@@ -52,7 +52,18 @@ Codecs: `jus_formats/koma.py` (art, 898/898 byte-exact), `jus_formats/kshape.py`
 cards, byte-exact), `jus_package/komacards.py` (card ↔ art, Inferred). Apply writes art into `koma.aar` and stages `bin/kshape.bin` and/or `bin/koma.bin`; Save writes
 all changed files. New dictionary counts have valid offsets but unverified runtime limits. The registry
 links `bin/koma.bin` → each art file (`card art`) and → `bin/kshape.bin`.
-Next: mission rewards and Koma evolution/purchase graphs; deck placement is explicitly out of scope.
+Next: Koma evolution/purchase graphs and new-card runtime constraints. Mission rewards are now editable (Ctrl+8); deck placement is explicitly out of scope.
+
+## Missions (Ctrl+8) — `app/workspaces/missions.py` (J-Galaxy progression)
+
+| Area | Content |
+|---|---|
+| Browser | 142 progression nodes grouped by 65 named planets; filter by name and node ID |
+| Content | Linked mission/battle definition ID and title, raw flags, up to six objective rewards per node |
+| Editor | Change signed Koma grant ID or six u16 resource quantities, rename a shared mission/battle definition |
+| Safety | Preserve goal/condition fields and unknown tail bytes; fixed record counts and IDs; undo/redo, Apply → Save |
+
+Verified executable flow: overlay1 `FUN_0214E380` reads the node's 20-byte reward slots and passes Koma IDs into main `FUN_02075F98` → `FUN_02071360` save unlock bits. The original `jgalaxy.aar` (174 members) rebuilds byte-for-byte identically; changing one reward preserves every other member. Details: `docs/MISSION_REWARD_TRACE.md`. The separate evolution data in `bin/jpower.bin` is still read-only until traced.
 
 ## Level (Ctrl+5) — `app/workspaces/level.py` (ALTM tile painting; raw gameplay overlays)
 

@@ -1,6 +1,7 @@
 r"""Read-only mission / Koma acquisition evidence collector for JUS.
 
-This program does NOT claim reward or evolution offsets are known. It locates
+This is a first-pass raw evidence collector. Confirmed mission reward offsets
+are documented in docs/MISSION_REWARD_TRACE.md and tools/trace_jgalaxy.py. It locates
 candidate files, ARM9 strings, and pointer-literal occurrences for follow-up
 Ghidra dataflow analysis. It never writes back to ROM or extracted assets.
 
@@ -95,7 +96,7 @@ def inventory(data: Path) -> dict:
 def collect(data: Path | None, arm9: Path | None, rom: Path | None) -> dict:
     code, source = executable(arm9, rom)
     base = int(source.get('load_address', f'0x{ARM9_BASE:08X}'), 16)
-    out = {'status': 'UNVERIFIED: no mission or reward semantics are asserted',
+    out = {'status': 'UNVERIFIED raw pointer candidates; use trace_jgalaxy.py for verified mission rewards',
            'goals': ['mission completion → reward record → Koma identifier',
                      'starting/help Koma availability → evolution tree nodes → gem costs',
                      'Koma record count/capacity and runtime lookup by index'],
@@ -118,7 +119,7 @@ def main(argv=None):
     result = collect(a.data, a.arm9, a.rom)
     a.out.parent.mkdir(parents=True, exist_ok=True)
     a.out.write_text(json.dumps(result, indent=2, ensure_ascii=False) + '\n', encoding='utf-8')
-    print(f'Wrote {a.out}; mission semantics are NOT verified')
+    print(f'Wrote {a.out}; pointer candidates still require xref verification')
 
 
 if __name__ == '__main__':

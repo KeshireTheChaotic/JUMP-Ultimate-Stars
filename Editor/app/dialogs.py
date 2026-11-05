@@ -148,10 +148,11 @@ SHORTCUTS = """\
 Global
   Ctrl+1 / 2 / 3     Animation / Sprite / Archive workspace
   Ctrl+4 / 5 / 6     Koma / Level / Screen workspace
-  Ctrl+Z, Ctrl+Y     Undo / redo (move-table, sprite and koma edits)
+  Ctrl+7 / 8         References / Missions workspace
+  Ctrl+Z, Ctrl+Y     Undo / redo (move-table, sprites, koma, missions and stage edits)
   Ctrl+S             Save rebuilt archives in place (asks first)
   Ctrl+Shift+S       Save rebuilt archives to a folder
-  Ctrl+Enter         Apply the current move table / sprite to its archive
+  Ctrl+Enter         Apply edits in the current workspace to its archive
 
 Animation
   Space              Play / pause
@@ -172,6 +173,11 @@ Sprite
 Koma
   V / B / I          Select / Pencil / Picker
   Palette            click = paint colour, double-click = edit colour
+
+Missions
+  Select node        inspect mission/battle definition and objective rewards
+  Update reward      change Koma ID or six resource quantities
+  Rename definition  shared mission/battle name (all referencing nodes)
 
 Level / Screen
   Layers dock        click the ● column to show/hide a layer

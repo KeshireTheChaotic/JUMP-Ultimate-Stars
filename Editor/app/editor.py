@@ -205,6 +205,7 @@ class EditorApp(tk.Tk):
         v.add_command(label='Archive workspace', accelerator='Ctrl+3', command=lambda: self.show_workspace('archive'))
         v.add_command(label='Koma editor', accelerator='Ctrl+4', command=lambda: self.show_workspace('koma'))
         v.add_command(label='Level editor', accelerator='Ctrl+5', command=lambda: self.show_workspace('level'))
+        v.add_command(label='Mission editor', accelerator='Ctrl+8', command=lambda: self.show_workspace('missions'))
         v.add_command(label='Screen editor', accelerator='Ctrl+6', command=lambda: self.show_workspace('screen'))
         v.add_command(label='References', accelerator='Ctrl+7', command=lambda: self.show_workspace('references'))
         v.add_separator()
@@ -232,7 +233,7 @@ class EditorApp(tk.Tk):
         self._tab_buttons = {}
         # Move Lab (Animation + Sprite) · suite workspaces · Archive
         for key, label in (('animation', 'Animation'), ('sprite', 'Sprite'), ('|', None),
-                           ('koma', 'Koma'), ('level', 'Level'), ('screen', 'Screen'), ('|', None),
+                           ('koma', 'Koma'), ('missions', 'Missions'), ('level', 'Level'), ('screen', 'Screen'), ('|', None),
                            ('references', 'References'), ('archive', 'Archive')):
             if key == '|':
                 tk.Frame(top, width=1, bg=T.LINE).pack(side='left', fill='y', padx=5, pady=8)
@@ -243,6 +244,7 @@ class EditorApp(tk.Tk):
         T.Tooltip(self._tab_buttons['animation'], 'Move Lab: animations, effects, NoteTrack (Ctrl+1)')
         T.Tooltip(self._tab_buttons['sprite'], 'Move Lab: sprite frames and pieces (Ctrl+2)')
         T.Tooltip(self._tab_buttons['koma'], 'Koma Editor: comic panel art (Ctrl+4)')
+        T.Tooltip(self._tab_buttons['missions'], 'J-Galaxy progression missions and Koma rewards (Ctrl+8)')
         T.Tooltip(self._tab_buttons['level'], 'Level Editor v1: stage backgrounds; overlays read-only (Ctrl+5)')
         T.Tooltip(self._tab_buttons['screen'], 'Screen Editor: menu screens on the DS dual screen (Ctrl+6)')
         T.Tooltip(self._tab_buttons['archive'], 'Archive members (Ctrl+3)')
@@ -556,6 +558,7 @@ class EditorApp(tk.Tk):
         self.bind_all('<Control-Key-5>', guard(lambda e: self.show_workspace('level'), True))
         self.bind_all('<Control-Key-6>', guard(lambda e: self.show_workspace('screen'), True))
         self.bind_all('<Control-Key-7>', guard(lambda e: self.show_workspace('references'), True))
+        self.bind_all('<Control-Key-8>', guard(lambda e: self.show_workspace('missions'), True))
         for key, tool in (('v', 'select'), ('b', 'pencil'), ('i', 'picker')):
             self.bind_all(f'<KeyPress-{key}>', guard(lambda e, t=tool: self.suite[self.workspace].tool.set(t)
                                                      if self.workspace in ('koma', 'level') else None))

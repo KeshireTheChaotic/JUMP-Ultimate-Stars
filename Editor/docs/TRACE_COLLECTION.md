@@ -5,10 +5,7 @@ mission clear requirements make starting/help Komas available; the Koma evolutio
 chart exposes support/battle variants and costs gems. A new Koma needs links from
 both the game-data side and the character acquisition graph.
 
-**Status:** Mission rewards, evolution links, purchase costs, prerequisites, save
-flags, and runtime expansion limits are unverified. No offsets are editable yet.
-The supplied Editor source contains none of the original ARM9/overlay bytes or
-extracted asset tables. This report intentionally avoids fake record schemas.
+**Updated 2026-11-05:** The user supplied raw executable traces and the extracted game assets. **Mission reward Koma IDs and six-resource grants are now verified and editable** via the Missions workspace (Ctrl+8). See `docs/MISSION_REWARD_TRACE.md` for proof and offsets. Evolution links and costs, mission condition codes, and expanded runtime capacity remain unverified. This document retains the collection steps for those remaining areas.
 
 ## 1. Locate executable references and candidate game tables
 
@@ -45,8 +42,7 @@ first-pass queue: a candidate pointer is not proof that a function reads the
 corresponding table. Treat emitted pseudocode as evidence to be checked against
 assembly and data.
 
-Only after these are traced should the editor write mission rewards or evolution
-records. There may be separate, fixed-size runtime arrays even if an archive
+Mission reward fields are now traced and writable. Evolution records are still blocked pending traces. There may be separate, fixed-size runtime arrays even if an archive
 header holds a dynamic record count.
 
 ## 2. Controlled reward evidence (not deck edits)

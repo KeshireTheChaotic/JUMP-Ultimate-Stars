@@ -22,8 +22,8 @@ drives the window against the real data.
 The window follows the 2D animation editors of Unity (Animation window + Inspector),
 Godot (AnimationPlayer dock, SpriteFrames) and Unreal (Paper2D Flipbook/Sprite editors):
 a resource browser on the left (each workspace shows its own), the workspaces
-**Animation** / **Sprite** (the Move Lab, Ctrl+1/2), **Koma** / **Level** / **Screen**
-(the JUS Studio suite, Ctrl+4/5/6) and **Archive** (Ctrl+3), a dark engine-style theme,
+**Animation** / **Sprite** (the Move Lab, Ctrl+1/2), **Koma** / **Missions** / **Level** / **Screen**
+(the JUS Studio suite, Ctrl+4/8/5/6) and **Archive** (Ctrl+3), a dark engine-style theme,
 tooltips, undo/redo and keyboard shortcuts (F1 lists them all). Layout and evidence rules
 for every workspace: `docs/STUDIO_WORKSPACES.md`.
 
@@ -57,6 +57,7 @@ for every workspace: `docs/STUDIO_WORKSPACES.md`.
   `koma.aar`, dictionary → `bin/kshape.bin`, selectors → `bin/koma.bin`). All edits are
   undoable. Deck placement is not part of this editor. Additional variants require
   emulator testing because runtime shape-array capacity is not yet traced.
+* **Missions workspace (Ctrl+8)** — browse J-Galaxy progression nodes by planet; inspect 56 mission / 75 battle definition links, up to six objective grants per node, raw condition codes and flags. Change an objective reward to a Koma ID or six resource quantities; rename shared mission/battle definition titles. Apply updates to the nested `jgalaxy/jgalaxy.aar` archive, then Save. Mission/objective insertion, unknown conditions and evolution costs remain read-only (see `docs/MISSION_REWARD_TRACE.md`).
 * **Level workspace** — stage browser (`bg_xx` sets) | composited background layers
   (ALTM + tiles, ¼×–12× zoom, tile hover/inspect) | **Select / Paint / Picker** for
   background tile entries, with a tile-set brush, palette bank, horizontal/vertical
