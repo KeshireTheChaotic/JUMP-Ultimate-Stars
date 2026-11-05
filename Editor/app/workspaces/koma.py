@@ -8,10 +8,12 @@ strip, the shape dictionary and problems.
 * Panel art: DSTX v1 flags 0x04, byte-exact on 898/898 files (Direct).
 * Card shape: ``bin/kshape.bin`` 66 shapes on a 5×4 grid (5 columns × 4 rows, the deck board width) and ``bin/koma.bin``
   890 cards selecting (size, variant) — both rebuild byte-exactly (Direct).
-  A shape edit changes only bytes +0x08/+0x09 of one card.
+  Choosing an existing shape changes bytes +0x08/+0x09 of one card.
+  Editing the shape dictionary writes kshape.bin and may update multiple cards.
 * Card ↔ art: series id → art prefix from the ARM9 table 0x0209E840, art index →
   `koma/<prefix>_<NN>.dtx` (FUN_020790F0) — Direct.
-* Deck placement is separate data and not decoded.
+* Deck placement is handled by the game and is outside the editor.
+* New shape variants are format-valid but their runtime capacity is unverified.
 """
 from __future__ import annotations
 
@@ -51,6 +53,7 @@ class KomaWorkspace(SuiteWorkspace):
         self.show_grid = tk.BooleanVar(value=True)
         self._dirty = False                       # art edited, not applied
         self._cards_dirty = False                 # koma.bin edited, not applied
+        self._shape_dirty = False                 # kshape.bin edited, not applied
         self._stroke = None
         self._cache: dict[int, Image.Image] = {}
         self.cat: komacards.KomaCatalog | None = None
@@ -97,7 +100,10 @@ class KomaWorkspace(SuiteWorkspace):
         T.tool_button(t, 'Export panel PNG…', self.export_panel, 'Save the selected panel as an indexed PNG')
         T.tool_button(t, 'Export all…', self.export_all, 'Save every panel of this asset')
         T.tool_button(t, 'Export card PNG…', self.export_card, 'Save the panels as laid out on the card shape')
-        T.tool_button(t, 'Apply', self.apply, 'Write the art into koma.aar and the card shape into bin/koma.bin '
+        T.tool_button(t, 'Edit shape…', self.edit_shape_variant, 'Edit the selected 5×4 polyomino variant')
+        T.tool_button(t, 'New variant…', self.add_shape_variant, 'Append a shape variant, selecting it for this Koma')
+        T.tool_button(t, 'Remove variant…', self.remove_shape_variant, 'Delete a shape with safe reference migration')
+        T.tool_button(t, 'Apply', self.apply, 'Stage art in koma.aar, shapes in bin/kshape.bin and card selectors in bin/koma.bin '
                                               '(Ctrl+Enter)', style='Accent.TButton')
         self.problems = self.problems_page()
         return ws
@@ -161,6 +167,7 @@ class KomaWorkspace(SuiteWorkspace):
             return
         self._orig = self.app.root_data.read(self.path)
         self._dirty = False
+        self._shape_dirty = False
         self.panel = 0
         self._cache.clear()
         self.card_choices = self.cat.cards_for_art(name) if self.cat else []
@@ -374,6 +381,121 @@ class KomaWorkspace(SuiteWorkspace):
                 self.card = c
         self.refresh(frame=True)
 
+    # ------------------------------------------------------------ authored shape variants
+    def _update_shape_dirty(self):
+        if self.cat:
+            self._shape_dirty = self.cat.shapes.build() != self.app.root_data.read(komacards.SHAPES)
+            self._cards_dirty = self.cat.cards.build() != self.app.root_data.read(komacards.CARDS)
+
+    def _shape_dialog(self, *, create=False):
+        if not (self.cat and self.card and self.kf):
+            self.app.status.set('Select a koma card before editing shape variants.')
+            return
+        size = self.card.size
+        original = self._shape()
+        if original is None:
+            return
+        dlg = tk.Toplevel(self.frame)
+        dlg.title(('New' if create else 'Edit') + f' {size}-panel shape')
+        dlg.transient(self.frame.winfo_toplevel())
+        dlg.resizable(False, False)
+        f = ttk.Frame(dlg, padding=14)
+        f.pack(fill='both', expand=True)
+        ttk.Label(f, text='5 × 4 shape · 0 = empty · each numbered art panel appears once').grid(
+            row=0, column=0, columnspan=5, sticky='w', pady=(0, 10))
+        vars_ = []
+        for y in range(kshape.ROWS):
+            for x in range(kshape.COLS):
+                var = tk.StringVar(value=str(original.cells[y * kshape.COLS + x]))
+                cb = ttk.Combobox(f, textvariable=var, width=3, state='readonly',
+                                  values=tuple(str(i) for i in range(size + 1)))
+                cb.grid(row=y + 1, column=x, padx=3, pady=3)
+                vars_.append(var)
+        status = ttk.Label(f, text='', foreground='#F18A77', wraplength=320)
+        status.grid(row=5, column=0, columnspan=5, sticky='w', pady=(8, 2))
+
+        def commit():
+            values = tuple(int(v.get()) for v in vars_)
+            try:
+                kshape.ShapeTable._validated_cells(size, values)
+            except ValueError as exc:
+                status.config(text=str(exc))
+                return
+            if not create and values == original.cells:
+                dlg.destroy()
+                return
+            # Multiple cards may reference a shared shape variant.
+            users = [c.index for c in self.cat.cards.cards
+                     if c.size == size and c.variant == original.variant]
+            if not create and len(users) > 1 and not messagebox.askyesno(
+                    'Shared shape', f'This shape is used by {len(users)} Komas. Change all of them?', parent=dlg):
+                return
+            self.checkpoint('add shape variant' if create else 'edit shape variant')
+            if create:
+                new = self.cat.shapes.append_variant(size, values)
+                self.cat.cards.set_shape(self.card.index, size, new.variant, self.cat.shapes)
+            else:
+                new = self.cat.shapes.replace_variant(size, original.variant, values)
+            self._update_shape_dirty()
+            self.layout_mode.set('Card')
+            dlg.destroy()
+            self.refresh(frame=True)
+            self.app.update_dirty()
+            self.app.status.set(f'Shape {new.index} ({size} panels, variant {new.variant}) staged; '
+                                'Apply, then Save. New variants require in-game validation.')
+
+        controls = ttk.Frame(f)
+        controls.grid(row=6, column=0, columnspan=5, sticky='e', pady=(8, 0))
+        ttk.Button(controls, text='Cancel', command=dlg.destroy).pack(side='right', padx=(6, 0))
+        ttk.Button(controls, text='Create variant' if create else 'Update shape',
+                   command=commit).pack(side='right')
+        dlg.grab_set()
+        dlg.focus_set()
+
+    def edit_shape_variant(self):
+        self._shape_dialog(create=False)
+
+    def add_shape_variant(self):
+        self._shape_dialog(create=True)
+
+    def remove_shape_variant(self):
+        if not (self.cat and self.card and self.kf):
+            self.app.status.set('Select a koma card before removing a shape variant.')
+            return
+        from tkinter import simpledialog
+        size, variant = self.card.size, self.card.variant
+        group = self.cat.shapes.groups[size - 1]
+        if len(group) <= 1:
+            messagebox.showerror('Remove shape', 'A size group must retain at least one variant.')
+            return
+        refs = [c.index for c in self.cat.cards.cards
+                if c.size == size and c.variant == variant]
+        options = [n for n in range(len(group)) if n != variant]
+        replacement = None
+        if refs:
+            replacement = simpledialog.askinteger(
+                'Reassign shape references',
+                f'Variant {variant} is used by {len(refs)} Komas.\n'
+                f'Choose a replacement variant from {options}.\n'
+                'All those cards will be reassigned, and later variant IDs renumbered.',
+                parent=self.frame)
+            if replacement is None:
+                return
+            if replacement not in options:
+                messagebox.showerror('Invalid replacement', f'Choose one of {options}.')
+                return
+        if not messagebox.askyesno('Remove shape',
+                                  f'Remove size {size} variant {variant}?\n'
+                                  f'{len(refs)} cards will be reassigned; later variants will shift.',
+                                  parent=self.frame):
+            return
+        self.checkpoint('remove shape variant')
+        self.cat.shapes.delete_variant(size, variant, self.cat.cards, replacement)
+        self._update_shape_dirty()
+        self.refresh(frame=True)
+        self.app.update_dirty()
+        self.app.status.set('Shape variant removed; Apply, then Save. Verify against the game.')
+
     # ------------------------------------------------------------ tools
     def _pixel(self, wx, wy):
         hit = self._panel_at(wx, wy)
@@ -446,7 +568,7 @@ class KomaWorkspace(SuiteWorkspace):
             ins.section('Evidence')
             ins.evidence('Panel art', 'Direct', 'DSTX v1 flags 0x04 rebuilds byte-exactly on 898/898 files')
             ins.evidence('Card shapes', 'Direct', 'kshape.bin 66 shapes / koma.bin 890 cards rebuild byte-exactly')
-            ins.evidence('Deck placement', 'Unknown', 'separate data, not decoded')
+            ins.evidence('Mission / evolution unlocks', 'Unknown', 'acquisition tables not traced')
             return
         k = self.kf
         ins.section('Asset', note=self.path.split('|')[-1])
@@ -457,7 +579,9 @@ class KomaWorkspace(SuiteWorkspace):
         if self._dirty:
             state.append('art edited')
         if self._cards_dirty:
-            state.append('card shape edited')
+            state.append('card shape selector edited')
+        if self._shape_dirty:
+            state.append('shape dictionary edited')
         ins.value('State', ('● ' + ', '.join(state) + ', not applied') if state else 'unchanged',
                   colour=T.WARN if state else T.MUTED)
         self._inspect_card(ins)
@@ -474,14 +598,14 @@ class KomaWorkspace(SuiteWorkspace):
         ins.evidence('Card shape', 'Direct', 'kshape.bin / koma.bin byte-exact; occupancy masks match all 66 shapes')
         ins.evidence('Card ↔ art', 'Direct', 'prefix table 0x0209E840 + art index (FUN_020790F0); '
                                               'art index = file number')
-        ins.evidence('Deck placement', 'Unknown', 'separate data, not decoded')
+        ins.evidence('Mission / evolution unlocks', 'Unknown', 'acquisition tables not traced')
 
     def _inspect_card(self, ins):
         if self.cat is None:
             ins.section('Card')
             ins.value('Tables', self.cat_error or 'bin/kshape.bin / bin/koma.bin not found', colour=T.BAD)
             return
-        ins.section('Card (bin/koma.bin)', note='A shape edit changes bytes +8/+9 of this card only.')
+        ins.section('Card (bin/koma.bin)', note='Selecting a variant changes this card; editing a shared variant affects its users.')
         if not self.card_choices:
             ins.text('No card record uses this art. dt_20..dt_27 are extra art (1..8 panels) with no card; '
                      'their purpose is not traced.')
@@ -641,13 +765,18 @@ class KomaWorkspace(SuiteWorkspace):
     def snapshot(self):
         if not self.kf:
             return None
-        return (self.kf.build(), self.panel, self._dirty, self.cat.cards.build() if self.cat else None)
+        return (self.kf.build(), self.panel, self._dirty,
+                self.cat.cards.build() if self.cat else None,
+                self.cat.shapes.build() if self.cat else None)
 
     def restore(self, snap):
-        data, panel, _, cards = snap
+        data, panel, _, cards, shapes = snap
         self.kf = koma.parse(data)
         self.kf.image_dirty = True
         self._dirty = data != getattr(self, '_orig', None)
+        if self.cat and shapes is not None:
+            self.cat.shapes = kshape.ShapeTable.parse(shapes)
+            self._shape_dirty = shapes != self.app.root_data.read(komacards.SHAPES)
         if cards is not None and self.cat:
             self.cat.cards = kshape.CardTable.parse(cards, self.cat.shapes)
             self.card_choices = self.cat.cards_for_art(self.path.split('|')[-1])
@@ -660,13 +789,15 @@ class KomaWorkspace(SuiteWorkspace):
         self.refresh()
 
     def _revert_cards(self):
-        if self.cat and self._cards_dirty:
+        if self.cat and (self._cards_dirty or self._shape_dirty):
+            self.cat.shapes = kshape.ShapeTable.parse(self.app.root_data.read(komacards.SHAPES))
             self.cat.cards = kshape.CardTable.parse(self.app.root_data.read(komacards.CARDS), self.cat.shapes)
+            self._shape_dirty = False
             self._cards_dirty = False
 
     @property
     def dirty(self):
-        return self._dirty or self._cards_dirty
+        return self._dirty or self._cards_dirty or self._shape_dirty
 
     def apply(self):
         if not self.kf or not self.dirty:
@@ -680,6 +811,13 @@ class KomaWorkspace(SuiteWorkspace):
             self._orig = blob
             self._dirty = False
             done.append('koma.aar')
+        if self._shape_dirty and self.cat:
+            blob = self.cat.shapes.build()
+            checked = kshape.ShapeTable.parse(blob)
+            kshape.CardTable.parse(self.cat.cards.build(), checked)
+            self.app.root_data.write_file(komacards.SHAPES, blob)
+            self._shape_dirty = False
+            done.append('bin/kshape.bin')
         if self._cards_dirty and self.cat:
             blob = self.cat.cards.build()
             kshape.CardTable.parse(blob, self.cat.shapes)
@@ -689,6 +827,7 @@ class KomaWorkspace(SuiteWorkspace):
         self.refresh()
         self.app.update_dirty()
         self.app.status.set(f'Applied {self.path} → {" + ".join(done)} — Save (Ctrl+S) to write the files.')
+        self.app.resources_applied()
 
 
 def hx4(v):

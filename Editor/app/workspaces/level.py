@@ -1,20 +1,20 @@
-"""Level Editor (v1, visual-only): battle stages from ``stage/stage.aar``.
+"""Level Editor: editable ALTM background maps from ``stage/stage.aar``.
 
 Godot 2D scene / Unity Tilemap layout: stage browser (left dock) · scene
 canvas with the background layers stacked · Layers dock (eye toggles) over
 the Inspector · bottom dock with the tile set, raw stage data and problems.
 
-Locked v1 scope (docs/04): backgrounds are decoded (ALTM + DSIG) and shown;
+The supported edit surface is ALTM tile entries only. Backgrounds are decoded (ALTM + DSIG) and shown;
 camera (.cam), objects (.mob), stage table (.bin), collision and gimmicks are
 **read-only overlays**.  None of those formats is decoded yet, so they are
 listed as *unavailable* with their raw bytes, never drawn as guessed
-geometry.  There is no save path for them.
+geometry. They have no save path.
 """
 from __future__ import annotations
 
 import tkinter as tk
 from pathlib import Path
-from tkinter import filedialog, ttk
+from tkinter import filedialog, messagebox, ttk
 
 from PIL import Image, ImageTk
 
@@ -44,6 +44,14 @@ class LevelWorkspace(SuiteWorkspace):
         self.sel_layer: scenes.Layer | None = None
         self.sel_tile: tuple[int, int] | None = None
         self.show_bounds = tk.BooleanVar(value=True)
+        self.tool = tk.StringVar(value='select')
+        self.brush = 0
+        self.bank = tk.IntVar(value=0)
+        self.flip_h = tk.BooleanVar(value=False)
+        self.flip_v = tk.BooleanVar(value=False)
+        self._stroke = False
+        self._original_maps: dict[str, bytes] = {}
+        self._dsig_cache = {}
         self._sets: list[scenes.StageSet] = []
         super().__init__(app, host, browser_host, k)
 
@@ -51,10 +59,15 @@ class LevelWorkspace(SuiteWorkspace):
     def build(self, host):
         ws = self.standard_layout(host, layers=True, bottom_ratio=0.7)
         h = self.view_panel.header
+        for key, title in (('picker', 'Picker'), ('pencil', 'Paint'), ('select', 'Select')):
+            ttk.Radiobutton(h, text=title, value=key, variable=self.tool,
+                            style='ToolToggle.TRadiobutton').pack(side='left', padx=2)
         ttk.Checkbutton(h, text='Layer bounds', variable=self.show_bounds, style='Toolbar.TCheckbutton',
                         command=lambda: self.view.redraw()).pack(side='right', padx=6)
         ttk.Button(h, text='Frame', style='Tool.TButton', command=self.frame_view).pack(side='right', padx=6)
-        self.view = self.make_viewport(on_draw=self._draw, on_press=self._press, origin_frac=(0.05, 0.08), zoom=1)
+        self.view = self.make_viewport(on_draw=self._draw, on_press=self._press,
+                                       on_drag=self._drag, on_release=self._release,
+                                       origin_frac=(0.05, 0.08), zoom=1)
         self.view.show_grid.set(False)
         self.view.canvas.bind('<Motion>', self._hover, add='+')
         self.layer_list = LayerList(self.layers_panel.body, on_select=self._select_layer, on_toggle=self._toggle)
@@ -64,6 +77,15 @@ class LevelWorkspace(SuiteWorkspace):
         tsb = ttk.Scrollbar(tiles, orient='horizontal', command=self.tile_canvas.xview)
         self.tile_canvas.configure(xscrollcommand=tsb.set)
         self.tile_canvas.pack(fill='both', expand=True, padx=4, pady=(4, 0))
+        self.tile_canvas.bind('<Button-1>', self._choose_tile)
+        opts = ttk.Frame(tiles)
+        opts.pack(fill='x', padx=6, pady=3)
+        ttk.Label(opts, text='Palette bank').pack(side='left')
+        ttk.Combobox(opts, textvariable=self.bank, values=list(range(16)), width=3,
+                     state='readonly').pack(side='left', padx=6)
+        ttk.Checkbutton(opts, text='H flip', variable=self.flip_h).pack(side='left', padx=4)
+        ttk.Checkbutton(opts, text='V flip', variable=self.flip_v).pack(side='left', padx=4)
+        ttk.Label(opts, text='Click a source tile, then Paint on the viewport.', style='Toolbar.TLabel').pack(side='left', padx=8)
         tsb.pack(fill='x', padx=4)
         raw = self.bottom.add('raw', 'Stage data (read-only)')
         self.raw_log = TextLog(raw)
@@ -114,7 +136,14 @@ class LevelWorkspace(SuiteWorkspace):
             self.load(stem)
 
     def load(self, stem):
+        if self.stage and self.stage.stem != stem and self.dirty:
+            if not messagebox.askyesno('Level', 'Discard unapplied tile-map edits before switching stages?'):
+                return
         self.stage = next((s for s in self._sets if s.stem == stem), None)
+        self._stroke = False
+        self.sel_overlay = None
+        self._original_maps = {}
+        self._dsig_cache = {}
         self.layers, self.images, self.sel_layer, self.sel_tile = [], {}, None, None
         probs = []
         for role in ('layers', 'floor'):
@@ -124,6 +153,7 @@ class LevelWorkspace(SuiteWorkspace):
                 except (ValueError, KeyError) as exc:
                     probs.append((f'{role}: {exc}', 'bad'))
         for l in self.layers:
+            self._original_maps[l.atm_path] = self.app.root_data.read(l.atm_path)
             img, p = scenes.render_layer(self.app.root_data, l)
             self.images[l.name] = img
             probs += [(f'{l.name}: {x}', 'warn') for x in l.problems + p]
@@ -131,6 +161,8 @@ class LevelWorkspace(SuiteWorkspace):
             self.visible.setdefault(l.name, l.borrowed is None)
         shown = [l for l in self.layers if self.visible.get(l.name)]
         self.sel_layer = (shown or self.layers or [None])[-1]
+        if self.sel_layer and self.sel_layer.map.entries:
+            self._set_brush(self.sel_layer.map.entries[0])
         self._probs = probs
         self.refresh(frame=True)
         self.app.status.set(f'{stem}: {len(self.layers)} background layers')
@@ -184,8 +216,8 @@ class LevelWorkspace(SuiteWorkspace):
         if self.sel_layer is not None and self.sel_tile is not None:
             tx, ty = self.sel_tile
             vp.rect(tx * 8, ty * 8, tx * 8 + 8, ty * 8 + 8, outline=T.WARN, width=2)
-        vp.hud.configure(text=f'{self.stage.stem}: layers drawn back→front in list order (BG priority, '
-                              f'scroll and camera not decoded)')
+        vp.hud.configure(text=f'{self.stage.stem}: {self.tool.get()} · tile {self.brush} · '
+                              'layers back→front in list order (priority/scroll unverified)')
 
     def _tile_at(self, wx, wy):
         l = self.sel_layer
@@ -211,8 +243,88 @@ class LevelWorkspace(SuiteWorkspace):
 
     def _press(self, wx, wy, e):
         self.sel_tile = self._tile_at(wx, wy)
+        if self.sel_tile and self.tool.get() == 'picker':
+            self._set_brush(self.sel_layer.map.get(*self.sel_tile))
+            self.tool.set('pencil')
+        elif self.sel_tile and self.tool.get() == 'pencil' and self.sel_layer.image_path:
+            self.checkpoint('paint stage tiles')
+            self._stroke = True
+            self._paint(*self.sel_tile)
         self.refresh_inspector()
         self.view.redraw()
+
+    def _drag(self, wx, wy, _e):
+        if self._stroke:
+            at = self._tile_at(wx, wy)
+            if at:
+                self.sel_tile = at
+                self._paint(*at)
+
+    def _release(self, wx, wy, _e):
+        if self._stroke:
+            self._stroke = False
+            self.refresh_inspector()
+            self.app.update_dirty()
+
+    def _set_brush(self, value):
+        self.brush = altmmod.entry_tile(value)
+        self.bank.set(altmmod.entry_bank(value))
+        self.flip_h.set(altmmod.entry_hflip(value))
+        self.flip_v.set(altmmod.entry_vflip(value))
+        self._draw_tile_marker()
+
+    def _brush_value(self):
+        return (self.brush | ((self.bank.get() & 15) << 12) |
+                (0x400 if self.flip_h.get() else 0) | (0x800 if self.flip_v.get() else 0))
+
+    def _choose_tile(self, e):
+        if not self.sel_layer or not self.sel_layer.image_path:
+            return
+        x = self.tile_canvas.canvasx(e.x) - 4
+        y = self.tile_canvas.canvasy(e.y) - 4
+        if x < 0 or y < 0:
+            return
+        tile = int(x // 16) + int(y // 16) * 64
+        if 0 <= tile < getattr(self, '_tile_count', 0):
+            self.brush = tile
+            self._draw_tile_marker()
+            self.tool.set('pencil')
+            self.refresh_inspector()
+
+    def _draw_tile_marker(self):
+        if not hasattr(self, 'tile_canvas'):
+            return
+        self.tile_canvas.delete('brush')
+        if 0 <= self.brush < getattr(self, '_tile_count', 0):
+            x = 4 + (self.brush % 64) * 16
+            y = 4 + (self.brush // 64) * 16
+            self.tile_canvas.create_rectangle(x, y, x + 16, y + 16, width=2,
+                                              outline=T.ACCENT, tags='brush')
+
+    def _paint(self, tx, ty):
+        l = self.sel_layer
+        if not l or not l.image_path or self.brush >= getattr(self, '_tile_count', 0):
+            return
+        value = self._brush_value()
+        if l.map.get(tx, ty) == value:
+            return
+        l.map.set(tx, ty, value)
+        # Decode only the edited 8×8 cell during a brush drag; a full 512×512
+        # render on every pointer event makes painting impractically slow.
+        dsig = self._dsig_cache.get(l.image_path)
+        if dsig is None:
+            dsig = tilemap.embedded_dsig(self.app.root_data.read(l.image_path))
+            self._dsig_cache[l.image_path] = dsig
+        if dsig is not None and self.images.get(l.name) is not None:
+            cell = altmmod.AltmFile(width=1, height=1, entries=[value])
+            pixel, problems = tilemap.render(cell, dsig)
+            self.images[l.name].paste(pixel, (tx * 8, ty * 8))
+        else:
+            self.images[l.name], problems = scenes.render_layer(self.app.root_data, l)
+        self._probs = [p for p in self._probs if not p[0].startswith(l.name + ':')]
+        self._probs.extend((l.name + ': ' + p, 'warn') for p in problems)
+        self.view.redraw()
+        self.app.update_dirty()
 
     def _select_layer(self, row):
         if not row:
@@ -222,6 +334,8 @@ class LevelWorkspace(SuiteWorkspace):
             self.sel_layer = next((l for l in self.layers if l.name == iid[2:]), None)
             self.sel_overlay = None
             self._fill_tiles()
+            if self.sel_layer and self.sel_layer.map.entries:
+                self._set_brush(self.sel_layer.map.entries[0])
         elif iid.startswith('O:'):
             self.sel_overlay = iid[2:]
         self.refresh_inspector()
@@ -238,13 +352,17 @@ class LevelWorkspace(SuiteWorkspace):
         c = self.tile_canvas
         c.delete('all')
         self._tile_photo = None
+        self._tile_count = 0
         l = self.sel_layer
         if not l or not l.image_path:
             c.create_text(10, 20, anchor='w', text='Select a background layer', fill=T.MUTED, font=T.UI_FONT)
             return
         try:
             dsig = tilemap.embedded_dsig(self.app.root_data.read(l.image_path))
-            n = tilemap.tile_count(dsig)
+            if dsig is None:
+                raise ValueError('No DSIG tile sheet for this layer')
+            n = min(tilemap.tile_count(dsig), 1024)  # text-BG entry has a 10-bit tile index
+            self._tile_count = n
             # sheet: 64 tiles per row, using palette bank of the most common entry
             banks = [altmmod.entry_bank(v) for v in l.map.entries]
             bank = max(set(banks), key=banks.count)
@@ -262,6 +380,7 @@ class LevelWorkspace(SuiteWorkspace):
                           text=f'{split(l.image_path)[-1]}\n{n} tiles, {len(used)} used\nmode 0x{dsig.mode:02X}, '
                                f'{dsig.banks} banks\nshown with bank {bank}')
             c.configure(scrollregion=(0, 0, img.width + 220, img.height + 8))
+            self._draw_tile_marker()
         except (ValueError, KeyError) as exc:
             c.create_text(10, 20, anchor='w', text=str(exc), fill=T.BAD, font=T.UI_FONT)
 
@@ -296,9 +415,9 @@ class LevelWorkspace(SuiteWorkspace):
         ins = self.inspector
         ins.clear()
         if not self.stage:
-            ins.section('Level editor (v1)')
-            ins.text('Visual-only. Backgrounds are decoded and shown; collision, gimmicks, camera and objects '
-                     'are read-only and stay unavailable until their formats are traced.')
+            ins.section('Level editor')
+            ins.text('ALTM background tile maps can be painted and saved. Collision, gimmicks, camera and '
+                     'objects remain read-only until their formats are traced.')
             return
         ov = getattr(self, 'sel_overlay', None)
         if ov:
@@ -335,8 +454,65 @@ class LevelWorkspace(SuiteWorkspace):
             ins.value('Tile', str(altmmod.entry_tile(v)))
             ins.value('Bank', str(altmmod.entry_bank(v)))
             ins.value('Flip', ('H ' if altmmod.entry_hflip(v) else '') + ('V' if altmmod.entry_vflip(v) else '') or '—')
-        ins.text('Editing backgrounds is the next step: the ALTM codec already re-encodes edited maps '
-                 '(identical rows shared, sequential runs packed).')
+        ins.section('Tile painting')
+        ins.value('Tool', self.tool.get())
+        ins.value('Brush', f'tile {self.brush}, bank {self.bank.get()}' +
+                  (' H' if self.flip_h.get() else '') + (' V' if self.flip_v.get() else ''))
+        ins.value('Unapplied edits', 'yes' if l.map.build() != self._original_maps.get(l.atm_path) else 'no',
+                  colour=T.WARN if l.map.build() != self._original_maps.get(l.atm_path) else None)
+        ins.text('Paint edits only ALTM tile entries. Camera, .mob/.bin, collision and gimmicks are read-only. '
+                 'Use Apply, then Save; the stage archive is not modified before Save.')
+
+    # ------------------------------------------------------------ undo / apply
+    def doc(self):
+        return 'level:' + self.stage.stem if self.stage else None
+
+    def snapshot(self):
+        if not self.stage:
+            return None
+        return ({l.atm_path: l.map.build() for l in self.layers},
+                self.sel_layer.name if self.sel_layer else None, self.sel_tile)
+
+    def restore(self, snap):
+        blobs, selected, tile = snap
+        for l in self.layers:
+            if l.atm_path in blobs:
+                l.map = altmmod.parse(blobs[l.atm_path])
+                self.images[l.name], _ = scenes.render_layer(self.app.root_data, l)
+        self.sel_layer = next((l for l in self.layers if l.name == selected), None)
+        self.sel_tile = tile
+        self.refresh()
+
+    @property
+    def dirty(self):
+        return any(l.map.build() != self._original_maps.get(l.atm_path) for l in self.layers)
+
+    def apply(self):
+        if not self.dirty:
+            self.app.status.set('Level: nothing to apply.')
+            return
+        updates = []
+        try:
+            for l in self.layers:
+                blob = l.map.build()
+                if blob == self._original_maps.get(l.atm_path):
+                    continue
+                check = altmmod.parse(blob)
+                if (check.entries != l.map.entries or check.width != l.map.width or
+                        check.height != l.map.height):
+                    raise ValueError(f'{l.name}: map round-trip mismatch')
+                updates.append((l, blob))
+        except (ValueError, IndexError) as exc:
+            messagebox.showerror('Stage map', f'Cannot apply ALTM edits: {exc}')
+            return
+        for l, blob in updates:
+            self.app.root_data.write(l.atm_path, blob)
+            self._original_maps[l.atm_path] = blob
+            l.map = altmmod.parse(blob)
+        self.refresh()
+        self.app.update_dirty()
+        self.app.resources_applied()
+        self.app.status.set(f'Applied {len(updates)} ALTM map(s); Save (Ctrl+S) to write the stage archive.')
 
     # ------------------------------------------------------------ export
     def export_layer(self):

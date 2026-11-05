@@ -12,8 +12,8 @@ Unreal Reference Viewer + Unity Project search layout:
   project-wide unresolved references, summary.
 
 The index (:mod:`jus_package.registry`) is built on a background thread from
-its own read-only :class:`DataRoot`, so it reflects the files on disk; it is
-rebuilt automatically after Save and on demand.
+a detached snapshot of applied in-session resource edits; it refreshes after
+Apply, Save, or an explicit rebuild. Unapplied workspace drafts are excluded.
 """
 from __future__ import annotations
 
@@ -50,6 +50,8 @@ class ReferencesWorkspace(SuiteWorkspace):
         self.move_filter: int | None = None
         self.history: list[str] = []
         self._building = False
+        self._rebuild_pending = False
+        self._refresh_job = None
         self._cards: list[tuple[tuple, str]] = []
         super().__init__(app, host, browser_host, k)
 
@@ -58,7 +60,7 @@ class ReferencesWorkspace(SuiteWorkspace):
         ws = self.standard_layout(host, bottom_ratio=0.62)
         self.view_panel.set_title('Reference viewer')
         h = self.view_panel.header
-        T.tool_button(h, '⟳ Rebuild index', self.rebuild, 'Re-scan every archive on disk (about 3 s)')
+        T.tool_button(h, '⟳ Rebuild index', self.rebuild, 'Index applied in-memory changes and files on disk')
         T.tool_button(h, '◀ Back', self.back, 'Previous selection')
         self.build_label = ttk.Label(h, text='', style='Toolbar.TLabel')
         self.build_label.pack(side='right', padx=8)
@@ -110,18 +112,32 @@ class ReferencesWorkspace(SuiteWorkspace):
         self.sel = None
         self.rebuild()
 
+    def request_refresh(self):
+        """Coalesce successive Apply operations (e.g. sprite + image)."""
+        if self._refresh_job is not None:
+            self.frame.after_cancel(self._refresh_job)
+        self._refresh_job = self.frame.after(350, self.rebuild)
+
     def rebuild(self):
+        self._refresh_job = None
         root = self.app.root_data
-        if root is None or self._building:
+        if root is None:
+            return
+        if self._building:
+            self._rebuild_pending = True
+            return
+        try:
+            snapshot = root.index_snapshot()  # on UI thread, before the worker starts
+        except (ValueError, KeyError, OSError) as exc:
+            self.build_label.configure(text=f'index snapshot failed: {exc}')
             return
         self._building = True
         self.build_label.configure(text='indexing…')
-        path = root.root
         state = {'msg': 'indexing…'}
 
         def work():
             try:
-                reg = regmod.build(DataRoot(path), progress=lambda m, f: state.update(msg=f'indexing {int(f * 100)}%'))
+                reg = regmod.build(snapshot, progress=lambda m, f: state.update(msg=f'indexing {int(f * 100)}%'))
             except Exception as exc:  # noqa: BLE001
                 reg = exc
             state['done'] = reg
@@ -129,6 +145,9 @@ class ReferencesWorkspace(SuiteWorkspace):
         def poll():
             if 'done' in state:
                 self._building = False
+                if self._rebuild_pending:
+                    self._rebuild_pending = False
+                    self.request_refresh()
                 res = state['done']
                 if isinstance(res, Exception):
                     self.build_label.configure(text=f'index failed: {res}')
@@ -198,7 +217,7 @@ class ReferencesWorkspace(SuiteWorkspace):
     # ------------------------------------------------------------ selection
     def select(self, path, push=True, move_id=None):
         if not self.reg or path not in self.reg.resources:
-            self.app.status.set(f'{path}: not in the index (rebuild after Save).')
+            self.app.status.set(f'{path}: not in the index (rebuild after Apply/Save).')
             return
         if push and self.sel and self.sel != path:
             self.history.append(self.sel)
@@ -330,7 +349,7 @@ class ReferencesWorkspace(SuiteWorkspace):
             lines.append(f'  {regmod.KIND_LABELS.get(kind, kind):24} {n:7,}   evidence: {regmod.EVIDENCE[kind]}')
         lines += ['', ('Resolution: ids are looked up in the source\'s group (one character\'s archives, or the '
                        'top-level file), then in efc/*.aar.', 'muted'),
-                  ('The index reflects the files on disk; it rebuilds after Save.', 'muted')]
+                  ('The index reflects applied edits plus files on disk; it refreshes after Apply/Save.', 'muted')]
         if self.reg.errors:
             lines += [''] + [(e, 'bad') for e in self.reg.errors[:50]]
         self.summary.set_lines(lines)

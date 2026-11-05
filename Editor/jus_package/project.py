@@ -11,8 +11,11 @@ only the archives that changed when :meth:`DataRoot.save` is called.
 """
 from __future__ import annotations
 
+import os
+import copy
 import re
 import shutil
+import tempfile
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -54,6 +57,8 @@ class DataRoot:
             return
         self._files[rel] = bytes(data)
         self._files_dirty.add(rel)
+        if rel.lower().endswith('.aar'):
+            self._invalidate_below(rel)
 
     # ----------------------------------------------------------- archives
     def archive(self, path: str) -> alar.Archive:
@@ -61,7 +66,7 @@ class DataRoot:
         if path not in self._archives:
             parts = split(path)
             if len(parts) == 1:
-                blob = (self.root / parts[0]).read_bytes()
+                blob = self.read(parts[0])
                 arc = alar.open_nested(blob)
             else:
                 arc = alar.open_nested(self.entry(path).data)
@@ -154,27 +159,114 @@ class DataRoot:
             node.dirty = False
         return out
 
-    def save(self, out_root: Path | str | None = None, backup: bool = True) -> list[Path]:
-        """Write every changed top-level archive.
+    def index_snapshot(self) -> 'DataRoot':
+        """Isolate applied (but not yet saved) resources for read-only indexing.
 
-        ``out_root=None`` writes in place (keeping ``<file>.orig`` backups the
-        first time a file is overwritten); otherwise files are written to the
-        same relative paths under ``out_root``.
+        Deep-copy cached archives before propagating nested changes.  An index
+        built from the returned snapshot sees Apply edits, and its background
+        worker cannot mutate the editor's working archive cache.
         """
-        written = []
-        files = self._flush()
-        files.update({rel: self._files[rel] for rel in self._files_dirty})
-        for rel, blob in files.items():
-            dst = (Path(out_root) if out_root else self.root) / rel
-            dst.parent.mkdir(parents=True, exist_ok=True)
-            if out_root is None and backup and dst.exists():
-                bak = dst.with_name(dst.name + '.orig')
-                if not bak.exists():
-                    shutil.copy2(dst, bak)
-            dst.write_bytes(blob)
-            written.append(dst)
-        self._files_dirty.clear()             # like archives: edited content stays in the session, now clean
-        return written
+        snap = DataRoot(self.root)
+        snap._archives = copy.deepcopy(self._archives)
+        snap._files = dict(self._files)
+        snap._files_dirty = set(self._files_dirty)
+        snap._flush()                 # updates snapshot's cached parent archives only
+        return snap
+
+    def save(self, out_root: Path | str | None = None, backup: bool = True) -> list[Path]:
+        """Stage writes in destination directories, then atomically replace files.
+
+        On a failed multi-file commit, restore the previously existing files.
+        Dirty state is retained on failure; ``.orig`` backups are never
+        overwritten.  Filesystems do not provide a single multi-file atomic
+        rename, so sudden power loss during a commit remains a limitation.
+        """
+        original_dirty = {k for k, n in self._archives.items() if n.dirty}
+        loose_dirty = set(self._files_dirty)
+        try:
+            files = self._flush()
+            files.update({rel: self._files[rel] for rel in loose_dirty})
+            if not files:
+                return []
+            base = Path(out_root) if out_root is not None else self.root
+            staged: dict[Path, Path] = {}
+            rollback: dict[Path, Path | None] = {}
+            committed: list[Path] = []
+            garbage: set[Path] = set()
+
+            def temp_near(path: Path) -> Path:
+                fd, name = tempfile.mkstemp(prefix='.' + path.name + '.', suffix='.tmp', dir=path.parent)
+                os.close(fd)
+                result = Path(name)
+                garbage.add(result)
+                return result
+
+            try:
+                # Prepare *every* replacement and recovery copy before modifying
+                # a destination; validate that paths stay inside the chosen root.
+                for rel, blob in sorted(files.items()):
+                    dst = base / rel
+                    if Path(rel).is_absolute() or '..' in Path(rel).parts:
+                        raise ValueError(f'Unsafe data-relative save path: {rel}')
+                    dst.parent.mkdir(parents=True, exist_ok=True)
+                    tmp = temp_near(dst)
+                    with tmp.open('wb') as f:
+                        f.write(blob)
+                        f.flush()
+                        os.fsync(f.fileno())
+                    if dst.exists():
+                        prev = temp_near(dst)
+                        shutil.copy2(dst, prev)
+                        rollback[dst] = prev
+                        if out_root is None and backup:
+                            bak = dst.with_name(dst.name + '.orig')
+                            if not bak.exists():
+                                # Stage and install the original backup without
+                                # touching the original destination.
+                                bak_tmp = temp_near(dst)
+                                shutil.copy2(dst, bak_tmp)
+                                os.replace(bak_tmp, bak)
+                                garbage.discard(bak_tmp)
+                    else:
+                        rollback[dst] = None
+                    staged[dst] = tmp
+
+                for dst, tmp in staged.items():
+                    os.replace(tmp, dst)
+                    garbage.discard(tmp)
+                    committed.append(dst)
+            except Exception:
+                failed_restore = []
+                for dst in reversed(committed):
+                    old = rollback[dst]
+                    try:
+                        if old is None:
+                            dst.unlink(missing_ok=True)
+                        else:
+                            os.replace(old, dst)
+                            garbage.discard(old)
+                    except OSError as exc:
+                        failed_restore.append(f'{dst}: {exc}')
+                if failed_restore:
+                    raise OSError('Save failed and rollback was incomplete: ' + '; '.join(failed_restore))
+                raise
+            finally:
+                for tmp in garbage:
+                    tmp.unlink(missing_ok=True)
+
+            self._files_dirty.difference_update(loose_dirty)
+            return list(staged)
+        except Exception:
+            # _flush propagated nested payloads into parent archives before
+            # the failed write. Re-mark both original edits and changed roots.
+            for key in original_dirty:
+                if key in self._archives:
+                    self._archives[key].dirty = True
+            for rel in self.dirty_files() + [k.split(SEP)[0] for k in original_dirty]:
+                if rel in self._archives:
+                    self._archives[rel].dirty = True
+            self._files_dirty.update(loose_dirty)
+            raise
 
     # ----------------------------------------------------------- discovery
     def characters(self) -> list[str]:

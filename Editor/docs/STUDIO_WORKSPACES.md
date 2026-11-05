@@ -46,28 +46,28 @@ projection, DrawPrio ordering once traced.
 | Browser | `koma/koma.aar`, grouped by series prefix, panel counts |
 | Viewport | Card mode: panels on the card's 5×4 shape grid (5 columns × 4 rows, the deck board width) (repeated/missing labels in red); Strip mode: art order; Select/Pencil/Picker, pixel grid ≥6× |
 | Inspector | asset/panel facts; card record (series → art prefix from the ARM9 table 0x0209E840, art index, raw 12 bytes); same-size shape picker; palette; evidence |
-| Bottom | Panels strip; Shapes (all 66, current highlighted, same-size clickable); panel/card PNG export, panel PNG import, Apply; Problems |
+| Bottom | Panels strip; Shapes (66 shipped; current highlighted; edit/create/remove same-size variants); panel/card PNG export, panel PNG import, Apply; Problems |
 
 Codecs: `jus_formats/koma.py` (art, 898/898 byte-exact), `jus_formats/kshape.py` (shapes +
-cards, byte-exact), `jus_package/komacards.py` (card ↔ art, Inferred). Apply writes the art
-into `koma.aar` and stages `bin/koma.bin` (loose file); Save writes both. The registry
+cards, byte-exact), `jus_package/komacards.py` (card ↔ art, Inferred). Apply writes art into `koma.aar` and stages `bin/kshape.bin` and/or `bin/koma.bin`; Save writes
+all changed files. New dictionary counts have valid offsets but unverified runtime limits. The registry
 links `bin/koma.bin` → each art file (`card art`) and → `bin/kshape.bin`.
-Next: deck placement data (the deck board is 5×4 cells, FUN_020790F0; empty cells use koma/dt_20.dtx).
+Next: mission rewards and Koma evolution/purchase graphs; deck placement is explicitly out of scope.
 
-## Level (Ctrl+5) — `app/workspaces/level.py` (v1 visual-only, locked scope)
+## Level (Ctrl+5) — `app/workspaces/level.py` (ALTM tile painting; raw gameplay overlays)
 
 | Area | Content |
 |---|---|
 | Browser | 36 `bg_xx` stage sets (+ shared `SuddenDeath.bin`): layers / floor / gimmick / data |
-| Viewport | background layers composited back→front in list order; tile hover readout; click inspects a tile |
+| Viewport | background layers composited back→front; tile hover readout; Select / Paint / Picker brush tools |
 | Layers | Backgrounds (eye toggles; `*_sud` alternates start hidden) · **Read-only overlays**: camera, objects, stage table, collision, gimmicks — *unavailable*, never drawn |
-| Inspector | layer map/storage/tiles/banks/pairing + evidence; tile entry; overlay provenance |
-| Bottom | Tile set sheet; Stage data (read-only hex of .cam/.mob/.bin, gimmick member list); Problems; layer/composite PNG export |
+| Inspector | layer map/storage/tiles/banks/pairing + evidence; tile entry, brush and unapplied status; overlay provenance |
+| Bottom | Selectable tile set sheet, palette bank and flip controls; Stage data (read-only hex of .cam/.mob/.bin, gimmick member list); Problems; PNG export |
 
 Codecs: `jus_formats/altm.py` (Inferred; 1,558/1,558 decode), `jus_package/tilemap.py`,
-`jus_package/scenes.py`. No save path exists for overlays.
-Next: background tile painting (the ALTM encoder already re-packs edited maps),
-BG priority/scroll from the stage code, then camera/mob tracing.
+`jus_package/scenes.py`. ALTM edits have undo/redo and Apply → Save with
+rebuild validation. No save path exists for gameplay overlays.
+Next: BG priority/scroll from the stage code, then camera/mob tracing.
 
 ## Screen (Ctrl+6) — `app/workspaces/screen.py`
 
@@ -95,13 +95,15 @@ timeline, hit-zone overlay later.
 
 Registry `jus_package/registry.py`: 12,733 resources, 25,348 references, 0 unresolved
 on the shipped data. Ids resolve in the source's group (one character's archives or the
-top-level file), then `efc/*.aar`. Built on a background thread from a separate
-read-only `DataRoot`, so it reflects the files on disk; rebuilt after Save.
+top-level file), then `efc/*.aar`. Built on a background thread from a detached
+in-memory `DataRoot` snapshot so it reflects applied edits plus unchanged files on disk;
+refreshed after Apply / Save.
 
 ## Not done / open
 
 * Registry: dependency-driven preview invalidation and cross-archive transactions
   (docs/04) build on this index next; edges for DSTX 0x05/0x06 layouts, ALOD and
   stage .bin/.cam/.mob wait for their formats.
-* Level/Screen editing (they are viewers plus exports in this round).
+* Level `.mob`/`.bin`/`.cam`, collision and gimmicks remain read-only. Screen
+  backgrounds remain preview-only pending BG slot/priority/scroll tracing.
 * Emulator verification of ALTM rendering, effect draw order and pursuer motion.

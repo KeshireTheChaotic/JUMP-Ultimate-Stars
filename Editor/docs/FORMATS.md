@@ -36,7 +36,7 @@ embedded DSIG v1 mode 0x10 (4bpp 8×8 tiles, one bank; `w08 = 8`, `w0A = 8 × ti
 Every panel is 6×6 tiles (48×48 px); tile 0 is unused and panel *n* starts at tile
 `1 + 36n`, tiles row-major. Evidence: **Direct** (byte-exact on all 898 files; a panel
 edit leaves neighbouring panels untouched). How panels sit on the card is given by
-`bin/kshape.bin` + `bin/koma.bin`, below; deck placement is still **unknown**.
+`bin/kshape.bin` + `bin/koma.bin`, below. Player deck serialization is outside the editor scope.
 
 ## Koma card shapes — `bin/kshape.bin` + `bin/koma.bin` (`jus_formats.kshape`)
 
@@ -53,7 +53,12 @@ re-verified here; both files rebuild byte-for-byte. **Direct.**
 * `koma.bin`: 890 × 12-byte cards. `+0 u16 index` (= record number), `+4 series id`,
   `+5 art index`, `+6 type` (0 battle koma, 1 support, 2 other), `+7 character record`
   (`chr_b.bin` / `chr_s.bin`), `+8 size−1`, `+9 variant`; other bytes unknown and
-  preserved. A shape edit changes only `+8/+9` of one card.
+  preserved. Changing a card selector changes only `+8/+9` of that card.
+  Editing a variant writes the corresponding `kshape.bin` shape and its derived mask;
+  adding a variant increases a group count and shifts later global shape indices,
+  without changing existing variant selectors. Removal requires explicit migration
+  of any references (which may update multiple card selectors). A changed variant
+  count is format-valid but runtime memory bounds have not been traced.
 * Card → art (**Direct**): `FUN_020790F0` fills `koma/??_??.dtx` with the prefix table at
   `0x0209E840` (`roster.KOMA_SERIES_PREFIXES`, indexed by `+4`) and `+5` as two digits. The
   table settles the ids that panel counts alone could not: 2 = `is`, 11 = `nb`, 17 = `tz`,

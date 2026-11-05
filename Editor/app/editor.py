@@ -557,8 +557,8 @@ class EditorApp(tk.Tk):
         self.bind_all('<Control-Key-6>', guard(lambda e: self.show_workspace('screen'), True))
         self.bind_all('<Control-Key-7>', guard(lambda e: self.show_workspace('references'), True))
         for key, tool in (('v', 'select'), ('b', 'pencil'), ('i', 'picker')):
-            self.bind_all(f'<KeyPress-{key}>', guard(lambda e, t=tool: self.suite['koma'].tool.set(t)
-                                                     if self.workspace == 'koma' else None))
+            self.bind_all(f'<KeyPress-{key}>', guard(lambda e, t=tool: self.suite[self.workspace].tool.set(t)
+                                                     if self.workspace in ('koma', 'level') else None))
         self.bind_all('<F1>', guard(lambda e: self.show_shortcuts(), True))
         self.bind_all('<Control-d>', guard(lambda e: self.duplicate_move() if self.workspace == 'animation' else None))
         self.bind_all('<space>', guard(lambda e: self.toggle_play() if self.workspace == 'animation'
@@ -812,6 +812,12 @@ class EditorApp(tk.Tk):
             self.almt_dirty = self.sprite_dirty = False
         return True
 
+    def resources_applied(self):
+        """Refresh the where-used registry against applied (not only saved) data."""
+        refs = self.suite.get('references') if hasattr(self, 'suite') else None
+        if refs:
+            refs.request_refresh()
+
     def apply_current(self):
         if self.workspace in self.suite:
             self.suite[self.workspace].apply()
@@ -838,11 +844,15 @@ class EditorApp(tk.Tk):
             out = filedialog.askdirectory(title='Output root (archives are written at their data-relative paths)')
             if not out:
                 return
-        written = self.root_data.save(out)
+        try:
+            written = self.root_data.save(out)
+        except (OSError, ValueError) as exc:
+            messagebox.showerror('Save failed', f'No edits have been marked saved.\n{exc}')
+            self.update_dirty()
+            return
         self.update_dirty()
         self.status.set(f'Saved {len(written)} archive file(s).')
-        if out is None:                       # the index mirrors the data root on disk
-            self.suite['references'].rebuild()
+        self.resources_applied()
         messagebox.showinfo('Save', 'Wrote:\n' + '\n'.join(str(w) for w in written))
 
     def revert(self):
@@ -914,6 +924,7 @@ class EditorApp(tk.Tk):
             if rep.warnings:
                 msg += '\n\nWarnings:\n' + '\n'.join(rep.warnings[:20])
             msg += '\n\nUse Save to write the rebuilt archives.'
+            self.resources_applied()
             messagebox.showinfo('Import package', msg)
         self.run_task('Importing package…', work, done)
 
@@ -1164,6 +1175,7 @@ class EditorApp(tk.Tk):
         self.update_dirty()
         self.populate_archive()
         self.status.set(f'Applied {self.almt_path} ({len(data)} bytes). {" ".join(rep.warnings)}')
+        self.resources_applied()
 
     def export_almt_json(self):
         if not self.almt:
@@ -3089,6 +3101,7 @@ class EditorApp(tk.Tk):
         self.update_dirty()
         self.populate_archive()
         self.status.set(f'Applied {self.sprite_path}')
+        self.resources_applied()
 
     def export_frames(self):
         d, g = self.sprite_d, self.sprite_g
@@ -3335,6 +3348,7 @@ class EditorApp(tk.Tk):
             self.after_archive_edit()
 
     def after_archive_edit(self):
+        self.resources_applied()
         if self.index:
             self.index.rebuild()
         self.update_dirty()

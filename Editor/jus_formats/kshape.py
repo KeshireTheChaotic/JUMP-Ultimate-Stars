@@ -100,6 +100,86 @@ class ShapeTable:
             raise ValueError(f'no koma shape for size {size}, variant {variant}')
         return self.groups[size - 1][variant]
 
+    @staticmethod
+    def _validated_cells(size: int, cells) -> tuple[tuple[int, ...], int]:
+        """Validate an authored polyomino; existing shipped anomalies are not changed."""
+        if not 1 <= size <= 8:
+            raise ValueError('koma shapes must contain 1–8 panels')
+        cells = tuple(int(v) for v in cells)
+        if len(cells) != COLS * ROWS:
+            raise ValueError('shape canvas must contain 20 cells (5×4)')
+        if sorted(v for v in cells if v) != list(range(1, size + 1)):
+            raise ValueError(f'occupied cells must use each panel label 1–{size} exactly once')
+        occupied = {i for i, v in enumerate(cells) if v}
+        seen = {next(iter(occupied))}
+        todo = list(seen)
+        while todo:
+            i = todo.pop()
+            x, y = i % COLS, i // COLS
+            for nx, ny in ((x-1, y), (x+1, y), (x, y-1), (x, y+1)):
+                j = ny * COLS + nx
+                if 0 <= nx < COLS and 0 <= ny < ROWS and j in occupied and j not in seen:
+                    seen.add(j)
+                    todo.append(j)
+        if seen != occupied:
+            raise ValueError('occupied cells must be orthogonally connected (one polyomino)')
+        return cells, sum(1 << i for i in occupied)
+
+    def _renumber(self) -> None:
+        i = 0
+        for size, group in enumerate(self.groups, 1):
+            for variant, old in enumerate(group):
+                group[variant] = Shape(i, size, variant, old.cells, old.mask)
+                i += 1
+
+    def replace_variant(self, size: int, variant: int, cells) -> Shape:
+        """Edit the 20-byte shape and derived mask without changing references."""
+        old = self.get(size, variant)
+        values, mask = self._validated_cells(size, cells)
+        self.groups[size - 1][variant] = Shape(old.index, size, variant, values, mask)
+        return self.get(size, variant)
+
+    def append_variant(self, size: int, cells) -> Shape:
+        """Append a shape within its size group (preserves existing variant ids)."""
+        self.get(size, 0)       # size group must already exist
+        group = self.groups[size - 1]
+        if len(group) >= 256:
+            raise ValueError('variant index exceeds the u8 koma.bin selector')
+        values, mask = self._validated_cells(size, cells)
+        group.append(Shape(-1, size, len(group), values, mask))
+        self._renumber()
+        return self.get(size, len(group) - 1)
+
+    def delete_variant(self, size: int, variant: int, cards: 'CardTable',
+                       replacement: int | None = None) -> int:
+        """Delete one variant and migrate card selectors losslessly.
+
+        Referenced variants require an explicit alternative (before deletion).
+        No card is deleted and every unrelated card byte remains untouched.
+        Returns the number of cards reassigned away from the removed shape.
+        """
+        self.get(size, variant)
+        group = self.groups[size - 1]
+        if len(group) == 1:
+            raise ValueError('cannot remove the last variant of a size group')
+        affected = [c for c in cards.cards if c.size == size and c.variant == variant]
+        if affected and (replacement is None or replacement == variant):
+            raise ValueError(f'{len(affected)} cards reference this variant; choose another variant first')
+        if replacement is not None:
+            self.get(size, replacement)
+            if replacement == variant:
+                raise ValueError('replacement cannot be the variant being removed')
+        # Perform all validation before mutating the dictionary or cards.
+        for c in cards.cards:
+            if c.size == size:
+                if c.variant == variant:
+                    c.raw[9] = replacement - (replacement > variant)
+                elif c.variant > variant:
+                    c.raw[9] -= 1
+        del group[variant]
+        self._renumber()
+        return len(affected)
+
     @classmethod
     def parse(cls, data: bytes) -> 'ShapeTable':
         if len(data) < 0x40 or (len(data) - 0x40) % SHAPE_SIZE:

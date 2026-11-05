@@ -52,13 +52,17 @@ for every workspace: `docs/STUDIO_WORKSPACES.md`.
   `bin/koma.bin` card) or as a strip, with Select / Pencil / Picker (V/B/I) and pixel grid |
   Inspector with the card record (series → art prefix from the game table, art index, raw bytes; card
   choice), a same-size **shape picker**, the 16-colour palette and evidence | Panels strip,
-  **Shapes** dictionary (all 66), panel / card PNG export, panel PNG import, Apply (art →
-  `koma.aar`, shape → `bin/koma.bin`, bytes +8/+9 of one card only). All edits are undoable;
-  deck placement is not decoded.
-* **Level workspace (v1, visual-only)** — stage browser (`bg_xx` sets) | composited
-  background layers (ALTM + tiles, ¼×–12× zoom, tile hover/inspect) | Layers dock with eye
-  toggles and **read-only overlays** (camera, objects, stage table, collision, gimmicks:
-  listed as unavailable, raw bytes in *Stage data*) | Tile set, Problems, PNG export.
+  **Shapes** dictionary (66 shipped variants), panel / card PNG export, panel PNG import,
+  Edit / New / Remove variant (5×4 polyomino and reference migration), Apply (art →
+  `koma.aar`, dictionary → `bin/kshape.bin`, selectors → `bin/koma.bin`). All edits are
+  undoable. Deck placement is not part of this editor. Additional variants require
+  emulator testing because runtime shape-array capacity is not yet traced.
+* **Level workspace** — stage browser (`bg_xx` sets) | composited background layers
+  (ALTM + tiles, ¼×–12× zoom, tile hover/inspect) | **Select / Paint / Picker** for
+  background tile entries, with a tile-set brush, palette bank, horizontal/vertical
+  flips, undo/redo and Apply → Save | Layers with eye toggles and **read-only overlays**
+  (camera, `.mob` objects, `.bin` stage table, collision and gimmicks remain undecoded;
+  raw bytes in *Stage data*) | Problems, PNG export. No geometric guesses are saved.
 * **Screen workspace** — menu/scene archive browser (nested archives expand) | DS dual
   256×192 screens | Layers dock + Inspector to preview each layer's screen, scroll and
   order (not saved; the real assignment is not traced) | Resources table with decoder
@@ -71,7 +75,8 @@ for every workspace: `docs/STUDIO_WORKSPACES.md`.
   filter; tables with the exact source location (move, node, key, tick, record) and
   evidence; *Open in workspace*. The Archive, Animation and Sprite inspectors show
   *Where used* too, and Project right-click has *Show references*. The index is built in
-  the background from the files on disk (≈2 s) and rebuilt after Save.
+  the background from a detached snapshot of **applied** edits and unchanged files on disk;
+  Apply and Save trigger refreshes.
 * **Archive workspace** — member table and details (type, resource id, attribute bits,
   verified name hash, size, DSCP) with extract/replace/add/remove and a rebuild check.
 * Edits stay in memory with **undo/redo** (Ctrl+Z / Ctrl+Y) until **Apply** (Ctrl+Enter)
@@ -79,9 +84,11 @@ for every workspace: `docs/STUDIO_WORKSPACES.md`.
   unsaved.
 * **Export package… / Import package…**: whole character (all ChrArc archives, `*c.aar`
   image archives, ChrBin tables, ChrWin sprites) or the selected archive.
-* **Save to folder…** writes only the rebuilt archives at their data-relative paths;
-  **Save in place** overwrites the data root and keeps a `.orig` copy of each file the
-  first time.
+* **Save to folder…** writes only changed files at their data-relative paths;
+  **Save in place** stages replacement files beside their destinations, uses an atomic
+  rename per file, retains a `.orig` backup on the first overwrite, and attempts to
+  roll back all files if a multi-file commit fails. Dirty state is preserved on failure.
+  This is not a global crash-proof transaction across multiple files.
 
 ## Packages
 
@@ -139,6 +146,8 @@ py -3 -m unittest discover -s tests -p "test_*.py"   # unit + end-to-end package
 py -3 tests\roundtrip_scan.py                        # every archive/format in the data root
 py -3 tests\sprite_scan.py                           # every character/effect frame
 py -3 tests\validate_chr_textures.py --chr C:\work\chr.zip  # corpus address check
+# GUI smoke with a generated synthetic stage fixture (needs Tkinter / a desktop):
+py -3 tests\gui_level_smoke.py
 ```
 
 ## Pursuer effect timeline (NoteTrack)
@@ -159,3 +168,12 @@ with `JUS_DATA_ROOT` retained for compatibility and
 
 Regression target: `dg_b_01.amt` move 24 selects pursuer slot 3 twice, mapping
 to `dg_b_01_e0.amt` move 24 (`0x4C150`), **not** e0 moves 9–11.
+
+## Unresolved data capture (does not change game files)
+
+`tools/trace_unknowns.py` emits bounded, non-destructive forensic JSON reports for
+stage `.mob`/`.bin`/`.cam` files and controlled emulator deck-save differences.
+See [docs/TRACE_COLLECTION.md](docs/TRACE_COLLECTION.md) for exact commands,
+experiment controls and the evidence needed to decode native serialization.
+Reports and the editor use **Unknown / Inferred / Direct** labels; raw candidates
+are never advertised as native writable formats.
