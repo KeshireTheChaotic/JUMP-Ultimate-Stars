@@ -107,6 +107,7 @@ class EditorApp(tk.Tk):
         self.show_collision = tk.BooleanVar(value=True)
         self.show_effects = tk.BooleanVar(value=True)      # pursuer (chara_action 13/14)
         self.show_spawns = tk.BooleanVar(value=True)       # GenerateID effects
+        self.isolate_selected_spawn = tk.BooleanVar(value=False)  # viewport diagnostic, not saved
         self.show_effect_marks = tk.BooleanVar(value=True)
         self.effect_layer = tk.StringVar(value='Front')    # viewport occlusion override; high-first submission verified
         self.parent_link_preview = tk.BooleanVar(value=True)  # owner translation only; no scale/facing
@@ -371,6 +372,8 @@ class EditorApp(tk.Tk):
         gm.add_checkbutton(label='Assume floor at start height', variable=self.motion_floor,
                            command=self._motion_changed)
         gm.add_separator()
+        gm.add_checkbutton(label='Isolate selected spawned effect (diagnostic only)',
+                           variable=self.isolate_selected_spawn, command=self.redraw_view)
         gm.add_checkbutton(label='ParentLink translation follow (no scale/facing)',
                            variable=self.parent_link_preview, command=self.redraw_view)
         gm.add_command(label='Effect layer (high-first callbacks; final occlusion unverified):', state='disabled')
@@ -1844,15 +1847,27 @@ class EditorApp(tk.Tk):
     def _spawn_rows(self):
         """One read-only clip row per GenerateID key (Unity-style sub-clip bars)."""
         sp_list = spawns.keyed_spawns(self.move, self.almt.node_names)
+        ref_events = spawns.reference_events(self.move, self.almt.node_names)
         self._spawn_list = sp_list
         if not sp_list:
             return []
         gid = ('group', 'spawns')
         collapsed = gid in self._collapsed
-        rows = [{'id': gid, 'kind': 'group', 'label': f'Spawned effects ({len(sp_list)})', 'collapsed': collapsed,
-                 'keys': [(sp.tick, None) for sp in sp_list], 'editable': False}]
+        rows = [{'id': gid, 'kind': 'group', 'label': f'Spawned effects ({len(sp_list)} keys)', 'collapsed': collapsed,
+                 'keys': [(sp.tick, None) for sp in sp_list] + [(e.tick, None) for e in ref_events],
+                 'editable': False}]
         if collapsed:
             return rows
+        if ref_events:
+            rows.append({'id': ('spawn', 'references'), 'kind': 'track', 'indent': 1,
+                         'label': 'GN child ref+ (actions 4/5)', 'colour': T.WARN,
+                         'editable': False, 'keys': [(e.tick, ('ref', e.tick)) for e in ref_events],
+                         'labels': [(e.tick, '+ref', T.WARN) for e in ref_events],
+                         'tooltip': lambda t, p, events=ref_events: '\n'.join(
+                             f'{ev.node} tick {ev.tick}: action {ev.action} retains {ev.kind}'
+                             for ev in events if ev.tick == t) +
+                             '\nARM9 0x0206C650/0x0206C760 → virtual +8 increments refcount; '
+                             'not a kill command.'})
         horizon = self.move.duration
         for sp in sp_list:
             entry = self._effect_moves.get(sp.effect_id)
@@ -2290,7 +2305,7 @@ class EditorApp(tk.Tk):
                 if f.startswith('CollisionRect') and isinstance(v, list):
                     xs.append((pos[0] + v[0], pos[1] + v[1], pos[0] + v[2], pos[1] + v[3]))
         if self.show_spawns.get() and self.index:
-            for inst in self.spawn_projection().instances:
+            for inst in self._visible_spawn_instances(self.spawn_projection()):
                 for s in self._state(inst.move, inst.sub_tick).values():
                     tid, frame = s.get('TextureID'), s.get('BoundsIndex')
                     if tid is None or frame in (None, 0xFFFF):
@@ -2416,11 +2431,47 @@ class EditorApp(tk.Tk):
         child, names, path = entry
         ins.value('Table', path)
         ins.value('Length', f'{child.duration}{"  ⟳ loops" if child.flags & almt.MOVE_FLAG_LOOP else ""}')
+        ins.value('Spawn lifetime control', '-1 (FUN_0206CA8C → +0xDC / 0x02025278)')
+        lifetime = spawns.nominal_lifetime(sp, child, self.tick)
+        ins.value('Nominal state', lifetime.phase)
+        ins.value('Authored end tick', str(lifetime.scheduled_end) if lifetime.scheduled_end is not None
+                  else 'not defined: loop / owner-controlled')
+        ins.text('Verified lifecycle: an ALMT loop wrap dispatches event 6 (0x02027B14); '
+                 'child removal is registered on event 1 (0x020161D8/0x020160F0), '
+                 'dispatched on object deactivation (0x02022380/0x020279D0). '
+                 'A loop does not automatically remove the child.')
+        ins.text('Nominal playback is not the live object registry. Owner deactivation, '
+                 'collision-driven state changes and branches are not simulated.')
+        refs = [ev for ev in spawns.reference_events(self.move, self.almt.node_names)
+                if ev.tick >= sp.tick and ev.tick <= self.tick]
+        if refs:
+            ins.value('GN reference actions', ', '.join(f'{ev.tick}: +ref {ev.action}' for ev in refs[:8]),
+                      colour=T.WARN)
+            ins.text('chara_action(4/5) raises child references (FUN_020102D0). It does NOT '
+                     'remove a previous aura or force a 16-tick loop to finish. '
+                     'The inherited owner lifecycle determines subsequent deactivation.')
         live = [i for i in self.spawn_projection().instances if i.spawn == sp]
         if live:
             inst = live[0]
             ins.section('At playhead')
             ins.value('Effect tick', str(inst.sub_tick))
+            frame_state = spawns.state_at(inst.move, inst.sub_tick)
+            for child_state in frame_state.values():
+                if 'TextureID' in child_state and 'BoundsIndex' in child_state:
+                    tex_id = int(child_state['TextureID'])
+                    ins.value('Active sprite', f"texture 0x{tex_id:06X}, frame {child_state['BoundsIndex']}")
+                    sprite_entry = self.index.sprite(tex_id) if self.index else None
+                    if sprite_entry is not None:
+                        _dstx, sprite_source = sprite_entry
+                        if sprite_source.is_atlas:
+                            ins.value('Image path', f'DSIG 0x{sprite_source.mode:02X} — GX textured atlas')
+                            ins.text('Preview uses indexed-pixel RGBA on a Tk canvas. '
+                                     'The DS submits atlas pieces through GX, with polygon alpha, '
+                                     'depth and material state. Overlap in this preview is NOT a '
+                                     'pixel-accurate hardware composite.')
+                        elif sprite_source.is_obj:
+                            ins.value('Image path', f'DSIG 0x{sprite_source.mode:02X} — OBJ/tile source')
+                    break
             ins.value('Anchor', f'({inst.anchor[0]}, {inst.anchor[1]})')
             ins.value('EffectFlags', f'{hx(inst.flags, 4)}  {spawns.describe_flags(inst.flags)}')
             ins.value('ParentLink', f'{inst.parent_link} ({"attached" if inst.parent_link else "snapshot"})')
@@ -2432,7 +2483,7 @@ class EditorApp(tk.Tk):
             for n in inst.notes:
                 ins.text('• ' + n)
         else:
-            ins.text('Not alive at the playhead (before the spawn tick or after a one-shot ended).')
+            ins.text('Outside the nominal authored span. This does not identify an observed runtime death.')
         ins.buttons(('Open effect move', lambda: self.open_effect_move(sp.effect_id, path), 'Accent.TButton'))
         ins.text('Projection follows the authored timeline straight through. Marker loops, branches, facing '
                  'and LifeType are not simulated.')
@@ -2563,13 +2614,20 @@ class EditorApp(tk.Tk):
                               self._effect_moves, follow_parent=self.parent_link_preview.get(),
                               origin_at=self._animation_origin)
 
+    def _visible_spawn_instances(self, projection):
+        if not self.isolate_selected_spawn.get():
+            return projection.instances
+        hot = self.sel_virtual.get('spawn') if self.sel_virtual else None
+        return [i for i in projection.instances if hot is not None and i.spawn == hot]
+
     def _draw_spawns(self, vp, tick, info, sprites=True, marks=True):
         """GenerateID effects: sprites (front or behind pass) and origin marks (always on top)."""
         if not self.show_spawns.get() or not self.index:
             return
         proj = self.spawn_projection(tick)
         hot = self.sel_virtual.get('spawn') if self.sel_virtual else None
-        for inst in proj.instances:
+        displayed = self._visible_spawn_instances(proj)
+        for inst in displayed:
             if sprites:
                 self._draw_node_sprites(vp, inst.move, inst.sub_tick, base=inst.anchor, names=inst.names)
             if not marks:
@@ -2586,7 +2644,10 @@ class EditorApp(tk.Tk):
         if not marks:
             return
         if proj.instances:
-            info.append(f'effects: {len(proj.instances)} live')
+            info.append(f'effects: {len(proj.instances)} nominal / {len(displayed)} displayed'
+                        + (' (isolated)' if self.isolate_selected_spawn.get() else ' (combat state unknown)'))
+        if self.isolate_selected_spawn.get() and hot is None:
+            info.append('Select an effect row to isolate it')
         for sp in proj.missing[:3]:
             info.append(f'⚠ GenerateID {hx(sp.effect_id, 6)} has no move')
 

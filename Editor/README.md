@@ -228,3 +228,24 @@ your extracted ARM9 image without modifying it using:
 ```powershell
 py -3 tools\verify_draw_traversal.py D:\Library\Development\JUS\arm9.bin
 ```
+
+### November 5 effect-lifetime reference trace
+
+See `docs/EFFECT_LOOP_REFCOUNT_TRACE_20261105.md`. The Animation timeline now shows a
+read-only **GN child ref+ (actions 4/5)** row. These are *reference increments*,
+not destruction events. The editor deliberately leaves looping effects as
+nominally open-ended until a real object-release/visibility trace is available.
+Use `tools/audit_spawn_lifecycle.py` to inspect move 41 at tick 55 and
+`tools/verify_effect_reference_path.py` to verify the original ARM9 vtables.
+
+### Static-only GX aura lifetime trace (2026-11-05)
+
+`docs/STATIC_EFFECT_LIFETIME_RENDER_TRACE_20261105.md` records the verified
+`GenerateID` → `CommonEffect` → loop-event-6/deactivation-event-1 paths.
+The `db_b_01` move 41 aura (`0x05C189`/`0x05C18A`) is genuinely looping,
+and its repeated keys create separate objects; do not expire or deduplicate
+these just to approximate the game's image.  Its `0x05C180` texture is a
+GX `0x50` atlas.  The Inspector now labels this image mode and warns that
+Tk's straight RGBA compositing is not DS polygon-alpha/depth compositing.
+To verify the ARM9 vtable and call edges offline, run
+`python tools/verify_lifetime_dispatch.py reverse_engineering.zip`.

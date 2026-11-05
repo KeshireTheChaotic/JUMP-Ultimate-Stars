@@ -25,9 +25,10 @@ timeline ("Visual Playback" of the nominal path).
 from __future__ import annotations
 
 from dataclasses import dataclass, field
+import struct
 from typing import Callable, Mapping
 
-from jus_formats import almt
+from jus_formats import almt, notetrack
 
 from .effectlinks import effect_frame_tick
 
@@ -121,6 +122,53 @@ def keyed_spawns(move: almt.Move, node_names: list[str]) -> list[Spawn]:
     return out
 
 
+@dataclass(frozen=True)
+class ReferenceEvent:
+    """Battle chara_action(4/5) affecting references to GN child objects.
+
+    ARM9 overlay 6 FUN_02157A44 dispatches actions 4 and 5 to main
+    FUN_0206C650/0206C760. Those functions call virtual +8 on selected
+    GN01..GN09 children. On the effect widget vtable, +8 resolves to
+    Thumb FUN_020102D0, which *increments* the reference count; it is not
+    the object destructor or a timed effect kill.
+
+    The caller's retained references, later releases and execution under
+    Marker/NoteTrack branches are not simulated in the preview.
+    """
+    tick: int
+    node: str
+    kind: str        # 'all GN children' or 'first eligible GN child'
+    action: int
+
+
+def reference_events(move: almt.Move, node_names: list[str]) -> tuple[ReferenceEvent, ...]:
+    """Extract the traced child-reference actions without altering lifetimes."""
+    events: list[ReferenceEvent] = []
+    for ni, node in enumerate(move.nodes):
+        if node is None:
+            continue
+        tr = node.track('NoteTrack')
+        if tr is None:
+            continue
+        try:
+            keys = notetrack.parse(tr.encoded()).keys
+        except (ValueError, IndexError, struct.error):
+            continue
+        for key in keys:
+            for cmd in key.commands:
+                if cmd.opcode != 0x0300:
+                    continue
+                args = cmd.values()
+                if not args or args[0] not in (4, 5):
+                    continue
+                action = args[0]
+                events.append(ReferenceEvent(key.tick,
+                            node_names[ni] if ni < len(node_names) else f'N{ni}',
+                            'all GN children' if action == 4 else 'first eligible GN child',
+                            action))
+    return tuple(sorted(events, key=lambda ev: (ev.tick, ev.node)))
+
+
 @dataclass
 class EffectInstance:
     """A spawned effect as it appears at one parent tick."""
@@ -154,6 +202,36 @@ class Projection:
     instances: list[EffectInstance]
     missing: list[Spawn]         # GenerateID with no ALMT move in the catalog
     spawns: list[Spawn]
+
+
+@dataclass(frozen=True)
+class NominalLifetime:
+    """Offline timeline status, not proof an engine object survived combat.
+
+    Non-looping animations are drawable through their authored terminal tick;
+    the animation controller transitions to its end path once its clock
+    advances *past* duration (ARM9 FUN_0201BDEC). A looping ALMT supplies no
+    independent death tick. Owner deletion, combat collision, scene changes,
+    animation retargeting and hardware visibility require runtime state.
+    """
+    phase: str
+    age: int
+    frame_tick: int | None
+    scheduled_end: int | None
+    runtime_dependent: bool = True
+
+
+def nominal_lifetime(spawn: Spawn, child: almt.Move, tick: int) -> NominalLifetime:
+    age = tick - spawn.tick
+    if age < 0:
+        return NominalLifetime('not-spawned', age, None, None if child.flags & almt.MOVE_FLAG_LOOP
+                               else spawn.tick + child.duration)
+    sub = effect_frame_tick(child, age)
+    if sub is None:
+        return NominalLifetime('past-authored-end', age, None, spawn.tick + child.duration)
+    return NominalLifetime('looping-until-runtime-removal' if child.flags & almt.MOVE_FLAG_LOOP
+                           else 'within-authored-span', age, sub,
+                           None if child.flags & almt.MOVE_FLAG_LOOP else spawn.tick + child.duration)
 
 
 def effect_span(spawn: Spawn, child: almt.Move, horizon: int) -> tuple[int, int, bool]:
