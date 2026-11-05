@@ -135,7 +135,7 @@ class EffectInstance:
     parent_link: int
     depth: int = 0
     parent: 'EffectInstance | None' = None
-    draw_prio: int | None = None # spawning node DrawPrio (20.12); final compositing not traced
+    draw_prio: int | None = None # spawning node DrawPrio (20.12); visual occlusion unverified
     notes: list[str] = field(default_factory=list)
 
     @property
@@ -179,7 +179,9 @@ def project(move: almt.Move, node_names: list[str], tick: int,
     the owner at playback time. ``origin_at`` supplies the preview's assumed
     world-space owner position; when omitted the owner is stationary.
 
-    This is *translation only*, not full engine attachment. Scale, facing,
+    This is *translation only*, not full engine attachment. ARM9
+    0x02022060 links the widget and its transform controller to the owner;
+    0x0202AA28 evaluates the inherited transform matrix. Scale, facing,
     rotation, owner bone selection, screen-reference and repeated Marker loops
     still require further runtime traces. Positions returned for the editor
     are relative to ``origin_at(_world_tick)`` because the main viewport
@@ -234,7 +236,7 @@ def project(move: almt.Move, node_names: list[str], tick: int,
         if follow_parent:
             inst.notes.append('ParentLink translation preview: owner ' +
                               ('follows each tick' if link else 'position captured at spawn'))
-            inst.notes.append('Owner scale/rotation/facing, bones and runtime attachment not resolved')
+            inst.notes.append('Runtime uses transform hierarchy (0x02022060); rotation/scale/facing not previewed')
         else:
             inst.notes.append('anchored at the spawning node 2DPos on the spawn tick (legacy preview)')
             if link:

@@ -33,6 +33,7 @@ if str(HERE) not in sys.path:
 from jus_formats import alar, almt, dsig as dsigmod, dstx as dstxmod, eventops, notetrack, sdat, sprite  # noqa: E402
 from jus_package import effectlinks, images, motion, package, sounds, spawns, spriteedit  # noqa: E402
 from app.workspaces import SUITE  # noqa: E402
+from jus_package.draworder import submission_note  # noqa: E402
 from jus_package.audio_preview import AudioPreview
 from jus_package.project import DataRoot, join, split  # noqa: E402
 from jus_package.resources import ResourceIndex  # noqa: E402
@@ -107,7 +108,7 @@ class EditorApp(tk.Tk):
         self.show_effects = tk.BooleanVar(value=True)      # pursuer (chara_action 13/14)
         self.show_spawns = tk.BooleanVar(value=True)       # GenerateID effects
         self.show_effect_marks = tk.BooleanVar(value=True)
-        self.effect_layer = tk.StringVar(value='Front')    # final DrawPrio compositing not traced
+        self.effect_layer = tk.StringVar(value='Front')    # viewport occlusion override; high-first submission verified
         self.parent_link_preview = tk.BooleanVar(value=True)  # owner translation only; no scale/facing
         # NoteTrack physics (jus_package.motion) and sound cues (jus_package.sounds)
         self.show_motion = tk.BooleanVar(value=True)       # trajectory overlay
@@ -372,7 +373,7 @@ class EditorApp(tk.Tk):
         gm.add_separator()
         gm.add_checkbutton(label='ParentLink translation follow (no scale/facing)',
                            variable=self.parent_link_preview, command=self.redraw_view)
-        gm.add_command(label='Effect layer (DrawPrio final traversal not traced):', state='disabled')
+        gm.add_command(label='Effect layer (high-first callbacks; final occlusion unverified):', state='disabled')
         for v in ('Front', 'Behind'):
             gm.add_radiobutton(label=f'   Effects {v.lower()} character', value=v, variable=self.effect_layer,
                                command=self.redraw_view)
@@ -2425,7 +2426,9 @@ class EditorApp(tk.Tk):
             ins.value('ParentLink', f'{inst.parent_link} ({"attached" if inst.parent_link else "snapshot"})')
             ins.value('DrawPrio', '—' if inst.draw_prio is None else
                       f'{inst.draw_prio / 4096:g}  (raw {inst.draw_prio})')
-            ins.text('Child priority comparison is descending; final DS front/back traversal is unresolved.')
+            ins.value('Renderer link priority', submission_note(inst.draw_prio))
+            ins.text('Verified: DrawPrio setter → sorted list → high-first draw callbacks. '
+                     'DS depth, alpha and BG/OBJ rules still determine visible front/back.')
             for n in inst.notes:
                 ins.text('• ' + n)
         else:

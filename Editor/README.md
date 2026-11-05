@@ -33,7 +33,8 @@ for every workspace: `docs/STUDIO_WORKSPACES.md`.
   pursuer effect with traced follow smoothing or target-only reference; an explicit first-position
   seed is required for standalone move replay — all toggled from **Show ▾**) | *Inspector* (move
   ID/length/loop, the selected track, key or NoteTrack events, editable in place; for an
-  effect row: spawn node/key/tick, EffectFlags, ParentLink, DrawPrio, anchor). Below it,
+  effect row: spawn node/key/tick, EffectFlags, ParentLink, DrawPrio, **stored renderer priority**
+  (high-first submission only, not a proven front/back rule), and anchor). Below it,
   the dock-style **Timeline**: a *Spawned effects* group with one clip bar per GenerateID
   key (double-click opens the effect's own move), transport (⏮ ◀| ◀ ▶ ▶ |▶ ⏭,
   tick field, loop, speed), Fit, ruler with draggable playhead, per-node groups that
@@ -209,3 +210,21 @@ because the final `DrawPrio` submission traversal is not yet established.
 See [docs/PARENTLINK_DRAWPRIO_CONTINUED_TRACE_20261105.md](docs/PARENTLINK_DRAWPRIO_CONTINUED_TRACE_20261105.md)
 for the executable offsets, distinction between scheduler `Prio` and child
 `DrawPrio`, evidence limits, and repeatable regression checks.
+
+## ParentLink and DrawPrio trace (2026-11-05)
+
+The original ARM9 confirms the spawned effect's `+0xD4` parent method is
+`0x02022060`: it attaches both widget and transform-controller hierarchies.
+The current preview intentionally follows **translation only**. `DrawPrio`
+quantizes to a 16-bit renderer-link priority and the final CPU render
+traversal submits high-priority links before low-priority links; GX/BG hardware
+state still decides **visible front/back**. The Show menu's Front/Behind option
+remains a manual visualization override, not a runtime-equivalent setting.
+
+See `docs/PARENTLINK_DRAWPRIO_RENDER_TRAVERSAL_20261105.md` for the full
+function chain, verified vtable pointers, and graphics leaf callbacks. Check
+your extracted ARM9 image without modifying it using:
+
+```powershell
+py -3 tools\verify_draw_traversal.py D:\Library\Development\JUS\arm9.bin
+```
