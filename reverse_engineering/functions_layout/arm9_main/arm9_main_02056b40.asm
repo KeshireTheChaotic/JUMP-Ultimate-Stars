@@ -1,0 +1,17 @@
+02056b40  stmdb sp!,{r4,lr}
+02056b44  bl 0x02053a98
+02056b48  cmp r0,#0x0
+02056b4c  moveq r0,#0x1
+02056b50  ldmiaeq sp!,{r4,lr}
+02056b54  bxeq lr
+02056b58  bl 0x02055238
+02056b5c  ldr r1,[0x2056b84]
+02056b60  mov r2,#0x10
+02056b64  str r2,[r1,#0x0]
+02056b68  ldr r4,[r1,#0x0]
+02056b6c  bl 0x0205524c
+02056b70  cmp r4,#0x0
+02056b74  movne r0,#0x1
+02056b78  moveq r0,#0x0
+02056b7c  ldmia sp!,{r4,lr}
+02056b80  bx lr

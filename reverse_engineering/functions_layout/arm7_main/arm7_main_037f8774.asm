@@ -1,0 +1,15 @@
+037f8774  stmdb sp!,{lr}
+037f8778  sub sp,sp,#0x4
+037f877c  ldr r1,[r0,#0x0]
+037f8780  cmp r1,#0x0
+037f8784  beq 0x037f87a4
+037f8788  ldr r0,[0x37f87b0]
+037f878c  ldr r0,[r0,#0x0]
+037f8790  add r0,r0,#0x200
+037f8794  bl 0x037f87b4
+037f8798  mov r0,#0x2
+037f879c  mov r1,#0xb
+037f87a0  bl 0x037f85f8
+037f87a4  add sp,sp,#0x4
+037f87a8  ldmia sp!,{lr}
+037f87ac  bx lr

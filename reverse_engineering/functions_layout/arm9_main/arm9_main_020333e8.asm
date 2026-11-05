@@ -1,0 +1,10 @@
+020333e8  stmdb sp!,{r4,lr}
+020333ec  mov r4,r0
+020333f0  bl 0x0201a9ec
+020333f4  cmp r0,#0x0
+020333f8  bne 0x02033408
+020333fc  mov r0,r4
+02033400  mov r1,#0x1
+02033404  bl 0x0201a958
+02033408  mov r0,r4
+0203340c  ldmia sp!,{r4,pc}

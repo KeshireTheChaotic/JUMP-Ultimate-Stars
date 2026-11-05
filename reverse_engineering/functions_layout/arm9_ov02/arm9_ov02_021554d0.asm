@@ -1,0 +1,16 @@
+021554d0  bl 0x02155884
+021554d4  mov r0,#0x28
+021554d8  str r0,[sp,#0x10]
+021554dc  mov r0,r4
+021554e0  add r1,sp,#0x10
+021554e4  bl 0x02151858
+021554e8  str r4,[r6,#0xc]
+021554ec  mov r0,#0x0
+021554f0  str r0,[r6,#0x10]
+021554f4  str r0,[r6,#0x14]
+021554f8  str r5,[r6,#0x4]
+021554fc  mov r0,#0x2
+02155500  strb r0,[r6,#0x1c]
+02155504  mov r0,r6
+02155508  add sp,sp,#0x14
+0215550c  ldmia sp!,{r3,r4,r5,r6,pc}

@@ -1,0 +1,17 @@
+02152dc4  ldr r2,[r0,#0x114]
+02152dc8  ldr r1,[r0,#0x110]
+02152dcc  cmp r2,r1
+02152dd0  movcs r0,#0x0
+02152dd4  bxcs lr
+02152dd8  add r1,r2,#0x1
+02152ddc  str r1,[r0,#0x114]
+02152de0  ldr r1,[r0,#0x128]
+02152de4  add r1,r1,#0x1
+02152de8  str r1,[r0,#0x128]
+02152dec  ldr r2,[r0,#0x128]
+02152df0  ldr r1,[r0,#0xcc]
+02152df4  cmp r2,r1
+02152df8  moveq r1,#0x0
+02152dfc  streq r1,[r0,#0x128]
+02152e00  mov r0,#0x1
+02152e04  bx lr

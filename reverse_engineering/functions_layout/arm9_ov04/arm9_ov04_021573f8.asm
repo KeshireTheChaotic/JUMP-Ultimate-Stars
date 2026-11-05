@@ -1,0 +1,12 @@
+021573f8  stmdb sp!,{r4,lr}
+021573fc  movs r4,r0
+02157400  ldmiaeq sp!,{r4,pc}
+02157404  ldr r0,[r4,#0x0]
+02157408  cmp r0,#0x0
+0215740c  beq 0x0215741c
+02157410  ldr r1,[r0,#0x0]
+02157414  ldr r1,[r1,#0x8]
+02157418  blx r1
+0215741c  mov r0,r4
+02157420  bl 0x0201b244
+02157424  ldmia sp!,{r4,pc}

@@ -1,0 +1,13 @@
+020344cc  stmdb sp!,{r4,lr}
+020344d0  mov r4,r0
+020344d4  add r0,r4,#0x4
+020344d8  bl 0x0201cb78
+020344dc  mov r0,r4
+020344e0  bl 0x0201a9ec
+020344e4  cmp r0,#0x0
+020344e8  bne 0x020344f8
+020344ec  mov r0,r4
+020344f0  mov r1,#0x1
+020344f4  bl 0x0201a958
+020344f8  mov r0,r4
+020344fc  ldmia sp!,{r4,pc}

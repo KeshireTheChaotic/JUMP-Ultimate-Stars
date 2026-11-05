@@ -1,0 +1,22 @@
+02032260  stmdb sp!,{r3,r4,r5,lr}
+02032264  mov r4,r0
+02032268  mov r5,r1
+0203226c  add r0,sp,#0x0
+02032270  mov r1,r4
+02032274  blx 0x02011990
+02032278  ldr r1,[sp,#0x0]
+0203227c  ldr r0,[r5,#0x0]
+02032280  cmp r1,r0
+02032284  ldmiaeq sp!,{r3,r4,r5,pc}
+02032288  ldr r0,[0x20322b8]
+0203228c  mov r1,r4
+02032290  ldr r0,[r0,#0xb8]
+02032294  bl 0x0201cdb4
+02032298  ldr r1,[r5,#0x0]
+0203229c  ldr r0,[0x20322b8]
+020322a0  mov r1,r1, asr #0x4
+020322a4  strh r1,[r4,#0x6]
+020322a8  ldr r0,[r0,#0xb8]
+020322ac  mov r1,r4
+020322b0  bl 0x0201cca0
+020322b4  ldmia sp!,{r3,r4,r5,pc}

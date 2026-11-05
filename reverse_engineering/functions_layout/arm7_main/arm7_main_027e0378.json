@@ -1,0 +1,1 @@
+{"module":"arm7_main","address":"027e0378","name":"FUN_027e0378","thumb":false,"body_bytes":324,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["027e01a4","027e267c","037fe648","037fe788"],"unresolved_call_targets":[],"status":"decompiled","asm_file":"arm7_main_027e0378.asm","c_file":"arm7_main_027e0378.c"}

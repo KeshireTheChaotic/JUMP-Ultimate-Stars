@@ -1,0 +1,13 @@
+0216c5bc  stmdb sp!,{r4,lr}
+0216c5c0  mov r4,r0
+0216c5c4  ldr r3,[r4,#0x64]
+0216c5c8  mov r1,#0x0
+0216c5cc  ldrb r0,[r3,#0x600]
+0216c5d0  mov r2,#0x40
+0216c5d4  bic r0,r0,#0x1
+0216c5d8  strb r0,[r3,#0x600]
+0216c5dc  ldr r0,[r4,#0x64]
+0216c5e0  bl 0x020517fc
+0216c5e4  mov r0,r4
+0216c5e8  bl 0x0216c55c
+0216c5ec  ldmia sp!,{r4,pc}

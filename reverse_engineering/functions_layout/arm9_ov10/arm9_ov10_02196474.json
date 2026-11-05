@@ -1,0 +1,1 @@
+{"module":"arm9_ov10","address":"02196474","name":"FUN_02196474","thumb":true,"body_bytes":140,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["02051890","02196534"],"unresolved_call_targets":[],"status":"decompiled","asm_file":"arm9_ov10_02196474.asm","c_file":"arm9_ov10_02196474.c"}

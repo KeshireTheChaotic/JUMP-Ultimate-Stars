@@ -1,0 +1,1 @@
+{"module":"arm9_ov11","address":"02178250","name":"FUN_02178250","thumb":false,"body_bytes":1292,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["02051890","02175628","0217718c","02177c00","02177c24","02178240","02178f40"],"unresolved_call_targets":[],"status":"decompiled","asm_file":"arm9_ov11_02178250.asm","c_file":"arm9_ov11_02178250.c"}

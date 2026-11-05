@@ -1,0 +1,25 @@
+02162a1c  stmdb sp!,{r3,lr}
+02162a20  ldrb r12,[r1,#0x2]
+02162a24  cmp r12,#0x6
+02162a28  bne 0x02162a38
+02162a2c  ldr r12,[r0,#0x3c]
+02162a30  tst r12,#0x8
+02162a34  beq 0x02162a40
+02162a38  mov r0,#0x0
+02162a3c  ldmia sp!,{r3,pc}
+02162a40  ldrsh r12,[r1,#0x0]
+02162a44  ldr lr,[r0,#0x18]
+02162a48  mov r1,#0x18
+02162a4c  smlabb r1,r12,r1,lr
+02162a50  ldrsh r1,[r1,#0x16]
+02162a54  ldr r0,[r0,#0x20]
+02162a58  add r1,r0,r1, lsl #0x3
+02162a5c  ldrb r0,[r1,#0x3]
+02162a60  strb r0,[r2,#0x0]
+02162a64  ldrb r0,[r1,#0x2]
+02162a68  strb r0,[r3,#0x0]
+02162a6c  ldrb r0,[r1,#0x6]
+02162a70  cmp r0,#0x0
+02162a74  movne r0,#0x1
+02162a78  moveq r0,#0x0
+02162a7c  ldmia sp!,{r3,pc}

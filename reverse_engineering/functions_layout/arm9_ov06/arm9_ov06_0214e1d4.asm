@@ -1,0 +1,17 @@
+0214e1d4  push {r3,lr}
+0214e1d6  ldr r0,[0x0214e1fc]
+0214e1d8  ldr r1,[r0,#0x0]
+0214e1da  mov r0,#0x51
+0214e1dc  lsl r0,r0,#0x2
+0214e1de  ldr r0,[r1,r0]
+0214e1e0  ldr r0,[r0,#0x4]
+0214e1e2  blx 0x020282f4
+0214e1e6  ldr r0,[0x0214e1fc]
+0214e1e8  ldr r1,[r0,#0x0]
+0214e1ea  mov r0,#0x5
+0214e1ec  lsl r0,r0,#0x6
+0214e1ee  ldr r0,[r1,r0]
+0214e1f0  ldr r1,[0x0214e200]
+0214e1f2  ldr r0,[r0,#0x4]
+0214e1f4  blx 0x020314c0
+0214e1f8  pop {r3,pc}

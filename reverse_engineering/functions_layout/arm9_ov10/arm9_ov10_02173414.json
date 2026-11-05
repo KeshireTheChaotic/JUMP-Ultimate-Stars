@@ -1,0 +1,1 @@
+{"module":"arm9_ov10","address":"02173414","name":"FUN_02173414","thumb":true,"body_bytes":6,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":[],"unresolved_call_targets":[],"status":"decompiled","asm_file":"arm9_ov10_02173414.asm","c_file":"arm9_ov10_02173414.c"}

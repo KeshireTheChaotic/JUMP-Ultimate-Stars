@@ -1,0 +1,1 @@
+{"module":"arm9_main","address":"02050dcc","name":"FUN_02050dcc","thumb":false,"body_bytes":4,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":[],"unresolved_call_targets":[],"status":"decompiled","asm_file":"arm9_main_02050dcc.asm","c_file":"arm9_main_02050dcc.c"}

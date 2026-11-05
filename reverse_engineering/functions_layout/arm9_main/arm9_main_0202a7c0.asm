@@ -1,0 +1,54 @@
+0202a7c0  stmdb sp!,{r3,r4,r5,lr}
+0202a7c4  sub sp,sp,#0x8
+0202a7c8  mov r5,r0
+0202a7cc  bl 0x02019e70
+0202a7d0  mov r4,r0
+0202a7d4  bl 0x02019edc
+0202a7d8  ldrb r0,[r5,#0x24]
+0202a7dc  mov r1,r0, lsl #0x1e
+0202a7e0  movs r1,r1, lsr #0x1f
+0202a7e4  beq 0x0202a83c
+0202a7e8  mov r0,r0, lsl #0x1d
+0202a7ec  movs r0,r0, lsr #0x1f
+0202a7f0  ldr r1,[r5,#0x30]
+0202a7f4  mov r0,r4
+0202a7f8  beq 0x0202a834
+0202a7fc  bl 0x02019f00
+0202a800  mov r0,r4
+0202a804  add r1,r5,#0x34
+0202a808  bl 0x02018ac8
+0202a80c  add r0,r4,#0x8
+0202a810  add r1,r5,#0x38
+0202a814  bl 0x02018ac8
+0202a818  add r0,r4,#0x4
+0202a81c  add r1,r5,#0x34
+0202a820  bl 0x02018ac8
+0202a824  add r0,r4,#0xc
+0202a828  add r1,r5,#0x38
+0202a82c  bl 0x02018ac8
+0202a830  b 0x0202a874
+0202a834  bl 0x02019f00
+0202a838  b 0x0202a874
+0202a83c  mov r1,r5
+0202a840  ldr r2,[r1,#0x0]
+0202a844  add r0,sp,#0x4
+0202a848  ldr r2,[r2,#0x34]
+0202a84c  blx r2
+0202a850  ldr r0,[sp,#0x4]
+0202a854  mov r1,r5
+0202a858  str r0,[r4,#0x0]
+0202a85c  ldr r2,[r1,#0x0]
+0202a860  add r0,sp,#0x0
+0202a864  ldr r2,[r2,#0x38]
+0202a868  blx r2
+0202a86c  ldr r0,[sp,#0x0]
+0202a870  str r0,[r4,#0xc]
+0202a874  ldr r1,[r5,#0xc]
+0202a878  mov r0,r4
+0202a87c  str r1,[r4,#0x10]
+0202a880  ldr r1,[r5,#0x10]
+0202a884  str r1,[r4,#0x14]
+0202a888  ldrb r1,[r5,#0x24]
+0202a88c  strb r1,[r5,#0x25]
+0202a890  add sp,sp,#0x8
+0202a894  ldmia sp!,{r3,r4,r5,pc}

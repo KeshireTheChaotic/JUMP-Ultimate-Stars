@@ -1,0 +1,11 @@
+0214d450  stmdb sp!,{r4,lr}
+0214d454  bl 0x02035c90
+0214d458  mov r4,r0
+0214d45c  ldr r1,[r4,#0x38]
+0214d460  cmp r1,#0x0
+0214d464  bne 0x0214d474
+0214d468  ldr r1,[r0,#0x0]
+0214d46c  ldr r1,[r1,#0x14]
+0214d470  blx r1
+0214d474  ldr r0,[r4,#0x38]
+0214d478  ldmia sp!,{r4,pc}

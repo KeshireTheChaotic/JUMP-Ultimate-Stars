@@ -1,0 +1,11 @@
+0205cae8  stmdb sp!,{lr}
+0205caec  sub sp,sp,#0x4
+0205caf0  ldr r0,[r0,#0x0]
+0205caf4  mov r1,#0x20
+0205caf8  bl 0x0205eab4
+0205cafc  cmp r0,#0x20
+0205cb00  movcc r0,#0x0
+0205cb04  subcs r0,r0,#0x20
+0205cb08  biccs r0,r0,#0x1f
+0205cb0c  add sp,sp,#0x4
+0205cb10  ldmia sp!,{pc}

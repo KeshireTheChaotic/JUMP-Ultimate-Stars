@@ -1,0 +1,13 @@
+02034cd0  stmdb sp!,{r4,lr}
+02034cd4  ldr r2,[0x2034d04]
+02034cd8  mov r4,r0
+02034cdc  cmp r1,#0x0
+02034ce0  ldreq r0,[0x2034d08]
+02034ce4  str r2,[r4,#0x0]
+02034ce8  ldreq r1,[r0,#0x420]
+02034cec  mov r0,r4
+02034cf0  str r1,[r4,#0x4]
+02034cf4  ldr r1,[0x2034d0c]
+02034cf8  bl 0x0201ac08
+02034cfc  mov r0,r4
+02034d00  ldmia sp!,{r4,pc}

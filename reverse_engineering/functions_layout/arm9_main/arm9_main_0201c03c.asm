@@ -1,0 +1,12 @@
+0201c03c  stmdb sp!,{r3,lr}
+0201c040  cmp r1,#0x0
+0201c044  movne r0,#0x0
+0201c048  ldmiane sp!,{r3,pc}
+0201c04c  mov r1,#0x0
+0201c050  str r1,[sp,#0x0]
+0201c054  ldr r2,[r0,#0x0]
+0201c058  add r1,sp,#0x0
+0201c05c  ldr r2,[r2,#0xbc]
+0201c060  blx r2
+0201c064  mov r0,#0x1
+0201c068  ldmia sp!,{r3,pc}

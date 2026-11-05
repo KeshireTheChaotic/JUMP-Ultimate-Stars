@@ -1,0 +1,36 @@
+027f7a60  mov r12,#0x4000000
+027f7a64  add r12,r12,#0x138
+027f7a68  stmdb sp!,{r0,r1}
+027f7a6c  tst r0,#0x1
+027f7a70  ldrheq r1,[r0,#0x0]
+027f7a74  ldrhne r1,[r0,#-0x1]
+027f7a78  movne r1,r1, lsr #0x8
+027f7a7c  ldrh r0,[r12,#0x0]
+027f7a80  bic r0,r0,#0x77
+027f7a84  orr r0,r0,#0x74
+027f7a88  mov r2,#0x0
+027f7a8c  bic r0,r0,#0x3
+027f7a90  orr r0,r0,#0x0
+027f7a94  mov r3,#0x1
+027f7a98  tst r3,r1, lsr r2
+027f7a9c  movne r3,#0x1
+027f7aa0  moveq r3,#0x0
+027f7aa4  orr r0,r0,r3
+027f7aa8  strh r0,[r12,#0x0]
+027f7aac  mov r3,#0x9
+027f7ab0  subs r3,r3,#0x1
+027f7ab4  bne 0x027f7ab0
+027f7ab8  bic r0,r0,#0x2
+027f7abc  orr r0,r0,#0x2
+027f7ac0  strh r0,[r12,#0x0]
+027f7ac4  mov r3,#0x9
+027f7ac8  subs r3,r3,#0x1
+027f7acc  bne 0x027f7ac8
+027f7ad0  add r2,r2,#0x1
+027f7ad4  cmp r2,#0x8
+027f7ad8  bne 0x027f7a8c
+027f7adc  ldmia sp!,{r0,r1}
+027f7ae0  add r0,r0,#0x1
+027f7ae4  subs r1,r1,#0x1
+027f7ae8  bne 0x027f7a68
+027f7aec  bx lr

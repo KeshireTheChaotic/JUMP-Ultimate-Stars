@@ -1,0 +1,11 @@
+02159e1c  ldr r0,[0x02159e34]
+02159e1e  ldrh r1,[r0,#0x0]
+02159e20  ldr r0,[0x02159e38]
+02159e22  and r1,r0
+02159e24  asr r0,r1,#0xf
+02159e26  cmp r0,#0x0
+02159e28  beq 0x02159e2e
+02159e2a  mov r0,#0x1
+02159e2c  bx lr
+02159e2e  mov r0,#0x0
+02159e30  bx lr

@@ -1,0 +1,15 @@
+02012384  stmdb sp!,{r4,lr}
+02012388  mov r4,r0
+0201238c  str r1,[r4,#0x1c]
+02012390  cmp r1,#0x0
+02012394  ldmiaeq sp!,{r4,pc}
+02012398  ldr r1,[r4,#0x18]
+0201239c  cmp r1,#0x0
+020123a0  beq 0x020123b4
+020123a4  bl 0x02012318
+020123a8  ldr r1,[r0,#0x0]
+020123ac  ldr r1,[r1,#0x28]
+020123b0  blx r1
+020123b4  mov r0,r4
+020123b8  bl 0x020123d8
+020123bc  ldmia sp!,{r4,pc}

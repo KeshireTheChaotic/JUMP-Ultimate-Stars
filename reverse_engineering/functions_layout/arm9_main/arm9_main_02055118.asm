@@ -1,0 +1,35 @@
+02055118  stmdb sp!,{r4,r5,lr}
+0205511c  sub sp,sp,#0x4
+02055120  mov r4,r0
+02055124  bl 0x02054b44
+02055128  ldr r3,[0x20551a4]
+0205512c  mov r2,#0x0
+02055130  strh r2,[r3,#0x0]
+02055134  ldr r12,[r4,#0xc]
+02055138  ldr r3,[r4,#0x10]
+0205513c  subs r5,r12,r0
+02055140  sbc r4,r3,r1
+02055144  ldr r1,[0x20551a8]
+02055148  mov r0,#0x1
+0205514c  bl 0x02051dc8
+02055150  mov r2,#0x0
+02055154  subs r0,r5,r2
+02055158  sbcs r0,r4,r2
+0205515c  ldrlt r2,[0x20551ac]
+02055160  blt 0x0205517c
+02055164  mov r0,#0x10000
+02055168  subs r0,r5,r0
+0205516c  sbcs r0,r4,r2
+02055170  mvnlt r0,r5
+02055174  movlt r0,r0, lsl #0x10
+02055178  movlt r2,r0, lsr #0x10
+0205517c  ldr r0,[0x20551b0]
+02055180  ldr r1,[0x20551a4]
+02055184  strh r2,[r0,#0x0]
+02055188  mov r2,#0xc1
+0205518c  mov r0,#0x10
+02055190  strh r2,[r1,#0x0]
+02055194  bl 0x02051d5c
+02055198  add sp,sp,#0x4
+0205519c  ldmia sp!,{r4,r5,lr}
+020551a0  bx lr

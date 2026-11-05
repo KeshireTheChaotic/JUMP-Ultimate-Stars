@@ -1,0 +1,41 @@
+021644e8  stmdb sp!,{r3,r4,r5,r6,r7,r8,r9,r10,r11,lr}
+021644ec  mov r5,#0x5
+021644f0  mov r10,r0
+021644f4  mov r8,r2
+021644f8  mov r9,r1
+021644fc  sub r6,r5,#0x6
+02164500  mov r7,#0x0
+02164504  add r4,r10,r8, lsl #0x2
+02164508  mov r11,#0xc
+0216450c  mla r0,r7,r11,r4
+02164510  ldr r0,[r0,#0xc8]
+02164514  bl 0x02152d80
+02164518  cmp r0,#0x0
+0216451c  bne 0x02164544
+02164520  subs r1,r9,r7
+02164524  rsbmi r0,r1,#0x0
+02164528  movpl r0,r1
+0216452c  cmp r0,r5
+02164530  bge 0x02164544
+02164534  cmp r1,#0x0
+02164538  rsblt r1,r1,#0x0
+0216453c  mov r5,r1
+02164540  mov r6,r7
+02164544  add r7,r7,#0x1
+02164548  cmp r7,#0x5
+0216454c  blt 0x0216450c
+02164550  mvn r0,#0x0
+02164554  cmp r6,r0
+02164558  bne 0x02164578
+0216455c  cmp r8,#0x1
+02164560  ldreq r0,[r10,#0xc4]
+02164564  movne r0,#0xc
+02164568  mlane r0,r9,r0,r10
+0216456c  addne r0,r0,r8, lsl #0x2
+02164570  ldrne r0,[r0,#0xc8]
+02164574  ldmia sp!,{r3,r4,r5,r6,r7,r8,r9,r10,r11,pc}
+02164578  mov r0,#0xc
+0216457c  mla r0,r6,r0,r10
+02164580  add r0,r0,r8, lsl #0x2
+02164584  ldr r0,[r0,#0xc8]
+02164588  ldmia sp!,{r3,r4,r5,r6,r7,r8,r9,r10,r11,pc}

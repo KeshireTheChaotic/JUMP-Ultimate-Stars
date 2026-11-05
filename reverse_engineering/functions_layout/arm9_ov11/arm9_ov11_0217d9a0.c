@@ -1,0 +1,19 @@
+
+void FUN_0217d9a0(int param_1)
+
+{
+  int *piVar1;
+  
+  piVar1 = *(int **)(*(int *)(param_1 + 4) + 0x10);
+  if ((char)piVar1[3] == '\0') {
+    *(uint *)(*piVar1 + 0xe4) = *(uint *)(*piVar1 + 0xe4) | 0x80;
+  }
+  else if ((char)piVar1[3] == '\x04') {
+    *(uint *)(*piVar1 + 0xe4) = *(uint *)(*piVar1 + 0xe4) & 0xffffff7f;
+    FUN_02028384(*(undefined4 *)(param_1 + 4),&LAB_0217d92c);
+    piVar1[2] = 0;
+  }
+  *(char *)(piVar1 + 3) = (char)piVar1[3] + '\x01';
+  return;
+}
+

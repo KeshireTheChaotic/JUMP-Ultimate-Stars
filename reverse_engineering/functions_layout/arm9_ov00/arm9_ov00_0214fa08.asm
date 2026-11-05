@@ -1,0 +1,13 @@
+0214fa08  stmdb sp!,{r3,lr}
+0214fa0c  ldr r0,[r0,#0x4]
+0214fa10  ldr r0,[r0,#0x68]
+0214fa14  ldr r1,[r0,#0x0]
+0214fa18  ldr r1,[r1,#0x68]
+0214fa1c  blx r1
+0214fa20  cmp r0,#0x0
+0214fa24  moveq r0,#0x1
+0214fa28  movne r0,#0x0
+0214fa2c  cmp r0,#0x0
+0214fa30  moveq r0,#0x1
+0214fa34  movne r0,#0x0
+0214fa38  ldmia sp!,{r3,pc}

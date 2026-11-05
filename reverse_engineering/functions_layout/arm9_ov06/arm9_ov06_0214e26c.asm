@@ -1,0 +1,10 @@
+0214e26c  ldr r0,[0x0214e280]
+0214e26e  ldr r2,[r0,#0x0]
+0214e270  mov r0,#0x5a
+0214e272  lsl r0,r0,#0x2
+0214e274  ldrsh r1,[r2,r0]
+0214e276  cmp r1,#0x0
+0214e278  beq 0x0214e27e
+0214e27a  mov r1,#0x0
+0214e27c  strh r1,[r2,r0]
+0214e27e  bx lr

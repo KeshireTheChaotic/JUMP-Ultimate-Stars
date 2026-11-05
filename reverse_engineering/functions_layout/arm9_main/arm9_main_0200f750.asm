@@ -1,0 +1,12 @@
+0200f750  push {r3,r4,r5,lr}
+0200f752  add r5,r0,#0x0
+0200f754  add r4,r1,#0x0
+0200f756  ldr r1,[r5,#0x20]
+0200f758  cmp r1,#0x0
+0200f75a  bne 0x0200f762
+0200f75c  ldr r1,[r0,#0x0]
+0200f75e  ldr r1,[r1,#0x3c]
+0200f760  blx r1
+0200f762  ldr r0,[r5,#0x20]
+0200f764  add r0,r0,r4
+0200f766  pop {r3,r4,r5,pc}

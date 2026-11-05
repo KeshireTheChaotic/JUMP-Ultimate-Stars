@@ -1,0 +1,1 @@
+{"module":"arm9_ov12","address":"021ae46c","name":"CreateDrawFunc","thumb":false,"body_bytes":72,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["02014604","0201a21c"],"unresolved_call_targets":[],"status":"decompiled","asm_file":"arm9_ov12_021ae46c.asm","c_file":"arm9_ov12_021ae46c.c"}

@@ -1,0 +1,37 @@
+021a3024  stmdb sp!,{r4,r5,r6,lr}
+021a3028  mov r4,r0
+021a302c  ldrb r0,[r4,#0x35]
+021a3030  cmp r0,#0x0
+021a3034  ldmiaeq sp!,{r4,r5,r6,pc}
+021a3038  mov r6,#0x0
+021a303c  mov r5,#0x1
+021a3040  b 0x021a30ac
+021a3044  bl 0x0219b614
+021a3048  cmp r6,r0
+021a304c  beq 0x021a30a4
+021a3050  mov r0,r6
+021a3054  blx 0x02176654
+021a3058  cmp r0,#0x0
+021a305c  beq 0x021a30a4
+021a3060  ldrb r0,[r4,#0x35]
+021a3064  tst r0,r5, lsl r6
+021a3068  beq 0x021a30a4
+021a306c  mov r0,r6
+021a3070  blx 0x0217ef04
+021a3074  cmp r0,#0x0
+021a3078  ldmiaeq sp!,{r4,r5,r6,pc}
+021a307c  bl 0x02199e10
+021a3080  mov r1,r0
+021a3084  ldr r2,[r4,#0x38]
+021a3088  mov r0,r6
+021a308c  blx 0x0217ee90
+021a3090  cmp r0,#0x0
+021a3094  ldrbne r1,[r4,#0x35]
+021a3098  mvnne r0,r5, lsl r6
+021a309c  andne r0,r1,r0
+021a30a0  strbne r0,[r4,#0x35]
+021a30a4  add r0,r6,#0x1
+021a30a8  and r6,r0,#0xff
+021a30ac  cmp r6,#0x4
+021a30b0  bcc 0x021a3044
+021a30b4  ldmia sp!,{r4,r5,r6,pc}

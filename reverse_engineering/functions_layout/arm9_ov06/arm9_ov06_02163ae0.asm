@@ -1,0 +1,13 @@
+02163ae0  stmdb sp!,{r3,lr}
+02163ae4  ldr r1,[r0,#0x0]
+02163ae8  ldr r0,[r1,#0x10]
+02163aec  ldr r0,[r0,#0x40]
+02163af0  tst r0,#0x80000000
+02163af4  ldmiaeq sp!,{r3,pc}
+02163af8  ldr r0,[r1,#0xc]
+02163afc  ldr r0,[r0,#0x4]
+02163b00  ldr r0,[r0,#0x68]
+02163b04  ldr r1,[r0,#0x0]
+02163b08  ldr r1,[r1,#0xfc]
+02163b0c  blx r1
+02163b10  ldmia sp!,{r3,pc}

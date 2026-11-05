@@ -1,0 +1,20 @@
+037ffb04  stmdb sp!,{r4,lr}
+037ffb08  mov r4,r0
+037ffb0c  ldrb r0,[r4,#0x2]
+037ffb10  cmp r0,#0x0
+037ffb14  moveq r0,#0x0
+037ffb18  beq 0x037ffb4c
+037ffb1c  ldrh r1,[r4,#0x6]
+037ffb20  ldrh r0,[r4,#0x4]
+037ffb24  cmp r1,r0
+037ffb28  movcc r0,#0x0
+037ffb2c  bcc 0x037ffb4c
+037ffb30  ldrh r0,[r4,#0x8]
+037ffb34  mov r0,r0, lsr #0x8
+037ffb38  bl 0x037ff39c
+037ffb3c  ldrb r2,[r4,#0x3]
+037ffb40  ldrb r1,[r4,#0x2]
+037ffb44  mul r0,r1,r0
+037ffb48  mul r0,r2,r0
+037ffb4c  ldmia sp!,{r4,lr}
+037ffb50  bx lr

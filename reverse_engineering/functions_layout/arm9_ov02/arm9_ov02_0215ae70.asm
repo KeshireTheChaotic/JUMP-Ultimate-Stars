@@ -1,0 +1,16 @@
+0215ae70  stmdb sp!,{r3,lr}
+0215ae74  cmp r1,#0x0
+0215ae78  ldr r0,[r0,#0x4]
+0215ae7c  bne 0x0215ae98
+0215ae80  ldr r0,[r0,#0x64]
+0215ae84  mov r1,#0x0
+0215ae88  ldr r3,[r0,#0x0]
+0215ae8c  ldr r3,[r3,#0x50]
+0215ae90  blx r3
+0215ae94  ldmia sp!,{r3,pc}
+0215ae98  ldr r0,[r0,#0x64]
+0215ae9c  ldr r1,[r1,#0x4]
+0215aea0  ldr r3,[r0,#0x0]
+0215aea4  ldr r3,[r3,#0x50]
+0215aea8  blx r3
+0215aeac  ldmia sp!,{r3,pc}

@@ -1,0 +1,15 @@
+02086998  push {r3,lr}
+0208699a  cmp r1,#0x0
+0208699c  beq 0x020869aa
+0208699e  ldr r1,[r0,#0x14]
+020869a0  cmp r1,#0x0
+020869a2  beq 0x020869b4
+020869a4  ldr r0,[r0,#0xc]
+020869a6  blx r1
+020869a8  pop {r3,pc}
+020869aa  ldr r1,[r0,#0x18]
+020869ac  cmp r1,#0x0
+020869ae  beq 0x020869b4
+020869b0  ldr r0,[r0,#0xc]
+020869b2  blx r1
+020869b4  pop {r3,pc}

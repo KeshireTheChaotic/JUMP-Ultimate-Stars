@@ -1,0 +1,1 @@
+{"module":"arm7_main","address":"037ffea4","name":"FUN_037ffea4","thumb":false,"body_bytes":296,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["037ff94c","037ff9f8"],"unresolved_call_targets":[],"status":"decompiled","asm_file":"arm7_main_037ffea4.asm","c_file":"arm7_main_037ffea4.c"}

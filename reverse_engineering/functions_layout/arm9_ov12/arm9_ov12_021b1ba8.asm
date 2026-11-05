@@ -1,0 +1,12 @@
+021b1ba8  stmdb sp!,{r4,lr}
+021b1bac  ldr r1,[0x21b1bd8]
+021b1bb0  mov r4,r0
+021b1bb4  ldr r2,[0x21b1bdc]
+021b1bb8  mov r0,#0x44
+021b1bbc  mov r3,#0x65
+021b1bc0  bl 0x0201a21c
+021b1bc4  cmp r0,#0x0
+021b1bc8  ldmiaeq sp!,{r4,pc}
+021b1bcc  mov r1,r4
+021b1bd0  bl 0x02027210
+021b1bd4  ldmia sp!,{r4,pc}

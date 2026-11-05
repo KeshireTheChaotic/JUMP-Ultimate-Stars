@@ -1,0 +1,15 @@
+02150fb8  stmdb sp!,{r3,r4,r5,lr}
+02150fbc  mov r5,r0
+02150fc0  ldrb r2,[r5,#0x24]
+02150fc4  mov r4,r1
+02150fc8  orr r1,r2,r4
+02150fcc  cmp r2,r1
+02150fd0  beq 0x02150fe0
+02150fd4  ldr r2,[r0,#0x0]
+02150fd8  ldr r2,[r2,#0x18]
+02150fdc  blx r2
+02150fe0  ldrb r0,[r5,#0x24]
+02150fe4  orr r0,r0,r4
+02150fe8  orr r0,r0,#0x30
+02150fec  strb r0,[r5,#0x24]
+02150ff0  ldmia sp!,{r3,r4,r5,pc}

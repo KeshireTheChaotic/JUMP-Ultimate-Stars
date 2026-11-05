@@ -1,0 +1,11 @@
+02195a30  add r3,r0,#0x0
+02195a32  mov r1,#0x0
+02195a34  b 0x02195a38
+02195a36  add r0,r0,#0x1
+02195a38  ldrsb r2,[r0,r1]
+02195a3a  cmp r2,#0x2e
+02195a3c  beq 0x02195a42
+02195a3e  cmp r2,#0x0
+02195a40  bne 0x02195a36
+02195a42  sub r0,r0,r3
+02195a44  bx lr

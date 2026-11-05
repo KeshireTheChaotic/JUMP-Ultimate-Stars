@@ -1,0 +1,11 @@
+02070b30  stmdb sp!,{r4,lr}
+02070b34  bl 0x02033410
+02070b38  mov r4,r0
+02070b3c  ldr r1,[r4,#0x1c]
+02070b40  cmp r1,#0x0
+02070b44  bne 0x02070b54
+02070b48  ldr r1,[r0,#0x0]
+02070b4c  ldr r1,[r1,#0x10]
+02070b50  blx r1
+02070b54  ldr r0,[r4,#0x1c]
+02070b58  ldmia sp!,{r4,pc}

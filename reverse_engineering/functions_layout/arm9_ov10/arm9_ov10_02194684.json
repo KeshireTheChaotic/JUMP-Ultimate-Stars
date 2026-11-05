@@ -1,0 +1,1 @@
+{"module":"arm9_ov10","address":"02194684","name":"FUN_02194684","thumb":true,"body_bytes":426,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["02051890","0218eda0","02194890","02194c2c","02196204"],"unresolved_call_targets":[],"status":"decompiled","asm_file":"arm9_ov10_02194684.asm","c_file":"arm9_ov10_02194684.c"}

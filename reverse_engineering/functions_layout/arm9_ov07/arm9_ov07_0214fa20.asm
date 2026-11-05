@@ -1,0 +1,14 @@
+0214fa20  cmp r0,#0x8
+0214fa22  bcc 0x0214fa2c
+0214fa24  cmp r0,#0xd
+0214fa26  bcs 0x0214fa2c
+0214fa28  sub r0,r0,#0x7
+0214fa2a  bx lr
+0214fa2c  cmp r0,#0xd
+0214fa2e  bcc 0x0214fa38
+0214fa30  cmp r0,#0x10
+0214fa32  bcs 0x0214fa38
+0214fa34  sub r0,r0,#0x7
+0214fa36  bx lr
+0214fa38  mov r0,#0x0
+0214fa3a  bx lr

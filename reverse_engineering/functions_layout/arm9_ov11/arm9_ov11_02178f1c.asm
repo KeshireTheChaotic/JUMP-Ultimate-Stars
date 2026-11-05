@@ -1,0 +1,9 @@
+02178f1c  stmdb sp!,{r4,lr}
+02178f20  ldr r4,[r0,#0x0]
+02178f24  cmp r4,#0x0
+02178f28  moveq r0,#0x0
+02178f2c  ldmiaeq sp!,{r4,pc}
+02178f30  mov r1,r4
+02178f34  bl 0x02037c24
+02178f38  mov r0,r4
+02178f3c  ldmia sp!,{r4,pc}

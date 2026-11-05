@@ -1,0 +1,10 @@
+021afc40  stmdb sp!,{r4,lr}
+021afc44  ldr r0,[r0,#0x4]
+021afc48  ldr r4,[r0,#0x64]
+021afc4c  ldr r3,[r4,#0x34]
+021afc50  add r0,r4,#0x14
+021afc54  bl 0x02019c74
+021afc58  cmp r0,#0x0
+021afc5c  movne r0,#0x0
+021afc60  strne r0,[r4,#0x3c]
+021afc64  ldmia sp!,{r4,pc}

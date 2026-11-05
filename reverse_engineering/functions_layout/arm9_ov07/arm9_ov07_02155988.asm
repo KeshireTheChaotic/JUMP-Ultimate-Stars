@@ -1,0 +1,14 @@
+02155988  stmdb sp!,{r3,lr}
+0215598c  bl 0x021a3264
+02155990  cmp r0,#0x0
+02155994  movne r0,#0x0
+02155998  ldmiane sp!,{r3,pc}
+0215599c  bl 0x0219bee8
+021559a0  cmp r0,#0x0
+021559a4  movne r0,#0x1
+021559a8  ldmiane sp!,{r3,pc}
+021559ac  bl 0x0219bf28
+021559b0  cmp r0,#0x0
+021559b4  moveq r0,#0x1
+021559b8  movne r0,#0x0
+021559bc  ldmia sp!,{r3,pc}

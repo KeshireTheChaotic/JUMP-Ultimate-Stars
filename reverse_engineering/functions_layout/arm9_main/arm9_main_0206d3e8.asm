@@ -1,0 +1,17 @@
+0206d3e8  stmdb sp!,{r4,lr}
+0206d3ec  ldr r0,[r0,#0x0]
+0206d3f0  ldr r4,[r0,#0x18]
+0206d3f4  cmp r4,#0x0
+0206d3f8  bne 0x0206d408
+0206d3fc  ldr r0,[r0,#0xc]
+0206d400  bl 0x02036430
+0206d404  mov r4,r0
+0206d408  ldr r0,[r4,#0x18]
+0206d40c  cmp r0,#0x0
+0206d410  bne 0x0206d424
+0206d414  mov r0,r4
+0206d418  ldr r1,[r0,#0x0]
+0206d41c  ldr r1,[r1,#0x10]
+0206d420  blx r1
+0206d424  ldr r0,[r4,#0x18]
+0206d428  ldmia sp!,{r4,pc}

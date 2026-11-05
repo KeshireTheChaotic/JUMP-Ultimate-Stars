@@ -1,0 +1,12 @@
+0205e984  str r2,[r1,#0x8]
+0205e988  cmp r2,#0x0
+0205e98c  ldrne r3,[r2,#0xc]
+0205e990  strne r1,[r2,#0xc]
+0205e994  ldreq r3,[r0,#0x0]
+0205e998  streq r1,[r0,#0x0]
+0205e99c  str r3,[r1,#0xc]
+0205e9a0  cmp r3,#0x0
+0205e9a4  strne r1,[r3,#0x8]
+0205e9a8  streq r1,[r0,#0x4]
+0205e9ac  mov r0,r1
+0205e9b0  bx lr

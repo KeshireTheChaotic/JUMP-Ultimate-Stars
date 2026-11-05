@@ -1,0 +1,10 @@
+0200ff84  push {r4,lr}
+0200ff86  add r4,r1,#0x0
+0200ff88  bl 0x0200ff9c
+0200ff8c  lsl r1,r4,#0x1
+0200ff8e  add r1,r0,r1
+0200ff90  ldrh r1,[r1,#0x12]
+0200ff92  add r1,#0xc
+0200ff94  ldr r0,[r0,r1]
+0200ff96  lsr r0,r0,#0x18
+0200ff98  pop {r4,pc}

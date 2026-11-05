@@ -1,0 +1,15 @@
+020696d4  push {r4,r5,r6,lr}
+020696d6  add r5,r0,#0x0
+020696d8  add r4,r1,#0x0
+020696da  add r6,r2,#0x0
+020696dc  mov r1,#0x0
+020696de  mov r2,#0xc
+020696e0  blx 0x020517fc
+020696e4  add r0,r5,#0x0
+020696e6  add r1,r4,#0x0
+020696e8  add r2,r6,#0x0
+020696ea  bl 0x02069c68
+020696ee  add r0,r5,#0x0
+020696f0  mov r1,#0x2
+020696f2  bl 0x02069be0
+020696f6  pop {r4,r5,r6,pc}

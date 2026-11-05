@@ -1,0 +1,25 @@
+0200da58  stmdb sp!,{r4,r5,r6,lr}
+0200da5c  subs r6,r1,#0x1
+0200da60  mov r5,#0x0
+0200da64  bmi 0x0200dab4
+0200da68  mov r1,#0xc
+0200da6c  add r3,r5,r6
+0200da70  mov r4,r3, asr #0x1
+0200da74  mul r3,r4,r1
+0200da78  ldr r12,[r0,r3]
+0200da7c  add lr,r0,r3
+0200da80  cmp r2,r12
+0200da84  subcc r6,r4,#0x1
+0200da88  bcc 0x0200daac
+0200da8c  ldr r3,[lr,#0x4]
+0200da90  bic r3,r3,#0x1
+0200da94  add r3,r12,r3
+0200da98  cmp r2,r3
+0200da9c  addhi r5,r4,#0x1
+0200daa0  bhi 0x0200daac
+0200daa4  mov r0,lr
+0200daa8  ldmia sp!,{r4,r5,r6,pc}
+0200daac  cmp r5,r6
+0200dab0  ble 0x0200da6c
+0200dab4  mov r0,#0x0
+0200dab8  ldmia sp!,{r4,r5,r6,pc}

@@ -1,0 +1,7 @@
+0214f90c  mov r1,#0x0
+0214f90e  ldr r0,[r0,#0x10]
+0214f910  mvn r1,r1
+0214f912  cmp r0,r1
+0214f914  bne 0x0214f918
+0214f916  mov r0,#0x0
+0214f918  bx lr

@@ -1,0 +1,12 @@
+
+void FUN_020737d4(void)
+
+{
+  int iVar1;
+  
+  iVar1 = FUN_0203b3e4();
+  FUN_0206e468(*(undefined4 *)(iVar1 + 0x88),0x3f,0);
+  DAT_0214bd78 = 1;
+  return;
+}
+

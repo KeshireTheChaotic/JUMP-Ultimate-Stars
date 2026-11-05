@@ -1,0 +1,16 @@
+0214de6c  stmdb sp!,{r3,lr}
+0214de70  ldrh r2,[r0,#0x54]
+0214de74  add r1,r2,#0x1
+0214de78  strh r1,[r0,#0x54]
+0214de7c  cmp r2,#0x3c
+0214de80  ldmials sp!,{r3,pc}
+0214de84  ldr r1,[0x214deac]
+0214de88  mov r12,#0x1
+0214de8c  str r1,[r0,#0x48]
+0214de90  mov r1,#0x0
+0214de94  strh r1,[r0,#0x54]
+0214de98  sub r2,r12,#0x2
+0214de9c  mov r3,#0x10
+0214dea0  str r12,[sp,#0x0]
+0214dea4  bl 0x0214e5b8
+0214dea8  ldmia sp!,{r3,pc}

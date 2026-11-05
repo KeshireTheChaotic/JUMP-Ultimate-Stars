@@ -1,0 +1,12 @@
+0204a1c0  stmdb sp!,{r3,lr}
+0204a1c4  sub sp,sp,#0x8
+0204a1c8  ldr r3,[r2,#0x0]
+0204a1cc  add r2,sp,#0x0
+0204a1d0  str r3,[sp,#0x0]
+0204a1d4  ldr r3,[r1,#0x0]
+0204a1d8  add r1,sp,#0x4
+0204a1dc  add r0,r0,#0x40
+0204a1e0  str r3,[sp,#0x4]
+0204a1e4  bl 0x0204a1ac
+0204a1e8  add sp,sp,#0x8
+0204a1ec  ldmia sp!,{r3,pc}

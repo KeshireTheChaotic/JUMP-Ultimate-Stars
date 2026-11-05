@@ -1,0 +1,11 @@
+0201a548  ldr r1,[0x201a574]
+0201a54c  ldrb r1,[r1,#0x1]
+0201a550  cmp r1,#0x0
+0201a554  bxeq lr
+0201a558  ldr r3,[0x201a578]
+0201a55c  add r0,r0,#0x400
+0201a560  ldrh r2,[r3,#0x0]
+0201a564  mov r1,#0x0
+0201a568  strh r2,[r0,#0x9c]
+0201a56c  strh r1,[r3,#0x0]
+0201a570  bx lr

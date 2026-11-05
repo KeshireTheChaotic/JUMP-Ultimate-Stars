@@ -1,0 +1,9 @@
+0205e388  stmdb sp!,{r4,lr}
+0205e38c  ldr r4,[0x205e3ac]
+0205e390  mov r1,r0
+0205e394  mov r0,r4
+0205e398  bl 0x0205e3b0
+0205e39c  cmp r0,#0x0
+0205e3a0  addne r4,r0,#0xc
+0205e3a4  mov r0,r4
+0205e3a8  ldmia sp!,{r4,pc}

@@ -1,0 +1,10 @@
+02161d40  stmdb sp!,{r4,lr}
+02161d44  mov r4,r0
+02161d48  ldr r0,[r4,#0x4]
+02161d4c  ldr r0,[r0,#0x10]
+02161d50  ldr r0,[r0,#0x18]
+02161d54  bl 0x0214fe78
+02161d58  ldr r0,[r4,#0x4]
+02161d5c  ldr r1,[0x2161d68]
+02161d60  bl 0x02028384
+02161d64  ldmia sp!,{r4,pc}

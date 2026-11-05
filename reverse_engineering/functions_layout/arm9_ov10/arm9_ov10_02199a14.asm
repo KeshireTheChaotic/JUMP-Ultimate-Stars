@@ -1,0 +1,17 @@
+02199a14  push {lr}
+02199a16  sub sp,#0x4
+02199a18  ldrh r1,[r0,#0x0]
+02199a1a  cmp r1,#0x12
+02199a1c  bne 0x02199a34
+02199a1e  ldrh r2,[r0,#0x2]
+02199a20  ldr r1,[0x02199a3c]
+02199a22  str r2,[r1,#0x24]
+02199a24  ldrh r0,[r0,#0x2]
+02199a26  cmp r0,#0x0
+02199a28  bne 0x02199a2e
+02199a2a  bl 0x02198878
+02199a2e  ldr r0,[0x02199a40]
+02199a30  blx 0x02053210
+02199a34  add sp,#0x4
+02199a36  pop {r3}
+02199a38  bx r3

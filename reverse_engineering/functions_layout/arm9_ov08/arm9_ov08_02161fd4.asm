@@ -1,0 +1,16 @@
+02161fd4  push {lr}
+02161fd6  sub sp,#0xc
+02161fd8  ldr r1,[0x02161ff8]
+02161fda  ldr r2,[r1,#0x0]
+02161fdc  ldr r1,[0x02161ffc]
+02161fde  add r3,r2,r1
+02161fe0  ldrb r1,[r3,#0x2]
+02161fe2  str r1,[sp,#0x0]
+02161fe4  ldrb r1,[r3,#0x3]
+02161fe6  str r1,[sp,#0x4]
+02161fe8  ldr r1,[0x02162000]
+02161fea  ldrb r2,[r3,#0x0]
+02161fec  ldrb r3,[r3,#0x1]
+02161fee  blx 0x02052c8c
+02161ff2  add sp,#0xc
+02161ff4  pop {pc}

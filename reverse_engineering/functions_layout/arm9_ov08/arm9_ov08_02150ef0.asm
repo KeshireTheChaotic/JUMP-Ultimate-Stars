@@ -1,0 +1,13 @@
+02150ef0  mov r1,#0x0
+02150ef2  str r1,[r0,#0x14]
+02150ef4  ldr r1,[r0,#0x14]
+02150ef6  str r1,[r0,#0x10]
+02150ef8  ldr r1,[0x02150f0c]
+02150efa  str r1,[r0,#0x0]
+02150efc  ldr r1,[0x02150f10]
+02150efe  str r1,[r0,#0x4]
+02150f00  ldr r1,[0x02150f14]
+02150f02  str r1,[r0,#0x8]
+02150f04  ldr r1,[0x02150f18]
+02150f06  str r1,[r0,#0xc]
+02150f08  bx lr

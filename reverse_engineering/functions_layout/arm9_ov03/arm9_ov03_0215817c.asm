@@ -1,0 +1,10 @@
+0215817c  stmdb sp!,{r3,lr}
+02158180  ldr r0,[r0,#0x4]
+02158184  ldr r2,[r0,#0x0]
+02158188  ldr r2,[r2,#0xb0]
+0215818c  blx r2
+02158190  cmp r0,#0x0
+02158194  moveq r0,#0x0
+02158198  ldmiaeq sp!,{r3,pc}
+0215819c  bl 0x0214d47c
+021581a0  ldmia sp!,{r3,pc}

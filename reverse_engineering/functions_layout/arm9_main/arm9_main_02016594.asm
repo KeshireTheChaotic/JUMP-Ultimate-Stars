@@ -1,0 +1,17 @@
+02016594  stmdb sp!,{r3,r4,r5,lr}
+02016598  ldr r1,[0x20165d8]
+0201659c  mov r2,#0x4
+020165a0  mov r3,#0x0
+020165a4  bl 0x020334a4
+020165a8  movs r5,r0
+020165ac  moveq r0,#0x0
+020165b0  ldmiaeq sp!,{r3,r4,r5,pc}
+020165b4  mov r1,#0x0
+020165b8  bl 0x02016628
+020165bc  mov r4,r0
+020165c0  mov r0,r5
+020165c4  ldr r1,[r0,#0x0]
+020165c8  ldr r1,[r1,#0xc]
+020165cc  blx r1
+020165d0  mov r0,r4
+020165d4  ldmia sp!,{r3,r4,r5,pc}

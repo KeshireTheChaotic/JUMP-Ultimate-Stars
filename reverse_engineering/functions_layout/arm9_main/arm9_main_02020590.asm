@@ -1,0 +1,17 @@
+02020590  stmdb sp!,{r4,r5,r6,lr}
+02020594  ldr r5,[r0,#0x28]
+02020598  mov r6,r1
+0202059c  mov r0,r5
+020205a0  ldr r2,[r0,#0x0]
+020205a4  mov r1,#0x0
+020205a8  ldr r2,[r2,#0x2c]
+020205ac  blx r2
+020205b0  mov r4,r0
+020205b4  mov r0,r5
+020205b8  ldr r1,[r0,#0x0]
+020205bc  ldr r1,[r1,#0x28]
+020205c0  blx r1
+020205c4  mov r1,r6
+020205c8  add r0,r4,r0
+020205cc  bl 0x0201f0ec
+020205d0  ldmia sp!,{r4,r5,r6,pc}

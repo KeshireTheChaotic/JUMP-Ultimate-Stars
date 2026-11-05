@@ -1,0 +1,1 @@
+{"module":"arm9_ov06","address":"0215ffe0","name":"Battle_CharaInfoCreate","thumb":false,"body_bytes":56,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["0201a21c","020517fc"],"unresolved_call_targets":[],"status":"decompiled","asm_file":"arm9_ov06_0215ffe0.asm","c_file":"arm9_ov06_0215ffe0.c"}

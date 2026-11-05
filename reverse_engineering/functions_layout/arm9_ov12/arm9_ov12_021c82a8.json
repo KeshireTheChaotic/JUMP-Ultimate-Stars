@@ -1,0 +1,1 @@
+{"module":"arm9_ov12","address":"021c82a8","name":"ALTextDS_021d4a2c","thumb":false,"body_bytes":88,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["021c79ec"],"unresolved_call_targets":[],"status":"decompiled","asm_file":"arm9_ov12_021c82a8.asm","c_file":"arm9_ov12_021c82a8.c"}

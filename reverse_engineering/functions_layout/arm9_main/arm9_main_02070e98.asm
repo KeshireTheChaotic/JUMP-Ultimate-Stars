@@ -1,0 +1,14 @@
+02070e98  push {r3,lr}
+02070e9a  mov r2,#0xab
+02070e9c  ldr r0,[0x02070eb8]
+02070e9e  mov r1,#0x0
+02070ea0  lsl r2,r2,#0x2
+02070ea2  blx 0x020517fc
+02070ea6  ldr r0,[0x02070ebc]
+02070ea8  mov r1,#0x1
+02070eaa  strb r1,[r0,#0x0]
+02070eac  mov r1,#0xab
+02070eae  ldr r0,[0x02070ec0]
+02070eb0  lsl r1,r1,#0x2
+02070eb2  bl 0x02073114
+02070eb6  pop {r3,pc}

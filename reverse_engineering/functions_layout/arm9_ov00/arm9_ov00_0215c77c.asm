@@ -1,0 +1,11 @@
+0215c77c  stmdb sp!,{r4,lr}
+0215c780  ldr r4,[r0,#0x4]
+0215c784  ldr r0,[r4,#0x64]
+0215c788  ldr r1,[r0,#0x0]
+0215c78c  ldr r1,[r1,#0x70]
+0215c790  blx r1
+0215c794  mov r0,r4
+0215c798  ldr r1,[r0,#0x0]
+0215c79c  ldr r1,[r1,#0xc4]
+0215c7a0  blx r1
+0215c7a4  ldmia sp!,{r4,pc}

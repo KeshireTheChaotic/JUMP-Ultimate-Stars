@@ -1,0 +1,9 @@
+021629a4  andeq r1,r10,#0xc000000
+021629a8  andeqs r2,r6,#0x3300
+021629ac  andeqs r2,r6,#0x140
+021629b0  andeqs r2,r6,#0x1e0
+021629b4  andeqs r2,r6,#0x250
+021629b8  andeqs r2,r6,#0x370000
+021629bc  ldr r12,[0x21629c8]
+021629c0  mov r0,#0x1
+021629c4  bx r12

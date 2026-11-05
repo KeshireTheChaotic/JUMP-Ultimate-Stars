@@ -1,0 +1,10 @@
+02161a70  cmp r0,#0x39
+02161a72  bhi 0x02161a78
+02161a74  sub r0,#0x30
+02161a76  bx lr
+02161a78  cmp r0,#0x46
+02161a7a  bhi 0x02161a80
+02161a7c  sub r0,#0x37
+02161a7e  bx lr
+02161a80  sub r0,#0x57
+02161a82  bx lr

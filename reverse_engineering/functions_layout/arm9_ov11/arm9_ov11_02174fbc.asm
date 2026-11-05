@@ -1,0 +1,19 @@
+02174fbc  stmdb sp!,{r3,r4,r5,r6,r7,lr}
+02174fc0  mov r6,#0x0
+02174fc4  mov r7,r0
+02174fc8  mov r4,r6
+02174fcc  mov r5,r6
+02174fd0  mov r0,r7
+02174fd4  mov r2,r5
+02174fd8  add r1,r6,#0x9
+02174fdc  bl 0x021751cc
+02174fe0  add r1,r7,r6, lsl #0x2
+02174fe4  str r0,[r1,#0x1c]
+02174fe8  cmp r0,#0x0
+02174fec  beq 0x02174ff8
+02174ff0  mov r1,r4
+02174ff4  bl 0x0207b310
+02174ff8  add r6,r6,#0x1
+02174ffc  cmp r6,#0x2
+02175000  blt 0x02174fd0
+02175004  ldmia sp!,{r3,r4,r5,r6,r7,pc}

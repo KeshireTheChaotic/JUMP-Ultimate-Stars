@@ -1,0 +1,9 @@
+0207afdc  ldr r0,[r0,#0x4]
+0207afe0  ldr r2,[r0,#0x50]
+0207afe4  ldr r0,[r2,#0xc]
+0207afe8  str r0,[r1,#0x0]
+0207afec  ldr r0,[r2,#0x10]
+0207aff0  str r0,[r1,#0x4]
+0207aff4  ldr r0,[r2,#0x14]
+0207aff8  str r0,[r1,#0x8]
+0207affc  bx lr

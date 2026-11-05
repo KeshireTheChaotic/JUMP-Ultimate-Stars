@@ -1,0 +1,16 @@
+02020dd8  stmdb sp!,{r4,lr}
+02020ddc  mov r4,r0
+02020de0  mov r0,#0x6c
+02020de4  bl 0x0201a228
+02020de8  movs r1,r0
+02020dec  beq 0x02020e00
+02020df0  ldr r1,[0x2020e18]
+02020df4  mov r2,#0x0
+02020df8  bl 0x020218d4
+02020dfc  mov r1,r0
+02020e00  mov r0,r4
+02020e04  bl 0x02026f20
+02020e08  ldr r1,[0x2020e1c]
+02020e0c  mov r0,r4
+02020e10  str r1,[r4,#0x0]
+02020e14  ldmia sp!,{r4,pc}

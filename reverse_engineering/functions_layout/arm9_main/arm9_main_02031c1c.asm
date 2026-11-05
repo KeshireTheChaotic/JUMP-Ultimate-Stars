@@ -1,0 +1,9 @@
+02031c1c  ldr r2,[r1,#0x0]
+02031c20  str r2,[r0,#0x0]
+02031c24  ldr r2,[r1,#0x4]
+02031c28  str r2,[r0,#0x4]
+02031c2c  ldr r2,[r1,#0x8]
+02031c30  str r2,[r0,#0x8]
+02031c34  ldr r1,[r1,#0xc]
+02031c38  str r1,[r0,#0xc]
+02031c3c  bx lr

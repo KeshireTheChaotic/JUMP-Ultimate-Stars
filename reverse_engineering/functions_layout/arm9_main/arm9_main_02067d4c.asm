@@ -1,0 +1,10 @@
+02067d4c  ldr r1,[0x02067d60]
+02067d4e  ldrb r0,[r0,r1]
+02067d50  lsl r0,r0,#0x1c
+02067d52  lsr r0,r0,#0x1e
+02067d54  cmp r0,#0x1
+02067d56  bne 0x02067d5c
+02067d58  ldr r0,[0x02067d64]
+02067d5a  bx lr
+02067d5c  ldr r0,[0x02067d68]
+02067d5e  bx lr

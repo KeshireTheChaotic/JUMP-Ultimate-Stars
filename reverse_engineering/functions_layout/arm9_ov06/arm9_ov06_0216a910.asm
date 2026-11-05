@@ -1,0 +1,13 @@
+0216a910  ldrb r1,[r0,#0x1a]
+0216a914  cmp r1,#0x1
+0216a918  cmpne r1,#0x5
+0216a91c  cmpne r1,#0xe
+0216a920  beq 0x0216a934
+0216a924  add r1,r1,#0xe9
+0216a928  and r1,r1,#0xff
+0216a92c  cmp r1,#0x2
+0216a930  bhi 0x0216a93c
+0216a934  mov r0,#0x0
+0216a938  bx lr
+0216a93c  ldr r0,[r0,#0x2c]
+0216a940  bx lr

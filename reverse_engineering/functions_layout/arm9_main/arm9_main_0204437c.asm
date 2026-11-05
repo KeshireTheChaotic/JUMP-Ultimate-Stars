@@ -1,0 +1,13 @@
+0204437c  stmdb sp!,{r3,lr}
+02044380  ldr r1,[r0,#0x44]
+02044384  cmp r1,r0
+02044388  ldrheq r1,[r0,#0x4]
+0204438c  addeq r1,r1,#0x1
+02044390  strheq r1,[r0,#0x4]
+02044394  ldrheq r0,[r0,#0x4]
+02044398  ldmiaeq sp!,{r3,pc}
+0204439c  mov r0,r1
+020443a0  ldr r1,[r0,#0x0]
+020443a4  ldr r1,[r1,#0x8]
+020443a8  blx r1
+020443ac  ldmia sp!,{r3,pc}

@@ -1,0 +1,11 @@
+0205af08  stmdb sp!,{lr}
+0205af0c  sub sp,sp,#0x4
+0205af10  cmp r0,#0x0
+0205af14  beq 0x0205af28
+0205af18  mov r0,#0x40
+0205af1c  bl 0x020566ac
+0205af20  add sp,sp,#0x4
+0205af24  ldmia sp!,{pc}
+0205af28  bl 0x02056680
+0205af2c  add sp,sp,#0x4
+0205af30  ldmia sp!,{pc}

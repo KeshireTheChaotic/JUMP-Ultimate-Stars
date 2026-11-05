@@ -1,0 +1,24 @@
+0205c484  ldr r1,[0x205c4e4]
+0205c488  ldr r3,[r1,#0x0]
+0205c48c  ldr r2,[r3,#0x8c]
+0205c490  ldr r1,[r2,#0x1c]
+0205c494  cmp r1,#0x0
+0205c498  moveq r2,#0x0
+0205c49c  addne r2,r2,r1
+0205c4a0  cmp r2,#0x0
+0205c4a4  moveq r0,#0x0
+0205c4a8  bxeq lr
+0205c4ac  cmp r0,#0x0
+0205c4b0  movlt r0,#0x0
+0205c4b4  bxlt lr
+0205c4b8  ldr r1,[r2,#0x0]
+0205c4bc  cmp r0,r1
+0205c4c0  movcs r0,#0x0
+0205c4c4  bxcs lr
+0205c4c8  add r0,r2,r0, lsl #0x2
+0205c4cc  ldr r1,[r0,#0x4]
+0205c4d0  ldr r0,[r3,#0x8c]
+0205c4d4  cmp r1,#0x0
+0205c4d8  moveq r0,#0x0
+0205c4dc  addne r0,r0,r1
+0205c4e0  bx lr

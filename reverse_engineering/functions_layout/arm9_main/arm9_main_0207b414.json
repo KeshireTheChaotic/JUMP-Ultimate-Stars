@@ -1,0 +1,1 @@
+{"module":"arm9_main","address":"0207b414","name":"FUN_0207b414","thumb":false,"body_bytes":988,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["0201899c","0201b244","02037b98","020517fc","02051890","0207afdc","0207b1c0"],"unresolved_call_targets":[],"status":"decompiled","asm_file":"arm9_main_0207b414.asm","c_file":"arm9_main_0207b414.c"}

@@ -1,0 +1,16 @@
+02068cd0  push {r4,lr}
+02068cd2  add r4,r0,#0x0
+02068cd4  mov r0,#0x10
+02068cd6  bl 0x020673ec
+02068cda  cmp r4,#0xd
+02068cdc  bls 0x02068ce0
+02068cde  mov r4,#0xd
+02068ce0  ldr r1,[0x02068cf4]
+02068ce2  add r0,r0,r1
+02068ce4  ldrh r3,[r0,#0x0]
+02068ce6  mov r2,#0x1
+02068ce8  sub r1,r4,#0x1
+02068cea  lsl r2,r1
+02068cec  orr r3,r2
+02068cee  strh r3,[r0,#0x0]
+02068cf0  pop {r4,pc}

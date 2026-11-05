@@ -1,0 +1,17 @@
+0217ef10  push {r4,r5,r6,r7,lr}
+0217ef12  sub sp,#0x4
+0217ef14  add r7,r0,#0x0
+0217ef16  add r5,r1,#0x0
+0217ef18  add r6,r2,#0x0
+0217ef1a  mov r4,#0x0
+0217ef1c  cmp r6,#0x0
+0217ef1e  ble 0x0217ef30
+0217ef20  add r0,r7,#0x0
+0217ef22  ldrb r1,[r5,r4]
+0217ef24  bl 0x0217ef34
+0217ef28  strb r0,[r5,r4]
+0217ef2a  add r4,r4,#0x1
+0217ef2c  cmp r4,r6
+0217ef2e  blt 0x0217ef20
+0217ef30  add sp,#0x4
+0217ef32  pop {r4,r5,r6,r7,pc}

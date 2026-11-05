@@ -1,0 +1,1 @@
+{"module":"arm9_ov12","address":"021ca854","name":"FUN_021ca854","thumb":false,"body_bytes":100,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["021c997c","021c9a84"],"unresolved_call_targets":[],"status":"decompiled","asm_file":"arm9_ov12_021ca854.asm","c_file":"arm9_ov12_021ca854.c"}

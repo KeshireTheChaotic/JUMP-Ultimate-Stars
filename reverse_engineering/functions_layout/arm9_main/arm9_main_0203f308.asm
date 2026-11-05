@@ -1,0 +1,15 @@
+0203f308  stmdb sp!,{r4,lr}
+0203f30c  mov r4,r0
+0203f310  bl 0x0203f0dc
+0203f314  ldr r0,[0x203f344]
+0203f318  mov r1,#0x0
+0203f31c  str r0,[r4,#0x0]
+0203f320  str r1,[r4,#0x50]
+0203f324  str r1,[r4,#0x54]
+0203f328  sub r0,r1,#0x1
+0203f32c  str r0,[r4,#0x58]
+0203f330  str r1,[r4,#0x5c]
+0203f334  mov r1,#0x1
+0203f338  mov r0,r4
+0203f33c  strb r1,[r4,#0x64]
+0203f340  ldmia sp!,{r4,pc}

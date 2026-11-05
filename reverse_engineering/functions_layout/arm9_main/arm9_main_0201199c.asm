@@ -1,0 +1,17 @@
+0201199c  stmdb sp!,{r4,lr}
+020119a0  mov r4,r0
+020119a4  ldrb r0,[r4,#0x29]
+020119a8  cmp r0,#0x0
+020119ac  ldmiaeq sp!,{r4,pc}
+020119b0  ldr r0,[0x20119e0]
+020119b4  ldr r1,[r0,#0xf4]
+020119b8  cmp r1,r4
+020119bc  ldreq r1,[r4,#0xc]
+020119c0  streq r1,[r0,#0xf4]
+020119c4  ldr r0,[0x20119e0]
+020119c8  mov r1,r4
+020119cc  ldr r0,[r0,#0x460]
+020119d0  bl 0x0201cdb4
+020119d4  mov r0,#0x0
+020119d8  strb r0,[r4,#0x29]
+020119dc  ldmia sp!,{r4,pc}

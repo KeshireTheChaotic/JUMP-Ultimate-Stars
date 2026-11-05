@@ -1,0 +1,50 @@
+0201e1e4  stmdb sp!,{r3,r4,r5,r6,r7,r8,r9,lr}
+0201e1e8  mov r6,r2
+0201e1ec  mov r7,r0
+0201e1f0  mov r0,r6
+0201e1f4  ldr r2,[r0,#0x0]
+0201e1f8  mov r4,r1
+0201e1fc  ldr r2,[r2,#0x68]
+0201e200  mov r1,r7
+0201e204  mov r5,r3
+0201e208  blx r2
+0201e20c  add r2,r0,#0x1
+0201e210  mov r0,r4
+0201e214  ldr r1,[r0,#0x0]
+0201e218  mov r2,r2, lsr #0x1
+0201e21c  ldr r1,[r1,#0xa0]
+0201e220  add r4,r2,#0x1
+0201e224  blx r1
+0201e228  ldr r0,[r0,#0x0]
+0201e22c  add r8,sp,#0x0
+0201e230  str r0,[sp,#0x0]
+0201e234  b 0x0201e244
+0201e238  ldr r0,[r5,#0x0]
+0201e23c  sub r0,r0,r4, lsl #0x1
+0201e240  str r0,[r5,#0x0]
+0201e244  ldr r1,[r5,#0x0]
+0201e248  mov r0,r8
+0201e24c  ldrh r1,[r1,#0x0]
+0201e250  bl 0x02016314
+0201e254  cmp r0,#0x0
+0201e258  bne 0x0201e238
+0201e25c  mov r9,r4, lsl #0x1
+0201e260  add r8,sp,#0x0
+0201e264  b 0x0201e274
+0201e268  ldr r0,[r5,#0x0]
+0201e26c  add r0,r0,r4, lsl #0x1
+0201e270  str r0,[r5,#0x0]
+0201e274  ldr r0,[r5,#0x0]
+0201e278  mov r1,r8
+0201e27c  ldrh r0,[r9,r0]
+0201e280  bl 0x02016328
+0201e284  cmp r0,#0x0
+0201e288  bne 0x0201e268
+0201e28c  mov r0,r6
+0201e290  ldr r3,[r0,#0x0]
+0201e294  ldr r2,[r5,#0x0]
+0201e298  ldr r3,[r3,#0x24]
+0201e29c  mov r1,r7
+0201e2a0  add r2,r2,#0x2
+0201e2a4  blx r3
+0201e2a8  ldmia sp!,{r3,r4,r5,r6,r7,r8,r9,pc}

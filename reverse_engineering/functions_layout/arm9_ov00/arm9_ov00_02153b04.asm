@@ -1,0 +1,10 @@
+02153b04  stmdb sp!,{r4,lr}
+02153b08  mov r4,r0
+02153b0c  ldrb r0,[r4,#0x10]
+02153b10  cmp r0,#0x1
+02153b14  bne 0x02153b20
+02153b18  ldr r0,[r4,#0xc]
+02153b1c  blx 0x02064450
+02153b20  mov r0,#0x0
+02153b24  strb r0,[r4,#0x10]
+02153b28  ldmia sp!,{r4,pc}

@@ -1,0 +1,11 @@
+021599e4  push {lr}
+021599e6  sub sp,#0x4
+021599e8  bl 0x02163614
+021599ec  mov r1,#0x1
+021599ee  mvn r1,r1
+021599f0  cmp r0,r1
+021599f2  beq 0x021599fa
+021599f4  ldr r0,[0x02159a00]
+021599f6  bl 0x02157088
+021599fa  add sp,#0x4
+021599fc  pop {pc}

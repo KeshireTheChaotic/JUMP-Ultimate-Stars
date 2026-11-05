@@ -1,0 +1,1 @@
+{"module":"arm9_ov12","address":"021c7460","name":"FUN_021c7460","thumb":false,"body_bytes":212,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["0200c5ac","0200c8e0","0200c99c","0200c9e4","02032fe8"],"unresolved_call_targets":[],"status":"decompiled","asm_file":"arm9_ov12_021c7460.asm","c_file":"arm9_ov12_021c7460.c"}

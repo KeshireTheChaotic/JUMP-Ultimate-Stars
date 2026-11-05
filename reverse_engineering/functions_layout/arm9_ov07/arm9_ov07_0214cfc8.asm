@@ -1,0 +1,23 @@
+0214cfc8  stmdb sp!,{r4,lr}
+0214cfcc  mov r1,#0x0
+0214cfd0  mov r4,r0
+0214cfd4  blx 0x021be9f0
+0214cfd8  cmp r0,#0x0
+0214cfdc  bne 0x0214cff4
+0214cfe0  mov r0,r4
+0214cfe4  bl 0x0214d5d0
+0214cfe8  mov r0,r4
+0214cfec  blx 0x021bfd64
+0214cff0  ldmia sp!,{r4,pc}
+0214cff4  bl 0x02055238
+0214cff8  ldr r1,[0x214d024]
+0214cffc  mov r3,#0x1
+0214d000  ldrh r2,[r1,#0xc]
+0214d004  mvn r3,r3, lsl r4
+0214d008  and r2,r2,r3
+0214d00c  strh r2,[r1,#0xc]
+0214d010  ldrh r2,[r1,#0xa]
+0214d014  and r2,r2,r3
+0214d018  strh r2,[r1,#0xa]
+0214d01c  bl 0x0205524c
+0214d020  ldmia sp!,{r4,pc}

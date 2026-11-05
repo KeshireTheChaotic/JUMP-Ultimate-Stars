@@ -1,0 +1,14 @@
+021560b0  stmdb sp!,{r3,r4,r5,lr}
+021560b4  ldr r2,[0x21560e8]
+021560b8  mov r5,r0
+021560bc  ldr r0,[r2,#0x0]
+021560c0  mov r4,r1
+021560c4  ldr r0,[r0,#0x4]
+021560c8  bl 0x02031070
+021560cc  tst r0,#0x1
+021560d0  ldmiaeq sp!,{r3,r4,r5,pc}
+021560d4  ldrsb r2,[r4,#0x2]
+021560d8  mov r0,r5
+021560dc  mov r1,#0x0
+021560e0  bl 0x021565a4
+021560e4  ldmia sp!,{r3,r4,r5,pc}

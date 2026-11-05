@@ -1,0 +1,9 @@
+0204b55c  stmdb sp!,{r4,lr}
+0204b560  mov r4,r0
+0204b564  bl 0x0201731c
+0204b568  mov r1,r0
+0204b56c  mov r0,r4
+0204b570  ldr r2,[r0,#0x0]
+0204b574  ldr r2,[r2,#0x40]
+0204b578  blx r2
+0204b57c  ldmia sp!,{r4,pc}

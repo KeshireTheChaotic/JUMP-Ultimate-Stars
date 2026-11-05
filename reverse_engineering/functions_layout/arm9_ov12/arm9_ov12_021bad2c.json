@@ -1,0 +1,1 @@
+{"module":"arm9_ov12","address":"021bad2c","name":"FUN_021bad2c","thumb":false,"body_bytes":20,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":[],"unresolved_call_targets":[],"status":"decompiled","asm_file":"arm9_ov12_021bad2c.asm","c_file":"arm9_ov12_021bad2c.c"}

@@ -1,0 +1,11 @@
+02175aa4  stmdb sp!,{r3,lr}
+02175aa8  cmp r0,#0x0
+02175aac  ldmiaeq sp!,{r3,pc}
+02175ab0  ldr r0,[r0,#0x10]
+02175ab4  cmp r1,#0x0
+02175ab8  ldr r0,[r0,#0x4]
+02175abc  beq 0x02175ac8
+02175ac0  bl 0x02028330
+02175ac4  ldmia sp!,{r3,pc}
+02175ac8  bl 0x020282f4
+02175acc  ldmia sp!,{r3,pc}

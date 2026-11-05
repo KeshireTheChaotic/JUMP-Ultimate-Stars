@@ -1,0 +1,15 @@
+0216d404  stmdb sp!,{r4,lr}
+0216d408  mov r4,r0
+0216d40c  mov r0,r1, lsl #0x1
+0216d410  bl 0x0200c954
+0216d414  mov r1,r0
+0216d418  ldr r0,[0x216d440]
+0216d41c  bl 0x0200c9e4
+0216d420  ldr r1,[0x216d444]
+0216d424  bl 0x0200c5ac
+0216d428  mov r1,r0
+0216d42c  ldr r0,[0x216d448]
+0216d430  bl 0x0200c9e4
+0216d434  bl 0x0200c8e0
+0216d438  str r0,[r4,#0x0]
+0216d43c  ldmia sp!,{r4,pc}

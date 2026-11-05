@@ -1,0 +1,13 @@
+020614bc  push {r4,lr}
+020614be  add r4,r0,#0x0
+020614c0  cmp r4,#0x0
+020614c2  beq 0x020614d0
+020614c4  ldr r0,[r4,#0x4]
+020614c6  ldr r1,[r4,#0x0]
+020614c8  blx r1
+020614ca  ldr r4,[r4,#0x8]
+020614cc  cmp r4,#0x0
+020614ce  bne 0x020614c4
+020614d0  pop {r4}
+020614d2  pop {r3}
+020614d4  bx r3

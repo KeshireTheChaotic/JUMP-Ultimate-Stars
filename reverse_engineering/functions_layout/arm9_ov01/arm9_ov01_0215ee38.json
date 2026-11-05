@@ -1,0 +1,1 @@
+{"module":"arm9_ov01","address":"0215ee38","name":"FUN_0215ee38","thumb":true,"body_bytes":364,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["0200d12c","02023894","020517fc","02051890","02075780","02075788","0215f124"],"unresolved_call_targets":[],"status":"decompiled","asm_file":"arm9_ov01_0215ee38.asm","c_file":"arm9_ov01_0215ee38.c"}

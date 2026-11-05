@@ -1,0 +1,9 @@
+0208bf30  push {r3,lr}
+0208bf32  add r1,sp,#0x0
+0208bf34  strh r0,[r1,#0x0]
+0208bf36  ldr r3,[0x0208bf44]
+0208bf38  mov r0,#0xd
+0208bf3a  add r1,sp,#0x0
+0208bf3c  mov r2,#0x2
+0208bf3e  bl 0x0208a1e0
+0208bf42  pop {r3,pc}

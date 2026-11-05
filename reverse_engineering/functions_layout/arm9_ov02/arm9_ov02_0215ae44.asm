@@ -1,0 +1,11 @@
+0215ae44  stmdb sp!,{r4,lr}
+0215ae48  bl 0x02035c90
+0215ae4c  mov r4,r0
+0215ae50  ldr r1,[r4,#0x38]
+0215ae54  cmp r1,#0x0
+0215ae58  bne 0x0215ae68
+0215ae5c  ldr r1,[r0,#0x0]
+0215ae60  ldr r1,[r1,#0x14]
+0215ae64  blx r1
+0215ae68  ldr r0,[r4,#0x38]
+0215ae6c  ldmia sp!,{r4,pc}

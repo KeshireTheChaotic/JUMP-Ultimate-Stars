@@ -1,0 +1,49 @@
+0216f8d8  stmdb sp!,{r4,r5,r6,r7,r8,r9,lr}
+0216f8dc  sub sp,sp,#0x1c
+0216f8e0  mov r9,r0
+0216f8e4  ldr r0,[r9,#0x2c]
+0216f8e8  ldr r1,[r0,#0x10]
+0216f8ec  ldr r1,[r1,#0x158]
+0216f8f0  and r6,r1,#0xf
+0216f8f4  bl 0x0216f0f0
+0216f8f8  mov r8,#0x0
+0216f8fc  mov r7,r0
+0216f900  mov r5,#0x1
+0216f904  mov r4,r8
+0216f908  tst r6,#0x1
+0216f90c  beq 0x0216f974
+0216f910  ldr r0,[r9,#0x2c]
+0216f914  ldr r0,[r0,#0x8]
+0216f918  cmp r0,#0x0
+0216f91c  moveq r2,r5
+0216f920  beq 0x0216f92c
+0216f924  bl 0x02155c9c
+0216f928  mov r2,r0
+0216f92c  ldr r0,[r9,#0x2c]
+0216f930  ldr r1,[r7,#0x4]
+0216f934  str r1,[sp,#0x0]
+0216f938  ldrsb r1,[r0,#0x39]
+0216f93c  stmib sp,{r1,r4}
+0216f940  str r4,[sp,#0xc]
+0216f944  str r8,[sp,#0x10]
+0216f948  ldrh r1,[r9,#0x24]
+0216f94c  str r1,[sp,#0x14]
+0216f950  ldrh r1,[r9,#0x22]
+0216f954  str r1,[sp,#0x18]
+0216f958  ldr r1,[r9,#0x8]
+0216f95c  ldr r3,[r9,#0xc]
+0216f960  ldrsh r1,[r1,#0x1e]
+0216f964  ldr r12,[r3,#0x10]
+0216f968  ldr r3,[r7,#0x0]
+0216f96c  add r1,r12,r1, lsl #0x5
+0216f970  bl 0x0216ab58
+0216f974  add r0,r8,#0x1
+0216f978  mov r0,r0, lsl #0x18
+0216f97c  mov r8,r0, asr #0x18
+0216f980  cmp r8,#0x4
+0216f984  mov r6,r6, lsr #0x1
+0216f988  blt 0x0216f908
+0216f98c  mov r0,r9
+0216f990  bl 0x0216f398
+0216f994  add sp,sp,#0x1c
+0216f998  ldmia sp!,{r4,r5,r6,r7,r8,r9,pc}

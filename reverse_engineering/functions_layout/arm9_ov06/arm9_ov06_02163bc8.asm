@@ -1,0 +1,13 @@
+02163bc8  stmdb sp!,{r3,lr}
+02163bcc  ldr r0,[r0,#0x4]
+02163bd0  ldr r0,[r0,#0x68]
+02163bd4  ldr r1,[r0,#0x0]
+02163bd8  ldr r1,[r1,#0x68]
+02163bdc  blx r1
+02163be0  cmp r0,#0x0
+02163be4  moveq r0,#0x1
+02163be8  movne r0,#0x0
+02163bec  cmp r0,#0x0
+02163bf0  moveq r0,#0x1
+02163bf4  movne r0,#0x0
+02163bf8  ldmia sp!,{r3,pc}

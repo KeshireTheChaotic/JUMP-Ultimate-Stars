@@ -1,0 +1,14 @@
+021cb124  ldr r3,[r0,#0x34]
+021cb126  b 0x021cb132
+021cb128  ldrh r1,[r3,#0x4]
+021cb12a  ldr r2,[r3,#0x34]
+021cb12c  add r1,r1,#0x1
+021cb12e  strh r1,[r3,#0x4]
+021cb130  add r3,r2,#0x0
+021cb132  cmp r3,r0
+021cb134  bne 0x021cb128
+021cb136  ldrh r1,[r0,#0x4]
+021cb138  add r1,r1,#0x1
+021cb13a  strh r1,[r0,#0x4]
+021cb13c  ldrh r0,[r0,#0x4]
+021cb13e  bx lr

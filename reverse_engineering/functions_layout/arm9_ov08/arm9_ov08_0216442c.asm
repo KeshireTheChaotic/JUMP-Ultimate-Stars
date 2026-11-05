@@ -1,0 +1,16 @@
+0216442c  mrrcne p12,0x1,r0,r11,cr2
+02164430  ldrne r0,[r11],#-0x41b
+02164434  blle 0x01cef07c
+02164438  stmdble r7!,{r0,r9,r11,sp}
+0216443c  stmdavs sp,{r0,r2,r4,r8,r11,lr}
+02164440  ldmdami r5,{r0,r1,r3,r5,r7,r8,r10,r11,sp,lr}
+02164444  ldmdami r5,{r0,r1,r6,r8,r9,lr}
+02164448  strvs r1,[r8,#0x818]!
+0216444c  stcvs p8,cr6,[r1,#0x20]
+02164450  strdmi r2,r3,[r1],-pc
+02164454  andeqs r4,r0,#0x28000001
+02164458  andcs r0,r0,#0x300
+0216445c  stcne p1,cr2,[r0],#-0x4
+02164460  stmdacs r0,{r3,lr}
+02164464  blcs 0x02198494
+02164468  mrrcne p1,0x0,sp,r0,cr5

@@ -1,0 +1,16 @@
+02013f98  stmdb sp!,{r3,r4,r5,lr}
+02013f9c  ldr r1,[0x2013fd8]
+02013fa0  mov r5,r0
+02013fa4  str r1,[r5,#0x0]
+02013fa8  ldr r4,[r5,#0x34]
+02013fac  mov r0,r4
+02013fb0  bl 0x0201a9ec
+02013fb4  cmp r0,#0x0
+02013fb8  bne 0x02013fc8
+02013fbc  mov r0,r4
+02013fc0  mov r1,#0x1
+02013fc4  bl 0x0201a958
+02013fc8  mov r0,r5
+02013fcc  bl 0x0201214c
+02013fd0  mov r0,r5
+02013fd4  ldmia sp!,{r3,r4,r5,pc}

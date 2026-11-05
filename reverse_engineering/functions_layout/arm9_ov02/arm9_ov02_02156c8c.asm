@@ -1,0 +1,14 @@
+02156c8c  stmdb sp!,{r4,lr}
+02156c90  ldr r0,[r0,#0x4]
+02156c94  ldr r1,[r0,#0x0]
+02156c98  ldr r1,[r1,#0x64]
+02156c9c  blx r1
+02156ca0  mov r4,r0
+02156ca4  ldr r1,[r4,#0x18]
+02156ca8  cmp r1,#0x0
+02156cac  bne 0x02156cbc
+02156cb0  ldr r1,[r0,#0x0]
+02156cb4  ldr r1,[r1,#0x10]
+02156cb8  blx r1
+02156cbc  ldr r0,[r4,#0x18]
+02156cc0  ldmia sp!,{r4,pc}

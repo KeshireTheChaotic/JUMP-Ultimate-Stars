@@ -1,0 +1,16 @@
+027eaa8c  cmp r0,#0x1
+027eaa90  bcc 0x027eaa9c
+027eaa94  cmp r0,#0xff
+027eaa98  bls 0x027eaaa4
+027eaa9c  mov r0,#0x5
+027eaaa0  bx lr
+027eaaa4  ldr r1,[0x27eaacc]
+027eaaa8  ldr r1,[r1,#0x0]
+027eaaac  add r1,r1,#0x300
+027eaab0  strh r0,[r1,#0xb8]
+027eaab4  ldr r1,[0x27eaad0]
+027eaab8  strh r0,[r1,#0x0]
+027eaabc  mov r0,#0x0
+027eaac0  ldr r1,[0x27eaad4]
+027eaac4  strh r0,[r1,#0x0]
+027eaac8  bx lr

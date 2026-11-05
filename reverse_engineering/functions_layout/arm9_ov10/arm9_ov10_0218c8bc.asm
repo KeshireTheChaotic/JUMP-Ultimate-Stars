@@ -1,0 +1,17 @@
+0218c8bc  push {r4,lr}
+0218c8be  bl 0x0218ce14
+0218c8c2  add r4,r0,#0x0
+0218c8c4  cmp r4,#0x0
+0218c8c6  beq 0x0218c8e0
+0218c8c8  ldr r0,[r4,#0x0]
+0218c8ca  mov r1,#0x0
+0218c8cc  mvn r1,r1
+0218c8ce  cmp r0,r1
+0218c8d0  beq 0x0218c8d6
+0218c8d2  bl 0x02001b80
+0218c8d6  mov r0,#0x0
+0218c8d8  mvn r0,r0
+0218c8da  str r0,[r4,#0x0]
+0218c8dc  mov r0,#0x4
+0218c8de  str r0,[r4,#0x10]
+0218c8e0  pop {r4,pc}

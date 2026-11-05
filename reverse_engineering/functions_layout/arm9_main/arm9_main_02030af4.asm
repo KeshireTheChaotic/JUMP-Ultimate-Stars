@@ -1,0 +1,15 @@
+02030af4  stmdb sp!,{r0,r1,r2,r3}
+02030af8  stmdb sp!,{r4,lr}
+02030afc  mov r4,r0
+02030b00  add r1,sp,#0xc
+02030b04  add r0,r4,#0x10
+02030b08  bl 0x02030110
+02030b0c  add r0,r4,#0x28
+02030b10  add r1,r4,#0x1c
+02030b14  bl 0x02030110
+02030b18  ldrh r0,[r4,#0xa]
+02030b1c  add r0,r0,#0x1
+02030b20  strh r0,[r4,#0xa]
+02030b24  ldmia sp!,{r4,lr}
+02030b28  add sp,sp,#0x10
+02030b2c  bx lr

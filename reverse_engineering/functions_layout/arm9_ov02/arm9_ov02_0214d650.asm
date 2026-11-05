@@ -1,0 +1,10 @@
+0214d650  stmdb sp!,{r3,lr}
+0214d654  ldr r2,[r1,#0x0]
+0214d658  ldr r0,[r0,#0x4]
+0214d65c  add r1,sp,#0x0
+0214d660  str r2,[sp,#0x0]
+0214d664  ldr r0,[r0,#0x64]
+0214d668  ldr r2,[r0,#0x0]
+0214d66c  ldr r2,[r2,#0x10]
+0214d670  blx r2
+0214d674  ldmia sp!,{r3,pc}

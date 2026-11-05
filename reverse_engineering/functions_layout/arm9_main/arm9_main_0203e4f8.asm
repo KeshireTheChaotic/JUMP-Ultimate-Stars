@@ -1,0 +1,11 @@
+0203e4f8  add r1,r0,#0x800
+0203e4fc  ldrh r3,[r1,#0xc8]
+0203e500  ldrh r2,[r1,#0xca]
+0203e504  ldr r12,[r0,#0x940]
+0203e508  ldr r1,[0x203e524]
+0203e50c  mul r2,r3,r2
+0203e510  mul r2,r12,r2
+0203e514  str r2,[r0,#0x960]
+0203e518  mov r0,#0x2
+0203e51c  str r0,[r1,#0x288]
+0203e520  bx lr

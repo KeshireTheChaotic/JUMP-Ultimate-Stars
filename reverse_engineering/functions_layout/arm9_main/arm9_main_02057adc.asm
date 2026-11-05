@@ -1,0 +1,12 @@
+02057adc  stmdb sp!,{r4,lr}
+02057ae0  bl 0x02055238
+02057ae4  ldr r1,[0x2057b0c]
+02057ae8  ldr r1,[r1,#0x0]
+02057aec  cmp r1,#0x0
+02057af0  addne r1,r1,#0x100
+02057af4  ldrhne r4,[r1,#0x50]
+02057af8  moveq r4,#0x0
+02057afc  bl 0x0205524c
+02057b00  mov r0,r4
+02057b04  ldmia sp!,{r4,lr}
+02057b08  bx lr

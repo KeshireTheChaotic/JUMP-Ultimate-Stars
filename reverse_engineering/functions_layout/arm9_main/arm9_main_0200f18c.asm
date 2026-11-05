@@ -1,0 +1,13 @@
+0200f18c  stmdb sp!,{r3,r4,r5,lr}
+0200f190  movs r5,r0
+0200f194  mov r4,r2
+0200f198  mov r12,r1
+0200f19c  ldmiaeq sp!,{r3,r4,r5,pc}
+0200f1a0  cmp r3,#0x0
+0200f1a4  beq 0x0200f1b4
+0200f1a8  ldr r1,[r5,#-0x4]
+0200f1ac  mov r2,r12
+0200f1b0  bl 0x0200f0a0
+0200f1b4  sub r0,r5,r4
+0200f1b8  bl 0x0201b268
+0200f1bc  ldmia sp!,{r3,r4,r5,pc}

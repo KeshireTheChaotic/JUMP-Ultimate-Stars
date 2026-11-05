@@ -1,0 +1,12 @@
+02030d6c  stmdb sp!,{r3,lr}
+02030d70  ldr r1,[0x2030d9c]
+02030d74  str r0,[r1,#0x2c8]
+02030d78  mov r0,#0x8
+02030d7c  bl 0x0201a228
+02030d80  cmp r0,#0x0
+02030d84  beq 0x02030d8c
+02030d88  bl 0x02030dcc
+02030d8c  ldr r1,[0x2030d9c]
+02030d90  str r0,[r1,#0x1dc]
+02030d94  str r0,[r1,#0x174]
+02030d98  ldmia sp!,{r3,pc}

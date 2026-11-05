@@ -1,0 +1,33 @@
+020796c8  stmdb sp!,{r4,r5,r6,lr}
+020796cc  mov r4,r0
+020796d0  cmp r1,#0x0
+020796d4  mov r6,#0x0
+020796d8  beq 0x02079714
+020796dc  mov r5,#0x1
+020796e0  add r0,r4,r6, lsl #0x2
+020796e4  ldr r0,[r0,#0x14]
+020796e8  cmp r0,#0x0
+020796ec  beq 0x02079704
+020796f0  ldr r0,[r0,#0x4]
+020796f4  mov r1,r5
+020796f8  ldr r2,[r0,#0x0]
+020796fc  ldr r2,[r2,#0xd8]
+02079700  blx r2
+02079704  add r6,r6,#0x1
+02079708  cmp r6,#0x14
+0207970c  blt 0x020796e0
+02079710  ldmia sp!,{r4,r5,r6,pc}
+02079714  mov r5,r6
+02079718  add r0,r4,r6, lsl #0x2
+0207971c  ldr r0,[r0,#0x14]
+02079720  cmp r0,#0x0
+02079724  beq 0x0207973c
+02079728  ldr r0,[r0,#0x4]
+0207972c  mov r1,r5
+02079730  ldr r2,[r0,#0x0]
+02079734  ldr r2,[r2,#0xd8]
+02079738  blx r2
+0207973c  add r6,r6,#0x1
+02079740  cmp r6,#0x14
+02079744  blt 0x02079718
+02079748  ldmia sp!,{r4,r5,r6,pc}

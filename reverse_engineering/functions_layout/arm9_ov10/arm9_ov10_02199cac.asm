@@ -1,0 +1,17 @@
+02199cac  push {lr}
+02199cae  sub sp,#0x4
+02199cb0  ldr r0,[0x02199cd0]
+02199cb2  ldrb r1,[r0,#0x0]
+02199cb4  cmp r1,#0x0
+02199cb6  bne 0x02199cca
+02199cb8  mov r1,#0x1
+02199cba  strb r1,[r0,#0x0]
+02199cbc  mov r1,#0x0
+02199cbe  str r1,[r0,#0x24]
+02199cc0  str r1,[r0,#0x8]
+02199cc2  str r1,[r0,#0x4]
+02199cc4  ldr r0,[0x02199cd4]
+02199cc6  blx 0x02053f5c
+02199cca  add sp,#0x4
+02199ccc  pop {r3}
+02199cce  bx r3

@@ -1,0 +1,16 @@
+0219dd5c  stmdb sp!,{r4,lr}
+0219dd60  ldr r0,[0x219dd9c]
+0219dd64  ldr r0,[r0,#0x0]
+0219dd68  add r0,r0,#0x1000
+0219dd6c  ldr r0,[r0,#0xbd8]
+0219dd70  cmp r0,#0x0
+0219dd74  ldmiaeq sp!,{r4,pc}
+0219dd78  bl 0x0219dcb8
+0219dd7c  ldr r4,[0x219dda0]
+0219dd80  b 0x0219dd8c
+0219dd84  ldr r0,[r4,#0x0]
+0219dd88  blx r0
+0219dd8c  bl 0x0219dce0
+0219dd90  cmp r0,#0x0
+0219dd94  beq 0x0219dd84
+0219dd98  ldmia sp!,{r4,pc}

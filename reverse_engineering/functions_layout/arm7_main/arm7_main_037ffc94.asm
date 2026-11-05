@@ -1,0 +1,13 @@
+037ffc94  ands r1,r1,#0x1
+037ffc98  ldreq r1,[0x37ffcc8]
+037ffc9c  ldreq r2,[r1,#0x0]
+037ffca0  mvneq r0,r0
+037ffca4  andeq r0,r2,r0
+037ffca8  streq r0,[r1,#0x0]
+037ffcac  bxeq lr
+037ffcb0  ldr r1,[0x37ffccc]
+037ffcb4  ldr r2,[r1,#0x0]
+037ffcb8  mvn r0,r0
+037ffcbc  and r0,r2,r0
+037ffcc0  str r0,[r1,#0x0]
+037ffcc4  bx lr

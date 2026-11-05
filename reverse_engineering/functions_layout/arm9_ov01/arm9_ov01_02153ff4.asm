@@ -1,0 +1,12 @@
+02153ff4  stmdb sp!,{r3,lr}
+02153ff8  ldr r0,[r0,#0x4]
+02153ffc  ldr r0,[r0,#0x10]
+02154000  ldr r0,[r0,#0x2c]
+02154004  cmp r0,#0x0
+02154008  ldmiaeq sp!,{r3,pc}
+0215400c  ldr r0,[r0,#0x4]
+02154010  mov r1,#0x10
+02154014  ldr r2,[r0,#0x0]
+02154018  ldr r2,[r2,#0x148]
+0215401c  blx r2
+02154020  ldmia sp!,{r3,pc}

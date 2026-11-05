@@ -1,0 +1,101 @@
+0206b500  stmdb sp!,{r4,r5,r6,r7,r8,r9,r10,r11,lr}
+0206b504  sub sp,sp,#0x4c
+0206b508  ldr r0,[r0,#0x4]
+0206b50c  add r1,sp,#0xc
+0206b510  ldr r4,[r0,#0x10]
+0206b514  ldrh r2,[r4,#0xe]
+0206b518  ldrb r3,[r4,#0x10]
+0206b51c  ldr r0,[r4,#0x4]
+0206b520  bl 0x0206ae7c
+0206b524  ldrb r0,[r4,#0x1c]
+0206b528  tst r0,#0x1
+0206b52c  ldrheq r5,[sp,#0xc]
+0206b530  beq 0x0206b550
+0206b534  ldr r0,[r4,#0x8]
+0206b538  ldrh r1,[r4,#0x16]
+0206b53c  ldrh r0,[r0,#0x0]
+0206b540  ldrb r2,[r4,#0x11]
+0206b544  ldrb r3,[r4,#0x1a]
+0206b548  bl 0x0206b8b0
+0206b54c  mov r5,r0
+0206b550  ldrb r0,[r4,#0x1c]
+0206b554  tst r0,#0x2
+0206b558  ldrbeq r1,[r4,#0x10]
+0206b55c  addeq r0,sp,#0xc
+0206b560  subeq r1,r1,#0x1
+0206b564  moveq r1,r1, lsl #0x1
+0206b568  ldrheq r0,[r0,r1]
+0206b56c  beq 0x0206b594
+0206b570  ldrb r0,[r4,#0x10]
+0206b574  ldr r2,[r4,#0x8]
+0206b578  ldrh r1,[r4,#0x18]
+0206b57c  sub r0,r0,#0x1
+0206b580  mov r0,r0, lsl #0x1
+0206b584  ldrh r0,[r2,r0]
+0206b588  ldrb r2,[r4,#0x11]
+0206b58c  ldrb r3,[r4,#0x1a]
+0206b590  bl 0x0206b8b0
+0206b594  mov r6,r5, asr #0x5
+0206b598  mov r3,r0, asr #0x5
+0206b59c  mov r2,r5, asr #0xa
+0206b5a0  and r7,r3,#0x1f
+0206b5a4  and r6,r6,#0x1f
+0206b5a8  and r8,r5,#0x1f
+0206b5ac  mov r1,r0, asr #0xa
+0206b5b0  and r3,r0,#0x1f
+0206b5b4  sub r11,r7,r6
+0206b5b8  and r10,r2,#0x1f
+0206b5bc  and r0,r1,#0x1f
+0206b5c0  sub r7,r3,r8
+0206b5c4  sub r9,r0,r10
+0206b5c8  mov r5,#0x0
+0206b5cc  b 0x0206b638
+0206b5d0  mul r0,r5,r9
+0206b5d4  sub r1,r3,#0x1
+0206b5d8  str r1,[sp,#0x0]
+0206b5dc  bl 0x0200d12c
+0206b5e0  str r0,[sp,#0x4]
+0206b5e4  mul r0,r5,r7
+0206b5e8  ldr r1,[sp,#0x0]
+0206b5ec  bl 0x0200d12c
+0206b5f0  str r0,[sp,#0x8]
+0206b5f4  mul r0,r5,r11
+0206b5f8  ldr r1,[sp,#0x0]
+0206b5fc  bl 0x0200d12c
+0206b600  ldr r2,[sp,#0x8]
+0206b604  ldr r1,[sp,#0x4]
+0206b608  add r2,r8,r2
+0206b60c  add r0,r6,r0
+0206b610  add r1,r10,r1
+0206b614  and r2,r2,#0xff
+0206b618  and r0,r0,#0xff
+0206b61c  and r1,r1,#0xff
+0206b620  orr r0,r2,r0, lsl #0x5
+0206b624  orr r2,r0,r1, lsl #0xa
+0206b628  mov r1,r5, lsl #0x1
+0206b62c  add r0,sp,#0xc
+0206b630  strh r2,[r0,r1]
+0206b634  add r5,r5,#0x1
+0206b638  ldrb r3,[r4,#0x10]
+0206b63c  cmp r5,r3
+0206b640  blt 0x0206b5d0
+0206b644  ldr r0,[r4,#0x4]
+0206b648  ldrh r2,[r4,#0xe]
+0206b64c  ldr r0,[r0,#0x4]
+0206b650  add r1,sp,#0xc
+0206b654  bl 0x02029c68
+0206b658  ldrb r1,[r4,#0x11]
+0206b65c  ldrb r0,[r4,#0x1a]
+0206b660  cmp r1,r0
+0206b664  mvncs r0,#0x0
+0206b668  strbcs r0,[r4,#0x1b]
+0206b66c  bcs 0x0206b67c
+0206b670  cmp r1,#0x0
+0206b674  moveq r0,#0x1
+0206b678  strbeq r0,[r4,#0x1b]
+0206b67c  ldrb r1,[r4,#0x11]
+0206b680  ldrsb r0,[r4,#0x1b]
+0206b684  add r0,r1,r0
+0206b688  strb r0,[r4,#0x11]
+0206b68c  add sp,sp,#0x4c
+0206b690  ldmia sp!,{r4,r5,r6,r7,r8,r9,r10,r11,pc}

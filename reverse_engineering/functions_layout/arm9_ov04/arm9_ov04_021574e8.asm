@@ -1,0 +1,9 @@
+021574e8  cmp r0,#0x0
+021574ec  beq 0x02157504
+021574f0  ldrsb r0,[r0,#0x11]
+021574f4  cmp r0,#0x0
+021574f8  movne r0,#0x1
+021574fc  moveq r0,#0x0
+02157500  bx lr
+02157504  mov r0,#0x0
+02157508  bx lr

@@ -1,0 +1,15 @@
+02177f18  push {lr}
+02177f1a  sub sp,#0x4
+02177f1c  ldr r0,[0x02177f38]
+02177f1e  ldr r1,[r0,#0x0]
+02177f20  cmp r1,#0x0
+02177f22  beq 0x02177f34
+02177f24  mov r0,#0x0
+02177f26  str r0,[r1,#0x8]
+02177f28  blx 0x02054b44
+02177f2c  ldr r2,[0x02177f38]
+02177f2e  ldr r2,[r2,#0x0]
+02177f30  str r0,[r2,#0xc]
+02177f32  str r1,[r2,#0x10]
+02177f34  add sp,#0x4
+02177f36  pop {pc}

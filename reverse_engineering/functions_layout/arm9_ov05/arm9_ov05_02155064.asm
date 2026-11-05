@@ -1,0 +1,10 @@
+02155064  ldr r12,[r0,#0x3c4]
+02155068  cmp r12,r1
+0215506c  ldreq r12,[r0,#0x3c8]
+02155070  cmpeq r12,r2
+02155074  cmpeq r3,#0x0
+02155078  strne r1,[r0,#0x3c4]
+0215507c  strne r2,[r0,#0x3c8]
+02155080  movne r1,#0x1
+02155084  strbne r1,[r0,#0x468]
+02155088  bx lr

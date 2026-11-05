@@ -1,0 +1,33 @@
+02159434  stmdb sp!,{r4,lr}
+02159438  mov r4,r0
+0215943c  bl 0x02087724
+02159440  cmp r0,#0x2
+02159444  moveq r0,#0x1
+02159448  movne r0,#0x0
+0215944c  cmp r0,#0x0
+02159450  movne r0,#0x1
+02159454  ldmiane sp!,{r4,pc}
+02159458  ldrb r0,[r4,#0x1eb]
+0215945c  cmp r0,#0x0
+02159460  bne 0x021594b0
+02159464  ldr r0,[0x21594b8]
+02159468  mov r1,#0x23
+0215946c  ldr r2,[r0,#0x0]
+02159470  ldr r0,[r2,#0x15c]
+02159474  add r0,r2,r0, lsl #0x2
+02159478  ldr r0,[r0,#0xdc]
+0215947c  add r0,r0,#0x120
+02159480  bl 0x02158eb0
+02159484  cmp r0,#0x0
+02159488  beq 0x0215949c
+0215948c  mov r0,r4
+02159490  bl 0x021594bc
+02159494  mov r0,#0x1
+02159498  ldmia sp!,{r4,pc}
+0215949c  add r0,r4,#0x100
+021594a0  ldrsb r0,[r0,#0xe0]
+021594a4  mov r1,#0x1
+021594a8  mov r0,r1, lsl r0
+021594ac  blx 0x0214e2d8
+021594b0  mov r0,#0x1
+021594b4  ldmia sp!,{r4,pc}

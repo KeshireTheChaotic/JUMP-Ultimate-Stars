@@ -1,0 +1,15 @@
+02012d10  stmdb sp!,{r3,r4,r5,lr}
+02012d14  mov r2,#0xc0000
+02012d18  mov r5,r0
+02012d1c  mov r4,r1
+02012d20  str r2,[sp,#0x0]
+02012d24  bl 0x02012ce8
+02012d28  mov r1,r0
+02012d2c  add r2,sp,#0x0
+02012d30  mov r0,r5
+02012d34  bl 0x02011efc
+02012d38  ldr r1,[0x2012d4c]
+02012d3c  mov r0,r5
+02012d40  str r1,[r5,#0x0]
+02012d44  str r4,[r5,#0x2c]
+02012d48  ldmia sp!,{r3,r4,r5,pc}

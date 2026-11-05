@@ -1,0 +1,12 @@
+02046e40  stmdb sp!,{r4,lr}
+02046e44  mov r4,r0
+02046e48  bl 0x02036d24
+02046e4c  mov r0,r4
+02046e50  bl 0x0201a9ec
+02046e54  cmp r0,#0x0
+02046e58  bne 0x02046e68
+02046e5c  mov r0,r4
+02046e60  mov r1,#0x1
+02046e64  bl 0x0201a958
+02046e68  mov r0,r4
+02046e6c  ldmia sp!,{r4,pc}

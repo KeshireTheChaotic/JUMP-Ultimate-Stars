@@ -1,0 +1,1 @@
+{"module":"arm9_main","address":"02046af0","name":"vfunc_06","thumb":false,"body_bytes":20,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["0204552c"],"unresolved_call_targets":[],"status":"decompiled","asm_file":"arm9_main_02046af0.asm","c_file":"arm9_main_02046af0.c"}

@@ -1,0 +1,10 @@
+021bbde0  stmdb sp!,{r3,lr}
+021bbde4  ldr r2,[r1,#0x0]
+021bbde8  ldr r0,[r0,#0x4]
+021bbdec  add r1,sp,#0x0
+021bbdf0  str r2,[sp,#0x0]
+021bbdf4  ldr r0,[r0,#0x64]
+021bbdf8  ldr r2,[r0,#0x0]
+021bbdfc  ldr r2,[r2,#0x10]
+021bbe00  blx r2
+021bbe04  ldmia sp!,{r3,pc}

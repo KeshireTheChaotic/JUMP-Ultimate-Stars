@@ -1,0 +1,11 @@
+020174fc  stmdb sp!,{r4,lr}
+02017500  mov r4,r0
+02017504  cmp r1,#0x0
+02017508  cmpne r2,#0x0
+0201750c  ldmiaeq sp!,{r4,pc}
+02017510  mul r0,r1,r2
+02017514  bl 0x0201a228
+02017518  str r0,[r4,#0xc]
+0201751c  mov r0,#0x1
+02017520  strb r0,[r4,#0x10]
+02017524  ldmia sp!,{r4,pc}

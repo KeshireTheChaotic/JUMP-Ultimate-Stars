@@ -1,0 +1,17 @@
+0214fc34  stmdb sp!,{r3,lr}
+0214fc38  cmp r0,#0x0
+0214fc3c  beq 0x0214fc58
+0214fc40  mov r0,#0x30
+0214fc44  bl 0x020734e0
+0214fc48  mov r0,#0x30
+0214fc4c  mov r1,#0x0
+0214fc50  bl 0x0207361c
+0214fc54  b 0x0214fc6c
+0214fc58  mov r0,#0x31
+0214fc5c  bl 0x020734e0
+0214fc60  mov r0,#0x31
+0214fc64  mov r1,#0x0
+0214fc68  bl 0x0207361c
+0214fc6c  mov r0,#0x7c
+0214fc70  bl 0x02073744
+0214fc74  ldmia sp!,{r3,pc}

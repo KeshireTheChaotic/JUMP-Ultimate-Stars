@@ -1,0 +1,14 @@
+020400c4  push {r4,lr}
+020400c6  ldr r1,[r0,#0x0]
+020400c8  add r4,r0,#0x0
+020400ca  ldr r1,[r1,#0x3c]
+020400cc  blx r1
+020400ce  ldr r1,[r0,#0x0]
+020400d0  ldr r1,[r1,#0x64]
+020400d2  blx r1
+020400d4  add r1,r0,#0x0
+020400d6  add r0,r4,#0x0
+020400d8  ldr r2,[r0,#0x0]
+020400da  ldr r2,[r2,#0x60]
+020400dc  blx r2
+020400de  pop {r4,pc}

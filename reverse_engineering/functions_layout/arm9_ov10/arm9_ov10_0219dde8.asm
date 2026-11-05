@@ -1,0 +1,10 @@
+0219dde8  stmdb sp!,{r3,lr}
+0219ddec  ldr r2,[0x219de10]
+0219ddf0  mov r1,r0
+0219ddf4  ldr r0,[r2,#0x0]
+0219ddf8  add r0,r0,#0x1000
+0219ddfc  ldr r0,[r0,#0xbd8]
+0219de00  cmp r0,#0x0
+0219de04  ldmiaeq sp!,{r3,pc}
+0219de08  blx 0x021cc050
+0219de0c  ldmia sp!,{r3,pc}

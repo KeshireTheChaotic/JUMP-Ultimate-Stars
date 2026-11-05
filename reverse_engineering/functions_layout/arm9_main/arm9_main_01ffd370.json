@@ -1,0 +1,1 @@
+{"module":"arm9_main","address":"01ffd370","name":"FUN_01ffd370","thumb":false,"body_bytes":80,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["01ff9450","01ffd240","01ffd26c"],"unresolved_call_targets":[],"status":"decompiled","asm_file":"arm9_main_01ffd370.asm","c_file":"arm9_main_01ffd370.c"}

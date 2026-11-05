@@ -1,0 +1,10 @@
+02025280  stmdb sp!,{r3,r4,lr}
+02025284  sub sp,sp,#0x4
+02025288  ldr r1,[r1,#0x64]
+0202528c  add r0,sp,#0x0
+02025290  mov r4,r2
+02025294  blx 0x02011990
+02025298  ldr r0,[sp,#0x0]
+0202529c  str r0,[r4,#0x0]
+020252a0  add sp,sp,#0x4
+020252a4  ldmia sp!,{r3,r4,pc}

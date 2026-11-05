@@ -1,0 +1,13 @@
+0206bbd0  strh r1,[r0,#0x8]
+0206bbd2  strh r2,[r0,#0xa]
+0206bbd4  cmp r3,#0x0
+0206bbd6  ldrb r2,[r0,#0x14]
+0206bbd8  beq 0x0206bbe2
+0206bbda  mov r1,#0x1
+0206bbdc  orr r1,r2
+0206bbde  strb r1,[r0,#0x14]
+0206bbe0  bx lr
+0206bbe2  mov r1,#0x1
+0206bbe4  bic r2,r1
+0206bbe6  strb r2,[r0,#0x14]
+0206bbe8  bx lr

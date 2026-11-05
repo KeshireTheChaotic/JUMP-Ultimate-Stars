@@ -1,0 +1,16 @@
+0207b2d0  stmdb sp!,{r3,lr}
+0207b2d4  movs r2,r0
+0207b2d8  ldmiaeq sp!,{r3,pc}
+0207b2dc  ldrb r0,[r2,#0x18]
+0207b2e0  tst r0,#0x20
+0207b2e4  ldmiaeq sp!,{r3,pc}
+0207b2e8  cmp r1,#0x0
+0207b2ec  orrne r0,r0,#0x1
+0207b2f0  strbne r0,[r2,#0x18]
+0207b2f4  ldmiane sp!,{r3,pc}
+0207b2f8  bic r0,r0,#0x1
+0207b2fc  strb r0,[r2,#0x18]
+0207b300  ldr r0,[r2,#0x20]
+0207b304  mov r1,r2
+0207b308  bl 0x0207bc2c
+0207b30c  ldmia sp!,{r3,pc}

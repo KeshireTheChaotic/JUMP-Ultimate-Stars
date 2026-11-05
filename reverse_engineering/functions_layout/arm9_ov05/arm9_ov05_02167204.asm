@@ -1,0 +1,9 @@
+02167204  stmdb sp!,{r4,lr}
+02167208  mov r4,r0
+0216720c  ldr r0,[r4,#0x0]
+02167210  cmp r0,#0x0
+02167214  ldmiaeq sp!,{r4,pc}
+02167218  blx 0x021bd500
+0216721c  mov r0,#0x0
+02167220  str r0,[r4,#0x0]
+02167224  ldmia sp!,{r4,pc}

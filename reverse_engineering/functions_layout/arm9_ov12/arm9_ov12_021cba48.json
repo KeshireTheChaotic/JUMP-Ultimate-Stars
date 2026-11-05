@@ -1,0 +1,1 @@
+{"module":"arm9_ov12","address":"021cba48","name":"~ALFont_021d4f60","thumb":true,"body_bytes":24,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["0201b268","021cb030"],"unresolved_call_targets":[],"status":"decompiled","asm_file":"arm9_ov12_021cba48.asm","c_file":"arm9_ov12_021cba48.c"}

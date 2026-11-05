@@ -1,0 +1,9 @@
+02019edc  mov r2,#0x1000
+02019ee0  str r2,[r0,#0x0]
+02019ee4  mov r1,#0x0
+02019ee8  str r1,[r0,#0x4]
+02019eec  str r1,[r0,#0x8]
+02019ef0  str r2,[r0,#0xc]
+02019ef4  str r1,[r0,#0x10]
+02019ef8  str r1,[r0,#0x14]
+02019efc  bx lr

@@ -1,0 +1,13 @@
+021561a8  mvn r2,#0x0
+021561ac  cmp r1,r2
+021561b0  moveq r0,#0x0
+021561b4  bxeq lr
+021561b8  ldrsb r3,[r0,#0xa2]
+021561bc  add r2,r3,#0x1
+021561c0  cmp r3,r1
+021561c4  strb r2,[r0,#0xa2]
+021561c8  movge r1,#0x0
+021561cc  strbge r1,[r0,#0xa2]
+021561d0  movge r0,#0x1
+021561d4  movlt r0,#0x0
+021561d8  bx lr

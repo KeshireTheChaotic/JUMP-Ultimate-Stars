@@ -1,0 +1,14 @@
+02161578  stmdb sp!,{r3,r4,r5,lr}
+0216157c  mov r5,r0
+02161580  ldr r0,[r5,#0x4]
+02161584  ldr r4,[r0,#0x10]
+02161588  bl 0x0207382c
+0216158c  cmp r0,#0x0
+02161590  ldmiaeq sp!,{r3,r4,r5,pc}
+02161594  blx 0x021b65cc
+02161598  ldrb r0,[r4,#0xb2]
+0216159c  bic r0,r0,#0x4
+021615a0  strb r0,[r4,#0xb2]
+021615a4  ldr r0,[r5,#0x4]
+021615a8  bl 0x020282f4
+021615ac  ldmia sp!,{r3,r4,r5,pc}

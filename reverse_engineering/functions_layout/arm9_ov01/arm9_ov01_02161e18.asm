@@ -1,0 +1,12 @@
+02161e18  stmdb sp!,{r4,lr}
+02161e1c  mov r4,r0
+02161e20  bl 0x02086bd4
+02161e24  cmp r0,#0x0
+02161e28  ldmiaeq sp!,{r4,pc}
+02161e2c  ldr r0,[0x2161e48]
+02161e30  ldr r0,[r0,#0x8]
+02161e34  cmp r0,#0x0
+02161e38  ldmiane sp!,{r4,pc}
+02161e3c  mov r0,r4
+02161e40  bl 0x02086e6c
+02161e44  ldmia sp!,{r4,pc}

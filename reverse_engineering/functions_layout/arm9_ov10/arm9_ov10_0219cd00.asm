@@ -1,0 +1,9 @@
+0219cd00  stmdb sp!,{r4,lr}
+0219cd04  mov r4,r0
+0219cd08  bl 0x0219cbd8
+0219cd0c  mov r0,r4
+0219cd10  bl 0x0219a354
+0219cd14  cmp r0,#0x0
+0219cd18  ldmialt sp!,{r4,pc}
+0219cd1c  bl 0x021a2854
+0219cd20  ldmia sp!,{r4,pc}

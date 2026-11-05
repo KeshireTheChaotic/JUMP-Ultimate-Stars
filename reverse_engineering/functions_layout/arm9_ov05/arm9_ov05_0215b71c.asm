@@ -1,0 +1,9 @@
+0215b71c  stmdb sp!,{r3,lr}
+0215b720  ldr r1,[r0,#0x18]
+0215b724  cmp r1,#0x0
+0215b728  bne 0x0215b738
+0215b72c  ldr r0,[r0,#0xc]
+0215b730  bl 0x02036430
+0215b734  mov r1,r0
+0215b738  mov r0,r1
+0215b73c  ldmia sp!,{r3,pc}

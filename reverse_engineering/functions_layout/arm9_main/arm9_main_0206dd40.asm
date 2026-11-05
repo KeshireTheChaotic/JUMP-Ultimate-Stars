@@ -1,0 +1,12 @@
+0206dd40  stmdb sp!,{r3,lr}
+0206dd44  bl 0x02073410
+0206dd48  bl 0x02086bd4
+0206dd4c  cmp r0,#0x0
+0206dd50  beq 0x0206dd68
+0206dd54  blx 0x02087980
+0206dd58  ldr r0,[0x206dd70]
+0206dd5c  ldr r0,[r0,#0x0]
+0206dd60  blx r0
+0206dd64  blx 0x0208a55c
+0206dd68  bl 0x02055684
+0206dd6c  ldmia sp!,{r3,pc}

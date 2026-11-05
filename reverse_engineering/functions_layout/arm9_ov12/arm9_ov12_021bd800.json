@@ -1,0 +1,1 @@
+{"module":"arm9_ov12","address":"021bd800","name":"FUN_021bd800","thumb":true,"body_bytes":126,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["02028384","021bd884","021bd8a4","021bda04"],"unresolved_call_targets":[],"status":"decompiled","asm_file":"arm9_ov12_021bd800.asm","c_file":"arm9_ov12_021bd800.c"}

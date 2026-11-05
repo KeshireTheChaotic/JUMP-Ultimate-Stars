@@ -1,0 +1,10 @@
+0219b730  stmdb sp!,{r3,lr}
+0219b734  ldr r0,[0x219b758]
+0219b738  ldr r0,[r0,#0x0]
+0219b73c  cmp r0,#0x0
+0219b740  moveq r0,#0x0
+0219b744  ldmiaeq sp!,{r3,pc}
+0219b748  add r0,r0,#0x1000
+0219b74c  ldr r0,[r0,#0xbd4]
+0219b750  bl 0x021a0664
+0219b754  ldmia sp!,{r3,pc}

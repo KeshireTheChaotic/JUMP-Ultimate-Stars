@@ -1,0 +1,10 @@
+021644fc  push {lr}
+021644fe  sub sp,#0x4
+02164500  add r3,r1,#0x0
+02164502  mov r1,#0x1e
+02164504  str r1,[sp,#0x0]
+02164506  mov r1,#0x3
+02164508  mov r2,#0x11
+0216450a  blx 0x0205ab10
+0216450e  add sp,#0x4
+02164510  pop {pc}

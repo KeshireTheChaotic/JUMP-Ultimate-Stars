@@ -1,0 +1,16 @@
+0215bb28  push {lr}
+0215bb2a  sub sp,#0x4
+0215bb2c  bl 0x02163600
+0215bb30  cmp r0,#0x0
+0215bb32  bne 0x0215bb48
+0215bb34  ldr r0,[0x0215bb4c]
+0215bb36  ldr r0,[r0,#0x0]
+0215bb38  ldr r2,[r0,#0x4]
+0215bb3a  ldr r1,[r2,#0x0]
+0215bb3c  ldr r0,[0x0215bb50]
+0215bb3e  and r1,r0
+0215bb40  str r1,[r2,#0x0]
+0215bb42  ldr r0,[0x0215bb54]
+0215bb44  bl 0x02157088
+0215bb48  add sp,#0x4
+0215bb4a  pop {pc}

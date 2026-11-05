@@ -1,0 +1,11 @@
+0217d068  ldr r0,[r0,#0x34]
+0217d06c  cmp r0,#0x0
+0217d070  moveq r0,#0x0
+0217d074  bxeq lr
+0217d078  ldr r0,[r0,#0x4]
+0217d07c  ldr r0,[r0,#0x10]
+0217d080  ldrb r0,[r0,#0x12]
+0217d084  cmp r0,#0x0
+0217d088  movne r0,#0x1
+0217d08c  moveq r0,#0x0
+0217d090  bx lr

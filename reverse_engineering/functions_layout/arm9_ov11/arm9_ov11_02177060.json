@@ -1,0 +1,1 @@
+{"module":"arm9_ov11","address":"02177060","name":"FUN_02177060","thumb":false,"body_bytes":256,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["02074000","020741bc"],"unresolved_call_targets":[],"status":"decompiled","asm_file":"arm9_ov11_02177060.asm","c_file":"arm9_ov11_02177060.c"}

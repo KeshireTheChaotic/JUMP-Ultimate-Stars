@@ -1,0 +1,11 @@
+021b18ac  ldrb r1,[r0,#0x8]
+021b18ae  cmp r1,#0x0
+021b18b0  beq 0x021b18c0
+021b18b2  ldr r1,[r0,#0x0]
+021b18b4  b 0x021b18b8
+021b18b6  ldr r1,[r1,#0x0]
+021b18b8  cmp r1,#0x0
+021b18ba  bne 0x021b18b6
+021b18bc  mov r1,#0x0
+021b18be  strb r1,[r0,#0x8]
+021b18c0  bx lr

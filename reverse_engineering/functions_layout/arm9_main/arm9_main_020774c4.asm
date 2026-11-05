@@ -1,0 +1,16 @@
+020774c4  ldr r12,[r0,#0x558]
+020774c8  cmp r12,#0x0
+020774cc  bxeq lr
+020774d0  ldr r3,[0x2077504]
+020774d4  b 0x020774f8
+020774d8  ldrb r0,[r12,#0x40]
+020774dc  cmp r0,#0x2
+020774e0  ldrbne r0,[r3,r1]
+020774e4  ldrbne r2,[r12,#0xf]
+020774e8  mvnne r0,r0
+020774ec  andne r0,r2,r0
+020774f0  strbne r0,[r12,#0xf]
+020774f4  ldr r12,[r12,#0x0]
+020774f8  cmp r12,#0x0
+020774fc  bne 0x020774d8
+02077500  bx lr

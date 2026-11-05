@@ -1,0 +1,15 @@
+0200d0d0  stmdb sp!,{r4,r5,r6,r7,r11,r12,lr}
+0200d0d4  mov r4,#0x1
+0200d0d8  orrs r5,r3,r2
+0200d0dc  bne 0x0200d0e8
+0200d0e0  ldmia sp!,{r4,r5,r6,r7,r11,r12,lr}
+0200d0e4  bx lr
+0200d0e8  orrs r5,r1,r3
+0200d0ec  bne 0x0200cf88
+0200d0f0  mov r1,r2
+0200d0f4  bl 0x0200d340
+0200d0f8  cmp r4,#0x0
+0200d0fc  movne r0,r1
+0200d100  mov r1,#0x0
+0200d104  ldmia sp!,{r4,r5,r6,r7,r11,r12,lr}
+0200d108  bx lr

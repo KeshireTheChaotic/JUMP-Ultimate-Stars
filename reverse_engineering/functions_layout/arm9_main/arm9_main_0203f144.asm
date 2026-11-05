@@ -1,0 +1,17 @@
+0203f144  stmdb sp!,{r4,lr}
+0203f148  mov r4,r0
+0203f14c  bl 0x0203f0dc
+0203f150  ldr r1,[0x203f188]
+0203f154  mvn r0,#0x0
+0203f158  str r1,[r4,#0x0]
+0203f15c  str r0,[r4,#0x50]
+0203f160  str r0,[r4,#0x54]
+0203f164  str r0,[r4,#0x58]
+0203f168  mov r1,#0x0
+0203f16c  str r1,[r4,#0x5c]
+0203f170  str r1,[r4,#0x60]
+0203f174  str r1,[r4,#0x64]
+0203f178  str r1,[r4,#0x68]
+0203f17c  mov r0,r4
+0203f180  str r1,[r4,#0x6c]
+0203f184  ldmia sp!,{r4,pc}

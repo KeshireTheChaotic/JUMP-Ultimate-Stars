@@ -1,0 +1,12 @@
+037f99ec  stmdb sp!,{lr}
+037f99f0  sub sp,sp,#0x4
+037f99f4  bl 0x027e9e08
+037f99f8  ldr r1,[0x37f9a1c]
+037f99fc  ldr r0,[0x37f9a20]
+037f9a00  strh r1,[r0,#0x0]
+037f9a04  mov r1,#0x30
+037f9a08  ldr r0,[0x37f9a24]
+037f9a0c  strh r1,[r0,#0x0]
+037f9a10  add sp,sp,#0x4
+037f9a14  ldmia sp!,{lr}
+037f9a18  bx lr

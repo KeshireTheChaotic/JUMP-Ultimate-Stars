@@ -1,0 +1,9 @@
+03805a10  stmdb sp!,{r4,lr}
+03805a14  mov r4,r0
+03805a18  mov r0,#0x0
+03805a1c  bl 0x03805a34
+03805a20  orr r1,r0,r4
+03805a24  mov r0,#0x0
+03805a28  bl 0x03805ac4
+03805a2c  ldmia sp!,{r4,lr}
+03805a30  bx lr

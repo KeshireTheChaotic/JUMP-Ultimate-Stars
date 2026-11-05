@@ -1,0 +1,25 @@
+020204b0  stmdb sp!,{r4,r5,r6,lr}
+020204b4  ldr r2,[r0,#0x1c]
+020204b8  mov r6,r1
+020204bc  cmp r2,#0x0
+020204c0  bne 0x02020500
+020204c4  ldr r5,[r0,#0x28]
+020204c8  mov r1,#0x0
+020204cc  mov r0,r5
+020204d0  ldr r2,[r0,#0x0]
+020204d4  ldr r2,[r2,#0x2c]
+020204d8  blx r2
+020204dc  mov r4,r0
+020204e0  mov r0,r5
+020204e4  ldr r1,[r0,#0x0]
+020204e8  ldr r1,[r1,#0x28]
+020204ec  blx r1
+020204f0  add r0,r4,r0
+020204f4  add r0,r0,r6, lsl #0x2
+020204f8  ldr r0,[r0,#0xc]
+020204fc  ldmia sp!,{r4,r5,r6,pc}
+02020500  mov r0,r2
+02020504  ldr r2,[r0,#0x0]
+02020508  ldr r2,[r2,#0x30]
+0202050c  blx r2
+02020510  ldmia sp!,{r4,r5,r6,pc}

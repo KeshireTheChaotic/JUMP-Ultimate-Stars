@@ -1,0 +1,11 @@
+0217f694  ldr r2,[r0,#0x0]
+0217f696  str r2,[r1,#0x20]
+0217f698  str r1,[r0,#0x0]
+0217f69a  ldr r2,[r0,#0x4]
+0217f69c  cmp r2,#0x0
+0217f69e  bne 0x0217f6a2
+0217f6a0  str r1,[r0,#0x4]
+0217f6a2  ldr r1,[r0,#0x8]
+0217f6a4  add r1,r1,#0x1
+0217f6a6  str r1,[r0,#0x8]
+0217f6a8  bx lr

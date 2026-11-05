@@ -1,0 +1,15 @@
+0216489c  push {lr}
+0216489e  sub sp,#0x4
+021648a0  mov r0,#0x3
+021648a2  bl 0x02164cb8
+021648a6  ldr r0,[0x021648c0]
+021648a8  blx 0x0205965c
+021648ac  cmp r0,#0x2
+021648ae  beq 0x021648ba
+021648b0  bl 0x02164ca4
+021648b4  mov r0,#0x0
+021648b6  add sp,#0x4
+021648b8  pop {pc}
+021648ba  mov r0,#0x1
+021648bc  add sp,#0x4
+021648be  pop {pc}

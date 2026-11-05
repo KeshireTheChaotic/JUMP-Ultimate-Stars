@@ -1,0 +1,17 @@
+02155bb8  stmdb sp!,{r4,lr}
+02155bbc  mov r4,r0
+02155bc0  mov r0,#0x3
+02155bc4  mov r1,#0x1
+02155bc8  bl 0x02073ebc
+02155bcc  ldr r0,[r4,#0x2c]
+02155bd0  ldr r0,[r0,#0x4]
+02155bd4  blx 0x021b65d8
+02155bd8  blx 0x021b65bc
+02155bdc  ldr r0,[r4,#0x4]
+02155be0  ldr r1,[0x2155bfc]
+02155be4  ldr r0,[r0,#0x4]
+02155be8  bl 0x02028384
+02155bec  ldr r0,[r4,#0x4]
+02155bf0  ldr r0,[r0,#0x4]
+02155bf4  bl 0x02028330
+02155bf8  ldmia sp!,{r4,pc}

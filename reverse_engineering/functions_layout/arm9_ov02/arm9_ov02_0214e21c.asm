@@ -1,0 +1,11 @@
+0214e21c  stmdb sp!,{r4,lr}
+0214e220  mov r4,r0
+0214e224  mov r0,#0x5
+0214e228  mov r1,#0x1
+0214e22c  bl 0x02073ebc
+0214e230  bl 0x0207382c
+0214e234  cmp r0,#0x0
+0214e238  beq 0x0214e230
+0214e23c  mov r0,#0x1
+0214e240  strb r0,[r4,#0x54]
+0214e244  ldmia sp!,{r4,pc}

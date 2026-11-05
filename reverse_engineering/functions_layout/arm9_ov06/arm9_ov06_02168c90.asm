@@ -1,0 +1,15 @@
+02168c90  stmdb sp!,{r4,lr}
+02168c94  mov r4,r0
+02168c98  ldr r0,[r4,#0x0]
+02168c9c  b 0x02168ca8
+02168ca0  bl 0x02168f88
+02168ca4  ldr r0,[r4,#0x0]
+02168ca8  cmp r0,#0x0
+02168cac  bne 0x02168ca0
+02168cb0  ldr r0,[r4,#0x18]
+02168cb4  ldr r1,[r0,#0x0]
+02168cb8  ldr r1,[r1,#0x8]
+02168cbc  blx r1
+02168cc0  mov r0,r4
+02168cc4  bl 0x0201b244
+02168cc8  ldmia sp!,{r4,pc}

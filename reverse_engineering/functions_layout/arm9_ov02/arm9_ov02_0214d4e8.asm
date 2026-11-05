@@ -1,0 +1,15 @@
+0214d4e8  stmdb sp!,{r3,r4,r5,lr}
+0214d4ec  mov r5,r0
+0214d4f0  ldrb r2,[r5,#0x24]
+0214d4f4  mov r4,r1
+0214d4f8  orr r1,r2,r4
+0214d4fc  cmp r2,r1
+0214d500  beq 0x0214d510
+0214d504  ldr r2,[r0,#0x0]
+0214d508  ldr r2,[r2,#0x18]
+0214d50c  blx r2
+0214d510  ldrb r0,[r5,#0x24]
+0214d514  orr r0,r0,r4
+0214d518  orr r0,r0,#0x30
+0214d51c  strb r0,[r5,#0x24]
+0214d520  ldmia sp!,{r3,r4,r5,pc}

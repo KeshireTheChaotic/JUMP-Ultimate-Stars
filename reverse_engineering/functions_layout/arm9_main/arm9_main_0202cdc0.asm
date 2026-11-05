@@ -1,0 +1,16 @@
+0202cdc0  stmdb sp!,{r3,lr}
+0202cdc4  ldr r3,[0x202ce00]
+0202cdc8  ldr r12,[r0,#0x0]
+0202cdcc  ldr lr,[r3,#0x74]
+0202cdd0  ldr r2,[0x202ce04]
+0202cdd4  add lr,lr,#0x1
+0202cdd8  and lr,lr,#0x7
+0202cddc  ldr r12,[r12,#0x20]
+0202cde0  add r2,r2,lr
+0202cde4  str lr,[r3,#0x74]
+0202cde8  blx r12
+0202cdec  ldr r0,[0x202ce00]
+0202cdf0  ldr r1,[0x202ce04]
+0202cdf4  ldr r0,[r0,#0x74]
+0202cdf8  add r0,r1,r0
+0202cdfc  ldmia sp!,{r3,pc}

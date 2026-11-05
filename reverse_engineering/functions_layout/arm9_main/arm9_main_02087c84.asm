@@ -1,0 +1,11 @@
+02087c84  stmdb sp!,{r4,lr}
+02087c88  bl 0x020329ec
+02087c8c  mov r4,r0
+02087c90  ldr r1,[r4,#0x18]
+02087c94  cmp r1,#0x0
+02087c98  bne 0x02087ca8
+02087c9c  ldr r1,[r0,#0x0]
+02087ca0  ldr r1,[r1,#0x14]
+02087ca4  blx r1
+02087ca8  ldr r0,[r4,#0x18]
+02087cac  ldmia sp!,{r4,pc}

@@ -1,0 +1,1 @@
+{"module":"arm9_ov10","address":"02177360","name":"FUN_02177360","thumb":true,"body_bytes":98,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["02004b18","02054b44","02177480","021822c4"],"unresolved_call_targets":[],"status":"decompiled","asm_file":"arm9_ov10_02177360.asm","c_file":"arm9_ov10_02177360.c"}

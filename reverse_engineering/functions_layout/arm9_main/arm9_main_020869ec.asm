@@ -1,0 +1,13 @@
+020869ec  push {r4,lr}
+020869ee  add r4,r0,#0x0
+020869f0  mov r1,#0x20
+020869f2  ldrsb r1,[r4,r1]
+020869f4  cmp r1,#0x0
+020869f6  bne 0x02086a08
+020869f8  mov r1,#0x1
+020869fa  bl 0x02086998
+020869fe  ldr r0,[r4,#0x4]
+02086a00  ldr r1,[0x02086a0c]
+02086a02  ldr r0,[r0,#0x4]
+02086a04  blx 0x02028384
+02086a08  pop {r4,pc}

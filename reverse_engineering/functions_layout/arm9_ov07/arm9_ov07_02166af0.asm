@@ -1,0 +1,14 @@
+02166af0  push {r3,lr}
+02166af2  ldr r0,[0x02166b10]
+02166af4  ldr r1,[r0,#0x0]
+02166af6  ldr r0,[r1,#0x10]
+02166af8  cmp r0,#0x0
+02166afa  beq 0x02166b0c
+02166afc  mov r0,#0x0
+02166afe  str r0,[r1,#0x48]
+02166b00  bl 0x02176cf8
+02166b04  ldr r0,[0x02166b10]
+02166b06  mov r1,#0x0
+02166b08  ldr r0,[r0,#0x0]
+02166b0a  str r1,[r0,#0x10]
+02166b0c  pop {r3,pc}

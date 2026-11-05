@@ -1,0 +1,12 @@
+0214db7c  ldrb r0,[r0,#0xdcc]
+0214db80  tst r0,#0x1
+0214db84  movne r0,r6
+0214db88  moveq r0,#0x0
+0214db8c  cmp r0,#0x0
+0214db90  moveq r4,#0x1
+0214db94  mvn r0,#0x0
+0214db98  mov r7,#0x0
+0214db9c  str r0,[sp,#0x8]
+0214dba0  b 0x0214dbdc
+0214dba4  ldr r0,[sp,#0x4]
+0214dba8  mov r1,#0x14

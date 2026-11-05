@@ -1,0 +1,14 @@
+02159500  stmdb sp!,{r3,r4,r5,lr}
+02159504  mov r2,#0x1d
+02159508  mov r5,r0
+0215950c  mov r4,r1
+02159510  bl 0x0215986c
+02159514  cmp r0,#0x0
+02159518  movne r0,#0x0
+0215951c  ldmiane sp!,{r3,r4,r5,pc}
+02159520  ldr r1,[r4,#0x4]
+02159524  ldr r0,[r5,#0x1b4]
+02159528  ldrsh r1,[r1,#0x4]
+0215952c  bl 0x020783cc
+02159530  mov r0,#0x1
+02159534  ldmia sp!,{r3,r4,r5,pc}

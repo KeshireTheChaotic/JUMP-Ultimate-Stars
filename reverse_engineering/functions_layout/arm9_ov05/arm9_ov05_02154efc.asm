@@ -1,0 +1,29 @@
+02154efc  add r1,r0,#0x400
+02154f00  ldr r12,[r0,#0x454]
+02154f04  ldrsb r3,[r1,#0x5a]
+02154f08  ldr r2,[0x2154f70]
+02154f0c  add r12,r12,r12, lsl #0x2
+02154f10  add r2,r2,r12
+02154f14  ldrsb r3,[r3,r2]
+02154f18  ldr r2,[0x2154f74]
+02154f1c  strb r3,[r0,#0x459]
+02154f20  ldrsb r3,[r1,#0x5a]
+02154f24  add r3,r3,#0x1
+02154f28  strb r3,[r0,#0x45a]
+02154f2c  ldr r3,[r0,#0x454]
+02154f30  ldrsb r12,[r1,#0x5a]
+02154f34  ldrsb r1,[r2,r3]
+02154f38  cmp r12,r1
+02154f3c  movgt r1,#0x0
+02154f40  strbgt r1,[r0,#0x45a]
+02154f44  add r1,r0,#0x400
+02154f48  ldr r3,[r0,#0x454]
+02154f4c  ldrsb r2,[r1,#0x5a]
+02154f50  ldr r1,[0x2154f70]
+02154f54  add r3,r3,r3, lsl #0x2
+02154f58  add r1,r1,r3
+02154f5c  ldrsb r2,[r2,r1]
+02154f60  mov r1,#0x1
+02154f64  strb r2,[r0,#0x458]
+02154f68  strb r1,[r0,#0x46a]
+02154f6c  bx lr

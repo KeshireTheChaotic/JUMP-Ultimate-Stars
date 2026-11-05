@@ -1,0 +1,14 @@
+0214e1c4  stmdb sp!,{r4,lr}
+0214e1c8  mov r4,r0
+0214e1cc  ldrb r0,[r4,#0x57]
+0214e1d0  mov r1,#0x1
+0214e1d4  cmp r0,#0x0
+0214e1d8  bne 0x0214e1e8
+0214e1dc  mov r0,#0x7
+0214e1e0  bl 0x02073ebc
+0214e1e4  b 0x0214e1f0
+0214e1e8  mov r0,#0x3
+0214e1ec  bl 0x02073ebc
+0214e1f0  mov r0,#0x1
+0214e1f4  strb r0,[r4,#0x54]
+0214e1f8  ldmia sp!,{r4,pc}

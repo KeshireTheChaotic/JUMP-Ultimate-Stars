@@ -1,0 +1,10 @@
+02160198  stmdb sp!,{r4,lr}
+0216019c  ldr r0,[r0,#0x4]
+021601a0  ldr r4,[r0,#0x10]
+021601a4  ldr r0,[r4,#0xcc]
+021601a8  bl 0x021574e8
+021601ac  cmp r0,#0x0
+021601b0  ldmiaeq sp!,{r4,pc}
+021601b4  mov r0,r4
+021601b8  bl 0x0215fdcc
+021601bc  ldmia sp!,{r4,pc}

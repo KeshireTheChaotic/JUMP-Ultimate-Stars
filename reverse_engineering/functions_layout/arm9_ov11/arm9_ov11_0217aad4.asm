@@ -1,0 +1,19 @@
+0217aad4  stmdb sp!,{r4,r5,r6,r7,r8,lr}
+0217aad8  mov r4,r0
+0217aadc  mov r7,#0x0
+0217aae0  ldr r6,[0x217ab24]
+0217aae4  str r7,[r4,#0x4c]
+0217aae8  mov r5,#0x1
+0217aaec  ldrsb r8,[r6,r7]
+0217aaf0  add r0,r6,r7
+0217aaf4  cmp r8,#0x0
+0217aaf8  ldmialt sp!,{r4,r5,r6,r7,r8,pc}
+0217aafc  ldrsb r1,[r0,#0x16]
+0217ab00  ldr r0,[r4,#0x2c]
+0217ab04  bl 0x0217ab28
+0217ab08  cmp r0,#0x0
+0217ab0c  ldrne r0,[r4,#0x4c]
+0217ab10  add r7,r7,#0x1
+0217ab14  orrne r0,r0,r5, lsl r8
+0217ab18  strne r0,[r4,#0x4c]
+0217ab1c  b 0x0217aaec

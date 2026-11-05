@@ -1,0 +1,11 @@
+020443b0  stmdb sp!,{r3,lr}
+020443b4  ldr r1,[r0,#0x44]
+020443b8  cmp r1,r0
+020443bc  bne 0x020443c8
+020443c0  bl 0x02035b74
+020443c4  ldmia sp!,{r3,pc}
+020443c8  mov r0,r1
+020443cc  ldr r1,[r0,#0x0]
+020443d0  ldr r1,[r1,#0xc]
+020443d4  blx r1
+020443d8  ldmia sp!,{r3,pc}

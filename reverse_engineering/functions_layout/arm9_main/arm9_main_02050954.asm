@@ -1,0 +1,7 @@
+02050954  stmdb sp!,{lr}
+02050958  sub sp,sp,#0x4
+0205095c  bl 0x02050864
+02050960  bl 0x020508a0
+02050964  add sp,sp,#0x4
+02050968  ldmia sp!,{lr}
+0205096c  bx lr

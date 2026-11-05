@@ -1,0 +1,12 @@
+0207e634  stmdb sp!,{lr}
+0207e638  sub sp,sp,#0xc
+0207e63c  ldr r12,[sp,#0x10]
+0207e640  ldr lr,[sp,#0x14]
+0207e644  str r12,[sp,#0x0]
+0207e648  ldrb r12,[sp,#0x18]
+0207e64c  str lr,[sp,#0x4]
+0207e650  str r12,[sp,#0x8]
+0207e654  ldr r0,[r0,#0xf8]
+0207e658  bl 0x0216220c
+0207e65c  add sp,sp,#0xc
+0207e660  ldmia sp!,{pc}

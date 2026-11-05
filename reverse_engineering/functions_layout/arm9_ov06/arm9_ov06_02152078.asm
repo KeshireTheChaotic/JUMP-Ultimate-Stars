@@ -1,0 +1,24 @@
+02152078  ldr r1,[0x21520d8]
+0215207c  ldr r3,[r1,#0x0]
+02152080  ldrb r2,[r3,#0x2e]
+02152084  tst r2,#0x1
+02152088  movne r0,#0x1
+0215208c  bxne lr
+02152090  add r2,r3,r0, lsl #0x2
+02152094  ldr r2,[r2,#0xc]
+02152098  cmp r2,#0x0
+0215209c  moveq r0,#0x0
+021520a0  bxeq lr
+021520a4  str r2,[r3,#0x1c]
+021520a8  ldr r2,[r1,#0x0]
+021520ac  strb r0,[r2,#0x30]
+021520b0  ldr r3,[r1,#0x0]
+021520b4  mov r0,#0x1
+021520b8  ldr r2,[r3,#0x1c]
+021520bc  ldr r2,[r2,#0x0]
+021520c0  str r2,[r3,#0x20]
+021520c4  ldr r2,[r1,#0x0]
+021520c8  ldr r1,[r2,#0x1c]
+021520cc  ldr r1,[r1,#0x4]
+021520d0  str r1,[r2,#0x24]
+021520d4  bx lr

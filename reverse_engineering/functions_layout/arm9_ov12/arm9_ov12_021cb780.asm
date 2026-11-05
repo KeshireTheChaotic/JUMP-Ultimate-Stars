@@ -1,0 +1,11 @@
+021cb780  ldr r3,[r1,#0x0]
+021cb782  ldr r2,[r1,#0x4]
+021cb784  str r3,[r0,#0x0]
+021cb786  str r2,[r0,#0x4]
+021cb788  ldr r2,[r1,#0x8]
+021cb78a  str r2,[r0,#0x8]
+021cb78c  ldrh r2,[r1,#0xc]
+021cb78e  strh r2,[r0,#0xc]
+021cb790  ldrb r1,[r1,#0xe]
+021cb792  strb r1,[r0,#0xe]
+021cb794  bx lr

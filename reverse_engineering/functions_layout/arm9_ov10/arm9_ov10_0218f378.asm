@@ -1,0 +1,14 @@
+0218f378  ldr r0,[0x0218f394]
+0218f37a  ldr r2,[r0,#0x4]
+0218f37c  add r0,r2,#0x0
+0218f37e  add r0,#0xa4
+0218f380  ldr r1,[r0,#0x0]
+0218f382  cmp r1,#0x0
+0218f384  beq 0x0218f392
+0218f386  str r2,[r1,#0x0]
+0218f388  mov r0,#0x0
+0218f38a  strb r0,[r1,#0x8]
+0218f38c  str r0,[r1,#0x44]
+0218f38e  str r0,[r1,#0x60]
+0218f390  str r0,[r1,#0x38]
+0218f392  bx lr

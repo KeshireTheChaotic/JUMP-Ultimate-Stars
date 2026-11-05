@@ -1,0 +1,11 @@
+038059e4  stmdb sp!,{r4,lr}
+038059e8  mov r4,r0
+038059ec  mov r0,#0x0
+038059f0  bl 0x03805a34
+038059f4  mvn r1,r4
+038059f8  and r0,r0,r1
+038059fc  and r1,r0,#0xff
+03805a00  mov r0,#0x0
+03805a04  bl 0x03805ac4
+03805a08  ldmia sp!,{r4,lr}
+03805a0c  bx lr

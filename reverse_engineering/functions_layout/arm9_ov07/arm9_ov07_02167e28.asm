@@ -1,0 +1,31 @@
+02167e28  stmdb sp!,{r3,r4,r5,r6,r7,lr}
+02167e2c  mov r5,r0
+02167e30  mov r4,#0x0
+02167e34  strb r4,[r5,#0x1]
+02167e38  ldrsb r1,[r5,#0x3]
+02167e3c  cmp r1,#0x0
+02167e40  beq 0x02167e98
+02167e44  mov r6,#0x1
+02167e48  mov r7,r6
+02167e4c  mov r0,r4
+02167e50  blx 0x02176654
+02167e54  cmp r0,#0x0
+02167e58  beq 0x02167e78
+02167e5c  mov r0,r4
+02167e60  bl 0x02167d54
+02167e64  cmp r0,#0x0
+02167e68  ldrsbeq r0,[r5,#0x1]
+02167e6c  orreq r0,r0,r7, lsl r4
+02167e70  strbeq r0,[r5,#0x1]
+02167e74  b 0x02167e84
+02167e78  ldrsb r0,[r5,#0x1]
+02167e7c  orr r0,r0,r6, lsl r4
+02167e80  strb r0,[r5,#0x1]
+02167e84  add r0,r4,#0x1
+02167e88  and r4,r0,#0xff
+02167e8c  cmp r4,#0x4
+02167e90  bcc 0x02167e4c
+02167e94  ldmia sp!,{r3,r4,r5,r6,r7,pc}
+02167e98  strb r4,[r5,#0x2]
+02167e9c  bl 0x02167d6c
+02167ea0  ldmia sp!,{r3,r4,r5,r6,r7,pc}

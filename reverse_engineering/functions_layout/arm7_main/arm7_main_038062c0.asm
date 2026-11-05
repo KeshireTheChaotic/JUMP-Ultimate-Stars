@@ -1,0 +1,13 @@
+038062c0  stmdb sp!,{lr}
+038062c4  sub sp,sp,#0x4
+038062c8  bl 0x03806158
+038062cc  ldr r1,[0x38062f4]
+038062d0  ldr r0,[r1,#0x0]
+038062d4  orr r0,r0,#0x40
+038062d8  str r0,[r1,#0x0]
+038062dc  mov r1,#0x40
+038062e0  ldr r0,[0x38062f8]
+038062e4  str r1,[r0,#0x0]
+038062e8  add sp,sp,#0x4
+038062ec  ldmia sp!,{lr}
+038062f0  bx lr

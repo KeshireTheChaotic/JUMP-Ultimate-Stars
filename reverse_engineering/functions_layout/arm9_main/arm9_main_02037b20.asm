@@ -1,0 +1,13 @@
+02037b20  stmdb sp!,{r3,r4,r5,lr}
+02037b24  mov r5,r1
+02037b28  ldr r0,[r5,#0x64]
+02037b2c  mov r4,r2
+02037b30  ldr r0,[r0,#0x34]
+02037b34  bl 0x020250c0
+02037b38  mov r0,r5
+02037b3c  ldr r2,[r0,#0x0]
+02037b40  mov r1,r4
+02037b44  ldr r2,[r2,#0x130]
+02037b48  blx r2
+02037b4c  bl 0x0202511c
+02037b50  ldmia sp!,{r3,r4,r5,pc}

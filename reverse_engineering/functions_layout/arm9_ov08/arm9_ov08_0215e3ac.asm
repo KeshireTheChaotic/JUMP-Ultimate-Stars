@@ -1,0 +1,9 @@
+0215e3ac  push {lr}
+0215e3ae  sub sp,#0x4
+0215e3b0  bl 0x02163600
+0215e3b4  cmp r0,#0x0
+0215e3b6  bne 0x0215e3be
+0215e3b8  ldr r0,[0x0215e3c4]
+0215e3ba  bl 0x02157088
+0215e3be  add sp,#0x4
+0215e3c0  pop {pc}

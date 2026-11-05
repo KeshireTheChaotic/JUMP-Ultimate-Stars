@@ -1,0 +1,10 @@
+0380709c  stmdb sp!,{lr}
+038070a0  sub sp,sp,#0x4
+038070a4  mov r0,#0x0
+038070a8  bl 0x038072a0
+038070ac  bl 0x037fedb8
+038070b0  bl 0x038060cc
+038070b4  bl 0x037fe538
+038070b8  add sp,sp,#0x4
+038070bc  ldmia sp!,{lr}
+038070c0  bx lr

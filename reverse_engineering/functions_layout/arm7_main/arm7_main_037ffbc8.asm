@@ -1,0 +1,9 @@
+037ffbc8  mov r2,#0x0
+037ffbcc  strb r2,[r0,#0x0]
+037ffbd0  strb r2,[r0,#0x2]
+037ffbd4  mov r1,#0x1
+037ffbd8  strb r1,[r0,#0x3]
+037ffbdc  mov r1,#0x10
+037ffbe0  strb r1,[r0,#0x1]
+037ffbe4  strh r2,[r0,#0x4]
+037ffbe8  bx lr

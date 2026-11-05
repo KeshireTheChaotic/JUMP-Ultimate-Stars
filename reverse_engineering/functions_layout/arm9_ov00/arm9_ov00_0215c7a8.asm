@@ -1,0 +1,12 @@
+0215c7a8  stmdb sp!,{r4,lr}
+0215c7ac  ldr r0,[r0,#0x4]
+0215c7b0  ldr r4,[r0,#0x10]
+0215c7b4  add r0,r4,#0x44
+0215c7b8  bl 0x0215c7d8
+0215c7bc  add r0,r4,#0xfc
+0215c7c0  bl 0x0215c7d8
+0215c7c4  add r0,r4,#0xa0
+0215c7c8  bl 0x0215c7d8
+0215c7cc  add r0,r4,#0x158
+0215c7d0  bl 0x0215c7d8
+0215c7d4  ldmia sp!,{r4,pc}

@@ -1,0 +1,10 @@
+0219adcc  stmdb sp!,{r4,lr}
+0219add0  mov r4,r1
+0219add4  blx 0x020696f8
+0219add8  stmia r4,{r0,r1}
+0219addc  mov r0,#0x0
+0219ade0  ldr r2,[r4,#0x0]
+0219ade4  cmp r1,r0
+0219ade8  cmpeq r2,r0
+0219adec  movne r0,#0x1
+0219adf0  ldmia sp!,{r4,pc}

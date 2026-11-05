@@ -1,0 +1,10 @@
+0214eb4c  stmdb sp!,{r3,r4,r5,lr}
+0214eb50  mov r5,r0
+0214eb54  mov r4,r1
+0214eb58  blx 0x021b65bc
+0214eb5c  str r4,[r5,#0x24]
+0214eb60  ldr r0,[r5,#0x30]
+0214eb64  ldr r1,[0x214eb74]
+0214eb68  ldr r0,[r0,#0x4]
+0214eb6c  bl 0x02028384
+0214eb70  ldmia sp!,{r3,r4,r5,pc}

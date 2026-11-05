@@ -1,0 +1,13 @@
+0217fc4c  push {r4,lr}
+0217fc4e  add r4,r0,#0x0
+0217fc50  add r0,#0x4c
+0217fc52  bl 0x021818e8
+0217fc56  add r1,r0,#0x0
+0217fc58  mov r0,#0x0
+0217fc5a  mvn r0,r0
+0217fc5c  cmp r1,r0
+0217fc5e  beq 0x0217fc68
+0217fc60  add r4,#0x4c
+0217fc62  add r0,r4,#0x0
+0217fc64  bl 0x02181830
+0217fc68  pop {r4,pc}

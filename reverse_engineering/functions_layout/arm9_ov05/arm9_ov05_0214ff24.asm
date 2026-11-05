@@ -1,0 +1,11 @@
+0214ff24  stmdb sp!,{r4,lr}
+0214ff28  ldr r0,[r0,#0x4]
+0214ff2c  ldr r4,[r0,#0x10]
+0214ff30  bl 0x02073840
+0214ff34  cmp r0,#0x0
+0214ff38  ldmiaeq sp!,{r4,pc}
+0214ff3c  ldr r0,[r4,#0x38]
+0214ff40  ldr r1,[0x214ff50]
+0214ff44  ldr r0,[r0,#0x4]
+0214ff48  bl 0x02028384
+0214ff4c  ldmia sp!,{r4,pc}

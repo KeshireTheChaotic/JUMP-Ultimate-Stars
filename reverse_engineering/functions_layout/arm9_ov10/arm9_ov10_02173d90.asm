@@ -1,0 +1,15 @@
+02173d90  push {r4,lr}
+02173d92  add r4,r1,#0x0
+02173d94  ldr r1,[0x02173db0]
+02173d96  ldr r3,[r0,r1]
+02173d98  ldr r1,[r4,#0x0]
+02173d9a  cmp r1,#0x0
+02173d9c  beq 0x02173da4
+02173d9e  ldr r0,[0x02173db4]
+02173da0  mov r2,#0x0
+02173da2  blx r3
+02173da4  add r0,r4,#0x0
+02173da6  mov r1,#0x0
+02173da8  mov r2,#0x10
+02173daa  blx 0x020517fc
+02173dae  pop {r4,pc}

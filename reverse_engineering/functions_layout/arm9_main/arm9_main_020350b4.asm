@@ -1,0 +1,41 @@
+020350b4  stmdb sp!,{r4,r5,r6,r7,r8,lr}
+020350b8  sub sp,sp,#0x8
+020350bc  mov r6,r0
+020350c0  ldrb r0,[r6,#0xc]
+020350c4  mov r5,r1
+020350c8  mov r4,r2
+020350cc  cmp r0,#0x0
+020350d0  beq 0x020350f4
+020350d4  ldr r7,[r6,#0x8]
+020350d8  mov r0,r7
+020350dc  bl 0x0201a9ec
+020350e0  cmp r0,#0x0
+020350e4  bne 0x020350f4
+020350e8  mov r0,r7
+020350ec  mov r1,#0x1
+020350f0  bl 0x0201a958
+020350f4  mov r8,r5, lsl #0x3
+020350f8  mov r1,#0x1
+020350fc  mov r0,r8
+02035100  strb r1,[r6,#0xc]
+02035104  bl 0x0201a228
+02035108  movs r7,r0
+0203510c  beq 0x02035130
+02035110  ldr r2,[0x2035158]
+02035114  mov r1,r5
+02035118  str r2,[sp,#0x0]
+0203511c  mov r3,#0x0
+02035120  mov r2,#0x8
+02035124  str r3,[sp,#0x4]
+02035128  bl 0x0200ef34
+0203512c  mov r7,r0
+02035130  mov r0,r4
+02035134  mov r1,r7
+02035138  mov r2,r8
+0203513c  bl 0x02051760
+02035140  mov r0,r5, lsl #0x10
+02035144  str r7,[r6,#0x8]
+02035148  mov r0,r0, lsr #0x10
+0203514c  str r0,[r6,#0x4]
+02035150  add sp,sp,#0x8
+02035154  ldmia sp!,{r4,r5,r6,r7,r8,pc}

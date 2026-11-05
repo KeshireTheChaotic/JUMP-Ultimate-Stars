@@ -1,0 +1,10 @@
+027ec200  stmdb sp!,{lr}
+027ec204  sub sp,sp,#0x4
+027ec208  bl 0x027ec1ac
+027ec20c  ldrh r0,[r0,#0x10]
+027ec210  ands r0,r0,#0x2
+027ec214  movne r0,#0x14
+027ec218  moveq r0,#0xa
+027ec21c  add sp,sp,#0x4
+027ec220  ldmia sp!,{lr}
+027ec224  bx lr

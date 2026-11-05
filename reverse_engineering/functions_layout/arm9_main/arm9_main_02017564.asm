@@ -1,0 +1,11 @@
+02017564  stmdb sp!,{r3,r4,r5,r6,r7,lr}
+02017568  mov r7,r0
+0201756c  mov r6,r1
+02017570  mov r1,r3
+02017574  mov r5,r2
+02017578  ldr r4,[r7,#0xc]
+0201757c  bl 0x0201731c
+02017580  ldrh r1,[r7,#0x8]
+02017584  mla r1,r5,r1,r6
+02017588  strb r0,[r4,r1]
+0201758c  ldmia sp!,{r3,r4,r5,r6,r7,pc}

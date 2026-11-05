@@ -1,0 +1,16 @@
+0215a834  stmdb sp!,{r4,r5,r6,lr}
+0215a838  mov r5,r1
+0215a83c  mov r6,r0
+0215a840  ldr r1,[0x215a874]
+0215a844  ldr r2,[0x215a878]
+0215a848  mov r0,#0x8
+0215a84c  mov r3,#0x21
+0215a850  bl 0x0201a21c
+0215a854  mov r1,#0x0
+0215a858  mov r2,#0x8
+0215a85c  mov r4,r0
+0215a860  bl 0x020517fc
+0215a864  strb r6,[r4,#0x4]
+0215a868  mov r0,r4
+0215a86c  strb r5,[r4,#0x5]
+0215a870  ldmia sp!,{r4,r5,r6,pc}

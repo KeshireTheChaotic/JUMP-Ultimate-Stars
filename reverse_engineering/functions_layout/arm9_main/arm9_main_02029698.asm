@@ -1,0 +1,13 @@
+02029698  stmdb sp!,{r4,r5,r6,lr}
+0202969c  mov r0,#0x20
+020296a0  mov r6,r1
+020296a4  mov r5,r2
+020296a8  mov r4,r3
+020296ac  bl 0x0201a228
+020296b0  cmp r0,#0x0
+020296b4  ldmiaeq sp!,{r4,r5,r6,pc}
+020296b8  mov r1,r6
+020296bc  mov r2,r5
+020296c0  mov r3,r4
+020296c4  bl 0x020299a8
+020296c8  ldmia sp!,{r4,r5,r6,pc}

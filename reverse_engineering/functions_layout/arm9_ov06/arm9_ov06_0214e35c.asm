@@ -1,0 +1,9 @@
+0214e35c  push {r4,lr}
+0214e35e  add r4,r0,#0x0
+0214e360  blx 0x0203b3e4
+0214e364  add r0,#0x88
+0214e366  ldr r0,[r0,#0x0]
+0214e368  mov r1,#0xe
+0214e36a  add r2,r4,#0x0
+0214e36c  blx 0x0214e330
+0214e370  pop {r4,pc}

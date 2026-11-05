@@ -1,0 +1,9 @@
+021c6544  ldrh r2,[r1,#0x0]
+021c6546  strh r2,[r0,#0x0]
+021c6548  ldrh r2,[r1,#0x2]
+021c654a  strh r2,[r0,#0x2]
+021c654c  ldrh r2,[r1,#0x4]
+021c654e  strh r2,[r0,#0x4]
+021c6550  ldrh r1,[r1,#0x6]
+021c6552  strh r1,[r0,#0x6]
+021c6554  bx lr

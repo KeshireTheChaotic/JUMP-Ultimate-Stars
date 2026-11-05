@@ -1,0 +1,106 @@
+021561d0  stmdb sp!,{r3,r4,r5,r6,r7,r8,r9,r10,r11,lr}
+021561d4  sub sp,sp,#0x18
+021561d8  ldr r0,[r0,#0x4]
+021561dc  mov r6,#0x0
+021561e0  ldr r7,[r0,#0x10]
+021561e4  add r11,sp,#0x0
+021561e8  mov r8,r7
+021561ec  ldr r9,[r7,#0x214]
+021561f0  add r5,sp,#0x8
+021561f4  add r4,sp,#0x10
+021561f8  b 0x021562c0
+021561fc  ldr r0,[r8,#0x4]
+02156200  ldr r2,[r8,#0x0]
+02156204  ldr r10,[r0,#0x8]
+02156208  mov r0,r7
+0215620c  mov r1,r8
+02156210  blx r2
+02156214  str r6,[r8,#0x10]
+02156218  ldr r1,[r8,#0x1c]
+0215621c  mov r0,r10
+02156220  mov r1,r1, asr #0x3
+02156224  mov r1,r1, lsl #0xc
+02156228  str r1,[sp,#0x4]
+0215622c  ldr r2,[r8,#0x18]
+02156230  mov r1,r11
+02156234  mov r2,r2, asr #0x3
+02156238  mov r2,r2, lsl #0xc
+0215623c  str r2,[sp,#0x0]
+02156240  add r2,sp,#0x4
+02156244  bl 0x0214f418
+02156248  ldr r1,[r7,#0x12c]
+0215624c  add r0,sp,#0xc
+02156250  bl 0x0214e27c
+02156254  mov r0,r5
+02156258  mov r1,r10
+0215625c  bl 0x0214e27c
+02156260  ldr r2,[r5,#0x0]
+02156264  ldr r1,[sp,#0xc]
+02156268  add r0,sp,#0x14
+0215626c  add r1,r2,r1
+02156270  sub r2,r1,#0x10000
+02156274  mov r1,r2, asr #0xb
+02156278  add r1,r2,r1, lsr #0x14
+0215627c  mov r1,r1, asr #0xc
+02156280  strh r1,[r8,#0x8]
+02156284  ldr r1,[r7,#0x12c]
+02156288  bl 0x0214e290
+0215628c  mov r1,r10
+02156290  mov r0,r4
+02156294  bl 0x0214e290
+02156298  ldr r1,[r4,#0x0]
+0215629c  ldr r0,[sp,#0x14]
+021562a0  sub r9,r9,#0x1
+021562a4  add r0,r1,r0
+021562a8  sub r1,r0,#0x30000
+021562ac  mov r0,r1, asr #0xb
+021562b0  add r0,r1,r0, lsr #0x14
+021562b4  mov r0,r0, asr #0xc
+021562b8  strh r0,[r8,#0xa]
+021562bc  add r8,r8,#0x48
+021562c0  cmp r9,#0x0
+021562c4  bne 0x021561fc
+021562c8  mov r2,r7
+021562cc  ldr r1,[r7,#0x214]
+021562d0  mov r4,#0x0
+021562d4  b 0x02156330
+021562d8  ldrb r0,[r2,#0x32]
+021562dc  cmp r0,#0x0
+021562e0  beq 0x02156328
+021562e4  add r0,r7,#0x218
+021562e8  ldrb r3,[r0,r4]
+021562ec  mov r2,#0x0
+021562f0  strb r2,[r0,r4]
+021562f4  b 0x02156318
+021562f8  cmp r4,r2
+021562fc  beq 0x02156314
+02156300  add r1,r7,r2
+02156304  ldrb r0,[r1,#0x218]
+02156308  cmp r3,r0
+0215630c  addgt r0,r0,#0x1
+02156310  strbgt r0,[r1,#0x218]
+02156314  add r2,r2,#0x1
+02156318  ldr r0,[r7,#0x214]
+0215631c  cmp r2,r0
+02156320  blt 0x021562f8
+02156324  b 0x02156338
+02156328  add r4,r4,#0x1
+0215632c  add r2,r2,#0x48
+02156330  cmp r4,r1
+02156334  blt 0x021562d8
+02156338  mov r5,#0x0
+0215633c  mov r6,r7
+02156340  mov r4,r5
+02156344  b 0x02156364
+02156348  strb r4,[r6,#0x32]
+0215634c  add r0,r7,r5
+02156350  ldrb r1,[r0,#0x218]
+02156354  mov r0,r6
+02156358  bl 0x02156960
+0215635c  add r5,r5,#0x1
+02156360  add r6,r6,#0x48
+02156364  ldr r0,[r7,#0x214]
+02156368  cmp r5,r0
+0215636c  blt 0x02156348
+02156370  add sp,sp,#0x18
+02156374  ldmia sp!,{r3,r4,r5,r6,r7,r8,r9,r10,r11,pc}

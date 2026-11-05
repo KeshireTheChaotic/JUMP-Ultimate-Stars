@@ -1,0 +1,15 @@
+02016174  stmdb sp!,{r4,lr}
+02016178  mov r4,r0
+0201617c  ldr r0,[r4,#0x4]
+02016180  ldr r0,[r0,#0x34]
+02016184  bl 0x020161b0
+02016188  ldr r0,[r0,#0x4]
+0201618c  ldr r0,[r0,#0x224]
+02016190  cmp r0,#0x0
+02016194  ldr r0,[r4,#0x4]
+02016198  ldrhne r0,[r0,#0x4]
+0201619c  ldmiane sp!,{r4,pc}
+020161a0  ldr r1,[r0,#0x0]
+020161a4  ldr r1,[r1,#0xc]
+020161a8  blx r1
+020161ac  ldmia sp!,{r4,pc}

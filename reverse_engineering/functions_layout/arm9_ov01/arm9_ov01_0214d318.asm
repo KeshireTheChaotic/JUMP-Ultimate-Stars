@@ -1,0 +1,14 @@
+0214d318  stmdb sp!,{r4,lr}
+0214d31c  mov r4,r0
+0214d320  mov r0,#0x3
+0214d324  mov r1,#0x1
+0214d328  bl 0x02073ebc
+0214d32c  ldr r0,[r4,#0x4]
+0214d330  ldr r1,[0x214d350]
+0214d334  ldr r0,[r0,#0x4]
+0214d338  bl 0x02028384
+0214d33c  ldr r0,[r4,#0x4]
+0214d340  ldr r0,[r0,#0x4]
+0214d344  bl 0x02028330
+0214d348  blx 0x021b65bc
+0214d34c  ldmia sp!,{r4,pc}

@@ -1,0 +1,24 @@
+021539b8  stmdb sp!,{r3,r4,r5,lr}
+021539bc  mov r5,r0
+021539c0  mov r4,#0x0
+021539c4  add r0,r5,r4, lsl #0x2
+021539c8  ldr r0,[r0,#0x8]
+021539cc  cmp r0,#0x0
+021539d0  beq 0x021539e0
+021539d4  ldr r1,[r0,#0x0]
+021539d8  ldr r1,[r1,#0x8]
+021539dc  blx r1
+021539e0  add r4,r4,#0x1
+021539e4  cmp r4,#0x5
+021539e8  blt 0x021539c4
+021539ec  ldr r0,[r5,#0x4]
+021539f0  ldr r1,[r0,#0x0]
+021539f4  ldr r1,[r1,#0xc]
+021539f8  blx r1
+021539fc  ldr r0,[r5,#0x0]
+02153a00  ldr r1,[r0,#0x0]
+02153a04  ldr r1,[r1,#0x8]
+02153a08  blx r1
+02153a0c  mov r0,r5
+02153a10  bl 0x0201b244
+02153a14  ldmia sp!,{r3,r4,r5,pc}

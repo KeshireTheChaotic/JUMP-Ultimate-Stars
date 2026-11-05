@@ -1,0 +1,11 @@
+0215b53c  add r0,r0,#0x100
+0215b540  ldrsh r1,[r0,#0x10]
+0215b544  sub r1,r1,#0x1
+0215b548  strh r1,[r0,#0x10]
+0215b54c  ldrsh r1,[r0,#0x10]
+0215b550  cmp r1,#0x0
+0215b554  movlt r1,#0x0
+0215b558  strhlt r1,[r0,#0x10]
+0215b55c  movlt r0,#0x1
+0215b560  movge r0,#0x0
+0215b564  bx lr

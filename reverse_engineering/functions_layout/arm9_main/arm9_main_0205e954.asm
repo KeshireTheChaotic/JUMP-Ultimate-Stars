@@ -1,0 +1,12 @@
+0205e954  ldr r3,[r0,#0x0]
+0205e958  mov r2,#0x0
+0205e95c  strh r1,[r3,#0x0]
+0205e960  strh r2,[r3,#0x2]
+0205e964  ldr r1,[r0,#0x4]
+0205e968  add r0,r3,#0x10
+0205e96c  sub r0,r1,r0
+0205e970  str r0,[r3,#0x4]
+0205e974  str r2,[r3,#0x8]
+0205e978  mov r0,r3
+0205e97c  str r2,[r3,#0xc]
+0205e980  bx lr

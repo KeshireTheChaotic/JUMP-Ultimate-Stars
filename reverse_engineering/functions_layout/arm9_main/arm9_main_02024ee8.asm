@@ -1,0 +1,9 @@
+02024ee8  stmdb sp!,{r3,lr}
+02024eec  ldr r0,[r1,#0x64]
+02024ef0  ldr r1,[r2,#0x0]
+02024ef4  ldr r3,[r0,#0x0]
+02024ef8  ldr r1,[r1,#0x4]
+02024efc  ldr r3,[r3,#0x50]
+02024f00  mov r2,#0x0
+02024f04  blx r3
+02024f08  ldmia sp!,{r3,pc}

@@ -1,0 +1,37 @@
+021a2c68  stmdb sp!,{r4,r5,r6,lr}
+021a2c6c  mov r6,r0
+021a2c70  bl 0x021a2f1c
+021a2c74  ldr r0,[r6,#0x28]
+021a2c78  cmp r0,#0x0
+021a2c7c  bne 0x021a2c8c
+021a2c80  mov r0,r6
+021a2c84  bl 0x021a3024
+021a2c88  ldmia sp!,{r4,r5,r6,pc}
+021a2c8c  mov r5,#0x0
+021a2c90  mov r4,#0x1
+021a2c94  bl 0x0219b614
+021a2c98  cmp r5,r0
+021a2c9c  beq 0x021a2cec
+021a2ca0  and r0,r5,#0xff
+021a2ca4  blx 0x02176654
+021a2ca8  cmp r0,#0x0
+021a2cac  beq 0x021a2cec
+021a2cb0  ldrb r0,[r6,#0x32]
+021a2cb4  tst r0,r4, lsl r5
+021a2cb8  bne 0x021a2cec
+021a2cbc  and r0,r5,#0xff
+021a2cc0  blx 0x0217ef04
+021a2cc4  cmp r0,#0x0
+021a2cc8  beq 0x021a2cec
+021a2ccc  ldr r1,[r6,#0x28]
+021a2cd0  ldr r2,[r6,#0x2c]
+021a2cd4  and r0,r5,#0xff
+021a2cd8  blx 0x0217ee90
+021a2cdc  cmp r0,#0x0
+021a2ce0  ldrbne r0,[r6,#0x32]
+021a2ce4  orrne r0,r0,r4, lsl r5
+021a2ce8  strbne r0,[r6,#0x32]
+021a2cec  add r5,r5,#0x1
+021a2cf0  cmp r5,#0x4
+021a2cf4  blt 0x021a2c94
+021a2cf8  ldmia sp!,{r4,r5,r6,pc}

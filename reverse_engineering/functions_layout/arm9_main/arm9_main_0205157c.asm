@@ -1,0 +1,34 @@
+0205157c  stmdb sp!,{r4,r5,r6,r7,r8,lr}
+02051580  movs r4,r3
+02051584  mov r8,r0
+02051588  mov r7,r1
+0205158c  mov r6,r2
+02051590  ldmiaeq sp!,{r4,r5,r6,r7,r8,lr}
+02051594  bxeq lr
+02051598  mov r0,#0x3
+0205159c  mul r1,r8,r0
+020515a0  ldr r0,[0x2051604]
+020515a4  add r1,r1,#0x2
+020515a8  add r5,r0,r1, lsl #0x2
+020515ac  ldr r0,[r5,#0x0]
+020515b0  ands r0,r0,#0x80000000
+020515b4  bne 0x020515ac
+020515b8  bl 0x02055238
+020515bc  ldr r1,[0x2051608]
+020515c0  mov r2,r8, lsl #0x2
+020515c4  mov r3,r4, lsr #0x1
+020515c8  mov r4,r0
+020515cc  add r12,r2,#0x4000000
+020515d0  mov r0,r8
+020515d4  mov r2,r7
+020515d8  add r1,r1,r8, lsl #0x2
+020515dc  orr r3,r3,#0x81000000
+020515e0  str r6,[r12,#0xe0]
+020515e4  bl 0x01ff8bc4
+020515e8  mov r0,r4
+020515ec  bl 0x0205524c
+020515f0  ldr r0,[r5,#0x0]
+020515f4  ands r0,r0,#0x80000000
+020515f8  bne 0x020515f0
+020515fc  ldmia sp!,{r4,r5,r6,r7,r8,lr}
+02051600  bx lr

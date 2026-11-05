@@ -1,0 +1,13 @@
+021593e8  stmdb sp!,{r3,lr}
+021593ec  ldrsh r2,[r1,#0x10]
+021593f0  cmp r2,#0x0
+021593f4  moveq r2,#0x1
+021593f8  strheq r2,[r1,#0x10]
+021593fc  moveq r2,#0x140
+02159400  strheq r2,[r0,#0xbc]
+02159404  ldrh r1,[r1,#0xe]
+02159408  cmp r1,#0x0
+0215940c  bne 0x02159414
+02159410  bl 0x0215bf70
+02159414  mov r0,#0x1
+02159418  ldmia sp!,{r3,pc}

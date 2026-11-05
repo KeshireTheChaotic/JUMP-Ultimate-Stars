@@ -1,0 +1,24 @@
+021807b4  stmdb sp!,{r3,r4,r5,lr}
+021807b8  mov r5,r0
+021807bc  ldrb r0,[r5,#0x107]
+021807c0  mov r4,#0x0
+021807c4  add r0,r5,r0, lsl #0x2
+021807c8  ldr r0,[r0,#0xdc]
+021807cc  cmp r0,#0x8000
+021807d0  movlt r4,#0x1
+021807d4  mov r0,r5
+021807d8  bl 0x0217e438
+021807dc  cmp r0,#0x0
+021807e0  movne r4,#0x1
+021807e4  cmp r4,#0x0
+021807e8  ldreq r0,[r5,#0x14]
+021807ec  moveq r1,#0x4000
+021807f0  ldreq r0,[r0,#0x0]
+021807f4  streq r1,[r0,#0xe8]
+021807f8  ldmiaeq sp!,{r3,r4,r5,pc}
+021807fc  mov r0,#0x0
+02180800  strb r0,[r5,#0xad]
+02180804  strb r0,[r5,#0xac]
+02180808  mov r0,#0x1
+0218080c  strb r0,[r5,#0x105]
+02180810  ldmia sp!,{r3,r4,r5,pc}

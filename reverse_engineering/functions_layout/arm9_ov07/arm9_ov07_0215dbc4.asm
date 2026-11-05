@@ -1,0 +1,9 @@
+0215dbc4  push {r4,lr}
+0215dbc6  ldr r0,[r0,#0x4]
+0215dbc8  ldr r4,[r0,#0x10]
+0215dbca  blx 0x0214dd50
+0215dbce  mov r1,#0x6
+0215dbd0  blx 0x0214dd6c
+0215dbd4  add r0,r4,#0x0
+0215dbd6  blx 0x0215dc48
+0215dbda  pop {r4,pc}

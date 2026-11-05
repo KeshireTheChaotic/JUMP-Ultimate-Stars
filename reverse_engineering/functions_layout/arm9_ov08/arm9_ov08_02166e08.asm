@@ -1,0 +1,11 @@
+02166e08  ldr r1,[0x02166e20]
+02166e0a  ldr r1,[r1,#0x0]
+02166e0c  ldrh r1,[r1,#0x36]
+02166e0e  add r2,r0,#0x0
+02166e10  and r2,r1
+02166e12  cmp r0,r2
+02166e14  bne 0x02166e1a
+02166e16  mov r0,#0x1
+02166e18  bx lr
+02166e1a  mov r0,#0x0
+02166e1c  bx lr

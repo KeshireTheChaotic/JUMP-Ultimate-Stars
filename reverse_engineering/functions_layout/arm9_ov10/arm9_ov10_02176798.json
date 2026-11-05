@@ -1,0 +1,1 @@
+{"module":"arm9_ov10","address":"02176798","name":"FUN_02176798","thumb":true,"body_bytes":106,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["0217575c","0217643c","02177ea4","0218a888","0218cd38"],"unresolved_call_targets":[],"status":"decompiled","asm_file":"arm9_ov10_02176798.asm","c_file":"arm9_ov10_02176798.c"}

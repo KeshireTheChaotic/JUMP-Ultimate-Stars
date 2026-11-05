@@ -1,0 +1,107 @@
+
+void FUN_02155d40(void)
+
+{
+  int iVar1;
+  int *piVar2;
+  undefined4 in_r3;
+  int iVar3;
+  undefined4 local_2c;
+  undefined4 local_28;
+  undefined4 local_24;
+  undefined4 local_20;
+  undefined4 local_1c;
+  undefined4 local_18;
+  undefined4 local_14;
+  undefined4 local_10;
+  undefined4 uStack_c;
+  
+  uStack_c = in_r3;
+  FUN_02041f7c(DAT_020a0f64,1);
+  FUN_0203d4e4();
+  iVar1 = FUN_0203b414(0);
+  iVar1 = *(int *)(iVar1 + 0x88);
+  FUN_0203d0b4(*(undefined4 *)(iVar1 + 4),0);
+  local_10 = 0;
+  piVar2 = *(int **)(iVar1 + 4);
+  (**(code **)(*piVar2 + 0x10))(piVar2,&local_10);
+  iVar1 = FUN_0203b414(1);
+  iVar1 = *(int *)(iVar1 + 0x88);
+  FUN_0203d0b4(*(undefined4 *)(iVar1 + 4),1);
+  FUN_0203d478(*(undefined4 *)(iVar1 + 4),4);
+  FUN_0203cfbc(*(undefined4 *)(iVar1 + 4),0x20,0x20);
+  (**(code **)(**(int **)(iVar1 + 4) + 0x90))(*(int **)(iVar1 + 4),0x8000);
+  local_14 = 0x3000;
+  (**(code **)(**(int **)(iVar1 + 4) + 0x10))(*(int **)(iVar1 + 4),&local_14);
+  (**(code **)(**(int **)(iVar1 + 4) + 0x94))(*(int **)(iVar1 + 4),1);
+  iVar1 = FUN_0203b414(2);
+  iVar1 = *(int *)(iVar1 + 0x88);
+  FUN_0203d0b4(*(undefined4 *)(iVar1 + 4),1);
+  FUN_0203d478(*(undefined4 *)(iVar1 + 4),4);
+  FUN_0203cfbc(*(undefined4 *)(iVar1 + 4),0x40,0x20);
+  (**(code **)(**(int **)(iVar1 + 4) + 0x90))(*(int **)(iVar1 + 4),0x8000);
+  local_18 = 0x2000;
+  (**(code **)(**(int **)(iVar1 + 4) + 0x10))(*(int **)(iVar1 + 4),&local_18);
+  iVar1 = FUN_0203b414(3);
+  iVar1 = *(int *)(iVar1 + 0x88);
+  FUN_0203d0b4(*(undefined4 *)(iVar1 + 4),1);
+  FUN_0203d478(*(undefined4 *)(iVar1 + 4),4);
+  FUN_0203cfbc(*(undefined4 *)(iVar1 + 4),0,0);
+  (**(code **)(**(int **)(iVar1 + 4) + 0x90))(*(int **)(iVar1 + 4),0);
+  local_1c = 0x1000;
+  (**(code **)(**(int **)(iVar1 + 4) + 0x10))(*(int **)(iVar1 + 4),&local_1c);
+  iVar1 = FUN_0203b424(3);
+  iVar1 = *(int *)(iVar1 + 0x88);
+  FUN_0203d0b4(*(undefined4 *)(iVar1 + 4),1);
+  FUN_0203d478(*(undefined4 *)(iVar1 + 4),4);
+  FUN_0203cfbc(*(undefined4 *)(iVar1 + 4),0x20,0x20);
+  (**(code **)(**(int **)(iVar1 + 4) + 0x90))(*(int **)(iVar1 + 4),0x8000);
+  local_20 = 0x3000;
+  (**(code **)(**(int **)(iVar1 + 4) + 0x10))(*(int **)(iVar1 + 4),&local_20);
+  (**(code **)(**(int **)(iVar1 + 4) + 0x94))(*(int **)(iVar1 + 4),1);
+  iVar1 = FUN_0203b424(1);
+  iVar1 = *(int *)(iVar1 + 0x88);
+  FUN_0203d0b4(*(undefined4 *)(iVar1 + 4),1);
+  FUN_0203d478(*(undefined4 *)(iVar1 + 4),4);
+  FUN_0203cfbc(*(undefined4 *)(iVar1 + 4),0x40,0x20);
+  (**(code **)(**(int **)(iVar1 + 4) + 0x90))(*(int **)(iVar1 + 4),0x4000);
+  local_24 = 0;
+  (**(code **)(**(int **)(iVar1 + 4) + 0x10))(*(int **)(iVar1 + 4),&local_24);
+  iVar1 = FUN_0203b424(2);
+  iVar1 = *(int *)(iVar1 + 0x88);
+  FUN_0203d0b4(*(undefined4 *)(iVar1 + 4),1);
+  FUN_0203d478(*(undefined4 *)(iVar1 + 4),4);
+  FUN_0203cfbc(*(undefined4 *)(iVar1 + 4),0x40,0x20);
+  (**(code **)(**(int **)(iVar1 + 4) + 0x90))(*(int **)(iVar1 + 4),0x4000);
+  local_28 = 0x2000;
+  (**(code **)(**(int **)(iVar1 + 4) + 0x10))(*(int **)(iVar1 + 4),&local_28);
+  iVar1 = FUN_0203b424(0);
+  iVar1 = *(int *)(iVar1 + 0x88);
+  FUN_0203d0b4(*(undefined4 *)(iVar1 + 4),1);
+  FUN_0203d478(*(undefined4 *)(iVar1 + 4),4);
+  FUN_0203cfbc(*(undefined4 *)(iVar1 + 4),0x40,0x20);
+  (**(code **)(**(int **)(iVar1 + 4) + 0x90))(*(int **)(iVar1 + 4),0x4000);
+  local_2c = 0x1000;
+  (**(code **)(**(int **)(iVar1 + 4) + 0x10))(*(int **)(iVar1 + 4),&local_2c);
+  if ((DAT_0215ec38 & 1) == 0) {
+    FUN_0214ee3c(&DAT_0215e410,4,0xc,0xea,0xac);
+    DAT_0215ec38 = DAT_0215ec38 | 1;
+  }
+  iVar1 = FUN_0203b3f4();
+  iVar3 = *(int *)(iVar1 + 0x88);
+  FUN_02152e64(iVar3,0,&DAT_0215e410);
+  iVar1 = *(int *)(iVar3 + 4);
+  *(undefined1 *)(iVar1 + 0x901) = 1;
+  *(undefined1 *)(iVar1 + 0x8fd) = 1;
+  iVar1 = *(int *)(iVar3 + 4);
+  *(undefined1 *)(iVar1 + 0x901) = 1;
+  *(undefined4 *)(iVar1 + 0x8c8) = 0x15;
+  iVar1 = *(int *)(iVar3 + 4);
+  *(undefined1 *)(iVar1 + 0x901) = 1;
+  *(undefined4 *)(iVar1 + 0x8d4) = 0x1a;
+  iVar1 = *(int *)(iVar3 + 4);
+  *(undefined1 *)(iVar1 + 0x8ff) = 1;
+  *(undefined1 *)(iVar1 + 0x901) = 1;
+  return;
+}
+

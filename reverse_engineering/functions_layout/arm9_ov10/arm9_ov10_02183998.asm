@@ -1,0 +1,12 @@
+02183998  push {r4,r5,r6,lr}
+0218399a  add r5,r0,#0x0
+0218399c  add r4,r1,#0x0
+0218399e  add r6,r2,#0x0
+021839a0  add r0,r6,#0x0
+021839a2  bl 0x02004b04
+021839a6  add r3,r0,#0x0
+021839a8  add r0,r5,#0x0
+021839aa  add r1,r4,#0x0
+021839ac  add r2,r6,#0x0
+021839ae  bl 0x021839b4
+021839b2  pop {r4,r5,r6,pc}

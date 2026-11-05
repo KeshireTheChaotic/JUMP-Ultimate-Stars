@@ -1,0 +1,14 @@
+020378c4  stmdb sp!,{r4,lr}
+020378c8  ldr r1,[0x20378fc]
+020378cc  mov r4,r0
+020378d0  str r1,[r4,#0x0]
+020378d4  ldr r0,[r4,#0x5c]
+020378d8  cmp r0,#0x0
+020378dc  beq 0x020378ec
+020378e0  ldr r1,[r0,#0x0]
+020378e4  ldr r1,[r1,#0xc]
+020378e8  blx r1
+020378ec  mov r0,r4
+020378f0  bl 0x02014980
+020378f4  mov r0,r4
+020378f8  ldmia sp!,{r4,pc}

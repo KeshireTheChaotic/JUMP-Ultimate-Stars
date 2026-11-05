@@ -1,0 +1,9 @@
+0215e980  cmp r0,#0x0
+0215e984  beq 0x0215e99c
+0215e988  ldrsb r0,[r0,#0x10]
+0215e98c  cmp r0,#0x0
+0215e990  movne r0,#0x1
+0215e994  moveq r0,#0x0
+0215e998  bx lr
+0215e99c  mov r0,#0x0
+0215e9a0  bx lr

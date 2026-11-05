@@ -1,0 +1,13 @@
+021cb320  push {r4,lr}
+021cb322  add r4,r0,#0x0
+021cb324  ldr r0,[r4,#0x4c]
+021cb326  mov r1,#0x20
+021cb328  ldr r2,[r0,#0x0]
+021cb32a  ldr r2,[r2,#0x14]
+021cb32c  blx r2
+021cb32e  cmp r0,#0x0
+021cb330  ldrh r0,[r4,#0x38]
+021cb332  beq 0x021cb338
+021cb334  lsr r0,r0,#0x1
+021cb336  pop {r4,pc}
+021cb338  pop {r4,pc}

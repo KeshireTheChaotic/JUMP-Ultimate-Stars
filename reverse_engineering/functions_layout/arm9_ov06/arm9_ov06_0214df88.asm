@@ -1,0 +1,13 @@
+0214df88  push {r4,lr}
+0214df8a  add r4,r0,#0x0
+0214df8c  ldr r0,[0x0214dfa8]
+0214df8e  ldr r1,[r0,#0x0]
+0214df90  add r1,r1,#0x1
+0214df92  str r1,[r0,#0x0]
+0214df94  mov r0,#0x3
+0214df96  mov r1,#0x1
+0214df98  blx 0x02073ebc
+0214df9c  ldr r0,[r4,#0x4]
+0214df9e  ldr r1,[0x0214dfac]
+0214dfa0  blx 0x02028384
+0214dfa4  pop {r4,pc}

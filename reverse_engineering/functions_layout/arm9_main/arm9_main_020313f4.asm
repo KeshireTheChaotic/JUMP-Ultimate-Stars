@@ -1,0 +1,9 @@
+020313f4  stmdb sp!,{r4,lr}
+020313f8  mov r4,r0
+020313fc  mov r0,#0x8
+02031400  bl 0x0201a228
+02031404  cmp r0,#0x0
+02031408  ldrne r1,[0x2031418]
+0203140c  stmiane r0,{r1,r4}
+02031410  str r0,[r4,#0x25c]
+02031414  ldmia sp!,{r4,pc}

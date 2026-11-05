@@ -1,0 +1,12 @@
+0216ee14  ldr r0,[r0,#0x10]
+0216ee18  ldr r1,[r0,#0x8]
+0216ee1c  b 0x0216ee34
+0216ee20  ldr r0,[r1,#0x18]
+0216ee24  tst r0,#0x1
+0216ee28  movne r0,#0x1
+0216ee2c  bxne lr
+0216ee30  ldr r1,[r1,#0x0]
+0216ee34  cmp r1,#0x0
+0216ee38  bne 0x0216ee20
+0216ee3c  mov r0,#0x0
+0216ee40  bx lr

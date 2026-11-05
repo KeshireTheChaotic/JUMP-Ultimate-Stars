@@ -1,0 +1,36 @@
+021a02c0  stmdb sp!,{r3,r4,r5,r6,r7,lr}
+021a02c4  ldr r2,[0x21a0350]
+021a02c8  mov r1,#0x0
+021a02cc  mov r7,r0
+021a02d0  bl 0x020517fc
+021a02d4  cmp r7,#0x0
+021a02d8  movne r0,#0x1
+021a02dc  ldr r5,[0x21a0354]
+021a02e0  ldr r4,[0x21a0358]
+021a02e4  strbne r0,[r7,#0x8a1]
+021a02e8  mov r6,#0x0
+021a02ec  mov r0,r5
+021a02f0  mov r1,r6
+021a02f4  bl 0x021a0364
+021a02f8  add r1,r7,r6, lsl #0x2
+021a02fc  str r0,[r1,#0x8a4]
+021a0300  mov r0,r4
+021a0304  mov r1,r6
+021a0308  bl 0x021a0390
+021a030c  add r1,r7,r6, lsl #0x2
+021a0310  add r6,r6,#0x1
+021a0314  str r0,[r1,#0x8b4]
+021a0318  cmp r6,#0x4
+021a031c  blt 0x021a02ec
+021a0320  ldr r0,[0x21a035c]
+021a0324  mov r1,#0x0
+021a0328  bl 0x021a0364
+021a032c  str r0,[r7,#0xb08]
+021a0330  ldr r0,[0x21a0360]
+021a0334  mov r1,#0x0
+021a0338  bl 0x021a0390
+021a033c  str r0,[r7,#0xb0c]
+021a0340  mov r0,r7
+021a0344  bl 0x021a0458
+021a0348  mov r0,r7
+021a034c  ldmia sp!,{r3,r4,r5,r6,r7,pc}

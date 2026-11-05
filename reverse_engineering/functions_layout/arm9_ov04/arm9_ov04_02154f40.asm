@@ -1,0 +1,9 @@
+02154f40  stmdb sp!,{r4,lr}
+02154f44  mov r4,r0
+02154f48  cmp r1,#0x0
+02154f4c  beq 0x02154f54
+02154f50  bl 0x0206af1c
+02154f54  ldr r0,[r4,#0x0]
+02154f58  ldr r0,[r0,#0x4]
+02154f5c  bl 0x020282f4
+02154f60  ldmia sp!,{r4,pc}

@@ -1,0 +1,14 @@
+02032598  ldr r3,[r0,#0x20]
+0203259c  b 0x020325b4
+020325a0  ldr r2,[r3,#0x8]
+020325a4  cmp r1,r2
+020325a8  moveq r0,r3
+020325ac  bxeq lr
+020325b0  mov r3,r12
+020325b4  ldr r12,[r3,#0x14]
+020325b8  cmp r12,#0x0
+020325bc  bne 0x020325a0
+020325c0  mov r1,#0x0
+020325c4  str r1,[r0,#0x28]
+020325c8  mov r0,r1
+020325cc  bx lr

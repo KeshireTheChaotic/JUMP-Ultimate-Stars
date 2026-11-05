@@ -1,0 +1,15 @@
+021751d0  push {r4,lr}
+021751d2  ldr r0,[0x021751f4]
+021751d4  ldr r1,[r0,#0x0]
+021751d6  ldr r0,[0x021751f8]
+021751d8  add r0,r1,r0
+021751da  blx 0x02053ed0
+021751de  ldr r0,[0x021751f4]
+021751e0  ldr r1,[r0,#0x0]
+021751e2  ldr r0,[0x021751fc]
+021751e4  ldr r4,[r1,r0]
+021751e6  ldr r0,[0x021751f8]
+021751e8  add r0,r1,r0
+021751ea  blx 0x02053e60
+021751ee  add r0,r4,#0x0
+021751f0  pop {r4,pc}

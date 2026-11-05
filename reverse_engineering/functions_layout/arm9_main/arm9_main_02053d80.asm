@@ -1,0 +1,9 @@
+02053d80  ldr r2,[r0,#0x8c]
+02053d84  cmp r2,#0x0
+02053d88  streq r1,[r0,#0x88]
+02053d8c  strne r1,[r2,#0x10]
+02053d90  str r2,[r1,#0x14]
+02053d94  mov r2,#0x0
+02053d98  str r2,[r1,#0x10]
+02053d9c  str r1,[r0,#0x8c]
+02053da0  bx lr

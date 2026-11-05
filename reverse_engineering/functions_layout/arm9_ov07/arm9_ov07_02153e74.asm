@@ -1,0 +1,12 @@
+02153e74  push {r4,lr}
+02153e76  ldr r0,[r0,#0x4]
+02153e78  ldr r4,[r0,#0x10]
+02153e7a  blx 0x0219ad4c
+02153e7e  cmp r0,#0x0
+02153e80  beq 0x02153e8a
+02153e82  ldr r0,[r4,#0x5c]
+02153e84  mov r1,#0x10
+02153e86  blx 0x021516f0
+02153e8a  add r0,r4,#0x0
+02153e8c  bl 0x02154294
+02153e90  pop {r4,pc}

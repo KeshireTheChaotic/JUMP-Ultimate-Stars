@@ -1,0 +1,11 @@
+0219619c  push {lr}
+0219619e  sub sp,#0x4
+021961a0  add r1,r0,#0x0
+021961a2  cmp r1,#0x20
+021961a4  bcs 0x021961ae
+021961a6  ldr r0,[0x021961b4]
+021961a8  ldr r0,[r0,#0x4]
+021961aa  blx 0x02052f54
+021961ae  add sp,#0x4
+021961b0  pop {r3}
+021961b2  bx r3

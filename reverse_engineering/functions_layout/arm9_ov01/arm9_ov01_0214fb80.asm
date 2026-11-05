@@ -1,0 +1,10 @@
+0214fb80  stmdb sp!,{r4,lr}
+0214fb84  mov r4,r0
+0214fb88  mov r0,r1
+0214fb8c  bl 0x0214f7f8
+0214fb90  mov r0,r4
+0214fb94  bl 0x0214fb54
+0214fb98  mov r4,r0
+0214fb9c  bl 0x0214f834
+0214fba0  mov r0,r4
+0214fba4  ldmia sp!,{r4,pc}

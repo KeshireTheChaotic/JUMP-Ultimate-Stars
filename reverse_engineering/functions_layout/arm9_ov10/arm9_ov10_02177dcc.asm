@@ -1,0 +1,11 @@
+02177dcc  ldr r0,[0x02177de4]
+02177dce  ldr r1,[r0,#0x0]
+02177dd0  cmp r1,#0x0
+02177dd2  beq 0x02177de0
+02177dd4  mov r2,#0x0
+02177dd6  str r2,[r1,#0x0]
+02177dd8  ldr r1,[r0,#0x0]
+02177dda  strb r2,[r1,#0x1e]
+02177ddc  ldr r0,[r0,#0x0]
+02177dde  strb r2,[r0,#0x1f]
+02177de0  bx lr

@@ -1,0 +1,106 @@
+0200cf14  stmdb sp!,{r4,r5,r6,r7,r11,r12,lr}
+0200cf18  eor r4,r1,r3
+0200cf1c  mov r4,r4, asr #0x1
+0200cf20  mov r4,r4, lsl #0x1
+0200cf24  orrs r5,r3,r2
+0200cf28  bne 0x0200cf34
+0200cf2c  ldmia sp!,{r4,r5,r6,r7,r11,r12,lr}
+0200cf30  bx lr
+0200cf34  mov r5,r0, lsr #0x1f
+0200cf38  add r5,r5,r1
+0200cf3c  mov r6,r2, lsr #0x1f
+0200cf40  add r6,r6,r3
+0200cf44  orrs r6,r5,r6
+0200cf48  bne 0x0200cf68
+0200cf4c  mov r1,r2
+0200cf50  bl 0x0200d12c
+0200cf54  ands r4,r4,#0x1
+0200cf58  movne r0,r1
+0200cf5c  mov r1,r0, asr #0x1f
+0200cf60  ldmia sp!,{r4,r5,r6,r7,r11,r12,lr}
+0200cf64  bx lr
+0200cf68  cmp r1,#0x0
+0200cf6c  bge 0x0200cf78
+0200cf70  rsbs r0,r0,#0x0
+0200cf74  rsc r1,r1,#0x0
+0200cf78  cmp r3,#0x0
+0200cf7c  bge 0x0200cf88
+0200cf80  rsbs r2,r2,#0x0
+0200cf84  rsc r3,r3,#0x0
+0200cf88  orrs r5,r1,r0
+0200cf8c  beq 0x0200d0ac
+0200cf90  mov r5,#0x0
+0200cf94  mov r6,#0x1
+0200cf98  cmp r3,#0x0
+0200cf9c  bmi 0x0200cfb4
+0200cfa0  add r5,r5,#0x1
+0200cfa4  adds r2,r2,r2
+0200cfa8  adcs r3,r3,r3
+0200cfac  bpl 0x0200cfa0
+0200cfb0  add r6,r6,r5
+0200cfb4  cmp r1,#0x0
+0200cfb8  blt 0x0200cfd4
+0200cfbc  cmp r6,#0x1
+0200cfc0  beq 0x0200cfd4
+0200cfc4  sub r6,r6,#0x1
+0200cfc8  adds r0,r0,r0
+0200cfcc  adcs r1,r1,r1
+0200cfd0  bpl 0x0200cfbc
+0200cfd4  mov r7,#0x0
+0200cfd8  mov r12,#0x0
+0200cfdc  mov r11,#0x0
+0200cfe0  b 0x0200cffc
+0200cfe4  orr r12,r12,#0x1
+0200cfe8  subs r6,r6,#0x1
+0200cfec  beq 0x0200d054
+0200cff0  adds r0,r0,r0
+0200cff4  adcs r1,r1,r1
+0200cff8  adcs r7,r7,r7
+0200cffc  subs r0,r0,r2
+0200d000  sbcs r1,r1,r3
+0200d004  sbcs r7,r7,#0x0
+0200d008  adds r12,r12,r12
+0200d00c  adc r11,r11,r11
+0200d010  cmp r7,#0x0
+0200d014  bge 0x0200cfe4
+0200d018  subs r6,r6,#0x1
+0200d01c  beq 0x0200d04c
+0200d020  adds r0,r0,r0
+0200d024  adcs r1,r1,r1
+0200d028  adc r7,r7,r7
+0200d02c  adds r0,r0,r2
+0200d030  adcs r1,r1,r3
+0200d034  adc r7,r7,#0x0
+0200d038  adds r12,r12,r12
+0200d03c  adc r11,r11,r11
+0200d040  cmp r7,#0x0
+0200d044  bge 0x0200cfe4
+0200d048  b 0x0200d018
+0200d04c  adds r0,r0,r2
+0200d050  adc r1,r1,r3
+0200d054  ands r7,r4,#0x1
+0200d058  moveq r0,r12
+0200d05c  moveq r1,r11
+0200d060  beq 0x0200d08c
+0200d064  subs r7,r5,#0x20
+0200d068  movge r0,r1, lsr r7
+0200d06c  bge 0x0200d0b0
+0200d070  rsb r7,r5,#0x20
+0200d074  mov r0,r0, lsr r5
+0200d078  orr r0,r0,r1, lsl r7
+0200d07c  mov r1,r1, lsr r5
+0200d080  b 0x0200d08c
+0200d08c  cmp r4,#0x0
+0200d090  blt 0x0200d09c
+0200d094  ldmia sp!,{r4,r5,r6,r7,r11,r12,lr}
+0200d098  bx lr
+0200d09c  rsbs r0,r0,#0x0
+0200d0a0  rsc r1,r1,#0x0
+0200d0a4  ldmia sp!,{r4,r5,r6,r7,r11,r12,lr}
+0200d0a8  bx lr
+0200d0ac  mov r0,#0x0
+0200d0b0  mov r1,#0x0
+0200d0b4  cmp r4,#0x0
+0200d0b8  blt 0x0200d09c
+0200d0bc  ldmia sp!,{r4,r5,r6,r7,r11,r12,lr}
+0200d0c0  bx lr

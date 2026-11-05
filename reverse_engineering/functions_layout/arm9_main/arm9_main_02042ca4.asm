@@ -1,0 +1,25 @@
+02042ca4  stmdb sp!,{lr}
+02042ca8  sub sp,sp,#0x14
+02042cac  ldr r2,[0x2042d08]
+02042cb0  ldr r1,[0x2042d0c]
+02042cb4  mov r0,r2, lsl #0x6
+02042cb8  str r2,[r1,#0x0]
+02042cbc  str r0,[sp,#0x0]
+02042cc0  mov r1,#0x400000
+02042cc4  str r1,[sp,#0x4]
+02042cc8  mov r0,#0x0
+02042ccc  str r1,[sp,#0x8]
+02042cd0  mov r1,#0x1
+02042cd4  str r1,[sp,#0xc]
+02042cd8  mov r2,r0
+02042cdc  mov r1,#0xc0000
+02042ce0  mov r3,#0x100000
+02042ce4  str r0,[sp,#0x10]
+02042ce8  blx 0x020666f0
+02042cec  ldr r1,[0x2042d10]
+02042cf0  mov r0,#0x0
+02042cf4  str r0,[r1,#0x0]
+02042cf8  mov r0,#0x1
+02042cfc  str r0,[r1,#-0xc]
+02042d00  add sp,sp,#0x14
+02042d04  ldmia sp!,{pc}

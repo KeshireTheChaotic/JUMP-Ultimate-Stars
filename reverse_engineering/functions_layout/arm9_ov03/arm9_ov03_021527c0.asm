@@ -1,0 +1,16 @@
+021527c0  stmdb sp!,{r3,r4,r5,lr}
+021527c4  mov r5,r0
+021527c8  ldr r0,[r5,#0x4]
+021527cc  ldr r4,[r0,#0x10]
+021527d0  bl 0x0207382c
+021527d4  cmp r0,#0x0
+021527d8  ldmiaeq sp!,{r3,r4,r5,pc}
+021527dc  ldr r0,[r4,#0x1a0]
+021527e0  ldr r0,[r0,#0x4]
+021527e4  blx 0x021b65e0
+021527e8  mov r0,#0x1
+021527ec  strb r0,[r4,#0x58b]
+021527f0  ldr r0,[r5,#0x4]
+021527f4  ldr r1,[0x2152800]
+021527f8  bl 0x02028384
+021527fc  ldmia sp!,{r3,r4,r5,pc}

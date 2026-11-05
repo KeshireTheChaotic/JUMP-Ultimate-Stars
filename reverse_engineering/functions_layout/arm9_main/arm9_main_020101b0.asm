@@ -1,0 +1,10 @@
+020101b0  push {r4,lr}
+020101b2  add r4,r0,#0x0
+020101b4  ldr r0,[0x020101c4]
+020101b6  str r0,[r4,#0x0]
+020101b8  ldr r0,[r4,#0x8]
+020101ba  ldr r1,[r0,#0x0]
+020101bc  ldr r1,[r1,#0xc]
+020101be  blx r1
+020101c0  add r0,r4,#0x0
+020101c2  pop {r4,pc}

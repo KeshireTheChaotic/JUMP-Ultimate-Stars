@@ -1,0 +1,15 @@
+02156dac  stmdb sp!,{r4,lr}
+02156db0  mov r4,r0
+02156db4  ldr r0,[r4,#0xc]
+02156db8  ldr r2,[r4,#0x88]
+02156dbc  ldr r0,[r0,#0x4]
+02156dc0  add r1,r2,r1
+02156dc4  mov r2,#0x0
+02156dc8  bl 0x02023894
+02156dcc  ldr r0,[r4,#0xc]
+02156dd0  ldr r0,[r0,#0x4]
+02156dd4  ldr r0,[r0,#0x68]
+02156dd8  ldr r1,[r0,#0x0]
+02156ddc  ldr r1,[r1,#0x6c]
+02156de0  blx r1
+02156de4  ldmia sp!,{r4,pc}

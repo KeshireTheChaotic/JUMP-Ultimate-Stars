@@ -1,0 +1,9 @@
+021530bc  stmdb sp!,{r3,lr}
+021530c0  ldr r0,[0x21530e0]
+021530c4  ldr r0,[r0,#0x8]
+021530c8  cmp r0,#0x0
+021530cc  ldmiaeq sp!,{r3,pc}
+021530d0  ldr r0,[r0,#0x4]
+021530d4  mvn r1,#0x80000000
+021530d8  bl 0x020314c0
+021530dc  ldmia sp!,{r3,pc}

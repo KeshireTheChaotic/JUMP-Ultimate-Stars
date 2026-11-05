@@ -1,0 +1,12 @@
+0204fee4  ldr r2,[0x204ff14]
+0204fee8  ldr r1,[0x204ff18]
+0204feec  str r2,[r0,#0x0]
+0204fef0  ldr r2,[0x204ff1c]
+0204fef4  str r1,[r0,#0x4]
+0204fef8  ldr r1,[0x204ff20]
+0204fefc  str r2,[r0,#0x8]
+0204ff00  str r1,[r0,#0xc]
+0204ff04  mov r1,#0x0
+0204ff08  str r1,[r0,#0x10]
+0204ff0c  str r1,[r0,#0x14]
+0204ff10  bx lr

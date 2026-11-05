@@ -1,0 +1,13 @@
+0203633c  stmdb sp!,{r3,r4,r5,lr}
+02036340  mov r5,r0
+02036344  mov r4,r1
+02036348  mov r0,r4
+0203634c  str r4,[r5,#0x20]
+02036350  ldr r1,[r0,#0x0]
+02036354  ldr r1,[r1,#0x8]
+02036358  blx r1
+0203635c  ldrh r0,[r4,#0x8]
+02036360  strh r0,[r5,#0x2c]
+02036364  ldrh r0,[r4,#0xa]
+02036368  strh r0,[r5,#0x2e]
+0203636c  ldmia sp!,{r3,r4,r5,pc}

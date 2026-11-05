@@ -1,0 +1,9 @@
+02083624  stmdb sp!,{r3,lr}
+02083628  sub sp,sp,#0x8
+0208362c  ldrb r12,[sp,#0x10]
+02083630  str r3,[sp,#0x0]
+02083634  mov r3,#0x0
+02083638  str r12,[sp,#0x4]
+0208363c  bl 0x020834d4
+02083640  add sp,sp,#0x8
+02083644  ldmia sp!,{r3,pc}

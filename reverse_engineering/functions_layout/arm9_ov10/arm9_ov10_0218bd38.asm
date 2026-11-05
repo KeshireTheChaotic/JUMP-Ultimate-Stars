@@ -1,0 +1,11 @@
+0218bd38  ldrb r2,[r0,r1]
+0218bd3a  lsl r3,r2,#0x8
+0218bd3c  ldr r2,[0x0218bd50]
+0218bd3e  and r3,r2
+0218bd40  lsl r2,r3,#0x10
+0218bd42  lsr r2,r2,#0x10
+0218bd44  add r1,r1,#0x1
+0218bd46  ldrb r0,[r0,r1]
+0218bd48  orr r2,r0
+0218bd4a  add r0,r2,#0x0
+0218bd4c  bx lr

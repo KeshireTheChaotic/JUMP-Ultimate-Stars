@@ -1,0 +1,12 @@
+0214f258  stmdb sp!,{r4,lr}
+0214f25c  movs r4,r0
+0214f260  ldmiaeq sp!,{r4,pc}
+0214f264  ldr r0,[r4,#0x4]
+0214f268  mov r2,#0x0
+0214f26c  bl 0x02023894
+0214f270  ldr r0,[r4,#0x4]
+0214f274  ldr r0,[r0,#0x68]
+0214f278  ldr r1,[r0,#0x0]
+0214f27c  ldr r1,[r1,#0x6c]
+0214f280  blx r1
+0214f284  ldmia sp!,{r4,pc}

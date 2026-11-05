@@ -1,0 +1,17 @@
+021551a0  stmdb sp!,{r4,lr}
+021551a4  ldr r0,[r0,#0x4]
+021551a8  mov r2,#0x1
+021551ac  ldr r4,[r0,#0x10]
+021551b0  mov r1,#0x3
+021551b4  mov r0,r4
+021551b8  strb r2,[r4,#0x469]
+021551bc  mov r2,#0xdf
+021551c0  bl 0x021553b4
+021551c4  ldr r0,[r4,#0x3d0]
+021551c8  ldr r1,[0x21551e4]
+021551cc  ldr r0,[r0,#0x4]
+021551d0  bl 0x02028384
+021551d4  mov r0,r4
+021551d8  mov r1,#0x0
+021551dc  bl 0x021556d8
+021551e0  ldmia sp!,{r4,pc}

@@ -1,0 +1,16 @@
+021746cc  push {r4,lr}
+021746ce  add r4,r0,#0x0
+021746d0  ldr r0,[0x021746f0]
+021746d2  ldr r1,[r0,#0x0]
+021746d4  ldr r0,[0x021746f4]
+021746d6  add r0,r1,r0
+021746d8  blx 0x02053ed0
+021746dc  ldr r1,[0x021746f0]
+021746de  ldr r2,[r1,#0x0]
+021746e0  ldr r0,[0x021746f8]
+021746e2  str r4,[r2,r0]
+021746e4  ldr r1,[r1,#0x0]
+021746e6  ldr r0,[0x021746f4]
+021746e8  add r0,r1,r0
+021746ea  blx 0x02053e60
+021746ee  pop {r4,pc}

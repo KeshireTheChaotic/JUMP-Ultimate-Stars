@@ -1,0 +1,12 @@
+02172e60  stmdb sp!,{r4,lr}
+02172e64  ldr r0,[r0,#0x4]
+02172e68  ldr r4,[r0,#0x34]
+02172e6c  ldr r0,[r4,#0x25c]
+02172e70  cmp r0,#0x0
+02172e74  bne 0x02172e88
+02172e78  mov r0,r4
+02172e7c  ldr r1,[r0,#0x0]
+02172e80  ldr r1,[r1,#0x14]
+02172e84  blx r1
+02172e88  ldr r0,[r4,#0x25c]
+02172e8c  ldmia sp!,{r4,pc}

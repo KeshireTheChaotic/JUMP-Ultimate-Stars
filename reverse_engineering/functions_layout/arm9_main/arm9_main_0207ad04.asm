@@ -1,0 +1,14 @@
+0207ad04  stmdb sp!,{r3,r4,r5,lr}
+0207ad08  mov r5,r0
+0207ad0c  mov r4,r1
+0207ad10  mov r1,r5
+0207ad14  add r0,r2,#0x10
+0207ad18  bl 0x02037c24
+0207ad1c  mov r2,#0x0
+0207ad20  str r2,[r5,#0x8]
+0207ad24  str r2,[r5,#0xc]
+0207ad28  mov r0,r4
+0207ad2c  mov r1,r5
+0207ad30  strb r2,[r5,#0x13]
+0207ad34  bl 0x02037b98
+0207ad38  ldmia sp!,{r3,r4,r5,pc}

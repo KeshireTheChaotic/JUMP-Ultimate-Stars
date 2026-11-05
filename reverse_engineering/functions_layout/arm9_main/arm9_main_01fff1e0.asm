@@ -1,0 +1,10 @@
+01fff1e0  mov r6,#0x20
+01fff1e4  add r7,r3,#0x200
+01fff1e8  mov r8,#0x0
+01fff1ec  mov r9,#0x0
+01fff1f0  mov r10,#0x0
+01fff1f4  mov r11,#0x0
+01fff1f8  stmia r7!,{r8,r9,r10,r11}
+01fff1fc  subs r6,r6,#0x1
+01fff200  bne 0x01fff1f8
+01fff204  mov pc,lr

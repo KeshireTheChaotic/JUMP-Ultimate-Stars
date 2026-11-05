@@ -1,0 +1,12 @@
+0214e4b8  stmdb sp!,{r4,lr}
+0214e4bc  movs r4,r0
+0214e4c0  ldmiaeq sp!,{r4,pc}
+0214e4c4  ldr r0,[r4,#0x0]
+0214e4c8  cmp r0,#0x0
+0214e4cc  beq 0x0214e4dc
+0214e4d0  ldr r1,[r0,#0x0]
+0214e4d4  ldr r1,[r1,#0x8]
+0214e4d8  blx r1
+0214e4dc  mov r0,r4
+0214e4e0  bl 0x0201b244
+0214e4e4  ldmia sp!,{r4,pc}

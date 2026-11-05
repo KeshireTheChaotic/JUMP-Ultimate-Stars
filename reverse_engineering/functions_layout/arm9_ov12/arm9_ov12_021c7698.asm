@@ -1,0 +1,14 @@
+021c7698  stmdb sp!,{r3,r4,r5,lr}
+021c769c  mov r4,r1
+021c76a0  mov r5,r0
+021c76a4  ldr r1,[0x21c76d0]
+021c76a8  ldr r2,[0x21c76d4]
+021c76ac  mov r0,#0x170
+021c76b0  mov r3,#0x80
+021c76b4  bl 0x0201a21c
+021c76b8  cmp r0,#0x0
+021c76bc  ldmiaeq sp!,{r3,r4,r5,pc}
+021c76c0  mov r1,r5
+021c76c4  mov r2,r4
+021c76c8  blx 0x021c6264
+021c76cc  ldmia sp!,{r3,r4,r5,pc}

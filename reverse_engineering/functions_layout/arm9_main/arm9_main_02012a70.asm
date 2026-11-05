@@ -1,0 +1,17 @@
+02012a70  stmdb sp!,{r3,r4,lr}
+02012a74  sub sp,sp,#0x4
+02012a78  mov r4,r0
+02012a7c  bl 0x02026ea0
+02012a80  ldr r0,[0x2012ab4]
+02012a84  mov r2,#0xa0000
+02012a88  str r0,[r4,#0x0]
+02012a8c  add r1,sp,#0x0
+02012a90  mov r0,r4
+02012a94  str r2,[sp,#0x0]
+02012a98  bl 0x02012940
+02012a9c  ldr r0,[r4,#0x4]
+02012aa0  mov r1,#0x1
+02012aa4  bl 0x02027de8
+02012aa8  mov r0,r4
+02012aac  add sp,sp,#0x4
+02012ab0  ldmia sp!,{r3,r4,pc}

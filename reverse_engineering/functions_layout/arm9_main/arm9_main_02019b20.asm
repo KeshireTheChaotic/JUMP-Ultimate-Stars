@@ -1,0 +1,13 @@
+02019b20  stmdb sp!,{r3,lr}
+02019b24  ldr r3,[r0,#0x1c]
+02019b28  ldr r2,[r3,#0x4]
+02019b2c  cmp r2,#0x0
+02019b30  ldrheq r0,[r0,#0x2c]
+02019b34  ldmiaeq sp!,{r3,pc}
+02019b38  mov r0,r3
+02019b3c  ldr r3,[r0,#0x0]
+02019b40  mov r2,#0x0
+02019b44  ldr r3,[r3,#0x8]
+02019b48  blx r3
+02019b4c  ldrsh r0,[r0,#0x4]
+02019b50  ldmia sp!,{r3,pc}

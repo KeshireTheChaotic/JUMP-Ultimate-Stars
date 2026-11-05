@@ -1,0 +1,14 @@
+02156f78  push {r3,r4,r5,lr}
+02156f7a  add r4,r0,#0x0
+02156f7c  ldr r0,[0x02156f9c]
+02156f7e  ldrb r0,[r0,r1]
+02156f80  add r1,r2,#0x0
+02156f82  bl 0x0207216c
+02156f86  add r0,#0x34
+02156f88  ldrb r5,[r0,#0x0]
+02156f8a  add r0,r4,#0x0
+02156f8c  blx 0x02075780
+02156f90  add r0,r4,#0x0
+02156f92  add r1,r5,#0x0
+02156f94  blx 0x02075788
+02156f98  pop {r3,r4,r5,pc}

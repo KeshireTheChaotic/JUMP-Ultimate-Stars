@@ -1,0 +1,9 @@
+02026fd0  stmdb sp!,{r3,lr}
+02026fd4  ldr r0,[r0,#0x4]
+02026fd8  ldr r2,[r0,#0x0]
+02026fdc  ldr r2,[r2,#0x54]
+02026fe0  blx r2
+02026fe4  ldr r0,[0x2026ff4]
+02026fe8  ldr r0,[r0,#0x1e4]
+02026fec  blx r0
+02026ff0  ldmia sp!,{r3,pc}

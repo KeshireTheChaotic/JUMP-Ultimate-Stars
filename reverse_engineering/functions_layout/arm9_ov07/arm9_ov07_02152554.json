@@ -1,0 +1,1 @@
+{"module":"arm9_ov07","address":"02152554","name":"FUN_02152554","thumb":true,"body_bytes":80,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["02028330","02028384","0207342c","0214dd50","0214dd60"],"unresolved_call_targets":["021b65bc"],"status":"decompiled","asm_file":"arm9_ov07_02152554.asm","c_file":"arm9_ov07_02152554.c"}

@@ -1,0 +1,11 @@
+020329ec  stmdb sp!,{r4,lr}
+020329f0  ldr r1,[0x2032a18]
+020329f4  mov r4,r0
+020329f8  ldr r0,[r1,#0x180]
+020329fc  blx r0
+02032a00  mov r1,r4
+02032a04  mov r2,#0x0
+02032a08  mov r4,r0
+02032a0c  bl 0x020250f8
+02032a10  mov r0,r4
+02032a14  ldmia sp!,{r4,pc}

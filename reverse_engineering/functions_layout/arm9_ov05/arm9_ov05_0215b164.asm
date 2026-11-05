@@ -1,0 +1,13 @@
+0215b164  stmdb sp!,{r4,lr}
+0215b168  ldr r0,[r0,#0x4]
+0215b16c  tst r1,#0x20
+0215b170  ldr r4,[r0,#0x10]
+0215b174  ldmiaeq sp!,{r4,pc}
+0215b178  blx 0x021b65bc
+0215b17c  mov r0,r4
+0215b180  mvn r1,#0x0
+0215b184  bl 0x0215b3b0
+0215b188  mov r0,#0x78
+0215b18c  mov r1,#0x1
+0215b190  bl 0x0207342c
+0215b194  ldmia sp!,{r4,pc}

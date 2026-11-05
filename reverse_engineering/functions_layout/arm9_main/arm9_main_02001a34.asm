@@ -1,0 +1,12 @@
+02001a34  push {lr}
+02001a36  sub sp,#0x4
+02001a38  add r0,r3,#0x0
+02001a3a  mov r1,#0x0
+02001a3c  ldr r2,[sp,#0x8]
+02001a3e  ldr r2,[r2,#0x0]
+02001a40  blx 0x020517fc
+02001a44  mov r0,#0x0
+02001a46  mvn r1,r0
+02001a48  bl 0x02001ba8
+02001a4c  add sp,#0x4
+02001a4e  pop {pc}

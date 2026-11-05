@@ -1,0 +1,13 @@
+02156c2c  push {lr}
+02156c2e  sub sp,#0x4
+02156c30  ldr r0,[0x02156c4c]
+02156c32  ldr r0,[r0,#0x0]
+02156c34  ldr r0,[r0,#0x58]
+02156c36  bl 0x02165d6c
+02156c3a  ldr r0,[0x02156c4c]
+02156c3c  ldr r0,[r0,#0x0]
+02156c3e  ldr r0,[r0,#0x5c]
+02156c40  ldr r1,[0x02156c50]
+02156c42  bl 0x021677b8
+02156c46  add sp,#0x4
+02156c48  pop {pc}

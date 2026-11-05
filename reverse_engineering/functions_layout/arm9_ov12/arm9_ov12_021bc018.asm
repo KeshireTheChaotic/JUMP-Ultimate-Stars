@@ -1,0 +1,9 @@
+021bc018  stmdb sp!,{r4,lr}
+021bc01c  mov r4,r0
+021bc020  cmp r1,#0x0
+021bc024  beq 0x021bc02c
+021bc028  bl 0x0206af1c
+021bc02c  ldr r0,[r4,#0x0]
+021bc030  ldr r0,[r0,#0x4]
+021bc034  bl 0x020282f4
+021bc038  ldmia sp!,{r4,pc}

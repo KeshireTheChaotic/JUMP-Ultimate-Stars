@@ -1,0 +1,11 @@
+020876cc  stmdb sp!,{r4,lr}
+020876d0  mov r4,r0
+020876d4  bl 0x0208c51c
+020876d8  cmp r0,#0x0
+020876dc  beq 0x020876ec
+020876e0  and r0,r4,#0xff
+020876e4  bl 0x0219cb14
+020876e8  ldmia sp!,{r4,pc}
+020876ec  mov r0,r4
+020876f0  blx 0x0208c13c
+020876f4  ldmia sp!,{r4,pc}

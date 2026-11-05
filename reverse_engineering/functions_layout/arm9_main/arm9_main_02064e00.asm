@@ -1,0 +1,16 @@
+02064e00  cmp r1,#0x0
+02064e02  bne 0x02064e0a
+02064e04  mov r1,#0x0
+02064e06  strh r1,[r0,#0x0]
+02064e08  bx lr
+02064e0a  cmp r1,#0x0
+02064e0c  ble 0x02064e16
+02064e0e  ldr r2,[0x02064e20]
+02064e10  orr r1,r2
+02064e12  strh r1,[r0,#0x0]
+02064e14  bx lr
+02064e16  rsb r2,r1
+02064e18  ldr r1,[0x02064e24]
+02064e1a  orr r2,r1
+02064e1c  strh r2,[r0,#0x0]
+02064e1e  bx lr

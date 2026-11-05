@@ -1,0 +1,13 @@
+038074ec  stmdb sp!,{lr}
+038074f0  sub sp,sp,#0x4
+038074f4  and r0,r1,#0x3f
+038074f8  cmp r0,#0x1
+038074fc  ldreq r0,[0x3807520]
+03807500  streq r1,[r0,#0x0]
+03807504  moveq r1,#0x1
+03807508  streq r1,[r0,#0x10]
+0380750c  beq 0x03807514
+03807510  bl 0x037fe538
+03807514  add sp,sp,#0x4
+03807518  ldmia sp!,{lr}
+0380751c  bx lr

@@ -1,0 +1,11 @@
+0203daf8  add r1,r0,#0x800
+0203dafc  ldrh r3,[r1,#0xc8]
+0203db00  ldrh r2,[r1,#0xca]
+0203db04  ldr r12,[r0,#0x940]
+0203db08  ldr r1,[0x203db24]
+0203db0c  mul r2,r3,r2
+0203db10  mul r2,r12,r2
+0203db14  str r2,[r0,#0x960]
+0203db18  mov r0,#0x2
+0203db1c  str r0,[r1,#0x3bc]
+0203db20  bx lr

@@ -1,0 +1,9 @@
+02069cac  ldr r1,[r0,#0x0]
+02069cae  ldr r2,[0x02069cc0]
+02069cb0  and r1,r2
+02069cb2  mov r2,#0x0
+02069cb4  ldr r0,[r0,#0x4]
+02069cb6  orr r1,r2
+02069cb8  orr r2,r0
+02069cba  add r0,r2,#0x0
+02069cbc  bx lr

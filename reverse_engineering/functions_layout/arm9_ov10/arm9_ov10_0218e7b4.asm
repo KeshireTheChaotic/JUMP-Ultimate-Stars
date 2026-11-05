@@ -1,0 +1,15 @@
+0218e7b4  push {r4,r5,r6,lr}
+0218e7b6  add r6,r0,#0x0
+0218e7b8  add r5,r2,#0x0
+0218e7ba  cmp r3,r1
+0218e7bc  bcs 0x0218e7cc
+0218e7be  sub r4,r1,r3
+0218e7c0  add r0,r5,#0x0
+0218e7c2  add r1,r6,#0x0
+0218e7c4  add r2,r4,#0x0
+0218e7c6  blx 0x020517fc
+0218e7ca  add r5,r5,r4
+0218e7cc  add r0,r5,#0x0
+0218e7ce  pop {r4,r5,r6}
+0218e7d0  pop {r3}
+0218e7d2  bx r3

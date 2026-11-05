@@ -1,0 +1,16 @@
+0205dfec  cmp r1,#0x0
+0205dff0  movlt r0,#0x0
+0205dff4  bxlt lr
+0205dff8  ldr r2,[r0,#0x1c]
+0205dffc  cmp r1,r2
+0205e000  movcs r0,#0x0
+0205e004  bxcs lr
+0205e008  mov r2,#0xc
+0205e00c  mul r2,r1,r2
+0205e010  add r3,r0,#0x20
+0205e014  ldr r1,[r3,r2]
+0205e018  mvn r0,#0x0
+0205e01c  cmp r1,r0
+0205e020  add r0,r3,r2
+0205e024  moveq r0,#0x0
+0205e028  bx lr

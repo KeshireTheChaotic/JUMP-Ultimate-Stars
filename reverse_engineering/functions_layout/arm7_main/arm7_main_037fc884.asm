@@ -1,0 +1,17 @@
+037fc884  ldr r1,[0x37fc8c8]
+037fc888  ldr r2,[r1,#0x8]
+037fc88c  mov r1,#0x0
+037fc890  b 0x037fc89c
+037fc894  mov r1,r2
+037fc898  ldr r2,[r2,#0x4c]
+037fc89c  cmp r2,#0x0
+037fc8a0  beq 0x037fc8ac
+037fc8a4  cmp r2,r0
+037fc8a8  bne 0x037fc894
+037fc8ac  cmp r1,#0x0
+037fc8b0  ldreq r1,[r0,#0x4c]
+037fc8b4  ldreq r0,[0x37fc8c8]
+037fc8b8  streq r1,[r0,#0x8]
+037fc8bc  ldrne r0,[r0,#0x4c]
+037fc8c0  strne r0,[r1,#0x4c]
+037fc8c4  bx lr

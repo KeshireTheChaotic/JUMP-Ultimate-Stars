@@ -1,0 +1,16 @@
+02034db8  stmdb sp!,{r4,lr}
+02034dbc  ldr r0,[r0,#0x4]
+02034dc0  ldr r1,[r0,#0x0]
+02034dc4  ldr r1,[r1,#0x3c]
+02034dc8  blx r1
+02034dcc  movs r4,r0
+02034dd0  moveq r0,#0x0
+02034dd4  ldmiaeq sp!,{r4,pc}
+02034dd8  ldr r1,[r4,#0x1c]
+02034ddc  cmp r1,#0x0
+02034de0  bne 0x02034df0
+02034de4  ldr r1,[r0,#0x0]
+02034de8  ldr r1,[r1,#0x14]
+02034dec  blx r1
+02034df0  ldr r0,[r4,#0x1c]
+02034df4  ldmia sp!,{r4,pc}

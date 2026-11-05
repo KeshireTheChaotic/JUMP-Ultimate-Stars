@@ -1,0 +1,10 @@
+02153d78  stmdb sp!,{r4,lr}
+02153d7c  ldr r0,[r0,#0x4]
+02153d80  ldr r4,[r0,#0x10]
+02153d84  blx 0x021b65cc
+02153d88  ldr r0,[r4,#0x10]
+02153d8c  ldr r0,[r0,#0x4]
+02153d90  blx 0x021b65d8
+02153d94  ldr r0,[r4,#0x33c]
+02153d98  bl 0x02156280
+02153d9c  ldmia sp!,{r4,pc}

@@ -1,0 +1,11 @@
+02073e90  stmdb sp!,{r3,lr}
+02073e94  strb r1,[r0,#0x0]
+02073e98  strb r2,[r0,#0x1]
+02073e9c  mov r1,#0x0
+02073ea0  strh r1,[r0,#0x2]
+02073ea4  str r3,[r0,#0x4]
+02073ea8  ldr r2,[sp,#0x8]
+02073eac  strb r1,[r0,#0x8]
+02073eb0  str r2,[r0,#0xc]
+02073eb4  blx r2
+02073eb8  ldmia sp!,{r3,pc}

@@ -1,0 +1,1 @@
+{"module":"arm9_ov03","address":"02152478","name":"FUN_02152478","thumb":false,"body_bytes":40,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":[],"unresolved_call_targets":["021b65e0"],"status":"decompiled","asm_file":"arm9_ov03_02152478.asm","c_file":"arm9_ov03_02152478.c"}

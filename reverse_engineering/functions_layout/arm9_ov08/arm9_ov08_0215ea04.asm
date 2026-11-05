@@ -1,0 +1,11 @@
+0215ea04  ldr r0,[0x0215ea1c]
+0215ea06  ldrh r1,[r0,#0x0]
+0215ea08  ldr r0,[0x0215ea20]
+0215ea0a  and r1,r0
+0215ea0c  asr r0,r1,#0xf
+0215ea0e  cmp r0,#0x0
+0215ea10  beq 0x0215ea16
+0215ea12  mov r0,#0x1
+0215ea14  bx lr
+0215ea16  mov r0,#0x0
+0215ea18  bx lr

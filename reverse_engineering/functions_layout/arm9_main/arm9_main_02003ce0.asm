@@ -1,0 +1,14 @@
+02003ce0  push {r0,r1,r2,r3}
+02003ce2  push {r4,lr}
+02003ce4  add r4,sp,#0xc
+02003ce6  mov r3,#0x3
+02003ce8  mov r1,#0x0
+02003cea  bic r4,r3
+02003cec  ldr r2,[sp,#0xc]
+02003cee  mvn r1,r1
+02003cf0  add r3,r4,#0x4
+02003cf2  bl 0x02003c88
+02003cf6  pop {r4}
+02003cf8  pop {r3}
+02003cfa  add sp,#0x10
+02003cfc  bx r3

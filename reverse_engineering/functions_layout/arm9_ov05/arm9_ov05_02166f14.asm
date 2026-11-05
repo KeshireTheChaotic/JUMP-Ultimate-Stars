@@ -1,0 +1,12 @@
+02166f14  stmdb sp!,{r4,lr}
+02166f18  mov r4,r0
+02166f1c  bl 0x0207382c
+02166f20  cmp r0,#0x0
+02166f24  ldmiaeq sp!,{r4,pc}
+02166f28  mov r0,#0x3
+02166f2c  mov r1,#0x1
+02166f30  bl 0x02073ebc
+02166f34  ldr r0,[r4,#0x4]
+02166f38  ldr r1,[0x2166f44]
+02166f3c  bl 0x02028384
+02166f40  ldmia sp!,{r4,pc}

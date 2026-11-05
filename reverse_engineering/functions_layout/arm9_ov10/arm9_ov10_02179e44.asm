@@ -1,0 +1,16 @@
+02179e44  push {lr}
+02179e46  sub sp,#0x4
+02179e48  bl 0x02178448
+02179e4c  mov r2,#0x2
+02179e4e  ldr r1,[0x02179e6c]
+02179e50  strb r2,[r0,r1]
+02179e52  bl 0x02178448
+02179e56  ldr r0,[r0,#0x4]
+02179e58  ldr r0,[r0,#0x0]
+02179e5a  bl 0x0218a888
+02179e5e  bl 0x02178448
+02179e62  mov r2,#0x0
+02179e64  ldr r1,[0x02179e6c]
+02179e66  strb r2,[r0,r1]
+02179e68  add sp,#0x4
+02179e6a  pop {pc}

@@ -1,0 +1,12 @@
+02159cd8  stmdb sp!,{r3,lr}
+02159cdc  sub sp,sp,#0x8
+02159ce0  ldr r12,[r2,#0x0]
+02159ce4  add r2,sp,#0x0
+02159ce8  str r12,[sp,#0x0]
+02159cec  ldr r12,[r1,#0x0]
+02159cf0  add r1,sp,#0x4
+02159cf4  str r12,[sp,#0x4]
+02159cf8  ldr r0,[r0,#0x4]
+02159cfc  blx 0x021b6f84
+02159d00  add sp,sp,#0x8
+02159d04  ldmia sp!,{r3,pc}

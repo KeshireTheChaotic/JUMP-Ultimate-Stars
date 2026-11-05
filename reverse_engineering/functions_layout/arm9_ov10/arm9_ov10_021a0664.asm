@@ -1,0 +1,15 @@
+021a0664  stmdb sp!,{r4,lr}
+021a0668  mov r4,r0
+021a066c  bl 0x0219a93c
+021a0670  cmp r0,#0x0
+021a0674  movne r0,#0x0
+021a0678  ldmiane sp!,{r4,pc}
+021a067c  ldrsb r0,[r4,#0x0]
+021a0680  cmp r0,#0x0
+021a0684  ldrsbeq r0,[r4,#0x1]
+021a0688  cmpeq r0,#0x0
+021a068c  ldrsbeq r0,[r4,#0x2]
+021a0690  cmpeq r0,#0x0
+021a0694  movne r0,#0x1
+021a0698  moveq r0,#0x0
+021a069c  ldmia sp!,{r4,pc}

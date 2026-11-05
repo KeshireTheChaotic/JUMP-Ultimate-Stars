@@ -1,0 +1,9 @@
+021af9e0  stmdb sp!,{r4,lr}
+021af9e4  mov r4,r0
+021af9e8  blx 0x021aed58
+021af9ec  mov r1,r0
+021af9f0  mov r0,r4
+021af9f4  ldr r2,[r0,#0x0]
+021af9f8  ldr r2,[r2,#0x198]
+021af9fc  blx r2
+021afa00  ldmia sp!,{r4,pc}

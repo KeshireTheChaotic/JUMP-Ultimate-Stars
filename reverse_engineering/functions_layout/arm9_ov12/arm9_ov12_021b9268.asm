@@ -1,0 +1,7 @@
+021b9268  push {r4,lr}
+021b926a  add r4,r0,#0x0
+021b926c  blx 0x020152d0
+021b9270  add r0,r4,#0x0
+021b9272  blx 0x0201b244
+021b9276  add r0,r4,#0x0
+021b9278  pop {r4,pc}

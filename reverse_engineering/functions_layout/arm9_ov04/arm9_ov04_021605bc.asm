@@ -1,0 +1,9 @@
+021605bc  stmdb sp!,{r3,lr}
+021605c0  mov r12,#0x40
+021605c4  ldr r0,[0x21605e0]
+021605c8  sub r1,r12,#0x64
+021605cc  sub r2,r12,#0x7c
+021605d0  mov r3,#0x24
+021605d4  str r12,[sp,#0x0]
+021605d8  bl 0x0214e6e4
+021605dc  ldmia sp!,{r3,pc}

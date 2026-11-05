@@ -1,0 +1,14 @@
+021607c0  cmp r0,#0x0
+021607c4  bxeq lr
+021607c8  ldrb r2,[r0,#0x6a]
+021607cc  cmp r2,r1
+021607d0  bcs 0x021607f0
+021607d4  strb r1,[r0,#0x6a]
+021607d8  ldr r2,[r0,#0x38]
+021607dc  ldr r1,[0x21607f8]
+021607e0  cmp r2,r1
+021607e4  addcc r1,r2,#0x1
+021607e8  strcc r1,[r0,#0x38]
+021607ec  bx lr
+021607f0  strbhi r1,[r0,#0x6a]
+021607f4  bx lr

@@ -1,0 +1,10 @@
+021b2b04  add r3,r0,#0x0
+021b2b06  mov r2,#0x0
+021b2b08  add r3,#0xc
+021b2b0a  str r2,[r0,#0xc]
+021b2b0c  str r2,[r3,#0x4]
+021b2b0e  add r1,r3,#0x4
+021b2b10  str r1,[r3,#0x8]
+021b2b12  str r2,[r0,#0x18]
+021b2b14  str r2,[r0,#0x1c]
+021b2b16  bx lr

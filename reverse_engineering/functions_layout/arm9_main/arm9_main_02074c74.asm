@@ -1,0 +1,9 @@
+02074c74  stmdb sp!,{r3,lr}
+02074c78  mov r1,r0
+02074c7c  mov r0,#0x0
+02074c80  bl 0x02010adc
+02074c84  cmp r0,#0x0
+02074c88  moveq r0,#0x0
+02074c8c  ldmiaeq sp!,{r3,pc}
+02074c90  bl 0x02011b38
+02074c94  ldmia sp!,{r3,pc}

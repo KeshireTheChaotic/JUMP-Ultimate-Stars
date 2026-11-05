@@ -1,0 +1,1 @@
+{"module":"arm9_ov10","address":"02189298","name":"FUN_02189298","thumb":true,"body_bytes":128,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["02001cbc","02183f3c","0218913c","02189470"],"unresolved_call_targets":[],"status":"decompiled","asm_file":"arm9_ov10_02189298.asm","c_file":"arm9_ov10_02189298.c"}

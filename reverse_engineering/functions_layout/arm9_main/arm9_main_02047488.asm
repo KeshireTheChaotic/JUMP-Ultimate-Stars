@@ -1,0 +1,10 @@
+02047488  stmdb sp!,{r3,r4,r5,lr}
+0204748c  mov r5,r0
+02047490  add r0,sp,#0x0
+02047494  mov r1,#0x1
+02047498  ldr r4,[r5,#0x4]
+0204749c  bl 0x0200f69c
+020474a0  ldr r0,[r5,#0x4]
+020474a4  sub r0,r0,r4
+020474a8  str r0,[r5,#0x4]
+020474ac  ldmia sp!,{r3,r4,r5,pc}

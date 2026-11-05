@@ -1,0 +1,10 @@
+037fc400  ldr r0,[0x37fc428]
+037fc404  ldr r0,[r0,#0x8]
+037fc408  b 0x037fc410
+037fc40c  ldr r0,[r0,#0x4c]
+037fc410  cmp r0,#0x0
+037fc414  bxeq lr
+037fc418  ldr r1,[r0,#0x48]
+037fc41c  cmp r1,#0x1
+037fc420  bne 0x037fc40c
+037fc424  bx lr

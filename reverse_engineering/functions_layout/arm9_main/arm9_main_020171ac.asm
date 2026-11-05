@@ -1,0 +1,14 @@
+020171ac  stmdb sp!,{r4,lr}
+020171b0  mov r4,r0
+020171b4  bl 0x02016434
+020171b8  ldr r1,[0x20171e4]
+020171bc  ldr r0,[0x20171e8]
+020171c0  str r1,[r4,#0x0]
+020171c4  ldr r0,[r0,#0x410]
+020171c8  ldr r1,[sp,#0x8]
+020171cc  ldr r2,[r0,#0x0]
+020171d0  ldr r2,[r2,#0x0]
+020171d4  blx r2
+020171d8  str r0,[r4,#0x20]
+020171dc  mov r0,r4
+020171e0  ldmia sp!,{r4,pc}

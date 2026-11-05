@@ -1,0 +1,11 @@
+02053334  stmdb sp!,{lr}
+02053338  sub sp,sp,#0x4
+0205333c  ldr r0,[r0,#0xb0]
+02053340  cmp r0,#0x0
+02053344  addeq sp,sp,#0x4
+02053348  ldmiaeq sp!,{lr}
+0205334c  bxeq lr
+02053350  bl 0x02054e50
+02053354  add sp,sp,#0x4
+02053358  ldmia sp!,{lr}
+0205335c  bx lr

@@ -1,0 +1,14 @@
+027eb360  ldr r1,[0x27eb398]
+027eb364  ands r1,r0,r1
+027eb368  moveq r0,#0x5
+027eb36c  bxeq lr
+027eb370  ldr r2,[0x27eb39c]
+027eb374  ldr r1,[r2,#0x0]
+027eb378  add r1,r1,#0x300
+027eb37c  strh r0,[r1,#0x2c]
+027eb380  ldr r1,[r2,#0x0]
+027eb384  ldr r0,[r1,#0x340]
+027eb388  orr r0,r0,#0x4
+027eb38c  str r0,[r1,#0x340]
+027eb390  mov r0,#0x0
+027eb394  bx lr

@@ -1,0 +1,11 @@
+0214f91c  ldr r2,[r0,#0x8]
+0214f91e  mov r1,#0xc
+0214f920  add r3,r2,#0x0
+0214f922  mul r3,r1
+0214f924  ldr r1,[0x0214f934]
+0214f926  ldr r1,[r1,r3]
+0214f928  str r1,[r0,#0x0]
+0214f92a  mov r1,#0x1
+0214f92c  add r0,#0xc8
+0214f92e  strb r1,[r0,#0x0]
+0214f930  bx lr

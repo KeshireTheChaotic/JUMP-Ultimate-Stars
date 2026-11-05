@@ -1,0 +1,11 @@
+0214e330  ldr r3,[r0,#0x4]
+0214e334  mov r0,#0x0
+0214e338  str r1,[r3,#0x8e8]
+0214e33c  str r0,[r3,#0x8ec]
+0214e340  cmp r2,#0x0
+0214e344  str r2,[r3,#0x8f4]
+0214e348  movne r0,#0x2
+0214e34c  str r0,[r3,#0x8f0]
+0214e350  mov r0,#0x1
+0214e354  strb r0,[r3,#0x902]
+0214e358  bx lr

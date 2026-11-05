@@ -1,0 +1,11 @@
+02037f58  ldr r2,[r1,#0x4]
+02037f5c  cmp r2,#0x0
+02037f60  ldrne r0,[r1,#0x0]
+02037f64  strne r0,[r2,#0x0]
+02037f68  ldreq r2,[r1,#0x0]
+02037f6c  streq r2,[r0,#0x0]
+02037f70  ldr r2,[r1,#0x0]
+02037f74  cmp r2,#0x0
+02037f78  ldrne r0,[r1,#0x4]
+02037f7c  strne r0,[r2,#0x4]
+02037f80  bx lr

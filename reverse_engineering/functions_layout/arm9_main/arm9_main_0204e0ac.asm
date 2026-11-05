@@ -1,0 +1,12 @@
+0204e0ac  stmdb sp!,{r4,lr}
+0204e0b0  mov r4,r0
+0204e0b4  bl 0x02014980
+0204e0b8  mov r0,r4
+0204e0bc  bl 0x0201a9ec
+0204e0c0  cmp r0,#0x0
+0204e0c4  bne 0x0204e0d4
+0204e0c8  mov r0,r4
+0204e0cc  mov r1,#0x1
+0204e0d0  bl 0x0201a958
+0204e0d4  mov r0,r4
+0204e0d8  ldmia sp!,{r4,pc}

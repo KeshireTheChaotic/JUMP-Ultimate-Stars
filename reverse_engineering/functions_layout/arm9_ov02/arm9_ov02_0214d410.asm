@@ -1,0 +1,9 @@
+0214d410  stmdb sp!,{r3,lr}
+0214d414  ldrsb r2,[r0,#0x55]
+0214d418  mvn r1,#0x0
+0214d41c  cmp r2,r1
+0214d420  ldmiaeq sp!,{r3,pc}
+0214d424  strb r1,[r0,#0x55]
+0214d428  mov r0,#0x8
+0214d42c  bl 0x0207367c
+0214d430  ldmia sp!,{r3,pc}

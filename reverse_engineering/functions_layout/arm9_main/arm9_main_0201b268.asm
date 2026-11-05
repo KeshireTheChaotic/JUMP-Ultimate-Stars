@@ -1,0 +1,9 @@
+0201b268  stmdb sp!,{r4,lr}
+0201b26c  mov r4,r0
+0201b270  bl 0x0201a9ec
+0201b274  cmp r0,#0x0
+0201b278  ldmiane sp!,{r4,pc}
+0201b27c  mov r0,r4
+0201b280  mov r1,#0x1
+0201b284  bl 0x0201a958
+0201b288  ldmia sp!,{r4,pc}

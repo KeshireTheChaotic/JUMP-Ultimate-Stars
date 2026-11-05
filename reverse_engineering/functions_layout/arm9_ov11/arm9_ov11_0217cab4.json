@@ -1,0 +1,1 @@
+{"module":"arm9_ov11","address":"0217cab4","name":"FUN_0217cab4","thumb":false,"body_bytes":580,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["02174f4c","02175628","0217aa58","0217bfe0"],"unresolved_call_targets":["0216a8f0"],"status":"decompiled","asm_file":"arm9_ov11_0217cab4.asm","c_file":"arm9_ov11_0217cab4.c"}

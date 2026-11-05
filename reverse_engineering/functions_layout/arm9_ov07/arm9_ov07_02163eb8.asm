@@ -1,0 +1,10 @@
+02163eb8  stmdb sp!,{r4,lr}
+02163ebc  mov r4,r0
+02163ec0  ldr r1,[r4,#0x18]
+02163ec4  cmp r1,#0x0
+02163ec8  bne 0x02163ed8
+02163ecc  ldr r1,[r0,#0x0]
+02163ed0  ldr r1,[r1,#0x14]
+02163ed4  blx r1
+02163ed8  ldr r0,[r4,#0x18]
+02163edc  ldmia sp!,{r4,pc}

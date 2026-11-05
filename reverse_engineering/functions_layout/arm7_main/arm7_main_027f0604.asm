@@ -1,0 +1,44 @@
+027f0604  stmdb sp!,{r4,r5,r6,r7,r8,r9,lr}
+027f0608  sub sp,sp,#0x4
+027f060c  mov r9,r0
+027f0610  ldr r1,[0x27f06b4]
+027f0614  ldr r1,[r1,#0x0]
+027f0618  add r8,r1,#0x344
+027f061c  mov r7,#0x0
+027f0620  mov r1,#0x1
+027f0624  bl 0x027e93d0
+027f0628  add r7,r7,#0x2
+027f062c  mov r6,#0x0
+027f0630  ldr r4,[0x27f06b8]
+027f0634  mov r5,#0x1
+027f0638  mov r1,r5, lsl r6
+027f063c  ldrh r0,[r8,#0x62]
+027f0640  ands r0,r0,r1
+027f0644  beq 0x027f0688
+027f0648  ldrh r0,[r8,#0x60]
+027f064c  ands r0,r0,r1
+027f0650  beq 0x027f0670
+027f0654  add r0,r9,r7
+027f0658  mov r1,r6, lsl #0x1
+027f065c  ldrh r1,[r4,r1]
+027f0660  orr r1,r1,#0x80
+027f0664  and r1,r1,#0xff
+027f0668  bl 0x027e93d0
+027f066c  b 0x027f0684
+027f0670  add r0,r9,r7
+027f0674  mov r1,r6, lsl #0x1
+027f0678  ldrh r1,[r4,r1]
+027f067c  and r1,r1,#0xff
+027f0680  bl 0x027e93d0
+027f0684  add r7,r7,#0x1
+027f0688  add r6,r6,#0x1
+027f068c  cmp r6,#0x10
+027f0690  bcc 0x027f0638
+027f0694  add r0,r9,#0x1
+027f0698  sub r1,r7,#0x2
+027f069c  and r1,r1,#0xff
+027f06a0  bl 0x027e93d0
+027f06a4  mov r0,r7
+027f06a8  add sp,sp,#0x4
+027f06ac  ldmia sp!,{r4,r5,r6,r7,r8,r9,lr}
+027f06b0  bx lr

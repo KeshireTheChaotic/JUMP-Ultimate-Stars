@@ -1,0 +1,15 @@
+021505e8  stmdb sp!,{r3,r4,lr}
+021505ec  sub sp,sp,#0x4
+021505f0  mov r2,#0x0
+021505f4  mov r12,#0x1f
+021505f8  mov r4,r0
+021505fc  sub r3,r2,#0x1
+02150600  mov r1,#0x32
+02150604  str r12,[sp,#0x0]
+02150608  bl 0x02150660
+0215060c  mov r0,r4
+02150610  mov r1,#0x0
+02150614  mov r2,#0x3
+02150618  bl 0x02150560
+0215061c  add sp,sp,#0x4
+02150620  ldmia sp!,{r3,r4,pc}

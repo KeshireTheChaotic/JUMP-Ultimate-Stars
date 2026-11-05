@@ -1,0 +1,13 @@
+02156f5c  push {r3,lr}
+02156f5e  ldr r1,[r0,#0x4]
+02156f60  mov r2,#0x49
+02156f62  ldr r0,[r1,#0x10]
+02156f64  lsl r2,r2,#0x2
+02156f66  ldr r0,[r0,#0x30]
+02156f68  ldr r1,[r1,r2]
+02156f6a  ldr r0,[r0,#0x4]
+02156f6c  add r2,#0x74
+02156f6e  ldr r3,[r0,#0x0]
+02156f70  ldr r3,[r3,r2]
+02156f72  blx r3
+02156f74  pop {r3,pc}

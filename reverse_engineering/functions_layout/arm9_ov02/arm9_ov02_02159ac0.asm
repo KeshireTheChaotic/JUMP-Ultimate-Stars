@@ -1,0 +1,31 @@
+02159ac0  stmdb sp!,{r3,r4,r5,lr}
+02159ac4  mov r4,r1
+02159ac8  add r1,r4,#0xa00
+02159acc  ldrh r1,[r1,#0x88]
+02159ad0  mov r5,r0
+02159ad4  tst r1,#0x1
+02159ad8  beq 0x02159ae0
+02159adc  bl 0x020735e4
+02159ae0  ldrb r1,[r5,#0x4]
+02159ae4  cmp r1,#0x6
+02159ae8  bne 0x02159b04
+02159aec  ldrb r0,[r5,#0x5]
+02159af0  bl 0x0207367c
+02159af4  add r0,r4,#0xa00
+02159af8  ldrh r1,[r0,#0x88]
+02159afc  bic r1,r1,#0x1
+02159b00  b 0x02159b30
+02159b04  ldr r0,[0x2159b3c]
+02159b08  ldr r0,[r0,r1,lsl #0x2]
+02159b0c  bl 0x020734e0
+02159b10  ldrb r2,[r5,#0x4]
+02159b14  ldr r0,[0x2159b40]
+02159b18  ldrb r1,[r5,#0x5]
+02159b1c  ldr r0,[r0,r2,lsl #0x2]
+02159b20  bl 0x0207361c
+02159b24  add r0,r4,#0xa00
+02159b28  ldrh r1,[r0,#0x88]
+02159b2c  orr r1,r1,#0x1
+02159b30  strh r1,[r0,#0x88]
+02159b34  mov r0,#0x0
+02159b38  ldmia sp!,{r3,r4,r5,pc}

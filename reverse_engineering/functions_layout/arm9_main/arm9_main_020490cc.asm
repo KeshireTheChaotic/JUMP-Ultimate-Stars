@@ -1,0 +1,10 @@
+020490cc  stmdb sp!,{r4,lr}
+020490d0  mov r4,r0
+020490d4  bl 0x0201a9ec
+020490d8  cmp r0,#0x0
+020490dc  bne 0x020490ec
+020490e0  mov r0,r4
+020490e4  mov r1,#0x1
+020490e8  bl 0x0201a958
+020490ec  mov r0,r4
+020490f0  ldmia sp!,{r4,pc}

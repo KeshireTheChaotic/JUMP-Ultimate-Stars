@@ -1,0 +1,14 @@
+0205d054  stmdb sp!,{r4,r5,lr}
+0205d058  sub sp,sp,#0x4
+0205d05c  mov r4,r1
+0205d060  mov r1,r2
+0205d064  mov r5,r0
+0205d068  mov r2,r3
+0205d06c  bl 0x0205d0bc
+0205d070  mov r0,r5
+0205d074  add r1,r5,r4
+0205d078  bl 0x02056738
+0205d07c  mov r0,r5
+0205d080  bl 0x02057870
+0205d084  add sp,sp,#0x4
+0205d088  ldmia sp!,{r4,r5,pc}

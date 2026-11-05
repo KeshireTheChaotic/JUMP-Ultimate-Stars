@@ -1,0 +1,10 @@
+0218c2c8  push {lr}
+0218c2ca  sub sp,#0x4
+0218c2cc  ldr r2,[r0,#0x0]
+0218c2ce  ldr r0,[r2,#0x0]
+0218c2d0  ldrh r2,[r2,#0x4]
+0218c2d2  mul r0,r2
+0218c2d4  blx 0x0200d338
+0218c2d8  add r0,r1,#0x0
+0218c2da  add sp,#0x4
+0218c2dc  pop {pc}

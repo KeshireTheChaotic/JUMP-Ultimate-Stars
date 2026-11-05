@@ -1,0 +1,11 @@
+0214ce84  push {r4,r5,lr}
+0214ce86  sub sp,#0x4
+0214ce88  ldr r5,[sp,#0x14]
+0214ce8a  ldr r4,[sp,#0x10]
+0214ce8c  strb r5,[r4,#0x0]
+0214ce8e  str r4,[sp,#0x0]
+0214ce90  bl 0x02193a0c
+0214ce94  add sp,#0x4
+0214ce96  pop {r4,r5}
+0214ce98  pop {r3}
+0214ce9a  bx r3

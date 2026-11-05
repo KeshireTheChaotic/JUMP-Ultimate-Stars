@@ -1,0 +1,11 @@
+0215a250  ldr r0,[0x0215a268]
+0215a252  ldrh r1,[r0,#0x0]
+0215a254  ldr r0,[0x0215a26c]
+0215a256  and r1,r0
+0215a258  asr r0,r1,#0xf
+0215a25a  cmp r0,#0x0
+0215a25c  beq 0x0215a262
+0215a25e  mov r0,#0x1
+0215a260  bx lr
+0215a262  mov r0,#0x0
+0215a264  bx lr

@@ -1,0 +1,17 @@
+0205eb74  stmdb sp!,{lr}
+0205eb78  sub sp,sp,#0x4
+0205eb7c  add r1,r1,r0
+0205eb80  add r0,r0,#0x3
+0205eb84  bic r1,r1,#0x3
+0205eb88  bic r0,r0,#0x3
+0205eb8c  cmp r0,r1
+0205eb90  bhi 0x0205eba0
+0205eb94  sub r3,r1,r0
+0205eb98  cmp r3,#0x30
+0205eb9c  bcs 0x0205ebac
+0205eba0  add sp,sp,#0x4
+0205eba4  mov r0,#0x0
+0205eba8  ldmia sp!,{pc}
+0205ebac  bl 0x0205ecd0
+0205ebb0  add sp,sp,#0x4
+0205ebb4  ldmia sp!,{pc}

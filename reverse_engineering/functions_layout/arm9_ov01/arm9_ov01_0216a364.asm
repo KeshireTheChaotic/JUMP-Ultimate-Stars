@@ -1,0 +1,17 @@
+0216a364  push {r3,lr}
+0216a366  mov r0,#0x10
+0216a368  str r0,[sp,#0x0]
+0216a36a  mov r1,#0x4
+0216a36c  ldr r0,[0x0216a38c]
+0216a36e  sub r2,r1,#0x6
+0216a370  mov r3,#0xe4
+0216a372  blx 0x0214dc98
+0216a376  mov r3,#0x0
+0216a378  add r1,r3,#0x0
+0216a37a  add r2,r3,#0x0
+0216a37c  ldr r0,[0x0216a390]
+0216a37e  sub r1,#0x30
+0216a380  sub r2,#0x10
+0216a382  str r3,[sp,#0x0]
+0216a384  blx 0x0214dc98
+0216a388  pop {r3,pc}

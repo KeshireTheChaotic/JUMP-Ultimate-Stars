@@ -1,0 +1,9 @@
+0203147c  stmdb sp!,{r4,lr}
+02031480  mov r4,r0
+02031484  ldr r0,[r4,#0x258]
+02031488  cmp r0,#0x0
+0203148c  ldmiaeq sp!,{r4,pc}
+02031490  bl 0x020275ec
+02031494  mov r0,#0x0
+02031498  str r0,[r4,#0x258]
+0203149c  ldmia sp!,{r4,pc}

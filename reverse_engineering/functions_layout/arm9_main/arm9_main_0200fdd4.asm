@@ -1,0 +1,17 @@
+0200fdd4  push {r4,r5,r6,lr}
+0200fdd6  ldr r1,[r0,#0x0]
+0200fdd8  add r6,r0,#0x0
+0200fdda  ldr r1,[r1,#0x1c]
+0200fddc  blx r1
+0200fdde  add r4,r0,#0x0
+0200fde0  mov r5,#0x0
+0200fde2  b 0x0200fdf0
+0200fde4  add r0,r6,#0x0
+0200fde6  ldr r2,[r0,#0x0]
+0200fde8  add r1,r5,#0x0
+0200fdea  ldr r2,[r2,#0x64]
+0200fdec  blx r2
+0200fdee  add r5,r5,#0x1
+0200fdf0  cmp r5,r4
+0200fdf2  bcc 0x0200fde4
+0200fdf4  pop {r4,r5,r6,pc}

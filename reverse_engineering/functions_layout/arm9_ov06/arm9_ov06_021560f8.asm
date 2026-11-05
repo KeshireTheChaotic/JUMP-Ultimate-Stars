@@ -1,0 +1,11 @@
+021560f8  stmdb sp!,{r4,lr}
+021560fc  mov r4,r0
+02156100  ldrsb r2,[r4,#0xa3]
+02156104  mvn r1,#0x0
+02156108  cmp r2,r1
+0215610c  ldmiaeq sp!,{r4,pc}
+02156110  mov r1,#0x0
+02156114  bl 0x021565a4
+02156118  mvn r0,#0x0
+0215611c  strb r0,[r4,#0xa3]
+02156120  ldmia sp!,{r4,pc}

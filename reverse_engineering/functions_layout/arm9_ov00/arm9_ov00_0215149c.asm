@@ -1,0 +1,11 @@
+0215149c  stmdb sp!,{r4,lr}
+021514a0  ldr r1,[r0,#0x4]
+021514a4  mov r0,#0x78
+021514a8  ldr r4,[r1,#0x10]
+021514ac  mov r1,#0x1
+021514b0  bl 0x0207342c
+021514b4  mov r1,#0x1
+021514b8  mov r0,r4
+021514bc  strb r1,[r4,#0x82]
+021514c0  bl 0x02150f48
+021514c4  ldmia sp!,{r4,pc}

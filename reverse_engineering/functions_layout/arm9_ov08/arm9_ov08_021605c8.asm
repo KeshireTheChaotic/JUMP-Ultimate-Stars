@@ -1,0 +1,6 @@
+021605c8  push {lr}
+021605ca  sub sp,#0x4
+021605cc  bl 0x021604c8
+021605d0  bl 0x021605c4
+021605d4  add sp,#0x4
+021605d6  pop {pc}

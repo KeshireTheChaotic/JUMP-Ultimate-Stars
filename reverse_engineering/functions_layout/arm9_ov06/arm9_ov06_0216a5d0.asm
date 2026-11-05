@@ -1,0 +1,13 @@
+0216a5d0  ldrsb r1,[r0,#0x48]
+0216a5d4  cmp r1,#0x0
+0216a5d8  bne 0x0216a5fc
+0216a5dc  ldrsb r2,[r0,#0x47]
+0216a5e0  add r1,r2,#0x1
+0216a5e4  strb r1,[r0,#0x47]
+0216a5e8  cmp r2,#0x3c
+0216a5ec  movgt r1,#0x5
+0216a5f0  strbgt r1,[r0,#0x46]
+0216a5f4  movgt r0,#0x1
+0216a5f8  bxgt lr
+0216a5fc  mov r0,#0x0
+0216a600  bx lr

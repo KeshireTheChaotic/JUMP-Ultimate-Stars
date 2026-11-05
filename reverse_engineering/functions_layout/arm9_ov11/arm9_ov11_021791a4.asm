@@ -1,0 +1,24 @@
+021791a4  stmdb sp!,{r4,lr}
+021791a8  mov lr,#0x0
+021791ac  mov r4,lr
+021791b0  ldrsh r12,[r0,#0x8]
+021791b4  ldr r2,[0x2179204]
+021791b8  b 0x021791dc
+021791bc  rsb r3,r4,#0x7
+021791c0  mov r1,r3, lsl #0x1
+021791c4  ldrsh r1,[r2,r1]
+021791c8  cmp r12,r1
+021791cc  andge lr,r3,#0xff
+021791d0  bge 0x021791e4
+021791d4  add r1,r4,#0x1
+021791d8  and r4,r1,#0xff
+021791dc  cmp r4,#0x8
+021791e0  bcc 0x021791bc
+021791e4  ldr r1,[0x2179208]
+021791e8  ldr r2,[r0,#0x38]
+021791ec  ldrb r0,[r1,lr]
+021791f0  and r1,r2,#0xff
+021791f4  cmp r1,r0
+021791f8  movls r0,#0x1
+021791fc  movhi r0,#0x0
+02179200  ldmia sp!,{r4,pc}

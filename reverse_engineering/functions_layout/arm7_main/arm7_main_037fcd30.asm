@@ -1,0 +1,9 @@
+037fcd30  ldr r2,[r1,#0x10]
+037fcd34  ldr r1,[r1,#0x14]
+037fcd38  cmp r2,#0x0
+037fcd3c  streq r1,[r0,#0x70]
+037fcd40  strne r1,[r2,#0x14]
+037fcd44  cmp r1,#0x0
+037fcd48  streq r2,[r0,#0x6c]
+037fcd4c  strne r2,[r1,#0x10]
+037fcd50  bx lr

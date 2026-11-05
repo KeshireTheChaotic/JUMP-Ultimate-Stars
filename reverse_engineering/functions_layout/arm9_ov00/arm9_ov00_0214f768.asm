@@ -1,0 +1,15 @@
+0214f768  stmdb sp!,{r4,lr}
+0214f76c  mov r4,r0
+0214f770  ldr r0,[r4,#0xc]
+0214f774  ldr r2,[r4,#0x88]
+0214f778  ldr r0,[r0,#0x4]
+0214f77c  add r1,r2,r1
+0214f780  mov r2,#0x0
+0214f784  bl 0x02023894
+0214f788  ldr r0,[r4,#0xc]
+0214f78c  ldr r0,[r0,#0x4]
+0214f790  ldr r0,[r0,#0x68]
+0214f794  ldr r1,[r0,#0x0]
+0214f798  ldr r1,[r1,#0x6c]
+0214f79c  blx r1
+0214f7a0  ldmia sp!,{r4,pc}

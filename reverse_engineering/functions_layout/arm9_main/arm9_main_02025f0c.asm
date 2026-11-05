@@ -1,0 +1,9 @@
+02025f0c  stmdb sp!,{r3,lr}
+02025f10  mov r12,r0
+02025f14  mov r0,r1
+02025f18  mov r1,r2
+02025f1c  mov r2,r3
+02025f20  ldr r3,[sp,#0x8]
+02025f24  ldr r12,[r12,#0x30]
+02025f28  blx r12
+02025f2c  ldmia sp!,{r3,pc}

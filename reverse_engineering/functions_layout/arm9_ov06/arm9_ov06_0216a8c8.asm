@@ -1,0 +1,10 @@
+0216a8c8  stmdb sp!,{r4,lr}
+0216a8cc  mov r4,r0
+0216a8d0  bl 0x0216ac20
+0216a8d4  ldr r0,[r4,#0x18]
+0216a8d8  ldr r1,[r0,#0x0]
+0216a8dc  ldr r1,[r1,#0x8]
+0216a8e0  blx r1
+0216a8e4  mov r0,r4
+0216a8e8  bl 0x0201b244
+0216a8ec  ldmia sp!,{r4,pc}

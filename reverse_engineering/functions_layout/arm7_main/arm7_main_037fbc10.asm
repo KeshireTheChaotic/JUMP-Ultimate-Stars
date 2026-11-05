@@ -1,0 +1,13 @@
+037fbc10  ldr r12,[0x37fbc44]
+037fbc14  ldrh r3,[r12,#0x0]
+037fbc18  mov r1,#0x0
+037fbc1c  strh r1,[r12,#0x0]
+037fbc20  ldr r2,[0x37fbc48]
+037fbc24  ldr r1,[r2,#0x0]
+037fbc28  mvn r0,r0
+037fbc2c  and r0,r1,r0
+037fbc30  str r0,[r2,#0x0]
+037fbc34  ldrh r0,[r12,#0x0]
+037fbc38  strh r3,[r12,#0x0]
+037fbc3c  mov r0,r1
+037fbc40  bx lr

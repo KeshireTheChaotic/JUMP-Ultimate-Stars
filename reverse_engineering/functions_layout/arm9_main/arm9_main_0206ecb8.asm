@@ -1,0 +1,9 @@
+0206ecb8  cmp r1,#0x3
+0206ecbc  ldrne r0,[0x206ecdc]
+0206ecc0  movne r1,#0x1
+0206ecc4  strbne r1,[r0,#0x17]
+0206ecc8  movne r1,#0x9
+0206eccc  ldreq r0,[0x206ecdc]
+0206ecd0  moveq r1,#0xb
+0206ecd4  str r1,[r0,#0x18c]
+0206ecd8  bx lr

@@ -1,0 +1,10 @@
+0218aa60  push {lr}
+0218aa62  sub sp,#0x4
+0218aa64  cmp r3,#0x0
+0218aa66  beq 0x0218aa70
+0218aa68  bl 0x0218aecc
+0218aa6c  add sp,#0x4
+0218aa6e  pop {pc}
+0218aa70  bl 0x0218ac28
+0218aa74  add sp,#0x4
+0218aa76  pop {pc}

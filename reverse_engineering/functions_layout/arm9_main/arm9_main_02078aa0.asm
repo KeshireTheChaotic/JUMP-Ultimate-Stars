@@ -1,0 +1,12 @@
+02078aa0  stmdb sp!,{r4,lr}
+02078aa4  mov r1,#0x0
+02078aa8  mov r2,#0x5c
+02078aac  mov r4,r0
+02078ab0  bl 0x020517fc
+02078ab4  mov r1,#0x10
+02078ab8  mvn r0,#0x0
+02078abc  sub r1,r1,#0x1
+02078ac0  cmp r1,#0x0
+02078ac4  strh r0,[r4],#0x4
+02078ac8  bgt 0x02078abc
+02078acc  ldmia sp!,{r4,pc}

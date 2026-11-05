@@ -1,0 +1,16 @@
+0214e204  push {r3,lr}
+0214e206  ldr r0,[0x0214e228]
+0214e208  ldr r1,[r0,#0x0]
+0214e20a  mov r0,#0x51
+0214e20c  lsl r0,r0,#0x2
+0214e20e  ldr r0,[r1,r0]
+0214e210  ldr r0,[r0,#0x4]
+0214e212  blx 0x02028330
+0214e216  ldr r0,[0x0214e228]
+0214e218  ldr r1,[r0,#0x0]
+0214e21a  mov r0,#0x5
+0214e21c  lsl r0,r0,#0x6
+0214e21e  ldr r0,[r1,r0]
+0214e220  ldr r0,[r0,#0x4]
+0214e222  blx 0x02031520
+0214e226  pop {r3,pc}

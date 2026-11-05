@@ -1,0 +1,15 @@
+0205b460  stmdb sp!,{r4,r5,lr}
+0205b464  sub sp,sp,#0x4
+0205b468  movs r5,r0
+0205b46c  mov r4,r1
+0205b470  addeq sp,sp,#0x4
+0205b474  ldmiaeq sp!,{r4,r5,pc}
+0205b478  ldrb r0,[r5,#0x2e]
+0205b47c  cmp r4,r0
+0205b480  addeq sp,sp,#0x4
+0205b484  ldmiaeq sp!,{r4,r5,pc}
+0205b488  ldrb r0,[r5,#0x3c]
+0205b48c  bl 0x02056a14
+0205b490  strb r4,[r5,#0x2e]
+0205b494  add sp,sp,#0x4
+0205b498  ldmia sp!,{r4,r5,pc}

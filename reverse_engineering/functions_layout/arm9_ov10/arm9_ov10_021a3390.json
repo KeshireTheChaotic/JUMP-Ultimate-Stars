@@ -1,0 +1,1 @@
+{"module":"arm9_ov10","address":"021a3390","name":"FUN_021a3390","thumb":false,"body_bytes":256,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["02028384","0219a0a4","0219a93c","0219a974","0219a9cc"],"unresolved_call_targets":["0216747c"],"status":"decompiled","asm_file":"arm9_ov10_021a3390.asm","c_file":"arm9_ov10_021a3390.c"}

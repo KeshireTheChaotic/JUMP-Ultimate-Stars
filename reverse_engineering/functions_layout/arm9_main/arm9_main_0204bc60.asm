@@ -1,0 +1,9 @@
+0204bc60  stmdb sp!,{r4,lr}
+0204bc64  mov r4,r0
+0204bc68  mov r0,#0x44
+0204bc6c  bl 0x0201a228
+0204bc70  cmp r0,#0x0
+0204bc74  ldmiaeq sp!,{r4,pc}
+0204bc78  mov r1,r4
+0204bc7c  bl 0x02013f10
+0204bc80  ldmia sp!,{r4,pc}

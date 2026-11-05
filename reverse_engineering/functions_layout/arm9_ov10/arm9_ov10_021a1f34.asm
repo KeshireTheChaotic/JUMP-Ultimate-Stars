@@ -1,0 +1,13 @@
+021a1f34  stmdb sp!,{r3,r4,r5,lr}
+021a1f38  mov r5,r0
+021a1f3c  mov r4,r1
+021a1f40  bl 0x021a1f04
+021a1f44  cmp r0,#0x0
+021a1f48  beq 0x021a1f60
+021a1f4c  ldrb r1,[r5,#0x34]
+021a1f50  and r0,r4,#0xff
+021a1f54  cmp r1,r0
+021a1f58  moveq r0,#0x1
+021a1f5c  ldmiaeq sp!,{r3,r4,r5,pc}
+021a1f60  mov r0,#0x0
+021a1f64  ldmia sp!,{r3,r4,r5,pc}

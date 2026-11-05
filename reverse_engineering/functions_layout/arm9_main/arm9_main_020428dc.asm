@@ -1,0 +1,42 @@
+020428dc  stmdb sp!,{r4,r5,lr}
+020428e0  sub sp,sp,#0xc
+020428e4  ldr r0,[0x2042984]
+020428e8  mov lr,#0x0
+020428ec  ldr r5,[r0,#0x824]
+020428f0  ldr r12,[r0,#0x828]
+020428f4  b 0x02042974
+020428f8  ldr r0,[r5,lr,lsl #0x3]
+020428fc  mov r3,lr, lsl #0x3
+02042900  cmp r0,r1
+02042904  addeq r4,r5,r3
+02042908  ldreq r0,[r4,#0x4]
+0204290c  cmpeq r0,r2
+02042910  bne 0x02042970
+02042914  add r0,sp,#0x0
+02042918  mov r1,#0x1
+0204291c  str r4,[sp,#0x8]
+02042920  str r4,[sp,#0x4]
+02042924  bl 0x0200f69c
+02042928  ldr r1,[0x2042984]
+0204292c  mov r0,r4
+02042930  ldr r3,[r1,#0x824]
+02042934  ldr r2,[r1,#0x828]
+02042938  add r1,r4,#0x8
+0204293c  add r2,r3,r2, lsl #0x3
+02042940  sub r3,r2,r4
+02042944  mov r2,r3, asr #0x2
+02042948  add r2,r3,r2, lsr #0x1d
+0204294c  mov r2,r2, asr #0x3
+02042950  sub r2,r2,#0x1
+02042954  mov r2,r2, lsl #0x3
+02042958  blx 0x02002450
+0204295c  ldr r0,[0x2042984]
+02042960  ldr r1,[r0,#0x828]
+02042964  sub r1,r1,#0x1
+02042968  str r1,[r0,#0x828]
+0204296c  b 0x0204297c
+02042970  add lr,lr,#0x1
+02042974  cmp lr,r12
+02042978  bcc 0x020428f8
+0204297c  add sp,sp,#0xc
+02042980  ldmia sp!,{r4,r5,pc}

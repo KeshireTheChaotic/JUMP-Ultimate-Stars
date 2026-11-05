@@ -1,0 +1,11 @@
+0215ca40  ldr r0,[0x0215ca58]
+0215ca42  ldrb r1,[r0,#0x0]
+0215ca44  sub r1,#0xb
+0215ca46  ldr r0,[0x0215ca5c]
+0215ca48  ldrb r1,[r0,r1]
+0215ca4a  ldr r0,[0x0215ca60]
+0215ca4c  ldr r0,[r0,#0x0]
+0215ca4e  ldr r0,[r0,#0x10]
+0215ca50  add r2,r1,#0x0
+0215ca52  ldr r3,[0x0215ca64]
+0215ca54  bx r3

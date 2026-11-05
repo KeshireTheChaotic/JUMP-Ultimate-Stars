@@ -1,0 +1,1 @@
+{"module":"arm7_main","address":"027f783c","name":"FUN_027f783c","thumb":false,"body_bytes":256,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["027f717c","027f71e0","027f72f8","027f7528","027f7554"],"unresolved_call_targets":[],"status":"decompiled","asm_file":"arm7_main_027f783c.asm","c_file":"arm7_main_027f783c.c"}

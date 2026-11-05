@@ -1,0 +1,16 @@
+02059470  stmdb sp!,{r4,lr}
+02059474  mov r4,r0
+02059478  bl 0x02057fe8
+0205947c  cmp r0,#0x0
+02059480  ldmiane sp!,{r4,lr}
+02059484  bxne lr
+02059488  mov r1,r4
+0205948c  mov r0,#0x1
+02059490  bl 0x02058214
+02059494  mov r0,#0x1
+02059498  mov r1,#0x0
+0205949c  bl 0x020580e8
+020594a0  cmp r0,#0x0
+020594a4  moveq r0,#0x2
+020594a8  ldmia sp!,{r4,lr}
+020594ac  bx lr

@@ -1,0 +1,31 @@
+020554cc  stmdb sp!,{r4,r5,r6,r7,r8,r9,r10,lr}
+020554d0  mov r5,r0
+020554d4  mov r10,r1
+020554d8  bl 0x02055238
+020554dc  ldr r4,[0x2055548]
+020554e0  ldr r1,[0x205554c]
+020554e4  ldr r2,[r4,#0x0]
+020554e8  mov r8,r0
+020554ec  and r0,r5,r2
+020554f0  and r9,r0,r1
+020554f4  ldr r6,[0x2055550]
+020554f8  mov r7,#0x1
+020554fc  mov r5,#0x0
+02055500  mov r0,r9
+02055504  bl 0x020554c4
+02055508  rsbs r2,r0,#0x1f
+0205550c  bmi 0x02055538
+02055510  mov r1,r2, lsl #0x1
+02055514  ldrh r0,[r6,r1]
+02055518  mvn r2,r7, lsl r2
+0205551c  cmp r10,r0
+02055520  ldreq r0,[r4,#0x0]
+02055524  and r9,r9,r2
+02055528  andeq r0,r0,r2
+0205552c  strheq r5,[r6,r1]
+02055530  streq r0,[r4,#0x0]
+02055534  b 0x02055500
+02055538  mov r0,r8
+0205553c  bl 0x0205524c
+02055540  ldmia sp!,{r4,r5,r6,r7,r8,r9,r10,lr}
+02055544  bx lr

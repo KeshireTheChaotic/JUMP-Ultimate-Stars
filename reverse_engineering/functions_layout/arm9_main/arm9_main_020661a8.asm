@@ -1,0 +1,11 @@
+020661a8  push {r4,lr}
+020661aa  add r4,r0,#0x0
+020661ac  add r2,r1,#0x0
+020661ae  mov r1,#0x20
+020661b0  blx 0x020662b0
+020661b4  add r0,r4,#0x0
+020661b6  mov r1,#0x1
+020661b8  bl 0x02066214
+020661bc  pop {r4}
+020661be  pop {r3}
+020661c0  bx r3

@@ -1,0 +1,15 @@
+021acaf8  stmdb sp!,{r3,r4,r5,lr}
+021acafc  mov r5,r0
+021acb00  ldrb r2,[r5,#0x24]
+021acb04  mov r4,r1
+021acb08  orr r1,r2,r4
+021acb0c  cmp r2,r1
+021acb10  beq 0x021acb20
+021acb14  ldr r2,[r0,#0x0]
+021acb18  ldr r2,[r2,#0x18]
+021acb1c  blx r2
+021acb20  ldrb r0,[r5,#0x24]
+021acb24  orr r0,r0,r4
+021acb28  orr r0,r0,#0x30
+021acb2c  strb r0,[r5,#0x24]
+021acb30  ldmia sp!,{r3,r4,r5,pc}

@@ -1,0 +1,16 @@
+0214fec8  push {r4,lr}
+0214feca  add r4,r0,#0x0
+0214fecc  bl 0x0214fe44
+0214fed0  cmp r0,#0x0
+0214fed2  beq 0x0214fed8
+0214fed4  mov r0,#0x1
+0214fed6  pop {r4,pc}
+0214fed8  add r0,r4,#0x0
+0214feda  bl 0x0214ff40
+0214fede  cmp r0,#0x1
+0214fee0  bne 0x0214fee6
+0214fee2  mov r0,#0x1
+0214fee4  pop {r4,pc}
+0214fee6  add r0,r4,#0x0
+0214fee8  bl 0x0214f998
+0214feec  pop {r4,pc}

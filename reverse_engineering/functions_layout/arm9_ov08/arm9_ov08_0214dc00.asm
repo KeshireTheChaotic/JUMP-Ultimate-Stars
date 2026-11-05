@@ -1,0 +1,13 @@
+0214dc00  str r4,[r6,#0x4]
+0214dc02  b 0x0214dc58
+0214dc04  add r0,r6,#0x0
+0214dc06  add r0,#0xb0
+0214dc08  add r1,r5,#0x6
+0214dc0a  add r2,r4,#0x0
+0214dc0c  bl 0x0214cf10
+0214dc10  str r4,[r6,#0x4]
+0214dc12  b 0x0214dc58
+0214dc14  add r0,r6,#0x0
+0214dc16  add r0,#0xf0
+0214dc18  add r1,r5,#0x6
+0214dc1a  add r2,r4,#0x0

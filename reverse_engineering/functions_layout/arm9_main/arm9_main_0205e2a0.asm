@@ -1,0 +1,11 @@
+0205e2a0  ldrh r3,[r0,#0xa]
+0205e2a4  mov r2,#0x0
+0205e2a8  add r12,r1,r3
+0205e2ac  str r2,[r12,#0x4]
+0205e2b0  str r2,[r1,r3]
+0205e2b4  str r1,[r0,#0x0]
+0205e2b8  str r1,[r0,#0x4]
+0205e2bc  ldrh r1,[r0,#0x8]
+0205e2c0  add r1,r1,#0x1
+0205e2c4  strh r1,[r0,#0x8]
+0205e2c8  bx lr

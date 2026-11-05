@@ -1,0 +1,15 @@
+02064ec8  ldr r1,[0x02064ee8]
+02064eca  ldr r0,[r1,#0x0]
+02064ecc  mov r3,#0x0
+02064ece  ldr r2,[0x02064eec]
+02064ed0  strh r3,[r2,#0x0]
+02064ed2  ldr r2,[0x02064ef0]
+02064ed4  add r3,r0,#0x0
+02064ed6  and r3,r2
+02064ed8  lsr r3,r3,#0x10
+02064eda  ldr r2,[0x02064ef4]
+02064edc  strh r3,[r2,#0x0]
+02064ede  ldr r2,[0x02064ef8]
+02064ee0  and r0,r2
+02064ee2  str r0,[r1,#0x0]
+02064ee4  bx lr

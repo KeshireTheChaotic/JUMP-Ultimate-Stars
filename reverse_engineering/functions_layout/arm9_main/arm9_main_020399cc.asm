@@ -1,0 +1,17 @@
+020399cc  stmdb sp!,{r3,lr}
+020399d0  ldrh r3,[r0,#0x8]
+020399d4  ldrh r2,[r0,#0xa]
+020399d8  ldr r12,[r0,#0xc]
+020399dc  mov lr,#0x0
+020399e0  mul r2,r3,r2
+020399e4  cmp r2,#0x0
+020399e8  ldmiale sp!,{r3,pc}
+020399ec  b 0x020399f8
+020399f0  str r1,[r12],#0x4
+020399f4  add lr,lr,#0x1
+020399f8  ldrh r3,[r0,#0x8]
+020399fc  ldrh r2,[r0,#0xa]
+02039a00  mul r2,r3,r2
+02039a04  cmp lr,r2
+02039a08  blt 0x020399f0
+02039a0c  ldmia sp!,{r3,pc}

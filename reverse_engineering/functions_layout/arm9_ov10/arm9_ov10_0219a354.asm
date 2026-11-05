@@ -1,0 +1,11 @@
+0219a354  stmdb sp!,{r3,lr}
+0219a358  bl 0x0219caf4
+0219a35c  cmp r0,#0xff
+0219a360  mvneq r0,#0x0
+0219a364  ldmiaeq sp!,{r3,pc}
+0219a368  ldr r1,[0x219a380]
+0219a36c  ldr r1,[r1,#0x0]
+0219a370  add r0,r1,r0
+0219a374  add r0,r0,#0x800
+0219a378  ldrsb r0,[r0,#0xe8]
+0219a37c  ldmia sp!,{r3,pc}

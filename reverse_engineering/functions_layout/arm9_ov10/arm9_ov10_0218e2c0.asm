@@ -1,0 +1,17 @@
+0218e2c0  ldrb r3,[r0,#0x0]
+0218e2c2  add r0,r0,#0x1
+0218e2c4  cmp r3,#0x0
+0218e2c6  beq 0x0218e2e0
+0218e2c8  mov r1,#0xc0
+0218e2ca  add r2,r3,#0x0
+0218e2cc  and r2,r1
+0218e2ce  cmp r2,#0xc0
+0218e2d0  bne 0x0218e2d6
+0218e2d2  add r0,r0,#0x1
+0218e2d4  bx lr
+0218e2d6  add r2,r0,r3
+0218e2d8  add r0,r2,#0x1
+0218e2da  ldrb r3,[r2,#0x0]
+0218e2dc  cmp r3,#0x0
+0218e2de  bne 0x0218e2ca
+0218e2e0  bx lr

@@ -1,0 +1,12 @@
+0208712c  stmdb sp!,{r4,lr}
+02087130  mov r4,r0
+02087134  bl 0x0208c51c
+02087138  cmp r0,#0x0
+0208713c  beq 0x0208714c
+02087140  mov r0,r4
+02087144  bl 0x0219f9e4
+02087148  ldmia sp!,{r4,pc}
+0208714c  ldr r1,[0x208715c]
+02087150  mov r0,r4
+02087154  blx 0x0208bfbc
+02087158  ldmia sp!,{r4,pc}

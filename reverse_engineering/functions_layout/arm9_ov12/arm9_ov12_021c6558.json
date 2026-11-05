@@ -1,0 +1,1 @@
+{"module":"arm9_ov12","address":"021c6558","name":"~ALTextImp_021d46e8","thumb":true,"body_bytes":52,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["02014980","0201b268","02039230","021c7824"],"unresolved_call_targets":[],"status":"decompiled","asm_file":"arm9_ov12_021c6558.asm","c_file":"arm9_ov12_021c6558.c"}

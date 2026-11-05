@@ -1,0 +1,16 @@
+021c38b8  mov r3,#0xa4
+021c38ba  ldr r0,[r0,#0x4]
+021c38bc  mul r3,r1
+021c38be  add r1,r0,r3
+021c38c0  mov r0,#0x20
+021c38c2  ldrsb r0,[r1,r0]
+021c38c4  mov r2,#0x1
+021c38c6  cmp r0,#0x0
+021c38c8  bne 0x021c38d4
+021c38ca  mov r0,#0x48
+021c38cc  ldrsb r0,[r1,r0]
+021c38ce  cmp r0,#0x0
+021c38d0  bne 0x021c38d4
+021c38d2  mov r2,#0x0
+021c38d4  add r0,r2,#0x0
+021c38d6  bx lr

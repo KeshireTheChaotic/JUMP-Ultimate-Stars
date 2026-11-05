@@ -1,0 +1,10 @@
+021a3280  stmdb sp!,{r3,lr}
+021a3284  bl 0x021a3264
+021a3288  cmp r0,#0x0
+021a328c  beq 0x021a32a0
+021a3290  bl 0x0219a9cc
+021a3294  cmp r0,#0x7
+021a3298  moveq r0,#0x1
+021a329c  ldmiaeq sp!,{r3,pc}
+021a32a0  mov r0,#0x0
+021a32a4  ldmia sp!,{r3,pc}

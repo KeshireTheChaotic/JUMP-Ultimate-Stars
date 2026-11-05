@@ -1,0 +1,13 @@
+02156d8c  stmdb sp!,{r3,lr}
+02156d90  ldr r0,[r0,#0x4]
+02156d94  ldr r0,[r0,#0x68]
+02156d98  ldr r1,[r0,#0x0]
+02156d9c  ldr r1,[r1,#0x68]
+02156da0  blx r1
+02156da4  cmp r0,#0x0
+02156da8  moveq r0,#0x1
+02156dac  movne r0,#0x0
+02156db0  cmp r0,#0x0
+02156db4  moveq r0,#0x1
+02156db8  movne r0,#0x0
+02156dbc  ldmia sp!,{r3,pc}

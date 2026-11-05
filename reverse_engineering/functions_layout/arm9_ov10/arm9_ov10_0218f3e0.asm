@@ -1,0 +1,11 @@
+0218f3e0  ldr r0,[0x0218f3f8]
+0218f3e2  ldr r0,[r0,#0x4]
+0218f3e4  add r0,#0xa4
+0218f3e6  ldr r1,[r0,#0x0]
+0218f3e8  cmp r1,#0x0
+0218f3ea  beq 0x0218f3f4
+0218f3ec  mov r0,#0xa
+0218f3ee  strb r0,[r1,#0x8]
+0218f3f0  mov r0,#0x0
+0218f3f2  str r0,[r1,#0x44]
+0218f3f4  bx lr

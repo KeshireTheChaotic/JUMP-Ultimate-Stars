@@ -1,0 +1,9 @@
+021653ac  ldr r12,[r0,#0x4]
+021653b0  mov r0,#0x130
+021653b4  mla r0,r1,r0,r12
+021653b8  add r1,r0,#0x4
+021653bc  mov r0,#0x3c
+021653c0  mla r1,r2,r0,r1
+021653c4  mov r0,#0x14
+021653c8  mla r0,r3,r0,r1
+021653cc  bx lr

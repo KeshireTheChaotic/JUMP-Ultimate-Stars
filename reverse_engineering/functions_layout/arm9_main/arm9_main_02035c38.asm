@@ -1,0 +1,20 @@
+02035c38  ldr r1,[0x2035c88]
+02035c3c  ldr r12,[r1,#0x160]
+02035c40  cmp r12,#0x8
+02035c44  bcs 0x02035c78
+02035c48  mov r3,#0x0
+02035c4c  ldr r2,[0x2035c8c]
+02035c50  b 0x02035c70
+02035c54  ldr r1,[r2,r3,lsl #0x2]
+02035c58  cmp r1,r0
+02035c5c  subeq r1,r12,#0x1
+02035c60  ldreq r1,[r2,r1,lsl #0x2]
+02035c64  streq r1,[r2,r3,lsl #0x2]
+02035c68  beq 0x02035c78
+02035c6c  add r3,r3,#0x1
+02035c70  cmp r3,r12
+02035c74  bcc 0x02035c54
+02035c78  ldrb r1,[r0,#0x28]
+02035c7c  bic r1,r1,#0x1
+02035c80  strb r1,[r0,#0x28]
+02035c84  bx lr

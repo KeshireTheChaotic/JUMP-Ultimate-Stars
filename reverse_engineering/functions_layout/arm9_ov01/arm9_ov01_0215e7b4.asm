@@ -1,0 +1,13 @@
+0215e7b4  push {r4,lr}
+0215e7b6  add r4,r0,#0x0
+0215e7b8  ldr r0,[r4,#0x4]
+0215e7ba  ldr r0,[r0,#0x10]
+0215e7bc  add r1,r0,#0x0
+0215e7be  add r1,#0x88
+0215e7c0  ldrb r1,[r1,#0x0]
+0215e7c2  cmp r1,#0x0
+0215e7c4  bne 0x0215e7ca
+0215e7c6  bl 0x0215e7f4
+0215e7ca  ldr r0,[r4,#0x4]
+0215e7cc  bl 0x021b7170
+0215e7d0  pop {r4,pc}

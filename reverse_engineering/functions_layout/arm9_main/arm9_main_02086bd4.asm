@@ -1,0 +1,12 @@
+02086bd4  stmdb sp!,{r3,lr}
+02086bd8  ldr r0,[0x2086c04]
+02086bdc  ldrb r0,[r0,#0x28]
+02086be0  cmp r0,#0x0
+02086be4  bne 0x02086bf4
+02086be8  bl 0x0208c51c
+02086bec  cmp r0,#0x0
+02086bf0  beq 0x02086bfc
+02086bf4  mov r0,#0x1
+02086bf8  ldmia sp!,{r3,pc}
+02086bfc  mov r0,#0x0
+02086c00  ldmia sp!,{r3,pc}

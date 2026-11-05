@@ -1,0 +1,14 @@
+021563fc  stmdb sp!,{lr}
+02156400  sub sp,sp,#0x14
+02156404  mov r3,#0x0
+02156408  str r3,[sp,#0x0]
+0215640c  str r3,[sp,#0x4]
+02156410  str r3,[sp,#0x8]
+02156414  str r3,[sp,#0xc]
+02156418  str r3,[sp,#0x10]
+0215641c  ldr r1,[r0,#0x74]
+02156420  ldr r12,[r0,#0x70]
+02156424  mov r2,#0x47
+02156428  blx r12
+0215642c  add sp,sp,#0x14
+02156430  ldmia sp!,{pc}

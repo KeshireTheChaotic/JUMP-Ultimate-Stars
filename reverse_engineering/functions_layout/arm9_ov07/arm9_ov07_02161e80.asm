@@ -1,0 +1,21 @@
+02161e80  stmdb sp!,{r4,lr}
+02161e84  mov r4,r1
+02161e88  cmp r0,#0x5
+02161e8c  addls pc,pc,r0, lsl #0x2
+02161e90  ldmia sp!,{r4,pc}
+02161e94  b 0x02161eac
+02161e98  ldmia sp!,{r4,pc}
+02161e9c  ldmia sp!,{r4,pc}
+02161ea0  ldmia sp!,{r4,pc}
+02161ea4  ldmia sp!,{r4,pc}
+02161ea8  ldmia sp!,{r4,pc}
+02161eac  cmp r4,#0x0
+02161eb0  ldmiaeq sp!,{r4,pc}
+02161eb4  mov r0,r4
+02161eb8  bl 0x0201a9ec
+02161ebc  cmp r0,#0x0
+02161ec0  ldmiane sp!,{r4,pc}
+02161ec4  mov r0,r4
+02161ec8  mov r1,#0x1
+02161ecc  bl 0x0201a958
+02161ed0  ldmia sp!,{r4,pc}

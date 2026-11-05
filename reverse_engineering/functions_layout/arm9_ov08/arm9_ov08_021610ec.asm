@@ -1,0 +1,11 @@
+021610ec  ldr r0,[0x02161104]
+021610ee  ldrh r1,[r0,#0x0]
+021610f0  ldr r0,[0x02161108]
+021610f2  and r1,r0
+021610f4  asr r0,r1,#0xf
+021610f6  cmp r0,#0x0
+021610f8  beq 0x021610fe
+021610fa  mov r0,#0x1
+021610fc  bx lr
+021610fe  mov r0,#0x0
+02161100  bx lr

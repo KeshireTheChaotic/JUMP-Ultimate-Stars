@@ -1,0 +1,16 @@
+02172a60  push {r4,lr}
+02172a62  add r4,r0,#0x0
+02172a64  ldr r0,[0x02172a84]
+02172a66  ldr r1,[r0,#0x0]
+02172a68  ldr r0,[0x02172a88]
+02172a6a  add r0,r1,r0
+02172a6c  blx 0x02053ed0
+02172a70  ldr r1,[0x02172a84]
+02172a72  ldr r2,[r1,#0x0]
+02172a74  ldr r0,[0x02172a8c]
+02172a76  str r4,[r2,r0]
+02172a78  ldr r1,[r1,#0x0]
+02172a7a  ldr r0,[0x02172a88]
+02172a7c  add r0,r1,r0
+02172a7e  blx 0x02053e60
+02172a82  pop {r4,pc}

@@ -1,0 +1,12 @@
+0215cd74  push {r4,lr}
+0215cd76  add r4,r0,#0x0
+0215cd78  bl 0x0215cce8
+0215cd7c  mov r0,#0xc1
+0215cd7e  lsl r0,r0,#0x2
+0215cd80  ldr r1,[r4,r0]
+0215cd82  cmp r1,#0x0
+0215cd84  bne 0x0215cd8c
+0215cd86  mov r1,#0x5a
+0215cd88  add r0,#0x8
+0215cd8a  str r1,[r4,r0]
+0215cd8c  pop {r4,pc}

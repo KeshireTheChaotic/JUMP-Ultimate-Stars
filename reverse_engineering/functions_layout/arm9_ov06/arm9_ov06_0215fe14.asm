@@ -1,0 +1,26 @@
+0215fe14  stmdb sp!,{r3,r4,r5,lr}
+0215fe18  mov r5,r0
+0215fe1c  ldr r0,[r5,#0x0]
+0215fe20  mov r4,r1
+0215fe24  ldr r0,[r0,#0x56c]
+0215fe28  ldrh r2,[r5,#0x56]
+0215fe2c  ldrsh r3,[r0,#0x18]
+0215fe30  ldrsh r1,[r0,#0x16]
+0215fe34  mov r0,#0x64
+0215fe38  smulbb r0,r3,r0
+0215fe3c  strh r2,[r5,#0x5a]
+0215fe40  ldrh r2,[r5,#0x58]
+0215fe44  strh r2,[r5,#0x5c]
+0215fe48  bl 0x0200d12c
+0215fe4c  cmp r0,#0x19
+0215fe50  ldmiagt sp!,{r3,r4,r5,pc}
+0215fe54  add r2,r5,r4, lsl #0x1
+0215fe58  ldrh r1,[r5,#0x5a]
+0215fe5c  ldrh r0,[r2,#0x16]
+0215fe60  add r0,r1,r0
+0215fe64  strh r0,[r5,#0x5a]
+0215fe68  ldrh r1,[r5,#0x5c]
+0215fe6c  ldrh r0,[r2,#0x16]
+0215fe70  add r0,r1,r0
+0215fe74  strh r0,[r5,#0x5c]
+0215fe78  ldmia sp!,{r3,r4,r5,pc}

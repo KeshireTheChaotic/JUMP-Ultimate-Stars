@@ -1,0 +1,14 @@
+0214e518  ldrb r1,[r0,#0x6]
+0214e51c  cmp r1,#0x2
+0214e520  movne r0,#0x0
+0214e524  bxne lr
+0214e528  ldr r1,[0x214e550]
+0214e52c  ldrb r2,[r0,#0x7]
+0214e530  ldr r3,[r1,#0x0]
+0214e534  mov r0,#0xc
+0214e538  smulbb r1,r2,r0
+0214e53c  ldr r2,[r3,#0x54]
+0214e540  ldr r0,[r2,r1]
+0214e544  add r1,r2,r1
+0214e548  add r0,r0,r1
+0214e54c  bx lr

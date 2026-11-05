@@ -1,0 +1,17 @@
+02037f14  ldr r2,[r0,#0x0]
+02037f18  cmp r2,#0x0
+02037f1c  streq r1,[r0,#0x0]
+02037f20  moveq r0,#0x0
+02037f24  streq r0,[r1,#0x4]
+02037f28  streq r0,[r1,#0x0]
+02037f2c  bxeq lr
+02037f30  b 0x02037f38
+02037f34  mov r2,r0
+02037f38  ldr r0,[r2,#0x0]
+02037f3c  cmp r0,#0x0
+02037f40  bne 0x02037f34
+02037f44  str r2,[r1,#0x4]
+02037f48  mov r0,#0x0
+02037f4c  str r0,[r1,#0x0]
+02037f50  str r1,[r2,#0x0]
+02037f54  bx lr

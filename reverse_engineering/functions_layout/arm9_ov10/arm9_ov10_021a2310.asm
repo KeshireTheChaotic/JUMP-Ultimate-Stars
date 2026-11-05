@@ -1,0 +1,12 @@
+021a2310  stmdb sp!,{r3,r4,r5,lr}
+021a2314  mov r5,r0
+021a2318  blx 0x02070fd4
+021a231c  mov r4,r0
+021a2320  blx 0x02070ff4
+021a2324  mov r1,r0
+021a2328  mov r0,r4
+021a232c  add r3,r5,#0x40
+021a2330  mov r2,#0x32
+021a2334  str r5,[sp,#0x0]
+021a2338  bl 0x021a24fc
+021a233c  ldmia sp!,{r3,r4,r5,pc}

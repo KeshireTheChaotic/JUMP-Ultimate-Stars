@@ -1,0 +1,15 @@
+02155d18  push {lr}
+02155d1a  sub sp,#0x4
+02155d1c  ldr r0,[0x02155d3c]
+02155d1e  ldr r1,[r0,#0x0]
+02155d20  ldr r0,[0x02155d40]
+02155d22  ldr r0,[r1,r0]
+02155d24  bl 0x02165d6c
+02155d28  ldr r0,[0x02155d3c]
+02155d2a  ldr r1,[r0,#0x0]
+02155d2c  ldr r0,[0x02155d44]
+02155d2e  ldr r0,[r1,r0]
+02155d30  ldr r1,[0x02155d48]
+02155d32  bl 0x021677b8
+02155d36  add sp,#0x4
+02155d38  pop {pc}

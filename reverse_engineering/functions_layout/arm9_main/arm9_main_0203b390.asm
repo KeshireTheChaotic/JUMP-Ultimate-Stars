@@ -1,0 +1,11 @@
+0203b390  stmdb sp!,{r4,lr}
+0203b394  mov r4,r0
+0203b398  add r0,r4,#0x4b0
+0203b39c  bl 0x0201cf24
+0203b3a0  add r0,r4,#0xa4
+0203b3a4  add r0,r0,#0x400
+0203b3a8  bl 0x0201cf24
+0203b3ac  mov r0,r4
+0203b3b0  bl 0x02031e5c
+0203b3b4  mov r0,r4
+0203b3b8  ldmia sp!,{r4,pc}

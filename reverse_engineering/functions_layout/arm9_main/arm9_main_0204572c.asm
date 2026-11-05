@@ -1,0 +1,34 @@
+0204572c  stmdb sp!,{r4,r5,r6,lr}
+02045730  mov r6,r0
+02045734  mov r5,r1
+02045738  mov r4,r2
+0204573c  ldr r12,[sp,#0x10]
+02045740  ldr r2,[r6,#0x74]
+02045744  mov r1,#0x0
+02045748  b 0x02045770
+0204574c  add r0,r6,r1, lsl #0x2
+02045750  ldr r0,[r0,#0x20]
+02045754  cmp r0,r3
+02045758  addeq r0,r6,r1
+0204575c  ldrbeq r0,[r0,#0x60]
+02045760  cmpeq r12,r0
+02045764  moveq r0,r1, lsl #0x5
+02045768  ldmiaeq sp!,{r4,r5,r6,pc}
+0204576c  add r1,r1,#0x1
+02045770  cmp r1,r2
+02045774  bcc 0x0204574c
+02045778  add r0,r6,r2
+0204577c  strb r12,[r0,#0x60]
+02045780  ldr r12,[r6,#0x74]
+02045784  mov r0,r5
+02045788  add r2,r12,#0x1
+0204578c  mov r1,r4
+02045790  str r2,[r6,#0x74]
+02045794  add r2,r6,r12, lsl #0x2
+02045798  str r3,[r2,#0x20]
+0204579c  bl 0x0205401c
+020457a0  mov r0,r6
+020457a4  mov r1,r5
+020457a8  mov r2,r4
+020457ac  bl 0x02045570
+020457b0  ldmia sp!,{r4,r5,r6,pc}

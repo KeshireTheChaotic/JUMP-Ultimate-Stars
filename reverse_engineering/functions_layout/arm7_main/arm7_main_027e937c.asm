@@ -1,0 +1,11 @@
+027e937c  ldr r2,[0x27e93a8]
+027e9380  ldr r3,[r2,#0x0]
+027e9384  add r12,r3,#0x5f0
+027e9388  ldr r2,[0x27e93ac]
+027e938c  and r0,r0,r2
+027e9390  add r2,r0,#0x5
+027e9394  add r0,r3,#0x500
+027e9398  strh r2,[r0,#0xf0]
+027e939c  orr r0,r1,#0x1
+027e93a0  strh r0,[r12,#0x2]
+027e93a4  bx lr

@@ -1,0 +1,16 @@
+0215eac8  stmdb sp!,{lr}
+0215eacc  sub sp,sp,#0x4
+0215ead0  add r2,r0,#0x5000
+0215ead4  str r1,[r2,#0xf4]
+0215ead8  ldr r1,[r2,#0xf0]
+0215eadc  cmp r1,#0x1
+0215eae0  addeq sp,sp,#0x4
+0215eae4  ldmiaeq sp!,{pc}
+0215eae8  ldr r2,[r2,#0xf4]
+0215eaec  cmp r1,r2
+0215eaf0  addeq sp,sp,#0x4
+0215eaf4  ldmiaeq sp!,{pc}
+0215eaf8  mov r2,#0x0
+0215eafc  bl 0x0215f994
+0215eb00  add sp,sp,#0x4
+0215eb04  ldmia sp!,{pc}

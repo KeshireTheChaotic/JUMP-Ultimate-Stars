@@ -1,0 +1,9 @@
+0215c4c8  push {lr}
+0215c4ca  sub sp,#0x4
+0215c4cc  bl 0x02154424
+0215c4d0  mov r0,#0x8
+0215c4d2  bl 0x02166188
+0215c4d6  ldr r0,[0x0215c4e0]
+0215c4d8  bl 0x02157088
+0215c4dc  add sp,#0x4
+0215c4de  pop {pc}

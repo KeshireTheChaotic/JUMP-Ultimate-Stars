@@ -1,0 +1,10 @@
+02016008  stmdb sp!,{r4,lr}
+0201600c  mov r4,r0
+02016010  mov r0,#0x30
+02016014  bl 0x0201a228
+02016018  cmp r0,#0x0
+0201601c  ldmiaeq sp!,{r4,pc}
+02016020  mov r1,r4
+02016024  mov r2,#0x1
+02016028  bl 0x0202a0e4
+0201602c  ldmia sp!,{r4,pc}

@@ -1,0 +1,13 @@
+021598b8  ldr r0,[0x21598ec]
+021598bc  ldr r0,[r0,#0x0]
+021598c0  add r0,r0,#0xb00
+021598c4  ldrsb r1,[r0,#0xe7]
+021598c8  cmp r1,#0x0
+021598cc  bne 0x021598dc
+021598d0  ldrsb r0,[r0,#0xe8]
+021598d4  cmp r0,#0x0
+021598d8  bne 0x021598e4
+021598dc  mov r0,#0x1
+021598e0  bx lr
+021598e4  mov r0,#0x0
+021598e8  bx lr

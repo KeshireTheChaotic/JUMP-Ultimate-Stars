@@ -1,0 +1,122 @@
+03800504  stmdb sp!,{r4,r5,r6,r7,r8,r9,r10,lr}
+03800508  sub sp,sp,#0x18
+0380050c  mov r8,#0x0
+03800510  mov r4,#0x2
+03800514  mov r5,#0x1
+03800518  mov r6,r8
+0380051c  ldr r7,[0x38006ec]
+03800520  mov r10,#0x54
+03800524  mla r9,r8,r10,r7
+03800528  ldrb r0,[r9,#0x3]
+0380052c  mov r0,r0, lsl #0x18
+03800530  movs r0,r0, lsr #0x1b
+03800534  beq 0x03800684
+03800538  ands r0,r0,#0x2
+0380053c  beq 0x0380054c
+03800540  mov r0,r8
+03800544  mov r1,r6
+03800548  bl 0x037ff104
+0380054c  ldrb r0,[r9,#0x3]
+03800550  mov r0,r0, lsl #0x18
+03800554  mov r1,r0, lsr #0x1b
+03800558  ands r0,r1,#0x1
+0380055c  beq 0x03800628
+03800560  ldrb r0,[r9,#0x1]
+03800564  cmp r0,#0x0
+03800568  beq 0x03800580
+0380056c  cmp r0,#0x1
+03800570  beq 0x038005d8
+03800574  cmp r0,#0x2
+03800578  beq 0x03800604
+0380057c  b 0x03800684
+03800580  ldrb r0,[r9,#0x39]
+03800584  cmp r0,#0x0
+03800588  movne r3,r5
+0380058c  moveq r3,r4
+03800590  ldrh r1,[r9,#0x24]
+03800594  ldrh r0,[r9,#0x3e]
+03800598  str r0,[sp,#0x0]
+0380059c  ldr r0,[r9,#0x40]
+038005a0  str r0,[sp,#0x4]
+038005a4  and r0,r1,#0xff
+038005a8  str r0,[sp,#0x8]
+038005ac  mov r0,r1, asr #0x8
+038005b0  str r0,[sp,#0xc]
+038005b4  ldrh r0,[r9,#0x26]
+038005b8  str r0,[sp,#0x10]
+038005bc  ldrb r0,[r9,#0x23]
+038005c0  str r0,[sp,#0x14]
+038005c4  mov r0,r8
+038005c8  ldr r1,[r9,#0x44]
+038005cc  ldrb r2,[r9,#0x38]
+038005d0  bl 0x037ff298
+038005d4  b 0x03800684
+038005d8  ldrh r3,[r9,#0x24]
+038005dc  ldrh r0,[r9,#0x26]
+038005e0  str r0,[sp,#0x0]
+038005e4  ldrb r0,[r9,#0x23]
+038005e8  str r0,[sp,#0x4]
+038005ec  mov r0,r8
+038005f0  ldr r1,[r9,#0x44]
+038005f4  and r2,r3,#0xff
+038005f8  mov r3,r3, asr #0x8
+038005fc  bl 0x037ff1e0
+03800600  b 0x03800684
+03800604  ldrh r2,[r9,#0x24]
+03800608  ldrb r0,[r9,#0x23]
+0380060c  str r0,[sp,#0x0]
+03800610  mov r0,r8
+03800614  and r1,r2,#0xff
+03800618  mov r2,r2, asr #0x8
+0380061c  ldrh r3,[r9,#0x26]
+03800620  bl 0x037ff130
+03800624  b 0x03800684
+03800628  ands r0,r1,#0x4
+0380062c  beq 0x0380063c
+03800630  mov r0,r8
+03800634  ldrh r1,[r9,#0x26]
+03800638  bl 0x037ff068
+0380063c  ldrb r0,[r9,#0x3]
+03800640  mov r0,r0, lsl #0x18
+03800644  mov r0,r0, lsr #0x1b
+03800648  ands r0,r0,#0x8
+0380064c  beq 0x03800664
+03800650  ldrh r2,[r9,#0x24]
+03800654  mov r0,r8
+03800658  and r1,r2,#0xff
+0380065c  mov r2,r2, asr #0x8
+03800660  bl 0x037ff080
+03800664  ldrb r0,[r9,#0x3]
+03800668  mov r0,r0, lsl #0x18
+0380066c  mov r0,r0, lsr #0x1b
+03800670  ands r0,r0,#0x10
+03800674  beq 0x03800684
+03800678  mov r0,r8
+0380067c  ldrb r1,[r9,#0x23]
+03800680  bl 0x037fefec
+03800684  add r8,r8,#0x1
+03800688  cmp r8,#0x10
+0380068c  blt 0x03800524
+03800690  mov r5,#0x0
+03800694  ldr r3,[0x38006ec]
+03800698  mov r1,#0x54
+0380069c  mla r4,r5,r1,r3
+038006a0  ldrb r0,[r4,#0x3]
+038006a4  mov r0,r0, lsl #0x18
+038006a8  movs r0,r0, lsr #0x1b
+038006ac  beq 0x038006d4
+038006b0  ands r0,r0,#0x1
+038006b4  movne r0,r5, lsl #0x4
+038006b8  addne r0,r0,#0x4000000
+038006bc  ldrbne r2,[r0,#0x403]
+038006c0  orrne r2,r2,#0x80
+038006c4  strbne r2,[r0,#0x403]
+038006c8  ldrb r0,[r4,#0x3]
+038006cc  bic r0,r0,#0xf8
+038006d0  strb r0,[r4,#0x3]
+038006d4  add r5,r5,#0x1
+038006d8  cmp r5,#0x10
+038006dc  blt 0x0380069c
+038006e0  add sp,sp,#0x18
+038006e4  ldmia sp!,{r4,r5,r6,r7,r8,r9,r10,lr}
+038006e8  bx lr

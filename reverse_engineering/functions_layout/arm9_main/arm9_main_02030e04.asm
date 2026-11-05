@@ -1,0 +1,12 @@
+02030e04  stmdb sp!,{r4,lr}
+02030e08  ldr r1,[0x2030e34]
+02030e0c  mov r4,r0
+02030e10  str r1,[r4,#0x0]
+02030e14  ldr r0,[r4,#0x4]
+02030e18  cmp r0,#0x0
+02030e1c  beq 0x02030e2c
+02030e20  ldr r1,[r0,#0x0]
+02030e24  ldr r1,[r1,#0x4]
+02030e28  blx r1
+02030e2c  mov r0,r4
+02030e30  ldmia sp!,{r4,pc}

@@ -1,0 +1,6 @@
+0215a314  push {lr}
+0215a316  sub sp,#0x4
+0215a318  bl 0x0215a270
+0215a31c  bl 0x0215a310
+0215a320  add sp,#0x4
+0215a322  pop {pc}

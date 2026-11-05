@@ -1,0 +1,15 @@
+021ac338  ldr r3,[r0,#0x0]
+021ac33a  lsl r3,r3,#0x1f
+021ac33c  lsr r3,r3,#0x1f
+021ac33e  bne 0x021ac34c
+021ac340  add r3,r0,#0x1
+021ac342  str r3,[r1,#0x0]
+021ac344  ldrb r0,[r0,#0x0]
+021ac346  lsl r0,r0,#0x18
+021ac348  lsr r0,r0,#0x19
+021ac34a  b 0x021ac352
+021ac34c  ldr r3,[r0,#0x8]
+021ac34e  str r3,[r1,#0x0]
+021ac350  ldr r0,[r0,#0x4]
+021ac352  str r0,[r2,#0x0]
+021ac354  bx lr

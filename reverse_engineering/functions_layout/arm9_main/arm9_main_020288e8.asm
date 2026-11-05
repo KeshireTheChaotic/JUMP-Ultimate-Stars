@@ -1,0 +1,14 @@
+020288e8  stmdb sp!,{r4,lr}
+020288ec  mov r4,r0
+020288f0  ldr r1,[r4,#0x0]
+020288f4  cmp r1,#0x0
+020288f8  movne r0,#0x0
+020288fc  strne r0,[r1,#0xdc]
+02028900  ldrne r0,[r4,#0x0]
+02028904  cmpne r0,#0x0
+02028908  beq 0x02028918
+0202890c  ldr r1,[r0,#0x0]
+02028910  ldr r1,[r1,#0x4]
+02028914  blx r1
+02028918  mov r0,r4
+0202891c  ldmia sp!,{r4,pc}

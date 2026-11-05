@@ -1,0 +1,16 @@
+
+void FUN_0202e694(int *param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+
+{
+  int *piVar1;
+  undefined4 uVar2;
+  
+  piVar1 = (int *)(**(code **)(*param_1 + 0x58))();
+  if (piVar1 == (int *)0x0) {
+    return;
+  }
+  uVar2 = (**(code **)(*param_1 + 0x5c))(param_1,param_2);
+  (**(code **)(*piVar1 + 0x20))(piVar1,uVar2,param_3,*(code **)(*piVar1 + 0x20),param_4);
+  return;
+}
+

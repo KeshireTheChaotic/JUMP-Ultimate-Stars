@@ -1,0 +1,9 @@
+02017aec  stmdb sp!,{r4,lr}
+02017af0  mov r0,#0x24
+02017af4  mov r4,r1
+02017af8  bl 0x0201a228
+02017afc  cmp r0,#0x0
+02017b00  ldmiaeq sp!,{r4,pc}
+02017b04  mov r1,r4
+02017b08  bl 0x020177fc
+02017b0c  ldmia sp!,{r4,pc}

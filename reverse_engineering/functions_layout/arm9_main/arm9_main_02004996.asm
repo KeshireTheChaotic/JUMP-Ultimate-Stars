@@ -1,0 +1,16 @@
+02004996  add r0,r6,#0x0
+02004998  mov r1,#0x0
+0200499a  mov r2,#0x2
+0200499c  blx r5
+0200499e  cmp r0,#0x0
+020049a0  beq 0x020049b0
+020049a2  ldr r0,[sp,#0x4c]
+020049a4  cmp r0,#0x0
+020049a6  bne 0x020049b0
+020049a8  mov r0,#0x0
+020049aa  add sp,#0x8c
+020049ac  mvn r0,r0
+020049ae  pop {r4,r5,r6,r7,pc}
+020049b0  ldr r0,[sp,#0x50]
+020049b2  add sp,#0x8c
+020049b4  pop {r4,r5,r6,r7,pc}

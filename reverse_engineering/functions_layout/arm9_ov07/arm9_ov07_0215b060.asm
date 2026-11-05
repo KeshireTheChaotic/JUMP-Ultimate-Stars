@@ -1,0 +1,17 @@
+0215b060  push {r4,lr}
+0215b062  ldr r0,[r0,#0x4]
+0215b064  mov r1,#0x1
+0215b066  ldr r4,[r0,#0x10]
+0215b068  add r0,r4,#0x0
+0215b06a  add r0,#0x72
+0215b06c  strb r1,[r0,#0x0]
+0215b06e  add r0,r4,#0x0
+0215b070  add r0,#0x73
+0215b072  strb r1,[r0,#0x0]
+0215b074  blx 0x02158e84
+0215b078  blx 0x0214dd50
+0215b07c  mov r1,#0x1
+0215b07e  blx 0x0214dd60
+0215b082  add r0,r4,#0x0
+0215b084  blx 0x0215b478
+0215b088  pop {r4,pc}

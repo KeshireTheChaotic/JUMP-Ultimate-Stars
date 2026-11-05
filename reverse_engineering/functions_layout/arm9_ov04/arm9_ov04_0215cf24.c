@@ -1,0 +1,216 @@
+
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+/* JUS-GAME JQuizResultMultiPlay::JQuizResultMultiPlay_Add [source-string]
+   __FILE__="JQuizResultMultiPlay.cpp" __FUNCTION__="JQuizResultMultiPlay_Add" lines=[62, 135]
+   passed to 2 source-location call(s); header inlines: ALWidgetImp.h:Create */
+
+undefined4 JQuizResultMultiPlay::JQuizResultMultiPlay_Add(void)
+
+{
+  char cVar1;
+  undefined4 *puVar2;
+  int iVar3;
+  undefined4 uVar4;
+  int *piVar5;
+  int iVar6;
+  undefined4 in_r3;
+  undefined4 uVar7;
+  undefined4 local_88;
+  undefined4 local_84;
+  undefined4 local_80;
+  undefined4 local_7c;
+  undefined4 local_78;
+  undefined4 local_74;
+  undefined4 local_70;
+  undefined4 local_6c;
+  undefined4 local_68;
+  undefined4 local_64;
+  undefined4 local_60;
+  undefined4 local_5c;
+  undefined4 local_58;
+  undefined4 local_54;
+  undefined4 local_50;
+  undefined4 local_4c;
+  undefined4 local_48;
+  undefined4 local_44;
+  undefined4 local_40;
+  undefined4 local_3c;
+  undefined4 local_38;
+  undefined4 local_34;
+  undefined4 local_30;
+  undefined4 local_2c;
+  undefined4 local_28;
+  undefined4 local_24;
+  undefined4 local_20;
+  undefined4 local_1c;
+  undefined4 uStack_18;
+  
+  uStack_18 = in_r3;
+  puVar2 = (undefined4 *)
+           jus_AllocDebug(0xd4,s_JQuizResultMultiPlay_cpp_02161810,
+                          s_JQuizResultMultiPlay_Add_021617f4,0x87);
+  FUN_0214fadc(puVar2,0xd4);
+  FUN_0214f9f0();
+  iVar3 = FUN_0214f704();
+  *(bool *)(puVar2 + 0x2d) = (&DAT_020afee6)[iVar3] == '\0';
+  FUN_0214fc34(*(undefined1 *)(puVar2 + 0x2d));
+  FUN_0214f540();
+  FUN_0214f540();
+  FUN_0214f540();
+  FUN_0214d964();
+  iVar3 = FUN_0203b414(3);
+  uVar4 = JQuizCommon::JQuizCmn_BaseBG_Create(*(undefined4 *)(iVar3 + 0x88));
+  puVar2[2] = uVar4;
+  iVar3 = FUN_0203b414(2);
+  uVar4 = FUN_0214e880(s_jquiz_result00_atm_0216182c,s_jquiz_result00_dig_02161840,
+                       *(undefined4 *)(iVar3 + 0x88));
+  puVar2[5] = uVar4;
+  uVar4 = FUN_020101f4(s_Common_button_aar_02161854,0);
+  puVar2[9] = uVar4;
+  uVar4 = FUN_020101f4(s_jquiz_result_obj_a_3d_aar_02161868,0);
+  puVar2[10] = uVar4;
+  uVar4 = FUN_020101f4(s_jquiz_com_result_obj_a_3d_aar_02161884,0);
+  puVar2[0xb] = uVar4;
+  uVar4 = JQuizResultWinLosePlate::JQuizResultWinLosePlateClass_Create
+                    (*(undefined1 *)(puVar2 + 0x2d),1);
+  puVar2[0x2e] = uVar4;
+  iVar3 = FUN_0214f704();
+  uVar4 = JQuizResultScoreDisp::JQuizResultScoreDispClass_Create((&DAT_020afef2)[iVar3] & 0xff,100);
+  puVar2[0x2f] = uVar4;
+  uVar4 = JQuizResultJPowerGraph::JQuizResultJPowerGraphClass_Create();
+  puVar2[0x30] = uVar4;
+  iVar3 = FUN_0214e4b0(puVar2[2]);
+  puVar2[0x11] = iVar3;
+  func_0x021b6214(*(undefined4 *)(iVar3 + 4),1);
+  (**(code **)(**(int **)(iVar3 + 4) + 0xd8))(*(int **)(iVar3 + 4),1);
+  iVar3 = FUN_0203b404();
+  FUN_0214e4e8(puVar2[2],0x838000,0,*(undefined4 *)(iVar3 + 0x88));
+  iVar3 = FUN_0203b3f4();
+  iVar3 = FUN_0214e6fc(puVar2[2],*(undefined4 *)(iVar3 + 0x88));
+  (**(code **)(**(int **)(iVar3 + 4) + 0x24))(*(int **)(iVar3 + 4),puVar2);
+  FUN_02027834(*(undefined4 *)(iVar3 + 4),8,FUN_0215d824);
+  func_0x021b4104(*(undefined4 *)(iVar3 + 4),*(undefined4 *)(iVar3 + 4),4);
+  *(undefined4 *)(*(int *)(iVar3 + 4) + 0x124) = 2;
+  puVar2[0x1b] = iVar3;
+  iVar3 = ALWidgetBaseImp::Create(puVar2,puVar2[0x11]);
+  puVar2[0x13] = iVar3;
+  FUN_02023940(*(undefined4 *)(iVar3 + 4));
+  FUN_02151ebc(&local_28,iVar3,s_Position_021618a4);
+  FUN_02151ebc(&local_30,iVar3,&DAT_021618b0);
+  (**(code **)(**(int **)(iVar3 + 4) + 0xd8))(*(int **)(iVar3 + 4),1);
+  local_38 = 0;
+  local_34 = 0xfff00000;
+  FUN_0214e1b8(iVar3,&local_34,&local_38);
+  FUN_02023c60(*(undefined4 *)(iVar3 + 4),local_28,0,local_24);
+  FUN_02023c60(*(undefined4 *)(iVar3 + 4),local_30,0,local_2c);
+  local_40 = 0;
+  local_3c = 0;
+  FUN_0214e1b8(iVar3,&local_3c,&local_40);
+  FUN_02023c60(*(undefined4 *)(iVar3 + 4),local_28,8,local_24);
+  piVar5 = *(int **)(*(int *)(iVar3 + 4) + 0x68);
+  (**(code **)(*piVar5 + 0xac))(piVar5,0);
+  FUN_02023c80(*(undefined4 *)(iVar3 + 4),local_28,0x494c,local_24);
+  FUN_02023c70(*(undefined4 *)(iVar3 + 4),1);
+  func_0x021b4034(*(undefined4 *)(iVar3 + 4),1);
+  (**(code **)(**(int **)(iVar3 + 4) + 0xd8))(*(int **)(iVar3 + 4),0);
+  uVar4 = _DAT_021d5154;
+  uVar7 = *(undefined4 *)(iVar3 + 4);
+  iVar3 = jus_AllocDebug(0x134,s_ALWidgetImp_h_021608d4,s_Create_021617ec,0x3e);
+  piVar5 = (int *)0x0;
+  if (iVar3 != 0) {
+    piVar5 = (int *)func_0x021af0f8(iVar3,uVar7,uVar4,ALWidgetBaseImp::CreateDrawFunc);
+  }
+  if (piVar5[6] == 0) {
+    (**(code **)(*piVar5 + 0x14))();
+  }
+  iVar3 = piVar5[6];
+  (**(code **)(**(int **)(iVar3 + 4) + 0xd8))(*(int **)(iVar3 + 4),1);
+  (**(code **)(**(int **)(puVar2[5] + 4) + 0xd8))(*(int **)(puVar2[5] + 4),1);
+  local_48 = 0;
+  local_44 = 0;
+  FUN_0214e1b8(puVar2[5],&local_44,&local_48);
+  piVar5 = *(int **)(puVar2[5] + 4);
+  (**(code **)(**(int **)(iVar3 + 4) + 0xb4))(*(int **)(iVar3 + 4),piVar5);
+  (**(code **)(*piVar5 + 0xc))();
+  local_50 = 0x10000;
+  local_4c = 0;
+  FUN_0214e1b8(iVar3,&local_4c,&local_50);
+  iVar3 = ALWidgetBaseImp::Create(puVar2,puVar2[0x11]);
+  puVar2[0x14] = iVar3;
+  FUN_02023940(*(undefined4 *)(iVar3 + 4));
+  FUN_02151ebc(&local_80,iVar3,s_Position_021618a4);
+  FUN_02151ebc(&local_78,iVar3,&DAT_021618b0);
+  (**(code **)(**(int **)(iVar3 + 4) + 0xd8))(*(int **)(iVar3 + 4),0);
+  local_6c = 0;
+  local_70 = 0x100000;
+  FUN_0214e1b8(iVar3,&local_70,&local_6c);
+  FUN_02023c60(*(undefined4 *)(iVar3 + 4),local_80,0,local_7c);
+  FUN_02023c60(*(undefined4 *)(iVar3 + 4),local_78,0,local_74);
+  (**(code **)(**(int **)(iVar3 + 4) + 0xd8))(*(int **)(iVar3 + 4),1);
+  FUN_02023c60(*(undefined4 *)(iVar3 + 4),local_78,8,local_74);
+  FUN_02023c60(*(undefined4 *)(iVar3 + 4),local_80,8,local_7c);
+  local_64 = 0;
+  local_68 = 0;
+  FUN_0214e1b8(iVar3,&local_68,&local_64);
+  FUN_02023c60(*(undefined4 *)(iVar3 + 4),local_80,0x10,local_7c);
+  piVar5 = *(int **)(*(int *)(iVar3 + 4) + 0x68);
+  (**(code **)(*piVar5 + 0xac))(piVar5,0);
+  FUN_02023c80(*(undefined4 *)(iVar3 + 4),local_80,0x494c,local_7c);
+  FUN_02023c70(*(undefined4 *)(iVar3 + 4),1);
+  func_0x021b4034(*(undefined4 *)(iVar3 + 4),1);
+  func_0x021b6760(*(undefined4 *)(iVar3 + 4),0x10,&LAB_0215d974);
+  (**(code **)(**(int **)(iVar3 + 4) + 0xd8))(*(int **)(iVar3 + 4),0);
+  ALWidgetImp::Create(puVar2[0x2e],iVar3);
+  local_88 = 0x80;
+  local_84 = 0x3b;
+  iVar6 = FUN_0203b404();
+  iVar6 = FUN_0214ee60(iVar3,*(undefined4 *)(iVar6 + 0x88),0x830000,3,0x80,&local_88);
+  (**(code **)(**(int **)(iVar6 + 4) + 0xd8))(*(int **)(iVar6 + 4),1);
+  uVar4 = puVar2[0x14];
+  local_60 = 0x30;
+  local_5c = 100;
+  iVar6 = FUN_0203b404();
+  uVar7 = *(undefined4 *)(iVar6 + 0x88);
+  iVar6 = FUN_0214f704();
+  iVar6 = FUN_0214ee60(uVar4,uVar7,0x838000,iVar6 + 1,0x80,&local_60);
+  (**(code **)(**(int **)(iVar6 + 4) + 0xd8))(*(int **)(iVar6 + 4),1);
+  local_60 = 0x60;
+  local_5c = 100;
+  iVar6 = FUN_0214f704();
+  cVar1 = (&DAT_020afee6)[iVar6];
+  iVar6 = FUN_0203b404();
+  iVar6 = FUN_0214ee60(uVar4,*(undefined4 *)(iVar6 + 0x88),0x838000,cVar1 + 5,0x80,&local_60);
+  (**(code **)(**(int **)(iVar6 + 4) + 0xd8))(*(int **)(iVar6 + 4),1);
+  local_60 = 0x84;
+  local_5c = 100;
+  iVar6 = FUN_0203b404();
+  iVar6 = FUN_0214ee60(uVar4,*(undefined4 *)(iVar6 + 0x88),0x838000,10,0x80,&local_60);
+  (**(code **)(**(int **)(iVar6 + 4) + 0xd8))(*(int **)(iVar6 + 4),1);
+  FUN_0215a8a0(puVar2[0x2f],iVar3,0xc0,0x70,0x18);
+  uVar4 = puVar2[0x14];
+  local_58 = 0x85;
+  local_54 = 0x88;
+  iVar3 = FUN_0203b404();
+  iVar3 = FUN_0214ee60(uVar4,*(undefined4 *)(iVar3 + 0x88),0x838000,9,0x80,&local_58);
+  (**(code **)(**(int **)(iVar3 + 4) + 0xd8))(*(int **)(iVar3 + 4),1);
+  FUN_0215aacc(puVar2[0x30],uVar4,0xa0,0xa4);
+  uVar4 = ResultRank::ResultRank_Create(2);
+  puVar2[0x32] = uVar4;
+  uVar4 = FUN_02026f94();
+  puVar2[1] = uVar4;
+  local_1c = 0x80000;
+  FUN_02152ca0(puVar2[1],&local_1c);
+  FUN_02028384(*(undefined4 *)(puVar2[1] + 4),FUN_0215d988);
+  (**(code **)(**(int **)(puVar2[1] + 4) + 0x24))(*(int **)(puVar2[1] + 4),puVar2);
+  uVar4 = FUN_02026f94();
+  puVar2[0x33] = uVar4;
+  local_20 = 0x80000;
+  FUN_02152ca0(puVar2[0x33],&local_20);
+  (**(code **)(**(int **)(puVar2[0x33] + 4) + 0x24))(*(int **)(puVar2[0x33] + 4),puVar2);
+  FUN_02028384(*(undefined4 *)(puVar2[0x33] + 4),FUN_0215d8a8);
+  FUN_02027834(*(undefined4 *)(puVar2[0x33] + 4),8,FUN_0215d8e8);
+  FUN_02086cac(puVar2[0x33]);
+  FUN_02073ebc(2,1);
+  return *puVar2;
+}
+

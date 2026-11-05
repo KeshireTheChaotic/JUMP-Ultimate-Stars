@@ -1,0 +1,14 @@
+02016b18  stmdb sp!,{r4,lr}
+02016b1c  ldr r4,[r0,#0xc]
+02016b20  cmp r4,#0x0
+02016b24  ldrbne r0,[r0,#0x10]
+02016b28  cmpne r0,#0x0
+02016b2c  ldmiaeq sp!,{r4,pc}
+02016b30  mov r0,r4
+02016b34  bl 0x0201a9ec
+02016b38  cmp r0,#0x0
+02016b3c  ldmiane sp!,{r4,pc}
+02016b40  mov r0,r4
+02016b44  mov r1,#0x1
+02016b48  bl 0x0201a958
+02016b4c  ldmia sp!,{r4,pc}

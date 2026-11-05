@@ -1,0 +1,1 @@
+{"module":"arm7_main","address":"027e8300","name":"FUN_027e8300","thumb":false,"body_bytes":164,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["027e8110","03808074","038080d0"],"unresolved_call_targets":[],"status":"decompiled","asm_file":"arm7_main_027e8300.asm","c_file":"arm7_main_027e8300.c"}

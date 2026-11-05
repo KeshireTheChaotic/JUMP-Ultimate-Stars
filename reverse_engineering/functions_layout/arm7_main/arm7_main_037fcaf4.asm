@@ -1,0 +1,13 @@
+037fcaf4  add r1,r0,#0x0
+037fcaf8  mrs r2,cpsr
+037fcafc  str r2,[r1],#0x4
+037fcb00  mov r0,#0xd3
+037fcb04  msr cpsr_c,r0
+037fcb08  str sp,[r1,#0x40]
+037fcb0c  msr cpsr_c,r2
+037fcb10  mov r0,#0x1
+037fcb14  stmia r1,{r0,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12,sp,lr}
+037fcb18  adr r0,0x37fcb28
+037fcb1c  str r0,[r1,#0x3c]
+037fcb20  mov r0,#0x0
+037fcb24  bx lr

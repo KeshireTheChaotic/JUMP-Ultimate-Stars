@@ -1,0 +1,11 @@
+021beb40  push {r4,lr}
+021beb42  add r4,r0,#0x0
+021beb44  blx 0x02055238
+021beb48  ldr r1,[0x021beb5c]
+021beb4a  ldr r2,[r1,#0x0]
+021beb4c  ldr r1,[0x021beb60]
+021beb4e  str r4,[r2,r1]
+021beb50  blx 0x0205524c
+021beb54  pop {r4}
+021beb56  pop {r3}
+021beb58  bx r3

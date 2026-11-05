@@ -1,0 +1,10 @@
+021ac358  ldr r1,[r0,#0x0]
+021ac35a  lsl r1,r1,#0x1f
+021ac35c  lsr r1,r1,#0x1f
+021ac35e  bne 0x021ac368
+021ac360  ldrb r0,[r0,#0x0]
+021ac362  lsl r0,r0,#0x18
+021ac364  lsr r0,r0,#0x19
+021ac366  bx lr
+021ac368  ldr r0,[r0,#0x4]
+021ac36a  bx lr

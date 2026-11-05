@@ -1,0 +1,11 @@
+0217fba0  stmdb sp!,{r4,lr}
+0217fba4  mov r4,r0
+0217fba8  ldrb r2,[r4,#0x95]
+0217fbac  add r1,r2,#0x1
+0217fbb0  strb r1,[r4,#0x95]
+0217fbb4  cmp r2,#0x78
+0217fbb8  ldmiacc sp!,{r4,pc}
+0217fbbc  bl 0x0217f890
+0217fbc0  mov r0,#0x1
+0217fbc4  strb r0,[r4,#0x105]
+0217fbc8  ldmia sp!,{r4,pc}

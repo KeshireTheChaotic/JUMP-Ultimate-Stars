@@ -1,0 +1,9 @@
+021afc1c  stmdb sp!,{r4,lr}
+021afc20  ldr r0,[r0,#0x4]
+021afc24  ldr r4,[r0,#0x64]
+021afc28  ldr r3,[r4,#0x34]
+021afc2c  add r0,r4,#0x14
+021afc30  bl 0x02019bec
+021afc34  mov r0,#0x0
+021afc38  str r0,[r4,#0x3c]
+021afc3c  ldmia sp!,{r4,pc}

@@ -1,0 +1,11 @@
+037fcb28  mrs r1,cpsr
+037fcb2c  bic r1,r1,#0x1f
+037fcb30  orr r1,r1,#0xd3
+037fcb34  msr cpsr_c,r1
+037fcb38  ldr r1,[r0],#0x4
+037fcb3c  msr spsr_cxsf,r1
+037fcb40  ldr sp,[r0,#0x40]
+037fcb44  ldr lr,[r0,#0x3c]
+037fcb48  ldmia r0,{r0,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12,sp,lr}^
+037fcb4c  mov r0,r0
+037fcb50  subs pc,lr,#0x4

@@ -1,0 +1,13 @@
+02052e00  stmdb sp!,{r4,lr}
+02052e04  bl 0x02055238
+02052e08  ldr r2,[0x2052e34]
+02052e0c  mvn r1,#0x0
+02052e10  ldr r3,[r2,#0x0]
+02052e14  cmp r3,r1
+02052e18  addcc r1,r3,#0x1
+02052e1c  movcc r4,r3
+02052e20  strcc r1,[r2,#0x0]
+02052e24  bl 0x0205524c
+02052e28  mov r0,r4
+02052e2c  ldmia sp!,{r4,lr}
+02052e30  bx lr

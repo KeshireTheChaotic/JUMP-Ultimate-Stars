@@ -1,0 +1,10 @@
+02020e64  stmdb sp!,{r4,lr}
+02020e68  mov r4,r0
+02020e6c  bl 0x0201a9ec
+02020e70  cmp r0,#0x0
+02020e74  bne 0x02020e84
+02020e78  mov r0,r4
+02020e7c  mov r1,#0x1
+02020e80  bl 0x0201a958
+02020e84  mov r0,r4
+02020e88  ldmia sp!,{r4,pc}

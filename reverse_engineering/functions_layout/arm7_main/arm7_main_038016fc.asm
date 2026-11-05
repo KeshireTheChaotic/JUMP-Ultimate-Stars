@@ -1,0 +1,20 @@
+038016fc  stmdb sp!,{r4,r5,lr}
+03801700  sub sp,sp,#0x4
+03801704  mov r5,r0
+03801708  mov r4,r1
+0380170c  bl 0x03801770
+03801710  cmp r0,#0x0
+03801714  beq 0x03801740
+03801718  mov r1,r5
+0380171c  bl 0x03801750
+03801720  add r3,r5,#0x8
+03801724  ldr r2,[0x380174c]
+03801728  ldrb r1,[r3,r4]
+0380172c  ldrb r0,[r2,r1,lsl #0x6]
+03801730  bic r0,r0,#0x1
+03801734  strb r0,[r2,r1,lsl #0x6]
+03801738  mov r0,#0xff
+0380173c  strb r0,[r3,r4]
+03801740  add sp,sp,#0x4
+03801744  ldmia sp!,{r4,r5,lr}
+03801748  bx lr

@@ -1,0 +1,42 @@
+038071d8  stmdb sp!,{r4,r5,r6,r7,r8,lr}
+038071dc  mov r7,r0
+038071e0  mov r0,#0x8000000
+038071e4  add r6,r0,#0x4
+038071e8  mov r4,#0x1
+038071ec  bl 0x037fbddc
+038071f0  mov r0,r0, lsl #0x10
+038071f4  mov r5,r0, lsr #0x10
+038071f8  mov r0,r5
+038071fc  bl 0x037fbef4
+03807200  mov r1,#0x0
+03807204  ldr r0,[0x3807280]
+03807208  eor r2,r0,#0x3
+0380720c  mov r2,r2, lsl #0x10
+03807210  mov lr,r2, lsr #0x10
+03807214  eor r2,r0,#0x84
+03807218  mov r2,r2, lsl #0x10
+0380721c  mov r8,r2, lsr #0x10
+03807220  b 0x0380725c
+03807224  mov r12,r0
+03807228  cmp r1,#0x4c
+0380722c  moveq r12,r8
+03807230  beq 0x0380723c
+03807234  cmp r1,#0x4d
+03807238  moveq r12,lr
+0380723c  mov r3,r1, lsl #0x1
+03807240  ldrh r2,[r7,r3]
+03807244  and r12,r12,r2
+03807248  ldrh r2,[r6,r3]
+0380724c  cmp r12,r2
+03807250  movne r4,#0x0
+03807254  bne 0x03807264
+03807258  add r1,r1,#0x1
+0380725c  cmp r1,#0x4e
+03807260  blt 0x03807224
+03807264  mov r0,r5
+03807268  bl 0x037fbdd0
+0380726c  mov r0,r5
+03807270  bl 0x037fbe74
+03807274  mov r0,r4
+03807278  ldmia sp!,{r4,r5,r6,r7,r8,lr}
+0380727c  bx lr

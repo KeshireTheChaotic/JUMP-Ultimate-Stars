@@ -1,0 +1,10 @@
+0201bff0  stmdb sp!,{r3,lr}
+0201bff4  ldr r2,[r1,#0x0]
+0201bff8  ldr r1,[r0,#0x38]
+0201bffc  cmp r1,r2
+0201c000  ldmiaeq sp!,{r3,pc}
+0201c004  str r2,[r0,#0x38]
+0201c008  ldr r1,[r0,#0x0]
+0201c00c  ldr r1,[r1,#0xcc]
+0201c010  blx r1
+0201c014  ldmia sp!,{r3,pc}

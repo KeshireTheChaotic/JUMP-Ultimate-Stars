@@ -1,0 +1,14 @@
+0218d870  strb r1,[r0,#0x0]
+0218d872  add r3,r0,#0x1
+0218d874  ldrb r1,[r2,#0x0]
+0218d876  strb r1,[r0,#0x1]
+0218d878  ldrb r1,[r2,#0x1]
+0218d87a  strb r1,[r3,#0x1]
+0218d87c  ldrb r1,[r2,#0x2]
+0218d87e  strb r1,[r3,#0x2]
+0218d880  ldrb r1,[r2,#0x3]
+0218d882  strb r1,[r3,#0x3]
+0218d884  mov r2,#0x5
+0218d886  ldr r1,[0x0218d88c]
+0218d888  str r2,[r0,r1]
+0218d88a  bx lr

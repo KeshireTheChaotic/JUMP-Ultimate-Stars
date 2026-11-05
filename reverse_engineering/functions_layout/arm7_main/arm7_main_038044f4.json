@@ -1,0 +1,1 @@
+{"module":"arm7_main","address":"038044f4","name":"FUN_038044f4","thumb":false,"body_bytes":104,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["027f5a24","037fcbcc","03804a54","038055f0","038062fc"],"unresolved_call_targets":[],"status":"decompiled","asm_file":"arm7_main_038044f4.asm","c_file":"arm7_main_038044f4.c"}

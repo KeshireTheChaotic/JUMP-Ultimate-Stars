@@ -1,0 +1,11 @@
+02021b58  stmdb sp!,{r3,r4,r5,lr}
+02021b5c  mov r5,r0
+02021b60  mov r0,#0x40
+02021b64  mov r4,r1
+02021b68  bl 0x0201a228
+02021b6c  cmp r0,#0x0
+02021b70  ldmiaeq sp!,{r3,r4,r5,pc}
+02021b74  mov r1,r5
+02021b78  mov r2,r4
+02021b7c  bl 0x02014820
+02021b80  ldmia sp!,{r3,r4,r5,pc}

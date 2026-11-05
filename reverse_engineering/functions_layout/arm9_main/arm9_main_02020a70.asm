@@ -1,0 +1,12 @@
+02020a70  stmdb sp!,{r4,lr}
+02020a74  mov r4,r0
+02020a78  bl 0x02021f3c
+02020a7c  mov r0,r4
+02020a80  bl 0x0201a9ec
+02020a84  cmp r0,#0x0
+02020a88  bne 0x02020a98
+02020a8c  mov r0,r4
+02020a90  mov r1,#0x1
+02020a94  bl 0x0201a958
+02020a98  mov r0,r4
+02020a9c  ldmia sp!,{r4,pc}

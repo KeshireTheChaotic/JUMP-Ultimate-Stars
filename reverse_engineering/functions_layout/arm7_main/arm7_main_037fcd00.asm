@@ -1,0 +1,12 @@
+037fcd00  mov r12,#0x0
+037fcd04  str r12,[r0,#0x4]
+037fcd08  ldr r3,[r0,#0x4]
+037fcd0c  str r3,[r0,#0x0]
+037fcd10  str r12,[r0,#0xc]
+037fcd14  ldr r3,[r0,#0xc]
+037fcd18  str r3,[r0,#0x8]
+037fcd1c  str r1,[r0,#0x10]
+037fcd20  str r2,[r0,#0x14]
+037fcd24  str r12,[r0,#0x18]
+037fcd28  str r12,[r0,#0x1c]
+037fcd2c  bx lr

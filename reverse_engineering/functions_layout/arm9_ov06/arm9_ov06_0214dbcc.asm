@@ -1,0 +1,12 @@
+0214dbcc  push {r3,r4,r5,r6,r7,lr}
+0214dbce  add r6,r0,#0x0
+0214dbd0  ldr r0,[0x0214dda0]
+0214dbd2  ldr r1,[r0,#0x0]
+0214dbd4  add r1,r1,#0x1
+0214dbd6  str r1,[r0,#0x0]
+0214dbd8  ldr r1,[0x0214dda4]
+0214dbda  mov r0,#0x5a
+0214dbdc  ldr r3,[r1,#0x0]
+0214dbde  lsl r0,r0,#0x2
+0214dbe0  ldrsh r2,[r3,r0]
+0214dbe2  cmp r2,#0x0

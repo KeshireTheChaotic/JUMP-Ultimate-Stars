@@ -1,0 +1,1 @@
+{"module":"arm9_ov12","address":"021b328c","name":"CreateControl","thumb":true,"body_bytes":152,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["0201a21c","021b2730","021b2b04","021b2d2c","021b2e18","021b2f50"],"unresolved_call_targets":[],"status":"decompiled","asm_file":"arm9_ov12_021b328c.asm","c_file":"arm9_ov12_021b328c.c"}

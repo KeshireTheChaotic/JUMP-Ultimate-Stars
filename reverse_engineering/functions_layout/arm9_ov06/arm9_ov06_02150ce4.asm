@@ -1,0 +1,15 @@
+02150ce4  push {r4,lr}
+02150ce6  add r4,r0,#0x0
+02150ce8  bl 0x0215044c
+02150cec  mov r3,#0x1
+02150cee  ldr r0,[0x02150d04]
+02150cf0  b 0x02150cfc
+02150cf2  lsl r1,r3,#0x2
+02150cf4  ldr r2,[r0,#0x18]
+02150cf6  add r1,r4,r1
+02150cf8  str r2,[r1,#0x1c]
+02150cfa  add r3,r3,#0x1
+02150cfc  ldr r1,[r4,#0x14]
+02150cfe  cmp r3,r1
+02150d00  blt 0x02150cf2
+02150d02  pop {r4,pc}

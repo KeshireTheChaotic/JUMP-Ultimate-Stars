@@ -1,0 +1,11 @@
+0217ca60  push {lr}
+0217ca62  sub sp,#0x4
+0217ca64  bl 0x02178448
+0217ca68  cmp r0,#0x0
+0217ca6a  bne 0x0217ca72
+0217ca6c  mov r0,#0x1
+0217ca6e  add sp,#0x4
+0217ca70  pop {pc}
+0217ca72  mov r0,#0x0
+0217ca74  add sp,#0x4
+0217ca76  pop {pc}

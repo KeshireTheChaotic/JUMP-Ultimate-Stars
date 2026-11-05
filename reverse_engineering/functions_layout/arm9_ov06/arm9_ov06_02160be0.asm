@@ -1,0 +1,16 @@
+02160be0  stmdb sp!,{r4,lr}
+02160be4  ldr r0,[0x2160c20]
+02160be8  mov r4,r1
+02160bec  ldr r1,[r0,#0x0]
+02160bf0  mov r0,#0x64
+02160bf4  ldr r1,[r1,#0x118]
+02160bf8  ldr r1,[r1,#0x56c]
+02160bfc  ldrsh r2,[r1,#0x18]
+02160c00  ldrsh r1,[r1,#0x16]
+02160c04  smulbb r0,r2,r0
+02160c08  bl 0x0200d12c
+02160c0c  ldrh r1,[r4,#0x2]
+02160c10  cmp r0,r1
+02160c14  movle r0,#0x1
+02160c18  movgt r0,#0x0
+02160c1c  ldmia sp!,{r4,pc}

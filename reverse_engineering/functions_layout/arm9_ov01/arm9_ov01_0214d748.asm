@@ -1,0 +1,13 @@
+0214d748  stmdb sp!,{r4,lr}
+0214d74c  ldr r0,[r0,#0x4]
+0214d750  ldr r4,[r0,#0x10]
+0214d754  bl 0x0207382c
+0214d758  cmp r0,#0x0
+0214d75c  ldmiaeq sp!,{r4,pc}
+0214d760  ldr r0,[r4,#0x24]
+0214d764  ldr r0,[r0,#0x4]
+0214d768  blx 0x021b65e0
+0214d76c  ldr r0,[r4,#0x4]
+0214d770  ldr r0,[r0,#0x4]
+0214d774  bl 0x020282f4
+0214d778  ldmia sp!,{r4,pc}

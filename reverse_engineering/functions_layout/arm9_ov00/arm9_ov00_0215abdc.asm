@@ -1,0 +1,11 @@
+0215abdc  ldr r3,[r0,#0x4]
+0215abe0  mov r0,#0x0
+0215abe4  str r1,[r3,#0x8e8]
+0215abe8  str r0,[r3,#0x8ec]
+0215abec  cmp r2,#0x0
+0215abf0  str r2,[r3,#0x8f4]
+0215abf4  movne r0,#0x2
+0215abf8  str r0,[r3,#0x8f0]
+0215abfc  mov r0,#0x1
+0215ac00  strb r0,[r3,#0x902]
+0215ac04  bx lr

@@ -1,0 +1,1 @@
+{"module":"arm9_ov06","address":"02155688","name":"FUN_02155688","thumb":false,"body_bytes":700,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["02028330","020838c4","021554e0","0215594c","02155998","021567e8"],"unresolved_call_targets":[],"status":"decompiled","asm_file":"arm9_ov06_02155688.asm","c_file":"arm9_ov06_02155688.c"}

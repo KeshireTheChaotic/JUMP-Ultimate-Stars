@@ -1,0 +1,1 @@
+{"module":"arm9_main","address":"02056220","name":"FUN_02056220","thumb":false,"body_bytes":116,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["02055238","0205524c","02056374"],"unresolved_call_targets":[],"status":"decompiled","asm_file":"arm9_main_02056220.asm","c_file":"arm9_main_02056220.c"}

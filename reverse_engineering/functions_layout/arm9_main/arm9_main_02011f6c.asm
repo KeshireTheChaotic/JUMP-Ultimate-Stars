@@ -1,0 +1,9 @@
+02011f6c  stmdb sp!,{r4,lr}
+02011f70  mov r4,r0
+02011f74  bl 0x0202f378
+02011f78  ldr r0,[0x2011f90]
+02011f7c  mov r1,#0x0
+02011f80  str r0,[r4,#0x0]
+02011f84  mov r0,r4
+02011f88  str r1,[r4,#0x1c]
+02011f8c  ldmia sp!,{r4,pc}

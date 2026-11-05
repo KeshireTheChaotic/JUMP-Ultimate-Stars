@@ -1,0 +1,17 @@
+0201bcf8  stmdb sp!,{r4,lr}
+0201bcfc  ldr r1,[0x201bd3c]
+0201bd00  mov r4,r0
+0201bd04  str r1,[r4,#0x0]
+0201bd08  ldr r1,[r0,#0x0]
+0201bd0c  ldr r1,[r1,#0x70]
+0201bd10  blx r1
+0201bd14  ldr r0,[r4,#0x44]
+0201bd18  cmp r0,#0x0
+0201bd1c  beq 0x0201bd2c
+0201bd20  ldr r1,[r0,#0x0]
+0201bd24  ldr r1,[r1,#0xc]
+0201bd28  blx r1
+0201bd2c  mov r0,r4
+0201bd30  bl 0x0201214c
+0201bd34  mov r0,r4
+0201bd38  ldmia sp!,{r4,pc}

@@ -1,0 +1,1 @@
+{"module":"arm9_ov08","address":"02162d9c","name":"FUN_02162d9c","thumb":true,"body_bytes":44,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":[],"unresolved_call_targets":[],"status":"unresolved","error":"decompile: Low-level Error: Trying to construct memory range beyond end of address space: ram","asm_file":"arm9_ov08_02162d9c.asm"}

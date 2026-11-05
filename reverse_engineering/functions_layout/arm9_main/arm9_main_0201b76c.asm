@@ -1,0 +1,13 @@
+0201b76c  stmdb sp!,{r3,lr}
+0201b770  ldr r1,[r0,#0x1c]
+0201b774  cmp r1,#0x0
+0201b778  ldrheq r1,[r0,#0x4]
+0201b77c  addeq r1,r1,#0x1
+0201b780  strheq r1,[r0,#0x4]
+0201b784  ldrheq r0,[r0,#0x4]
+0201b788  ldmiaeq sp!,{r3,pc}
+0201b78c  mov r0,r1
+0201b790  ldr r1,[r0,#0x0]
+0201b794  ldr r1,[r1,#0x8]
+0201b798  blx r1
+0201b79c  ldmia sp!,{r3,pc}

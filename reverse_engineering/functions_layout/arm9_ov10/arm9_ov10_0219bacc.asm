@@ -1,0 +1,17 @@
+0219bacc  stmdb sp!,{r3,r4,r5,lr}
+0219bad0  mov r5,r0
+0219bad4  mov r4,r1
+0219bad8  blx 0x02069880
+0219badc  cmp r0,#0x0
+0219bae0  beq 0x0219baf8
+0219bae4  mov r0,r5
+0219bae8  mov r1,r4
+0219baec  blx 0x02069694
+0219baf0  mov r0,#0x1
+0219baf4  ldmia sp!,{r3,r4,r5,pc}
+0219baf8  mov r0,r4
+0219bafc  mov r1,#0x0
+0219bb00  mov r2,#0xc
+0219bb04  bl 0x020517fc
+0219bb08  mov r0,#0x0
+0219bb0c  ldmia sp!,{r3,r4,r5,pc}

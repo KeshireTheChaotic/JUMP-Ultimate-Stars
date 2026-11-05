@@ -1,0 +1,1 @@
+{"module":"arm9_ov10","address":"02192688","name":"FUN_02192688","thumb":true,"body_bytes":120,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["02192294","021923c4","02192630"],"unresolved_call_targets":[],"status":"decompiled","asm_file":"arm9_ov10_02192688.asm","c_file":"arm9_ov10_02192688.c"}

@@ -1,0 +1,12 @@
+021934a4  ldr r2,[r0,#0x0]
+021934a6  cmp r2,#0x0
+021934a8  beq 0x021934b8
+021934aa  cmp r2,r1
+021934ac  beq 0x021934ba
+021934ae  add r0,r2,#0x0
+021934b0  add r0,#0x7c
+021934b2  ldr r2,[r2,#0x7c]
+021934b4  cmp r2,#0x0
+021934b6  bne 0x021934aa
+021934b8  mov r0,#0x0
+021934ba  bx lr

@@ -1,0 +1,17 @@
+0215cca8  stmdb sp!,{r3,r4,r5,lr}
+0215ccac  mov r5,r0
+0215ccb0  ldr r0,[r5,#0x4]
+0215ccb4  mov r1,#0x0
+0215ccb8  ldr r4,[r0,#0x10]
+0215ccbc  mov r2,r1
+0215ccc0  ldr r0,[r4,#0x1fc]
+0215ccc4  bl 0x0206af68
+0215ccc8  mov r1,#0x0
+0215cccc  ldr r0,[r4,#0x200]
+0215ccd0  mov r2,r1
+0215ccd4  bl 0x0206af68
+0215ccd8  blx 0x021b65cc
+0215ccdc  ldr r0,[r5,#0x4]
+0215cce0  ldr r1,[0x215ccec]
+0215cce4  bl 0x02028384
+0215cce8  ldmia sp!,{r3,r4,r5,pc}

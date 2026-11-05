@@ -1,0 +1,11 @@
+02150f54  stmdb sp!,{r4,lr}
+02150f58  mov r4,r0
+02150f5c  mov r0,r1
+02150f60  bl 0x02150e78
+02150f64  mov r0,r4
+02150f68  bl 0x02035c90
+02150f6c  bl 0x02150ee4
+02150f70  mov r4,r0
+02150f74  bl 0x02150eb4
+02150f78  mov r0,r4
+02150f7c  ldmia sp!,{r4,pc}

@@ -1,0 +1,1 @@
+{"module":"arm7_main","address":"037fe3fc","name":"OS_GetProcMode","thumb":false,"body_bytes":12,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":[],"unresolved_call_targets":[],"status":"decompiled","asm_file":"arm7_main_037fe3fc.asm","c_file":"arm7_main_037fe3fc.c"}

@@ -1,0 +1,13 @@
+02053fb0  mov r12,#0x0
+02053fb4  mov r1,#0x0
+02053fb8  mov r0,#0x0
+02053fbc  orr r2,r1,r0
+02053fc0  mcr p15,0x0,r12,cr7,cr10,0x4
+02053fc4  mcr p15,0x0,r2,cr7,cr14,0x2
+02053fc8  add r0,r0,#0x20
+02053fcc  cmp r0,#0x400
+02053fd0  blt 0x02053fbc
+02053fd4  add r1,r1,#0x40000000
+02053fd8  cmp r1,#0x0
+02053fdc  bne 0x02053fb8
+02053fe0  bx lr

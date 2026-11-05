@@ -1,0 +1,12 @@
+021ce710  mov r2,#0x0
+021ce712  ldr r0,[0x021ce728]
+021ce714  str r2,[r0,#0x0]
+021ce716  ldr r0,[0x021ce72c]
+021ce718  str r2,[r0,#0x0]
+021ce71a  ldr r1,[0x021ce730]
+021ce71c  add r0,r2,#0x0
+021ce71e  stmia r1!,{r0}
+021ce720  add r2,r2,#0x1
+021ce722  cmp r2,#0x3
+021ce724  blt 0x021ce71e
+021ce726  bx lr

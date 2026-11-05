@@ -1,0 +1,15 @@
+02073cac  stmdb sp!,{r3,r4,r5,lr}
+02073cb0  mov r5,r0
+02073cb4  mov r4,r1
+02073cb8  bl 0x0203b3e4
+02073cbc  ldr r1,[r5,#0x4]
+02073cc0  ldr r0,[r0,#0x88]
+02073cc4  mvn r2,r1
+02073cc8  and r2,r2,#0x3f
+02073ccc  bl 0x02073c74
+02073cd0  bl 0x0203b3e4
+02073cd4  ldr r0,[r0,#0x88]
+02073cd8  mov r1,r4
+02073cdc  mov r2,#0x10
+02073ce0  bl 0x02073c90
+02073ce4  ldmia sp!,{r3,r4,r5,pc}

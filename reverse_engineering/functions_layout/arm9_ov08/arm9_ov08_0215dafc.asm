@@ -1,0 +1,15 @@
+0215dafc  push {r4,lr}
+0215dafe  add r4,r0,#0x0
+0215db00  bl 0x021622d4
+0215db04  add r0,#0xf6
+0215db06  ldrb r0,[r0,#0x0]
+0215db08  cmp r0,r4
+0215db0a  beq 0x0215db1e
+0215db0c  ldr r0,[0x0215db20]
+0215db0e  ldr r0,[r0,#0x0]
+0215db10  add r0,#0x43
+0215db12  strb r4,[r0,#0x0]
+0215db14  add r0,r4,#0x0
+0215db16  bl 0x021622ac
+0215db1a  bl 0x0215d660
+0215db1e  pop {r4,pc}

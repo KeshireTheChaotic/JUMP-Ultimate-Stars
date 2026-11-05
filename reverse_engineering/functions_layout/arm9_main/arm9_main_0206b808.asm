@@ -1,0 +1,16 @@
+0206b808  stmdb sp!,{r3,r4,r5,lr}
+0206b80c  mov r5,r0
+0206b810  ldr r0,[r5,#0x4]
+0206b814  ldr r4,[r0,#0x10]
+0206b818  mov r0,r4
+0206b81c  bl 0x0206b848
+0206b820  ldrb r0,[r4,#0x18]
+0206b824  ldrb r1,[r4,#0x11]
+0206b828  cmp r0,r1
+0206b82c  ldrsbhi r0,[r4,#0x19]
+0206b830  addhi r0,r1,r0
+0206b834  strbhi r0,[r4,#0x11]
+0206b838  ldmiahi sp!,{r3,r4,r5,pc}
+0206b83c  ldr r0,[r5,#0x4]
+0206b840  bl 0x020282f4
+0206b844  ldmia sp!,{r3,r4,r5,pc}

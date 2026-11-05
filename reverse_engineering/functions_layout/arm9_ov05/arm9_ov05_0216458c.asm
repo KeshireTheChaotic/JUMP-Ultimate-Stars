@@ -1,0 +1,86 @@
+0216458c  stmdb sp!,{r3,r4,r5,r6,r7,r8,r9,lr}
+02164590  mov r9,r0
+02164594  mov r8,r1
+02164598  mov r7,r2
+0216459c  mov r6,r3
+021645a0  bl 0x021653ac
+021645a4  mov r4,r0
+021645a8  ldrb r0,[r4,#0x1]
+021645ac  ldrh r5,[r4,#0x4]
+021645b0  cmp r0,#0x0
+021645b4  beq 0x021645c8
+021645b8  bl 0x02164434
+021645bc  cmp r0,#0x0
+021645c0  moveq r0,#0x0
+021645c4  ldmiaeq sp!,{r3,r4,r5,r6,r7,r8,r9,pc}
+021645c8  ldrb r0,[r4,#0x2]
+021645cc  cmp r0,#0x9
+021645d0  addls pc,pc,r0, lsl #0x2
+021645d4  b 0x021646b0
+021645d8  b 0x02164600
+021645dc  b 0x021646b0
+021645e0  b 0x02164608
+021645e4  b 0x021646b0
+021645e8  b 0x021646b0
+021645ec  b 0x021646b0
+021645f0  b 0x021646b0
+021645f4  b 0x02164690
+021645f8  b 0x0216462c
+021645fc  b 0x02164664
+02164600  mov r0,#0x0
+02164604  ldmia sp!,{r3,r4,r5,r6,r7,r8,r9,pc}
+02164608  ldr r2,[sp,#0x24]
+0216460c  mov r0,r9
+02164610  mov r1,r5
+02164614  bl 0x021649cc
+02164618  bl 0x02164410
+0216461c  cmp r0,#0x0
+02164620  bne 0x021646b0
+02164624  mov r0,#0x0
+02164628  ldmia sp!,{r3,r4,r5,r6,r7,r8,r9,pc}
+0216462c  ldr r0,[sp,#0x20]
+02164630  mov r1,r5
+02164634  bl 0x0216d4f8
+02164638  mov r2,r0, lsr #0x5
+0216463c  ldr r1,[0x21646e4]
+02164640  and r0,r0,#0x1f
+02164644  ldr r1,[r1,r2,lsl #0x2]
+02164648  mov r2,#0x1
+0216464c  tst r1,r2, lsl r0
+02164650  moveq r2,#0x0
+02164654  cmp r2,#0x0
+02164658  bne 0x021646b0
+0216465c  mov r0,#0x0
+02164660  ldmia sp!,{r3,r4,r5,r6,r7,r8,r9,pc}
+02164664  ldr r0,[0x21646e8]
+02164668  mov r1,r5, lsr #0x5
+0216466c  ldr r0,[r0,r1,lsl #0x2]
+02164670  and r1,r5,#0x1f
+02164674  mov r2,#0x1
+02164678  tst r0,r2, lsl r1
+0216467c  moveq r2,#0x0
+02164680  cmp r2,#0x0
+02164684  bne 0x021646b0
+02164688  mov r0,#0x0
+0216468c  ldmia sp!,{r3,r4,r5,r6,r7,r8,r9,pc}
+02164690  ldr r0,[0x21646ec]
+02164694  ldr r0,[r0,#0x8d8]
+02164698  tst r0,#0x20
+0216469c  movne r0,#0x1
+021646a0  moveq r0,#0x0
+021646a4  cmp r0,#0x0
+021646a8  moveq r0,#0x0
+021646ac  ldmiaeq sp!,{r3,r4,r5,r6,r7,r8,r9,pc}
+021646b0  cmp r7,#0x0
+021646b4  moveq r0,#0x1
+021646b8  ldmiaeq sp!,{r3,r4,r5,r6,r7,r8,r9,pc}
+021646bc  ldrb r2,[r4,#0x0]
+021646c0  ldr r1,[0x21646f0]
+021646c4  mov r0,r9
+021646c8  ldrsb r3,[r1,r2]
+021646cc  mov r1,r8
+021646d0  sub r2,r7,#0x1
+021646d4  add r3,r6,r3
+021646d8  bl 0x021653ac
+021646dc  bl 0x02164234
+021646e0  ldmia sp!,{r3,r4,r5,r6,r7,r8,r9,pc}

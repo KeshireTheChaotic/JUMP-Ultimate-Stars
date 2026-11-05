@@ -1,0 +1,12 @@
+0203a044  stmdb sp!,{r4,lr}
+0203a048  ldr r1,[0x203a074]
+0203a04c  mov r4,r0
+0203a050  str r1,[r4,#0x0]
+0203a054  ldr r0,[r4,#0x20]
+0203a058  ldr r1,[r0,#0x0]
+0203a05c  ldr r1,[r1,#0xc]
+0203a060  blx r1
+0203a064  mov r0,r4
+0203a068  bl 0x020168bc
+0203a06c  mov r0,r4
+0203a070  ldmia sp!,{r4,pc}

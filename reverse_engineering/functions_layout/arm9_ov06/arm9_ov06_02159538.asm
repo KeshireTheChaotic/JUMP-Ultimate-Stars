@@ -1,0 +1,16 @@
+02159538  stmdb sp!,{r3,r4,r5,lr}
+0215953c  mov r2,#0x1c
+02159540  mov r5,r0
+02159544  mov r4,r1
+02159548  bl 0x0215986c
+0215954c  cmp r0,#0x0
+02159550  movne r0,#0x0
+02159554  ldmiane sp!,{r3,r4,r5,pc}
+02159558  ldrb r0,[r4,#0x14]
+0215955c  cmp r0,#0x0
+02159560  movne r0,#0x0
+02159564  strbne r0,[r4,#0x14]
+02159568  movne r0,#0x1
+0215956c  strbne r0,[r5,#0x78]
+02159570  mov r0,#0x1
+02159574  ldmia sp!,{r3,r4,r5,pc}

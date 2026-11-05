@@ -1,0 +1,14 @@
+02087198  stmdb sp!,{r3,lr}
+0208719c  bl 0x0208c51c
+020871a0  cmp r0,#0x0
+020871a4  beq 0x020871bc
+020871a8  bl 0x0219b634
+020871ac  cmp r0,#0x0
+020871b0  ldmiaeq sp!,{r3,pc}
+020871b4  bl 0x0219fa60
+020871b8  ldmia sp!,{r3,pc}
+020871bc  blx 0x0208c11c
+020871c0  cmp r0,#0x0
+020871c4  ldmiane sp!,{r3,pc}
+020871c8  blx 0x0208bfdc
+020871cc  ldmia sp!,{r3,pc}

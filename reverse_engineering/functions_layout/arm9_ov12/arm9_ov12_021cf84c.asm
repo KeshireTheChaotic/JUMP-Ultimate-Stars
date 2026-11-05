@@ -1,0 +1,14 @@
+021cf84c  push {lr}
+021cf84e  sub sp,#0x4
+021cf850  ldr r1,[0x021cf86c]
+021cf852  ldr r1,[r1,#0x10]
+021cf854  cmp r1,#0x0
+021cf856  beq 0x021cf85c
+021cf858  cmp r1,#0x2
+021cf85a  bne 0x021cf862
+021cf85c  mov r0,#0x0
+021cf85e  add sp,#0x4
+021cf860  pop {pc}
+021cf862  bl 0x021cf4b4
+021cf866  add sp,#0x4
+021cf868  pop {pc}

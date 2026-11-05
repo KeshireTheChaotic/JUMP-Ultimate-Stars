@@ -1,0 +1,11 @@
+02056aa0  stmdb sp!,{lr}
+02056aa4  sub sp,sp,#0x4
+02056aa8  mov r2,#0x0
+02056aac  mov r1,r0
+02056ab0  mov r3,r2
+02056ab4  mov r0,#0x1
+02056ab8  str r2,[sp,#0x0]
+02056abc  bl 0x02056594
+02056ac0  add sp,sp,#0x4
+02056ac4  ldmia sp!,{lr}
+02056ac8  bx lr

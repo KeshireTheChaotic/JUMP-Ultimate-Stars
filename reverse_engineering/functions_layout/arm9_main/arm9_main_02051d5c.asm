@@ -1,0 +1,12 @@
+02051d5c  ldr r12,[0x2051d8c]
+02051d60  mov r1,#0x0
+02051d64  ldrh r3,[r12,#0x0]
+02051d68  ldr r2,[0x2051d90]
+02051d6c  strh r1,[r12,#0x0]
+02051d70  ldr r1,[r2,#0x0]
+02051d74  orr r0,r1,r0
+02051d78  str r0,[r2,#0x0]
+02051d7c  ldrh r0,[r12,#0x0]
+02051d80  mov r0,r1
+02051d84  strh r3,[r12,#0x0]
+02051d88  bx lr

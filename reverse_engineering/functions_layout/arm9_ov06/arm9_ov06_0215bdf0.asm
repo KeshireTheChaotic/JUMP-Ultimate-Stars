@@ -1,0 +1,12 @@
+0215bdf0  stmdb sp!,{r4,lr}
+0215bdf4  mov r4,r0
+0215bdf8  bl 0x021598f0
+0215bdfc  cmp r0,#0x0
+0215be00  ldmiane sp!,{r4,pc}
+0215be04  mov r0,r4
+0215be08  bl 0x0215dec8
+0215be0c  cmp r0,#0x0
+0215be10  ldmiane sp!,{r4,pc}
+0215be14  mov r0,r4
+0215be18  bl 0x0215d2e4
+0215be1c  ldmia sp!,{r4,pc}

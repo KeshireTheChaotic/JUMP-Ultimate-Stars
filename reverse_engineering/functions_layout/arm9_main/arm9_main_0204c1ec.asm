@@ -1,0 +1,9 @@
+0204c1ec  push {r4,lr}
+0204c1ee  mov r0,#0x28
+0204c1f0  add r4,r1,#0x0
+0204c1f2  blx 0x0201a228
+0204c1f6  cmp r0,#0x0
+0204c1f8  beq 0x0204c200
+0204c1fa  add r1,r4,#0x0
+0204c1fc  bl 0x0200f6c0
+0204c200  pop {r4,pc}

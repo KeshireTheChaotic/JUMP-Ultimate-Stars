@@ -1,0 +1,12 @@
+020119ec  stmdb sp!,{r4,lr}
+020119f0  mov r4,r0
+020119f4  ldrb r0,[r4,#0x29]
+020119f8  cmp r0,#0x0
+020119fc  ldmiane sp!,{r4,pc}
+02011a00  ldr r0,[0x2011a1c]
+02011a04  mov r1,r4
+02011a08  ldr r0,[r0,#0x460]
+02011a0c  bl 0x0201cca0
+02011a10  mov r0,#0x1
+02011a14  strb r0,[r4,#0x29]
+02011a18  ldmia sp!,{r4,pc}

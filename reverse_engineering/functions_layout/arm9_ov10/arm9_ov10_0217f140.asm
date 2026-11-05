@@ -1,0 +1,9 @@
+0217f140  ldr r3,[r0,#0x40]
+0217f142  cmp r3,#0x14
+0217f144  bge 0x0217f150
+0217f146  add r2,r3,#0x1
+0217f148  str r2,[r0,#0x40]
+0217f14a  add r0,r0,r3
+0217f14c  add r0,#0x2c
+0217f14e  strb r1,[r0,#0x0]
+0217f150  bx lr

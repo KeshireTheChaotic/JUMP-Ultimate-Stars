@@ -1,0 +1,9 @@
+0214f678  ldr r0,[0x214f69c]
+0214f67c  ldr r1,[r0,#0x0]
+0214f680  ldrsh r0,[r1,#0x10]
+0214f684  ldrsh r1,[r1,#0x12]
+0214f688  sub r0,r0,#0x1
+0214f68c  cmp r1,r0
+0214f690  moveq r0,#0x1
+0214f694  movne r0,#0x0
+0214f698  bx lr

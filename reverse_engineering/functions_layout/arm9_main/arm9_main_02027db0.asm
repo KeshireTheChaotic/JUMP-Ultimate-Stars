@@ -1,0 +1,14 @@
+02027db0  stmdb sp!,{r3,r4,r5,lr}
+02027db4  mov r5,r0
+02027db8  ldr r0,[r5,#0x34]
+02027dbc  mov r4,r1
+02027dc0  cmp r0,r4
+02027dc4  ldmiaeq sp!,{r3,r4,r5,pc}
+02027dc8  add r0,r0,#0x23c
+02027dcc  add r1,r5,#0x20
+02027dd0  bl 0x02037c24
+02027dd4  add r0,r4,#0x23c
+02027dd8  add r1,r5,#0x20
+02027ddc  str r4,[r5,#0x34]
+02027de0  bl 0x02037b98
+02027de4  ldmia sp!,{r3,r4,r5,pc}

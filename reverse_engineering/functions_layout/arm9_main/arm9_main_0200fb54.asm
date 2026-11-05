@@ -1,0 +1,11 @@
+0200fb54  ldr r2,[r1,#0x0]
+0200fb56  ldr r0,[0x0200fb6c]
+0200fb58  cmp r2,r0
+0200fb5a  bne 0x0200fb66
+0200fb5c  ldrb r0,[r1,#0x4]
+0200fb5e  cmp r0,#0x2
+0200fb60  bne 0x0200fb66
+0200fb62  mov r0,#0x1
+0200fb64  bx lr
+0200fb66  mov r0,#0x0
+0200fb68  bx lr

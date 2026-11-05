@@ -1,0 +1,11 @@
+0214cee0  ldr r3,[r0,#0x4]
+0214cee4  mov r0,#0x0
+0214cee8  str r1,[r3,#0x8e8]
+0214ceec  str r0,[r3,#0x8ec]
+0214cef0  cmp r2,#0x0
+0214cef4  str r2,[r3,#0x8f4]
+0214cef8  movne r0,#0x2
+0214cefc  str r0,[r3,#0x8f0]
+0214cf00  mov r0,#0x1
+0214cf04  strb r0,[r3,#0x902]
+0214cf08  bx lr

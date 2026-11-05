@@ -1,0 +1,11 @@
+02017a04  stmdb sp!,{r3,r4,r5,r6,r7,lr}
+02017a08  mov r7,r0
+02017a0c  mov r6,r1
+02017a10  mov r1,r3
+02017a14  mov r5,r2
+02017a18  ldr r4,[r7,#0xc]
+02017a1c  bl 0x0201731c
+02017a20  ldrh r1,[r7,#0x8]
+02017a24  mla r1,r5,r1,r6
+02017a28  strb r0,[r4,r1]
+02017a2c  ldmia sp!,{r3,r4,r5,r6,r7,pc}

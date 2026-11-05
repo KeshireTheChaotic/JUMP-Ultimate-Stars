@@ -1,0 +1,12 @@
+020398dc  stmdb sp!,{r4,lr}
+020398e0  ldr r1,[0x203990c]
+020398e4  mov r4,r0
+020398e8  str r1,[r4,#0x0]
+020398ec  ldr r0,[r4,#0x20]
+020398f0  ldr r1,[r0,#0x0]
+020398f4  ldr r1,[r1,#0xc]
+020398f8  blx r1
+020398fc  mov r0,r4
+02039900  bl 0x020168bc
+02039904  mov r0,r4
+02039908  ldmia sp!,{r4,pc}

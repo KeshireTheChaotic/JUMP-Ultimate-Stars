@@ -1,0 +1,11 @@
+027e0030  ldr r1,[0x27e005c]
+027e0034  ldr r2,[r1,#0x550]
+027e0038  strh r0,[r2,#0x30]
+027e003c  add r1,r2,#0x100
+027e0040  ldrh r1,[r1,#0x88]
+027e0044  cmp r1,#0x0
+027e0048  addeq r0,r0,#0x4
+027e004c  strheq r0,[r2,#0x38]
+027e0050  addne r0,r0,#0x4
+027e0054  strhne r0,[r2,#0x3a]
+027e0058  bx lr

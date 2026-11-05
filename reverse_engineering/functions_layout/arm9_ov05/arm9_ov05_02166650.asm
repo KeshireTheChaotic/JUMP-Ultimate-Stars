@@ -1,0 +1,54 @@
+02166650  stmdb sp!,{r4,r5,r6,r7,r8,r9,lr}
+02166654  sub sp,sp,#0xc
+02166658  ldr r1,[0x2166728]
+0216665c  mov r8,r0
+02166660  add r0,sp,#0x0
+02166664  bl 0x021634b4
+02166668  ldr r0,[r8,#0x20]
+0216666c  mov r1,#0x0
+02166670  ldr r0,[r0,#0x4]
+02166674  ldr r2,[r0,#0x0]
+02166678  ldr r2,[r2,#0xd8]
+0216667c  blx r2
+02166680  mov r5,#0x0
+02166684  add r7,r5,r5, lsl #0x2
+02166688  mov r6,#0x0
+0216668c  add r4,r8,r7, lsl #0x2
+02166690  mov r9,r6
+02166694  add r0,r4,r6, lsl #0x2
+02166698  ldr r0,[r0,#0x9c]
+0216669c  mov r1,r9
+021666a0  ldr r0,[r0,#0x4]
+021666a4  ldr r2,[r0,#0x0]
+021666a8  ldr r2,[r2,#0xd8]
+021666ac  blx r2
+021666b0  add r6,r6,#0x1
+021666b4  cmp r6,#0x5
+021666b8  blt 0x02166694
+021666bc  add r0,r8,r7, lsl #0x2
+021666c0  ldr r4,[r0,#0xa4]
+021666c4  ldr r1,[0x216672c]
+021666c8  ldr r0,[r4,#0x4]
+021666cc  mov r2,#0x0
+021666d0  bl 0x02023894
+021666d4  ldr r0,[r4,#0x4]
+021666d8  ldr r0,[r0,#0x68]
+021666dc  ldr r1,[r0,#0x0]
+021666e0  ldr r1,[r1,#0x6c]
+021666e4  blx r1
+021666e8  ldr r0,[r4,#0x4]
+021666ec  mov r1,#0x1
+021666f0  ldr r2,[r0,#0x0]
+021666f4  ldr r2,[r2,#0xd8]
+021666f8  blx r2
+021666fc  add r1,sp,#0x0
+02166700  mov r0,r4
+02166704  bl 0x021639a8
+02166708  ldr r0,[sp,#0x0]
+0216670c  add r5,r5,#0x1
+02166710  add r0,r0,#0x22000
+02166714  str r0,[sp,#0x0]
+02166718  cmp r5,#0x6
+0216671c  blt 0x02166684
+02166720  add sp,sp,#0xc
+02166724  ldmia sp!,{r4,r5,r6,r7,r8,r9,pc}

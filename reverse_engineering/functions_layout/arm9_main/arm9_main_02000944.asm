@@ -1,0 +1,43 @@
+02000944  cmp r0,#0x0
+02000948  beq 0x020009ec
+0200094c  stmdb sp!,{r4,r5,r6,r7}
+02000950  ldmdb r0,{r1,r2}
+02000954  add r2,r0,r2
+02000958  sub r3,r0,r1, lsr #0x18
+0200095c  bic r1,r1,#0xff000000
+02000960  sub r1,r0,r1
+02000964  mov r4,r2
+02000968  cmp r3,r1
+0200096c  ble 0x020009c8
+02000970  ldrb r5,[r3,#-0x1]!
+02000974  mov r6,#0x8
+02000978  subs r6,r6,#0x1
+0200097c  blt 0x02000968
+02000980  tst r5,#0x80
+02000984  bne 0x02000994
+02000988  ldrb r0,[r3,#-0x1]!
+0200098c  strb r0,[r2,#-0x1]!
+02000990  b 0x020009bc
+02000994  ldrb r12,[r3,#-0x1]!
+02000998  ldrb r7,[r3,#-0x1]!
+0200099c  orr r7,r7,r12, lsl #0x8
+020009a0  bic r7,r7,#0xf000
+020009a4  add r7,r7,#0x2
+020009a8  add r12,r12,#0x20
+020009ac  ldrb r0,[r2,r7]
+020009b0  strb r0,[r2,#-0x1]!
+020009b4  subs r12,r12,#0x10
+020009b8  bge 0x020009ac
+020009bc  cmp r3,r1
+020009c0  mov r5,r5, lsl #0x1
+020009c4  bgt 0x02000978
+020009c8  mov r0,#0x0
+020009cc  bic r3,r1,#0x1f
+020009d0  mcr p15,0x0,r0,cr7,cr10,0x4
+020009d4  mcr p15,0x0,r3,cr7,cr5,0x1
+020009d8  mcr p15,0x0,r3,cr7,cr14,0x1
+020009dc  add r3,r3,#0x20
+020009e0  cmp r3,r4
+020009e4  blt 0x020009d0
+020009e8  ldmia sp!,{r4,r5,r6,r7}
+020009ec  bx lr

@@ -1,0 +1,9 @@
+02153e8c  stmdb sp!,{r4,lr}
+02153e90  ldr r1,[r0,#0x4]
+02153e94  mov r0,#0x7b
+02153e98  ldr r4,[r1,#0x10]
+02153e9c  mov r1,#0x0
+02153ea0  bl 0x0207342c
+02153ea4  mov r0,r4
+02153ea8  bl 0x021535b0
+02153eac  ldmia sp!,{r4,pc}

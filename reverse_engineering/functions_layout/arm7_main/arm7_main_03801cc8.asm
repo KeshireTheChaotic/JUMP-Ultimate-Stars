@@ -1,0 +1,14 @@
+03801cc8  bic r2,r0,#0x3
+03801ccc  ldr r0,[0x3801d00]
+03801cd0  str r2,[r0,#0x0]
+03801cd4  add r1,r2,#0x10
+03801cd8  str r1,[r0,#0x4]
+03801cdc  ldr r1,[r2,#0x0]
+03801ce0  str r1,[r0,#0x8]
+03801ce4  ldr r1,[r2,#0x4]
+03801ce8  str r1,[r0,#0xc]
+03801cec  ldr r1,[r2,#0x8]
+03801cf0  str r1,[r0,#0x10]
+03801cf4  ldr r1,[r2,#0xc]
+03801cf8  str r1,[r0,#0x14]
+03801cfc  bx lr

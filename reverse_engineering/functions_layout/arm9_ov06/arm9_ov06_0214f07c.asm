@@ -1,0 +1,21 @@
+0214f07c  stmdb sp!,{r3,r4,r5,r6,r7,lr}
+0214f080  ldr r5,[0x214f0d0]
+0214f084  mov r4,r0
+0214f088  ldr r0,[r5,#0x0]
+0214f08c  ldrb r0,[r0,#0x16e]
+0214f090  cmp r0,#0x0
+0214f094  ldmiaeq sp!,{r3,r4,r5,r6,r7,pc}
+0214f098  mov r7,#0x1
+0214f09c  ldr r6,[0x214f0d4]
+0214f0a0  b 0x0214f0bc
+0214f0a4  ldrsb r1,[r4,#0x9b]
+0214f0a8  add r0,r2,r7, lsl #0x2
+0214f0ac  ldr r0,[r0,#0x12c]
+0214f0b0  ldrb r1,[r6,r1]
+0214f0b4  bl 0x021731f0
+0214f0b8  add r7,r7,#0x1
+0214f0bc  ldr r2,[r5,#0x0]
+0214f0c0  ldr r0,[r2,#0x158]
+0214f0c4  cmp r7,r0
+0214f0c8  blt 0x0214f0a4
+0214f0cc  ldmia sp!,{r3,r4,r5,r6,r7,pc}

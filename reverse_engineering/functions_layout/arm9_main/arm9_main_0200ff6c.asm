@@ -1,0 +1,10 @@
+0200ff6c  push {r3,lr}
+0200ff6e  bl 0x0200fe80
+0200ff72  ldrb r1,[r0,#0x5]
+0200ff74  mov r0,#0x4
+0200ff76  tst r0,r1
+0200ff78  beq 0x0200ff7e
+0200ff7a  mov r0,#0x1
+0200ff7c  pop {r3,pc}
+0200ff7e  mov r0,#0x0
+0200ff80  pop {r3,pc}

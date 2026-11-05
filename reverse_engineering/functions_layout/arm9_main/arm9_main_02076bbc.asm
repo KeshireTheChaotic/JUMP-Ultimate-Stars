@@ -1,0 +1,23 @@
+02076bbc  stmdb sp!,{r4,r5,r6,r7,r8,lr}
+02076bc0  mov r7,r1
+02076bc4  mov r8,r0
+02076bc8  mov r0,r7
+02076bcc  bl 0x02078aa0
+02076bd0  ldr r5,[r8,#0x558]
+02076bd4  mov r6,#0x0
+02076bd8  mov r4,#0x4
+02076bdc  b 0x02076bf8
+02076be0  mov r2,r4
+02076be4  add r0,r5,#0xc
+02076be8  add r1,r7,r6, lsl #0x2
+02076bec  bl 0x02051890
+02076bf0  ldr r5,[r5,#0x0]
+02076bf4  add r6,r6,#0x1
+02076bf8  cmp r5,#0x0
+02076bfc  bne 0x02076be0
+02076c00  add r0,r8,#0xfe
+02076c04  add r0,r0,#0x500
+02076c08  add r1,r7,#0x40
+02076c0c  mov r2,#0x1a
+02076c10  bl 0x02051890
+02076c14  ldmia sp!,{r4,r5,r6,r7,r8,pc}

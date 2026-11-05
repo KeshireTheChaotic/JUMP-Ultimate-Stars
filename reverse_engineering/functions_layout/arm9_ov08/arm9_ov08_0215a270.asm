@@ -1,0 +1,13 @@
+0215a270  push {lr}
+0215a272  sub sp,#0x4
+0215a274  ldr r0,[0x0215a28c]
+0215a276  ldrb r1,[r0,#0x0]
+0215a278  add r1,r1,#0x1
+0215a27a  strb r1,[r0,#0x0]
+0215a27c  ldrb r0,[r0,#0x0]
+0215a27e  cmp r0,#0x78
+0215a280  bcc 0x0215a288
+0215a282  ldr r0,[0x0215a290]
+0215a284  bl 0x02157088
+0215a288  add sp,#0x4
+0215a28a  pop {pc}

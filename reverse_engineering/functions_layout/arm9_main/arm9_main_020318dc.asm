@@ -1,0 +1,10 @@
+020318dc  stmdb sp!,{r3,lr}
+020318e0  ldr r0,[0x2031904]
+020318e4  ldr r2,[0x2031908]
+020318e8  ldr r0,[r0,#0x1a4]
+020318ec  mov r1,#0x0
+020318f0  bl 0x0201a418
+020318f4  cmp r0,#0x0
+020318f8  ldmiaeq sp!,{r3,pc}
+020318fc  bl 0x02031c40
+02031900  ldmia sp!,{r3,pc}

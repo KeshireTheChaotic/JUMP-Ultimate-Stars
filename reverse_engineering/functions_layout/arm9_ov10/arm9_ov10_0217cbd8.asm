@@ -1,0 +1,15 @@
+0217cbd8  push {r4,lr}
+0217cbda  add r4,r0,#0x0
+0217cbdc  bl 0x02178448
+0217cbe0  cmp r0,#0x0
+0217cbe2  bne 0x0217cbe8
+0217cbe4  mov r0,#0x0
+0217cbe6  pop {r4,pc}
+0217cbe8  bl 0x02178448
+0217cbec  ldr r1,[0x0217cbfc]
+0217cbee  add r0,r0,r1
+0217cbf0  str r0,[r4,#0x0]
+0217cbf2  bl 0x02178448
+0217cbf6  ldrb r0,[r0,#0xd]
+0217cbf8  add r0,r0,#0x1
+0217cbfa  pop {r4,pc}

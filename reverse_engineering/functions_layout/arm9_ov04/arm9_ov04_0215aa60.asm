@@ -1,0 +1,12 @@
+0215aa60  stmdb sp!,{r4,lr}
+0215aa64  ldr r1,[0x215aa90]
+0215aa68  ldr r2,[0x215aa94]
+0215aa6c  mov r0,#0x18
+0215aa70  mov r3,#0x1f
+0215aa74  bl 0x0201a21c
+0215aa78  mov r1,#0x0
+0215aa7c  mov r2,#0x18
+0215aa80  mov r4,r0
+0215aa84  bl 0x020517fc
+0215aa88  mov r0,r4
+0215aa8c  ldmia sp!,{r4,pc}

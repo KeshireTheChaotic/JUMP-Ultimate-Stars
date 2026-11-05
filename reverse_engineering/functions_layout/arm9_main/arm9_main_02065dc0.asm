@@ -1,0 +1,34 @@
+02065dc0  ldr r0,[0x2065e48]
+02065dc4  mov r2,#0x4000000
+02065dc8  ldr r1,[r2,#0x0]
+02065dcc  ldrh r3,[r0,#0x0]
+02065dd0  ldr r0,[r2,#0x0]
+02065dd4  and r12,r1,#0x7
+02065dd8  and r0,r0,#0x38000000
+02065ddc  mov r1,r0, lsr #0x1b
+02065de0  and r0,r3,#0x1f00
+02065de4  mov r2,r1, lsl #0x10
+02065de8  cmp r12,#0x6
+02065dec  mov r1,r0, lsr #0x8
+02065df0  addls pc,pc,r12, lsl #0x2
+02065df4  b 0x02065e40
+02065df8  b 0x02065e14
+02065dfc  b 0x02065e14
+02065e00  b 0x02065e14
+02065e04  b 0x02065e20
+02065e08  b 0x02065e20
+02065e0c  b 0x02065e20
+02065e10  b 0x02065e38
+02065e14  add r0,r2,#0x6000000
+02065e18  add r0,r0,r1, lsl #0xb
+02065e1c  bx lr
+02065e20  ands r0,r3,#0x80
+02065e24  movne r0,r1, lsl #0xe
+02065e28  addne r0,r0,#0x6000000
+02065e2c  addeq r0,r2,#0x6000000
+02065e30  addeq r0,r0,r1, lsl #0xb
+02065e34  bx lr
+02065e38  mov r0,#0x0
+02065e3c  bx lr
+02065e40  mov r0,#0x0
+02065e44  bx lr

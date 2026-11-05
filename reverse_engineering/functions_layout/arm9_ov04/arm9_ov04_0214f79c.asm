@@ -1,0 +1,10 @@
+0214f79c  ldr r1,[0x214f7c4]
+0214f7a0  ldr r1,[r1,#0x0]
+0214f7a4  ldrb r12,[r1,#0x14]
+0214f7a8  add r3,r1,#0x16
+0214f7ac  ldrb r2,[r3,r12]
+0214f7b0  add r1,r1,r12
+0214f7b4  add r0,r2,r0
+0214f7b8  strb r0,[r3,r12]
+0214f7bc  ldrb r0,[r1,#0x16]
+0214f7c0  bx lr

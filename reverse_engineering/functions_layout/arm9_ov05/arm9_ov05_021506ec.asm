@@ -1,0 +1,14 @@
+021506ec  stmdb sp!,{r3,r4,r5,lr}
+021506f0  ldr r0,[r0,#0x4]
+021506f4  ldr r5,[r1,#0x4]
+021506f8  ldr r2,[r0,#0x0]
+021506fc  mov r1,r5
+02150700  ldr r2,[r2,#0xb4]
+02150704  blx r2
+02150708  mov r4,r0
+0215070c  mov r0,r5
+02150710  ldr r1,[r0,#0x0]
+02150714  ldr r1,[r1,#0xc]
+02150718  blx r1
+0215071c  mov r0,r4
+02150720  ldmia sp!,{r3,r4,r5,pc}

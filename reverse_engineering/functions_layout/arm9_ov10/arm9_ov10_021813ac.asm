@@ -1,0 +1,13 @@
+021813ac  push {r4,r5,r6,lr}
+021813ae  add r5,r0,#0x0
+021813b0  add r4,r2,#0x0
+021813b2  add r6,r3,#0x0
+021813b4  ldr r0,[r5,#0x0]
+021813b6  bl 0x02002434
+021813ba  ldr r0,[r6,#0x0]
+021813bc  add r0,r0,r4
+021813be  str r0,[r6,#0x0]
+021813c0  ldr r0,[r5,#0x0]
+021813c2  add r0,r0,r4
+021813c4  str r0,[r5,#0x0]
+021813c6  pop {r4,r5,r6,pc}

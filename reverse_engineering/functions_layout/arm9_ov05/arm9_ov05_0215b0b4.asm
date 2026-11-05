@@ -1,0 +1,17 @@
+0215b0b4  stmdb sp!,{r4,lr}
+0215b0b8  ldrsb r3,[r1,#0x8]
+0215b0bc  ldr r2,[0x215b0f8]
+0215b0c0  mov r4,r0
+0215b0c4  ldrsb r2,[r2,r3]
+0215b0c8  ldrsb r1,[r1,#0x9]
+0215b0cc  ldr r0,[r4,#0x4]
+0215b0d0  add r2,r2,#0x810000
+0215b0d4  add r1,r2,r1
+0215b0d8  mov r2,#0x0
+0215b0dc  bl 0x02023894
+0215b0e0  ldr r0,[r4,#0x4]
+0215b0e4  mov r1,#0x1
+0215b0e8  ldr r2,[r0,#0x0]
+0215b0ec  ldr r2,[r2,#0xd8]
+0215b0f0  blx r2
+0215b0f4  ldmia sp!,{r4,pc}

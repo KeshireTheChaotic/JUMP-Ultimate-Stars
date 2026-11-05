@@ -1,0 +1,16 @@
+01fffa9c  stmdb sp!,{r1,lr}
+01fffaa0  bl 0x01fff978
+01fffaa4  add r4,r1,#0xc0
+01fffaa8  add r3,r4,#0x400
+01fffaac  bl 0x01fff1e0
+01fffab0  bl 0x01fffa24
+01fffab4  add r2,r1,#0x8c0
+01fffab8  add r2,r2,#0xc10
+01fffabc  bl 0x01fff424
+01fffac0  add r2,r1,#0x48
+01fffac4  stmia r2,{r5,r6,r7,r8,r9,r10,r11,r12}
+01fffac8  str r4,[r1,#0x74]
+01fffacc  add r0,r3,#0x200
+01fffad0  mov r2,#0x80
+01fffad4  bl 0x01fff5d8
+01fffad8  ldmia sp!,{r1,pc}

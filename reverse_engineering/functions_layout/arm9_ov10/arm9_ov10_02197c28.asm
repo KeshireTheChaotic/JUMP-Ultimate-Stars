@@ -1,0 +1,10 @@
+02197c26  sub r1,r1,#0x1
+02197c28  cmp r1,#0x0
+02197c2a  beq 0x02197c36
+02197c2c  sub r2,r1,#0x1
+02197c2e  lsl r2,r2,#0x1
+02197c30  ldrh r2,[r0,r2]
+02197c32  cmp r2,#0x0
+02197c34  beq 0x02197c26
+02197c36  add r0,r1,#0x0
+02197c38  bx lr

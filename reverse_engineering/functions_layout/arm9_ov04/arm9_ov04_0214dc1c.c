@@ -1,0 +1,26 @@
+
+void FUN_0214dc1c(undefined4 param_1,int param_2,undefined4 param_3,undefined4 param_4,
+                 undefined4 param_5,undefined1 param_6)
+
+{
+  int iVar1;
+  int *piVar2;
+  
+  _param_6 = 0x2000;
+  (**(code **)(**(int **)(param_2 + 4) + 0x10))(*(int **)(param_2 + 4),&param_6);
+  iVar1 = FUN_0203b424(3);
+  FUN_0203d0b4(*(undefined4 *)(*(int *)(iVar1 + 0x88) + 4),1);
+  iVar1 = FUN_0203b424(3);
+  FUN_0203d478(*(undefined4 *)(*(int *)(iVar1 + 0x88) + 4),4);
+  iVar1 = FUN_0203b424(3);
+  FUN_0203cfbc(*(undefined4 *)(*(int *)(iVar1 + 0x88) + 4),0x20,0x20);
+  iVar1 = FUN_0203b424(3);
+  piVar2 = *(int **)(*(int *)(iVar1 + 0x88) + 4);
+  (**(code **)(*piVar2 + 0x90))(piVar2,0x8000);
+  iVar1 = FUN_0203b424(3);
+  param_5 = 0x3000;
+  piVar2 = *(int **)(*(int *)(iVar1 + 0x88) + 4);
+  (**(code **)(*piVar2 + 0x10))(piVar2,&param_5);
+  return;
+}
+

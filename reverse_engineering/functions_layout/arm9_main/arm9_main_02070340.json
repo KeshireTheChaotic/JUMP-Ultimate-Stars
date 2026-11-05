@@ -1,0 +1,1 @@
+{"module":"arm9_main","address":"02070340","name":"jus_Scene44_Create","thumb":false,"body_bytes":20,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":[],"unresolved_call_targets":["02070878","0214cd20"],"status":"decompiled","asm_file":"arm9_main_02070340.asm","c_file":"arm9_main_02070340.c"}

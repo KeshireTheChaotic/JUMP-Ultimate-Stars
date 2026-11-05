@@ -1,0 +1,85 @@
+
+void FUN_0216e9d8(void)
+
+{
+  undefined1 auStack_88 [4];
+  undefined1 auStack_84 [4];
+  undefined1 auStack_80 [4];
+  undefined1 auStack_7c [4];
+  undefined1 auStack_78 [4];
+  undefined1 auStack_74 [4];
+  undefined1 auStack_70 [4];
+  undefined1 auStack_6c [4];
+  undefined1 auStack_68 [4];
+  undefined1 auStack_64 [4];
+  undefined1 auStack_60 [4];
+  undefined1 auStack_5c [4];
+  undefined1 auStack_58 [4];
+  undefined1 auStack_54 [4];
+  undefined1 auStack_50 [4];
+  undefined1 auStack_4c [4];
+  undefined1 auStack_48 [4];
+  undefined1 auStack_44 [4];
+  undefined1 auStack_40 [4];
+  undefined1 auStack_3c [4];
+  undefined1 auStack_38 [4];
+  undefined1 auStack_34 [4];
+  undefined1 auStack_30 [4];
+  undefined1 auStack_2c [4];
+  undefined1 auStack_28 [4];
+  undefined1 auStack_24 [4];
+  undefined1 auStack_20 [4];
+  undefined1 auStack_1c [4];
+  undefined1 auStack_18 [4];
+  undefined1 auStack_14 [4];
+  undefined1 auStack_10 [4];
+  undefined1 auStack_c [4];
+  undefined1 auStack_8 [8];
+  
+  FUN_02154cb4(auStack_10,0);
+  FUN_02154cb4(auStack_c,0);
+  FUN_02154cb4(auStack_8,0x80);
+  FUN_021595f4(&DAT_02171430,auStack_8,auStack_c,auStack_10);
+  FUN_02154cb4(auStack_1c,0);
+  FUN_02154cb4(auStack_18,0x34);
+  FUN_02154cb4(auStack_14,0x14);
+  FUN_021595f4(&DAT_0217143c,auStack_14,auStack_18,auStack_1c);
+  FUN_02154cb4(auStack_28,0);
+  FUN_02154cb4(auStack_24,0x40);
+  FUN_02154cb4(auStack_20,0xa4);
+  FUN_021595f4(&DAT_02171448,auStack_20,auStack_24,auStack_28);
+  FUN_02154cb4(auStack_34,0);
+  FUN_02154cb4(auStack_30,0x48);
+  FUN_02154cb4(auStack_2c,0xa0);
+  FUN_021595f4(&DAT_02171454,auStack_2c,auStack_30,auStack_34);
+  FUN_02154cb4(auStack_40,0);
+  FUN_02154cb4(auStack_3c,0xa1);
+  FUN_02154cb4(auStack_38,0x1b);
+  FUN_021595f4(&DAT_02171460,auStack_38,auStack_3c,auStack_40);
+  FUN_02154cb4(auStack_4c,0);
+  FUN_02154cb4(auStack_48,0x8e);
+  FUN_02154cb4(auStack_44,0x3c);
+  FUN_021595f4(&DAT_0217146c,auStack_44,auStack_48,auStack_4c);
+  FUN_02154cb4(auStack_58,0);
+  FUN_02154cb4(auStack_54,0xa2);
+  FUN_02154cb4(auStack_50,0x3c);
+  FUN_021595f4(&DAT_02171478,auStack_50,auStack_54,auStack_58);
+  FUN_02154cb4(auStack_64,0);
+  FUN_02154cb4(auStack_60,0x38);
+  FUN_02154cb4(auStack_5c,0x54);
+  FUN_021595f4(&DAT_02171484,auStack_5c,auStack_60,auStack_64);
+  FUN_02154cb4(auStack_70,0);
+  FUN_02154cb4(auStack_6c,0x50);
+  FUN_02154cb4(auStack_68,0x58);
+  FUN_021595f4(&DAT_02171490,auStack_68,auStack_6c,auStack_70);
+  FUN_02154cb4(auStack_7c,0);
+  FUN_02154cb4(auStack_78,0x78);
+  FUN_02154cb4(auStack_74,0x18);
+  FUN_021595f4(&DAT_0217149c,auStack_74,auStack_78,auStack_7c);
+  FUN_02154cb4(auStack_88,0);
+  FUN_02154cb4(auStack_84,0);
+  FUN_02154cb4(auStack_80,8);
+  FUN_021595f4(&DAT_021714a8,auStack_80,auStack_84,auStack_88);
+  return;
+}
+

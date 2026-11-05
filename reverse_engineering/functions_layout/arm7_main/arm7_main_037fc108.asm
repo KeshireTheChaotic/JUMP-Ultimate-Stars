@@ -1,0 +1,13 @@
+037fc108  stmdb sp!,{r4,lr}
+037fc10c  bl 0x037fe3a4
+037fc110  mov r4,#0x0
+037fc114  ldr r1,[0x37fc13c]
+037fc118  ldr r3,[r1,#0x0]
+037fc11c  cmp r3,#0x0
+037fc120  subne r2,r3,#0x1
+037fc124  strne r2,[r1,#0x0]
+037fc128  movne r4,r3
+037fc12c  bl 0x037fe3b8
+037fc130  mov r0,r4
+037fc134  ldmia sp!,{r4,lr}
+037fc138  bx lr

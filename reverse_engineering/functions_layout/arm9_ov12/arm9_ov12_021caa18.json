@@ -1,0 +1,1 @@
+{"module":"arm9_ov12","address":"021caa18","name":"FUN_021caa18","thumb":true,"body_bytes":90,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["0201a21c","02037f84","021caa84"],"unresolved_call_targets":[],"status":"decompiled","asm_file":"arm9_ov12_021caa18.asm","c_file":"arm9_ov12_021caa18.c"}

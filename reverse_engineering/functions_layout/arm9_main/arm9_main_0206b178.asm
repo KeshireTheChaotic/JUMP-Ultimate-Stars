@@ -1,0 +1,14 @@
+0206b178  stmdb sp!,{r4,lr}
+0206b17c  ldr r0,[r0,#0x4]
+0206b180  ldr r4,[r0,#0x10]
+0206b184  ldrb r1,[r4,#0x11]
+0206b188  add r0,r1,#0x1
+0206b18c  strb r0,[r4,#0x11]
+0206b190  ldrb r0,[r4,#0x17]
+0206b194  cmp r1,r0
+0206b198  ldmiacc sp!,{r4,pc}
+0206b19c  mov r0,r4
+0206b1a0  bl 0x0206b304
+0206b1a4  mov r0,#0x0
+0206b1a8  strb r0,[r4,#0x11]
+0206b1ac  ldmia sp!,{r4,pc}

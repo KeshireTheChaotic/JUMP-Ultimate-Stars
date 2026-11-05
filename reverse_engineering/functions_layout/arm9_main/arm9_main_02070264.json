@@ -1,0 +1,1 @@
+{"module":"arm9_main","address":"02070264","name":"jus_Scene42_Exit","thumb":false,"body_bytes":120,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["0206e574","0207003c"],"unresolved_call_targets":[],"status":"decompiled","asm_file":"arm9_main_02070264.asm","c_file":"arm9_main_02070264.c"}

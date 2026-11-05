@@ -1,0 +1,10 @@
+0205889c  stmdb sp!,{lr}
+020588a0  sub sp,sp,#0x4
+020588a4  bl 0x02058044
+020588a8  cmp r0,#0x0
+020588ac  movne r0,#0x8000
+020588b0  ldreq r0,[0x20588c4]
+020588b4  ldrheq r0,[r0,#0x0]
+020588b8  add sp,sp,#0x4
+020588bc  ldmia sp!,{lr}
+020588c0  bx lr

@@ -1,0 +1,271 @@
+037f9f88  stmdb sp!,{r4,r5,r6,r7,r8,r9,r10,r11,lr}
+037f9f8c  sub sp,sp,#0x1c
+037f9f90  ldr r0,[0x37fa3c4]
+037f9f94  ldr r1,[r0,#0x0]
+037f9f98  add r10,r1,#0x344
+037f9f9c  ldr r0,[0x37fa3c8]
+037f9fa0  add r9,r1,r0
+037f9fa4  add r0,r1,#0x600
+037f9fa8  ldrh r2,[r0,#0x90]
+037f9fac  mov r1,#0x1
+037f9fb0  ldr r0,[0x37fa3cc]
+037f9fb4  strh r1,[r0,#0x0]
+037f9fb8  ldrh r0,[r10,#0xc]
+037f9fbc  cmp r0,#0x0
+037f9fc0  ldreq r0,[0x37fa3d0]
+037f9fc4  ldrheq r1,[r0,#0x0]
+037f9fc8  ldreq r0,[0x37fa3d4]
+037f9fcc  strheq r1,[r0,#0x0]
+037f9fd0  and r5,r2,#0x1
+037f9fd4  mov r0,#0x3e8
+037f9fd8  str r0,[sp,#0x14]
+037f9fdc  mov r0,#0x0
+037f9fe0  str r0,[sp,#0x18]
+037f9fe4  ldrh r7,[r9,#0x4]
+037f9fe8  ldr r0,[0x37fa3d0]
+037f9fec  ldrh r6,[r0,#0x0]
+037f9ff0  cmp r7,r6
+037f9ff4  beq 0x037fa360
+037f9ff8  ldr r0,[0x37fa3d8]
+037f9ffc  ldrh r4,[r0,#0x0]
+037fa000  ldr r0,[0x37fa3dc]
+037fa004  ldrh r3,[r0,#0x0]
+037fa008  ldr r0,[0x37fa3d8]
+037fa00c  ldrh r2,[r0,#0x0]
+037fa010  ldr r0,[0x37fa3dc]
+037fa014  ldrh r1,[r0,#0x0]
+037fa018  cmp r4,r2
+037fa01c  movhi r0,r2, lsr #0x4
+037fa020  orrhi r11,r0,r1, lsl #0xc
+037fa024  movls r0,r4, lsr #0x4
+037fa028  orrls r11,r0,r3, lsl #0xc
+037fa02c  ldr r0,[0x37fa3e0]
+037fa030  cmp r7,r0
+037fa034  bcc 0x037fa048
+037fa038  ldr r0,[0x37fa3e4]
+037fa03c  cmp r7,r0
+037fa040  bhi 0x037fa048
+037fa044  bl 0x027e9e08
+037fa048  mov r0,r7, lsl #0x1
+037fa04c  str r0,[sp,#0x8]
+037fa050  ldr r0,[0x37fa3e8]
+037fa054  add r8,r0,r7, lsl #0x1
+037fa058  add r0,r8,#0x2
+037fa05c  bl 0x037fa998
+037fa060  mov r4,r0
+037fa064  add r0,r4,#0x2
+037fa068  bl 0x037fa998
+037fa06c  str r0,[sp,#0xc]
+037fa070  add r0,r0,#0x4
+037fa074  bl 0x037fa998
+037fa078  str r0,[sp,#0x10]
+037fa07c  add r0,r8,#0xe
+037fa080  bl 0x037fa998
+037fa084  str r0,[sp,#0x4]
+037fa088  ldr r0,[sp,#0x8]
+037fa08c  add r0,r0,#0x4800000
+037fa090  add r0,r0,#0x4000
+037fa094  ldrh r2,[r0,#0x0]
+037fa098  ldrh r1,[r4,#0x0]
+037fa09c  mov r1,r1, lsl #0x1
+037fa0a0  and r1,r1,#0x400
+037fa0a4  orr r1,r2,r1
+037fa0a8  strh r1,[r0,#0x0]
+037fa0ac  ldr r0,[sp,#0xc]
+037fa0b0  strh r11,[r0,#0x0]
+037fa0b4  ldr r0,[sp,#0x10]
+037fa0b8  ldrh r2,[r0,#0x0]
+037fa0bc  add r0,r2,r7, lsl #0x1
+037fa0c0  add r0,r0,#0xf
+037fa0c4  mov r0,r0, lsr #0x2
+037fa0c8  mov r7,r0, lsl #0x1
+037fa0cc  cmp r7,#0xfb0
+037fa0d0  ldrhcs r0,[r10,#0x9a]
+037fa0d4  subcs r7,r7,r0, lsr #0x1
+037fa0d8  ldr r0,[0x37fa3ec]
+037fa0dc  cmp r2,r0
+037fa0e0  bls 0x037fa100
+037fa0e4  ldr r0,[0x37fa3f0]
+037fa0e8  strh r0,[r8,#0x0]
+037fa0ec  mov r7,r6
+037fa0f0  ldrh r0,[r10,#0xb4]
+037fa0f4  add r0,r0,#0x1
+037fa0f8  strh r0,[r10,#0xb4]
+037fa0fc  b 0x037fa198
+037fa100  cmp r5,#0x0
+037fa104  beq 0x037fa198
+037fa108  cmp r7,r6
+037fa10c  beq 0x037fa198
+037fa110  mov r1,r7, lsl #0x1
+037fa114  ldr r0,[0x37fa3e8]
+037fa118  add r0,r0,r7, lsl #0x1
+037fa11c  add r1,r1,#0x4800000
+037fa120  add r1,r1,#0x4000
+037fa124  ldrh r1,[r1,#0x0]
+037fa128  ldr r3,[0x37fa3f4]
+037fa12c  cmp r0,r3
+037fa130  ldrhcc r0,[r0,#0x6]
+037fa134  andcc r0,r0,#0xff
+037fa138  movcc r0,r0, lsl #0x10
+037fa13c  movcc r3,r0, lsr #0x10
+037fa140  ldrhcs r3,[r10,#0x9a]
+037fa144  subcs r0,r0,r3
+037fa148  ldrhcs r3,[r0,#0x6]
+037fa14c  ands r0,r1,#0x7c00
+037fa150  bne 0x037fa170
+037fa154  cmp r3,#0xa
+037fa158  beq 0x037fa164
+037fa15c  cmp r3,#0x14
+037fa160  bne 0x037fa170
+037fa164  ldr r0,[0x37fa3f8]
+037fa168  cmp r2,r0
+037fa16c  bls 0x037fa198
+037fa170  ldrh r0,[r10,#0xb4]
+037fa174  add r0,r0,#0x1
+037fa178  strh r0,[r10,#0xb4]
+037fa17c  ldr r0,[0x37fa3f0]
+037fa180  strh r0,[r8,#0x0]
+037fa184  mov r0,r6, lsl #0x10
+037fa188  mov r0,r0, lsr #0x10
+037fa18c  strh r0,[r9,#0x4]
+037fa190  strh r0,[r4,#0x0]
+037fa194  b 0x037fa360
+037fa198  ldrh r0,[r8,#0x0]
+037fa19c  and r0,r0,#0xf
+037fa1a0  cmp r0,#0xc
+037fa1a4  bne 0x037fa2f4
+037fa1a8  add r0,r8,#0xc
+037fa1ac  bl 0x037fa998
+037fa1b0  ldrh r11,[r0,#0x0]
+037fa1b4  add r0,r8,#0x22
+037fa1b8  bl 0x037fa998
+037fa1bc  ldrh r6,[r0,#0x0]
+037fa1c0  ldrh r0,[r9,#0x0]
+037fa1c4  cmp r0,r6
+037fa1c8  bne 0x037fa1f4
+037fa1cc  ands r0,r11,#0x800
+037fa1d0  beq 0x037fa1f4
+037fa1d4  ldr r0,[0x37fa3c4]
+037fa1d8  ldr r1,[r0,#0x0]
+037fa1dc  ldr r0,[r1,#0x57c]
+037fa1e0  add r0,r0,#0x1
+037fa1e4  str r0,[r1,#0x57c]
+037fa1e8  ldr r0,[0x37fa3f0]
+037fa1ec  strh r0,[r8,#0x0]
+037fa1f0  b 0x037fa2cc
+037fa1f4  ldr r0,[0x37fa3c4]
+037fa1f8  ldr r0,[r0,#0x0]
+037fa1fc  add r1,r0,#0x300
+037fa200  ldrh r2,[r1,#0x3a]
+037fa204  mov r2,r2, lsl #0x18
+037fa208  movs r2,r2, lsr #0x1f
+037fa20c  bne 0x037fa2cc
+037fa210  ldrh r1,[r1,#0x4c]
+037fa214  cmp r1,#0x40
+037fa218  bne 0x037fa2cc
+037fa21c  ldr r1,[0x37fa3fc]
+037fa220  ldrh r1,[r1,#0x0]
+037fa224  cmp r1,#0x0
+037fa228  beq 0x037fa2a4
+037fa22c  ldr r1,[0x37fa400]
+037fa230  ldrh r1,[r1,#0x0]
+037fa234  ands r1,r1,#0x8000
+037fa238  beq 0x037fa2a4
+037fa23c  add r0,r0,#0x660
+037fa240  bl 0x037fd998
+037fa244  ldr r0,[sp,#0x4]
+037fa248  ldrh r2,[r0,#0x0]
+037fa24c  mov r1,#0x0
+037fa250  ldr r0,[0x37fa404]
+037fa254  umull r8,r3,r2,r0
+037fa258  mla r3,r2,r1,r3
+037fa25c  mla r3,r1,r0,r3
+037fa260  mov r1,r3, lsr #0x6
+037fa264  mov r0,r8, lsr #0x6
+037fa268  orr r0,r0,r3, lsl #0x1a
+037fa26c  ldr r2,[sp,#0x14]
+037fa270  ldr r3,[sp,#0x18]
+037fa274  bl 0x038076b8
+037fa278  mov r3,r0
+037fa27c  mov r2,r1
+037fa280  ldr r0,[sp,#0x18]
+037fa284  str r0,[sp,#0x0]
+037fa288  ldr r0,[0x37fa3c4]
+037fa28c  ldr r0,[r0,#0x0]
+037fa290  add r0,r0,#0x660
+037fa294  mov r1,r3
+037fa298  ldr r3,[0x37fa408]
+037fa29c  bl 0x037fdaa4
+037fa2a0  b 0x037fa2cc
+037fa2a4  ldr r6,[0x37fa3f0]
+037fa2a8  mov r1,r6
+037fa2ac  ldr r0,[0x37fa40c]
+037fa2b0  strh r1,[r0,#0x0]
+037fa2b4  ldr r0,[0x37fa410]
+037fa2b8  strh r1,[r0,#0x0]
+037fa2bc  ldr r0,[0x37fa414]
+037fa2c0  strh r1,[r0,#0x0]
+037fa2c4  mov r0,r6
+037fa2c8  strh r0,[r8,#0x0]
+037fa2cc  strh r6,[r9,#0x0]
+037fa2d0  bl 0x037fa9c0
+037fa2d4  cmp r0,#0x0
+037fa2d8  bne 0x037fa34c
+037fa2dc  ldr r0,[0x37fa3c4]
+037fa2e0  ldr r1,[r0,#0x0]
+037fa2e4  ldr r0,[r1,#0x5a8]
+037fa2e8  add r0,r0,#0x1
+037fa2ec  str r0,[r1,#0x5a8]
+037fa2f0  b 0x037fa34c
+037fa2f4  cmp r0,#0xd
+037fa2f8  bne 0x037fa34c
+037fa2fc  ldr r0,[0x37fa3c4]
+037fa300  ldr r0,[r0,#0x0]
+037fa304  add r0,r0,#0x300
+037fa308  ldrh r1,[r0,#0x3a]
+037fa30c  mov r1,r1, lsl #0x18
+037fa310  movs r1,r1, lsr #0x1f
+037fa314  bne 0x037fa34c
+037fa318  ldrh r0,[r0,#0x4c]
+037fa31c  cmp r0,#0x40
+037fa320  bne 0x037fa34c
+037fa324  ldr r0,[0x37fa3fc]
+037fa328  ldrh r0,[r0,#0x0]
+037fa32c  cmp r0,#0x0
+037fa330  beq 0x037fa344
+037fa334  ldr r0,[0x37fa400]
+037fa338  ldrh r0,[r0,#0x0]
+037fa33c  ands r0,r0,#0x8000
+037fa340  bne 0x037fa34c
+037fa344  ldr r0,[0x37fa3f0]
+037fa348  strh r0,[r8,#0x0]
+037fa34c  mov r0,r7, lsl #0x10
+037fa350  mov r0,r0, lsr #0x10
+037fa354  strh r0,[r9,#0x4]
+037fa358  strh r0,[r4,#0x0]
+037fa35c  b 0x037f9fe4
+037fa360  cmp r5,#0x0
+037fa364  beq 0x037fa394
+037fa368  ldr r0,[0x37fa3d0]
+037fa36c  ldrh r4,[r0,#0x0]
+037fa370  bl 0x037fa9c0
+037fa374  cmp r0,#0x0
+037fa378  beq 0x037fa394
+037fa37c  ldr r0,[0x37fa3d0]
+037fa380  ldrh r0,[r0,#0x0]
+037fa384  cmp r4,r0
+037fa388  bne 0x037fa394
+037fa38c  mov r0,#0x20
+037fa390  bl 0x027e904c
+037fa394  ldr r0,[0x37fa3d4]
+037fa398  ldrh r1,[r0,#0x0]
+037fa39c  ldr r0,[0x37fa3d0]
+037fa3a0  ldrh r0,[r0,#0x0]
+037fa3a4  cmp r1,r0
+037fa3a8  beq 0x037fa3b8
+037fa3ac  mov r0,#0x0
+037fa3b0  mov r1,#0xf
+037fa3b4  bl 0x037f85f8
+037fa3b8  add sp,sp,#0x1c
+037fa3bc  ldmia sp!,{r4,r5,r6,r7,r8,r9,r10,r11,lr}
+037fa3c0  bx lr

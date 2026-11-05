@@ -1,0 +1,13 @@
+037fe214  cmp r0,#0x0
+037fe218  bxeq lr
+037fe21c  ldr r2,[r0,#0x14]
+037fe220  ldr r1,[r0,#0x18]
+037fe224  cmp r1,#0x0
+037fe228  strne r2,[r1,#0x14]
+037fe22c  ldreq r0,[0x37fe248]
+037fe230  streq r2,[r0,#0x4]
+037fe234  cmp r2,#0x0
+037fe238  strne r1,[r2,#0x18]
+037fe23c  ldreq r0,[0x37fe248]
+037fe240  streq r1,[r0,#0x0]
+037fe244  bx lr

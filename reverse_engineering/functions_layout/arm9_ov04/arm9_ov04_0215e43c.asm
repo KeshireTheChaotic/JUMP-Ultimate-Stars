@@ -1,0 +1,16 @@
+0215e43c  stmdb sp!,{r4,lr}
+0215e440  ldr r1,[0x215e47c]
+0215e444  ldr r2,[r0,#0x4]
+0215e448  ldr r0,[r1,#0x0]
+0215e44c  ldr r4,[r2,#0x10]
+0215e450  add r0,r0,#0x1
+0215e454  str r0,[r1,#0x0]
+0215e458  ldrsb r0,[r4,#0xba]
+0215e45c  cmp r0,#0x0
+0215e460  ldmiale sp!,{r4,pc}
+0215e464  bl 0x0214ce64
+0215e468  mov r1,#0x6
+0215e46c  bl 0x0214ce74
+0215e470  mov r0,r4
+0215e474  bl 0x0215e20c
+0215e478  ldmia sp!,{r4,pc}

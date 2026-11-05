@@ -1,0 +1,9 @@
+02061da8  push {r4,lr}
+02061daa  add r4,r0,#0x0
+02061dac  blx 0x02052060
+02061db0  add r0,r4,#0x0
+02061db2  mov r1,#0x1
+02061db4  bl 0x02061f30
+02061db8  pop {r4}
+02061dba  pop {r3}
+02061dbc  bx r3

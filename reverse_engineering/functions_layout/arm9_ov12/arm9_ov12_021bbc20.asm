@@ -1,0 +1,15 @@
+021bbc20  stmdb sp!,{r3,lr}
+021bbc24  ldr r0,[r0,#0x4]
+021bbc28  tst r1,#0x20
+021bbc2c  ldr r2,[r0,#0x10]
+021bbc30  ldmiaeq sp!,{r3,pc}
+021bbc34  ldrsb r0,[r2,#0x9c]
+021bbc38  mov r1,#0x1
+021bbc3c  cmp r0,#0x1
+021bbc40  moveq r0,#0x1
+021bbc44  movne r0,#0x2
+021bbc48  strb r0,[r2,#0xa0]
+021bbc4c  mov r0,#0x78
+021bbc50  strb r1,[r2,#0xa6]
+021bbc54  bl 0x0207342c
+021bbc58  ldmia sp!,{r3,pc}

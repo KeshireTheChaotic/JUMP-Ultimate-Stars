@@ -1,0 +1,14 @@
+02087160  stmdb sp!,{r3,lr}
+02087164  bl 0x0208c51c
+02087168  cmp r0,#0x0
+0208716c  beq 0x02087184
+02087170  bl 0x0219b634
+02087174  cmp r0,#0x0
+02087178  ldmiaeq sp!,{r3,pc}
+0208717c  bl 0x0219fa20
+02087180  ldmia sp!,{r3,pc}
+02087184  blx 0x0208c11c
+02087188  cmp r0,#0x0
+0208718c  ldmiane sp!,{r3,pc}
+02087190  blx 0x0208bfcc
+02087194  ldmia sp!,{r3,pc}

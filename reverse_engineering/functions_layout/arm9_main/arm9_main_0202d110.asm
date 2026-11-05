@@ -1,0 +1,22 @@
+0202d110  stmdb sp!,{r3,r4,r5,r6,r7,lr}
+0202d114  mov r7,r0
+0202d118  mov r6,r1
+0202d11c  mov r5,r2
+0202d120  bl 0x02038458
+0202d124  mov r4,r0
+0202d128  ldr r0,[r7,#0x18]
+0202d12c  mov r1,r6
+0202d130  ldr r3,[r0,#0x0]
+0202d134  mov r2,r4
+0202d138  ldr r3,[r3,#0x20]
+0202d13c  blx r3
+0202d140  ldr r3,[r5,#0x0]
+0202d144  mov r1,r6
+0202d148  ldr r0,[r7,#0x14]
+0202d14c  mov r2,r4
+0202d150  str r3,[r4,r0,lsl #0x2]
+0202d154  ldr r0,[r7,#0x18]
+0202d158  ldr r3,[r0,#0x0]
+0202d15c  ldr r3,[r3,#0x24]
+0202d160  blx r3
+0202d164  ldmia sp!,{r3,r4,r5,r6,r7,pc}

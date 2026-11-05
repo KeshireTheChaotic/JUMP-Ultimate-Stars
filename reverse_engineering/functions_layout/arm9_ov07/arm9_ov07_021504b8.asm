@@ -1,0 +1,11 @@
+021504b8  push {r3,lr}
+021504ba  cmp r1,#0x3
+021504bc  bne 0x021504c6
+021504be  add r1,r2,#0x0
+021504c0  bl 0x02150448
+021504c4  pop {r3,pc}
+021504c6  cmp r1,#0x4
+021504c8  bne 0x021504d0
+021504ca  add r1,r2,#0x0
+021504cc  bl 0x02150480
+021504d0  pop {r3,pc}

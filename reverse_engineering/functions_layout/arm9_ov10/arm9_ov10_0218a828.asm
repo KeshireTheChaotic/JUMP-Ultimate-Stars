@@ -1,0 +1,14 @@
+0218a828  push {r4,r5,lr}
+0218a82a  sub sp,#0x4
+0218a82c  add r5,r0,#0x0
+0218a82e  add r4,r1,#0x0
+0218a830  cmp r5,#0x0
+0218a832  bne 0x0218a840
+0218a834  ldr r0,[0x0218a848]
+0218a836  ldr r1,[0x0218a84c]
+0218a838  mov r2,#0x0
+0218a83a  ldr r3,[0x0218a850]
+0218a83c  bl 0x02002068
+0218a840  str r4,[r5,#0x40]
+0218a842  add sp,#0x4
+0218a844  pop {r4,r5,pc}

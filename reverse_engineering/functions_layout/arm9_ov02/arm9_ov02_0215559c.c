@@ -1,0 +1,80 @@
+
+void FUN_0215559c(void)
+
+{
+  int iVar1;
+  int *piVar2;
+  undefined4 in_r3;
+  undefined4 local_30;
+  undefined4 local_2c;
+  undefined4 local_28;
+  undefined4 local_24;
+  undefined4 local_20;
+  undefined4 local_1c;
+  undefined4 local_18;
+  undefined4 local_14;
+  undefined4 local_10;
+  undefined4 local_c;
+  undefined4 uStack_8;
+  
+  uStack_8 = in_r3;
+  FUN_02043264(1);
+  iVar1 = FUN_0203b414(0);
+  local_24 = 0;
+  piVar2 = *(int **)(*(int *)(iVar1 + 0x88) + 4);
+  (**(code **)(*piVar2 + 0x10))(piVar2,&local_24);
+  iVar1 = FUN_0203b414(1);
+  FUN_0203d0b4(*(undefined4 *)(*(int *)(iVar1 + 0x88) + 4),1);
+  iVar1 = FUN_0203b414(1);
+  FUN_0203d478(*(undefined4 *)(*(int *)(iVar1 + 0x88) + 4),4);
+  iVar1 = FUN_0203b414(1);
+  FUN_0203cfbc(*(undefined4 *)(*(int *)(iVar1 + 0x88) + 4),0,0);
+  iVar1 = FUN_0203b414(1);
+  piVar2 = *(int **)(*(int *)(iVar1 + 0x88) + 4);
+  (**(code **)(*piVar2 + 0x90))(piVar2,0);
+  iVar1 = FUN_0203b414(1);
+  local_28 = 0x1000;
+  piVar2 = *(int **)(*(int *)(iVar1 + 0x88) + 4);
+  (**(code **)(*piVar2 + 0x10))(piVar2,&local_28);
+  iVar1 = FUN_0203b414(2);
+  FUN_0203d0b4(*(undefined4 *)(*(int *)(iVar1 + 0x88) + 4),1);
+  iVar1 = FUN_0203b414(2);
+  FUN_0203d478(*(undefined4 *)(*(int *)(iVar1 + 0x88) + 4),4);
+  iVar1 = FUN_0203b414(2);
+  FUN_0203cfbc(*(undefined4 *)(*(int *)(iVar1 + 0x88) + 4),0,0);
+  iVar1 = FUN_0203b414(2);
+  piVar2 = *(int **)(*(int *)(iVar1 + 0x88) + 4);
+  (**(code **)(*piVar2 + 0x90))(piVar2,0);
+  iVar1 = FUN_0203b414(2);
+  local_2c = 0x2000;
+  piVar2 = *(int **)(*(int *)(iVar1 + 0x88) + 4);
+  (**(code **)(*piVar2 + 0x10))(piVar2,&local_2c);
+  iVar1 = FUN_0203b414(3);
+  FUN_0203d0b4(*(undefined4 *)(*(int *)(iVar1 + 0x88) + 4),3);
+  iVar1 = FUN_0203b414(3);
+  FUN_0203d478(*(undefined4 *)(*(int *)(iVar1 + 0x88) + 4),8);
+  iVar1 = FUN_0203b414(3);
+  FUN_0203cfbc(*(undefined4 *)(*(int *)(iVar1 + 0x88) + 4),0x20,0x20);
+  iVar1 = FUN_0203b414(3);
+  piVar2 = *(int **)(*(int *)(iVar1 + 0x88) + 4);
+  (**(code **)(*piVar2 + 0x90))(piVar2,0x10000);
+  iVar1 = FUN_0203b414(3);
+  local_30 = 0x3000;
+  piVar2 = *(int **)(*(int *)(iVar1 + 0x88) + 4);
+  (**(code **)(*piVar2 + 0x10))(piVar2,&local_30);
+  iVar1 = FUN_0203b414(3);
+  piVar2 = *(int **)(*(int *)(iVar1 + 0x88) + 4);
+  (**(code **)(*piVar2 + 0x94))(piVar2,0);
+  local_14 = 0;
+  local_10 = 0;
+  local_c = 0;
+  iVar1 = FUN_0203b3e4();
+  FUN_02155808(*(undefined4 *)(iVar1 + 0x88),&local_c,&local_10,&local_14);
+  local_20 = 0;
+  local_1c = 0;
+  local_18 = 0;
+  iVar1 = FUN_0203b3f4();
+  FUN_02155808(*(undefined4 *)(iVar1 + 0x88),&local_18,&local_1c,&local_20);
+  return;
+}
+

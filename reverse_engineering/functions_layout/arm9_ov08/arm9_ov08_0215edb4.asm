@@ -1,0 +1,12 @@
+0215edb4  push {lr}
+0215edb6  sub sp,#0x4
+0215edb8  bl 0x02154488
+0215edbc  mov r1,#0x1
+0215edbe  mvn r1,r1
+0215edc0  cmp r0,r1
+0215edc2  beq 0x0215edce
+0215edc4  bl 0x02154434
+0215edc8  ldr r0,[0x0215edd4]
+0215edca  bl 0x02157088
+0215edce  add sp,#0x4
+0215edd0  pop {pc}

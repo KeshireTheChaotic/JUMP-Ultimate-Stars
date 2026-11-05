@@ -1,0 +1,14 @@
+020332b8  stmdb sp!,{r3,r4,r5,lr}
+020332bc  mov r5,r0
+020332c0  ldr r0,[r5,#0x4]
+020332c4  mov r4,r1
+020332c8  ldr r1,[r0,#0x0]
+020332cc  ldr r1,[r1,#0x1c]
+020332d0  blx r1
+020332d4  mov r2,r0
+020332d8  ldr r0,[r5,#0x4]
+020332dc  mov r1,r4
+020332e0  ldr r3,[r0,#0x0]
+020332e4  ldr r3,[r3,#0x14]
+020332e8  blx r3
+020332ec  ldmia sp!,{r3,r4,r5,pc}

@@ -1,0 +1,16 @@
+02065fb8  ldr r0,[0x02065fd8]
+02065fba  ldrh r1,[r0,#0x0]
+02065fbc  ldr r0,[0x02065fdc]
+02065fbe  and r1,r0
+02065fc0  asr r0,r1,#0x8
+02065fc2  lsl r2,r0,#0xb
+02065fc4  ldr r0,[0x02065fe0]
+02065fc6  ldr r1,[r0,#0x0]
+02065fc8  ldr r0,[0x02065fe4]
+02065fca  and r1,r0
+02065fcc  lsr r0,r1,#0x1b
+02065fce  lsl r1,r0,#0x10
+02065fd0  ldr r0,[0x02065fe8]
+02065fd2  add r0,r1,r0
+02065fd4  add r0,r2,r0
+02065fd6  bx lr

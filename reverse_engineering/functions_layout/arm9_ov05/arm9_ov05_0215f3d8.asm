@@ -1,0 +1,10 @@
+0215f3d8  stmdb sp!,{r4,lr}
+0215f3dc  mov r4,r0
+0215f3e0  ldr r0,[r4,#0x0]
+0215f3e4  ldr r0,[r0,#0x4]
+0215f3e8  ldr r1,[r0,#0x0]
+0215f3ec  ldr r1,[r1,#0xc]
+0215f3f0  blx r1
+0215f3f4  mov r0,r4
+0215f3f8  bl 0x0201b244
+0215f3fc  ldmia sp!,{r4,pc}

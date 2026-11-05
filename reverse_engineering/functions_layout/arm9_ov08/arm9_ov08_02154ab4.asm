@@ -1,0 +1,17 @@
+02154ab4  push {lr}
+02154ab6  sub sp,#0x4
+02154ab8  ldr r0,[0x02154adc]
+02154aba  ldr r1,[r0,#0x0]
+02154abc  cmp r1,#0x0
+02154abe  beq 0x02154ad8
+02154ac0  mov r0,#0x0
+02154ac2  ldr r1,[r1,#0x4]
+02154ac4  bl 0x02167798
+02154ac8  ldr r0,[0x02154adc]
+02154aca  ldr r0,[r0,#0x0]
+02154acc  ldr r0,[r0,#0x0]
+02154ace  bl 0x02167204
+02154ad2  ldr r0,[0x02154adc]
+02154ad4  bl 0x02166b5c
+02154ad8  add sp,#0x4
+02154ada  pop {pc}

@@ -1,0 +1,15 @@
+0201a274  stmdb sp!,{r4,lr}
+0201a278  movs r4,r0
+0201a27c  add r0,r4,#0x3b
+0201a280  bic r0,r0,#0x1f
+0201a284  sub r2,r0,#0x4
+0201a288  beq 0x0201a2a8
+0201a28c  adds r0,r2,#0x4
+0201a290  beq 0x0201a2a4
+0201a294  sub r2,r2,r4
+0201a298  sub r1,r1,r2
+0201a29c  sub r1,r1,#0x4
+0201a2a0  bl 0x0201a758
+0201a2a4  str r0,[r4,#0x0]
+0201a2a8  mov r0,r4
+0201a2ac  ldmia sp!,{r4,pc}

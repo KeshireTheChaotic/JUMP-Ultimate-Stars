@@ -1,0 +1,10 @@
+021512bc  stmdb sp!,{r3,lr}
+021512c0  ldr r2,[r1,#0x0]
+021512c4  ldr r0,[r0,#0x4]
+021512c8  add r1,sp,#0x0
+021512cc  str r2,[sp,#0x0]
+021512d0  ldr r0,[r0,#0x64]
+021512d4  ldr r2,[r0,#0x0]
+021512d8  ldr r2,[r2,#0x10]
+021512dc  blx r2
+021512e0  ldmia sp!,{r3,pc}

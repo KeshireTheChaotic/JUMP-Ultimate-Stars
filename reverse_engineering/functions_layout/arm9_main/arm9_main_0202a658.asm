@@ -1,0 +1,11 @@
+0202a658  stmdb sp!,{r4,lr}
+0202a65c  mvn r1,#0x0
+0202a660  str r1,[r0,#0x8]
+0202a664  ldr r4,[r0,#0x1c]
+0202a668  b 0x0202a678
+0202a66c  mov r0,r4
+0202a670  bl 0x0202a658
+0202a674  ldr r4,[r4,#0x20]
+0202a678  cmp r4,#0x0
+0202a67c  bne 0x0202a66c
+0202a680  ldmia sp!,{r4,pc}

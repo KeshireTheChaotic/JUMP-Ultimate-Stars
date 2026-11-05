@@ -1,0 +1,10 @@
+0214d1fc  stmdb sp!,{r3,lr}
+0214d200  ldr r0,[0x214d224]
+0214d204  ldrh r1,[r0,#0x8]
+0214d208  cmp r1,#0x4
+0214d20c  ldrheq r1,[r0,#0xa]
+0214d210  ldrheq r0,[r0,#0x14]
+0214d214  cmpeq r1,r0
+0214d218  ldmiane sp!,{r3,pc}
+0214d21c  blx 0x021bfe80
+0214d220  ldmia sp!,{r3,pc}

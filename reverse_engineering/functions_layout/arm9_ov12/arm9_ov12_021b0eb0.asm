@@ -1,0 +1,9 @@
+021b0eb0  ldr r12,[r1,#0x0]
+021b0eb4  ldr r3,[r2,#0x0]
+021b0eb8  sub r3,r12,r3
+021b0ebc  str r3,[r0,#0x0]
+021b0ec0  ldr r3,[r1,#0x4]
+021b0ec4  ldr r1,[r2,#0x4]
+021b0ec8  sub r1,r3,r1
+021b0ecc  str r1,[r0,#0x4]
+021b0ed0  bx lr

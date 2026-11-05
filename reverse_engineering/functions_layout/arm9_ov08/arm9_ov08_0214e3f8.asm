@@ -1,0 +1,17 @@
+0214e3f8  mov r3,#0x0
+0214e3fa  cmp r1,#0x0
+0214e3fc  ble 0x0214e416
+0214e3fe  ldrb r2,[r0,#0x0]
+0214e400  add r0,r0,#0x1
+0214e402  cmp r2,#0x20
+0214e404  bcc 0x0214e40a
+0214e406  cmp r2,#0x7f
+0214e408  bls 0x0214e410
+0214e40a  mov r0,#0x0
+0214e40c  mvn r0,r0
+0214e40e  bx lr
+0214e410  add r3,r3,#0x1
+0214e412  cmp r3,r1
+0214e414  blt 0x0214e3fe
+0214e416  mov r0,#0x0
+0214e418  bx lr

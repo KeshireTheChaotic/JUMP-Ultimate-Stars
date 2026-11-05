@@ -1,0 +1,12 @@
+02056c80  stmdb sp!,{r4,r5,lr}
+02056c84  sub sp,sp,#0x4
+02056c88  mov r5,r1
+02056c8c  bl 0x02055238
+02056c90  mov r4,r0
+02056c94  mov r0,r5
+02056c98  bl 0x02057364
+02056c9c  mov r0,r4
+02056ca0  bl 0x0205524c
+02056ca4  add sp,sp,#0x4
+02056ca8  ldmia sp!,{r4,r5,lr}
+02056cac  bx lr

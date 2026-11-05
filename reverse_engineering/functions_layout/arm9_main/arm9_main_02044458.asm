@@ -1,0 +1,12 @@
+02044458  stmdb sp!,{r4,lr}
+0204445c  mov r4,r0
+02044460  cmp r1,#0x0
+02044464  ldrne r0,[r4,#0x3c]
+02044468  cmpne r0,#0x0
+0204446c  ldmiaeq sp!,{r4,pc}
+02044470  ldr r1,[r0,#0x0]
+02044474  ldr r1,[r1,#0xc]
+02044478  blx r1
+0204447c  mov r0,#0x0
+02044480  str r0,[r4,#0x3c]
+02044484  ldmia sp!,{r4,pc}

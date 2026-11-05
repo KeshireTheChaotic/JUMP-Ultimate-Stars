@@ -1,0 +1,12 @@
+0202d610  stmdb sp!,{r4,lr}
+0202d614  ldr r3,[r0,#0x0]
+0202d618  mov r4,r2
+0202d61c  ldr r3,[r3,#0x1c]
+0202d620  blx r3
+0202d624  ldrh r1,[r0,#0x0]
+0202d628  strh r1,[r4,#0x0]
+0202d62c  ldrh r1,[r0,#0x2]
+0202d630  strh r1,[r4,#0x2]
+0202d634  ldrh r0,[r0,#0x4]
+0202d638  strh r0,[r4,#0x4]
+0202d63c  ldmia sp!,{r4,pc}

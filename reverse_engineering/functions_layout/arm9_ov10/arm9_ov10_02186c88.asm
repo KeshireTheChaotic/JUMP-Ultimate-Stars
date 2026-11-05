@@ -1,0 +1,16 @@
+02186c88  ldr r2,[r0,#0x0]
+02186c8a  ldr r0,[0x02186ca8]
+02186c8c  ldr r0,[r2,r0]
+02186c8e  cmp r0,#0x0
+02186c90  beq 0x02186ca4
+02186c92  ldr r2,[r0,#0xc]
+02186c94  cmp r2,r1
+02186c96  bne 0x02186c9e
+02186c98  ldr r2,[r0,#0x0]
+02186c9a  cmp r2,#0x69
+02186c9c  beq 0x02186ca6
+02186c9e  ldr r0,[r0,#0x3c]
+02186ca0  cmp r0,#0x0
+02186ca2  bne 0x02186c92
+02186ca4  mov r0,#0x0
+02186ca6  bx lr

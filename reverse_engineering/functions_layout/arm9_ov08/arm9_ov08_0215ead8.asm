@@ -1,0 +1,10 @@
+0215ead8  push {lr}
+0215eada  sub sp,#0x4
+0215eadc  mov r0,#0x0
+0215eade  bl 0x02166314
+0215eae2  cmp r0,#0x0
+0215eae4  bne 0x0215eaec
+0215eae6  ldr r0,[0x0215eaf0]
+0215eae8  bl 0x02157088
+0215eaec  add sp,#0x4
+0215eaee  pop {pc}

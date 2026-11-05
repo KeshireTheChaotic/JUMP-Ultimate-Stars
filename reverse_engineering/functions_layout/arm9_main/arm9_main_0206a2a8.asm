@@ -1,0 +1,11 @@
+0206a2a8  mov r2,#0x0
+0206a2aa  ldrb r1,[r0,r2]
+0206a2ac  cmp r1,#0x0
+0206a2ae  beq 0x0206a2b4
+0206a2b0  mov r0,#0x1
+0206a2b2  bx lr
+0206a2b4  add r2,r2,#0x1
+0206a2b6  cmp r2,#0x20
+0206a2b8  blt 0x0206a2aa
+0206a2ba  mov r0,#0x0
+0206a2bc  bx lr

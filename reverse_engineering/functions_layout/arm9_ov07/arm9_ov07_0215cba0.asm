@@ -1,0 +1,10 @@
+0215cba0  push {r3,lr}
+0215cba2  cmp r1,#0x0
+0215cba4  ldr r0,[r0,#0x28]
+0215cba6  beq 0x0215cbb0
+0215cba8  ldr r0,[r0,#0x4]
+0215cbaa  bl 0x021b65d8
+0215cbae  pop {r3,pc}
+0215cbb0  ldr r0,[r0,#0x4]
+0215cbb2  bl 0x021b65e0
+0215cbb6  pop {r3,pc}

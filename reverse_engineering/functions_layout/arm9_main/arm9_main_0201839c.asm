@@ -1,0 +1,11 @@
+0201839c  stmdb sp!,{r3,lr}
+020183a0  mov r3,r0
+020183a4  ldr r0,[r3,#0x20]
+020183a8  ldrsh lr,[r3,#0x24]
+020183ac  ldrsh r12,[r3,#0x26]
+020183b0  ldr r3,[r0,#0x0]
+020183b4  add r1,r1,lr
+020183b8  ldr r3,[r3,#0x2c]
+020183bc  add r2,r2,r12
+020183c0  blx r3
+020183c4  ldmia sp!,{r3,pc}

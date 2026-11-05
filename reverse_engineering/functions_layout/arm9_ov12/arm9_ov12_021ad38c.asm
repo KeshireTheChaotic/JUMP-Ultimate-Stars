@@ -1,0 +1,10 @@
+021ad38c  add r2,r0,#0x0
+021ad38e  mov r1,#0xce
+021ad390  ldrsh r0,[r2,r1]
+021ad392  add r1,#0x92
+021ad394  ldr r1,[r2,r1]
+021ad396  ldr r3,[0x021ad3a0]
+021ad398  ldr r1,[r1,#0x64]
+021ad39a  add r1,#0xe8
+021ad39c  ldr r1,[r1,#0x0]
+021ad39e  bx r3

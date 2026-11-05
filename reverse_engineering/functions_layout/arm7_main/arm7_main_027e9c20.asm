@@ -1,0 +1,46 @@
+027e9c20  stmdb sp!,{r4,r5,r6,r7,r8,r9,r10,lr}
+027e9c24  mov r4,r0
+027e9c28  mov r10,r1
+027e9c2c  mov r0,#0x0
+027e9c30  strh r0,[r10,#0x0]
+027e9c34  strh r0,[r10,#0x2]
+027e9c38  add r0,r4,#0x1
+027e9c3c  bl 0x027e93b0
+027e9c40  mov r8,r0
+027e9c44  mov r9,#0x0
+027e9c48  ldr r6,[0x27e9cd8]
+027e9c4c  add r7,r4,#0x2
+027e9c50  add r4,r10,#0x2
+027e9c54  mov r5,#0x1
+027e9c58  b 0x027e9cc8
+027e9c5c  add r0,r7,r9
+027e9c60  bl 0x027e93b0
+027e9c64  and r1,r0,#0x7f
+027e9c68  sub r1,r1,#0x1
+027e9c6c  cmp r1,#0x78
+027e9c70  bcs 0x027e9ca8
+027e9c74  mov r1,r1, lsl #0x1
+027e9c78  ldrh r3,[r6,r1]
+027e9c7c  cmp r3,#0xff
+027e9c80  beq 0x027e9ca8
+027e9c84  mov r2,r5, lsl r3
+027e9c88  ldrh r1,[r4,#0x0]
+027e9c8c  orr r1,r1,r5, lsl r3
+027e9c90  strh r1,[r4,#0x0]
+027e9c94  ands r0,r0,#0x80
+027e9c98  ldrhne r0,[r10,#0x0]
+027e9c9c  orrne r0,r0,r2
+027e9ca0  strhne r0,[r10,#0x0]
+027e9ca4  b 0x027e9cc4
+027e9ca8  ldrh r1,[r4,#0x0]
+027e9cac  orr r1,r1,#0x8000
+027e9cb0  strh r1,[r4,#0x0]
+027e9cb4  ands r0,r0,#0x80
+027e9cb8  ldrhne r0,[r10,#0x0]
+027e9cbc  orrne r0,r0,#0x8000
+027e9cc0  strhne r0,[r10,#0x0]
+027e9cc4  add r9,r9,#0x1
+027e9cc8  cmp r9,r8
+027e9ccc  bcc 0x027e9c5c
+027e9cd0  ldmia sp!,{r4,r5,r6,r7,r8,r9,r10,lr}
+027e9cd4  bx lr

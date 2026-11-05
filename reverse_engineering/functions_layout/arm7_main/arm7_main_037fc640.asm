@@ -1,0 +1,10 @@
+037fc640  stmdb sp!,{lr}
+037fc644  sub sp,sp,#0x4
+037fc648  bl 0x037fe3a4
+037fc64c  ldr r0,[0x37fc668]
+037fc650  ldr r0,[r0,#0x4]
+037fc654  mov r1,#0x0
+037fc658  bl 0x037fc5d8
+037fc65c  add sp,sp,#0x4
+037fc660  ldmia sp!,{lr}
+037fc664  bx lr

@@ -1,0 +1,20 @@
+# Game data — never commit
+*.nds
+# ...but not the Jus.Nds project folder (git matches case-insensitively on Windows)
+!Jus.Nds/
+*.sav
+*.ml1
+*.dsv
+*.zip
+
+# .NET
+bin/
+obj/
+.vs/
+TestResults/
+*.user
+
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/

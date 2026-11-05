@@ -1,0 +1,10 @@
+0215b3e0  stmdb sp!,{r4,lr}
+0215b3e4  ldr r1,[0x215b408]
+0215b3e8  mov r4,r0
+0215b3ec  ldr r0,[r1,#0x0]
+0215b3f0  ldr r0,[r0,#0x4]
+0215b3f4  bl 0x02031070
+0215b3f8  mov r1,r4
+0215b3fc  bl 0x0200d338
+0215b400  mov r0,r1
+0215b404  ldmia sp!,{r4,pc}

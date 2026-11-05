@@ -1,0 +1,91 @@
+02158bc4  stmdb sp!,{r3,r4,r5,r6,r7,lr}
+02158bc8  ldr r3,[0x2158d30]
+02158bcc  ldrb r4,[r0,#0x4]
+02158bd0  smulbb r12,r2,r3
+02158bd4  add r3,r1,#0x20
+02158bd8  add r3,r3,r12
+02158bdc  add r4,r3,r4, lsl #0x1
+02158be0  ldrsh r5,[r0,#0x6]
+02158be4  add lr,r4,#0x400
+02158be8  strh r5,[lr,#0x18]
+02158bec  ldrb r4,[r0,#0x4]
+02158bf0  ldrsh r5,[r0,#0x8]
+02158bf4  add r4,r3,r4, lsl #0x1
+02158bf8  add lr,r4,#0x400
+02158bfc  strh r5,[lr,#0x34]
+02158c00  ldrb r4,[r0,#0x4]
+02158c04  ldrsh r5,[r0,#0xa]
+02158c08  add r4,r3,r4, lsl #0x1
+02158c0c  add lr,r4,#0x400
+02158c10  strh r5,[lr,#0x50]
+02158c14  ldrb r4,[r0,#0x5]
+02158c18  tst r4,#0x1
+02158c1c  movne r4,#0x1
+02158c20  moveq r4,#0x0
+02158c24  strb r4,[r3,#0x4db]
+02158c28  ldrb r4,[r0,#0x5]
+02158c2c  tst r4,#0x2
+02158c30  bne 0x02158d20
+02158c34  ldrb r4,[r0,#0x4]
+02158c38  mov r2,#0xc
+02158c3c  mov lr,#0x1c
+02158c40  smulbb r6,r4,r2
+02158c44  add r7,r3,#0x370
+02158c48  ldr r2,[r7,r6]
+02158c4c  smulbb r4,r4,lr
+02158c50  add r5,r3,#0xc
+02158c54  str r2,[r5,r4]
+02158c58  add r6,r7,r6
+02158c5c  ldr r2,[r6,#0x4]
+02158c60  add r4,r5,r4
+02158c64  str r2,[r4,#0x4]
+02158c68  ldr r2,[r6,#0x8]
+02158c6c  str r2,[r4,#0x8]
+02158c70  ldrb r5,[r0,#0x4]
+02158c74  add r2,r3,r5, lsl #0x1
+02158c78  add r2,r2,#0x400
+02158c7c  mla r4,r5,lr,r3
+02158c80  ldrsh r2,[r2,#0x18]
+02158c84  strh r2,[r4,#0x18]
+02158c88  ldrb r5,[r0,#0x4]
+02158c8c  add r2,r3,r5, lsl #0x1
+02158c90  add r2,r2,#0x400
+02158c94  mla r4,r5,lr,r3
+02158c98  ldrsh r2,[r2,#0x34]
+02158c9c  strh r2,[r4,#0x1a]
+02158ca0  ldrb r4,[r0,#0x4]
+02158ca4  cmp r4,#0x4
+02158ca8  addcc r1,r1,r12
+02158cac  addcc r1,r1,r4, lsl #0x2
+02158cb0  ldrcc r1,[r1,#0x1e0]
+02158cb4  mla r2,r4,lr,r3
+02158cb8  strcc r1,[r2,#0x4]
+02158cbc  addcs r12,r1,r12
+02158cc0  subcs r1,r4,#0x4
+02158cc4  addcs r1,r12,r1, lsl #0x2
+02158cc8  ldrcs r1,[r1,#0x1f0]
+02158ccc  strcs r1,[r2,#0x8]
+02158cd0  ldrb r1,[r0,#0x4]
+02158cd4  mov r2,#0x1c
+02158cd8  mla r12,r1,r2,r3
+02158cdc  add r1,r3,r1, lsl #0x1
+02158ce0  add r1,r1,#0x400
+02158ce4  ldrsh r1,[r1,#0x50]
+02158ce8  strh r1,[r12,#0x1c]
+02158cec  ldrb r12,[r0,#0x4]
+02158cf0  mla r1,r12,r2,r3
+02158cf4  strb r12,[r1,#0x1e]
+02158cf8  ldrb r1,[r0,#0x5]
+02158cfc  ldrb r2,[r0,#0x4]
+02158d00  mov r0,#0x0
+02158d04  tst r1,#0x1
+02158d08  mov r1,#0x1c
+02158d0c  movne r4,#0x1
+02158d10  mla r1,r2,r1,r3
+02158d14  moveq r4,#0x0
+02158d18  strb r4,[r1,#0x1f]
+02158d1c  ldmia sp!,{r3,r4,r5,r6,r7,pc}
+02158d20  ldr r12,[0x2158d34]
+02158d24  str r12,[r3,#0x1bc]
+02158d28  bl 0x02158d38
+02158d2c  ldmia sp!,{r3,r4,r5,r6,r7,pc}

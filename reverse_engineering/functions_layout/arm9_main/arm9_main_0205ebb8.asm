@@ -1,0 +1,12 @@
+0205ebb8  add r2,r0,#0x24
+0205ebbc  ldr r3,[r2,#0x8]
+0205ebc0  cmp r3,#0x0
+0205ebc4  beq 0x0205ebdc
+0205ebc8  ldr r1,[r0,#0x1c]
+0205ebcc  str r1,[r3,#0x8]
+0205ebd0  ldr r3,[r3,#0xc]
+0205ebd4  cmp r3,#0x0
+0205ebd8  bne 0x0205ebc8
+0205ebdc  ldr r0,[r0,#0x1c]
+0205ebe0  str r0,[r2,#0x4]
+0205ebe4  bx lr

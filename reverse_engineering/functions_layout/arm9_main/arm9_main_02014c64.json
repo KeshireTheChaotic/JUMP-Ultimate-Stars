@@ -1,0 +1,1 @@
+{"module":"arm9_main","address":"02014c64","name":"FUN_02014c64","thumb":false,"body_bytes":48,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["02014ae0"],"unresolved_call_targets":[],"status":"decompiled","asm_file":"arm9_main_02014c64.asm","c_file":"arm9_main_02014c64.c"}

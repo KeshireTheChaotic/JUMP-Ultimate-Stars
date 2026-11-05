@@ -1,0 +1,19 @@
+0202899c  ldr r1,[0x20289e8]
+020289a0  mov r12,#0x0
+020289a4  ldr r2,[r1,#0x90]
+020289a8  ldr r3,[0x20289ec]
+020289ac  b 0x020289dc
+020289b0  ldr r1,[r3,r12,lsl #0x2]
+020289b4  cmp r1,r0
+020289b8  bne 0x020289d8
+020289bc  ldr r0,[0x20289e8]
+020289c0  ldr r1,[r0,#0x90]
+020289c4  sub r2,r1,#0x1
+020289c8  ldr r1,[r3,r2,lsl #0x2]
+020289cc  str r2,[r0,#0x90]
+020289d0  str r1,[r3,r12,lsl #0x2]
+020289d4  bx lr
+020289d8  add r12,r12,#0x1
+020289dc  cmp r12,r2
+020289e0  bcc 0x020289b0
+020289e4  bx lr

@@ -1,0 +1,10 @@
+0216b9b0  stmdb sp!,{r4,lr}
+0216b9b4  mov r4,r0
+0216b9b8  bl 0x0216b514
+0216b9bc  ldrh r2,[r4,#0x26]
+0216b9c0  mov r1,#0x0
+0216b9c4  mov r0,r4
+0216b9c8  orr r2,r2,#0x2
+0216b9cc  strh r2,[r4,#0x26]
+0216b9d0  strb r1,[r4,#0x64]
+0216b9d4  ldmia sp!,{r4,pc}

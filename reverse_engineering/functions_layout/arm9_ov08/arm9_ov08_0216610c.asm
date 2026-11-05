@@ -1,0 +1,9 @@
+0216610c  push {r0,r1,r2,r3}
+0216610e  push {lr}
+02166110  sub sp,#0x4
+02166112  add r0,sp,#0x8
+02166114  bl 0x02166b5c
+02166118  add sp,#0x4
+0216611a  pop {r3}
+0216611c  add sp,#0x10
+0216611e  bx r3

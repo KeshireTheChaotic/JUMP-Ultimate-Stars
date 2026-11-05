@@ -1,0 +1,11 @@
+021c39f8  ldr r3,[r0,#0x4]
+021c39fc  mov r0,#0x0
+021c3a00  str r1,[r3,#0x8e8]
+021c3a04  str r0,[r3,#0x8ec]
+021c3a08  cmp r2,#0x0
+021c3a0c  str r2,[r3,#0x8f4]
+021c3a10  movne r0,#0x2
+021c3a14  str r0,[r3,#0x8f0]
+021c3a18  mov r0,#0x1
+021c3a1c  strb r0,[r3,#0x902]
+021c3a20  bx lr

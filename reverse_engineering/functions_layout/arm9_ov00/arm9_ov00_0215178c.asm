@@ -1,0 +1,11 @@
+0215178c  stmdb sp!,{r4,lr}
+02151790  bl 0x02033410
+02151794  mov r4,r0
+02151798  ldr r1,[r4,#0x1c]
+0215179c  cmp r1,#0x0
+021517a0  bne 0x021517b0
+021517a4  ldr r1,[r0,#0x0]
+021517a8  ldr r1,[r1,#0x10]
+021517ac  blx r1
+021517b0  ldr r0,[r4,#0x1c]
+021517b4  ldmia sp!,{r4,pc}

@@ -1,0 +1,13 @@
+0217e2a4  ldrb r1,[r0,#0x83]
+0217e2a8  cmp r1,#0x0
+0217e2ac  subne r1,r1,#0x1
+0217e2b0  strbne r1,[r0,#0x83]
+0217e2b4  ldrb r1,[r0,#0x84]
+0217e2b8  cmp r1,#0x0
+0217e2bc  subne r1,r1,#0x1
+0217e2c0  strbne r1,[r0,#0x84]
+0217e2c4  ldrb r1,[r0,#0x85]
+0217e2c8  cmp r1,#0x0
+0217e2cc  subne r1,r1,#0x1
+0217e2d0  strbne r1,[r0,#0x85]
+0217e2d4  bx lr

@@ -1,0 +1,14 @@
+03804440  ldr r1,[0x3804478]
+03804444  and r1,r1,r0, lsr #0x1
+03804448  sub r2,r0,r1
+0380444c  ldr r0,[0x380447c]
+03804450  and r1,r2,r0
+03804454  and r0,r0,r2, lsr #0x2
+03804458  add r0,r1,r0
+0380445c  add r1,r0,r0, lsr #0x4
+03804460  ldr r0,[0x3804480]
+03804464  and r0,r1,r0
+03804468  add r0,r0,r0, lsr #0x8
+0380446c  add r0,r0,r0, lsr #0x10
+03804470  and r0,r0,#0xff
+03804474  bx lr

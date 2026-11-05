@@ -1,0 +1,1 @@
+{"module":"arm7_main","address":"037fe168","name":"FUN_037fe168","thumb":false,"body_bytes":148,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["037fdd54","037fe290","037fe3a4","037fe3b8","037fe538"],"unresolved_call_targets":[],"status":"decompiled","asm_file":"arm7_main_037fe168.asm","c_file":"arm7_main_037fe168.c"}

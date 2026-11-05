@@ -1,0 +1,9 @@
+021554ac  mov r4,r0
+021554b0  bl 0x0214d4c0
+021554b4  mov r0,#0x60000
+021554b8  str r0,[sp,#0xc]
+021554bc  mov r0,#0x80000
+021554c0  str r0,[sp,#0x8]
+021554c4  mov r0,r4
+021554c8  add r1,sp,#0x8
+021554cc  add r2,sp,#0xc

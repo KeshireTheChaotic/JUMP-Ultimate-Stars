@@ -1,0 +1,16 @@
+0200ee94  stmdb sp!,{r3,r4,r5,lr}
+0200ee98  ldr r4,[0x200eed4]
+0200ee9c  ldr r2,[r4,#0x0]
+0200eea0  cmp r2,#0x0
+0200eea4  ldmiaeq sp!,{r3,r4,r5,pc}
+0200eea8  mvn r5,#0x0
+0200eeac  ldr r0,[r2,#0x0]
+0200eeb0  mov r1,r5
+0200eeb4  str r0,[r4,#0x0]
+0200eeb8  ldr r0,[r2,#0x8]
+0200eebc  ldr r2,[r2,#0x4]
+0200eec0  blx r2
+0200eec4  ldr r2,[r4,#0x0]
+0200eec8  cmp r2,#0x0
+0200eecc  bne 0x0200eeac
+0200eed0  ldmia sp!,{r3,r4,r5,pc}

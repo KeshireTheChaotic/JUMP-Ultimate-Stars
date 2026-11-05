@@ -1,0 +1,12 @@
+0217cc48  push {lr}
+0217cc4a  sub sp,#0x4
+0217cc4c  bl 0x02178448
+0217cc50  cmp r0,#0x0
+0217cc52  beq 0x0217cc5e
+0217cc54  bl 0x02178448
+0217cc58  ldrb r0,[r0,#0xe]
+0217cc5a  add sp,#0x4
+0217cc5c  pop {pc}
+0217cc5e  mov r0,#0x0
+0217cc60  add sp,#0x4
+0217cc62  pop {pc}

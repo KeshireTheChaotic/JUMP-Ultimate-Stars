@@ -1,0 +1,1 @@
+{"module":"arm9_main","address":"020304ec","name":"PropBindInstance_02095200_Derived_02095140","thumb":false,"body_bytes":88,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["02012e94","0201a228","0202f834"],"unresolved_call_targets":[],"status":"decompiled","asm_file":"arm9_main_020304ec.asm","c_file":"arm9_main_020304ec.c"}

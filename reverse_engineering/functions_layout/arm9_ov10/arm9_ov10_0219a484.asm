@@ -1,0 +1,11 @@
+0219a484  ldr r0,[0x219a4b0]
+0219a488  ldr r0,[r0,#0x0]
+0219a48c  cmp r0,#0x0
+0219a490  beq 0x0219a4a8
+0219a494  ldrsb r0,[r0,#0x5c]
+0219a498  cmp r0,#0x0
+0219a49c  moveq r0,#0x1
+0219a4a0  movne r0,#0x2
+0219a4a4  bx lr
+0219a4a8  mov r0,#0x0
+0219a4ac  bx lr

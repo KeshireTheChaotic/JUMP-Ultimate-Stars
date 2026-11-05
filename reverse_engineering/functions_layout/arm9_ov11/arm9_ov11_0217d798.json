@@ -1,0 +1,1 @@
+{"module":"arm9_ov11","address":"0217d798","name":"BattleAIObj_CreateCommandNode","thumb":false,"body_bytes":228,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["0201a21c","02020d90","02028384","020517fc"],"unresolved_call_targets":[],"status":"decompiled","asm_file":"arm9_ov11_0217d798.asm","c_file":"arm9_ov11_0217d798.c"}

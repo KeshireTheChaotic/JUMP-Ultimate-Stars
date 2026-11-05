@@ -1,0 +1,27 @@
+
+/* JUS-GAME ALObjectImp::PostMessage [source-string-template] __FILE__="ALObjectImp.h"
+   __FUNCTION__="PostMessage"; one of 2 instantiations in arm9_ov10 */
+
+void ALObjectImp::PostMessage
+               (int param_1,int param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,
+               undefined4 param_6)
+
+{
+  int iVar1;
+  undefined4 uVar2;
+  undefined4 uVar3;
+  undefined4 uVar4;
+  undefined4 uVar5;
+  
+  uVar3 = *(undefined4 *)(param_1 + 4);
+  uVar4 = *(undefined4 *)(param_2 + 4);
+  uVar5 = param_4;
+  iVar1 = jus_AllocDebug(0x2c,s_ALObjectImp_h_021a71b4,s_PostMessage_021a71a8,0x10a);
+  uVar2 = 0;
+  if (iVar1 != 0) {
+    uVar2 = WiFiGame::WiFiGame(iVar1,param_3,uVar3,param_4,param_5,param_6,uVar5);
+  }
+  FUN_02028644(uVar4,uVar2,param_6);
+  return;
+}
+

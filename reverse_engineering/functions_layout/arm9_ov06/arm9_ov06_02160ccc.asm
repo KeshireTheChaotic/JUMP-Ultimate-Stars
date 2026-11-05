@@ -1,0 +1,12 @@
+02160ccc  stmdb sp!,{r4,lr}
+02160cd0  ldr r0,[0x2160cfc]
+02160cd4  mov r4,r1
+02160cd8  ldr r0,[r0,#0x0]
+02160cdc  blx 0x0214f8f8
+02160ce0  ldrh r2,[r4,#0x2]
+02160ce4  mov r1,#0x3c
+02160ce8  mul r1,r2,r1
+02160cec  cmp r0,r1
+02160cf0  movge r0,#0x1
+02160cf4  movlt r0,#0x0
+02160cf8  ldmia sp!,{r4,pc}

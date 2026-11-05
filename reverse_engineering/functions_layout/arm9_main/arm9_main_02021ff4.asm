@@ -1,0 +1,10 @@
+02021ff4  stmdb sp!,{r4,lr}
+02021ff8  mov r4,r0
+02021ffc  mov r0,#0x40
+02022000  bl 0x0201a228
+02022004  cmp r0,#0x0
+02022008  ldmiaeq sp!,{r4,pc}
+0202200c  mov r1,r4
+02022010  mov r2,#0x1
+02022014  bl 0x020146b8
+02022018  ldmia sp!,{r4,pc}

@@ -1,0 +1,9 @@
+0215e7a8  str r1,[r0,#0x4]
+0215e7ac  str r2,[r0,#0x8]
+0215e7b0  str r3,[r0,#0xc]
+0215e7b4  mov r1,#0x0
+0215e7b8  str r1,[r0,#0x10]
+0215e7bc  str r1,[r0,#0x14]
+0215e7c0  str r1,[r0,#0x20]
+0215e7c4  str r1,[r0,#0x24]
+0215e7c8  bx lr

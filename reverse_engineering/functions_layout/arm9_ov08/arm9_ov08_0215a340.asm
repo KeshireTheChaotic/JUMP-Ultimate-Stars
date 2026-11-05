@@ -1,0 +1,14 @@
+0215a340  push {lr}
+0215a342  sub sp,#0x4
+0215a344  mov r0,#0x2
+0215a346  mov r1,#0x0
+0215a348  mov r2,#0x15
+0215a34a  mov r3,#0x8
+0215a34c  bl 0x0216628c
+0215a350  mov r0,#0x0
+0215a352  mov r1,#0x15
+0215a354  bl 0x02166adc
+0215a358  ldr r0,[0x0215a364]
+0215a35a  bl 0x02157088
+0215a35e  add sp,#0x4
+0215a360  pop {pc}

@@ -1,0 +1,1 @@
+{"module":"arm9_main","address":"020130ec","name":"jus_TagIPCT","thumb":false,"body_bytes":356,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["02012ef0","02013aec","0201a228","02051890"],"unresolved_call_targets":[],"status":"decompiled","asm_file":"arm9_main_020130ec.asm","c_file":"arm9_main_020130ec.c"}

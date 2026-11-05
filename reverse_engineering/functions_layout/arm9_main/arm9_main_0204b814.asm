@@ -1,0 +1,10 @@
+0204b814  stmdb sp!,{r4,lr}
+0204b818  mov r4,r0
+0204b81c  bl 0x02038458
+0204b820  ldr r2,[r4,#0x34]
+0204b824  mov r1,#0x1000
+0204b828  str r2,[r0,#0x0]
+0204b82c  ldr r2,[r4,#0x38]
+0204b830  str r2,[r0,#0x4]
+0204b834  str r1,[r0,#0x8]
+0204b838  ldmia sp!,{r4,pc}

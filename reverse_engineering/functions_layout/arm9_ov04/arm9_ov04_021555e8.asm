@@ -1,0 +1,13 @@
+021555e8  stmdb sp!,{r3,lr}
+021555ec  cmp r0,#0x0
+021555f0  ldmiaeq sp!,{r3,pc}
+021555f4  cmp r1,#0x0
+021555f8  mov r1,#0x16
+021555fc  ldr r0,[r0,#0x0]
+02155600  beq 0x02155610
+02155604  sub r2,r1,#0x1e
+02155608  bl 0x0214cee0
+0215560c  ldmia sp!,{r3,pc}
+02155610  mov r2,#0x0
+02155614  bl 0x0214cee0
+02155618  ldmia sp!,{r3,pc}

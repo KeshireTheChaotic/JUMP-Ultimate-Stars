@@ -1,0 +1,10 @@
+021504d4  stmdb sp!,{r3,lr}
+021504d8  ldr r0,[r0,#0x4]
+021504dc  ldr r2,[r0,#0x0]
+021504e0  ldr r2,[r2,#0xb0]
+021504e4  blx r2
+021504e8  cmp r0,#0x0
+021504ec  moveq r0,#0x0
+021504f0  ldmiaeq sp!,{r3,pc}
+021504f4  bl 0x021504fc
+021504f8  ldmia sp!,{r3,pc}

@@ -1,0 +1,12 @@
+0200f1c4  stmdb sp!,{r3,lr}
+0200f1c8  cmp r0,r1
+0200f1cc  beq 0x0200f1e4
+0200f1d0  ldr r0,[r0,#0x4]
+0200f1d4  ldr r1,[r1,#0x4]
+0200f1d8  blx 0x02004c2c
+0200f1dc  cmp r0,#0x0
+0200f1e0  bne 0x0200f1ec
+0200f1e4  mov r0,#0x1
+0200f1e8  ldmia sp!,{r3,pc}
+0200f1ec  mov r0,#0x0
+0200f1f0  ldmia sp!,{r3,pc}

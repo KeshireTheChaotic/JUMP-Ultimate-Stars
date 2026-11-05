@@ -1,0 +1,9 @@
+0206c00c  strh r1,[r0,#0xc]
+0206c00e  strh r2,[r0,#0xe]
+0206c010  ldrb r2,[r0,#0x14]
+0206c012  mov r1,#0x6
+0206c014  orr r1,r2
+0206c016  strb r1,[r0,#0x14]
+0206c018  mov r1,#0x0
+0206c01a  strh r1,[r0,#0x12]
+0206c01c  bx lr

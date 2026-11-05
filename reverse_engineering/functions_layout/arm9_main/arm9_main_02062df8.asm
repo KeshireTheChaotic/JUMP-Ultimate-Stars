@@ -1,0 +1,12 @@
+02062df8  push {lr}
+02062dfa  sub sp,#0x4
+02062dfc  blx 0x02055698
+02062e00  mov r0,#0xe
+02062e02  ldr r1,[0x02062e14]
+02062e04  blx 0x020558a4
+02062e08  mov r1,#0x0
+02062e0a  ldr r0,[0x02062e18]
+02062e0c  str r1,[r0,#0x0]
+02062e0e  add sp,#0x4
+02062e10  pop {r3}
+02062e12  bx r3

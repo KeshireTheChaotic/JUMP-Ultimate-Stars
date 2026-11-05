@@ -1,0 +1,14 @@
+02175d58  push {r4,lr}
+02175d5a  sub sp,#0x10
+02175d5c  add r4,r2,#0x0
+02175d5e  str r0,[sp,#0x0]
+02175d60  str r3,[sp,#0x4]
+02175d62  str r1,[sp,#0x8]
+02175d64  add r0,r4,#0x0
+02175d66  ldr r1,[0x02175d78]
+02175d68  ldr r2,[0x02175d7c]
+02175d6a  blx 0x02052c44
+02175d6e  add r0,r4,#0x0
+02175d70  bl 0x02004b04
+02175d74  add sp,#0x10
+02175d76  pop {r4,pc}

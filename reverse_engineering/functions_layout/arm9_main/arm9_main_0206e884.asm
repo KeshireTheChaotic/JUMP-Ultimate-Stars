@@ -1,0 +1,12 @@
+0206e884  stmdb sp!,{r3,lr}
+0206e888  ldr r0,[0x206e8b4]
+0206e88c  ldrb r1,[r0,#0x14]
+0206e890  cmp r1,#0x0
+0206e894  beq 0x0206e8a4
+0206e898  mov r0,#0x6
+0206e89c  blx 0x021572b8
+0206e8a0  ldmia sp!,{r3,pc}
+0206e8a4  ldr r0,[r0,#0x40]
+0206e8a8  and r0,r0,#0xff
+0206e8ac  blx 0x021572b8
+0206e8b0  ldmia sp!,{r3,pc}

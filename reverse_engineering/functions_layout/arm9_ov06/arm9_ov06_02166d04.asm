@@ -1,0 +1,25 @@
+02166d04  stmdb sp!,{r3,r4,r5,lr}
+02166d08  ldr r0,[r0,#0x0]
+02166d0c  mov r5,r2
+02166d10  ldr r4,[r0,r1,lsl #0x2]
+02166d14  cmp r4,#0x0
+02166d18  beq 0x02166d24
+02166d1c  ldr r0,[r4,#0x14]
+02166d20  bl 0x0207a878
+02166d24  cmp r5,#0x0
+02166d28  beq 0x02166d50
+02166d2c  ldr r0,[r4,#0x30]
+02166d30  ldr r2,[r4,#0xc]
+02166d34  ldrb r1,[r0,#0x8]
+02166d38  ldr r0,[r2,#0x4]
+02166d3c  mov r2,#0x0
+02166d40  add r1,r1,#0x42
+02166d44  add r1,r1,#0x300000
+02166d48  bl 0x02023894
+02166d4c  ldmia sp!,{r3,r4,r5,pc}
+02166d50  ldr r0,[r4,#0xc]
+02166d54  ldr r1,[0x2166d68]
+02166d58  ldr r0,[r0,#0x4]
+02166d5c  mov r2,#0x0
+02166d60  bl 0x02023894
+02166d64  ldmia sp!,{r3,r4,r5,pc}

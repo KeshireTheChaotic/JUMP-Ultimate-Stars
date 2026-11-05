@@ -1,0 +1,12 @@
+0215bc3c  stmdb sp!,{r4,lr}
+0215bc40  ldr r0,[r0,#0x4]
+0215bc44  mov r1,#0x1
+0215bc48  ldr r4,[r0,#0x10]
+0215bc4c  ldr r0,[r4,#0x54]
+0215bc50  ldr r0,[r0,#0x4]
+0215bc54  blx 0x021b6214
+0215bc58  ldr r0,[r4,#0x70]
+0215bc5c  mov r1,#0x1
+0215bc60  ldr r0,[r0,#0x4]
+0215bc64  blx 0x021b6214
+0215bc68  ldmia sp!,{r4,pc}

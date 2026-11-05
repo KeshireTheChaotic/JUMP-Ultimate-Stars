@@ -1,0 +1,31 @@
+02079d34  stmdb sp!,{r4,r5,r6,lr}
+02079d38  sub sp,sp,#0x8
+02079d3c  mov r4,r0
+02079d40  ldr r0,[r4,#0x4]
+02079d44  mov r6,r2
+02079d48  add r1,r1,#0x6f0000
+02079d4c  mov r2,#0x0
+02079d50  mov r5,r3
+02079d54  bl 0x02023894
+02079d58  ldr r0,[r4,#0x4]
+02079d5c  ldr r0,[r0,#0x68]
+02079d60  ldr r1,[r0,#0x0]
+02079d64  ldr r1,[r1,#0x6c]
+02079d68  blx r1
+02079d6c  mov r2,r5, lsl #0xc
+02079d70  mov r0,r6, lsl #0xc
+02079d74  str r2,[sp,#0x0]
+02079d78  str r0,[sp,#0x4]
+02079d7c  add r1,sp,#0x4
+02079d80  add r2,sp,#0x0
+02079d84  mov r0,r4
+02079d88  bl 0x0206c9f8
+02079d8c  ldr r0,[r4,#0x4]
+02079d90  mov r1,#0x1
+02079d94  ldr r2,[r0,#0x0]
+02079d98  ldr r2,[r2,#0xd8]
+02079d9c  blx r2
+02079da0  ldr r0,[r4,#0x4]
+02079da4  bl 0x02028330
+02079da8  add sp,sp,#0x8
+02079dac  ldmia sp!,{r4,r5,r6,pc}

@@ -1,0 +1,10 @@
+02042c48  stmdb sp!,{r3,lr}
+02042c4c  blx 0x021b0660
+02042c50  ldr r0,[0x2042c70]
+02042c54  mov r1,#0x1
+02042c58  strb r1,[r0,#0x1c]
+02042c5c  ldr r0,[r0,#0x150]
+02042c60  bl 0x020161b0
+02042c64  ldr r0,[r0,#0x4]
+02042c68  bl 0x0203141c
+02042c6c  ldmia sp!,{r3,pc}

@@ -1,0 +1,16 @@
+021563cc  stmdb sp!,{r4,lr}
+021563d0  ldr r1,[r0,#0x4]
+021563d4  mov r0,#0x78
+021563d8  ldr r4,[r1,#0x10]
+021563dc  mov r1,#0x0
+021563e0  bl 0x0207342c
+021563e4  ldr r0,[r4,#0x0]
+021563e8  mov r1,#0x1
+021563ec  strb r1,[r0,#0x58]
+021563f0  ldr r0,[r4,#0x0]
+021563f4  mov r1,#0x2
+021563f8  strb r1,[r0,#0x59]
+021563fc  ldr r0,[r4,#0x0]
+02156400  mov r1,#0x6
+02156404  bl 0x0214d348
+02156408  ldmia sp!,{r4,pc}

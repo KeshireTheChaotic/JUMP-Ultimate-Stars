@@ -1,0 +1,1 @@
+{"module":"arm9_ov05","address":"0216ac4c","name":"FUN_0216ac4c","thumb":false,"body_bytes":176,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["02028384","02150070","02150a10","02152964"],"unresolved_call_targets":[],"status":"decompiled","asm_file":"arm9_ov05_0216ac4c.asm","c_file":"arm9_ov05_0216ac4c.c"}

@@ -1,0 +1,17 @@
+02168374  stmdb sp!,{r4,lr}
+02168378  mov r4,r0
+0216837c  ldr r0,[r4,#0xa4]
+02168380  ldr r1,[r0,#0x0]
+02168384  ldr r1,[r1,#0xc]
+02168388  blx r1
+0216838c  ldr r0,[r4,#0xa0]
+02168390  ldr r1,[r0,#0x0]
+02168394  ldr r1,[r1,#0xc]
+02168398  blx r1
+0216839c  ldr r0,[r4,#0xa8]
+021683a0  ldr r1,[r0,#0x0]
+021683a4  ldr r1,[r1,#0x8]
+021683a8  blx r1
+021683ac  mov r0,r4
+021683b0  bl 0x0201b244
+021683b4  ldmia sp!,{r4,pc}

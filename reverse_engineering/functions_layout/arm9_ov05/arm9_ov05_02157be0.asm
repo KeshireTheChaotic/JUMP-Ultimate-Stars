@@ -1,0 +1,9 @@
+02157be0  ldr r12,[r1,#0x0]
+02157be4  mov r1,#0x1000
+02157be8  str r12,[r0,#0x0]
+02157bec  ldr r2,[r2,#0x0]
+02157bf0  str r2,[r0,#0x4]
+02157bf4  ldr r2,[r3,#0x0]
+02157bf8  str r2,[r0,#0x8]
+02157bfc  str r1,[r0,#0xc]
+02157c00  bx lr

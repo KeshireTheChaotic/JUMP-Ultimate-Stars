@@ -1,0 +1,10 @@
+02152694  stmdb sp!,{r3,lr}
+02152698  cmp r0,#0x0
+0215269c  ldmiaeq sp!,{r3,pc}
+021526a0  ldr r0,[r0,#0x0]
+021526a4  mov r1,#0x10
+021526a8  ldr r0,[r0,#0x4]
+021526ac  ldr r2,[r0,#0x0]
+021526b0  ldr r2,[r2,#0x148]
+021526b4  blx r2
+021526b8  ldmia sp!,{r3,pc}

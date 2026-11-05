@@ -1,0 +1,36 @@
+02155800  stmdb sp!,{r3,r4,r5,lr}
+02155804  sub sp,sp,#0x10
+02155808  mov r4,r0
+0215580c  cmp r1,#0x0
+02155810  ldr r5,[r4,#0x4]
+02155814  beq 0x02155840
+02155818  ldrsh r3,[r5,#0xa2]
+0215581c  add r1,sp,#0xc
+02155820  add r2,sp,#0x8
+02155824  mov r3,r3, lsl #0xc
+02155828  str r3,[sp,#0x8]
+0215582c  ldrsh r3,[r5,#0xa0]
+02155830  mov r3,r3, lsl #0xc
+02155834  str r3,[sp,#0xc]
+02155838  bl 0x0214f418
+0215583c  b 0x02155874
+02155840  mov r0,#0x78
+02155844  mov r1,#0x3
+02155848  bl 0x0207342c
+0215584c  ldrsh r0,[r5,#0xa2]
+02155850  add r1,sp,#0x4
+02155854  add r2,sp,#0x0
+02155858  mov r0,r0, lsl #0xc
+0215585c  str r0,[sp,#0x0]
+02155860  ldrsh r3,[r5,#0xa0]
+02155864  mov r0,r4
+02155868  mov r3,r3, lsl #0xc
+0215586c  str r3,[sp,#0x4]
+02155870  bl 0x0214f418
+02155874  ldr r0,[r4,#0x4]
+02155878  ldr r0,[r0,#0x44]
+0215587c  cmp r0,#0x0
+02155880  beq 0x02155888
+02155884  bl 0x0214ed84
+02155888  add sp,sp,#0x10
+0215588c  ldmia sp!,{r3,r4,r5,pc}

@@ -1,0 +1,11 @@
+021615d8  stmdb sp!,{r4,lr}
+021615dc  bl 0x020329ec
+021615e0  mov r4,r0
+021615e4  ldr r1,[r4,#0x18]
+021615e8  cmp r1,#0x0
+021615ec  bne 0x021615fc
+021615f0  ldr r1,[r0,#0x0]
+021615f4  ldr r1,[r1,#0x14]
+021615f8  blx r1
+021615fc  ldr r0,[r4,#0x18]
+02161600  ldmia sp!,{r4,pc}

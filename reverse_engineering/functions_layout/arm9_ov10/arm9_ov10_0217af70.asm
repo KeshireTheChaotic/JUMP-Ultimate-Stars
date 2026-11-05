@@ -1,0 +1,12 @@
+0217af70  push {r4,lr}
+0217af72  add r4,r0,#0x0
+0217af74  bl 0x02178448
+0217af78  ldrb r0,[r0,#0x15]
+0217af7a  cmp r0,#0x0
+0217af7c  bne 0x0217af86
+0217af7e  add r0,r4,#0x0
+0217af80  bl 0x021790e4
+0217af84  pop {r4,pc}
+0217af86  add r0,r4,#0x0
+0217af88  bl 0x0217914c
+0217af8c  pop {r4,pc}

@@ -1,0 +1,11 @@
+02166b8c  push {r4,r5,lr}
+02166b8e  sub sp,#0x4
+02166b90  add r5,r0,#0x0
+02166b92  bl 0x02166ba8
+02166b96  add r4,r0,#0x0
+02166b98  mov r1,#0x0
+02166b9a  add r2,r5,#0x0
+02166b9c  blx 0x020517fc
+02166ba0  add r0,r4,#0x0
+02166ba2  add sp,#0x4
+02166ba4  pop {r4,r5,pc}

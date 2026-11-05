@@ -1,0 +1,17 @@
+037fdd54  stmdb sp!,{r4,lr}
+037fdd58  mov r4,r0
+037fdd5c  bl 0x037fe3a4
+037fdd60  ldr r1,[0x37fdd98]
+037fdd64  ldr r1,[r1,#0x0]
+037fdd68  cmp r4,r1
+037fdd6c  ldrlt r1,[0x37fdd9c]
+037fdd70  ldrlt r2,[r1,#0x0]
+037fdd74  addlt r2,r2,#0x1
+037fdd78  strlt r2,[r1,#0x0]
+037fdd7c  ldr r1,[0x37fdd98]
+037fdd80  str r4,[r1,#0x0]
+037fdd84  bl 0x037fe3b8
+037fdd88  ldr r0,[0x37fdd9c]
+037fdd8c  ldr r0,[r0,#0x0]
+037fdd90  ldmia sp!,{r4,lr}
+037fdd94  bx lr

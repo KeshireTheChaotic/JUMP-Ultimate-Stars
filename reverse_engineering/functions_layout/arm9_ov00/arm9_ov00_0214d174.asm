@@ -1,0 +1,9 @@
+0214d174  stmdb sp!,{r4,lr}
+0214d178  mov r4,r0
+0214d17c  bl 0x0207382c
+0214d180  cmp r0,#0x0
+0214d184  ldmiaeq sp!,{r4,pc}
+0214d188  ldr r0,[r4,#0x4]
+0214d18c  ldr r1,[0x214d198]
+0214d190  bl 0x02028384
+0214d194  ldmia sp!,{r4,pc}

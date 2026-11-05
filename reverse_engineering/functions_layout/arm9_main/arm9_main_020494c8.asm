@@ -1,0 +1,11 @@
+020494c8  stmdb sp!,{r3,r4,r5,lr}
+020494cc  mov r0,#0x14
+020494d0  mov r5,r1
+020494d4  mov r4,r2
+020494d8  bl 0x0201a228
+020494dc  cmp r0,#0x0
+020494e0  ldmiaeq sp!,{r3,r4,r5,pc}
+020494e4  mov r1,r5
+020494e8  mov r2,r4
+020494ec  bl 0x020491ac
+020494f0  ldmia sp!,{r3,r4,r5,pc}

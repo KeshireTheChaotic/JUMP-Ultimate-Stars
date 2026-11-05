@@ -1,0 +1,1 @@
+{"module":"arm9_ov10","address":"02178778","name":"FUN_02178778","thumb":true,"body_bytes":138,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["02004cec","02051890","02176640","02178448","0217b348"],"unresolved_call_targets":[],"status":"decompiled","asm_file":"arm9_ov10_02178778.asm","c_file":"arm9_ov10_02178778.c"}

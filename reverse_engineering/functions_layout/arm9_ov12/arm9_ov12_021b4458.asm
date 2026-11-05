@@ -1,0 +1,13 @@
+021b4458  stmdb sp!,{r3,lr}
+021b445c  mov r0,#0x134
+021b4460  ldr r1,[0x21b448c]
+021b4464  ldr r2,[0x21b4490]
+021b4468  sub r3,r0,#0x32
+021b446c  bl 0x0201a21c
+021b4470  cmp r0,#0x0
+021b4474  ldmiaeq sp!,{r3,pc}
+021b4478  mov r1,#0x0
+021b447c  ldr r3,[0x21b4494]
+021b4480  mov r2,r1
+021b4484  blx 0x021b4e00
+021b4488  ldmia sp!,{r3,pc}

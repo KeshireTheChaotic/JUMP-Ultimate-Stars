@@ -1,0 +1,1 @@
+{"module":"arm9_ov12","address":"021af0cc","name":"ALWidgetImp_021d0f9c","thumb":true,"body_bytes":38,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["021b44e8"],"unresolved_call_targets":[],"status":"decompiled","asm_file":"arm9_ov12_021af0cc.asm","c_file":"arm9_ov12_021af0cc.c"}

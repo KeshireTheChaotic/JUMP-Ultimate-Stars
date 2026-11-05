@@ -1,0 +1,15 @@
+0205dcc4  stmdb sp!,{lr}
+0205dcc8  sub sp,sp,#0x4
+0205dccc  ldr r1,[r0,#0x120]
+0205dcd0  cmp r1,#0x0
+0205dcd4  addeq sp,sp,#0x4
+0205dcd8  ldmiaeq sp!,{pc}
+0205dcdc  sub r1,r1,#0x1
+0205dce0  str r1,[r0,#0x120]
+0205dce4  ldr r1,[r0,#0x120]
+0205dce8  cmp r1,#0x0
+0205dcec  addne sp,sp,#0x4
+0205dcf0  ldmiane sp!,{pc}
+0205dcf4  bl 0x0205bff0
+0205dcf8  add sp,sp,#0x4
+0205dcfc  ldmia sp!,{pc}

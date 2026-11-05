@@ -1,0 +1,20 @@
+02051fa0  ldr r3,[0x2051ff0]
+02051fa4  ldr r1,[r3,#0x0]
+02051fa8  clz r2,r1
+02051fac  cmp r2,#0x20
+02051fb0  movne r0,#0x40
+02051fb4  bne 0x02051fd4
+02051fb8  add r3,r3,#0x4
+02051fbc  ldr r1,[r3,#0x0]
+02051fc0  clz r2,r1
+02051fc4  cmp r2,#0x20
+02051fc8  ldr r0,[0x2051ff4]
+02051fcc  bxeq lr
+02051fd0  mov r0,#0x60
+02051fd4  add r0,r0,r2
+02051fd8  mov r1,#0x80000000
+02051fdc  mov r1,r1, lsr r2
+02051fe0  ldr r2,[r3,#0x0]
+02051fe4  bic r2,r2,r1
+02051fe8  str r2,[r3,#0x0]
+02051fec  bx lr

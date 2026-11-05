@@ -1,0 +1,29 @@
+02169760  stmdb sp!,{r4,r5,r6,lr}
+02169764  sub sp,sp,#0x8
+02169768  mov r6,r0
+0216976c  ldr r4,[r6,#0x4]
+02169770  ldr r0,[r4,#0x94]
+02169774  cmp r0,#0x0
+02169778  moveq r5,#0x0
+0216977c  beq 0x02169788
+02169780  bl 0x021504fc
+02169784  mov r5,r0
+02169788  ldrsh r0,[r4,#0xa2]
+0216978c  add r1,sp,#0x4
+02169790  add r2,sp,#0x0
+02169794  mov r0,r0, lsl #0xc
+02169798  str r0,[sp,#0x0]
+0216979c  ldrsh r3,[r4,#0xa0]
+021697a0  mov r0,r6
+021697a4  mov r3,r3, lsl #0xc
+021697a8  str r3,[sp,#0x4]
+021697ac  bl 0x0214ce68
+021697b0  ldr r0,[r5,#0x4]
+021697b4  blx 0x021b712c
+021697b8  cmp r0,#0x0
+021697bc  bne 0x021697cc
+021697c0  mov r0,#0x78
+021697c4  mov r1,#0x3
+021697c8  bl 0x0207342c
+021697cc  add sp,sp,#0x8
+021697d0  ldmia sp!,{r4,r5,r6,pc}

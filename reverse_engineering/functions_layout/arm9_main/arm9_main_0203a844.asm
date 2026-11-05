@@ -1,0 +1,12 @@
+0203a844  stmdb sp!,{r4,lr}
+0203a848  mov r4,r0
+0203a84c  bl 0x02029bac
+0203a850  mov r0,r4
+0203a854  bl 0x0201a9ec
+0203a858  cmp r0,#0x0
+0203a85c  bne 0x0203a86c
+0203a860  mov r0,r4
+0203a864  mov r1,#0x1
+0203a868  bl 0x0201a958
+0203a86c  mov r0,r4
+0203a870  ldmia sp!,{r4,pc}

@@ -1,0 +1,1 @@
+{"module":"arm9_ov00","address":"02153c1c","name":"vfunc_02","thumb":false,"body_bytes":84,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["020643f4","02064450"],"unresolved_call_targets":[],"status":"decompiled","asm_file":"arm9_ov00_02153c1c.asm","c_file":"arm9_ov00_02153c1c.c"}

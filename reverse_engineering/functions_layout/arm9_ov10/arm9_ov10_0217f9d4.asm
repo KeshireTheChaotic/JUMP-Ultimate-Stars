@@ -1,0 +1,11 @@
+0217f9d4  ldrh r1,[r0,#0xc]
+0217f9d6  asr r2,r1,#0x8
+0217f9d8  mov r0,#0xff
+0217f9da  and r2,r0
+0217f9dc  lsl r1,r1,#0x8
+0217f9de  ldr r0,[0x0217f9ec]
+0217f9e0  and r1,r0
+0217f9e2  orr r2,r1
+0217f9e4  lsl r0,r2,#0x10
+0217f9e6  lsr r0,r0,#0x10
+0217f9e8  bx lr

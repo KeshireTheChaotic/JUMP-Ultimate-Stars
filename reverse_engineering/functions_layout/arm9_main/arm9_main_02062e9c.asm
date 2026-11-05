@@ -1,0 +1,11 @@
+02062e9c  push {r4,lr}
+02062e9e  add r4,r1,#0x0
+02062ea0  ldr r1,[r4,#0x0]
+02062ea2  cmp r1,#0x0
+02062ea4  bne 0x02062eaa
+02062ea6  blx 0x02051f94
+02062eaa  ldr r0,[r4,#0x4]
+02062eac  blx 0x0205524c
+02062eb0  pop {r4}
+02062eb2  pop {r3}
+02062eb4  bx r3

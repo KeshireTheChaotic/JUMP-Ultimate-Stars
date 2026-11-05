@@ -1,0 +1,93 @@
+
+void FUN_0214d98c(void)
+
+{
+  int iVar1;
+  int *piVar2;
+  int iVar3;
+  undefined4 in_r3;
+  undefined4 uStack_30;
+  undefined4 uStack_2c;
+  undefined4 uStack_28;
+  undefined4 local_24;
+  undefined4 local_20;
+  undefined4 uStack_1c;
+  
+  uStack_1c = in_r3;
+  FUN_02043264(0);
+  iVar1 = FUN_0203b414(0);
+  FUN_0203d0b4(*(undefined4 *)(*(int *)(iVar1 + 0x88) + 4),0);
+  iVar1 = FUN_0203b414(0);
+  local_20 = 0;
+  piVar2 = *(int **)(*(int *)(iVar1 + 0x88) + 4);
+  (**(code **)(*piVar2 + 0x10))(piVar2,&local_20);
+  iVar1 = 1;
+  do {
+    iVar3 = FUN_0203b414(iVar1);
+    FUN_0203d0b4(*(undefined4 *)(*(int *)(iVar3 + 0x88) + 4),1);
+    iVar3 = FUN_0203b414(iVar1);
+    FUN_0203d478(*(undefined4 *)(*(int *)(iVar3 + 0x88) + 4),4);
+    iVar3 = FUN_0203b414(iVar1);
+    FUN_0203cfbc(*(undefined4 *)(*(int *)(iVar3 + 0x88) + 4),0,0);
+    iVar3 = FUN_0203b414(iVar1);
+    piVar2 = *(int **)(*(int *)(iVar3 + 0x88) + 4);
+    (**(code **)(*piVar2 + 0x90))(piVar2,0);
+    iVar3 = FUN_0203b414(iVar1);
+    FUN_0214d4c8(*(undefined4 *)(iVar3 + 0x88),iVar1);
+    iVar1 = iVar1 + 1;
+  } while (iVar1 < 4);
+  iVar1 = FUN_0203b424(0);
+  FUN_0203d0b4(*(undefined4 *)(*(int *)(iVar1 + 0x88) + 4),1);
+  iVar1 = FUN_0203b424(0);
+  FUN_0203d478(*(undefined4 *)(*(int *)(iVar1 + 0x88) + 4),4);
+  iVar1 = FUN_0203b424(0);
+  FUN_0203cfbc(*(undefined4 *)(*(int *)(iVar1 + 0x88) + 4),0,0);
+  iVar1 = FUN_0203b424(0);
+  piVar2 = *(int **)(*(int *)(iVar1 + 0x88) + 4);
+  (**(code **)(*piVar2 + 0x90))(piVar2,0);
+  iVar1 = FUN_0203b424(0);
+  local_24 = 0;
+  piVar2 = *(int **)(*(int *)(iVar1 + 0x88) + 4);
+  (**(code **)(*piVar2 + 0x10))(piVar2,&local_24);
+  iVar1 = FUN_0203b424(1);
+  FUN_0203d0b4(*(undefined4 *)(*(int *)(iVar1 + 0x88) + 4),1);
+  iVar1 = FUN_0203b424(1);
+  FUN_0203d478(*(undefined4 *)(*(int *)(iVar1 + 0x88) + 4),4);
+  iVar1 = FUN_0203b424(1);
+  FUN_0203cfbc(*(undefined4 *)(*(int *)(iVar1 + 0x88) + 4),0x20,0x20);
+  iVar1 = FUN_0203b424(1);
+  piVar2 = *(int **)(*(int *)(iVar1 + 0x88) + 4);
+  (**(code **)(*piVar2 + 0x90))(piVar2,0x4000);
+  iVar1 = FUN_0203b424(1);
+  uStack_28 = 0x1000;
+  piVar2 = *(int **)(*(int *)(iVar1 + 0x88) + 4);
+  (**(code **)(*piVar2 + 0x10))(piVar2,&uStack_28);
+  iVar1 = FUN_0203b424(2);
+  FUN_0203d0b4(*(undefined4 *)(*(int *)(iVar1 + 0x88) + 4),1);
+  iVar1 = FUN_0203b424(2);
+  FUN_0203d478(*(undefined4 *)(*(int *)(iVar1 + 0x88) + 4),4);
+  iVar1 = FUN_0203b424(2);
+  FUN_0203cfbc(*(undefined4 *)(*(int *)(iVar1 + 0x88) + 4),0x40,0x20);
+  iVar1 = FUN_0203b424(2);
+  piVar2 = *(int **)(*(int *)(iVar1 + 0x88) + 4);
+  (**(code **)(*piVar2 + 0x90))(piVar2,0x4000);
+  iVar1 = FUN_0203b424(2);
+  uStack_2c = 0x2000;
+  piVar2 = *(int **)(*(int *)(iVar1 + 0x88) + 4);
+  (**(code **)(*piVar2 + 0x10))(piVar2,&uStack_2c);
+  iVar1 = FUN_0203b424(3);
+  FUN_0203d0b4(*(undefined4 *)(*(int *)(iVar1 + 0x88) + 4),1);
+  iVar1 = FUN_0203b424(3);
+  FUN_0203d478(*(undefined4 *)(*(int *)(iVar1 + 0x88) + 4),4);
+  iVar1 = FUN_0203b424(3);
+  FUN_0203cfbc(*(undefined4 *)(*(int *)(iVar1 + 0x88) + 4),0x20,0x20);
+  iVar1 = FUN_0203b424(3);
+  piVar2 = *(int **)(*(int *)(iVar1 + 0x88) + 4);
+  (**(code **)(*piVar2 + 0x90))(piVar2,0x8000);
+  iVar1 = FUN_0203b424(3);
+  uStack_30 = 0x3000;
+  piVar2 = *(int **)(*(int *)(iVar1 + 0x88) + 4);
+  (**(code **)(*piVar2 + 0x10))(piVar2,&uStack_30);
+  return;
+}
+

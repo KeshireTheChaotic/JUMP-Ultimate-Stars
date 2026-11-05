@@ -1,0 +1,9 @@
+0200f69c  cmp r0,#0x0
+0200f6a0  mov r3,r0
+0200f6a4  cmpne r1,#0x0
+0200f6a8  bxeq lr
+0200f6ac  mov r2,#0x0
+0200f6b0  strb r2,[r3],#0x1
+0200f6b4  subs r1,r1,#0x1
+0200f6b8  bne 0x0200f6b0
+0200f6bc  bx lr

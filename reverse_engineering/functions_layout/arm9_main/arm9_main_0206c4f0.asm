@@ -1,0 +1,9 @@
+0206c4f0  stmdb sp!,{r3,lr}
+0206c4f4  ldr r2,[r1,#0x0]
+0206c4f8  add r1,sp,#0x0
+0206c4fc  str r2,[sp,#0x0]
+0206c500  ldr r0,[r0,#0x64]
+0206c504  ldr r2,[r0,#0x0]
+0206c508  ldr r2,[r2,#0x10]
+0206c50c  blx r2
+0206c510  ldmia sp!,{r3,pc}

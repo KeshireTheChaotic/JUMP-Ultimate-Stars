@@ -1,0 +1,16 @@
+02032990  stmdb sp!,{r4,lr}
+02032994  ldr r1,[0x20329d0]
+02032998  mov r4,r0
+0203299c  ldr r2,[r1,#0x140]
+020329a0  sub r2,r2,#0x1
+020329a4  str r2,[r1,#0x140]
+020329a8  bl 0x02021f3c
+020329ac  mov r0,r4
+020329b0  bl 0x0201a9ec
+020329b4  cmp r0,#0x0
+020329b8  bne 0x020329c8
+020329bc  mov r0,r4
+020329c0  mov r1,#0x1
+020329c4  bl 0x0201a958
+020329c8  mov r0,r4
+020329cc  ldmia sp!,{r4,pc}

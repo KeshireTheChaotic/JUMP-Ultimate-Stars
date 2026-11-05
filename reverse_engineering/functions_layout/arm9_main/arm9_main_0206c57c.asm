@@ -1,0 +1,11 @@
+0206c57c  stmdb sp!,{r3,lr}
+0206c580  ldr r1,[0x206c5a8]
+0206c584  ldr r2,[0x206c5ac]
+0206c588  mov r0,#0x84
+0206c58c  mov r3,#0x95
+0206c590  bl 0x0201a21c
+0206c594  cmp r0,#0x0
+0206c598  ldmiaeq sp!,{r3,pc}
+0206c59c  ldr r1,[0x206c5b0]
+0206c5a0  bl 0x0206ca4c
+0206c5a4  ldmia sp!,{r3,pc}

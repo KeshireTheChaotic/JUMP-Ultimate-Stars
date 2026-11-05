@@ -1,0 +1,11 @@
+02064da8  ldrb r2,[r0,#0x1f]
+02064daa  mov r1,#0x1
+02064dac  and r2,r1
+02064dae  cmp r2,#0x0
+02064db0  beq 0x02064dba
+02064db2  ldr r0,[r0,#0x1c]
+02064db4  lsl r0,r0,#0x8
+02064db6  lsr r0,r0,#0x8
+02064db8  bx lr
+02064dba  ldr r0,[r0,#0x8]
+02064dbc  bx lr

@@ -1,0 +1,11 @@
+020107f4  stmdb sp!,{r3,r4,r5,r6,r7,lr}
+020107f8  mov r7,r0
+020107fc  ldr r0,[0x2010820]
+02010800  mov r6,r1
+02010804  mov r5,r2
+02010808  mov r4,r3
+0201080c  bl 0x02037f84
+02010810  str r7,[r0,#0x0]
+02010814  stmib r0,{r4,r6}
+02010818  str r5,[r0,#0xc]
+0201081c  ldmia sp!,{r3,r4,r5,r6,r7,pc}

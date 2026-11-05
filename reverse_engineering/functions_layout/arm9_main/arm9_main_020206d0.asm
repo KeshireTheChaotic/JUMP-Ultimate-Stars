@@ -1,0 +1,15 @@
+020206d0  stmdb sp!,{r4,lr}
+020206d4  ldr r1,[0x202070c]
+020206d8  mov r4,r0
+020206dc  str r1,[r4,#0x0]
+020206e0  ldr r0,[r4,#0x4c]
+020206e4  cmp r0,#0x0
+020206e8  beq 0x020206fc
+020206ec  ldr r3,[0x2020710]
+020206f0  mov r1,#0x10
+020206f4  mov r2,#0x8
+020206f8  bl 0x0200f18c
+020206fc  mov r0,r4
+02020700  bl 0x0201bda4
+02020704  mov r0,r4
+02020708  ldmia sp!,{r4,pc}

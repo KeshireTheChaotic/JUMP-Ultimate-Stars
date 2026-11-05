@@ -1,0 +1,16 @@
+02037998  stmdb sp!,{r3,r4,r5,lr}
+0203799c  movs r4,r1
+020379a0  mov r5,r0
+020379a4  beq 0x020379b8
+020379a8  mov r0,r4
+020379ac  ldr r1,[r0,#0x0]
+020379b0  ldr r1,[r1,#0x8]
+020379b4  blx r1
+020379b8  ldr r0,[r5,#0x5c]
+020379bc  cmp r0,#0x0
+020379c0  beq 0x020379d0
+020379c4  ldr r1,[r0,#0x0]
+020379c8  ldr r1,[r1,#0xc]
+020379cc  blx r1
+020379d0  str r4,[r5,#0x5c]
+020379d4  ldmia sp!,{r3,r4,r5,pc}

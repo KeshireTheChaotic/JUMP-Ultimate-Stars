@@ -1,0 +1,82 @@
+038021c4  stmdb sp!,{r4,r5,r6,r7,r8,r9,lr}
+038021c8  sub sp,sp,#0x4
+038021cc  mov r4,r0
+038021d0  mov r8,r1
+038021d4  mov r6,r2
+038021d8  mov r5,r3
+038021dc  ldr r1,[0x380230c]
+038021e0  mov r0,#0x24
+038021e4  mul r0,r4,r0
+038021e8  add r7,r1,r0
+038021ec  ldrb r0,[r1,r0]
+038021f0  mov r0,r0, lsl #0x1f
+038021f4  movs r0,r0, lsr #0x1f
+038021f8  beq 0x03802204
+038021fc  mov r0,r7
+03802200  bl 0x038016bc
+03802204  mov r0,r7
+03802208  mov r1,r5
+0380220c  bl 0x03801908
+03802210  bl 0x038007d0
+03802214  movs r9,r0
+03802218  bmi 0x03802300
+0380221c  ldr r0,[0x3802310]
+03802220  add r5,r0,r9, lsl #0x6
+03802224  mov r0,r5
+03802228  bl 0x038019cc
+0380222c  mov r0,r5
+03802230  mov r1,r8
+03802234  mov r2,r6
+03802238  bl 0x038019b8
+0380223c  strb r9,[r7,#0x8]
+03802240  ldr r0,[r5,#0x28]
+03802244  bl 0x03801cc8
+03802248  ldr r0,[r5,#0x28]
+0380224c  bl 0x03801c78
+03802250  add r2,r5,#0x28
+03802254  ldr r1,[r5,#0x28]
+03802258  add r1,r1,#0x1
+0380225c  str r1,[r5,#0x28]
+03802260  cmp r0,#0xfe
+03802264  ldrne r0,[r2,#0x0]
+03802268  subne r0,r0,#0x1
+0380226c  strne r0,[r2,#0x0]
+03802270  bne 0x038022c8
+03802274  mov r0,r5
+03802278  bl 0x03801c28
+0380227c  mov r0,r0, lsl #0xf
+03802280  mov r5,r0, lsr #0x10
+03802284  mov r6,#0x1
+03802288  ldr r8,[0x3802310]
+0380228c  b 0x038022c0
+03802290  ands r0,r5,#0x1
+03802294  beq 0x038022b4
+03802298  bl 0x038007d0
+0380229c  movs r9,r0
+038022a0  bmi 0x038022c8
+038022a4  add r0,r8,r9, lsl #0x6
+038022a8  bl 0x038019cc
+038022ac  add r0,r7,r6
+038022b0  strb r9,[r0,#0x8]
+038022b4  add r6,r6,#0x1
+038022b8  mov r0,r5, lsl #0xf
+038022bc  mov r5,r0, lsr #0x10
+038022c0  cmp r5,#0x0
+038022c4  bne 0x03802290
+038022c8  ldrb r0,[r7,#0x0]
+038022cc  bic r0,r0,#0x1
+038022d0  orr r0,r0,#0x1
+038022d4  strb r0,[r7,#0x0]
+038022d8  ldrb r0,[r7,#0x0]
+038022dc  bic r0,r0,#0x2
+038022e0  strb r0,[r7,#0x0]
+038022e4  ldr r0,[0x3802314]
+038022e8  ldr r2,[r0,#0x0]
+038022ec  cmp r2,#0x0
+038022f0  ldrne r1,[r2,#0x4]
+038022f4  movne r0,#0x1
+038022f8  orrne r0,r1,r0, lsl r4
+038022fc  strne r0,[r2,#0x4]
+03802300  add sp,sp,#0x4
+03802304  ldmia sp!,{r4,r5,r6,r7,r8,r9,lr}
+03802308  bx lr

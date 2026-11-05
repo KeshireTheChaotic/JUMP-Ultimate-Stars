@@ -1,0 +1,10 @@
+02010c98  stmdb sp!,{r4,lr}
+02010c9c  mov r4,r0
+02010ca0  bl 0x0201a9ec
+02010ca4  cmp r0,#0x0
+02010ca8  bne 0x02010cb8
+02010cac  mov r0,r4
+02010cb0  mov r1,#0x1
+02010cb4  bl 0x0201a958
+02010cb8  mov r0,r4
+02010cbc  ldmia sp!,{r4,pc}

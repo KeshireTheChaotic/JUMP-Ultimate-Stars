@@ -1,0 +1,16 @@
+0219cb14  ldr r1,[0x219cb54]
+0219cb18  ldr r3,[r1,#0x0]
+0219cb1c  cmp r3,#0x0
+0219cb20  beq 0x0219cb4c
+0219cb24  mov r2,#0x0
+0219cb28  b 0x0219cb44
+0219cb2c  add r1,r3,r2
+0219cb30  ldrb r1,[r1,#0x8e0]
+0219cb34  cmp r0,r1
+0219cb38  moveq r0,r2
+0219cb3c  bxeq lr
+0219cb40  add r2,r2,#0x1
+0219cb44  cmp r2,#0x4
+0219cb48  blt 0x0219cb2c
+0219cb4c  mvn r0,#0x0
+0219cb50  bx lr

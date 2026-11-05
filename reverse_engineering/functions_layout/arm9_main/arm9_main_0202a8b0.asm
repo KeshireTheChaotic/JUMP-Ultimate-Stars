@@ -1,0 +1,11 @@
+0202a8b0  stmdb sp!,{r4,lr}
+0202a8b4  mov r4,r0
+0202a8b8  bl 0x02019e9c
+0202a8bc  add r0,r4,#0x18
+0202a8c0  bl 0x02019e9c
+0202a8c4  mov r0,r4
+0202a8c8  bl 0x02019edc
+0202a8cc  add r0,r4,#0x18
+0202a8d0  bl 0x02019edc
+0202a8d4  mov r0,r4
+0202a8d8  ldmia sp!,{r4,pc}

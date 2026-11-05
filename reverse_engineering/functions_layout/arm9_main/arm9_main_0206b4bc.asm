@@ -1,0 +1,17 @@
+0206b4bc  stmdb sp!,{r4,lr}
+0206b4c0  sub sp,sp,#0x40
+0206b4c4  ldr r0,[r0,#0x4]
+0206b4c8  add r1,sp,#0x0
+0206b4cc  ldr r4,[r0,#0x10]
+0206b4d0  ldrb r2,[r4,#0x16]
+0206b4d4  ldrb r3,[r4,#0x10]
+0206b4d8  ldr r0,[r4,#0x4]
+0206b4dc  bl 0x0206ae7c
+0206b4e0  ldr r0,[r4,#0x4]
+0206b4e4  ldrh r2,[r4,#0xe]
+0206b4e8  ldrb r3,[r4,#0x10]
+0206b4ec  ldr r0,[r0,#0x4]
+0206b4f0  add r1,sp,#0x0
+0206b4f4  bl 0x02029c68
+0206b4f8  add sp,sp,#0x40
+0206b4fc  ldmia sp!,{r4,pc}

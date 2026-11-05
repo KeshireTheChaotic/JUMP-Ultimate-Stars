@@ -1,0 +1,10 @@
+02164b68  push {r4,lr}
+02164b6a  add r4,r0,#0x0
+02164b6c  blx 0x0207382c
+02164b70  cmp r0,#0x0
+02164b72  beq 0x02164b80
+02164b74  bl 0x021b65cc
+02164b78  ldr r0,[r4,#0x4]
+02164b7a  ldr r1,[0x02164b84]
+02164b7c  blx 0x02028384
+02164b80  pop {r4,pc}

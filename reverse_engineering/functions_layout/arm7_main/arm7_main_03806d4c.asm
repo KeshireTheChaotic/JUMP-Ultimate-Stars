@@ -1,0 +1,10 @@
+03806d4c  stmdb sp!,{r4,lr}
+03806d50  mov r4,r1
+03806d54  ldr r1,[r4,#0x0]
+03806d58  cmp r1,#0x0
+03806d5c  bne 0x03806d64
+03806d60  bl 0x037fbdd0
+03806d64  ldr r0,[r4,#0x4]
+03806d68  bl 0x037fe3b8
+03806d6c  ldmia sp!,{r4,lr}
+03806d70  bx lr

@@ -1,0 +1,9 @@
+0214cfd8  push {lr}
+0214cfda  sub sp,#0x4
+0214cfdc  add r0,r1,#0x0
+0214cfde  ldr r1,[0x0214cfec]
+0214cfe0  ldr r1,[r1,#0x0]
+0214cfe2  blx r1
+0214cfe4  add sp,#0x4
+0214cfe6  pop {r3}
+0214cfe8  bx r3

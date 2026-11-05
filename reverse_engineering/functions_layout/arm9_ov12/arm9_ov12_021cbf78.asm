@@ -1,0 +1,11 @@
+021cbf78  cmp r0,#0x0
+021cbf7a  bne 0x021cbf80
+021cbf7c  mov r0,#0x0
+021cbf7e  bx lr
+021cbf80  ldrb r0,[r0,#0x5]
+021cbf82  cmp r0,#0x0
+021cbf84  beq 0x021cbf8a
+021cbf86  mov r0,#0x1
+021cbf88  bx lr
+021cbf8a  mov r0,#0x0
+021cbf8c  bx lr

@@ -1,0 +1,10 @@
+0219ad18  stmdb sp!,{r4,lr}
+0219ad1c  mov r4,r0
+0219ad20  blx 0x020697d0
+0219ad24  cmp r0,#0x0
+0219ad28  moveq r0,#0x0
+0219ad2c  ldmiaeq sp!,{r4,pc}
+0219ad30  mov r0,r4
+0219ad34  blx 0x020697b8
+0219ad38  mov r0,#0x1
+0219ad3c  ldmia sp!,{r4,pc}

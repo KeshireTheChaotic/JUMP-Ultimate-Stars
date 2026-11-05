@@ -1,0 +1,29 @@
+0216bdc8  stmdb sp!,{r4,r5,r6,lr}
+0216bdcc  sub sp,sp,#0x8
+0216bdd0  mov r6,r0
+0216bdd4  ldr r4,[r6,#0x4]
+0216bdd8  ldr r0,[r4,#0x94]
+0216bddc  cmp r0,#0x0
+0216bde0  moveq r5,#0x0
+0216bde4  beq 0x0216bdf0
+0216bde8  bl 0x021504fc
+0216bdec  mov r5,r0
+0216bdf0  ldrsh r0,[r4,#0xa2]
+0216bdf4  add r1,sp,#0x4
+0216bdf8  add r2,sp,#0x0
+0216bdfc  mov r0,r0, lsl #0xc
+0216be00  str r0,[sp,#0x0]
+0216be04  ldrsh r3,[r4,#0xa0]
+0216be08  mov r0,r6
+0216be0c  mov r3,r3, lsl #0xc
+0216be10  str r3,[sp,#0x4]
+0216be14  bl 0x0214ce68
+0216be18  ldr r0,[r5,#0x4]
+0216be1c  blx 0x021b712c
+0216be20  cmp r0,#0x0
+0216be24  bne 0x0216be34
+0216be28  mov r0,#0x78
+0216be2c  mov r1,#0x3
+0216be30  bl 0x0207342c
+0216be34  add sp,sp,#0x8
+0216be38  ldmia sp!,{r4,r5,r6,pc}

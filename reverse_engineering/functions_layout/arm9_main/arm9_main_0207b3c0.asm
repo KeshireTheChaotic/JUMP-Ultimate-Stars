@@ -1,0 +1,11 @@
+0207b3c0  ldr r2,[r0,#0x8]
+0207b3c4  b 0x0207b3e0
+0207b3c8  ldrb r0,[r2,#0x18]
+0207b3cc  cmp r1,#0x0
+0207b3d0  orrne r0,r0,#0x40
+0207b3d4  biceq r0,r0,#0x40
+0207b3d8  strb r0,[r2,#0x18]
+0207b3dc  ldr r2,[r2,#0x0]
+0207b3e0  cmp r2,#0x0
+0207b3e4  bne 0x0207b3c8
+0207b3e8  bx lr

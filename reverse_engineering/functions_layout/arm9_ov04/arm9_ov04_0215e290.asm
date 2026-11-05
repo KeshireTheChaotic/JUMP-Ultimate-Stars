@@ -1,0 +1,11 @@
+0215e290  stmdb sp!,{r4,r5,r6,lr}
+0215e294  mov r6,r0
+0215e298  mov r5,#0x0
+0215e29c  ldr r4,[0x215e2bc]
+0215e2a0  b 0x0215e2b0
+0215e2a4  ldr r0,[r4,#0x0]
+0215e2a8  blx r0
+0215e2ac  add r5,r5,#0x1
+0215e2b0  cmp r5,r6
+0215e2b4  bcc 0x0215e2a4
+0215e2b8  ldmia sp!,{r4,r5,r6,pc}

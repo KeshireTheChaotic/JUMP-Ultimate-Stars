@@ -1,0 +1,7 @@
+0214dc54  bl 0x0203b424
+0214dc58  ldr r0,[r0,#0x88]
+0214dc5c  mov r1,#0x4
+0214dc60  ldr r0,[r0,#0x4]
+0214dc64  bl 0x0203d478
+0214dc68  mov r0,#0x3
+0214dc6c  bl 0x0203b424

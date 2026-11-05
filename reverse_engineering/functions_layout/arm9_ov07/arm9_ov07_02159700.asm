@@ -1,0 +1,15 @@
+02159700  stmdb sp!,{r4,lr}
+02159704  ldr r3,[0x215973c]
+02159708  mov r2,#0xdc
+0215970c  ldr r4,[r3,#0x0]
+02159710  add r3,r4,#0x10
+02159714  mla r2,r0,r2,r3
+02159718  add r0,r2,#0x1c
+0215971c  blx 0x0208bb00
+02159720  strb r0,[r4,#0xbe8]
+02159724  add r0,r4,#0xb00
+02159728  ldrsb r0,[r0,#0xe8]
+0215972c  cmp r0,#0x0
+02159730  movne r0,#0x1
+02159734  moveq r0,#0x0
+02159738  ldmia sp!,{r4,pc}

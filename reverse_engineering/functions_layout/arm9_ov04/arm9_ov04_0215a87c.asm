@@ -1,0 +1,9 @@
+0215a87c  stmdb sp!,{r4,lr}
+0215a880  mov r4,r0
+0215a884  ldr r0,[r4,#0x0]
+0215a888  cmp r0,#0x0
+0215a88c  beq 0x0215a894
+0215a890  bl 0x021500f0
+0215a894  mov r0,r4
+0215a898  bl 0x0201b244
+0215a89c  ldmia sp!,{r4,pc}

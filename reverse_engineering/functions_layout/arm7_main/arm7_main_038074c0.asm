@@ -1,0 +1,11 @@
+038074c0  stmdb sp!,{lr}
+038074c4  sub sp,sp,#0x4
+038074c8  and r0,r1,#0x3f
+038074cc  cmp r0,#0x2
+038074d0  bne 0x038074dc
+038074d4  bl 0x0380709c
+038074d8  b 0x038074e0
+038074dc  bl 0x037fe538
+038074e0  add sp,sp,#0x4
+038074e4  ldmia sp!,{lr}
+038074e8  bx lr

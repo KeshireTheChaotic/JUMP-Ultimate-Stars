@@ -1,0 +1,12 @@
+020574c4  stmdb sp!,{lr}
+020574c8  sub sp,sp,#0x4
+020574cc  ldr r0,[0x20574f4]
+020574d0  mov r1,#0x4
+020574d4  ldr r0,[r0,#0x0]
+020574d8  bl 0x02053fe4
+020574dc  ldr r0,[0x20574f4]
+020574e0  ldr r0,[r0,#0x0]
+020574e4  ldr r0,[r0,#0x0]
+020574e8  add sp,sp,#0x4
+020574ec  ldmia sp!,{lr}
+020574f0  bx lr

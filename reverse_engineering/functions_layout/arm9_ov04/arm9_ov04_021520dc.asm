@@ -1,0 +1,9 @@
+021520dc  stmdb sp!,{r4,lr}
+021520e0  mov r4,r0
+021520e4  bl 0x0207382c
+021520e8  cmp r0,#0x0
+021520ec  ldmiaeq sp!,{r4,pc}
+021520f0  ldr r0,[r4,#0x4]
+021520f4  ldr r1,[0x2152100]
+021520f8  bl 0x02028384
+021520fc  ldmia sp!,{r4,pc}

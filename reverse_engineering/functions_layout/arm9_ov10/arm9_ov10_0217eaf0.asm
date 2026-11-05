@@ -1,0 +1,17 @@
+0217eaf0  push {r4,lr}
+0217eaf2  add r4,r1,#0x0
+0217eaf4  ldr r1,[0x0217eb14]
+0217eaf6  ldr r2,[r1,#0x0]
+0217eaf8  ldr r1,[0x0217eb18]
+0217eafa  ldr r1,[r2,r1]
+0217eafc  cmp r1,#0x0
+0217eafe  beq 0x0217eb12
+0217eb00  bl 0x02176568
+0217eb04  add r1,r0,#0x0
+0217eb06  add r0,r4,#0x0
+0217eb08  ldr r2,[0x0217eb14]
+0217eb0a  ldr r3,[r2,#0x0]
+0217eb0c  ldr r2,[0x0217eb18]
+0217eb0e  ldr r2,[r3,r2]
+0217eb10  blx r2
+0217eb12  pop {r4,pc}

@@ -1,0 +1,1 @@
+{"module":"arm9_main","address":"020437ac","name":"TextureImpInstance_Derived_020962ac","thumb":false,"body_bytes":136,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["02035758","02043980"],"unresolved_call_targets":[],"status":"decompiled","asm_file":"arm9_main_020437ac.asm","c_file":"arm9_main_020437ac.c"}

@@ -1,0 +1,1 @@
+{"module":"arm9_ov06","address":"0215b568","name":"FUN_0215b568","thumb":false,"body_bytes":188,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["02083950","02157450","0215b204","0215b62c","0215f334"],"unresolved_call_targets":[],"status":"decompiled","asm_file":"arm9_ov06_0215b568.asm","c_file":"arm9_ov06_0215b568.c"}

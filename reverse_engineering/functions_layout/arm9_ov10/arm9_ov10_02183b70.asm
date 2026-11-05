@@ -1,0 +1,13 @@
+02183b70  push {r4,r5,lr}
+02183b72  sub sp,#0x14
+02183b74  add r5,r0,#0x0
+02183b76  add r4,r1,#0x0
+02183b78  add r0,sp,#0x0
+02183b7a  ldr r1,[0x02183b90]
+02183b7c  bl 0x02003ce0
+02183b80  add r0,r5,#0x0
+02183b82  add r1,r4,#0x0
+02183b84  add r2,sp,#0x0
+02183b86  bl 0x02183b94
+02183b8a  add sp,#0x14
+02183b8c  pop {r4,r5,pc}

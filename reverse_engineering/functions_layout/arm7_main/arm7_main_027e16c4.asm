@@ -1,0 +1,31 @@
+027e16c4  stmdb sp!,{r4,r5,lr}
+027e16c8  sub sp,sp,#0x4
+027e16cc  ldr r2,[0x27e1740]
+027e16d0  ldr lr,[r2,#0x550]
+027e16d4  ldrh r4,[lr,#0xbe]
+027e16d8  cmp r1,#0x0
+027e16dc  bne 0x027e1734
+027e16e0  ldrh r3,[r0,#0x14]
+027e16e4  cmp r3,#0x1
+027e16e8  bcc 0x027e1734
+027e16ec  mov r5,#0x0
+027e16f0  add r12,r0,#0x1a
+027e16f4  b 0x027e1728
+027e16f8  ldrh r2,[r0,#0x16]
+027e16fc  mla r1,r2,r5,r12
+027e1700  ldrb r2,[r1,#0x3]
+027e1704  ands r1,r2,#0x2
+027e1708  movne r1,r2, asr #0x2
+027e170c  andne r1,r1,#0xff
+027e1710  moveq r1,r2, asr #0x2
+027e1714  addeq r1,r1,#0x19
+027e1718  andeq r1,r1,#0xff
+027e171c  cmp r1,r4
+027e1720  movcc r4,r1
+027e1724  add r5,r5,#0x1
+027e1728  cmp r5,r3
+027e172c  blt 0x027e16f8
+027e1730  strh r4,[lr,#0xbe]
+027e1734  add sp,sp,#0x4
+027e1738  ldmia sp!,{r4,r5,lr}
+027e173c  bx lr

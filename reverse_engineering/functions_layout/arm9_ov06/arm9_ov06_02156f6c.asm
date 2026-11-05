@@ -1,0 +1,12 @@
+02156f6c  stmdb sp!,{r3,lr}
+02156f70  cmp r1,#0x0
+02156f74  ldr r0,[r0,#0x1c0]
+02156f78  beq 0x02156f8c
+02156f7c  ldr r1,[0x2156f9c]
+02156f80  ldr r0,[r0,#0x4]
+02156f84  bl 0x02028384
+02156f88  ldmia sp!,{r3,pc}
+02156f8c  ldr r1,[0x2156fa0]
+02156f90  ldr r0,[r0,#0x4]
+02156f94  bl 0x02028384
+02156f98  ldmia sp!,{r3,pc}

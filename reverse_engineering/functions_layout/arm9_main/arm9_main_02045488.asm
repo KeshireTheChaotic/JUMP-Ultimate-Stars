@@ -1,0 +1,16 @@
+02045488  stmdb sp!,{r3,r4,r5,lr}
+0204548c  ldr r1,[0x20454c8]
+02045490  mov r5,r0
+02045494  str r1,[r5,#0x0]
+02045498  ldr r4,[r5,#0x14]
+0204549c  cmp r4,#0x0
+020454a0  beq 0x020454c0
+020454a4  mov r0,r4
+020454a8  bl 0x0201a9ec
+020454ac  cmp r0,#0x0
+020454b0  bne 0x020454c0
+020454b4  mov r0,r4
+020454b8  mov r1,#0x1
+020454bc  bl 0x0201a958
+020454c0  mov r0,r5
+020454c4  ldmia sp!,{r3,r4,r5,pc}

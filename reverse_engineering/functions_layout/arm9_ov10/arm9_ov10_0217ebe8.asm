@@ -1,0 +1,11 @@
+0217ebe8  push {r4,r5,r6,lr}
+0217ebea  add r5,r0,#0x0
+0217ebec  add r4,r1,#0x0
+0217ebee  add r6,r2,#0x0
+0217ebf0  add r0,r5,#0x6
+0217ebf2  ldr r1,[0x0217ec00]
+0217ebf4  mov r2,#0x2
+0217ebf6  bl 0x02004b94
+0217ebfa  strh r4,[r5,#0x4]
+0217ebfc  str r6,[r5,#0x0]
+0217ebfe  pop {r4,r5,r6,pc}

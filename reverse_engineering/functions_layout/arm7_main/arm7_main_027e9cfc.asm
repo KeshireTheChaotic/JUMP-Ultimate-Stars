@@ -1,0 +1,15 @@
+027e9cfc  ldrh r3,[r0,#0x4]
+027e9d00  ldrh r2,[r1,#0x4]
+027e9d04  cmp r3,r2
+027e9d08  bne 0x027e9d30
+027e9d0c  ldrh r3,[r0,#0x2]
+027e9d10  ldrh r2,[r1,#0x2]
+027e9d14  cmp r3,r2
+027e9d18  bne 0x027e9d30
+027e9d1c  ldrh r2,[r0,#0x0]
+027e9d20  ldrh r0,[r1,#0x0]
+027e9d24  cmp r2,r0
+027e9d28  moveq r0,#0x1
+027e9d2c  bxeq lr
+027e9d30  mov r0,#0x0
+027e9d34  bx lr

@@ -1,0 +1,15 @@
+0215e94c  stmdb sp!,{r4,lr}
+0215e950  mov r4,r0
+0215e954  bl 0x0215d4e0
+0215e958  cmp r0,#0x0
+0215e95c  beq 0x0215e96c
+0215e960  mov r0,r4
+0215e964  mov r1,#0x8
+0215e968  bl 0x02157450
+0215e96c  ldr r0,[r4,#0x1a0]
+0215e970  bl 0x0215d4fc
+0215e974  cmp r0,#0x0
+0215e978  ldmiane sp!,{r4,pc}
+0215e97c  mov r0,r4
+0215e980  bl 0x0215d2e4
+0215e984  ldmia sp!,{r4,pc}

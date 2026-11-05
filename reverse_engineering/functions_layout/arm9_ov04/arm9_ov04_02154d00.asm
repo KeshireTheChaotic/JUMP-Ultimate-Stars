@@ -1,0 +1,10 @@
+02154d00  stmdb sp!,{r4,lr}
+02154d04  movs r4,r0
+02154d08  ldmiaeq sp!,{r4,pc}
+02154d0c  ldr r0,[r4,#0x0]
+02154d10  ldr r1,[r0,#0x0]
+02154d14  ldr r1,[r1,#0x8]
+02154d18  blx r1
+02154d1c  mov r0,r4
+02154d20  bl 0x0201b244
+02154d24  ldmia sp!,{r4,pc}

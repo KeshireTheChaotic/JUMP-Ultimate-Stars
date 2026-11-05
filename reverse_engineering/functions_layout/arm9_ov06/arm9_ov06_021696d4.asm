@@ -1,0 +1,17 @@
+021696d4  stmdb sp!,{r3,lr}
+021696d8  ldr r1,[r0,#0x8]
+021696dc  ldr r2,[r0,#0x20]
+021696e0  ldr r1,[r1,#0x10]
+021696e4  ldr r1,[r1,#0x134]
+021696e8  subs r1,r2,r1
+021696ec  str r1,[r0,#0x20]
+021696f0  ldrbmi r1,[r0,#0x3a]
+021696f4  orrmi r1,r1,#0x2
+021696f8  strbmi r1,[r0,#0x3a]
+021696fc  ldr r0,[r0,#0x8]
+02169700  ldr r0,[r0,#0x18]
+02169704  bl 0x02155620
+02169708  cmp r0,#0x0
+0216970c  moveq r0,#0x1
+02169710  movne r0,#0x0
+02169714  ldmia sp!,{r3,pc}

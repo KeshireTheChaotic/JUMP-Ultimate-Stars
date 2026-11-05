@@ -1,0 +1,212 @@
+
+/* JUS-GAME SelectStandby::SelectStandby_Create [source-string] __FILE__="SelectStandby.cpp"
+   __FUNCTION__="SelectStandby_Create" lines=[129, 751, 1219] passed to 3 source-location call(s);
+   header inlines: ALControllerImp.h:Create, ALNodeImp.h:Create */
+
+int * SelectStandby::SelectStandby_Create
+                (int param_1,int param_2,undefined1 param_3,undefined4 param_4)
+
+{
+  int *piVar1;
+  int iVar2;
+  undefined4 uVar3;
+  char *pcVar4;
+  int iVar5;
+  int *piVar6;
+  int iVar7;
+  char *pcVar8;
+  bool bVar9;
+  undefined4 local_64;
+  char *local_60;
+  undefined4 local_5c;
+  undefined4 local_58;
+  undefined4 local_54;
+  undefined4 local_50;
+  undefined4 local_4c;
+  undefined4 local_48;
+  undefined4 local_44;
+  undefined4 local_40;
+  undefined4 local_3c;
+  undefined1 auStack_38 [12];
+  int local_2c;
+  int local_28;
+  undefined4 local_24;
+  undefined4 uStack_20;
+  
+  uStack_20 = param_4;
+  piVar1 = (int *)jus_AllocDebug(0x6c,s_SelectStandby_cpp_0216d4bc,s_SelectStandby_Create_0216d384,
+                                 0x81);
+  piVar1[0x16] = param_1;
+  piVar1[0x17] = param_2;
+  *(undefined1 *)(piVar1 + 0x1a) = param_3;
+  FUN_0203d0b4(*(undefined4 *)(param_1 + 4),3);
+  FUN_0203d478(*(undefined4 *)(param_1 + 4),8);
+  FUN_0203cfbc(*(undefined4 *)(param_1 + 4),0x40,0x40);
+  (**(code **)(**(int **)(param_1 + 4) + 0x90))(*(int **)(param_1 + 4),0x8000);
+  local_3c = 0x1000;
+  (**(code **)(**(int **)(param_1 + 4) + 0x10))(*(int **)(param_1 + 4),&local_3c);
+  iVar2 = FUN_020101f4(s_deckselect_deckselect_aar_0216d4d0,0);
+  piVar1[1] = iVar2;
+  iVar2 = FUN_020101f4(s_deckselect_deck_standby_obj_aar_0216d4ec,0);
+  piVar1[2] = iVar2;
+  iVar2 = FUN_020101f4(s_common_title_icon_2d_aar_0216d50c,0);
+  piVar1[3] = iVar2;
+  iVar2 = jus_AllocDebug(0x78,s_ALNodeImp_h_0216bbd4,s_Create_0216d37c,0x4c3);
+  if (iVar2 != 0) {
+    jus_Class_0209c0b4::jus_Class_0209c0b4(iVar2,FUN_02024a30,1);
+  }
+  iVar2 = FUN_0214d37c();
+  *piVar1 = iVar2;
+  (**(code **)(**(int **)(iVar2 + 4) + 0xd8))(*(int **)(iVar2 + 4),1);
+  iVar2 = *(int *)(*(int *)(*piVar1 + 4) + 0x50);
+  *(undefined4 *)(iVar2 + 0xc) = 0xfff00000;
+  FUN_0214f784(iVar2,1);
+  local_5c = 0xfff00000;
+  local_58 = 0;
+  local_54 = 0;
+  FUN_0214dc68(auStack_38,&local_5c,&local_58,&local_54);
+  piVar6 = *(int **)(*piVar1 + 4);
+  uVar3 = FUN_020326b0(s_Position_0216d528);
+  uVar3 = (**(code **)(*piVar6 + 0x40))(piVar6,s_Position_0216d528,&local_50,uVar3);
+  FUN_0202c4a4(&local_64,uVar3,local_50);
+  iVar2 = jus_AllocDebug(0x4c,s_ALControllerImp_h_0216c958,s_Create_0216d374,0x2ef);
+  if (iVar2 != 0) {
+    jus_TagIPMV::jus_TagIPMV(iVar2,0,local_64,local_60,0x494c,auStack_38,8,0,0);
+  }
+  uVar3 = FUN_0215e28c();
+  FUN_02020f38(*piVar1,uVar3);
+  (**(code **)(**(int **)(*piVar1 + 4) + 0x24))(*(int **)(*piVar1 + 4),piVar1);
+  FUN_02028384(*(undefined4 *)(*piVar1 + 4),FUN_02164e74);
+  bVar9 = (char)piVar1[0x1a] != '\0';
+  if (bVar9) {
+    pcVar4 = s_deckselect_deck_standby00_dig_0216d534;
+    pcVar8 = s_deckselect_deck_standby00_atm_0216d554;
+  }
+  else {
+    pcVar4 = s_deckselect_deck_standby01_dig_0216d574;
+    pcVar8 = local_60;
+  }
+  if (!bVar9) {
+    pcVar8 = s_deckselect_deck_standby01_atm_0216d594;
+  }
+  FUN_0214f7f8(piVar1[0x16]);
+  piVar6 = (int *)FUN_02035c90(pcVar4);
+  if (piVar6[0xe] == 0) {
+    (**(code **)(*piVar6 + 0x14))();
+  }
+  iVar5 = piVar6[0xe];
+  FUN_02036ab8();
+  iVar2 = FUN_0214d37c();
+  (**(code **)(**(int **)(iVar2 + 4) + 0x130))(*(int **)(iVar2 + 4),pcVar8);
+  if (iVar5 == 0) {
+    piVar6 = *(int **)(*(int *)(iVar2 + 4) + 100);
+    (**(code **)(*piVar6 + 0x50))(piVar6,0,0);
+  }
+  else {
+    piVar6 = *(int **)(*(int *)(iVar2 + 4) + 100);
+    (**(code **)(*piVar6 + 0x50))(piVar6,*(undefined4 *)(iVar5 + 4),0);
+  }
+  (**(code **)(**(int **)(iVar2 + 4) + 0xd8))(*(int **)(iVar2 + 4),1);
+  FUN_02034d7c(iVar5);
+  FUN_0214e688(*piVar1,iVar2);
+  FUN_0214f7c0(iVar2,*piVar1);
+  piVar1[4] = iVar2;
+  FUN_0214f834();
+  iVar2 = FUN_02164db4(0xa01000,0xa01000,piVar1[0x17],*piVar1,100,&DAT_0216d3f0);
+  piVar1[5] = iVar2;
+  iVar2 = 1;
+  do {
+    iVar5 = FUN_02164db4(0x885000,0x885000,piVar1[0x17],*piVar1,100,&DAT_0216d3f0 + iVar2 * 0xc);
+    iVar7 = iVar2 + 1;
+    piVar1[iVar2 + 5] = iVar5;
+    iVar2 = iVar7;
+  } while (iVar7 < 0x10);
+  iVar2 = 9;
+  do {
+    local_44 = 0x63000;
+    FUN_0214e6c0(piVar1[iVar2 + 5],&local_44);
+    iVar2 = iVar2 + 1;
+  } while (iVar2 < 0xd);
+  local_48 = 0x61000;
+  FUN_0214e6c0(piVar1[0x14],&local_48);
+  local_4c = 0x62000;
+  FUN_0214e6c0(piVar1[0x13],&local_4c);
+  FUN_02023894(*(undefined4 *)(piVar1[0x14] + 4),0x885018,0);
+  (**(code **)(**(int **)(*(int *)(piVar1[0x14] + 4) + 0x68) + 0x6c))();
+  FUN_02023894(*(undefined4 *)(piVar1[0x13] + 4),0x885017,0);
+  (**(code **)(**(int **)(*(int *)(piVar1[0x13] + 4) + 0x68) + 0x6c))();
+  FUN_02023894(*(undefined4 *)(piVar1[0x12] + 4),0x88500f,0);
+  (**(code **)(**(int **)(*(int *)(piVar1[0x12] + 4) + 0x68) + 0x6c))();
+  iVar2 = DAT_020afe98;
+  if ((char)piVar1[0x1a] == '\0') {
+    iVar5 = FUN_02087724();
+    if (iVar5 == 2) {
+      (**(code **)(**(int **)(piVar1[0x14] + 4) + 0xd8))(*(int **)(piVar1[0x14] + 4),0);
+      (**(code **)(**(int **)(piVar1[0x13] + 4) + 0xd8))(*(int **)(piVar1[0x13] + 4),0);
+    }
+    else {
+      iVar2 = (iVar2 + 5) * 0xc;
+      local_2c = *(int *)(&DAT_0216d3f0 + iVar2);
+      local_28 = *(int *)(&DAT_0216d3f4 + iVar2);
+      local_24 = *(undefined4 *)(&DAT_0216d3f8 + iVar2);
+      FUN_0214f864(piVar1[0x13],&local_2c);
+      local_2c = local_2c + DAT_0216d4a4;
+      local_28 = local_28 + DAT_0216d4a8;
+      FUN_0214f864(piVar1[0x14],&local_2c);
+    }
+  }
+  else {
+    iVar5 = 0;
+    do {
+      FUN_0214f864(piVar1[iVar5 + 5],&DAT_0216d39c + iVar5 * 0xc);
+      iVar5 = iVar5 + 1;
+    } while (iVar5 < 6);
+    iVar5 = 6;
+    do {
+      (**(code **)(**(int **)(piVar1[iVar5 + 5] + 4) + 0xd8))(*(int **)(piVar1[iVar5 + 5] + 4),0);
+      iVar5 = iVar5 + 1;
+    } while (iVar5 < 0x10);
+    FUN_02023894(*(undefined4 *)(piVar1[10] + 4),iVar2 + 0x885008,0);
+    (**(code **)(**(int **)(*(int *)(piVar1[10] + 4) + 0x68) + 0x6c))();
+  }
+  iVar2 = *(int *)(*(int *)(piVar1[0x13] + 4) + 100);
+  piVar6 = *(int **)(iVar2 + 0x2c);
+  if (piVar6 == (int *)0x0) {
+    piVar6 = (int *)FUN_02036430(*(undefined4 *)(iVar2 + 0x20));
+  }
+  if (piVar6[6] == 0) {
+    (**(code **)(*piVar6 + 0x10))();
+  }
+  iVar2 = CommonPaletteAnime::CommonPaletteAnime_Create(piVar6[6],0x21,3,5,0x80);
+  *(undefined2 *)(iVar2 + 0x18) = 0;
+  *(undefined2 *)(iVar2 + 0x16) = 0x8df;
+  *(undefined1 *)(iVar2 + 0x1a) = 0x1e;
+  *(undefined1 *)(iVar2 + 0x1c) = 1;
+  *(undefined1 *)(iVar2 + 0x1b) = 1;
+  piVar1[0x19] = iVar2;
+  FUN_0214f7f8(piVar1[0x17]);
+  iVar2 = func_0x021caa0c(s_font_jskfont_aft_0216d5b4,0,0);
+  func_0x021c5fb4(*(undefined4 *)(iVar2 + 4));
+  iVar5 = FUN_0214d37c();
+  local_40 = 0x65000;
+  FUN_0214e6c0(iVar5,&local_40);
+  piVar6 = *(int **)(*(int *)(iVar5 + 4) + 100);
+  (**(code **)(*piVar6 + 0xa8))(piVar6,0);
+  (**(code **)(**(int **)(iVar5 + 4) + 0xd8))(*(int **)(iVar5 + 4),1);
+  FUN_0214f7c0(iVar5,*piVar1);
+  FUN_0214e688(*piVar1,iVar5);
+  if ((char)piVar1[0x1a] == '\0') {
+    FUN_0214f864(iVar5,&DAT_0216d4b0);
+  }
+  else {
+    FUN_0214f864(iVar5,&DAT_0216d3e4);
+  }
+  (**(code **)(**(int **)(iVar2 + 4) + 0xc))();
+  FUN_0214f834();
+  piVar1[0x15] = iVar5;
+  iVar2 = StageData::StageData_Create();
+  piVar1[0x18] = iVar2;
+  FUN_02164e74(*piVar1);
+  return piVar1;
+}
+

@@ -1,0 +1,12 @@
+021cad80  ldr r1,[0x21cadb0]
+021cad84  mov r2,#0x1
+021cad88  str r1,[r0,#0x0]
+021cad8c  ldr r1,[0x21cadb4]
+021cad90  strh r2,[r0,#0x4]
+021cad94  str r1,[r0,#0x0]
+021cad98  mov r1,#0x0
+021cad9c  str r1,[r0,#0x8]
+021cada0  str r1,[r0,#0xc]
+021cada4  str r1,[r0,#0x14]
+021cada8  str r1,[r0,#0x18]
+021cadac  bx lr

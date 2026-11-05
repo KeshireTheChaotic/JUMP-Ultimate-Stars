@@ -1,0 +1,11 @@
+02056848  stmdb sp!,{lr}
+0205684c  sub sp,sp,#0x4
+02056850  mov r2,r1
+02056854  mov r3,#0x0
+02056858  mov r1,r0
+0205685c  mov r0,#0x1a
+02056860  str r3,[sp,#0x0]
+02056864  bl 0x02056594
+02056868  add sp,sp,#0x4
+0205686c  ldmia sp!,{lr}
+02056870  bx lr

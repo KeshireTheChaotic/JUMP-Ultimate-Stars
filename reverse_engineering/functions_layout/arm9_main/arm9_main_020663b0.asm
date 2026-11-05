@@ -1,0 +1,16 @@
+020663b0  ldr r2,[0x020663d0]
+020663b2  ldr r3,[r2,#0x0]
+020663b4  ldr r1,[0x020663d4]
+020663b6  and r3,r1
+020663b8  cmp r3,#0x0
+020663ba  beq 0x020663c2
+020663bc  mov r0,#0x0
+020663be  mvn r0,r0
+020663c0  bx lr
+020663c2  ldr r2,[r2,#0x0]
+020663c4  ldr r1,[0x020663d8]
+020663c6  and r2,r1
+020663c8  lsr r1,r2,#0x8
+020663ca  str r1,[r0,#0x0]
+020663cc  mov r0,#0x0
+020663ce  bx lr

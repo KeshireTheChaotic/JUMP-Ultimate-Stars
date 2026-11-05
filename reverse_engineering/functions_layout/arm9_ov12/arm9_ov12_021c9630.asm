@@ -1,0 +1,74 @@
+021c9630  stmdb sp!,{r3,r4,r5,r6,r7,r8,r9,r10,r11,lr}
+021c9634  mov r7,r0
+021c9638  ldr r0,[r7,#0x1a0]
+021c963c  mov r11,r1
+021c9640  cmp r0,#0x0
+021c9644  ldmialt sp!,{r3,r4,r5,r6,r7,r8,r9,r10,r11,pc}
+021c9648  ldr r0,[r7,#0xfc]
+021c964c  mov r4,#0x0
+021c9650  add r0,r0,#0x7
+021c9654  bic r0,r0,#0x7
+021c9658  mov r6,r0, lsr #0x3
+021c965c  b 0x021c9744
+021c9660  mov r0,r11
+021c9664  mov r1,r4
+021c9668  bl 0x021c961c
+021c966c  add r2,r7,#0x100
+021c9670  mov r8,r0
+021c9674  ldrsh r9,[r8,#0x0]
+021c9678  ldrsh r5,[r2,#0xac]
+021c967c  ldrh r1,[r2,#0x80]
+021c9680  ldrsh r3,[r8,#0x2]
+021c9684  sub r9,r9,r5
+021c9688  ldrsh r2,[r2,#0xae]
+021c968c  add r9,r1,r9
+021c9690  ldr r5,[r7,#0x19c]
+021c9694  sub r1,r3,r2
+021c9698  mla r2,r5,r1,r9
+021c969c  ldrb r1,[r7,#0x198]
+021c96a0  sub r5,r2,r1, lsl #0xc
+021c96a4  bl 0x021ad69c
+021c96a8  str r0,[sp,#0x0]
+021c96ac  mov r0,r8
+021c96b0  bl 0x021ad6b4
+021c96b4  add r1,r7,#0x100
+021c96b8  ldrsh r10,[r8,#0x2]
+021c96bc  ldrsh r2,[r1,#0xae]
+021c96c0  ldrsh r9,[r8,#0x0]
+021c96c4  ldrsh r8,[r1,#0xac]
+021c96c8  sub r2,r10,r2
+021c96cc  ldrh r3,[r1,#0x88]
+021c96d0  sub r10,r9,r8
+021c96d4  ldr r9,[r7,#0x184]
+021c96d8  mla r8,r3,r2,r10
+021c96dc  add lr,r9,r8, lsl #0x1
+021c96e0  mla r2,r6,r2,r10
+021c96e4  ldr r3,[r7,#0x194]
+021c96e8  mov r9,#0x0
+021c96ec  add r8,r3,r2
+021c96f0  b 0x021c9738
+021c96f4  mov r10,#0x0
+021c96f8  b 0x021c9714
+021c96fc  ldrb r3,[r8,r10]
+021c9700  add r12,r5,r10
+021c9704  mov r2,r10, lsl #0x1
+021c9708  add r3,r12,r3, lsl #0xc
+021c970c  strh r3,[lr,r2]
+021c9710  add r10,r10,#0x1
+021c9714  ldr r2,[sp,#0x0]
+021c9718  cmp r10,r2
+021c971c  bcc 0x021c96fc
+021c9720  ldrh r2,[r1,#0x88]
+021c9724  ldr r3,[r7,#0x19c]
+021c9728  add r8,r8,r6
+021c972c  add r5,r5,r3
+021c9730  add lr,lr,r2, lsl #0x1
+021c9734  add r9,r9,#0x1
+021c9738  cmp r9,r0
+021c973c  bcc 0x021c96f4
+021c9740  add r4,r4,#0x1
+021c9744  ldr r0,[r11,#0x8]
+021c9748  ldrh r0,[r0,#0x14]
+021c974c  cmp r4,r0
+021c9750  bcc 0x021c9660
+021c9754  ldmia sp!,{r3,r4,r5,r6,r7,r8,r9,r10,r11,pc}

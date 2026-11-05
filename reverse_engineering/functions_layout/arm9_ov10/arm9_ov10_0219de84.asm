@@ -1,0 +1,11 @@
+0219de84  stmdb sp!,{r4,lr}
+0219de88  movs r4,r0
+0219de8c  ldmiaeq sp!,{r4,pc}
+0219de90  mov r1,#0x0
+0219de94  mov r2,#0x34
+0219de98  bl 0x020517fc
+0219de9c  mvn r0,#0x0
+0219dea0  str r0,[r4,#0x8]
+0219dea4  sub r0,r0,#0x80000000
+0219dea8  str r0,[r4,#0xc]
+0219deac  ldmia sp!,{r4,pc}

@@ -1,0 +1,14 @@
+0205eaf0  stmdb sp!,{r4,r5,lr}
+0205eaf4  sub sp,sp,#0x4
+0205eaf8  mov r4,r1
+0205eafc  mov r5,r0
+0205eb00  ands r1,r4,#0x1
+0205eb04  beq 0x0205eb0c
+0205eb08  bl 0x0205ebe8
+0205eb0c  ands r0,r4,#0x2
+0205eb10  addeq sp,sp,#0x4
+0205eb14  ldmiaeq sp!,{r4,r5,pc}
+0205eb18  mov r0,r5
+0205eb1c  bl 0x0205ebb8
+0205eb20  add sp,sp,#0x4
+0205eb24  ldmia sp!,{r4,r5,pc}

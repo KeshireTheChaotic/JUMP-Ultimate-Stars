@@ -1,0 +1,10 @@
+021524a0  stmdb sp!,{r3,lr}
+021524a4  cmp r1,#0x0
+021524a8  ldr r0,[r0,#0x4]
+021524ac  bne 0x021524bc
+021524b0  mov r1,#0x0
+021524b4  blx 0x021b5898
+021524b8  ldmia sp!,{r3,pc}
+021524bc  ldr r1,[r1,#0x4]
+021524c0  blx 0x021b5898
+021524c4  ldmia sp!,{r3,pc}

@@ -1,0 +1,10 @@
+021601c0  stmdb sp!,{r4,lr}
+021601c4  ldr r0,[r0,#0x4]
+021601c8  ldr r4,[r0,#0x10]
+021601cc  ldr r0,[r4,#0xd0]
+021601d0  bl 0x0215e980
+021601d4  cmp r0,#0x0
+021601d8  ldmiaeq sp!,{r4,pc}
+021601dc  mov r0,r4
+021601e0  bl 0x0215fec4
+021601e4  ldmia sp!,{r4,pc}

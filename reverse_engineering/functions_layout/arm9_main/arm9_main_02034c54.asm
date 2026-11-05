@@ -1,0 +1,9 @@
+02034c54  stmdb sp!,{r3,lr}
+02034c58  mov r0,#0x80
+02034c5c  bl 0x0201a228
+02034c60  cmp r0,#0x0
+02034c64  ldmiaeq sp!,{r3,pc}
+02034c68  ldr r1,[0x2034c78]
+02034c6c  mov r2,#0x0
+02034c70  bl 0x02015d70
+02034c74  ldmia sp!,{r3,pc}

@@ -1,0 +1,11 @@
+0214f2dc  stmdb sp!,{r3,lr}
+0214f2e0  cmp r0,#0x0
+0214f2e4  ldrle r0,[0x214f308]
+0214f2e8  ldrle r0,[r0,#0x0]
+0214f2ec  ldmiale sp!,{r3,pc}
+0214f2f0  ldr r2,[0x214f30c]
+0214f2f4  sub r1,r0,#0x1
+0214f2f8  ldr r0,[r2,#0x0]
+0214f2fc  ldr r0,[r0,#0x38]
+0214f300  bl 0x0207452c
+0214f304  ldmia sp!,{r3,pc}

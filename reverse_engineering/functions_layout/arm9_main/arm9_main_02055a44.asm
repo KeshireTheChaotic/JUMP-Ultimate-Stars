@@ -1,0 +1,33 @@
+02055a44  stmdb sp!,{r4,r5,lr}
+02055a48  sub sp,sp,#0x4
+02055a4c  mov r5,#0x0
+02055a50  mov r3,r5
+02055a54  mov r2,r5
+02055a58  mov r1,r0, lsr r2
+02055a5c  and r1,r1,#0xf
+02055a60  cmp r1,#0xa
+02055a64  addcs sp,sp,#0x4
+02055a68  movcs r0,#0x0
+02055a6c  ldmiacs sp!,{r4,r5,lr}
+02055a70  bxcs lr
+02055a74  add r3,r3,#0x1
+02055a78  cmp r3,#0x8
+02055a7c  add r2,r2,#0x4
+02055a80  blt 0x02055a58
+02055a84  mov r12,#0x0
+02055a88  mov lr,r12
+02055a8c  mov r4,#0x1
+02055a90  mov r2,#0xa
+02055a94  mov r1,r0, lsr lr
+02055a98  and r3,r1,#0xf
+02055a9c  mul r1,r4,r2
+02055aa0  mla r5,r4,r3,r5
+02055aa4  add r12,r12,#0x1
+02055aa8  mov r4,r1
+02055aac  cmp r12,#0x8
+02055ab0  add lr,lr,#0x4
+02055ab4  blt 0x02055a94
+02055ab8  mov r0,r5
+02055abc  add sp,sp,#0x4
+02055ac0  ldmia sp!,{r4,r5,lr}
+02055ac4  bx lr

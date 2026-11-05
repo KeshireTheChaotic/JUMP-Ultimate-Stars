@@ -1,0 +1,9 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Jus.Nds/Jus.Nds.csproj" />
+    <Project Path="src/Jus.Port/Jus.Port.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Jus.Nds.Tests/Jus.Nds.Tests.csproj" />
+  </Folder>
+</Solution>

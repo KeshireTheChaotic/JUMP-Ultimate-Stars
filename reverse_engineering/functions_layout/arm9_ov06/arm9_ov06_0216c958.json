@@ -1,0 +1,1 @@
+{"module":"arm9_ov06","address":"0216c958","name":"FUN_0216c958","thumb":false,"body_bytes":404,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["02083648","0216b740","0216caf0","0216ee14"],"unresolved_call_targets":[],"status":"decompiled","asm_file":"arm9_ov06_0216c958.asm","c_file":"arm9_ov06_0216c958.c"}

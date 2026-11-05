@@ -1,0 +1,14 @@
+027f6758  ldr r1,[0x27f6790]
+027f675c  ldrh r0,[r1,#0x0]
+027f6760  ands r0,r0,#0x80
+027f6764  bne 0x027f675c
+027f6768  mov r0,#0x8100
+027f676c  strh r0,[r1,#0x0]
+027f6770  mov r1,#0x6
+027f6774  ldr r0,[0x27f6794]
+027f6778  strh r1,[r0,#0x0]
+027f677c  ldr r1,[0x27f6790]
+027f6780  ldrh r0,[r1,#0x0]
+027f6784  ands r0,r0,#0x80
+027f6788  bne 0x027f6780
+027f678c  bx lr

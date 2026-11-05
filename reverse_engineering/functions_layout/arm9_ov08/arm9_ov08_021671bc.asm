@@ -1,0 +1,9 @@
+021671bc  push {r0,r1,r2,r3}
+021671be  push {lr}
+021671c0  sub sp,#0x4
+021671c2  add r0,sp,#0x8
+021671c4  bl 0x02166b5c
+021671c8  add sp,#0x4
+021671ca  pop {r3}
+021671cc  add sp,#0x10
+021671ce  bx r3

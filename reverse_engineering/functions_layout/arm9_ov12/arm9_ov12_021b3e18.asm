@@ -1,0 +1,17 @@
+021b3e18  push {r4,lr}
+021b3e1a  mov r2,#0x0
+021b3e1c  add r4,r0,#0x0
+021b3e1e  blx 0x020154ac
+021b3e22  ldr r0,[0x021b3e44]
+021b3e24  str r0,[r4,#0x0]
+021b3e26  add r0,r4,#0x0
+021b3e28  add r0,#0x78
+021b3e2a  bl 0x021b3c40
+021b3e2e  add r0,r4,#0x0
+021b3e30  add r0,#0x84
+021b3e32  bl 0x021b3e48
+021b3e36  add r0,r4,#0x0
+021b3e38  mov r1,#0x1
+021b3e3a  blx 0x02027de8
+021b3e3e  add r0,r4,#0x0
+021b3e40  pop {r4,pc}

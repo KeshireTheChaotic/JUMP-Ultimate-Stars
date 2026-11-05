@@ -1,0 +1,12 @@
+021657a4  stmdb sp!,{r3,lr}
+021657a8  ldr r2,[r0,#0x10]
+021657ac  ldr r1,[r0,#0x30]
+021657b0  ldr r2,[r2,#0x78]
+021657b4  tst r2,#0x400000
+021657b8  beq 0x021657c8
+021657bc  ldr r2,[r1,#0x18]
+021657c0  blx r2
+021657c4  ldmia sp!,{r3,pc}
+021657c8  ldr r2,[r1,#0x10]
+021657cc  blx r2
+021657d0  ldmia sp!,{r3,pc}

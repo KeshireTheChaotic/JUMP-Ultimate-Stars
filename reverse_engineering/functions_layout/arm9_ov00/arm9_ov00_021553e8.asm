@@ -1,0 +1,10 @@
+021553e8  stmdb sp!,{r4,lr}
+021553ec  mov r4,r0
+021553f0  ldr r1,[r4,#0x18]
+021553f4  cmp r1,#0x0
+021553f8  bne 0x02155408
+021553fc  ldr r1,[r0,#0x0]
+02155400  ldr r1,[r1,#0x14]
+02155404  blx r1
+02155408  ldr r0,[r4,#0x18]
+0215540c  ldmia sp!,{r4,pc}

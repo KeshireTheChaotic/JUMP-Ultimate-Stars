@@ -1,0 +1,16 @@
+02048c88  stmdb sp!,{r3,r4,r5,lr}
+02048c8c  ldr r1,[0x2048cc8]
+02048c90  mov r5,r0
+02048c94  str r1,[r5,#0x0]
+02048c98  ldr r4,[r5,#0x30]
+02048c9c  mov r0,r4
+02048ca0  bl 0x0201a9ec
+02048ca4  cmp r0,#0x0
+02048ca8  bne 0x02048cb8
+02048cac  mov r0,r4
+02048cb0  mov r1,#0x1
+02048cb4  bl 0x0201a958
+02048cb8  mov r0,r5
+02048cbc  bl 0x0203940c
+02048cc0  mov r0,r5
+02048cc4  ldmia sp!,{r3,r4,r5,pc}

@@ -1,0 +1,9 @@
+02061e4c  push {lr}
+02061e4e  sub sp,#0x4
+02061e50  bl 0x02061e64
+02061e54  cmp r0,#0x0
+02061e56  bne 0x02061e5c
+02061e58  blx 0x02055684
+02061e5c  add sp,#0x4
+02061e5e  pop {r3}
+02061e60  bx r3

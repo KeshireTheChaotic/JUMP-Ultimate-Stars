@@ -1,0 +1,13 @@
+02194fc8  mov r2,#0x8
+02194fca  sub r0,r0,#0x1
+02194fcc  ldrb r1,[r0,#0x0]
+02194fce  add r1,r1,#0x1
+02194fd0  lsl r1,r1,#0x18
+02194fd2  lsr r1,r1,#0x18
+02194fd4  strb r1,[r0,#0x0]
+02194fd6  cmp r1,#0x0
+02194fd8  bne 0x02194fe0
+02194fda  sub r2,r2,#0x1
+02194fdc  cmp r2,#0x0
+02194fde  bne 0x02194fca
+02194fe0  bx lr

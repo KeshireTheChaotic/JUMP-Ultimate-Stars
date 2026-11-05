@@ -1,0 +1,17 @@
+027ea624  stmdb sp!,{lr}
+027ea628  sub sp,sp,#0x4
+027ea62c  ldr r1,[0x27ea668]
+027ea630  ldr r1,[r1,#0x0]
+027ea634  add r3,r1,#0x3a4
+027ea638  ldrh r2,[r0,#0x0]
+027ea63c  add r1,r1,#0x300
+027ea640  strh r2,[r1,#0xa4]
+027ea644  ldrh r1,[r0,#0x2]
+027ea648  ldrh r0,[r0,#0x0]
+027ea64c  orr r0,r1,r0
+027ea650  strh r0,[r3,#0x2]
+027ea654  bl 0x027ea590
+027ea658  mov r0,#0x0
+027ea65c  add sp,sp,#0x4
+027ea660  ldmia sp!,{lr}
+027ea664  bx lr

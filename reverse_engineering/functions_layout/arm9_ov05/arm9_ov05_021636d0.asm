@@ -1,0 +1,15 @@
+021636d0  stmdb sp!,{r3,lr}
+021636d4  cmp r1,#0x0
+021636d8  ldr r0,[r0,#0x4]
+021636dc  bne 0x021636f4
+021636e0  ldr r2,[r0,#0x0]
+021636e4  mov r1,#0x8
+021636e8  ldr r2,[r2,#0x164]
+021636ec  blx r2
+021636f0  ldmia sp!,{r3,pc}
+021636f4  ldr r3,[r0,#0x0]
+021636f8  ldr r2,[r1,#0x4]
+021636fc  ldr r3,[r3,#0x160]
+02163700  mov r1,#0x8
+02163704  blx r3
+02163708  ldmia sp!,{r3,pc}

@@ -1,0 +1,9 @@
+0215b11c  stmdb sp!,{r4,lr}
+0215b120  ldr r4,[r0,#0x4]
+0215b124  mov r0,r4
+0215b128  blx 0x021aed58
+0215b12c  mov r1,r0
+0215b130  mov r0,r4
+0215b134  bl 0x02159a74
+0215b138  bl 0x0214d37c
+0215b13c  ldmia sp!,{r4,pc}

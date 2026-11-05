@@ -1,0 +1,1 @@
+{"module":"arm9_ov12","address":"021bfe80","name":"FUN_021bfe80","thumb":true,"body_bytes":40,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["02055238","0205524c","02055684","021bfeb0"],"unresolved_call_targets":[],"status":"decompiled","asm_file":"arm9_ov12_021bfe80.asm","c_file":"arm9_ov12_021bfe80.c"}

@@ -1,0 +1,1 @@
+{"module":"arm9_ov10","address":"0218974c","name":"FUN_0218974c","thumb":true,"body_bytes":130,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["02004d40","02005f14","02189548","021898c4","02189984"],"unresolved_call_targets":[],"status":"decompiled","asm_file":"arm9_ov10_0218974c.asm","c_file":"arm9_ov10_0218974c.c"}

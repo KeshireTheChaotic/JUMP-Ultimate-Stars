@@ -1,0 +1,22 @@
+0202b690  stmdb sp!,{r3,r4,r5,lr}
+0202b694  ldr r1,[0x202b6e8]
+0202b698  mov r5,r0
+0202b69c  str r1,[r5,#0x0]
+0202b6a0  mov r4,#0x0
+0202b6a4  b 0x0202b6cc
+0202b6a8  add r0,r5,r4, lsl #0x2
+0202b6ac  ldr r0,[r0,#0x50]
+0202b6b0  ldr r0,[r0,#0x4]
+0202b6b4  cmp r0,#0x0
+0202b6b8  beq 0x0202b6c8
+0202b6bc  ldr r1,[r0,#0x0]
+0202b6c0  ldr r1,[r1,#0x8]
+0202b6c4  blx r1
+0202b6c8  add r4,r4,#0x1
+0202b6cc  ldr r0,[r5,#0x70]
+0202b6d0  cmp r4,r0
+0202b6d4  bcc 0x0202b6a8
+0202b6d8  mov r0,r5
+0202b6dc  bl 0x02014980
+0202b6e0  mov r0,r5
+0202b6e4  ldmia sp!,{r3,r4,r5,pc}

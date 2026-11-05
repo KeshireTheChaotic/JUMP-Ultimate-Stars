@@ -1,0 +1,17 @@
+02048ec4  stmdb sp!,{r4,lr}
+02048ec8  mov r4,r0
+02048ecc  mov r0,#0x0
+02048ed0  str r0,[r4,#0x10]
+02048ed4  ldr r1,[r4,#0x30]
+02048ed8  ldr r2,[r4,#0x34]
+02048edc  add r0,r4,#0x3c
+02048ee0  blx 0x02067278
+02048ee4  ldr r0,[r4,#0x8]
+02048ee8  cmp r0,#0x1
+02048eec  ldmiahi sp!,{r4,pc}
+02048ef0  mov r1,#0x40000
+02048ef4  mov r2,r1
+02048ef8  add r0,r4,#0x3c
+02048efc  mov r3,#0x1000
+02048f00  blx 0x020661ec
+02048f04  ldmia sp!,{r4,pc}

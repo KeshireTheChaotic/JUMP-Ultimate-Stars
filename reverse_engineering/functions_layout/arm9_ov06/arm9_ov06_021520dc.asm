@@ -1,0 +1,12 @@
+021520dc  ldr r3,[0x215210c]
+021520e0  ldr r12,[r3,#0x0]
+021520e4  cmp r12,#0x0
+021520e8  bxeq lr
+021520ec  strh r0,[r12,#0x28]
+021520f0  ldr r12,[r3,#0x0]
+021520f4  strh r0,[r12,#0x2a]
+021520f8  ldr r0,[r3,#0x0]
+021520fc  strb r1,[r0,#0x2c]
+02152100  ldr r0,[r3,#0x0]
+02152104  strb r2,[r0,#0x2d]
+02152108  bx lr

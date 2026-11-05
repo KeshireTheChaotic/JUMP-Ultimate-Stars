@@ -1,0 +1,13 @@
+0217aa58  stmdb sp!,{r4,lr}
+0217aa5c  mov r4,r0
+0217aa60  ldr r0,[r4,#0x24]
+0217aa64  ldr r0,[r0,#0x0]
+0217aa68  bl 0x02174f24
+0217aa6c  ldr r1,[r4,#0xd4]
+0217aa70  mov r0,#0x0
+0217aa74  bic r1,r1,#0x1100
+0217aa78  str r1,[r4,#0xd4]
+0217aa7c  strb r0,[r4,#0x39]
+0217aa80  strb r0,[r4,#0x3e]
+0217aa84  strb r0,[r4,#0x3a]
+0217aa88  ldmia sp!,{r4,pc}

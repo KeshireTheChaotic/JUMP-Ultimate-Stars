@@ -1,0 +1,9 @@
+021c9c78  stmdb sp!,{r3,lr}
+021c9c7c  add r2,r1,#0x7
+021c9c80  ldr r1,[r0,#0xfc]
+021c9c84  bic r2,r2,#0x7
+021c9c88  cmp r1,r2
+021c9c8c  ldmiaeq sp!,{r3,pc}
+021c9c90  str r2,[r0,#0xfc]
+021c9c94  bl 0x021c9b2c
+021c9c98  ldmia sp!,{r3,pc}

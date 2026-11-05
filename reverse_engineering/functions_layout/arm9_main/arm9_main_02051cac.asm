@@ -1,0 +1,9 @@
+02051cac  ldr r12,[0x2051cd0]
+02051cb0  ldr r3,[0x2051cd4]
+02051cb4  add r0,r12,#0x3000
+02051cb8  ldr r2,[0x2051cd8]
+02051cbc  ldr r1,[0x2051cdc]
+02051cc0  str r3,[r0,#0xf7c]
+02051cc4  add r0,r12,#0x3f80
+02051cc8  str r2,[r0,-r1]
+02051ccc  bx lr

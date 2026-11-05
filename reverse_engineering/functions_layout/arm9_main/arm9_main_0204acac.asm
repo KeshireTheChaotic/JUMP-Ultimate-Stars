@@ -1,0 +1,9 @@
+0204acac  stmdb sp!,{r4,lr}
+0204acb0  mov r0,#0x74
+0204acb4  mov r4,r1
+0204acb8  bl 0x0201a228
+0204acbc  cmp r0,#0x0
+0204acc0  ldmiaeq sp!,{r4,pc}
+0204acc4  mov r1,r4
+0204acc8  bl 0x0201e620
+0204accc  ldmia sp!,{r4,pc}

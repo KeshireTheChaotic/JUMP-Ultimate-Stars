@@ -1,0 +1,13 @@
+02024e44  stmdb sp!,{r4,lr}
+02024e48  ldr r0,[r1,#0x50]
+02024e4c  mov r4,r2
+02024e50  ldr r1,[r0,#0x0]
+02024e54  ldr r1,[r1,#0x1c]
+02024e58  blx r1
+02024e5c  ldr r1,[r0,#0x0]
+02024e60  str r1,[r4,#0x0]
+02024e64  ldr r1,[r0,#0x4]
+02024e68  str r1,[r4,#0x4]
+02024e6c  ldr r0,[r0,#0x8]
+02024e70  str r0,[r4,#0x8]
+02024e74  ldmia sp!,{r4,pc}

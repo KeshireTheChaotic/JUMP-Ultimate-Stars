@@ -1,0 +1,16 @@
+02165c6c  stmdb sp!,{r3,lr}
+02165c70  ldr r0,[0x2165cac]
+02165c74  ldr r0,[r0,#0x4]
+02165c78  tst r0,#0x1
+02165c7c  bne 0x02165c98
+02165c80  bl 0x020876ac
+02165c84  ldr r1,[0x2165cac]
+02165c88  strh r0,[r1,#0x0]
+02165c8c  ldr r0,[r1,#0x4]
+02165c90  orr r0,r0,#0x1
+02165c94  str r0,[r1,#0x4]
+02165c98  ldr r0,[0x2165cb0]
+02165c9c  ldr r1,[0x2165cb4]
+02165ca0  mov r2,#0x2
+02165ca4  bl 0x02087214
+02165ca8  ldmia sp!,{r3,pc}

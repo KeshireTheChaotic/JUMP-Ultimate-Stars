@@ -1,0 +1,15 @@
+0205e454  stmdb sp!,{lr}
+0205e458  sub sp,sp,#0x4
+0205e45c  cmp r1,#0x0
+0205e460  moveq r1,#0x1
+0205e464  add r1,r1,#0x3
+0205e468  cmp r2,#0x0
+0205e46c  bic r1,r1,#0x3
+0205e470  blt 0x0205e480
+0205e474  bl 0x0205e68c
+0205e478  add sp,sp,#0x4
+0205e47c  ldmia sp!,{pc}
+0205e480  rsb r2,r2,#0x0
+0205e484  bl 0x0205e5d0
+0205e488  add sp,sp,#0x4
+0205e48c  ldmia sp!,{pc}

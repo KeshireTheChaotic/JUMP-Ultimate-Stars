@@ -1,0 +1,12 @@
+0214ea48  stmdb sp!,{r4,lr}
+0214ea4c  mov r4,r0
+0214ea50  ldr r0,[r4,#0x4]
+0214ea54  blx 0x021b65e0
+0214ea58  ldr r0,[r4,#0x4]
+0214ea5c  ldr r1,[0x214ea78]
+0214ea60  ldr r2,[r0,#0x124]
+0214ea64  cmp r2,r1
+0214ea68  ldmiane sp!,{r4,pc}
+0214ea6c  mov r1,#0x1
+0214ea70  blx 0x021b6214
+0214ea74  ldmia sp!,{r4,pc}

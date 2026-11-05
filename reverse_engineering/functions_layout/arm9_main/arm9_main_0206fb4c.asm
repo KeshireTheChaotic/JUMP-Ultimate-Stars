@@ -1,0 +1,10 @@
+0206fb4c  stmdb sp!,{r3,lr}
+0206fb50  ldr r0,[0x206fb74]
+0206fb54  ldrb r0,[r0,#0x17]
+0206fb58  cmp r0,#0x0
+0206fb5c  bne 0x0206fb64
+0206fb60  bl 0x0207062c
+0206fb64  ldr r0,[0x206fb74]
+0206fb68  ldr r0,[r0,#0x108]
+0206fb6c  bl 0x02166994
+0206fb70  ldmia sp!,{r3,pc}

@@ -1,0 +1,14 @@
+0215f540  stmdb sp!,{r4,lr}
+0215f544  add r3,r0,#0x100
+0215f548  ldrsb r4,[r3,#0xc0]
+0215f54c  cmp r4,#0xd
+0215f550  movge r0,#0x0
+0215f554  ldmiage sp!,{r4,pc}
+0215f558  add lr,r4,#0x1
+0215f55c  add r12,r0,#0x8
+0215f560  mov r3,#0x1c
+0215f564  strb lr,[r0,#0x1c0]
+0215f568  mla r0,r4,r3,r12
+0215f56c  strb r1,[r0,#0x15]
+0215f570  strh r2,[r0,#0x16]
+0215f574  ldmia sp!,{r4,pc}

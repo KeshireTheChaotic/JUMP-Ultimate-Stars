@@ -1,0 +1,1 @@
+{"module":"arm9_ov02","address":"0214d808","name":"Create","thumb":false,"body_bytes":140,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["0201a21c","0214d498"],"unresolved_call_targets":["021b3ba4","021b7950"],"status":"decompiled","asm_file":"arm9_ov02_0214d808.asm","c_file":"arm9_ov02_0214d808.c"}

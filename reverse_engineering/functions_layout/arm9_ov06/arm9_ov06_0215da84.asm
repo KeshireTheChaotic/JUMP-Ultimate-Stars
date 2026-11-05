@@ -1,0 +1,10 @@
+0215da84  stmdb sp!,{r4,lr}
+0215da88  mov r4,r0
+0215da8c  bl 0x0215a824
+0215da90  cmp r0,#0x0
+0215da94  movne r1,#0x0
+0215da98  ldrne r0,[0x215daac]
+0215da9c  strbne r1,[r4,#0x1de]
+0215daa0  strne r0,[r4,#0x1d4]
+0215daa4  mov r0,#0x0
+0215daa8  ldmia sp!,{r4,pc}

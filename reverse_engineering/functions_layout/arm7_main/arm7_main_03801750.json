@@ -1,0 +1,1 @@
+{"module":"arm7_main","address":"03801750","name":"FUN_03801750","thumb":false,"body_bytes":32,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["0380185c","03801898"],"unresolved_call_targets":[],"status":"decompiled","asm_file":"arm7_main_03801750.asm","c_file":"arm7_main_03801750.c"}

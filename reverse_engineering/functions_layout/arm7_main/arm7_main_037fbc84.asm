@@ -1,0 +1,11 @@
+037fbc84  ldr r12,[0x37fbcb0]
+037fbc88  ldrh r3,[r12,#0x0]
+037fbc8c  mov r1,#0x0
+037fbc90  strh r1,[r12,#0x0]
+037fbc94  ldr r2,[0x37fbcb4]
+037fbc98  ldr r1,[r2,#0x0]
+037fbc9c  str r0,[r2,#0x0]
+037fbca0  ldrh r0,[r12,#0x0]
+037fbca4  strh r3,[r12,#0x0]
+037fbca8  mov r0,r1
+037fbcac  bx lr

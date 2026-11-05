@@ -1,0 +1,16 @@
+021a117c  ldrsb r1,[r0,#0x1]
+021a1180  cmp r1,#0x0
+021a1184  beq 0x021a11b4
+021a1188  ldr r2,[r0,#0x28]
+021a118c  cmp r2,#0x0
+021a1190  movlt r0,#0x1
+021a1194  bxlt lr
+021a1198  ldr r1,[0x21a11bc]
+021a119c  ldr r0,[r0,#0x18]
+021a11a0  and r1,r2,r1
+021a11a4  cmp r1,r0
+021a11a8  moveq r0,#0x1
+021a11ac  movne r0,#0x0
+021a11b0  bx lr
+021a11b4  mov r0,#0x0
+021a11b8  bx lr

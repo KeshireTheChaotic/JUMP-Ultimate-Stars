@@ -1,0 +1,16 @@
+02065cd8  ldr r0,[0x02065cf8]
+02065cda  ldrh r1,[r0,#0x0]
+02065cdc  mov r0,#0x3c
+02065cde  and r1,r0
+02065ce0  asr r0,r1,#0x2
+02065ce2  lsl r2,r0,#0xe
+02065ce4  ldr r0,[0x02065cfc]
+02065ce6  ldr r1,[r0,#0x0]
+02065ce8  ldr r0,[0x02065d00]
+02065cea  and r1,r0
+02065cec  lsr r0,r1,#0x18
+02065cee  lsl r1,r0,#0x10
+02065cf0  ldr r0,[0x02065d04]
+02065cf2  add r0,r1,r0
+02065cf4  add r0,r2,r0
+02065cf6  bx lr

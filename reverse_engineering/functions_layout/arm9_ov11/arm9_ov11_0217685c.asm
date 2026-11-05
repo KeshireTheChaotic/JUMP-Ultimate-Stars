@@ -1,0 +1,31 @@
+0217685c  stmdb sp!,{r4,lr}
+02176860  ldr r1,[0x21768d8]
+02176864  mov r4,r0
+02176868  ldr r0,[r1,#0x0]
+0217686c  mov r1,r4
+02176870  add r0,r0,#0x30
+02176874  bl 0x02037c24
+02176878  ldr r0,[0x21768d8]
+0217687c  mov r1,r4
+02176880  ldr r0,[r0,#0x0]
+02176884  add r0,r0,#0x8
+02176888  bl 0x02037b98
+0217688c  ldrsh r1,[r4,#0xc]
+02176890  ldrsh r0,[r4,#0x8]
+02176894  sub r0,r1,r0
+02176898  mov r0,r0, asr #0x1
+0217689c  strh r0,[r4,#0x14]
+021768a0  ldrsh r1,[r4,#0xe]
+021768a4  ldrsh r0,[r4,#0xa]
+021768a8  sub r0,r1,r0
+021768ac  mov r0,r0, asr #0x1
+021768b0  strh r0,[r4,#0x16]
+021768b4  ldrsh r1,[r4,#0x8]
+021768b8  ldrsh r0,[r4,#0x14]
+021768bc  add r0,r1,r0
+021768c0  strh r0,[r4,#0x10]
+021768c4  ldrsh r1,[r4,#0xa]
+021768c8  ldrsh r0,[r4,#0x16]
+021768cc  add r0,r1,r0
+021768d0  strh r0,[r4,#0x12]
+021768d4  ldmia sp!,{r4,pc}

@@ -1,0 +1,11 @@
+02156e94  stmdb sp!,{r3,lr}
+02156e98  ldr r0,[r0,#0x418]
+02156e9c  cmp r0,#0x0
+02156ea0  beq 0x02156eb8
+02156ea4  ldr r0,[r0,#0x4]
+02156ea8  mov r1,#0x0
+02156eac  ldr r2,[r0,#0x0]
+02156eb0  ldr r2,[r2,#0xd8]
+02156eb4  blx r2
+02156eb8  mov r0,#0x1
+02156ebc  ldmia sp!,{r3,pc}

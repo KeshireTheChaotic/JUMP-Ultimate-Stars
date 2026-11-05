@@ -1,0 +1,10 @@
+027ea2e8  mov r1,#0x0
+027ea2ec  ldr r0,[0x27ea310]
+027ea2f0  ldr r0,[r0,#0x0]
+027ea2f4  add r0,r0,#0x300
+027ea2f8  strh r1,[r0,#0xea]
+027ea2fc  ldr r1,[0x27ea314]
+027ea300  ldrh r0,[r1,#0x0]
+027ea304  orr r0,r0,#0x2
+027ea308  strh r0,[r1,#0x0]
+027ea30c  bx lr

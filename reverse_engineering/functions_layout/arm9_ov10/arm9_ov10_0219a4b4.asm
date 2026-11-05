@@ -1,0 +1,10 @@
+0219a4b4  ldr r0,[0x219a4dc]
+0219a4b8  mov r3,#0x0
+0219a4bc  mvn r2,#0x0
+0219a4c0  ldr r1,[r0,#0x0]
+0219a4c4  add r1,r1,r3
+0219a4c8  add r3,r3,#0x1
+0219a4cc  strb r2,[r1,#0x8e4]
+0219a4d0  cmp r3,#0x4
+0219a4d4  blt 0x0219a4c0
+0219a4d8  bx lr

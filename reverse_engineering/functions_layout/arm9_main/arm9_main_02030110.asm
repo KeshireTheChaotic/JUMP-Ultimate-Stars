@@ -1,0 +1,117 @@
+02030110  stmdb sp!,{r4,r5,r6,r7,lr}
+02030114  sub sp,sp,#0x1c
+02030118  mov r5,r0
+0203011c  mov r4,r1
+02030120  add r0,sp,#0x6
+02030124  mov r1,#0x1
+02030128  bl 0x0200f69c
+0203012c  ldr r1,[r5,#0x4]
+02030130  ldr r0,[r5,#0x8]
+02030134  cmp r1,r0
+02030138  bcs 0x02030158
+0203013c  add r0,r1,#0x1
+02030140  str r0,[r5,#0x4]
+02030144  ldr r2,[r4,#0x0]
+02030148  ldr r1,[r5,#0x0]
+0203014c  sub r0,r0,#0x1
+02030150  str r2,[r1,r0,lsl #0x2]
+02030154  b 0x020302dc
+02030158  add r0,sp,#0x5
+0203015c  mov r1,#0x1
+02030160  bl 0x0200f69c
+02030164  add r0,sp,#0x0
+02030168  mov r1,#0x1
+0203016c  bl 0x0200f69c
+02030170  mov r0,r5
+02030174  mov r1,#0x1
+02030178  blx 0x0200b27c
+0203017c  mov r1,#0x0
+02030180  add r0,r5,#0x8
+02030184  str r1,[sp,#0x8]
+02030188  str r1,[sp,#0xc]
+0203018c  str r1,[sp,#0x10]
+02030190  str r0,[sp,#0x14]
+02030194  str r1,[sp,#0x18]
+02030198  ldmib r5,{r0,r1}
+0203019c  add r2,r0,#0x1
+020301a0  mov r0,r5
+020301a4  sub r1,r2,r1
+020301a8  blx 0x0200b27c
+020301ac  mov r6,r0
+020301b0  add r0,sp,#0x4
+020301b4  mov r1,#0x1
+020301b8  bl 0x0200f69c
+020301bc  mvn r0,#0xc0000000
+020301c0  cmp r6,r0
+020301c4  bls 0x020301d4
+020301c8  ldr r0,[0x20302e4]
+020301cc  blx 0x02003bd8
+020301d0  blx 0x02001f18
+020301d4  mov r0,r6, lsl #0x2
+020301d8  bl 0x0201a228
+020301dc  movs r7,r0
+020301e0  bne 0x020301f0
+020301e4  ldr r0,[0x20302e8]
+020301e8  blx 0x02003bd8
+020301ec  blx 0x02001f18
+020301f0  str r7,[sp,#0x8]
+020301f4  str r6,[sp,#0x10]
+020301f8  ldr r1,[r5,#0x4]
+020301fc  add r0,sp,#0x3
+02030200  str r1,[sp,#0x18]
+02030204  mov r1,#0x1
+02030208  bl 0x0200f69c
+0203020c  ldr r2,[sp,#0x8]
+02030210  ldr r0,[sp,#0x18]
+02030214  ldr r3,[r4,#0x0]
+02030218  ldr r1,[sp,#0xc]
+0203021c  add r0,r2,r0, lsl #0x2
+02030220  str r3,[r0,r1,lsl #0x2]
+02030224  ldr r1,[sp,#0xc]
+02030228  add r0,sp,#0x2
+0203022c  add r1,r1,#0x1
+02030230  str r1,[sp,#0xc]
+02030234  ldr r4,[r5,#0x0]
+02030238  ldr r2,[r5,#0x4]
+0203023c  mov r1,#0x1
+02030240  add r6,r4,r2, lsl #0x2
+02030244  bl 0x0200f69c
+02030248  sub r1,r6,r4
+0203024c  mov r0,r1, asr #0x1
+02030250  add r6,r1,r0, lsr #0x1e
+02030254  ldr r0,[sp,#0x18]
+02030258  mov r1,r6, asr #0x2
+0203025c  sub r3,r0,r6, asr #0x2
+02030260  mov r7,r1, lsl #0x2
+02030264  ldr r0,[sp,#0x8]
+02030268  mov r1,r4
+0203026c  mov r2,r7
+02030270  add r0,r0,r3, lsl #0x2
+02030274  str r3,[sp,#0x18]
+02030278  blx 0x02002434
+0203027c  mov r0,r4
+02030280  mov r2,r7
+02030284  mov r1,#0x0
+02030288  blx 0x02002488
+0203028c  ldr r1,[sp,#0xc]
+02030290  add r0,sp,#0x1
+02030294  add r1,r1,r6, asr #0x2
+02030298  str r1,[sp,#0xc]
+0203029c  mov r1,#0x1
+020302a0  bl 0x0200f69c
+020302a4  mov r0,#0x0
+020302a8  str r0,[r5,#0x4]
+020302ac  add r0,r5,#0x8
+020302b0  add r1,sp,#0x10
+020302b4  bl 0x0204f098
+020302b8  ldr r2,[r5,#0x0]
+020302bc  ldr r1,[sp,#0x8]
+020302c0  add r0,r5,#0x4
+020302c4  str r1,[r5,#0x0]
+020302c8  add r1,sp,#0xc
+020302cc  str r2,[sp,#0x8]
+020302d0  bl 0x0204f098
+020302d4  add r0,sp,#0x8
+020302d8  blx 0x0200b2fc
+020302dc  add sp,sp,#0x1c
+020302e0  ldmia sp!,{r4,r5,r6,r7,pc}

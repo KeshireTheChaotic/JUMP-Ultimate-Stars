@@ -1,0 +1,10 @@
+02174f24  stmdb sp!,{r3,r4,r5,lr}
+02174f28  mov r5,r0
+02174f2c  mov r4,#0x0
+02174f30  mov r0,r5
+02174f34  mov r1,r4
+02174f38  bl 0x02175144
+02174f3c  add r4,r4,#0x1
+02174f40  cmp r4,#0x2
+02174f44  blt 0x02174f30
+02174f48  ldmia sp!,{r3,r4,r5,pc}

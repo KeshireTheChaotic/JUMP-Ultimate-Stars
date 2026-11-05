@@ -1,0 +1,13 @@
+
+void FUN_02001ad4(undefined4 param_1,byte *param_2,uint *param_3)
+
+{
+  undefined4 uVar1;
+  
+  *param_2 = (byte)*param_3;
+  uVar1 = func_0x02193804();
+  *param_3 = (uint)*param_2;
+  FUN_02001ba8(uVar1,0xffffffff);
+  return;
+}
+

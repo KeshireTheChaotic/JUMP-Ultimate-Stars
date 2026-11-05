@@ -1,0 +1,23 @@
+02156710  stmdb sp!,{r3,r4,r5,lr}
+02156714  mov r4,r1
+02156718  ldrb r1,[r4,#0x4]
+0215671c  mov r5,r0
+02156720  strb r1,[r5,#0xa0]
+02156724  ldrsb r0,[r4,#0x2]
+02156728  cmp r0,#0x0
+0215672c  beq 0x02156754
+02156730  mov r0,r0, lsl #0x5
+02156734  strh r0,[r5,#0x9c]
+02156738  ldr r0,[r5,#0x88]
+0215673c  bl 0x02155c9c
+02156740  cmp r0,#0x0
+02156744  ldrshne r1,[r5,#0x9c]
+02156748  mvnne r0,#0x0
+0215674c  smulbbne r0,r1,r0
+02156750  strhne r0,[r5,#0x9c]
+02156754  ldrsb r1,[r4,#0x3]
+02156758  cmp r1,#0x0
+0215675c  mvnne r0,#0x7d
+02156760  mulne r0,r1,r0
+02156764  strhne r0,[r5,#0x9e]
+02156768  ldmia sp!,{r3,r4,r5,pc}

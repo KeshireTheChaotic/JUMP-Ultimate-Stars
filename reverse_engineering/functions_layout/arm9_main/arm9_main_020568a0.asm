@@ -1,0 +1,17 @@
+020568a0  stmdb sp!,{r4,r5,r6,lr}
+020568a4  sub sp,sp,#0x8
+020568a8  mov r4,r2
+020568ac  mov r5,r1
+020568b0  ldr r2,[sp,#0x18]
+020568b4  mov r6,r0
+020568b8  mov r1,r3
+020568bc  bl 0x020573c4
+020568c0  str r0,[sp,#0x0]
+020568c4  mov r1,r6
+020568c8  mov r2,r5
+020568cc  mov r3,r4
+020568d0  mov r0,#0x12
+020568d4  bl 0x02056594
+020568d8  add sp,sp,#0x8
+020568dc  ldmia sp!,{r4,r5,r6,lr}
+020568e0  bx lr

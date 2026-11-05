@@ -1,0 +1,14 @@
+0217f490  push {r4,lr}
+0217f492  add r4,r0,#0x0
+0217f494  ldr r0,[r4,#0x20]
+0217f496  bl 0x02001b80
+0217f49a  mov r0,#0x0
+0217f49c  mvn r0,r0
+0217f49e  str r0,[r4,#0x20]
+0217f4a0  add r0,r4,#0x0
+0217f4a2  add r0,#0x14
+0217f4a4  bl 0x0217f62c
+0217f4a8  add r4,#0x8
+0217f4aa  add r0,r4,#0x0
+0217f4ac  bl 0x0217f62c
+0217f4b0  pop {r4,pc}

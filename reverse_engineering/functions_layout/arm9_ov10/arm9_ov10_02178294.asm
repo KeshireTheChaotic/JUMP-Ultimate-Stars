@@ -1,0 +1,14 @@
+02178294  ldr r0,[0x021782b0]
+02178296  ldr r0,[r0,#0x0]
+02178298  cmp r0,#0x0
+0217829a  beq 0x021782ac
+0217829c  ldrb r0,[r0,#0x1e]
+0217829e  add r0,#0xff
+021782a0  lsl r0,r0,#0x18
+021782a2  lsr r0,r0,#0x18
+021782a4  cmp r0,#0x1
+021782a6  bhi 0x021782ac
+021782a8  mov r0,#0x0
+021782aa  bx lr
+021782ac  mov r0,#0x1
+021782ae  bx lr

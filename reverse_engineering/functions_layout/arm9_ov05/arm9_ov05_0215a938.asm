@@ -1,0 +1,19 @@
+0215a938  stmdb sp!,{r3,lr}
+0215a93c  ldr lr,[r0,#0x0]
+0215a940  mov r12,#0x14
+0215a944  mla r12,r2,r12,lr
+0215a948  add r1,r12,r1, lsl #0x2
+0215a94c  ldr r1,[r1,#0x8]
+0215a950  cmp r3,#0x0
+0215a954  str r1,[sp,#0x0]
+0215a958  mov r3,#0x0
+0215a95c  ldr r1,[r0,#0x204]
+0215a960  beq 0x0215a974
+0215a964  ldr r12,[r0,#0x208]
+0215a968  mov r2,#0x4
+0215a96c  blx r12
+0215a970  ldmia sp!,{r3,pc}
+0215a974  ldr r12,[r0,#0x208]
+0215a978  mov r2,#0x3
+0215a97c  blx r12
+0215a980  ldmia sp!,{r3,pc}

@@ -1,0 +1,17 @@
+0215ee44  stmdb sp!,{r4,lr}
+0215ee48  ldr r0,[r0,#0x10]
+0215ee4c  cmp r0,#0x0
+0215ee50  beq 0x0215ee5c
+0215ee54  bl 0x0203b3f4
+0215ee58  b 0x0215ee60
+0215ee5c  bl 0x0203b3e4
+0215ee60  ldr r4,[r0,#0x88]
+0215ee64  mov r1,#0x0
+0215ee68  mov r0,r4
+0215ee6c  mov r2,r1
+0215ee70  bl 0x0215ede4
+0215ee74  mov r0,r4
+0215ee78  mov r1,#0x1
+0215ee7c  mov r2,#0x0
+0215ee80  bl 0x0215ede4
+0215ee84  ldmia sp!,{r4,pc}

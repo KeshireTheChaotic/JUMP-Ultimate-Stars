@@ -1,0 +1,13 @@
+0201cee4  push {r4,lr}
+0201cee6  add r4,r0,#0x0
+0201cee8  ldr r0,[0x0201cf04]
+0201ceea  str r0,[r4,#0x0]
+0201ceec  add r0,r4,#0x0
+0201ceee  add r0,#0xc
+0201cef0  blx 0x0201cf08
+0201cef4  add r0,r4,#0x0
+0201cef6  add r0,#0xc
+0201cef8  mov r1,#0x8
+0201cefa  blx 0x02010970
+0201cefe  add r0,r4,#0x0
+0201cf00  pop {r4,pc}

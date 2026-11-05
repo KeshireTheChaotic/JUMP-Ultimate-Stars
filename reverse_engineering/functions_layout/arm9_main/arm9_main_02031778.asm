@@ -1,0 +1,53 @@
+02031778  stmdb sp!,{r4,r5,r6,r7,r8,r9,r10,lr}
+0203177c  mov r6,r0
+02031780  ldr r0,[r6,#0x208]
+02031784  ldr r4,[r6,#0x200]
+02031788  add r0,r0,#0x1
+0203178c  ldr r5,[r6,#0x204]
+02031790  cmp r4,#0x40
+02031794  and r9,r0,#0x1
+02031798  cmpne r5,#0x40
+0203179c  bne 0x020317f0
+020317a0  ldr r7,[r1,#0x23c]
+020317a4  b 0x020317e4
+020317a8  sub r0,r7,#0x20
+020317ac  ldrb r1,[r0,#0x29]
+020317b0  ldr r7,[r7,#0x0]
+020317b4  mov r2,r1, lsl #0x18
+020317b8  movs r2,r2, lsr #0x1f
+020317bc  beq 0x020317e4
+020317c0  mov r1,r1, lsl #0x1b
+020317c4  movs r1,r1, lsr #0x1f
+020317c8  ldrbeq r1,[r0,#0x29]
+020317cc  orreq r1,r1,#0x10
+020317d0  strbeq r1,[r0,#0x29]
+020317d4  beq 0x020317e4
+020317d8  ldr r1,[r0,#0x0]
+020317dc  ldr r1,[r1,#0xc]
+020317e0  blx r1
+020317e4  cmp r7,#0x0
+020317e8  bne 0x020317a8
+020317ec  b 0x0203182c
+020317f0  add r8,r6,r9, lsl #0x2
+020317f4  ldr r0,[r8,#0x200]
+020317f8  cmp r0,#0x40
+020317fc  beq 0x0203182c
+02031800  mov r10,#0x0
+02031804  add r7,r6,r9, lsl #0x8
+02031808  b 0x02031820
+0203180c  ldr r0,[r7,r10,lsl #0x2]
+02031810  ldr r1,[r0,#0x0]
+02031814  ldr r1,[r1,#0xc]
+02031818  blx r1
+0203181c  add r10,r10,#0x1
+02031820  ldr r0,[r8,#0x200]
+02031824  cmp r10,r0
+02031828  blt 0x0203180c
+0203182c  add r1,r6,r9, lsl #0x2
+02031830  mov r0,#0x0
+02031834  str r0,[r1,#0x200]
+02031838  cmp r4,#0x0
+0203183c  cmpeq r5,#0x0
+02031840  str r9,[r6,#0x208]
+02031844  movne r0,#0x1
+02031848  ldmia sp!,{r4,r5,r6,r7,r8,r9,r10,pc}

@@ -1,0 +1,13 @@
+01ff8c24  stmdb sp!,{lr}
+01ff8c28  sub sp,sp,#0x4
+01ff8c2c  mov r12,#0xc
+01ff8c30  mul lr,r0,r12
+01ff8c34  ldr r0,[0x1ff8c58]
+01ff8c38  add r12,lr,#0x4000000
+01ff8c3c  str r1,[r12,#0xb0]
+01ff8c40  add r0,lr,r0
+01ff8c44  str r2,[r0,#0x4]
+01ff8c48  str r3,[r0,#0x8]
+01ff8c4c  add sp,sp,#0x4
+01ff8c50  ldmia sp!,{lr}
+01ff8c54  bx lr

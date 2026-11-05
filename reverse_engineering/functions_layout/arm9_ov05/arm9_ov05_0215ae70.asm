@@ -1,0 +1,17 @@
+0215ae70  stmdb sp!,{r4,lr}
+0215ae74  mov r4,r0
+0215ae78  bl 0x0215ae50
+0215ae7c  cmp r0,#0x0
+0215ae80  ldreq r0,[r4,#0xc]
+0215ae84  cmpeq r0,#0x0
+0215ae88  ldrne r1,[0x215aeb4]
+0215ae8c  ldr r0,[r4,#0x4cc]
+0215ae90  ldreq r1,[0x215aeb8]
+0215ae94  cmp r0,r1
+0215ae98  strne r1,[r4,#0x4cc]
+0215ae9c  ldrne r0,[r4,#0x8c]
+0215aea0  cmpne r0,#0x0
+0215aea4  ldmiaeq sp!,{r4,pc}
+0215aea8  ldr r0,[r0,#0x4]
+0215aeac  blx 0x021b3fc4
+0215aeb0  ldmia sp!,{r4,pc}

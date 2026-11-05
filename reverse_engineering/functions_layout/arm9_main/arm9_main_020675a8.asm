@@ -1,0 +1,12 @@
+020675a8  push {r4,lr}
+020675aa  mov r4,#0xff
+020675ac  bl 0x02067394
+020675b0  cmp r0,#0xa
+020675b2  bcc 0x020675be
+020675b4  cmp r0,#0x10
+020675b6  bhi 0x020675be
+020675b8  ldr r0,[0x020675c4]
+020675ba  ldr r0,[r0,#0x0]
+020675bc  ldrb r4,[r0,#0x17]
+020675be  add r0,r4,#0x0
+020675c0  pop {r4,pc}

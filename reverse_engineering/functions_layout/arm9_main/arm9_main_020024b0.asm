@@ -1,0 +1,13 @@
+020024b0  lsl r1,r1,#0x18
+020024b2  lsr r3,r1,#0x18
+020024b4  add r0,r0,r2
+020024b6  cmp r2,#0x0
+020024b8  beq 0x020024c6
+020024ba  sub r0,r0,#0x1
+020024bc  ldrb r1,[r0,#0x0]
+020024be  cmp r1,r3
+020024c0  beq 0x020024c8
+020024c2  sub r2,r2,#0x1
+020024c4  bne 0x020024ba
+020024c6  mov r0,#0x0
+020024c8  bx lr

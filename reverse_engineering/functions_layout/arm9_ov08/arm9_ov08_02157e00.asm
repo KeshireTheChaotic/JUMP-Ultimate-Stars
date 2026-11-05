@@ -1,0 +1,7 @@
+02157e00  push {lr}
+02157e02  sub sp,#0x4
+02157e04  bl 0x02157d30
+02157e08  bl 0x02157d2c
+02157e0c  bl 0x02157cec
+02157e10  add sp,#0x4
+02157e12  pop {pc}

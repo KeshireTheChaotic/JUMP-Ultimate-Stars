@@ -1,0 +1,11 @@
+0215e828  stmdb sp!,{r4,lr}
+0215e82c  mov r4,r0
+0215e830  ldr r0,[r4,#0x1a8]
+0215e834  mov r1,#0x0
+0215e838  ldr r0,[r0,#0x10]
+0215e83c  bl 0x0207d11c
+0215e840  ldr r0,[r4,#0x1a8]
+0215e844  mov r1,#0x10000000
+0215e848  ldr r0,[r0,#0x10]
+0215e84c  bl 0x0207cec8
+0215e850  ldmia sp!,{r4,pc}

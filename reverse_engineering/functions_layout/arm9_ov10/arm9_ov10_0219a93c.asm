@@ -1,0 +1,13 @@
+0219a93c  stmdb sp!,{r3,lr}
+0219a940  ldr r0,[0x219a970]
+0219a944  ldr r0,[r0,#0x0]
+0219a948  cmp r0,#0x0
+0219a94c  beq 0x0219a968
+0219a950  ldr r0,[r0,#0x24]
+0219a954  cmp r0,#0x0
+0219a958  movne r0,#0x1
+0219a95c  ldmiane sp!,{r3,pc}
+0219a960  bl 0x0219a974
+0219a964  ldmia sp!,{r3,pc}
+0219a968  mov r0,#0x0
+0219a96c  ldmia sp!,{r3,pc}

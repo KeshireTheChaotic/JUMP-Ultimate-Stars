@@ -1,0 +1,14 @@
+02192aec  ldr r3,[r0,#0x68]
+02192aee  add r0,r3,#0x0
+02192af0  add r0,#0xf8
+02192af2  ldr r2,[r0,#0x0]
+02192af4  ldr r0,[0x02192b08]
+02192af6  ldrh r1,[r3,r0]
+02192af8  ldr r0,[0x02192b0c]
+02192afa  ldrh r0,[r3,r0]
+02192afc  sub r0,r0,r1
+02192afe  sub r0,r0,#0x1
+02192b00  cmp r0,#0x0
+02192b02  bge 0x02192b06
+02192b04  add r0,r0,r2
+02192b06  bx lr

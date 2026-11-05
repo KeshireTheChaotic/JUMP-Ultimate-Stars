@@ -1,0 +1,1 @@
+{"module":"arm9_ov12","address":"021b149c","name":"ALObjectImp_021d253c","thumb":true,"body_bytes":66,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["02027034","02027de8","0205174c","021af5f0"],"unresolved_call_targets":[],"status":"decompiled","asm_file":"arm9_ov12_021b149c.asm","c_file":"arm9_ov12_021b149c.c"}

@@ -1,0 +1,13 @@
+02153ce8  ldr r1,[r0,#0x0]
+02153cec  ldr r1,[r1,#0x6c]
+02153cf0  blx r1
+02153cf4  add r6,r6,#0x1
+02153cf8  ldrb r0,[r5,#0x44]
+02153cfc  cmp r6,r0
+02153d00  blt 0x02153c74
+02153d04  add r4,r4,#0x1
+02153d08  ldrb r0,[r10,#0x35f]
+02153d0c  cmp r4,r0
+02153d10  blt 0x02153c20
+02153d14  add sp,sp,#0x30
+02153d18  ldmia sp!,{r3,r4,r5,r6,r7,r8,r9,r10,r11,pc}

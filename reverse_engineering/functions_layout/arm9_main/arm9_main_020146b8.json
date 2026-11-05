@@ -1,0 +1,1 @@
+{"module":"arm9_main","address":"020146b8","name":"jus_Class_02095a08","thumb":false,"body_bytes":168,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["0201453c","02014ae0","02014dc4","020194ec"],"unresolved_call_targets":[],"status":"decompiled","asm_file":"arm9_main_020146b8.asm","c_file":"arm9_main_020146b8.c"}

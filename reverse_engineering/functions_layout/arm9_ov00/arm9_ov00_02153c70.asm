@@ -1,0 +1,15 @@
+02153c70  str r1,[r0,#0xc]
+02153c74  ldr r2,[r0,#0xc]
+02153c78  mov r1,#0x0
+02153c7c  ldr r3,[r2,#0x28]
+02153c80  ldr r2,[r2,#0x24]
+02153c84  sub r2,r3,r2
+02153c88  str r2,[r0,#0x4]
+02153c8c  ldr r2,[r0,#0xc]
+02153c90  ldr r3,[r2,#0x2c]
+02153c94  ldr r2,[r2,#0x24]
+02153c98  sub r2,r3,r2
+02153c9c  str r2,[r0,#0x8]
+02153ca0  strb r1,[r0,#0x10]
+02153ca4  mov r0,#0x1
+02153ca8  bx lr

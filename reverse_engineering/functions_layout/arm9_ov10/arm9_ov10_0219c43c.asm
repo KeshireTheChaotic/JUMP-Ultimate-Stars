@@ -1,0 +1,42 @@
+0219c43c  stmdb sp!,{r3,r4,r5,r6,r7,r8,r9,lr}
+0219c440  mov r1,r0
+0219c444  mov r2,#0x0
+0219c448  b 0x0219c474
+0219c44c  cmp r3,#0x30
+0219c450  blt 0x0219c45c
+0219c454  cmp r3,#0x39
+0219c458  ble 0x0219c464
+0219c45c  bl 0x0219c4e8
+0219c460  ldmia sp!,{r3,r4,r5,r6,r7,r8,r9,pc}
+0219c464  add r2,r2,#0x1
+0219c468  cmp r2,#0xc
+0219c46c  bge 0x0219c480
+0219c470  add r1,r1,#0x1
+0219c474  ldrsb r3,[r1,#0x0]
+0219c478  cmp r3,#0x0
+0219c47c  bne 0x0219c44c
+0219c480  mov r7,#0x0
+0219c484  add r0,r0,r2
+0219c488  mov r1,r7
+0219c48c  mov r8,r7
+0219c490  cmp r2,#0x0
+0219c494  sub r9,r0,#0x1
+0219c498  ble 0x0219c4dc
+0219c49c  ldr r12,[0x219c4e4]
+0219c4a0  b 0x0219c4d4
+0219c4a4  ldrsb lr,[r9],#-0x1
+0219c4a8  add r0,r12,r8, lsl #0x3
+0219c4ac  ldr r3,[r12,r8,lsl #0x3]
+0219c4b0  sub r4,lr,#0x30
+0219c4b4  umull r6,r5,r4,r3
+0219c4b8  ldr r0,[r0,#0x4]
+0219c4bc  mov lr,r4, asr #0x1f
+0219c4c0  mla r5,r4,r0,r5
+0219c4c4  mla r5,lr,r3,r5
+0219c4c8  adds r7,r7,r6
+0219c4cc  adc r1,r1,r5
+0219c4d0  add r8,r8,#0x1
+0219c4d4  cmp r8,r2
+0219c4d8  blt 0x0219c4a4
+0219c4dc  mov r0,r7
+0219c4e0  ldmia sp!,{r3,r4,r5,r6,r7,r8,r9,pc}

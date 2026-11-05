@@ -1,0 +1,8 @@
+02001f18  push {r3,lr}
+02001f1a  mov r0,#0x1
+02001f1c  bl 0x02004a50
+02001f20  ldr r1,[0x02001f2c]
+02001f22  mov r0,#0x1
+02001f24  str r0,[r1,#0xc]
+02001f26  bl 0x02001f30
+02001f2a  pop {r3,pc}

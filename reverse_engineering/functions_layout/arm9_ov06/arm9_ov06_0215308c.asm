@@ -1,0 +1,11 @@
+0215308c  stmdb sp!,{r3,lr}
+02153090  ldr r0,[0x21530b8]
+02153094  ldr r0,[r0,#0x8]
+02153098  ldr r0,[r0,#0x4]
+0215309c  ldr r1,[r0,#0x0]
+021530a0  ldr r1,[r1,#0xc]
+021530a4  blx r1
+021530a8  ldr r0,[0x21530b8]
+021530ac  mov r1,#0x0
+021530b0  str r1,[r0,#0x8]
+021530b4  ldmia sp!,{r3,pc}

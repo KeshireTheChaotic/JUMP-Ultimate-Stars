@@ -1,0 +1,1 @@
+{"module":"arm9_ov06","address":"0215e2dc","name":"FUN_0215e2dc","thumb":false,"body_bytes":400,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["02083950","02157450","0215d2e4","0215d4e0","0215d82c","0215dec8","0215f6e4"],"unresolved_call_targets":[],"status":"decompiled","asm_file":"arm9_ov06_0215e2dc.asm","c_file":"arm9_ov06_0215e2dc.c"}

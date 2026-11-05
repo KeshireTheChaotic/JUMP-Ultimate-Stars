@@ -1,0 +1,14 @@
+02015a78  stmdb sp!,{r3,r4,r5,lr}
+02015a7c  ldr r1,[0x2015ab0]
+02015a80  mov r5,r0
+02015a84  str r1,[r5,#0x0]
+02015a88  ldr r4,[r5,#0x8]
+02015a8c  mov r0,r4
+02015a90  bl 0x0201a9ec
+02015a94  cmp r0,#0x0
+02015a98  bne 0x02015aa8
+02015a9c  mov r0,r4
+02015aa0  mov r1,#0x1
+02015aa4  bl 0x0201a958
+02015aa8  mov r0,r5
+02015aac  ldmia sp!,{r3,r4,r5,pc}

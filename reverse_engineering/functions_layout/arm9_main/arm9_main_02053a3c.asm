@@ -1,0 +1,16 @@
+02053a3c  stmdb sp!,{r0,lr}
+02053a40  add r0,r0,#0x48
+02053a44  ldr r1,[0x2053a7c]
+02053a48  blx r1
+02053a4c  ldmia sp!,{r0,lr}
+02053a50  mrs r1,cpsr
+02053a54  bic r1,r1,#0x1f
+02053a58  orr r1,r1,#0xd3
+02053a5c  msr cpsr_c,r1
+02053a60  ldr r1,[r0],#0x4
+02053a64  msr spsr_cxsf,r1
+02053a68  ldr sp,[r0,#0x40]
+02053a6c  ldr lr,[r0,#0x3c]
+02053a70  ldmia r0,{r0,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12,sp,lr}^
+02053a74  mov r0,r0
+02053a78  subs pc,lr,#0x4

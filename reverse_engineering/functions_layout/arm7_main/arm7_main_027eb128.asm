@@ -1,0 +1,13 @@
+027eb128  cmp r0,#0x1
+027eb12c  movhi r0,#0x5
+027eb130  bxhi lr
+027eb134  ldr r1,[0x27eb15c]
+027eb138  ldr r1,[r1,#0x0]
+027eb13c  add r1,r1,#0x300
+027eb140  ldrh r2,[r1,#0x3a]
+027eb144  bic r2,r2,#0x1
+027eb148  and r0,r0,#0x1
+027eb14c  orr r0,r2,r0
+027eb150  strh r0,[r1,#0x3a]
+027eb154  mov r0,#0x0
+027eb158  bx lr

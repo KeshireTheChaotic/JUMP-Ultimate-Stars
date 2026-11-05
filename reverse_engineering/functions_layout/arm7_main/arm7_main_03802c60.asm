@@ -1,0 +1,22 @@
+03802c60  stmdb sp!,{r4,r5,r6,r7,lr}
+03802c64  sub sp,sp,#0x4
+03802c68  mov r7,r0
+03802c6c  mov r6,r1
+03802c70  mov r5,r2
+03802c74  mov r4,#0x0
+03802c78  b 0x03802c9c
+03802c7c  ands r0,r7,#0x1
+03802c80  beq 0x03802c94
+03802c84  mov r0,r4
+03802c88  mov r1,r6
+03802c8c  mov r2,r5
+03802c90  bl 0x037ff080
+03802c94  add r4,r4,#0x1
+03802c98  mov r7,r7, lsr #0x1
+03802c9c  cmp r4,#0x10
+03802ca0  bge 0x03802cac
+03802ca4  cmp r7,#0x0
+03802ca8  bne 0x03802c7c
+03802cac  add sp,sp,#0x4
+03802cb0  ldmia sp!,{r4,r5,r6,r7,lr}
+03802cb4  bx lr

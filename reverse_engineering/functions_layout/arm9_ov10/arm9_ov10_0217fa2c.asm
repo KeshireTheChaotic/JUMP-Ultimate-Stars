@@ -1,0 +1,15 @@
+0217fa2c  push {r4,r5,lr}
+0217fa2e  sub sp,#0x4
+0217fa30  add r5,r2,#0x0
+0217fa32  add r4,r3,#0x0
+0217fa34  mov r2,#0x0
+0217fa36  bl 0x0217faa8
+0217fa3a  cmp r0,#0x0
+0217fa3c  beq 0x0217fa46
+0217fa3e  bl 0x02005954
+0217fa42  add r5,r0,#0x0
+0217fa44  add r4,r1,#0x0
+0217fa46  add r0,r5,#0x0
+0217fa48  add r1,r4,#0x0
+0217fa4a  add sp,#0x4
+0217fa4c  pop {r4,r5,pc}

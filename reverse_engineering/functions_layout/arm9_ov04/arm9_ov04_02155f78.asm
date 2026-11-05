@@ -1,0 +1,10 @@
+02155f78  stmdb sp!,{r3,lr}
+02155f7c  cmp r0,#0x0
+02155f80  ldmiaeq sp!,{r3,pc}
+02155f84  add r1,r1,#0x1
+02155f88  strb r1,[r0,#0x18]
+02155f8c  ldr r0,[r0,#0x0]
+02155f90  ldr r1,[0x2155fa0]
+02155f94  ldr r0,[r0,#0x4]
+02155f98  bl 0x02028384
+02155f9c  ldmia sp!,{r3,pc}

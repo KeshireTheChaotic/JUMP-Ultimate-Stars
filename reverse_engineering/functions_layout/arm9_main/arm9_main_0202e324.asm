@@ -1,0 +1,11 @@
+0202e324  stmdb sp!,{r4,lr}
+0202e328  mov r4,r0
+0202e32c  mov r0,r1
+0202e330  ldr r3,[r0,#0x0]
+0202e334  mov r1,r2
+0202e338  ldr r3,[r3,#0x1c]
+0202e33c  blx r3
+0202e340  mov r1,r0
+0202e344  mov r0,r4
+0202e348  bl 0x020383ec
+0202e34c  ldmia sp!,{r4,pc}

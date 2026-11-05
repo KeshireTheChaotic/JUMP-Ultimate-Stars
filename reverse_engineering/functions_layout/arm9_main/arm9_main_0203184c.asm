@@ -1,0 +1,36 @@
+0203184c  stmdb sp!,{r3,r4,r5,lr}
+02031850  ldr r3,[r0,#0x200]
+02031854  cmp r3,#0x40
+02031858  ldrne r3,[r0,#0x204]
+0203185c  cmpne r3,#0x40
+02031860  bne 0x0203188c
+02031864  ldr r1,[r1,#0x23c]
+02031868  b 0x02031880
+0203186c  sub r0,r1,#0x20
+02031870  cmp r0,r2
+02031874  moveq r0,#0x1
+02031878  ldmiaeq sp!,{r3,r4,r5,pc}
+0203187c  ldr r1,[r1,#0x0]
+02031880  cmp r1,#0x0
+02031884  bne 0x0203186c
+02031888  b 0x020318d4
+0203188c  mov lr,#0x0
+02031890  mov r12,lr
+02031894  b 0x020318cc
+02031898  add r1,r0,lr, lsl #0x2
+0203189c  mov r4,r12
+020318a0  ldr r5,[r1,#0x200]
+020318a4  add r3,r0,lr, lsl #0x8
+020318a8  b 0x020318c0
+020318ac  ldr r1,[r3,r4,lsl #0x2]
+020318b0  cmp r1,r2
+020318b4  moveq r0,#0x1
+020318b8  ldmiaeq sp!,{r3,r4,r5,pc}
+020318bc  add r4,r4,#0x1
+020318c0  cmp r4,r5
+020318c4  blt 0x020318ac
+020318c8  add lr,lr,#0x1
+020318cc  cmp lr,#0x2
+020318d0  bcc 0x02031898
+020318d4  mov r0,#0x0
+020318d8  ldmia sp!,{r3,r4,r5,pc}

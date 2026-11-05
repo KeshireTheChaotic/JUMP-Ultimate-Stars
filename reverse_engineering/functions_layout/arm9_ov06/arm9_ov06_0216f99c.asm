@@ -1,0 +1,13 @@
+0216f99c  stmdb sp!,{r4,lr}
+0216f9a0  mov r4,r0
+0216f9a4  ldr r1,[r4,#0x2c]
+0216f9a8  bl 0x0216e5a0
+0216f9ac  ldr r0,[r4,#0x48]
+0216f9b0  cmp r0,#0x0
+0216f9b4  beq 0x0216f9c4
+0216f9b8  ldr r1,[r0,#0x0]
+0216f9bc  ldr r1,[r1,#0x8]
+0216f9c0  blx r1
+0216f9c4  ldr r0,[r4,#0x2c]
+0216f9c8  bl 0x02083648
+0216f9cc  ldmia sp!,{r4,pc}

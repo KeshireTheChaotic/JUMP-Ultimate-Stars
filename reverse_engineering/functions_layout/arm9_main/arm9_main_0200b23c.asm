@@ -1,0 +1,11 @@
+0200b23c  push {r3,lr}
+0200b23e  ldr r1,[r0,#0x8]
+0200b240  sub r1,r1,#0x1
+0200b242  str r1,[r0,#0x8]
+0200b244  bne 0x0200b250
+0200b246  cmp r0,#0x0
+0200b248  beq 0x0200b250
+0200b24a  ldr r1,[r0,#0x0]
+0200b24c  ldr r1,[r1,#0x4]
+0200b24e  blx r1
+0200b250  pop {r3,pc}

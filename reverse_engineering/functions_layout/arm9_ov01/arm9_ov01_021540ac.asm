@@ -1,0 +1,17 @@
+021540ac  stmdb sp!,{r3,r4,r5,lr}
+021540b0  ldr r1,[0x21540f0]
+021540b4  mov r5,r0
+021540b8  ldrsb r4,[r1,#0x0]
+021540bc  mvn r0,#0x0
+021540c0  cmp r4,r0
+021540c4  ldmiaeq sp!,{r3,r4,r5,pc}
+021540c8  mov r0,r4
+021540cc  mov r1,r5
+021540d0  blx 0x02071d1c
+021540d4  cmp r0,#0x0
+021540d8  mvneq r0,#0x0
+021540dc  ldmiaeq sp!,{r3,r4,r5,pc}
+021540e0  mov r0,r4
+021540e4  mov r1,r5
+021540e8  blx 0x02071d00
+021540ec  ldmia sp!,{r3,r4,r5,pc}

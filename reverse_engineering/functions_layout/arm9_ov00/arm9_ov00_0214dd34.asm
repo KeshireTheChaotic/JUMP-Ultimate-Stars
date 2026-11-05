@@ -1,0 +1,15 @@
+0214dd34  add r3,r3,#0x1
+0214dd38  str r3,[r1,#0x0]
+0214dd3c  str r2,[r0,#0x0]
+0214dd40  ldr r0,[r4,#0x0]
+0214dd44  ldr r0,[r0,#0x4]
+0214dd48  ldr r1,[r0,#0x0]
+0214dd4c  ldr r1,[r1,#0xc]
+0214dd50  blx r1
+0214dd54  ldr r0,[r4,#0x4]
+0214dd58  ldr r1,[r0,#0x0]
+0214dd5c  ldr r1,[r1,#0x8]
+0214dd60  blx r1
+0214dd64  mov r0,r4
+0214dd68  bl 0x0201b244
+0214dd6c  ldmia sp!,{r3,r4,r5,pc}

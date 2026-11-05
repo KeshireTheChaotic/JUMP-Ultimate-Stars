@@ -1,0 +1,12 @@
+02159c90  ldr r2,[0x2159cc0]
+02159c94  str r1,[r0,#0x0]
+02159c98  str r2,[r0,#0xc]
+02159c9c  mov r1,#0x0
+02159ca0  str r2,[r0,#0x4]
+02159ca4  str r1,[r0,#0x10]
+02159ca8  str r1,[r0,#0x8]
+02159cac  strb r1,[r0,#0x19]
+02159cb0  strb r1,[r0,#0x18]
+02159cb4  strb r1,[r0,#0x1a]
+02159cb8  strh r1,[r0,#0x14]
+02159cbc  bx lr

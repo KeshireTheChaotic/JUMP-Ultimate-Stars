@@ -1,0 +1,14 @@
+02155884  stmdb sp!,{r3,lr}
+02155888  sub sp,sp,#0x8
+0215588c  ldr r3,[r2,#0x0]
+02155890  add r2,sp,#0x0
+02155894  str r3,[sp,#0x0]
+02155898  ldr r3,[r1,#0x0]
+0215589c  add r1,sp,#0x4
+021558a0  str r3,[sp,#0x4]
+021558a4  ldr r0,[r0,#0x4]
+021558a8  ldr r3,[r0,#0x0]
+021558ac  ldr r3,[r3,#0x124]
+021558b0  blx r3
+021558b4  add sp,sp,#0x8
+021558b8  ldmia sp!,{r3,pc}

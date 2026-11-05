@@ -1,0 +1,9 @@
+02030018  stmdb sp!,{r4,lr}
+0203001c  mov r4,r0
+02030020  ldr r0,[r4,#0xc]
+02030024  ldr r1,[r0,#0x0]
+02030028  ldr r1,[r1,#0x2c]
+0203002c  blx r1
+02030030  ldrh r1,[r4,#0xa]
+02030034  add r0,r1,r0
+02030038  ldmia sp!,{r4,pc}

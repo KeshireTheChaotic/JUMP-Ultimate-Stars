@@ -1,0 +1,17 @@
+0206dcec  stmdb sp!,{r4,lr}
+0206dcf0  mov r4,r0
+0206dcf4  mov r0,#0x1
+0206dcf8  blx 0x0208b784
+0206dcfc  bl 0x02073410
+0206dd00  mov r2,#0x4000000
+0206dd04  ldr r0,[r2,#0x0]
+0206dd08  add r1,r2,#0x1000
+0206dd0c  bic r0,r0,#0x1f00
+0206dd10  str r0,[r2,#0x0]
+0206dd14  ldr r0,[r1,#0x0]
+0206dd18  bic r0,r0,#0x1f00
+0206dd1c  str r0,[r1,#0x0]
+0206dd20  bl 0x020552a8
+0206dd24  mov r0,r4
+0206dd28  bl 0x020552d0
+0206dd2c  ldmia sp!,{r4,pc}

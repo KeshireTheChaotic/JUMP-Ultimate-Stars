@@ -1,0 +1,11 @@
+0217e6cc  push {lr}
+0217e6ce  sub sp,#0x4
+0217e6d0  bl 0x02176578
+0217e6d4  bl 0x0218a85c
+0217e6d8  ldr r1,[0x0217e6e8]
+0217e6da  sub r0,r0,r1
+0217e6dc  cmp r0,#0x0
+0217e6de  bgt 0x0217e6e2
+0217e6e0  mov r0,#0x0
+0217e6e2  add sp,#0x4
+0217e6e4  pop {pc}

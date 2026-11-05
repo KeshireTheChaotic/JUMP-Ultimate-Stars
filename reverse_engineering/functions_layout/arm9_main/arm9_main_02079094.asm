@@ -1,0 +1,15 @@
+02079094  stmdb sp!,{r3,r4,r5,lr}
+02079098  mov r5,r0
+0207909c  mov r4,r1
+020790a0  str r4,[r5,#0x0]
+020790a4  mov r1,#0x0
+020790a8  str r1,[r5,#0x4]
+020790ac  bl 0x020797e4
+020790b0  ldrb r0,[r4,#0x5f2]
+020790b4  ldr r1,[0x20790d0]
+020790b8  bic r0,r0,#0x10
+020790bc  strb r0,[r4,#0x5f2]
+020790c0  ldr r0,[r5,#0x8]
+020790c4  ldr r0,[r0,#0x4]
+020790c8  bl 0x02028384
+020790cc  ldmia sp!,{r3,r4,r5,pc}

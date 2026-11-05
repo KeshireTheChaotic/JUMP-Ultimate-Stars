@@ -1,0 +1,14 @@
+021ce624  ldr r1,[0x021ce640]
+021ce626  ldr r2,[r1,#0x0]
+021ce628  cmp r2,#0x0
+021ce62a  beq 0x021ce63c
+021ce62c  ldrb r1,[r2,#0x11]
+021ce62e  cmp r1,r0
+021ce630  bne 0x021ce636
+021ce632  add r0,r2,#0x0
+021ce634  bx lr
+021ce636  ldr r2,[r2,#0x8]
+021ce638  cmp r2,#0x0
+021ce63a  bne 0x021ce62c
+021ce63c  mov r0,#0x0
+021ce63e  bx lr

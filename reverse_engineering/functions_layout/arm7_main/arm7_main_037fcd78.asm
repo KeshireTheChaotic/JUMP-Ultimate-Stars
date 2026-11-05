@@ -1,0 +1,15 @@
+037fcd78  stmdb sp!,{r4,r5,r6,lr}
+037fcd7c  mov r6,r0
+037fcd80  add r5,r6,#0x6c
+037fcd84  mov r4,#0x0
+037fcd88  b 0x037fcda0
+037fcd8c  mov r0,r5
+037fcd90  bl 0x037fc934
+037fcd94  str r4,[r0,#0xc]
+037fcd98  str r4,[r0,#0x8]
+037fcd9c  bl 0x037fc460
+037fcda0  ldr r0,[r6,#0x6c]
+037fcda4  cmp r0,#0x0
+037fcda8  bne 0x037fcd8c
+037fcdac  ldmia sp!,{r4,r5,r6,lr}
+037fcdb0  bx lr

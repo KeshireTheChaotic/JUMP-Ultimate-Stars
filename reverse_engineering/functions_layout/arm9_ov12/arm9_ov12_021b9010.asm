@@ -1,0 +1,11 @@
+021b9010  push {r3,lr}
+021b9012  add r2,r0,#0x0
+021b9014  add r2,#0xa4
+021b9016  ldr r2,[r2,#0x0]
+021b9018  cmp r2,r1
+021b901a  beq 0x021b9026
+021b901c  add r2,r0,#0x0
+021b901e  add r2,#0xa4
+021b9020  str r1,[r2,#0x0]
+021b9022  bl 0x021b8f70
+021b9026  pop {r3,pc}

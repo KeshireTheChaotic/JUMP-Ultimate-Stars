@@ -1,0 +1,11 @@
+027e67ac  stmdb sp!,{lr}
+027e67b0  sub sp,sp,#0x4
+027e67b4  ldr r0,[0x27e67d8]
+027e67b8  ldr r0,[r0,#0x550]
+027e67bc  ldrh r0,[r0,#0x0]
+027e67c0  cmp r0,#0xa
+027e67c4  bne 0x027e67cc
+027e67c8  bl 0x027e7bf4
+027e67cc  add sp,sp,#0x4
+027e67d0  ldmia sp!,{lr}
+027e67d4  bx lr

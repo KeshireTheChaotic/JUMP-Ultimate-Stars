@@ -1,0 +1,9 @@
+021554ac  beq 0x021554bc
+021554b0  mov r0,r4
+021554b4  mov r1,r5
+021554b8  blx 0x021b3ba4
+021554bc  ldr r0,[r4,#0x4]
+021554c0  mov r1,#0x1
+021554c4  blx 0x021b6214
+021554c8  ldr r0,[r4,#0x4]
+021554cc  mov r1,#0x1

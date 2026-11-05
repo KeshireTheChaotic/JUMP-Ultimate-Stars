@@ -1,0 +1,53 @@
+020178bc  stmdb sp!,{r4,r5,r6,r7,r8,lr}
+020178c0  mov r7,r1
+020178c4  mov r8,r0
+020178c8  mov r0,r7
+020178cc  ldr r1,[r0,#0x0]
+020178d0  ldr r1,[r1,#0x20]
+020178d4  blx r1
+020178d8  ldr r1,[0x2017990]
+020178dc  cmp r0,r1
+020178e0  bne 0x02017980
+020178e4  mov r0,r7
+020178e8  ldr r1,[r0,#0x0]
+020178ec  ldr r1,[r1,#0x60]
+020178f0  blx r1
+020178f4  mov r1,r0
+020178f8  ldr r0,[r8,#0x20]
+020178fc  ldr r2,[r0,#0x0]
+02017900  ldr r2,[r2,#0x14]
+02017904  blx r2
+02017908  mov r5,#0x0
+0201790c  mov r4,r5
+02017910  b 0x02017970
+02017914  mov r0,r8
+02017918  ldr r2,[r0,#0x0]
+0201791c  mov r1,r5
+02017920  ldr r2,[r2,#0x38]
+02017924  blx r2
+02017928  mov r6,r0
+0201792c  mov r0,r7
+02017930  ldr r2,[r0,#0x0]
+02017934  mov r1,r5
+02017938  ldr r2,[r2,#0x34]
+0201793c  blx r2
+02017940  mov r3,r4
+02017944  b 0x02017960
+02017948  ldrb r1,[r0,r3]
+0201794c  mov r2,r1, lsl #0x1c
+02017950  mov r1,r1, asr #0x4
+02017954  orr r1,r1,r2, lsr #0x18
+02017958  strb r1,[r6,r3]
+0201795c  add r3,r3,#0x1
+02017960  ldrh r1,[r8,#0x8]
+02017964  cmp r3,r1, lsr #0x1
+02017968  blt 0x02017948
+0201796c  add r5,r5,#0x1
+02017970  ldrh r0,[r8,#0xa]
+02017974  cmp r5,r0
+02017978  blt 0x02017914
+0201797c  ldmia sp!,{r4,r5,r6,r7,r8,pc}
+02017980  mov r0,r8
+02017984  mov r1,r7
+02017988  bl 0x0201694c
+0201798c  ldmia sp!,{r4,r5,r6,r7,r8,pc}

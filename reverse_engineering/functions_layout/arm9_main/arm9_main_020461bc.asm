@@ -1,0 +1,16 @@
+020461bc  stmdb sp!,{r3,r4,r5,lr}
+020461c0  mov r4,r1
+020461c4  mov r5,r0
+020461c8  mov r0,r4
+020461cc  ldr r1,[r0,#0x0]
+020461d0  ldr r1,[r1,#0x4]
+020461d4  blx r1
+020461d8  mvn r1,#0x0
+020461dc  cmp r0,r1
+020461e0  ldmiaeq sp!,{r3,r4,r5,pc}
+020461e4  mov r2,#0x0
+020461e8  mov r0,r5
+020461ec  mov r1,r4
+020461f0  str r2,[r4,#0xc]
+020461f4  bl 0x02045bd0
+020461f8  ldmia sp!,{r3,r4,r5,pc}

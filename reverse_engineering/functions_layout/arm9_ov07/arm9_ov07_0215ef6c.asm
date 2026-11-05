@@ -1,0 +1,13 @@
+0215ef6c  stmdb sp!,{r4,r5,lr}
+0215ef70  sub sp,sp,#0x14
+0215ef74  ldr r1,[0x215f0f0]
+0215ef78  movs r5,r0
+0215ef7c  ldr r4,[r1,#0x0]
+0215ef80  beq 0x0215ef9c
+0215ef84  mov r0,r4
+0215ef88  mov r1,r5
+0215ef8c  bl 0x0215fc84
+0215ef90  cmp r0,#0x0
+0215ef94  addeq sp,sp,#0x14
+0215ef98  ldmiaeq sp!,{r4,r5,pc}
+0215ef9c  cmp r5,#0x0

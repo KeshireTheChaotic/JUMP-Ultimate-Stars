@@ -1,0 +1,10 @@
+02023c80  stmdb sp!,{r3,lr}
+02023c84  ldr r12,[r0,#0x68]
+02023c88  mov lr,r1
+02023c8c  str r3,[sp,#0x0]
+02023c90  ldr r0,[r12,#0x44]
+02023c94  mov r3,r2
+02023c98  ldr r1,[r12,#0x1c]
+02023c9c  mov r2,lr
+02023ca0  blx 0x021b3438
+02023ca4  ldmia sp!,{r3,pc}

@@ -1,0 +1,10 @@
+0200ee68  stmdb sp!,{r4,lr}
+0200ee6c  ldr r4,[0x200ee90]
+0200ee70  b 0x0200ee7c
+0200ee74  blx r0
+0200ee78  add r4,r4,#0x4
+0200ee7c  cmp r4,#0x0
+0200ee80  ldrne r0,[r4,#0x0]
+0200ee84  cmpne r0,#0x0
+0200ee88  bne 0x0200ee74
+0200ee8c  ldmia sp!,{r4,pc}

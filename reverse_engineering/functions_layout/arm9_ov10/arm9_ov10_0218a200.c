@@ -1,0 +1,24 @@
+
+undefined4 FUN_0218a200(int param_1,undefined4 param_2)
+
+{
+  if (param_1 == 0) {
+    FUN_02002068(s_connection_021a666c,s_gt2Callback_c_021a665c,0,0xba);
+    return 1;
+  }
+  if (*(int *)(param_1 + 0x30) == 0) {
+    return 1;
+  }
+  *(int *)(param_1 + 0x24) = *(int *)(param_1 + 0x24) + 1;
+  *(int *)(*(int *)(param_1 + 8) + 0x1c) = *(int *)(*(int *)(param_1 + 8) + 0x1c) + 1;
+  (**(code **)(param_1 + 0x30))(param_1,param_2);
+  *(int *)(param_1 + 0x24) = *(int *)(param_1 + 0x24) + -1;
+  *(int *)(*(int *)(param_1 + 8) + 0x1c) = *(int *)(*(int *)(param_1 + 8) + 0x1c) + -1;
+  if ((*(int *)(*(int *)(param_1 + 8) + 0x14) == 0) || (*(int *)(*(int *)(param_1 + 8) + 0x1c) != 0)
+     ) {
+    return 1;
+  }
+  FUN_0218c0e4();
+  return 0;
+}
+

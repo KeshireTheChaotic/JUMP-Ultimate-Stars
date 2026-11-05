@@ -1,0 +1,10 @@
+0217eba4  cmp r0,#0x2
+0217eba6  beq 0x0217ebb0
+0217eba8  cmp r0,#0x3
+0217ebaa  beq 0x0217ebb0
+0217ebac  cmp r0,#0x4
+0217ebae  bne 0x0217ebb4
+0217ebb0  mov r0,#0xc
+0217ebb2  bx lr
+0217ebb4  mov r0,#0x8
+0217ebb6  bx lr

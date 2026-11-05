@@ -1,0 +1,1 @@
+{"module":"arm9_main","address":"02054f60","name":"FUN_02054f60","thumb":false,"body_bytes":316,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["0200d0c4","02054b44","02055118"],"unresolved_call_targets":[],"status":"decompiled","asm_file":"arm9_main_02054f60.asm","c_file":"arm9_main_02054f60.c"}

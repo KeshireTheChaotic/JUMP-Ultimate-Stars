@@ -1,0 +1,17 @@
+02056af4  stmdb sp!,{lr}
+02056af8  sub sp,sp,#0x4
+02056afc  ldr r1,[0x2056b38]
+02056b00  ldr r0,[r1,#0x0]
+02056b04  cmp r0,#0x0
+02056b08  addne sp,sp,#0x4
+02056b0c  ldmiane sp!,{lr}
+02056b10  bxne lr
+02056b14  ldr r0,[0x2056b3c]
+02056b18  mov r2,#0x1
+02056b1c  str r2,[r1,#0x0]
+02056b20  bl 0x02053f5c
+02056b24  bl 0x0205724c
+02056b28  bl 0x02057414
+02056b2c  add sp,sp,#0x4
+02056b30  ldmia sp!,{lr}
+02056b34  bx lr

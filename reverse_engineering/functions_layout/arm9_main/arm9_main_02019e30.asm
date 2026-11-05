@@ -1,0 +1,15 @@
+02019e30  stmdb sp!,{r3,lr}
+02019e34  ldr r0,[0x2019e6c]
+02019e38  ldr r0,[r0,#0x1ec]
+02019e3c  cmp r0,#0x0
+02019e40  bne 0x02019e60
+02019e44  mov r0,#0x20
+02019e48  bl 0x0201a228
+02019e4c  cmp r0,#0x0
+02019e50  beq 0x02019e58
+02019e54  bl 0x02019e00
+02019e58  ldr r1,[0x2019e6c]
+02019e5c  str r0,[r1,#0x1ec]
+02019e60  ldr r0,[0x2019e6c]
+02019e64  ldr r0,[r0,#0x1ec]
+02019e68  ldmia sp!,{r3,pc}

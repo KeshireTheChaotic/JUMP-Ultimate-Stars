@@ -1,0 +1,15 @@
+02174174  stmdb sp!,{r3,r4,r5,lr}
+02174178  mov r5,r0
+0217417c  ldrb r2,[r5,#0x24]
+02174180  mov r4,r1
+02174184  orr r1,r2,r4
+02174188  cmp r2,r1
+0217418c  beq 0x0217419c
+02174190  ldr r2,[r0,#0x0]
+02174194  ldr r2,[r2,#0x18]
+02174198  blx r2
+0217419c  ldrb r0,[r5,#0x24]
+021741a0  orr r0,r0,r4
+021741a4  orr r0,r0,#0x30
+021741a8  strb r0,[r5,#0x24]
+021741ac  ldmia sp!,{r3,r4,r5,pc}

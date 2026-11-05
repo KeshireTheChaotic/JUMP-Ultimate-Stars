@@ -1,0 +1,17 @@
+02019b54  stmdb sp!,{r3,lr}
+02019b58  ldr r0,[0x2019b98]
+02019b5c  ldr r0,[r0,#0x0]
+02019b60  tst r0,#0x1
+02019b64  bne 0x02019b90
+02019b68  mov r1,#0x0
+02019b6c  ldr r0,[0x2019b9c]
+02019b70  mov r2,r1
+02019b74  mov r3,r1
+02019b78  str r1,[sp,#0x0]
+02019b7c  bl 0x02019ba0
+02019b80  ldr r0,[0x2019b98]
+02019b84  ldr r1,[r0,#0x0]
+02019b88  orr r1,r1,#0x1
+02019b8c  str r1,[r0,#0x0]
+02019b90  ldr r0,[0x2019b9c]
+02019b94  ldmia sp!,{r3,pc}

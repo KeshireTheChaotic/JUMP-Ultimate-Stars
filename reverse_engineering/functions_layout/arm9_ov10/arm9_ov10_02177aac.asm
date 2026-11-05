@@ -1,0 +1,11 @@
+02177aac  push {r4,lr}
+02177aae  add r1,r0,#0x0
+02177ab0  ldr r0,[0x02177ac8]
+02177ab2  ldr r0,[r0,#0x0]
+02177ab4  ldr r0,[r0,#0x4]
+02177ab6  ldr r2,[0x02177acc]
+02177ab8  bl 0x02182024
+02177abc  add r4,r0,#0x0
+02177abe  bl 0x021779d8
+02177ac2  add r0,r4,#0x0
+02177ac4  pop {r4,pc}

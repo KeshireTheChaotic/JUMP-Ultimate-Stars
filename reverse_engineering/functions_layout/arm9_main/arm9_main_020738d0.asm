@@ -1,0 +1,12 @@
+020738d0  stmdb sp!,{r4,lr}
+020738d4  mov r4,r1
+020738d8  bl 0x0203b3e4
+020738dc  rsb r4,r4,#0x10
+020738e0  ldr r0,[r0,#0x88]
+020738e4  mov r1,r4
+020738e8  bl 0x0206e494
+020738ec  bl 0x0203b3f4
+020738f0  ldr r0,[r0,#0x88]
+020738f4  mov r1,r4
+020738f8  bl 0x0206e494
+020738fc  ldmia sp!,{r4,pc}

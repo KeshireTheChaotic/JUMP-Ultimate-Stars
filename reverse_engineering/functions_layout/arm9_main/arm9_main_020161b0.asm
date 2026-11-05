@@ -1,0 +1,10 @@
+020161b0  stmdb sp!,{r4,lr}
+020161b4  mov r4,r0
+020161b8  ldr r1,[r4,#0x25c]
+020161bc  cmp r1,#0x0
+020161c0  bne 0x020161d0
+020161c4  ldr r1,[r0,#0x0]
+020161c8  ldr r1,[r1,#0x14]
+020161cc  blx r1
+020161d0  ldr r0,[r4,#0x25c]
+020161d4  ldmia sp!,{r4,pc}

@@ -1,0 +1,12 @@
+0202b398  stmdb sp!,{r4,lr}
+0202b39c  mov r4,r0
+0202b3a0  bl 0x02021f3c
+0202b3a4  mov r0,r4
+0202b3a8  bl 0x0201a9ec
+0202b3ac  cmp r0,#0x0
+0202b3b0  bne 0x0202b3c0
+0202b3b4  mov r0,r4
+0202b3b8  mov r1,#0x1
+0202b3bc  bl 0x0201a958
+0202b3c0  mov r0,r4
+0202b3c4  ldmia sp!,{r4,pc}

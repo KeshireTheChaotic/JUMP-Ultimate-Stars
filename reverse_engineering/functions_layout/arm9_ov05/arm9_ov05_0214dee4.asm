@@ -1,0 +1,16 @@
+0214dee4  stmdb sp!,{r4,lr}
+0214dee8  ldr r2,[0x214df24]
+0214deec  ldr r0,[r0,#0x0]
+0214def0  ldr r3,[r2,#0x0]
+0214def4  ldrh r2,[r0,#0x0]
+0214def8  ldr r3,[r3,#0x34]
+0214defc  mov r0,#0xc
+0214df00  mla r0,r2,r0,r3
+0214df04  ldrb r0,[r0,#0x4]
+0214df08  mov r4,r1
+0214df0c  mov r1,#0xa
+0214df10  bl 0x0200d12c
+0214df14  cmp r0,r4
+0214df18  moveq r0,#0x1
+0214df1c  movne r0,#0x0
+0214df20  ldmia sp!,{r4,pc}

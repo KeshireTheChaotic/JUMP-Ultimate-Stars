@@ -1,0 +1,15 @@
+021568dc  stmdb sp!,{r4,lr}
+021568e0  mov r4,r0
+021568e4  ldr r0,[r4,#0xc]
+021568e8  ldr r2,[r4,#0x88]
+021568ec  ldr r0,[r0,#0x4]
+021568f0  add r1,r2,r1
+021568f4  mov r2,#0x0
+021568f8  bl 0x02023894
+021568fc  ldr r0,[r4,#0xc]
+02156900  ldr r0,[r0,#0x4]
+02156904  ldr r0,[r0,#0x68]
+02156908  ldr r1,[r0,#0x0]
+0215690c  ldr r1,[r1,#0x6c]
+02156910  blx r1
+02156914  ldmia sp!,{r4,pc}

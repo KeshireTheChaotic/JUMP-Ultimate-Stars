@@ -1,0 +1,14 @@
+0202f6f8  stmdb sp!,{r3,r4,lr}
+0202f6fc  sub sp,sp,#0x4
+0202f700  str r3,[sp,#0x0]
+0202f704  mov r4,r0
+0202f708  ldr r0,[r4,#0x14]
+0202f70c  mov lr,r1
+0202f710  ldr r12,[r0,#0x0]
+0202f714  mov r3,r2
+0202f718  ldr r12,[r12,#0x1c]
+0202f71c  mov r1,r4
+0202f720  mov r2,lr
+0202f724  blx r12
+0202f728  add sp,sp,#0x4
+0202f72c  ldmia sp!,{r3,r4,pc}

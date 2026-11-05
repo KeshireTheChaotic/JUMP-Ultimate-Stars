@@ -1,0 +1,13 @@
+02077a74  cmp r1,#0x0
+02077a78  beq 0x02077aa0
+02077a7c  ldrsb r3,[r0,#0x1a]
+02077a80  cmp r3,#0xf
+02077a84  bge 0x02077aa0
+02077a88  add r2,r3,#0x1
+02077a8c  strb r2,[r0,#0x1a]
+02077a90  add r0,r0,r3
+02077a94  strb r1,[r0,#0x1b]
+02077a98  mov r0,#0x1
+02077a9c  bx lr
+02077aa0  mov r0,#0x0
+02077aa4  bx lr

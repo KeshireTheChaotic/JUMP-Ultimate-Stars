@@ -1,0 +1,26 @@
+02038294  stmdb sp!,{r3,r4,r5,lr}
+02038298  mov r5,r0
+0203829c  blx 0x02005f14
+020382a0  str r0,[sp,#0x0]
+020382a4  cmp r0,#0x0
+020382a8  bne 0x020382f4
+020382ac  ldrsb r4,[r5,#0x0]
+020382b0  cmp r4,#0x30
+020382b4  beq 0x020382f4
+020382b8  mov r0,r5
+020382bc  blx 0x02004b04
+020382c0  cmp r0,#0x4
+020382c4  bne 0x020382dc
+020382c8  add r1,sp,#0x0
+020382cc  mov r0,r5
+020382d0  mov r2,#0x4
+020382d4  bl 0x02051890
+020382d8  b 0x020382f4
+020382dc  mov r0,r5
+020382e0  blx 0x02004b04
+020382e4  cmp r0,#0x2
+020382e8  ldrsbeq r0,[r5,#0x1]
+020382ec  orreq r0,r4,r0, lsl #0x8
+020382f0  streq r0,[sp,#0x0]
+020382f4  ldr r0,[sp,#0x0]
+020382f8  ldmia sp!,{r3,r4,r5,pc}

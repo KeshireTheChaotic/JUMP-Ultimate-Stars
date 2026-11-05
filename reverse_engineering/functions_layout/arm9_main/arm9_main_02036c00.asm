@@ -1,0 +1,27 @@
+02036c00  stmdb sp!,{r3,r4,r5,lr}
+02036c04  mov r4,r0
+02036c08  mov r5,r1
+02036c0c  bl 0x02021960
+02036c10  ldr r0,[0x2036c6c]
+02036c14  str r0,[r4,#0x0]
+02036c18  ldr r0,[r5,#0x6c]
+02036c1c  str r0,[r4,#0x6c]
+02036c20  ldr r0,[r5,#0x74]
+02036c24  str r0,[r4,#0x74]
+02036c28  ldr r0,[r5,#0x78]
+02036c2c  str r0,[r4,#0x78]
+02036c30  ldr r0,[r5,#0x70]
+02036c34  cmp r0,#0x0
+02036c38  moveq r0,#0x0
+02036c3c  streq r0,[r4,#0x70]
+02036c40  beq 0x02036c64
+02036c44  blx 0x02004b04
+02036c48  add r0,r0,#0x1
+02036c4c  rsb r0,r0,r0, lsl #0x1
+02036c50  bl 0x0201a228
+02036c54  ldr r1,[r5,#0x70]
+02036c58  mov r5,r0
+02036c5c  blx 0x02004b18
+02036c60  str r5,[r4,#0x70]
+02036c64  mov r0,r4
+02036c68  ldmia sp!,{r3,r4,r5,pc}

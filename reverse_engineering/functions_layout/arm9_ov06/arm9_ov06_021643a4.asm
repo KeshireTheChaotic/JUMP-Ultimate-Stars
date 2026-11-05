@@ -1,0 +1,34 @@
+021643a4  mov r1,r4
+021643a8  ldr r0,[r0,#0x64]
+021643ac  ldr r2,[r0,#0x0]
+021643b0  ldr r2,[r2,#0x5c]
+021643b4  blx r2
+021643b8  ldr r2,[r7,#0x4]
+021643bc  ldr r0,[0x21644a4]
+021643c0  ldrb r3,[r2,#0xd]
+021643c4  ldmib r2,{r1,r2}
+021643c8  add r0,r3,r0
+021643cc  mov r1,r1, asr #0x8
+021643d0  mov r2,r2, asr #0x8
+021643d4  mov r3,#0x0
+021643d8  bl 0x0206c7fc
+021643dc  ldr r0,[r0,#0x4]
+021643e0  mov r1,r4
+021643e4  ldr r0,[r0,#0x64]
+021643e8  ldr r2,[r0,#0x0]
+021643ec  ldr r2,[r2,#0x5c]
+021643f0  blx r2
+021643f4  mov r0,#0x7a
+021643f8  mov r1,#0x4e
+021643fc  bl 0x0207342c
+02164400  ldr r0,[r7,#0x0]
+02164404  mov r1,#0x0
+02164408  ldr r0,[r0,#0xc]
+0216440c  bl 0x02163bc8
+02164410  cmp r0,#0x0
+02164414  beq 0x02164488
+02164418  mov r0,r7
+0216441c  mov r1,#0x0
+02164420  bl 0x0216383c
+02164424  mov r0,#0x0
+02164428  strb r0,[r7,#0x12]

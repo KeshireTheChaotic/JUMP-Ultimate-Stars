@@ -1,0 +1,11 @@
+020698f0  push {lr}
+020698f2  sub sp,#0x4
+020698f4  bl 0x02069c44
+020698f8  cmp r0,#0x1
+020698fa  bne 0x02069902
+020698fc  mov r0,#0x1
+020698fe  add sp,#0x4
+02069900  pop {pc}
+02069902  mov r0,#0x0
+02069904  add sp,#0x4
+02069906  pop {pc}

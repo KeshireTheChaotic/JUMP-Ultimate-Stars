@@ -1,0 +1,16 @@
+0202a43c  stmdb sp!,{r4,lr}
+0202a440  mov r4,r0
+0202a444  bl 0x02019e70
+0202a448  mov r2,#0x1000
+0202a44c  str r2,[r0,#0x0]
+0202a450  mov r1,#0x0
+0202a454  str r1,[r0,#0x4]
+0202a458  str r1,[r0,#0x8]
+0202a45c  str r2,[r0,#0xc]
+0202a460  ldr r1,[r4,#0xc]
+0202a464  str r1,[r0,#0x10]
+0202a468  ldr r1,[r4,#0x10]
+0202a46c  str r1,[r0,#0x14]
+0202a470  ldrb r1,[r4,#0x24]
+0202a474  strb r1,[r4,#0x25]
+0202a478  ldmia sp!,{r4,pc}

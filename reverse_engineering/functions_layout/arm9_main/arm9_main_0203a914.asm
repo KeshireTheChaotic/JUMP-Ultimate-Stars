@@ -1,0 +1,15 @@
+0203a914  stmdb sp!,{r4,lr}
+0203a918  ldr r1,[0x203a950]
+0203a91c  movs r4,r0
+0203a920  str r1,[r4,#0x0]
+0203a924  ldr r0,[0x203a954]
+0203a928  mov r1,r4
+0203a92c  str r0,[r4,#0x24]
+0203a930  ldr r0,[0x203a958]
+0203a934  addne r1,r4,#0x24
+0203a938  ldr r0,[r0,#0x29c]
+0203a93c  bl 0x020461bc
+0203a940  mov r0,r4
+0203a944  bl 0x02029bac
+0203a948  mov r0,r4
+0203a94c  ldmia sp!,{r4,pc}

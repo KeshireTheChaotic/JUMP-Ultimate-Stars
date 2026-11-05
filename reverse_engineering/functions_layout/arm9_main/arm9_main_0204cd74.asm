@@ -1,0 +1,10 @@
+0204cd74  stmdb sp!,{r4,lr}
+0204cd78  mov r4,r0
+0204cd7c  add r0,r4,#0x14
+0204cd80  bl 0x0204c320
+0204cd84  ldr r1,[0x204cd9c]
+0204cd88  mov r0,r4
+0204cd8c  ldr r2,[r1,#0x30c]
+0204cd90  sub r2,r2,#0x1
+0204cd94  str r2,[r1,#0x30c]
+0204cd98  ldmia sp!,{r4,pc}

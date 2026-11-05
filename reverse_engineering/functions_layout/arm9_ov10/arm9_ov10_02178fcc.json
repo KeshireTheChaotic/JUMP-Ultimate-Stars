@@ -1,0 +1,1 @@
+{"module":"arm9_ov10","address":"02178fcc","name":"FUN_02178fcc","thumb":true,"body_bytes":46,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["0217d118"],"unresolved_call_targets":[],"status":"decompiled","asm_file":"arm9_ov10_02178fcc.asm","c_file":"arm9_ov10_02178fcc.c"}

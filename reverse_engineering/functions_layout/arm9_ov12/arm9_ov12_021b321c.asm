@@ -1,0 +1,11 @@
+021b321c  ldr r2,[r0,#0x1c]
+021b321e  cmp r2,#0x0
+021b3220  beq 0x021b322a
+021b3222  add r0,r2,#0x0
+021b3224  b 0x021b322a
+021b3226  ldr r0,[r0,#0x20]
+021b3228  sub r1,r1,#0x1
+021b322a  cmp r1,#0x0
+021b322c  bne 0x021b3226
+021b322e  ldr r0,[r0,#0x8]
+021b3230  bx lr

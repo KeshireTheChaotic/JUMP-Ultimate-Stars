@@ -1,0 +1,14 @@
+020288a4  stmdb sp!,{r3,lr}
+020288a8  ldr r1,[r0,#0x34]
+020288ac  ldr r1,[r1,#0x224]
+020288b0  cmp r1,#0x0
+020288b4  ldmiane sp!,{r3,pc}
+020288b8  ldrh r1,[r0,#0x4]
+020288bc  cmp r1,#0x1
+020288c0  bne 0x020288cc
+020288c4  bl 0x02028868
+020288c8  ldmia sp!,{r3,pc}
+020288cc  ldr r1,[r0,#0x0]
+020288d0  ldr r1,[r1,#0xc]
+020288d4  blx r1
+020288d8  ldmia sp!,{r3,pc}

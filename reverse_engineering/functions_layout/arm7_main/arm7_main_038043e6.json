@@ -1,0 +1,1 @@
+{"module":"arm7_main","address":"038043e6","name":"SVC_Sleep","thumb":true,"body_bytes":4,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":[],"unresolved_call_targets":[],"status":"decompiled","asm_file":"arm7_main_038043e6.asm","c_file":"arm7_main_038043e6.c"}

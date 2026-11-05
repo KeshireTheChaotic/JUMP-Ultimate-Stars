@@ -1,0 +1,11 @@
+0206e468  ldr r3,[r0,#0x4]
+0206e46c  mov r0,#0x0
+0206e470  str r1,[r3,#0x8e8]
+0206e474  str r0,[r3,#0x8ec]
+0206e478  cmp r2,#0x0
+0206e47c  str r2,[r3,#0x8f4]
+0206e480  movne r0,#0x2
+0206e484  str r0,[r3,#0x8f0]
+0206e488  mov r0,#0x1
+0206e48c  strb r0,[r3,#0x902]
+0206e490  bx lr

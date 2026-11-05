@@ -1,0 +1,9 @@
+0215b740  stmdb sp!,{r4,lr}
+0215b744  mov r4,r0
+0215b748  cmp r1,#0x0
+0215b74c  beq 0x0215b754
+0215b750  bl 0x0206af1c
+0215b754  ldr r0,[r4,#0x0]
+0215b758  ldr r0,[r0,#0x4]
+0215b75c  bl 0x02028330
+0215b760  ldmia sp!,{r4,pc}

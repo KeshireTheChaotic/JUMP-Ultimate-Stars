@@ -1,0 +1,11 @@
+02163488  stmdb sp!,{r4,lr}
+0216348c  bl 0x02033410
+02163490  mov r4,r0
+02163494  ldr r1,[r4,#0x1c]
+02163498  cmp r1,#0x0
+0216349c  bne 0x021634ac
+021634a0  ldr r1,[r0,#0x0]
+021634a4  ldr r1,[r1,#0x10]
+021634a8  blx r1
+021634ac  ldr r0,[r4,#0x1c]
+021634b0  ldmia sp!,{r4,pc}

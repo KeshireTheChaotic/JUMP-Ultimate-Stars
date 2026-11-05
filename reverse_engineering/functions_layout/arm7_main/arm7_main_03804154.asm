@@ -1,0 +1,10 @@
+03804154  stmdb sp!,{lr}
+03804158  sub sp,sp,#0x4
+0380415c  mov r0,#0x0
+03804160  bl 0x038072a0
+03804164  bl 0x037fedb8
+03804168  bl 0x038060cc
+0380416c  bl 0x037fe538
+03804170  add sp,sp,#0x4
+03804174  ldmia sp!,{lr}
+03804178  bx lr

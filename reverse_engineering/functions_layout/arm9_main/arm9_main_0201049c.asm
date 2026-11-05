@@ -1,0 +1,10 @@
+0201049c  push {r3,lr}
+0201049e  ldr r2,[r0,#0x20]
+020104a0  cmp r2,#0x0
+020104a2  beq 0x020104b0
+020104a4  ldrb r0,[r0,#0x1b]
+020104a6  cmp r0,#0x0
+020104a8  beq 0x020104b0
+020104aa  add r0,r2,#0x0
+020104ac  blx 0x0201ac08
+020104b0  pop {r3,pc}

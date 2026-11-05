@@ -1,0 +1,9 @@
+02168d14  stmdb sp!,{r3,lr}
+02168d18  mov r12,#0x28
+02168d1c  ldr r0,[0x2168d38]
+02168d20  sub r1,r12,#0x44
+02168d24  sub r2,r12,#0x50
+02168d28  mov r3,#0x1c
+02168d2c  str r12,[sp,#0x0]
+02168d30  bl 0x021502ec
+02168d34  ldmia sp!,{r3,pc}

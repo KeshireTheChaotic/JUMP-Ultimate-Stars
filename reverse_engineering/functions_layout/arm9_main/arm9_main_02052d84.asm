@@ -1,0 +1,11 @@
+02052d84  ldr r2,[r0,#0x0]
+02052d88  cmp r2,#0x0
+02052d8c  ldrne r2,[r0,#0x4]
+02052d90  strbne r1,[r2,#0x0]
+02052d94  ldrne r1,[r0,#0x0]
+02052d98  subne r1,r1,#0x1
+02052d9c  strne r1,[r0,#0x0]
+02052da0  ldr r1,[r0,#0x4]
+02052da4  add r1,r1,#0x1
+02052da8  str r1,[r0,#0x4]
+02052dac  bx lr

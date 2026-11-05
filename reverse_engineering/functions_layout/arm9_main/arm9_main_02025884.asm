@@ -1,0 +1,33 @@
+02025884  stmdb sp!,{r4,r5,r6,lr}
+02025888  mov r6,r0
+0202588c  ldr r4,[r6,#0xc]
+02025890  ldr r2,[r6,#0x14]
+02025894  ldr r0,[r4,#0x8]
+02025898  mov r5,r1
+0202589c  cmp r0,r2
+020258a0  bcc 0x020258d0
+020258a4  sub r0,r2,#0x1
+020258a8  mov r0,r0, lsl #0x2
+020258ac  add r0,r0,#0x10
+020258b0  bl 0x0201a228
+020258b4  str r0,[r4,#0x0]
+020258b8  str r4,[r0,#0x4]
+020258bc  mov r1,#0x0
+020258c0  str r1,[r0,#0x0]
+020258c4  str r1,[r0,#0x8]
+020258c8  mov r4,r0
+020258cc  str r0,[r6,#0xc]
+020258d0  ldr r2,[r4,#0x8]
+020258d4  mov r0,r5
+020258d8  add r1,r2,#0x1
+020258dc  str r1,[r4,#0x8]
+020258e0  add r1,r4,r2, lsl #0x2
+020258e4  str r5,[r1,#0xc]
+020258e8  ldr r1,[r0,#0x0]
+020258ec  ldr r1,[r1,#0x8]
+020258f0  blx r1
+020258f4  ldr r0,[r6,#0x10]
+020258f8  add r0,r0,#0x1
+020258fc  str r0,[r6,#0x10]
+02025900  sub r0,r0,#0x1
+02025904  ldmia sp!,{r4,r5,r6,pc}

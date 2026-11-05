@@ -1,0 +1,14 @@
+02049648  stmdb sp!,{r3,lr}
+0204964c  sub sp,sp,#0x10
+02049650  ldr lr,[sp,#0x18]
+02049654  ldr r12,[sp,#0x1c]
+02049658  stmia sp,{r3,lr}
+0204965c  ldr r3,[sp,#0x20]
+02049660  str r12,[sp,#0x8]
+02049664  str r3,[sp,#0xc]
+02049668  ldr r12,[r0,#0x0]
+0204966c  ldr r3,[0x2049680]
+02049670  ldr r12,[r12,#0x14]
+02049674  blx r12
+02049678  add sp,sp,#0x10
+0204967c  ldmia sp!,{r3,pc}

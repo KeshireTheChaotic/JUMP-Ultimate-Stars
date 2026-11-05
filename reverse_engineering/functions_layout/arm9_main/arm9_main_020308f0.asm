@@ -1,0 +1,15 @@
+020308f0  stmdb sp!,{r3,r4,r5,lr}
+020308f4  mov r5,r0
+020308f8  ldr r0,[r5,#0xc]
+020308fc  ldr r1,[r0,#0x0]
+02030900  ldr r1,[r1,#0x2c]
+02030904  blx r1
+02030908  mov r4,r0
+0203090c  ldr r0,[r5,#0x24]
+02030910  ldr r1,[r0,#0x0]
+02030914  ldr r1,[r1,#0x2c]
+02030918  blx r1
+0203091c  ldrh r1,[r5,#0xa]
+02030920  add r1,r1,r4
+02030924  add r0,r1,r0
+02030928  ldmia sp!,{r3,r4,r5,pc}

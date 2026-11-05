@@ -1,0 +1,22 @@
+0217d8d0  stmdb sp!,{r3,r4,r5,r6,r7,lr}
+0217d8d4  ldr r6,[r0,#0x30]
+0217d8d8  mov r4,r1
+0217d8dc  cmp r6,#0x0
+0217d8e0  ldmiaeq sp!,{r3,r4,r5,r6,r7,pc}
+0217d8e4  ldr r1,[0x217d928]
+0217d8e8  ldr r2,[r6,#0x4]
+0217d8ec  ldr r7,[r1,r4,lsl #0x2]
+0217d8f0  ldr r5,[r2,#0x10]
+0217d8f4  cmp r7,#0x0
+0217d8f8  beq 0x0217d91c
+0217d8fc  bl 0x0217d094
+0217d900  ldr r0,[r5,#0x0]
+0217d904  mov r1,#0x0
+0217d908  str r1,[r0,#0xe4]
+0217d90c  ldr r0,[r6,#0x4]
+0217d910  mov r1,r7
+0217d914  bl 0x02028384
+0217d918  str r4,[r5,#0x8]
+0217d91c  mov r0,#0x0
+0217d920  strb r0,[r5,#0xc]
+0217d924  ldmia sp!,{r3,r4,r5,r6,r7,pc}

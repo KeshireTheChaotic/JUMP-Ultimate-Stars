@@ -1,0 +1,10 @@
+02155c8c  stmdb sp!,{r3,lr}
+02155c90  ldr r0,[r0,#0x4]
+02155c94  mov r1,#0x1
+02155c98  ldr r0,[r0,#0x10]
+02155c9c  ldr r0,[r0,#0x5c]
+02155ca0  ldr r0,[r0,#0x4]
+02155ca4  ldr r2,[r0,#0x0]
+02155ca8  ldr r2,[r2,#0xd8]
+02155cac  blx r2
+02155cb0  ldmia sp!,{r3,pc}

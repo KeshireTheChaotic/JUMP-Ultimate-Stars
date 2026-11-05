@@ -1,0 +1,13 @@
+0214da24  stmdb sp!,{r4,lr}
+0214da28  mov r4,r0
+0214da2c  ldr r0,[r4,#0x0]
+0214da30  ldr r0,[r0,#0x4]
+0214da34  bl 0x020282f4
+0214da38  ldrb r0,[r4,#0xe4]
+0214da3c  orr r0,r0,#0x2
+0214da40  strb r0,[r4,#0xe4]
+0214da44  tst r0,#0x4
+0214da48  ldmiaeq sp!,{r4,pc}
+0214da4c  mov r0,r4
+0214da50  bl 0x02152980
+0214da54  ldmia sp!,{r4,pc}

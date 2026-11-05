@@ -1,0 +1,15 @@
+02071ed8  push {r4,lr}
+02071eda  add r4,r0,#0x0
+02071edc  blx 0x020733b8
+02071ee0  ldr r0,[0x02071efc]
+02071ee2  ldrb r1,[r0,#0x9]
+02071ee4  cmp r1,r4
+02071ee6  beq 0x02071ef8
+02071ee8  strb r4,[r0,#0x9]
+02071eea  ldr r0,[0x02071f00]
+02071eec  mov r1,#0x1
+02071eee  bl 0x02073114
+02071ef2  ldr r0,[0x02071f04]
+02071ef4  mov r1,#0x1
+02071ef6  strb r1,[r0,#0x0]
+02071ef8  pop {r4,pc}

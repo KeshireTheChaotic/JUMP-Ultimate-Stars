@@ -1,0 +1,16 @@
+027f793c  stmdb sp!,{lr}
+027f7940  sub sp,sp,#0x4
+027f7944  mov r0,#0x8000
+027f7948  bl 0x037fec00
+027f794c  ldrh r0,[sp,#0x0]
+027f7950  bic r0,r0,#0x1
+027f7954  orr r0,r0,#0x1
+027f7958  strh r0,[sp,#0x0]
+027f795c  mov r0,#0x6
+027f7960  mov r1,#0x0
+027f7964  add r2,sp,#0x0
+027f7968  mov r3,#0x1
+027f796c  bl 0x027f717c
+027f7970  add sp,sp,#0x4
+027f7974  ldmia sp!,{lr}
+027f7978  bx lr

@@ -1,0 +1,10 @@
+0216d330  stmdb sp!,{r4,lr}
+0216d334  mov r4,r0
+0216d338  ldr r0,[r4,#0x0]
+0216d33c  ldr r0,[r0,#0x4]
+0216d340  ldr r1,[r0,#0x0]
+0216d344  ldr r1,[r1,#0xc]
+0216d348  blx r1
+0216d34c  mov r0,r4
+0216d350  bl 0x0201b244
+0216d354  ldmia sp!,{r4,pc}

@@ -1,0 +1,16 @@
+021919a0  push {lr}
+021919a2  sub sp,#0x4
+021919a4  add r2,r0,#0x0
+021919a6  ldr r0,[0x021919c4]
+021919a8  add r1,sp,#0x0
+021919aa  blx 0x02053bd8
+021919ae  cmp r0,#0x0
+021919b0  beq 0x021919ba
+021919b2  ldr r0,[sp,#0x0]
+021919b4  add sp,#0x4
+021919b6  pop {r3}
+021919b8  bx r3
+021919ba  mov r0,#0x0
+021919bc  add sp,#0x4
+021919be  pop {r3}
+021919c0  bx r3

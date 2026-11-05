@@ -1,0 +1,9 @@
+0202e450  stmdb sp!,{r4,lr}
+0202e454  ldr r3,[r0,#0x0]
+0202e458  mov r4,r2
+0202e45c  ldr r3,[r3,#0x1c]
+0202e460  blx r3
+0202e464  mov r1,r0
+0202e468  mov r0,r4
+0202e46c  blx 0x02004b18
+0202e470  ldmia sp!,{r4,pc}

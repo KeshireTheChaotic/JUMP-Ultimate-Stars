@@ -1,0 +1,11 @@
+0215cc30  ldr r0,[r0,#0x4]
+0215cc34  ldr r2,[r1,#0x0]
+0215cc38  ldr r0,[r0,#0x50]
+0215cc3c  ldr r12,[0x215cc5c]
+0215cc40  str r2,[r0,#0xc]
+0215cc44  ldr r2,[r1,#0x4]
+0215cc48  str r2,[r0,#0x10]
+0215cc4c  ldr r2,[r1,#0x8]
+0215cc50  mov r1,#0x1
+0215cc54  str r2,[r0,#0x14]
+0215cc58  bx r12

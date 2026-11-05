@@ -1,0 +1,16 @@
+03800814  ldr r2,[0x3800854]
+03800818  ldr r2,[r2,#0x0]
+0380081c  cmp r2,#0x0
+03800820  moveq r0,#0x0
+03800824  bxeq lr
+03800828  cmp r1,#0x10
+0380082c  addge r2,r2,#0x260
+03800830  subge r0,r1,#0x10
+03800834  addge r0,r2,r0, lsl #0x1
+03800838  bxge lr
+0380083c  add r3,r2,#0x20
+03800840  ldrb r2,[r0,#0x1]
+03800844  mov r0,#0x24
+03800848  mla r0,r2,r0,r3
+0380084c  add r0,r0,r1, lsl #0x1
+03800850  bx lr

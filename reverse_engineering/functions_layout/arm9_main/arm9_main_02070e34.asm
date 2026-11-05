@@ -1,0 +1,7 @@
+02070e34  push {r3,lr}
+02070e36  bl 0x02070d64
+02070e3a  bl 0x02071dac
+02070e3e  ldr r0,[0x02070e48]
+02070e40  mov r1,#0x1
+02070e42  strb r1,[r0,#0x0]
+02070e44  pop {r3,pc}

@@ -1,0 +1,12 @@
+0206c9f8  stmdb sp!,{r3,lr}
+0206c9fc  sub sp,sp,#0x8
+0206ca00  ldr r3,[r2,#0x0]
+0206ca04  add r2,sp,#0x0
+0206ca08  str r3,[sp,#0x0]
+0206ca0c  ldr r3,[r1,#0x0]
+0206ca10  add r1,sp,#0x4
+0206ca14  str r3,[sp,#0x4]
+0206ca18  ldr r0,[r0,#0x4]
+0206ca1c  bl 0x0206ca28
+0206ca20  add sp,sp,#0x8
+0206ca24  ldmia sp!,{r3,pc}

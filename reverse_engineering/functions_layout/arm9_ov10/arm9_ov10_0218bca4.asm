@@ -1,0 +1,12 @@
+0218bca4  push {r4,lr}
+0218bca6  add r4,r0,#0x0
+0218bca8  bl 0x0218ab00
+0218bcac  cmp r0,#0x0
+0218bcae  beq 0x0218bcbc
+0218bcb0  add r0,r4,#0x0
+0218bcb2  mov r1,#0x1
+0218bcb4  mov r2,#0x4
+0218bcb6  bl 0x0218bccc
+0218bcba  pop {r4,pc}
+0218bcbc  mov r0,#0x0
+0218bcbe  pop {r4,pc}

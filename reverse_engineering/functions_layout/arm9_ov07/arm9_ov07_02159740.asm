@@ -1,0 +1,12 @@
+02159740  stmdb sp!,{r4,lr}
+02159744  mov r4,r0
+02159748  add r0,r4,#0x264
+0215974c  add r0,r0,#0x800
+02159750  sub r0,r1,r0
+02159754  mov r1,#0x22
+02159758  bl 0x0200d338
+0215975c  ldr r1,[r4,#0xbdc]
+02159760  cmp r1,#0x0
+02159764  cmpge r0,r1
+02159768  strlt r0,[r4,#0xbdc]
+0215976c  ldmia sp!,{r4,pc}

@@ -1,0 +1,10 @@
+0219b088  ldr r0,[0x219b0b0]
+0219b08c  ldr r0,[r0,#0x0]
+0219b090  cmp r0,#0x0
+0219b094  beq 0x0219b0a8
+0219b098  ldrsb r0,[r0,#0x57]
+0219b09c  cmp r0,#0x0
+0219b0a0  movlt r0,#0x1
+0219b0a4  bxlt lr
+0219b0a8  mov r0,#0x0
+0219b0ac  bx lr

@@ -1,0 +1,14 @@
+02153cac  stmdb sp!,{r3,lr}
+02153cb0  ldr r0,[0x2153ce4]
+02153cb4  ldr r0,[r0,#0x0]
+02153cb8  cmp r0,#0x0
+02153cbc  beq 0x02153cc4
+02153cc0  bl 0x02034d7c
+02153cc4  ldr r0,[0x2153ce4]
+02153cc8  ldr r0,[r0,#0x4]
+02153ccc  cmp r0,#0x0
+02153cd0  ldmiaeq sp!,{r3,pc}
+02153cd4  ldr r1,[r0,#0x0]
+02153cd8  ldr r1,[r1,#0xc]
+02153cdc  blx r1
+02153ce0  ldmia sp!,{r3,pc}

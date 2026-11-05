@@ -1,0 +1,13 @@
+02069be0  push {r4,r5,lr}
+02069be2  sub sp,#0x4
+02069be4  add r5,r0,#0x0
+02069be6  add r4,r1,#0x0
+02069be8  bl 0x02069c54
+02069bec  mov r1,#0x3
+02069bee  bic r0,r1
+02069bf0  add r1,r0,#0x0
+02069bf2  orr r1,r4
+02069bf4  add r0,r5,#0x0
+02069bf6  bl 0x02069c00
+02069bfa  add sp,#0x4
+02069bfc  pop {r4,r5,pc}

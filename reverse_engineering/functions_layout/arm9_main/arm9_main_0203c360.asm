@@ -1,0 +1,9 @@
+0203c360  push {r3,lr}
+0203c362  ldr r0,[r0,#0x8]
+0203c364  ldrh r2,[r0,#0x14]
+0203c366  cmp r2,#0x0
+0203c368  bne 0x0203c370
+0203c36a  bl 0x0201d544
+0203c36e  pop {r3,pc}
+0203c370  blx 0x0201d1a0
+0203c374  pop {r3,pc}

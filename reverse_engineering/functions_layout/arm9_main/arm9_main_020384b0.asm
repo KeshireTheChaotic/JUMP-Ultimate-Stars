@@ -1,0 +1,12 @@
+020384b0  ldr r3,[r1,#0x0]
+020384b4  ldr r0,[r2,#0x0]
+020384b8  cmp r3,r0
+020384bc  ldreq r3,[r1,#0x4]
+020384c0  ldreq r0,[r2,#0x4]
+020384c4  cmpeq r3,r0
+020384c8  ldreq r1,[r1,#0x8]
+020384cc  ldreq r0,[r2,#0x8]
+020384d0  cmpeq r1,r0
+020384d4  moveq r0,#0x1
+020384d8  movne r0,#0x0
+020384dc  bx lr

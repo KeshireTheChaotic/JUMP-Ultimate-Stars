@@ -1,0 +1,15 @@
+021519fc  push {r4,lr}
+021519fe  ldr r0,[r0,#0x4]
+02151a00  ldr r4,[r0,#0x10]
+02151a02  ldr r0,[r4,#0x4c]
+02151a04  ldr r0,[r0,#0x4]
+02151a06  bl 0x021b65e0
+02151a0a  mov r0,#0x4d
+02151a0c  lsl r0,r0,#0x2
+02151a0e  ldr r0,[r4,r0]
+02151a10  cmp r0,#0x0
+02151a12  beq 0x02151a1c
+02151a14  ldr r0,[r0,#0x4]
+02151a16  mov r1,#0x1
+02151a18  bl 0x021b6214
+02151a1c  pop {r4,pc}

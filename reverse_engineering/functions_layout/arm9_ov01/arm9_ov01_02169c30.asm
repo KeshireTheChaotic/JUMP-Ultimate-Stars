@@ -1,0 +1,13 @@
+02169c30  push {r4,lr}
+02169c32  add r4,r0,#0x0
+02169c34  ldr r0,[r4,#0x4]
+02169c36  mov r1,#0x0
+02169c38  ldr r0,[r0,#0x10]
+02169c3a  ldr r0,[r0,#0xc]
+02169c3c  blx 0x02169ad4
+02169c40  cmp r0,#0x0
+02169c42  beq 0x02169c4c
+02169c44  ldr r0,[r4,#0x4]
+02169c46  ldr r1,[0x02169c50]
+02169c48  blx 0x02028384
+02169c4c  pop {r4,pc}

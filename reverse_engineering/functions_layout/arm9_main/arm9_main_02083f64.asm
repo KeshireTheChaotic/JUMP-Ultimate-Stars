@@ -1,0 +1,12 @@
+02083f64  stmdb sp!,{r4,lr}
+02083f68  ldr r0,[r0,#0x4]
+02083f6c  ldr r0,[r0,#0x10]
+02083f70  ldr r4,[r0,#0x7c]
+02083f74  b 0x02083f88
+02083f78  ldr r0,[r4,#0x8]
+02083f7c  ldr r4,[r4,#0x0]
+02083f80  ldr r1,[r0,#0x24]
+02083f84  blx r1
+02083f88  cmp r4,#0x0
+02083f8c  bne 0x02083f78
+02083f90  ldmia sp!,{r4,pc}

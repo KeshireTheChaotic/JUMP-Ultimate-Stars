@@ -1,0 +1,10 @@
+021823dc  push {lr}
+021823de  sub sp,#0x4
+021823e0  cmp r0,#0x0
+021823e2  beq 0x021823ee
+021823e4  ldr r1,[r0,#0x0]
+021823e6  cmp r1,#0x0
+021823e8  beq 0x021823ee
+021823ea  bl 0x02182918
+021823ee  add sp,#0x4
+021823f0  pop {pc}

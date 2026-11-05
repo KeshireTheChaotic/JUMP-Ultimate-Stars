@@ -1,0 +1,9 @@
+0215e18c  stmdb sp!,{r4,lr}
+0215e190  mov r4,r0
+0215e194  cmp r1,#0x0
+0215e198  beq 0x0215e1a0
+0215e19c  bl 0x0206af1c
+0215e1a0  ldr r0,[r4,#0x0]
+0215e1a4  ldr r0,[r0,#0x4]
+0215e1a8  bl 0x02028330
+0215e1ac  ldmia sp!,{r4,pc}

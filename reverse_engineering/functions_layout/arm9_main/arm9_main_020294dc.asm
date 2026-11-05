@@ -1,0 +1,9 @@
+020294dc  ldr r2,[r1,#0x0]
+020294e0  str r2,[r0,#0x0]
+020294e4  ldrh r2,[r1,#0x4]
+020294e8  strh r2,[r0,#0x4]
+020294ec  ldrh r2,[r1,#0x6]
+020294f0  strh r2,[r0,#0x6]
+020294f4  ldrb r1,[r1,#0x8]
+020294f8  strb r1,[r0,#0x8]
+020294fc  bx lr

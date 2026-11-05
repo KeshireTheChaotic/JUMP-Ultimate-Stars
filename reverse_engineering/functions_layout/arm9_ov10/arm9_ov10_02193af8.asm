@@ -1,0 +1,11 @@
+02193af8  push {r4,lr}
+02193afa  sub sp,#0x8
+02193afc  mov r4,#0x0
+02193afe  str r4,[sp,#0x0]
+02193b00  str r3,[sp,#0x4]
+02193b02  add r3,r4,#0x0
+02193b04  bl 0x02192700
+02193b08  add sp,#0x8
+02193b0a  pop {r4}
+02193b0c  pop {r3}
+02193b0e  bx r3

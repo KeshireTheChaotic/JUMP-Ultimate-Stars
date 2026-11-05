@@ -1,0 +1,12 @@
+0203cf2c  push {r3,r4,r5,lr}
+0203cf2e  ldr r5,[r1,#0x8]
+0203cf30  ldr r4,[r0,#0x8]
+0203cf32  add r1,r5,#0x0
+0203cf34  add r0,r4,#0x0
+0203cf36  add r0,#0xc
+0203cf38  add r1,#0xc
+0203cf3a  blx 0x02038058
+0203cf3e  add r0,r4,#0x4
+0203cf40  add r1,r5,#0x4
+0203cf42  bl 0x0202e118
+0203cf46  pop {r3,r4,r5,pc}

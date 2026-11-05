@@ -1,0 +1,9 @@
+02033218  stmdb sp!,{r4,lr}
+0203321c  mov r4,r0
+02033220  mov r0,#0x8
+02033224  bl 0x0201a228
+02033228  cmp r0,#0x0
+0203322c  ldrne r1,[0x203323c]
+02033230  stmiane r0,{r1,r4}
+02033234  str r0,[r4,#0x1c]
+02033238  ldmia sp!,{r4,pc}

@@ -1,0 +1,10 @@
+0205b830  ldr r12,[r0,#0x0]
+0205b834  cmp r12,#0x0
+0205b838  bxeq lr
+0205b83c  mov r3,#0x2
+0205b840  strh r3,[r12,#0x34]
+0205b844  ldr r3,[r0,#0x0]
+0205b848  strh r1,[r3,#0x38]
+0205b84c  ldr r0,[r0,#0x0]
+0205b850  strh r2,[r0,#0x3a]
+0205b854  bx lr

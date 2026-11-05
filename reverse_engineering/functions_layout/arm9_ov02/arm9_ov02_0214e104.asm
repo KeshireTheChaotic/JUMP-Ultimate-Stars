@@ -1,0 +1,10 @@
+0214e104  stmdb sp!,{r4,lr}
+0214e108  mov r4,r0
+0214e10c  mov r0,#0x6
+0214e110  mov r1,#0x1
+0214e114  bl 0x02073ebc
+0214e118  mov r1,#0x1
+0214e11c  mov r0,r4
+0214e120  strb r1,[r4,#0x54]
+0214e124  bl 0x0214d410
+0214e128  ldmia sp!,{r4,pc}

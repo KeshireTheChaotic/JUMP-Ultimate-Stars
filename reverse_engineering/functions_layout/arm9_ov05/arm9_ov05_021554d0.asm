@@ -1,0 +1,14 @@
+021554d0  stmdb sp!,{r3,lr}
+021554d4  ldr r1,[r0,#0x4]
+021554d8  ldr r1,[r1,#0x10]
+021554dc  add r1,r1,#0x400
+021554e0  ldrh r2,[r1,#0x3c]
+021554e4  add r2,r2,#0x1
+021554e8  strh r2,[r1,#0x3c]
+021554ec  ldrh r1,[r1,#0x3c]
+021554f0  cmp r1,#0x3c
+021554f4  ldmials sp!,{r3,pc}
+021554f8  ldr r0,[r0,#0x4]
+021554fc  ldr r1,[0x2155508]
+02155500  bl 0x02028384
+02155504  ldmia sp!,{r3,pc}

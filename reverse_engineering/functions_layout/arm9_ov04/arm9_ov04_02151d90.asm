@@ -1,0 +1,10 @@
+02151d90  stmdb sp!,{r3,lr}
+02151d94  ldr r0,[r0,#0x4]
+02151d98  ldr r2,[r0,#0x0]
+02151d9c  ldr r2,[r2,#0xb0]
+02151da0  blx r2
+02151da4  cmp r0,#0x0
+02151da8  moveq r0,#0x0
+02151dac  ldmiaeq sp!,{r3,pc}
+02151db0  bl 0x0214e3ec
+02151db4  ldmia sp!,{r3,pc}

@@ -1,0 +1,17 @@
+02035b74  stmdb sp!,{r4,lr}
+02035b78  mov r4,r0
+02035b7c  ldrh r1,[r4,#0x4]
+02035b80  sub r1,r1,#0x1
+02035b84  strh r1,[r4,#0x4]
+02035b88  ldrh r1,[r4,#0x4]
+02035b8c  cmp r1,#0x0
+02035b90  bne 0x02035bb0
+02035b94  bl 0x02035bbc
+02035b98  ldr r0,[r4,#0x14]
+02035b9c  cmp r0,#0x0
+02035ba0  bne 0x02035bb0
+02035ba4  ldr r0,[0x2035bb8]
+02035ba8  mov r1,r4
+02035bac  bl 0x020324dc
+02035bb0  ldrh r0,[r4,#0x4]
+02035bb4  ldmia sp!,{r4,pc}

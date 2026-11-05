@@ -1,0 +1,17 @@
+02199c84  push {r4,lr}
+02199c86  add r3,r0,#0x0
+02199c88  ldr r0,[0x02199ca8]
+02199c8a  ldr r4,[r0,#0x28]
+02199c8c  cmp r4,#0x0
+02199c8e  beq 0x02199ca0
+02199c90  add r0,r3,#0x0
+02199c92  add r0,#0x1e
+02199c94  add r1,r3,#0x0
+02199c96  add r1,#0x18
+02199c98  add r2,r3,#0x0
+02199c9a  add r2,#0x2c
+02199c9c  ldrh r3,[r3,#0x6]
+02199c9e  blx r4
+02199ca0  pop {r4}
+02199ca2  pop {r3}
+02199ca4  bx r3

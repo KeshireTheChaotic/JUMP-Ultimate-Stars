@@ -1,0 +1,17 @@
+021cf3c4  push {r4,lr}
+021cf3c6  sub sp,#0x10
+021cf3c8  add r4,r0,#0x0
+021cf3ca  mov r1,#0xff
+021cf3cc  add r0,sp,#0x0
+021cf3ce  strb r1,[r0,#0x4]
+021cf3d0  ldr r0,[0x021cf3ec]
+021cf3d2  add r1,sp,#0x0
+021cf3d4  mov r2,#0x4
+021cf3d6  bl 0x021cf2d4
+021cf3da  add r0,sp,#0x0
+021cf3dc  strb r4,[r0,#0xa]
+021cf3de  ldr r0,[0x021cf3ec]
+021cf3e0  add r1,sp,#0x0
+021cf3e2  bl 0x021cf3f0
+021cf3e6  add sp,#0x10
+021cf3e8  pop {r4,pc}

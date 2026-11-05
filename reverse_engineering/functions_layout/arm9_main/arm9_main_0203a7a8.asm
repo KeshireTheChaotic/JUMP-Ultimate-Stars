@@ -1,0 +1,12 @@
+0203a7a8  stmdb sp!,{r3,r4,r5,lr}
+0203a7ac  mov r0,#0xe4
+0203a7b0  mov r5,r1
+0203a7b4  bl 0x0201a228
+0203a7b8  movs r4,r0
+0203a7bc  beq 0x0203a7d0
+0203a7c0  bl 0x02028b90
+0203a7c4  ldr r0,[0x203a7d8]
+0203a7c8  str r0,[r4,#0x0]
+0203a7cc  str r5,[r4,#0xe0]
+0203a7d0  mov r0,r4
+0203a7d4  ldmia sp!,{r3,r4,r5,pc}

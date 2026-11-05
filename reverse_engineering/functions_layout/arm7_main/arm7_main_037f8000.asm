@@ -1,0 +1,10 @@
+037f8000  stmdb sp!,{lr}
+037f8004  sub sp,sp,#0x4
+037f8008  ldr r0,[0x37f8028]
+037f800c  ldr r0,[r0,#0x0]
+037f8010  cmp r0,#0x0
+037f8014  beq 0x037f801c
+037f8018  bl 0x03805f00
+037f801c  add sp,sp,#0x4
+037f8020  ldmia sp!,{lr}
+037f8024  bx lr

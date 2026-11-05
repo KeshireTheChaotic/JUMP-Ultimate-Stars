@@ -1,0 +1,9 @@
+02012fe8  stmdb sp!,{r4,lr}
+02012fec  ldr r1,[0x201300c]
+02012ff0  ldr r2,[0x2013010]
+02012ff4  mov r4,r0
+02012ff8  bl 0x02013018
+02012ffc  ldr r1,[0x2013014]
+02013000  mov r0,r4
+02013004  str r1,[r4,#0x0]
+02013008  ldmia sp!,{r4,pc}

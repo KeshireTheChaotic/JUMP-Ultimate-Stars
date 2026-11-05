@@ -1,0 +1,30 @@
+0203a9c0  stmdb sp!,{r3,r4,lr}
+0203a9c4  sub sp,sp,#0x4
+0203a9c8  movs r4,r0
+0203a9cc  ldr r0,[0x203aa38]
+0203a9d0  mov r1,r4
+0203a9d4  ldr r0,[r0,#0x29c]
+0203a9d8  addne r1,r4,#0x24
+0203a9dc  bl 0x02045b08
+0203a9e0  cmp r0,#0x0
+0203a9e4  ldrbeq r0,[r4,#0x1c]
+0203a9e8  cmpeq r0,#0x0
+0203a9ec  beq 0x0203aa1c
+0203a9f0  ldrh r2,[r4,#0x8]
+0203a9f4  ldr r0,[0x203aa38]
+0203a9f8  mov r1,r4
+0203a9fc  mov r2,r2, lsl #0x1
+0203aa00  str r2,[sp,#0x0]
+0203aa04  ldr r0,[r0,#0x2ec]
+0203aa08  ldr r2,[r4,#0x10]
+0203aa0c  ldr r3,[r4,#0x20]
+0203aa10  bl 0x0203ef80
+0203aa14  mov r0,#0x0
+0203aa18  strb r0,[r4,#0x1c]
+0203aa1c  ldr r0,[r4,#0x20]
+0203aa20  ldr r1,[0x203aa3c]
+0203aa24  mov r2,r0, lsr #0x4
+0203aa28  mov r0,r4
+0203aa2c  str r2,[r1,#0x0]
+0203aa30  add sp,sp,#0x4
+0203aa34  ldmia sp!,{r3,r4,pc}

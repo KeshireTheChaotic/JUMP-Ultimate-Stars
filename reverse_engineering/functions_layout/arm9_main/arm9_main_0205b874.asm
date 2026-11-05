@@ -1,0 +1,10 @@
+0205b874  stmdb sp!,{lr}
+0205b878  sub sp,sp,#0x4
+0205b87c  ldr r0,[r0,#0x0]
+0205b880  cmp r0,#0x0
+0205b884  addeq sp,sp,#0x4
+0205b888  ldmiaeq sp!,{pc}
+0205b88c  ldrb r0,[r0,#0x3c]
+0205b890  bl 0x020569bc
+0205b894  add sp,sp,#0x4
+0205b898  ldmia sp!,{pc}

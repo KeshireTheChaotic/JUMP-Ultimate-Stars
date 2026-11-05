@@ -1,0 +1,76 @@
+020275ec  stmdb sp!,{r4,lr}
+020275f0  mov r4,r0
+020275f4  ldrb r1,[r4,#0x29]
+020275f8  mov r1,r1, lsl #0x18
+020275fc  movs r1,r1, lsr #0x1f
+02027600  bne 0x02027644
+02027604  bl 0x0201b45c
+02027608  cmp r0,#0x0
+0202760c  beq 0x0202761c
+02027610  ldr r1,[r0,#0x0]
+02027614  ldr r1,[r1,#0x2c]
+02027618  blx r1
+0202761c  mov r0,r4
+02027620  ldr r1,[r0,#0x0]
+02027624  ldr r1,[r1,#0x64]
+02027628  blx r1
+0202762c  mov r0,r4
+02027630  ldr r2,[r0,#0x0]
+02027634  mov r1,#0x1
+02027638  ldr r2,[r2,#0x50]
+0202763c  blx r2
+02027640  b 0x02027694
+02027644  ldr r0,[r4,#0x34]
+02027648  mov r3,#0x0
+0202764c  add r2,r0,#0x10
+02027650  ldr r0,[r2,#0x208]
+02027654  add r1,r2,r0, lsl #0x2
+02027658  add r2,r2,r0, lsl #0x8
+0202765c  b 0x02027688
+02027660  ldr r0,[r2,r3,lsl #0x2]
+02027664  cmp r0,r4
+02027668  bne 0x02027684
+0202766c  add r0,r2,r12, lsl #0x2
+02027670  ldr r0,[r0,#-0x4]
+02027674  str r0,[r2,r3,lsl #0x2]
+02027678  ldr r0,[r1,#0x200]
+0202767c  sub r0,r0,#0x1
+02027680  str r0,[r1,#0x200]
+02027684  add r3,r3,#0x1
+02027688  ldr r12,[r1,#0x200]
+0202768c  cmp r3,r12
+02027690  blt 0x02027660
+02027694  mov r0,r4
+02027698  ldr r1,[r0,#0x0]
+0202769c  ldr r1,[r1,#0x5c]
+020276a0  blx r1
+020276a4  b 0x020276b8
+020276a8  mov r0,r4
+020276ac  ldr r1,[r0,#0x0]
+020276b0  ldr r1,[r1,#0xc]
+020276b4  blx r1
+020276b8  ldrh r0,[r4,#0x4]
+020276bc  cmp r0,#0x1
+020276c0  bhi 0x020276a8
+020276c4  ldr r1,[r4,#0x34]
+020276c8  mov r2,r4
+020276cc  add r0,r1,#0x10
+020276d0  bl 0x0203184c
+020276d4  cmp r0,#0x0
+020276d8  ldmiane sp!,{r4,pc}
+020276dc  ldr r0,[r4,#0x34]
+020276e0  add lr,r0,#0x10
+020276e4  ldr r0,[lr,#0x208]
+020276e8  add r0,r0,#0x1
+020276ec  and r12,r0,#0x1
+020276f0  add r0,lr,r12, lsl #0x2
+020276f4  ldr r3,[r0,#0x200]
+020276f8  cmp r3,#0x40
+020276fc  ldmiage sp!,{r4,pc}
+02027700  add r2,lr,#0x200
+02027704  ldr r1,[r2,r12,lsl #0x2]
+02027708  add r0,lr,r12, lsl #0x8
+0202770c  add r1,r1,#0x1
+02027710  str r1,[r2,r12,lsl #0x2]
+02027714  str r4,[r0,r3,lsl #0x2]
+02027718  ldmia sp!,{r4,pc}

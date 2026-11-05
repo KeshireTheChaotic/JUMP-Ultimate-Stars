@@ -1,0 +1,10 @@
+0214cdb0  mov r2,#0x0
+0214cdb2  ldrsb r1,[r0,r2]
+0214cdb4  cmp r1,#0x0
+0214cdb6  beq 0x0214cdc0
+0214cdb8  add r2,r2,#0x1
+0214cdba  ldrsb r1,[r0,r2]
+0214cdbc  cmp r1,#0x0
+0214cdbe  bne 0x0214cdb8
+0214cdc0  add r0,r2,#0x0
+0214cdc2  bx lr

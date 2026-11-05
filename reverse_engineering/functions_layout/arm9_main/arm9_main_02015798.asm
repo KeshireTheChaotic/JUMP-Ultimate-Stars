@@ -1,0 +1,12 @@
+02015798  stmdb sp!,{r3,r4,r5,lr}
+0201579c  mov r4,r1
+020157a0  mov r5,r0
+020157a4  ldr r0,[r4,#0x64]
+020157a8  mov r1,#0x0
+020157ac  ldr r2,[r0,#0x0]
+020157b0  ldr r2,[r2,#0x28]
+020157b4  blx r2
+020157b8  mov r0,r5
+020157bc  mov r1,r4
+020157c0  bl 0x020247b8
+020157c4  ldmia sp!,{r3,r4,r5,pc}

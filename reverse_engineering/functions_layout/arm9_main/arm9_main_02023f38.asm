@@ -1,0 +1,17 @@
+02023f38  stmdb sp!,{r3,r4,r5,lr}
+02023f3c  mov r4,r1
+02023f40  mov r5,r0
+02023f44  mov r0,r4
+02023f48  ldr r1,[r0,#0x0]
+02023f4c  ldr r1,[r1,#0x30]
+02023f50  blx r1
+02023f54  cmp r0,#0x0
+02023f58  beq 0x02023f74
+02023f5c  mov r0,r4
+02023f60  ldr r2,[r0,#0x0]
+02023f64  mov r1,r5
+02023f68  ldr r2,[r2,#0x54]
+02023f6c  blx r2
+02023f70  mov r5,r0
+02023f74  mov r0,r5
+02023f78  ldmia sp!,{r3,r4,r5,pc}

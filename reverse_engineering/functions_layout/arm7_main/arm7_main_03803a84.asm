@@ -1,0 +1,16 @@
+03803a84  stmdb sp!,{lr}
+03803a88  sub sp,sp,#0x4
+03803a8c  mov r0,#0x0
+03803a90  mov r1,#0x32
+03803a94  bl 0x03803b34
+03803a98  ldr r0,[0x3803ac4]
+03803a9c  ldr r1,[r0,#0x0]
+03803aa0  ldr r0,[r1,#0x0]
+03803aa4  cmp r0,#0x4
+03803aa8  moveq r0,#0x6
+03803aac  streq r0,[r1,#0x0]
+03803ab0  moveq r0,#0x0
+03803ab4  movne r0,#0x1
+03803ab8  add sp,sp,#0x4
+03803abc  ldmia sp!,{lr}
+03803ac0  bx lr

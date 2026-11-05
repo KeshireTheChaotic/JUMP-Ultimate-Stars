@@ -1,0 +1,17 @@
+0207e5b8  stmdb sp!,{r4,lr}
+0207e5bc  sub sp,sp,#0x10
+0207e5c0  ldr r12,[r0,#0xf8]
+0207e5c4  mov r0,#0x18
+0207e5c8  ldr r3,[r12,#0x18]
+0207e5cc  mov r4,r2
+0207e5d0  smlabb r0,r1,r0,r3
+0207e5d4  ldrsh r2,[r0,#0x16]
+0207e5d8  ldr r1,[r12,#0x30]
+0207e5dc  add r0,sp,#0x0
+0207e5e0  bl 0x020855bc
+0207e5e4  add r1,sp,#0x0
+0207e5e8  mov r0,r4
+0207e5ec  bl 0x0207e594
+0207e5f0  mov r0,#0x0
+0207e5f4  add sp,sp,#0x10
+0207e5f8  ldmia sp!,{r4,pc}

@@ -1,0 +1,17 @@
+02047094  stmdb sp!,{r3,r4,r5,lr}
+02047098  mov r5,r0
+0204709c  mov r0,r1
+020470a0  mov r1,#0x0
+020470a4  mov r2,r1
+020470a8  bl 0x0203341c
+020470ac  mov r4,r0
+020470b0  ldr r0,[r5,#0x64]
+020470b4  mov r1,r4
+020470b8  ldr r2,[r0,#0x0]
+020470bc  ldr r2,[r2,#0x5c]
+020470c0  blx r2
+020470c4  mov r0,r4
+020470c8  ldr r1,[r0,#0x0]
+020470cc  ldr r1,[r1,#0xc]
+020470d0  blx r1
+020470d4  ldmia sp!,{r3,r4,r5,pc}

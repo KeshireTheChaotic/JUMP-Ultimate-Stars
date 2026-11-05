@@ -1,0 +1,14 @@
+021500cc  stmdb sp!,{r3,lr}
+021500d0  cmp r1,#0x0
+021500d4  ldr r0,[r0,#0x4]
+021500d8  bne 0x021500f0
+021500dc  ldr r2,[r0,#0x0]
+021500e0  mov r1,#0x0
+021500e4  ldr r2,[r2,#0xd4]
+021500e8  blx r2
+021500ec  ldmia sp!,{r3,pc}
+021500f0  ldr r2,[r0,#0x0]
+021500f4  ldr r1,[r1,#0x4]
+021500f8  ldr r2,[r2,#0xd4]
+021500fc  blx r2
+02150100  ldmia sp!,{r3,pc}

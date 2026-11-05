@@ -1,0 +1,12 @@
+0218a7e8  push {r4,lr}
+0218a7ea  add r4,r1,#0x0
+0218a7ec  bl 0x0218bf84
+0218a7f0  cmp r0,#0x0
+0218a7f2  bne 0x0218a800
+0218a7f4  mov r0,#0x0
+0218a7f6  ldr r1,[r4,#0x0]
+0218a7f8  str r0,[r1,#0xc]
+0218a7fa  mov r2,#0x1
+0218a7fc  ldr r1,[r4,#0x0]
+0218a7fe  str r2,[r1,#0x10]
+0218a800  pop {r4,pc}

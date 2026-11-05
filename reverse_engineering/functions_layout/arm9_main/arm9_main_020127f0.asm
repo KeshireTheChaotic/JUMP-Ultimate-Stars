@@ -1,0 +1,12 @@
+020127f0  stmdb sp!,{r3,lr}
+020127f4  mov r0,#0x1000
+020127f8  ldr r2,[r2,#0x0]
+020127fc  rsb r0,r0,#0x0
+02012800  and r2,r2,r0
+02012804  mov r0,r1
+02012808  str r2,[sp,#0x0]
+0201280c  ldr r2,[r0,#0x0]
+02012810  add r1,sp,#0x0
+02012814  ldr r2,[r2,#0x10]
+02012818  blx r2
+0201281c  ldmia sp!,{r3,pc}

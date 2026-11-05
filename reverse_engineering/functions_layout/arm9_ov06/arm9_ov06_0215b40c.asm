@@ -1,0 +1,13 @@
+0215b40c  add r1,r0,#0x100
+0215b410  ldrsb r1,[r1,#0x1e]
+0215b414  cmp r1,#0x0
+0215b418  bxeq lr
+0215b41c  mov r2,#0x0
+0215b420  strb r2,[r0,#0x11e]
+0215b424  ldr r1,[r0,#0x1a0]
+0215b428  sub r0,r2,#0x1
+0215b42c  ldr r1,[r1,#0x174]
+0215b430  ldr r1,[r1,#0x4]
+0215b434  strb r2,[r1,#0x5c]
+0215b438  str r0,[r1,#0x54]
+0215b43c  bx lr

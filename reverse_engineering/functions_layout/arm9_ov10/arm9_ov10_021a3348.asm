@@ -1,0 +1,17 @@
+021a3348  ldr r0,[0x21a338c]
+021a334c  ldr r1,[r0,#0x0]
+021a3350  cmp r1,#0x0
+021a3354  beq 0x021a3384
+021a3358  ldrb r0,[r1,#0xa]
+021a335c  cmp r0,#0x0
+021a3360  beq 0x021a337c
+021a3364  ldrb r0,[r1,#0xc]
+021a3368  cmp r0,#0x0
+021a336c  ldrbeq r0,[r1,#0xd]
+021a3370  cmpeq r0,#0x0
+021a3374  movne r0,#0x1
+021a3378  bxne lr
+021a337c  mov r0,#0x0
+021a3380  bx lr
+021a3384  mov r0,#0x0
+021a3388  bx lr

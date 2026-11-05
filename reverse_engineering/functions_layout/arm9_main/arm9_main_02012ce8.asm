@@ -1,0 +1,9 @@
+02012ce8  stmdb sp!,{r3,lr}
+02012cec  ldr r0,[0x2012d0c]
+02012cf0  ldr r0,[r0,#0xcc]
+02012cf4  cmp r0,#0x0
+02012cf8  bne 0x02012d00
+02012cfc  bl 0x02012dd8
+02012d00  ldr r0,[0x2012d0c]
+02012d04  ldr r0,[r0,#0xcc]
+02012d08  ldmia sp!,{r3,pc}

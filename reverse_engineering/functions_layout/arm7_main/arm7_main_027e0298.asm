@@ -1,0 +1,10 @@
+027e0298  cmp r0,#0x8
+027e029c  movcc r0,#0x0
+027e02a0  bxcc lr
+027e02a4  cmp r0,#0xe
+027e02a8  movcc r0,#0x1
+027e02ac  bxcc lr
+027e02b0  cmp r0,#0x14
+027e02b4  movcc r0,#0x2
+027e02b8  movcs r0,#0x3
+027e02bc  bx lr

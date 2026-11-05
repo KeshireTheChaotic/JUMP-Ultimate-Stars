@@ -1,0 +1,1 @@
+{"module":"arm9_main","address":"02044774","name":"FUN_02044774","thumb":false,"body_bytes":456,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["02016708","0201a228","0203add8","0203ef0c","02045b08","020519c8","0205401c"],"unresolved_call_targets":[],"status":"decompiled","asm_file":"arm9_main_02044774.asm","c_file":"arm9_main_02044774.c"}

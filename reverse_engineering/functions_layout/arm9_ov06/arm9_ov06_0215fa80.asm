@@ -1,0 +1,9 @@
+0215fa80  stmdb sp!,{r3,lr}
+0215fa84  ldr r1,[0x215faa4]
+0215fa88  ldrb r1,[r1,#0x0]
+0215fa8c  cmp r1,#0x0
+0215fa90  ldmiaeq sp!,{r3,pc}
+0215fa94  ldr r1,[r0,#0x0]
+0215fa98  ldr r1,[r1,#0x8]
+0215fa9c  blx r1
+0215faa0  ldmia sp!,{r3,pc}

@@ -1,0 +1,1 @@
+{"module":"arm9_ov12","address":"021ac300","name":"~jus_Class_021d05d0","thumb":true,"body_bytes":52,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["0201b244","0201c89c","021ac2a8","021ac398","021ac3c4"],"unresolved_call_targets":[],"status":"decompiled","asm_file":"arm9_ov12_021ac300.asm","c_file":"arm9_ov12_021ac300.c"}

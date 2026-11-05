@@ -1,0 +1,22 @@
+0201512c  stmdb sp!,{r3,r4,r5,lr}
+02015130  mov r5,r0
+02015134  ldrb r0,[r5,#0x10]
+02015138  mov r4,r1
+0201513c  mov r0,r0, lsl #0x1f
+02015140  movs r0,r0, lsr #0x1f
+02015144  bne 0x02015174
+02015148  ldrb r0,[r5,#0x11]
+0201514c  mov r0,r0, lsl #0x1f
+02015150  movs r0,r0, lsr #0x1f
+02015154  beq 0x02015174
+02015158  ldr r0,[r5,#0x34]
+0201515c  mov r1,r5
+02015160  add r0,r0,#0x8c
+02015164  bl 0x0201cdb4
+02015168  ldrb r0,[r5,#0x11]
+0201516c  bic r0,r0,#0x1
+02015170  strb r0,[r5,#0x11]
+02015174  mov r0,r5
+02015178  str r4,[r5,#0x34]
+0201517c  bl 0x02014ae0
+02015180  ldmia sp!,{r3,r4,r5,pc}

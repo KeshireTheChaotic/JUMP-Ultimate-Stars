@@ -1,0 +1,12 @@
+0207d370  stmdb sp!,{lr}
+0207d374  sub sp,sp,#0xc
+0207d378  ldr r12,[sp,#0x10]
+0207d37c  ldr lr,[sp,#0x14]
+0207d380  str r12,[sp,#0x0]
+0207d384  ldrb r12,[sp,#0x18]
+0207d388  str lr,[sp,#0x4]
+0207d38c  str r12,[sp,#0x8]
+0207d390  ldr r12,[r0,#0x148]
+0207d394  blx r12
+0207d398  add sp,sp,#0xc
+0207d39c  ldmia sp!,{pc}

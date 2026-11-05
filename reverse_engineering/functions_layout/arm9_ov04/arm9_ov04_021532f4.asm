@@ -1,0 +1,18 @@
+021532f4  stmdb sp!,{r3,lr}
+021532f8  sub sp,sp,#0x8
+021532fc  cmp r0,#0x0
+02153300  beq 0x02153334
+02153304  mov r12,#0x0
+02153308  add r2,sp,#0x0
+0215330c  add r1,r12,#0x1
+02153310  mov r3,r12, lsl #0x1
+02153314  mov r1,r1, lsl #0x18
+02153318  strh r12,[r2,r3]
+0215331c  mov r12,r1, asr #0x18
+02153320  cmp r12,#0x4
+02153324  blt 0x0215330c
+02153328  mov r1,#0x4
+0215332c  mov r3,r1
+02153330  bl 0x021531d0
+02153334  add sp,sp,#0x8
+02153338  ldmia sp!,{r3,pc}

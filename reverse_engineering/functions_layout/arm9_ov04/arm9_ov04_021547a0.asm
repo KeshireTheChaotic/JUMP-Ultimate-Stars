@@ -1,0 +1,9 @@
+021547a0  stmdb sp!,{r4,lr}
+021547a4  mov r4,r0
+021547a8  cmp r1,#0x0
+021547ac  beq 0x021547b4
+021547b0  bl 0x0206af1c
+021547b4  ldr r0,[r4,#0x0]
+021547b8  ldr r0,[r0,#0x4]
+021547bc  bl 0x02028330
+021547c0  ldmia sp!,{r4,pc}

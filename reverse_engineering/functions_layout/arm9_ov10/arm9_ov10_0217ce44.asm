@@ -1,0 +1,10 @@
+0217ce44  push {r4,lr}
+0217ce46  add r4,r0,#0x0
+0217ce48  bl 0x02178448
+0217ce4c  ldr r1,[0x0217ce5c]
+0217ce4e  ldrb r0,[r0,r1]
+0217ce50  cmp r0,#0x2
+0217ce52  beq 0x0217ce5a
+0217ce54  add r0,r4,#0x0
+0217ce56  bl 0x0217a93c
+0217ce5a  pop {r4,pc}

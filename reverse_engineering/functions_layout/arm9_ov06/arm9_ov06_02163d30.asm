@@ -1,0 +1,35 @@
+02163d30  stmdb sp!,{r4,r5,lr}
+02163d34  sub sp,sp,#0x1c
+02163d38  mov r4,r0
+02163d3c  ldrh r1,[r4,#0x10]
+02163d40  sub r0,r1,#0x1
+02163d44  strh r0,[r4,#0x10]
+02163d48  cmp r1,#0x0
+02163d4c  bne 0x02163db4
+02163d50  ldr r5,[r4,#0xc]
+02163d54  ldr r0,[r5,#0x0]
+02163d58  bl 0x0215b3e0
+02163d5c  add r1,r5,#0x4
+02163d60  ldr r3,[r1,r0,lsl #0x3]
+02163d64  add r0,r1,r0, lsl #0x3
+02163d68  ldr r0,[r0,#0x4]
+02163d6c  mov r1,#0x0
+02163d70  str r0,[sp,#0x0]
+02163d74  mov r0,#0x4
+02163d78  stmib sp,{r0,r1}
+02163d7c  str r1,[sp,#0xc]
+02163d80  sub r0,r1,#0x1
+02163d84  str r0,[sp,#0x10]
+02163d88  str r1,[sp,#0x14]
+02163d8c  str r1,[sp,#0x18]
+02163d90  ldr r0,[r4,#0x8]
+02163d94  cmp r3,#0x20000
+02163d98  movgt r2,#0x1
+02163d9c  ldr r1,[0x2163dbc]
+02163da0  ldr r0,[r0,#0xc]
+02163da4  movle r2,#0x0
+02163da8  bl 0x0216ab58
+02163dac  mov r0,#0x78
+02163db0  strh r0,[r4,#0x10]
+02163db4  add sp,sp,#0x1c
+02163db8  ldmia sp!,{r4,r5,pc}

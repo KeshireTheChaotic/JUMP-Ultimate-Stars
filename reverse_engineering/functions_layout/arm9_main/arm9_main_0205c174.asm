@@ -1,0 +1,21 @@
+0205c174  stmdb sp!,{r4,lr}
+0205c178  ldr r3,[0x205c1c8]
+0205c17c  ldr r0,[r3,#0x0]
+0205c180  cmp r0,#0x0
+0205c184  ldmiaeq sp!,{r4,pc}
+0205c188  ldr r1,[r3,#0x2c]
+0205c18c  cmp r1,#0x0
+0205c190  movge r0,#0x1
+0205c194  movge r2,r0, lsl r1
+0205c198  ldr r0,[r3,#0x24]
+0205c19c  ldr r1,[r3,#0x28]
+0205c1a0  movlt r2,#0x0
+0205c1a4  mov r3,#0x0
+0205c1a8  bl 0x020568e4
+0205c1ac  bl 0x02056da4
+0205c1b0  mov r4,r0
+0205c1b4  mov r0,#0x1
+0205c1b8  bl 0x02056e74
+0205c1bc  mov r0,r4
+0205c1c0  bl 0x02056de4
+0205c1c4  ldmia sp!,{r4,pc}

@@ -1,0 +1,17 @@
+02076c98  mvn r0,#0x0
+02076c9c  cmp r1,r0
+02076ca0  moveq r0,#0x0
+02076ca4  bxeq lr
+02076ca8  cmp r1,#0x0
+02076cac  movlt r0,#0x0
+02076cb0  bxlt lr
+02076cb4  ldr r0,[0x2076cdc]
+02076cb8  ldr r2,[r0,#0x0]
+02076cbc  add r0,r2,#0x1000
+02076cc0  ldr r0,[r0,#0x8ec]
+02076cc4  cmp r1,r0
+02076cc8  movcs r0,#0x0
+02076ccc  ldrcc r2,[r2,#0x30]
+02076cd0  movcc r0,#0xc
+02076cd4  mlacc r0,r1,r0,r2
+02076cd8  bx lr

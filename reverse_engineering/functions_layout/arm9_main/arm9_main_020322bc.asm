@@ -1,0 +1,16 @@
+020322bc  stmdb sp!,{r4,lr}
+020322c0  ldr r0,[r0,#0x8]
+020322c4  ldr r0,[r0,#0x8]
+020322c8  ldr r4,[r0,#0x8]
+020322cc  b 0x020322f0
+020322d0  ldrb r1,[r0,#0x43]
+020322d4  cmp r1,#0x0
+020322d8  beq 0x020322e8
+020322dc  ldr r1,[r0,#0x0]
+020322e0  ldr r1,[r1,#0x18]
+020322e4  blx r1
+020322e8  mov r0,r4
+020322ec  ldr r4,[r4,#0x8]
+020322f0  cmp r4,#0x0
+020322f4  bne 0x020322d0
+020322f8  ldmia sp!,{r4,pc}

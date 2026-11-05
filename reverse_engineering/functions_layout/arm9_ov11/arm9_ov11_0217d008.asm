@@ -1,0 +1,17 @@
+0217d008  stmdb sp!,{r3,lr}
+0217d00c  ldr r1,[r0,#0x34]
+0217d010  cmp r1,#0x0
+0217d014  ldmiaeq sp!,{r3,pc}
+0217d018  ldr r2,[r1,#0x4]
+0217d01c  mov r1,#0x0
+0217d020  ldr r3,[r2,#0x10]
+0217d024  mvn r2,#0x0
+0217d028  strb r2,[r3,#0xe]
+0217d02c  strb r1,[r3,#0xf]
+0217d030  strh r1,[r3,#0xc]
+0217d034  strb r1,[r3,#0x11]
+0217d038  strb r1,[r3,#0x10]
+0217d03c  ldr r0,[r0,#0x34]
+0217d040  ldr r0,[r0,#0x4]
+0217d044  bl 0x02028330
+0217d048  ldmia sp!,{r3,pc}

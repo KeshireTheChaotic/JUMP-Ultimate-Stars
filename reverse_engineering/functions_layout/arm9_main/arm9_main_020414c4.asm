@@ -1,0 +1,10 @@
+020414c4  ldr r2,[r0,#0xc]
+020414c8  mvn r1,#0x0
+020414cc  cmp r2,r1
+020414d0  ldreq r1,[r0,#0x24]
+020414d4  ldreq r2,[r1,#0x28]
+020414d8  ldreq r1,[r1,#0x24]
+020414dc  subeq r1,r2,r1
+020414e0  streq r1,[r0,#0xc]
+020414e4  ldr r0,[r0,#0xc]
+020414e8  bx lr

@@ -1,0 +1,14 @@
+027e9b60  stmdb sp!,{lr}
+027e9b64  sub sp,sp,#0x4
+027e9b68  ldr r2,[0x27e9b98]
+027e9b6c  strh r1,[r2,#0x0]
+027e9b70  orr r1,r0,#0x5000
+027e9b74  ldr r0,[0x27e9b9c]
+027e9b78  strh r1,[r0,#0x0]
+027e9b7c  bl 0x037fb88c
+027e9b80  cmp r0,#0x0
+027e9b84  mvnne r0,#0x0
+027e9b88  moveq r0,#0x0
+027e9b8c  add sp,sp,#0x4
+027e9b90  ldmia sp!,{lr}
+027e9b94  bx lr

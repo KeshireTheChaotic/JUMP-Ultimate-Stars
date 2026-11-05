@@ -1,0 +1,13 @@
+0208a5f8  push {r3,lr}
+0208a5fa  bl 0x0208bce4
+0208a5fe  ldr r1,[0x0208a618]
+0208a600  ldr r1,[r1,#0xc]
+0208a602  strb r0,[r1,#0x15]
+0208a604  bl 0x0208bd0c
+0208a608  ldr r1,[0x0208a618]
+0208a60a  ldr r2,[r1,#0xc]
+0208a60c  strb r0,[r2,#0x16]
+0208a60e  ldr r0,[r1,#0xc]
+0208a610  mov r1,#0x18
+0208a612  bl 0x02089560
+0208a616  pop {r3,pc}

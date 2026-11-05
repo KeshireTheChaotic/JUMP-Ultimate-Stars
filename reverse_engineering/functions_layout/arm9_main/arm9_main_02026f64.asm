@@ -1,0 +1,10 @@
+02026f64  stmdb sp!,{r4,lr}
+02026f68  mov r4,r0
+02026f6c  bl 0x0201a9ec
+02026f70  cmp r0,#0x0
+02026f74  bne 0x02026f84
+02026f78  mov r0,r4
+02026f7c  mov r1,#0x1
+02026f80  bl 0x0201a958
+02026f84  mov r0,r4
+02026f88  ldmia sp!,{r4,pc}

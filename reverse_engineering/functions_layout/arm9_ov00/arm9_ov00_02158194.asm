@@ -1,0 +1,15 @@
+02158194  stmdb sp!,{r3,lr}
+02158198  cmp r1,#0x0
+0215819c  ldr r0,[r0,#0x4]
+021581a0  bne 0x021581b8
+021581a4  ldr r2,[r0,#0x0]
+021581a8  mov r1,#0x2
+021581ac  ldr r2,[r2,#0x164]
+021581b0  blx r2
+021581b4  ldmia sp!,{r3,pc}
+021581b8  ldr r3,[r0,#0x0]
+021581bc  ldr r2,[r1,#0x4]
+021581c0  ldr r3,[r3,#0x160]
+021581c4  mov r1,#0x2
+021581c8  blx r3
+021581cc  ldmia sp!,{r3,pc}

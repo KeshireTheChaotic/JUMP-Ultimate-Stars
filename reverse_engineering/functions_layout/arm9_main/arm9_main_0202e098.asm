@@ -1,0 +1,13 @@
+0202e098  stmdb sp!,{r3,lr}
+0202e09c  sub sp,sp,#0x8
+0202e0a0  ldrsh r2,[r3,#0x4]
+0202e0a4  mov r0,r1
+0202e0a8  ldr r1,[0x202e0cc]
+0202e0ac  str r2,[sp,#0x0]
+0202e0b0  ldrsh r2,[r3,#0x6]
+0202e0b4  str r2,[sp,#0x4]
+0202e0b8  ldrsh r2,[r3,#0x0]
+0202e0bc  ldrsh r3,[r3,#0x2]
+0202e0c0  blx 0x02003ce0
+0202e0c4  add sp,sp,#0x8
+0202e0c8  ldmia sp!,{r3,pc}

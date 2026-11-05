@@ -1,0 +1,11 @@
+020876f8  stmdb sp!,{r3,lr}
+020876fc  bl 0x0208c51c
+02087700  cmp r0,#0x0
+02087704  beq 0x02087710
+02087708  bl 0x0219b634
+0208770c  ldmia sp!,{r3,pc}
+02087710  blx 0x0208c134
+02087714  cmp r0,#0x0
+02087718  moveq r0,#0x1
+0208771c  movne r0,#0x0
+02087720  ldmia sp!,{r3,pc}

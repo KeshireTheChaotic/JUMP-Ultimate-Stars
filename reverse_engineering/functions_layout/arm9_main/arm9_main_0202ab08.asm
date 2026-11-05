@@ -1,0 +1,16 @@
+0202ab08  stmdb sp!,{r4,lr}
+0202ab0c  ldr r1,[0x202ab48]
+0202ab10  mov r4,r0
+0202ab14  ldr r2,[r1,#0x28]
+0202ab18  ldr r1,[r4,#0x8]
+0202ab1c  subs r1,r2,r1
+0202ab20  ldrbeq r1,[r4,#0x24]
+0202ab24  addeq r0,r4,#0x54
+0202ab28  beq 0x0202ab3c
+0202ab2c  ldr r1,[r0,#0x0]
+0202ab30  ldr r1,[r1,#0x50]
+0202ab34  blx r1
+0202ab38  ldrb r1,[r4,#0x24]
+0202ab3c  orr r1,r1,#0x8
+0202ab40  strb r1,[r4,#0x24]
+0202ab44  ldmia sp!,{r4,pc}

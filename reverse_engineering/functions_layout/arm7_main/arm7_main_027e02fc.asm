@@ -1,0 +1,12 @@
+027e02fc  mov r3,#0x0
+027e0300  ldr r2,[0x27e032c]
+027e0304  add r1,r2,r3
+027e0308  add r1,r1,#0x1000
+027e030c  strb r0,[r1,#0x554]
+027e0310  add r3,r3,#0x1
+027e0314  cmp r3,#0x20
+027e0318  blt 0x027e0304
+027e031c  mov r1,#0x0
+027e0320  ldr r0,[0x27e0330]
+027e0324  str r1,[r0,#0x574]
+027e0328  bx lr

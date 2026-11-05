@@ -1,0 +1,12 @@
+021558d8  stmdb sp!,{r4,lr}
+021558dc  movs r4,r0
+021558e0  ldmiaeq sp!,{r4,pc}
+021558e4  ldr r0,[r4,#0x0]
+021558e8  cmp r0,#0x0
+021558ec  beq 0x021558fc
+021558f0  ldr r1,[r0,#0x0]
+021558f4  ldr r1,[r1,#0x8]
+021558f8  blx r1
+021558fc  mov r0,r4
+02155900  bl 0x0201b244
+02155904  ldmia sp!,{r4,pc}

@@ -1,0 +1,14 @@
+02157494  stmdb sp!,{r4,lr}
+02157498  mov r4,r0
+0215749c  bl 0x02159d34
+021574a0  ldrh r0,[sp,#0x8]
+021574a4  tst r0,#0x10
+021574a8  ldr r0,[r4,#0x1b4]
+021574ac  ldrne r1,[r0,#0x56c]
+021574b0  ldrne r0,[r1,#0x3c]
+021574b4  orrne r0,r0,#0x2
+021574b8  ldreq r1,[r0,#0x56c]
+021574bc  ldreq r0,[r1,#0x3c]
+021574c0  biceq r0,r0,#0x2
+021574c4  str r0,[r1,#0x3c]
+021574c8  ldmia sp!,{r4,pc}

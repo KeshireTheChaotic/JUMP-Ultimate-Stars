@@ -1,0 +1,13 @@
+020741c0  add r0,r0,#0x1
+020741c4  ldrsb r2,[r0,#0x0]
+020741c8  cmp r2,#0x0
+020741cc  bne 0x020741c0
+020741d0  b 0x020741dc
+020741d4  ldrsb r2,[r1],#0x1
+020741d8  strb r2,[r0],#0x1
+020741dc  ldrsb r2,[r1,#0x0]
+020741e0  cmp r2,#0x0
+020741e4  bne 0x020741d4
+020741e8  mov r1,#0x0
+020741ec  strb r1,[r0,#0x0]
+020741f0  bx lr

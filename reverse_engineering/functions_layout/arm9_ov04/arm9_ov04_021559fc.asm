@@ -1,0 +1,15 @@
+021559fc  stmdb sp!,{r4,lr}
+02155a00  movs r4,r0
+02155a04  ldmiaeq sp!,{r4,pc}
+02155a08  mov r1,#0x0
+02155a0c  strb r1,[r4,#0xc]
+02155a10  ldr r0,[r4,#0x8]
+02155a14  ldr r0,[r0,#0x4]
+02155a18  ldr r2,[r0,#0x0]
+02155a1c  ldr r2,[r2,#0xd8]
+02155a20  blx r2
+02155a24  ldr r0,[r4,#0x0]
+02155a28  ldr r1,[0x2155a38]
+02155a2c  ldr r0,[r0,#0x4]
+02155a30  bl 0x02028384
+02155a34  ldmia sp!,{r4,pc}

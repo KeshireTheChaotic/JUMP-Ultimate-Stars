@@ -1,0 +1,9 @@
+021af908  stmdb sp!,{r3,lr}
+021af90c  ldr r0,[r0,#0x94]
+021af910  cmp r0,#0x0
+021af914  moveq r0,#0x0
+021af918  ldmiaeq sp!,{r3,pc}
+021af91c  ldr r1,[r0,#0x0]
+021af920  ldr r1,[r1,#0x128]
+021af924  blx r1
+021af928  ldmia sp!,{r3,pc}

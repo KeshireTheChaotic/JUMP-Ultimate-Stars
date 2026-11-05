@@ -1,0 +1,11 @@
+021b30ec  push {r4,lr}
+021b30ee  add r4,r0,#0x0
+021b30f0  ldr r0,[r4,#0x1c]
+021b30f2  cmp r0,#0x0
+021b30f4  beq 0x021b30fa
+021b30f6  blx 0x0201b268
+021b30fa  add r0,r4,#0x0
+021b30fc  add r0,#0xc
+021b30fe  blx 0x021b36e0
+021b3102  add r0,r4,#0x0
+021b3104  pop {r4,pc}

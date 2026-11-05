@@ -1,0 +1,17 @@
+0219a22c  stmdb sp!,{r3,lr}
+0219a230  bl 0x0219a308
+0219a234  ldr r0,[0x219a270]
+0219a238  ldr r1,[0x219a274]
+0219a23c  ldr r0,[r0,#0x0]
+0219a240  ldr r2,[r1,#0x0]
+0219a244  add r0,r0,#0x2ac
+0219a248  add r0,r0,#0x2800
+0219a24c  str r0,[r2,#0x1c]
+0219a250  ldr r12,[r1,#0x0]
+0219a254  mov r1,#0xc
+0219a258  ldr r3,[r12,#0x44]
+0219a25c  ldr r0,[r12,#0x18]
+0219a260  mul r2,r3,r1
+0219a264  ldr r1,[r12,#0x1c]
+0219a268  bl 0x02051890
+0219a26c  ldmia sp!,{r3,pc}

@@ -1,0 +1,13 @@
+0214d79c  stmdb sp!,{r3,r4,r5,lr}
+0214d7a0  ldr r3,[0x214d7d0]
+0214d7a4  mov r5,r0
+0214d7a8  ldrb r0,[r3,r1]
+0214d7ac  mov r1,r2
+0214d7b0  blx 0x0207216c
+0214d7b4  ldrb r4,[r0,#0x34]
+0214d7b8  mov r0,r5
+0214d7bc  bl 0x02075780
+0214d7c0  mov r0,r5
+0214d7c4  mov r1,r4
+0214d7c8  bl 0x02075788
+0214d7cc  ldmia sp!,{r3,r4,r5,pc}

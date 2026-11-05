@@ -1,0 +1,64 @@
+0216d0c8  stmdb sp!,{r4,r5,r6,r7,r8,r9,r10,lr}
+0216d0cc  mov r8,r0
+0216d0d0  mov r7,r2
+0216d0d4  bl 0x0216d1cc
+0216d0d8  ldr r2,[r8,#0x34]
+0216d0dc  ldr r1,[r8,#0x38]
+0216d0e0  mov r4,r0
+0216d0e4  add r0,r1,r2
+0216d0e8  cmp r2,#0x0
+0216d0ec  rsb r5,r0,#0x0
+0216d0f0  rsblt r0,r2,#0x0
+0216d0f4  movge r0,r2
+0216d0f8  add r0,r0,r1
+0216d0fc  rsb r6,r0,#0x0
+0216d100  add r0,r6,r6, lsr #0x1f
+0216d104  add r0,r1,r0, asr #0x1
+0216d108  mul r1,r0,r0
+0216d10c  add r0,r5,r5, lsr #0x1f
+0216d110  add r2,r2,r0, asr #0x1
+0216d114  mla r0,r2,r2,r1
+0216d118  bl 0x0200b850
+0216d11c  bl 0x0200bb00
+0216d120  mov r9,r0
+0216d124  ldrh r0,[r8,#0x20]
+0216d128  mov r10,r1
+0216d12c  bl 0x0200b890
+0216d130  mov r2,r9
+0216d134  mov r3,r10
+0216d138  bl 0x0200b8cc
+0216d13c  ldr r3,[0x216d1c8]
+0216d140  mov r2,#0x0
+0216d144  bl 0x0200d534
+0216d148  bl 0x0200b6c4
+0216d14c  mov r9,r0
+0216d150  ldrsh r0,[r8,#0x58]
+0216d154  mov r0,r0, lsl #0x8
+0216d158  bl 0x0200c954
+0216d15c  mov r1,r9
+0216d160  bl 0x0200c5ac
+0216d164  mov r1,r0
+0216d168  mov r0,#0x3f800000
+0216d16c  bl 0x0200bfb4
+0216d170  bl 0x0200c914
+0216d174  strh r0,[r8,#0x62]
+0216d178  ldrh r1,[r8,#0x62]
+0216d17c  mov r0,r5
+0216d180  bl 0x0200d12c
+0216d184  strh r0,[r8,#0x5a]
+0216d188  ldrh r1,[r8,#0x62]
+0216d18c  mov r0,r6
+0216d190  bl 0x0200d12c
+0216d194  strh r0,[r8,#0x5c]
+0216d198  mov r2,#0xb5
+0216d19c  strh r2,[r8,#0x48]
+0216d1a0  rsb r0,r2,#0x0
+0216d1a4  strh r0,[r8,#0x4a]
+0216d1a8  ldrb r0,[r7,#0x1c]
+0216d1ac  cmp r0,#0x0
+0216d1b0  ldrshne r1,[r8,#0x48]
+0216d1b4  subne r0,r2,#0xb6
+0216d1b8  smulbbne r0,r1,r0
+0216d1bc  strhne r0,[r8,#0x48]
+0216d1c0  mov r0,r4
+0216d1c4  ldmia sp!,{r4,r5,r6,r7,r8,r9,r10,pc}

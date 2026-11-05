@@ -1,0 +1,14 @@
+0214e30c  push {r3,lr}
+0214e30e  blx 0x0203b3e4
+0214e312  add r0,#0x88
+0214e314  ldr r0,[r0,#0x0]
+0214e316  mov r1,#0x2e
+0214e318  mov r2,#0x0
+0214e31a  blx 0x0214e330
+0214e31e  blx 0x0203b3e4
+0214e322  add r0,#0x88
+0214e324  ldr r0,[r0,#0x0]
+0214e326  mov r1,#0x1
+0214e328  mov r2,#0x3e
+0214e32a  blx 0x0214da28
+0214e32e  pop {r3,pc}

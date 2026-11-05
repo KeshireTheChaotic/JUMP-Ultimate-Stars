@@ -1,0 +1,1 @@
+{"module":"arm9_main","address":"02046248","name":"vfunc_20","thumb":false,"body_bytes":328,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["0201a228","02044488","02044538","020445f4","02044c78"],"unresolved_call_targets":[],"status":"decompiled","asm_file":"arm9_main_02046248.asm","c_file":"arm9_main_02046248.c"}

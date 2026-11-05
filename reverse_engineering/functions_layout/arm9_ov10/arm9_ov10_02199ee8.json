@@ -1,0 +1,1 @@
+{"module":"arm9_ov10","address":"02199ee8","name":"WiFi_Init_MemoryManager","thumb":false,"body_bytes":140,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["020101f4","0201a21c","020517fc","02199f94"],"unresolved_call_targets":[],"status":"decompiled","asm_file":"arm9_ov10_02199ee8.asm","c_file":"arm9_ov10_02199ee8.c"}

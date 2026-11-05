@@ -1,0 +1,12 @@
+0202a684  stmdb sp!,{r4,lr}
+0202a688  mov r4,r0
+0202a68c  bl 0x02029ef4
+0202a690  ldr r1,[0x202a6b4]
+0202a694  mov r0,#0x0
+0202a698  str r1,[r4,#0x0]
+0202a69c  str r0,[r4,#0x30]
+0202a6a0  mov r1,#0x1000
+0202a6a4  str r1,[r4,#0x34]
+0202a6a8  mov r0,r4
+0202a6ac  str r1,[r4,#0x38]
+0202a6b0  ldmia sp!,{r4,pc}

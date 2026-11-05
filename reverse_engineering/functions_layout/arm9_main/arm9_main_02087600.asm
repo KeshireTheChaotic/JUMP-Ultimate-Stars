@@ -1,0 +1,10 @@
+02087600  stmdb sp!,{r3,lr}
+02087604  bl 0x0208c51c
+02087608  cmp r0,#0x0
+0208760c  ldmiaeq sp!,{r3,pc}
+02087610  bl 0x020876f8
+02087614  cmp r0,#0x0
+02087618  ldmiaeq sp!,{r3,pc}
+0208761c  mov r0,#0x1
+02087620  bl 0x0219b1c4
+02087624  ldmia sp!,{r3,pc}

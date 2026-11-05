@@ -1,0 +1,9 @@
+03804560  stmdb sp!,{lr}
+03804564  sub sp,sp,#0x4
+03804568  ldr r0,[0x3804584]
+0380456c  add r1,sp,#0x0
+03804570  mov r2,#0x0
+03804574  bl 0x037fcb54
+03804578  add sp,sp,#0x4
+0380457c  ldmia sp!,{lr}
+03804580  bx lr

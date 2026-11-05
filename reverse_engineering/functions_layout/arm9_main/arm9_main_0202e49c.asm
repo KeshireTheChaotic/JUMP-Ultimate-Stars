@@ -1,0 +1,10 @@
+0202e49c  stmdb sp!,{r3,lr}
+0202e4a0  cmp r2,#0x0
+0202e4a4  movne r2,#0x1
+0202e4a8  moveq r2,#0x0
+0202e4ac  strb r2,[sp,#0x0]
+0202e4b0  ldr r3,[r0,#0x0]
+0202e4b4  add r2,sp,#0x0
+0202e4b8  ldr r3,[r3,#0x24]
+0202e4bc  blx r3
+0202e4c0  ldmia sp!,{r3,pc}

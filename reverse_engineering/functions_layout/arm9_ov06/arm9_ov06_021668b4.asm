@@ -1,0 +1,88 @@
+021668b4  stmdb sp!,{r3,r4,r5,r6,r7,r8,r9,r10,r11,lr}
+021668b8  sub sp,sp,#0x90
+021668bc  mov r10,r0
+021668c0  ldr r0,[r10,#0x24]
+021668c4  mov r9,r1
+021668c8  ldrb r3,[r0,#0x10]
+021668cc  mov r8,r2
+021668d0  ldr r0,[r10,#0x80]
+021668d4  add r1,sp,#0x10
+021668d8  mov r2,r3, lsl #0x3
+021668dc  bl 0x02051890
+021668e0  mov r5,#0x0
+021668e4  add r4,sp,#0x10
+021668e8  add r11,sp,#0x8
+021668ec  b 0x02166924
+021668f0  bl 0x0215b3e0
+021668f4  add r6,r4,r0, lsl #0x3
+021668f8  mov r0,r11
+021668fc  mov r1,r6
+02166900  bl 0x02166a1c
+02166904  add r7,r4,r5, lsl #0x3
+02166908  mov r0,r6
+0216690c  mov r1,r7
+02166910  bl 0x02166a1c
+02166914  mov r0,r7
+02166918  mov r1,r11
+0216691c  bl 0x02166a1c
+02166920  add r5,r5,#0x1
+02166924  ldr r0,[r10,#0x24]
+02166928  ldrb r0,[r0,#0x10]
+0216692c  cmp r5,r0
+02166930  blt 0x021668f0
+02166934  mov r5,#0x0
+02166938  mov r4,#0x500
+0216693c  mov r6,r5
+02166940  rsb r4,r4,#0x0
+02166944  ldr r11,[0x2166a14]
+02166948  b 0x021669f8
+0216694c  cmp r8,#0x0
+02166950  beq 0x02166978
+02166954  ldr r1,[r10,#0x2c]
+02166958  mov r0,#0xc
+0216695c  mla r2,r6,r0,r1
+02166960  ldmia r2,{r0,r1}
+02166964  mov r2,#0x1
+02166968  mov r3,#0x1800
+0216696c  bl 0x021663ec
+02166970  cmp r0,#0x0
+02166974  bne 0x021669f4
+02166978  ldr r0,[r11,#0x0]
+0216697c  ldr r0,[r0,#0x4]
+02166980  bl 0x02031070
+02166984  ldr r1,[0x2166a18]
+02166988  and r7,r0,r1
+0216698c  ldr r0,[r11,#0x0]
+02166990  ldr r0,[r0,#0x4]
+02166994  bl 0x02031070
+02166998  sub r1,r4,r7
+0216699c  mov r1,r1, lsl #0x10
+021669a0  mov r1,r1, asr #0x10
+021669a4  str r1,[sp,#0x0]
+021669a8  mov r1,#0x0
+021669ac  str r1,[sp,#0x4]
+021669b0  ldr r1,[0x2166a18]
+021669b4  add r2,sp,#0x10
+021669b8  and r0,r0,r1
+021669bc  add r2,r2,r6, lsl #0x3
+021669c0  sub r0,r0,#0x200
+021669c4  add r1,sp,#0x10
+021669c8  ldr r2,[r2,#0x4]
+021669cc  mov r0,r0, lsl #0x10
+021669d0  mov r3,r0, asr #0x10
+021669d4  ldr r1,[r1,r6,lsl #0x3]
+021669d8  mov r0,#0xc0
+021669dc  sub r2,r2,#0x1
+021669e0  bl 0x02164d48
+021669e4  add r5,r5,#0x1
+021669e8  cmp r9,r5
+021669ec  movls r0,#0x1
+021669f0  bls 0x02166a0c
+021669f4  add r6,r6,#0x1
+021669f8  ldr r0,[r10,#0x24]
+021669fc  ldrb r0,[r0,#0x10]
+02166a00  cmp r6,r0
+02166a04  blt 0x0216694c
+02166a08  mov r0,#0x0
+02166a0c  add sp,sp,#0x90
+02166a10  ldmia sp!,{r3,r4,r5,r6,r7,r8,r9,r10,r11,pc}

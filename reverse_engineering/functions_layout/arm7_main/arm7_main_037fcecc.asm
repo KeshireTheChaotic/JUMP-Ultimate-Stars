@@ -1,0 +1,14 @@
+037fcecc  stmdb sp!,{lr}
+037fced0  sub sp,sp,#0x4
+037fced4  bl 0x037fd02c
+037fced8  bl 0x037fe8c0
+037fcedc  bl 0x037fc078
+037fcee0  bl 0x037fbdac
+037fcee4  bl 0x037fd7f4
+037fcee8  bl 0x037fdc68
+037fceec  bl 0x037fc77c
+037fcef0  bl 0x037fe4f8
+037fcef4  bl 0x0380760c
+037fcef8  add sp,sp,#0x4
+037fcefc  ldmia sp!,{lr}
+037fcf00  bx lr

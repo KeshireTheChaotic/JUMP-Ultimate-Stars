@@ -1,0 +1,11 @@
+02159a30  stmdb sp!,{r4,lr}
+02159a34  bl 0x020329d4
+02159a38  mov r4,r0
+02159a3c  ldr r1,[r4,#0x18]
+02159a40  cmp r1,#0x0
+02159a44  bne 0x02159a54
+02159a48  ldr r1,[r0,#0x0]
+02159a4c  ldr r1,[r1,#0x14]
+02159a50  blx r1
+02159a54  ldr r0,[r4,#0x18]
+02159a58  ldmia sp!,{r4,pc}

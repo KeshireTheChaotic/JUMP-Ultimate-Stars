@@ -1,0 +1,15 @@
+0217f6ac  ldr r2,[r0,#0x4]
+0217f6ae  cmp r2,#0x0
+0217f6b0  beq 0x0217f6b4
+0217f6b2  str r1,[r2,#0x20]
+0217f6b4  str r1,[r0,#0x4]
+0217f6b6  mov r2,#0x0
+0217f6b8  str r2,[r1,#0x20]
+0217f6ba  ldr r2,[r0,#0x0]
+0217f6bc  cmp r2,#0x0
+0217f6be  bne 0x0217f6c2
+0217f6c0  str r1,[r0,#0x0]
+0217f6c2  ldr r1,[r0,#0x8]
+0217f6c4  add r1,r1,#0x1
+0217f6c6  str r1,[r0,#0x8]
+0217f6c8  bx lr

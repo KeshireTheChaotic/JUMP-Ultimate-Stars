@@ -1,0 +1,14 @@
+02165b60  push {r4,r5}
+02165b62  ldr r5,[r0,#0x8]
+02165b64  lsl r4,r1,#0x3
+02165b66  ldr r1,[r5,r4]
+02165b68  ldr r0,[0x02165b7c]
+02165b6a  and r1,r0
+02165b6c  lsr r0,r1,#0x10
+02165b6e  str r0,[r2,#0x0]
+02165b70  ldr r1,[r5,r4]
+02165b72  mov r0,#0xff
+02165b74  and r1,r0
+02165b76  str r1,[r3,#0x0]
+02165b78  pop {r4,r5}
+02165b7a  bx lr

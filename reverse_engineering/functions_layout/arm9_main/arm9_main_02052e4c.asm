@@ -1,0 +1,12 @@
+02052e4c  stmdb sp!,{r4,r5,lr}
+02052e50  sub sp,sp,#0x4
+02052e54  mov r5,r0
+02052e58  bl 0x02055238
+02052e5c  ldr r1,[0x2052e7c]
+02052e60  ldr r4,[r1,#0xc]
+02052e64  str r5,[r1,#0xc]
+02052e68  bl 0x0205524c
+02052e6c  mov r0,r4
+02052e70  add sp,sp,#0x4
+02052e74  ldmia sp!,{r4,r5,lr}
+02052e78  bx lr

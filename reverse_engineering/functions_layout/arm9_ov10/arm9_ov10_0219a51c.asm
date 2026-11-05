@@ -1,0 +1,17 @@
+0219a51c  cmp r0,#0x0
+0219a520  blt 0x0219a558
+0219a524  ldr r1,[0x219a560]
+0219a528  mov r2,#0x0
+0219a52c  ldr r3,[r1,#0x0]
+0219a530  b 0x0219a550
+0219a534  add r1,r3,r2
+0219a538  add r1,r1,#0x800
+0219a53c  ldrsb r1,[r1,#0xe4]
+0219a540  cmp r0,r1
+0219a544  moveq r0,#0x1
+0219a548  bxeq lr
+0219a54c  add r2,r2,#0x1
+0219a550  cmp r2,#0x4
+0219a554  blt 0x0219a534
+0219a558  mov r0,#0x0
+0219a55c  bx lr

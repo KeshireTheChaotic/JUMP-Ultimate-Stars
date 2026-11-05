@@ -1,0 +1,9 @@
+0215da20  stmdb sp!,{r3,lr}
+0215da24  mov r12,#0xe
+0215da28  ldr r0,[0x215da44]
+0215da2c  sub r1,r12,#0x40
+0215da30  sub r2,r12,#0x1a
+0215da34  mov r3,#0x32
+0215da38  str r12,[sp,#0x0]
+0215da3c  bl 0x0214ee3c
+0215da40  ldmia sp!,{r3,pc}

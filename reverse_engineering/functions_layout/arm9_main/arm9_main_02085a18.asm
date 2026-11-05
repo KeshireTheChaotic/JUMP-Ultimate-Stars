@@ -1,0 +1,37 @@
+02085a18  stmdb sp!,{r4,r5,r6,lr}
+02085a1c  mov r4,r0
+02085a20  ldr r0,[r4,#0x0]
+02085a24  cmp r0,#0x0
+02085a28  beq 0x02085a40
+02085a2c  ldr r1,[r0,#0x0]
+02085a30  ldr r1,[r1,#0x8]
+02085a34  blx r1
+02085a38  mov r0,#0x0
+02085a3c  str r0,[r4,#0x0]
+02085a40  mov r6,#0x0
+02085a44  mov r5,r6
+02085a48  b 0x02085a6c
+02085a4c  ldr r0,[r4,#0x8]
+02085a50  ldr r0,[r0,r6,lsl #0x2]
+02085a54  cmp r0,#0x0
+02085a58  beq 0x02085a68
+02085a5c  bl 0x02083648
+02085a60  ldr r0,[r4,#0x8]
+02085a64  str r5,[r0,r6,lsl #0x2]
+02085a68  add r6,r6,#0x1
+02085a6c  ldrb r0,[r4,#0x10]
+02085a70  cmp r6,r0
+02085a74  blt 0x02085a4c
+02085a78  ldr r0,[r4,#0x4]
+02085a7c  cmp r0,#0x0
+02085a80  beq 0x02085a90
+02085a84  ldr r1,[r0,#0x0]
+02085a88  ldr r1,[r1,#0xc]
+02085a8c  blx r1
+02085a90  ldr r0,[r4,#0x8]
+02085a94  cmp r0,#0x0
+02085a98  beq 0x02085aa0
+02085a9c  bl 0x0201b268
+02085aa0  mov r0,r4
+02085aa4  bl 0x0201b244
+02085aa8  ldmia sp!,{r4,r5,r6,pc}

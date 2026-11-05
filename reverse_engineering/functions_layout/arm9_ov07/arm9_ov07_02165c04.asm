@@ -1,0 +1,11 @@
+02165c04  stmdb sp!,{r4,lr}
+02165c08  ldr r4,[r0,#0x4]
+02165c0c  ldr r0,[r4,#0x64]
+02165c10  ldr r1,[r0,#0x0]
+02165c14  ldr r1,[r1,#0x70]
+02165c18  blx r1
+02165c1c  mov r0,r4
+02165c20  ldr r1,[r0,#0x0]
+02165c24  ldr r1,[r1,#0xc4]
+02165c28  blx r1
+02165c2c  ldmia sp!,{r4,pc}

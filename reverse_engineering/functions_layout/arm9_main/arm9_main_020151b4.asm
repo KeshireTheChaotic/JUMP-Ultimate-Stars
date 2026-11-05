@@ -1,0 +1,9 @@
+020151b4  stmdb sp!,{r4,lr}
+020151b8  mov r4,r0
+020151bc  mov r0,#0x40
+020151c0  bl 0x0201a228
+020151c4  cmp r0,#0x0
+020151c8  ldmiaeq sp!,{r4,pc}
+020151cc  mov r1,r4
+020151d0  bl 0x020151d8
+020151d4  ldmia sp!,{r4,pc}

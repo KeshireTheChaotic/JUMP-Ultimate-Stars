@@ -1,0 +1,14 @@
+021c5478  mov r1,#0x1
+021c547a  mov r2,#0x1f
+021c547c  and r2,r0
+021c547e  add r3,r1,#0x0
+021c5480  lsr r0,r0,#0x5
+021c5482  lsl r3,r2
+021c5484  lsl r2,r0,#0x2
+021c5486  ldr r0,[0x021c5494]
+021c5488  ldr r0,[r0,r2]
+021c548a  tst r0,r3
+021c548c  bne 0x021c5490
+021c548e  mov r1,#0x0
+021c5490  add r0,r1,#0x0
+021c5492  bx lr

@@ -1,0 +1,9 @@
+021b4ddc  ldrsh r2,[r1,#0x0]
+021b4de0  strh r2,[r0,#0x0]
+021b4de4  ldrsh r2,[r1,#0x2]
+021b4de8  strh r2,[r0,#0x2]
+021b4dec  ldrsh r2,[r1,#0x4]
+021b4df0  strh r2,[r0,#0x4]
+021b4df4  ldrsh r1,[r1,#0x6]
+021b4df8  strh r1,[r0,#0x6]
+021b4dfc  bx lr

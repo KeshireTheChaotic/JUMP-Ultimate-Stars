@@ -1,0 +1,12 @@
+02039b04  stmdb sp!,{r4,lr}
+02039b08  ldr r1,[0x2039b34]
+02039b0c  mov r4,r0
+02039b10  str r1,[r4,#0x0]
+02039b14  ldr r0,[r4,#0x20]
+02039b18  ldr r1,[r0,#0x0]
+02039b1c  ldr r1,[r1,#0xc]
+02039b20  blx r1
+02039b24  mov r0,r4
+02039b28  bl 0x020168bc
+02039b2c  mov r0,r4
+02039b30  ldmia sp!,{r4,pc}

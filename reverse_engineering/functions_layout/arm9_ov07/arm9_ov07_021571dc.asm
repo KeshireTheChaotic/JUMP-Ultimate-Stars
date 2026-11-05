@@ -1,0 +1,12 @@
+021571dc  push {r4,lr}
+021571de  ldr r0,[r0,#0x4]
+021571e0  ldr r4,[r0,#0x10]
+021571e2  ldr r0,[r4,#0x70]
+021571e4  ldr r1,[r0,#0x24]
+021571e6  cmp r1,#0x0
+021571e8  beq 0x021571ee
+021571ea  ldr r0,[r0,#0x10]
+021571ec  blx r1
+021571ee  add r0,r4,#0x0
+021571f0  bl 0x02157480
+021571f4  pop {r4,pc}

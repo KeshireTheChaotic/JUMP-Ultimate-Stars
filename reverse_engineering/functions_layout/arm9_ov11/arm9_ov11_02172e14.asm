@@ -1,0 +1,9 @@
+02172e14  stmdb sp!,{r3,lr}
+02172e18  ldr r2,[r1,#0x0]
+02172e1c  add r1,sp,#0x0
+02172e20  str r2,[sp,#0x0]
+02172e24  ldr r0,[r0,#0x4]
+02172e28  ldr r2,[r0,#0x0]
+02172e2c  ldr r2,[r2,#0xa0]
+02172e30  blx r2
+02172e34  ldmia sp!,{r3,pc}

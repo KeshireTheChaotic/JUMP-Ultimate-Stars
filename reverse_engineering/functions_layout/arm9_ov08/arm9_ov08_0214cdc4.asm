@@ -1,0 +1,10 @@
+0214cdc4  asr r2,r0,#0x8
+0214cdc6  mov r1,#0xff
+0214cdc8  and r2,r1
+0214cdca  lsl r1,r0,#0x8
+0214cdcc  ldr r0,[0x0214cdd8]
+0214cdce  and r1,r0
+0214cdd0  orr r2,r1
+0214cdd2  lsl r0,r2,#0x10
+0214cdd4  lsr r0,r0,#0x10
+0214cdd6  bx lr

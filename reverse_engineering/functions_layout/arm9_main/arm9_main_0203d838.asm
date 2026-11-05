@@ -1,0 +1,14 @@
+0203d838  stmdb sp!,{r4,r5,r6,lr}
+0203d83c  mov r5,r1
+0203d840  mov r6,r0
+0203d844  add r0,r5,#0x30
+0203d848  mov r4,r2
+0203d84c  blx 0x0203cf1c
+0203d850  cmp r0,#0x0
+0203d854  ldrne r0,[r6,#0x4a8]
+0203d858  mov r1,r4
+0203d85c  addne r0,r0,#0x1
+0203d860  strne r0,[r6,#0x4a8]
+0203d864  add r0,r5,#0x30
+0203d868  blx 0x0203c360
+0203d86c  ldmia sp!,{r4,r5,r6,pc}

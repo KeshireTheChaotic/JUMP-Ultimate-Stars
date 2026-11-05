@@ -1,0 +1,13 @@
+02152094  stmdb sp!,{r3,lr}
+02152098  ldr r0,[r0,#0x4]
+0215209c  cmp r1,#0x1
+021520a0  ldr r0,[r0,#0x10]
+021520a4  ldmiaeq sp!,{r3,pc}
+021520a8  cmp r1,#0x2
+021520ac  beq 0x021520b8
+021520b0  cmp r1,#0x4
+021520b4  ldmia sp!,{r3,pc}
+021520b8  ldr r0,[r0,#0x88]
+021520bc  ldr r0,[r0,#0x4]
+021520c0  blx 0x021b65d8
+021520c4  ldmia sp!,{r3,pc}

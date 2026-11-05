@@ -1,0 +1,34 @@
+021c35fc  stmdb sp!,{r3,r4,r5,lr}
+021c3600  mov r4,r0
+021c3604  ldr r5,[0x21c3684]
+021c3608  b 0x021c3614
+021c360c  ldr r0,[r5,#0x0]
+021c3610  blx r0
+021c3614  ldrb r0,[r4,#0xa9]
+021c3618  mov r0,r0, lsl #0x1f
+021c361c  movs r0,r0, lsr #0x1f
+021c3620  bne 0x021c360c
+021c3624  ldr r0,[r4,#0x0]
+021c3628  ldr r0,[r0,#0x4]
+021c362c  bl 0x02028330
+021c3630  ldr r0,[r4,#0x0]
+021c3634  ldr r1,[0x21c3688]
+021c3638  ldr r0,[r0,#0x4]
+021c363c  bl 0x02028384
+021c3640  ldr r0,[r4,#0x8]
+021c3644  mov r1,#0x0
+021c3648  ldr r0,[r0,#0x4]
+021c364c  ldr r2,[r0,#0x0]
+021c3650  ldr r2,[r2,#0xd8]
+021c3654  blx r2
+021c3658  mov r1,#0x0
+021c365c  mov r0,r4
+021c3660  mov r2,r1
+021c3664  blx 0x021c3488
+021c3668  ldrb r0,[r4,#0xa9]
+021c366c  bic r0,r0,#0x8
+021c3670  strb r0,[r4,#0xa9]
+021c3674  ldr r0,[r4,#0x4]
+021c3678  ldr r0,[r0,#0x4]
+021c367c  bl 0x020282f4
+021c3680  ldmia sp!,{r3,r4,r5,pc}

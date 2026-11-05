@@ -1,0 +1,15 @@
+0215f954  stmdb sp!,{r4,lr}
+0215f958  ldr r2,[0x215f990]
+0215f95c  mov r1,r0
+0215f960  ldr r4,[r2,#0x0]
+0215f964  mov r0,r4
+0215f968  bl 0x0215fc84
+0215f96c  add r0,r4,#0x5000
+0215f970  mov r1,#0x0
+0215f974  str r1,[r0,#0xec]
+0215f978  ldrh r0,[r0,#0xe6]
+0215f97c  cmp r0,#0x0
+0215f980  ldmiaeq sp!,{r4,pc}
+0215f984  mov r0,r4
+0215f988  bl 0x0215fbb8
+0215f98c  ldmia sp!,{r4,pc}

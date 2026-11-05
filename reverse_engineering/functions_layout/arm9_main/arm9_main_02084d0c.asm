@@ -1,0 +1,21 @@
+02084d0c  stmdb sp!,{r3,lr}
+02084d10  add r0,r0,r1, lsl #0x3
+02084d14  ldr r1,[r0,#0x44]
+02084d18  mov r0,#0x1c
+02084d1c  mla r1,r2,r0,r1
+02084d20  ldrb r0,[r1,#0x14]
+02084d24  cmp r0,#0x0
+02084d28  cmpne r0,#0x1
+02084d2c  beq 0x02084d3c
+02084d30  cmp r0,#0x2
+02084d34  beq 0x02084d50
+02084d38  ldmia sp!,{r3,pc}
+02084d3c  ldr r0,[r1,#0x10]
+02084d40  ldr r0,[r0,#0x0]
+02084d44  ldr r0,[r0,#0x4]
+02084d48  bl 0x02028330
+02084d4c  ldmia sp!,{r3,pc}
+02084d50  ldr r0,[r1,#0x0]
+02084d54  ldr r0,[r0,#0x4]
+02084d58  bl 0x02028330
+02084d5c  ldmia sp!,{r3,pc}

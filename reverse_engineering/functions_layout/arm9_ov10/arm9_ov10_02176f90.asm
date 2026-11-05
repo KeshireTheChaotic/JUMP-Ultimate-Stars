@@ -1,0 +1,11 @@
+02176f90  ldr r0,[0x02176fa8]
+02176f92  ldr r0,[r0,#0x0]
+02176f94  cmp r0,#0x0
+02176f96  beq 0x02176fa2
+02176f98  ldr r0,[r0,#0x4]
+02176f9a  cmp r0,#0x5
+02176f9c  bne 0x02176fa2
+02176f9e  mov r0,#0x1
+02176fa0  bx lr
+02176fa2  mov r0,#0x0
+02176fa4  bx lr

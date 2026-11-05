@@ -1,0 +1,13 @@
+021662d8  stmdb sp!,{r4,lr}
+021662dc  ldr r0,[r0,#0x4]
+021662e0  ldr r4,[r0,#0x10]
+021662e4  ldr r0,[r4,#0x128]
+021662e8  bl 0x021bacec
+021662ec  cmp r0,#0x0
+021662f0  ldmiaeq sp!,{r4,pc}
+021662f4  mov r0,r4
+021662f8  bl 0x0216630c
+021662fc  ldr r0,[r4,#0x4]
+02166300  ldr r0,[r0,#0x4]
+02166304  bl 0x020282f4
+02166308  ldmia sp!,{r4,pc}

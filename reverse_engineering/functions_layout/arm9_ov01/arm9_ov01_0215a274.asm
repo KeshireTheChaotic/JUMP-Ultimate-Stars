@@ -1,0 +1,12 @@
+0215a274  push {r4,lr}
+0215a276  ldr r0,[r0,#0x4]
+0215a278  mov r1,#0x1
+0215a27a  ldr r4,[r0,#0x10]
+0215a27c  ldr r0,[0x0215a294]
+0215a27e  strb r1,[r4,r0]
+0215a280  mov r0,#0x78
+0215a282  blx 0x0207342c
+0215a286  bl 0x021b65cc
+0215a28a  add r0,r4,#0x0
+0215a28c  bl 0x02159ef4
+0215a290  pop {r4,pc}

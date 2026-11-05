@@ -1,0 +1,9 @@
+02150104  stmdb sp!,{r3,lr}
+02150108  cmp r0,#0x0
+0215010c  bne 0x0215011c
+02150110  mov r0,#0x0
+02150114  blx 0x021cb434
+02150118  ldmia sp!,{r3,pc}
+0215011c  ldr r0,[r0,#0x4]
+02150120  blx 0x021cb434
+02150124  ldmia sp!,{r3,pc}

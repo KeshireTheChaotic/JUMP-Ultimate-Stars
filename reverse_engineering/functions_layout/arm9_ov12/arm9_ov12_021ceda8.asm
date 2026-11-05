@@ -1,0 +1,13 @@
+021ceda8  push {r4,r5,lr}
+021cedaa  sub sp,#0x4
+021cedac  add r5,r0,#0x0
+021cedae  add r4,r1,#0x0
+021cedb0  ldr r0,[r5,#0x3c]
+021cedb2  cmp r0,#0x0
+021cedb4  beq 0x021cedba
+021cedb6  bl 0x021cf870
+021cedba  str r4,[r5,#0x3c]
+021cedbc  ldr r0,[r5,#0x34]
+021cedbe  bl 0x021ce83c
+021cedc2  add sp,#0x4
+021cedc4  pop {r4,r5,pc}

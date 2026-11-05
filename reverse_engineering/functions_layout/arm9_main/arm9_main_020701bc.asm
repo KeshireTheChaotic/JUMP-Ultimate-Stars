@@ -1,0 +1,12 @@
+020701bc  cmp r1,#0x0
+020701c0  beq 0x020701cc
+020701c4  cmp r1,#0x1
+020701c8  beq 0x020701dc
+020701cc  ldrsb r1,[r0,#0x0]
+020701d0  ldr r0,[0x20701ec]
+020701d4  str r1,[r0,#0x18c]
+020701d8  bx lr
+020701dc  ldrsb r1,[r0,#0x1]
+020701e0  ldr r0,[0x20701ec]
+020701e4  str r1,[r0,#0x18c]
+020701e8  bx lr

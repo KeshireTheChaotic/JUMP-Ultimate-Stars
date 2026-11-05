@@ -1,0 +1,11 @@
+02053f84  mov r1,#0x0
+02053f88  mov r0,#0x0
+02053f8c  orr r2,r1,r0
+02053f90  mcr p15,0x0,r2,cr7,cr10,0x2
+02053f94  add r0,r0,#0x20
+02053f98  cmp r0,#0x400
+02053f9c  blt 0x02053f8c
+02053fa0  add r1,r1,#0x40000000
+02053fa4  cmp r1,#0x0
+02053fa8  bne 0x02053f88
+02053fac  bx lr

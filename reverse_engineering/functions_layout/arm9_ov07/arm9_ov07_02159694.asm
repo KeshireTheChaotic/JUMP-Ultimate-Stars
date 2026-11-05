@@ -1,0 +1,11 @@
+02159694  stmdb sp!,{r4,lr}
+02159698  mov r4,r0
+0215969c  add r0,r4,#0x10
+021596a0  sub r0,r1,r0
+021596a4  mov r1,#0xdc
+021596a8  bl 0x0200d338
+021596ac  ldr r1,[r4,#0xa60]
+021596b0  cmp r1,#0x0
+021596b4  cmpge r0,r1
+021596b8  strlt r0,[r4,#0xa60]
+021596bc  ldmia sp!,{r4,pc}

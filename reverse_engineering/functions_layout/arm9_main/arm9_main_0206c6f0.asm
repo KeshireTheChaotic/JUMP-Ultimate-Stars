@@ -1,0 +1,10 @@
+0206c6f0  stmdb sp!,{r3,lr}
+0206c6f4  ldr r0,[r0,#0x4]
+0206c6f8  ldr r2,[r0,#0x0]
+0206c6fc  ldr r2,[r2,#0xb0]
+0206c700  blx r2
+0206c704  cmp r0,#0x0
+0206c708  moveq r0,#0x0
+0206c70c  ldmiaeq sp!,{r3,pc}
+0206c710  bl 0x02011b38
+0206c714  ldmia sp!,{r3,pc}

@@ -1,0 +1,10 @@
+0201c874  stmdb sp!,{r4,lr}
+0201c878  mov r4,r0
+0201c87c  bl 0x0201a9ec
+0201c880  cmp r0,#0x0
+0201c884  bne 0x0201c894
+0201c888  mov r0,r4
+0201c88c  mov r1,#0x1
+0201c890  bl 0x0201a958
+0201c894  mov r0,r4
+0201c898  ldmia sp!,{r4,pc}

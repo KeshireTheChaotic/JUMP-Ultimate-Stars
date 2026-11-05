@@ -1,0 +1,9 @@
+021b0f0c  ldr r3,[r0,#0x0]
+021b0f10  ldr r2,[r1,#0x0]
+021b0f14  sub r2,r3,r2
+021b0f18  str r2,[r0,#0x0]
+021b0f1c  ldr r2,[r0,#0x4]
+021b0f20  ldr r1,[r1,#0x4]
+021b0f24  sub r1,r2,r1
+021b0f28  str r1,[r0,#0x4]
+021b0f2c  bx lr

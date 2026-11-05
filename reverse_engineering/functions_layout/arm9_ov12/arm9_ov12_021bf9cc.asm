@@ -1,0 +1,12 @@
+021bf9cc  mov r2,#0x0
+021bf9ce  ldrh r1,[r0,#0x0]
+021bf9d0  add r0,r0,#0x2
+021bf9d2  cmp r1,#0x0
+021bf9d4  beq 0x021bf9e0
+021bf9d6  add r2,r2,#0x1
+021bf9d8  ldrh r1,[r0,#0x0]
+021bf9da  add r0,r0,#0x2
+021bf9dc  cmp r1,#0x0
+021bf9de  bne 0x021bf9d6
+021bf9e0  add r0,r2,#0x0
+021bf9e2  bx lr

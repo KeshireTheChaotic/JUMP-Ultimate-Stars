@@ -1,0 +1,17 @@
+02189ee8  push {r4,r5,lr}
+02189eea  sub sp,#0x4
+02189eec  add r5,r0,#0x0
+02189eee  add r4,r1,#0x0
+02189ef0  add r0,r4,#0x0
+02189ef2  bl 0x0217583c
+02189ef6  str r0,[r5,#0x0]
+02189ef8  ldr r0,[r5,#0x0]
+02189efa  cmp r0,#0x0
+02189efc  bne 0x02189f04
+02189efe  mov r0,#0x0
+02189f00  add sp,#0x4
+02189f02  pop {r4,r5,pc}
+02189f04  str r4,[r5,#0x4]
+02189f06  mov r0,#0x1
+02189f08  add sp,#0x4
+02189f0a  pop {r4,r5,pc}

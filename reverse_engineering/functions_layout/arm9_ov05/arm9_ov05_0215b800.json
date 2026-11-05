@@ -1,0 +1,1 @@
+{"module":"arm9_ov05","address":"0215b800","name":"FUN_0215b800","thumb":false,"body_bytes":140,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["0207342c","02077508","020797e4","0215b88c","0215bacc"],"unresolved_call_targets":["021b712c","021b7170"],"status":"decompiled","asm_file":"arm9_ov05_0215b800.asm","c_file":"arm9_ov05_0215b800.c"}

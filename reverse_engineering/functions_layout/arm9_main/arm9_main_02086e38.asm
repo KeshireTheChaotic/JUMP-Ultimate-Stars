@@ -1,0 +1,13 @@
+02086e38  stmdb sp!,{r3,r4,r5,lr}
+02086e3c  mov r5,r0
+02086e40  mov r4,r1
+02086e44  bl 0x0208c51c
+02086e48  cmp r0,#0x0
+02086e4c  mov r0,r5
+02086e50  mov r1,r4
+02086e54  beq 0x02086e60
+02086e58  bl 0x021a00d4
+02086e5c  ldmia sp!,{r3,r4,r5,pc}
+02086e60  mov r2,#0x0
+02086e64  bl 0x0208bdf4
+02086e68  ldmia sp!,{r3,r4,r5,pc}

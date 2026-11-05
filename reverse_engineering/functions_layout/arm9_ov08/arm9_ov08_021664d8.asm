@@ -1,0 +1,10 @@
+021664d8  push {r4,lr}
+021664da  sub sp,#0x8
+021664dc  ldr r4,[sp,#0x10]
+021664de  str r4,[sp,#0x0]
+021664e0  ldr r4,[sp,#0x14]
+021664e2  str r4,[sp,#0x4]
+021664e4  add r0,#0x20
+021664e6  blx 0x020604d0
+021664ea  add sp,#0x8
+021664ec  pop {r4,pc}

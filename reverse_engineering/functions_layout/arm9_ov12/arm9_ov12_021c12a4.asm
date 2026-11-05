@@ -1,0 +1,9 @@
+021c12a4  ldr r0,[r0,#0x4]
+021c12a6  lsl r0,r0,#0x1f
+021c12a8  lsr r0,r0,#0x1f
+021c12aa  cmp r0,#0x0
+021c12ac  beq 0x021c12b2
+021c12ae  mov r0,#0x1
+021c12b0  bx lr
+021c12b2  mov r0,#0x0
+021c12b4  bx lr

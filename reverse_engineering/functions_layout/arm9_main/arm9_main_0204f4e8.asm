@@ -1,0 +1,9 @@
+0204f4e8  ldr r2,[r1,#0x0]
+0204f4ec  str r2,[r0,#0x0]
+0204f4f0  ldr r2,[r1,#0x4]
+0204f4f4  str r2,[r0,#0x4]
+0204f4f8  ldr r2,[r1,#0x8]
+0204f4fc  str r2,[r0,#0x8]
+0204f500  ldr r1,[r1,#0xc]
+0204f504  str r1,[r0,#0xc]
+0204f508  bx lr

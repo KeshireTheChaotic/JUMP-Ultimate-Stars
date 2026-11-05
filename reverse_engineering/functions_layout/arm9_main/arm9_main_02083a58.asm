@@ -1,0 +1,14 @@
+02083a58  stmdb sp!,{r3,r4,r5,lr}
+02083a5c  ldr r0,[r0,#0x10]
+02083a60  mov r5,r1
+02083a64  ldr r1,[r0,#0x60]
+02083a68  mov r0,r5
+02083a6c  bl 0x0207a744
+02083a70  mov r4,r0
+02083a74  ldr r0,[r5,#0x4]
+02083a78  mov r1,r4
+02083a7c  ldr r2,[r0,#0x0]
+02083a80  ldr r2,[r2,#0x24]
+02083a84  blx r2
+02083a88  mov r0,r4
+02083a8c  ldmia sp!,{r3,r4,r5,pc}

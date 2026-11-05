@@ -1,0 +1,34 @@
+02051eec  stmdb sp!,{r4,r5,r6,r7,r8,lr}
+02051ef0  mov r8,#0x0
+02051ef4  ldr lr,[0x2051f74]
+02051ef8  ldr r5,[0x2051f78]
+02051efc  mov r6,r8
+02051f00  mov r12,r8
+02051f04  mov r3,#0x1
+02051f08  mov r2,#0xc
+02051f0c  ands r4,r0,#0x1
+02051f10  beq 0x02051f5c
+02051f14  mov r7,r6
+02051f18  cmp r8,#0x8
+02051f1c  blt 0x02051f30
+02051f20  cmp r8,#0xb
+02051f24  suble r4,r8,#0x8
+02051f28  mlale r7,r4,r2,r5
+02051f2c  ble 0x02051f4c
+02051f30  cmp r8,#0x3
+02051f34  blt 0x02051f48
+02051f38  cmp r8,#0x6
+02051f3c  addle r4,r8,#0x1
+02051f40  mlale r7,r4,r2,r5
+02051f44  ble 0x02051f4c
+02051f48  str r1,[lr,r8,lsl #0x2]
+02051f4c  cmp r7,#0x0
+02051f50  strne r1,[r7,#0x0]
+02051f54  strne r12,[r7,#0x8]
+02051f58  strne r3,[r7,#0x4]
+02051f5c  add r8,r8,#0x1
+02051f60  cmp r8,#0x16
+02051f64  mov r0,r0, lsr #0x1
+02051f68  blt 0x02051f0c
+02051f6c  ldmia sp!,{r4,r5,r6,r7,r8,lr}
+02051f70  bx lr

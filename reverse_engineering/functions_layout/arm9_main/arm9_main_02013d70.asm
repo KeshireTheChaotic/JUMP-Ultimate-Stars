@@ -1,0 +1,34 @@
+02013d70  stmdb sp!,{r4,r5,r6,lr}
+02013d74  mov r6,r0
+02013d78  mov r5,r2
+02013d7c  mov r4,r3
+02013d80  bl 0x02012ef0
+02013d84  ldr r0,[0x2013df8]
+02013d88  ldrb r1,[sp,#0x18]
+02013d8c  str r0,[r6,#0x0]
+02013d90  ldr r0,[sp,#0x14]
+02013d94  strb r1,[r6,#0x38]
+02013d98  str r0,[r6,#0x3c]
+02013d9c  mov r1,#0x0
+02013da0  mov r0,r5
+02013da4  str r1,[r6,#0x40]
+02013da8  ldr r2,[r0,#0x0]
+02013dac  mov r1,r4
+02013db0  ldr r2,[r2,#0x68]
+02013db4  blx r2
+02013db8  add r0,r0,#0x1
+02013dbc  mov r0,r0, lsr #0x1
+02013dc0  mov r0,r0, lsl #0x1
+02013dc4  bl 0x0201a228
+02013dc8  str r0,[r6,#0x34]
+02013dcc  mov r0,r5
+02013dd0  ldr r2,[r0,#0x0]
+02013dd4  mov r1,r4
+02013dd8  ldr r2,[r2,#0x68]
+02013ddc  blx r2
+02013de0  mov r2,r0
+02013de4  ldr r0,[sp,#0x10]
+02013de8  ldr r1,[r6,#0x34]
+02013dec  bl 0x02051890
+02013df0  mov r0,r6
+02013df4  ldmia sp!,{r4,r5,r6,pc}

@@ -1,0 +1,16 @@
+021503b4  push {r4,lr}
+021503b6  add r4,r0,#0x0
+021503b8  bl 0x0214fe44
+021503bc  cmp r0,#0x0
+021503be  beq 0x021503c4
+021503c0  mov r0,#0x1
+021503c2  pop {r4,pc}
+021503c4  add r0,r4,#0x0
+021503c6  bl 0x0214ff40
+021503ca  cmp r0,#0x1
+021503cc  bne 0x021503d2
+021503ce  mov r0,#0x1
+021503d0  pop {r4,pc}
+021503d2  add r0,r4,#0x0
+021503d4  bl 0x0214f998
+021503d8  pop {r4,pc}

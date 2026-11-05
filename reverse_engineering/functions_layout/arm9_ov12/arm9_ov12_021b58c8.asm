@@ -1,0 +1,14 @@
+021b58c8  mov r2,#0xcc
+021b58ca  ldrsh r3,[r0,r2]
+021b58cc  lsl r1,r1,#0x10
+021b58ce  asr r2,r1,#0x10
+021b58d0  cmp r3,r2
+021b58d2  beq 0x021b58e2
+021b58d4  add r1,r0,#0x0
+021b58d6  add r1,#0xcc
+021b58d8  strh r2,[r1,#0x0]
+021b58da  ldr r0,[r0,#0x64]
+021b58dc  mov r1,#0x1
+021b58de  add r0,#0x40
+021b58e0  strb r1,[r0,#0x0]
+021b58e2  bx lr

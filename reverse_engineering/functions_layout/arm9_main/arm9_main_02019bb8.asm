@@ -1,0 +1,13 @@
+02019bb8  stmdb sp!,{r3,lr}
+02019bbc  ldr r3,[r0,#0x1c]
+02019bc0  ldr r2,[r3,#0x4]
+02019bc4  cmp r2,#0x0
+02019bc8  ldrheq r0,[r0,#0x2e]
+02019bcc  ldmiaeq sp!,{r3,pc}
+02019bd0  mov r0,r3
+02019bd4  ldr r3,[r0,#0x0]
+02019bd8  mov r2,#0x0
+02019bdc  ldr r3,[r3,#0x8]
+02019be0  blx r3
+02019be4  ldrsh r0,[r0,#0x6]
+02019be8  ldmia sp!,{r3,pc}

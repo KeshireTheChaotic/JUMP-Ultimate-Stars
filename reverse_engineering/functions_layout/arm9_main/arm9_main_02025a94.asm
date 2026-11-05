@@ -1,0 +1,14 @@
+02025a94  stmdb sp!,{r4,lr}
+02025a98  mov r4,r0
+02025a9c  bl 0x02025a40
+02025aa0  mov r1,r0
+02025aa4  mvn r0,#0x0
+02025aa8  cmp r1,r0
+02025aac  moveq r0,#0x0
+02025ab0  ldmiaeq sp!,{r4,pc}
+02025ab4  mov r0,r4
+02025ab8  ldr r2,[r0,#0x0]
+02025abc  ldr r2,[r2,#0x14]
+02025ac0  blx r2
+02025ac4  mov r0,#0x1
+02025ac8  ldmia sp!,{r4,pc}

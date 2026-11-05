@@ -1,0 +1,52 @@
+020770a8  stmdb sp!,{r4,r5,r6,lr}
+020770ac  mov r6,r0
+020770b0  mov r0,#0x14
+020770b4  mla r0,r2,r0,r6
+020770b8  add r0,r0,r1, lsl #0x2
+020770bc  ldr r4,[r0,#0x8]
+020770c0  mov r5,#0x0
+020770c4  cmp r4,#0x0
+020770c8  beq 0x02077170
+020770cc  cmp r4,#0x0
+020770d0  ldr r5,[r4,#0x34]
+020770d4  beq 0x02077150
+020770d8  add r0,r6,#0x158
+020770dc  mov r1,r4
+020770e0  add r0,r0,#0x400
+020770e4  bl 0x02037c24
+020770e8  mov r1,r4
+020770ec  add r0,r6,#0x560
+020770f0  bl 0x02037b98
+020770f4  ldrb r1,[r4,#0xe]
+020770f8  ldr r2,[r4,#0x38]
+020770fc  ldr r3,[r6,#0x568]
+02077100  and r0,r1,#0xf0
+02077104  mov r0,r0, asr #0x4
+02077108  and r0,r0,#0xff
+0207710c  and r1,r1,#0xf
+02077110  add r0,r0,r0, lsl #0x2
+02077114  ldr r2,[r2,#0x14]
+02077118  add r0,r1,r0
+0207711c  mvn r0,r2, lsl r0
+02077120  and r0,r3,r0
+02077124  str r0,[r6,#0x568]
+02077128  add r3,r6,#0x8
+0207712c  mov r2,#0x14
+02077130  mov r0,#0x0
+02077134  ldr r1,[r3,#0x0]
+02077138  sub r2,r2,#0x1
+0207713c  cmp r4,r1
+02077140  streq r0,[r3,#0x0]
+02077144  cmp r2,#0x0
+02077148  add r3,r3,#0x4
+0207714c  bgt 0x02077134
+02077150  mov r0,r6
+02077154  bl 0x02077aa8
+02077158  mov r0,r6
+0207715c  bl 0x02077610
+02077160  mov r0,r6
+02077164  bl 0x020772e4
+02077168  mov r0,r6
+0207716c  bl 0x02077768
+02077170  mov r0,r5
+02077174  ldmia sp!,{r4,r5,r6,pc}

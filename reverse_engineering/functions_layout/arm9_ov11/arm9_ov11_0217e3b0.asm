@@ -1,0 +1,17 @@
+0217e3b0  stmdb sp!,{r4,lr}
+0217e3b4  mov r4,r0
+0217e3b8  ldrsb r0,[r4,#0x7e]
+0217e3bc  cmp r0,#0x0
+0217e3c0  movne r0,#0x0
+0217e3c4  ldmiane sp!,{r4,pc}
+0217e3c8  ldrb r1,[r4,#0x104]
+0217e3cc  ldr r0,[r4,#0x2c]
+0217e3d0  add r1,r1,#0x1
+0217e3d4  and r1,r1,#0xff
+0217e3d8  bl 0x0217e3f4
+0217e3dc  cmp r0,#0x0
+0217e3e0  movne r0,#0x1
+0217e3e4  moveq r0,#0x1e
+0217e3e8  strbeq r0,[r4,#0x7e]
+0217e3ec  moveq r0,#0x0
+0217e3f0  ldmia sp!,{r4,pc}

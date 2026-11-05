@@ -1,0 +1,9 @@
+0203ab2c  ldr r2,[r1,#0x0]
+0203ab30  ldr r0,[0x203ab50]
+0203ab34  cmp r2,r0
+0203ab38  ldreq r1,[r1,#0x10]
+0203ab3c  ldreq r0,[0x203ab54]
+0203ab40  cmpeq r1,r0
+0203ab44  moveq r0,#0x1
+0203ab48  movne r0,#0x0
+0203ab4c  bx lr

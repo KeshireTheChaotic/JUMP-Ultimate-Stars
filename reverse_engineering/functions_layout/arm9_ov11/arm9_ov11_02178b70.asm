@@ -1,0 +1,22 @@
+02178b70  stmdb sp!,{r3,r4,r5,r6,r7,r8,r9,lr}
+02178b74  mov r8,#0x1
+02178b78  ldr r7,[0x2178bcc]
+02178b7c  mov r6,r0
+02178b80  mov r5,r1
+02178b84  mov r9,#0x0
+02178b88  mov r4,r8
+02178b8c  ldr r0,[r6,#0x70]
+02178b90  add r0,r6,r0, lsl #0x2
+02178b94  ldr r0,[r0,#0x18]
+02178b98  tst r5,r0
+02178b9c  movne r0,r4
+02178ba0  bne 0x02178bb4
+02178ba4  ldr r0,[r6,#0x12c]
+02178ba8  tst r5,r0
+02178bac  movne r0,r9
+02178bb0  moveq r0,r8
+02178bb4  cmp r0,#0x0
+02178bb8  ldmiane sp!,{r3,r4,r5,r6,r7,r8,r9,pc}
+02178bbc  ldr r0,[r7,#0x0]
+02178bc0  blx r0
+02178bc4  b 0x02178b8c

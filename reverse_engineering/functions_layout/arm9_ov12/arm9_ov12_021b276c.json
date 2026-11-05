@@ -1,0 +1,1 @@
+{"module":"arm9_ov12","address":"021b276c","name":"FUN_021b276c","thumb":true,"body_bytes":6,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":[],"unresolved_call_targets":[],"status":"decompiled","asm_file":"arm9_ov12_021b276c.asm","c_file":"arm9_ov12_021b276c.c"}

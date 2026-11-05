@@ -1,0 +1,16 @@
+021638ec  ldr r1,[0x0216390c]
+021638ee  ldr r3,[r1,#0x0]
+021638f0  ldrh r2,[r3,#0x2]
+021638f2  mov r1,#0x1
+021638f4  lsl r1,r0
+021638f6  and r2,r1
+021638f8  cmp r2,#0x0
+021638fa  beq 0x02163908
+021638fc  add r3,#0xe
+021638fe  sub r1,r0,#0x1
+02163900  mov r0,#0x1e
+02163902  mul r1,r0
+02163904  add r0,r3,r1
+02163906  bx lr
+02163908  mov r0,#0x0
+0216390a  bx lr

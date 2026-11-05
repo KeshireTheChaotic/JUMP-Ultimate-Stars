@@ -1,0 +1,10 @@
+02156bbc  stmdb sp!,{r4,lr}
+02156bc0  mov r4,r0
+02156bc4  ldr r0,[r4,#0x4]
+02156bc8  ldr r0,[r0,#0x10]
+02156bcc  ldr r0,[r0,#0x1c]
+02156bd0  bl 0x02155908
+02156bd4  ldr r0,[r4,#0x4]
+02156bd8  ldr r1,[0x2156be4]
+02156bdc  bl 0x02028384
+02156be0  ldmia sp!,{r4,pc}

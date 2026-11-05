@@ -1,0 +1,10 @@
+0215ded8  push {r4,lr}
+0215deda  ldr r0,[r0,#0x4]
+0215dedc  mov r1,#0x0
+0215dede  ldr r4,[r0,#0x10]
+0215dee0  mov r0,#0x78
+0215dee2  blx 0x0207342c
+0215dee6  mov r0,#0x1
+0215dee8  add r4,#0x9d
+0215deea  strb r0,[r4,#0x0]
+0215deec  pop {r4,pc}

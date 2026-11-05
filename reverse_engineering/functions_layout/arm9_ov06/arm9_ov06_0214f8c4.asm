@@ -1,0 +1,13 @@
+0214f8c4  push {r3,lr}
+0214f8c6  mov r1,#0x0
+0214f8c8  ldr r2,[r0,#0x10]
+0214f8ca  mvn r1,r1
+0214f8cc  cmp r2,r1
+0214f8ce  bne 0x0214f8d4
+0214f8d0  mov r0,#0x0
+0214f8d2  pop {r3,pc}
+0214f8d4  ldr r0,[r0,#0xc]
+0214f8d6  mov r1,#0x90
+0214f8d8  sub r0,r0,r2
+0214f8da  blx 0x0200d12c
+0214f8de  pop {r3,pc}

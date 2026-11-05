@@ -1,0 +1,9 @@
+021529e0  stmdb sp!,{r4,lr}
+021529e4  mov r4,r0
+021529e8  bl 0x0201a9ec
+021529ec  cmp r0,#0x0
+021529f0  ldmiane sp!,{r4,pc}
+021529f4  mov r0,r4
+021529f8  mov r1,#0x1
+021529fc  bl 0x0201a958
+02152a00  ldmia sp!,{r4,pc}

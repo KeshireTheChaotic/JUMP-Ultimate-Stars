@@ -1,0 +1,9 @@
+02162ad4  ldr r1,[r0,#0x0]
+02162ad8  ldr r1,[r1,#0x4]
+02162adc  blx r1
+02162ae0  str r0,[r4,#0xbc]
+02162ae4  mov r0,r5
+02162ae8  ldr r1,[r0,#0x0]
+02162aec  ldr r1,[r1,#0x4]
+02162af0  blx r1
+02162af4  ldmia sp!,{r4,r5,r6,pc}

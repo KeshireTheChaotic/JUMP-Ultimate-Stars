@@ -1,0 +1,10 @@
+02032c44  stmdb sp!,{r4,lr}
+02032c48  mov r4,r0
+02032c4c  mov r0,#0x8
+02032c50  bl 0x0201a228
+02032c54  cmp r0,#0x0
+02032c58  beq 0x02032c64
+02032c5c  mov r1,r4
+02032c60  bl 0x020326fc
+02032c64  str r0,[r4,#0x18]
+02032c68  ldmia sp!,{r4,pc}

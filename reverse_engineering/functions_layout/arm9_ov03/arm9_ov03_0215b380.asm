@@ -1,0 +1,12 @@
+0215b380  stmdb sp!,{r3,lr}
+0215b384  ldr r0,[r0,#0x4]
+0215b388  ldr r0,[r0,#0x10]
+0215b38c  ldr r0,[r0,#0x40]
+0215b390  cmp r0,#0x0
+0215b394  ldmiaeq sp!,{r3,pc}
+0215b398  ldr r0,[r0,#0x4]
+0215b39c  mov r1,#0x10
+0215b3a0  ldr r2,[r0,#0x0]
+0215b3a4  ldr r2,[r2,#0x148]
+0215b3a8  blx r2
+0215b3ac  ldmia sp!,{r3,pc}

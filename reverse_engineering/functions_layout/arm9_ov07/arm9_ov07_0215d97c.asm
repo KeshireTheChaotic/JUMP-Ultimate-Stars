@@ -1,0 +1,10 @@
+0215d97c  push {r4,lr}
+0215d97e  ldr r0,[r0,#0x4]
+0215d980  ldr r4,[r0,#0x10]
+0215d982  blx 0x0207382c
+0215d986  cmp r0,#0x0
+0215d988  beq 0x0215d992
+0215d98a  ldr r0,[r4,#0x8]
+0215d98c  ldr r0,[r0,#0x4]
+0215d98e  blx 0x020282f4
+0215d992  pop {r4,pc}

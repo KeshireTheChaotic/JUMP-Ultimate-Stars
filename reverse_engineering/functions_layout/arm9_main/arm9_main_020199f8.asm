@@ -1,0 +1,12 @@
+020199f8  stmdb sp!,{r3,r4,r5,lr}
+020199fc  ldr r1,[r1,#0x0]
+02019a00  mov r5,r0
+02019a04  mov r4,r2
+02019a08  mov r0,r1
+02019a0c  str r1,[r5,#0x0]
+02019a10  bl 0x0200c954
+02019a14  mov r1,r4
+02019a18  bl 0x0200c9e4
+02019a1c  bl 0x0200c8e0
+02019a20  str r0,[r5,#0x0]
+02019a24  ldmia sp!,{r3,r4,r5,pc}

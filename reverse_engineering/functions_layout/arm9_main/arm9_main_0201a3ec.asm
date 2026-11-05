@@ -1,0 +1,11 @@
+0201a3ec  ldr r1,[r0,#0x40c]
+0201a3f0  ldr r2,[r1,#0xc]
+0201a3f4  b 0x0201a408
+0201a3f8  ldr r0,[r1,#0xc]
+0201a3fc  ldr r1,[r1,#0x4]
+0201a400  cmp r2,r0
+0201a404  movls r2,r0
+0201a408  cmp r1,#0x0
+0201a40c  bne 0x0201a3f8
+0201a410  sub r0,r2,#0x20
+0201a414  bx lr

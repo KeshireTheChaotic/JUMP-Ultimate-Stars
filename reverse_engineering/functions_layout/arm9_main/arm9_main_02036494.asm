@@ -1,0 +1,11 @@
+02036494  stmdb sp!,{r3,r4,r5,lr}
+02036498  mov r5,r0
+0203649c  mov r4,r1
+020364a0  bl 0x02035758
+020364a4  ldr r0,[0x20364c0]
+020364a8  mov r1,#0x0
+020364ac  str r0,[r5,#0x0]
+020364b0  str r4,[r5,#0x40]
+020364b4  mov r0,r5
+020364b8  str r1,[r5,#0x44]
+020364bc  ldmia sp!,{r3,r4,r5,pc}

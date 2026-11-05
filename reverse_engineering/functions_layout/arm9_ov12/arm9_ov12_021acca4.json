@@ -1,0 +1,1 @@
+{"module":"arm9_ov12","address":"021acca4","name":"~ALWidgetBase_021d149c","thumb":true,"body_bytes":36,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["0201b244","021b5088"],"unresolved_call_targets":[],"status":"decompiled","asm_file":"arm9_ov12_021acca4.asm","c_file":"arm9_ov12_021acca4.c"}

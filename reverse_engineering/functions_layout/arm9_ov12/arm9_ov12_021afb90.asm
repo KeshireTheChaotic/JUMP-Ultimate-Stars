@@ -1,0 +1,13 @@
+021afb90  stmdb sp!,{r4,lr}
+021afb94  mov r4,r0
+021afb98  bl 0x021afbc4
+021afb9c  ldr r0,[r0,#0x4]
+021afba0  ldr r0,[r0,#0x224]
+021afba4  cmp r0,#0x0
+021afba8  ldr r0,[r4,#0x4]
+021afbac  ldrhne r0,[r0,#0x4]
+021afbb0  ldmiane sp!,{r4,pc}
+021afbb4  ldr r1,[r0,#0x0]
+021afbb8  ldr r1,[r1,#0xc]
+021afbbc  blx r1
+021afbc0  ldmia sp!,{r4,pc}

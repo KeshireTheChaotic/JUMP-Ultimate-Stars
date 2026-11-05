@@ -1,0 +1,13 @@
+020483c4  stmdb sp!,{r4,lr}
+020483c8  mov r4,r0
+020483cc  bl 0x0204754c
+020483d0  ldr r0,[r4,#0x5c]
+020483d4  mov r1,#0x0
+020483d8  ldr r2,[r0,#0x0]
+020483dc  ldr r2,[r2,#0x2c]
+020483e0  blx r2
+020483e4  ldrb r0,[r0,#0x5]
+020483e8  tst r0,#0x4
+020483ec  ldrne r0,[0x20483f8]
+020483f0  strne r0,[r4,#0xa8]
+020483f4  ldmia sp!,{r4,pc}

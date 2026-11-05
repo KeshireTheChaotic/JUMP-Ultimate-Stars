@@ -1,0 +1,16 @@
+021afcc8  stmdb sp!,{r4,lr}
+021afccc  ldr r1,[0x21afd08]
+021afcd0  mov r4,r0
+021afcd4  str r1,[r4,#0x0]
+021afcd8  ldr r0,[r4,#0x8]
+021afcdc  cmp r0,#0x0
+021afce0  beq 0x021afcf0
+021afce4  ldr r1,[r0,#0x0]
+021afce8  ldr r1,[r1,#0x4]
+021afcec  blx r1
+021afcf0  mov r0,r4
+021afcf4  bl 0x0201c89c
+021afcf8  mov r0,r4
+021afcfc  bl 0x0201b244
+021afd00  mov r0,r4
+021afd04  ldmia sp!,{r4,pc}

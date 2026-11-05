@@ -1,0 +1,34 @@
+03805a34  stmdb sp!,{r4,lr}
+03805a38  mov r4,r0
+03805a3c  ldr r1,[0x3805abc]
+03805a40  ldrh r0,[r1,#0x0]
+03805a44  ands r0,r0,#0x80
+03805a48  bne 0x03805a40
+03805a4c  mov r0,#0x1
+03805a50  bl 0x03805b34
+03805a54  orr r0,r4,#0x80
+03805a58  and r0,r0,#0xff
+03805a5c  and r1,r0,#0xff
+03805a60  ldr r0,[0x3805ac0]
+03805a64  strh r1,[r0,#0x0]
+03805a68  ldr r1,[0x3805abc]
+03805a6c  ldrh r0,[r1,#0x0]
+03805a70  ands r0,r0,#0x80
+03805a74  bne 0x03805a6c
+03805a78  mov r0,#0x0
+03805a7c  bl 0x03805b34
+03805a80  mov r1,#0x0
+03805a84  ldr r0,[0x3805ac0]
+03805a88  strh r1,[r0,#0x0]
+03805a8c  ldr r1,[0x3805abc]
+03805a90  ldrh r0,[r1,#0x0]
+03805a94  ands r0,r0,#0x80
+03805a98  bne 0x03805a90
+03805a9c  ldr r0,[0x3805ac0]
+03805aa0  ldrh r0,[r0,#0x0]
+03805aa4  and r0,r0,#0xff
+03805aa8  mov r0,r0, lsl #0x10
+03805aac  mov r0,r0, lsr #0x10
+03805ab0  and r0,r0,#0xff
+03805ab4  ldmia sp!,{r4,lr}
+03805ab8  bx lr

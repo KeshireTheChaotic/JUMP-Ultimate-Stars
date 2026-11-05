@@ -1,0 +1,13 @@
+0202e118  mov r2,#0x0
+0202e11a  ldrsh r2,[r1,r2]
+0202e11c  strh r2,[r0,#0x0]
+0202e11e  mov r2,#0x2
+0202e120  ldrsh r2,[r1,r2]
+0202e122  strh r2,[r0,#0x2]
+0202e124  mov r2,#0x4
+0202e126  ldrsh r2,[r1,r2]
+0202e128  strh r2,[r0,#0x4]
+0202e12a  mov r2,#0x6
+0202e12c  ldrsh r1,[r1,r2]
+0202e12e  strh r1,[r0,#0x6]
+0202e130  bx lr

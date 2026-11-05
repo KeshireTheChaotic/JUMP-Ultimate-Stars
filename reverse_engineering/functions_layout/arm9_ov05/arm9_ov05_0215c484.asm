@@ -1,0 +1,9 @@
+0215c484  stmdb sp!,{r4,lr}
+0215c488  mov r4,r0
+0215c48c  cmp r1,#0x0
+0215c490  beq 0x0215c498
+0215c494  bl 0x0206af1c
+0215c498  ldr r0,[r4,#0x0]
+0215c49c  ldr r0,[r0,#0x4]
+0215c4a0  bl 0x020282f4
+0215c4a4  ldmia sp!,{r4,pc}

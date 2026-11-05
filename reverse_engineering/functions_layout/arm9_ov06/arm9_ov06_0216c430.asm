@@ -1,0 +1,75 @@
+0216c430  stmdb sp!,{r4,r5,r6,r7,lr}
+0216c434  sub sp,sp,#0xc
+0216c438  mov r5,r0
+0216c43c  ldrb r1,[r5,#0x4d]
+0216c440  add r0,r5,#0x2c
+0216c444  add r1,r1,#0x1
+0216c448  strb r1,[r5,#0x4d]
+0216c44c  bl 0x0216ce38
+0216c450  ldrh r0,[r5,#0x26]
+0216c454  tst r0,#0x1
+0216c458  beq 0x0216c46c
+0216c45c  mov r0,r5
+0216c460  add r1,r5,#0x2c
+0216c464  bl 0x0216cd9c
+0216c468  b 0x0216c554
+0216c46c  ldrh r6,[r5,#0x20]
+0216c470  ldrsh r2,[r5,#0x48]
+0216c474  ldrsh r0,[r5,#0x4a]
+0216c478  ldrsh r1,[r5,#0x58]
+0216c47c  mul r2,r6,r2
+0216c480  mul r3,r6,r0
+0216c484  mov r0,r2, lsl #0x8
+0216c488  sub r1,r1,r0, asr #0x10
+0216c48c  strh r1,[r5,#0x58]
+0216c490  ldrsh r2,[r5,#0x5a]
+0216c494  mov r1,r3, lsl #0x8
+0216c498  sub r2,r2,r1, asr #0x10
+0216c49c  strh r2,[r5,#0x5a]
+0216c4a0  ldrsh r2,[r5,#0x58]
+0216c4a4  subs r0,r2,r0, asr #0x10
+0216c4a8  bmi 0x0216c4b8
+0216c4ac  ldrsh r0,[r5,#0x5a]
+0216c4b0  subs r0,r0,r1, asr #0x10
+0216c4b4  bpl 0x0216c510
+0216c4b8  ldr r4,[r5,#0x30]
+0216c4bc  mov r1,#0x0
+0216c4c0  b 0x0216c508
+0216c4c4  ldrb r0,[r4,#0x6]
+0216c4c8  tst r0,#0x1
+0216c4cc  bne 0x0216c500
+0216c4d0  ldr r1,[r5,#0x8]
+0216c4d4  mov r0,r4
+0216c4d8  ldr r1,[r1,#0x10]
+0216c4dc  mov r3,r5
+0216c4e0  str r1,[sp,#0x0]
+0216c4e4  ldr r2,[r5,#0x2c]
+0216c4e8  add r1,r5,#0x2c
+0216c4ec  bl 0x0216c5f0
+0216c4f0  ldrb r0,[r4,#0x6]
+0216c4f4  orr r0,r0,#0x4
+0216c4f8  strb r0,[r4,#0x6]
+0216c4fc  b 0x0216c510
+0216c500  add r1,r1,#0x1
+0216c504  add r4,r4,#0x8
+0216c508  cmp r1,#0x20
+0216c50c  bcc 0x0216c4c4
+0216c510  mov r7,#0x0
+0216c514  str r7,[sp,#0x4]
+0216c518  str r7,[sp,#0x8]
+0216c51c  add r6,sp,#0x4
+0216c520  ldrb r0,[r4,#0x6]
+0216c524  tst r0,#0x1
+0216c528  beq 0x0216c540
+0216c52c  mov r0,r5
+0216c530  mov r1,r4
+0216c534  mov r3,r6
+0216c538  add r2,r5,#0x2c
+0216c53c  bl 0x0216c958
+0216c540  add r7,r7,#0x1
+0216c544  cmp r7,#0x20
+0216c548  add r4,r4,#0x8
+0216c54c  bcc 0x0216c520
+0216c550  mov r0,#0x1
+0216c554  add sp,sp,#0xc
+0216c558  ldmia sp!,{r4,r5,r6,r7,pc}

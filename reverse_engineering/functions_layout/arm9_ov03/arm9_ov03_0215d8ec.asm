@@ -1,0 +1,15 @@
+0215d8ec  stmdb sp!,{r3,lr}
+0215d8f0  mov r12,#0xc
+0215d8f4  ldr r0,[0x215d928]
+0215d8f8  sub r1,r12,#0x4c
+0215d8fc  sub r2,r12,#0x18
+0215d900  mov r3,#0x40
+0215d904  str r12,[sp,#0x0]
+0215d908  bl 0x0214ee3c
+0215d90c  mov r3,#0x0
+0215d910  ldr r0,[0x215d92c]
+0215d914  sub r1,r3,#0x30
+0215d918  sub r2,r3,#0x10
+0215d91c  str r3,[sp,#0x0]
+0215d920  bl 0x0214ee3c
+0215d924  ldmia sp!,{r3,pc}

@@ -1,0 +1,15 @@
+0217f674  ldr r2,[r0,#0x0]
+0217f676  cmp r2,#0x0
+0217f678  beq 0x0217f68e
+0217f67a  ldr r1,[r2,#0x20]
+0217f67c  str r1,[r0,#0x0]
+0217f67e  ldr r1,[r0,#0x0]
+0217f680  cmp r1,#0x0
+0217f682  bne 0x0217f688
+0217f684  mov r1,#0x0
+0217f686  str r1,[r0,#0x4]
+0217f688  ldr r1,[r0,#0x8]
+0217f68a  sub r1,r1,#0x1
+0217f68c  str r1,[r0,#0x8]
+0217f68e  add r0,r2,#0x0
+0217f690  bx lr

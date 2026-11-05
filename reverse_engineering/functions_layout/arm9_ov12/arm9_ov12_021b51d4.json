@@ -1,0 +1,1 @@
+{"module":"arm9_ov12","address":"021b51d4","name":"RegistSkin","thumb":true,"body_bytes":136,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["0201a21c","0201b244","021ae4c0","021b8504","021b8558"],"unresolved_call_targets":[],"status":"decompiled","asm_file":"arm9_ov12_021b51d4.asm","c_file":"arm9_ov12_021b51d4.c"}

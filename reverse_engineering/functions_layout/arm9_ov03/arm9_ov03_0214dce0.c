@@ -1,0 +1,279 @@
+
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+undefined4 FUN_0214dce0(undefined4 param_1,int param_2)
+
+{
+  int iVar1;
+  undefined4 uVar2;
+  int *piVar3;
+  int *piVar4;
+  int iVar5;
+  int iVar6;
+  int unaff_r9;
+  uint uVar7;
+  int unaff_r10;
+  undefined4 uStack00000008;
+  undefined4 in_stack_0000000c;
+  undefined4 uStack00000010;
+  undefined4 uStack00000014;
+  undefined4 uStack00000018;
+  undefined4 uStack0000001c;
+  undefined4 uStack00000020;
+  undefined4 uStack00000024;
+  undefined4 in_stack_00000028;
+  undefined4 in_stack_0000002c;
+  int in_stack_00000030;
+  int in_stack_00000034;
+  undefined4 uStack00000038;
+  undefined4 in_stack_0000003c;
+  undefined4 uStack00000040;
+  undefined4 uStack00000044;
+  undefined4 uStack00000048;
+  undefined4 uStack0000004c;
+  undefined4 uStack00000050;
+  undefined4 uStack00000054;
+  undefined4 in_stack_00000058;
+  undefined4 in_stack_0000005c;
+  int in_stack_00000070;
+  
+  while( true ) {
+    (**(code **)(**(int **)(param_2 + 4) + 0x10))();
+    unaff_r9 = unaff_r9 + 1;
+    if (3 < unaff_r9) break;
+    iVar5 = FUN_0203b424(unaff_r9);
+    FUN_0203d0b4(*(undefined4 *)(*(int *)(iVar5 + 0x88) + 4));
+    iVar5 = FUN_0203b424(unaff_r9);
+    FUN_0203d478(*(undefined4 *)(*(int *)(iVar5 + 0x88) + 4));
+    iVar5 = FUN_0203b424(unaff_r9);
+    FUN_0203cfbc(*(undefined4 *)(*(int *)(iVar5 + 0x88) + 4));
+    iVar5 = FUN_0203b424(unaff_r9);
+    (**(code **)(**(int **)(*(int *)(iVar5 + 0x88) + 4) + 0x90))();
+    iVar5 = FUN_0203b424(unaff_r9);
+    param_2 = *(int *)(iVar5 + 0x88);
+    in_stack_00000070 = unaff_r9 * 0x1000;
+  }
+  iVar5 = 0;
+  do {
+    iVar1 = FUN_0203b414(iVar5 + 1);
+    uVar2 = FUN_0214d3a8((&DAT_0215db3c)[iVar5],(&DAT_0215db34)[iVar5],*(undefined4 *)(iVar1 + 0x88)
+                        );
+    iVar1 = iVar5 * 4;
+    iVar5 = iVar5 + 1;
+    *(undefined4 *)(unaff_r10 + iVar1 + 0x18) = uVar2;
+  } while (iVar5 < 2);
+  iVar5 = 0;
+  do {
+    uVar2 = FUN_020101f4((&DAT_0215db44)[iVar5],0);
+    iVar1 = iVar5 * 4;
+    iVar5 = iVar5 + 1;
+    *(undefined4 *)(unaff_r10 + iVar1 + 0xc) = uVar2;
+  } while (iVar5 < 3);
+  iVar5 = jus_AllocDebug(0xcc,s_ALWidget_inl_0215dbec,s_Create_0215db1c,0x1de);
+  piVar3 = (int *)0x0;
+  if (iVar5 != 0) {
+    piVar3 = (int *)func_0x021af26c(iVar5,FUN_0214ec20,FUN_0214eccc,0);
+  }
+  if (piVar3[6] == 0) {
+    (**(code **)(*piVar3 + 0x14))();
+  }
+  piVar3 = (int *)piVar3[6];
+  func_0x021b3b7c(1,0,piVar3,0);
+  _DAT_021d5154 = 1;
+  iVar5 = (**(code **)(*(int *)piVar3[1] + 0xb0))((int *)piVar3[1],0x31305053);
+  if (iVar5 == 0) {
+    iVar5 = 0;
+  }
+  else {
+    iVar5 = FUN_0214d47c();
+  }
+  iVar5 = *(int *)(*(int *)(iVar5 + 4) + 100);
+  piVar4 = *(int **)(iVar5 + 0x2c);
+  if (piVar4 == (int *)0x0) {
+    piVar4 = (int *)FUN_02036430(*(undefined4 *)(iVar5 + 0x20));
+  }
+  if (piVar4[6] == 0) {
+    (**(code **)(*piVar4 + 0x10))();
+  }
+  iVar5 = CommonPaletteAnime::CommonPaletteAnime_Create(piVar4[6],0x21,2,5);
+  *(int *)(unaff_r10 + 0x60) = iVar5;
+  if (iVar5 != 0) {
+    *(undefined2 *)(iVar5 + 0x18) = 0;
+    *(undefined2 *)(iVar5 + 0x16) = 0x8df;
+    *(undefined1 *)(iVar5 + 0x1a) = 0x1e;
+    *(undefined1 *)(iVar5 + 0x1c) = 1;
+    *(undefined1 *)(iVar5 + 0x1b) = 1;
+  }
+  (**(code **)(*piVar3 + 8))();
+  iVar5 = ALWidgetBaseImp::Create();
+  (**(code **)(**(int **)(iVar5 + 4) + 0xd8))(*(int **)(iVar5 + 4),1);
+  *(undefined4 *)(*(int *)(iVar5 + 4) + 0x124) = 0x100;
+  *(int *)(unaff_r10 + 0x20) = iVar5;
+  in_stack_00000058 = 0x100;
+  in_stack_0000005c = 0xc0;
+  iVar5 = FUN_0203b3e4();
+  iVar5 = ALWidgetImp::Create(*(undefined4 *)(unaff_r10 + 0x20),*(undefined4 *)(iVar5 + 0x88),
+                              0x510000,0);
+  (**(code **)(**(int **)(iVar5 + 4) + 0xd8))(*(int **)(iVar5 + 4),1);
+  *(undefined1 *)(*(int *)(iVar5 + 4) + 0xaa) = 1;
+  *(undefined1 *)(*(int *)(iVar5 + 4) + 0xab) = 0;
+  func_0x021b77a8(*(undefined4 *)(iVar5 + 4),0x20);
+  (**(code **)(**(int **)(iVar5 + 4) + 0x24))();
+  uVar2 = FUN_0214e81c(0,&DAT_0215db58,&DAT_02093c8c);
+  FUN_02020e98(iVar5,uVar2);
+  func_0x021b65e8(*(undefined4 *)(iVar5 + 4),4,&LAB_0214eb7c);
+  func_0x021b6760(*(undefined4 *)(iVar5 + 4),4,FUN_0214eb94);
+  FUN_02023894(*(undefined4 *)(iVar5 + 4),0x510000,0);
+  func_0x021b3f78(*(undefined4 *)(iVar5 + 4),0x510000);
+  func_0x021b3fc4(*(undefined4 *)(iVar5 + 4),0x510001);
+  *(undefined4 *)(*(int *)(iVar5 + 4) + 0x124) = 4;
+  *(int *)(unaff_r10 + 0x40) = iVar5;
+  in_stack_00000058 = 0x80;
+  in_stack_0000005c = 0;
+  iVar5 = FUN_0203b404();
+  iVar5 = ALWidgetImp::Create(*(undefined4 *)(unaff_r10 + 0x20),*(undefined4 *)(iVar5 + 0x88),
+                              0x810000,0);
+  (**(code **)(**(int **)(iVar5 + 4) + 0xd8))(*(int **)(iVar5 + 4),1);
+  func_0x021b6214(*(undefined4 *)(iVar5 + 4),0);
+  *(int *)(unaff_r10 + 0x44) = iVar5;
+  iVar5 = ALWidgetImp::Create(*(undefined4 *)(unaff_r10 + 0x20),_DAT_021d5154);
+  FUN_0214e908(iVar5,*(undefined4 *)(unaff_r10 + 0x18));
+  (**(code **)(**(int **)(iVar5 + 4) + 0xd8))(*(int **)(iVar5 + 4),1);
+  func_0x021b6214(*(undefined4 *)(iVar5 + 4),0);
+  FUN_02028384(*(undefined4 *)(iVar5 + 4),FUN_0214ed44);
+  (**(code **)(**(int **)(iVar5 + 4) + 0x24))();
+  piVar3 = *(int **)(*(int *)(unaff_r10 + 0x18) + 4);
+  (**(code **)(*piVar3 + 0xd8))(piVar3,1);
+  *(int *)(unaff_r10 + 0x4c) = iVar5;
+  iVar5 = ALWidgetBaseImp::Create();
+  *(undefined4 *)(*(int *)(iVar5 + 4) + 0x140) = 4;
+  func_0x021b7744(*(undefined4 *)(iVar5 + 4),1);
+  *(undefined4 *)(*(int *)(iVar5 + 4) + 0x124) = 0x101;
+  func_0x021b65e8(*(undefined4 *)(iVar5 + 4),0x10,&LAB_0214ea38);
+  func_0x021b6760(*(undefined4 *)(iVar5 + 4),0x10,FUN_0214ea48);
+  *(int *)(unaff_r10 + 0x24) = iVar5;
+  uVar7 = 0;
+  do {
+    in_stack_00000034 = uVar7 * 0x20 + 0x30;
+    in_stack_00000030 = 0xb8;
+    iVar5 = FUN_0203b404();
+    iVar5 = ALWidgetImp::Create(*(undefined4 *)(unaff_r10 + 0x24),*(undefined4 *)(iVar5 + 0x88),
+                                0x810000,uVar7 + 5);
+    FUN_02023940(*(undefined4 *)(iVar5 + 4));
+    FUN_0214e940(&uStack00000038,iVar5,s_Position_0215dca8);
+    uStack00000044 = in_stack_00000034 << 0xc;
+    uStack00000040 = (in_stack_00000030 + 0xa0) * 0x1000;
+    FUN_0214e990(iVar5,&uStack00000040,&uStack00000044);
+    FUN_02023c60(*(undefined4 *)(iVar5 + 4),uStack00000038,0,in_stack_0000003c);
+    uStack0000004c = in_stack_00000034 << 0xc;
+    uStack00000048 = in_stack_00000030 << 0xc;
+    FUN_0214e990(iVar5,&uStack00000048,&uStack0000004c);
+    FUN_02023c60(*(undefined4 *)(iVar5 + 4),uStack00000038,8,in_stack_0000003c);
+    piVar3 = *(int **)(*(int *)(iVar5 + 4) + 0x68);
+    (**(code **)(*piVar3 + 0xac))(piVar3,0);
+    FUN_02023c80(*(undefined4 *)(iVar5 + 4),uStack00000038,0x494c,in_stack_0000003c);
+    FUN_02023c70(*(undefined4 *)(iVar5 + 4),2);
+    func_0x021b4034(*(undefined4 *)(iVar5 + 4),2);
+    uVar2 = FUN_0214e81c(0,&DAT_0215db50,&DAT_02093c8c);
+    FUN_02020e98(iVar5,uVar2);
+    func_0x021b65e8(*(undefined4 *)(iVar5 + 4),1,&LAB_0214ed04);
+    func_0x021b65e8(*(undefined4 *)(iVar5 + 4),4,FUN_0214eab0);
+    func_0x021b6760(*(undefined4 *)(iVar5 + 4),4,FUN_0214eac8);
+    func_0x021b65e8(*(undefined4 *)(iVar5 + 4),0x10,FUN_0214ea7c);
+    *(uint *)(*(int *)(iVar5 + 4) + 0x124) = uVar7;
+    (**(code **)(**(int **)(iVar5 + 4) + 0x24))();
+    uStack00000054 = in_stack_00000034 << 0xc;
+    uStack00000050 = (in_stack_00000030 + 0xa0) * 0x1000;
+    FUN_0214e990(iVar5,&uStack00000050,&uStack00000054);
+    *(int *)(unaff_r10 + uVar7 * 4 + 0x30) = iVar5;
+    if (uVar7 == *(byte *)(unaff_r10 + 1)) {
+      func_0x021b6214(*(undefined4 *)(iVar5 + 4),1);
+    }
+    uVar7 = uVar7 + 1;
+  } while ((int)uVar7 < 4);
+  iVar5 = 0;
+  do {
+    iVar1 = iVar5 + -1;
+    if (iVar1 < 0) {
+      iVar1 = 3;
+    }
+    iVar1 = *(int *)(unaff_r10 + iVar1 * 4 + 0x30);
+    iVar6 = iVar5 + 1;
+    if (3 < iVar6) {
+      iVar6 = 0;
+    }
+    piVar3 = *(int **)(*(int *)(unaff_r10 + iVar5 * 4 + 0x30) + 4);
+    if (iVar1 == 0) {
+      (**(code **)(*piVar3 + 0x164))(piVar3,1);
+    }
+    else {
+      (**(code **)(*piVar3 + 0x160))(piVar3,1,*(undefined4 *)(iVar1 + 4));
+    }
+    iVar1 = *(int *)(unaff_r10 + iVar6 * 4 + 0x30);
+    piVar3 = *(int **)(*(int *)(unaff_r10 + iVar5 * 4 + 0x30) + 4);
+    if (iVar1 == 0) {
+      (**(code **)(*piVar3 + 0x164))(piVar3,2);
+    }
+    else {
+      (**(code **)(*piVar3 + 0x160))(piVar3,2,*(undefined4 *)(iVar1 + 4));
+    }
+    iVar5 = iVar5 + 1;
+  } while (iVar5 < 4);
+  iVar5 = ALWidgetBaseImp::Create();
+  *(undefined4 *)(*(int *)(iVar5 + 4) + 0x124) = 0x103;
+  func_0x021b65e8(*(undefined4 *)(iVar5 + 4),0x10,&LAB_0214ea38);
+  func_0x021b6760(*(undefined4 *)(iVar5 + 4),0x10,FUN_0214ea48);
+  *(int *)(unaff_r10 + 0x2c) = iVar5;
+  in_stack_00000028 = 0x40;
+  in_stack_0000002c = 0x6a;
+  iVar5 = 8;
+  do {
+    uVar7 = (iVar5 + -8) * 2;
+    iVar1 = FUN_0203b404();
+    iVar1 = ALWidgetImp::Create(*(undefined4 *)(unaff_r10 + 0x2c),*(undefined4 *)(iVar1 + 0x88),
+                                0x800000,uVar7 + 1);
+    *(int *)(unaff_r10 + iVar5 * 4 + 0x30) = iVar1;
+    FUN_02023894(*(undefined4 *)(iVar1 + 4),uVar7 | 0x800000,0);
+    func_0x021b3f78(*(undefined4 *)(*(int *)(unaff_r10 + iVar5 * 4 + 0x30) + 4),uVar7 + 1 | 0x800000
+                   );
+    func_0x021b4034(*(undefined4 *)(*(int *)(unaff_r10 + iVar5 * 4 + 0x30) + 4),uVar7 | 0x800000);
+    iVar5 = iVar5 + 1;
+  } while (iVar5 < 0xb);
+  iVar5 = ALWidgetBaseImp::Create();
+  (**(code **)(**(int **)(iVar5 + 4) + 0x24))();
+  *(undefined4 *)(*(int *)(iVar5 + 4) + 0x124) = 0x102;
+  func_0x021b65e8(*(undefined4 *)(iVar5 + 4),0x10,&LAB_0214e9dc);
+  func_0x021b6760(*(undefined4 *)(iVar5 + 4),0x10,FUN_0214e9ec);
+  *(int *)(unaff_r10 + 0x28) = iVar5;
+  iVar5 = ALWidgetImp::Create(iVar5,_DAT_021d5154);
+  FUN_0214e908(iVar5,*(undefined4 *)(unaff_r10 + 0x1c));
+  piVar3 = *(int **)(*(int *)(unaff_r10 + 0x1c) + 4);
+  (**(code **)(*piVar3 + 0xd8))(piVar3,1);
+  FUN_02023940(*(undefined4 *)(iVar5 + 4));
+  FUN_0214e940(&uStack00000008,iVar5,s_Position_0215dca8);
+  uStack00000014 = 0;
+  uStack00000010 = 0x100000;
+  FUN_0214e990(iVar5,&uStack00000010,&uStack00000014);
+  FUN_02023c60(*(undefined4 *)(iVar5 + 4),uStack00000008,0,in_stack_0000000c);
+  uStack0000001c = 0;
+  uStack00000018 = 0;
+  FUN_0214e990(iVar5,&uStack00000018,&uStack0000001c);
+  FUN_02023c60(*(undefined4 *)(iVar5 + 4),uStack00000008,8,in_stack_0000000c);
+  piVar3 = *(int **)(*(int *)(iVar5 + 4) + 0x68);
+  (**(code **)(*piVar3 + 0xac))(piVar3,0);
+  FUN_02023c80(*(undefined4 *)(iVar5 + 4),uStack00000008,0x494c,in_stack_0000000c);
+  FUN_02023c70(*(undefined4 *)(iVar5 + 4),2);
+  func_0x021b4034(*(undefined4 *)(iVar5 + 4),2);
+  uStack00000024 = 0;
+  uStack00000020 = 0x100000;
+  FUN_0214e990(iVar5,&uStack00000020,&uStack00000024);
+  *(int *)(unaff_r10 + 0x48) = iVar5;
+  uVar2 = func_0x021bcf1c(1,1,1,0xffffffff);
+  *(undefined4 *)(unaff_r10 + 0x5c) = uVar2;
+  FUN_0214ed1c();
+  FUN_02073ebc(2,1);
+  piVar3 = *(int **)(*(int *)(unaff_r10 + 0x28) + 4);
+  (**(code **)(*piVar3 + 0x148))(piVar3,0x10);
+  return *(undefined4 *)(unaff_r10 + 4);
+}
+

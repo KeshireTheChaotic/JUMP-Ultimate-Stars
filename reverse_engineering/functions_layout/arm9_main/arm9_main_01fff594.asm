@@ -1,0 +1,17 @@
+01fff594  ldrsh r0,[r4],#0x2
+01fff598  ldrsh r3,[r4],#0x2
+01fff59c  ldrsh r2,[r4],#0x2
+01fff5a0  add r5,r5,r0
+01fff5a4  add r6,r6,r3
+01fff5a8  add r7,r7,r2
+01fff5ac  ldrsh r0,[r4],#0x2
+01fff5b0  ldrsh r3,[r4],#0x2
+01fff5b4  ldrsh r2,[r4],#0x2
+01fff5b8  add r8,r8,r0
+01fff5bc  add r9,r9,r3
+01fff5c0  add r10,r10,r2
+01fff5c4  ldrsh r0,[r4],#0x2
+01fff5c8  ldrsh r3,[r4],#0x2
+01fff5cc  add r11,r11,r0
+01fff5d0  add r12,r12,r3
+01fff5d4  mov pc,lr

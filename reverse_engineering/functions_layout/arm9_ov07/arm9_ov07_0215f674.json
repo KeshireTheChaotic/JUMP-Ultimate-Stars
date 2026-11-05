@@ -1,0 +1,1 @@
+{"module":"arm9_ov07","address":"0215f674","name":"FUN_0215f674","thumb":false,"body_bytes":140,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["02059560","0215f994","0215fc84","0215fcb8"],"unresolved_call_targets":[],"status":"decompiled","asm_file":"arm9_ov07_0215f674.asm","c_file":"arm9_ov07_0215f674.c"}

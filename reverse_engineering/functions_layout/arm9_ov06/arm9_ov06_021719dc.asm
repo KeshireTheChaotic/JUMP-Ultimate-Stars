@@ -1,0 +1,9 @@
+021719dc  stmdb sp!,{r3,lr}
+021719e0  ldr r0,[0x2171a00]
+021719e4  mov r12,#0x2
+021719e8  mov r1,#0x0
+021719ec  mov r2,#0x1
+021719f0  mov r3,#0x1f
+021719f4  str r12,[sp,#0x0]
+021719f8  bl 0x02155190
+021719fc  ldmia sp!,{r3,pc}

@@ -1,0 +1,12 @@
+0214dbe4  add r0,r6,#0x0
+0214dbe6  add r0,#0x30
+0214dbe8  add r1,r5,#0x6
+0214dbea  add r2,r4,#0x0
+0214dbec  bl 0x0214cf10
+0214dbf0  str r4,[r6,#0x4]
+0214dbf2  b 0x0214dc58
+0214dbf4  add r0,r6,#0x0
+0214dbf6  add r0,#0x70
+0214dbf8  add r1,r5,#0x6
+0214dbfa  add r2,r4,#0x0
+0214dbfc  bl 0x0214cf10

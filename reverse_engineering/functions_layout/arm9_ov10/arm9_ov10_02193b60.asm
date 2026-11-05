@@ -1,0 +1,12 @@
+02193b60  ldrh r2,[r1,#0x2]
+02193b62  asr r3,r2,#0x8
+02193b64  mov r1,#0xff
+02193b66  and r3,r1
+02193b68  lsl r2,r2,#0x8
+02193b6a  ldr r1,[0x02193b78]
+02193b6c  and r2,r1
+02193b6e  orr r3,r2
+02193b70  lsl r1,r3,#0x10
+02193b72  lsr r1,r1,#0x10
+02193b74  ldr r3,[0x02193b7c]
+02193b76  bx r3

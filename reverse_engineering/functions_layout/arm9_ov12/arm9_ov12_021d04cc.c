@@ -1,0 +1,12 @@
+
+void FUN_021d04cc(void)
+
+{
+  FUN_021ba470(&DAT_021d518c);
+  FUN_0200f2b0(&DAT_021d518c,FUN_021ba484,&DAT_021d5174);
+  FUN_021b4a98(&DAT_021d5180);
+  FUN_0200f2b0(&DAT_021d5180,0x21b4aa5,&DAT_021d5168);
+  FUN_021ba498(&DAT_021d5138,s_Widget_021d3dfc,3);
+  return;
+}
+

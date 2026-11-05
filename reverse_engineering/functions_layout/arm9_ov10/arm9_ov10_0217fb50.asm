@@ -1,0 +1,17 @@
+0217fb50  push {lr}
+0217fb52  sub sp,#0x4
+0217fb54  ldr r0,[0x0217fb78]
+0217fb56  ldr r0,[r0,#0x0]
+0217fb58  cmp r0,#0x0
+0217fb5a  beq 0x0217fb72
+0217fb5c  bl 0x02001600
+0217fb60  cmp r0,#0x0
+0217fb62  bne 0x0217fb72
+0217fb64  ldr r0,[0x0217fb78]
+0217fb66  ldr r0,[r0,#0x0]
+0217fb68  bl 0x02001650
+0217fb6c  mov r1,#0x0
+0217fb6e  ldr r0,[0x0217fb78]
+0217fb70  str r1,[r0,#0x0]
+0217fb72  add sp,#0x4
+0217fb74  pop {pc}

@@ -1,0 +1,1 @@
+{"module":"arm9_ov08","address":"02160b24","name":"FUN_02160b24","thumb":true,"body_bytes":20,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["02160abc","02160af8","02160afc"],"unresolved_call_targets":[],"status":"decompiled","asm_file":"arm9_ov08_02160b24.asm","c_file":"arm9_ov08_02160b24.c"}

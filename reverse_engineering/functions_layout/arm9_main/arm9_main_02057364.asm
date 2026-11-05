@@ -1,0 +1,23 @@
+02057364  stmdb sp!,{lr}
+02057368  sub sp,sp,#0x4
+0205736c  ldr r3,[0x20573c0]
+02057370  and r2,r0,#0xff
+02057374  mov r1,#0xc
+02057378  mla r3,r2,r1,r3
+0205737c  mov r1,r0, asr #0x8
+02057380  ldrb r0,[r3,#0x8]
+02057384  and r1,r1,#0xff
+02057388  cmp r1,r0
+0205738c  addne sp,sp,#0x4
+02057390  ldmiane sp!,{lr}
+02057394  bxne lr
+02057398  ldr r1,[r3,#0x0]
+0205739c  cmp r1,#0x0
+020573a0  addeq sp,sp,#0x4
+020573a4  ldmiaeq sp!,{lr}
+020573a8  bxeq lr
+020573ac  ldr r0,[r3,#0x4]
+020573b0  blx r1
+020573b4  add sp,sp,#0x4
+020573b8  ldmia sp!,{lr}
+020573bc  bx lr

@@ -1,0 +1,11 @@
+020573c4  mov r3,#0xc
+020573c8  mul r3,r0,r3
+020573cc  ldr r0,[0x20573f0]
+020573d0  str r1,[r0,r3]
+020573d4  add r1,r0,r3
+020573d8  str r2,[r1,#0x4]
+020573dc  ldrb r0,[r1,#0x8]
+020573e0  add r0,r0,#0x1
+020573e4  strb r0,[r1,#0x8]
+020573e8  ldrb r0,[r1,#0x8]
+020573ec  bx lr

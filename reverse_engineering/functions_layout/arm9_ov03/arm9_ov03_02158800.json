@@ -1,0 +1,1 @@
+{"module":"arm9_ov03","address":"02158800","name":"FUN_02158800","thumb":false,"body_bytes":136,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["0214d820","0214d838","02156dac"],"unresolved_call_targets":["021b6214","021b65cc","021b65e0"],"status":"decompiled","asm_file":"arm9_ov03_02158800.asm","c_file":"arm9_ov03_02158800.c"}

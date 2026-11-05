@@ -1,0 +1,29 @@
+0205646c  stmdb sp!,{r4,r5,lr}
+02056470  sub sp,sp,#0x4
+02056474  mov r5,r1
+02056478  bl 0x02056500
+0205647c  mov r4,r0
+02056480  mvn r0,#0x0
+02056484  cmp r4,r0
+02056488  addeq sp,sp,#0x4
+0205648c  moveq r1,r0
+02056490  ldmiaeq sp!,{r4,r5,lr}
+02056494  bxeq lr
+02056498  mov r0,r5
+0205649c  bl 0x020564e4
+020564a0  mvn r2,#0x0
+020564a4  cmp r0,r2
+020564a8  moveq r1,r2
+020564ac  beq 0x020564d0
+020564b0  ldr r1,[0x20564e0]
+020564b4  mov r2,#0x0
+020564b8  umull r12,r3,r4,r1
+020564bc  mla r3,r4,r2,r3
+020564c0  mov r2,r4, asr #0x1f
+020564c4  mla r3,r2,r1,r3
+020564c8  adds r2,r0,r12
+020564cc  adc r1,r3,r0, asr #0x1f
+020564d0  mov r0,r2
+020564d4  add sp,sp,#0x4
+020564d8  ldmia sp!,{r4,r5,lr}
+020564dc  bx lr

@@ -1,0 +1,1 @@
+{"module":"arm9_main","address":"020896c0","name":"PostSyncMessage","thumb":true,"body_bytes":282,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["0201a21c","0201a2d4","0201a30c","020282a0","020287f8","02059864","02088904"],"unresolved_call_targets":[],"status":"decompiled","asm_file":"arm9_main_020896c0.asm","c_file":"arm9_main_020896c0.c"}

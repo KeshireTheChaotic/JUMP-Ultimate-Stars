@@ -1,0 +1,28 @@
+02179130  cmp r1,#0x1b
+02179134  ble 0x02179198
+02179138  sub r12,r1,#0x1b
+0217913c  add r2,r0,r12, lsl #0x1
+02179140  ldrsh r2,[r2,#0x3c]
+02179144  cmp r2,#0x0
+02179148  movne r0,#0x0
+0217914c  bxne lr
+02179150  ldrb r3,[r0,r1]
+02179154  cmp r3,#0x8
+02179158  movcs r1,#0x1
+0217915c  bcs 0x0217917c
+02179160  ldr r1,[0x21791a0]
+02179164  ldr r2,[r0,#0x38]
+02179168  ldr r1,[r1,r3,lsl #0x2]
+0217916c  and r2,r2,#0xff
+02179170  cmp r2,r1
+02179174  movls r1,#0x1
+02179178  movhi r1,#0x0
+0217917c  cmp r1,#0x0
+02179180  movne r0,#0x1
+02179184  addeq r0,r0,r12, lsl #0x1
+02179188  moveq r1,#0x1e
+0217918c  strheq r1,[r0,#0x3c]
+02179190  moveq r0,#0x0
+02179194  bx lr
+02179198  mov r0,#0x0
+0217919c  bx lr

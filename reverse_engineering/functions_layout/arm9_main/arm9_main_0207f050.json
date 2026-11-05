@@ -1,0 +1,1 @@
+{"module":"arm9_main","address":"0207f050","name":"FUN_0207f050","thumb":false,"body_bytes":636,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["0207e538","0207e594"],"unresolved_call_targets":["0216293c","02162dc4","02162e0c"],"status":"decompiled","asm_file":"arm9_main_0207f050.asm","c_file":"arm9_main_0207f050.c"}

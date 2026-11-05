@@ -1,0 +1,9 @@
+0215c910  stmdb sp!,{r4,lr}
+0215c914  mov r4,r0
+0215c918  cmp r1,#0x0
+0215c91c  beq 0x0215c924
+0215c920  bl 0x0206af1c
+0215c924  ldr r0,[r4,#0x0]
+0215c928  ldr r0,[r0,#0x4]
+0215c92c  bl 0x020282f4
+0215c930  ldmia sp!,{r4,pc}

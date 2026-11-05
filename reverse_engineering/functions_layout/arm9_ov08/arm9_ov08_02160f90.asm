@@ -1,0 +1,12 @@
+02160f90  push {lr}
+02160f92  sub sp,#0x4
+02160f94  bl 0x02154488
+02160f98  mov r1,#0x1
+02160f9a  mvn r1,r1
+02160f9c  cmp r0,r1
+02160f9e  beq 0x02160faa
+02160fa0  bl 0x02154434
+02160fa4  ldr r0,[0x02160fb0]
+02160fa6  bl 0x02157088
+02160faa  add sp,#0x4
+02160fac  pop {pc}

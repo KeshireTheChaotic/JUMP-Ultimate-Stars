@@ -1,0 +1,17 @@
+02079dfc  ldrsb r2,[r0,#0xe]
+02079e00  mvn r1,#0x0
+02079e04  bic r2,r2,#0x3f
+02079e08  orr r2,r2,#0x3f
+02079e0c  strb r2,[r0,#0xe]
+02079e10  ldrsb r2,[r0,#0xf]
+02079e14  bic r2,r2,#0x3f
+02079e18  orr r2,r2,#0x3f
+02079e1c  strb r2,[r0,#0xf]
+02079e20  strh r1,[r0,#0xc]
+02079e24  ldrb r1,[r0,#0xe]
+02079e28  bic r1,r1,#0x80
+02079e2c  strb r1,[r0,#0xe]
+02079e30  ldrb r1,[r0,#0xf]
+02079e34  orr r1,r1,#0x80
+02079e38  strb r1,[r0,#0xf]
+02079e3c  bx lr

@@ -1,0 +1,17 @@
+02159afc  stmdb sp!,{r3,lr}
+02159b00  sub sp,sp,#0x8
+02159b04  cmp r1,#0x0
+02159b08  beq 0x02159b24
+02159b0c  mov r1,#0xe8000
+02159b10  str r1,[sp,#0x4]
+02159b14  ldr r0,[r0,#0x4c]
+02159b18  add r1,sp,#0x4
+02159b1c  bl 0x02150a10
+02159b20  b 0x02159b38
+02159b24  mov r1,#0x100000
+02159b28  str r1,[sp,#0x0]
+02159b2c  ldr r0,[r0,#0x4c]
+02159b30  add r1,sp,#0x0
+02159b34  bl 0x02150a10
+02159b38  add sp,sp,#0x8
+02159b3c  ldmia sp!,{r3,pc}

@@ -1,0 +1,10 @@
+0200e9f0  stmdb sp!,{r4,r11,lr}
+0200e9f4  sub sp,sp,#0x2c
+0200e9f8  mov r11,sp
+0200e9fc  str sp,[r11,#0x18]
+0200ea00  ldr r4,[r0,#0x14]
+0200ea04  bl 0x0200f298
+0200ea08  b 0x0200ea7c
+0200ea7c  bl 0x0200f280
+0200ea80  add sp,r11,#0x2c
+0200ea84  ldmia sp!,{r4,r11,pc}

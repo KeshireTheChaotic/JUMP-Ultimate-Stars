@@ -1,0 +1,1 @@
+{"module":"arm7_main","address":"027e62cc","name":"FUN_027e62cc","thumb":false,"body_bytes":248,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["027e0134","027e6164","027e6680","037fcc6c","037fd6ac","03808074","038080d0"],"unresolved_call_targets":[],"status":"decompiled","asm_file":"arm7_main_027e62cc.asm","c_file":"arm7_main_027e62cc.c"}

@@ -1,0 +1,9 @@
+02160aa0  push {lr}
+02160aa2  sub sp,#0x4
+02160aa4  bl 0x02154424
+02160aa8  mov r0,#0x8
+02160aaa  bl 0x02166188
+02160aae  ldr r0,[0x02160ab8]
+02160ab0  bl 0x02157088
+02160ab4  add sp,#0x4
+02160ab6  pop {pc}

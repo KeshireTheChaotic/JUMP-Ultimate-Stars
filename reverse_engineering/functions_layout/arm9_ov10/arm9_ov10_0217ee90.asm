@@ -1,0 +1,11 @@
+0217ee90  push {r4,r5,lr}
+0217ee92  sub sp,#0x4
+0217ee94  add r5,r0,#0x0
+0217ee96  add r4,r1,#0x0
+0217ee98  add r3,r2,#0x0
+0217ee9a  mov r0,#0x1
+0217ee9c  add r1,r5,#0x0
+0217ee9e  add r2,r4,#0x0
+0217eea0  bl 0x0217eddc
+0217eea4  add sp,#0x4
+0217eea6  pop {r4,r5,pc}

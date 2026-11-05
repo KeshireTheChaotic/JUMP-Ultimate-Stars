@@ -1,0 +1,16 @@
+020704a8  stmdb sp!,{r3,lr}
+020704ac  ldr r0,[0x20704e8]
+020704b0  mov r1,#0x0
+020704b4  mov r2,#0x70
+020704b8  bl 0x020517fc
+020704bc  ldr r1,[0x20704ec]
+020704c0  mvn r2,#0x0
+020704c4  ldr r0,[0x20704f0]
+020704c8  strh r2,[r1,#0x8]
+020704cc  strb r2,[r0,#0x9e]
+020704d0  str r2,[r0,#0xcc]
+020704d4  strb r2,[r0,#0x9f]
+020704d8  strb r2,[r0,#0xa0]
+020704dc  strb r2,[r0,#0xa1]
+020704e0  strb r2,[r0,#0xe4]
+020704e4  ldmia sp!,{r3,pc}

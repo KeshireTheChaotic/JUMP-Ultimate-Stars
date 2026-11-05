@@ -1,0 +1,10 @@
+0215e9cc  stmdb sp!,{lr}
+0215e9d0  sub sp,sp,#0x4
+0215e9d4  ldr r12,[sp,#0x8]
+0215e9d8  str r12,[sp,#0x0]
+0215e9dc  ldr r12,[r0,#0x20]
+0215e9e0  ldr r12,[r12,#0xc]
+0215e9e4  ldr r12,[r12,#0x1c]
+0215e9e8  blx r12
+0215e9ec  add sp,sp,#0x4
+0215e9f0  ldmia sp!,{pc}

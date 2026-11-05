@@ -1,0 +1,1 @@
+{"module":"arm7_main","address":"037ff5b4","name":"SVC_GetPitchTable","thumb":false,"body_bytes":8,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":[],"unresolved_call_targets":[],"status":"decompiled","asm_file":"arm7_main_037ff5b4.asm","c_file":"arm7_main_037ff5b4.c"}

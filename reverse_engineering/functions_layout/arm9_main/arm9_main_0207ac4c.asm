@@ -1,0 +1,9 @@
+0207ac4c  ldr r12,[r1,#0x0]
+0207ac50  mov r1,#0x1000
+0207ac54  str r12,[r0,#0x0]
+0207ac58  ldr r2,[r2,#0x0]
+0207ac5c  str r2,[r0,#0x4]
+0207ac60  ldr r2,[r3,#0x0]
+0207ac64  str r2,[r0,#0x8]
+0207ac68  str r1,[r0,#0xc]
+0207ac6c  bx lr

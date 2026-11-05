@@ -1,0 +1,9 @@
+02173f8c  stmdb sp!,{r4,lr}
+02173f90  ldr r0,[r0,#0x4]
+02173f94  mov r4,r1
+02173f98  bl 0x0202f628
+02173f9c  ldr r2,[r0,#0x0]
+02173fa0  ldr r1,[r4,#0x0]
+02173fa4  ldr r2,[r2,#0x40]
+02173fa8  blx r2
+02173fac  ldmia sp!,{r4,pc}

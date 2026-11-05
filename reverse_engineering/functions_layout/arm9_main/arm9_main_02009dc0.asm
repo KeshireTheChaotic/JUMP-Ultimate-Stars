@@ -1,0 +1,16 @@
+02009dc0  push {r3,r4,r5,lr}
+02009dc2  add r4,r1,#0x0
+02009dc4  add r5,r0,#0x0
+02009dc6  cmp r4,#0x0
+02009dc8  ble 0x02009de2
+02009dca  ldrb r2,[r5,#0x4]
+02009dcc  cmp r4,r2
+02009dce  bge 0x02009de2
+02009dd0  bl 0x02009d3c
+02009dd4  strb r4,[r5,#0x4]
+02009dd6  cmp r0,#0x0
+02009dd8  blt 0x02009de2
+02009dda  add r0,r5,#0x0
+02009ddc  add r1,r4,#0x0
+02009dde  bl 0x02009d88
+02009de2  pop {r3,r4,r5,pc}

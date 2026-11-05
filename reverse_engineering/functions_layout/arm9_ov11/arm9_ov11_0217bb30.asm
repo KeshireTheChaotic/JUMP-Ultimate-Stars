@@ -1,0 +1,10 @@
+0217bb30  ldr r2,[r0,#0x0]
+0217bb34  cmp r2,#0x0
+0217bb38  bxeq lr
+0217bb3c  ldr r0,[r2,#0xa8]
+0217bb40  cmp r1,#0x0
+0217bb44  orrne r0,r0,#0x40
+0217bb48  strne r0,[r2,#0xa8]
+0217bb4c  biceq r0,r0,#0x40
+0217bb50  streq r0,[r2,#0xa8]
+0217bb54  bx lr

@@ -1,0 +1,26 @@
+0219bbb4  stmdb sp!,{r4,lr}
+0219bbb8  mov r4,#0x1
+0219bbbc  blx 0x021759a4
+0219bbc0  ldr r1,[0x219bc1c]
+0219bbc4  ldr r2,[r1,#0x0]
+0219bbc8  ldr r1,[r2,#0x20]
+0219bbcc  cmp r0,r1
+0219bbd0  beq 0x0219bc14
+0219bbd4  cmp r0,#0x8
+0219bbd8  addls pc,pc,r0, lsl #0x2
+0219bbdc  b 0x0219bc10
+0219bbe0  b 0x0219bc10
+0219bbe4  b 0x0219bc10
+0219bbe8  b 0x0219bc10
+0219bbec  b 0x0219bc10
+0219bbf0  b 0x0219bc10
+0219bbf4  b 0x0219bc10
+0219bbf8  b 0x0219bc10
+0219bbfc  b 0x0219bc04
+0219bc00  b 0x0219bc0c
+0219bc04  mov r4,#0x0
+0219bc08  b 0x0219bc10
+0219bc0c  mov r4,#0x0
+0219bc10  str r0,[r2,#0x20]
+0219bc14  mov r0,r4
+0219bc18  ldmia sp!,{r4,pc}

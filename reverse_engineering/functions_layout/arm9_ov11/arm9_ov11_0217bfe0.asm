@@ -1,0 +1,13 @@
+0217bfe0  ldr r3,[0x217c018]
+0217bfe4  mov r12,#0x0
+0217bfe8  ldrsb r2,[r3,r12]
+0217bfec  cmp r2,#0x0
+0217bff0  movlt r0,#0x0
+0217bff4  bxlt lr
+0217bff8  ldr r1,[r0,#0x20]
+0217bffc  ldrsb r1,[r1,#0x18]
+0217c000  cmp r2,r1
+0217c004  moveq r0,#0x1
+0217c008  bxeq lr
+0217c00c  add r12,r12,#0x1
+0217c010  b 0x0217bfe8

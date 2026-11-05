@@ -1,0 +1,17 @@
+020129cc  stmdb sp!,{r3,r4,lr}
+020129d0  sub sp,sp,#0x4
+020129d4  mov r4,r0
+020129d8  bl 0x02026ea0
+020129dc  ldr r0,[0x2012a10]
+020129e0  mov r2,#0x40000
+020129e4  str r0,[r4,#0x0]
+020129e8  add r1,sp,#0x0
+020129ec  mov r0,r4
+020129f0  str r2,[sp,#0x0]
+020129f4  bl 0x02012940
+020129f8  ldr r0,[r4,#0x4]
+020129fc  mov r1,#0x1
+02012a00  bl 0x02027de8
+02012a04  mov r0,r4
+02012a08  add sp,sp,#0x4
+02012a0c  ldmia sp!,{r3,r4,pc}

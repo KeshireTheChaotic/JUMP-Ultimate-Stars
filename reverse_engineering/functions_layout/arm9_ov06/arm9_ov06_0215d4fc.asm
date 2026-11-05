@@ -1,0 +1,13 @@
+0215d4fc  stmdb sp!,{r3,lr}
+0215d500  ldr r0,[r0,#0x174]
+0215d504  ldr r0,[r0,#0x0]
+0215d508  ldr r0,[r0,#0xc]
+0215d50c  ldr r0,[r0,#0x4]
+0215d510  ldr r0,[r0,#0x68]
+0215d514  ldr r1,[r0,#0x0]
+0215d518  ldr r1,[r1,#0x68]
+0215d51c  blx r1
+0215d520  cmp r0,#0x0
+0215d524  moveq r0,#0x1
+0215d528  movne r0,#0x0
+0215d52c  ldmia sp!,{r3,pc}

@@ -1,0 +1,27 @@
+021a1acc  stmdb sp!,{r4,r5,r6,r7,r8,lr}
+021a1ad0  mov r6,r0
+021a1ad4  ldr r0,[0x21a1b38]
+021a1ad8  ldr r2,[r6,#0x0]
+021a1adc  mvn r4,#0x0
+021a1ae0  and r0,r1,r0
+021a1ae4  cmp r2,r0
+021a1ae8  addgt r0,r0,#0x8000
+021a1aec  sub r5,r0,r2
+021a1af0  add r8,r4,#0x8000
+021a1af4  add r7,r4,#0x4000
+021a1af8  b 0x021a1b24
+021a1afc  ldrb r1,[r6,#0x8]
+021a1b00  mov r0,r6
+021a1b04  add r1,r6,r1, lsl #0x3
+021a1b08  strh r4,[r1,#0xc]
+021a1b0c  bl 0x021a1ab0
+021a1b10  ldr r0,[r6,#0x0]
+021a1b14  sub r5,r5,#0x1
+021a1b18  add r0,r0,#0x1
+021a1b1c  and r0,r0,r8
+021a1b20  str r0,[r6,#0x0]
+021a1b24  cmp r5,r7
+021a1b28  ldmiage sp!,{r4,r5,r6,r7,r8,pc}
+021a1b2c  cmp r5,#0x0
+021a1b30  bgt 0x021a1afc
+021a1b34  ldmia sp!,{r4,r5,r6,r7,r8,pc}

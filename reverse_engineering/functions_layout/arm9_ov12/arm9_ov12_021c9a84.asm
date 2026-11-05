@@ -1,0 +1,10 @@
+021c9a84  ldr r12,[r1,#0x0]
+021c9a88  ldr r1,[sp,#0x0]
+021c9a8c  str r12,[r0,#0x0]
+021c9a90  ldr r2,[r2,#0x0]
+021c9a94  str r2,[r0,#0x4]
+021c9a98  ldr r2,[r3,#0x0]
+021c9a9c  str r2,[r0,#0x8]
+021c9aa0  ldr r1,[r1,#0x0]
+021c9aa4  str r1,[r0,#0xc]
+021c9aa8  bx lr

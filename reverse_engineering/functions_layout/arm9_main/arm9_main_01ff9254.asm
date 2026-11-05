@@ -1,0 +1,14 @@
+01ff9254  stmdb sp!,{lr}
+01ff9258  sub sp,sp,#0x4
+01ff925c  ldr r0,[0x1ff928c]
+01ff9260  ldrh r1,[r0,#0x0]
+01ff9264  cmp r1,#0x0
+01ff9268  beq 0x01ff9260
+01ff926c  ldr r0,[0x1ff9290]
+01ff9270  mov r1,#0x0
+01ff9274  strh r1,[r0,#0x0]
+01ff9278  bl 0x01ff9174
+01ff927c  bl 0x01ff8f80
+01ff9280  add sp,sp,#0x4
+01ff9284  ldmia sp!,{lr}
+01ff9288  bx lr

@@ -1,0 +1,9 @@
+02165cdc  stmdb sp!,{r4,lr}
+02165ce0  mov r4,r0
+02165ce4  bl 0x02073840
+02165ce8  cmp r0,#0x0
+02165cec  ldmiaeq sp!,{r4,pc}
+02165cf0  ldr r0,[r4,#0x4]
+02165cf4  ldr r1,[0x2165d00]
+02165cf8  bl 0x02028384
+02165cfc  ldmia sp!,{r4,pc}

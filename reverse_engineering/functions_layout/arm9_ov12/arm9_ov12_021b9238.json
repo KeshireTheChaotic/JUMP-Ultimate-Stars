@@ -1,0 +1,1 @@
+{"module":"arm9_ov12","address":"021b9238","name":"ALWidgetBase_021d2d74","thumb":true,"body_bytes":32,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["021b91bc","021b9228"],"unresolved_call_targets":[],"status":"decompiled","asm_file":"arm9_ov12_021b9238.asm","c_file":"arm9_ov12_021b9238.c"}

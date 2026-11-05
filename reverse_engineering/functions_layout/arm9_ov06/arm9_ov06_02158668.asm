@@ -1,0 +1,22 @@
+02158668  stmdb sp!,{r3,r4,r5,r6,r7,lr}
+0215866c  mov r4,r0
+02158670  ldrsh r0,[r4,#0xe2]
+02158674  cmp r0,#0x0
+02158678  ldmiaeq sp!,{r3,r4,r5,r6,r7,pc}
+0215867c  mov r7,#0x0
+02158680  add r5,r4,#0x100
+02158684  ldr r6,[0x21586c0]
+02158688  b 0x021586ac
+0215868c  ldrsb r0,[r5,#0xe0]
+02158690  cmp r7,r0
+02158694  beq 0x021586a8
+02158698  add r0,r1,r7, lsl #0x2
+0215869c  ldrsh r1,[r4,#0xe2]
+021586a0  ldr r0,[r0,#0x118]
+021586a4  bl 0x020781e4
+021586a8  add r7,r7,#0x1
+021586ac  ldr r1,[r6,#0x0]
+021586b0  ldr r0,[r1,#0x158]
+021586b4  cmp r7,r0
+021586b8  blt 0x0215868c
+021586bc  ldmia sp!,{r3,r4,r5,r6,r7,pc}

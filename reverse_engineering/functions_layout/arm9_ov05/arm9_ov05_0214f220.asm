@@ -1,0 +1,10 @@
+0214f220  stmdb sp!,{r4,lr}
+0214f224  mov r4,r0
+0214f228  ldr r0,[r4,#0x4]
+0214f22c  ldr r0,[r0,#0x10]
+0214f230  ldr r0,[r0,#0x14]
+0214f234  bl 0x0214fe78
+0214f238  ldr r0,[r4,#0x4]
+0214f23c  ldr r1,[0x214f248]
+0214f240  bl 0x02028384
+0214f244  ldmia sp!,{r4,pc}

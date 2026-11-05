@@ -1,0 +1,10 @@
+02030ce8  stmdb sp!,{r3,r4,r5,lr}
+02030cec  mov r5,r0
+02030cf0  mov r4,r1
+02030cf4  bl 0x0202f450
+02030cf8  ldr r1,[0x2030d10]
+02030cfc  mov r0,r5
+02030d00  str r1,[r5,#0x0]
+02030d04  ldr r1,[r4,#0x1c]
+02030d08  str r1,[r5,#0x1c]
+02030d0c  ldmia sp!,{r3,r4,r5,pc}

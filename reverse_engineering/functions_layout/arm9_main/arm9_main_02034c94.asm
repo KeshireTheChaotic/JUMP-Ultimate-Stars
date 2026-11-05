@@ -1,0 +1,12 @@
+02034c94  stmdb sp!,{r3,lr}
+02034c98  ldr r1,[0x2034cc4]
+02034c9c  ldr r0,[0x2034cc8]
+02034ca0  str r1,[r0,#0x1e4]
+02034ca4  ldr r0,[r0,#0x330]
+02034ca8  ldr r1,[r0,#0x0]
+02034cac  ldr r1,[r1,#0x0]
+02034cb0  blx r1
+02034cb4  ldr r1,[0x2034ccc]
+02034cb8  ldr r0,[0x2034cc8]
+02034cbc  str r1,[r0,#0x1e4]
+02034cc0  ldmia sp!,{r3,pc}

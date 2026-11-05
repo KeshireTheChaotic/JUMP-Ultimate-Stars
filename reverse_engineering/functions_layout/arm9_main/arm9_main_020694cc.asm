@@ -1,0 +1,10 @@
+020694cc  push {r4,lr}
+020694ce  sub sp,#0x18
+020694d0  add r4,r1,#0x0
+020694d2  add r1,sp,#0x0
+020694d4  bl 0x020693dc
+020694d8  add r0,sp,#0x0
+020694da  add r1,r4,#0x0
+020694dc  bl 0x020693ac
+020694e0  add sp,#0x18
+020694e2  pop {r4,pc}

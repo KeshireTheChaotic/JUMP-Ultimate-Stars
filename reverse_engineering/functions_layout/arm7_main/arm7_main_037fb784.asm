@@ -1,0 +1,10 @@
+037fb784  mov r2,#0xfa0
+037fb788  ldr r1,[0x37fb7ac]
+037fb78c  b 0x037fb7a0
+037fb790  ldrh r0,[r1,#0x0]
+037fb794  ands r0,r0,#0x80
+037fb798  bxne lr
+037fb79c  sub r2,r2,#0x1
+037fb7a0  cmp r2,#0x0
+037fb7a4  bne 0x037fb790
+037fb7a8  bx lr

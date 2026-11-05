@@ -1,0 +1,17 @@
+0218ca00  push {r4,lr}
+0218ca02  add r4,r0,#0x0
+0218ca04  bl 0x020019ec
+0218ca08  mov r1,#0x0
+0218ca0a  mvn r1,r1
+0218ca0c  cmp r0,r1
+0218ca0e  bne 0x0218ca24
+0218ca10  add r0,r4,#0x0
+0218ca12  bl 0x02193970
+0218ca16  cmp r0,#0x0
+0218ca18  bne 0x0218ca1e
+0218ca1a  mov r0,#0x0
+0218ca1c  pop {r4,pc}
+0218ca1e  ldr r0,[r0,#0xc]
+0218ca20  ldr r0,[r0,#0x0]
+0218ca22  ldr r0,[r0,#0x0]
+0218ca24  pop {r4,pc}

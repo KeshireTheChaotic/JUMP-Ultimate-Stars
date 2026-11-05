@@ -1,0 +1,1 @@
+{"module":"arm9_ov02","address":"02153da0","name":"FUN_02153da0","thumb":false,"body_bytes":60,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["02028330","02028384","0207342c"],"unresolved_call_targets":["021b65bc"],"status":"decompiled","asm_file":"arm9_ov02_02153da0.asm","c_file":"arm9_ov02_02153da0.c"}

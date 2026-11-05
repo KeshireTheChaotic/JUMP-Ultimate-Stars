@@ -1,0 +1,13 @@
+020324a8  stmdb sp!,{r4,lr}
+020324ac  mov r4,r0
+020324b0  add r0,r4,#0x4
+020324b4  bl 0x02032334
+020324b8  mov r0,r4
+020324bc  bl 0x0201a9ec
+020324c0  cmp r0,#0x0
+020324c4  bne 0x020324d4
+020324c8  mov r0,r4
+020324cc  mov r1,#0x1
+020324d0  bl 0x0201a958
+020324d4  mov r0,r4
+020324d8  ldmia sp!,{r4,pc}

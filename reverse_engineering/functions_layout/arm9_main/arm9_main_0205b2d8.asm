@@ -1,0 +1,13 @@
+0205b2d8  stmdb sp!,{r4,lr}
+0205b2dc  mov r4,r0
+0205b2e0  ldrb r0,[r4,#0x2c]
+0205b2e4  cmp r0,#0x2
+0205b2e8  bne 0x0205b2f8
+0205b2ec  ldrb r0,[r4,#0x3c]
+0205b2f0  ldr r1,[0x205b30c]
+0205b2f4  bl 0x020569fc
+0205b2f8  ldrb r0,[r4,#0x3c]
+0205b2fc  bl 0x02056aa0
+0205b300  mov r0,r4
+0205b304  bl 0x0205b1d8
+0205b308  ldmia sp!,{r4,pc}

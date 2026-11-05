@@ -1,0 +1,15 @@
+0214deec  push {r3,lr}
+0214deee  blx 0x02086bd4
+0214def2  cmp r0,#0x0
+0214def4  beq 0x0214df0e
+0214def6  blx 0x02086c4c
+0214defa  cmp r0,#0x0
+0214defc  beq 0x0214df0e
+0214defe  ldr r0,[0x0214df10]
+0214df00  mov r2,#0x1
+0214df02  ldr r1,[r0,#0x0]
+0214df04  mov r0,#0x59
+0214df06  lsl r0,r0,#0x2
+0214df08  str r2,[r1,r0]
+0214df0a  bl 0x0214df14
+0214df0e  pop {r3,pc}

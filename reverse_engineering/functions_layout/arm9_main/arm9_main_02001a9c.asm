@@ -1,0 +1,15 @@
+02001a9c  push {r4,r5,r6,lr}
+02001a9e  sub sp,#0x8
+02001aa0  ldr r5,[sp,#0x18]
+02001aa2  ldr r4,[sp,#0x1c]
+02001aa4  ldr r6,[r4,#0x0]
+02001aa6  strb r6,[r5,#0x0]
+02001aa8  str r5,[sp,#0x0]
+02001aaa  bl 0x02193a94
+02001aae  ldrb r1,[r5,#0x0]
+02001ab0  str r1,[r4,#0x0]
+02001ab2  mov r1,#0x0
+02001ab4  mvn r1,r1
+02001ab6  bl 0x02001ba8
+02001aba  add sp,#0x8
+02001abc  pop {r4,r5,r6,pc}

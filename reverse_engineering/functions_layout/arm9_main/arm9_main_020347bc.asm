@@ -1,0 +1,15 @@
+020347bc  stmdb sp!,{r4,lr}
+020347c0  ldr r1,[0x20347f8]
+020347c4  mov r4,r0
+020347c8  ldr r0,[r1,#0x330]
+020347cc  mov r1,r4
+020347d0  add r0,r0,#0x4
+020347d4  bl 0x0201cca0
+020347d8  ldr r0,[0x20347f8]
+020347dc  ldr r1,[r0,#0x394]
+020347e0  cmp r1,#0x0
+020347e4  ldmiaeq sp!,{r4,pc}
+020347e8  ldr r1,[r1,#0xc]
+020347ec  cmp r1,r4
+020347f0  streq r4,[r0,#0x1fc]
+020347f4  ldmia sp!,{r4,pc}

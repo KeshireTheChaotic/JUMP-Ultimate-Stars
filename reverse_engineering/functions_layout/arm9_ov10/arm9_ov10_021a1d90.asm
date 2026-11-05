@@ -1,0 +1,13 @@
+021a1d90  stmdb sp!,{r4,r5,lr}
+021a1d94  sub sp,sp,#0xc
+021a1d98  mov r4,r1
+021a1d9c  mov r5,r0
+021a1da0  add r1,sp,#0x0
+021a1da4  mov r0,r4
+021a1da8  blx 0x02069694
+021a1dac  add r1,sp,#0x0
+021a1db0  mov r0,r4
+021a1db4  blx 0x02069718
+021a1db8  str r0,[r5,#0x38]
+021a1dbc  add sp,sp,#0xc
+021a1dc0  ldmia sp!,{r4,r5,pc}

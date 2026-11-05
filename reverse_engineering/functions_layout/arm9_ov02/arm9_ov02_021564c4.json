@@ -1,0 +1,1 @@
+{"module":"arm9_ov02","address":"021564c4","name":"FUN_021564c4","thumb":false,"body_bytes":104,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["0203b3e4","0203b3f4","0214ecc0"],"unresolved_call_targets":["021b6214"],"status":"decompiled","asm_file":"arm9_ov02_021564c4.asm","c_file":"arm9_ov02_021564c4.c"}

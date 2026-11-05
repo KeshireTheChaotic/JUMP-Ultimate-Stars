@@ -1,0 +1,1 @@
+{"module":"arm9_main","address":"02064998","name":"FS_LoadOverlay","thumb":true,"body_bytes":52,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["02064a88","02064b94","02064bfc"],"unresolved_call_targets":[],"status":"decompiled","asm_file":"arm9_main_02064998.asm","c_file":"arm9_main_02064998.c"}

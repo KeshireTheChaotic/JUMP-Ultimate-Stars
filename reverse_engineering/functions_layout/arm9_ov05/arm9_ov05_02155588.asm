@@ -1,0 +1,51 @@
+02155588  stmdb sp!,{r4,r5,r6,lr}
+0215558c  mov r4,r0
+02155590  ldrb r0,[r4,#0x99]
+02155594  cmp r0,#0x0
+02155598  ldmiaeq sp!,{r4,r5,r6,pc}
+0215559c  mov r6,#0x0
+021555a0  mov r5,r6
+021555a4  add r0,r4,r6, lsl #0x2
+021555a8  ldr r0,[r0,#0x4]
+021555ac  cmp r0,#0x0
+021555b0  beq 0x021555d4
+021555b4  ldr r0,[r0,#0x4]
+021555b8  mov r1,r5
+021555bc  ldr r2,[r0,#0x0]
+021555c0  ldr r2,[r2,#0xd8]
+021555c4  blx r2
+021555c8  add r0,r4,r6, lsl #0x2
+021555cc  ldr r0,[r0,#0x4]
+021555d0  bl 0x02155654
+021555d4  add r6,r6,#0x1
+021555d8  cmp r6,#0x10
+021555dc  blt 0x021555a4
+021555e0  mov r6,#0x0
+021555e4  mov r5,r6
+021555e8  add r0,r4,r6, lsl #0x2
+021555ec  ldr r0,[r0,#0x44]
+021555f0  cmp r0,#0x0
+021555f4  beq 0x0215560c
+021555f8  ldr r0,[r0,#0x4]
+021555fc  mov r1,r5
+02155600  ldr r2,[r0,#0x0]
+02155604  ldr r2,[r2,#0xd8]
+02155608  blx r2
+0215560c  add r6,r6,#0x1
+02155610  cmp r6,#0x12
+02155614  blt 0x021555e8
+02155618  mov r6,#0x0
+0215561c  mov r5,r6
+02155620  add r0,r4,r6, lsl #0x2
+02155624  ldr r0,[r0,#0x8c]
+02155628  cmp r0,#0x0
+0215562c  beq 0x02155644
+02155630  ldr r0,[r0,#0x4]
+02155634  mov r1,r5
+02155638  ldr r2,[r0,#0x0]
+0215563c  ldr r2,[r2,#0xd8]
+02155640  blx r2
+02155644  add r6,r6,#0x1
+02155648  cmp r6,#0x3
+0215564c  blt 0x02155620
+02155650  ldmia sp!,{r4,r5,r6,pc}

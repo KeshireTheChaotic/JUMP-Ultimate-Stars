@@ -1,0 +1,14 @@
+0215b4c4  add r2,r0,#0x100
+0215b4c8  ldrsb r3,[r2,#0x15]
+0215b4cc  add r1,r3,r1
+0215b4d0  strb r1,[r0,#0x115]
+0215b4d4  ldrsb r1,[r2,#0x15]
+0215b4d8  cmp r1,#0x10
+0215b4dc  movlt r1,#0x10
+0215b4e0  strblt r1,[r0,#0x115]
+0215b4e4  add r1,r0,#0x100
+0215b4e8  ldrsb r1,[r1,#0x15]
+0215b4ec  cmp r1,#0x3c
+0215b4f0  movgt r1,#0x3c
+0215b4f4  strbgt r1,[r0,#0x115]
+0215b4f8  bx lr

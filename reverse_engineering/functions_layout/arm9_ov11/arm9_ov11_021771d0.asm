@@ -1,0 +1,155 @@
+021771d0  stmdb sp!,{r4,r5,r6,r7,r8,lr}
+021771d4  ldr r8,[0x217743c]
+021771d8  mov r6,#0x100000
+021771dc  ldr r0,[r8,#0x0]
+021771e0  rsb r6,r6,#0x0
+021771e4  ldr r4,[r0,#0x0]
+021771e8  ldr r7,[0x2177440]
+021771ec  b 0x02177294
+021771f0  ldrsh r0,[r4,#0x1c]
+021771f4  ldr r5,[r4,#0x0]
+021771f8  bl 0x02083aec
+021771fc  cmp r0,#0x0
+02177200  bne 0x02177240
+02177204  ldr r2,[r4,#0x8]
+02177208  mov r1,r4
+0217720c  mov r0,r2, lsl #0xc
+02177210  mov r0,r0, lsr #0xc
+02177214  bic r0,r0,#0x1
+02177218  and r2,r2,r6
+0217721c  and r0,r0,r7
+02177220  orr r0,r2,r0
+02177224  str r0,[r4,#0x8]
+02177228  ldr r0,[r8,#0x0]
+0217722c  bl 0x02037c24
+02177230  ldr r0,[r8,#0x0]
+02177234  mov r1,r4
+02177238  add r0,r0,#0x10
+0217723c  bl 0x02037b98
+02177240  ldrsb r0,[r4,#0x1e]
+02177244  cmp r0,#0x2
+02177248  bne 0x02177290
+0217724c  ldr r0,[r4,#0x8]
+02177250  mov r0,r0, lsl #0xc
+02177254  mov r0,r0, lsr #0xc
+02177258  tst r0,#0x8
+0217725c  bne 0x02177290
+02177260  ldrsh r0,[r4,#0x1c]
+02177264  bl 0x02083b2c
+02177268  cmp r0,#0x0
+0217726c  beq 0x02177290
+02177270  ldr r1,[r4,#0x8]
+02177274  mov r0,r1, lsl #0xc
+02177278  mov r0,r0, lsr #0xc
+0217727c  orr r0,r0,#0x8
+02177280  and r1,r1,r6
+02177284  and r0,r0,r7
+02177288  orr r0,r1,r0
+0217728c  str r0,[r4,#0x8]
+02177290  mov r4,r5
+02177294  cmp r4,#0x0
+02177298  bne 0x021771f0
+0217729c  ldr r8,[0x217743c]
+021772a0  mov r6,#0x100000
+021772a4  ldr r0,[r8,#0x0]
+021772a8  rsb r6,r6,#0x0
+021772ac  ldr r4,[r0,#0x10]
+021772b0  ldr r7,[0x2177440]
+021772b4  b 0x0217735c
+021772b8  ldrsh r0,[r4,#0x1c]
+021772bc  ldr r5,[r4,#0x0]
+021772c0  bl 0x02083aec
+021772c4  cmp r0,#0x0
+021772c8  beq 0x02177308
+021772cc  ldr r2,[r4,#0x8]
+021772d0  mov r1,r4
+021772d4  mov r0,r2, lsl #0xc
+021772d8  mov r0,r0, lsr #0xc
+021772dc  orr r0,r0,#0x1
+021772e0  and r2,r2,r6
+021772e4  and r0,r0,r7
+021772e8  orr r0,r2,r0
+021772ec  str r0,[r4,#0x8]
+021772f0  ldr r0,[r8,#0x0]
+021772f4  add r0,r0,#0x10
+021772f8  bl 0x02037c24
+021772fc  ldr r0,[r8,#0x0]
+02177300  mov r1,r4
+02177304  bl 0x02037b98
+02177308  ldrsb r0,[r4,#0x1e]
+0217730c  cmp r0,#0x2
+02177310  bne 0x02177358
+02177314  ldr r0,[r4,#0x8]
+02177318  mov r0,r0, lsl #0xc
+0217731c  mov r0,r0, lsr #0xc
+02177320  tst r0,#0x8
+02177324  bne 0x02177358
+02177328  ldrsh r0,[r4,#0x1c]
+0217732c  bl 0x02083b2c
+02177330  cmp r0,#0x0
+02177334  beq 0x02177358
+02177338  ldr r1,[r4,#0x8]
+0217733c  mov r0,r1, lsl #0xc
+02177340  mov r0,r0, lsr #0xc
+02177344  orr r0,r0,#0x8
+02177348  and r1,r1,r6
+0217734c  and r0,r0,r7
+02177350  orr r0,r1,r0
+02177354  str r0,[r4,#0x8]
+02177358  mov r4,r5
+0217735c  cmp r4,#0x0
+02177360  bne 0x021772b8
+02177364  ldr r7,[0x217743c]
+02177368  mov r5,#0x100000
+0217736c  ldr r0,[r7,#0x0]
+02177370  rsb r5,r5,#0x0
+02177374  ldr r4,[r0,#0x0]
+02177378  ldr r6,[0x2177440]
+0217737c  b 0x02177430
+02177380  ldr r1,[r4,#0x8]
+02177384  mov r0,r1, lsl #0x6
+02177388  mov r2,r0, lsr #0x1a
+0217738c  cmp r2,#0x3f
+02177390  beq 0x021773cc
+02177394  ldr r0,[r7,#0x0]
+02177398  add r0,r0,r2, lsl #0x5
+0217739c  ldr r0,[r0,#0x44]
+021773a0  mov r0,r0, lsl #0xc
+021773a4  mov r0,r0, lsr #0xc
+021773a8  tst r0,#0x8
+021773ac  beq 0x021773cc
+021773b0  mov r0,r1, lsl #0xc
+021773b4  mov r0,r0, lsr #0xc
+021773b8  bic r0,r0,#0x2
+021773bc  and r1,r1,r5
+021773c0  and r0,r0,r6
+021773c4  orr r0,r1,r0
+021773c8  str r0,[r4,#0x8]
+021773cc  ldr r1,[r4,#0x8]
+021773d0  mov r2,r1, lsr #0x1a
+021773d4  cmp r2,#0x3f
+021773d8  beq 0x02177414
+021773dc  ldr r0,[r7,#0x0]
+021773e0  add r0,r0,r2, lsl #0x5
+021773e4  ldr r0,[r0,#0x44]
+021773e8  mov r0,r0, lsl #0xc
+021773ec  mov r0,r0, lsr #0xc
+021773f0  tst r0,#0x8
+021773f4  beq 0x02177414
+021773f8  mov r0,r1, lsl #0xc
+021773fc  mov r0,r0, lsr #0xc
+02177400  bic r0,r0,#0x4
+02177404  and r1,r1,r5
+02177408  and r0,r0,r6
+0217740c  orr r0,r1,r0
+02177410  str r0,[r4,#0x8]
+02177414  ldrsb r0,[r4,#0x1e]
+02177418  cmp r0,#0xc
+0217741c  bne 0x0217742c
+02177420  ldrsh r0,[r4,#0x1c]
+02177424  add r1,r4,#0xc
+02177428  bl 0x02083760
+0217742c  ldr r4,[r4,#0x0]
+02177430  cmp r4,#0x0
+02177434  bne 0x02177380
+02177438  ldmia sp!,{r4,r5,r6,r7,r8,pc}

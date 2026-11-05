@@ -1,0 +1,16 @@
+02152f38  push {r3,r4,r5,lr}
+02152f3a  add r5,r0,#0x0
+02152f3c  add r4,r1,#0x0
+02152f3e  b 0x02152f4c
+02152f40  ldr r0,[r5,#0x4]
+02152f42  ldr r1,[r1,#0x4]
+02152f44  ldr r2,[r0,#0x0]
+02152f46  add r2,#0xb8
+02152f48  ldr r2,[r2,#0x0]
+02152f4a  blx r2
+02152f4c  add r0,r5,#0x0
+02152f4e  add r1,r4,#0x0
+02152f50  blx 0x0214f898
+02152f54  add r1,r0,#0x0
+02152f56  bne 0x02152f40
+02152f58  pop {r3,r4,r5,pc}

@@ -1,0 +1,12 @@
+02031a6c  stmdb sp!,{r4,lr}
+02031a70  mov r4,r0
+02031a74  bl 0x0201cc2c
+02031a78  mov r0,r4
+02031a7c  bl 0x0201a9ec
+02031a80  cmp r0,#0x0
+02031a84  bne 0x02031a94
+02031a88  mov r0,r4
+02031a8c  mov r1,#0x1
+02031a90  bl 0x0201a958
+02031a94  mov r0,r4
+02031a98  ldmia sp!,{r4,pc}

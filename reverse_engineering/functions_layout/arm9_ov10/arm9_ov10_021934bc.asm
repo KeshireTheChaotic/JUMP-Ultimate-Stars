@@ -1,0 +1,10 @@
+021934bc  push {r4,lr}
+021934be  add r4,r1,#0x0
+021934c0  bl 0x021934a4
+021934c4  cmp r0,#0x0
+021934c6  beq 0x021934cc
+021934c8  ldr r1,[r4,#0x7c]
+021934ca  str r1,[r0,#0x0]
+021934cc  pop {r4}
+021934ce  pop {r3}
+021934d0  bx r3

@@ -1,0 +1,11 @@
+0203cf48  push {r3,lr}
+0203cf4a  ldr r1,[r1,#0x8]
+0203cf4c  ldr r0,[r0,#0x8]
+0203cf4e  ldrh r2,[r1,#0x14]
+0203cf50  cmp r2,#0x1
+0203cf52  bne 0x0203cf5c
+0203cf54  ldr r1,[r1,#0xc]
+0203cf56  blx 0x0201e07c
+0203cf5a  pop {r3,pc}
+0203cf5c  blx 0x0201dc80
+0203cf60  pop {r3,pc}

@@ -1,0 +1,9 @@
+0207e594  ldr r2,[r1,#0x0]
+0207e598  str r2,[r0,#0x0]
+0207e59c  ldr r2,[r1,#0x4]
+0207e5a0  str r2,[r0,#0x4]
+0207e5a4  ldr r2,[r1,#0x8]
+0207e5a8  str r2,[r0,#0x8]
+0207e5ac  ldr r1,[r1,#0xc]
+0207e5b0  str r1,[r0,#0xc]
+0207e5b4  bx lr

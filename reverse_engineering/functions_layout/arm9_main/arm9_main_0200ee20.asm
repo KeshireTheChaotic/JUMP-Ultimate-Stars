@@ -1,0 +1,10 @@
+0200ee20  stmdb sp!,{r3,lr}
+0200ee24  ldr r1,[r0,#0x0]
+0200ee28  cmp r1,#0x0
+0200ee2c  ldrne r2,[r0,#0x8]
+0200ee30  cmpne r2,#0x0
+0200ee34  ldmiaeq sp!,{r3,pc}
+0200ee38  mov r0,r1
+0200ee3c  mvn r1,#0x0
+0200ee40  blx r2
+0200ee44  ldmia sp!,{r3,pc}

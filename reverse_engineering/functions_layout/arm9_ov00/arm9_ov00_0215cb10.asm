@@ -1,0 +1,14 @@
+0215cb10  stmdb sp!,{r3,lr}
+0215cb14  sub sp,sp,#0x8
+0215cb18  ldr r3,[r2,#0x0]
+0215cb1c  add r2,sp,#0x0
+0215cb20  str r3,[sp,#0x0]
+0215cb24  ldr r3,[r1,#0x0]
+0215cb28  add r1,sp,#0x4
+0215cb2c  str r3,[sp,#0x4]
+0215cb30  ldr r0,[r0,#0x4]
+0215cb34  ldr r3,[r0,#0x0]
+0215cb38  ldr r3,[r3,#0x124]
+0215cb3c  blx r3
+0215cb40  add sp,sp,#0x8
+0215cb44  ldmia sp!,{r3,pc}

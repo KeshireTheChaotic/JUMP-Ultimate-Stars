@@ -1,0 +1,9 @@
+0215ef24  ldrsb r1,[r0,#0x18]
+0215ef28  cmp r1,#0x3
+0215ef2c  bxeq lr
+0215ef30  add r0,r0,#0x100
+0215ef34  ldrsh r1,[r0,#0x2]
+0215ef38  cmp r1,#0x0
+0215ef3c  subgt r1,r1,#0x1
+0215ef40  strhgt r1,[r0,#0x2]
+0215ef44  bx lr

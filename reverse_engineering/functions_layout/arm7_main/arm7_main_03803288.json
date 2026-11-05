@@ -1,0 +1,1 @@
+{"module":"arm7_main","address":"03803288","name":"FUN_03803288","thumb":false,"body_bytes":152,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["037fc42c","037fc66c","037feab8","03803278"],"unresolved_call_targets":[],"status":"decompiled","asm_file":"arm7_main_03803288.asm","c_file":"arm7_main_03803288.c"}

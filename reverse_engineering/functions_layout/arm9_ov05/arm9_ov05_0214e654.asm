@@ -1,0 +1,15 @@
+0214e654  ldr r2,[r0,#0x558]
+0214e658  cmp r2,#0x0
+0214e65c  moveq r0,#0x0
+0214e660  bxeq lr
+0214e664  b 0x0214e680
+0214e668  ldr r0,[r2,#0x34]
+0214e66c  ldrh r0,[r0,#0x2]
+0214e670  cmp r0,r1
+0214e674  moveq r0,#0x1
+0214e678  bxeq lr
+0214e67c  ldr r2,[r2,#0x0]
+0214e680  cmp r2,#0x0
+0214e684  bne 0x0214e668
+0214e688  mov r0,#0x0
+0214e68c  bx lr

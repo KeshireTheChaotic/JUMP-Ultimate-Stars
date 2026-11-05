@@ -1,0 +1,25 @@
+02074310  stmdb sp!,{r3,r4,r5,lr}
+02074314  mov r5,#0x0
+02074318  mov lr,r5
+0207431c  mov r12,r5
+02074320  b 0x0207434c
+02074324  cmp r4,#0x0
+02074328  ldrsbne r3,[r0],#0x1
+0207432c  ldrsb r4,[r1,#0x0]
+02074330  moveq r3,lr
+02074334  cmp r4,#0x0
+02074338  moveq r4,r12
+0207433c  addne r1,r1,#0x1
+02074340  subs r3,r3,r4
+02074344  movne r0,r3
+02074348  ldmiane sp!,{r3,r4,r5,pc}
+0207434c  ldrsb r4,[r0,#0x0]
+02074350  cmp r4,#0x0
+02074354  ldrsbeq r3,[r1,#0x0]
+02074358  cmpeq r3,#0x0
+0207435c  beq 0x0207436c
+02074360  cmp r5,r2, lsl #0x1
+02074364  add r5,r5,#0x1
+02074368  blt 0x02074324
+0207436c  mov r0,#0x0
+02074370  ldmia sp!,{r3,r4,r5,pc}

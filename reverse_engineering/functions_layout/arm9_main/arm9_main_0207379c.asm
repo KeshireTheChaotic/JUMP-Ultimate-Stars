@@ -1,0 +1,13 @@
+0207379c  stmdb sp!,{r3,lr}
+020737a0  bl 0x0203b3e4
+020737a4  ldr r0,[r0,#0x88]
+020737a8  mov r1,#0x0
+020737ac  bl 0x0206e494
+020737b0  bl 0x0203b3f4
+020737b4  ldr r0,[r0,#0x88]
+020737b8  mov r1,#0x0
+020737bc  bl 0x0206e494
+020737c0  ldr r0,[0x20737d0]
+020737c4  mov r1,#0x1
+020737c8  strb r1,[r0,#0x8]
+020737cc  ldmia sp!,{r3,pc}

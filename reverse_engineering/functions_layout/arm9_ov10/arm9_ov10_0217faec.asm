@@ -1,0 +1,13 @@
+0217faec  push {r4,r5,lr}
+0217faee  sub sp,#0x14
+0217faf0  add r5,r0,#0x0
+0217faf2  add r4,r1,#0x0
+0217faf4  add r0,sp,#0x0
+0217faf6  ldr r1,[0x0217fb0c]
+0217faf8  bl 0x02003ce0
+0217fafc  add r0,r5,#0x0
+0217fafe  add r1,r4,#0x0
+0217fb00  add r2,sp,#0x0
+0217fb02  bl 0x0217fb10
+0217fb06  add sp,#0x14
+0217fb08  pop {r4,r5,pc}

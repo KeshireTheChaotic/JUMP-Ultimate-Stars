@@ -1,0 +1,1 @@
+{"module":"arm9_ov12","address":"021cb724","name":"FUN_021cb724","thumb":true,"body_bytes":88,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["02027db0","020288a4","02037f84","021cb780","021cb830"],"unresolved_call_targets":[],"status":"decompiled","asm_file":"arm9_ov12_021cb724.asm","c_file":"arm9_ov12_021cb724.c"}

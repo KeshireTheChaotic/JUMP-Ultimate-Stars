@@ -1,0 +1,10 @@
+0200fac4  push {r4,lr}
+0200fac6  add r4,r0,#0x0
+0200fac8  ldr r1,[r4,#0x1c]
+0200faca  cmp r1,#0x0
+0200facc  bne 0x0200fad4
+0200face  ldr r1,[r0,#0x0]
+0200fad0  ldr r1,[r1,#0x10]
+0200fad2  blx r1
+0200fad4  ldr r0,[r4,#0x1c]
+0200fad6  pop {r4,pc}

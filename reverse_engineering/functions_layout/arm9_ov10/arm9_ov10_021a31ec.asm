@@ -1,0 +1,13 @@
+021a31ec  stmdb sp!,{r3,lr}
+021a31f0  ldr r0,[0x21a3220]
+021a31f4  ldr r0,[r0,#0x0]
+021a31f8  cmp r0,#0x0
+021a31fc  ldmiaeq sp!,{r3,pc}
+021a3200  ldr r0,[r0,#0x4]
+021a3204  ldr r1,[0x21a3224]
+021a3208  ldr r0,[r0,#0x4]
+021a320c  bl 0x02028384
+021a3210  ldr r0,[0x21a3220]
+021a3214  mov r1,#0x0
+021a3218  str r1,[r0,#0x0]
+021a321c  ldmia sp!,{r3,pc}

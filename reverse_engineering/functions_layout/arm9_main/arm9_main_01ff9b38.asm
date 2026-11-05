@@ -1,0 +1,11 @@
+01ff9b38  ldrb r10,[r9,#-0x100]
+01ff9b3c  add r6,r6,r10
+01ff9b40  ldrb r10,[r9,#-0xff]
+01ff9b44  add r6,r6,r10
+01ff9b48  ldrb r10,[r9,#-0xfe]
+01ff9b4c  add r6,r6,r10
+01ff9b50  ldrb r10,[r9,#-0xfd]
+01ff9b54  add r6,r6,r10
+01ff9b58  add r6,r6,#0x2
+01ff9b5c  add r7,r7,#0x1
+01ff9b60  mov pc,lr

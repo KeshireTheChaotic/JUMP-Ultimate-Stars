@@ -1,0 +1,14 @@
+02035f84  stmdb sp!,{r4,lr}
+02035f88  ldr r1,[0x2035fbc]
+02035f8c  mov r4,r0
+02035f90  ldr r0,[r1,#0x1c8]
+02035f94  ldr r1,[r0,#0x0]
+02035f98  ldr r1,[r1,#0x8]
+02035f9c  blx r1
+02035fa0  ldr r2,[r0,#0x0]
+02035fa4  mov r1,r4
+02035fa8  ldr r2,[r2,#0x28]
+02035fac  mov r4,r0
+02035fb0  blx r2
+02035fb4  mov r0,r4
+02035fb8  ldmia sp!,{r4,pc}

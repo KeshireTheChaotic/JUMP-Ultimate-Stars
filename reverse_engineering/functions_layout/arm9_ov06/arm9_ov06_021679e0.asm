@@ -1,0 +1,12 @@
+021679e0  stmdb sp!,{r4,lr}
+021679e4  mov r4,r1
+021679e8  ldr r0,[r4,#0x0]
+021679ec  mov r1,r2
+021679f0  bl 0x02167a10
+021679f4  ldr r0,[r4,#0x0]
+021679f8  mov r1,#0x1
+021679fc  ldr r0,[r0,#0x4]
+02167a00  ldr r2,[r0,#0x0]
+02167a04  ldr r2,[r2,#0xd8]
+02167a08  blx r2
+02167a0c  ldmia sp!,{r4,pc}

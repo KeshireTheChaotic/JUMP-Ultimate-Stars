@@ -1,0 +1,37 @@
+021c8470  stmdb sp!,{r4,r5,r6,lr}
+021c8474  mov r5,r0
+021c8478  ldr r0,[r5,#0x194]
+021c847c  mov r4,r1
+021c8480  cmp r0,#0x0
+021c8484  bne 0x021c84dc
+021c8488  ldr r1,[r5,#0xfc]
+021c848c  ldr r0,[r5,#0x100]
+021c8490  add r1,r1,#0x7
+021c8494  add r0,r0,#0x7
+021c8498  bic r1,r1,#0x7
+021c849c  bic r0,r0,#0x7
+021c84a0  mov r1,r1, lsr #0x3
+021c84a4  mov r0,r0, lsr #0x3
+021c84a8  mul r6,r1,r0
+021c84ac  ldr r1,[0x21c8504]
+021c84b0  ldr r2,[0x21c8508]
+021c84b4  ldr r3,[0x21c850c]
+021c84b8  mov r0,r6
+021c84bc  bl 0x0201a21c
+021c84c0  mov r2,r6
+021c84c4  and r1,r4,#0xff
+021c84c8  str r0,[r5,#0x194]
+021c84cc  bl 0x0201b28c
+021c84d0  and r0,r4,#0xff
+021c84d4  strb r0,[r5,#0x198]
+021c84d8  b 0x021c84f8
+021c84dc  ldrb r0,[r5,#0x198]
+021c84e0  cmp r4,r0
+021c84e4  movcc r0,r4
+021c84e8  strb r0,[r5,#0x198]
+021c84ec  ldrb r0,[r5,#0x199]
+021c84f0  cmp r4,r0
+021c84f4  movhi r0,r4
+021c84f8  strb r0,[r5,#0x199]
+021c84fc  strb r4,[r5,#0x174]
+021c8500  ldmia sp!,{r4,r5,r6,pc}

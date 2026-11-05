@@ -1,0 +1,40 @@
+0201ff80  stmdb sp!,{r3,r4,r5,r6,r7,lr}
+0201ff84  ldr r3,[r0,#0x0]
+0201ff88  mov r7,r0
+0201ff8c  ldr r3,[r3,#0xd0]
+0201ff90  mov r5,r1
+0201ff94  mov r4,r2
+0201ff98  blx r3
+0201ff9c  bl 0x0201e6d4
+0201ffa0  mov r6,r0
+0201ffa4  mov r0,r7
+0201ffa8  ldr r1,[r0,#0x0]
+0201ffac  ldr r1,[r1,#0xd0]
+0201ffb0  blx r1
+0201ffb4  ldrh r1,[r7,#0x2a]
+0201ffb8  bl 0x02020590
+0201ffbc  ldrb r1,[r6,#0x4]
+0201ffc0  cmp r1,#0x1
+0201ffc4  bhi 0x0201ffe0
+0201ffc8  add r1,r0,r5, lsl #0x1
+0201ffcc  ldrh r2,[r1,#0x28]
+0201ffd0  mov r1,r4
+0201ffd4  add r0,r0,r2
+0201ffd8  bl 0x0201f6bc
+0201ffdc  ldmia sp!,{r3,r4,r5,r6,r7,pc}
+0201ffe0  mov r3,#0x0
+0201ffe4  mov r2,r3
+0201ffe8  b 0x0201fffc
+0201ffec  add r1,r0,r2, lsl #0x1
+0201fff0  ldrh r1,[r1,#0x28]
+0201fff4  add r2,r2,#0x1
+0201fff8  add r3,r3,r1
+0201fffc  cmp r2,r5
+02020000  bcc 0x0201ffec
+02020004  add r1,r0,r5, lsl #0x1
+02020008  ldrh r2,[r1,#0x28]
+0202000c  mov r1,r4
+02020010  add r2,r3,r2
+02020014  add r0,r0,r2
+02020018  bl 0x0201f6bc
+0202001c  ldmia sp!,{r3,r4,r5,r6,r7,pc}

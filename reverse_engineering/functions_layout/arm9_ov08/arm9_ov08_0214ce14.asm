@@ -1,0 +1,10 @@
+0214ce14  asr r2,r0,#0x8
+0214ce16  mov r1,#0xff
+0214ce18  and r2,r1
+0214ce1a  lsl r1,r0,#0x8
+0214ce1c  ldr r0,[0x0214ce28]
+0214ce1e  and r1,r0
+0214ce20  orr r2,r1
+0214ce22  lsl r0,r2,#0x10
+0214ce24  lsr r0,r0,#0x10
+0214ce26  bx lr

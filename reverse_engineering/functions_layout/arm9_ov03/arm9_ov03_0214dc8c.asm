@@ -1,0 +1,21 @@
+0214dc8c  bl 0x0203d478
+0214dc90  mov r0,r9
+0214dc94  bl 0x0203b424
+0214dc98  ldr r0,[r0,#0x88]
+0214dc9c  mov r1,r6
+0214dca0  ldr r0,[r0,#0x4]
+0214dca4  mov r2,r6
+0214dca8  bl 0x0203cfbc
+0214dcac  mov r0,r9
+0214dcb0  bl 0x0203b424
+0214dcb4  ldr r0,[r0,#0x88]
+0214dcb8  mov r1,r5
+0214dcbc  ldr r0,[r0,#0x4]
+0214dcc0  ldr r2,[r0,#0x0]
+0214dcc4  ldr r2,[r2,#0x90]
+0214dcc8  blx r2
+0214dccc  mov r0,r9
+0214dcd0  bl 0x0203b424
+0214dcd4  ldr r1,[r0,#0x88]
+0214dcd8  mov r0,r9, lsl #0xc
+0214dcdc  str r0,[sp,#0x70]

@@ -1,0 +1,17 @@
+027f05bc  stmdb sp!,{r4,lr}
+027f05c0  mov r4,r0
+027f05c4  mov r1,#0x3
+027f05c8  bl 0x027e93d0
+027f05cc  add r0,r4,#0x1
+027f05d0  mov r1,#0x1
+027f05d4  bl 0x027e93d0
+027f05d8  add r0,r4,#0x2
+027f05dc  ldr r1,[0x27f0600]
+027f05e0  ldr r1,[r1,#0x0]
+027f05e4  add r1,r1,#0x300
+027f05e8  ldrh r1,[r1,#0xbe]
+027f05ec  and r1,r1,#0xff
+027f05f0  bl 0x027e93d0
+027f05f4  mov r0,#0x3
+027f05f8  ldmia sp!,{r4,lr}
+027f05fc  bx lr

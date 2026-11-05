@@ -1,0 +1,10 @@
+02030da0  stmdb sp!,{r3,lr}
+02030da4  ldr r0,[0x2030dc8]
+02030da8  mov r1,#0x0
+02030dac  ldr r0,[r0,#0x1a4]
+02030db0  mov r2,#0x9d0
+02030db4  bl 0x0201a418
+02030db8  cmp r0,#0x0
+02030dbc  ldmiaeq sp!,{r3,pc}
+02030dc0  bl 0x02030ed8
+02030dc4  ldmia sp!,{r3,pc}

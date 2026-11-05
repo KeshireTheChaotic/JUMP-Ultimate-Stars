@@ -1,0 +1,10 @@
+02004b04  mov r3,#0x0
+02004b06  mvn r3,r3
+02004b08  mov r1,#0x0
+02004b0a  ldrsb r2,[r0,r1]
+02004b0c  add r3,r3,#0x1
+02004b0e  add r0,r0,#0x1
+02004b10  cmp r2,#0x0
+02004b12  bne 0x02004b0a
+02004b14  add r0,r3,#0x0
+02004b16  bx lr

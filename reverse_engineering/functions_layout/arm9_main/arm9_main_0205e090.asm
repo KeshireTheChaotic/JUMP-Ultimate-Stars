@@ -1,0 +1,11 @@
+0205e090  stmdb sp!,{r4,r5,r6,lr}
+0205e094  mov r6,r0
+0205e098  mov r5,r1
+0205e09c  mov r4,r2
+0205e0a0  bl 0x0205e05c
+0205e0a4  str r0,[r6,#0x0]
+0205e0a8  str r5,[r6,#0x4]
+0205e0ac  str r4,[r6,#0xc]
+0205e0b0  mov r0,#0x0
+0205e0b4  str r0,[r6,#0x8]
+0205e0b8  ldmia sp!,{r4,r5,r6,pc}

@@ -1,0 +1,1 @@
+{"module":"arm9_ov10","address":"02180fc4","name":"FUN_02180fc4","thumb":true,"body_bytes":36,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["02001320","0217fb50","02180fe8","021817a4"],"unresolved_call_targets":[],"status":"decompiled","asm_file":"arm9_ov10_02180fc4.asm","c_file":"arm9_ov10_02180fc4.c"}

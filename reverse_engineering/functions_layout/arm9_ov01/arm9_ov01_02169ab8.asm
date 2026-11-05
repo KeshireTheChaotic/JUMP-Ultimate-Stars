@@ -1,0 +1,13 @@
+02169ab8  push {r4,lr}
+02169aba  add r4,r0,#0x0
+02169abc  ldr r0,[r4,#0xc]
+02169abe  mov r2,#0x0
+02169ac0  ldr r0,[r0,#0x4]
+02169ac2  blx 0x02023894
+02169ac6  ldr r0,[r4,#0xc]
+02169ac8  ldr r0,[r0,#0x4]
+02169aca  ldr r0,[r0,#0x68]
+02169acc  ldr r1,[r0,#0x0]
+02169ace  ldr r1,[r1,#0x6c]
+02169ad0  blx r1
+02169ad2  pop {r4,pc}

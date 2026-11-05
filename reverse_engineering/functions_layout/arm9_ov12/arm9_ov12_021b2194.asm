@@ -1,0 +1,15 @@
+021b2194  add r2,r0,#0x0
+021b2196  add r2,#0x32
+021b2198  ldrb r3,[r2,#0x0]
+021b219a  mov r2,#0x2
+021b219c  bic r3,r2
+021b219e  lsl r2,r1,#0x1f
+021b21a0  lsr r2,r2,#0x1e
+021b21a2  orr r3,r2
+021b21a4  add r2,r0,#0x0
+021b21a6  add r2,#0x32
+021b21a8  strb r3,[r2,#0x0]
+021b21aa  ldr r0,[r0,#0x44]
+021b21ac  add r0,#0x30
+021b21ae  strb r1,[r0,#0x0]
+021b21b0  bx lr

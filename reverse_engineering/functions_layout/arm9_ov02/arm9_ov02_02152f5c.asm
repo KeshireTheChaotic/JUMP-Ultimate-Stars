@@ -1,0 +1,15 @@
+02152f5c  stmdb sp!,{r3,lr}
+02152f60  cmp r1,#0x0
+02152f64  ldr r0,[r0,#0x4]
+02152f68  bne 0x02152f80
+02152f6c  ldr r2,[r0,#0x0]
+02152f70  mov r1,#0x2
+02152f74  ldr r2,[r2,#0x164]
+02152f78  blx r2
+02152f7c  ldmia sp!,{r3,pc}
+02152f80  ldr r3,[r0,#0x0]
+02152f84  ldr r2,[r1,#0x4]
+02152f88  ldr r3,[r3,#0x160]
+02152f8c  mov r1,#0x2
+02152f90  blx r3
+02152f94  ldmia sp!,{r3,pc}

@@ -1,0 +1,13 @@
+0215687c  stmdb sp!,{r4,lr}
+02156880  movs r4,r0
+02156884  ldmiaeq sp!,{r4,pc}
+02156888  mov r0,#0x0
+0215688c  strb r0,[r4,#0x14]
+02156890  strb r0,[r4,#0x16]
+02156894  ldr r0,[r4,#0x18]
+02156898  bl 0x02155fa4
+0215689c  ldr r0,[r4,#0x0]
+021568a0  ldr r1,[0x21568b0]
+021568a4  ldr r0,[r0,#0x4]
+021568a8  bl 0x02028384
+021568ac  ldmia sp!,{r4,pc}

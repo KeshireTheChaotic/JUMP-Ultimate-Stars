@@ -1,0 +1,13 @@
+02150f1c  stmdb sp!,{r3,lr}
+02150f20  ldr r0,[0x2150f50]
+02150f24  ldr r0,[r0,#0x4]
+02150f28  cmp r0,#0x0
+02150f2c  ldmiaeq sp!,{r3,pc}
+02150f30  ldr r0,[r0,#0x4]
+02150f34  ldr r1,[r0,#0x0]
+02150f38  ldr r1,[r1,#0xc]
+02150f3c  blx r1
+02150f40  ldr r0,[0x2150f50]
+02150f44  mov r1,#0x0
+02150f48  str r1,[r0,#0x4]
+02150f4c  ldmia sp!,{r3,pc}

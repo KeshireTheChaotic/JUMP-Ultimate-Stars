@@ -1,0 +1,10 @@
+0217e930  push {r4,r5,r6,lr}
+0217e932  add r5,r1,#0x0
+0217e934  add r4,r2,#0x0
+0217e936  add r6,r3,#0x0
+0217e938  bl 0x02176578
+0217e93c  add r1,r5,#0x0
+0217e93e  add r2,r4,#0x0
+0217e940  add r3,r6,#0x0
+0217e942  bl 0x0218a8bc
+0217e946  pop {r4,r5,r6,pc}

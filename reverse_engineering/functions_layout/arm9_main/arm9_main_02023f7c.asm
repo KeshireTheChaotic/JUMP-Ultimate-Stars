@@ -1,0 +1,12 @@
+02023f7c  stmdb sp!,{r3,r4,r5,lr}
+02023f80  mov r5,r0
+02023f84  ldr r0,[r5,#0x68]
+02023f88  mov r4,r1
+02023f8c  ldr r1,[r0,#0x0]
+02023f90  ldr r1,[r1,#0xc]
+02023f94  blx r1
+02023f98  cmp r4,#0x0
+02023f9c  ldreq r0,[0x2023fac]
+02023fa0  ldreq r0,[r0,#0x234]
+02023fa4  streq r0,[r5,#0x68]
+02023fa8  ldmia sp!,{r3,r4,r5,pc}

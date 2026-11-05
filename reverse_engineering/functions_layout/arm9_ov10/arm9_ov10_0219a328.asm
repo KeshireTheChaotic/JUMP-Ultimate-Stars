@@ -1,0 +1,10 @@
+0219a328  ldr r0,[0x219a350]
+0219a32c  mov r3,#0x0
+0219a330  mvn r2,#0x0
+0219a334  ldr r1,[r0,#0x0]
+0219a338  add r1,r1,r3
+0219a33c  add r3,r3,#0x1
+0219a340  strb r2,[r1,#0x8e8]
+0219a344  cmp r3,#0x4
+0219a348  blt 0x0219a334
+0219a34c  bx lr

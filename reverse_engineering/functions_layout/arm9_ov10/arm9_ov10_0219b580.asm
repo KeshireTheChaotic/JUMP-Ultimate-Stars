@@ -1,0 +1,11 @@
+0219b580  stmdb sp!,{r4,lr}
+0219b584  mov r4,r1
+0219b588  bl 0x0219b4f4
+0219b58c  cmp r0,#0x0
+0219b590  beq 0x0219b5a4
+0219b594  cmp r4,#0x0
+0219b598  addne r0,r0,#0x1c
+0219b59c  addeq r0,r0,#0x8
+0219b5a0  ldmia sp!,{r4,pc}
+0219b5a4  mov r0,#0x0
+0219b5a8  ldmia sp!,{r4,pc}

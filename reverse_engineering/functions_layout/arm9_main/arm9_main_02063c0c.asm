@@ -1,0 +1,10 @@
+02063c0c  cmp r2,#0x0
+02063c0e  bne 0x02063c14
+02063c10  mov r1,#0x0
+02063c12  b 0x02063c1a
+02063c14  cmp r1,#0x0
+02063c16  bne 0x02063c1a
+02063c18  mov r2,#0x0
+02063c1a  str r1,[r0,#0x54]
+02063c1c  str r2,[r0,#0x58]
+02063c1e  bx lr

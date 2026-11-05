@@ -1,0 +1,22 @@
+0203505c  stmdb sp!,{r3,r4,r5,r6,r7,lr}
+02035060  mov r4,r0
+02035064  ldrb r0,[r4,#0xc]
+02035068  mov r7,r1
+0203506c  mov r6,r2
+02035070  cmp r0,#0x0
+02035074  beq 0x02035098
+02035078  ldr r5,[r4,#0x8]
+0203507c  mov r0,r5
+02035080  bl 0x0201a9ec
+02035084  cmp r0,#0x0
+02035088  bne 0x02035098
+0203508c  mov r0,r5
+02035090  mov r1,#0x1
+02035094  bl 0x0201a958
+02035098  mov r0,#0x0
+0203509c  strb r0,[r4,#0xc]
+020350a0  mov r0,r7, lsl #0x10
+020350a4  str r6,[r4,#0x8]
+020350a8  mov r0,r0, lsr #0x10
+020350ac  str r0,[r4,#0x4]
+020350b0  ldmia sp!,{r3,r4,r5,r6,r7,pc}

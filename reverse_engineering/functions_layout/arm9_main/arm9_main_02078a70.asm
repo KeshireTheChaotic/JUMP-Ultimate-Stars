@@ -1,0 +1,12 @@
+02078a70  mov r1,#0x0
+02078a74  strb r1,[r0,#0x5d0]
+02078a78  ldr r2,[r0,#0x56c]
+02078a7c  cmp r2,#0x0
+02078a80  ldrne r1,[r2,#0x3c]
+02078a84  bicne r1,r1,#0x30
+02078a88  strne r1,[r2,#0x3c]
+02078a8c  ldr r1,[r0,#0x574]
+02078a90  cmp r1,#0x0
+02078a94  movne r1,#0x0
+02078a98  strne r1,[r0,#0x574]
+02078a9c  bx lr

@@ -1,0 +1,24 @@
+0214fadc  stmdb sp!,{r4,lr}
+0214fae0  mov r2,r1
+0214fae4  mov r1,#0x0
+0214fae8  mov r4,r0
+0214faec  bl 0x020517fc
+0214faf0  bl 0x020310f4
+0214faf4  ldr r2,[0x214fb3c]
+0214faf8  str r0,[r4,#0x0]
+0214fafc  ldr r1,[0x214fb40]
+0214fb00  ldr r12,[r2,#0x0]
+0214fb04  ldr r3,[r1,#0x0]
+0214fb08  sub r12,r12,#0x1
+0214fb0c  ldr r1,[0x214fb44]
+0214fb10  str r12,[r2,#0x0]
+0214fb14  str r3,[r1,r12,lsl #0x2]
+0214fb18  ldr r0,[r0,#0x4]
+0214fb1c  bl 0x020314a0
+0214fb20  mov r0,#0x0
+0214fb24  bl 0x02028920
+0214fb28  str r0,[r4,#0x10]
+0214fb2c  blx 0x021b65bc
+0214fb30  ldr r0,[r4,#0x0]
+0214fb34  bl 0x0214efb0
+0214fb38  ldmia sp!,{r4,pc}

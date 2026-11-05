@@ -1,0 +1,16 @@
+038076b8  stmdb sp!,{r4,r5,r6,r7,r11,r12,lr}
+038076bc  mov r4,#0x0
+038076c0  b 0x038076cc
+038076cc  orrs r5,r3,r2
+038076d0  bne 0x038076dc
+038076d4  ldmia sp!,{r4,r5,r6,r7,r11,r12,lr}
+038076d8  bx lr
+038076dc  orrs r5,r1,r3
+038076e0  bne 0x03807784
+038076e4  mov r1,r2
+038076e8  bl 0x03807ad4
+038076ec  cmp r4,#0x0
+038076f0  movne r0,r1
+038076f4  mov r1,#0x0
+038076f8  ldmia sp!,{r4,r5,r6,r7,r11,r12,lr}
+038076fc  bx lr

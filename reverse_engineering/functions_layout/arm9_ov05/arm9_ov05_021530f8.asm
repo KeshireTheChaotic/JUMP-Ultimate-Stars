@@ -1,0 +1,10 @@
+021530f8  stmdb sp!,{r3,lr}
+021530fc  ldr r0,[r0,#0x4]
+02153100  ldr r0,[r0,#0x10]
+02153104  add r1,r0,#0x400
+02153108  ldrsb r1,[r1,#0x39]
+0215310c  cmp r1,#0x0
+02153110  ldmiane sp!,{r3,pc}
+02153114  mvn r1,#0x0
+02153118  bl 0x02153af8
+0215311c  ldmia sp!,{r3,pc}

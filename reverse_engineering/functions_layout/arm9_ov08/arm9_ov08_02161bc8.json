@@ -1,0 +1,1 @@
+{"module":"arm9_ov08","address":"02161bc8","name":"FUN_02161bc8","thumb":true,"body_bytes":104,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["02051718","02051890","02069cf4","0206ab24","02161ad8"],"unresolved_call_targets":[],"status":"decompiled","asm_file":"arm9_ov08_02161bc8.asm","c_file":"arm9_ov08_02161bc8.c"}

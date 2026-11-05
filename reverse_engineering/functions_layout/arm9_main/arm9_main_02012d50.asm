@@ -1,0 +1,12 @@
+02012d50  stmdb sp!,{r4,lr}
+02012d54  mov r4,r0
+02012d58  ldr r0,[r4,#0x2c]
+02012d5c  cmp r0,#0x0
+02012d60  ldmialt sp!,{r4,pc}
+02012d64  bne 0x02012d70
+02012d68  ldr r0,[r4,#0x1c]
+02012d6c  bl 0x02027560
+02012d70  ldr r0,[r4,#0x2c]
+02012d74  sub r0,r0,#0x1
+02012d78  str r0,[r4,#0x2c]
+02012d7c  ldmia sp!,{r4,pc}

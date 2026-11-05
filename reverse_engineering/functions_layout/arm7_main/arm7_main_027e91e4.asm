@@ -1,0 +1,15 @@
+027e91e4  mov r1,#0x0
+027e91e8  ldr r0,[0x27e9220]
+027e91ec  strh r1,[r0,#0x0]
+027e91f0  mov r2,#0x10
+027e91f4  ldr r1,[0x27e9224]
+027e91f8  b 0x027e9214
+027e91fc  ldrh r0,[r1,#0x0]
+027e9200  cmp r0,#0x0
+027e9204  bxeq lr
+027e9208  cmp r0,#0x9
+027e920c  bxeq lr
+027e9210  sub r2,r2,#0x1
+027e9214  cmp r2,#0x0
+027e9218  bne 0x027e91fc
+027e921c  bx lr

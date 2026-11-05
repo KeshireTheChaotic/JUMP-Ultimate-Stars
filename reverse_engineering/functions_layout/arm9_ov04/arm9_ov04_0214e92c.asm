@@ -1,0 +1,11 @@
+0214e92c  stmdb sp!,{r4,lr}
+0214e930  ldr r0,[r0,#0x4]
+0214e934  mov r4,r1
+0214e938  ldr r0,[r0,#0x64]
+0214e93c  ldr r0,[r0,#0x20]
+0214e940  bl 0x0214e828
+0214e944  bl 0x02034db8
+0214e948  ldr r0,[r0,#0x4]
+0214e94c  mov r1,r4
+0214e950  bl 0x0201710c
+0214e954  ldmia sp!,{r4,pc}

@@ -1,0 +1,17 @@
+0214e328  stmdb sp!,{r4,lr}
+0214e32c  ldr r0,[r0,#0x4]
+0214e330  ldr r1,[0x214e36c]
+0214e334  ldr r4,[r0,#0x10]
+0214e338  ldr r0,[r4,#0x4]
+0214e33c  ldr r0,[r0,#0x4]
+0214e340  bl 0x02028384
+0214e344  ldr r0,[r4,#0x4]
+0214e348  ldr r0,[r0,#0x4]
+0214e34c  bl 0x02028330
+0214e350  mov r0,#0x78
+0214e354  mov r1,#0x0
+0214e358  bl 0x0207342c
+0214e35c  mov r0,#0x3
+0214e360  mov r1,#0x1
+0214e364  bl 0x02073ebc
+0214e368  ldmia sp!,{r4,pc}

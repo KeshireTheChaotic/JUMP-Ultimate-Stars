@@ -1,0 +1,15 @@
+0215d8a8  stmdb sp!,{r4,lr}
+0215d8ac  ldr r1,[0x215d8e4]
+0215d8b0  ldr r2,[r0,#0x4]
+0215d8b4  ldr r0,[r1,#0x0]
+0215d8b8  ldr r4,[r2,#0x10]
+0215d8bc  add r0,r0,#0x1
+0215d8c0  str r0,[r1,#0x0]
+0215d8c4  bl 0x020882c4
+0215d8c8  cmp r0,#0x0
+0215d8cc  ldmiaeq sp!,{r4,pc}
+0215d8d0  bl 0x02088290
+0215d8d4  bl 0x02086c94
+0215d8d8  mov r0,r4
+0215d8dc  bl 0x0215d738
+0215d8e0  ldmia sp!,{r4,pc}

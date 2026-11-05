@@ -1,0 +1,11 @@
+027f59f8  stmdb sp!,{lr}
+027f59fc  sub sp,sp,#0x4
+027f5a00  add r0,sp,#0x0
+027f5a04  bl 0x027f66a4
+027f5a08  ldrh r0,[sp,#0x0]
+027f5a0c  ands r0,r0,#0x1
+027f5a10  moveq r0,#0x1
+027f5a14  movne r0,#0x0
+027f5a18  add sp,sp,#0x4
+027f5a1c  ldmia sp!,{lr}
+027f5a20  bx lr

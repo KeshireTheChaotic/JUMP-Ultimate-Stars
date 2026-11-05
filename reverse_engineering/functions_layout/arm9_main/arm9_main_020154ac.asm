@@ -1,0 +1,17 @@
+020154ac  stmdb sp!,{r4,lr}
+020154b0  mov r4,r0
+020154b4  bl 0x02024024
+020154b8  ldr r0,[0x20154f0]
+020154bc  str r0,[r4,#0x0]
+020154c0  ldr r0,[r4,#0x14]
+020154c4  ldr r1,[r0,#0x0]
+020154c8  ldr r1,[r1,#0xc]
+020154cc  blx r1
+020154d0  ldr r0,[0x20154f4]
+020154d4  ldr r0,[r0,#0x438]
+020154d8  str r0,[r4,#0x14]
+020154dc  ldr r1,[r0,#0x0]
+020154e0  ldr r1,[r1,#0x8]
+020154e4  blx r1
+020154e8  mov r0,r4
+020154ec  ldmia sp!,{r4,pc}

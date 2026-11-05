@@ -1,0 +1,11 @@
+0202c948  ldr r2,[r1,#0x0]
+0202c94c  str r2,[r0,#0x0]
+0202c950  ldrh r2,[r1,#0x4]
+0202c954  strh r2,[r0,#0x4]
+0202c958  ldrh r2,[r1,#0x6]
+0202c95c  strh r2,[r0,#0x6]
+0202c960  ldr r2,[r1,#0x8]
+0202c964  str r2,[r0,#0x8]
+0202c968  ldr r1,[r1,#0xc]
+0202c96c  str r1,[r0,#0xc]
+0202c970  bx lr

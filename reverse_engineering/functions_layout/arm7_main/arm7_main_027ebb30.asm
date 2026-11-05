@@ -1,0 +1,24 @@
+027ebb30  stmdb sp!,{lr}
+027ebb34  sub sp,sp,#0x4
+027ebb38  ldrh r1,[r0,#0x0]
+027ebb3c  cmp r1,#0x0
+027ebb40  beq 0x027ebb80
+027ebb44  ldr r2,[r0,#0x8]
+027ebb48  ldrh r1,[r2,#0x0]
+027ebb4c  ands r1,r1,#0x1
+027ebb50  beq 0x027ebb80
+027ebb54  ldr r1,[0x27ebb90]
+027ebb58  and r1,r2,r1
+027ebb5c  mov r1,r1, lsr #0x1
+027ebb60  orr r2,r1,#0x8000
+027ebb64  ldr r1,[0x27ebb94]
+027ebb68  ldrh r1,[r1,#0x0]
+027ebb6c  cmp r2,r1
+027ebb70  beq 0x027ebb80
+027ebb74  bl 0x027f1bb0
+027ebb78  mov r0,#0x1
+027ebb7c  b 0x027ebb84
+027ebb80  mov r0,#0x0
+027ebb84  add sp,sp,#0x4
+027ebb88  ldmia sp!,{lr}
+027ebb8c  bx lr

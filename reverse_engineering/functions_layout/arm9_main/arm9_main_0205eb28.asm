@@ -1,0 +1,16 @@
+0205eb28  stmdb sp!,{lr}
+0205eb2c  sub sp,sp,#0x4
+0205eb30  cmp r1,#0x0
+0205eb34  moveq r1,#0x1
+0205eb38  add r1,r1,#0x3
+0205eb3c  add r0,r0,#0x24
+0205eb40  cmp r2,#0x0
+0205eb44  bic r1,r1,#0x3
+0205eb48  blt 0x0205eb58
+0205eb4c  bl 0x0205ec6c
+0205eb50  add sp,sp,#0x4
+0205eb54  ldmia sp!,{pc}
+0205eb58  rsb r2,r2,#0x0
+0205eb5c  bl 0x0205ec00
+0205eb60  add sp,sp,#0x4
+0205eb64  ldmia sp!,{pc}

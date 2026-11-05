@@ -1,0 +1,13 @@
+0215fc84  stmdb sp!,{r4,r5,r6,lr}
+0215fc88  mov r5,r1
+0215fc8c  mov r6,r0
+0215fc90  mov r0,r5
+0215fc94  bl 0x0215e714
+0215fc98  movs r4,r0
+0215fc9c  bne 0x0215fcb0
+0215fca0  ldrh r1,[r5,#0x0]
+0215fca4  ldrh r2,[r5,#0x2]
+0215fca8  mov r0,r6
+0215fcac  bl 0x0215fcfc
+0215fcb0  mov r0,r4
+0215fcb4  ldmia sp!,{r4,r5,r6,pc}

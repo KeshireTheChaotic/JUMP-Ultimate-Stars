@@ -1,0 +1,16 @@
+021cf2d4  ldr r3,[0x021cf2f4]
+021cf2d6  str r3,[r1,#0x0]
+021cf2d8  mov r3,#0x10
+021cf2da  strb r3,[r1,#0x5]
+021cf2dc  strb r2,[r1,#0x6]
+021cf2de  ldr r2,[0x021cf2f8]
+021cf2e0  ldrb r3,[r2,#0x0]
+021cf2e2  strb r3,[r1,#0x8]
+021cf2e4  ldrb r0,[r0,#0x4]
+021cf2e6  strb r0,[r1,#0x9]
+021cf2e8  mov r0,#0x0
+021cf2ea  strb r0,[r1,#0xa]
+021cf2ec  ldrb r2,[r2,#0x0]
+021cf2ee  strb r2,[r1,#0xb]
+021cf2f0  str r0,[r1,#0xc]
+021cf2f2  bx lr

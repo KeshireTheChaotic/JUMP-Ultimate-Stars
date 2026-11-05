@@ -1,0 +1,15 @@
+0206b7cc  stmdb sp!,{r3,r4,r5,lr}
+0206b7d0  mov r5,r0
+0206b7d4  ldr r0,[r5,#0x4]
+0206b7d8  ldr r4,[r0,#0x10]
+0206b7dc  mov r0,r4
+0206b7e0  bl 0x0206b848
+0206b7e4  ldrb r1,[r4,#0x11]
+0206b7e8  cmp r1,#0x0
+0206b7ec  ldrsbne r0,[r4,#0x19]
+0206b7f0  addne r0,r1,r0
+0206b7f4  strbne r0,[r4,#0x11]
+0206b7f8  ldmiane sp!,{r3,r4,r5,pc}
+0206b7fc  ldr r0,[r5,#0x4]
+0206b800  bl 0x020282f4
+0206b804  ldmia sp!,{r3,r4,r5,pc}

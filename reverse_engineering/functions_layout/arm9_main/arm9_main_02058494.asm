@@ -1,0 +1,12 @@
+02058494  stmdb sp!,{lr}
+02058498  sub sp,sp,#0x4
+0205849c  mov r2,#0xf00
+020584a0  bl 0x020582a0
+020584a4  cmp r0,#0x0
+020584a8  ldreq r1,[0x20584c4]
+020584ac  moveq r2,#0x0
+020584b0  ldreq r1,[r1,#0x0]
+020584b4  strheq r2,[r1,#0x16]
+020584b8  add sp,sp,#0x4
+020584bc  ldmia sp!,{lr}
+020584c0  bx lr

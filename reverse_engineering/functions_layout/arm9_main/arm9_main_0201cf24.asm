@@ -1,0 +1,12 @@
+0201cf24  stmdb sp!,{r3,r4,r5,lr}
+0201cf28  mov r5,r0
+0201cf2c  ldr r4,[r5,#0x0]
+0201cf30  mov r0,r4
+0201cf34  bl 0x0201a9ec
+0201cf38  cmp r0,#0x0
+0201cf3c  bne 0x0201cf4c
+0201cf40  mov r0,r4
+0201cf44  mov r1,#0x1
+0201cf48  bl 0x0201a958
+0201cf4c  mov r0,r5
+0201cf50  ldmia sp!,{r3,r4,r5,pc}

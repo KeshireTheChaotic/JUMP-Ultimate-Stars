@@ -1,0 +1,12 @@
+021532a8  stmdb sp!,{r4,lr}
+021532ac  ldr r1,[0x21532d8]
+021532b0  ldr r2,[0x21532dc]
+021532b4  mov r0,#0x8
+021532b8  mov r3,#0x48
+021532bc  bl 0x0201a21c
+021532c0  mov r1,#0x0
+021532c4  mov r2,#0x8
+021532c8  mov r4,r0
+021532cc  bl 0x020517fc
+021532d0  mov r0,r4
+021532d4  ldmia sp!,{r4,pc}

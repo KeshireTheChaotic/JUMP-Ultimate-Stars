@@ -1,0 +1,10 @@
+02012704  stmdb sp!,{r3,lr}
+02012708  ldr r0,[r0,#0x18]
+0201270c  cmp r0,#0x0
+02012710  moveq r0,#0x0
+02012714  ldmiaeq sp!,{r3,pc}
+02012718  ldr r1,[r0,#0x0]
+0201271c  ldr r1,[r1,#0x30]
+02012720  blx r1
+02012724  ldr r0,[r0,#0x4]
+02012728  ldmia sp!,{r3,pc}

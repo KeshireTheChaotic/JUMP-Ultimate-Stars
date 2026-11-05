@@ -1,0 +1,10 @@
+02019d1c  ldr r1,[0x2019d44]
+02019d20  mov r0,#0x1f
+02019d24  strb r0,[r1,#0x480]
+02019d28  ldr r3,[r1,#0x1ec]
+02019d2c  ldr r0,[0x2019d48]
+02019d30  mov r2,#0x0
+02019d34  str r3,[r0,#0x1c]
+02019d38  strb r2,[r1,#0x481]
+02019d3c  str r3,[r1,#0x484]
+02019d40  bx lr

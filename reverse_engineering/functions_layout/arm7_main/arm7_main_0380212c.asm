@@ -1,0 +1,21 @@
+0380212c  stmdb sp!,{r4,lr}
+03802130  mov r4,r0
+03802134  ldr r2,[0x3802180]
+03802138  mov r0,#0x24
+0380213c  mul r1,r4,r0
+03802140  add r0,r2,r1
+03802144  ldrb r1,[r2,r1]
+03802148  mov r1,r1, lsl #0x1f
+0380214c  movs r1,r1, lsr #0x1f
+03802150  beq 0x03802178
+03802154  bl 0x038016bc
+03802158  ldr r0,[0x3802184]
+0380215c  ldr r2,[r0,#0x0]
+03802160  cmp r2,#0x0
+03802164  ldrne r1,[r2,#0x4]
+03802168  movne r0,#0x1
+0380216c  mvnne r0,r0, lsl r4
+03802170  andne r0,r1,r0
+03802174  strne r0,[r2,#0x4]
+03802178  ldmia sp!,{r4,lr}
+0380217c  bx lr

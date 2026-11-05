@@ -1,0 +1,12 @@
+021bf720  mov r3,#0x1
+021bf722  ldr r1,[0x021bf738]
+021bf724  ldr r2,[r1,#0x4]
+021bf726  ldr r0,[0x021bf73c]
+021bf728  strh r3,[r2,r0]
+021bf72a  ldr r2,[r1,#0x4]
+021bf72c  ldr r0,[0x021bf740]
+021bf72e  ldrb r0,[r2,r0]
+021bf730  strb r0,[r1,#0xe]
+021bf732  mov r0,#0x5
+021bf734  strb r0,[r1,#0xc]
+021bf736  bx lr

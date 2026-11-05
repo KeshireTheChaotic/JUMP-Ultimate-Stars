@@ -1,0 +1,14 @@
+02049db4  stmdb sp!,{lr}
+02049db8  sub sp,sp,#0xc
+02049dbc  ldr r12,[r3,#0x0]
+02049dc0  add r3,sp,#0x0
+02049dc4  str r12,[sp,#0x0]
+02049dc8  ldr r12,[r2,#0x0]
+02049dcc  add r2,sp,#0x4
+02049dd0  str r12,[sp,#0x4]
+02049dd4  ldr r12,[r1,#0x0]
+02049dd8  add r1,sp,#0x8
+02049ddc  str r12,[sp,#0x8]
+02049de0  bl 0x0202c47c
+02049de4  add sp,sp,#0xc
+02049de8  ldmia sp!,{pc}

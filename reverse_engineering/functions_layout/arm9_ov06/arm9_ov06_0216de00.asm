@@ -1,0 +1,16 @@
+0216de00  stmdb sp!,{r4,lr}
+0216de04  mov r4,r0
+0216de08  ldr r0,[r4,#0x8]
+0216de0c  cmp r0,#0x0
+0216de10  ldmiaeq sp!,{r4,pc}
+0216de14  ldr r0,[r0,#0x4]
+0216de18  ldr r0,[r0,#0x64]
+0216de1c  ldr r2,[r0,#0x0]
+0216de20  ldr r2,[r2,#0x60]
+0216de24  blx r2
+0216de28  ldr r0,[r4,#0x14]
+0216de2c  cmp r0,#0x0
+0216de30  ldmiaeq sp!,{r4,pc}
+0216de34  ldr r1,[r4,#0x8]
+0216de38  bl 0x0207aa20
+0216de3c  ldmia sp!,{r4,pc}

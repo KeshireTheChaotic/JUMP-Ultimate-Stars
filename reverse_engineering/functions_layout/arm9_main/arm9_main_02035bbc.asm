@@ -1,0 +1,27 @@
+02035bbc  stmdb sp!,{r3,r4,r5,lr}
+02035bc0  ldr r1,[0x2035c28]
+02035bc4  ldr r4,[r1,#0x160]
+02035bc8  cmp r4,#0x8
+02035bcc  ldrcc r2,[0x2035c2c]
+02035bd0  addcc r3,r4,#0x1
+02035bd4  strcc r0,[r2,r4,lsl #0x2]
+02035bd8  strcc r3,[r1,#0x160]
+02035bdc  ldrb r1,[r0,#0x28]
+02035be0  bic r1,r1,#0x1
+02035be4  orr r1,r1,#0x1
+02035be8  strb r1,[r0,#0x28]
+02035bec  ldr r5,[r0,#0x24]
+02035bf0  cmp r5,#0x0
+02035bf4  ldmiaeq sp!,{r3,r4,r5,pc}
+02035bf8  b 0x02035c1c
+02035bfc  mov r0,r5
+02035c00  ldr r1,[r0,#0x0]
+02035c04  ldr r1,[r1,#0x10]
+02035c08  blx r1
+02035c0c  mov r4,r0
+02035c10  mov r0,r5
+02035c14  bl 0x02035bbc
+02035c18  mov r5,r4
+02035c1c  cmp r5,#0x0
+02035c20  bne 0x02035bfc
+02035c24  ldmia sp!,{r3,r4,r5,pc}

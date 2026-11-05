@@ -1,0 +1,14 @@
+02174de4  stmdb sp!,{r3,lr}
+02174de8  cmp r1,#0x0
+02174dec  ldr r0,[r0,#0x4]
+02174df0  bne 0x02174e08
+02174df4  ldr r2,[r0,#0x0]
+02174df8  mov r1,#0x0
+02174dfc  ldr r2,[r2,#0xd4]
+02174e00  blx r2
+02174e04  ldmia sp!,{r3,pc}
+02174e08  ldr r2,[r0,#0x0]
+02174e0c  ldr r1,[r1,#0x4]
+02174e10  ldr r2,[r2,#0xd4]
+02174e14  blx r2
+02174e18  ldmia sp!,{r3,pc}

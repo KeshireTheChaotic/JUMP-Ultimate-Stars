@@ -1,0 +1,1 @@
+{"module":"arm9_ov12","address":"021b2404","name":"ALMotionDynamic_021d266c","thumb":true,"body_bytes":44,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["0201b988","021b2514"],"unresolved_call_targets":[],"status":"decompiled","asm_file":"arm9_ov12_021b2404.asm","c_file":"arm9_ov12_021b2404.c"}

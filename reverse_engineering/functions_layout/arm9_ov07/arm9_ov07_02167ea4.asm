@@ -1,0 +1,11 @@
+02167ea4  stmdb sp!,{r4,r5,r6,lr}
+02167ea8  mov r6,#0x0
+02167eac  strb r6,[r0,#0x0]
+02167eb0  add r5,r0,#0x4
+02167eb4  mov r4,#0xc
+02167eb8  mla r0,r6,r4,r5
+02167ebc  bl 0x02167d38
+02167ec0  add r6,r6,#0x1
+02167ec4  cmp r6,#0x4
+02167ec8  blt 0x02167eb8
+02167ecc  ldmia sp!,{r4,r5,r6,pc}

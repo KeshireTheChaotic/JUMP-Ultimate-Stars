@@ -1,0 +1,11 @@
+02175b90  mov r2,#0x0
+02175b92  ldrh r1,[r0,#0x0]
+02175b94  cmp r1,#0x0
+02175b96  beq 0x02175ba2
+02175b98  add r0,r0,#0x2
+02175b9a  add r2,r2,#0x1
+02175b9c  ldrh r1,[r0,#0x0]
+02175b9e  cmp r1,#0x0
+02175ba0  bne 0x02175b98
+02175ba2  add r0,r2,#0x0
+02175ba4  bx lr

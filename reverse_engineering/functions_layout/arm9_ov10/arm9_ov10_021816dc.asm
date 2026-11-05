@@ -1,0 +1,14 @@
+021816dc  mov r3,#0x0
+021816de  cmp r1,#0x0
+021816e0  ble 0x021816f2
+021816e2  ldrsb r2,[r0,r3]
+021816e4  cmp r2,#0x0
+021816e6  bne 0x021816ec
+021816e8  add r0,r3,#0x1
+021816ea  bx lr
+021816ec  add r3,r3,#0x1
+021816ee  cmp r3,r1
+021816f0  blt 0x021816e2
+021816f2  mov r0,#0x0
+021816f4  mvn r0,r0
+021816f6  bx lr

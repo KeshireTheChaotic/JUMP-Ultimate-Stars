@@ -1,0 +1,13 @@
+021c79b0  stmdb sp!,{r4,lr}
+021c79b4  ldr r1,[0x21c79e4]
+021c79b8  mov r4,r0
+021c79bc  ldr r2,[0x21c79e8]
+021c79c0  mov r0,#0x8
+021c79c4  mov r3,#0x3b
+021c79c8  bl 0x0201a21c
+021c79cc  cmp r0,#0x0
+021c79d0  beq 0x021c79dc
+021c79d4  mov r1,r4
+021c79d8  bl 0x021ca280
+021c79dc  str r0,[r4,#0x18]
+021c79e0  ldmia sp!,{r4,pc}

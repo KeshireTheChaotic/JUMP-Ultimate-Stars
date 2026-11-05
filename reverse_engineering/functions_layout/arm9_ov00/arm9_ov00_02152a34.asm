@@ -1,0 +1,12 @@
+02152a34  stmdb sp!,{lr}
+02152a38  sub sp,sp,#0x4
+02152a3c  cmp r0,#0x0
+02152a40  addeq sp,sp,#0x4
+02152a44  moveq r0,#0x0
+02152a48  ldmiaeq sp!,{pc}
+02152a4c  bl 0x02152d1c
+02152a50  cmp r0,#0x1
+02152a54  moveq r0,#0x1
+02152a58  movne r0,#0x0
+02152a5c  add sp,sp,#0x4
+02152a60  ldmia sp!,{pc}

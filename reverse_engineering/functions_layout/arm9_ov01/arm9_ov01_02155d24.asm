@@ -1,0 +1,9 @@
+02155d24  push {r3,lr}
+02155d26  ldr r0,[r0,#0x4]
+02155d28  ldr r0,[r0,#0x10]
+02155d2a  ldr r0,[r0,#0x38]
+02155d2c  cmp r0,#0x0
+02155d2e  beq 0x02155d36
+02155d30  ldr r0,[r0,#0x4]
+02155d32  bl 0x021b65d8
+02155d36  pop {r3,pc}

@@ -1,0 +1,1 @@
+{"module":"arm9_ov12","address":"021ad110","name":"FUN_021ad110","thumb":true,"body_bytes":134,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["021ac1dc","021ad0ec","021b5900"],"unresolved_call_targets":[],"status":"decompiled","asm_file":"arm9_ov12_021ad110.asm","c_file":"arm9_ov12_021ad110.c"}

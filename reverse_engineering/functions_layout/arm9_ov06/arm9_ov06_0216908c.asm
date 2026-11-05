@@ -1,0 +1,16 @@
+0216908c  stmdb sp!,{r4,lr}
+02169090  ldr r0,[r0,#0x4]
+02169094  ldr r1,[r0,#0x0]
+02169098  ldr r1,[r1,#0xec]
+0216909c  blx r1
+021690a0  movs r4,r0
+021690a4  moveq r0,#0x0
+021690a8  ldmiaeq sp!,{r4,pc}
+021690ac  ldr r1,[r4,#0x18]
+021690b0  cmp r1,#0x0
+021690b4  bne 0x021690c4
+021690b8  ldr r1,[r0,#0x0]
+021690bc  ldr r1,[r1,#0x14]
+021690c0  blx r1
+021690c4  ldr r0,[r4,#0x18]
+021690c8  ldmia sp!,{r4,pc}

@@ -1,0 +1,9 @@
+0219ca34  cmp r0,#0x0
+0219ca38  bxlt lr
+0219ca3c  cmp r0,#0x4
+0219ca40  ldrlt r1,[0x219ca58]
+0219ca44  movlt r2,#0xff
+0219ca48  ldrlt r1,[r1,#0x0]
+0219ca4c  addlt r0,r1,r0
+0219ca50  strblt r2,[r0,#0x8e0]
+0219ca54  bx lr

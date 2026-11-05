@@ -1,0 +1,23 @@
+02029284  mov r2,#0x0
+02029288  mov r3,r2
+0202928c  add r1,r0,r2, lsl #0x2
+02029290  add r2,r2,#0x1
+02029294  str r3,[r1,#0x18]
+02029298  cmp r2,#0x4
+0202929c  bcc 0x0202928c
+020292a0  str r3,[r0,#0x28]
+020292a4  mov r12,#0x0
+020292a8  add r1,r0,r3, lsl #0x2
+020292ac  str r12,[r1,#0x30]
+020292b0  add r3,r3,#0x1
+020292b4  str r12,[r1,#0x90]
+020292b8  cmp r3,#0x10
+020292bc  bcc 0x020292a8
+020292c0  mov r2,#0x0
+020292c4  add r1,r0,r12, lsl #0x2
+020292c8  str r2,[r1,#0x80]
+020292cc  add r12,r12,#0x1
+020292d0  str r2,[r1,#0x88]
+020292d4  cmp r12,#0x2
+020292d8  bcc 0x020292c4
+020292dc  bx lr

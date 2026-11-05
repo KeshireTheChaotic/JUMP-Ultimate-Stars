@@ -1,0 +1,15 @@
+0216589c  push {r0,r1,r2,r3}
+0216589e  push {lr}
+021658a0  sub sp,#0x4
+021658a2  add r0,sp,#0x8
+021658a4  bl 0x02166b5c
+021658a8  ldr r0,[0x021658c0]
+021658aa  ldr r0,[r0,#0x0]
+021658ac  add r0,#0x84
+021658ae  ldr r0,[r0,#0x0]
+021658b0  ldr r1,[sp,#0x8]
+021658b2  bl 0x021660d0
+021658b6  add sp,#0x4
+021658b8  pop {r3}
+021658ba  add sp,#0x10
+021658bc  bx r3

@@ -1,0 +1,12 @@
+0202f348  stmdb sp!,{r4,lr}
+0202f34c  mov r4,r0
+0202f350  bl 0x0202fa3c
+0202f354  mov r0,r4
+0202f358  bl 0x0201a9ec
+0202f35c  cmp r0,#0x0
+0202f360  bne 0x0202f370
+0202f364  mov r0,r4
+0202f368  mov r1,#0x1
+0202f36c  bl 0x0201a958
+0202f370  mov r0,r4
+0202f374  ldmia sp!,{r4,pc}

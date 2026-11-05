@@ -1,0 +1,16 @@
+0215ffe4  push {lr}
+0215ffe6  sub sp,#0x4
+0215ffe8  mov r0,#0x1
+0215ffea  bl 0x02166314
+0215ffee  cmp r0,#0x0
+0215fff0  bne 0x02160008
+0215fff2  mov r0,#0x0
+0215fff4  bl 0x02166314
+0215fff8  cmp r0,#0x0
+0215fffa  bne 0x02160008
+0215fffc  mov r0,#0x0
+0215fffe  bl 0x02154704
+02160002  ldr r0,[0x0216000c]
+02160004  bl 0x02157088
+02160008  add sp,#0x4
+0216000a  pop {pc}

@@ -1,0 +1,10 @@
+037fd64c  ldr r3,[r1,#0x4]
+037fd650  cmp r3,#0x0
+037fd654  ldrne r2,[r1,#0x0]
+037fd658  strne r2,[r3,#0x0]
+037fd65c  ldr r2,[r1,#0x0]
+037fd660  cmp r2,#0x0
+037fd664  ldreq r0,[r1,#0x4]
+037fd668  ldrne r1,[r1,#0x4]
+037fd66c  strne r1,[r2,#0x4]
+037fd670  bx lr

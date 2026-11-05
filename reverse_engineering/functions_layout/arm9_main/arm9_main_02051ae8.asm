@@ -1,0 +1,9 @@
+02051ae8  stmdb sp!,{lr}
+02051aec  sub sp,sp,#0x4
+02051af0  mov r0,#0x3
+02051af4  bl 0x0205115c
+02051af8  mov r0,#0x0
+02051afc  bl 0x02051290
+02051b00  add sp,sp,#0x4
+02051b04  ldmia sp!,{lr}
+02051b08  bx lr

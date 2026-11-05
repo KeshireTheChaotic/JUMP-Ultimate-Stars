@@ -1,0 +1,17 @@
+02037b54  ldr r2,[r0,#0x0]
+02037b58  cmp r2,#0x0
+02037b5c  bne 0x02037b78
+02037b60  str r1,[r0,#0x0]
+02037b64  str r1,[r0,#0x4]
+02037b68  mov r0,#0x0
+02037b6c  str r0,[r1,#0x4]
+02037b70  str r0,[r1,#0x0]
+02037b74  bx lr
+02037b78  mov r2,#0x0
+02037b7c  str r2,[r1,#0x4]
+02037b80  ldr r2,[r0,#0x0]
+02037b84  str r2,[r1,#0x0]
+02037b88  ldr r2,[r0,#0x0]
+02037b8c  str r1,[r2,#0x4]
+02037b90  str r1,[r0,#0x0]
+02037b94  bx lr

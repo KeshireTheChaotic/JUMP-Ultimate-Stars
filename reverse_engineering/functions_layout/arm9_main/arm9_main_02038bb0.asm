@@ -1,0 +1,13 @@
+02038bb0  stmdb sp!,{r3,r4,r5,lr}
+02038bb4  mov r5,r1
+02038bb8  mov r4,r2
+02038bbc  mov r0,r5
+02038bc0  mov r1,r4
+02038bc4  bl 0x02018ac8
+02038bc8  mov r1,r4
+02038bcc  add r0,r5,#0x4
+02038bd0  bl 0x02018ac8
+02038bd4  mov r1,r4
+02038bd8  add r0,r5,#0x8
+02038bdc  bl 0x02018ac8
+02038be0  ldmia sp!,{r3,r4,r5,pc}

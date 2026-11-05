@@ -1,0 +1,12 @@
+0200f59c  stmdb sp!,{r3,r4,lr}
+0200f5a0  sub sp,sp,#0x4
+0200f5a4  ldrb r4,[r0],#0x2
+0200f5a8  add r1,sp,#0x0
+0200f5ac  bl 0x0200d9cc
+0200f5b0  tst r4,#0x40
+0200f5b4  addeq sp,sp,#0x4
+0200f5b8  ldmiaeq sp!,{r3,r4,pc}
+0200f5bc  add r1,sp,#0x0
+0200f5c0  bl 0x0200d9cc
+0200f5c4  add sp,sp,#0x4
+0200f5c8  ldmia sp!,{r3,r4,pc}

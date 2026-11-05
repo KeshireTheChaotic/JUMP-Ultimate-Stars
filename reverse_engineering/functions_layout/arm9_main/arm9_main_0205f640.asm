@@ -1,0 +1,14 @@
+0205f640  stmdb sp!,{lr}
+0205f644  sub sp,sp,#0x14
+0205f648  ldr lr,[sp,#0x18]
+0205f64c  ldr r12,[0x205f678]
+0205f650  str lr,[sp,#0x0]
+0205f654  ldr lr,[0x205f67c]
+0205f658  str r12,[sp,#0x4]
+0205f65c  ldr r12,[0x205f680]
+0205f660  str lr,[sp,#0x8]
+0205f664  str r12,[sp,#0xc]
+0205f668  str r2,[sp,#0x10]
+0205f66c  bl 0x0205f740
+0205f670  add sp,sp,#0x14
+0205f674  ldmia sp!,{pc}

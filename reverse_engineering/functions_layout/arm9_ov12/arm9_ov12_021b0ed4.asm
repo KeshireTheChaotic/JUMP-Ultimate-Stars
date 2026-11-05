@@ -1,0 +1,9 @@
+021b0ed4  ldr r3,[r0,#0x0]
+021b0ed8  ldr r2,[r1,#0x0]
+021b0edc  add r2,r3,r2
+021b0ee0  str r2,[r0,#0x0]
+021b0ee4  ldr r2,[r0,#0x4]
+021b0ee8  ldr r1,[r1,#0x4]
+021b0eec  add r1,r2,r1
+021b0ef0  str r1,[r0,#0x4]
+021b0ef4  bx lr

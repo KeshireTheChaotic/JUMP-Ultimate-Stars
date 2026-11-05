@@ -1,0 +1,11 @@
+0215ef0c  ldr r0,[0x0215ef24]
+0215ef0e  ldrh r1,[r0,#0x0]
+0215ef10  ldr r0,[0x0215ef28]
+0215ef12  and r1,r0
+0215ef14  asr r0,r1,#0xf
+0215ef16  cmp r0,#0x0
+0215ef18  beq 0x0215ef1e
+0215ef1a  mov r0,#0x1
+0215ef1c  bx lr
+0215ef1e  mov r0,#0x0
+0215ef20  bx lr

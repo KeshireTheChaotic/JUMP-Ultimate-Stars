@@ -1,0 +1,9 @@
+0201e71c  stmdb sp!,{r3,r4,r5,lr}
+0201e720  mov r5,r0
+0201e724  mov r4,r2
+0201e728  bl 0x0201e5ec
+0201e72c  ldr r1,[0x201e740]
+0201e730  mov r0,r5
+0201e734  str r1,[r5,#0x0]
+0201e738  str r4,[r5,#0x54]
+0201e73c  ldmia sp!,{r3,r4,r5,pc}

@@ -1,0 +1,1 @@
+{"module":"arm9_ov06","address":"02165944","name":"FUN_02165944","thumb":false,"body_bytes":652,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["0200d338","02031070","0207342c","02083b74","0215b3e0","02164d48","02165eb0"],"unresolved_call_targets":[],"status":"decompiled","asm_file":"arm9_ov06_02165944.asm","c_file":"arm9_ov06_02165944.c"}

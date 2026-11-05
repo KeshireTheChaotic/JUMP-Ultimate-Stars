@@ -1,0 +1,17 @@
+0203c3d4  stmdb sp!,{r4,lr}
+0203c3d8  mov r4,r0
+0203c3dc  add r0,r4,#0x1dc
+0203c3e0  add r0,r0,#0x800
+0203c3e4  bl 0x0203c3ac
+0203c3e8  add r0,r4,#0x19c
+0203c3ec  add r0,r0,#0x800
+0203c3f0  bl 0x02014980
+0203c3f4  add r0,r4,#0x990
+0203c3f8  bl 0x0201cf9c
+0203c3fc  add r0,r4,#0xac
+0203c400  add r0,r0,#0x400
+0203c404  bl 0x0201cb78
+0203c408  mov r0,r4
+0203c40c  bl 0x02031e5c
+0203c410  mov r0,r4
+0203c414  ldmia sp!,{r4,pc}

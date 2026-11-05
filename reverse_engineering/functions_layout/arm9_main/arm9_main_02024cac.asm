@@ -1,0 +1,15 @@
+02024cac  stmdb sp!,{r4,r5,lr}
+02024cb0  sub sp,sp,#0xc
+02024cb4  add r0,sp,#0x0
+02024cb8  mov r4,r2
+02024cbc  mov r5,r1
+02024cc0  bl 0x0201899c
+02024cc4  add r1,sp,#0x0
+02024cc8  mov r0,r4
+02024ccc  mov r2,#0xc
+02024cd0  bl 0x02051730
+02024cd4  add r1,sp,#0x0
+02024cd8  mov r0,r5
+02024cdc  bl 0x0202367c
+02024ce0  add sp,sp,#0xc
+02024ce4  ldmia sp!,{r4,r5,pc}

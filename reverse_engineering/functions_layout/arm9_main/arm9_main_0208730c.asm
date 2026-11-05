@@ -1,0 +1,15 @@
+0208730c  stmdb sp!,{r3,lr}
+02087310  bl 0x0208c51c
+02087314  cmp r0,#0x0
+02087318  beq 0x02087330
+0208731c  bl 0x0219b634
+02087320  cmp r0,#0x0
+02087324  ldmiaeq sp!,{r3,pc}
+02087328  bl 0x0219fae0
+0208732c  ldmia sp!,{r3,pc}
+02087330  blx 0x0208c11c
+02087334  cmp r0,#0x0
+02087338  ldmiane sp!,{r3,pc}
+0208733c  mov r0,#0x1
+02087340  bl 0x0208c080
+02087344  ldmia sp!,{r3,pc}

@@ -1,0 +1,12 @@
+0214db7c  mov r0,#0x1
+0214db80  bl 0x0203b424
+0214db84  ldr r1,[r0,#0x88]
+0214db88  mov r0,#0x1000
+0214db8c  str r0,[sp,#0x8]
+0214db90  ldr r0,[r1,#0x4]
+0214db94  add r1,sp,#0x8
+0214db98  ldr r2,[r0,#0x0]
+0214db9c  ldr r2,[r2,#0x10]
+0214dba0  blx r2
+0214dba4  mov r0,#0x2
+0214dba8  bl 0x0203b424

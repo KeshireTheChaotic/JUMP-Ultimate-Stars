@@ -1,0 +1,19 @@
+021c615c  stmdb sp!,{r4,lr}
+021c6160  mov r4,r0
+021c6164  mov r0,#0x0
+021c6168  str r0,[r4,#0x0]
+021c616c  str r0,[r4,#0x4]
+021c6170  strh r0,[r4,#0x8]
+021c6174  mov r0,#0x1
+021c6178  strh r0,[r4,#0xa]
+021c617c  mov r0,#0x10
+021c6180  str r0,[r4,#0x4]
+021c6184  ldrh r0,[r4,#0xa]
+021c6188  ldr r1,[0x21c61a8]
+021c618c  ldr r2,[0x21c61ac]
+021c6190  mov r0,r0, lsl #0x4
+021c6194  mov r3,#0x38
+021c6198  bl 0x0201a21c
+021c619c  str r0,[r4,#0x0]
+021c61a0  mov r0,r4
+021c61a4  ldmia sp!,{r4,pc}

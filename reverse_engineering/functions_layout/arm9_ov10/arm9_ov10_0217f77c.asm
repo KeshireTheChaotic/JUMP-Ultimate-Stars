@@ -1,0 +1,9 @@
+0217f77c  push {r4,lr}
+0217f77e  add r4,r0,#0x0
+0217f780  mov r0,#0x0
+0217f782  ldr r1,[r4,#0x0]
+0217f784  bl 0x021816f8
+0217f788  mov r0,#0x0
+0217f78a  ldr r1,[r4,#0x4]
+0217f78c  bl 0x021816f8
+0217f790  pop {r4,pc}

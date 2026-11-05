@@ -1,0 +1,15 @@
+0206a23c  ldrb r0,[r0,#0x0]
+0206a23e  cmp r0,#0x7f
+0206a240  bne 0x0206a246
+0206a242  mov r0,#0x0
+0206a244  bx lr
+0206a246  cmp r0,#0x1
+0206a248  bcs 0x0206a24e
+0206a24a  mov r0,#0x0
+0206a24c  bx lr
+0206a24e  cmp r0,#0xdf
+0206a250  bhi 0x0206a256
+0206a252  mov r0,#0x1
+0206a254  bx lr
+0206a256  mov r0,#0x0
+0206a258  bx lr

@@ -1,0 +1,15 @@
+0207698c  stmdb sp!,{r4,lr}
+02076990  ldr r1,[0x20769c8]
+02076994  mov r4,r0
+02076998  ldr r0,[r1,#0x0]
+0207699c  mov r1,r4
+020769a0  add r0,r0,#0xd4
+020769a4  add r0,r0,#0x1800
+020769a8  bl 0x02037c24
+020769ac  ldr r0,[0x20769c8]
+020769b0  mov r1,r4
+020769b4  ldr r0,[r0,#0x0]
+020769b8  add r0,r0,#0xdc
+020769bc  add r0,r0,#0x1800
+020769c0  bl 0x02037b98
+020769c4  ldmia sp!,{r4,pc}

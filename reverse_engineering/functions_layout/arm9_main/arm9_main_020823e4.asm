@@ -1,0 +1,170 @@
+020823e4  stmdb sp!,{r3,r4,r5,r6,r7,r8,r9,r10,r11,lr}
+020823e8  mov r10,r1
+020823ec  ldr r4,[r10,#0xc]
+020823f0  mov r9,r2
+020823f4  mov r11,r3
+020823f8  add r7,r4,#0xa4
+020823fc  ldr r8,[r0,#0xc]
+02082400  b 0x02082414
+02082404  ldr r0,[r1,#0x40]
+02082408  tst r0,#0x200
+0208240c  bne 0x02082420
+02082410  mov r4,r1
+02082414  ldr r1,[r4,#0x68]
+02082418  cmp r1,#0x0
+0208241c  bne 0x02082404
+02082420  ldr r1,[r10,#0x10]
+02082424  ldr r0,[r4,#0x40]
+02082428  ldrsb r5,[r1,#0x4]
+0208242c  tst r0,#0x2000000
+02082430  mov r6,#0x0
+02082434  beq 0x0208247c
+02082438  ldr r0,[0x208268c]
+0208243c  ldr r0,[r0,#0x0]
+02082440  ldr r0,[r0,#0x4]
+02082444  bl 0x02031070
+02082448  ldrsh r2,[r7,#0xca]
+0208244c  ldr r1,[0x2082690]
+02082450  mov r2,r2, asr #0x6
+02082454  ldr r1,[r1,r2,lsl #0x2]
+02082458  tst r1,r0, lsr #0x3
+0208245c  bne 0x0208247c
+02082460  orr r0,r6,#0x1
+02082464  mov r2,r0, lsl #0x10
+02082468  mov r0,#0x7a
+0208246c  mov r1,#0x28
+02082470  mov r5,r5, lsl #0x1
+02082474  mov r6,r2, asr #0x10
+02082478  bl 0x0207342c
+0208247c  add r0,r4,#0x100
+02082480  ldrh r2,[r0,#0x84]
+02082484  ldrh r0,[r0,#0x86]
+02082488  ldr r1,[r10,#0x18]
+0208248c  mov r3,r5, lsl #0x8
+02082490  sub r2,r2,#0x100
+02082494  mul r2,r3,r2
+02082498  add r2,r3,r2, asr #0x8
+0208249c  sub r0,r0,#0x100
+020824a0  mul r0,r2,r0
+020824a4  tst r1,#0xc0
+020824a8  add r5,r2,r0, asr #0x8
+020824ac  mov r0,#0x0
+020824b0  beq 0x020824d0
+020824b4  tst r1,#0x40
+020824b8  ldrb r1,[r7,#0xd1]
+020824bc  movne r1,r1, lsl #0x1c
+020824c0  movne r1,r1, lsr #0x1e
+020824c4  moveq r1,r1, lsl #0x1a
+020824c8  moveq r1,r1, lsr #0x1e
+020824cc  b 0x020824dc
+020824d0  ldrb r1,[r7,#0xd1]
+020824d4  mov r1,r1, lsl #0x1e
+020824d8  mov r1,r1, lsr #0x1e
+020824dc  ldr r2,[r8,#0x40]
+020824e0  tst r2,#0x40000000
+020824e4  bne 0x020824f4
+020824e8  ldr r2,[r4,#0x40]
+020824ec  tst r2,#0x40000000
+020824f0  beq 0x020824fc
+020824f4  mov r3,#0x100
+020824f8  b 0x0208253c
+020824fc  cmp r9,#0x0
+02082500  ldrb r7,[r8,#0x175]
+02082504  beq 0x02082524
+02082508  mov r2,r1, lsl #0x1
+0208250c  mov r1,r7, lsl #0x1e
+02082510  ldr r3,[0x2082694]
+02082514  mov r1,r1, lsr #0x1e
+02082518  add r1,r3,r1, lsl #0x3
+0208251c  ldrsh r3,[r2,r1]
+02082520  b 0x0208253c
+02082524  mov r2,r1, lsl #0x1
+02082528  mov r1,r7, lsl #0x1e
+0208252c  ldr r3,[0x2082698]
+02082530  mov r1,r1, lsr #0x1e
+02082534  add r1,r3,r1, lsl #0x3
+02082538  ldrsh r3,[r2,r1]
+0208253c  cmp r3,#0x100
+02082540  ble 0x02082568
+02082544  ldr r2,[r8,#0x40]
+02082548  orr r1,r6,#0x2
+0208254c  orr r2,r2,#0x400000
+02082550  str r2,[r8,#0x40]
+02082554  ldr r2,[r4,#0x40]
+02082558  mov r1,r1, lsl #0x10
+0208255c  orr r2,r2,#0x200000
+02082560  str r2,[r4,#0x40]
+02082564  mov r6,r1, asr #0x10
+02082568  sub r1,r3,#0x100
+0208256c  mul r1,r5,r1
+02082570  ldr r3,[r10,#0x10]
+02082574  ldr r2,[r8,#0x44]
+02082578  add r0,r0,r1, asr #0x8
+0208257c  tst r2,#0x4000
+02082580  ldrsb r1,[r3,#0xe]
+02082584  ldrb r4,[r3,#0x0]
+02082588  beq 0x020825ac
+0208258c  cmp r4,#0x4
+02082590  cmpne r4,#0x5
+02082594  beq 0x020825a4
+02082598  ldr r3,[r10,#0x14]
+0208259c  tst r3,#0xf0
+020825a0  beq 0x020825ac
+020825a4  mov r3,r5, lsl #0x6
+020825a8  add r0,r0,r3, asr #0x8
+020825ac  tst r2,#0x40
+020825b0  beq 0x020825e0
+020825b4  cmp r4,#0x4
+020825b8  cmpne r4,#0x5
+020825bc  beq 0x020825cc
+020825c0  ldr r3,[r10,#0x14]
+020825c4  tst r3,#0xf0
+020825c8  beq 0x020825e0
+020825cc  orr r3,r6,#0x4
+020825d0  mov r3,r3, lsl #0x10
+020825d4  mov r4,r5, lsl #0x6
+020825d8  mov r6,r3, asr #0x10
+020825dc  sub r0,r0,r4, asr #0x8
+020825e0  cmp r1,#0x0
+020825e4  blt 0x02082678
+020825e8  cmp r1,#0xf
+020825ec  bgt 0x02082678
+020825f0  tst r2,#0x1000
+020825f4  beq 0x0208260c
+020825f8  ldr r3,[0x208269c]
+020825fc  ldrb r3,[r3,r1]
+02082600  cmp r3,#0x1
+02082604  moveq r3,r5, lsl #0x6
+02082608  addeq r0,r0,r3, asr #0x8
+0208260c  tst r2,#0x2000
+02082610  beq 0x02082628
+02082614  ldr r3,[0x208269c]
+02082618  ldrb r3,[r3,r1]
+0208261c  cmp r3,#0x2
+02082620  moveq r3,r5, lsl #0x6
+02082624  addeq r0,r0,r3, asr #0x8
+02082628  tst r2,#0x10
+0208262c  beq 0x02082650
+02082630  ldr r3,[0x208269c]
+02082634  ldrb r3,[r3,r1]
+02082638  cmp r3,#0x1
+0208263c  orreq r3,r6,#0x4
+02082640  moveq r3,r3, lsl #0x10
+02082644  moveq r4,r5, lsl #0x6
+02082648  moveq r6,r3, asr #0x10
+0208264c  subeq r0,r0,r4, asr #0x8
+02082650  tst r2,#0x20
+02082654  beq 0x02082678
+02082658  ldr r2,[0x208269c]
+0208265c  ldrb r1,[r2,r1]
+02082660  cmp r1,#0x2
+02082664  orreq r1,r6,#0x4
+02082668  moveq r1,r1, lsl #0x10
+0208266c  moveq r2,r5, lsl #0x6
+02082670  moveq r6,r1, asr #0x10
+02082674  subeq r0,r0,r2, asr #0x8
+02082678  add r0,r5,r0
+0208267c  mov r1,r0, asr #0x2
+02082680  mov r0,r6
+02082684  str r1,[r11,#0x0]
+02082688  ldmia sp!,{r3,r4,r5,r6,r7,r8,r9,r10,r11,pc}

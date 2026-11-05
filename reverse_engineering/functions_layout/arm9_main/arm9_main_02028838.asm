@@ -1,0 +1,12 @@
+02028838  stmdb sp!,{r4,lr}
+0202883c  ldr r0,[r0,#0x38]
+02028840  movs r4,r1
+02028844  addne r1,r1,#0x4
+02028848  bl 0x02037c24
+0202884c  cmp r4,#0x0
+02028850  ldmiaeq sp!,{r4,pc}
+02028854  mov r0,r4
+02028858  ldr r1,[r0,#0x0]
+0202885c  ldr r1,[r1,#0x1c]
+02028860  blx r1
+02028864  ldmia sp!,{r4,pc}

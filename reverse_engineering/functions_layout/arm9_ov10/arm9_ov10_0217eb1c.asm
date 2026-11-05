@@ -1,0 +1,15 @@
+0217eb1c  push {r4,lr}
+0217eb1e  ldr r4,[0x0217eb40]
+0217eb20  ldr r4,[r4,#0x0]
+0217eb22  cmp r4,#0x0
+0217eb24  beq 0x0217eb3c
+0217eb26  cmp r1,#0x0
+0217eb28  beq 0x0217eb3c
+0217eb2a  cmp r2,#0x0
+0217eb2c  beq 0x0217eb3c
+0217eb2e  cmp r3,#0x0
+0217eb30  beq 0x0217eb38
+0217eb32  bl 0x0217e898
+0217eb36  pop {r4,pc}
+0217eb38  bl 0x0217e82c
+0217eb3c  pop {r4,pc}

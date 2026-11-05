@@ -1,0 +1,14 @@
+02165ff4  push {r4,r5,r6,lr}
+02165ff6  sub sp,#0x8
+02165ff8  add r5,r0,#0x0
+02165ffa  add r6,r1,#0x0
+02165ffc  add r1,sp,#0x0
+02165ffe  bl 0x02167248
+02166002  add r4,r0,#0x0
+02166004  add r0,r5,#0x0
+02166006  add r1,r6,#0x0
+02166008  add r2,r4,#0x0
+0216600a  bl 0x02166014
+0216600e  add r0,r4,#0x0
+02166010  add sp,#0x8
+02166012  pop {r4,r5,r6,pc}

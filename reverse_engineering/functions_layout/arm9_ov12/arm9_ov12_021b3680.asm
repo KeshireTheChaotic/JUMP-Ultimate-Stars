@@ -1,0 +1,10 @@
+021b3680  push {r3,lr}
+021b3682  ldr r2,[r1,#0x0]
+021b3684  str r2,[r0,#0x38]
+021b3686  ldr r1,[r1,#0x0]
+021b3688  str r1,[r0,#0x3c]
+021b368a  ldr r1,[r0,#0x0]
+021b368c  add r1,#0xcc
+021b368e  ldr r1,[r1,#0x0]
+021b3690  blx r1
+021b3692  pop {r3,pc}

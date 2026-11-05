@@ -1,0 +1,16 @@
+0218cc74  push {lr}
+0218cc76  sub sp,#0xc
+0218cc78  mov r1,#0x8
+0218cc7a  str r1,[sp,#0x8]
+0218cc7c  add r1,sp,#0x0
+0218cc7e  add r2,sp,#0x8
+0218cc80  bl 0x02001a08
+0218cc84  mov r2,#0x0
+0218cc86  mvn r1,r2
+0218cc88  cmp r0,r1
+0218cc8a  beq 0x0218cc90
+0218cc8c  add r0,sp,#0x0
+0218cc8e  ldrh r2,[r0,#0x2]
+0218cc90  add r0,r2,#0x0
+0218cc92  add sp,#0xc
+0218cc94  pop {pc}

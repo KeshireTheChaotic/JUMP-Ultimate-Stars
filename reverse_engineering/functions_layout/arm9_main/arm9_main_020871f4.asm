@@ -1,0 +1,8 @@
+020871f4  stmdb sp!,{r3,lr}
+020871f8  bl 0x0208c51c
+020871fc  cmp r0,#0x0
+02087200  beq 0x0208720c
+02087204  bl 0x0219f8f0
+02087208  ldmia sp!,{r3,pc}
+0208720c  blx 0x0208c17c
+02087210  ldmia sp!,{r3,pc}

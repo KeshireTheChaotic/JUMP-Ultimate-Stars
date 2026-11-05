@@ -1,0 +1,1 @@
+{"module":"arm9_ov12","address":"021b8354","name":"ALDrawLinkImp_021d2e58_Derived_021d30c8","thumb":true,"body_bytes":64,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["021b3e18","021b83e8"],"unresolved_call_targets":[],"status":"decompiled","asm_file":"arm9_ov12_021b8354.asm","c_file":"arm9_ov12_021b8354.c"}

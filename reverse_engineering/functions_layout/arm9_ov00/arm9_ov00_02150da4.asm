@@ -1,0 +1,17 @@
+02150da4  stmdb sp!,{r4,lr}
+02150da8  ldr r0,[r0,#0x4]
+02150dac  ldr r4,[r0,#0x10]
+02150db0  bl 0x02054b44
+02150db4  ldr r3,[r4,#0x78]
+02150db8  ldr r2,[r4,#0x7c]
+02150dbc  subs r3,r0,r3
+02150dc0  sbc r1,r1,r2
+02150dc4  ldr r0,[0x2150de8]
+02150dc8  cmp r1,#0x0
+02150dcc  cmpeq r3,r0
+02150dd0  ldmials sp!,{r4,pc}
+02150dd4  mov r1,#0x1
+02150dd8  mov r0,r4
+02150ddc  strb r1,[r4,#0x82]
+02150de0  bl 0x02150f48
+02150de4  ldmia sp!,{r4,pc}

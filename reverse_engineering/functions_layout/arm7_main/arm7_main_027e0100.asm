@@ -1,0 +1,12 @@
+027e0100  ldr r0,[0x27e0130]
+027e0104  ldr r1,[r0,#0x550]
+027e0108  mov r0,#0x0
+027e010c  strh r0,[r1,#0x38]
+027e0110  strh r0,[r1,#0x3a]
+027e0114  strh r0,[r1,#0x30]
+027e0118  strh r0,[r1,#0x32]
+027e011c  strh r0,[r1,#0x3c]
+027e0120  strh r0,[r1,#0x3e]
+027e0124  strh r0,[r1,#0x34]
+027e0128  strh r0,[r1,#0x36]
+027e012c  bx lr

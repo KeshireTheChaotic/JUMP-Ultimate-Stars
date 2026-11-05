@@ -1,0 +1,16 @@
+021634bc  stmdb sp!,{r4,lr}
+021634c0  ldr r2,[0x21634fc]
+021634c4  mov r4,r0
+021634c8  str r1,[r4,#0x38]
+021634cc  cmp r1,r2
+021634d0  ldmiaeq sp!,{r4,pc}
+021634d4  str r1,[r4,#0x3c]
+021634d8  ldr r0,[r4,#0x40]
+021634dc  blx 0x02157118
+021634e0  ldr r0,[r4,#0x3c]
+021634e4  mov r1,#0x0
+021634e8  bl 0x02159700
+021634ec  bl 0x0214dd50
+021634f0  mov r1,#0xd
+021634f4  bl 0x0214dd60
+021634f8  ldmia sp!,{r4,pc}

@@ -1,0 +1,17 @@
+0215a600  push {r4,lr}
+0215a602  ldr r0,[0x0215a624]
+0215a604  ldrb r1,[r0,#0x0]
+0215a606  cmp r1,#0x4
+0215a608  bcs 0x0215a60e
+0215a60a  mov r0,#0x2
+0215a60c  b 0x0215a610
+0215a60e  mov r0,#0x3
+0215a610  lsl r4,r1,#0x3
+0215a612  ldr r1,[0x0215a628]
+0215a614  ldrh r1,[r1,r4]
+0215a616  ldr r2,[0x0215a62c]
+0215a618  ldrh r2,[r2,r4]
+0215a61a  ldr r3,[0x0215a630]
+0215a61c  ldrh r3,[r3,r4]
+0215a61e  bl 0x02154878
+0215a622  pop {r4,pc}

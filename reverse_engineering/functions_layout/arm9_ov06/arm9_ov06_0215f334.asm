@@ -1,0 +1,12 @@
+0215f334  stmdb sp!,{r3,lr}
+0215f338  ldrb r2,[r0,#0x1c1]
+0215f33c  ldr r0,[r0,#0x174]
+0215f340  cmp r2,#0x0
+0215f344  beq 0x0215f354
+0215f348  ldr r0,[r0,#0x0]
+0215f34c  bl 0x0215f364
+0215f350  ldmia sp!,{r3,pc}
+0215f354  ldr r0,[r0,#0x0]
+0215f358  mov r1,#0x0
+0215f35c  bl 0x0215f364
+0215f360  ldmia sp!,{r3,pc}

@@ -1,0 +1,10 @@
+020552a8  stmdb sp!,{lr}
+020552ac  sub sp,sp,#0x4
+020552b0  mov r0,#0x1
+020552b4  blx 0x020000ea
+020552b8  mov r0,#0x1
+020552bc  mov r1,r0
+020552c0  bl 0x02051b0c
+020552c4  add sp,sp,#0x4
+020552c8  ldmia sp!,{lr}
+020552cc  bx lr

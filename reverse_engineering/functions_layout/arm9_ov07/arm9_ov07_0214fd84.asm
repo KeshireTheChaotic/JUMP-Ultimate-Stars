@@ -1,0 +1,14 @@
+0214fd84  push {r3,r4,r5,lr}
+0214fd86  add r5,r0,#0x0
+0214fd88  mov r4,#0x0
+0214fd8a  lsl r0,r4,#0x2
+0214fd8c  add r0,r5,r0
+0214fd8e  ldr r0,[r0,#0x3c]
+0214fd90  cmp r0,#0x0
+0214fd92  beq 0x0214fd9a
+0214fd94  ldr r0,[r0,#0x4]
+0214fd96  bl 0x021b65d8
+0214fd9a  add r4,r4,#0x1
+0214fd9c  cmp r4,#0x10
+0214fd9e  blt 0x0214fd8a
+0214fda0  pop {r3,r4,r5,pc}

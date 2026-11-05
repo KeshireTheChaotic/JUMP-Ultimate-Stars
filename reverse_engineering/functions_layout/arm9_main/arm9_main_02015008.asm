@@ -1,0 +1,73 @@
+02015008  stmdb sp!,{r3,r4,r5,lr}
+0201500c  sub sp,sp,#0x20
+02015010  mov r5,r0
+02015014  ldrb r2,[r5,#0x11]
+02015018  mov r4,r1
+0201501c  mov r0,r2, lsl #0x1d
+02015020  mov r2,r2, lsl #0x1e
+02015024  mov r0,r0, lsr #0x1f
+02015028  orr r1,r4,r2, lsr #0x1f
+0201502c  orr r0,r0,r2, lsr #0x1f
+02015030  cmp r0,r1
+02015034  beq 0x02015124
+02015038  cmp r1,#0x0
+0201503c  beq 0x020150a0
+02015040  add r0,sp,#0x1c
+02015044  mov r1,r5
+02015048  blx 0x02011990
+0201504c  ldr r0,[sp,#0x1c]
+02015050  cmp r0,#0xc1000
+02015054  blt 0x020150a0
+02015058  add r0,sp,#0x18
+0201505c  mov r1,r5
+02015060  blx 0x02011990
+02015064  ldr r0,[sp,#0x18]
+02015068  cmp r0,#0xc7000
+0201506c  bgt 0x020150a0
+02015070  add r0,sp,#0x10
+02015074  mov r1,r5
+02015078  blx 0x02011990
+0201507c  ldr r1,[sp,#0x10]
+02015080  mov r0,r5
+02015084  sub r1,r1,#0x8000
+02015088  str r1,[sp,#0x14]
+0201508c  ldr r2,[r0,#0x0]
+02015090  add r1,sp,#0x14
+02015094  ldr r2,[r2,#0x10]
+02015098  blx r2
+0201509c  b 0x02015110
+020150a0  ldrb r0,[r5,#0x11]
+020150a4  mov r0,r0, lsl #0x1e
+020150a8  orrs r0,r4,r0, lsr #0x1f
+020150ac  bne 0x02015110
+020150b0  add r0,sp,#0xc
+020150b4  mov r1,r5
+020150b8  blx 0x02011990
+020150bc  ldr r0,[sp,#0xc]
+020150c0  cmp r0,#0xbf000
+020150c4  bgt 0x02015110
+020150c8  add r0,sp,#0x8
+020150cc  mov r1,r5
+020150d0  blx 0x02011990
+020150d4  ldr r0,[sp,#0x8]
+020150d8  cmp r0,#0xb9000
+020150dc  blt 0x02015110
+020150e0  add r0,sp,#0x0
+020150e4  mov r1,r5
+020150e8  blx 0x02011990
+020150ec  add r1,sp,#0x0
+020150f0  ldr r2,[r1,#0x0]
+020150f4  mov r0,r5
+020150f8  add r2,r2,#0x8000
+020150fc  str r2,[sp,#0x4]
+02015100  ldr r2,[r0,#0x0]
+02015104  add r1,sp,#0x4
+02015108  ldr r2,[r2,#0x10]
+0201510c  blx r2
+02015110  ldrb r1,[r5,#0x11]
+02015114  mov r0,r4, lsl #0x1f
+02015118  bic r1,r1,#0x4
+0201511c  orr r0,r1,r0, lsr #0x1d
+02015120  strb r0,[r5,#0x11]
+02015124  add sp,sp,#0x20
+02015128  ldmia sp!,{r3,r4,r5,pc}

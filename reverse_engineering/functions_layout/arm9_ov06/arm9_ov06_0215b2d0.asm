@@ -1,0 +1,11 @@
+0215b2d0  stmdb sp!,{r3,lr}
+0215b2d4  ldrb r2,[r0,#0x1e9]
+0215b2d8  add r1,r2,#0x1
+0215b2dc  strb r1,[r0,#0x1e9]
+0215b2e0  cmp r2,#0x8
+0215b2e4  ldmials sp!,{r3,pc}
+0215b2e8  ldr r1,[0x215b2fc]
+0215b2ec  mov r2,#0x0
+0215b2f0  strb r2,[r0,#0x1e9]
+0215b2f4  bl 0x0215b348
+0215b2f8  ldmia sp!,{r3,pc}

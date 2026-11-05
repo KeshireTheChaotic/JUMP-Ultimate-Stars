@@ -1,0 +1,16 @@
+0215a824  stmdb sp!,{r4,lr}
+0215a828  mov r4,r0
+0215a82c  ldr r0,[r4,#0x1a8]
+0215a830  bl 0x0215a864
+0215a834  cmp r0,#0x1
+0215a838  ldr r0,[r4,#0x6c]
+0215a83c  bne 0x0215a850
+0215a840  tst r0,#0x4
+0215a844  beq 0x0215a85c
+0215a848  mov r0,#0x1
+0215a84c  ldmia sp!,{r4,pc}
+0215a850  tst r0,#0x8
+0215a854  movne r0,#0x1
+0215a858  ldmiane sp!,{r4,pc}
+0215a85c  mov r0,#0x0
+0215a860  ldmia sp!,{r4,pc}

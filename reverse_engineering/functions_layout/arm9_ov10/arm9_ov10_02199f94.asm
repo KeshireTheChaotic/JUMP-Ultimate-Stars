@@ -1,0 +1,13 @@
+02199f94  stmdb sp!,{r3,lr}
+02199f98  ldr r0,[0x2199fc8]
+02199f9c  ldr r0,[r0,#0x0]
+02199fa0  cmp r0,#0x0
+02199fa4  ldmiaeq sp!,{r3,pc}
+02199fa8  ldr r0,[0x2199fcc]
+02199fac  ldr r0,[r0,#0x0]
+02199fb0  tst r0,#0x1
+02199fb4  ldmiaeq sp!,{r3,pc}
+02199fb8  ldr r0,[0x2199fd0]
+02199fbc  ldr r1,[0x2199fd4]
+02199fc0  blx 0x021758e0
+02199fc4  ldmia sp!,{r3,pc}

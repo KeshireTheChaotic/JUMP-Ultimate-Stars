@@ -1,0 +1,16 @@
+02033f68  stmdb sp!,{r3,r4,r5,lr}
+02033f6c  mov r5,r0
+02033f70  ldr r0,[r5,#0x24]
+02033f74  mov r4,r1
+02033f78  cmp r0,#0x0
+02033f7c  ldreq r0,[r5,#0x20]
+02033f80  beq 0x02033fa0
+02033f84  ldr r2,[r0,#0x0]
+02033f88  mov r1,#0x0
+02033f8c  ldr r2,[r2,#0x2c]
+02033f90  blx r2
+02033f94  ldr r1,[r5,#0x2c]
+02033f98  add r0,r0,r1
+02033f9c  str r0,[r5,#0x20]
+02033fa0  add r0,r0,r4
+02033fa4  ldmia sp!,{r3,r4,r5,pc}

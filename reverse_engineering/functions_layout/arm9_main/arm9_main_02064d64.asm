@@ -1,0 +1,9 @@
+02064d64  sub sp,#0x8
+02064d66  ldr r2,[0x02064d78]
+02064d68  str r2,[sp,#0x0]
+02064d6a  ldr r1,[r1,#0x18]
+02064d6c  str r1,[sp,#0x4]
+02064d6e  str r2,[r0,#0x0]
+02064d70  str r1,[r0,#0x4]
+02064d72  add sp,#0x8
+02064d74  bx lr

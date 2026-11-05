@@ -1,0 +1,13 @@
+020538c0  ldr r2,[r0,#0x0]
+020538c4  cmp r2,#0x0
+020538c8  beq 0x020538ec
+020538cc  ldr r1,[r2,#0x80]
+020538d0  str r1,[r0,#0x0]
+020538d4  cmp r1,#0x0
+020538d8  movne r0,#0x0
+020538dc  strne r0,[r1,#0x7c]
+020538e0  moveq r1,#0x0
+020538e4  streq r1,[r0,#0x4]
+020538e8  streq r1,[r2,#0x78]
+020538ec  mov r0,r2
+020538f0  bx lr

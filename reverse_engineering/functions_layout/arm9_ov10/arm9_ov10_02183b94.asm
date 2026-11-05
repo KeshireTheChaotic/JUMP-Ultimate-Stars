@@ -1,0 +1,12 @@
+02183b94  push {r4,r5,r6,lr}
+02183b96  add r5,r0,#0x0
+02183b98  add r4,r1,#0x0
+02183b9a  add r6,r2,#0x0
+02183b9c  add r0,r6,#0x0
+02183b9e  bl 0x02004b04
+02183ba2  add r3,r0,#0x0
+02183ba4  add r0,r5,#0x0
+02183ba6  add r1,r4,#0x0
+02183ba8  add r2,r6,#0x0
+02183baa  bl 0x02183bb0
+02183bae  pop {r4,r5,r6,pc}

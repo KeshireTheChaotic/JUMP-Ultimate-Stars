@@ -1,0 +1,17 @@
+021597b4  ldr r1,[0x21597f8]
+021597b8  mov r0,#0x0
+021597bc  ldr r1,[r1,#0x0]
+021597c0  mov r3,r0
+021597c4  add r1,r1,#0x264
+021597c8  add r2,r1,#0x800
+021597cc  ldrsb r1,[r2,#0x0]
+021597d0  cmp r1,#0x0
+021597d4  beq 0x021597e4
+021597d8  ldrsb r1,[r2,#0x20]
+021597dc  cmp r1,#0x0
+021597e0  addeq r0,r0,#0x1
+021597e4  add r3,r3,#0x1
+021597e8  cmp r3,#0xb
+021597ec  add r2,r2,#0x22
+021597f0  blt 0x021597cc
+021597f4  bx lr

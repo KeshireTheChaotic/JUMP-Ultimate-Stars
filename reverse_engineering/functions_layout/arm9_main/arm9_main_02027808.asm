@@ -1,0 +1,10 @@
+02027808  stmdb sp!,{r3,lr}
+0202780c  ldr r0,[r0,#0x30]
+02027810  ldr r2,[0x2027830]
+02027814  cmp r0,r2
+02027818  moveq r0,#0x0
+0202781c  ldmiaeq sp!,{r3,pc}
+02027820  ldr r2,[r0,#0x0]
+02027824  ldr r2,[r2,#0x50]
+02027828  blx r2
+0202782c  ldmia sp!,{r3,pc}

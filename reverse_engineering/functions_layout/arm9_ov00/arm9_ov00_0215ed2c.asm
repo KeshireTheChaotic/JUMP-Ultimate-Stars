@@ -1,0 +1,36 @@
+0215ed2c  stmdb sp!,{r3,r4,r5,r6,r7,lr}
+0215ed30  mov r5,#0x0
+0215ed34  mov r6,r0
+0215ed38  mov r4,r5
+0215ed3c  mov r7,r5
+0215ed40  add r0,r6,r5, lsl #0x2
+0215ed44  ldr r0,[r0,#0x8]
+0215ed48  cmp r0,#0x0
+0215ed4c  beq 0x0215ed64
+0215ed50  ldr r0,[r0,#0x4]
+0215ed54  mov r1,r4
+0215ed58  ldr r2,[r0,#0x0]
+0215ed5c  ldr r2,[r2,#0xd8]
+0215ed60  blx r2
+0215ed64  add r0,r6,r5, lsl #0x2
+0215ed68  ldr r0,[r0,#0x14]
+0215ed6c  cmp r0,#0x0
+0215ed70  beq 0x0215ed88
+0215ed74  ldr r0,[r0,#0x4]
+0215ed78  mov r1,r7
+0215ed7c  ldr r2,[r0,#0x0]
+0215ed80  ldr r2,[r2,#0xd8]
+0215ed84  blx r2
+0215ed88  add r5,r5,#0x1
+0215ed8c  cmp r5,#0x3
+0215ed90  blt 0x0215ed40
+0215ed94  ldr r0,[r6,#0x20]
+0215ed98  mov r1,#0x0
+0215ed9c  ldr r0,[r0,#0x4]
+0215eda0  ldr r2,[r0,#0x0]
+0215eda4  ldr r2,[r2,#0xd8]
+0215eda8  blx r2
+0215edac  ldr r0,[r6,#0x0]
+0215edb0  ldr r0,[r0,#0x4]
+0215edb4  bl 0x020282f4
+0215edb8  ldmia sp!,{r3,r4,r5,r6,r7,pc}

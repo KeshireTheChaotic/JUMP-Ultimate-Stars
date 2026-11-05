@@ -1,0 +1,10 @@
+02054888  ldr r3,[r1,#0x4]
+0205488c  cmp r3,#0x0
+02054890  ldrne r2,[r1,#0x0]
+02054894  strne r2,[r3,#0x0]
+02054898  ldr r2,[r1,#0x0]
+0205489c  cmp r2,#0x0
+020548a0  ldreq r0,[r1,#0x4]
+020548a4  ldrne r1,[r1,#0x4]
+020548a8  strne r1,[r2,#0x4]
+020548ac  bx lr

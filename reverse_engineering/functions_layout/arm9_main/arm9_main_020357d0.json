@@ -1,0 +1,1 @@
+{"module":"arm9_main","address":"020357d0","name":"TextureImpInstance","thumb":false,"body_bytes":108,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["02010560","0201ac08"],"unresolved_call_targets":[],"status":"decompiled","asm_file":"arm9_main_020357d0.asm","c_file":"arm9_main_020357d0.c"}

@@ -1,0 +1,11 @@
+0214f30c  push {lr}
+0214f30e  sub sp,#0x4
+0214f310  ldr r1,[0x0214f324]
+0214f312  ldr r1,[r1,#0x0]
+0214f314  cmp r1,#0x0
+0214f316  beq 0x0214f31a
+0214f318  blx r1
+0214f31a  mov r0,#0x0
+0214f31c  add sp,#0x4
+0214f31e  pop {r3}
+0214f320  bx r3

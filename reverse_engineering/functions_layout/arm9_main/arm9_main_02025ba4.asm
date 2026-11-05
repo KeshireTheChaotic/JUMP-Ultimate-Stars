@@ -1,0 +1,10 @@
+02025ba4  stmdb sp!,{r4,lr}
+02025ba8  mov r4,r0
+02025bac  mov r0,#0x8
+02025bb0  bl 0x0201a228
+02025bb4  cmp r0,#0x0
+02025bb8  beq 0x02025bc4
+02025bbc  mov r1,r4
+02025bc0  bl 0x02025b58
+02025bc4  str r0,[r4,#0x18]
+02025bc8  ldmia sp!,{r4,pc}

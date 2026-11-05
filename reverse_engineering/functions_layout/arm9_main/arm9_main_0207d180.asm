@@ -1,0 +1,10 @@
+0207d180  stmdb sp!,{r4,lr}
+0207d184  mov r4,r0
+0207d188  ldr r0,[r4,#0x64]
+0207d18c  cmp r0,#0x0
+0207d190  ldmiaeq sp!,{r4,pc}
+0207d194  bl 0x0207c070
+0207d198  ldr r0,[r4,#0x40]
+0207d19c  bic r0,r0,#0x6
+0207d1a0  str r0,[r4,#0x40]
+0207d1a4  ldmia sp!,{r4,pc}

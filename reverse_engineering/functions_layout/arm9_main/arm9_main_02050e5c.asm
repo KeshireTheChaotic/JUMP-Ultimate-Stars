@@ -1,0 +1,14 @@
+02050e5c  stmdb sp!,{lr}
+02050e60  sub sp,sp,#0x4
+02050e64  mov lr,r1
+02050e68  mvn r12,#0x0
+02050e6c  mov r3,r2
+02050e70  add r1,sp,#0x0
+02050e74  mov r2,lr
+02050e78  str r12,[sp,#0x0]
+02050e7c  bl 0x02050efc
+02050e80  ldr r0,[sp,#0x0]
+02050e84  mvn r0,r0
+02050e88  add sp,sp,#0x4
+02050e8c  ldmia sp!,{lr}
+02050e90  bx lr

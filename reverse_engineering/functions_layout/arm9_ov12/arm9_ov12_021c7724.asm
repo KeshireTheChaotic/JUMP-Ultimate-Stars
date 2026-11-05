@@ -1,0 +1,15 @@
+021c7724  stmdb sp!,{r3,r4,r5,lr}
+021c7728  ldr r1,[0x21c7760]
+021c772c  mov r5,r0
+021c7730  ldr r2,[0x21c7764]
+021c7734  mov r0,#0x78
+021c7738  mov r3,#0xe9
+021c773c  bl 0x0201a21c
+021c7740  movs r4,r0
+021c7744  beq 0x021c7758
+021c7748  mov r1,r5
+021c774c  bl 0x0201539c
+021c7750  ldr r0,[0x21c7768]
+021c7754  str r0,[r4,#0x0]
+021c7758  mov r0,r4
+021c775c  ldmia sp!,{r3,r4,r5,pc}

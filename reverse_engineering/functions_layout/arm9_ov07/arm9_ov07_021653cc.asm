@@ -1,0 +1,12 @@
+021653cc  stmdb sp!,{r3,lr}
+021653d0  cmp r0,#0x0
+021653d4  beq 0x021653e4
+021653d8  cmp r0,#0x1
+021653dc  beq 0x021653f0
+021653e0  cmp r0,#0x2
+021653e4  mov r0,#0x0
+021653e8  bl 0x021653fc
+021653ec  ldmia sp!,{r3,pc}
+021653f0  mov r0,#0x5
+021653f4  bl 0x021653fc
+021653f8  ldmia sp!,{r3,pc}

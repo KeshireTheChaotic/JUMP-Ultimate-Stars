@@ -1,0 +1,34 @@
+0214ea34  stmdb sp!,{r4,lr}
+0214ea38  ldr r2,[r0,#0x4]
+0214ea3c  ldr r1,[0x214eabc]
+0214ea40  ldr r4,[r2,#0x10]
+0214ea44  ldr r0,[r1,#0x8d8]
+0214ea48  tst r0,#0x8
+0214ea4c  ldmiaeq sp!,{r4,pc}
+0214ea50  mov r0,#0x0
+0214ea54  bl 0x02028920
+0214ea58  ldr r2,[r0,#0x0]
+0214ea5c  ldr r0,[r2,#0x74]
+0214ea60  ldr r1,[r2,#0x70]
+0214ea64  add r0,r2,r0, lsl #0x2
+0214ea68  add r1,r2,r1, lsl #0x2
+0214ea6c  ldr r0,[r0,#0x18]
+0214ea70  ldr r1,[r1,#0x18]
+0214ea74  mvn r0,r0
+0214ea78  and r0,r1,r0
+0214ea7c  cmp r0,#0x8000
+0214ea80  beq 0x0214eaa4
+0214ea84  mov r0,#0x0
+0214ea88  bl 0x020208ec
+0214ea8c  ldr r0,[r0,#0x4]
+0214ea90  ldr r1,[r0,#0x0]
+0214ea94  ldr r1,[r1,#0x130]
+0214ea98  blx r1
+0214ea9c  cmp r0,#0x0
+0214eaa0  ldmiaeq sp!,{r4,pc}
+0214eaa4  mov r0,r4
+0214eaa8  mov r1,#0x2
+0214eaac  bl 0x0214ec4c
+0214eab0  mov r0,#0x1
+0214eab4  strb r0,[r4,#0x18]
+0214eab8  ldmia sp!,{r4,pc}

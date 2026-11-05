@@ -1,0 +1,17 @@
+0219c3f8  stmdb sp!,{r3,r4,lr}
+0219c3fc  sub sp,sp,#0xc
+0219c400  mov r4,r2
+0219c404  add r2,sp,#0x0
+0219c408  bl 0x0219c380
+0219c40c  mov r2,#0x0
+0219c410  add r1,sp,#0x0
+0219c414  ldrsb r0,[r1,r2]
+0219c418  add r0,r0,#0x30
+0219c41c  strb r0,[r4,r2]
+0219c420  add r2,r2,#0x1
+0219c424  cmp r2,#0xc
+0219c428  blt 0x0219c414
+0219c42c  mov r0,#0x0
+0219c430  strb r0,[r4,r2]
+0219c434  add sp,sp,#0xc
+0219c438  ldmia sp!,{r3,r4,pc}

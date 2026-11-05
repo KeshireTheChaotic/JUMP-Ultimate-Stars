@@ -1,0 +1,12 @@
+0201d4c4  ldrh r1,[r0,#0x14]
+0201d4c6  cmp r1,#0x1
+0201d4c8  bne 0x0201d4ce
+0201d4ca  ldr r0,[r0,#0xc]
+0201d4cc  bx lr
+0201d4ce  cmp r1,#0x0
+0201d4d0  bne 0x0201d4d8
+0201d4d2  ldr r0,[0x0201d4dc]
+0201d4d4  ldr r0,[r0,#0x34]
+0201d4d6  bx lr
+0201d4d8  add r0,r0,#0x4
+0201d4da  bx lr

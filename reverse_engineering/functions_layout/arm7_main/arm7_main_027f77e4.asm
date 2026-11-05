@@ -1,0 +1,11 @@
+027f77e4  stmdb sp!,{r4,lr}
+027f77e8  mov r4,r0
+027f77ec  mov r0,#0x8000
+027f77f0  bl 0x037fec00
+027f77f4  mov r0,#0x6
+027f77f8  mov r1,#0x20
+027f77fc  mov r2,r4
+027f7800  mov r3,#0x7
+027f7804  bl 0x027f717c
+027f7808  ldmia sp!,{r4,lr}
+027f780c  bx lr

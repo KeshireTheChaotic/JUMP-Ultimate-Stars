@@ -1,0 +1,14 @@
+021c38d8  stmdb sp!,{r3,lr}
+021c38dc  cmp r1,#0x0
+021c38e0  ldr r0,[r0,#0x4]
+021c38e4  bne 0x021c38fc
+021c38e8  ldr r2,[r0,#0x0]
+021c38ec  mov r1,#0x0
+021c38f0  ldr r2,[r2,#0xd4]
+021c38f4  blx r2
+021c38f8  ldmia sp!,{r3,pc}
+021c38fc  ldr r2,[r0,#0x0]
+021c3900  ldr r1,[r1,#0x4]
+021c3904  ldr r2,[r2,#0xd4]
+021c3908  blx r2
+021c390c  ldmia sp!,{r3,pc}

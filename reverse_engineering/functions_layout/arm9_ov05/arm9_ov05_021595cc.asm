@@ -1,0 +1,10 @@
+021595cc  stmdb sp!,{r4,lr}
+021595d0  mov r4,r0
+021595d4  ldr r1,[r4,#0x18]
+021595d8  cmp r1,#0x0
+021595dc  bne 0x021595ec
+021595e0  ldr r1,[r0,#0x0]
+021595e4  ldr r1,[r1,#0x14]
+021595e8  blx r1
+021595ec  ldr r0,[r4,#0x18]
+021595f0  ldmia sp!,{r4,pc}

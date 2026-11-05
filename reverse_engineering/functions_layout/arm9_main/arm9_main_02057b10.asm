@@ -1,0 +1,11 @@
+02057b10  stmdb sp!,{lr}
+02057b14  sub sp,sp,#0x4
+02057b18  bl 0x02058044
+02057b1c  cmp r0,#0x0
+02057b20  movne r0,#0x0
+02057b24  ldreq r0,[0x2057b3c]
+02057b28  ldreq r0,[r0,#0x0]
+02057b2c  ldreq r0,[r0,#0x4]
+02057b30  add sp,sp,#0x4
+02057b34  ldmia sp!,{lr}
+02057b38  bx lr

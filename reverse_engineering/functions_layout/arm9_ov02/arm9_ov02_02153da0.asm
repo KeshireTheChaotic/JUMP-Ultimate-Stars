@@ -1,0 +1,15 @@
+02153da0  stmdb sp!,{r4,lr}
+02153da4  ldr r0,[r0,#0x4]
+02153da8  ldr r4,[r0,#0x10]
+02153dac  blx 0x021b65bc
+02153db0  mov r0,#0x78
+02153db4  mov r1,#0x1
+02153db8  bl 0x0207342c
+02153dbc  ldr r0,[r4,#0x0]
+02153dc0  ldr r1,[0x2153ddc]
+02153dc4  ldr r0,[r0,#0x4]
+02153dc8  bl 0x02028384
+02153dcc  ldr r0,[r4,#0x0]
+02153dd0  ldr r0,[r0,#0x4]
+02153dd4  bl 0x02028330
+02153dd8  ldmia sp!,{r4,pc}

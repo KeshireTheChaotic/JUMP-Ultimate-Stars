@@ -1,0 +1,1 @@
+{"module":"arm9_main","address":"0206d968","name":"jus_Overlay_SelectScene","thumb":false,"body_bytes":124,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["02064968","02064998","0206db88"],"unresolved_call_targets":[],"status":"decompiled","asm_file":"arm9_main_0206d968.asm","c_file":"arm9_main_0206d968.c"}

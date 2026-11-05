@@ -1,0 +1,11 @@
+0203a320  stmdb sp!,{r3,r4,lr}
+0203a324  sub sp,sp,#0x4
+0203a328  ldr r12,[sp,#0x10]
+0203a32c  mov r4,r0
+0203a330  str r12,[sp,#0x0]
+0203a334  bl 0x020171ac
+0203a338  ldr r1,[0x203a34c]
+0203a33c  mov r0,r4
+0203a340  str r1,[r4,#0x0]
+0203a344  add sp,sp,#0x4
+0203a348  ldmia sp!,{r3,r4,pc}

@@ -1,0 +1,9 @@
+02028ebc  stmdb sp!,{r4,lr}
+02028ec0  mov r4,r0
+02028ec4  ldr r1,[r4,#0x8]
+02028ec8  cmp r1,#0x0
+02028ecc  ldmiaeq sp!,{r4,pc}
+02028ed0  bl 0x02028ac8
+02028ed4  ldr r1,[r4,#0x8]
+02028ed8  blx r1
+02028edc  ldmia sp!,{r4,pc}

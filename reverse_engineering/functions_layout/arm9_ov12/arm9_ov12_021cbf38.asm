@@ -1,0 +1,15 @@
+021cbf38  push {r3,lr}
+021cbf3a  cmp r0,#0x0
+021cbf3c  beq 0x021cbf56
+021cbf3e  ldrb r1,[r0,#0x5]
+021cbf40  cmp r1,#0x0
+021cbf42  bne 0x021cbf56
+021cbf44  mov r1,#0x1
+021cbf46  strb r1,[r0,#0x5]
+021cbf48  mov r1,#0x0
+021cbf4a  strb r1,[r0,#0x4]
+021cbf4c  ldr r0,[r0,#0x0]
+021cbf4e  ldr r1,[0x021cbf58]
+021cbf50  ldr r0,[r0,#0x4]
+021cbf52  blx 0x02028384
+021cbf56  pop {r3,pc}

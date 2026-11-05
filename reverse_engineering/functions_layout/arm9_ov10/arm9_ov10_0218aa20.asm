@@ -1,0 +1,12 @@
+0218aa20  push {r4,lr}
+0218aa22  add r4,r0,#0x0
+0218aa24  bl 0x0218b064
+0218aa28  cmp r0,#0x0
+0218aa2a  beq 0x0218aa3c
+0218aa2c  add r0,r4,#0x0
+0218aa2e  bl 0x0218bda4
+0218aa32  cmp r0,#0x0
+0218aa34  beq 0x0218aa3c
+0218aa36  add r0,r4,#0x0
+0218aa38  bl 0x0218bd78
+0218aa3c  pop {r4,pc}

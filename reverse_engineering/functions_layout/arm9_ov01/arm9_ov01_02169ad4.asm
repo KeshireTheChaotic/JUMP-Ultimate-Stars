@@ -1,0 +1,13 @@
+02169ad4  stmdb sp!,{r3,lr}
+02169ad8  ldr r0,[r0,#0x4]
+02169adc  ldr r0,[r0,#0x68]
+02169ae0  ldr r1,[r0,#0x0]
+02169ae4  ldr r1,[r1,#0x68]
+02169ae8  blx r1
+02169aec  cmp r0,#0x0
+02169af0  moveq r0,#0x1
+02169af4  movne r0,#0x0
+02169af8  cmp r0,#0x0
+02169afc  moveq r0,#0x1
+02169b00  movne r0,#0x0
+02169b04  ldmia sp!,{r3,pc}

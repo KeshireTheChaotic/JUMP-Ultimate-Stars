@@ -1,0 +1,56 @@
+02047be4  stmdb sp!,{r3,r4,r5,r6,r7,lr}
+02047be8  sub sp,sp,#0x10
+02047bec  mov r5,r1
+02047bf0  mov r4,r0
+02047bf4  ldr r0,[r5,#0x18]
+02047bf8  cmp r0,#0x0
+02047bfc  beq 0x02047c04
+02047c00  bl 0x020472a0
+02047c04  ldr r2,[r4,#0x9c]
+02047c08  mov r3,#0x0
+02047c0c  b 0x02047cb4
+02047c10  ldr r1,[r4,#0x98]
+02047c14  ldr r0,[r1,r3,lsl #0x2]
+02047c18  cmp r0,r5
+02047c1c  bne 0x02047cb0
+02047c20  add r1,r1,r3, lsl #0x2
+02047c24  add r0,r4,#0x98
+02047c28  str r1,[sp,#0xc]
+02047c2c  str r1,[sp,#0x4]
+02047c30  bl 0x020303d0
+02047c34  mov r0,r5
+02047c38  bl 0x0201a9ec
+02047c3c  cmp r0,#0x0
+02047c40  bne 0x02047c50
+02047c44  mov r0,r5
+02047c48  mov r1,#0x1
+02047c4c  bl 0x0201a958
+02047c50  mov r0,#0x1
+02047c54  strb r0,[r5,#0x15]
+02047c58  ldr r0,[r4,#0xa4]
+02047c5c  subs r0,r0,#0x1
+02047c60  str r0,[r4,#0xa4]
+02047c64  bne 0x02047cbc
+02047c68  mov r7,#0x0
+02047c6c  ldr r6,[0x2047cc4]
+02047c70  ldr r5,[0x2047cc8]
+02047c74  b 0x02047ca0
+02047c78  ldr r1,[r5,#0x53c]
+02047c7c  ldr r0,[r1,r7,lsl #0x2]
+02047c80  cmp r0,r4
+02047c84  bne 0x02047c9c
+02047c88  add r1,r1,r7, lsl #0x2
+02047c8c  mov r0,r6
+02047c90  str r1,[sp,#0x8]
+02047c94  str r1,[sp,#0x0]
+02047c98  bl 0x020303d0
+02047c9c  add r7,r7,#0x1
+02047ca0  ldr r0,[r5,#0x540]
+02047ca4  cmp r7,r0
+02047ca8  bcc 0x02047c78
+02047cac  b 0x02047cbc
+02047cb0  add r3,r3,#0x1
+02047cb4  cmp r3,r2
+02047cb8  bcc 0x02047c10
+02047cbc  add sp,sp,#0x10
+02047cc0  ldmia sp!,{r3,r4,r5,r6,r7,pc}

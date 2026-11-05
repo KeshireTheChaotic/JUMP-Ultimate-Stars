@@ -1,0 +1,15 @@
+020470d8  stmdb sp!,{r3,r4,r5,lr}
+020470dc  mov r5,r0
+020470e0  orr r0,r1,#0x46000000
+020470e4  blx 0x020104b4
+020470e8  mov r4,r0
+020470ec  ldr r0,[r5,#0x64]
+020470f0  ldr r1,[r4,#0x4]
+020470f4  ldr r2,[r0,#0x0]
+020470f8  ldr r2,[r2,#0x5c]
+020470fc  blx r2
+02047100  ldr r0,[r4,#0x4]
+02047104  ldr r1,[r0,#0x0]
+02047108  ldr r1,[r1,#0xc]
+0204710c  blx r1
+02047110  ldmia sp!,{r3,r4,r5,pc}

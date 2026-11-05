@@ -1,0 +1,11 @@
+02017c10  stmdb sp!,{r3,r4,lr}
+02017c14  sub sp,sp,#0x4
+02017c18  ldr r12,[sp,#0x10]
+02017c1c  mov r4,r0
+02017c20  str r12,[sp,#0x0]
+02017c24  bl 0x02017230
+02017c28  ldr r1,[0x2017c3c]
+02017c2c  mov r0,r4
+02017c30  str r1,[r4,#0x0]
+02017c34  add sp,sp,#0x4
+02017c38  ldmia sp!,{r3,r4,pc}

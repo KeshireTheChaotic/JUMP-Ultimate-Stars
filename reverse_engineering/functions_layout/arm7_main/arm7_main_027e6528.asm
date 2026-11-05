@@ -1,0 +1,56 @@
+027e6528  stmdb sp!,{lr}
+027e652c  sub sp,sp,#0x4
+027e6530  ldr r0,[0x27e6608]
+027e6534  ldr r0,[r0,#0x550]
+027e6538  ldr r1,[r0,#0xd0]
+027e653c  mov r1,r1, lsl #0x6
+027e6540  str r1,[r0,#0xd0]
+027e6544  ldr r3,[0x27e660c]
+027e6548  ldrh r2,[r3,#0x0]
+027e654c  ldr r1,[0x27e6610]
+027e6550  ldrh r12,[r1,#0x0]
+027e6554  ldrh r3,[r3,#0x0]
+027e6558  cmp r2,r3
+027e655c  ldrhhi r12,[r1,#0x0]
+027e6560  orr r12,r3,r12, lsl #0x10
+027e6564  ldr r1,[0x27e6614]
+027e6568  ldrh r3,[r1,#0x0]
+027e656c  ldr r2,[0x27e6618]
+027e6570  and r12,r12,r2
+027e6574  ldr r1,[0x27e661c]
+027e6578  sub r3,r1,r3
+027e657c  mov r1,#0x7f
+027e6580  mul r1,r3,r1
+027e6584  add r1,r1,r12, lsl #0x1
+027e6588  and r12,r2,r1, lsr #0x1
+027e658c  ldr r1,[r0,#0xd0]
+027e6590  cmp r1,r12
+027e6594  movhi r1,#0x0
+027e6598  strhi r1,[r0,#0xd8]
+027e659c  bhi 0x027e65fc
+027e65a0  mov lr,#0x1
+027e65a4  add r3,r0,#0xd0
+027e65a8  ldr r1,[0x27e6620]
+027e65ac  b 0x027e65ec
+027e65b0  ldr r2,[r3,#0x0]
+027e65b4  add r2,r2,r1
+027e65b8  str r2,[r3,#0x0]
+027e65bc  ldr r2,[r0,#0xd0]
+027e65c0  cmp r2,r12
+027e65c4  bls 0x027e65e8
+027e65c8  sub r1,r2,r12
+027e65cc  str r1,[r0,#0xd8]
+027e65d0  ldr r2,[r0,#0xd8]
+027e65d4  ldr r1,[0x27e6624]
+027e65d8  cmp r2,r1
+027e65dc  movhi r1,#0x0
+027e65e0  strhi r1,[r0,#0xd8]
+027e65e4  b 0x027e65fc
+027e65e8  add lr,lr,#0x1
+027e65ec  cmp lr,#0x1e
+027e65f0  blt 0x027e65b0
+027e65f4  mov r1,#0x0
+027e65f8  str r1,[r0,#0xd8]
+027e65fc  add sp,sp,#0x4
+027e6600  ldmia sp!,{lr}
+027e6604  bx lr

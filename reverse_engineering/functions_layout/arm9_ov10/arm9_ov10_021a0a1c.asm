@@ -1,0 +1,35 @@
+021a0a1c  stmdb sp!,{r3,r4,r5,r6,r7,r8,r9,lr}
+021a0a20  mov r6,r0
+021a0a24  mov r4,r1
+021a0a28  mov r8,#0x0
+021a0a2c  blx 0x021766fc
+021a0a30  mov r5,r0
+021a0a34  ldr r0,[r6,#0x3c]
+021a0a38  mov r1,r4
+021a0a3c  bl 0x021a1b98
+021a0a40  cmp r0,#0x0
+021a0a44  moveq r0,#0x1
+021a0a48  orreq r8,r8,r0, lsl r5
+021a0a4c  add r7,r6,#0x40
+021a0a50  mov r9,#0x0
+021a0a54  mov r6,#0x1
+021a0a58  mov r5,#0x20c
+021a0a5c  blx 0x021766fc
+021a0a60  cmp r9,r0
+021a0a64  beq 0x021a0a94
+021a0a68  and r0,r9,#0xff
+021a0a6c  blx 0x02176654
+021a0a70  cmp r0,#0x0
+021a0a74  beq 0x021a0a94
+021a0a78  and r0,r9,#0xff
+021a0a7c  bl 0x02199e24
+021a0a80  mla r0,r5,r0,r7
+021a0a84  mov r1,r4
+021a0a88  bl 0x021a1b98
+021a0a8c  cmp r0,#0x0
+021a0a90  orreq r8,r8,r6, lsl r9
+021a0a94  add r9,r9,#0x1
+021a0a98  cmp r9,#0x4
+021a0a9c  blt 0x021a0a5c
+021a0aa0  mov r0,r8
+021a0aa4  ldmia sp!,{r3,r4,r5,r6,r7,r8,r9,pc}

@@ -1,0 +1,16 @@
+020630dc  push {lr}
+020630de  sub sp,#0x4
+020630e0  mov r0,#0x3f
+020630e2  and r1,r0
+020630e4  cmp r1,#0x1
+020630e6  bne 0x020630f4
+020630e8  mov r1,#0x1
+020630ea  ldr r0,[0x02063100]
+020630ec  strh r1,[r0,#0x0]
+020630ee  add sp,#0x4
+020630f0  pop {r3}
+020630f2  bx r3
+020630f4  blx 0x02055684
+020630f8  add sp,#0x4
+020630fa  pop {r3}
+020630fc  bx r3

@@ -1,0 +1,14 @@
+02020d2c  stmdb sp!,{r4,lr}
+02020d30  mov r4,r0
+02020d34  ldr r1,[r4,#0xa8]
+02020d38  cmp r1,#0x0
+02020d3c  beq 0x02020d50
+02020d40  bl 0x02011b38
+02020d44  ldr r1,[r4,#0xa8]
+02020d48  blx r1
+02020d4c  ldmia sp!,{r4,pc}
+02020d50  bl 0x02011b38
+02020d54  ldr r1,[r0,#0x0]
+02020d58  ldr r1,[r1,#0x58]
+02020d5c  blx r1
+02020d60  ldmia sp!,{r4,pc}

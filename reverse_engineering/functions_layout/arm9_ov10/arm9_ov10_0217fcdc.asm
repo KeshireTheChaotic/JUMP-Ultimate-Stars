@@ -1,0 +1,13 @@
+0217fcdc  push {r4,lr}
+0217fcde  sub sp,#0x10
+0217fce0  ldr r4,[sp,#0x18]
+0217fce2  str r4,[sp,#0x0]
+0217fce4  ldr r4,[sp,#0x1c]
+0217fce6  str r4,[sp,#0x4]
+0217fce8  mov r4,#0x80
+0217fcea  str r4,[sp,#0x8]
+0217fcec  ldr r4,[sp,#0x20]
+0217fcee  str r4,[sp,#0xc]
+0217fcf0  bl 0x0217fcf8
+0217fcf4  add sp,#0x10
+0217fcf6  pop {r4,pc}

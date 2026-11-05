@@ -1,0 +1,12 @@
+021a349c  stmdb sp!,{r3,lr}
+021a34a0  ldr r2,[r0,#0x4]
+021a34a4  ldr r1,[0x21a34cc]
+021a34a8  ldr r2,[r2,#0x10]
+021a34ac  ldr r3,[r1,#0x0]
+021a34b0  cmp r3,r2
+021a34b4  moveq r2,#0x0
+021a34b8  streq r2,[r1,#0x0]
+021a34bc  ldr r1,[r0,#0x0]
+021a34c0  ldr r1,[r1,#0x8]
+021a34c4  blx r1
+021a34c8  ldmia sp!,{r3,pc}

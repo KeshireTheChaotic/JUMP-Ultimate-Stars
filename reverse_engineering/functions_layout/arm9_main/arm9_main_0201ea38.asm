@@ -1,0 +1,9 @@
+0201ea38  ldr r2,[r1,#0x0]
+0201ea3c  str r2,[r0,#0x0]
+0201ea40  ldr r2,[r1,#0x4]
+0201ea44  str r2,[r0,#0x4]
+0201ea48  ldr r2,[r1,#0x8]
+0201ea4c  str r2,[r0,#0x8]
+0201ea50  ldr r1,[r1,#0xc]
+0201ea54  str r1,[r0,#0xc]
+0201ea58  bx lr

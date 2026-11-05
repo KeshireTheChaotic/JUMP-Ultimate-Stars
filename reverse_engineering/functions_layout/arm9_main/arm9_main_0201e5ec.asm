@@ -1,0 +1,12 @@
+0201e5ec  stmdb sp!,{r4,lr}
+0201e5f0  mov r4,r0
+0201e5f4  bl 0x0201b988
+0201e5f8  ldr r0,[0x201e61c]
+0201e5fc  mov r1,#0x0
+0201e600  str r0,[r4,#0x0]
+0201e604  str r1,[r4,#0x48]
+0201e608  str r1,[r4,#0x4c]
+0201e60c  strh r1,[r4,#0x50]
+0201e610  mov r0,r4
+0201e614  strh r1,[r4,#0x52]
+0201e618  ldmia sp!,{r4,pc}

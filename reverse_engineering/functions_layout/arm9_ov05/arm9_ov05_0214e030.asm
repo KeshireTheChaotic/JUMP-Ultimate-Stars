@@ -1,0 +1,10 @@
+0214e030  ldrh r2,[r0,#0x0]
+0214e034  mov r0,#0xc
+0214e038  ldr r1,[0x214e058]
+0214e03c  mul r3,r2,r0
+0214e040  ldr r0,[r1,#0x0]
+0214e044  ldr r1,[r0,#0x34]
+0214e048  ldr r0,[r1,r3]
+0214e04c  add r1,r1,r3
+0214e050  add r0,r1,r0
+0214e054  bx lr

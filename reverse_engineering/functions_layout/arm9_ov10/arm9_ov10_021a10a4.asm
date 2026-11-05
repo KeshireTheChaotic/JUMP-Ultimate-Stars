@@ -1,0 +1,44 @@
+021a10a4  stmdb sp!,{r4,lr}
+021a10a8  mov r4,r0
+021a10ac  add r0,r4,#0x34
+021a10b0  add r1,r4,#0x38
+021a10b4  mov r2,#0x4
+021a10b8  bl 0x02051890
+021a10bc  ldrsb r2,[r4,#0x38]
+021a10c0  mov r1,#0x0
+021a10c4  rsb r0,r2,#0x9
+021a10c8  add r0,r0,r0, lsr #0x1f
+021a10cc  add r0,r2,r0, asr #0x1
+021a10d0  strb r0,[r4,#0x34]
+021a10d4  str r1,[r4,#0x30]
+021a10d8  str r1,[r4,#0x18]
+021a10dc  str r1,[r4,#0x14]
+021a10e0  str r1,[r4,#0x1c]
+021a10e4  str r1,[r4,#0x20]
+021a10e8  str r1,[r4,#0x24]
+021a10ec  ldrsb r0,[r4,#0x35]
+021a10f0  str r0,[r4,#0x2c]
+021a10f4  ldrsb r0,[r4,#0x36]
+021a10f8  sub r0,r0,#0x1
+021a10fc  str r0,[r4,#0x8]
+021a1100  blx 0x021766fc
+021a1104  str r0,[r4,#0xc]
+021a1108  mov r2,#0x0
+021a110c  str r2,[r4,#0x10]
+021a1110  strb r2,[r4,#0x7]
+021a1114  add r0,r4,#0x800
+021a1118  strh r2,[r0,#0xd0]
+021a111c  mov r1,r2
+021a1120  add r0,r4,r2, lsl #0x1
+021a1124  add r0,r0,#0x800
+021a1128  add r2,r2,#0x1
+021a112c  strh r1,[r0,#0xc4]
+021a1130  cmp r2,#0x4
+021a1134  blt 0x021a1120
+021a1138  str r1,[r4,#0x8e0]
+021a113c  str r1,[r4,#0x8e4]
+021a1140  str r1,[r4,#0x8d8]
+021a1144  str r1,[r4,#0x8e8]
+021a1148  str r1,[r4,#0x8ec]
+021a114c  str r1,[r4,#0x8dc]
+021a1150  ldmia sp!,{r4,pc}

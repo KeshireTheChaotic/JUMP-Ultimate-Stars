@@ -1,0 +1,32 @@
+02163e60  stmdb sp!,{r4,r5,lr}
+02163e64  sub sp,sp,#0x1c
+02163e68  mov r4,r0
+02163e6c  ldrh r1,[r4,#0x10]
+02163e70  sub r0,r1,#0x1
+02163e74  strh r0,[r4,#0x10]
+02163e78  cmp r1,#0x0
+02163e7c  bne 0x02163ed8
+02163e80  ldr r5,[r4,#0xc]
+02163e84  ldr r0,[r5,#0x0]
+02163e88  bl 0x0215b3e0
+02163e8c  add r3,r5,#0x4
+02163e90  add r1,r3,r0, lsl #0x3
+02163e94  ldr r1,[r1,#0x4]
+02163e98  mov r2,#0x0
+02163e9c  str r1,[sp,#0x0]
+02163ea0  mov r1,#0x6
+02163ea4  stmib sp,{r1,r2}
+02163ea8  str r2,[sp,#0xc]
+02163eac  sub r1,r2,#0x1
+02163eb0  str r1,[sp,#0x10]
+02163eb4  str r2,[sp,#0x14]
+02163eb8  str r2,[sp,#0x18]
+02163ebc  ldr r1,[r4,#0x8]
+02163ec0  ldr r3,[r3,r0,lsl #0x3]
+02163ec4  ldr r0,[r1,#0xc]
+02163ec8  ldr r1,[0x2163ee0]
+02163ecc  bl 0x0216ab58
+02163ed0  mov r0,#0xb4
+02163ed4  strh r0,[r4,#0x10]
+02163ed8  add sp,sp,#0x1c
+02163edc  ldmia sp!,{r4,r5,pc}

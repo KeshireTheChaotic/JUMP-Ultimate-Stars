@@ -1,0 +1,9 @@
+0214fc10  stmdb sp!,{r3,lr}
+0214fc14  mov r0,#0x2
+0214fc18  bl 0x020734e0
+0214fc1c  mov r0,#0x2
+0214fc20  mov r1,#0x0
+0214fc24  bl 0x0207361c
+0214fc28  mov r0,#0x7c
+0214fc2c  bl 0x02073744
+0214fc30  ldmia sp!,{r3,pc}

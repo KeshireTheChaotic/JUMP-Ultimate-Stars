@@ -1,0 +1,11 @@
+021501bc  push {lr}
+021501be  sub sp,#0xc
+021501c0  add r0,sp,#0x0
+021501c2  bl 0x021501f0
+021501c6  add r0,sp,#0x0
+021501c8  ldr r1,[0x021501d4]
+021501ca  ldr r1,[r1,#0x0]
+021501cc  blx r1
+021501ce  add sp,#0xc
+021501d0  pop {r3}
+021501d2  bx r3

@@ -1,0 +1,21 @@
+0215a55c  stmdb sp!,{r3,r4,r5,lr}
+0215a560  mov r5,r0
+0215a564  ldr r0,[r5,#0x4]
+0215a568  cmp r0,#0x0
+0215a56c  beq 0x0215a57c
+0215a570  ldr r1,[r0,#0x0]
+0215a574  ldr r1,[r1,#0xc]
+0215a578  blx r1
+0215a57c  mov r4,#0x0
+0215a580  b 0x0215a59c
+0215a584  add r0,r5,r4, lsl #0x2
+0215a588  ldr r0,[r0,#0x8]
+0215a58c  cmp r0,#0x0
+0215a590  beq 0x0215a598
+0215a594  bl 0x0206ae98
+0215a598  add r4,r4,#0x1
+0215a59c  cmp r4,#0x2
+0215a5a0  bcc 0x0215a584
+0215a5a4  mov r0,r5
+0215a5a8  bl 0x0201b244
+0215a5ac  ldmia sp!,{r3,r4,r5,pc}

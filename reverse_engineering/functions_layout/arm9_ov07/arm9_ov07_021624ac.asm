@@ -1,0 +1,15 @@
+021624ac  stmdb sp!,{r4,lr}
+021624b0  mov r4,r1
+021624b4  mov r0,r4
+021624b8  ldr r1,[r0,#0x0]
+021624bc  ldr r1,[r1,#0x8]
+021624c0  blx r1
+021624c4  mov r0,r4
+021624c8  ldr r1,[r0,#0x0]
+021624cc  ldr r1,[r1,#0x8]
+021624d0  blx r1
+021624d4  mov r0,r4
+021624d8  ldr r1,[r0,#0x0]
+021624dc  ldr r1,[r1,#0x0]
+021624e0  blx r1
+021624e4  ldmia sp!,{r4,pc}

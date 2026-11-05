@@ -1,0 +1,1 @@
+{"module":"arm9_main","address":"020177fc","name":"jus_TagPAL4","thumb":false,"body_bytes":144,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["0201701c","02017174","02017894","020178bc"],"unresolved_call_targets":[],"status":"decompiled","asm_file":"arm9_main_020177fc.asm","c_file":"arm9_main_020177fc.c"}

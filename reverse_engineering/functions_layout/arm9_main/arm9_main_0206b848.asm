@@ -1,0 +1,26 @@
+0206b848  stmdb sp!,{r3,r4,r5,r6,r7,lr}
+0206b84c  mov r5,r0
+0206b850  mov r4,#0x0
+0206b854  add r7,sp,#0x0
+0206b858  mov r6,#0x1
+0206b85c  b 0x0206b8a0
+0206b860  ldr r1,[r5,#0x8]
+0206b864  mov r0,r4, lsl #0x1
+0206b868  ldrh r0,[r1,r0]
+0206b86c  ldrh r1,[r5,#0x16]
+0206b870  ldrb r2,[r5,#0x11]
+0206b874  ldrb r3,[r5,#0x18]
+0206b878  bl 0x0206b8b0
+0206b87c  strh r0,[sp,#0x0]
+0206b880  ldr r0,[r5,#0x4]
+0206b884  ldrh r2,[r5,#0xe]
+0206b888  ldr r0,[r0,#0x4]
+0206b88c  mov r1,r7
+0206b890  mov r3,r6
+0206b894  add r2,r2,r4
+0206b898  bl 0x02029c68
+0206b89c  add r4,r4,#0x1
+0206b8a0  ldrb r0,[r5,#0x10]
+0206b8a4  cmp r4,r0
+0206b8a8  blt 0x0206b860
+0206b8ac  ldmia sp!,{r3,r4,r5,r6,r7,pc}

@@ -1,0 +1,17 @@
+
+/* JUS-CLASS jus_Class_020940d0::vfunc_07 [class-virtual] slot 7 of vtable 020940d0 (own slot, not
+   inherited) */
+
+undefined4 jus_Class_020940d0::vfunc_07(undefined4 param_1)
+
+{
+  int iVar1;
+  
+  jus_Class_02094118::jus_Class_02094118();
+  iVar1 = FUN_0201a9ec(param_1);
+  if (iVar1 == 0) {
+    FUN_0201a958(param_1,1);
+  }
+  return param_1;
+}
+

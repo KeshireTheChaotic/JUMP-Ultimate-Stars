@@ -1,0 +1,15 @@
+02176d14  stmdb sp!,{r3,lr}
+02176d18  cmp r0,#0x0
+02176d1c  ldmiaeq sp!,{r3,pc}
+02176d20  add r1,r0,#0x100
+02176d24  mov r2,#0x0
+02176d28  strh r2,[r1,#0x88]
+02176d2c  strb r2,[r0,#0x18b]
+02176d30  ldr r0,[r0,#0x10]
+02176d34  bl 0x02175628
+02176d38  bl 0x02175628
+02176d3c  bl 0x02175628
+02176d40  bl 0x02176d50
+02176d44  mov r1,#0x0
+02176d48  str r1,[r0,#0xe4]
+02176d4c  ldmia sp!,{r3,pc}

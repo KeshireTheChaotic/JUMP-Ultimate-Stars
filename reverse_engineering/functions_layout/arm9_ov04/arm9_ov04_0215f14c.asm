@@ -1,0 +1,17 @@
+0215f14c  stmdb sp!,{r3,r4,r5,lr}
+0215f150  mov r5,r0
+0215f154  ldr r0,[r5,#0x4]
+0215f158  ldr r4,[r0,#0x10]
+0215f15c  bl 0x02086c08
+0215f160  cmp r0,#0x0
+0215f164  ldmiaeq sp!,{r3,r4,r5,pc}
+0215f168  bl 0x0219b730
+0215f16c  cmp r0,#0x0
+0215f170  ldmiane sp!,{r3,r4,r5,pc}
+0215f174  ldr r0,[r4,#0x0]
+0215f178  ldr r0,[r0,#0x4]
+0215f17c  bl 0x02031520
+0215f180  ldr r0,[r5,#0x4]
+0215f184  ldr r1,[0x215f190]
+0215f188  bl 0x02028384
+0215f18c  ldmia sp!,{r3,r4,r5,pc}

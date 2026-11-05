@@ -1,0 +1,14 @@
+021c622c  stmdb sp!,{r4,lr}
+021c6230  ldr r0,[r0,#0x4]
+021c6234  ldr r1,[r0,#0x0]
+021c6238  ldr r1,[r1,#0xb8]
+021c623c  blx r1
+021c6240  mov r4,r0
+021c6244  ldr r1,[r4,#0x24]
+021c6248  cmp r1,#0x0
+021c624c  bne 0x021c625c
+021c6250  ldr r1,[r0,#0x0]
+021c6254  ldr r1,[r1,#0x0]
+021c6258  blx r1
+021c625c  ldr r0,[r4,#0x24]
+021c6260  ldmia sp!,{r4,pc}

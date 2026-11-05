@@ -1,0 +1,14 @@
+0217f120  push {r4,r5,lr}
+0217f122  sub sp,#0x4
+0217f124  add r5,r0,#0x0
+0217f126  add r4,r1,#0x0
+0217f128  add r0,#0x8
+0217f12a  bl 0x0217f638
+0217f12e  cmp r0,#0x0
+0217f130  bne 0x0217f13c
+0217f132  add r5,#0x14
+0217f134  add r0,r5,#0x0
+0217f136  add r1,r4,#0x0
+0217f138  bl 0x0217f638
+0217f13c  add sp,#0x4
+0217f13e  pop {r4,r5,pc}

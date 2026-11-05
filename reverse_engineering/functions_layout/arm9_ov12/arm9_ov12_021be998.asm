@@ -1,0 +1,11 @@
+021be998  push {r4,lr}
+021be99a  ldr r3,[0x021be9b0]
+021be99c  ldr r4,[r3,#0x0]
+021be99e  ldr r3,[0x021be9b4]
+021be9a0  ldr r3,[r4,r3]
+021be9a2  cmp r3,#0x0
+021be9a4  beq 0x021be9a8
+021be9a6  blx r3
+021be9a8  pop {r4}
+021be9aa  pop {r3}
+021be9ac  bx r3

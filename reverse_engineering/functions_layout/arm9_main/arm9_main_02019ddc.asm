@@ -1,0 +1,9 @@
+02019ddc  stmdb sp!,{r3,lr}
+02019de0  ldr r1,[r0,#0x18]
+02019de4  cmp r1,#0x0
+02019de8  bne 0x02019df8
+02019dec  ldr r0,[r0,#0xc]
+02019df0  bl 0x02036430
+02019df4  mov r1,r0
+02019df8  mov r0,r1
+02019dfc  ldmia sp!,{r3,pc}

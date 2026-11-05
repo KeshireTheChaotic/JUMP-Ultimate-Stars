@@ -1,0 +1,38 @@
+03802318  stmdb sp!,{r4,r5,r6,r7,r8,r9,r10,lr}
+0380231c  mov r8,r0
+03802320  mov r5,#0x0
+03802324  mov r6,r5
+03802328  mov r10,#0x1
+0380232c  ldr r4,[0x38023b0]
+03802330  mov r9,#0x24
+03802334  mul r0,r6,r9
+03802338  add r7,r4,r0
+0380233c  ldrb r1,[r4,r0]
+03802340  mov r0,r1, lsl #0x1f
+03802344  movs r0,r0, lsr #0x1f
+03802348  beq 0x0380238c
+0380234c  mov r0,r1, lsl #0x1e
+03802350  movs r0,r0, lsr #0x1f
+03802354  beq 0x0380237c
+03802358  cmp r8,#0x0
+0380235c  beq 0x03802374
+03802360  mov r0,r1, lsl #0x1d
+03802364  movs r0,r0, lsr #0x1f
+03802368  bne 0x03802374
+0380236c  mov r0,r7
+03802370  bl 0x0380179c
+03802374  mov r0,r7
+03802378  bl 0x038014b0
+0380237c  ldrb r0,[r7,#0x0]
+03802380  mov r0,r0, lsl #0x1f
+03802384  movs r0,r0, lsr #0x1f
+03802388  orrne r5,r5,r10, lsl r6
+0380238c  add r6,r6,#0x1
+03802390  cmp r6,#0x10
+03802394  blt 0x03802334
+03802398  ldr r0,[0x38023b4]
+0380239c  ldr r0,[r0,#0x0]
+038023a0  cmp r0,#0x0
+038023a4  strne r5,[r0,#0x4]
+038023a8  ldmia sp!,{r4,r5,r6,r7,r8,r9,r10,lr}
+038023ac  bx lr

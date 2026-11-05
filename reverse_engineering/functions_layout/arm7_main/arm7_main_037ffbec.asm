@@ -1,0 +1,33 @@
+037ffbec  stmdb sp!,{r4,r5,r6,r7,r8,r9,lr}
+037ffbf0  sub sp,sp,#0x4
+037ffbf4  mov r7,r0
+037ffbf8  mov r6,r1
+037ffbfc  mov r5,#0x0
+037ffc00  mov r9,r5
+037ffc04  ldr r4,[0x37ffc70]
+037ffc08  mov r8,#0x54
+037ffc0c  mla r2,r5,r8,r4
+037ffc10  ldrb r1,[r2,#0x3]
+037ffc14  mov r0,r1, lsl #0x1f
+037ffc18  movs r0,r0, lsr #0x1f
+037ffc1c  beq 0x037ffc54
+037ffc20  ldrb r0,[r2,#0x1]
+037ffc24  cmp r0,#0x0
+037ffc28  bne 0x037ffc54
+037ffc2c  ldr r0,[r2,#0x44]
+037ffc30  cmp r7,r0
+037ffc34  bhi 0x037ffc54
+037ffc38  cmp r0,r6
+037ffc3c  bhi 0x037ffc54
+037ffc40  bic r0,r1,#0x2
+037ffc44  strb r0,[r2,#0x3]
+037ffc48  mov r0,r5
+037ffc4c  mov r1,r9
+037ffc50  bl 0x037ff104
+037ffc54  add r0,r5,#0x1
+037ffc58  and r5,r0,#0xff
+037ffc5c  cmp r5,#0x10
+037ffc60  bcc 0x037ffc0c
+037ffc64  add sp,sp,#0x4
+037ffc68  ldmia sp!,{r4,r5,r6,r7,r8,r9,lr}
+037ffc6c  bx lr

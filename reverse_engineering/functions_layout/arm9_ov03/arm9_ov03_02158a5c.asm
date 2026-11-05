@@ -1,0 +1,10 @@
+02158a5c  stmdb sp!,{r3,lr}
+02158a60  ldr r1,[r0,#0x4]
+02158a64  ldr r0,[r1,#0x10]
+02158a68  ldr r1,[r1,#0x124]
+02158a6c  ldr r0,[r0,#0x30]
+02158a70  ldr r0,[r0,#0x4]
+02158a74  ldr r2,[r0,#0x0]
+02158a78  ldr r2,[r2,#0x198]
+02158a7c  blx r2
+02158a80  ldmia sp!,{r3,pc}

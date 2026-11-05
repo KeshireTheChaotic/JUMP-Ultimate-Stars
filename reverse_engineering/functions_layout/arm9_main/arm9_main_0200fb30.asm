@@ -1,0 +1,14 @@
+0200fb30  push {r4,lr}
+0200fb32  add r4,r0,#0x0
+0200fb34  ldr r0,[0x0200fb50]
+0200fb36  str r0,[r4,#0x0]
+0200fb38  ldr r0,[r4,#0x2c]
+0200fb3a  cmp r0,#0x0
+0200fb3c  beq 0x0200fb44
+0200fb3e  ldr r1,[r0,#0x0]
+0200fb40  ldr r1,[r1,#0xc]
+0200fb42  blx r1
+0200fb44  add r0,r4,#0x0
+0200fb46  bl 0x02010608
+0200fb4a  add r0,r4,#0x0
+0200fb4c  pop {r4,pc}

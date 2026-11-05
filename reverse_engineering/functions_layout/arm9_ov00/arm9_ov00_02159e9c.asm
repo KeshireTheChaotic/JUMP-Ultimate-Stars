@@ -1,0 +1,13 @@
+02159e9c  stmdb sp!,{r3,r4,r5,lr}
+02159ea0  mov r5,r0
+02159ea4  ldr r0,[r5,#0x4]
+02159ea8  mov r1,#0x0
+02159eac  ldr r2,[r0,#0x0]
+02159eb0  ldr r4,[r0,#0x10]
+02159eb4  ldr r2,[r2,#0xd8]
+02159eb8  blx r2
+02159ebc  ldr r0,[r5,#0x4]
+02159ec0  blx 0x021b65d8
+02159ec4  ldr r0,[r4,#0x0]
+02159ec8  bl 0x02158820
+02159ecc  ldmia sp!,{r3,r4,r5,pc}

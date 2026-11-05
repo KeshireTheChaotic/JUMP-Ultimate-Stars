@@ -1,0 +1,1 @@
+{"module":"arm7_main","address":"037fdc68","name":"FUN_037fdc68","thumb":false,"body_bytes":72,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["037fbc10","037fd690"],"unresolved_call_targets":[],"status":"decompiled","asm_file":"arm7_main_037fdc68.asm","c_file":"arm7_main_037fdc68.c"}

@@ -1,0 +1,9 @@
+02078328  add r2,r0,#0x500
+0207832c  ldrsb r3,[r2,#0xcd]
+02078330  ldrsb r2,[r2,#0xcc]
+02078334  add r1,r3,r1
+02078338  cmp r1,r2
+0207833c  movgt r0,#0x0
+02078340  strble r1,[r0,#0x5cd]
+02078344  movle r0,#0x1
+02078348  bx lr

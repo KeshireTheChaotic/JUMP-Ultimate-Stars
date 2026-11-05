@@ -1,0 +1,12 @@
+0214dcb0  stmdb sp!,{r4,r5,r6,r7,r8,lr}
+0214dcb4  sub sp,sp,#0x18
+0214dcb8  ldr r1,[0x214e11c]
+0214dcbc  ldr r2,[0x214e120]
+0214dcc0  mov r0,#0x34
+0214dcc4  mov r3,#0x44
+0214dcc8  bl 0x0201a21c
+0214dccc  mov r7,r0
+0214dcd0  mov r1,#0x0
+0214dcd4  mov r2,#0x34
+0214dcd8  bl 0x020517fc
+0214dcdc  bl 0x02026f94

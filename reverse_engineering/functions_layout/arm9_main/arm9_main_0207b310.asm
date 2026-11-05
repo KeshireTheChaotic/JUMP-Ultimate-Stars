@@ -1,0 +1,11 @@
+0207b310  stmdb sp!,{r3,r4,r5,lr}
+0207b314  mov r5,r1
+0207b318  ldr r4,[r0,#0x8]
+0207b31c  b 0x0207b330
+0207b320  mov r0,r4
+0207b324  mov r1,r5
+0207b328  bl 0x0207b2d0
+0207b32c  ldr r4,[r4,#0x0]
+0207b330  cmp r4,#0x0
+0207b334  bne 0x0207b320
+0207b338  ldmia sp!,{r3,r4,r5,pc}

@@ -1,0 +1,1 @@
+{"module":"arm9_ov10","address":"021941e8","name":"FUN_021941e8","thumb":true,"body_bytes":110,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["02194258","02194580","02194684","02194950","0219520c"],"unresolved_call_targets":[],"status":"decompiled","asm_file":"arm9_ov10_021941e8.asm","c_file":"arm9_ov10_021941e8.c"}

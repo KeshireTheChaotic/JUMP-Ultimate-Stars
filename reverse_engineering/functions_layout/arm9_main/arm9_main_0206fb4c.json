@@ -1,0 +1,1 @@
+{"module":"arm9_main","address":"0206fb4c","name":"jus_Scene29_Create","thumb":false,"body_bytes":40,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["0207062c"],"unresolved_call_targets":["02166994"],"status":"decompiled","asm_file":"arm9_main_0206fb4c.asm","c_file":"arm9_main_0206fb4c.c"}

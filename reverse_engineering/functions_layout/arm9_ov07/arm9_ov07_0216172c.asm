@@ -1,0 +1,33 @@
+0216172c  stmdb sp!,{r4,r5,r6,lr}
+02161730  mov r6,r0
+02161734  ldr r0,[r6,#0x20]
+02161738  ldr r0,[r0,#0xc]
+0216173c  ldr r5,[r0,#0x24]
+02161740  ldr r1,[r5,#0x41c]
+02161744  ldr r0,[r5,#0x424]
+02161748  cmp r1,r0
+0216174c  ldrge r0,[0x21617b0]
+02161750  ldmiage sp!,{r4,r5,r6,pc}
+02161754  ldr r4,[r5,#0x414]
+02161758  ldr r0,[r5,#0x424]
+0216175c  add r4,r4,#0x1
+02161760  cmp r4,r0
+02161764  bge 0x02161778
+02161768  ldr r0,[r5,#0x41c]
+0216176c  add r0,r0,#0x20
+02161770  cmp r4,r0
+02161774  blt 0x0216177c
+02161778  ldr r4,[r5,#0x41c]
+0216177c  mov r0,r6
+02161780  mov r1,r4
+02161784  bl 0x021617b4
+02161788  cmp r0,#0x0
+0216178c  moveq r0,r4, lsl #0x10
+02161790  streq r4,[r5,#0x414]
+02161794  moveq r0,r0, lsr #0x10
+02161798  ldmiaeq sp!,{r4,r5,r6,pc}
+0216179c  ldr r0,[r5,#0x414]
+021617a0  cmp r4,r0
+021617a4  bne 0x02161758
+021617a8  ldr r0,[0x21617b0]
+021617ac  ldmia sp!,{r4,r5,r6,pc}

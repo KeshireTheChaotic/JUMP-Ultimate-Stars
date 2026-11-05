@@ -1,0 +1,16 @@
+027f797c  mov r12,#0x4000000
+027f7980  add r12,r12,#0x138
+027f7984  ldrh r0,[r12,#0x0]
+027f7988  bic r0,r0,#0x77
+027f798c  orr r0,r0,#0x72
+027f7990  strh r0,[r12,#0x0]
+027f7994  mov r3,#0x2
+027f7998  subs r3,r3,#0x1
+027f799c  bne 0x027f7998
+027f79a0  bic r0,r0,#0x4
+027f79a4  orr r0,r0,#0x4
+027f79a8  strh r0,[r12,#0x0]
+027f79ac  mov r3,#0x2
+027f79b0  subs r3,r3,#0x1
+027f79b4  bne 0x027f79b0
+027f79b8  bx lr

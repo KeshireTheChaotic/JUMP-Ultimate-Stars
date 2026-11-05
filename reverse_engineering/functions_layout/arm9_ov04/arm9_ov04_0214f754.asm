@@ -1,0 +1,10 @@
+0214f754  mov r3,#0x0
+0214f758  ldr r0,[0x214f77c]
+0214f75c  mov r2,r3
+0214f760  ldr r1,[r0,#0x0]
+0214f764  add r1,r1,r3
+0214f768  add r3,r3,#0x1
+0214f76c  strb r2,[r1,#0x16]
+0214f770  cmp r3,#0x4
+0214f774  blt 0x0214f760
+0214f778  bx lr

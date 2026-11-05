@@ -1,0 +1,12 @@
+0200f6e0  push {r4,lr}
+0200f6e2  add r4,r0,#0x0
+0200f6e4  bl 0x02010608
+0200f6e8  add r0,r4,#0x0
+0200f6ea  blx 0x0201a9ec
+0200f6ee  cmp r0,#0x0
+0200f6f0  bne 0x0200f6fa
+0200f6f2  add r0,r4,#0x0
+0200f6f4  mov r1,#0x1
+0200f6f6  blx 0x0201a958
+0200f6fa  add r0,r4,#0x0
+0200f6fc  pop {r4,pc}

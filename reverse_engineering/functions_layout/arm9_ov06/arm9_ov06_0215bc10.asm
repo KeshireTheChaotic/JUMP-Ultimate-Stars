@@ -1,0 +1,13 @@
+0215bc10  stmdb sp!,{r3,lr}
+0215bc14  ldr r0,[r0,#0x174]
+0215bc18  ldr r0,[r0,#0x0]
+0215bc1c  ldr r0,[r0,#0xc]
+0215bc20  ldr r0,[r0,#0x4]
+0215bc24  ldr r0,[r0,#0x68]
+0215bc28  ldr r1,[r0,#0x0]
+0215bc2c  ldr r1,[r1,#0x68]
+0215bc30  blx r1
+0215bc34  cmp r0,#0x0
+0215bc38  moveq r0,#0x1
+0215bc3c  movne r0,#0x0
+0215bc40  ldmia sp!,{r3,pc}

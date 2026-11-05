@@ -1,0 +1,21 @@
+02164db0  stmdb sp!,{r4,r5,r6,lr}
+02164db4  ldr r6,[r0,#0x4]
+02164db8  mov r1,#0x3
+02164dbc  ldr r5,[r6,#0x124]
+02164dc0  mov r0,r5
+02164dc4  bl 0x0200d338
+02164dc8  mov r4,r0
+02164dcc  mov r0,r5
+02164dd0  mov r1,#0x3
+02164dd4  bl 0x0200d338
+02164dd8  ldr r2,[r6,#0x10]
+02164ddc  mov r0,#0xc
+02164de0  mla r0,r4,r0,r2
+02164de4  add r0,r0,r1, lsl #0x2
+02164de8  ldr r0,[r0,#0x2c]
+02164dec  mov r1,#0x0
+02164df0  ldr r0,[r0,#0x4]
+02164df4  ldr r2,[r0,#0x0]
+02164df8  ldr r2,[r2,#0xd8]
+02164dfc  blx r2
+02164e00  ldmia sp!,{r4,r5,r6,pc}

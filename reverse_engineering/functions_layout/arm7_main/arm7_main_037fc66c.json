@@ -1,0 +1,1 @@
+{"module":"arm7_main","address":"037fc66c","name":"FUN_037fc66c","thumb":false,"body_bytes":260,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["037fc100","037fc8cc","037fca70","037fca88","037fe3a4","037fe3b8","037fe67c"],"unresolved_call_targets":[],"status":"decompiled","asm_file":"arm7_main_037fc66c.asm","c_file":"arm7_main_037fc66c.c"}

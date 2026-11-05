@@ -1,0 +1,14 @@
+021568b4  stmdb sp!,{r3,lr}
+021568b8  cmp r0,#0x0
+021568bc  ldmiaeq sp!,{r3,pc}
+021568c0  mov r2,#0x1
+021568c4  add r1,r1,#0x1
+021568c8  strb r2,[r0,#0x14]
+021568cc  strb r1,[r0,#0x15]
+021568d0  mov r1,#0x0
+021568d4  strb r1,[r0,#0x16]
+021568d8  ldr r0,[r0,#0x0]
+021568dc  ldr r1,[0x21568ec]
+021568e0  ldr r0,[r0,#0x4]
+021568e4  bl 0x02028384
+021568e8  ldmia sp!,{r3,pc}

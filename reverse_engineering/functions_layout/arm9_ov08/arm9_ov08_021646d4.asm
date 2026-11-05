@@ -1,0 +1,13 @@
+021646d4  push {lr}
+021646d6  sub sp,#0x4
+021646d8  ldrh r0,[r0,#0x2]
+021646da  cmp r0,#0x0
+021646dc  beq 0x021646e8
+021646de  mov r0,#0xa
+021646e0  bl 0x02164cb8
+021646e4  add sp,#0x4
+021646e6  pop {pc}
+021646e8  mov r0,#0x0
+021646ea  bl 0x02164cb8
+021646ee  add sp,#0x4
+021646f0  pop {pc}

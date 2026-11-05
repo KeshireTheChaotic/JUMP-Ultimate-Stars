@@ -1,0 +1,35 @@
+
+void FUN_0218c668(int param_1,int param_2,undefined4 param_3)
+
+{
+  char cVar1;
+  undefined4 uVar2;
+  
+  if (*(char *)(param_2 + 0x13) == '\0') {
+    FUN_0218c6e0(param_1,param_3);
+  }
+  if (*(int *)(param_1 + 0x10) < 2) {
+    cVar1 = *(char *)(param_2 + 0x13);
+    if (cVar1 != '\0') {
+      uVar2 = 3;
+      if (cVar1 == '\x01') {
+        uVar2 = 1;
+      }
+      else if (cVar1 == '\x02') {
+        uVar2 = 2;
+      }
+      (**(code **)(param_1 + 0x38))(uVar2,0xffffffff,0,*(undefined4 *)(param_1 + 0x3c));
+      FUN_0218c8bc(*(undefined4 *)(param_1 + 8));
+      return;
+    }
+    *(undefined4 *)(param_1 + 0x2c) = *(undefined4 *)(param_2 + 0xc);
+    *(ushort *)(param_1 + 0x30) =
+         *(ushort *)(param_2 + 0x10) >> 8 | *(ushort *)(param_2 + 0x10) << 8;
+    *(undefined4 *)(param_1 + 0x20) = 0;
+    *(undefined4 *)(param_1 + 0x10) = 2;
+    (**(code **)(param_1 + 0x34))(*(undefined4 *)(param_1 + 0x10),*(undefined4 *)(param_1 + 0x3c));
+    FUN_0218ca28(param_1);
+  }
+  return;
+}
+

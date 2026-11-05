@@ -1,0 +1,21 @@
+02025a40  stmdb sp!,{r4,lr}
+02025a44  ldr r12,[r0,#0x8]
+02025a48  mov r0,#0x0
+02025a4c  mov r3,r0
+02025a50  b 0x02025a80
+02025a54  mov lr,r3
+02025a58  b 0x02025a74
+02025a5c  add r2,r12,lr, lsl #0x2
+02025a60  ldr r2,[r2,#0xc]
+02025a64  cmp r2,r1
+02025a68  ldmiaeq sp!,{r4,pc}
+02025a6c  add r0,r0,#0x1
+02025a70  add lr,lr,#0x1
+02025a74  cmp lr,r4
+02025a78  bcc 0x02025a5c
+02025a7c  ldr r12,[r12,#0x0]
+02025a80  ldr r4,[r12,#0x8]
+02025a84  cmp r4,#0x0
+02025a88  bne 0x02025a54
+02025a8c  mvn r0,#0x0
+02025a90  ldmia sp!,{r4,pc}

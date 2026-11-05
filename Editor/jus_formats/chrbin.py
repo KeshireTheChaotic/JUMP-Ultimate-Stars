@@ -1,0 +1,63 @@
+"""Character gameplay tables from ChrBin.aar (``chr/<kind>/<character>.bin``).
+
+Only record strides are established; field meanings are not.  Tables are
+exposed as fixed-size records of little-endian words and always rebuild to
+the stored bytes.
+
+* ``chr/col``    20-byte records; ALMT ``CollisionType`` values 0x100+n select
+                 record n.
+* ``chr/shot``   32-byte records; the u32 at +0x0C often equals an ALMT move id.
+* ``chr/effect`` 8-byte records; the u32 at +0x00 often equals an ALMT move id.
+* ``chr/ai``     DSCP-wrapped; payload begins with ``AIPM``/``AIMV`` (opaque).
+"""
+from __future__ import annotations
+
+from dataclasses import dataclass
+
+from .binary import u16, u32
+
+STRIDES = {'col': 20, 'shot': 32, 'effect': 8}
+
+
+@dataclass
+class RecordTable:
+    kind: str
+    stride: int
+    raw: bytes
+
+    @property
+    def count(self) -> int:
+        return len(self.raw) // self.stride if self.stride else 0
+
+    def record(self, i: int) -> bytes:
+        if not 0 <= i < self.count:
+            raise IndexError(i)
+        return self.raw[i * self.stride:(i + 1) * self.stride]
+
+    def words16(self, i: int) -> tuple[int, ...]:
+        r = self.record(i)
+        return tuple(u16(r, k) for k in range(0, len(r) - 1, 2))
+
+    def words32(self, i: int) -> tuple[int, ...]:
+        r = self.record(i)
+        return tuple(u32(r, k) for k in range(0, len(r) - 3, 4))
+
+    def build(self) -> bytes:
+        return self.raw
+
+
+def kind_of(member_name: str) -> str:
+    parts = member_name.replace('\\', '/').split('/')
+    return parts[-2] if len(parts) >= 2 else ''
+
+
+def parse(blob: bytes, member_name: str) -> RecordTable:
+    kind = kind_of(member_name)
+    stride = STRIDES.get(kind, 0)
+    if stride and len(blob) % stride:
+        stride = 0
+    return RecordTable(kind, stride, bytes(blob))
+
+
+def signature(blob: bytes) -> str:
+    return blob[:4].decode('ascii') if blob[:4] in (b'AIPM', b'AIMV') else 'opaque-binary'

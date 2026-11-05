@@ -1,0 +1,14 @@
+02002494  lsl r1,r1,#0x18
+02002496  lsr r3,r1,#0x18
+02002498  cmp r2,#0x0
+0200249a  beq 0x020024ac
+0200249c  ldrb r1,[r0,#0x0]
+0200249e  add r0,r0,#0x1
+020024a0  cmp r1,r3
+020024a2  bne 0x020024a8
+020024a4  sub r0,r0,#0x1
+020024a6  bx lr
+020024a8  sub r2,r2,#0x1
+020024aa  bne 0x0200249c
+020024ac  mov r0,#0x0
+020024ae  bx lr

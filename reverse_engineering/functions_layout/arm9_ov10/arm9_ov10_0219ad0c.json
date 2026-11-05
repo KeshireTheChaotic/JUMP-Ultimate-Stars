@@ -1,0 +1,1 @@
+{"module":"arm9_ov10","address":"0219ad0c","name":"thunk_FUN_02199db4","thumb":false,"body_bytes":8,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":[],"unresolved_call_targets":[],"status":"decompiled","asm_file":"arm9_ov10_0219ad0c.asm","c_file":"arm9_ov10_0219ad0c.c"}

@@ -1,0 +1,12 @@
+02150d6c  stmdb sp!,{r4,lr}
+02150d70  movs r4,r0
+02150d74  ldmiaeq sp!,{r4,pc}
+02150d78  ldr r0,[r4,#0x0]
+02150d7c  cmp r0,#0x0
+02150d80  beq 0x02150d90
+02150d84  ldr r1,[r0,#0x0]
+02150d88  ldr r1,[r1,#0x8]
+02150d8c  blx r1
+02150d90  mov r0,r4
+02150d94  bl 0x0201b244
+02150d98  ldmia sp!,{r4,pc}

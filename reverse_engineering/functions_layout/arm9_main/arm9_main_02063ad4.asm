@@ -1,0 +1,13 @@
+02063ad4  ldr r3,[r0,#0xc]
+02063ad6  mov r2,#0x4
+02063ad8  orr r3,r2
+02063ada  str r3,[r0,#0xc]
+02063adc  ldr r2,[r0,#0x8]
+02063ade  str r2,[r0,#0x30]
+02063ae0  mov r2,#0x0
+02063ae2  str r2,[r0,#0x38]
+02063ae4  strh r2,[r0,#0x36]
+02063ae6  strh r1,[r0,#0x34]
+02063ae8  mov r1,#0x2
+02063aea  ldr r3,[0x02063af0]
+02063aec  bx r3

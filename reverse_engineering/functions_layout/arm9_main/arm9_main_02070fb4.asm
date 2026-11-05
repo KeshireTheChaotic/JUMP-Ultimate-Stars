@@ -1,0 +1,14 @@
+02070fb4  mov r1,#0x1
+02070fb6  mov r2,#0x1f
+02070fb8  and r2,r0
+02070fba  add r3,r1,#0x0
+02070fbc  lsr r0,r0,#0x5
+02070fbe  lsl r3,r2
+02070fc0  lsl r2,r0,#0x2
+02070fc2  ldr r0,[0x02070fd0]
+02070fc4  ldr r0,[r0,r2]
+02070fc6  tst r0,r3
+02070fc8  bne 0x02070fcc
+02070fca  mov r1,#0x0
+02070fcc  add r0,r1,#0x0
+02070fce  bx lr

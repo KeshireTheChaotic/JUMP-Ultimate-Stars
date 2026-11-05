@@ -1,0 +1,1 @@
+{"module":"arm9_ov12","address":"021cb4d4","name":"FUN_021cb4d4","thumb":true,"body_bytes":20,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["021cb798"],"unresolved_call_targets":[],"status":"decompiled","asm_file":"arm9_ov12_021cb4d4.asm","c_file":"arm9_ov12_021cb4d4.c"}

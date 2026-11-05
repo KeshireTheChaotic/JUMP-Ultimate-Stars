@@ -1,0 +1,12 @@
+02052c44  stmdb sp!,{r0,r1,r2,r3}
+02052c48  stmdb sp!,{lr}
+02052c4c  sub sp,sp,#0x4
+02052c50  add r3,sp,#0x10
+02052c54  bic r3,r3,#0x3
+02052c58  ldr r2,[sp,#0x10]
+02052c5c  add r3,r3,#0x4
+02052c60  bl 0x0205237c
+02052c64  add sp,sp,#0x4
+02052c68  ldmia sp!,{lr}
+02052c6c  add sp,sp,#0x10
+02052c70  bx lr

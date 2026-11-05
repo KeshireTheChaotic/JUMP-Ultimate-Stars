@@ -1,0 +1,19 @@
+02159930  stmdb sp!,{r3,r4,r5,lr}
+02159934  mov r5,r0
+02159938  ldrsh r2,[r5,#0xe8]
+0215993c  mov r0,#0x64
+02159940  mov r1,#0x3c
+02159944  smulbb r0,r2,r0
+02159948  bl 0x0200d12c
+0215994c  mov r0,r0, lsl #0x10
+02159950  mov r4,r0, asr #0x10
+02159954  ldr r0,[r5,#0xb4]
+02159958  mov r1,r4
+0215995c  bl 0x02154d28
+02159960  ldr r0,[r5,#0xbc]
+02159964  mov r1,r4
+02159968  bl 0x0215526c
+0215996c  ldr r0,[r5,#0xb8]
+02159970  mov r1,r4
+02159974  bl 0x02154f8c
+02159978  ldmia sp!,{r3,r4,r5,pc}

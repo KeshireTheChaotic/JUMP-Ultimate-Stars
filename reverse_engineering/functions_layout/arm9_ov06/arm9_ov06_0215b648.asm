@@ -1,0 +1,17 @@
+0215b648  stmdb sp!,{r4,lr}
+0215b64c  mov r4,r0
+0215b650  ldr r0,[r4,#0x1a8]
+0215b654  ldr r0,[r0,#0x10]
+0215b658  ldr r0,[r0,#0x28]
+0215b65c  cmp r0,#0x0
+0215b660  movne r0,#0x1
+0215b664  moveq r0,#0x0
+0215b668  cmp r0,#0x0
+0215b66c  movne r0,#0x0
+0215b670  ldmiane sp!,{r4,pc}
+0215b674  ldr r0,[r4,#0x1a0]
+0215b678  mov r1,#0x1
+0215b67c  bl 0x0215f334
+0215b680  mov r0,r4
+0215b684  bl 0x0215b4fc
+0215b688  ldmia sp!,{r4,pc}

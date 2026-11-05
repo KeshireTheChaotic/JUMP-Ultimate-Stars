@@ -1,0 +1,16 @@
+037fe24c  stmdb sp!,{lr}
+037fe250  sub sp,sp,#0x4
+037fe254  ldr r1,[0x37fe28c]
+037fe258  ldr r3,[r1,#0x4]
+037fe25c  str r3,[r0,#0x14]
+037fe260  mov r2,#0x0
+037fe264  str r2,[r0,#0x18]
+037fe268  str r0,[r1,#0x4]
+037fe26c  cmp r3,#0x0
+037fe270  strne r0,[r3,#0x18]
+037fe274  bne 0x037fe280
+037fe278  str r0,[r1,#0x0]
+037fe27c  bl 0x037fe074
+037fe280  add sp,sp,#0x4
+037fe284  ldmia sp!,{lr}
+037fe288  bx lr

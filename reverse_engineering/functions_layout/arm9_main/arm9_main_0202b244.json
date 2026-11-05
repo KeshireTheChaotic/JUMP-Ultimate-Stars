@@ -1,0 +1,1 @@
+{"module":"arm9_main","address":"0202b244","name":"ALWidgetBase_0209c1e0_Derived_0209bc04","thumb":false,"body_bytes":112,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["02021848","020254c8","0202b2b8","0202b2f4"],"unresolved_call_targets":[],"status":"decompiled","asm_file":"arm9_main_0202b244.asm","c_file":"arm9_main_0202b244.c"}

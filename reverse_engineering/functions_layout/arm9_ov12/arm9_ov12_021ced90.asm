@@ -1,0 +1,9 @@
+021ced90  add r2,r0,#0x0
+021ced92  add r2,#0x68
+021ced94  strh r1,[r2,#0x0]
+021ced96  ldr r1,[0x021ceda4]
+021ced98  str r1,[r0,#0x64]
+021ced9a  mov r1,#0x0
+021ced9c  str r1,[r0,#0x60]
+021ced9e  str r1,[r0,#0x5c]
+021ceda0  bx lr

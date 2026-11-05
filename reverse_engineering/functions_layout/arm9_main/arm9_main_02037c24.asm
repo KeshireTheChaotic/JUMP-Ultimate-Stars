@@ -1,0 +1,12 @@
+02037c24  ldr r3,[r1,#0x4]
+02037c28  ldr r2,[r1,#0x0]
+02037c2c  cmp r3,#0x0
+02037c30  strne r2,[r3,#0x0]
+02037c34  streq r2,[r0,#0x0]
+02037c38  ldr r2,[r1,#0x0]
+02037c3c  cmp r2,#0x0
+02037c40  ldrne r0,[r1,#0x4]
+02037c44  strne r0,[r2,#0x4]
+02037c48  ldreq r1,[r1,#0x4]
+02037c4c  streq r1,[r0,#0x4]
+02037c50  bx lr

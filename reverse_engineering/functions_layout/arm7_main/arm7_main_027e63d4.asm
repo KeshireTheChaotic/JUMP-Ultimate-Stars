@@ -1,0 +1,14 @@
+027e63d4  stmdb sp!,{r4,lr}
+027e63d8  ldr r0,[0x27e640c]
+027e63dc  ldr r4,[r0,#0x550]
+027e63e0  bl 0x027e6494
+027e63e4  ldr r0,[r4,#0xd8]
+027e63e8  cmp r0,#0x7f
+027e63ec  movcs r0,#0x0
+027e63f0  strcs r0,[r4,#0x1c]
+027e63f4  ldrsh r0,[r4,#0x42]
+027e63f8  ldr r1,[0x27e6410]
+027e63fc  mov r2,#0x4
+027e6400  bl 0x027e6680
+027e6404  ldmia sp!,{r4,lr}
+027e6408  bx lr

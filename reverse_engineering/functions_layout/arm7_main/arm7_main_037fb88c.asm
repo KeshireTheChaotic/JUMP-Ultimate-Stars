@@ -1,0 +1,12 @@
+037fb88c  mov r2,#0x0
+037fb890  ldr r1,[0x37fb8bc]
+037fb894  b 0x037fb8ac
+037fb898  ldrh r0,[r1,#0x0]
+037fb89c  ands r0,r0,#0x1
+037fb8a0  moveq r0,#0x0
+037fb8a4  bxeq lr
+037fb8a8  add r2,r2,#0x1
+037fb8ac  cmp r2,#0x2800
+037fb8b0  bcc 0x037fb898
+037fb8b4  mov r0,#0x1
+037fb8b8  bx lr

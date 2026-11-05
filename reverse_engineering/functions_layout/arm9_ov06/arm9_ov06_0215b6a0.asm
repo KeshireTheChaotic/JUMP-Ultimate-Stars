@@ -1,0 +1,29 @@
+0215b6a0  stmdb sp!,{r4,lr}
+0215b6a4  mov r4,r0
+0215b6a8  ldr r2,[r4,#0x1a8]
+0215b6ac  add r1,r4,#0x100
+0215b6b0  ldr r3,[r2,#0x10]
+0215b6b4  ldrsh r2,[r1,#0xa]
+0215b6b8  ldr r12,[r3,#0x5c]
+0215b6bc  ldrsh lr,[r1,#0xc]
+0215b6c0  ldrsh r3,[r12,#0x30]
+0215b6c4  add r2,r3,r2
+0215b6c8  strh r2,[r12,#0x30]
+0215b6cc  ldrsh r2,[r12,#0x32]
+0215b6d0  add r2,r2,lr
+0215b6d4  strh r2,[r12,#0x32]
+0215b6d8  ldrsb r2,[r1,#0x1e]
+0215b6dc  cmp r2,#0x2
+0215b6e0  ldrh r2,[r1,#0x0]
+0215b6e4  beq 0x0215b6f8
+0215b6e8  ldr r1,[0x215b714]
+0215b6ec  ldr r1,[r1,r2,lsl #0x3]
+0215b6f0  bl 0x02157450
+0215b6f4  b 0x0215b704
+0215b6f8  ldr r1,[0x215b718]
+0215b6fc  ldr r1,[r1,r2,lsl #0x3]
+0215b700  bl 0x02157450
+0215b704  ldr r1,[0x215b71c]
+0215b708  mov r0,#0x0
+0215b70c  str r1,[r4,#0xfc]
+0215b710  ldmia sp!,{r4,pc}

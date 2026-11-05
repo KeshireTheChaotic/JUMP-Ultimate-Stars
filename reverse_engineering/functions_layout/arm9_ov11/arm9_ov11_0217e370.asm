@@ -1,0 +1,11 @@
+0217e370  stmdb sp!,{r4,lr}
+0217e374  mov r4,r0
+0217e378  ldr r0,[r4,#0x54]
+0217e37c  cmp r0,#0x0
+0217e380  ldmiaeq sp!,{r4,pc}
+0217e384  ldr r1,[r0,#0x0]
+0217e388  ldr r1,[r1,#0x8]
+0217e38c  blx r1
+0217e390  mov r0,#0x0
+0217e394  str r0,[r4,#0x54]
+0217e398  ldmia sp!,{r4,pc}

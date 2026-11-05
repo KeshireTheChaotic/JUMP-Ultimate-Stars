@@ -1,0 +1,9 @@
+0215d53c  add r1,r0,#0x100
+0215d540  mov r2,#0x0
+0215d544  strh r2,[r1,#0x6]
+0215d548  strb r2,[r0,#0xd9]
+0215d54c  strb r2,[r0,#0xdc]
+0215d550  strb r2,[r0,#0xda]
+0215d554  ldr r12,[0x215d560]
+0215d558  add r0,r0,#0x130
+0215d55c  bx r12

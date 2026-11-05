@@ -1,0 +1,15 @@
+0219b408  stmdb sp!,{r3,lr}
+0219b40c  ldr r0,[0x219b444]
+0219b410  ldr r0,[r0,#0x0]
+0219b414  cmp r0,#0x0
+0219b418  beq 0x0219b43c
+0219b41c  blx 0x0217668c
+0219b420  ldr r1,[0x219b444]
+0219b424  ldr r1,[r1,#0x0]
+0219b428  ldrb r1,[r1,#0xa51]
+0219b42c  cmp r1,r0
+0219b430  moveq r0,#0x1
+0219b434  movne r0,#0x0
+0219b438  ldmia sp!,{r3,pc}
+0219b43c  mov r0,#0x1
+0219b440  ldmia sp!,{r3,pc}

@@ -1,0 +1,8 @@
+0215f15c  push {lr}
+0215f15e  sub sp,#0x4
+0215f160  bl 0x0215f080
+0215f164  bl 0x0215f07c
+0215f168  bl 0x0215f058
+0215f16c  bl 0x0215f09c
+0215f170  add sp,#0x4
+0215f172  pop {pc}

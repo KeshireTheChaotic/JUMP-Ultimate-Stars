@@ -1,0 +1,12 @@
+037fc934  ldr r2,[r0,#0x0]
+037fc938  cmp r2,#0x0
+037fc93c  beq 0x037fc95c
+037fc940  ldr r1,[r2,#0x10]
+037fc944  str r1,[r0,#0x0]
+037fc948  cmp r1,#0x0
+037fc94c  movne r0,#0x0
+037fc950  strne r0,[r1,#0x14]
+037fc954  moveq r1,#0x0
+037fc958  streq r1,[r0,#0x4]
+037fc95c  mov r0,r2
+037fc960  bx lr

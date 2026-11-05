@@ -1,0 +1,10 @@
+02153588  stmdb sp!,{r3,lr}
+0215358c  ldr r0,[r0,#0x4]
+02153590  ldr r1,[r0,#0x0]
+02153594  ldr r1,[r1,#0x154]
+02153598  blx r1
+0215359c  cmp r0,#0x0
+021535a0  moveq r0,#0x0
+021535a4  ldmiaeq sp!,{r3,pc}
+021535a8  bl 0x0214ed94
+021535ac  ldmia sp!,{r3,pc}

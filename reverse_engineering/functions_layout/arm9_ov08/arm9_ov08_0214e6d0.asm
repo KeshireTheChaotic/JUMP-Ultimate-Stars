@@ -1,0 +1,15 @@
+0214e6d0  add r3,r0,#0x0
+0214e6d2  and r3,r1
+0214e6d4  mvn r2,r1
+0214e6d6  bic r0,r1
+0214e6d8  add r1,r0,#0x1
+0214e6da  add r0,r3,#0x0
+0214e6dc  orr r0,r1
+0214e6de  add r1,r3,#0x0
+0214e6e0  orr r1,r2
+0214e6e2  cmp r0,r1
+0214e6e4  bcc 0x0214e6ec
+0214e6e6  mov r1,#0x1
+0214e6e8  add r0,r3,#0x0
+0214e6ea  orr r0,r1
+0214e6ec  bx lr

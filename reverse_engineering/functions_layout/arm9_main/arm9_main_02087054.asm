@@ -1,0 +1,17 @@
+02087054  stmdb sp!,{r4,lr}
+02087058  mov r4,r0
+0208705c  bl 0x0208c51c
+02087060  cmp r0,#0x0
+02087064  beq 0x02087080
+02087068  bl 0x0219b634
+0208706c  cmp r0,#0x0
+02087070  ldmiaeq sp!,{r4,pc}
+02087074  mov r0,r4
+02087078  bl 0x0219fef0
+0208707c  ldmia sp!,{r4,pc}
+02087080  blx 0x0208c11c
+02087084  cmp r0,#0x0
+02087088  ldmiane sp!,{r4,pc}
+0208708c  mov r0,r4
+02087090  blx 0x0208bf30
+02087094  ldmia sp!,{r4,pc}

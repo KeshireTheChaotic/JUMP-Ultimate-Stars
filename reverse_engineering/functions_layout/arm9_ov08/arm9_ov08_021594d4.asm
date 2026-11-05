@@ -1,0 +1,16 @@
+021594d4  push {lr}
+021594d6  sub sp,#0x4
+021594d8  mov r0,#0x3
+021594da  mov r1,#0x1
+021594dc  add r2,r1,#0x0
+021594de  mov r3,#0x8
+021594e0  bl 0x0216628c
+021594e4  mov r0,#0x3
+021594e6  mov r1,#0x0
+021594e8  mov r2,#0x15
+021594ea  mov r3,#0x8
+021594ec  bl 0x0216628c
+021594f0  ldr r0,[0x021594fc]
+021594f2  bl 0x02157088
+021594f6  add sp,#0x4
+021594f8  pop {pc}

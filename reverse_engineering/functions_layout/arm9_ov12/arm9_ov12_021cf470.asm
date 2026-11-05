@@ -1,0 +1,9 @@
+021cf470  ldrb r2,[r1,#0xa]
+021cf472  cmp r2,#0x1
+021cf474  bne 0x021cf480
+021cf476  ldrb r0,[r0,#0x4]
+021cf478  strb r0,[r1,#0xb]
+021cf47a  ldr r0,[0x021cf484]
+021cf47c  ldr r0,[r0,#0x0]
+021cf47e  str r0,[r1,#0xc]
+021cf480  bx lr

@@ -1,0 +1,12 @@
+0219cba4  stmdb sp!,{r4,lr}
+0219cba8  mov r4,r0
+0219cbac  blx 0x0217668c
+0219cbb0  ldr r1,[0x219cbd4]
+0219cbb4  ldr r1,[r1,#0x0]
+0219cbb8  add r1,r1,r4
+0219cbbc  ldrb r1,[r1,#0x64]
+0219cbc0  and r1,r0,r1
+0219cbc4  cmp r0,r1
+0219cbc8  moveq r0,#0x1
+0219cbcc  movne r0,#0x0
+0219cbd0  ldmia sp!,{r4,pc}

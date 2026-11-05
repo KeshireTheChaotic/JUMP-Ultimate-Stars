@@ -1,0 +1,10 @@
+02155244  stmdb sp!,{r4,lr}
+02155248  movs r4,r0
+0215524c  ldmiaeq sp!,{r4,pc}
+02155250  ldr r0,[r4,#0x0]
+02155254  ldr r1,[r0,#0x0]
+02155258  ldr r1,[r1,#0x8]
+0215525c  blx r1
+02155260  mov r0,r4
+02155264  bl 0x0201b244
+02155268  ldmia sp!,{r4,pc}

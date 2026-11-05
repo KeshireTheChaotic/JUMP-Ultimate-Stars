@@ -1,0 +1,12 @@
+0200fdf8  push {r3,lr}
+0200fdfa  ldr r2,[r0,#0x28]
+0200fdfc  cmp r1,r2
+0200fdfe  bcs 0x0200fe06
+0200fe00  bl 0x02010728
+0200fe04  pop {r3,pc}
+0200fe06  ldr r0,[r0,#0x2c]
+0200fe08  sub r1,r1,r2
+0200fe0a  ldr r2,[r0,#0x0]
+0200fe0c  ldr r2,[r2,#0x58]
+0200fe0e  blx r2
+0200fe10  pop {r3,pc}

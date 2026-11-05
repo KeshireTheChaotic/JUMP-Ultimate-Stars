@@ -1,0 +1,35 @@
+0202a490  ldr r3,[r0,#0x18]
+0202a494  cmp r3,r1
+0202a498  bxeq lr
+0202a49c  cmp r3,#0x0
+0202a4a0  beq 0x0202a4fc
+0202a4a4  ldrb r2,[r0,#0x24]
+0202a4a8  mov r2,r2, lsl #0x18
+0202a4ac  movs r2,r2, lsr #0x1f
+0202a4b0  bne 0x0202a4fc
+0202a4b4  ldr r12,[r3,#0x1c]
+0202a4b8  cmp r12,r0
+0202a4bc  bne 0x0202a4e8
+0202a4c0  ldr r2,[r0,#0x20]
+0202a4c4  cmp r2,#0x0
+0202a4c8  ldreq r2,[r12,#0x18]
+0202a4cc  moveq r3,#0x0
+0202a4d0  streq r3,[r2,#0x1c]
+0202a4d4  ldrne r3,[r12,#0x20]
+0202a4d8  ldrne r2,[r12,#0x18]
+0202a4dc  strne r3,[r2,#0x1c]
+0202a4e0  b 0x0202a4fc
+0202a4e4  mov r12,r2
+0202a4e8  ldr r2,[r12,#0x20]
+0202a4ec  cmp r2,r0
+0202a4f0  bne 0x0202a4e4
+0202a4f4  ldr r2,[r0,#0x20]
+0202a4f8  str r2,[r12,#0x20]
+0202a4fc  str r1,[r0,#0x18]
+0202a500  cmp r1,#0x0
+0202a504  ldrne r2,[r1,#0x1c]
+0202a508  strne r2,[r0,#0x20]
+0202a50c  strne r0,[r1,#0x1c]
+0202a510  moveq r1,#0x0
+0202a514  streq r1,[r0,#0x20]
+0202a518  bx lr

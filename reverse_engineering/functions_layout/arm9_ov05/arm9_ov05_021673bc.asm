@@ -1,0 +1,9 @@
+021673bc  stmdb sp!,{r4,lr}
+021673c0  mov r4,r0
+021673c4  ldr r0,[r4,#0x8]
+021673c8  cmp r0,#0x0
+021673cc  ldmiaeq sp!,{r4,pc}
+021673d0  bl 0x0216b930
+021673d4  mov r0,#0x0
+021673d8  str r0,[r4,#0x8]
+021673dc  ldmia sp!,{r4,pc}

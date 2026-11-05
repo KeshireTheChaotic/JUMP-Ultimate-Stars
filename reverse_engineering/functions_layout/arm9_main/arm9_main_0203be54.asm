@@ -1,0 +1,74 @@
+0203be54  stmdb sp!,{r4,r5,r6,r7,r8,r9,r10,r11,lr}
+0203be58  sub sp,sp,#0x1c
+0203be5c  ldr r5,[r0,#0x34]
+0203be60  ldr r3,[0x203bf7c]
+0203be64  add r2,r5,#0x800
+0203be68  ldrh r0,[r2,#0xca]
+0203be6c  str r1,[sp,#0x0]
+0203be70  ldrh r6,[r2,#0xc8]
+0203be74  str r0,[sp,#0x10]
+0203be78  ldr r0,[r3,#0x0]
+0203be7c  ldr r7,[r5,#0x8e0]
+0203be80  str r0,[sp,#0x8]
+0203be84  mov r8,#0x0
+0203be88  b 0x0203bf60
+0203be8c  ldr r0,[sp,#0x0]
+0203be90  mov r1,r8
+0203be94  blx 0x0203be48
+0203be98  mov r9,r0
+0203be9c  ldr r0,[sp,#0x10]
+0203bea0  mov r1,r7, lsl #0x10
+0203bea4  sub r11,r0,#0x1
+0203bea8  mov r0,r1, lsr #0x10
+0203beac  ldrsh r10,[r9,#0x2]
+0203beb0  sub r4,r6,#0x1
+0203beb4  str r0,[sp,#0x18]
+0203beb8  b 0x0203bf50
+0203bebc  cmp r7,#0x0
+0203bec0  bne 0x0203bf0c
+0203bec4  ldrsh r0,[r9,#0x0]
+0203bec8  ldrsh r2,[r9,#0x4]
+0203becc  ldr r1,[r5,#0x948]
+0203bed0  str r0,[sp,#0x4]
+0203bed4  sub r0,r2,r0
+0203bed8  mov r0,r0, lsl #0x1
+0203bedc  str r0,[sp,#0xc]
+0203bee0  blx r1
+0203bee4  ldr r1,[sp,#0x4]
+0203bee8  ldr r3,[sp,#0xc]
+0203beec  and r2,r1,r4
+0203bef0  and r1,r10,r11
+0203bef4  mla r1,r6,r1,r2
+0203bef8  add r1,r0,r1, lsl #0x1
+0203befc  ldr r0,[sp,#0x8]
+0203bf00  mov r2,#0x0
+0203bf04  bl 0x0205157c
+0203bf08  b 0x0203bf4c
+0203bf0c  ldrsh r2,[r9,#0x0]
+0203bf10  and r0,r10,r11
+0203bf14  ldr r1,[r5,#0x948]
+0203bf18  and r2,r2,r4
+0203bf1c  mla r0,r6,r0,r2
+0203bf20  str r0,[sp,#0x14]
+0203bf24  blx r1
+0203bf28  ldr r1,[sp,#0x14]
+0203bf2c  ldrsh r12,[r9,#0x4]
+0203bf30  ldrsh r3,[r9,#0x0]
+0203bf34  add r1,r0,r1, lsl #0x1
+0203bf38  ldr r0,[sp,#0x8]
+0203bf3c  sub r3,r12,r3
+0203bf40  ldr r2,[sp,#0x18]
+0203bf44  mov r3,r3, lsl #0x1
+0203bf48  bl 0x0205157c
+0203bf4c  add r10,r10,#0x1
+0203bf50  ldrsh r0,[r9,#0x6]
+0203bf54  cmp r10,r0
+0203bf58  bcc 0x0203bebc
+0203bf5c  add r8,r8,#0x1
+0203bf60  ldr r0,[sp,#0x0]
+0203bf64  ldr r0,[r0,#0x8]
+0203bf68  ldrh r0,[r0,#0x14]
+0203bf6c  cmp r8,r0
+0203bf70  bcc 0x0203be8c
+0203bf74  add sp,sp,#0x1c
+0203bf78  ldmia sp!,{r4,r5,r6,r7,r8,r9,r10,r11,pc}

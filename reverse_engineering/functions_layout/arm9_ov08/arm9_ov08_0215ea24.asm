@@ -1,0 +1,13 @@
+0215ea24  push {lr}
+0215ea26  sub sp,#0x4
+0215ea28  ldr r0,[0x0215ea40]
+0215ea2a  ldrb r1,[r0,#0x0]
+0215ea2c  add r1,r1,#0x1
+0215ea2e  strb r1,[r0,#0x0]
+0215ea30  ldrb r0,[r0,#0x0]
+0215ea32  cmp r0,#0x78
+0215ea34  bcc 0x0215ea3c
+0215ea36  ldr r0,[0x0215ea44]
+0215ea38  bl 0x02157088
+0215ea3c  add sp,#0x4
+0215ea3e  pop {pc}

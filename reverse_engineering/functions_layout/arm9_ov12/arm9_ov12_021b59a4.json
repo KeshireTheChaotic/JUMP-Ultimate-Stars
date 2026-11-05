@@ -1,0 +1,1 @@
+{"module":"arm9_ov12","address":"021b59a4","name":"FUN_021b59a4","thumb":true,"body_bytes":1350,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["02023924","021acab4","021b3e98","021b3f54","021b4284"],"unresolved_call_targets":[],"status":"decompiled","asm_file":"arm9_ov12_021b59a4.asm","c_file":"arm9_ov12_021b59a4.c"}

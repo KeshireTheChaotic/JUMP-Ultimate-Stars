@@ -1,0 +1,10 @@
+02155fdc  ldr r12,[r1,#0x0]
+02155fe0  ldr r1,[sp,#0x0]
+02155fe4  str r12,[r0,#0x0]
+02155fe8  ldr r2,[r2,#0x0]
+02155fec  str r2,[r0,#0x4]
+02155ff0  ldr r2,[r3,#0x0]
+02155ff4  str r2,[r0,#0x8]
+02155ff8  ldr r1,[r1,#0x0]
+02155ffc  str r1,[r0,#0xc]
+02156000  bx lr

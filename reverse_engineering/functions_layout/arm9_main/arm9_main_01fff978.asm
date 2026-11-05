@@ -1,0 +1,12 @@
+01fff978  add r8,r1,#0x8c0
+01fff97c  ldr r7,[r8,#0xc30]
+01fff980  mov r9,#0x1
+01fff984  str r7,[r1,#0x68]
+01fff988  mov r7,#0x8
+01fff98c  str r9,[r1,#0x6c]
+01fff990  add r8,r1,#0x78
+01fff994  mov r9,#0x0
+01fff998  str r9,[r8],#0x4
+01fff99c  subs r7,r7,#0x1
+01fff9a0  bne 0x01fff998
+01fff9a4  mov pc,lr

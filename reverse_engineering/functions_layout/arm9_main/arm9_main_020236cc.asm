@@ -1,0 +1,12 @@
+020236cc  stmdb sp!,{r3,r4,r5,lr}
+020236d0  mov r4,r1
+020236d4  mov r5,r0
+020236d8  bl 0x02023580
+020236dc  ldr r0,[r4,#0x0]
+020236e0  add r1,sp,#0x0
+020236e4  str r0,[sp,#0x0]
+020236e8  ldr r0,[r5,#0x50]
+020236ec  ldr r2,[r0,#0x0]
+020236f0  ldr r2,[r2,#0x28]
+020236f4  blx r2
+020236f8  ldmia sp!,{r3,r4,r5,pc}

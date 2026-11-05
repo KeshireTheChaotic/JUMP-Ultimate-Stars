@@ -1,0 +1,13 @@
+
+void FUN_020725e0(undefined4 param_1,undefined4 param_2,int param_3)
+
+{
+  int iVar1;
+  
+  iVar1 = thunk_FUN_020024cc(param_1,param_2,0x14);
+  if ((iVar1 != 0) && (FUN_02051890(param_2,param_1,0x14), param_3 != 0)) {
+    DAT_020b02ac = 1;
+  }
+  return;
+}
+

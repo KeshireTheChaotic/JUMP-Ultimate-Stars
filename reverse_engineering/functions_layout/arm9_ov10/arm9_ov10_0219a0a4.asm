@@ -1,0 +1,13 @@
+0219a0a4  stmdb sp!,{r3,lr}
+0219a0a8  ldr r0,[0x219a0d8]
+0219a0ac  ldr r2,[r0,#0x0]
+0219a0b0  cmp r2,#0x0
+0219a0b4  ldmiaeq sp!,{r3,pc}
+0219a0b8  mov r1,#0x0
+0219a0bc  strb r1,[r2,#0x50]
+0219a0c0  ldr r0,[r0,#0x0]
+0219a0c4  ldr r1,[0x219a0dc]
+0219a0c8  ldr r0,[r0,#0x8]
+0219a0cc  ldr r0,[r0,#0x4]
+0219a0d0  bl 0x02028384
+0219a0d4  ldmia sp!,{r3,pc}

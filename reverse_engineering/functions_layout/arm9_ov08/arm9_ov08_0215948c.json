@@ -1,0 +1,1 @@
+{"module":"arm9_ov08","address":"0215948c","name":"FUN_0215948c","thumb":true,"body_bytes":68,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["02154560","0215707c","02157088","02166314","021664f0","02166a84"],"unresolved_call_targets":[],"status":"decompiled","asm_file":"arm9_ov08_0215948c.asm","c_file":"arm9_ov08_0215948c.c"}

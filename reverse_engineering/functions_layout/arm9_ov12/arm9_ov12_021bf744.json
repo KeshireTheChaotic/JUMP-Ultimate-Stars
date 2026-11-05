@@ -1,0 +1,1 @@
+{"module":"arm9_ov12","address":"021bf744","name":"FUN_021bf744","thumb":true,"body_bytes":224,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["02051718","02051730","0205ac6c","021bf508"],"unresolved_call_targets":[],"status":"decompiled","asm_file":"arm9_ov12_021bf744.asm","c_file":"arm9_ov12_021bf744.c"}

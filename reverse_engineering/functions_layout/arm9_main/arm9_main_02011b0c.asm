@@ -1,0 +1,11 @@
+02011b0c  stmdb sp!,{r4,lr}
+02011b10  mov r4,r0
+02011b14  ldr r0,[r4,#0x4]
+02011b18  ldr r1,[r0,#0x0]
+02011b1c  ldr r1,[r1,#0x70]
+02011b20  blx r1
+02011b24  ldr r0,[r4,#0x4]
+02011b28  ldr r1,[r0,#0x0]
+02011b2c  ldr r1,[r1,#0xc]
+02011b30  blx r1
+02011b34  ldmia sp!,{r4,pc}

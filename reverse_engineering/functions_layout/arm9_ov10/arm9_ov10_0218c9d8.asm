@@ -1,0 +1,14 @@
+0218c9d8  push {lr}
+0218c9da  sub sp,#0x84
+0218c9dc  cmp r0,#0x0
+0218c9de  bne 0x0218c9f0
+0218c9e0  str r1,[sp,#0x0]
+0218c9e2  add r0,sp,#0x4
+0218c9e4  mov r1,#0x80
+0218c9e6  ldr r2,[0x0218c9f8]
+0218c9e8  ldr r3,[0x0218c9fc]
+0218c9ea  bl 0x02003cc4
+0218c9ee  add r0,sp,#0x4
+0218c9f0  bl 0x0218ca00
+0218c9f4  add sp,#0x84
+0218c9f6  pop {pc}

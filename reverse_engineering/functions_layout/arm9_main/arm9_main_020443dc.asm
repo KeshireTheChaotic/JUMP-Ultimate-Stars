@@ -1,0 +1,13 @@
+020443dc  stmdb sp!,{r3,r4,r5,lr}
+020443e0  mov r5,r0
+020443e4  mov r4,r2
+020443e8  bl 0x020437ac
+020443ec  ldr r0,[0x2044410]
+020443f0  cmp r4,#0x0
+020443f4  str r0,[r5,#0x0]
+020443f8  beq 0x02044408
+020443fc  mov r0,r5
+02044400  mov r1,r4
+02044404  bl 0x02043c7c
+02044408  mov r0,r5
+0204440c  ldmia sp!,{r3,r4,r5,pc}

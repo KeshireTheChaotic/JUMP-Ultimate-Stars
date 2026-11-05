@@ -1,0 +1,37 @@
+0207dd40  stmdb sp!,{r4,r5,r6,lr}
+0207dd44  ldr r4,[r0,#0xb0]
+0207dd48  b 0x0207ddc8
+0207dd4c  ldr r5,[r4,#0x8]
+0207dd50  ldr r0,[r5,#0x8]
+0207dd54  ldr r12,[r5,#0xc]
+0207dd58  ldrsh r3,[r0,#0x30]
+0207dd5c  ldrsh r1,[r0,#0x2c]
+0207dd60  ldr r0,[r12,#0x5c]
+0207dd64  ldr r2,[r0,#0xc]
+0207dd68  sub r0,r1,r3
+0207dd6c  add r1,r1,r3
+0207dd70  add r0,r2,r0, lsl #0x8
+0207dd74  cmp r0,#0x4000
+0207dd78  add r6,r2,r1, lsl #0x8
+0207dd7c  bge 0x0207dd9c
+0207dd80  ldr r0,[r12,#0x30]
+0207dd84  bl 0x0206cf28
+0207dd88  cmp r0,#0x0
+0207dd8c  ldrne r1,[r5,#0xc]
+0207dd90  ldrne r0,[r1,#0x78]
+0207dd94  orrne r0,r0,#0x1000000
+0207dd98  strne r0,[r1,#0x78]
+0207dd9c  cmp r6,#0x3c000
+0207dda0  ble 0x0207ddc4
+0207dda4  ldr r0,[r5,#0xc]
+0207dda8  ldr r0,[r0,#0x30]
+0207ddac  bl 0x0206cf28
+0207ddb0  cmp r0,#0x0
+0207ddb4  ldreq r1,[r5,#0xc]
+0207ddb8  ldreq r0,[r1,#0x78]
+0207ddbc  orreq r0,r0,#0x2000000
+0207ddc0  streq r0,[r1,#0x78]
+0207ddc4  ldr r4,[r4,#0x0]
+0207ddc8  cmp r4,#0x0
+0207ddcc  bne 0x0207dd4c
+0207ddd0  ldmia sp!,{r4,r5,r6,pc}

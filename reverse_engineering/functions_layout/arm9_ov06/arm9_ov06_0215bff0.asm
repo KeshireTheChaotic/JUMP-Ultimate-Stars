@@ -1,0 +1,17 @@
+0215bff0  stmdb sp!,{r4,lr}
+0215bff4  mov r4,r0
+0215bff8  add r1,r4,#0x100
+0215bffc  ldrsb r2,[r1,#0x19]
+0215c000  sub r2,r2,#0x1
+0215c004  strb r2,[r4,#0x119]
+0215c008  ldrsb r1,[r1,#0x19]
+0215c00c  cmp r1,#0x0
+0215c010  ldmiage sp!,{r4,pc}
+0215c014  bl 0x0215dec8
+0215c018  cmp r0,#0x0
+0215c01c  ldmiane sp!,{r4,pc}
+0215c020  mov r1,#0x2
+0215c024  mov r0,r4
+0215c028  strb r1,[r4,#0x1e6]
+0215c02c  bl 0x0215d2e4
+0215c030  ldmia sp!,{r4,pc}

@@ -1,0 +1,9 @@
+0217f9f4  ldrb r1,[r0,#0x15]
+0217f9f6  mov r0,#0x2
+0217f9f8  and r1,r0
+0217f9fa  cmp r1,#0x2
+0217f9fc  bne 0x0217fa02
+0217f9fe  mov r0,#0x1
+0217fa00  bx lr
+0217fa02  mov r0,#0x0
+0217fa04  bx lr

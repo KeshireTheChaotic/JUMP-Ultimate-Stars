@@ -1,0 +1,16 @@
+02012840  stmdb sp!,{r3,r4,lr}
+02012844  sub sp,sp,#0x4
+02012848  mov r4,r0
+0201284c  cmp r1,#0x0
+02012850  ldreq r0,[0x2012880]
+02012854  ldr r2,[r2,#0x0]
+02012858  ldreq r1,[r0,#0x45c]
+0201285c  str r2,[sp,#0x0]
+02012860  add r2,sp,#0x0
+02012864  mov r0,r4
+02012868  bl 0x02011efc
+0201286c  ldr r1,[0x2012884]
+02012870  mov r0,r4
+02012874  str r1,[r4,#0x0]
+02012878  add sp,sp,#0x4
+0201287c  ldmia sp!,{r3,r4,pc}

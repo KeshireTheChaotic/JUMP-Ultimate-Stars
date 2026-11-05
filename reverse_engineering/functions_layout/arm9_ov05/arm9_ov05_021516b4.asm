@@ -1,0 +1,77 @@
+021516b4  stmdb sp!,{r3,r4,r5,r6,r7,lr}
+021516b8  mov r6,r0
+021516bc  ldr r0,[r6,#0x4]
+021516c0  ldr r5,[r0,#0x10]
+021516c4  ldr r1,[r5,#0x68]
+021516c8  ldr r1,[r1,#0x4]
+021516cc  ldr r1,[r1,#0x148]
+021516d0  cmp r1,#0x0
+021516d4  bne 0x02151700
+021516d8  blx 0x021b65cc
+021516dc  ldr r0,[r6,#0x4]
+021516e0  blx 0x021b7170
+021516e4  ldr r0,[r5,#0x3f0]
+021516e8  cmp r0,#0x2
+021516ec  ldmiaeq sp!,{r3,r4,r5,r6,r7,pc}
+021516f0  mov r0,#0x78
+021516f4  mov r1,#0x2
+021516f8  bl 0x0207342c
+021516fc  ldmia sp!,{r3,r4,r5,r6,r7,pc}
+02151700  ldr r1,[r0,#0x0]
+02151704  ldr r1,[r1,#0x194]
+02151708  blx r1
+0215170c  mov r7,r0
+02151710  ldr r0,[r6,#0x4]
+02151714  mov r1,r7
+02151718  ldr r0,[r0,#0x15c]
+0215171c  bl 0x0214ff0c
+02151720  mov r4,r0
+02151724  mov r0,r5
+02151728  mov r1,r4
+0215172c  bl 0x021517ec
+02151730  cmp r0,#0x0
+02151734  beq 0x021517cc
+02151738  str r4,[sp,#0x0]
+0215173c  mov r2,r7, lsl #0x10
+02151740  ldr r1,[r5,#0x30]
+02151744  ldr r12,[r5,#0x2c]
+02151748  mov r0,r5
+0215174c  mov r3,r2, asr #0x10
+02151750  mov r2,#0x2
+02151754  blx r12
+02151758  cmp r0,#0x0
+0215175c  beq 0x021517bc
+02151760  ldr r0,[0x21517e8]
+02151764  ldr r1,[r0,#0x0]
+02151768  add r0,r1,#0x1000
+0215176c  ldr r0,[r0,#0x8e4]
+02151770  cmp r0,#0x2
+02151774  beq 0x02151784
+02151778  ldrh r0,[r4,#0x0]
+0215177c  blx 0x020713bc
+02151780  b 0x021517ac
+02151784  ldrh r4,[r4,#0x0]
+02151788  ldr r2,[r1,#0x60]
+0215178c  mov r1,#0x1
+02151790  and r0,r4,#0x1f
+02151794  add r3,r2,#0x74
+02151798  mov r2,r4, lsr #0x5
+0215179c  mvn r0,r1, lsl r0
+021517a0  ldr r1,[r3,r2,lsl #0x2]
+021517a4  and r0,r1,r0
+021517a8  str r0,[r3,r2,lsl #0x2]
+021517ac  mov r0,#0x78
+021517b0  mov r1,#0x0
+021517b4  bl 0x0207342c
+021517b8  ldmia sp!,{r3,r4,r5,r6,r7,pc}
+021517bc  blx 0x021b65cc
+021517c0  ldr r0,[r6,#0x4]
+021517c4  blx 0x021b7170
+021517c8  ldmia sp!,{r3,r4,r5,r6,r7,pc}
+021517cc  blx 0x021b65cc
+021517d0  ldr r0,[r6,#0x4]
+021517d4  blx 0x021b7170
+021517d8  mov r0,#0x78
+021517dc  mov r1,#0x2
+021517e0  bl 0x0207342c
+021517e4  ldmia sp!,{r3,r4,r5,r6,r7,pc}

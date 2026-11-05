@@ -1,0 +1,12 @@
+0214dc74  push {r4,r5}
+0214dc76  mov r5,#0x0
+0214dc78  sub r2,r1,#0x1
+0214dc7a  add r3,r0,r2
+0214dc7c  add r4,r5,#0x0
+0214dc7e  cmp r1,#0x0
+0214dc80  ble 0x0214dc90
+0214dc82  lsl r2,r5,#0x8
+0214dc84  ldrb r0,[r3,#0x0]
+0214dc86  sub r3,r3,#0x1
+0214dc88  add r5,r2,r0
+0214dc8a  add r4,r4,#0x1

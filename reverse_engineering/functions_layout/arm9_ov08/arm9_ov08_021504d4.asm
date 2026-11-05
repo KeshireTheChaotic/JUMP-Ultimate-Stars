@@ -1,0 +1,13 @@
+021504d4  push {lr}
+021504d6  sub sp,#0x4
+021504d8  blx 0x02054b44
+021504dc  lsr r2,r0,#0x1a
+021504de  lsl r1,r1,#0x6
+021504e0  orr r1,r2
+021504e2  lsl r0,r0,#0x6
+021504e4  ldr r2,[0x021504f4]
+021504e6  mov r3,#0x0
+021504e8  blx 0x0200d0c4
+021504ec  add sp,#0x4
+021504ee  pop {r3}
+021504f0  bx r3

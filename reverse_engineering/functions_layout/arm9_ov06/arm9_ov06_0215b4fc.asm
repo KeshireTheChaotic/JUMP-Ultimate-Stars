@@ -1,0 +1,9 @@
+0215b4fc  add r1,r0,#0x100
+0215b500  ldrsb r2,[r1,#0x15]
+0215b504  sub r2,r2,#0x1
+0215b508  strb r2,[r0,#0x115]
+0215b50c  ldrsb r0,[r1,#0x15]
+0215b510  cmp r0,#0x0
+0215b514  movlt r0,#0x1
+0215b518  movge r0,#0x0
+0215b51c  bx lr

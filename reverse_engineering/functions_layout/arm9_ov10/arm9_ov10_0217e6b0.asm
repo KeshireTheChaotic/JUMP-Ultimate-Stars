@@ -1,0 +1,12 @@
+0217e6b0  push {lr}
+0217e6b2  sub sp,#0x4
+0217e6b4  bl 0x0217e670
+0217e6b8  cmp r0,#0x0
+0217e6ba  beq 0x0217e6c6
+0217e6bc  bl 0x0217a168
+0217e6c0  mov r0,#0x1
+0217e6c2  add sp,#0x4
+0217e6c4  pop {pc}
+0217e6c6  mov r0,#0x0
+0217e6c8  add sp,#0x4
+0217e6ca  pop {pc}

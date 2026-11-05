@@ -1,0 +1,86 @@
+021550e4  stmdb sp!,{r3,r4,r5,r6,r7,lr}
+021550e8  sub sp,sp,#0x10
+021550ec  mov r7,r0
+021550f0  bl 0x0214fb7c
+021550f4  ldr r2,[r7,#0x4]
+021550f8  mov r1,r0
+021550fc  ldr r5,[r2,#0x124]
+02155100  cmp r5,#0x14
+02155104  blt 0x0215511c
+02155108  add r0,sp,#0xc
+0215510c  bl 0x0215523c
+02155110  add r0,sp,#0xc
+02155114  ldr r1,[r0,#0x0]
+02155118  b 0x0215512c
+0215511c  add r0,sp,#0x8
+02155120  bl 0x0215523c
+02155124  ldr r0,[sp,#0x8]
+02155128  sub r1,r0,#0x21000
+0215512c  mov r0,r1, asr #0xb
+02155130  add r0,r1,r0, lsr #0x14
+02155134  mov r4,r0, asr #0xc
+02155138  add r0,sp,#0x4
+0215513c  mov r1,r7
+02155140  bl 0x0215523c
+02155144  ldr r0,[sp,#0x4]
+02155148  add r1,r0,r4, lsl #0xc
+0215514c  mov r0,r1, asr #0xb
+02155150  add r0,r1,r0, lsr #0x14
+02155154  mov r6,r0, asr #0xc
+02155158  cmp r6,#0x260
+0215515c  blt 0x0215516c
+02155160  cmp r6,#0x260
+02155164  subge r6,r6,#0x280
+02155168  bge 0x02155160
+0215516c  mvn r0,#0x1f
+02155170  cmp r6,r0
+02155174  bgt 0x02155184
+02155178  cmp r6,r0
+0215517c  addle r6,r6,#0x280
+02155180  ble 0x02155178
+02155184  sub r0,r6,r4
+02155188  mov r2,r0, lsl #0xc
+0215518c  add r1,sp,#0x0
+02155190  mov r0,r7
+02155194  str r2,[sp,#0x0]
+02155198  bl 0x021550c4
+0215519c  ldr r0,[r7,#0x4]
+021551a0  cmp r5,#0x14
+021551a4  ldr r7,[r0,#0x10]
+021551a8  ldr r1,[r7,#0x574]
+021551ac  blt 0x021551ec
+021551b0  sub r4,r5,#0x14
+021551b4  mov r5,#0x1
+021551b8  tst r1,r5, lsl r4
+021551bc  beq 0x02155234
+021551c0  ldr r1,[r7,#0x578]
+021551c4  tst r1,r5, lsl r4
+021551c8  bne 0x02155234
+021551cc  ldr r2,[r0,#0x0]
+021551d0  mov r1,r5
+021551d4  ldr r2,[r2,#0xd8]
+021551d8  blx r2
+021551dc  ldr r0,[r7,#0x578]
+021551e0  orr r0,r0,r5, lsl r4
+021551e4  str r0,[r7,#0x578]
+021551e8  b 0x02155234
+021551ec  mov r4,#0x1
+021551f0  tst r1,r4, lsl r5
+021551f4  ldrbeq r1,[r7,#0x58a]
+021551f8  cmpeq r1,r5
+021551fc  bne 0x02155234
+02155200  cmp r6,#0x0
+02155204  bge 0x02155234
+02155208  ldr r2,[r0,#0x0]
+0215520c  mov r1,r4
+02155210  ldr r2,[r2,#0xd8]
+02155214  blx r2
+02155218  ldrb r0,[r7,#0x58a]
+0215521c  cmp r0,#0x0
+02155220  subne r0,r0,#0x1
+02155224  strbne r0,[r7,#0x58a]
+02155228  ldr r0,[r7,#0x574]
+0215522c  orr r0,r0,r4, lsl r5
+02155230  str r0,[r7,#0x574]
+02155234  add sp,sp,#0x10
+02155238  ldmia sp!,{r3,r4,r5,r6,r7,pc}

@@ -1,0 +1,1 @@
+{"module":"arm9_ov01","address":"021699c4","name":"FUN_021699c4","thumb":true,"body_bytes":76,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["02028384","02051890","02070cdc","02086c08","02088898","02169b08"],"unresolved_call_targets":["0219cd00"],"status":"decompiled","asm_file":"arm9_ov01_021699c4.asm","c_file":"arm9_ov01_021699c4.c"}

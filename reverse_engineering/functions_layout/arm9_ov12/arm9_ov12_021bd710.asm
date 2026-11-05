@@ -1,0 +1,12 @@
+021bd710  mov r2,#0x0
+021bd712  mvn r2,r2
+021bd714  cmp r1,r2
+021bd716  bne 0x021bd71c
+021bd718  ldr r0,[0x021bd728]
+021bd71a  bx lr
+021bd71c  ldr r2,[r0,#0x10]
+021bd71e  lsl r0,r1,#0x2
+021bd720  add r1,r2,r0
+021bd722  ldr r0,[r2,r0]
+021bd724  add r0,r1,r0
+021bd726  bx lr

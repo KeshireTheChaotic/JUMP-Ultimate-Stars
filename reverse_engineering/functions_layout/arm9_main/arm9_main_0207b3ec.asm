@@ -1,0 +1,10 @@
+0207b3ec  stmdb sp!,{r4,lr}
+0207b3f0  ldr r0,[r0,#0x4]
+0207b3f4  ldr r4,[r0,#0x10]
+0207b3f8  mov r0,r4
+0207b3fc  bl 0x0207b414
+0207b400  mov r0,r4
+0207b404  bl 0x0207b7f0
+0207b408  mov r0,r4
+0207b40c  bl 0x0207bac8
+0207b410  ldmia sp!,{r4,pc}

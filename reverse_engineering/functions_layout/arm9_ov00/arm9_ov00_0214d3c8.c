@@ -1,0 +1,145 @@
+
+/* JUS-GAME Opening::Opening_Add [source-string] __FILE__="Opening.cpp" __FUNCTION__="Opening_Add"
+   lines=[145] passed to 1 source-location call(s) */
+
+int Opening::Opening_Add(void)
+
+{
+  int *piVar1;
+  int iVar2;
+  int *piVar3;
+  int iVar4;
+  int iVar5;
+  undefined4 local_24;
+  undefined4 local_20;
+  undefined4 local_1c;
+  undefined4 local_18;
+  undefined4 local_14;
+  
+  piVar1 = (int *)jus_AllocDebug(0x60,s_Opening_cpp_02160c64,s_Opening_Add_02160bc0,0x91);
+  FUN_020517fc(piVar1,0,0x60);
+  FUN_02073410();
+  iVar2 = FUN_02026f94();
+  piVar1[1] = iVar2;
+  local_14 = 0x80000;
+  (**(code **)(**(int **)(iVar2 + 4) + 0xa0))(*(int **)(iVar2 + 4),&local_14);
+  (**(code **)(**(int **)(piVar1[1] + 4) + 0x24))(*(int **)(piVar1[1] + 4),piVar1);
+  iVar2 = Movie::Movie_Create(0,s_Opening_opening_vx_02160c70,0);
+  piVar1[0x11] = iVar2;
+  *(code **)(iVar2 + 0xd4) = FUN_0214da58;
+  *(int **)(iVar2 + 0xdc) = piVar1;
+  iVar2 = piVar1[0x11];
+  *(code **)(iVar2 + 0xd8) = FUN_0214de18;
+  *(int **)(iVar2 + 0xdc) = piVar1;
+  iVar2 = FUN_0203b424(0);
+  FUN_0203d0b4(*(undefined4 *)(*(int *)(iVar2 + 0x88) + 4),1);
+  iVar2 = FUN_0203b424(0);
+  FUN_0203d478(*(undefined4 *)(*(int *)(iVar2 + 0x88) + 4),4);
+  iVar2 = FUN_0203b424(0);
+  FUN_0203cfbc(*(undefined4 *)(*(int *)(iVar2 + 0x88) + 4),0x20,0x20);
+  iVar2 = FUN_0203b424(0);
+  local_24 = 0;
+  piVar3 = *(int **)(*(int *)(iVar2 + 0x88) + 4);
+  (**(code **)(*piVar3 + 0x10))(piVar3,&local_24);
+  iVar2 = FUN_0203b424(0);
+  piVar3 = *(int **)(*(int *)(iVar2 + 0x88) + 4);
+  (**(code **)(*piVar3 + 0x90))(piVar3,0x4000);
+  iVar2 = FUN_0203b424(1);
+  FUN_0203d0b4(*(undefined4 *)(*(int *)(iVar2 + 0x88) + 4),1);
+  iVar2 = FUN_0203b424(1);
+  FUN_0203d478(*(undefined4 *)(*(int *)(iVar2 + 0x88) + 4),4);
+  iVar2 = FUN_0203b424(1);
+  FUN_0203cfbc(*(undefined4 *)(*(int *)(iVar2 + 0x88) + 4),0x20,0x20);
+  iVar2 = FUN_0203b424(1);
+  local_20 = 0x2000;
+  piVar3 = *(int **)(*(int *)(iVar2 + 0x88) + 4);
+  (**(code **)(*piVar3 + 0x10))(piVar3,&local_20);
+  iVar2 = FUN_0203b424(1);
+  piVar3 = *(int **)(*(int *)(iVar2 + 0x88) + 4);
+  (**(code **)(*piVar3 + 0x90))(piVar3,0x4000);
+  iVar2 = FUN_0203b424(2);
+  FUN_0203d0b4(*(undefined4 *)(*(int *)(iVar2 + 0x88) + 4),1);
+  iVar2 = FUN_0203b424(2);
+  FUN_0203d478(*(undefined4 *)(*(int *)(iVar2 + 0x88) + 4),4);
+  iVar2 = FUN_0203b424(2);
+  FUN_0203cfbc(*(undefined4 *)(*(int *)(iVar2 + 0x88) + 4),0x20,0x20);
+  iVar2 = FUN_0203b424(2);
+  local_1c = 0x3000;
+  piVar3 = *(int **)(*(int *)(iVar2 + 0x88) + 4);
+  (**(code **)(*piVar3 + 0x10))(piVar3,&local_1c);
+  iVar2 = FUN_0203b424(2);
+  piVar3 = *(int **)(*(int *)(iVar2 + 0x88) + 4);
+  (**(code **)(*piVar3 + 0x90))(piVar3,0x4000);
+  iVar2 = FUN_0203b424(3);
+  FUN_0203d0b4(*(undefined4 *)(*(int *)(iVar2 + 0x88) + 4),4);
+  iVar2 = FUN_0203b424(3);
+  FUN_0203d478(*(undefined4 *)(*(int *)(iVar2 + 0x88) + 4),4);
+  iVar2 = FUN_0203b424(3);
+  FUN_0203cfbc(*(undefined4 *)(*(int *)(iVar2 + 0x88) + 4),0x20,0x20);
+  iVar2 = FUN_0203b424(3);
+  local_18 = 0x1000;
+  piVar3 = *(int **)(*(int *)(iVar2 + 0x88) + 4);
+  (**(code **)(*piVar3 + 0x10))(piVar3,&local_18);
+  iVar2 = FUN_0203b424(3);
+  piVar3 = *(int **)(*(int *)(iVar2 + 0x88) + 4);
+  (**(code **)(*piVar3 + 0x90))(piVar3,0x10000);
+  iVar2 = FUN_0203b424(3);
+  *(undefined1 *)(*(int *)(*(int *)(iVar2 + 0x88) + 4) + 0x974) = 0;
+  iVar2 = FUN_020310f4();
+  *piVar1 = iVar2;
+  DAT_02093c04 = DAT_02093c04 + -1;
+  *(undefined4 *)(&DAT_020a16c0 + DAT_02093c04 * 4) = DAT_020a0e80;
+  FUN_020314a0(*(undefined4 *)(iVar2 + 4));
+  iVar2 = FUN_02028920(0);
+  piVar1[2] = iVar2;
+  iVar2 = FUN_020208ec(0);
+  piVar1[3] = iVar2;
+  *(undefined1 *)(piVar1 + 0x14) = 0;
+  iVar2 = FUN_020101f4(s_opening_opening_aar_02160c84);
+  piVar1[4] = iVar2;
+  iVar2 = 0;
+  do {
+    FUN_02035c90((&DAT_02160bcc)[iVar2]);
+    iVar4 = FUN_0214d908();
+    iVar5 = iVar2 + 1;
+    piVar1[iVar2 + 9] = iVar4;
+    iVar2 = iVar5;
+  } while (iVar5 < 3);
+  iVar2 = FUN_0203b424(1);
+  iVar2 = FUN_0214d930(*(undefined4 *)(iVar2 + 0x88),DAT_02160bd8,piVar1[9]);
+  piVar1[6] = iVar2;
+  iVar2 = FUN_0203b424(2);
+  iVar2 = FUN_0214d930(*(undefined4 *)(iVar2 + 0x88),DAT_02160bdc,piVar1[10]);
+  piVar1[7] = iVar2;
+  (**(code **)(**(int **)(iVar2 + 4) + 0xd8))(*(int **)(iVar2 + 4),0);
+  iVar2 = FUN_0203b424(1);
+  iVar2 = FUN_0214d930(*(undefined4 *)(iVar2 + 0x88),DAT_02160be0,piVar1[0xb]);
+  piVar1[8] = iVar2;
+  (**(code **)(**(int **)(iVar2 + 4) + 0xd8))(*(int **)(iVar2 + 4),0);
+  FUN_0214d908(*(undefined4 *)(*(int *)(*(int *)(piVar1[8] + 4) + 100) + 0x20));
+  iVar2 = FUN_02034db8();
+  piVar3 = (int *)(**(code **)(**(int **)(iVar2 + 4) + 100))();
+  if (piVar3[6] == 0) {
+    (**(code **)(*piVar3 + 0x10))();
+  }
+  iVar2 = CommonPaletteAnime::CommonPaletteAnime_Load(piVar3[6],s_opening_star_bin_02160c98,0x80);
+  piVar1[0xd] = iVar2;
+  iVar2 = PassMark::PassMark_Create();
+  piVar1[0xf] = iVar2;
+  *(code **)(iVar2 + 8) = FUN_0214e6d0;
+  *(int **)(piVar1[0xf] + 0xc) = piVar1;
+  FUN_020282f4(*(undefined4 *)(*(int *)piVar1[0xf] + 4));
+  iVar2 = Secret::Secret_Create();
+  piVar1[0x10] = iVar2;
+  iVar2 = func_0x021ba49c(1,0,1);
+  piVar1[0xe] = iVar2;
+  piVar1[0x12] = (int)FUN_0214de6c;
+  *(undefined2 *)((int)piVar1 + 0x52) = 0xb1;
+  iVar2 = FUN_02075f60(piVar1 + 0xc);
+  piVar1[5] = iVar2;
+  FUN_02028330(*(undefined4 *)(*(int *)piVar1[0x11] + 4));
+  FUN_0214e5b8(piVar1,0xfffffff0,2,8,0);
+  FUN_02064790(1);
+  return *piVar1;
+}
+

@@ -1,0 +1,15 @@
+0201b544  ldr r1,[r0,#0x0]
+0201b546  cmp r1,#0x0
+0201b548  beq 0x0201b55c
+0201b54a  sub r1,r1,#0x4
+0201b54c  b 0x0201b55c
+0201b54e  ldr r0,[r1,#0xc]
+0201b550  sub r0,r0,#0x1
+0201b552  str r0,[r1,#0xc]
+0201b554  ldr r1,[r1,#0x4]
+0201b556  cmp r1,#0x0
+0201b558  beq 0x0201b55c
+0201b55a  sub r1,r1,#0x4
+0201b55c  cmp r1,#0x0
+0201b55e  bne 0x0201b54e
+0201b560  bx lr

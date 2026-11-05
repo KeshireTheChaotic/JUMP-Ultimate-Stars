@@ -1,0 +1,15 @@
+038001b0  stmdb sp!,{r4,lr}
+038001b4  mov r4,r0
+038001b8  mov lr,r2
+038001bc  mov r0,#0x0
+038001c0  strb r0,[r4,#0x1]
+038001c4  add r12,r4,#0x38
+038001c8  ldmia r1,{r0,r1,r2}
+038001cc  stmia r12,{r0,r1,r2}
+038001d0  str lr,[r4,#0x44]
+038001d4  mov r0,r4
+038001d8  mov r1,r3
+038001dc  bl 0x037ff9ac
+038001e0  mov r0,#0x1
+038001e4  ldmia sp!,{r4,lr}
+038001e8  bx lr

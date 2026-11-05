@@ -1,0 +1,16 @@
+0219df88  stmdb sp!,{r4,r5,r6,lr}
+0219df8c  blx 0x02070ff4
+0219df90  mov r5,r0
+0219df94  mov r6,#0x0
+0219df98  mov r4,#0xc
+0219df9c  b 0x0219dfb8
+0219dfa0  mla r0,r6,r4,r5
+0219dfa4  blx 0x020698cc
+0219dfa8  cmp r0,#0x0
+0219dfac  moveq r0,#0x0
+0219dfb0  ldmiaeq sp!,{r4,r5,r6,pc}
+0219dfb4  add r6,r6,#0x1
+0219dfb8  cmp r6,#0x32
+0219dfbc  blt 0x0219dfa0
+0219dfc0  mov r0,#0x1
+0219dfc4  ldmia sp!,{r4,r5,r6,pc}

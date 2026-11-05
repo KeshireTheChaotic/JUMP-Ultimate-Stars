@@ -1,0 +1,1 @@
+"""JUS Editor GUI (Tkinter)."""

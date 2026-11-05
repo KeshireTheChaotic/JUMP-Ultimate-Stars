@@ -1,0 +1,26 @@
+02043980  stmdb sp!,{r3,r4,r5,lr}
+02043984  mov r4,r0
+02043988  mov r5,r1
+0204398c  mov r0,r5
+02043990  str r5,[r4,#0x20]
+02043994  ldr r1,[r0,#0x0]
+02043998  ldr r1,[r1,#0x8]
+0204399c  blx r1
+020439a0  ldrh r0,[r5,#0x8]
+020439a4  strh r0,[r4,#0x2c]
+020439a8  ldrh r0,[r5,#0xa]
+020439ac  strh r0,[r4,#0x2e]
+020439b0  ldr r0,[r4,#0x20]
+020439b4  ldr r1,[r0,#0x0]
+020439b8  ldr r5,[r0,#0xc]
+020439bc  ldr r1,[r1,#0x18]
+020439c0  blx r1
+020439c4  mov r3,r0
+020439c8  ldrh r2,[r4,#0x2c]
+020439cc  ldrh r1,[r4,#0x2e]
+020439d0  mov r0,r5
+020439d4  mul r1,r2,r1
+020439d8  mul r2,r1,r3
+020439dc  mov r1,r2, lsr #0x3
+020439e0  bl 0x0205401c
+020439e4  ldmia sp!,{r3,r4,r5,pc}

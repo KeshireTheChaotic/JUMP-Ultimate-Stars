@@ -1,0 +1,11 @@
+0217fa0c  ldrh r1,[r0,#0x4]
+0217fa0e  asr r2,r1,#0x8
+0217fa10  mov r0,#0xff
+0217fa12  and r2,r0
+0217fa14  lsl r1,r1,#0x8
+0217fa16  ldr r0,[0x0217fa24]
+0217fa18  and r1,r0
+0217fa1a  orr r2,r1
+0217fa1c  lsl r0,r2,#0x10
+0217fa1e  lsr r0,r0,#0x10
+0217fa20  bx lr

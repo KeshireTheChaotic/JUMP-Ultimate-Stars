@@ -1,0 +1,15 @@
+0205de58  ldr r2,[r0,#0x14c]
+0205de5c  cmp r2,#0x0
+0205de60  movne r1,#0x0
+0205de64  strne r1,[r2,#0x0]
+0205de68  strne r1,[r0,#0x14c]
+0205de6c  ldr r1,[r0,#0x110]
+0205de70  bic r1,r1,#0x1
+0205de74  str r1,[r0,#0x110]
+0205de78  ldr r1,[r0,#0x110]
+0205de7c  bic r1,r1,#0x4
+0205de80  str r1,[r0,#0x110]
+0205de84  ldr r1,[r0,#0x110]
+0205de88  bic r1,r1,#0x2
+0205de8c  str r1,[r0,#0x110]
+0205de90  bx lr

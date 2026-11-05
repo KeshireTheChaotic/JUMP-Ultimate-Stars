@@ -1,0 +1,12 @@
+02015e54  stmdb sp!,{r4,lr}
+02015e58  ldr r1,[0x2015e84]
+02015e5c  mov r4,r0
+02015e60  ldr r2,[r1,#0x4c]
+02015e64  add r0,r4,#0x6c
+02015e68  sub r2,r2,#0x1
+02015e6c  str r2,[r1,#0x4c]
+02015e70  bl 0x0201cf24
+02015e74  mov r0,r4
+02015e78  bl 0x02021f3c
+02015e7c  mov r0,r4
+02015e80  ldmia sp!,{r4,pc}

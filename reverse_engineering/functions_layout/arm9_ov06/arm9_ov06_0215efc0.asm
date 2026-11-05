@@ -1,0 +1,35 @@
+0215efc0  stmdb sp!,{r3,r4,r5,r6,r7,lr}
+0215efc4  mov r7,r0
+0215efc8  ldr r0,[r7,#0x6c]
+0215efcc  mov r6,r1
+0215efd0  mov r5,r2
+0215efd4  tst r0,#0xc
+0215efd8  beq 0x0215efec
+0215efdc  tst r0,#0x8
+0215efe0  movne r4,#0x0
+0215efe4  moveq r4,#0x1
+0215efe8  b 0x0215eff8
+0215efec  ldr r0,[r7,#0x1a8]
+0215eff0  bl 0x0215e91c
+0215eff4  mov r4,r0
+0215eff8  cmp r4,#0x0
+0215effc  mvnne r0,#0x0
+0215f000  smulbbne r0,r6,r0
+0215f004  movne r0,r0, lsl #0x10
+0215f008  movne r6,r0, asr #0x10
+0215f00c  ldr r0,[r7,#0x1a8]
+0215f010  cmp r5,#0x0
+0215f014  ldr r0,[r0,#0x10]
+0215f018  ldr r0,[r0,#0x5c]
+0215f01c  strh r6,[r0,#0x2c]
+0215f020  ldmiaeq sp!,{r3,r4,r5,r6,r7,pc}
+0215f024  ldr r0,[r7,#0x1a8]
+0215f028  bl 0x0215e91c
+0215f02c  cmp r4,r0
+0215f030  ldmiaeq sp!,{r3,r4,r5,r6,r7,pc}
+0215f034  ldr r0,[r7,#0x1a8]
+0215f038  mov r1,r4
+0215f03c  bl 0x02083950
+0215f040  ldr r0,[0x215f04c]
+0215f044  str r0,[r7,#0x1d4]
+0215f048  ldmia sp!,{r3,r4,r5,r6,r7,pc}

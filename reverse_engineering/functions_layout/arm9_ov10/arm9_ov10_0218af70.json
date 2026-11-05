@@ -1,0 +1,1 @@
+{"module":"arm9_ov10","address":"0218af70","name":"FUN_0218af70","thumb":true,"body_bytes":162,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["02189e18","02189e6c","02189eac","02189ee0","0218b018","0218bca4"],"unresolved_call_targets":[],"status":"decompiled","asm_file":"arm9_ov10_0218af70.asm","c_file":"arm9_ov10_0218af70.c"}

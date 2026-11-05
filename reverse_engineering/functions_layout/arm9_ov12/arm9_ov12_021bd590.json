@@ -1,0 +1,1 @@
+{"module":"arm9_ov12","address":"021bd590","name":"FUN_021bd590","thumb":false,"body_bytes":376,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["02028384","021bb970","021bd730","021bd764","021bda94","021bdbd8"],"unresolved_call_targets":[],"status":"decompiled","asm_file":"arm9_ov12_021bd590.asm","c_file":"arm9_ov12_021bd590.c"}

@@ -1,0 +1,13 @@
+0218cd18  push {lr}
+0218cd1a  sub sp,#0x4
+0218cd1c  ldr r1,[0x0218cd34]
+0218cd1e  mov r2,#0x6
+0218cd20  bl 0x020024cc
+0218cd24  cmp r0,#0x0
+0218cd26  bne 0x0218cd2e
+0218cd28  mov r0,#0x1
+0218cd2a  add sp,#0x4
+0218cd2c  pop {pc}
+0218cd2e  mov r0,#0x0
+0218cd30  add sp,#0x4
+0218cd32  pop {pc}

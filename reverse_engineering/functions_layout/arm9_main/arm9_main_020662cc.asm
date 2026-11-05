@@ -1,0 +1,9 @@
+020662cc  cmp r1,#0x0
+020662d0  beq 0x020662e4
+020662d4  ldr r2,[r0,#0x0]
+020662d8  ands r2,r2,#0x3
+020662dc  movne r2,#0x1
+020662e0  strne r2,[r0,#0x10]
+020662e4  ldr r0,[r0,#0x0]
+020662e8  strb r1,[r0,#0x0]
+020662ec  bx lr

@@ -1,0 +1,8 @@
+021a2214  mov r12,#0x0
+021a2218  ldrb r3,[r1,r12]
+021a221c  add r2,r0,r12
+021a2220  add r12,r12,#0x1
+021a2224  strb r3,[r2,#0x48]
+021a2228  cmp r12,#0x4
+021a222c  blt 0x021a2218
+021a2230  bx lr

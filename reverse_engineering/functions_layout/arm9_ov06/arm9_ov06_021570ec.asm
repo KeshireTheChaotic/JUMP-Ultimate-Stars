@@ -1,0 +1,10 @@
+021570ec  stmdb sp!,{r4,lr}
+021570f0  mov r4,r1
+021570f4  str r0,[r4,#0x1a8]
+021570f8  ldr r1,[r4,#0x1a0]
+021570fc  ldr r1,[r1,#0x0]
+02157100  bl 0x020839c0
+02157104  mov r0,r4
+02157108  bl 0x02157024
+0215710c  mov r0,r4
+02157110  ldmia sp!,{r4,pc}

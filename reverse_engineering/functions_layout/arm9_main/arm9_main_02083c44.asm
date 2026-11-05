@@ -1,0 +1,36 @@
+02083c44  stmdb sp!,{r3,r4,r5,lr}
+02083c48  mov r4,r0
+02083c4c  ldrsb r2,[r4,#0x38]
+02083c50  cmp r2,#0x0
+02083c54  ldmialt sp!,{r3,r4,r5,pc}
+02083c58  ldr r0,[0x2083cd4]
+02083c5c  ldr r1,[r0,#0x0]
+02083c60  add r0,r1,r2, lsl #0x3
+02083c64  ldr r5,[r0,#0x74]
+02083c68  b 0x02083cb4
+02083c6c  ldr r0,[r5,#0x8]
+02083c70  cmp r4,r0
+02083c74  bne 0x02083cb0
+02083c78  add r0,r1,#0x74
+02083c7c  mov r1,r5
+02083c80  add r0,r0,r2, lsl #0x3
+02083c84  bl 0x02037c24
+02083c88  mov r0,r5
+02083c8c  mov r1,#0x0
+02083c90  mov r2,#0xc
+02083c94  bl 0x020517fc
+02083c98  ldr r0,[0x2083cd4]
+02083c9c  mov r1,r5
+02083ca0  ldr r0,[r0,#0x0]
+02083ca4  add r0,r0,#0x84
+02083ca8  bl 0x02037b98
+02083cac  b 0x02083cbc
+02083cb0  ldr r5,[r5,#0x0]
+02083cb4  cmp r5,#0x0
+02083cb8  bne 0x02083c6c
+02083cbc  ldr r1,[r4,#0x2c]
+02083cc0  mvn r0,#0x0
+02083cc4  bic r1,r1,#0x100
+02083cc8  str r1,[r4,#0x2c]
+02083ccc  strb r0,[r4,#0x38]
+02083cd0  ldmia sp!,{r3,r4,r5,pc}

@@ -1,0 +1,9 @@
+0214e2bc  ldr r1,[0x0214e2d0]
+0214e2be  ldr r3,[r1,#0x0]
+0214e2c0  mov r1,#0x53
+0214e2c2  lsl r1,r1,#0x2
+0214e2c4  ldr r2,[r3,r1]
+0214e2c6  orr r0,r2
+0214e2c8  str r0,[r3,r1]
+0214e2ca  ldr r3,[0x0214e2d4]
+0214e2cc  bx r3

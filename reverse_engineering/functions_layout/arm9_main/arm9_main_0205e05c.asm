@@ -1,0 +1,13 @@
+0205e05c  stmdb sp!,{r4,lr}
+0205e060  ldr r1,[r0,#0xc]
+0205e064  ldr r2,[r0,#0x8]
+0205e068  cmp r2,r1
+0205e06c  ldrge r0,[r0,#0x4]
+0205e070  ldmiage sp!,{r4,pc}
+0205e074  ldr r4,[r0,#0x0]
+0205e078  ldr r0,[r0,#0x4]
+0205e07c  sub r0,r0,r4
+0205e080  mul r0,r2,r0
+0205e084  bl 0x0200d12c
+0205e088  add r0,r4,r0
+0205e08c  ldmia sp!,{r4,pc}

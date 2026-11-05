@@ -1,0 +1,7 @@
+020808a4  tst r0,#0x1000
+020808a8  beq 0x020808b8
+020808ac  tst r1,#0x1
+020808b0  moveq r0,#0x1
+020808b4  bxeq lr
+020808b8  mov r0,#0x0
+020808bc  bx lr
