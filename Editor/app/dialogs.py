@@ -147,7 +147,8 @@ class TrackDialog(tk.Toplevel):
 SHORTCUTS = """\
 Global
   Ctrl+1 / 2 / 3     Animation / Sprite / Archive workspace
-  Ctrl+Z, Ctrl+Y     Undo / redo (move-table and sprite edits)
+  Ctrl+4 / 5 / 6     Koma / Level / Screen workspace
+  Ctrl+Z, Ctrl+Y     Undo / redo (move-table, sprite and koma edits)
   Ctrl+S             Save rebuilt archives in place (asks first)
   Ctrl+Shift+S       Save rebuilt archives to a folder
   Ctrl+Enter         Apply the current move table / sprite to its archive
@@ -168,6 +169,14 @@ Sprite
   Click piece        select; drag to move it; arrow keys nudge (Shift = 8 px)
   Delete             delete selected frame
 
+Koma
+  V / B / I          Select / Pencil / Picker
+  Palette            click = paint colour, double-click = edit colour
+
+Level / Screen
+  Layers dock        click the ● column to show/hide a layer
+  Read-only overlays are listed but unavailable until their formats are traced
+
 Viewport
-  Wheel = zoom, middle-drag or Space+drag = pan, F = frame the content
+  Wheel = zoom (¼×–12×), middle-drag or Space+drag = pan, Frame = fit the content
 """

@@ -66,6 +66,11 @@ class Inspector(ttk.Frame):
         self._row += 1
         return v
 
+    def evidence(self, label, grade, note=None):
+        """Evidence badge row: Direct / Cross-checked / Inferred / Unknown (tooltip = note)."""
+        return self.value(label, f'● {grade}' + (f' — {note}' if note else ''),
+                          tip=note, colour=T.EVIDENCE.get(grade, T.MUTED))
+
     def entry(self, label, var, tip=None, width=14, on_return=None):
         self._label(label, tip)
         e = ttk.Entry(self._grid, textvariable=var, width=width, font=T.MONO)

@@ -31,7 +31,9 @@ if str(HERE) not in sys.path:
     sys.path.insert(0, str(HERE))
 
 from jus_formats import alar, almt, dsig as dsigmod, dstx as dstxmod, eventops, notetrack, sdat, sprite  # noqa: E402
-from jus_package import effectlinks, images, package, spriteedit  # noqa: E402
+from jus_package import effectlinks, images, motion, package, sounds, spawns, spriteedit  # noqa: E402
+from app.workspaces import SUITE  # noqa: E402
+from jus_package.audio_preview import AudioPreview
 from jus_package.project import DataRoot, join, split  # noqa: E402
 from jus_package.resources import ResourceIndex  # noqa: E402
 
@@ -79,6 +81,7 @@ class EditorApp(tk.Tk):
         self.almt_path: str | None = None
         self.almt: almt.AlmtFile | None = None
         self.almt_dirty = False
+        self._clean: dict = {}          # undo doc -> bytes at the last load/apply (clears dirty on undo)
         self.move: almt.Move | None = None
         self.sprite_path: str | None = None
         self.sprite_g_path: str | None = None
@@ -94,7 +97,21 @@ class EditorApp(tk.Tk):
         self.loop = tk.BooleanVar(value=True)
         self.speed = tk.StringVar(value='1×')
         self.show_collision = tk.BooleanVar(value=True)
-        self.show_effects = tk.BooleanVar(value=True)
+        self.show_effects = tk.BooleanVar(value=True)      # pursuer (chara_action 13/14)
+        self.show_spawns = tk.BooleanVar(value=True)       # GenerateID effects
+        self.show_effect_marks = tk.BooleanVar(value=True)
+        self.effect_layer = tk.StringVar(value='Front')    # DrawPrio ordering is not traced
+        # NoteTrack physics (jus_package.motion) and sound cues (jus_package.sounds)
+        self.show_motion = tk.BooleanVar(value=True)       # trajectory overlay
+        self.root_motion = tk.BooleanVar(value=True)      # move the character by the simulated offset
+        self.facing_left = tk.BooleanVar(value=False)
+        self.motion_floor = tk.BooleanVar(value=True)
+        self._motion = None
+        self._cues = []
+        self._sounds = None
+        self._audio = None
+        self.sound_enabled = tk.BooleanVar(value=True)
+        self._audio_request = 0
         self.show_onion = tk.BooleanVar(value=False)
         self.pursuer_choice = tk.StringVar(value='A')
         self.sel_track: tuple[int, int] | None = None
@@ -103,6 +120,9 @@ class EditorApp(tk.Tk):
         self._collapsed: set = set()
         self._pursuer_events = ()
         self._effect_moves = {}
+        self._common_tables = None      # [(path, AlmtFile)] from efc/*.aar, cached per data root
+        self.registry = None            # jus_package.registry.Registry (built by the References workspace)
+        self._spawn_list = []
         self._effect_table_error = ''
         self._frame_cache: dict = {}
         self._view_info: list[str] = []
@@ -121,6 +141,8 @@ class EditorApp(tk.Tk):
         self._build_layout()
         self._bind_shortcuts()
         self.after(60, lambda: self.open_root(data_root or DEFAULT_DATA, quiet=True))
+        self._audio_poll_job = self.after(100, self._poll_audio)
+        self.protocol("WM_DELETE_WINDOW", self.destroy)
 
     # ================================================================ layout
     def _build_menu(self):
@@ -173,8 +195,14 @@ class EditorApp(tk.Tk):
         v.add_command(label='Animation workspace', accelerator='Ctrl+1', command=lambda: self.show_workspace('animation'))
         v.add_command(label='Sprite workspace', accelerator='Ctrl+2', command=lambda: self.show_workspace('sprite'))
         v.add_command(label='Archive workspace', accelerator='Ctrl+3', command=lambda: self.show_workspace('archive'))
+        v.add_command(label='Koma editor', accelerator='Ctrl+4', command=lambda: self.show_workspace('koma'))
+        v.add_command(label='Level editor', accelerator='Ctrl+5', command=lambda: self.show_workspace('level'))
+        v.add_command(label='Screen editor', accelerator='Ctrl+6', command=lambda: self.show_workspace('screen'))
+        v.add_command(label='References', accelerator='Ctrl+7', command=lambda: self.show_workspace('references'))
         v.add_separator()
         v.add_checkbutton(label='Collision boxes', variable=self.show_collision, command=self.redraw_view)
+        v.add_checkbutton(label='Spawned effects (GenerateID)', variable=self.show_spawns, command=self.redraw_view)
+        v.add_checkbutton(label='Effect origin markers', variable=self.show_effect_marks, command=self.redraw_view)
         v.add_checkbutton(label='Pursuer effects', variable=self.show_effects, command=self.redraw_view)
         v.add_checkbutton(label='Onion skin', variable=self.show_onion, command=self.redraw_view)
         v.add_checkbutton(label='Sprite piece outlines', variable=self.show_pieces, command=self.redraw_sprite)
@@ -194,10 +222,23 @@ class EditorApp(tk.Tk):
         tk.Label(top, text='JUS', fg=T.ACCENT, bg=T.PANEL2, font=('Segoe UI Black', 13)).pack(side='left', padx=(10, 2))
         tk.Label(top, text='Editor', fg=T.FG, bg=T.PANEL2, font=('Segoe UI', 12)).pack(side='left', padx=(0, 14))
         self._tab_buttons = {}
-        for key, label in (('animation', 'Animation'), ('sprite', 'Sprite'), ('archive', 'Archive')):
+        # Move Lab (Animation + Sprite) · suite workspaces · Archive
+        for key, label in (('animation', 'Animation'), ('sprite', 'Sprite'), ('|', None),
+                           ('koma', 'Koma'), ('level', 'Level'), ('screen', 'Screen'), ('|', None),
+                           ('references', 'References'), ('archive', 'Archive')):
+            if key == '|':
+                tk.Frame(top, width=1, bg=T.LINE).pack(side='left', fill='y', padx=5, pady=8)
+                continue
             b = ttk.Button(top, text=label, style='Tab.TButton', command=lambda kk=key: self.show_workspace(kk))
             b.pack(side='left', padx=1, pady=(4, 0))
             self._tab_buttons[key] = b
+        T.Tooltip(self._tab_buttons['animation'], 'Move Lab: animations, effects, NoteTrack (Ctrl+1)')
+        T.Tooltip(self._tab_buttons['sprite'], 'Move Lab: sprite frames and pieces (Ctrl+2)')
+        T.Tooltip(self._tab_buttons['koma'], 'Koma Editor: comic panel art (Ctrl+4)')
+        T.Tooltip(self._tab_buttons['level'], 'Level Editor v1: stage backgrounds; overlays read-only (Ctrl+5)')
+        T.Tooltip(self._tab_buttons['screen'], 'Screen Editor: menu screens on the DS dual screen (Ctrl+6)')
+        T.Tooltip(self._tab_buttons['archive'], 'Archive members (Ctrl+3)')
+        T.Tooltip(self._tab_buttons['references'], 'Resource registry: where used / uses, search by id (Ctrl+7)')
         T.separator(top)
         T.tool_button(top, '↶', self.undo, 'Undo (Ctrl+Z)', width=3)
         T.tool_button(top, '↷', self.redo, 'Redo (Ctrl+Y)', width=3)
@@ -230,6 +271,11 @@ class EditorApp(tk.Tk):
         self.ws = {'animation': self._build_animation(self.ws_host, k),
                    'sprite': self._build_sprite(self.ws_host, k),
                    'archive': self._build_archive(self.ws_host, k)}
+        self.suite = {}
+        for cls in SUITE:
+            w = cls(self, self.ws_host, self._project_panel.body, k)
+            self.suite[w.key] = w
+            self.ws[w.key] = w.frame
         self.show_workspace('animation')
         self.after(250, self._init_sashes)
 
@@ -237,14 +283,18 @@ class EditorApp(tk.Tk):
         p = T.Panel(body, 'Project')
         body.add(p, weight=0)
         p.configure(width=int(250 * k))
-        row = ttk.Frame(p.body)
+        self._project_panel = p
+        # Move Lab's browser; suite workspaces put their own browser in p.body and swap.
+        self._movelab_browser = ttk.Frame(p.body)
+        self._movelab_browser.pack(fill='both', expand=True)
+        row = ttk.Frame(self._movelab_browser)
         row.pack(fill='x', padx=6, pady=6)
         self.find_var = tk.StringVar()
         self.find_var.trace_add('write', lambda *_: self.populate_tree())
         e = ttk.Entry(row, textvariable=self.find_var)
         e.pack(fill='x')
         T.Tooltip(e, 'Filter characters and archives')
-        tf = ttk.Frame(p.body)
+        tf = ttk.Frame(self._movelab_browser)
         self.res_tree = ttk.Treeview(tf, show='tree', selectmode='browse')
         self.res_tree.column('#0', width=int(200 * k), stretch=True)
         sb = ttk.Scrollbar(tf, command=self.res_tree.yview)
@@ -288,15 +338,39 @@ class EditorApp(tk.Tk):
         # viewport
         vp = T.Panel(upper, 'Viewport')
         upper.add(vp, weight=1)
-        for text, var in (('Onion', self.show_onion), ('Effects', self.show_effects),
-                          ('Collision', self.show_collision)):
-            ttk.Checkbutton(vp.header, text=text, variable=var, style='Toolbar.TCheckbutton',
-                            command=self.redraw_view).pack(side='right', padx=4)
-        ps = ttk.Combobox(vp.header, values=('A', 'B'), width=2, state='readonly', textvariable=self.pursuer_choice)
-        ps.pack(side='right', padx=2)
-        ps.bind('<<ComboboxSelected>>', lambda e: self.redraw_view())
-        T.Tooltip(ps, 'Pursuer state to preview (the game picks A or B at run time)')
-        ttk.Label(vp.header, text='Pursuer', style='Toolbar.TLabel').pack(side='right')
+        # Unity-style "Gizmos" dropdown keeps the header uncluttered at any width.
+        giz = ttk.Menubutton(vp.header, text='Show ▾', style='Tool.TButton')
+        gm = tk.Menu(giz, tearoff=False)
+        for text, var in (('Spawned effects (GenerateID)', self.show_spawns),
+                          ('Effect origin markers', self.show_effect_marks),
+                          ('Pursuer effect (chara_action 13/14)', self.show_effects),
+                          ('Collision boxes', self.show_collision),
+                          ('Onion skin', self.show_onion)):
+            gm.add_checkbutton(label=text, variable=var, command=self.redraw_view)
+        gm.add_separator()
+        gm.add_checkbutton(label='Physics trajectory (NoteTrack 0x01xx)', variable=self.show_motion,
+                           command=self.redraw_view)
+        gm.add_checkbutton(label='Root motion: move the character along it', variable=self.root_motion,
+                           command=self.redraw_view)
+        gm.add_checkbutton(label='Facing left (mirrors x impulses)', variable=self.facing_left,
+                           command=self._motion_changed)
+        gm.add_checkbutton(label='Assume floor at start height', variable=self.motion_floor,
+                           command=self._motion_changed)
+        gm.add_separator()
+        gm.add_command(label='Effect layer (DrawPrio rule not traced):', state='disabled')
+        for v in ('Front', 'Behind'):
+            gm.add_radiobutton(label=f'   Effects {v.lower()} character', value=v, variable=self.effect_layer,
+                               command=self.redraw_view)
+        gm.add_command(label='Pursuer state (picked at run time):', state='disabled')
+        for v in ('A', 'B'):
+            gm.add_radiobutton(label=f'   State {v}', value=v, variable=self.pursuer_choice, command=self.redraw_view)
+        giz['menu'] = gm
+        giz.pack(side='right', padx=4)
+        T.Tooltip(giz, 'Viewport overlays: effects, pursuer, collision, onion skin, effect layer')
+        cb = ttk.Checkbutton(vp.header, text='Effects', variable=self.show_spawns, style='Toolbar.TCheckbutton',
+                             command=self.redraw_view)
+        cb.pack(side='right', padx=4)
+        T.Tooltip(cb, 'Effects spawned by GenerateID keys, incl. nested spawns')
         ttk.Button(vp.header, text='Frame', style='Tool.TButton', command=self.frame_view).pack(side='right', padx=6)
         self.view = Viewport(vp.body, on_draw=self._draw_animation, zoom=3)
         self.view.pack(fill='both', expand=True)
@@ -327,6 +401,8 @@ class EditorApp(tk.Tk):
         self.dur_label = ttk.Label(bar, text='/ 0', style='Toolbar.TLabel', font=T.MONO)
         self.dur_label.pack(side='left')
         ttk.Checkbutton(bar, text='Loop', variable=self.loop, style='Toolbar.TCheckbutton').pack(side='left', padx=6)
+        ttk.Checkbutton(bar, text='Sound', variable=self.sound_enabled, command=self._sound_changed,
+                        style='Toolbar.TCheckbutton').pack(side='left', padx=4)
         sc = ttk.Combobox(bar, values=SPEEDS, textvariable=self.speed, width=5, state='readonly')
         sc.pack(side='left')
         T.Tooltip(sc, 'Playback speed (the game runs one tick per frame at 60 Hz)')
@@ -431,6 +507,14 @@ class EditorApp(tk.Tk):
             frame.pack_forget()
             self._tab_buttons[key].configure(style='TabOn.TButton' if key == name else 'Tab.TButton')
         self.ws[name].pack(fill='both', expand=True)
+        # left dock: the workspace's own browser (one resource column, swapped per workspace)
+        suite = self.suite.get(name) if hasattr(self, 'suite') else None
+        for b in [self._movelab_browser] + [w.browser for w in getattr(self, 'suite', {}).values()]:
+            b.pack_forget()
+        (suite.browser if suite else self._movelab_browser).pack(fill='both', expand=True)
+        self._project_panel.set_title(suite.browser_title if suite else 'Project')
+        if suite:
+            suite.on_show()
         self._update_undo_label() if hasattr(self, 'undo_label') else None
         if name in ('sprite', 'archive') and not getattr(self, f'_sashed_{name}', False):
             setattr(self, f'_sashed_{name}', True)
@@ -460,6 +544,13 @@ class EditorApp(tk.Tk):
         self.bind_all('<Control-Key-1>', guard(lambda e: self.show_workspace('animation'), True))
         self.bind_all('<Control-Key-2>', guard(lambda e: self.show_workspace('sprite'), True))
         self.bind_all('<Control-Key-3>', guard(lambda e: self.show_workspace('archive'), True))
+        self.bind_all('<Control-Key-4>', guard(lambda e: self.show_workspace('koma'), True))
+        self.bind_all('<Control-Key-5>', guard(lambda e: self.show_workspace('level'), True))
+        self.bind_all('<Control-Key-6>', guard(lambda e: self.show_workspace('screen'), True))
+        self.bind_all('<Control-Key-7>', guard(lambda e: self.show_workspace('references'), True))
+        for key, tool in (('v', 'select'), ('b', 'pencil'), ('i', 'picker')):
+            self.bind_all(f'<KeyPress-{key}>', guard(lambda e, t=tool: self.suite['koma'].tool.set(t)
+                                                     if self.workspace == 'koma' else None))
         self.bind_all('<F1>', guard(lambda e: self.show_shortcuts(), True))
         self.bind_all('<Control-d>', guard(lambda e: self.duplicate_move() if self.workspace == 'animation' else None))
         self.bind_all('<space>', guard(lambda e: self.toggle_play() if self.workspace == 'animation'
@@ -521,9 +612,14 @@ class EditorApp(tk.Tk):
             self.open_root(d)
 
     def open_root(self, path, quiet=False):
+        self._stop_play()
+        if self._audio:
+            self._audio.close()
+            self._audio = None
         try:
             self.root_data = DataRoot(path)
             self.root_data.characters()
+            self._common_tables = None
         except Exception as exc:  # noqa: BLE001
             self.root_data = None
             if not quiet:
@@ -531,10 +627,15 @@ class EditorApp(tk.Tk):
             self.status.set(f'No data root loaded ({exc}). Use File › Open data root…')
             return
         self._sdat = None
+        self._sounds = sounds.SoundResolver(self.root_data.root)
+        self._audio = AudioPreview(self.root_data.root)
+        self._sounds.set_characters([c for c in self.root_data.characters() if '_b_' in c])
         self.status.set('Select a character or archive in the Project panel.')
         self.root_label.configure(text=str(path))
         self.container = None
         self.populate_tree()
+        for w in self.suite.values():
+            w.on_root()
         self.update_dirty()
 
     def populate_tree(self):
@@ -603,6 +704,10 @@ class EditorApp(tk.Tk):
         menu = tk.Menu(self, tearoff=False)
         menu.add_command(label='Export package…', command=self.export_package)
         menu.add_command(label='Import package…', command=self.import_package)
+        if item.startswith('arc:'):
+            path = item[4:].split('|@')[0]
+            menu.add_separator()
+            menu.add_command(label='Show references', command=lambda: self.show_references(path))
         menu.tk_popup(e.x_root, e.y_root)
 
     def select_container(self, path, char_id=None):
@@ -615,7 +720,9 @@ class EditorApp(tk.Tk):
         else:
             self.scope = [path]
         try:
-            self.index = ResourceIndex(self.root_data, self.scope)
+            # Common effect archives come last so character resources win on id clashes.
+            common = [p for p in self.root_data.effect_archives() if p not in self.scope]
+            self.index = ResourceIndex(self.root_data, self.scope + common)
             arc = self.root_data.archive(path)
         except Exception as exc:  # noqa: BLE001
             messagebox.showerror('Archive', f'{path}:\n{exc}')
@@ -673,6 +780,9 @@ class EditorApp(tk.Tk):
             parts.append('● move table not applied')
         if self.sprite_dirty:
             parts.append('● sprite not applied')
+        for w in getattr(self, 'suite', {}).values():
+            if w.dirty:
+                parts.append(f'● {w.title.lower()} not applied')
         if files:
             parts.append(f'unsaved: {", ".join(files)}')
         self.dirty_label.configure(text='   '.join(parts))
@@ -695,6 +805,9 @@ class EditorApp(tk.Tk):
         return True
 
     def apply_current(self):
+        if self.workspace in self.suite:
+            self.suite[self.workspace].apply()
+            return
         if self.workspace == 'sprite' or (self.sprite_dirty and not self.almt_dirty):
             self.apply_sprite()
         if self.almt_dirty or self.workspace == 'animation':
@@ -720,6 +833,8 @@ class EditorApp(tk.Tk):
         written = self.root_data.save(out)
         self.update_dirty()
         self.status.set(f'Saved {len(written)} archive file(s).')
+        if out is None:                       # the index mirrors the data root on disk
+            self.suite['references'].rebuild()
         messagebox.showinfo('Save', 'Wrote:\n' + '\n'.join(str(w) for w in written))
 
     def revert(self):
@@ -823,6 +938,8 @@ class EditorApp(tk.Tk):
 
     # ============================================================ undo/redo
     def _doc(self):
+        if self.workspace in getattr(self, 'suite', {}):
+            return self.suite[self.workspace].doc() or f'{self.workspace}:'
         if self.workspace == 'sprite' and self.sprite_path:
             return 'sprite:' + self.sprite_path
         return 'almt:' + (self.almt_path or '')
@@ -850,11 +967,17 @@ class EditorApp(tk.Tk):
         if kind == 'almt':
             snap = snap if snap is not None else self._almt_snapshot()
             if snap is not None and self.almt_path:
-                self.history.push('almt:' + self.almt_path, label, snap)
+                doc = 'almt:' + self.almt_path
+                if not self.almt_dirty:          # first edit since load/apply: remember the clean bytes
+                    self._clean[doc] = snap[0]
+                self.history.push(doc, label, snap)
         else:
             snap = snap if snap is not None else self._sprite_snapshot()
             if snap is not None and self.sprite_path:
-                self.history.push('sprite:' + self.sprite_path, label, snap)
+                doc = 'sprite:' + self.sprite_path
+                if not self.sprite_dirty:
+                    self._clean[doc] = snap[:2]
+                self.history.push(doc, label, snap)
         self._update_undo_label()
 
     def _restore_almt(self, snap):
@@ -862,7 +985,8 @@ class EditorApp(tk.Tk):
         self.almt = almt.parse(data)
         for m in self.almt.moves:
             m.dirty = True
-        self.almt_dirty = True
+        # undoing back to the applied/loaded bytes leaves nothing to apply
+        self.almt_dirty = data != self._clean.get('almt:' + (self.almt_path or ''))
         self.populate_moves(select=idx)
         self.sel_track, self.sel_key = sel_track, sel_key
         self.refresh_animation()
@@ -872,7 +996,7 @@ class EditorApp(tk.Tk):
         self.sprite_d = dstxmod.parse(dbytes)
         if gbytes is not None:
             self.sprite_g = dsigmod.parse(gbytes)
-        self.sprite_dirty = True
+        self.sprite_dirty = (dbytes, gbytes) != self._clean.get('sprite:' + (self.sprite_path or ''))
         self.populate_frames(select=fi)
         self.piece_i = pi
         self.redraw_sprite(thumbs=True)
@@ -885,6 +1009,17 @@ class EditorApp(tk.Tk):
 
     def _history_step(self, fn, verb):
         doc = self._doc()
+        ws = getattr(self, 'suite', {}).get(self.workspace)
+        if ws is not None:
+            current = ws.snapshot()
+            res = fn(doc, current) if current is not None else None
+            if res is None:
+                self.status.set(f'Nothing to {verb.lower()}.')
+                return
+            ws.restore(res[1])
+            self.status.set(f'{verb}: {res[0]}')
+            self.update_dirty()
+            return
         current = self._sprite_snapshot() if doc.startswith('sprite:') else self._almt_snapshot()
         if current is None:
             return
@@ -921,6 +1056,8 @@ class EditorApp(tk.Tk):
             messagebox.showerror('ALMT', str(exc))
             self.almt = None
         self.almt_dirty = False
+        if self.container.startswith('efc/'):
+            self._common_tables = None      # re-read the common effects after an edit/apply
         self._load_effect_catalog()
         self.populate_moves()
         self.update_dirty()
@@ -952,6 +1089,7 @@ class EditorApp(tk.Tk):
         new = self.almt.moves[int(sel)] if self.almt and sel else None
         changed = new is not self.move
         if changed:
+            self._stop_play()
             self.sel_track = self.sel_key = self.sel_virtual = None
         self.move = new
         if changed:
@@ -1074,36 +1212,17 @@ class EditorApp(tk.Tk):
                 self._sdat = False
         return self._sdat or None
 
-    def _sound_archives(self):
-        syms = self.sdat_symbols()
-        if not syms or not self.container:
-            return None, None
-        stem = Path(split(self.container)[-1]).stem.lower()
-        m = re.match(r'([a-z]{2}_[bsh]_\d{2})', stem)
-        char = syms.seqarc_by_name('SEQ_' + m.group(1)) if m else None
-        special = syms.seqarc_by_name('SEQ_' + stem) if stem != (m.group(1) if m else '') else None
-        return char, special
-
     def command_text(self, c: notetrack.Command, short=False) -> str:
         text = c.text()
         if c.opcode == 0x0300:
             v = c.values()
             if v and v[0] in eventops.CHARA_ACTION_NAMES:
                 text += f'  — {eventops.CHARA_ACTION_NAMES[v[0]]}'
-        if c.opcode in (0x0400, 0x0401, 0x0402):
+        if c.opcode in (0x0400, 0x0401, 0x0402) and self._sounds is not None:
             v = c.values()
-            syms = self.sdat_symbols()
-            name = None
-            if v and syms:
-                if c.opcode == 0x0400:
-                    name = syms.sound_name(sdat.SEQ_BATTLE, v[0])
-                else:
-                    char, special = self._sound_archives()
-                    arc = char if c.opcode == 0x0401 else special
-                    if arc and 0 <= v[0] < len(arc.sequences):
-                        name = arc.sequences[v[0]] + ' (archive inferred from name)'
-            if name:
-                text += f' = {name}'
+            if v:
+                cue = self._sounds.resolve(c.opcode, v[0], self.container)
+                text += f' = {cue.label}' if cue.ssar is not None else f'  (silent: {cue.note})'
         if short and len(text) > 48:
             text = text[:46] + '…'
         return text
@@ -1341,21 +1460,31 @@ class EditorApp(tk.Tk):
             self._note_dialog(ni, track, self.tick, operation='add')
 
     # ------------------------------------------------------- pursuer links
-    def _load_effect_catalog(self):
-        self._effect_moves = {}
-        if not self.root_data:
-            return
-        for path in self.scope:
+    def _amt_tables(self, paths):
+        out = []
+        for path in paths:
             try:
                 arc = self.root_data.archive(path)
                 for e in arc.entries:
                     if e.ext != '.amt':
                         continue
-                    table = self.almt if (join(path, e.name) == self.almt_path and self.almt) else almt.parse(e.payload())
-                    for move in table.moves:
-                        self._effect_moves.setdefault(move.id, (move, table.node_names, join(path, e.name)))
+                    rp = join(path, e.name)
+                    table = self.almt if (rp == self.almt_path and self.almt) else almt.parse(e.payload())
+                    out.append((rp, table))
             except (KeyError, ValueError, OSError):
                 continue
+        return out
+
+    def _load_effect_catalog(self):
+        """Move-id → (move, node names, path) over the character scope, then efc/*.aar."""
+        self._effect_moves = {}
+        if not self.root_data:
+            return
+        if self._common_tables is None:
+            self._common_tables = self._amt_tables(self.root_data.effect_archives())
+        # The open table is always the live (possibly edited) object.
+        common = [(p, self.almt if (p == self.almt_path and self.almt) else t) for p, t in self._common_tables]
+        spawns.build_catalog(self._amt_tables(self.scope) + common, self._effect_moves)
 
     def _refresh_pursuer_links(self):
         self._pursuer_events = ()
@@ -1376,6 +1505,7 @@ class EditorApp(tk.Tk):
     def _timeline_rows(self):
         rows = []
         if not self.move:
+            self._motion, self._cues = None, []
             return rows
         marker_ticks = {}
         for node in self.move.nodes:
@@ -1435,6 +1565,8 @@ class EditorApp(tk.Tk):
                          'keys': [(t, None) for t in sorted(all_ticks)], 'editable': False})
             if not collapsed:
                 rows.extend(child_rows)
+        rows.extend(self._spawn_rows())
+        rows.extend(self._notetrack_effect_rows())
         if self._pursuer_events:
             gid = ('group', 'effects')
             collapsed = gid in self._collapsed
@@ -1467,6 +1599,254 @@ class EditorApp(tk.Tk):
                                              'info': (eid, path)})
         return rows
 
+    # ======================================================== registry links
+    def open_resource(self, path, move_id=None):
+        """Open a registry resource in the workspace that edits it."""
+        if not self.root_data or not self.confirm_discard():
+            return
+        parts = split(path)
+        container, name = join(*parts[:-1]), parts[-1]
+        ext = '.' + name.rsplit('.', 1)[-1].lower() if '.' in name else ''
+        grp = self.registry.resources[path].group if self.registry and path in self.registry.resources else ''
+        cid = grp[4:] if grp.startswith('chr:') else None
+        if ext == '.aar':                      # an archive: open it as the container
+            container, name = path, None
+        try:
+            if name and ext == '.dtx' and container == 'koma/koma.aar':
+                self.show_workspace('koma')
+                self.suite['koma'].load(name)
+                return
+            if name and ext in ('.atm', '.dig', '.dtx') and container.startswith('stage/stage.aar'):
+                m = re.search(r'(bg_[a-z0-9_]+?)(_floor|_gimmick)?\.aar', container)
+                if m:
+                    self.show_workspace('level')
+                    self.suite['level'].load(m.group(1))
+                    return
+            if name and ext in ('.atm', '.dig') and not container.startswith(('chr/', 'efc/')):
+                self.show_workspace('screen')
+                self.suite['screen'].load(container)
+                return
+            self.select_container(container, cid)
+            if name and ext == '.amt':
+                if self.almt_path != path:
+                    self.almt_combo.set(name)
+                    self.load_almt(name)
+                idx = None
+                if move_id is not None and self.almt:
+                    idx = next((i for i, m in enumerate(self.almt.moves) if m.id == move_id), None)
+                if idx is not None:
+                    self.move_filter.set('')
+                    self.populate_moves(select=idx)
+                self.show_workspace('animation')
+                return
+            if name and ext == '.dtx':
+                label = next((lab for lab, p in self._sprite_paths.items() if p == path), None)
+                if label:
+                    self.sprite_combo.set(label)
+                    self.load_sprite(label)
+                    self.show_workspace('sprite')
+                    return
+            self.show_workspace('archive')
+            if name:
+                arc = self.root_data.archive(container)
+                k = next((i for i, e in enumerate(arc.entries) if e.name == name), None)
+                if k is not None and self.member_tree.exists(str(k)):
+                    self.member_tree.selection_set(str(k))
+                    self.member_tree.focus(str(k))
+                    self.member_tree.see(str(k))
+                    self._member_details()
+        finally:
+            self.status.set(f'Opened {path}')
+
+    def on_registry_ready(self):
+        """Refresh inspectors that show where-used once the index exists."""
+        if self.workspace == 'animation':
+            self.refresh_inspector()
+        elif self.workspace == 'sprite':
+            self.refresh_details()
+        elif self.workspace == 'archive':
+            self._member_details()
+
+    def show_references(self, path, move_id=None):
+        self.show_workspace('references')
+        self.suite['references'].select(path, move_id=move_id)
+
+    def _refs_section(self, ins, path, move_id=None, title='Where used'):
+        """Inspector section listing registry references for a resource (and move)."""
+        reg = self.registry
+        if reg is None:
+            ins.section(title)
+            ins.text('Resource index is being built…')
+            return
+        if path not in reg.resources:
+            return
+        users = reg.used_by(path, move_id)
+        uses = reg.uses(path)
+        if move_id is not None and path in reg.moves:
+            idx = next((i for i, m in reg.moves[path] if m == move_id), None)
+            uses = [r for r in uses if idx is not None and r.src_detail.startswith(f'move {idx} (')]
+        ins.section(title)
+        if not users:
+            ins.value('Used by', 'nothing (no known reference)', colour=T.MUTED)
+        for r in users[:6]:
+            src = split(r.src)[-1].rsplit('/', 1)[-1]
+            ins.value(src, f'{r.label}\n{r.src_detail}', tip=f'{r.src}\nevidence: {r.evidence}')
+        if len(users) > 6:
+            ins.value('', f'… {len(users) - 6} more')
+        ins.value('Uses', f'{len(uses)} reference(s)', colour=T.MUTED)
+        ins.buttons(('Show references', lambda: self.show_references(path, move_id)))
+
+    def open_effect_move(self, eid, path):
+        """Jump to an effect's own move table (like opening a sub-timeline)."""
+        parts = split(path)
+        container, name = join(*parts[:-1]), parts[-1]
+        if not self.confirm_discard():
+            return
+        if container != self.container:
+            cid = self._char_of(container) if container.startswith('chr/') else None
+            self.select_container(container, cid)
+        if self.almt_path != path:
+            self.almt_combo.set(name)
+            self.load_almt(name)
+        if self.almt:
+            idx = next((i for i, m in enumerate(self.almt.moves) if m.id == eid), None)
+            if idx is not None:
+                self.move_filter.set('')
+                self.populate_moves(select=idx)
+        self.status.set(f'Opened effect {hx(eid)} in {path}')
+
+    # ------------------------------------------- NoteTrack physics and sound
+    def _motion_params(self):
+        return motion.Params(facing_left=self.facing_left.get(), floor=self.motion_floor.get())
+
+    def _refresh_notetrack_effects(self):
+        self._motion = motion.simulate(self.move, self.almt.node_names, self._motion_params()) if self.move else None
+        self._cues = (self._sounds.cues(self.move, self.almt.node_names, self.container)
+                      if self.move and self._sounds else [])
+        if self._audio:
+            self._audio.prepare(self._cues)
+
+    def _motion_changed(self):
+        if self.move:
+            self._refresh_notetrack_effects()
+            self.refresh_inspector()
+            self.redraw_view()
+
+    def _notetrack_effect_rows(self):
+        """Read-only rows derived from NoteTrack: physics (0x01xx) and sound cues (0x04xx)."""
+        self._refresh_notetrack_effects()
+        mo, cues = self._motion, self._cues
+        if not (mo and mo.commands) and not cues:
+            return []
+        gid = ('group', 'ntfx')
+        collapsed = gid in self._collapsed
+        ticks = sorted({t for t, _, _ in (mo.commands if mo else [])} | {c.tick for c in cues})
+        rows = [{'id': gid, 'kind': 'group', 'label': 'NoteTrack physics & sound', 'collapsed': collapsed,
+                 'keys': [(t, None) for t in ticks], 'editable': False}]
+        if collapsed:
+            return rows
+        if mo and mo.commands:
+            spans, labels, keys = [], [], []
+            off_from = None
+            for f in mo.frames:                               # gravity-off spans
+                if not f.gravity and off_from is None:
+                    off_from = f.tick
+                if f.gravity and off_from is not None:
+                    spans.append((off_from, f.tick, T.READONLY, 'gravity off'))
+                    off_from = None
+            if off_from is not None:
+                spans.append((off_from, self.move.duration, T.READONLY, 'gravity off'))
+            for t, node, c in mo.commands:
+                keys.append((t, ('phys', t)))
+                if c.opcode == 0x0104:
+                    v = c.values() or [0, 0, 0]
+                    spans.append((t, t + (v[2] & 0xFF), T.WARN, ''))
+                if c.opcode in (0x0100, 0x0103, 0x0104):
+                    v = c.values() or []
+                    labels.append((t, 'stop' if c.opcode == 0x0100 else f'({v[0]},{v[1]})', T.WARN))
+            rows.append({'id': ('ntfx', 'physics'), 'label': 'Physics', 'indent': 1, 'kind': 'track',
+                         'colour': T.WARN, 'editable': False, 'keys': keys, 'spans': spans, 'labels': labels,
+                         'derived': 'physics', 'badge': f'{len(mo.commands)}',
+                         'tooltip': lambda t, p: self._physics_tooltip(t)})
+        if cues:
+            rows.append({'id': ('ntfx', 'sound'), 'label': 'Sound', 'indent': 1, 'kind': 'track',
+                         'colour': T.GOOD, 'editable': False, 'derived': 'sound', 'badge': f'{len(cues)}',
+                         'keys': [(c.tick, ('snd', c.tick)) for c in cues],
+                         'labels': [(c.tick, '♪ ' + c.label,
+                                     T.GOOD if c.ssar is not None else T.MUTED) for c in cues],
+                         'tooltip': lambda t, p: self._sound_tooltip(t)})
+        return rows
+
+    def _physics_tooltip(self, tick):
+        mo = self._motion
+        lines = [f'tick {tick}']
+        for t, node, c in mo.commands:
+            if t == tick:
+                lines.append(f'{node}: 0x{c.opcode:04X} {motion.LABELS.get(c.opcode, "")} {c.values()}  '
+                             f'(ov06 0x{motion.FUNCTIONS.get(c.opcode, 0):08X})')
+        f = mo.at(tick)
+        if f:
+            lines.append(f'offset ({f.px[0]:.1f}, {f.px[1]:.1f}) px · v ({f.vx / 256:.2f}, {f.vy / 256:.2f}) px/frame')
+        return '\n'.join(lines)
+
+    def _sound_tooltip(self, tick):
+        lines = [f'tick {tick}']
+        for c, played in sounds.dedupe_same_frame(self._cues):
+            if c.tick == tick:
+                lines.append(f'0x{c.opcode:04X} seq {c.seq}: {c.label}' + ('' if played or c.ssar is None
+                                                                           else '  (same-frame duplicate: ignored)'))
+        return '\n'.join(lines)
+
+    def _spawn_rows(self):
+        """One read-only clip row per GenerateID key (Unity-style sub-clip bars)."""
+        sp_list = spawns.keyed_spawns(self.move, self.almt.node_names)
+        self._spawn_list = sp_list
+        if not sp_list:
+            return []
+        gid = ('group', 'spawns')
+        collapsed = gid in self._collapsed
+        rows = [{'id': gid, 'kind': 'group', 'label': f'Spawned effects ({len(sp_list)})', 'collapsed': collapsed,
+                 'keys': [(sp.tick, None) for sp in sp_list], 'editable': False}]
+        if collapsed:
+            return rows
+        horizon = self.move.duration
+        for sp in sp_list:
+            entry = self._effect_moves.get(sp.effect_id)
+            row = {'id': ('spawn',) + sp.key, 'indent': 1, 'kind': 'track', 'editable': False,
+                   'keys': [(sp.tick, sp)], 'spawn': sp}
+            if entry is None:
+                row.update(label=f'{sp.effect_id:06X} ⚠ missing', colour=T.BAD, badge=sp.node,
+                           tooltip=lambda t, s: f'GenerateID {s.effect_id:06X} from {s.node} @ {s.tick}\n'
+                                                f'No move with this id in the character or efc/ archives.')
+                rows.append(row)
+                continue
+            child, names, path = entry
+            a, b, open_end = spawns.effect_span(sp, child, horizon)
+            src = 'common' if path.startswith('efc/') else 'char'
+            row.update(label=f'{sp.effect_id:06X} #{sp.occurrence}', colour=T.EFFECT, badge=sp.node,
+                       info=(sp.effect_id, path),
+                       spans=[(a, b, T.EFFECT, f'{split(path)[-1]} ({src}){" ⟳" if open_end else ""}')],
+                       tooltip=lambda t, s, c=child, p=path, oe=open_end: (
+                           f'GenerateID {s.effect_id:06X} — node {s.node}, key {s.key_index}, tick {s.tick}\n'
+                           f'{p}\nlength {c.duration}{" (loops; lifetime set at run time)" if oe else ""}\n'
+                           f'Double-click to open the effect move.'))
+            rows.append(row)
+            # one level of nested spawns, shifted into parent time
+            for csp in spawns.keyed_spawns(child, names):
+                if csp.tick > child.duration:
+                    continue
+                t0 = sp.tick + csp.tick
+                centry = self._effect_moves.get(csp.effect_id)
+                crow = {'id': ('spawn',) + sp.key + csp.key, 'indent': 2, 'kind': 'track', 'editable': False,
+                        'keys': [(t0, csp)], 'label': f'↳ {csp.effect_id:06X}', 'badge': csp.node,
+                        'colour': T.EFFECT if centry else T.BAD, 'spawn': csp}
+                if centry:
+                    ca, cb, coe = spawns.effect_span(csp, centry[0], horizon - sp.tick)
+                    crow.update(info=(csp.effect_id, centry[2]),
+                                spans=[(sp.tick + ca, sp.tick + cb, T.EFFECT, split(centry[2])[-1])])
+                rows.append(crow)
+        return rows
+
     @staticmethod
     def _branch_targets(cmd):
         if cmd.opcode >> 8 != 0:
@@ -1487,6 +1867,10 @@ class EditorApp(tk.Tk):
         info = cmd.info
         if info:
             lines.append(info.meaning[:90])
+        fn = motion.FUNCTIONS.get(cmd.opcode) or sounds.FUNCTIONS.get(cmd.opcode)
+        if fn:
+            lines.append(f'handler: ov06 0x{fn:08X}' + (' → main FUN_0207342C' if cmd.opcode >> 8 == 4 else
+                                                        ' · physics step main FUN_02082E10'))
         return '\n'.join(lines + row_events)
 
     def _fmt(self, field, v):
@@ -1605,7 +1989,7 @@ class EditorApp(tk.Tk):
         if not row.get('sel'):
             info = row.get('info')
             if info:
-                self.status.set(f'Effect move {hx(info[0])} lives in {info[1]} — select that move table to edit it.')
+                self.open_effect_move(*info)
             return
         self.sel_track = row['sel']
         tr = self._track()
@@ -1645,8 +2029,66 @@ class EditorApp(tk.Tk):
         self.tick_var.set(str(self.tick))
         self.timeline.set_tick(self.tick)
         self.redraw_view()
-        if self.sel_track is not None and self._track() is not None and self._track().field == 'NoteTrack':
+        if (self.sel_track is not None and self._track() is not None and self._track().field == 'NoteTrack'
+                or self.sel_virtual is not None and self.sel_virtual.get('derived') in ('physics', 'sound')):
             self.refresh_inspector()
+
+    def _poll_audio(self):
+        try:
+            if self._audio:
+                self._audio.poll()
+        except OSError as exc:
+            self.status.set(str(exc))
+        self._audio_poll_job = self.after(100, self._poll_audio)
+
+    def _sound_changed(self):
+        if not self.sound_enabled.get() and self._audio:
+            self._audio.stop()
+
+    def _play_sound_tick(self, tick):
+        if self._audio and self.sound_enabled.get():
+            errors = self._audio.play_tick(self._cues, tick)
+            if errors:
+                self.status.set('Sound: ' + '; '.join(dict.fromkeys(errors)))
+
+    def _begin_play(self):
+        if not self.playing:
+            return
+        if self.sound_enabled.get() and self._audio and not self._audio.ready():
+            self.status.set('Decoding sound cues… playback will start when ready.')
+            self._play_job = self.after(50, self._begin_play)
+            return
+        self.status.set('Playing authored timeline; sound cues use their original pitch and tempo.')
+        self._play_sound_tick(self.tick)
+        self._schedule_frame()
+
+    def _schedule_frame(self):
+        mult = float(self.speed.get().rstrip('×') or 1)
+        self._play_job = self.after(max(8, int(1000 / (60 * mult))), self._animate)
+
+    def _audition_tick(self):
+        self._stop_play()
+        self._audio_request += 1
+        request, tick = self._audio_request, self.tick
+        def ready():
+            if request != self._audio_request or not self._audio:
+                return
+            if not self._audio.ready():
+                self.status.set('Decoding sound cues…')
+                self._play_job = self.after(50, ready)
+                return
+            self._play_job = None
+            self._play_sound_tick(tick)
+            self.refresh_inspector()
+        ready()
+
+    def destroy(self):
+        self._stop_play()
+        if getattr(self, '_audio_poll_job', None):
+            self.after_cancel(self._audio_poll_job)
+        if self._audio:
+            self._audio.close()
+        super().destroy()
 
     def toggle_play(self):
         if self.playing:
@@ -1654,10 +2096,13 @@ class EditorApp(tk.Tk):
         elif self.move:
             self.playing = True
             self.play_btn.configure(text='❚❚')
-            self._animate()
+            self._begin_play()
 
     def _stop_play(self):
         self.playing = False
+        self._audio_request += 1
+        if self._audio:
+            self._audio.stop()
         if self._play_job:
             self.after_cancel(self._play_job)
             self._play_job = None
@@ -1675,8 +2120,8 @@ class EditorApp(tk.Tk):
                 return
             t = 0
         self.set_tick(t)
-        mult = float(self.speed.get().rstrip('×') or 1)
-        self._play_job = self.after(max(8, int(1000 / (60 * mult))), self._animate)
+        self._play_sound_tick(t)
+        self._schedule_frame()
 
     # ============================================================ viewport
     def refresh_animation(self):
@@ -1800,6 +2245,22 @@ class EditorApp(tk.Tk):
             for f, v in s.items():
                 if f.startswith('CollisionRect') and isinstance(v, list):
                     xs.append((pos[0] + v[0], pos[1] + v[1], pos[0] + v[2], pos[1] + v[3]))
+        if self.show_spawns.get() and self.index:
+            for inst in self.spawn_projection().instances:
+                for s in self._state(inst.move, inst.sub_tick).values():
+                    tid, frame = s.get('TextureID'), s.get('BoundsIndex')
+                    if tid is None or frame in (None, 0xFFFF):
+                        continue
+                    fi = self._frame_image(tid, frame)
+                    if fi:
+                        pil, l, t = fi
+                        p = s.get('2DPos', [0, 0])
+                        x, y = inst.anchor[0] + p[0] + l, inst.anchor[1] + p[1] + t
+                        xs.append((x, y, x + pil.width, y + pil.height))
+        dx, dy = self._animation_origin(self.tick)
+        xs = [(l + dx, t + dy, r + dx, b + dy) for l, t, r, b in xs]
+        if self.show_motion.get() and self._motion and self._motion.commands:
+            xs.extend((f.px[0], f.px[1], f.px[0], f.px[1]) for f in self._motion.frames)
         if not xs:
             return None
         return (min(r[0] for r in xs) - 8, min(r[1] for r in xs) - 8, max(r[2] for r in xs) + 8,
@@ -1832,11 +2293,37 @@ class EditorApp(tk.Tk):
             vp.hud.configure(text='No move selected')
             return
         tick = self.tick
+        shift = self._animation_origin(tick)
+        # Transform the body, never the camera/grid. Restore even after a draw error.
+        with vp.translated(*shift):
+            self._draw_animation_body(vp, tick, info, shift)
+        self._draw_motion(vp, tick, info)
+        for c, played in sounds.dedupe_same_frame(self._cues):
+            if c.tick == tick:
+                info.append('♪ ' + c.label + (' (duplicate)' if c.ssar is not None and not played else ''))
+        if self._effect_table_error:
+            info.append('Effect table: ' + self._effect_table_error)
+        vp.hud.configure(text=f'tick {tick}/{self.move.duration}   ' + '   '.join(info))
+
+    def _animation_origin(self, tick):
+        if self.root_motion.get() and self._motion and self._motion.commands:
+            frame = self._motion.at(tick)
+            if frame:
+                return frame.px
+        return (0.0, 0.0)
+
+    def _draw_animation_body(self, vp, tick, info, shift):
+        vp.text(0, 0, '+', fill=T.GOOD, font=T.UI_BOLD, tags=('animation_origin',))
+        behind = self.effect_layer.get() == 'Behind'
+        if behind:
+            self._draw_spawns(vp, tick, info, marks=False)
         if self.show_onion.get():
             prev_t = max([t for r in self.timeline.rows if r.get('label') == 'BoundsIndex'
                           for t, _ in r.get('keys', []) if t < tick], default=None)
             if prev_t is not None:
-                self._draw_node_sprites(vp, self.move, prev_t - 0 if prev_t < tick else tick, alpha=0.3)
+                self._draw_node_sprites(vp, self.move, prev_t,
+                                        base=tuple(a - b for a, b in zip(self._animation_origin(prev_t), shift)),
+                                        alpha=0.3)
         self._draw_node_sprites(vp, self.move, tick, info=info)
         state = self._state(self.move, tick)
         sel = self.sel_track
@@ -1868,10 +2355,168 @@ class EditorApp(tk.Tk):
                 info.append(f'{name}: GenerateID {hx(st["GenerateID"])}')
             if 'Marker' in st and st['Marker']:
                 info.append(f'{name}: {eventops.marker_label(st["Marker"])}')
+        self._draw_spawns(vp, tick, info, sprites=not behind)
         self._draw_pursuer(vp, tick, info)
-        if self._effect_table_error:
-            info.append('Effect table: ' + self._effect_table_error)
-        vp.hud.configure(text=f'tick {tick}/{self.move.duration}   ' + '   '.join(info))
+
+    def _inspect_spawn(self, ins, row):
+        sp = row['spawn']
+        ins.section('Spawned effect', note='GenerateID — read-only here; edit the key on the node track')
+        ins.value('Effect id', hx(sp.effect_id, 6), colour=T.EFFECT)
+        ins.value('Spawned by', f'{sp.node}, GenerateID key {sp.key_index}')
+        ins.value('Spawn tick', f'{sp.tick}  (exact key time)')
+        ins.value('Occurrence', f'#{sp.occurrence} of this id in the move')
+        entry = self._effect_moves.get(sp.effect_id)
+        if entry is None:
+            ins.value('Move', 'not found in character or efc/ archives', colour=T.BAD)
+            return
+        child, names, path = entry
+        ins.value('Table', path)
+        ins.value('Length', f'{child.duration}{"  ⟳ loops" if child.flags & almt.MOVE_FLAG_LOOP else ""}')
+        live = [i for i in self.spawn_projection().instances if i.spawn == sp]
+        if live:
+            inst = live[0]
+            ins.section('At playhead')
+            ins.value('Effect tick', str(inst.sub_tick))
+            ins.value('Anchor', f'({inst.anchor[0]}, {inst.anchor[1]})')
+            ins.value('EffectFlags', f'{hx(inst.flags, 4)}  {spawns.describe_flags(inst.flags)}')
+            ins.value('ParentLink', str(inst.parent_link))
+            ins.value('DrawPrio', '—' if inst.draw_prio is None else
+                      f'{inst.draw_prio / 4096:g}  (raw {inst.draw_prio})')
+            for n in inst.notes:
+                ins.text('• ' + n)
+        else:
+            ins.text('Not alive at the playhead (before the spawn tick or after a one-shot ended).')
+        ins.buttons(('Open effect move', lambda: self.open_effect_move(sp.effect_id, path), 'Accent.TButton'))
+        ins.text('Projection follows the authored timeline straight through. Marker loops, branches, facing '
+                 'and LifeType are not simulated.')
+
+    def _draw_motion(self, vp, tick, info):
+        """Trajectory of the body under the NoteTrack physics (world origin = start)."""
+        mo = self._motion
+        if not mo or not mo.commands or not self.show_motion.get():
+            return
+        pts = []
+        for f in mo.frames:
+            pts.extend(vp.to_screen(*f.px))
+        if len(pts) >= 4:
+            vp.canvas.create_line(*pts, fill=T.WARN, width=1, dash=(2, 3))
+        for f in mo.frames:
+            if f.events and any(e.startswith(('impulse', 'stop')) for e in f.events):
+                x, y = vp.to_screen(*f.px)
+                vp.canvas.create_oval(x - 3, y - 3, x + 3, y + 3, outline=T.WARN)
+        f = mo.at(tick)
+        if f:
+            x, y = vp.to_screen(*f.px)
+            vp.canvas.create_oval(x - 5, y - 5, x + 5, y + 5, outline='#FFFFFF', width=2)
+            vx, vy = f.vx / 256, f.vy / 256
+            if vx or vy:
+                vp.canvas.create_line(x, y, x + vx * vp.zoom * 4, y + vy * vp.zoom * 4, fill='#FFFFFF',
+                                      arrow='last')
+            info.append(f'phys ({f.px[0]:.0f},{f.px[1]:.0f})px v({vx:.1f},{vy:.1f})' +
+                        ('' if f.gravity else ' g-off'))
+
+    def _inspect_physics(self, ins):
+        mo = self._motion
+        f = mo.at(self.tick) if mo else None
+        ins.section('Physics (NoteTrack 0x01xx)', note='Traced integrator with preview assumptions; '
+                    'read-only here — edit the NoteTrack commands.')
+        if f:
+            ins.value('Offset', f'({f.px[0]:.2f}, {f.px[1]:.2f}) px from the start')
+            ins.value('Velocity', f'({f.vx / 256:.2f}, {f.vy / 256:.2f}) px/frame  raw ({f.vx}, {f.vy})')
+            ins.value('Gravity', 'on' if f.gravity else 'off (0x0101)', colour=None if f.gravity else T.WARN)
+            if f.counter:
+                ins.value('Impulse frames', f'{f.counter} left (0x0104)')
+            if f.grounded:
+                ins.value('Floor', 'resting on the assumed floor', colour=T.MUTED)
+        here = [(n, c) for t, n, c in mo.commands if t == self.tick]
+        if here:
+            ins.section(f'Commands @ {self.tick}')
+            for n, c in here:
+                ins.value(f'0x{c.opcode:04X}', f'{motion.LABELS.get(c.opcode, "?")} {c.values()}\n'
+                                               f'{n} · ov06 0x{motion.FUNCTIONS.get(c.opcode, 0):08X}')
+        ins.section('Preview')
+        self._mvars = {'face': self.facing_left, 'floor': self.motion_floor, 'root': self.root_motion,
+                       'show': self.show_motion}
+        ins.check('Facing left', self.facing_left, 'x impulses are negated when the character faces left',
+                  on_change=self._motion_changed)
+        ins.check('Assume floor', self.motion_floor, 'Collision is not traced: stop falling at the start height',
+                  on_change=self._motion_changed)
+        ins.check('Root motion', self.root_motion, 'Move the character along the simulated path',
+                  on_change=self.redraw_view)
+        ins.check('Trajectory', self.show_motion, on_change=self.redraw_view)
+        ins.section('Model')
+        ins.value('Gravity', f'0x{motion.GRAVITY:02X} /frame²', tip='BattleMove::Battle_MoveManCreate 0x02082A38')
+        ins.value('Friction', f'x {motion.FRICTION_X}/256, y {motion.FRICTION_Y}/256 per frame',
+                  tip='body defaults, main FUN_02082C34')
+        ins.value('Max speed', f'±0x{motion.MAX_SPEED * 0x100:X} ({motion.MAX_SPEED} px/frame)')
+        ins.value('Units', '256 per pixel, +y down', tip='BattleMapMoveFloorInit 0x02085D74: pixels << 8')
+        ins.evidence('Step', 'Direct', 'main FUN_02082E10 integrator; ov06 FUN_02155688 dispatcher')
+        ins.evidence('Defaults', 'Direct', 'gravity 0x29, friction 0x20/8, max 0x20; per-state overrides not traced')
+        ins.evidence('Floor/walls', 'Unknown', 'collision response not modelled')
+        for n in mo.notes:
+            ins.text('• ' + n)
+
+    def _inspect_sound(self, ins):
+        ins.section('Sound cues (NoteTrack 0x04xx)', note='FUN_0207342C(ssar, seq) on the SE player. '
+                    'Decoded SSAR sequences with instrument/wave playback; preview synthesis is approximate.')
+        t = self.tick
+        cur = [(c, p) for c, p in sounds.dedupe_same_frame(self._cues) if c.tick == t]
+        if cur:
+            ins.section(f'At tick {t}')
+        for c, played in cur:
+            ins.value(f'0x{c.opcode:04X} [{c.seq}]', c.label +
+                      (f'\n{c.ssar_name} (SSAR {c.ssar})' if c.ssar is not None else '') +
+                      (f'\n{c.note}' if c.note else '') + ('' if played or c.ssar is None else '\nduplicate: ignored'),
+                      tip=f'ov06 0x{sounds.FUNCTIONS[c.opcode]:08X} → main 0x{sounds.PLAY:08X}',
+                      colour=T.GOOD if c.ssar is not None else T.MUTED)
+        if cur:
+            ins.buttons(('▶ Play cues at this tick', self._audition_tick, 'Accent.TButton'))
+        ins.check('Sound enabled', self.sound_enabled, on_change=self._sound_changed)
+        for c, _ in cur:
+            if self._audio:
+                ins.value('Audio', self._audio.status(c))
+        ins.section(f'All cues ({len(self._cues)})')
+        for c in self._cues[:40]:
+            ins.value(f'@{c.tick}', f'0x{c.opcode:04X} {c.label}',
+                      colour=T.GOOD if c.ssar is not None else T.MUTED)
+        ins.section('Evidence')
+        ins.evidence('0x0400', 'Direct', 'SSAR 0x7A SEQ_BATTLE (ov06 0x021569CC)')
+        ins.evidence('0x0401/0x0402', 'Inferred', 'chara +0xA4/+0xA6 from the form record (ov06 FUN_02157114); '
+                                                  'archive chosen from chr_b.bin record order + SSAR names')
+        ins.evidence('Same-frame repeats', 'Direct', 'FUN_0207342C skips a repeated (ssar, seq)')
+
+    def spawn_projection(self, tick=None):
+        if not self.move or not self.almt:
+            return spawns.Projection([], [], [])
+        return spawns.project(self.move, self.almt.node_names, self.tick if tick is None else tick,
+                              self._effect_moves)
+
+    def _draw_spawns(self, vp, tick, info, sprites=True, marks=True):
+        """GenerateID effects: sprites (front or behind pass) and origin marks (always on top)."""
+        if not self.show_spawns.get() or not self.index:
+            return
+        proj = self.spawn_projection(tick)
+        hot = self.sel_virtual.get('spawn') if self.sel_virtual else None
+        for inst in proj.instances:
+            if sprites:
+                self._draw_node_sprites(vp, inst.move, inst.sub_tick, base=inst.anchor, names=inst.names)
+            if not marks:
+                continue
+            if self.show_effect_marks.get() or inst.spawn == hot:
+                ax, ay = inst.anchor
+                sx, sy = vp.to_screen(ax, ay)
+                col = '#FFFFFF' if inst.spawn == hot else T.EFFECT
+                vp.canvas.create_polygon(sx, sy - 5, sx + 5, sy, sx, sy + 5, sx - 5, sy, outline=col, fill='',
+                                         width=2 if inst.spawn == hot else 1)
+                vp.canvas.create_text(sx + 7, sy - 7, anchor='sw', fill=col, font=T.MONO_SMALL,
+                                      text=f'{inst.spawn.effect_id:06X} t{inst.sub_tick}' +
+                                           (' ⚑' if inst.flags & spawns.FLAG_SCREEN_REFERENCE else ''))
+        if not marks:
+            return
+        if proj.instances:
+            info.append(f'effects: {len(proj.instances)} live')
+        for sp in proj.missing[:3]:
+            info.append(f'⚠ GenerateID {hx(sp.effect_id, 6)} has no move')
 
     def _draw_pursuer(self, vp, tick, info):
         if not self.show_effects.get() or not self.index:
@@ -1918,6 +2563,17 @@ class EditorApp(tk.Tk):
                   on_change=self.apply_move_props)
         ins.value('fps', f'{m.fps}  (not read by the game)', colour=T.MUTED)
         ins.value('Flags', hx(m.flags, 2), colour=T.MUTED)
+        if self.sel_virtual is None and self._track() is None and self.almt_path:
+            self._refs_section(ins, self.almt_path, m.id, title='Where used (this move)')
+        if self.sel_virtual is not None and self.sel_virtual.get('spawn') is not None:
+            self._inspect_spawn(ins, self.sel_virtual)
+            return
+        if self.sel_virtual is not None and self.sel_virtual.get('derived') == 'physics' and self._motion:
+            self._inspect_physics(ins)
+            return
+        if self.sel_virtual is not None and self.sel_virtual.get('derived') == 'sound':
+            self._inspect_sound(ins)
+            return
         if self.sel_virtual is not None:
             row = self.sel_virtual
             ins.section('Effect (read-only)')
@@ -2248,6 +2904,12 @@ class EditorApp(tk.Tk):
                       (f'\natlas {g.width}×{g.height}' if mode in sprite.ATLAS_MODES else '') +
                       (' (embedded)' if d.embedded else ''))
             ins.value('Banks', str(g.banks))
+        if self.registry is not None and self.sprite_path in self.registry.resources:
+            users = self.registry.used_by(self.sprite_path)
+            tables = sorted({split(r.src)[-1] for r in users})
+            ins.value('Used by', f'{len(users)} move(s) in {len(tables)} table(s)' if users else 'no known user',
+                      tip='\n'.join(tables[:12]))
+            ins.buttons(('Show references', lambda: self.show_references(self.sprite_path)))
         if self.frame_i is not None:
             fr = d.frames[self.frame_i]
             ins.section(f'Frame {self.frame_i}')
@@ -2587,6 +3249,7 @@ class EditorApp(tk.Tk):
         ins.value('Size', f'{len(e.data):,} bytes' + ('  (DSCP)' if e.compressed else ''))
         ins.buttons(('Extract…', self.extract_member), ('Replace…', self.replace_member),
                     ('Remove', self.remove_member))
+        self._refs_section(ins, join(self.container, e.name))
 
     def extract_member(self):
         e = self._selected_member()

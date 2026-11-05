@@ -21,14 +21,20 @@ drives the window against the real data.
 
 The window follows the 2D animation editors of Unity (Animation window + Inspector),
 Godot (AnimationPlayer dock, SpriteFrames) and Unreal (Paper2D Flipbook/Sprite editors):
-a **Project** panel on the left, three workspaces (**Animation**, **Sprite**, **Archive**,
-Ctrl+1/2/3), a dark engine-style theme, tooltips, undo/redo and keyboard shortcuts
-(F1 lists them all).
+a resource browser on the left (each workspace shows its own), the workspaces
+**Animation** / **Sprite** (the Move Lab, Ctrl+1/2), **Koma** / **Level** / **Screen**
+(the JUS Studio suite, Ctrl+4/5/6) and **Archive** (Ctrl+3), a dark engine-style theme,
+tooltips, undo/redo and keyboard shortcuts (F1 lists them all). Layout and evidence rules
+for every workspace: `docs/STUDIO_WORKSPACES.md`.
 
 * **Animation workspace** — *Moves* list (filter, ⟳ = looping) | *Viewport* (wheel zoom,
-  middle-drag pan, Frame; sprites, collision boxes, onion skin, pursuer effect at its
-  target) | *Inspector* (move ID/length/loop, the selected track, key or NoteTrack events,
-  editable in place). Below it, the dock-style **Timeline**: transport (⏮ ◀| ◀ ▶ ▶ |▶ ⏭,
+  middle-drag pan, Frame; sprites, **spawned effects** (GenerateID, incl. nested spawns
+  and common `efc/` effects, front/behind the character), collision boxes, onion skin,
+  pursuer effect at its target — all toggled from **Show ▾**) | *Inspector* (move
+  ID/length/loop, the selected track, key or NoteTrack events, editable in place; for an
+  effect row: spawn node/key/tick, EffectFlags, ParentLink, DrawPrio, anchor). Below it,
+  the dock-style **Timeline**: a *Spawned effects* group with one clip bar per GenerateID
+  key (double-click opens the effect's own move), transport (⏮ ◀| ◀ ▶ ▶ |▶ ⏭,
   tick field, loop, speed), Fit, ruler with draggable playhead, per-node groups that
   collapse, ◆ keys with hold bars (values step), ⚑ NoteTrack event flags coloured by
   category, Marker labels with **jump arcs** (0xFF80+n → label 0xFF00+n) and dashed
@@ -41,6 +47,27 @@ Ctrl+1/2/3), a dark engine-style theme, tooltips, undo/redo and keyboard shortcu
   fields (index, x, y, shape, flips, 2bpp, bank) and a palette you click to assign banks;
   a thumbnail **Frames** filmstrip with flipbook playback and replace/append/re-layout/
   delete/export; atlas import/export and palette editing for effects.
+* **Koma workspace** — `koma/koma.aar` browser grouped by series | panel canvas with
+  Select / Pencil / Picker (V/B/I) and pixel grid | Inspector with the 16-colour palette
+  (click = paint colour, double-click = edit) and evidence | Panels strip, panel PNG
+  import/export, Apply. Edits are undoable; page arrangement is unknown and not shown.
+* **Level workspace (v1, visual-only)** — stage browser (`bg_xx` sets) | composited
+  background layers (ALTM + tiles, ¼×–12× zoom, tile hover/inspect) | Layers dock with eye
+  toggles and **read-only overlays** (camera, objects, stage table, collision, gimmicks:
+  listed as unavailable, raw bytes in *Stage data*) | Tile set, Problems, PNG export.
+* **Screen workspace** — menu/scene archive browser (nested archives expand) | DS dual
+  256×192 screens | Layers dock + Inspector to preview each layer's screen, scroll and
+  order (not saved; the real assignment is not traced) | Resources table with decoder
+  status/evidence per member, Problems.
+* **References workspace (Ctrl+7)** — the project-wide **resource registry**
+  (`jus_package/registry.py`): every archive member with typed references between them
+  (textures, images, spawned effects, pursuer tables, collision descriptors, shot records,
+  tile images) and the reverse *where used* index. Search by name, resource id or move id;
+  a reference viewer (referencers → selected → dependencies, click to re-centre); per-move
+  filter; tables with the exact source location (move, node, key, tick, record) and
+  evidence; *Open in workspace*. The Archive, Animation and Sprite inspectors show
+  *Where used* too, and Project right-click has *Show references*. The index is built in
+  the background from the files on disk (≈2 s) and rebuilt after Save.
 * **Archive workspace** — member table and details (type, resource id, attribute bits,
   verified name hash, size, DSCP) with extract/replace/add/remove and a rebuild check.
 * Edits stay in memory with **undo/redo** (Ctrl+Z / Ctrl+Y) until **Apply** (Ctrl+Enter)
@@ -95,8 +122,11 @@ py -3 jus_editor_cli.py import C:\work\bb_b_01 --out C:\work\rebuilt_data
 ## Libraries
 
 * `jus_formats/` — standalone (stdlib only) parse/build data structures: `alar`, `almt`,
-  `alod`, `dstx`, `dsig`, `sprite`, `chrbin`, `binary` (LZ10 codec, DSCP), `hashes`.
-* `jus_package/` — data-root project model, package import/export, PNG conversion.
+  `alod`, `dstx`, `dsig`, `sprite`, `koma` (DSTX 0x04 panels), `altm` (tile maps),
+  `notetrack`, `eventops`, `chrbin`, `sdat`, `binary` (LZ10 codec, DSCP), `hashes`.
+* `jus_package/` — data-root project model, package import/export, PNG conversion,
+  `spawns` (GenerateID projection), `effectlinks` (pursuer), `tilemap` (ALTM rendering),
+  `scenes` (stage/screen layer discovery).
 
 ## Tests
 

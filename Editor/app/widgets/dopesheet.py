@@ -270,6 +270,16 @@ class DopeSheet(tk.Frame):
             c.create_rectangle(max(x0, self.HEADER_W), mid - 2, x1, mid + 2, fill=colour, outline='',
                                stipple='gray50')
             return
+        # clip bars (spawned sub-animations), drawn under the keys
+        for a, b, col, text in row.get('spans', []):
+            xa, xb = self.tick_x(a), self.tick_x(b)
+            if xb < self.HEADER_W or xa > w:
+                continue
+            x0 = max(xa, self.HEADER_W)
+            c.create_rectangle(x0, mid - r + 1, max(x0 + 2, xb), mid + r - 1, fill=col, outline='',
+                               stipple='gray50')
+            if text and xb - x0 > 40:
+                c.create_text(x0 + r + 4, mid, anchor='w', text=text, fill=T.FG, font=T.MONO_SMALL)
         keys = row.get('keys', [])
         # hold bars between consecutive keys (step interpolation)
         if kind == 'track' and len(keys) > 1:

@@ -22,7 +22,17 @@ SELECT = '#2F5A8A'
 GOOD = '#7FCB8A'
 WARN = '#E8C27A'
 BAD = '#E57A84'
+EFFECT = '#F0A35E'     # spawned effects (GenerateID)
+READONLY = '#8C96A0'   # read-only overlays (Level v1 collision/gimmick, unknown structures)
 CANVAS_BG = '#17191C'
+
+# Evidence grades shown in every inspector (docs/03 + 01 policy)
+EVIDENCE = {
+    'Direct': GOOD,            # traced in code, or exact byte roundtrip of every file
+    'Cross-checked': ACCENT,   # two independent sources agree
+    'Inferred': WARN,          # consistent with all data, loader not traced
+    'Unknown': BAD,            # not decoded: shown raw / read-only
+}
 CHECK_A = '#2A2D31'
 CHECK_B = '#232629'
 
@@ -94,6 +104,12 @@ def apply_styles(root: tk.Misc) -> None:
     s.map('TCheckbutton', background=[('active', PANEL)])
     s.configure('Toolbar.TCheckbutton', background=PANEL2, foreground=FG)
     s.map('Toolbar.TCheckbutton', background=[('active', PANEL2)])
+    # tool palette toggles (Unity tool buttons): flat, highlighted when selected
+    s.layout('ToolToggle.TRadiobutton', [('Radiobutton.padding', {'sticky': 'nswe', 'children': [
+        ('Radiobutton.label', {'sticky': 'nswe'})]})])
+    s.configure('ToolToggle.TRadiobutton', background=PANEL2, foreground=MUTED, padding=(8, 2))
+    s.map('ToolToggle.TRadiobutton', background=[('selected', SELECT), ('active', PANEL3)],
+          foreground=[('selected', '#FFFFFF')])
     s.configure('TEntry', fieldbackground=PANEL2, foreground=FG, insertcolor=FG, borderwidth=1)
     s.configure('TSpinbox', fieldbackground=PANEL2, foreground=FG, arrowcolor=FG, insertcolor=FG)
     s.configure('TCombobox', fieldbackground=PANEL2, foreground=FG, arrowcolor=FG,

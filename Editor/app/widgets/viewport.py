@@ -1,6 +1,6 @@
 """Zoom/pan scene viewport (engine-editor style 2D view).
 
-* Mouse wheel zooms about the cursor (integer pixel scales 1×–12×).
+* Mouse wheel zooms about the cursor (¼×, ½×, then integer pixel scales 1×–12×).
 * Middle-drag, or Space+left-drag, pans; Home / "Frame" recentres the origin.
 * Checkerboard backdrop, world grid and origin cross are drawn underneath.
 
@@ -10,10 +10,18 @@ and :meth:`add_image`; pointer callbacks receive world (sprite-space) coords.
 from __future__ import annotations
 
 import tkinter as tk
+from contextlib import contextmanager
 
 from PIL import Image, ImageTk
 
 from .. import theme as T
+
+
+ZOOMS = (0.25, 0.5, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12)
+
+
+def _snap(z):
+    return min(ZOOMS, key=lambda v: abs(v - z))
 
 
 class Viewport(tk.Frame):
@@ -29,6 +37,7 @@ class Viewport(tk.Frame):
         self.zoom = zoom
         self.origin_frac = origin_frac
         self.pan = [0.0, 0.0]
+        self._translation = (0.0, 0.0)
         self.show_grid = tk.BooleanVar(value=True)
         self.show_checker = tk.BooleanVar(value=True)
         self._images = []
@@ -58,14 +67,25 @@ class Viewport(tk.Frame):
 
     def to_screen(self, x, y):
         ox, oy = self.origin()
-        return ox + x * self.zoom, oy + y * self.zoom
+        dx, dy = self._translation
+        return ox + (x + dx) * self.zoom, oy + (y + dy) * self.zoom
 
     def to_world(self, sx, sy):
         ox, oy = self.origin()
-        return (sx - ox) / self.zoom, (sy - oy) / self.zoom
+        dx, dy = self._translation
+        return (sx - ox) / self.zoom - dx, (sy - oy) / self.zoom - dy
+
+    @contextmanager
+    def translated(self, x, y):
+        previous = self._translation
+        self._translation = (previous[0] + x, previous[1] + y)
+        try:
+            yield self
+        finally:
+            self._translation = previous
 
     def set_zoom(self, z):
-        self.zoom = max(1, min(12, int(z)))
+        self.zoom = _snap(max(ZOOMS[0], min(ZOOMS[-1], z)))
         self.redraw()
 
     def frame_origin(self):
@@ -78,7 +98,8 @@ class Viewport(tk.Frame):
         w, h = max(self.canvas.winfo_width(), 50), max(self.canvas.winfo_height(), 50)
         zw = (w - 40) / max(1, r - l)
         zh = (h - 40) / max(1, b - t)
-        self.zoom = max(1, min(12, int(min(zw, zh))))
+        fit = min(zw, zh)
+        self.zoom = max([v for v in ZOOMS if v <= fit] or [ZOOMS[0]])
         ox0, oy0 = w * self.origin_frac[0], h * self.origin_frac[1]
         cx, cy = (l + r) / 2, (t + b) / 2
         self.pan = [w / 2 - (ox0 + cx * self.zoom), h / 2 - (oy0 + cy * self.zoom)]
@@ -88,7 +109,8 @@ class Viewport(tk.Frame):
     def add_image(self, pil: Image.Image, wx, wy, tags=()):
         """Draw a PIL image whose top-left is at world (wx, wy), scaled by zoom."""
         if self.zoom != 1:
-            pil = pil.resize((pil.width * self.zoom, pil.height * self.zoom), Image.NEAREST)
+            size = (max(1, int(pil.width * self.zoom)), max(1, int(pil.height * self.zoom)))
+            pil = pil.resize(size, Image.NEAREST if self.zoom >= 1 else Image.BILINEAR)
         ph = ImageTk.PhotoImage(pil)
         self._images.append(ph)
         sx, sy = self.to_screen(wx, wy)
@@ -141,12 +163,13 @@ class Viewport(tk.Frame):
         if self.on_draw:
             self.on_draw(self)
         c.create_oval(ox - 3, oy - 3, ox + 3, oy + 3, outline=T.ACCENT)
-        self.zoom_label.configure(text=f'{self.zoom}×')
+        self.zoom_label.configure(text=f'{self.zoom:g}×')
 
     # --------------------------------------------------------------- input
     def _wheel(self, e):
         wx, wy = self.to_world(e.x, e.y)
-        new = max(1, min(12, self.zoom + (1 if e.delta > 0 else -1)))
+        i = ZOOMS.index(_snap(self.zoom))
+        new = ZOOMS[max(0, min(len(ZOOMS) - 1, i + (1 if e.delta > 0 else -1)))]
         if new == self.zoom:
             return
         self.zoom = new

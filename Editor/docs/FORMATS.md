@@ -20,8 +20,65 @@ All values little-endian. "Verified" means checked against every relevant file i
 | DSTX sprite tables (flags 0x03/0x83) parse → build | all character/effect files |
 | Character frames: decode → re-encode with same layout byte-identical | 16,819 / 16,827 (other 8 differ only in hidden padding) |
 
-DSTX tables with flags 0x04/0x06 (koma comic panels, menu screens) are a different
-layout and are rejected explicitly; they pass through archives untouched.
+| Koma DSTX v1 flags 0x04 parse → build (`jus_formats.koma`) | 898 / 898 (all 6×6-tile panels) |
+| ALTM decode, every row exactly `map_w` entries (`jus_formats.altm`) | 1,558 / 1,558 (1,431 raw byte-identical, 127 packed) |
+| GenerateID move ids resolved (character tables or `efc/*.aar`) | 1,538 / 1,538 keys in the first 60 characters |
+
+DSTX tables with flags 0x05/0x06 (menu screen layouts) are a different layout and
+are rejected by the sprite parser; they pass through archives untouched. Flags 0x04
+(koma panels) has its own codec, below.
+
+## Koma panels — DSTX v1 flags 0x04 (`jus_formats.koma`)
+
+`'DSTX' u8 1, u8 0x04, u16 panel_count, u16 data_end`, then per panel
+`u16 first_tile, u8 width_tiles, u8 height_tiles`, zero padding to `data_end`, then an
+embedded DSIG v1 mode 0x10 (4bpp 8×8 tiles, one bank; `w08 = 8`, `w0A = 8 × tiles`).
+Every panel is 6×6 tiles (48×48 px); tile 0 is unused and panel *n* starts at tile
+`1 + 36n`, tiles row-major. Evidence: **Direct** (byte-exact on all 898 files; a panel
+edit leaves neighbouring panels untouched). The arrangement of panels on a comic/deck
+page is **unknown**.
+
+## ALTM tile maps (`jus_formats.altm`, resource type 0x46)
+
+Evidence: **Inferred from data** (structure consistent with all 1,558 files; the ARM9
+loader is not traced). Header 24 bytes: `'ALTM' u8 0, u8 flags (0x03 raw / 0x07 packed),
+u8 2, u8 0, bytes 0C 0A 0B 00 (unknown, kept), u16 tile_w=8, u16 tile_h=8, u16 map_w,
+u16 map_h, u32 0`.
+
+* Raw: `map_w × map_h` u16 entries, row-major.
+* Packed (flag bit 2): `u16 mode=2`, `u16 row_offset[map_h]` (bytes from the data start;
+  identical rows share an offset), then per row commands `u16 cmd, u16 pattern[(cmd&0x3F)+1]`:
+  `cmd>>8` = run length (0 = 256); the pattern repeats over the run; `cmd&0x40` = the tile
+  number steps +1 per repetition, with `cmd&0x80` the step is −1. A row ends after
+  `map_w` entries. No file uses 0x80 without 0x40.
+* Entries are DS text-BG entries: bits 0–9 tile, 10 H-flip, 11 V-flip, 12–15 bank.
+* Tiles: the same-stem `.dig` (DSIG v1 0x10 4bpp or 0x11 8bpp), or the DSIG embedded in a
+  same-stem `.dtx` (flags 0x06). For 8bpp tile sets with more than 16 banks the entry's
+  bank bits select a 256-colour extended palette slot (`bank × 256`); this is what makes
+  `bg_xx_00` stage skies render correctly (**Inferred**, visual check). Maps without a
+  same-stem image (`bg_xx_sud`) are shown with the tiles of the same-sized map (guess).
+* The re-encoder shares identical rows and packs fills, repeating patterns and
+  sequential runs; it is valid but not byte-identical to the original packer.
+* Not decoded: which BG slot/screen a layer uses, its priority, scroll/parallax.
+
+## Stage data (`stage/stage.aar`)
+
+Per stage stem `bg_xx`: `bg_xx.aar` (ALTM layers + tiles), optional `bg_xx_floor.aar`
+and `bg_xx_gimmick.aar`, and `bg_xx.bin` / `.cam` (32 bytes) / `.mob`. The `.bin`,
+`.cam`, `.mob` formats, collision and gimmicks are **not decoded**; the Level editor
+shows them read-only as raw bytes and never draws guessed geometry.
+
+## GenerateID effect spawns (`jus_package.spawns`)
+
+A non-zero keyed `GenerateID` spawns the effect move with that id when playback lands
+exactly on the key (docs/03 §4). Spawns are identified by (node, key index, occurrence),
+never deduplicated by id. Ids resolve in the character's own tables (`*_e<n>.amt`) or the
+common `efc/comm_*.aar`. The projection anchors the effect at the spawning node's `2DPos`
+on the spawn tick, reads `EffectFlags`, `ParentLink` and `DrawPrio` from that node at that
+tick, plays one-shots for their length and loops open-ended, and recurses into nested
+spawns. It does not simulate Marker loops/branches, facing, `LifeType`, ParentLink follow
+or `DrawPrio` ordering (its comparison rule is not traced; the viewport offers
+front/behind).
 
 ## Name hashes (`jus_formats.hashes`)
 
@@ -201,7 +258,8 @@ Open items: ALMT field `EffectFlags`
 (`CommonEffect.cpp` property, values 0/2/3/0x10/0xB…), full ALAR2 flag
 bit-1 split lifecycle and the attribute bit-24 vs bit-25 distinction,
 DSIG v2 `b7`, ALOD property
-descriptors, ALTM, DSTX flags 0x04/0x06 (screen layouts), the exact battle-state
+descriptors, ALTM screen/priority/scroll assignment, DSTX flags 0x05/0x06 (screen
+layouts), stage `.bin`/`.cam`/`.mob`, the exact battle-state
 fields behind each branch condition, `chara_action` sub-code semantics, and in-game draw
 order of overlapping effect pieces (the editor draws atlas pieces last-on-top and OBJ
 pieces first-on-top, matching OAM priority). The DS draw path itself was not confirmed

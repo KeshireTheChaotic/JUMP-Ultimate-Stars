@@ -9,7 +9,9 @@ reports any Tk callback exceptions.  Exit code 1 on failure.
 from __future__ import annotations
 
 import os
+import shutil
 import sys
+import tempfile
 import time
 import traceback
 from pathlib import Path
@@ -23,6 +25,12 @@ DATA = sys.argv[1] if len(sys.argv) > 1 else os.environ.get('JUS_DATA', r'D:\Lib
 
 def main():
     errors = []
+    # A modal prompt (e.g. "apply edits before switching?") would block an unattended run:
+    # record it as a failure and answer Cancel/No instead.
+    from tkinter import messagebox
+    prompts = []
+    for name in ('askyesnocancel', 'askyesno', 'askokcancel', 'showinfo', 'showwarning', 'showerror'):
+        setattr(messagebox, name, lambda *a, _n=name, **k: prompts.append(f'{_n}: {a[:2]}') or None)
     app = EditorApp(DATA)
     app.report_callback_exception = lambda *exc: errors.append(''.join(traceback.format_exception(*exc)))
 
@@ -57,6 +65,22 @@ def main():
     app.set_tick(8)
     pump(0.3)
     checks.append(('pursuer rows', any(r.get('id') == ('virt', 'pursuer') for r in app.timeline.rows)))
+    # GenerateID effects: gt_b_02 move 40 spawns a character effect at tick 0
+    app.select_container('chr/ChrArc.aar|chr/gt_b_02.aar', 'gt_b_02')
+    pump(0.5)
+    app.moves_tree.selection_set('40')
+    app.moves_tree.focus('40')
+    app.on_move_select()
+    app.set_tick(6)
+    pump(0.3)
+    srows = [r for r in app.timeline.rows if r.get('spawn') is not None]
+    live = app.spawn_projection().instances
+    checks.append(('spawn rows + live effect', bool(srows) and bool(live) and all('⚠' not in r['label'] for r in srows)))
+    app._timeline_select(srows[0], 6, None)
+    app.effect_layer.set('Behind')
+    app.redraw_view()
+    pump(0.2)
+    app.effect_layer.set('Front')
     app.show_workspace('sprite')
     pump(0.4)
     app.select_frame(20)
@@ -66,10 +90,69 @@ def main():
     app.nudge_piece(2, 0)
     moved = app._piece().x
     app.undo()
-    checks.append(('nudge+undo', moved == x0 + 2 and app._piece().x == x0))
+    # undoing back to the loaded bytes must leave nothing unapplied (else switching would prompt)
+    checks.append(('nudge+undo', moved == x0 + 2 and app._piece().x == x0 and not app.sprite_dirty))
+    # real work: edit, Apply, Save (to a scratch folder, never the data root) before switching
+    app.nudge_piece(1, 0)
+    app.apply_current()
+    out = tempfile.mkdtemp(prefix='jus_smoke_')
+    try:
+        written = app.root_data.save(out)
+        app.update_dirty()
+        saved = bool(written) and not app.root_data.dirty_files() and not app.sprite_dirty
+    finally:
+        shutil.rmtree(out, ignore_errors=True)
+    checks.append(('apply+save before switch', saved and not app.almt_dirty))
     app.show_workspace('archive')
     pump(0.3)
+    # suite workspaces
+    app.show_workspace('koma')
+    pump(0.4)
+    km = app.suite['koma']
+    km.load('koma/bb_02.dtx')
+    km.select_panel(1)
+    km.tool.set('pencil')
+    km.colour = 3
+    before = km.kf.build()
+    x0, y0 = km._origin(1)
+    km._press(x0 + 5, y0 + 5, None)
+    km._release(x0 + 5, y0 + 5, None)
+    painted = km.kf.build() != before
+    app.undo()
+    checks.append(('koma paint+undo', painted and km.kf.build() == before and not km.dirty))
+    app.show_workspace('level')
+    pump(0.4)
+    lv = app.suite['level']
+    lv.load('bg_bb')
+    pump(0.3)
+    checks.append(('level layers', len(lv.layers) == 4 and all(lv.images[n] is not None for n in lv.images)))
+    app.show_workspace('screen')
+    pump(0.4)
+    sc = app.suite['screen']
+    sc.load('title/title.aar')
+    pump(0.3)
+    checks.append(('screen layers', [sc.cfg[n]['screen'] for n in sc.order] == ['Top', 'Top', 'Bottom', 'Bottom']))
+    # resource registry: where-used and open-in-workspace
+    end = time.time() + 60
+    while app.registry is None and time.time() < end:
+        pump(0.3)
+    rf = app.suite['references']
+    app.show_workspace('references')
+    rf.select('chr/ChrArc.aar|chr/dg_b_01.aar|dg_b_01_e0.amt', move_id=0x0004C150)
+    pump(0.3)
+    users = rf._in_refs()
+    # switching resources asks to apply unapplied work; the session above left none
+    pending = app.almt_dirty or app.sprite_dirty or any(w.dirty for w in app.suite.values())
+    checks.append(('no unapplied work before switch', not pending))
+    app.open_resource('chr/ChrArc.aar|chr/dg_b_01.aar|dg_b_01_e0.amt', 0x0004C150)
+    pump(0.4)
+    checks.append(('registry where-used + open', bool(app.registry) and app.registry.stats()['unresolved'] == 0 and
+                   any(r.kind == 'pursuer' for r in users) and app.workspace == 'animation' and
+                   app.move is not None and app.move.id == 0x0004C150))
     app.destroy()
+    checks.append(('no unexpected dialogs', not prompts))
+    for p in prompts:
+        print('DIALOG', p)
     ok = all(c for _, c in checks) and not errors
     for name, c in checks:
         print(('PASS ' if c else 'FAIL ') + name)
