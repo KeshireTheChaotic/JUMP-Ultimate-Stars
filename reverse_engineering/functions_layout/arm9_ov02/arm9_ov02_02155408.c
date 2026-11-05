@@ -19,8 +19,8 @@ JGalaxyWarp::JGalaxyWarp_CreatePlanetIn
   undefined4 uStack_14;
   
   uStack_14 = param_4;
-  iVar1 = jus_AllocDebug(0x20,s_JGalaxyWarp_cpp_0215c3d4,s_JGalaxyWarp_CreatePlanetIn_0215c3b8,0x62)
-  ;
+  iVar1 = thunk_FUN_0201a228(0x20,s_JGalaxyWarp_cpp_0215c3d4,s_JGalaxyWarp_CreatePlanetIn_0215c3b8,
+                             0x62);
   puVar2 = (undefined4 *)0x0;
   if (iVar1 != 0) {
     puVar2 = (undefined4 *)FUN_021553f4();

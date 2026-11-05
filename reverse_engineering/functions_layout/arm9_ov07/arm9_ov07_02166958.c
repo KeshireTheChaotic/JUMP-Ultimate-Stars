@@ -7,7 +7,7 @@ void FUN_02166958(int param_1)
   (*(code *)*DAT_0214ccf8)(0x10,DAT_0214ccf8[1],0);
   FUN_02166af0();
   FUN_021669e8(0);
-  FUN_02028384(*(undefined4 *)(param_1 + 4),&LAB_0216699c_1);
+  FUN_02028384(*(undefined4 *)(param_1 + 4),0x216699d);
   return;
 }
 

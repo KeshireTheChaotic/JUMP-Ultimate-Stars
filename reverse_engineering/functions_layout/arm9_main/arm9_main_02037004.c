@@ -43,7 +43,7 @@ void ScreenInstance_Derived_02093d14::vfunc_53
   if (*(char *)(iVar1 + 6) == '\x01') {
     iVar2 = (**(code **)(*piVar3 + 0xc4))();
     if (iVar2 != iRam020371cc) {
-      iVar2 = jus_AllocDebug(0x78);
+      iVar2 = FUN_0201a228(0x78);
       piVar3 = (int *)0x0;
       if (iVar2 != 0) {
         piVar3 = (int *)jus_Class_0209b330::jus_Class_0209b330(iVar2,param_2);
@@ -66,7 +66,7 @@ void ScreenInstance_Derived_02093d14::vfunc_53
   else if (*(char *)(iVar1 + 6) == '\x02') {
     iVar2 = (**(code **)(*piVar3 + 0xc4))();
     if (iVar2 != iRam020371d0) {
-      iVar2 = jus_AllocDebug(0x78);
+      iVar2 = FUN_0201a228(0x78);
       piVar3 = (int *)0x0;
       if (iVar2 != 0) {
         piVar3 = (int *)jus_Class_0209b250::jus_Class_0209b250(iVar2,param_2);

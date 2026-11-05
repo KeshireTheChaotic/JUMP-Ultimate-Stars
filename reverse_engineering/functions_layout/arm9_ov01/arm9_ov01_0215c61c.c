@@ -21,7 +21,7 @@ void FUN_0215c61c(int param_1)
   iVar2 = *(int *)(param_1 + 0x2e4);
   *(undefined4 *)(iVar2 + 0x4c) = 0x215c7d1;
   *(int *)(iVar2 + 0x50) = param_1;
-  func_0x021b6760(*(undefined4 *)(*(int *)(param_1 + 0x70) + 4),4,&LAB_0215cb00_1);
+  func_0x021b6760(*(undefined4 *)(*(int *)(param_1 + 0x70) + 4),4,0x215cb01);
   FUN_0215aa74(param_1,1);
   FUN_0215aa74(param_1,2);
   FUN_0215a9cc(*(undefined4 *)(param_1 + 0x74));
@@ -40,18 +40,18 @@ void FUN_0215c61c(int param_1)
   local_24 = 0x215ccc5;
   local_20 = *(undefined4 *)(param_1 + 0x2d8);
   local_30[0] = param_1;
-  uVar1 = FUN_02086798(local_30);
+  uVar1 = CommWrapDisconnect::CommWrapDisconnect_Create(local_30);
   *(undefined4 *)(param_1 + 0x2ec) = uVar1;
   *(undefined4 *)(*(int *)(param_1 + 0x2e4) + 0x54) = *(undefined4 *)(param_1 + 0x2ec);
   *(undefined4 *)(*(int *)(param_1 + 0x2e4) + 0x58) = *(undefined4 *)(param_1 + 0x2f0);
   if (DAT_020afe98 == 0) {
-    FUN_02159ea8(param_1,&LAB_0215c8a0_1);
+    FUN_02159ea8(param_1,0x215c8a1);
   }
   else {
     iVar2 = FUN_02158dc8(param_1,&DAT_0216c918,*(undefined4 *)(param_1 + 100));
     func_0x021b4104(*(undefined4 *)(iVar2 + 4),*(undefined4 *)(iVar2 + 4),4);
-    FUN_02027834(*(undefined4 *)(iVar2 + 4),8,&LAB_0215c8a0_1);
-    FUN_02159ea8(param_1,&LAB_0215c930_1);
+    FUN_02027834(*(undefined4 *)(iVar2 + 4),8,0x215c8a1);
+    FUN_02159ea8(param_1,0x215c931);
     *(int *)(param_1 + 0x90) = iVar2;
   }
   return;

@@ -4,7 +4,7 @@ void FUN_0216aaf0(undefined4 *param_1)
 {
   int iVar1;
   
-  param_1[1] = &LAB_0216ac44;
+  param_1[1] = FUN_0216ac44;
   param_1[2] = 0;
   (**(code **)(*(int *)param_1[0x26] + 8))();
   (**(code **)(*(int *)param_1[0x24] + 8))();

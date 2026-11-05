@@ -95,7 +95,7 @@ int ALWidgetImp::Create(int param_1,undefined4 param_2,undefined4 param_3,int pa
   uVar9 = _DAT_021d5154;
   DAT_020a0dd0 = *(undefined4 *)(param_4 + 4);
   uVar7 = *(undefined4 *)(iVar2 + 4);
-  iVar3 = jus_AllocDebug(0x17c,s_ALWidgetImp_h_0216f4a4,s_Create_0216f434,0xb5);
+  iVar3 = thunk_FUN_0201a228(0x17c,s_ALWidgetImp_h_0216f4a4,s_Create_0216f434,0xb5);
   if (iVar3 != 0) {
     func_0x021acb3c(iVar3,uVar7,uVar9,ALWidgetBaseImp::CreateDrawFunc);
   }

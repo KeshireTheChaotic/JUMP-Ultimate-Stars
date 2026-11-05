@@ -1,0 +1,15 @@
+02070f94  push {r4,r5,r6,lr}
+02070f96  mov r4,#0x0
+02070f98  mov r6,#0x3a
+02070f9a  add r5,r4,#0x0
+02070f9c  lsl r6,r6,#0x4
+02070f9e  add r0,r5,#0x0
+02070fa0  bl 0x02070fb4
+02070fa4  cmp r0,#0x0
+02070fa6  beq 0x02070faa
+02070fa8  add r4,r4,#0x1
+02070faa  add r5,r5,#0x1
+02070fac  cmp r5,r6
+02070fae  blt 0x02070f9e
+02070fb0  add r0,r4,#0x0
+02070fb2  pop {r4,r5,r6,pc}

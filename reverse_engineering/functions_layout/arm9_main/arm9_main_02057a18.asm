@@ -1,0 +1,15 @@
+02057a18  sub r3,r2,#0x1
+02057a1c  cmp r3,#0x0
+02057a20  mov r12,#0x0
+02057a24  ble 0x02057a48
+02057a28  ldrsb r2,[r1,#0x0]
+02057a2c  strb r2,[r0,r12]
+02057a30  ldrsb r2,[r1,#0x0]
+02057a34  add r12,r12,#0x1
+02057a38  cmp r2,#0x0
+02057a3c  addne r1,r1,#0x1
+02057a40  cmp r12,r3
+02057a44  blt 0x02057a28
+02057a48  mov r1,#0x0
+02057a4c  strb r1,[r0,r12]
+02057a50  bx lr

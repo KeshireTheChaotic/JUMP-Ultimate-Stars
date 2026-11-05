@@ -6,7 +6,7 @@ void FUN_0207974c(int param_1)
   int iVar2;
   int iVar3;
   
-  FUN_02028384(*(undefined4 *)(*(int *)(param_1 + 8) + 4),&DAT_02078f84);
+  FUN_02028384(*(undefined4 *)(*(int *)(param_1 + 8) + 4),FUN_02078f84);
   iVar3 = 0;
   *(undefined4 *)(param_1 + 4) = 0;
   do {

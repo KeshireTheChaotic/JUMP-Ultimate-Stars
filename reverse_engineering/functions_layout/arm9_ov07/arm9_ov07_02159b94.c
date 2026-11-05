@@ -14,8 +14,8 @@ int CommuMenuWLCmnMemEnt::CommuMenuWLCmnMemEnt_Add
   undefined4 local_10;
   
   local_10 = param_4;
-  piVar1 = (int *)jus_AllocDebug(0xc0,s_CommuMenuWLCmnMemEnt_cpp_0216a1d0,
-                                 s_CommuMenuWLCmnMemEnt_Add_0216a1b4,0x59);
+  piVar1 = (int *)thunk_FUN_0201a228(0xc0,s_CommuMenuWLCmnMemEnt_cpp_0216a1d0,
+                                     s_CommuMenuWLCmnMemEnt_Add_0216a1b4,0x59);
   FUN_020517fc(piVar1,0,0xc0);
   FUN_02051890(param_1,piVar1 + 0x2c,0x10);
   if ((char)piVar1[0x2c] != '\0') {
@@ -52,12 +52,12 @@ int CommuMenuWLCmnMemEnt::CommuMenuWLCmnMemEnt_Add
   }
   piVar1[8] = (int)piVar1;
   piVar1[0xb] = (int)FUN_02159d98;
-  piVar1[0xc] = (int)&LAB_02159d64;
-  piVar1[0xd] = (int)&LAB_02159d84;
+  piVar1[0xc] = (int)FUN_02159d64;
+  piVar1[0xd] = (int)FUN_02159d84;
   iVar2 = FUN_02026f94();
   piVar1[1] = iVar2;
   (**(code **)(**(int **)(iVar2 + 4) + 0x24))(*(int **)(iVar2 + 4),piVar1);
-  FUN_02028384(*(undefined4 *)(piVar1[1] + 4),&LAB_02159fa0);
+  FUN_02028384(*(undefined4 *)(piVar1[1] + 4),FUN_02159fa0);
   local_10 = 0x80000;
   (**(code **)(**(int **)(piVar1[1] + 4) + 0xa0))(*(int **)(piVar1[1] + 4),&local_10);
   FUN_02088330();

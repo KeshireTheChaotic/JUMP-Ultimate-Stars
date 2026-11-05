@@ -9,8 +9,8 @@ int * JGalaxyDemo::JGalaxyDemo_Create
   int *piVar1;
   int iVar2;
   
-  piVar1 = (int *)jus_AllocDebug(0xc,s_JGalaxyDemo_cpp_0215c4a0,s_JGalaxyDemo_Create_0215c48c,0x37,
-                                 param_4);
+  piVar1 = (int *)thunk_FUN_0201a228(0xc,s_JGalaxyDemo_cpp_0215c4a0,s_JGalaxyDemo_Create_0215c48c,
+                                     0x37,param_4);
   FUN_020517fc(piVar1,0,0xc);
   piVar1[1] = param_1;
   iVar2 = FUN_02026f94();

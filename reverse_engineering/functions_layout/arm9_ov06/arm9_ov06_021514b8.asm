@@ -1,0 +1,12 @@
+021514b8  ldr r0,[0x021514d0]
+021514ba  ldr r0,[r0,#0x0]
+021514bc  add r0,#0xe0
+021514be  ldr r1,[r0,#0x0]
+021514c0  mov r0,#0x18
+021514c2  ldrsb r0,[r1,r0]
+021514c4  cmp r0,#0x18
+021514c6  bne 0x021514cc
+021514c8  mov r0,#0x1
+021514ca  bx lr
+021514cc  mov r0,#0x0
+021514ce  bx lr

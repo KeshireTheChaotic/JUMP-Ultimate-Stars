@@ -1,8 +1,9 @@
 
-/* JUS-SCENE jus_Scene03_CreateImpl [scene-map] called by scene 3 create wrapper 0206e6ec while
-   overlay 0 is resident */
+/* JUS-GAME TopMenu::TopMenu_Add [source-string] __FILE__="TopMenu.cpp" __FUNCTION__="TopMenu_Add"
+   lines=[320, 697, 1219] passed to 3 source-location call(s); header inlines:
+   ALControllerImp.h:Create, ALNodeImp.h:Create */
 
-int jus_Scene03_CreateImpl(int param_1)
+int TopMenu::TopMenu_Add(int param_1)
 
 {
   byte bVar1;
@@ -70,7 +71,8 @@ int jus_Scene03_CreateImpl(int param_1)
   undefined1 auStack_3c [12];
   undefined1 auStack_30 [12];
   
-  piVar6 = (int *)jus_AllocDebug(0xa8,PTR_s_TopMenu_cpp_02154c1c,PTR_s_TopMenu_Add_02154c20,0x140);
+  piVar6 = (int *)thunk_FUN_0201a228(0xa8,PTR_s_TopMenu_cpp_02154c1c,PTR_s_TopMenu_Add_02154c20,
+                                     0x140);
   FUN_020517fc(piVar6,0,0xa8);
   piVar6[0x1f] = param_1;
   iVar7 = FUN_020310f4();
@@ -195,7 +197,7 @@ int jus_Scene03_CreateImpl(int param_1)
   (**(code **)(**(int **)(iVar7 + 4) + 0x50))(*(int **)(iVar7 + 4),1);
   (**(code **)(**(int **)(piVar6[3] + 8) + 0x50))();
   FUN_0214edac();
-  iVar7 = jus_AllocDebug(0xcc,PTR_s_ALWidget_inl_02154c40,PTR_s_Create_02154c44,uRam02154c48);
+  iVar7 = thunk_FUN_0201a228(0xcc,PTR_FUN_02154c40,PTR_s_Create_02154c44,uRam02154c48);
   if (iVar7 != 0) {
     func_0x021af26c(iVar7,uRam02154c4c,uRam02154c50,0);
   }
@@ -260,7 +262,7 @@ int jus_Scene03_CreateImpl(int param_1)
     func_0x021b4034(*(undefined4 *)(iVar9 + 4),iVar18 + -0xc);
     func_0x021b3fc4(*(undefined4 *)(iVar9 + 4),iVar18);
     uStack_c8 = 0x18000;
-    iVar20 = jus_AllocDebug(0x10,PTR_s_ALCollision_inl_02154c70,PTR_s_Create_02154c74,0xd7);
+    iVar20 = thunk_FUN_0201a228(0x10,PTR_s_ALCollision_inl_02154c70,PTR_s_Create_02154c74,0xd7);
     uVar14 = 0;
     if (iVar20 != 0) {
       uStack_9c = uStack_c8;
@@ -282,8 +284,7 @@ int jus_Scene03_CreateImpl(int param_1)
     FUN_02150d54(&uStack_c4,iVar9,PTR_s_Scale_02154c88);
     uVar23 = uStack_c0;
     uVar14 = uStack_c4;
-    iVar17 = jus_AllocDebug(0x4c,PTR_s_ALControllerImp_h_02154c8c,PTR_s_Create_02154c90,uRam02154c94
-                           );
+    iVar17 = thunk_FUN_0201a228(0x4c,PTR_FUN_02154c8c,PTR_s_Create_02154c90,uRam02154c94);
     if (iVar17 != 0) {
       jus_TagIPCT::jus_TagIPCT(iVar17,0,uVar14,uVar23,uRam02154c98,auStack_3c,auStack_30,0x1e,0);
     }
@@ -342,7 +343,7 @@ int jus_Scene03_CreateImpl(int param_1)
                               0x530000);
   piVar6[0x15] = iVar7;
   uStack_90 = 0xd000;
-  iVar15 = jus_AllocDebug(0x10,PTR_s_ALCollision_inl_02154c70,PTR_s_Create_02154c74,0xd7);
+  iVar15 = thunk_FUN_0201a228(0x10,PTR_s_ALCollision_inl_02154c70,PTR_s_Create_02154c74,0xd7);
   uVar14 = 0;
   if (iVar15 != 0) {
     uStack_cc = uStack_90;
@@ -353,7 +354,7 @@ int jus_Scene03_CreateImpl(int param_1)
   *(undefined1 *)(*(int *)(iVar7 + 4) + 0xaa) = 1;
   func_0x021b4034(*(undefined4 *)(iVar7 + 4),*(undefined4 *)(puVar3 + 8));
   func_0x021b3fc4(*(undefined4 *)(iVar7 + 4),uRam02154ca8);
-  func_0x021b6760(*(undefined4 *)(iVar7 + 4),4,PTR_LAB_02154cac);
+  func_0x021b6760(*(undefined4 *)(iVar7 + 4),4,PTR_FUN_02154cac);
   *(undefined1 *)(*(int *)(iVar7 + 4) + 0xab) = 0;
   (**(code **)(**(int **)(iVar7 + 4) + 0xd8))(*(int **)(iVar7 + 4),1);
   puVar3 = PTR_DAT_02154cb0;
@@ -365,8 +366,8 @@ int jus_Scene03_CreateImpl(int param_1)
   uStack_96 = 0xfff0;
   uStack_94 = 0;
   uStack_92 = 0;
-  piVar8 = (int *)jus_AllocDebug(0x70,PTR_s_ALCollision_inl_02154cb4,PTR_s_Create_02154cb8,
-                                 uRam02154cbc);
+  piVar8 = (int *)thunk_FUN_0201a228(0x70,PTR_s_ALCollision_inl_02154cb4,PTR_s_Create_02154cb8,
+                                     uRam02154cbc);
   if (piVar8 != (int *)0x0) {
     func_0x021b054c(piVar8,0,PTR_DAT_02154c78);
     *piVar8 = iRam02154cc0;
@@ -385,9 +386,9 @@ int jus_Scene03_CreateImpl(int param_1)
   *(undefined1 *)(*(int *)(iVar7 + 4) + 0xb1) = 1;
   func_0x021b77a8(*(undefined4 *)(iVar7 + 4),0x20);
   (**(code **)(**(int **)(iVar7 + 4) + 0xd8))(*(int **)(iVar7 + 4),1);
-  iVar7 = jus_AllocDebug(0x78,uRam02154cd0,uRam02154cd4,uRam02154cd8);
+  iVar7 = thunk_FUN_0201a228(0x78,uRam02154cd0,uRam02154cd4,uRam02154cd8);
   if (iVar7 != 0) {
-    jus_Class_0209c0b4::jus_Class_0209c0b4(iVar7,uRam02154cdc,1);
+    jus_TagNDGR_0209c0b4::jus_TagNDGR_0209c0b4(iVar7,uRam02154cdc,1);
   }
   iVar7 = FUN_0214ed84();
   piVar6[10] = iVar7;
@@ -454,7 +455,7 @@ int jus_Scene03_CreateImpl(int param_1)
       if (iVar15 != 0) {
         if ((*(uint *)(PTR_DAT_02154cfc + (uStack_d0 >> 5) * 4 + 0xa70) & 1 << (uStack_d0 & 0x1f))
             == 0) {
-          func_0x02071750(uStack_d0);
+          FUN_02071750(uStack_d0);
           piVar8 = (int *)FUN_020101f4(PTR_s_jgalaxy_jgalaxy_aar_02154d00,0);
           piVar10 = (int *)FUN_02033410(PTR_s_jgalaxy_jgalaxy_bin_02154d04,0,0);
           if (piVar10[7] == 0) {

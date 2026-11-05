@@ -16,7 +16,7 @@ void FUN_02159ab8(void)
   FUN_02166408(uVar2,(uint)DAT_0216a958,(uint)DAT_0216a95a,(uint)DAT_0216a95c - (uint)DAT_0216a958,
                (uint)DAT_0216a95e - (uint)DAT_0216a95a,2,0x480,auStack_28);
   FUN_02166370(uVar2);
-  FUN_02157700(&LAB_02159864_1);
+  FUN_02157700(0x2159865);
   FUN_02157088(0x2159a31);
   return;
 }

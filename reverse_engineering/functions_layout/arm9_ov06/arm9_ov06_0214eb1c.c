@@ -19,7 +19,7 @@ void FUN_0214eb1c(int param_1)
   }
   *(undefined1 *)(iVar2 + 0x9a) = 0;
   FUN_0214f35c(iVar2);
-  FUN_02028384(*(undefined4 *)(param_1 + 4),(&PTR_LAB_02171af4)[*(char *)(iVar2 + 0x99) * 2]);
+  FUN_02028384(*(undefined4 *)(param_1 + 4),(&PTR_FUN_02171af4)[*(char *)(iVar2 + 0x99) * 2]);
   FUN_0207342c(0x78,0);
   return;
 }

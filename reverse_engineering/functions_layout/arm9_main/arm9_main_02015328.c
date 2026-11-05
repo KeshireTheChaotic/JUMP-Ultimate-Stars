@@ -9,7 +9,7 @@ void FUN_02015328(undefined4 param_1,undefined4 param_2,undefined4 param_3,undef
     DAT_020a1080 = DAT_020a1080 | 1;
   }
   DAT_020a106c = &DAT_020a1b04;
-  FUN_02023cd0(0x20204c44,&LAB_02015300);
+  FUN_02023cd0(0x20204c44,FUN_02015300);
   return;
 }
 

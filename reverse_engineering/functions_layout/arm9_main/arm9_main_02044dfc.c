@@ -12,7 +12,7 @@ void FUN_02044dfc(int param_1,undefined4 param_2,uint param_3)
     *(undefined4 *)(iVar1 + 0xc) = param_2;
     return;
   }
-  puVar2 = (undefined4 *)jus_AllocDebug(0x10);
+  puVar2 = (undefined4 *)FUN_0201a228(0x10);
   if (puVar2 != (undefined4 *)0x0) {
     *puVar2 = &jus_Class_02094b9c::vftable;
     *puVar2 = &jus_TagBBDS::vftable;

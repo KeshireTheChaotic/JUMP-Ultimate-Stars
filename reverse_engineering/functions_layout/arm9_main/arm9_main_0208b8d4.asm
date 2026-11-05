@@ -1,0 +1,10 @@
+0208b8d4  ldr r1,[0x0208b8e8]
+0208b8d6  ldr r2,[r1,#0xc]
+0208b8d8  cmp r2,#0x0
+0208b8da  beq 0x0208b8e6
+0208b8dc  ldr r1,[r2,#0x24]
+0208b8de  cmp r0,r1
+0208b8e0  bne 0x0208b8e6
+0208b8e2  mov r0,#0x0
+0208b8e4  str r0,[r2,#0x24]
+0208b8e6  bx lr

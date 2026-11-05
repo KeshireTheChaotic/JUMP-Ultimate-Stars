@@ -12,7 +12,7 @@ void ALWidget::MakeFitCollision(int *param_1)
   undefined2 local_12;
   
   puVar1 = (undefined4 *)
-           jus_AllocDebug(0x70,s_ALWidget_cpp_021d17d4,s_MakeFitCollision_021d1768,0x42);
+           thunk_FUN_0201a228(0x70,s_ALWidget_cpp_021d17d4,s_MakeFitCollision_021d1768,0x42);
   if (puVar1 != (undefined4 *)0x0) {
     local_12 = *(undefined2 *)((int)param_1 + 0xce);
     local_14 = (undefined2)param_1[0x33];

@@ -12,7 +12,7 @@ int Ending::Ending_Add(void)
   undefined4 uStack_c;
   
   uStack_c = in_r3;
-  piVar1 = (int *)jus_AllocDebug(0x20,s_Ending_cpp_02160cc8,s_Ending_Add_02160cbc,0x39);
+  piVar1 = (int *)thunk_FUN_0201a228(0x20,&DAT_02160cc8,&DAT_02160cbc,0x39);
   FUN_020517fc(piVar1,0,0x20);
   iVar2 = FUN_02026f94();
   piVar1[1] = iVar2;

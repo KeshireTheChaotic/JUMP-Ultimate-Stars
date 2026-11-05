@@ -10,7 +10,7 @@ void FUN_0217df18(int param_1)
   }
   else if ((char)piVar1[3] == '\x04') {
     *(uint *)(*piVar1 + 0xe4) = *(uint *)(*piVar1 + 0xe4) & 0xffffbfff;
-    FUN_02028384(*(undefined4 *)(param_1 + 4),&LAB_0217d92c);
+    FUN_02028384(*(undefined4 *)(param_1 + 4),FUN_0217d92c);
     piVar1[2] = 0;
   }
   *(char *)(piVar1 + 3) = (char)piVar1[3] + '\x01';

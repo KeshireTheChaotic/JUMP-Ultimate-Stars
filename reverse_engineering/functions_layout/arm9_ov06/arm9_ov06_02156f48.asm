@@ -1,0 +1,9 @@
+02156f48  stmdb sp!,{r3,lr}
+02156f4c  ldr r0,[r0,#0x4]
+02156f50  ldr r0,[r0,#0x10]
+02156f54  ldrsb r1,[r0,#0x18]
+02156f58  cmp r1,#0x1b
+02156f5c  ldmiaeq sp!,{r3,pc}
+02156f60  mov r1,#0x1
+02156f64  bl 0x0215a978
+02156f68  ldmia sp!,{r3,pc}

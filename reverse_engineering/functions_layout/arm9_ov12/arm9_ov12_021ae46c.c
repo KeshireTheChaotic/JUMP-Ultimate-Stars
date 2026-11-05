@@ -10,8 +10,8 @@ ALWidgetBaseImp::CreateDrawFunc
   undefined4 *puVar1;
   
   puVar1 = (undefined4 *)
-           jus_AllocDebug(0x44,s_ALWidgetBaseImp_h_021d17a4,s_CreateDrawFunc_021d1738,0x105,param_4)
-  ;
+           thunk_FUN_0201a228(0x44,s_ALWidgetBaseImp_h_021d17a4,s_CreateDrawFunc_021d1738,0x105,
+                              param_4);
   if (puVar1 != (undefined4 *)0x0) {
     jus_Class_02095a08::jus_Class_02095a08(puVar1,param_1,0);
     *puVar1 = &ALDrawLinkImp_021d2a24::vftable;

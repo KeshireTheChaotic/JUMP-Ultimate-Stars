@@ -17,7 +17,8 @@ int ComicDeckDisp::ComicDeck_DispCreate
                     /* JUS-TAG
                        strings=["ComicDeckDisp.cpp","ComicDeck_DispCreate","deckmake/cdeck_obj.aar","deckmake/deckmake.aar"]
                         */
-  iVar2 = jus_AllocDebug(0xd4,s_ComicDeckDisp_cpp_0209f650,s_ComicDeck_DispCreate_0209f638,0x24);
+  iVar2 = thunk_FUN_0201a228(0xd4,s_ComicDeckDisp_cpp_0209f650,s_ComicDeck_DispCreate_0209f638,0x24)
+  ;
   FUN_020517fc(iVar2,0,0xd4);
   *(undefined1 *)(iVar2 + 0xd0) = param_4;
   *(undefined1 *)(iVar2 + 0xd1) = param_5;
@@ -25,7 +26,7 @@ int ComicDeckDisp::ComicDeck_DispCreate
   *(int *)(iVar2 + 8) = iVar3;
   local_28[1] = 0x80000;
   (**(code **)(**(int **)(iVar3 + 4) + 0xa0))(*(int **)(iVar3 + 4),local_28 + 1);
-  FUN_02028384(*(undefined4 *)(*(int *)(iVar2 + 8) + 4),&DAT_02078f84);
+  FUN_02028384(*(undefined4 *)(*(int *)(iVar2 + 8) + 4),FUN_02078f84);
   piVar4 = *(int **)(*(int *)(iVar2 + 8) + 4);
   (**(code **)(*piVar4 + 0x24))(piVar4,iVar2);
   if (param_1 == 0) {

@@ -64,7 +64,7 @@ int FUN_02166fd4(int param_1,int param_2,int param_3,int param_4,int param_5,und
       iVar3 = FUN_0215b3e0(param_5 - param_3);
       iVar2 = FUN_0206c7fc(0x210012,param_2 + iVar2 >> 8,param_3 + iVar3 >> 8,0);
       *(int *)(iVar5 + 0x14) = iVar2;
-      FUN_02027834(*(undefined4 *)(iVar2 + 4),1,&LAB_02167f0c);
+      FUN_02027834(*(undefined4 *)(iVar2 + 4),1,FUN_02167f0c);
       piVar7 = *(int **)(*(int *)(iVar5 + 0x14) + 4);
       (**(code **)(*piVar7 + 0x24))(piVar7,iVar5);
     }

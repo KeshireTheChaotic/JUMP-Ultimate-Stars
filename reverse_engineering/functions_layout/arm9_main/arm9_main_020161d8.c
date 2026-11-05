@@ -7,7 +7,7 @@ void CommonEffect_0209c30c::vfunc_45
 
 {
   FUN_0202788c(param_2,1,FUN_020160f0,0,param_4);
-  jus_Class_0209c0b4::vfunc_45(param_1,param_2);
+  jus_TagNDGR_0209c0b4::vfunc_45(param_1,param_2);
   return;
 }
 

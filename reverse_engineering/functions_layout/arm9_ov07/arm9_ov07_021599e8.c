@@ -13,8 +13,8 @@ int * CommuMenuWLLeaderState::CommuMenuWLLeaderState_Create(void)
   undefined4 uStack_c;
   
   uStack_c = in_r3;
-  piVar1 = (int *)jus_AllocDebug(0x188,s_CommuMenuWLLeaderState_cpp_0216a198,
-                                 s_CommuMenuWLLeaderState_Create_0216a178,0x2d);
+  piVar1 = (int *)thunk_FUN_0201a228(0x188,s_CommuMenuWLLeaderState_cpp_0216a198,
+                                     s_CommuMenuWLLeaderState_Create_0216a178,0x2d);
   FUN_020517fc(piVar1,0,0x188);
   *(undefined1 *)(piVar1 + 1) = 1;
   *(undefined1 *)((int)piVar1 + 5) = 1;

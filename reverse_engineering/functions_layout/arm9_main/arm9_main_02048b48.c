@@ -11,25 +11,25 @@ void FUN_02048b48(void)
   uStack_8 = in_r3;
   FUN_02060e78(auStack_10);
   FUN_02060da4(auStack_10);
-  iVar1 = jus_AllocDebug(0xb0);
+  iVar1 = FUN_0201a228(0xb0);
   uVar2 = 0;
   if (iVar1 != 0) {
     uVar2 = jus_Class_0209c444::jus_Class_0209c444(iVar1,0);
   }
   FUN_02020c50(uVar2,0);
-  iVar1 = jus_AllocDebug(0xb0);
+  iVar1 = FUN_0201a228(0xb0);
   uVar2 = 0;
   if (iVar1 != 0) {
     uVar2 = jus_Class_0209c444::jus_Class_0209c444(iVar1,1);
   }
   FUN_02020c50(uVar2,1);
-  iVar1 = jus_AllocDebug(0xb0);
+  iVar1 = FUN_0201a228(0xb0);
   uVar2 = 0;
   if (iVar1 != 0) {
     uVar2 = jus_Class_0209c444::jus_Class_0209c444(iVar1,2);
   }
   FUN_02020c50(uVar2,2);
-  iVar1 = jus_AllocDebug(0xb0);
+  iVar1 = FUN_0201a228(0xb0);
   uVar2 = 0;
   if (iVar1 != 0) {
     uVar2 = jus_Class_0209c444::jus_Class_0209c444(iVar1,3);

@@ -29,7 +29,7 @@ undefined4 FUN_02162a80(int param_1)
   int in_stack_000000c8;
   
   (**(code **)(**(int **)(param_1 + 4) + 0xd8))(*(int **)(param_1 + 4),0);
-  iVar2 = jus_AllocDebug(0xcc,s_ALWidget_inl_0216f484,s_Create_021711b0,0x1de);
+  iVar2 = thunk_FUN_0201a228(0xcc,s_ALWidget_inl_0216f484,s_Create_021711b0,0x1de);
   piVar3 = (int *)0x0;
   if (iVar2 != 0) {
     piVar3 = (int *)func_0x021af26c(iVar2,FUN_02163898,FUN_02163900,0);
@@ -76,8 +76,8 @@ undefined4 FUN_02162a80(int param_1)
   iVar2 = FUN_02163b38(0xb00002,0xb00000,*(undefined4 *)(iVar2 + 0x88),unaff_r8[0x31]);
   *(undefined4 *)(*(int *)(iVar2 + 4) + 0x54) = 0x414d4f4b;
   FUN_02163e70(unaff_r8[0x31]);
-  func_0x021b65e8(*(undefined4 *)(unaff_r8[0x31] + 4),1,&LAB_02164d1c);
-  func_0x021b6760(*(undefined4 *)(unaff_r8[0x31] + 4),4,&LAB_02164e04);
+  func_0x021b65e8(*(undefined4 *)(unaff_r8[0x31] + 4),1,FUN_02164d1c);
+  func_0x021b6760(*(undefined4 *)(unaff_r8[0x31] + 4),4,FUN_02164e04);
   FUN_021634b4(&uStack000000ac,&DAT_02171230);
   iVar11 = 0;
   iVar2 = DAT_02171234;

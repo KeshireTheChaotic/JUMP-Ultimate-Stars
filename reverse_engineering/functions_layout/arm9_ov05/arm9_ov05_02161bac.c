@@ -21,7 +21,7 @@ void FUN_02161bac(void)
   *(undefined4 *)(unaff_r4 + 0x14) = 0;
   FUN_02073800();
   FUN_0207342c(0x78,6);
-  FUN_02028384(*(undefined4 *)(unaff_r5 + 4),&LAB_02161c48);
+  FUN_02028384(*(undefined4 *)(unaff_r5 + 4),FUN_02161c48);
   return;
 }
 

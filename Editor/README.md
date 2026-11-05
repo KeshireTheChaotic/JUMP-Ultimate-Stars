@@ -47,10 +47,14 @@ for every workspace: `docs/STUDIO_WORKSPACES.md`.
   fields (index, x, y, shape, flips, 2bpp, bank) and a palette you click to assign banks;
   a thumbnail **Frames** filmstrip with flipbook playback and replace/append/re-layout/
   delete/export; atlas import/export and palette editing for effects.
-* **Koma workspace** — `koma/koma.aar` browser grouped by series | panel canvas with
-  Select / Pencil / Picker (V/B/I) and pixel grid | Inspector with the 16-colour palette
-  (click = paint colour, double-click = edit) and evidence | Panels strip, panel PNG
-  import/export, Apply. Edits are undoable; page arrangement is unknown and not shown.
+* **Koma workspace** — `koma/koma.aar` browser grouped by series | card canvas: the art
+  laid out on its card shape (5×4 grid from `bin/kshape.bin`, selected by the
+  `bin/koma.bin` card) or as a strip, with Select / Pencil / Picker (V/B/I) and pixel grid |
+  Inspector with the card record (series → art prefix from the game table, art index, raw bytes; card
+  choice), a same-size **shape picker**, the 16-colour palette and evidence | Panels strip,
+  **Shapes** dictionary (all 66), panel / card PNG export, panel PNG import, Apply (art →
+  `koma.aar`, shape → `bin/koma.bin`, bytes +8/+9 of one card only). All edits are undoable;
+  deck placement is not decoded.
 * **Level workspace (v1, visual-only)** — stage browser (`bg_xx` sets) | composited
   background layers (ALTM + tiles, ¼×–12× zoom, tile hover/inspect) | Layers dock with eye
   toggles and **read-only overlays** (camera, objects, stage table, collision, gimmicks:

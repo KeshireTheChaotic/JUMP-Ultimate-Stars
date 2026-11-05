@@ -13,7 +13,8 @@ undefined4 KomaIBook::KomaBook_Add(void)
   undefined4 uStack_c;
   
   uStack_c = in_r3;
-  puVar1 = (undefined4 *)jus_AllocDebug(0x1c,s_KomaIBook_cpp_02170738,s_KomaBook_Add_02170728,0x29);
+  puVar1 = (undefined4 *)
+           thunk_FUN_0201a228(0x1c,s_KomaIBook_cpp_02170738,s_KomaBook_Add_02170728,0x29);
   FUN_020517fc(puVar1,0,0x1c);
   iVar2 = FUN_02026f94();
   puVar1[5] = iVar2;

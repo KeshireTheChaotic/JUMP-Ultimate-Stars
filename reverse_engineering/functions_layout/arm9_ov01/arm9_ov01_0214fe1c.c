@@ -1,8 +1,8 @@
 
-/* JUS-SCENE jus_Scene22_CreateImpl [scene-map] called by scene 22 create wrapper 0206f654 while
-   overlay 1 is resident */
+/* JUS-GAME JArenaMissionTry::JAMissionTry_Add [source-string] __FILE__="JArenaMissionTry.cpp"
+   __FUNCTION__="JAMissionTry_Add" lines=[231] passed to 1 source-location call(s) */
 
-undefined4 jus_Scene22_CreateImpl(undefined1 param_1)
+undefined4 JArenaMissionTry::JAMissionTry_Add(undefined1 param_1)
 
 {
   undefined1 *puVar1;
@@ -14,7 +14,8 @@ undefined4 jus_Scene22_CreateImpl(undefined1 param_1)
   FUN_020734e0(0x34);
   FUN_0207361c(0x34,0);
   puVar1 = (undefined1 *)
-           jus_AllocDebug(0x15c,s_JArenaMissionTry_cpp_0216bfdc,s_JAMissionTry_Add_0216bea4,0xe7);
+           thunk_FUN_0201a228(0x15c,s_JArenaMissionTry_cpp_0216bfdc,s_JAMissionTry_Add_0216bea4,0xe7
+                             );
   FUN_0214ff80(puVar1,0x15c);
   uVar2 = FUN_020310f4();
   *(undefined4 *)(puVar1 + 4) = uVar2;
@@ -22,13 +23,13 @@ undefined4 jus_Scene22_CreateImpl(undefined1 param_1)
   uVar2 = FUN_02020d90();
   FUN_0214dc10(auStack_14,0x85);
   FUN_0214ffd0(uVar2,auStack_14);
-  func_0x0214fff4(uVar2,FUN_021500d8 + 1);
+  FUN_0214fff4(uVar2,FUN_021500d8 + 1);
   FUN_02150004(uVar2,puVar1);
   *(undefined4 *)(puVar1 + 8) = uVar2;
   uVar2 = FUN_02020d90();
   FUN_0214dc10(auStack_18,0x86);
   FUN_0214ffd0(uVar2,auStack_18);
-  func_0x0214fff4(uVar2,FUN_021502d8 + 1);
+  FUN_0214fff4(uVar2,FUN_021502d8 + 1);
   FUN_02150004(uVar2,puVar1);
   *(undefined4 *)(puVar1 + 0xc) = uVar2;
   uVar2 = FUN_02028920(0);
@@ -43,15 +44,15 @@ undefined4 jus_Scene22_CreateImpl(undefined1 param_1)
   puVar1[0x158] = param_1;
   *puVar1 = 0;
   FUN_021504f0();
-  func_0x021507a0(puVar1);
-  func_0x0215081c(puVar1);
-  func_0x02150acc(puVar1);
+  FUN_021507a0(puVar1);
+  FUN_0215081c(puVar1);
+  FUN_02150acc(puVar1);
   FUN_02151ac8(puVar1);
-  func_0x0215121c(puVar1);
-  func_0x0215001c(&LAB_0214fdfc);
-  func_0x0215002c(0x30078);
-  func_0x02150074(0x10078);
-  func_0x02150088(0x10000,0x30078);
+  JAMissionTry_InitPanelWidgetItem(puVar1);
+  FUN_0215001c(FUN_0214fdfc);
+  FUN_0215002c(0x30078);
+  FUN_02150074(0x10078);
+  FUN_02150088(0x10000,0x30078);
   FUN_02073ebc(2,1);
   if (*(int *)(puVar1 + 0x4c) != 0) {
     FUN_02150094();

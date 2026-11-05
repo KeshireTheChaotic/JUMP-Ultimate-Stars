@@ -48,7 +48,7 @@ void FUN_02182768(int *param_1)
   }
   *(undefined4 *)(iVar2 + 0x424) = 0;
   *(undefined4 *)(iVar2 + 0x430) = 0;
-  FUN_02187518(param_1,&LAB_02182908_1);
+  FUN_02187518(param_1,0x2182909);
   *(undefined4 *)(iVar2 + 0x19c) = 0;
   *(undefined4 *)(iVar2 + 0x1a0) = 0;
   *(undefined4 *)(iVar2 + 0x198) = 0;

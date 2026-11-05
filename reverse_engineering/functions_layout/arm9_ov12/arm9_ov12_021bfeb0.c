@@ -17,7 +17,7 @@ undefined4 FUN_021bfeb0(void)
       uVar3 = FUN_021bff14();
     }
     else {
-      FUN_021c1160(&LAB_021bff0c_1);
+      FUN_021c1160(0x21bff0d);
     }
   }
   OS_RestoreInterrupts(uVar1);

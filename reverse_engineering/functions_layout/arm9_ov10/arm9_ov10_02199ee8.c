@@ -9,8 +9,8 @@ void WiFi::WiFi_Init_MemoryManager(void)
   undefined4 in_r3;
   
   if (DAT_0214ccfc == 0) {
-    DAT_0214ccfc = jus_AllocDebug(0x2d04,s_WiFi_cpp_021a716c,s_WiFi_Init_MemoryManager_021a7154,
-                                  0x133,in_r3);
+    DAT_0214ccfc = thunk_FUN_0201a228(0x2d04,s_WiFi_cpp_021a716c,s_WiFi_Init_MemoryManager_021a7154,
+                                      0x133,in_r3);
     FUN_020517fc(DAT_0214ccfc,0,0x2d04);
     uVar1 = FUN_020101f4(s_common_antenna_wifi_aar_021a7178,0);
     *(undefined4 *)(DAT_0214ccfc + 0x2aa4) = uVar1;

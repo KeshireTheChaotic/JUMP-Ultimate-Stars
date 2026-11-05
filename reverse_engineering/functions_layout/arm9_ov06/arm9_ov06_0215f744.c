@@ -36,7 +36,7 @@ void FUN_0215f744(int param_1,int param_2)
     if (*(char *)(param_1 + 0x1e2) == '\0') {
       *(undefined1 *)(param_1 + 0x1e2) = 1;
       FUN_02028384(*(undefined4 *)(iVar1 + 4),FUN_0215fa80);
-      FUN_02027834(*(undefined4 *)(iVar1 + 4),1,&LAB_0215fa6c);
+      FUN_02027834(*(undefined4 *)(iVar1 + 4),1,FUN_0215fa6c);
       (**(code **)(**(int **)(iVar1 + 4) + 0x24))(*(int **)(iVar1 + 4),param_1 + 0x1e2);
       local_1c = ((*(int *)(iVar3 + 0x10) >> 8) + -0x10) * 0x1000;
       local_18 = (*(int *)(iVar3 + 0xc) >> 8) << 0xc;
@@ -45,7 +45,7 @@ void FUN_0215f744(int param_1,int param_2)
     else if (*(char *)(param_1 + 0x1e3) == '\0') {
       *(undefined1 *)(param_1 + 0x1e3) = 1;
       FUN_02028384(*(undefined4 *)(iVar1 + 4),FUN_0215fa80);
-      FUN_02027834(*(undefined4 *)(iVar1 + 4),1,&LAB_0215fa6c);
+      FUN_02027834(*(undefined4 *)(iVar1 + 4),1,FUN_0215fa6c);
       (**(code **)(**(int **)(iVar1 + 4) + 0x24))(*(int **)(iVar1 + 4),param_1 + 0x1e3);
       local_24 = ((*(int *)(iVar3 + 0x10) >> 8) + -0x10) * 0x1000;
       local_20 = ((*(int *)(iVar3 + 0xc) >> 8) + -0x18) * 0x1000;
@@ -54,7 +54,7 @@ void FUN_0215f744(int param_1,int param_2)
     else if (*(char *)(param_1 + 0x1e4) == '\0') {
       *(undefined1 *)(param_1 + 0x1e4) = 1;
       FUN_02028384(*(undefined4 *)(iVar1 + 4),FUN_0215fa80);
-      FUN_02027834(*(undefined4 *)(iVar1 + 4),1,&LAB_0215fa6c);
+      FUN_02027834(*(undefined4 *)(iVar1 + 4),1,FUN_0215fa6c);
       (**(code **)(**(int **)(iVar1 + 4) + 0x24))(*(int **)(iVar1 + 4),param_1 + 0x1e4);
       local_2c = ((*(int *)(iVar3 + 0x10) >> 8) + -0x10) * 0x1000;
       local_28 = ((*(int *)(iVar3 + 0xc) >> 8) + 0x18) * 0x1000;

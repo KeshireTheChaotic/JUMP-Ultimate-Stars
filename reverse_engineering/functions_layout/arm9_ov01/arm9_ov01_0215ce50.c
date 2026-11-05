@@ -11,7 +11,7 @@ void FUN_0215ce50(int param_1,undefined4 param_2,undefined4 param_3,undefined4 p
   local_10 = 0x1a000;
   FUN_0215b3f4(*(undefined4 *)(param_1 + 0x54),&local_10);
   ALWidgetImp::Create(param_1,*(undefined4 *)(param_1 + 0x68),7,FUN_0215d13c);
-  ALWidgetImp::Create(param_1,*(undefined4 *)(param_1 + 0x68),0x1a,&LAB_0215a534_1);
+  ALWidgetImp::Create(param_1,*(undefined4 *)(param_1 + 0x68),0x1a,0x215a535);
   func_0x021b58e4(*(undefined4 *)(*(int *)(param_1 + 0x68) + 4),0x34);
   FUN_0215b740(*(undefined4 *)(param_1 + 0x68));
   return;

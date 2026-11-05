@@ -7,7 +7,7 @@ void jus_TagALMT::vfunc_05(undefined4 param_1,undefined4 param_2)
 {
   int iVar1;
   
-  iVar1 = jus_AllocDebug(0x74);
+  iVar1 = FUN_0201a228(0x74);
   if (iVar1 == 0) {
     return;
   }

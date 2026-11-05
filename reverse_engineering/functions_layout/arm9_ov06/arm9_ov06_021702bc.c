@@ -14,8 +14,8 @@ int * BattlePrmData::Battle_PrmDataInit
   undefined4 uStack_18;
   
   uStack_18 = param_4;
-  piVar1 = (int *)jus_AllocDebug(0x20,s_BattlePrmData_cpp_021728f8,s_Battle_PrmDataInit_021728e4,
-                                 0x20);
+  piVar1 = (int *)thunk_FUN_0201a228(0x20,s_BattlePrmData_cpp_021728f8,s_Battle_PrmDataInit_021728e4
+                                     ,0x20);
   FUN_020517fc(piVar1,0,0x20);
   *(undefined2 *)(piVar1 + 6) = 0xffff;
   *(undefined2 *)((int)piVar1 + 0x1a) = 0x7a;

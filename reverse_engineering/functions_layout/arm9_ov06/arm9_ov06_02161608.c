@@ -17,8 +17,8 @@ BattleCharaPursuer::Battle_PursuerCreate
   
   uStack_10 = param_4;
   puVar1 = (undefined4 *)
-           jus_AllocDebug(0x2c,s_BattleCharaPursuer_cpp_0217239c,s_Battle_PursuerCreate_02172384,
-                          0x1e);
+           thunk_FUN_0201a228(0x2c,s_BattleCharaPursuer_cpp_0217239c,s_Battle_PursuerCreate_02172384
+                              ,0x1e);
   FUN_020517fc(puVar1,0,0x2c);
   *puVar1 = param_1;
   DAT_02093c08 = DAT_02093c08 + -1;

@@ -9,7 +9,7 @@ jus_TagCLDS::vfunc_08(int param_1,undefined4 param_2,undefined4 param_3,undefine
   char cVar1;
   undefined4 *puVar2;
   
-  puVar2 = (undefined4 *)jus_AllocDebug(0x14);
+  puVar2 = (undefined4 *)FUN_0201a228(0x14);
   if (puVar2 != (undefined4 *)0x0) {
     *puVar2 = &jus_Class_02094b9c::vftable;
     puVar2[1] = *(undefined4 *)(param_1 + 4);

@@ -8,6 +8,7 @@ void FUN_02087b84(int param_1,int param_2,int param_3,int param_4)
   int local_24;
   int local_20 [3];
   
+                    /* JUS-TAG source_file_inferred="CommWrap.cpp" */
   local_28 = 0;
   if (-1 < *(char *)(DAT_0214be24 + 4)) {
     local_28 = (int)*(char *)(DAT_0214be24 + 4);
@@ -42,7 +43,7 @@ void FUN_02087b84(int param_1,int param_2,int param_3,int param_4)
     FUN_02023894(*(undefined4 *)(iVar2 + 4),local_28 + 0xc00100,0);
     (**(code **)(**(int **)(*(int *)(iVar2 + 4) + 0x68) + 0x6c))();
     (**(code **)(**(int **)(iVar2 + 4) + 0xd8))(*(int **)(iVar2 + 4),1);
-    FUN_02028384(*(undefined4 *)(iVar2 + 4),&LAB_02087a14_1);
+    FUN_02028384(*(undefined4 *)(iVar2 + 4),0x2087a15);
     (**(code **)(**(int **)(iVar2 + 4) + 0x94))(*(int **)(iVar2 + 4),0x1000);
     *(int *)(DAT_0214be24 + 0x10) = iVar2;
     FUN_0206c54c();

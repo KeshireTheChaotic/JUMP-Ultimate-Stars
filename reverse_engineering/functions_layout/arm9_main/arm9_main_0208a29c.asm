@@ -1,0 +1,14 @@
+0208a29c  ldr r1,[r0,#0x0]
+0208a29e  ldr r2,[0x0208a2b8]
+0208a2a0  ldr r1,[r1,#0xc]
+0208a2a2  lsl r1,r1,#0x3
+0208a2a4  add r1,r2,r1
+0208a2a6  ldrh r2,[r1,#0x2]
+0208a2a8  ldr r1,[0x0208a2bc]
+0208a2aa  and r2,r1
+0208a2ac  ldr r1,[r0,#0x0]
+0208a2ae  ldr r0,[r1,#0x78]
+0208a2b0  lsl r0,r0,#0x2
+0208a2b2  add r0,r1,r0
+0208a2b4  str r2,[r0,#0x18]
+0208a2b6  bx lr

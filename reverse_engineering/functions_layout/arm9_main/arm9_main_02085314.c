@@ -30,11 +30,11 @@ void FUN_02085314(int param_1)
       iVar5 = *(int *)(iVar8 + iVar10 * 4);
       if (iVar5 == 0) {
         if (*(char *)(iVar9 + 0x15) == '\x02') {
-          uVar3 = FUN_02042460(DAT_020a0f64,iVar4 - iVar1,&LAB_0208546c,pbVar6[iVar10 * 4 + 6]);
+          uVar3 = FUN_02042460(DAT_020a0f64,iVar4 - iVar1,FUN_0208546c,pbVar6[iVar10 * 4 + 6]);
           *(undefined4 *)(iVar8 + iVar10 * 4) = uVar3;
         }
         else {
-          uVar3 = FUN_02042460(DAT_020a0f64,iVar4 - iVar1,&LAB_02085488,pbVar6[iVar10 * 4 + 6]);
+          uVar3 = FUN_02042460(DAT_020a0f64,iVar4 - iVar1,FUN_02085488,pbVar6[iVar10 * 4 + 6]);
           *(undefined4 *)(iVar8 + iVar10 * 4) = uVar3;
         }
       }

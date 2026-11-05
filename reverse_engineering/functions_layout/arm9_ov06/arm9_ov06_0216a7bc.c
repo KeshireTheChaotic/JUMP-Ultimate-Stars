@@ -15,8 +15,8 @@ undefined4 * BattleObjShot::Battle_ObjShotManCreate(void)
   
   uStack_14 = in_r3;
   puVar1 = (undefined4 *)
-           jus_AllocDebug(0x3fd4,s_BattleObjShot_cpp_021728d0,s_Battle_ObjShotManCreate_02172774,
-                          0x118);
+           thunk_FUN_0201a228(0x3fd4,s_BattleObjShot_cpp_021728d0,s_Battle_ObjShotManCreate_02172774
+                              ,0x118);
   if (puVar1 == (undefined4 *)0x0) {
     puVar1 = (undefined4 *)0x0;
   }

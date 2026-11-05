@@ -7,7 +7,7 @@ undefined4 * jus_Class_02095940::vfunc_21(int param_1,undefined4 param_2)
 {
   undefined4 *puVar1;
   
-  puVar1 = (undefined4 *)jus_AllocDebug(0x44);
+  puVar1 = (undefined4 *)FUN_0201a228(0x44);
   if (puVar1 != (undefined4 *)0x0) {
     jus_Class_02095a08::jus_Class_02095a08(puVar1,param_1,param_2);
     *puVar1 = &vftable;

@@ -2,6 +2,7 @@
 void FUN_021cbf38(int *param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
 
 {
+                    /* JUS-TAG source_file_inferred="WiFiVoiceChat.cpp" */
   if ((param_1 != (int *)0x0) && (*(char *)((int)param_1 + 5) == '\0')) {
     *(undefined1 *)((int)param_1 + 5) = 1;
     *(undefined1 *)(param_1 + 1) = 0;

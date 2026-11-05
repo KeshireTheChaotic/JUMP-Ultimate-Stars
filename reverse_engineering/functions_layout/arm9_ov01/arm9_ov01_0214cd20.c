@@ -13,8 +13,7 @@ int JGalaxyStageInfo::JGalaxyStageInfo_Add(void)
   uint uVar6;
   int local_2c [3];
   
-  piVar1 = (int *)jus_AllocDebug(0x40,s_JGalaxyStageInfo_cpp_0216baf4,
-                                 s_JGalaxyStageInfo_Add_0216b9f0,0x82);
+  piVar1 = (int *)thunk_FUN_0201a228(0x40,FUN_0216baf4,s_JGalaxyStageInfo_Add_0216b9f0,0x82);
   FUN_020517fc(piVar1,0,0x40);
   iVar2 = FUN_02026f94();
   piVar1[1] = iVar2;

@@ -18,7 +18,7 @@ void FUN_0215c9f4(int param_1,undefined4 param_2,undefined4 param_3,undefined4 p
   if (local_1c < 0) {
     local_20 = 0;
     FUN_02150a10(*(undefined4 *)(iVar1 + 0x48),&local_20);
-    FUN_02028384(*(undefined4 *)(param_1 + 4),&LAB_0215ca70);
+    FUN_02028384(*(undefined4 *)(param_1 + 4),FUN_0215ca70);
   }
   return;
 }

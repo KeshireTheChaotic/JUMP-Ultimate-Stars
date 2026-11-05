@@ -26,8 +26,8 @@ undefined4 CommuMenuFrndCode::CommuMenuFrndCode_Add(void)
   char local_24 [16];
   
   puVar1 = (undefined4 *)
-           jus_AllocDebug(0x84,s_CommuMenuFrndCode_cpp_02169b48,s_CommuMenuFrndCode_Add_02169b18,
-                          0x7f);
+           thunk_FUN_0201a228(0x84,s_CommuMenuFrndCode_cpp_02169b48,s_CommuMenuFrndCode_Add_02169b18
+                              ,0x7f);
   FUN_020517fc(puVar1,0,0x84);
   iVar2 = FUN_020310f4();
   puVar1[1] = iVar2;
@@ -67,7 +67,7 @@ undefined4 CommuMenuFrndCode::CommuMenuFrndCode_Add(void)
   iVar2 = FUN_0203b3e4();
   iVar2 = FUN_02150bdc(*puVar1,*(undefined4 *)(iVar2 + 0x88));
   (**(code **)(**(int **)(iVar2 + 4) + 0x24))(*(int **)(iVar2 + 4),puVar1);
-  FUN_02027834(*(undefined4 *)(iVar2 + 4),8,&LAB_021535ec_1);
+  FUN_02027834(*(undefined4 *)(iVar2 + 4),8,0x21535ed);
   func_0x021b4104(*(undefined4 *)(iVar2 + 4),*(undefined4 *)(iVar2 + 4),4);
   *(undefined4 *)(*(int *)(iVar2 + 4) + 0x124) = 2;
   puVar1[0xd] = iVar2;
@@ -106,7 +106,7 @@ undefined4 CommuMenuFrndCode::CommuMenuFrndCode_Add(void)
   FUN_02023c70(*(undefined4 *)(iVar2 + 4),2);
   uVar3 = _DAT_021d5154;
   uVar6 = *(undefined4 *)(iVar2 + 4);
-  iVar4 = jus_AllocDebug(0x134,s_ALWidgetImp_h_02169654,s_Create_02169aa4,0x3e);
+  iVar4 = thunk_FUN_0201a228(0x134,s_ALWidgetImp_h_02169654,s_Create_02169aa4,0x3e);
   if (iVar4 != 0) {
     func_0x021af0f8(iVar4,uVar6,uVar3,ALWidgetBaseImp::CreateDrawFunc);
   }

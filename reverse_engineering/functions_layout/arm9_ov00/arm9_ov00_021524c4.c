@@ -84,7 +84,7 @@ LAB_021527e0:
       iVar8 = iVar8 + 1;
       if (((*(byte *)(iVar7 + 0xe4) & 8) != 0) && ((*(byte *)(iVar7 + 0xe4) & 4) != 0)) {
         uVar3 = FUN_020733a8();
-        uVar4 = FUN_0200c99c((&DAT_02160fd0)[*(byte *)(iVar7 + 0xe5)]);
+        uVar4 = FUN_0200c99c(*(undefined1 *)(*(byte *)(iVar7 + 0xe5) + 0x2160fd0));
         uVar4 = FUN_0200c5ac(uVar4,0x43000000);
         uVar3 = FUN_0200c99c(uVar3);
         FUN_0200c9e4(uVar4,uVar3);

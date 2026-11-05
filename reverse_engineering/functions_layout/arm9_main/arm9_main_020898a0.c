@@ -5,7 +5,7 @@ undefined4 FUN_020898a0(void)
   int iVar1;
   
                     /* JUS-TAG strings=["CommLib.cpp"] */
-  iVar1 = FUN_02058f40(&LAB_02089864_1);
+  iVar1 = FUN_02058f40(0x2089865);
   if (iVar1 == 2) {
     return 1;
   }

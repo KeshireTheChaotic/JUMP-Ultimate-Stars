@@ -38,7 +38,7 @@ void ALControllerImp::Create(int param_1)
   uVar2 = FUN_020326b0(s_Position_02170170);
   uVar2 = (**(code **)(*piVar4 + 0x40))(piVar4,s_Position_02170170,&local_3c,uVar2);
   FUN_0202c4a4(&local_28,uVar2,local_3c);
-  iVar1 = jus_AllocDebug(0x4c,s_ALControllerImp_h_02170018,s_Create_0216fc54,0x2ef);
+  iVar1 = thunk_FUN_0201a228(0x4c,s_ALControllerImp_h_02170018,s_Create_0216fc54,0x2ef);
   if (iVar1 != 0) {
     jus_TagIPMV::jus_TagIPMV(iVar1,0,local_28,local_24,0x494c,auStack_20,4,1,0);
   }

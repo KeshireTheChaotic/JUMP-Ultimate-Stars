@@ -47,8 +47,8 @@ undefined4 JQuizResultMultiPlay::JQuizResultMultiPlay_Add(void)
   
   uStack_18 = in_r3;
   puVar2 = (undefined4 *)
-           jus_AllocDebug(0xd4,s_JQuizResultMultiPlay_cpp_02161810,
-                          s_JQuizResultMultiPlay_Add_021617f4,0x87);
+           thunk_FUN_0201a228(0xd4,s_JQuizResultMultiPlay_cpp_02161810,
+                              s_JQuizResultMultiPlay_Add_021617f4,0x87);
   FUN_0214fadc(puVar2,0xd4);
   FUN_0214f9f0();
   iVar3 = FUN_0214f704();
@@ -62,8 +62,7 @@ undefined4 JQuizResultMultiPlay::JQuizResultMultiPlay_Add(void)
   uVar4 = JQuizCommon::JQuizCmn_BaseBG_Create(*(undefined4 *)(iVar3 + 0x88));
   puVar2[2] = uVar4;
   iVar3 = FUN_0203b414(2);
-  uVar4 = FUN_0214e880(s_jquiz_result00_atm_0216182c,s_jquiz_result00_dig_02161840,
-                       *(undefined4 *)(iVar3 + 0x88));
+  uVar4 = FUN_0214e880(s_jquiz_result00_atm_0216182c,FUN_02161840,*(undefined4 *)(iVar3 + 0x88));
   puVar2[5] = uVar4;
   uVar4 = FUN_020101f4(s_Common_button_aar_02161854,0);
   puVar2[9] = uVar4;
@@ -115,7 +114,7 @@ undefined4 JQuizResultMultiPlay::JQuizResultMultiPlay_Add(void)
   (**(code **)(**(int **)(iVar3 + 4) + 0xd8))(*(int **)(iVar3 + 4),0);
   uVar4 = _DAT_021d5154;
   uVar7 = *(undefined4 *)(iVar3 + 4);
-  iVar3 = jus_AllocDebug(0x134,s_ALWidgetImp_h_021608d4,s_Create_021617ec,0x3e);
+  iVar3 = thunk_FUN_0201a228(0x134,s_ALWidgetImp_h_021608d4,s_Create_021617ec,0x3e);
   piVar5 = (int *)0x0;
   if (iVar3 != 0) {
     piVar5 = (int *)func_0x021af0f8(iVar3,uVar7,uVar4,ALWidgetBaseImp::CreateDrawFunc);
@@ -158,7 +157,7 @@ undefined4 JQuizResultMultiPlay::JQuizResultMultiPlay_Add(void)
   FUN_02023c80(*(undefined4 *)(iVar3 + 4),local_80,0x494c,local_7c);
   FUN_02023c70(*(undefined4 *)(iVar3 + 4),1);
   func_0x021b4034(*(undefined4 *)(iVar3 + 4),1);
-  func_0x021b6760(*(undefined4 *)(iVar3 + 4),0x10,&LAB_0215d974);
+  func_0x021b6760(*(undefined4 *)(iVar3 + 4),0x10,FUN_0215d974);
   (**(code **)(**(int **)(iVar3 + 4) + 0xd8))(*(int **)(iVar3 + 4),0);
   ALWidgetImp::Create(puVar2[0x2e],iVar3);
   local_88 = 0x80;

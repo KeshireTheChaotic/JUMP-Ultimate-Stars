@@ -33,7 +33,7 @@ void FUN_02157768(undefined4 param_1)
   if (iVar2 == 0) {
     FUN_02055684();
   }
-  uVar3 = FUN_02167814(0,&LAB_02157550_1,0,0x78);
+  uVar3 = FUN_02167814(0,0x2157551,0,0x78);
   *(undefined4 *)(DAT_0216e714 + 0x1e29c) = uVar3;
   return;
 }

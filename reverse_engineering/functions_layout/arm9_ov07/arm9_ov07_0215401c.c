@@ -8,7 +8,7 @@ void FUN_0215401c(int param_1,undefined4 param_2,undefined4 param_3,undefined4 p
   FUN_02023894(*(undefined4 *)(iVar1 + 4),0x810002,0);
   (**(code **)(**(int **)(*(int *)(iVar1 + 4) + 0x68) + 0x6c))();
   FUN_02154248(param_1,6);
-  FUN_02028384(*(undefined4 *)(*(int *)(param_1 + 0x10) + 4),&LAB_0215422c_1);
+  FUN_02028384(*(undefined4 *)(*(int *)(param_1 + 0x10) + 4),0x215422d);
   func_0x021b6214(*(undefined4 *)(*(int *)(param_1 + *(int *)(param_1 + 0x68) * 4 + 0x30) + 4),1);
   *(undefined1 *)(param_1 + 0x74) = 0;
   return;

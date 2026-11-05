@@ -44,7 +44,7 @@ LAB_0201ab4c:
     if (((uVar3 != 0) && (uVar1 = *param_1, uVar3 < uVar1)) && (uVar1 < *(uint *)(uVar3 + 0x4a4))) {
       if (*(uint *)(uVar3 + 0x4a8) <= uVar1) {
         FUN_0201a57c();
-        uVar5 = jus_AllocDebug(param_2);
+        uVar5 = FUN_0201a228(param_2);
         FUN_02051890(*param_1,uVar5,param_2);
         uVar3 = *param_1;
         iVar4 = FUN_0201a9ec(uVar3);

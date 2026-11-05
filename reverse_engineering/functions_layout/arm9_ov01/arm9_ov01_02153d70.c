@@ -13,7 +13,7 @@ void FUN_02153d70(int param_1)
   if (*(int *)(iVar2 + 0x50) != 0) {
     FUN_02168274();
   }
-  FUN_02028384(*(undefined4 *)(param_1 + 4),&DAT_02153efc);
+  FUN_02028384(*(undefined4 *)(param_1 + 4),FUN_02153efc);
   return;
 }
 

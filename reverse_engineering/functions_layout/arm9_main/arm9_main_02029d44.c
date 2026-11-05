@@ -17,7 +17,7 @@ void jus_Class_02094538::vfunc_05(int param_1,int param_2)
     }
     uVar1 = *(ushort *)(param_2 + 8);
     *(ushort *)(param_1 + 8) = uVar1;
-    uVar3 = jus_AllocDebug((uint)uVar1 << 1);
+    uVar3 = FUN_0201a228((uint)uVar1 << 1);
     *(undefined4 *)(param_1 + 0x10) = uVar3;
   }
   MIi_CpuCopy16(*(undefined4 *)(param_2 + 0x10),*(undefined4 *)(param_1 + 0x10),

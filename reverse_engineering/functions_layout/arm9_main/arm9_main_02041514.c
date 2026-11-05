@@ -7,7 +7,7 @@ void jus_TagDUMY_Derived_02094a34::vfunc_04(int param_1)
 {
   undefined4 *puVar1;
   
-  puVar1 = (undefined4 *)jus_AllocDebug(8);
+  puVar1 = (undefined4 *)FUN_0201a228(8);
   if (puVar1 != (undefined4 *)0x0) {
     jus_Class_020946e8::jus_Class_020946e8(puVar1,param_1);
     *puVar1 = &jus_Class_02094628::vftable;

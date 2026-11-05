@@ -16,7 +16,7 @@ void FUN_02061428(void)
       iVar1 = FUN_0205587c(9,1);
     } while (iVar1 == 0);
     _DAT_027fff90 = 0;
-    FUN_020558a4(9,&LAB_02061204_1);
+    FUN_020558a4(9,0x2061205);
   }
   return;
 }

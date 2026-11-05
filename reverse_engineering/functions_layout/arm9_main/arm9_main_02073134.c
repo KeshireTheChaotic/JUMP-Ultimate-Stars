@@ -32,7 +32,7 @@ void FUN_02073134(void)
   FUN_0205b910(&DAT_0214bcbc,DAT_0214bd4d);
   FUN_0205b8c4(&DAT_0214bcbc,DAT_0214bd4d,0);
   DAT_0214bd48 = FUN_02026f94();
-  FUN_02028384(*(undefined4 *)(DAT_0214bd48 + 4),&LAB_0207330c);
+  FUN_02028384(*(undefined4 *)(DAT_0214bd48 + 4),FUN_0207330c);
   return;
 }
 

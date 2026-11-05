@@ -8,7 +8,7 @@ void FUN_0215147c(int param_1)
   if (iVar1 == 0) {
     return;
   }
-  FUN_02028384(*(undefined4 *)(param_1 + 4),&DAT_021515cc);
+  FUN_02028384(*(undefined4 *)(param_1 + 4),FUN_021515cc);
   return;
 }
 

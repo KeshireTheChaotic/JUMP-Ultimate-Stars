@@ -114,7 +114,7 @@ void FUN_0214fa3c(int param_1)
             uVar6 = 6;
           }
           FUN_021504b8(iVar8,iVar9,uVar6);
-          FUN_02028384(*(undefined4 *)(iVar4 + 4),&LAB_021505a0_1);
+          FUN_02028384(*(undefined4 *)(iVar4 + 4),0x21505a1);
         }
       }
       else {

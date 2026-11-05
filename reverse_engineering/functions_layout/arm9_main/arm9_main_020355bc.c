@@ -9,13 +9,13 @@ void FUN_020355bc(undefined4 *param_1)
   if (DAT_020a1054 != (undefined4 *)0x0) {
     return;
   }
-  DAT_020a0dbc = (undefined4 *)jus_AllocDebug(8);
+  DAT_020a0dbc = (undefined4 *)FUN_0201a228(8);
   if (DAT_020a0dbc != (undefined4 *)0x0) {
     *DAT_020a0dbc = &jus_Class_02094b9c::vftable;
     *DAT_020a0dbc = &PTR_vfunc_18_02094b54;
     DAT_020a0dbc[1] = 0;
   }
-  puVar1 = (undefined4 *)jus_AllocDebug(0x40);
+  puVar1 = (undefined4 *)FUN_0201a228(0x40);
   if (puVar1 != (undefined4 *)0x0) {
     TextureImpInstance::TextureImpInstance(puVar1,0);
     *puVar1 = &jus_Class_02095f10::vftable;

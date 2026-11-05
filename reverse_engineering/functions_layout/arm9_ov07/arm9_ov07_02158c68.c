@@ -11,14 +11,14 @@ void CommuMenuWrlsEntryObj::CommuMenuWrlsEntryObj_Init(void)
   
   if (DAT_0216ad78 == (int *)0x0) {
     FUN_02086cf4();
-    piVar1 = (int *)jus_AllocDebug(0xbec,s_CommuMenuWrlsEntryObj_cpp_0216a15c,
-                                   s_CommuMenuWrlsEntryObj_Init_0216a0f8,0x54);
+    piVar1 = (int *)thunk_FUN_0201a228(0xbec,s_CommuMenuWrlsEntryObj_cpp_0216a15c,
+                                       s_CommuMenuWrlsEntryObj_Init_0216a0f8,0x54);
     FUN_020517fc(piVar1,0,0xbec);
     *(undefined1 *)(piVar1 + 0x2fa) = 1;
     iVar2 = FUN_02026f94();
     *piVar1 = iVar2;
     (**(code **)(**(int **)(iVar2 + 4) + 0x24))(*(int **)(iVar2 + 4),piVar1);
-    FUN_02028384(*(undefined4 *)(*piVar1 + 4),&LAB_02159608);
+    FUN_02028384(*(undefined4 *)(*piVar1 + 4),FUN_02159608);
     FUN_02027834(*(undefined4 *)(*piVar1 + 4),8,FUN_02158e90);
     DAT_0216ad78 = piVar1;
   }

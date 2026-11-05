@@ -27,7 +27,7 @@ int jus_Scene14_CreateImpl(short param_1)
   FUN_0215790c();
   DAT_020a0dd0 = uVar6;
   FUN_0214d6e8();
-  piVar2 = (int *)jus_AllocDebug(0xa8c,s_Demo_cpp_0215ca94,s_Demo_Add_0215c778,0x174);
+  piVar2 = (int *)thunk_FUN_0201a228(0xa8c,s_Demo_cpp_0215ca94,s_Demo_Add_0215c778,0x174);
   if (piVar2 != (int *)0x0) {
     piVar4 = piVar2 + 8;
     do {
@@ -191,8 +191,8 @@ int jus_Scene14_CreateImpl(short param_1)
   FUN_02028384(*(undefined4 *)(piVar2[0x276] + 4),FUN_02159fe4);
   *(undefined1 *)(piVar2 + 0x278) = *(undefined1 *)(piVar2[7] + 4);
   piVar2[0x277] = piVar2[7] + 0xc;
-  iVar1 = jus_AllocDebug((uint)*(byte *)(piVar2 + 0x278) << 2,s_Demo_cpp_0215ca94,
-                         s_Demo_InitTexture_0215c99c,0xa0d);
+  iVar1 = thunk_FUN_0201a228((uint)*(byte *)(piVar2 + 0x278) << 2,s_Demo_cpp_0215ca94,
+                             s_Demo_InitTexture_0215c99c,0xa0d);
   piVar2[0x27a] = iVar1;
   FUN_020517fc(iVar1,0,(uint)*(byte *)(piVar2 + 0x278) << 2);
   while (*(byte *)((int)piVar2 + 0x9e1) < *(byte *)(piVar2[7] + 5)) {

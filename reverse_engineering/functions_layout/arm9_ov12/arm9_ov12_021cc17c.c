@@ -9,6 +9,7 @@ void FUN_021cc17c(int param_1,uint param_2,undefined4 *param_3,uint param_4,unde
   undefined2 *local_1c;
   undefined1 auStack_18 [4];
   
+                    /* JUS-TAG source_file_inferred="WiFiVoiceChat.cpp" */
   uVar2 = 0;
   *(undefined1 *)(param_6 + 0xb) = 0;
   if (param_1 == 0) {
@@ -18,7 +19,7 @@ void FUN_021cc17c(int param_1,uint param_2,undefined4 *param_3,uint param_4,unde
   }
   else {
     if (*(char *)(param_6 + 7) != '\0') {
-      FUN_02061320(param_6 + 0xcc,&LAB_021cc164_1,param_6);
+      FUN_02061320(param_6 + 0xcc,0x21cc165,param_6);
       *(undefined1 *)(param_6 + 7) = 0;
     }
     local_1c = *(undefined2 **)(param_6 + 0xd0);

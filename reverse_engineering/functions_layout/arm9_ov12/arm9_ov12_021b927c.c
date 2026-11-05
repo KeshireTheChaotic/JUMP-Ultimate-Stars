@@ -98,7 +98,7 @@ void ALWidgetBase::DoInit(int param_1)
                    (int)*(short *)(iVar3 + 0xce));
       uVar4 = FUN_021b9588(0,auStack_90,&DAT_02093c8c);
       FUN_02020e98(param_1,uVar4);
-      iVar5 = jus_AllocDebug(0xc,s_ALWidgetBase_cpp_021d3de8,s_DoInit_021d3b50,0xe08);
+      iVar5 = thunk_FUN_0201a228(0xc,s_ALWidgetBase_cpp_021d3de8,s_DoInit_021d3b50,0xe08);
       iVar3 = 0;
       if (iVar5 != 0) {
         iVar3 = ALWidgetBase_021d2c2c::ALWidgetBase_021d2c2c
@@ -121,7 +121,7 @@ void ALWidgetBase::DoInit(int param_1)
       local_b4 = *(int *)(*(int *)(param_1 + 4) + 0x98) * 0x1000 + -0x1000;
       FUN_0202b8d0(*(undefined4 *)(*(int *)(iVar2 + 4) + 100),&local_b8,&local_c0,&DAT_02093d5c,
                    &DAT_02093d5c,&DAT_02093c2c,&DAT_02093c2c);
-      iVar5 = jus_AllocDebug(0xc,s_ALWidgetBase_cpp_021d3de8,s_DoInit_021d3b50,0xe15);
+      iVar5 = thunk_FUN_0201a228(0xc,s_ALWidgetBase_cpp_021d3de8,s_DoInit_021d3b50,0xe15);
       iVar3 = 0;
       if (iVar5 != 0) {
         iVar3 = ALWidgetBase_021d2c2c::ALWidgetBase_021d2c2c

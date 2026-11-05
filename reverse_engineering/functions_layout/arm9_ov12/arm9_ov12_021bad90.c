@@ -229,10 +229,10 @@ LAB_021bb0bc:
     FUN_021b6214(*(undefined4 *)(piVar10[(char)iVar3 + 0x12] + 4),1);
   }
   if (*(char *)((int)piVar10 + 0xa5) != '\0') {
-    FUN_02073f24((&DAT_021d0114)[(uint)*(byte *)((int)piVar10 + 0x9a) * 2],0,
+    FUN_02073f24(FUN_021d0114[(uint)*(byte *)((int)piVar10 + 0x9a) * 2],0,
                  u_>__7__021d0128[*(char *)((int)piVar10 + 0x99)]);
   }
-  FUN_02028384(*(undefined4 *)(piVar10[4] + 4),&LAB_021bb6dc);
+  FUN_02028384(*(undefined4 *)(piVar10[4] + 4),FUN_021bb6dc);
   return;
 }
 

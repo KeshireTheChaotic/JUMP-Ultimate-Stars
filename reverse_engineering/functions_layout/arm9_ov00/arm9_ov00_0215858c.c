@@ -13,13 +13,13 @@ int ALWidgetImp::Create(undefined4 param_1,int param_2,undefined4 param_3,undefi
   
   uVar1 = _DAT_021d5154;
   uVar4 = *(undefined4 *)(param_2 + 4);
-  iVar2 = jus_AllocDebug(0x134,s_ALWidgetImp_h_02160d3c,s_Create_02161364,0x3e);
+  iVar2 = thunk_FUN_0201a228(0x134,0x2160d3c,s_Create_02161364,0x3e);
   if (iVar2 != 0) {
     func_0x021af0f8(iVar2,uVar4,uVar1,ALWidgetBaseImp::CreateDrawFunc);
   }
   iVar2 = FUN_0214ed84();
   (**(code **)(**(int **)(iVar2 + 4) + 0x24))(*(int **)(iVar2 + 4),param_1);
-  piVar3 = (int *)jus_AllocDebug(0x70,s_ALCollision_inl_02160d5c,s_Create_0216134c,0x1b2);
+  piVar3 = (int *)thunk_FUN_0201a228(0x70,s_ALCollision_inl_02160d5c,s_Create_0216134c,0x1b2);
   if (piVar3 != (int *)0x0) {
     func_0x021b054c(piVar3,0,&DAT_02093c8c);
     *piVar3 = (int)&jus_Class_02160db0::vftable;

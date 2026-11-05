@@ -20,7 +20,7 @@ void ALObjectImp::PostSyncMessage(int param_1)
     sVar1 = *(short *)(param_1 + 8);
     if (sVar1 == 7) {
       DAT_0214bea4 = 5;
-      iVar3 = FUN_02059864(&LAB_020895f0_1,&DAT_0214cb20,DAT_0214be5c & 0xffff,&DAT_0214caa0,
+      iVar3 = FUN_02059864(FUN_020895f0 + 1,&DAT_0214cb20,DAT_0214be5c & 0xffff,&DAT_0214caa0,
                            DAT_0214be94 & 0xffff,1);
       if (iVar3 == 2) {
         DAT_0214be44 = *(undefined2 *)(param_1 + 10);
@@ -38,7 +38,8 @@ void ALObjectImp::PostSyncMessage(int param_1)
         uVar2 = DAT_0214be98;
         if (DAT_0214be74 != 0) {
           uVar6 = *(undefined4 *)(DAT_0214be74 + 4);
-          iVar3 = jus_AllocDebug(0x2c,s_ALObjectImp_h_020a025c,s_PostSyncMessage_020a026c,0x121);
+          iVar3 = thunk_FUN_0201a228(0x2c,s_ALObjectImp_h_020a025c,s_PostSyncMessage_020a026c,0x121)
+          ;
           uVar5 = 0;
           if (iVar3 != 0) {
             uVar5 = jus_Class_0209455c::jus_Class_0209455c(iVar3,uVar2,0,0,0,0);

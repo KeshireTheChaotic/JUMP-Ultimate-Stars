@@ -16,7 +16,7 @@ undefined4 * jus_Class_02094538::jus_Class_02094538(undefined4 *param_1,int para
   param_1[5] = 0;
   param_1[6] = 0;
   *(undefined1 *)(param_1 + 7) = 0;
-  uVar1 = jus_AllocDebug(param_2 << 1);
+  uVar1 = FUN_0201a228(param_2 << 1);
   param_1[4] = uVar1;
   DAT_020a0d88 = DAT_020a0d88 + 1;
   return param_1;

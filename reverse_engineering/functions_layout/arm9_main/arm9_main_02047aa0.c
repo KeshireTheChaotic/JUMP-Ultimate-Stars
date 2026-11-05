@@ -23,7 +23,7 @@ undefined4 * FUN_02047aa0(int param_1,undefined4 param_2,undefined4 *param_3,und
   *(int *)(local_10 + 0xa4) = *(int *)(local_10 + 0xa4) + 1;
   while( true ) {
     if (*(uint *)(local_10 + 0x9c) <= uVar1) {
-      local_28 = (undefined4 *)jus_AllocDebug(0x30);
+      local_28 = (undefined4 *)FUN_0201a228(0x30);
       if (local_28 != (undefined4 *)0x0) {
         uVar3 = *param_4;
         uVar2 = *param_3;

@@ -32,8 +32,8 @@ void ALCollision::RegistCollision
         }
         else {
           iVar3 = *(int *)(local_98 + 4);
-          local_9c = jus_AllocDebug(0x10,s_ALCollision_cpp_021d25e0,s_RegistCollision_021d191c,0xde)
-          ;
+          local_9c = thunk_FUN_0201a228(0x10,s_ALCollision_cpp_021d25e0,s_RegistCollision_021d191c,
+                                        0xde);
           if (local_9c != 0) {
             local_9c = ALCollision_021d1a4c::ALCollision_021d1a4c(local_9c,param_1);
           }
@@ -48,7 +48,7 @@ void ALCollision::RegistCollision
     } while (uVar5 < 0x20);
     if (1 < uVar4) {
       iVar1 = (uVar4 - 1) * 4;
-      uVar2 = jus_AllocDebug(iVar1,s_ALCollision_cpp_021d25e0,s_RegistCollision_021d191c,0xea);
+      uVar2 = thunk_FUN_0201a228(iVar1,s_ALCollision_cpp_021d25e0,s_RegistCollision_021d191c,0xea);
       *(undefined4 *)(param_1 + 0x58) = uVar2;
       MIi_CpuCopy32(local_94,*(undefined4 *)(param_1 + 0x58),iVar1);
     }

@@ -34,7 +34,7 @@ void FUN_02156f34(void)
   DAT_0216e6e8[0x86] = 0xffff;
   DAT_0216e6e8[0x87] = 0xffff;
   FUN_020554a8(DAT_0216e6e8 + 0x88);
-  iVar3 = FUN_0214f79c(&LAB_02156ea0_1,&LAB_02156e98_1);
+  iVar3 = FUN_0214f79c(0x2156ea1,0x2156e99);
   if (iVar3 != 0) {
     FUN_02055684();
   }

@@ -1,0 +1,9 @@
+02087f20  stmdb sp!,{r3,r4,r5,lr}
+02087f24  ldr r4,[0x2087f44]
+02087f28  mov r5,#0x0
+02087f2c  ldr r0,[r4,#0x0]
+02087f30  blx r0
+02087f34  add r5,r5,#0x1
+02087f38  cmp r5,#0x2
+02087f3c  bcc 0x02087f2c
+02087f40  ldmia sp!,{r3,r4,r5,pc}

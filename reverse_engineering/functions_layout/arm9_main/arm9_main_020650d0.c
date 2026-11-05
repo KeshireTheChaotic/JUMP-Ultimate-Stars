@@ -6,7 +6,7 @@ void FUN_020650d0(void)
 {
                     /* JUS-TAG hw={"GX_2D_sub":1} io=["04001000"] */
   _DAT_04001000 = _DAT_04001000 & 0xbfffffff;
-  (*(code *)&LAB_020651c0)(&DAT_020afbb6);
+  FUN_020651c0(&DAT_020afbb6);
   return;
 }
 

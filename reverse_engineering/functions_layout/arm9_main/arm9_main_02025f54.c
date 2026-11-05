@@ -9,7 +9,7 @@ jus_Class_0209674c::jus_Class_0209674c
 {
   jus_Class_02095684::jus_Class_02095684();
   *param_1 = &vftable;
-  FUN_0200eff0(param_1 + 3,0xe,0xc,&LAB_02025fa0,FUN_02025fb4,param_4);
+  FUN_0200eff0(param_1 + 3,0xe,0xc,FUN_02025fa0,FUN_02025fb4,param_4);
   return param_1;
 }
 

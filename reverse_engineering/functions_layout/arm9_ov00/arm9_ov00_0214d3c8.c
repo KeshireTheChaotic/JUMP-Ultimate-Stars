@@ -16,7 +16,7 @@ int Opening::Opening_Add(void)
   undefined4 local_18;
   undefined4 local_14;
   
-  piVar1 = (int *)jus_AllocDebug(0x60,s_Opening_cpp_02160c64,s_Opening_Add_02160bc0,0x91);
+  piVar1 = (int *)thunk_FUN_0201a228(0x60,s_Opening_cpp_02160c64,s_Opening_Add_02160bc0,0x91);
   FUN_020517fc(piVar1,0,0x60);
   FUN_02073410();
   iVar2 = FUN_02026f94();
@@ -122,7 +122,7 @@ int Opening::Opening_Add(void)
   if (piVar3[6] == 0) {
     (**(code **)(*piVar3 + 0x10))();
   }
-  iVar2 = CommonPaletteAnime::CommonPaletteAnime_Load(piVar3[6],s_opening_star_bin_02160c98,0x80);
+  iVar2 = CommonPaletteAnime::CommonPaletteAnime_Load(piVar3[6],FUN_02160c98,0x80);
   piVar1[0xd] = iVar2;
   iVar2 = PassMark::PassMark_Create();
   piVar1[0xf] = iVar2;

@@ -50,7 +50,7 @@ LAB_0215ba64:
       *(undefined4 *)(param_1 + 0x184) = *(undefined4 *)(param_2 + 0x34);
       FUN_0215ceec(param_1);
       FUN_0215ccf0(param_1,*(undefined4 *)(param_1 + 0x184),0,0,1);
-      FUN_02028384(*(undefined4 *)(*(int *)(param_1 + 0x15c) + 4),&LAB_0215baac);
+      FUN_02028384(*(undefined4 *)(*(int *)(param_1 + 0x15c) + 4),FUN_0215baac);
       return;
     }
     if (*(char *)(param_1 + iVar3 + 0x4ea) != '\0') {

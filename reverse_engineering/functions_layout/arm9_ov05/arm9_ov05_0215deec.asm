@@ -1,0 +1,9 @@
+0215deec  stmdb sp!,{r4,lr}
+0215def0  mov r4,r0
+0215def4  mov r0,#0x7
+0215def8  mov r1,#0x0
+0215defc  bl 0x02073ef0
+0215df00  ldr r0,[r4,#0x4]
+0215df04  ldr r1,[0x215df10]
+0215df08  bl 0x02028384
+0215df0c  ldmia sp!,{r4,pc}

@@ -1,0 +1,10 @@
+020779a4  add r1,r0,#0x500
+020779a8  ldrsb r2,[r1,#0xcc]
+020779ac  add r2,r2,#0x1
+020779b0  strb r2,[r0,#0x5cc]
+020779b4  ldrsb r1,[r1,#0xcc]
+020779b8  cmp r1,#0x10
+020779bc  movgt r1,#0x10
+020779c0  strbgt r1,[r0,#0x5cc]
+020779c4  mov r0,#0x1
+020779c8  bx lr

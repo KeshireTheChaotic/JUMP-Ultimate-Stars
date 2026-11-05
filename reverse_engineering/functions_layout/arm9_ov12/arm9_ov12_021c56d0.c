@@ -33,7 +33,7 @@ int JArenaParam::JArena_ParamResult(int param_1,undefined1 *param_2)
   iVar9 = param_1 * 0xca4;
   puVar11 = &DAT_020b4118 + iVar9;
   FUN_02073114(iVar9 + 0x3e60);
-  iVar2 = jus_AllocDebug(0x2f0,s_JArenaParam_cpp_021d45e0,s_JArena_ParamResult_021d45cc,0x1f0);
+  iVar2 = thunk_FUN_0201a228(0x2f0,s_JArenaParam_cpp_021d45e0,s_JArena_ParamResult_021d45cc,0x1f0);
   FUN_020517fc(iVar2,0,0x2f0);
   piVar3 = (int *)FUN_020101f4(s_chr_ChrBin_aar_021d45f0,0);
   piVar4 = (int *)thunk_FUN_0203341c(s_chr_ai_ai_param_bin_021d4600,0,0);

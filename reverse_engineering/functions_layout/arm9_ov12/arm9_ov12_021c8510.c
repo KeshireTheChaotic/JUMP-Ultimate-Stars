@@ -175,7 +175,7 @@ void ALTextDS_021d4a2c::vfunc_07(int param_1)
         if ((*(int *)(param_1 + 0x1b0) == 0) &&
            (iVar8 = *(int *)(param_1 + 0x34), *(int *)(iVar8 + 0x940) != 1)) {
           if (*(int *)(param_1 + 0x194) == 0) {
-            uVar4 = FUN_0203d6e8(iVar8,param_1,&LAB_021c9524);
+            uVar4 = FUN_0203d6e8(iVar8,param_1,FUN_021c9524);
             *(undefined4 *)(param_1 + 0x1b0) = uVar4;
           }
           else {

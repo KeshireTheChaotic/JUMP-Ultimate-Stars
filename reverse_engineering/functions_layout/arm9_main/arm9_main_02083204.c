@@ -20,8 +20,8 @@ int * BattleObj::Battle_ObjManCreate(void)
   
                     /* JUS-TAG strings=["BattleObj.cpp","Battle_ObjManCreate"] */
   uStack_14 = in_r3;
-  piVar1 = (int *)jus_AllocDebug(0x42d8,s_BattleObj_cpp_0209fff4,s_Battle_ObjManCreate_0209ffe0,0x50
-                                );
+  piVar1 = (int *)thunk_FUN_0201a228(0x42d8,s_BattleObj_cpp_0209fff4,s_Battle_ObjManCreate_0209ffe0,
+                                     0x50);
   if (piVar1 != (int *)0x0) {
     piVar1[3] = 0;
     piVar1[4] = 0;

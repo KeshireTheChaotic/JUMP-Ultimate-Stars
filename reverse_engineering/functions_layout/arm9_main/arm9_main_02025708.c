@@ -14,7 +14,7 @@ undefined4 * jus_Class_020945fc::jus_Class_020945fc(undefined4 *param_1,int para
   param_1[5] = param_2;
   param_1[6] = 1;
   param_1[7] = 0;
-  puVar1 = (undefined4 *)jus_AllocDebug((param_2 + -1) * 4 + 0x10);
+  puVar1 = (undefined4 *)FUN_0201a228((param_2 + -1) * 4 + 0x10);
   param_1[2] = puVar1;
   *puVar1 = 0;
   *(undefined4 *)(param_1[2] + 4) = 0;

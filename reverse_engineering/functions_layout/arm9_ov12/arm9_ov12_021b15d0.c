@@ -14,7 +14,8 @@ ALCollision::CreateChecker(int param_1,uint param_2,undefined4 param_3,undefined
   iVar4 = param_2 * 4;
   iVar3 = param_1 + 0x48;
   if (*(int *)(iVar3 + iVar4) == 0) {
-    iVar1 = jus_AllocDebug(0x14,s_ALCollision_cpp_021d25e0,s_CreateChecker_021d18ec,0xde4,param_4);
+    iVar1 = thunk_FUN_0201a228(0x14,s_ALCollision_cpp_021d25e0,s_CreateChecker_021d18ec,0xde4,
+                               param_4);
     uVar2 = 0;
     if (iVar1 != 0) {
       uVar2 = FUN_021b1624(iVar1,param_1);

@@ -14,7 +14,7 @@ int Copyright::Copyright_Add(void)
   undefined4 local_1c;
   undefined4 local_18;
   
-  piVar1 = (int *)jus_AllocDebug(0x18,s_Copyright_cpp_02160b50,s_Copyright_Add_02160b40,0x23);
+  piVar1 = (int *)thunk_FUN_0201a228(0x18,FUN_02160b50,FUN_02160b40,0x23);
   FUN_020517fc(piVar1,0,0x18);
   FUN_0206dcdc(0);
   iVar2 = FUN_02026f94();
@@ -51,7 +51,7 @@ int Copyright::Copyright_Add(void)
   (**(code **)(*piVar4 + 0x10))(piVar4,&local_20);
   iVar2 = FUN_0203b424(0);
   DAT_020a0dd0 = *(undefined4 *)(*(int *)(iVar2 + 0x88) + 4);
-  uVar5 = FUN_0214d0dc(s_copyright_ganbari_dig_02160b60);
+  uVar5 = FUN_0214d0dc(FUN_02160b60);
   iVar2 = FUN_0214d108();
   (**(code **)(**(int **)(iVar2 + 4) + 0x130))
             (*(int **)(iVar2 + 4),s_copyright_ganbari_atm_02160b78);
@@ -75,8 +75,7 @@ int Copyright::Copyright_Add(void)
   DAT_020a0dd0 = *(undefined4 *)(*(int *)(iVar2 + 0x88) + 4);
   uVar5 = FUN_0214d0dc(s_copyright_nintendo_dig_02160b90);
   iVar2 = FUN_0214d108();
-  (**(code **)(**(int **)(iVar2 + 4) + 0x130))
-            (*(int **)(iVar2 + 4),s_copyright_nintendo_atm_02160ba8);
+  (**(code **)(**(int **)(iVar2 + 4) + 0x130))(*(int **)(iVar2 + 4),FUN_02160ba8);
   FUN_0214d134(iVar2,uVar5,0);
   piVar4 = *(int **)(*(int *)(iVar2 + 4) + 0x50);
   piVar4[3] = 0;

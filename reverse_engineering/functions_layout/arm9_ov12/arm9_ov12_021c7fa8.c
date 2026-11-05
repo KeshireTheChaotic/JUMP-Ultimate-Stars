@@ -5,6 +5,7 @@
 void ALTextImp_021d4c54::vfunc_24(void)
 
 {
+                    /* JUS-TAG source_file_inferred="ALTextDS.cpp" */
   FUN_021c662c();
   return;
 }

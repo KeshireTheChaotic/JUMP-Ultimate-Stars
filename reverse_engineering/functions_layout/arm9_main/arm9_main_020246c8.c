@@ -1,8 +1,8 @@
 
-/* JUS-CLASS jus_Class_0209c0b4::vfunc_45 [class-virtual] slot 45 of vtable 0209c0b4 (own slot, not
-   inherited) */
+/* JUS-CLASS jus_TagNDGR_0209c0b4::vfunc_45 [class-virtual] slot 45 of vtable 0209c0b4 (own slot,
+   not inherited) */
 
-undefined2 jus_Class_0209c0b4::vfunc_45(int param_1,int *param_2)
+undefined2 jus_TagNDGR_0209c0b4::vfunc_45(int param_1,int *param_2)
 
 {
   int *piVar1;

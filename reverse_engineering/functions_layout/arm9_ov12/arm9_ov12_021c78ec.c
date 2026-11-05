@@ -12,7 +12,8 @@ void ALTextDS::CreateDrawFunc
   piVar1 = DAT_020a0dd0;
   iVar2 = (**(code **)(*DAT_020a0dd0 + 0x74))();
   if (iVar2 != 0) {
-    iVar2 = jus_AllocDebug(0x178,s_ALTextDS_cpp_021d4e30,s_CreateDrawFunc_021d4924,0x30,param_4);
+    iVar2 = thunk_FUN_0201a228(0x178,s_ALTextDS_cpp_021d4e30,s_CreateDrawFunc_021d4924,0x30,param_4)
+    ;
     if (iVar2 == 0) {
       return;
     }
@@ -21,14 +22,15 @@ void ALTextDS::CreateDrawFunc
   }
   iVar2 = (**(code **)(*piVar1 + 0x78))();
   if (iVar2 == 0) {
-    iVar2 = jus_AllocDebug(0x178,s_ALTextDS_cpp_021d4e30,s_CreateDrawFunc_021d4924,0x35,param_4);
+    iVar2 = thunk_FUN_0201a228(0x178,s_ALTextDS_cpp_021d4e30,s_CreateDrawFunc_021d4924,0x35,param_4)
+    ;
     if (iVar2 == 0) {
       return;
     }
     jus_Class_021d4b9c::jus_Class_021d4b9c(iVar2,param_1);
     return;
   }
-  iVar2 = jus_AllocDebug(0x1b8,s_ALTextDS_cpp_021d4e30,s_CreateDrawFunc_021d4924,0x33,param_4);
+  iVar2 = thunk_FUN_0201a228(0x1b8,s_ALTextDS_cpp_021d4e30,s_CreateDrawFunc_021d4924,0x33,param_4);
   if (iVar2 == 0) {
     return;
   }

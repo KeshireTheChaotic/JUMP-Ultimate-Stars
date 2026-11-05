@@ -50,7 +50,7 @@ int JPower::JPower_Add(int param_1,undefined4 param_2,undefined4 param_3,undefin
   undefined4 uStack_28;
   
   uStack_28 = param_4;
-  piVar2 = (int *)jus_AllocDebug(0x110,s_JPower_cpp_02171360,s_JPower_Add_021711d8,0x108);
+  piVar2 = (int *)thunk_FUN_0201a228(0x110,s_JPower_cpp_02171360,s_JPower_Add_021711d8,0x108);
   FUN_020517fc(piVar2,0,0x110);
   iVar3 = FUN_02026f94();
   piVar2[1] = iVar3;
@@ -156,9 +156,9 @@ int JPower::JPower_Add(int param_1,undefined4 param_2,undefined4 param_3,undefin
                     (*(int **)(piVar2[0x1d] + 4),*(undefined4 *)(iVar3 + 0xc));
   piVar2[0x2f] = iVar6;
   piVar2[0x30] = (uint)*(ushort *)(iVar3 + 2);
-  iVar3 = jus_AllocDebug(0x78,s_ALNodeImp_h_021711e4,s_Create_021711c8,0x4c3);
+  iVar3 = thunk_FUN_0201a228(0x78,s_ALNodeImp_h_021711e4,s_Create_021711c8,0x4c3);
   if (iVar3 != 0) {
-    jus_Class_0209c0b4::jus_Class_0209c0b4(iVar3,FUN_02024a30,1);
+    jus_TagNDGR_0209c0b4::jus_TagNDGR_0209c0b4(iVar3,FUN_02024a30,1);
   }
   iVar3 = FUN_021504fc();
   (**(code **)(**(int **)(iVar3 + 4) + 0xd8))(*(int **)(iVar3 + 4),1);
@@ -196,7 +196,7 @@ int JPower::JPower_Add(int param_1,undefined4 param_2,undefined4 param_3,undefin
   uStack_98 = 0;
   FUN_021595f4(auStack_58,&uStack_98,&uStack_9c,&uStack_a0);
   FUN_02151fcc(&uStack_94,iVar6,s_Position_02171394);
-  iVar3 = jus_AllocDebug(0x4c,s_ALControllerImp_h_021712dc,s_Create_021711c0,0x2b9);
+  iVar3 = thunk_FUN_0201a228(0x4c,s_ALControllerImp_h_021712dc,s_Create_021711c0,0x2b9);
   piVar4 = (int *)0x0;
   if (iVar3 != 0) {
     piVar4 = (int *)jus_TagIPCT::jus_TagIPCT
@@ -211,7 +211,7 @@ int JPower::JPower_Add(int param_1,undefined4 param_2,undefined4 param_3,undefin
   iVar3 = FUN_02163b38(0xb0002f,0xb00000,*(undefined4 *)(iVar3 + 0x88),piVar2[2],0x80);
   piVar2[0x1a] = iVar3;
   (**(code **)(**(int **)(iVar3 + 4) + 0xd8))(*(int **)(iVar3 + 4),0);
-  iVar3 = jus_AllocDebug(0xcc,s_ALWidget_inl_0216f484,s_Create_021711b0,0x1de);
+  iVar3 = thunk_FUN_0201a228(0xcc,s_ALWidget_inl_0216f484,s_Create_021711b0,0x1de);
   piVar4 = (int *)0x0;
   if (iVar3 != 0) {
     piVar4 = (int *)func_0x021af26c(iVar3,FUN_02163898,FUN_02163900,0);
@@ -260,8 +260,8 @@ int JPower::JPower_Add(int param_1,undefined4 param_2,undefined4 param_3,undefin
   iVar3 = FUN_02163b38(0xb00002,0xb00000,*(undefined4 *)(iVar3 + 0x88),piVar2[0x31],0x85);
   *(undefined4 *)(*(int *)(iVar3 + 4) + 0x54) = 0x414d4f4b;
   FUN_02163e70(piVar2[0x31]);
-  func_0x021b65e8(*(undefined4 *)(piVar2[0x31] + 4),1,&LAB_02164d1c);
-  func_0x021b6760(*(undefined4 *)(piVar2[0x31] + 4),4,&LAB_02164e04);
+  func_0x021b65e8(*(undefined4 *)(piVar2[0x31] + 4),1,FUN_02164d1c);
+  func_0x021b6760(*(undefined4 *)(piVar2[0x31] + 4),4,FUN_02164e04);
   FUN_021634b4(&iStack_4c,&DAT_02171230);
   iVar6 = 0;
   iVar3 = DAT_02171234;

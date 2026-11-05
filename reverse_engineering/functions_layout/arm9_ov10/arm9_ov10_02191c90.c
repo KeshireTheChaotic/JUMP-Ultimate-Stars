@@ -15,7 +15,7 @@ undefined4 FUN_02191c90(int param_1)
   case 1:
     FUN_0218f378();
     FUN_0218f3e0();
-    FUN_0218f308(&LAB_021921bc_1);
+    FUN_0218f308(0x21921bd);
     break;
   case 2:
     FUN_0218f3e0();

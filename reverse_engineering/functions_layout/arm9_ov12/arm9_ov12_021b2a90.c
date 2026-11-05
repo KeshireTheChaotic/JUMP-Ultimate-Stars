@@ -10,7 +10,7 @@ void ALMotionDynamic::NewMotion(int param_1)
   int iVar3;
   
   iVar3 = 1;
-  iVar1 = jus_AllocDebug(0x44,s_ALMotionDynamic_cpp_021d28a0,s_NewMotion_021d27f8,0x1d8);
+  iVar1 = thunk_FUN_0201a228(0x44,s_ALMotionDynamic_cpp_021d28a0,s_NewMotion_021d27f8,0x1d8);
   piVar2 = (int *)0x0;
   if (iVar1 != 0) {
     piVar2 = (int *)ALMotionDynamic_021d2618::ALMotionDynamic_021d2618();

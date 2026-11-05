@@ -64,7 +64,8 @@ int * JPowerInfo::JPowerInfo_Create
   undefined4 uStack_28;
   
   uStack_28 = param_4;
-  piVar1 = (int *)jus_AllocDebug(300,s_JPowerInfo_cpp_021714b4,s_JPowerInfo_Create_0217141c,0xb7);
+  piVar1 = (int *)thunk_FUN_0201a228(300,s_JPowerInfo_cpp_021714b4,s_JPowerInfo_Create_0217141c,0xb7
+                                    );
   FUN_020517fc(piVar1,0,300);
   *piVar1 = param_1;
   iVar2 = FUN_0203b424(0);
@@ -124,9 +125,9 @@ int * JPowerInfo::JPowerInfo_Create
   local_c0 = 0x1000;
   piVar3 = *(int **)(*(int *)(iVar2 + 0x88) + 4);
   (**(code **)(*piVar3 + 0x10))(piVar3,&local_c0);
-  iVar2 = jus_AllocDebug(0x78,s_ALNodeImp_h_021711e4,s_Create_02171414,0x4c3);
+  iVar2 = thunk_FUN_0201a228(0x78,s_ALNodeImp_h_021711e4,s_Create_02171414,0x4c3);
   if (iVar2 != 0) {
-    jus_Class_0209c0b4::jus_Class_0209c0b4(iVar2,FUN_02024a30,1);
+    jus_TagNDGR_0209c0b4::jus_TagNDGR_0209c0b4(iVar2,FUN_02024a30,1);
   }
   iVar2 = FUN_021504fc();
   (**(code **)(**(int **)(iVar2 + 4) + 0xd8))(*(int **)(iVar2 + 4),1);
@@ -148,9 +149,9 @@ int * JPowerInfo::JPowerInfo_Create
   FUN_02023c80(*(undefined4 *)(iVar2 + 4),local_fc,0x494c,local_f8);
   (**(code **)(**(int **)(*(int *)(iVar2 + 4) + 0x68) + 0x70))();
   piVar1[2] = iVar2;
-  iVar2 = jus_AllocDebug(0x78,s_ALNodeImp_h_021711e4,s_Create_02171414,0x4c3);
+  iVar2 = thunk_FUN_0201a228(0x78,s_ALNodeImp_h_021711e4,s_Create_02171414,0x4c3);
   if (iVar2 != 0) {
-    jus_Class_0209c0b4::jus_Class_0209c0b4(iVar2,FUN_02024a30,1);
+    jus_TagNDGR_0209c0b4::jus_TagNDGR_0209c0b4(iVar2,FUN_02024a30,1);
   }
   iVar2 = FUN_021504fc();
   (**(code **)(**(int **)(iVar2 + 4) + 0xd8))(*(int **)(iVar2 + 4),1);
@@ -248,7 +249,7 @@ int * JPowerInfo::JPowerInfo_Create
   local_e0 = 0;
   FUN_021595f4(auStack_b0,&local_e0,&local_e4,&local_e8);
   FUN_02151fcc(&local_dc,iVar5,s_Position_021714c4);
-  iVar2 = jus_AllocDebug(0x4c,s_ALControllerImp_h_021712dc,s_Create_0217140c,0x2b9);
+  iVar2 = thunk_FUN_0201a228(0x4c,s_ALControllerImp_h_021712dc,s_Create_0217140c,0x2b9);
   piVar3 = (int *)0x0;
   if (iVar2 != 0) {
     piVar3 = (int *)jus_TagIPCT::jus_TagIPCT

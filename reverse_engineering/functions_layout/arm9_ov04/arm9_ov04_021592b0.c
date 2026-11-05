@@ -23,8 +23,8 @@ undefined4 JQuizMainSinglePlay::JQuizMainSinglePlay_Add(void)
   undefined4 local_1c;
   
   puVar1 = (undefined4 *)
-           jus_AllocDebug(0xf4,s_JQuizMainSinglePlay_cpp_021612f8,s_JQuizMainSinglePlay_Add_021612e0
-                          ,0x123);
+           thunk_FUN_0201a228(0xf4,s_JQuizMainSinglePlay_cpp_021612f8,
+                              s_JQuizMainSinglePlay_Add_021612e0,0x123);
   FUN_0214fadc(puVar1,0xf4);
   FUN_0214fc78();
   FUN_0214dcd4();
@@ -42,7 +42,7 @@ undefined4 JQuizMainSinglePlay::JQuizMainSinglePlay_Add(void)
   uVar3 = FUN_0214e880(s_jquiz_quiz00_b_atm_02161338,s_jquiz_quiz00_b_dig_0216134c,
                        *(undefined4 *)(iVar2 + 0x88));
   puVar1[6] = uVar3;
-  uVar3 = FUN_020101f4(s_Common_button_aar_02161360,0);
+  uVar3 = FUN_020101f4(FUN_02161360,0);
   puVar1[9] = uVar3;
   uVar3 = FUN_020101f4(s_jquiz_quiz_obj_a_3d_aar_02161374,0);
   puVar1[10] = uVar3;
@@ -70,7 +70,7 @@ undefined4 JQuizMainSinglePlay::JQuizMainSinglePlay_Add(void)
   puVar1[0x11] = iVar2;
   uVar3 = _DAT_021d5154;
   uVar8 = *(undefined4 *)(iVar2 + 4);
-  iVar5 = jus_AllocDebug(0x134,s_ALWidgetImp_h_021608d4,s_Create_021612d8,0x3e);
+  iVar5 = thunk_FUN_0201a228(0x134,s_ALWidgetImp_h_021608d4,s_Create_021612d8,0x3e);
   piVar4 = (int *)0x0;
   if (iVar5 != 0) {
     piVar4 = (int *)func_0x021af0f8(iVar5,uVar8,uVar3,ALWidgetBaseImp::CreateDrawFunc);
@@ -159,7 +159,7 @@ undefined4 JQuizMainSinglePlay::JQuizMainSinglePlay_Add(void)
   puVar1[0x38] = uVar3;
   local_20 = 0x80000;
   FUN_02152ca0(puVar1[0x38],&local_20);
-  FUN_02028384(*(undefined4 *)(puVar1[0x38] + 4),&DAT_0215a030);
+  FUN_02028384(*(undefined4 *)(puVar1[0x38] + 4),FUN_0215a030);
   (**(code **)(**(int **)(puVar1[0x38] + 4) + 0x24))(*(int **)(puVar1[0x38] + 4),puVar1);
   FUN_02073ebc(2,1);
   return *puVar1;

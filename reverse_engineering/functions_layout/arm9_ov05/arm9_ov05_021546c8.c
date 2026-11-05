@@ -16,7 +16,7 @@ int KomaState::KomaState_Create(undefined4 param_1,undefined4 param_2,int param_
   undefined4 local_2c;
   undefined4 local_28;
   
-  iVar1 = jus_AllocDebug(0x46c,s_KomaState_cpp_0216fb24,s_KomaState_Create_0216fa7c,99);
+  iVar1 = thunk_FUN_0201a228(0x46c,s_KomaState_cpp_0216fb24,s_KomaState_Create_0216fa7c,99);
   FUN_020517fc(iVar1,0,0x46c);
   uVar2 = FUN_020101f4(s_chr_ChrArc_aar_0216fb34,0);
   *(undefined4 *)(iVar1 + 0x3d4) = uVar2;
@@ -153,7 +153,7 @@ int KomaState::KomaState_Create(undefined4 param_1,undefined4 param_2,int param_
     FUN_0207907c(*(undefined4 *)(iVar1 + 0x3bc),*(undefined4 *)(iVar1 + 0x3b8));
   }
   if (param_3 == 0) {
-    FUN_02028384(*(undefined4 *)(*(int *)(iVar1 + 0x3d0) + 4),&LAB_021550c8);
+    FUN_02028384(*(undefined4 *)(*(int *)(iVar1 + 0x3d0) + 4),FUN_021550c8);
   }
   else {
     if (*(int *)(iVar1 + 0x454) == 1) {

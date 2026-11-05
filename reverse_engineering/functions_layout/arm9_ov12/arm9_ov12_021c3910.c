@@ -25,7 +25,7 @@ void FUN_021c3910(int param_1,undefined4 param_2,undefined4 param_3,undefined4 p
     }
     *(byte *)((int)piVar2 + 0xa9) = *(byte *)((int)piVar2 + 0xa9) & 0xfd;
     *(undefined1 *)((int)piVar2 + 0xa6) = 0xf0;
-    FUN_02028384(*(undefined4 *)(*piVar2 + 4),&LAB_021c44ec_1);
+    FUN_02028384(*(undefined4 *)(*piVar2 + 4),0x21c44ed);
   }
   return;
 }

@@ -40,7 +40,7 @@ This is the **complete recognized battle-overlay NoteTrack opcode catalog** (46 
 | `0x0103` | Physics / state | `set_velocity` | `bb` | 1,611 | vx*32 (mirrored by facing), vy*-126 → physics +0x2C/+0x2E |
 | `0x0104` | Physics / state | `set_velocity_for` | `bbBB` | 441 | vx, vy, frames, pad: velocity re-applied for N frames |
 | `0x0105` | Physics / state | `watch_state_bits` | `h` | 21 | 0 = enable watch of state+0x78 bits 2/3 |
-| `0x0106` | Physics / state | `set_object_flag` | `h` | 46 | FUN_0207D11C(obj, value != 0) (restored at end) |
+| `0x0106` | Physics / state | `set_object_flag` | `h` | 46 | ov06 0x02156664: nonzero sets state +0x78 bit 17 and saves +0x90..+0x93 → +0x98 (table 0x02172020; earlier FUN_0207D11C reading was wrong) |
 | `0x0107` | Physics / state | `watch_flag_0x400` | `h` | 1 | 0 = enable watch of FUN_020838C4(obj, 0x400) |
 | `0x0200` | Presentation | `screen_effect` | `BBBB` | 100 | FUN_021520DC(a, b, c) |
 | `0x0201` | Presentation | `show_model` | `h` | 137 | nonzero: make the animated object visible |
@@ -48,8 +48,8 @@ This is the **complete recognized battle-overlay NoteTrack opcode catalog** (46 
 | `0x0301` | Character action | `end_track` | `h` | 735 | hide object and stop note processing |
 | `0x0302` | Character action | `set_object_flag_29` | `h` | 430 | nonzero: FUN_0207CE7C (flag 0x20000000), 0 clears it |
 | `0x0400` | Audio | `play_se` | `h` | 3,283 | sound: SEQ_BATTLE (SSAR 0x7A) sequence index |
-| `0x0401` | Audio | `play_chara_se` | `h` | 443 | sound: character's SSAR (chr_b.bin record +0x1E) sequence index |
-| `0x0402` | Audio | `play_special_se` | `h` | 861 | sound: special-move SSAR (record +0x20) sequence index |
+| `0x0401` | Audio | `play_chara_se` | `h` | 443 | ov06 0x021569E0 → FUN_0207342C(+0xA4, seq); +0xA4 = chr_b.bin record +0x30 = `SEQ_<CHAR>` (main 0x02077C0C) |
+| `0x0402` | Audio | `play_special_se` | `h` | 861 | ov06 0x021569FC → FUN_0207342C(+0xA6, seq); +0xA6 = slot of the deployed koma size: chr_b +0x32+(size−4)·2 = `SEQ_<CHAR>_<size>` |
 
 ## Character action (`0x0300`) subcodes
 
@@ -103,7 +103,7 @@ The `0x0300` opcode has a signed 16-bit **secondary action subcode** plus six pa
 
 Corpus scope: 1,210 relevant ALMT files reachable from the selected `data.zip` archives; 1,842 NoteTracks; 17,791 commands. 44 of 46 defined opcodes appear in this subset. No unknown opcodes were encountered. This is narrower than the full 1,547-file format round-trip corpus.
 The GUI does not evaluate runtime conditions, pursuer movement, audio synthesis, or marker control-flow during scrubbing. It displays the key timeline and explicit jump arcs as metadata.
-For audio: opcode `0x0400` indexes `SEQ_BATTLE`; `0x0401` uses the character SSAR chosen by the character metadata; `0x0402` uses the special-move SSAR. The current editor resolves symbol names when available but does not synthesize SDAT sequences.
+For audio: opcode `0x0400` indexes `SEQ_BATTLE`; `0x0401` plays from `SEQ_<CHAR>` and `0x0402` from the active form's `SEQ_<CHAR>_<k>` (see FORMATS.md *Sound cues*; base-archive `0x0402` cues with several fitting forms and support `0x0401` stay unresolved). `FUN_0207342C` ignores a repeated (ssar, seq) in the same frame. The editor auditions cues with an approximate SSEQ renderer (`jus_formats.audio`); it is not hardware-accurate.
 
 ## Important remaining unknowns
 

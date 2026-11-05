@@ -56,7 +56,8 @@ int * StageView::StageView_Create(undefined1 param_1,undefined1 param_2,byte par
   undefined1 auStack_2c [12];
   undefined1 auStack_20 [12];
   
-  piVar1 = (int *)jus_AllocDebug(0xac,s_StageView_cpp_021d4408,s_StageView_Create_021d43e0,0xd7);
+  piVar1 = (int *)thunk_FUN_0201a228(0xac,s_StageView_cpp_021d4408,s_StageView_Create_021d43e0,0xd7)
+  ;
   if (piVar1 != (int *)0x0) {
     piVar1[0x1f] = 0;
     piVar1[0x20] = 0;
@@ -164,9 +165,9 @@ int * StageView::StageView_Create(undefined1 param_1,undefined1 param_2,byte par
               (*(int **)(piVar1[iVar2 + 0x14] + 4),0);
     iVar2 = iVar2 + 1;
   } while (iVar2 < 6);
-  iVar2 = jus_AllocDebug(0x78,s_ALNodeImp_h_021d43b4,s_Create_021d439c,0x4c3);
+  iVar2 = thunk_FUN_0201a228(0x78,s_ALNodeImp_h_021d43b4,s_Create_021d439c,0x4c3);
   if (iVar2 != 0) {
-    jus_Class_0209c0b4::jus_Class_0209c0b4(iVar2,FUN_02024a30,1);
+    jus_TagNDGR_0209c0b4::jus_TagNDGR_0209c0b4(iVar2,FUN_02024a30,1);
   }
   iVar2 = FUN_021acab4();
   (**(code **)(**(int **)(iVar2 + 4) + 0xd8))(*(int **)(iVar2 + 4),1);
@@ -290,7 +291,7 @@ int * StageView::StageView_Create(undefined1 param_1,undefined1 param_2,byte par
     local_cc = 0;
     FUN_021c3414(auStack_38,&local_cc,&local_c8,&local_c4);
     FUN_021c33c4(&local_d4,iVar2,s_Position_021d4500);
-    iVar3 = jus_AllocDebug(0x4c,s_ALControllerImp_h_021d43f4,s_Create_021d43a4,0x2b9);
+    iVar3 = thunk_FUN_0201a228(0x4c,s_ALControllerImp_h_021d43f4,s_Create_021d43a4,0x2b9);
     piVar4 = (int *)0x0;
     if (iVar3 != 0) {
       piVar4 = (int *)jus_TagIPCT::jus_TagIPCT

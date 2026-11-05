@@ -1,0 +1,15 @@
+0206bf64  ldr r2,[r1,#0x8]
+0206bf66  lsl r2,r2,#0x2
+0206bf68  add r0,r0,r2
+0206bf6a  ldr r0,[r0,#0x20]
+0206bf6c  ldr r3,[r0,#0x0]
+0206bf6e  add r0,r3,#0x0
+0206bf70  add r0,#0xe4
+0206bf72  ldr r2,[r0,#0x0]
+0206bf74  ldr r0,[r1,#0x4]
+0206bf76  add r3,#0xe4
+0206bf78  mvn r0,r0
+0206bf7a  and r0,r2
+0206bf7c  str r0,[r3,#0x0]
+0206bf7e  mov r0,#0x1
+0206bf80  bx lr

@@ -1,8 +1,8 @@
 
-/* JUS-CLASS BattleAI::~BattleAI [class-source-file] slot 0/1 of vtable 02094864; resets vtables
-   (destructor) */
+/* JUS-CLASS jus_Class_02094864::~jus_Class_02094864 [class-default] slot 0/1 of vtable 02094864;
+   resets vtables (destructor) */
 
-undefined4 * BattleAI::~BattleAI(undefined4 *param_1)
+undefined4 * jus_Class_02094864::~jus_Class_02094864(undefined4 *param_1)
 
 {
   int iVar1;

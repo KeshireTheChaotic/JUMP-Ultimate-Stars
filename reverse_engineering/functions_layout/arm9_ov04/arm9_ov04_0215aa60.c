@@ -8,8 +8,8 @@ undefined4 JQuizResultJPowerGraph::JQuizResultJPowerGraphClass_Create(void)
 {
   undefined4 uVar1;
   
-  uVar1 = jus_AllocDebug(0x18,s_JQuizResultJPowerGraph_cpp_02161520,
-                         s_JQuizResultJPowerGraphClass_Crea_021614fc,0x1f);
+  uVar1 = thunk_FUN_0201a228(0x18,s_JQuizResultJPowerGraph_cpp_02161520,
+                             s_JQuizResultJPowerGraphClass_Crea_021614fc,0x1f);
   FUN_020517fc(uVar1,0,0x18);
   return uVar1;
 }

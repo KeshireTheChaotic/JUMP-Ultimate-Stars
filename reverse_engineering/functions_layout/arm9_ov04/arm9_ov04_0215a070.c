@@ -20,7 +20,7 @@ void FUN_0215a070(int param_1)
   if (iVar1 < 1) {
     *(undefined1 *)(iVar3 + 0xea) = 1;
     FUN_0215438c(*(undefined4 *)(iVar3 + 0xdc));
-    FUN_02028384(*(undefined4 *)(param_1 + 4),&DAT_0215a030);
+    FUN_02028384(*(undefined4 *)(param_1 + 4),FUN_0215a030);
   }
   else {
     iVar2 = FUN_0200d12c(iVar1,0x3c);

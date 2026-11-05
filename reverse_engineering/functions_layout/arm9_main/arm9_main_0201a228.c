@@ -1,9 +1,7 @@
 
 /* WARNING: Removing unreachable block (ram,0x0201a25c) */
-/* JUS-SDK jus_AllocDebug [behavioral] receives (__FILE__ in r1, __FUNCTION__ in r2) at 68 call
-   sites */
 
-void jus_AllocDebug(uint param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+void FUN_0201a228(uint param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
 
 {
   undefined4 uVar1;

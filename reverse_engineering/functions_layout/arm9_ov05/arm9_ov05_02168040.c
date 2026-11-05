@@ -6,7 +6,7 @@ void FUN_02168040(int *param_1,undefined4 param_2,undefined4 param_3,undefined4 
 {
   int iVar1;
   
-  FUN_0216812c(param_1,&LAB_0216815c,0,param_4,param_4);
+  FUN_0216812c(param_1,FUN_0216815c,0,param_4,param_4);
   (**(code **)(*(int *)param_1[0xf] + 8))();
   (**(code **)(*(int *)param_1[0x10] + 8))();
   (**(code **)(*(int *)param_1[0x11] + 8))();

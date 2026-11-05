@@ -1,0 +1,9 @@
+02169a34  mov r1,#0x1e0
+02169a38  strh r1,[r0,#0x44]
+02169a3c  mov r1,#0x0
+02169a40  strb r1,[r0,#0x46]
+02169a44  mov r1,#0x1
+02169a48  strb r1,[r0,#0x48]
+02169a4c  mov r1,#0x3c
+02169a50  strb r1,[r0,#0x47]
+02169a54  bx lr

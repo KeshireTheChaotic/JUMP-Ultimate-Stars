@@ -39,7 +39,7 @@ int BattleAI_Deck::BattleAIDeck_Create
   undefined4 uStack_28;
   
   uStack_28 = param_4;
-  iVar6 = jus_AllocDebug(0x40,s_BattleAI_Deck_cpp_02181820,s_BattleAIDeck_Create_021817e8,0x94);
+  iVar6 = thunk_FUN_0201a228(0x40,s_BattleAI_Deck_cpp_02181820,s_BattleAIDeck_Create_021817e8,0x94);
   if (iVar6 != 0) {
     *(undefined4 *)(iVar6 + 0x14) = 0;
     *(undefined4 *)(iVar6 + 0x18) = 0;
@@ -60,8 +60,8 @@ int BattleAI_Deck::BattleAIDeck_Create
   *(undefined1 *)(iVar6 + 0x38) = *(undefined1 *)(iVar7 + 0x5e0);
   bVar14 = *(byte *)(*(int *)(iVar6 + 0xc) + 0x5e1);
   *(byte *)(iVar6 + 0x39) = bVar14;
-  uVar8 = jus_AllocDebug(((uint)*(byte *)(iVar6 + 0x38) + (uint)bVar14) * 0xcc,
-                         s_BattleAI_Deck_cpp_02181820,s_BattleAIDeck_Create_021817e8,0xb1);
+  uVar8 = thunk_FUN_0201a228(((uint)*(byte *)(iVar6 + 0x38) + (uint)bVar14) * 0xcc,
+                             s_BattleAI_Deck_cpp_02181820,s_BattleAIDeck_Create_021817e8,0xb1);
   *(undefined4 *)(iVar6 + 8) = uVar8;
   FUN_020517fc(uVar8,0,((uint)*(byte *)(iVar6 + 0x38) + (uint)*(byte *)(iVar6 + 0x39)) * 0xcc);
   puVar20 = *(undefined4 **)(iVar6 + 8);
@@ -75,7 +75,7 @@ int BattleAI_Deck::BattleAIDeck_Create
     }
     bVar14 = *(byte *)(puVar19 + 0x10);
     if (bVar14 < 2) {
-      iVar7 = jus_AllocDebug(0xc,s_BattleAI_Deck_cpp_02181820,s_BattleAIDeck_Create_021817e8);
+      iVar7 = thunk_FUN_0201a228(0xc,s_BattleAI_Deck_cpp_02181820,s_BattleAIDeck_Create_021817e8);
       if (iVar7 != 0) {
         *(undefined4 *)(iVar7 + 8) = 0;
       }

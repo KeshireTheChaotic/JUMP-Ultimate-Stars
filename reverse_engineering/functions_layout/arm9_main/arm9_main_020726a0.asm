@@ -1,0 +1,9 @@
+020726a0  push {r3,lr}
+020726a2  ldr r0,[0x020726b4]
+020726a4  bl 0x02072a60
+020726a8  mov r1,#0x28
+020726aa  ldr r2,[0x020726b8]
+020726ac  mul r1,r0
+020726ae  add r0,r2,r1
+020726b0  ldr r0,[r0,#0x24]
+020726b2  pop {r3,pc}

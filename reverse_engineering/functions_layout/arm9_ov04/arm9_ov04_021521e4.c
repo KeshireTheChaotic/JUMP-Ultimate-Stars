@@ -27,10 +27,10 @@ int * JQuizStartBackPlate::JQuizStartBackPlateClass_Create
   undefined4 local_28;
   undefined4 local_24;
   
-  piVar2 = (int *)jus_AllocDebug(0x14,s_JQuizStartBackPlate_cpp_02160cb4,
-                                 s_JQuizStartBackPlateClass_Create_02160c94,0x28);
+  piVar2 = (int *)thunk_FUN_0201a228(0x14,s_JQuizStartBackPlate_cpp_02160cb4,
+                                     s_JQuizStartBackPlateClass_Create_02160c94,0x28);
   FUN_020517fc(piVar2,0,0x14);
-  iVar3 = FUN_0214e880(s_JArena_direction_atm_02160ccc,s_JArena_direction_dig_02160ce4,param_2);
+  iVar3 = FUN_0214e880(FUN_02160ccc,s_JArena_direction_dig_02160ce4,param_2);
   FUN_0214e92c(iVar3,s_jquiz_q_direction00_ncl_02160cfc);
   iVar4 = ALWidgetBaseImp::Create(piVar2,param_4);
   *piVar2 = iVar4;
@@ -53,11 +53,11 @@ int * JQuizStartBackPlate::JQuizStartBackPlateClass_Create
   FUN_02023c80(*(undefined4 *)(iVar4 + 4),local_38,0x494c,local_34);
   FUN_02023c70(*(undefined4 *)(iVar4 + 4),1);
   func_0x021b4034(*(undefined4 *)(iVar4 + 4),1);
-  func_0x021b6760(*(undefined4 *)(iVar4 + 4),0x10,&LAB_021526c4);
+  func_0x021b6760(*(undefined4 *)(iVar4 + 4),0x10,FUN_021526c4);
   (**(code **)(**(int **)(iVar4 + 4) + 0xd8))(*(int **)(iVar4 + 4),0);
   uVar1 = _DAT_021d5154;
   uVar6 = *(undefined4 *)(*piVar2 + 4);
-  iVar4 = jus_AllocDebug(0x134,s_ALWidgetImp_h_021608d4,s_Create_02160c8c,0x3e);
+  iVar4 = thunk_FUN_0201a228(0x134,s_ALWidgetImp_h_021608d4,s_Create_02160c8c,0x3e);
   piVar5 = (int *)0x0;
   if (iVar4 != 0) {
     piVar5 = (int *)func_0x021af0f8(iVar4,uVar6,uVar1,ALWidgetBaseImp::CreateDrawFunc);

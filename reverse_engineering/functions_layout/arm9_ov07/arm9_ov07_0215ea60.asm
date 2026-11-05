@@ -1,0 +1,17 @@
+0215ea60  ldr r1,[0x215eaa8]
+0215ea64  ldr r2,[r1,#0x0]
+0215ea68  cmp r2,#0x0
+0215ea6c  streq r0,[r1,#0x0]
+0215ea70  moveq r1,#0x0
+0215ea74  streq r1,[r0,#0x28]
+0215ea78  bxeq lr
+0215ea7c  cmp r2,r0
+0215ea80  bxeq lr
+0215ea84  ldr r1,[r2,#0x28]
+0215ea88  cmp r1,#0x0
+0215ea8c  streq r0,[r2,#0x28]
+0215ea90  moveq r1,#0x0
+0215ea94  streq r1,[r0,#0x28]
+0215ea98  bxeq lr
+0215ea9c  mov r2,r1
+0215eaa0  b 0x0215ea7c

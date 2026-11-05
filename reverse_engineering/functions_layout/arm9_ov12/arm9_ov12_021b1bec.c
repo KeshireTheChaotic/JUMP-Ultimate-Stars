@@ -9,7 +9,7 @@ ALCollisionImp::CloneMain(int param_1,undefined4 param_2,undefined4 param_3,unde
   undefined4 *puVar1;
   
   puVar1 = (undefined4 *)
-           jus_AllocDebug(0x70,s_ALCollisionImp_h_021d192c,s_CloneMain_021d18b0,0x1a6,param_4);
+           thunk_FUN_0201a228(0x70,s_ALCollisionImp_h_021d192c,s_CloneMain_021d18b0,0x1a6,param_4);
   if (puVar1 != (undefined4 *)0x0) {
     jus_Class_021d1be8::jus_Class_021d1be8(puVar1,param_1);
     *puVar1 = &ALCollision_021d0a1c::vftable;

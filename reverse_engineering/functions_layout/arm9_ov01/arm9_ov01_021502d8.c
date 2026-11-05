@@ -13,6 +13,7 @@ void FUN_021502d8(int param_1)
   int iVar9;
   int local_20;
   
+                    /* JUS-TAG source_file_inferred="JArenaMissionTry.cpp" */
   iVar8 = *(int *)(*(int *)(param_1 + 4) + 0x10);
   if ((*(uint *)(iVar8 + 0x150) & 4) != 0) {
     iVar2 = (**(code **)(**(int **)(*(int *)(iVar8 + 0x134) + 4) + 0x194))();

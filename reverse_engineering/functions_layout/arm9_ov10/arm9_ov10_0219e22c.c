@@ -180,7 +180,7 @@ void WiFiGame::WiFiGame_MessObj_MessageFunc(int param_1,int *param_2)
         uVar6 = (**(code **)*param_2)();
         uVar8 = *(undefined4 *)(param_1 + 4);
         uVar9 = *(undefined4 *)(*(int *)(DAT_0214ccf8 + 0x1c40) + 4);
-        iVar3 = jus_AllocDebug(0x2c,s_ALObjectImp_h_021a71b4,s_PostMessage_021a71a8,0x10a);
+        iVar3 = thunk_FUN_0201a228(0x2c,s_ALObjectImp_h_021a71b4,s_PostMessage_021a71a8,0x10a);
         uVar7 = 0;
         if (iVar3 != 0) {
           uVar7 = WiFiGame(iVar3,0x70000004,uVar8,0x11,uVar6 >> 8,0);
@@ -223,7 +223,7 @@ void WiFiGame::WiFiGame_MessObj_MessageFunc(int param_1,int *param_2)
         uVar6 = (**(code **)*param_2)();
         uVar8 = *(undefined4 *)(param_1 + 4);
         uVar9 = *(undefined4 *)(*(int *)(DAT_0214ccf8 + 0x1c40) + 4);
-        iVar3 = jus_AllocDebug(0x2c,s_ALObjectImp_h_021a71b4,s_PostMessage_021a71a8,0x10a);
+        iVar3 = thunk_FUN_0201a228(0x2c,s_ALObjectImp_h_021a71b4,s_PostMessage_021a71a8,0x10a);
         uVar7 = 0;
         if (iVar3 != 0) {
           uVar7 = WiFiGame(iVar3,0x70000004,uVar8,0x1b,uVar6 >> 8,0);
@@ -258,7 +258,7 @@ void WiFiGame::WiFiGame_MessObj_MessageFunc(int param_1,int *param_2)
         uVar6 = (**(code **)*param_2)();
         uVar8 = *(undefined4 *)(param_1 + 4);
         uVar9 = *(undefined4 *)(*(int *)(DAT_0214ccf8 + 0x1c40) + 4);
-        iVar3 = jus_AllocDebug(0x2c,s_ALObjectImp_h_021a71b4,s_PostMessage_021a71a8,0x10a);
+        iVar3 = thunk_FUN_0201a228(0x2c,s_ALObjectImp_h_021a71b4,s_PostMessage_021a71a8,0x10a);
         uVar7 = 0;
         if (iVar3 != 0) {
           uVar7 = WiFiGame(iVar3,0x70000004,uVar8,0x23,uVar6 >> 8,0);
@@ -273,7 +273,7 @@ void WiFiGame::WiFiGame_MessObj_MessageFunc(int param_1,int *param_2)
         uVar6 = (**(code **)*param_2)();
         uVar8 = *(undefined4 *)(param_1 + 4);
         uVar9 = *(undefined4 *)(*(int *)(DAT_0214ccf8 + 0x1c40) + 4);
-        iVar3 = jus_AllocDebug(0x2c,s_ALObjectImp_h_021a71b4,s_PostMessage_021a71a8,0x10a);
+        iVar3 = thunk_FUN_0201a228(0x2c,s_ALObjectImp_h_021a71b4,s_PostMessage_021a71a8,0x10a);
         uVar7 = 0;
         if (iVar3 != 0) {
           uVar7 = WiFiGame(iVar3,0x70000004,uVar8,0x24,uVar6 >> 8,0);
@@ -289,7 +289,7 @@ void WiFiGame::WiFiGame_MessObj_MessageFunc(int param_1,int *param_2)
         uVar6 = (**(code **)*param_2)();
         uVar8 = *(undefined4 *)(param_1 + 4);
         uVar9 = *(undefined4 *)(*(int *)(DAT_0214ccf8 + 0x1c40) + 4);
-        iVar3 = jus_AllocDebug(0x2c,s_ALObjectImp_h_021a71b4,s_PostMessage_021a71a8,0x10a);
+        iVar3 = thunk_FUN_0201a228(0x2c,s_ALObjectImp_h_021a71b4,s_PostMessage_021a71a8,0x10a);
         uVar7 = 0;
         if (iVar3 != 0) {
           uVar7 = WiFiGame(iVar3,0x70000004,uVar8,0x25,uVar6 >> 8,0);
@@ -363,8 +363,8 @@ void WiFiGame::WiFiGame_MessObj_MessageFunc(int param_1,int *param_2)
           }
           else {
             iVar3 = (**(code **)(*param_2 + 4))();
-            uVar7 = jus_AllocDebug(iVar3 + -2,s_WiFiGame_cpp_021a72dc,
-                                   s_WiFiGame_MessObj_MessageFunc_021a7250,0x125);
+            uVar7 = thunk_FUN_0201a228(iVar3 + -2,s_WiFiGame_cpp_021a72dc,
+                                       s_WiFiGame_MessObj_MessageFunc_021a7250,0x125);
             iVar3 = (**(code **)(*param_2 + 4))();
             MIi_CpuCopy16(puVar4 + 1,uVar7,iVar3 + -2);
             uVar8 = (**(code **)(*param_2 + 8))();
@@ -384,7 +384,8 @@ void WiFiGame::WiFiGame_MessObj_MessageFunc(int param_1,int *param_2)
             if (*(int *)(DAT_0214ccf8 + 0x1c40) != 0) {
               uVar9 = *(undefined4 *)(param_1 + 4);
               uVar8 = *(undefined4 *)(*(int *)(DAT_0214ccf8 + 0x1c40) + 4);
-              iVar3 = jus_AllocDebug(0x2c,s_ALObjectImp_h_021a71b4,s_PostMessage_021a71a8,0x10a);
+              iVar3 = thunk_FUN_0201a228(0x2c,s_ALObjectImp_h_021a71b4,s_PostMessage_021a71a8,0x10a)
+              ;
               uVar7 = 0;
               if (iVar3 != 0) {
                 uVar7 = WiFiGame(iVar3,0x70000006,uVar9,0,0,0);
@@ -399,7 +400,7 @@ void WiFiGame::WiFiGame_MessObj_MessageFunc(int param_1,int *param_2)
           if ((iVar3 == 0x70000007) && (*(int *)(DAT_0214ccf8 + 0x1c40) != 0)) {
             uVar9 = *(undefined4 *)(param_1 + 4);
             uVar8 = *(undefined4 *)(*(int *)(DAT_0214ccf8 + 0x1c40) + 4);
-            iVar3 = jus_AllocDebug(0x2c,s_ALObjectImp_h_021a71b4,s_PostMessage_021a71a8,0x10a);
+            iVar3 = thunk_FUN_0201a228(0x2c,s_ALObjectImp_h_021a71b4,s_PostMessage_021a71a8,0x10a);
             uVar7 = 0;
             if (iVar3 != 0) {
               uVar7 = WiFiGame(iVar3,0x70000007,uVar9,0,0,0);

@@ -45,7 +45,7 @@ void FUN_0215df50(void)
   } while (iVar3 != 0);
   _DAT_0400000c = _DAT_0400000c & 0x43 | 0xe18;
   FUN_02154750(s_char_ybObjKb_ncl_l_0216ba18,0x2066ed5);
-  FUN_02154750(s_char_jbBgStep2_ncg_l_0216ba2c,&LAB_020669b4_1);
+  FUN_02154750(FUN_0216ba2c,&LAB_020669b4_1);
   FUN_02154750(s_char_jbBgStep21_ncg_l_0216ba44,0x20669f9);
   FUN_02154750(local_31,0x2066f65);
   FUN_02154750(s_char_jb3List_nsc_l_0216ba5c,0x2066b91);

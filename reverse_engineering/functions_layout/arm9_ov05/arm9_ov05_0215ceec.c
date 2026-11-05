@@ -17,7 +17,7 @@ void FUN_0215ceec(int param_1,undefined4 param_2,undefined4 param_3,undefined4 p
     FUN_02029c68(*(undefined4 *)(iVar1 + 4),iVar2 + 8,1,0xf);
     iVar2 = iVar2 + 0x28;
   }
-  *(undefined **)(param_1 + 0x4b4) = &DAT_0215ce14;
+  *(code **)(param_1 + 0x4b4) = FUN_0215ce14;
   return;
 }
 

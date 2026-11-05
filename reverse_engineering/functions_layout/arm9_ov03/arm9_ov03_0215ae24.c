@@ -58,7 +58,7 @@ void FUN_0215ae24(int param_1)
     iVar2 = iVar5 + 1;
     *(undefined4 *)(iVar4 + iVar5 * 4 + 0x88) = uVar3;
   } while (iVar2 < 10);
-  uVar3 = FUN_02042460(DAT_020a0f64,iVar5 + 0x11,&LAB_0215b1fc,iVar4);
+  uVar3 = FUN_02042460(DAT_020a0f64,iVar5 + 0x11,FUN_0215b1fc,iVar4);
   *(undefined4 *)(iVar4 + iVar2 * 4 + 0x88) = uVar3;
   iVar5 = iVar5 + 2;
   iVar2 = 9;
@@ -68,7 +68,7 @@ void FUN_0215ae24(int param_1)
     iVar5 = iVar5 + 1;
     iVar2 = iVar2 + -1;
   } while (-1 < iVar2);
-  uVar3 = FUN_02042460(DAT_020a0f64,0x9d,&LAB_0215b318,0);
+  uVar3 = FUN_02042460(DAT_020a0f64,0x9d,FUN_0215b318,0);
   *(undefined4 *)(iVar4 + iVar5 * 4 + 0x88) = uVar3;
   *(undefined2 *)(iVar4 + 0xec) = 0x13a;
   *(undefined2 *)(iVar4 + 0xee) = 1;

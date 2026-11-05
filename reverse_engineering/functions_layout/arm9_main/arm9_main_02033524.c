@@ -21,13 +21,13 @@ int * FUN_02033524(int *param_1)
       puVar3 = *(undefined4 **)(DAT_020a1284 + uVar9 * 4);
       iVar4 = (**(code **)*puVar3)(puVar3,auStack_40);
       if (iVar4 != 0) {
-        iVar5 = jus_AllocDebug(0x30);
+        iVar5 = FUN_0201a228(0x30);
         piVar6 = (int *)0x0;
         if (iVar5 != 0) {
           piVar6 = (int *)ALStreamImp::ALStreamImp(iVar5,iVar4);
         }
         uVar2 = (**(code **)(*param_1 + 0x1c))();
-        iVar5 = jus_AllocDebug(uVar2);
+        iVar5 = FUN_0201a228(uVar2);
         MIi_CpuCopy32(auStack_40,iVar5,0x20);
         iVar4 = (**(code **)(*param_1 + 0x1c))();
         (**(code **)(*param_1 + 0x14))(param_1,iVar5 + 0x20,iVar4 + -0x20);

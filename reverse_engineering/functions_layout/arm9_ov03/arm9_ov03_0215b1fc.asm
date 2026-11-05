@@ -1,0 +1,15 @@
+0215b1fc  ldrsh r1,[r1,#0xec]
+0215b200  ldr r12,[0x215b238]
+0215b204  mov r3,#0x9c
+0215b208  sub r0,r1,#0x3a
+0215b20c  cmp r0,#0xff
+0215b210  add r2,r1,#0x3a
+0215b214  movgt r0,#0xff
+0215b218  cmp r0,#0x0
+0215b21c  movlt r0,#0x0
+0215b220  cmp r2,#0xff
+0215b224  movgt r2,#0xff
+0215b228  cmp r2,#0x0
+0215b22c  movlt r2,#0x0
+0215b230  mov r1,#0x10
+0215b234  bx r12

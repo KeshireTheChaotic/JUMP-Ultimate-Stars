@@ -23,10 +23,10 @@ void ALNodeImp::Create(int *param_1,undefined4 param_2,undefined4 param_3,undefi
   (**(code **)(**(int **)(iVar1 + 4) + 0x24))(*(int **)(iVar1 + 4),param_1);
   FUN_02028384(*(undefined4 *)(*param_1 + 4),FUN_0215fe4c);
   FUN_020282f4(*(undefined4 *)(*param_1 + 4));
-  iVar1 = jus_AllocDebug(0x78,s_ALNodeImp_h_02161148,s_Create_02161a90,0x4c3);
+  iVar1 = thunk_FUN_0201a228(0x78,FUN_02161148,s_Create_02161a90,0x4c3);
   piVar2 = (int *)0x0;
   if (iVar1 != 0) {
-    piVar2 = (int *)jus_Class_0209c0b4::jus_Class_0209c0b4(iVar1,FUN_02024a30,1);
+    piVar2 = (int *)jus_TagNDGR_0209c0b4::jus_TagNDGR_0209c0b4(iVar1,FUN_02024a30,1);
   }
   if (piVar2[6] == 0) {
     (**(code **)(*piVar2 + 0x14))();
@@ -41,20 +41,19 @@ void ALNodeImp::Create(int *param_1,undefined4 param_2,undefined4 param_3,undefi
                        *(undefined4 *)(iVar1 + 0x88));
   param_1[2] = iVar1;
   iVar1 = FUN_0203b424(2);
-  iVar1 = FUN_0214ec98(s_ending_copyright00_atm_02161b2c,s_ending_copyright00_dig_02161b44,
-                       *(undefined4 *)(iVar1 + 0x88));
+  iVar1 = FUN_0214ec98(s_ending_copyright00_atm_02161b2c,&DAT_02161b44,*(undefined4 *)(iVar1 + 0x88)
+                      );
   param_1[3] = iVar1;
   iVar1 = FUN_0203b424(3);
-  iVar1 = FUN_0214ec98(s_ending_copyright01_atm_02161b5c,s_ending_copyright01_dig_02161b74,
-                       *(undefined4 *)(iVar1 + 0x88));
+  iVar1 = FUN_0214ec98(&DAT_02161b5c,&DAT_02161b74,*(undefined4 *)(iVar1 + 0x88));
   param_1[4] = iVar1;
   iVar1 = FUN_0203b424(2);
   iVar1 = FUN_0214ec98(s_ending_copyright02_atm_02161b8c,&DAT_02161ba4,*(undefined4 *)(iVar1 + 0x88)
                       );
   param_1[5] = iVar1;
   iVar1 = FUN_0203b424(3);
-  iVar1 = FUN_0214ec98(s_ending_copyright03_atm_02161bbc,s_ending_copyright03_dig_02161bd4,
-                       *(undefined4 *)(iVar1 + 0x88));
+  iVar1 = FUN_0214ec98(&DAT_02161bbc,s_ending_copyright03_dig_02161bd4,*(undefined4 *)(iVar1 + 0x88)
+                      );
   param_1[6] = iVar1;
   iVar1 = FUN_0203b424(2);
   iVar1 = FUN_0214ec98(s_ending_copyright04_atm_02161bec,s_ending_copyright04_dig_02161c04,

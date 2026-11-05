@@ -8,7 +8,7 @@ void FUN_0206af1c(int param_1)
                  *(undefined2 *)(param_1 + 0xe),*(undefined1 *)(param_1 + 0x10));
   }
   *(undefined1 *)(param_1 + 0x11) = 0;
-  (*(code *)(&PTR_LAB_0209de4c)[*(byte *)(param_1 + 0xc)])(param_1);
+  (*(code *)(&PTR_FUN_0209de4c)[*(byte *)(param_1 + 0xc)])(param_1);
   return;
 }
 

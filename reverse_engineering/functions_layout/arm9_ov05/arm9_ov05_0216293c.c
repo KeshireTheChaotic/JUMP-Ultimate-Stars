@@ -57,7 +57,7 @@ undefined4 FUN_0216293c(void)
   FUN_02151fcc(&uStack00000064,uVar11,s_Position_02171394);
   uVar5 = in_stack_00000068;
   uVar3 = uStack00000064;
-  iVar2 = jus_AllocDebug(0x4c,s_ALControllerImp_h_021712dc,s_Create_021711c0,0x2b9);
+  iVar2 = thunk_FUN_0201a228(0x4c,s_ALControllerImp_h_021712dc,s_Create_021711c0,0x2b9);
   piVar4 = (int *)0x0;
   if (iVar2 != 0) {
     piVar4 = (int *)jus_TagIPCT::jus_TagIPCT(iVar2,0,uVar3,uVar5);
@@ -71,7 +71,7 @@ undefined4 FUN_0216293c(void)
   iVar2 = FUN_02163b38(0xb0002f,0xb00000,*(undefined4 *)(iVar2 + 0x88),unaff_r8[2]);
   unaff_r8[0x1a] = iVar2;
   (**(code **)(**(int **)(iVar2 + 4) + 0xd8))(*(int **)(iVar2 + 4),0);
-  iVar2 = jus_AllocDebug(0xcc,s_ALWidget_inl_0216f484,s_Create_021711b0,0x1de);
+  iVar2 = thunk_FUN_0201a228(0xcc,s_ALWidget_inl_0216f484,s_Create_021711b0,0x1de);
   piVar4 = (int *)0x0;
   if (iVar2 != 0) {
     piVar4 = (int *)func_0x021af26c(iVar2,FUN_02163898,FUN_02163900,0);
@@ -118,8 +118,8 @@ undefined4 FUN_0216293c(void)
   iVar2 = FUN_02163b38(0xb00002,0xb00000,*(undefined4 *)(iVar2 + 0x88),unaff_r8[0x31]);
   *(undefined4 *)(*(int *)(iVar2 + 4) + 0x54) = 0x414d4f4b;
   FUN_02163e70(unaff_r8[0x31]);
-  func_0x021b65e8(*(undefined4 *)(unaff_r8[0x31] + 4),1,&LAB_02164d1c);
-  func_0x021b6760(*(undefined4 *)(unaff_r8[0x31] + 4),4,&LAB_02164e04);
+  func_0x021b65e8(*(undefined4 *)(unaff_r8[0x31] + 4),1,FUN_02164d1c);
+  func_0x021b6760(*(undefined4 *)(unaff_r8[0x31] + 4),4,FUN_02164e04);
   FUN_021634b4(&uStack000000ac,&DAT_02171230);
   iVar12 = 0;
   iVar2 = DAT_02171234;

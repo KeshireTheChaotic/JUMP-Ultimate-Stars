@@ -14,7 +14,7 @@ int BattleCol::Battle_ColObjCreate
                     /* JUS-TAG strings=["BattleCol.cpp","Battle_ColObjCreate"] */
   uStack_14 = param_4;
   FUN_0201899c(&local_20);
-  iVar1 = jus_AllocDebug(0x40,s_BattleCol_cpp_0209fb0c,s_Battle_ColObjCreate_0209fae0,0x16f);
+  iVar1 = thunk_FUN_0201a228(0x40,s_BattleCol_cpp_0209fb0c,s_Battle_ColObjCreate_0209fae0,0x16f);
   if (iVar1 == 0) {
     iVar1 = 0;
   }

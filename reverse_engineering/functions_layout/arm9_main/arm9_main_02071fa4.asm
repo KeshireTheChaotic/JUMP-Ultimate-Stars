@@ -1,0 +1,16 @@
+02071fa4  push {r3,lr}
+02071fa6  add r2,r0,#0x0
+02071fa8  add r3,r1,#0x0
+02071faa  mov r0,#0x0
+02071fac  str r0,[sp,#0x0]
+02071fae  lsl r2,r2,#0x18
+02071fb0  lsl r3,r3,#0x18
+02071fb2  ldr r0,[0x02071fc8]
+02071fb4  mov r1,#0x32
+02071fb6  lsr r2,r2,#0x18
+02071fb8  lsr r3,r3,#0x18
+02071fba  bl 0x0207241c
+02071fbe  ldr r0,[0x02071fcc]
+02071fc0  ldr r1,[0x02071fd0]
+02071fc2  bl 0x02073114
+02071fc6  pop {r3,pc}

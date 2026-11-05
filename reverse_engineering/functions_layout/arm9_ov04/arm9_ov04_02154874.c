@@ -16,7 +16,7 @@ void FUN_02154874(int param_1)
     return;
   }
   FUN_02154750(piVar2,0);
-  FUN_02028384(*(undefined4 *)(*piVar2 + 4),&DAT_02154870);
+  FUN_02028384(*(undefined4 *)(*piVar2 + 4),FUN_02154870);
   return;
 }
 

@@ -7,7 +7,7 @@ int * FUN_0203d6e8(int param_1,int param_2,int param_3,undefined4 param_4)
   undefined4 uStack_18;
   
   uStack_18 = param_4;
-  iVar1 = jus_AllocDebug(0x40);
+  iVar1 = FUN_0201a228(0x40);
   piVar2 = (int *)0x0;
   if (iVar1 != 0) {
     piVar2 = (int *)jus_Class_020942e4::jus_Class_020942e4();

@@ -12,7 +12,7 @@ void FUN_02086a14(int param_1)
       FUN_020871f4();
       func_0x0219a920();
     }
-    FUN_02028384(*(undefined4 *)(param_1 + 4),&LAB_02086a4c_1);
+    FUN_02028384(*(undefined4 *)(param_1 + 4),0x2086a4d);
   }
   return;
 }

@@ -51,11 +51,11 @@ void FUN_0215c7d8(undefined4 *param_1)
     param_1[2] = uVar4;
     thunk_FUN_0207400c(auStack_220,s_demo__021618b0);
     thunk_FUN_020741c4(auStack_220,(&PTR_DAT_0209e840)[*(int *)param_1[0x13]]);
-    thunk_FUN_020741c4(auStack_220,s__title_021618b8);
+    thunk_FUN_020741c4(auStack_220,FUN_021618b8);
     thunk_FUN_0207400c(auStack_320,auStack_220);
-    thunk_FUN_020741c4(auStack_320,&DAT_021618c0);
+    thunk_FUN_020741c4(auStack_320,0x21618c0);
     thunk_FUN_0207400c(auStack_420,auStack_220);
-    thunk_FUN_020741c4(auStack_420,&DAT_021618c8);
+    thunk_FUN_020741c4(auStack_420,FUN_021618c8);
     uVar4 = param_1[0x14];
     if (*(char *)((int)param_1 + 0x59) == '\0') {
       local_458 = 0xb0000;

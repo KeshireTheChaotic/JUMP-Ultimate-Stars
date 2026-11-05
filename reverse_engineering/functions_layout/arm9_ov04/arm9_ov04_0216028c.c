@@ -13,7 +13,7 @@ void FUN_0216028c(int param_1)
   if (iVar3 < 1) {
     *(undefined1 *)(iVar2 + 0xf6) = 1;
     FUN_0215438c(*(undefined4 *)(iVar2 + 0xe0));
-    FUN_02028384(*(undefined4 *)(param_1 + 4),&DAT_0216024c);
+    FUN_02028384(*(undefined4 *)(param_1 + 4),FUN_0216024c);
   }
   else {
     iVar1 = FUN_0200d12c(iVar3,0x3c);

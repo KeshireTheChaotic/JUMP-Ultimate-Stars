@@ -19,8 +19,7 @@ int * JQuizCommonScore::JQuizCommonScoreClass_Create
   int iStack_28;
   
   iStack_28 = param_4;
-  piVar2 = (int *)jus_AllocDebug(0x44,s_JQuizCommonScore_cpp_02160b20,
-                                 s_JQuizCommonScoreClass_Create_02160b00,0x54);
+  piVar2 = (int *)thunk_FUN_0201a228(0x44,s_JQuizCommonScore_cpp_02160b20,&DAT_02160b00,0x54);
   FUN_020517fc(piVar2,0,0x44);
   *(undefined1 *)(piVar2 + 6) = param_3;
   piVar2[0xe] = param_4;
@@ -33,20 +32,20 @@ int * JQuizCommonScore::JQuizCommonScoreClass_Create
     piVar2[0xd] = 10;
   }
   *(char *)((int)piVar2 + 0x19) = (char)piVar2[6] * '\x02' + '\x01';
-  iVar3 = jus_AllocDebug((int)*(char *)((int)piVar2 + 0x19) << 2,s_JQuizCommonScore_cpp_02160b20,
-                         s_JQuizCommonScoreClass_Create_02160b00,99);
+  iVar3 = thunk_FUN_0201a228((int)*(char *)((int)piVar2 + 0x19) << 2,s_JQuizCommonScore_cpp_02160b20
+                             ,&DAT_02160b00,99);
   piVar2[2] = iVar3;
   FUN_020517fc(iVar3,0,(int)*(char *)((int)piVar2 + 0x19) << 2);
-  iVar3 = jus_AllocDebug((int)(char)piVar2[6],s_JQuizCommonScore_cpp_02160b20,
-                         s_JQuizCommonScoreClass_Create_02160b00,0x66);
+  iVar3 = thunk_FUN_0201a228((int)(char)piVar2[6],s_JQuizCommonScore_cpp_02160b20,&DAT_02160b00,0x66
+                            );
   piVar2[3] = iVar3;
   FUN_020517fc(iVar3,0,(int)(char)piVar2[6]);
-  iVar3 = jus_AllocDebug((int)(char)piVar2[6],s_JQuizCommonScore_cpp_02160b20,
-                         s_JQuizCommonScoreClass_Create_02160b00,0x69);
+  iVar3 = thunk_FUN_0201a228((int)(char)piVar2[6],s_JQuizCommonScore_cpp_02160b20,&DAT_02160b00,0x69
+                            );
   piVar2[4] = iVar3;
   FUN_020517fc(iVar3,0,(int)(char)piVar2[6]);
-  iVar3 = jus_AllocDebug((int)*(char *)((int)piVar2 + 0x19) << 2,s_JQuizCommonScore_cpp_02160b20,
-                         s_JQuizCommonScoreClass_Create_02160b00,0x6c);
+  iVar3 = thunk_FUN_0201a228((int)*(char *)((int)piVar2 + 0x19) << 2,s_JQuizCommonScore_cpp_02160b20
+                             ,&DAT_02160b00,0x6c);
   piVar2[5] = iVar3;
   FUN_020517fc(iVar3,0,(int)*(char *)((int)piVar2 + 0x19) << 2);
   piVar2[1] = param_1;
@@ -91,7 +90,7 @@ int * JQuizCommonScore::JQuizCommonScoreClass_Create
   *piVar2 = iVar3;
   local_34 = 0x80000;
   (**(code **)(**(int **)(iVar3 + 4) + 0xa0))(*(int **)(iVar3 + 4),&local_34);
-  FUN_02028384(*(undefined4 *)(*piVar2 + 4),&DAT_02150ad4);
+  FUN_02028384(*(undefined4 *)(*piVar2 + 4),FUN_02150ad4);
   (**(code **)(**(int **)(*piVar2 + 4) + 0x24))(*(int **)(*piVar2 + 4),piVar2);
   return piVar2;
 }

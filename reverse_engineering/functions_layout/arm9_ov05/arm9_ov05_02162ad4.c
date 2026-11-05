@@ -69,8 +69,8 @@ undefined4 FUN_02162ad4(int *param_1)
   iVar4 = FUN_02163b38(0xb00002,0xb00000,*(undefined4 *)(iVar4 + 0x88),unaff_r8[0x31]);
   *(undefined4 *)(*(int *)(iVar4 + 4) + 0x54) = 0x414d4f4b;
   FUN_02163e70(unaff_r8[0x31]);
-  func_0x021b65e8(*(undefined4 *)(unaff_r8[0x31] + 4),1,&LAB_02164d1c);
-  func_0x021b6760(*(undefined4 *)(unaff_r8[0x31] + 4),4,&LAB_02164e04);
+  func_0x021b65e8(*(undefined4 *)(unaff_r8[0x31] + 4),1,FUN_02164d1c);
+  func_0x021b6760(*(undefined4 *)(unaff_r8[0x31] + 4),4,FUN_02164e04);
   FUN_021634b4(&uStack000000ac,&DAT_02171230);
   iVar11 = 0;
   iVar4 = DAT_02171234;

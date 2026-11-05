@@ -14,7 +14,7 @@ int JArenaGetJPower::JAGetJPower_Add
   
   uStack_14 = param_4;
   puVar1 = (undefined1 *)
-           jus_AllocDebug(0xc,s_JArenaGetJPower_cpp_0215eb24,s_JAGetJPower_Add_0215eb14,0x61);
+           thunk_FUN_0201a228(0xc,s_JArenaGetJPower_cpp_0215eb24,s_JAGetJPower_Add_0215eb14,0x61);
   FUN_020517fc(puVar1,0,0xc);
   iVar2 = FUN_02020d90();
   (**(code **)(**(int **)(iVar2 + 4) + 0x24))(*(int **)(iVar2 + 4),puVar1);

@@ -1,0 +1,17 @@
+021a2eb0  stmdb sp!,{r4,r5,r6,lr}
+021a2eb4  mov r6,r0
+021a2eb8  mov r5,r1
+021a2ebc  bl 0x02199e10
+021a2ec0  mov r4,r0
+021a2ec4  blx 0x0217668c
+021a2ec8  strb r0,[r6,#0x34]
+021a2ecc  ldr r0,[0x21a2ef4]
+021a2ed0  mov r1,r4
+021a2ed4  mov r2,#0x8
+021a2ed8  bl 0x02051890
+021a2edc  ldr r1,[0x21a2ef8]
+021a2ee0  mov r0,r6
+021a2ee4  and r1,r5,r1
+021a2ee8  str r1,[r4,#0x4]
+021a2eec  bl 0x021a2f1c
+021a2ef0  ldmia sp!,{r4,r5,r6,pc}

@@ -5,7 +5,7 @@ void jus_Scene13_Exit(int param_1,undefined4 param_2,undefined4 param_3,undefine
 
 {
   if (*(int *)(param_1 + 4) == 0) {
-    func_0x0206e590(param_1,0,param_3,param_4,param_4);
+    FUN_0206e590(param_1,0,param_3,param_4,param_4);
     return;
   }
   *(int *)(iRam0206f034 + 0x18c) = (int)*(char *)(param_1 + 1);

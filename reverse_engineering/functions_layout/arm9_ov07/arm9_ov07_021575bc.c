@@ -35,7 +35,7 @@ void FUN_021575bc(int param_1,undefined4 param_2,undefined4 param_3,undefined4 p
     FUN_0214f48c(param_1,iVar2);
     uVar3 = *(uint *)(*(int *)(param_1 + 4) + 0xac);
     uVar1 = *(undefined4 *)(*(int *)(param_1 + 4) + 0x94);
-    iVar2 = jus_AllocDebug(0xb4,s_ALWidget_inl_021699b4,s_Create_02169e94,0x226);
+    iVar2 = thunk_FUN_0201a228(0xb4,s_ALWidget_inl_021699b4,s_Create_02169e94,0x226);
     piVar4 = (int *)0x0;
     if (iVar2 != 0) {
       piVar4 = (int *)func_0x021af494(iVar2,*(undefined4 *)(param_1 + 4),uVar1,(uVar3 & 1) == 1,

@@ -1,0 +1,14 @@
+020715d4  mov r1,#0x1
+020715d6  mov r2,#0x1f
+020715d8  and r2,r0
+020715da  add r3,r1,#0x0
+020715dc  lsr r0,r0,#0x5
+020715de  lsl r3,r2
+020715e0  lsl r2,r0,#0x2
+020715e2  ldr r0,[0x020715f0]
+020715e4  ldr r0,[r0,r2]
+020715e6  tst r0,r3
+020715e8  bne 0x020715ec
+020715ea  mov r1,#0x0
+020715ec  add r0,r1,#0x0
+020715ee  bx lr

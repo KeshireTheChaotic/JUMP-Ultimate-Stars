@@ -33,17 +33,17 @@ int * DatabaseLocation::Database_LocationCreate(void)
   undefined4 local_2c;
   undefined4 local_28;
   
-  piVar1 = (int *)jus_AllocDebug(0x84,s_DatabaseLocation_cpp_02172178,
-                                 s_Database_LocationCreate_0217212c,0x3e);
+  piVar1 = (int *)thunk_FUN_0201a228(0x84,s_DatabaseLocation_cpp_02172178,
+                                     s_Database_LocationCreate_0217212c,0x3e);
   func_0x021b65bc();
   FUN_020517fc(piVar1,0,0x84);
-  piVar1[2] = (int)&LAB_0216cb6c;
+  piVar1[2] = (int)FUN_0216cb6c;
   piVar1[3] = 0;
   iVar2 = FUN_02026f94();
   piVar1[4] = iVar2;
   local_28 = 0x80000;
   (**(code **)(**(int **)(iVar2 + 4) + 0xa0))(*(int **)(iVar2 + 4),&local_28);
-  FUN_02028384(*(undefined4 *)(piVar1[4] + 4),&LAB_0216cb74);
+  FUN_02028384(*(undefined4 *)(piVar1[4] + 4),thunk_FUN_02073840);
   (**(code **)(**(int **)(piVar1[4] + 4) + 0x24))(*(int **)(piVar1[4] + 4),piVar1);
   iVar2 = LocationData::LocationData_Create();
   piVar1[1] = iVar2;
@@ -83,7 +83,7 @@ int * DatabaseLocation::Database_LocationCreate(void)
   iVar2 = FUN_0215e2d4(*(undefined4 *)(iVar2 + 0x88),0x810000,1,0x80,0,0x1f);
   piVar1[0x1d] = iVar2;
   (**(code **)(**(int **)(iVar2 + 4) + 0xd8))(*(int **)(iVar2 + 4),1);
-  iVar2 = jus_AllocDebug(0xcc,s_ALWidget_inl_0216f484,s_Create_02171e5c,0x1de);
+  iVar2 = thunk_FUN_0201a228(0xcc,s_ALWidget_inl_0216f484,s_Create_02171e5c,0x1de);
   piVar4 = (int *)0x0;
   if (iVar2 != 0) {
     piVar4 = (int *)func_0x021af26c(iVar2,FUN_0216cb80,FUN_0216cc00,0);
@@ -92,7 +92,7 @@ int * DatabaseLocation::Database_LocationCreate(void)
     (**(code **)(*piVar4 + 0x14))();
   }
   piVar7 = (int *)piVar4[6];
-  iVar2 = jus_AllocDebug(0xbc,s_ALWidget_inl_0216f464,s_Create_02171e54,0x212);
+  iVar2 = thunk_FUN_0201a228(0xbc,s_ALWidget_inl_0216f464,s_Create_02171e54,0x212);
   piVar4 = (int *)0x0;
   if (iVar2 != 0) {
     piVar4 = (int *)func_0x021af358(iVar2,FUN_0216cc74,0);
@@ -180,7 +180,7 @@ int * DatabaseLocation::Database_LocationCreate(void)
   (**(code **)(*piVar4 + 0xac))(piVar4,0);
   FUN_02023c80(*(undefined4 *)(iVar2 + 4),local_48,0x494c,local_44);
   FUN_02023c70(*(undefined4 *)(iVar2 + 4),0x820001);
-  func_0x021b6760(*(undefined4 *)(iVar2 + 4),0x10,&LAB_0216cefc);
+  func_0x021b6760(*(undefined4 *)(iVar2 + 4),0x10,FUN_0216cefc);
   func_0x021b4034(*(undefined4 *)(iVar2 + 4),0x820001);
   func_0x021b3f78(*(undefined4 *)(iVar2 + 4),0x820000);
   func_0x021b6214(*(undefined4 *)(iVar2 + 4),1);
@@ -211,7 +211,7 @@ int * DatabaseLocation::Database_LocationCreate(void)
   uVar6 = _DAT_021d5154;
   DAT_020a0dd0 = *(undefined4 *)(*(int *)(iVar2 + 0x88) + 4);
   uVar8 = *(undefined4 *)(iVar5 + 4);
-  iVar2 = jus_AllocDebug(0x17c,s_ALWidgetImp_h_0216f4a4,s_Create_02171e44,0xb5);
+  iVar2 = thunk_FUN_0201a228(0x17c,s_ALWidgetImp_h_0216f4a4,s_Create_02171e44,0xb5);
   if (iVar2 != 0) {
     func_0x021acb3c(iVar2,uVar8,uVar6,ALWidgetBaseImp::CreateDrawFunc);
   }

@@ -54,7 +54,7 @@ int Record::RecordSave(void)
   uVar4 = SVC_GetCRC16(0,&DAT_020b02b8,0x7548);
   iVar5 = FUN_02072a60(&DAT_020b02b8);
   *(undefined2 *)(&DAT_020b7800 + iVar5 * 2) = uVar4;
-  iVar6 = jus_AllocDebug(0x7558,s_Record_cpp_0209e61c,s_RecordSave_0209e5f4,0x7ed);
+  iVar6 = thunk_FUN_0201a228(0x7558,s_Record_cpp_0209e61c,s_RecordSave_0209e5f4,0x7ed);
   iVar7 = RecordLoad();
   uVar15 = FUN_02051fa0();
   if (uVar15 == 0xfffffffd) {
@@ -85,7 +85,7 @@ int Record::RecordSave(void)
         } while (uVar17 < 2);
       }
       else {
-        iVar7 = jus_AllocDebug(0x7558,s_Record_cpp_0209e61c,s_RecordSave_0209e5f4,0x808);
+        iVar7 = thunk_FUN_0201a228(0x7558,s_Record_cpp_0209e61c,s_RecordSave_0209e5f4,0x808);
         FUN_02051890(iVar6,iVar7,0x7558);
         for (uVar17 = 0;
             (uVar16 = 0, uVar17 < 0x7408 &&

@@ -12,7 +12,7 @@ void FUN_021623b0(void)
   FUN_0205c704(DAT_0216e7f4,*(undefined4 *)(DAT_0216e7f4 + 0x94));
   FUN_0205db80(0);
   FUN_0205b938(DAT_0216e7f4 + 0x90);
-  uVar1 = FUN_02167814(0,&LAB_02162330_1,0,200);
+  uVar1 = FUN_02167814(0,thunk_FUN_0205af34 + 1,0,200);
   *(undefined4 *)(DAT_0216e7f4 + 0x98) = uVar1;
   return;
 }

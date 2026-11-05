@@ -15,8 +15,8 @@ undefined4 * BattleObjCtrl::Battle_ObjCtrlManCreate(void)
   
   uStack_14 = in_r3;
   puVar1 = (undefined4 *)
-           jus_AllocDebug(0x314,s_BattleObjCtrl_cpp_02172760,s_Battle_ObjCtrlManCreate_02172748,0x9f
-                         );
+           thunk_FUN_0201a228(0x314,s_BattleObjCtrl_cpp_02172760,s_Battle_ObjCtrlManCreate_02172748,
+                              0x9f);
   if (puVar1 == (undefined4 *)0x0) {
     puVar1 = (undefined4 *)0x0;
   }

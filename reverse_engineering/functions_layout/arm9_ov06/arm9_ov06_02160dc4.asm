@@ -1,0 +1,10 @@
+02160dc4  ldr r0,[0x2160dec]
+02160dc8  ldrh r1,[r1,#0x2]
+02160dcc  ldr r0,[r0,#0x0]
+02160dd0  ldr r0,[r0,#0x118]
+02160dd4  add r0,r0,#0x500
+02160dd8  ldrsb r0,[r0,#0xe1]
+02160ddc  cmp r1,r0
+02160de0  moveq r0,#0x1
+02160de4  movne r0,#0x0
+02160de8  bx lr

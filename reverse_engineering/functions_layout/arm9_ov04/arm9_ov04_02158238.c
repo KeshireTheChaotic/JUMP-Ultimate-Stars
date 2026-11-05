@@ -14,8 +14,8 @@ JQuizMainMultiScore::JQuizMainMultiScoreClass_Create
   int iVar4;
   
   puVar2 = (undefined1 *)
-           jus_AllocDebug(0x14,s_JQuizMainMultiScore_cpp_0216119c,
-                          s_JQuizMainMultiScoreClass_Create_02161158,0x144);
+           thunk_FUN_0201a228(0x14,s_JQuizMainMultiScore_cpp_0216119c,
+                              s_JQuizMainMultiScoreClass_Create_02161158,0x144);
   FUN_020517fc(puVar2,0,0x14);
   *puVar2 = param_1;
   iVar4 = 0;

@@ -1,0 +1,17 @@
+021609d8  andeq r0,r0,r0
+021609dc  andeq r0,r0,r0
+021609e0  andeq r0,r0,r0
+021609e4  andeq r0,r0,r0
+021609e8  andeq r0,r0,r0
+021609ec  andeq r0,r0,r0
+021609f0  andeq r0,r0,r0
+021609f4  andeq r0,r0,r0
+021609f8  andeq r0,r0,r0
+021609fc  andeq r0,r0,r0
+02160a00  andeq r0,r0,r0
+02160a04  andeq r0,r0,r0
+02160a08  andeq r0,r0,r0
+02160a0c  andeq r0,r0,r0
+02160a10  andeq r0,r0,r0
+02160a14  andeq r0,r0,r0
+02160a18  andeq r0,r0,r0

@@ -1,0 +1,10 @@
+02078a44  ldr r12,[r0,#0x570]
+02078a48  cmp r12,#0x0
+02078a4c  bxeq lr
+02078a50  ldr r3,[r12,#0x3c]
+02078a54  ldr r1,[0x2078a6c]
+02078a58  mov r2,#0x0
+02078a5c  and r1,r3,r1
+02078a60  str r1,[r12,#0x3c]
+02078a64  str r2,[r0,#0x570]
+02078a68  bx lr

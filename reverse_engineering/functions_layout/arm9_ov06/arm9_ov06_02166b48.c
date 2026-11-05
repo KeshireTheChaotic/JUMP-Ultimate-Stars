@@ -15,13 +15,13 @@ int * BattleMapItem::BattleMapGripLoad
   if (*(char *)(param_2 + 1) == '\0') {
     return (int *)0x0;
   }
-  piVar2 = (int *)jus_AllocDebug(8,s_BattleMapItem_cpp_021725ec,s_BattleMapGripLoad_0217259c,0x9a9,
-                                 param_4);
+  piVar2 = (int *)thunk_FUN_0201a228(8,s_BattleMapItem_cpp_021725ec,s_BattleMapGripLoad_0217259c,
+                                     0x9a9,param_4);
   FUN_020517fc(piVar2,0,8);
   bVar1 = *(byte *)(param_2 + 1);
   *(byte *)(piVar2 + 1) = bVar1;
-  iVar3 = jus_AllocDebug((uint)bVar1 << 2,s_BattleMapItem_cpp_021725ec,s_BattleMapGripLoad_0217259c,
-                         0x9b0);
+  iVar3 = thunk_FUN_0201a228((uint)bVar1 << 2,s_BattleMapItem_cpp_021725ec,
+                             s_BattleMapGripLoad_0217259c,0x9b0);
   *piVar2 = iVar3;
   FUN_020517fc(iVar3,0,(uint)*(byte *)(piVar2 + 1) << 2);
   for (iVar3 = 0; iVar3 < (int)(uint)*(byte *)(piVar2 + 1); iVar3 = iVar3 + 1) {

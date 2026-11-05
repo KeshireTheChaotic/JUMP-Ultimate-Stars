@@ -5,7 +5,7 @@
 void TextureInstance::vfunc_13(void)
 
 {
-  DAT_020a1060 = &LAB_02049188;
+  DAT_020a1060 = FUN_02049188;
   return;
 }
 

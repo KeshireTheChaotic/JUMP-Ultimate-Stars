@@ -9,7 +9,7 @@ void jus_Scene32_Exit(int param_1,undefined4 param_2)
   uVar1 = func_0x02166ef8(param_2);
   switch(uVar1) {
   case 0:
-    func_0x0206e590(param_1,0);
+    FUN_0206e590(param_1,0);
     break;
   case 1:
     FUN_0206e524(1,0x21,0x20,0xffffffff,0);

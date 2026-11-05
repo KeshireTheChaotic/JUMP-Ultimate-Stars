@@ -7,7 +7,7 @@ void jus_TagNG18::vfunc_26(undefined4 param_1,undefined4 param_2)
 {
   int iVar1;
   
-  iVar1 = jus_AllocDebug(0x24);
+  iVar1 = FUN_0201a228(0x24);
   if (iVar1 == 0) {
     return;
   }

@@ -1,9 +1,9 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
-/* JUS-SCENE jus_Scene08_CreateImpl [scene-map] called by scene 8 create wrapper 0206ebd8 while
-   overlay 5 is resident */
+/* JUS-GAME Input::Input_Add [source-string] __FILE__="Input.cpp" __FUNCTION__="Input_Add"
+   lines=[90] passed to 1 source-location call(s) */
 
-undefined4 jus_Scene08_CreateImpl(undefined4 param_1)
+undefined4 Input::Input_Add(undefined4 param_1)
 
 {
   char cVar1;
@@ -43,7 +43,7 @@ undefined4 jus_Scene08_CreateImpl(undefined4 param_1)
   undefined4 uStack_1c;
   undefined4 uStack_18;
   
-  puVar3 = (undefined4 *)jus_AllocDebug(1000,s_Input_cpp_0217106c,s_Input_Add_02170d9c,0x5a);
+  puVar3 = (undefined4 *)thunk_FUN_0201a228(1000,s_Input_cpp_0217106c,s_Input_Add_02170d9c,0x5a);
   FUN_020517fc(puVar3,0,1000);
   func_0x021b65bc();
   puVar3[1] = param_1;
@@ -51,7 +51,7 @@ undefined4 jus_Scene08_CreateImpl(undefined4 param_1)
   puVar3[5] = iVar4;
   uStack_18 = 0x80000;
   (**(code **)(**(int **)(iVar4 + 4) + 0xa0))(*(int **)(iVar4 + 4),&uStack_18);
-  FUN_02028384(*(undefined4 *)(puVar3[5] + 4),&LAB_02160094_1);
+  FUN_02028384(*(undefined4 *)(puVar3[5] + 4),FUN_02160094 + 1);
   (**(code **)(**(int **)(puVar3[5] + 4) + 0x24))(*(int **)(puVar3[5] + 4),puVar3);
   iVar4 = FUN_020310f4();
   puVar3[4] = iVar4;
@@ -222,10 +222,10 @@ undefined4 jus_Scene08_CreateImpl(undefined4 param_1)
     iVar4 = FUN_0215b6f4();
     FUN_02029c68(*(undefined4 *)(iVar4 + 4),puVar3 + 0xb,0x71,0xf);
   }
-  piVar8 = (int *)FUN_02160ae0(FUN_02160b50 + 1,&LAB_02160c58_1,0);
+  piVar8 = (int *)FUN_02160ae0(FUN_02160b50 + 1,FUN_02160c58 + 1,0);
   func_0x021b3b7c(1,0,piVar8,0);
   (**(code **)(*piVar8 + 8))();
-  piVar8 = (int *)FUN_02160ae0(FUN_02160ba8 + 1,&LAB_02160c58_1,0);
+  piVar8 = (int *)FUN_02160ae0(FUN_02160ba8 + 1,FUN_02160c58 + 1,0);
   func_0x021b3b7c(2,0,piVar8,0);
   (**(code **)(*piVar8 + 8))();
   piVar8 = (int *)FUN_02160ae0(FUN_02160c00 + 1,FUN_02160cbc + 1,0);

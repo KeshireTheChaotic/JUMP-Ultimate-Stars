@@ -1,0 +1,16 @@
+02072198  push {r3,r4,r5,lr}
+0207219a  add r4,r1,#0x0
+0207219c  add r5,r0,#0x0
+0207219e  ldr r1,[0x020721bc]
+020721a0  mov r2,#0x5c
+020721a2  mul r5,r1
+020721a4  ldr r0,[0x020721c0]
+020721a6  mul r4,r2
+020721a8  add r0,r5,r0
+020721aa  add r0,r0,r4
+020721ac  add r1,r2,#0x0
+020721ae  bl 0x02073114
+020721b2  ldr r0,[0x020721c4]
+020721b4  add r0,r0,r5
+020721b6  add r0,r0,r4
+020721b8  pop {r3,r4,r5,pc}

@@ -33,14 +33,14 @@ ALMotionDynamic_021d2618::ALMotionDynamic_021d2618
   FUN_021b2140(param_1 + 0xe);
   FUN_021b2898(&local_1c,param_2 + 0x38);
   while (local_1c != param_2 + 0x3c) {
-    local_40 = jus_AllocDebug(0xc,s_ALMotionDynamic_cpp_021d28a0,&DAT_021d27e8,0x20d);
+    local_40 = thunk_FUN_0201a228(0xc,s_ALMotionDynamic_cpp_021d28a0,&DAT_021d27e8,0x20d);
     if (local_40 != 0) {
       local_40 = FUN_021b2d2c();
     }
     for (piVar7 = (int *)**(undefined4 **)(local_1c + 0x10);
         FUN_021b2784(&local_30,*(undefined4 *)(local_1c + 0x10)), piVar7 != local_30;
         piVar7 = piVar7 + 1) {
-      iVar2 = jus_AllocDebug(0x24,s_ALMotionDynamic_cpp_021d28a0,&DAT_021d27e8,0x210);
+      iVar2 = thunk_FUN_0201a228(0x24,s_ALMotionDynamic_cpp_021d28a0,&DAT_021d27e8,0x210);
       puVar3 = (undefined4 *)0x0;
       if (iVar2 != 0) {
         puVar3 = (undefined4 *)FUN_021b2b04();
@@ -64,7 +64,7 @@ ALMotionDynamic_021d2618::ALMotionDynamic_021d2618
       local_20[2] = *(undefined4 *)(*piVar7 + 8);
       local_20[6] = *(undefined4 *)(*piVar7 + 0x18);
       if ((local_20[6] != 0) && (sVar1 = *(short *)(local_20[6] + 4), sVar1 != 0)) {
-        uVar4 = jus_AllocDebug(sVar1,s_ALMotionDynamic_cpp_021d28a0,&DAT_021d27e8,0x22a);
+        uVar4 = thunk_FUN_0201a228(sVar1,s_ALMotionDynamic_cpp_021d28a0,&DAT_021d27e8,0x22a);
         local_20[7] = uVar4;
       }
       local_20[8] = *(undefined4 *)(*piVar7 + 0x20);

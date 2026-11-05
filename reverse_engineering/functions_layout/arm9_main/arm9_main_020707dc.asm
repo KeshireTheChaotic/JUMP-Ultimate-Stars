@@ -1,0 +1,36 @@
+020707dc  stmdb sp!,{r4,r5,r6,r7,r8,lr}
+020707e0  ldr r3,[0x207086c]
+020707e4  mov r6,r1
+020707e8  ldr r7,[r3,#0xcc]
+020707ec  mov r8,r0
+020707f0  mov r0,r7
+020707f4  mov r1,#0x3c
+020707f8  mov r5,r2
+020707fc  bl 0x0200d12c
+02070800  mov r4,r0
+02070804  mov r0,r7
+02070808  bl 0x0200c954
+0207080c  ldr r1,[0x2070870]
+02070810  bl 0x0200c5ac
+02070814  mov r1,r0
+02070818  ldr r0,[0x2070874]
+0207081c  bl 0x0200c9e4
+02070820  bl 0x0200c8e0
+02070824  mov r7,r0
+02070828  mov r0,r4
+0207082c  mov r1,#0x3c
+02070830  bl 0x0200d12c
+02070834  sub r1,r7,r4, lsl #0xc
+02070838  add r2,r1,#0x14
+0207083c  mov r1,#0x3c
+02070840  mul r1,r0,r1
+02070844  str r0,[r8,#0x0]
+02070848  sub r0,r4,r1
+0207084c  str r0,[r6,#0x0]
+02070850  mov r0,#0x64
+02070854  mul r1,r2,r0
+02070858  mov r0,r1, asr #0xb
+0207085c  add r0,r1,r0, lsr #0x14
+02070860  mov r0,r0, asr #0xc
+02070864  str r0,[r5,#0x0]
+02070868  ldmia sp!,{r4,r5,r6,r7,r8,pc}

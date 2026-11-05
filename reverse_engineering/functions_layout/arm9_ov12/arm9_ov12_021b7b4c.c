@@ -22,7 +22,7 @@ undefined4 FUN_021b7b4c(int *param_1,uint param_2,undefined4 param_3,undefined4 
         while (iVar3 = iVar3 + -1, -1 < iVar3) {
           if (iVar1 == 0) {
             uVar2 = FUN_02025908(param_1[0x4e],iVar3);
-            iVar4 = jus_AllocDebug(0x2c,s_ALObjectImp_h_021d3c10,s_PostMessage_021d3be4,0x10a);
+            iVar4 = thunk_FUN_0201a228(0x2c,s_ALObjectImp_h_021d3c10,s_PostMessage_021d3be4,0x10a);
             uVar6 = 0;
             if (iVar4 != 0) {
               uVar6 = jus_Class_021d293c::jus_Class_021d293c(iVar4,0x80010000,param_1,0,0,0,param_4)
@@ -32,7 +32,8 @@ undefined4 FUN_021b7b4c(int *param_1,uint param_2,undefined4 param_3,undefined4 
           }
           else {
             uVar2 = FUN_02025908(param_1[0x4e],iVar3);
-            iVar4 = jus_AllocDebug(0x2c,s_ALObjectImp_h_021d3bf0,s_PostDelayMessage_021d3ca0,0x113);
+            iVar4 = thunk_FUN_0201a228(0x2c,s_ALObjectImp_h_021d3bf0,s_PostDelayMessage_021d3ca0,
+                                       0x113);
             uVar6 = 0;
             if (iVar4 != 0) {
               uVar6 = jus_Class_021d293c::jus_Class_021d293c(iVar4,0x80010000,param_1,0,0,0,param_4)
@@ -47,7 +48,7 @@ undefined4 FUN_021b7b4c(int *param_1,uint param_2,undefined4 param_3,undefined4 
         for (uVar7 = 0; iVar3 = param_1[0x4e], uVar7 < *(uint *)(iVar3 + 0x10); uVar7 = uVar7 + 1) {
           if (iVar1 == 0) {
             uVar2 = FUN_02025908(iVar3,uVar7);
-            iVar3 = jus_AllocDebug(0x2c,s_ALObjectImp_h_021d3c10,s_PostMessage_021d3be4,0x10a);
+            iVar3 = thunk_FUN_0201a228(0x2c,s_ALObjectImp_h_021d3c10,s_PostMessage_021d3be4,0x10a);
             uVar6 = 0;
             if (iVar3 != 0) {
               uVar6 = jus_Class_021d293c::jus_Class_021d293c(iVar3,0x80010000,param_1,0,0,0,param_4)
@@ -57,7 +58,8 @@ undefined4 FUN_021b7b4c(int *param_1,uint param_2,undefined4 param_3,undefined4 
           }
           else {
             uVar2 = FUN_02025908(iVar3,uVar7);
-            iVar3 = jus_AllocDebug(0x2c,s_ALObjectImp_h_021d3bf0,s_PostDelayMessage_021d3ca0,0x113);
+            iVar3 = thunk_FUN_0201a228(0x2c,s_ALObjectImp_h_021d3bf0,s_PostDelayMessage_021d3ca0,
+                                       0x113);
             uVar6 = 0;
             if (iVar3 != 0) {
               uVar6 = jus_Class_021d293c::jus_Class_021d293c(iVar3,0x80010000,param_1,0,0,0,param_4)
@@ -76,7 +78,7 @@ undefined4 FUN_021b7b4c(int *param_1,uint param_2,undefined4 param_3,undefined4 
         while (iVar3 = iVar3 + -1, -1 < iVar3) {
           if (iVar1 == 0) {
             uVar2 = FUN_02025908(param_1[0x4e],iVar3);
-            iVar4 = jus_AllocDebug(0x2c,s_ALObjectImp_h_021d3c10,s_PostMessage_021d3be4,0x10a);
+            iVar4 = thunk_FUN_0201a228(0x2c,s_ALObjectImp_h_021d3c10,s_PostMessage_021d3be4,0x10a);
             uVar6 = 0;
             if (iVar4 != 0) {
               uVar6 = jus_Class_021d293c::jus_Class_021d293c(iVar4,0x80010001,param_1,0,0,0,param_4)
@@ -86,7 +88,8 @@ undefined4 FUN_021b7b4c(int *param_1,uint param_2,undefined4 param_3,undefined4 
           }
           else {
             uVar2 = FUN_02025908(param_1[0x4e],iVar3);
-            iVar4 = jus_AllocDebug(0x2c,s_ALObjectImp_h_021d3bf0,s_PostDelayMessage_021d3ca0,0x113);
+            iVar4 = thunk_FUN_0201a228(0x2c,s_ALObjectImp_h_021d3bf0,s_PostDelayMessage_021d3ca0,
+                                       0x113);
             uVar6 = 0;
             if (iVar4 != 0) {
               uVar6 = jus_Class_021d293c::jus_Class_021d293c(iVar4,0x80010001,param_1,0,0,0,param_4)
@@ -101,7 +104,7 @@ undefined4 FUN_021b7b4c(int *param_1,uint param_2,undefined4 param_3,undefined4 
         for (uVar7 = 0; iVar3 = param_1[0x4e], uVar7 < *(uint *)(iVar3 + 0x10); uVar7 = uVar7 + 1) {
           if (iVar1 == 0) {
             uVar2 = FUN_02025908(iVar3,uVar7);
-            iVar3 = jus_AllocDebug(0x2c,s_ALObjectImp_h_021d3c10,s_PostMessage_021d3be4,0x10a);
+            iVar3 = thunk_FUN_0201a228(0x2c,s_ALObjectImp_h_021d3c10,s_PostMessage_021d3be4,0x10a);
             uVar6 = 0;
             if (iVar3 != 0) {
               uVar6 = jus_Class_021d293c::jus_Class_021d293c(iVar3,0x80010001,param_1,0,0,0,param_4)
@@ -111,7 +114,8 @@ undefined4 FUN_021b7b4c(int *param_1,uint param_2,undefined4 param_3,undefined4 
           }
           else {
             uVar2 = FUN_02025908(iVar3,uVar7);
-            iVar3 = jus_AllocDebug(0x2c,s_ALObjectImp_h_021d3bf0,s_PostDelayMessage_021d3ca0,0x113);
+            iVar3 = thunk_FUN_0201a228(0x2c,s_ALObjectImp_h_021d3bf0,s_PostDelayMessage_021d3ca0,
+                                       0x113);
             uVar6 = 0;
             if (iVar3 != 0) {
               uVar6 = jus_Class_021d293c::jus_Class_021d293c(iVar3,0x80010001,param_1,0,0,0,param_4)

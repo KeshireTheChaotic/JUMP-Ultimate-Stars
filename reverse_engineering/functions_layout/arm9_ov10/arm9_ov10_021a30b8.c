@@ -12,8 +12,8 @@ void WiFiDataSendRecv::WiFiDataSendRecv_DataSendONEWAYUnreliable
   uint local_20;
   
   local_20 = param_4;
-  iVar1 = jus_AllocDebug(param_2 + 8U & 0xfffffffc,s_WiFiDataSendRecv_cpp_021a7318,
-                         s_WiFiDataSendRecv_DataSendONEWAYU_021a72ec,0x232);
+  iVar1 = thunk_FUN_0201a228(param_2 + 8U & 0xfffffffc,s_WiFiDataSendRecv_cpp_021a7318,
+                             s_WiFiDataSendRecv_DataSendONEWAYU_021a72ec,0x232);
   local_20 = param_3;
   FUN_02051890(s_JUpiJUdMJUpsJU1wJUReJUPn_021a36f0 + 0xc,iVar1,4);
   FUN_02051890(&local_20,iVar1 + 4,4);

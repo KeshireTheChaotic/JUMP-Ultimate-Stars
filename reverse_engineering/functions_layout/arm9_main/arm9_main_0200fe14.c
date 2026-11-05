@@ -14,7 +14,7 @@ void FUN_0200fe14(int param_1)
     *(undefined4 *)(param_1 + 0x34) = uVar1;
   }
   else {
-    uVar1 = jus_AllocDebug((uint)local_10);
+    uVar1 = FUN_0201a228((uint)local_10);
     *(undefined4 *)(param_1 + 0x34) = uVar1;
     FUN_02051890(auStack_20,*(undefined4 *)(param_1 + 0x34),0x12);
     (**(code **)(**(int **)(param_1 + 0x1c) + 0x14))

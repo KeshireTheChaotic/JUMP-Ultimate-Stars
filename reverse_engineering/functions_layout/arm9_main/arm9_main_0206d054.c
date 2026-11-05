@@ -34,7 +34,7 @@ undefined4 * CommonHSV::CommonHSV_Create(undefined4 param_1,int param_2)
   
                     /* JUS-TAG strings=["CommonHSV.cpp","CommonHSV_Create"] */
   puVar5 = (undefined4 *)
-           jus_AllocDebug(0x60,s_CommonHSV_cpp_0209e2c8,s_CommonHSV_Create_0209e2b4,0x2d);
+           thunk_FUN_0201a228(0x60,s_CommonHSV_cpp_0209e2c8,s_CommonHSV_Create_0209e2b4,0x2d);
   FUN_020517fc(puVar5,0,0x60);
   puVar5[0x13] = 100;
   puVar5[0x14] = 100;
@@ -59,17 +59,17 @@ undefined4 * CommonHSV::CommonHSV_Create(undefined4 param_1,int param_2)
     FUN_02051890(*(int *)(*(int *)(iVar7 + 4) + 0x10) + iVar18 * 2,&DAT_020afc7c,0x1e);
     if (DAT_020afc82 == 0) {
       *(undefined1 *)puVar17 = 3;
-      uVar8 = jus_AllocDebug(6,s_CommonHSV_cpp_0209e2c8,s_CommonHSV_Create_0209e2b4,0x42);
+      uVar8 = thunk_FUN_0201a228(6,s_CommonHSV_cpp_0209e2c8,s_CommonHSV_Create_0209e2b4,0x42);
       *puVar16 = uVar8;
-      uVar8 = jus_AllocDebug(0x18,s_CommonHSV_cpp_0209e2c8,s_CommonHSV_Create_0209e2b4,0x43);
+      uVar8 = thunk_FUN_0201a228(0x18,s_CommonHSV_cpp_0209e2c8,s_CommonHSV_Create_0209e2b4,0x43);
       *puVar14 = uVar8;
       FUN_02051890(&DAT_020afc7c,*puVar16,6);
     }
     else {
       *(undefined1 *)puVar17 = 0xf;
-      uVar8 = jus_AllocDebug(0x1e,s_CommonHSV_cpp_0209e2c8,s_CommonHSV_Create_0209e2b4,0x48);
+      uVar8 = thunk_FUN_0201a228(0x1e,s_CommonHSV_cpp_0209e2c8,s_CommonHSV_Create_0209e2b4,0x48);
       *puVar16 = uVar8;
-      uVar8 = jus_AllocDebug(0x78,s_CommonHSV_cpp_0209e2c8,s_CommonHSV_Create_0209e2b4,0x49);
+      uVar8 = thunk_FUN_0201a228(0x78,s_CommonHSV_cpp_0209e2c8,s_CommonHSV_Create_0209e2b4,0x49);
       *puVar14 = uVar8;
       FUN_02051890(&DAT_020afc7c,*puVar16,0x1e);
     }

@@ -23,7 +23,7 @@ void FUN_021532c8(int param_1,undefined4 param_2,undefined4 param_3,undefined4 p
   *(undefined1 *)(*(int *)(iVar2 + 4) + 0xab) = 0;
   func_0x021b77a8(*(undefined4 *)(iVar2 + 4),0x10);
   (**(code **)(**(int **)(iVar2 + 4) + 0x24))(*(int **)(iVar2 + 4),param_1);
-  piVar3 = (int *)jus_AllocDebug(0x70,s_ALCollision_inl_0215dc0c,s_Create_0215e158,0x1b2);
+  piVar3 = (int *)thunk_FUN_0201a228(0x70,s_ALCollision_inl_0215dc0c,s_Create_0215e158,0x1b2);
   if (piVar3 != (int *)0x0) {
     func_0x021b054c(piVar3,0,&DAT_02093c8c);
     *piVar3 = (int)&jus_Class_0215db68::vftable;

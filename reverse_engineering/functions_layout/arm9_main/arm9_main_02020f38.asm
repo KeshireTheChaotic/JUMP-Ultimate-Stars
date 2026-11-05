@@ -1,0 +1,17 @@
+02020f38  stmdb sp!,{r3,r4,r5,lr}
+02020f3c  ldr r4,[r1,#0x4]
+02020f40  ldr r5,[r0,#0x4]
+02020f44  add r1,r4,#0x20
+02020f48  add r0,r5,#0x1c
+02020f4c  bl 0x02037ed8
+02020f50  mov r0,r4
+02020f54  ldr r2,[r0,#0x0]
+02020f58  mov r1,r5
+02020f5c  ldr r2,[r2,#0x64]
+02020f60  blx r2
+02020f64  mov r0,r5
+02020f68  ldr r2,[r0,#0x0]
+02020f6c  mov r1,r4
+02020f70  ldr r2,[r2,#0x80]
+02020f74  blx r2
+02020f78  ldmia sp!,{r3,r4,r5,pc}

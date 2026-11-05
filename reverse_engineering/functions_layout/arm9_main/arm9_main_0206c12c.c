@@ -1,5 +1,9 @@
 
-void FUN_0206c12c(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+/* JUS-CLASS jus_Class_0209df4c::vfunc_22 [class-virtual] slot 22 of vtable 0209df4c (own slot, not
+   inherited) */
+
+void jus_Class_0209df4c::vfunc_22
+               (int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
 
 {
   short sVar1;

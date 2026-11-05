@@ -11,8 +11,7 @@ undefined4 * JQuizMainQuestionMask::JQuizMainAnswerMaskClass_Create(void)
   undefined4 uVar3;
   
   puVar1 = (undefined4 *)
-           jus_AllocDebug(4,s_JQuizMainQuestionMask_cpp_02160fc8,
-                          s_JQuizMainAnswerMaskClass_Create_02160f84,0x60);
+           thunk_FUN_0201a228(4,FUN_02160fc8,s_JQuizMainAnswerMaskClass_Create_02160f84,0x60);
   FUN_020517fc(puVar1,0,4);
   iVar2 = FUN_0203b3f4();
   uVar3 = *(undefined4 *)(iVar2 + 0x88);

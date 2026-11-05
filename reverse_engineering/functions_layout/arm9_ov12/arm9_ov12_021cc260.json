@@ -1,0 +1,1 @@
+{"module":"arm9_ov12","address":"021cc260","name":"WiFiVC_Proc_Init","thumb":true,"body_bytes":120,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["0201a21c","02028384","020733a8","020733f4"],"unresolved_call_targets":[],"status":"decompiled","asm_file":"arm9_ov12_021cc260.asm","c_file":"arm9_ov12_021cc260.c"}

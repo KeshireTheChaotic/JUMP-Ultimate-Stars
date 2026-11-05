@@ -32,7 +32,7 @@ BattleMarker::Battle_MarkerCreate(int param_1,int param_2,int param_3,undefined4
   undefined1 auStack_30 [12];
   
   puVar1 = (undefined4 *)
-           jus_AllocDebug(0xb4,s_BattleMarker_cpp_02172688,s_Battle_MarkerCreate_02172674,0x2b);
+           thunk_FUN_0201a228(0xb4,s_BattleMarker_cpp_02172688,s_Battle_MarkerCreate_02172674,0x2b);
   if (puVar1 != (undefined4 *)0x0) {
     puVar5 = puVar1;
     do {

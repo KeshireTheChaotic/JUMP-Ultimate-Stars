@@ -1,0 +1,9 @@
+02075f98  stmdb sp!,{r4,lr}
+02075f9c  mov r4,r0
+02075fa0  mov r0,r1
+02075fa4  blx 0x02071360
+02075fa8  cmp r4,#0x0
+02075fac  ldmiaeq sp!,{r4,pc}
+02075fb0  ldrb r0,[r4,#0x4]
+02075fb4  blx 0x02071240
+02075fb8  ldmia sp!,{r4,pc}

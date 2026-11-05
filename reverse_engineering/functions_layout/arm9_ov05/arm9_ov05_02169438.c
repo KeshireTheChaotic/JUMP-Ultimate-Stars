@@ -24,7 +24,7 @@ void FUN_02169438(int param_1,undefined4 param_2,undefined4 param_3,undefined4 p
     piVar1 = *(int **)(*(int *)(iVar2 + 0x3c) + 4);
     (**(code **)(*piVar1 + 0xd8))(piVar1,0);
     FUN_02169b3c(iVar2,0);
-    FUN_02028384(*(undefined4 *)(param_1 + 4),&LAB_021694f8);
+    FUN_02028384(*(undefined4 *)(param_1 + 4),FUN_021694f8);
   }
   FUN_02073840();
   return;

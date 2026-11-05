@@ -20,7 +20,7 @@ void FUN_02155a8c(int param_1)
     uVar1 = FUN_02155a3c(piVar3);
     FUN_02155970(uVar1,local_10 + 1);
     *(undefined1 *)(piVar3 + 3) = 1;
-    FUN_02028384(*(undefined4 *)(*piVar3 + 4),&DAT_02155a88);
+    FUN_02028384(*(undefined4 *)(*piVar3 + 4),FUN_02155a88);
   }
   return;
 }

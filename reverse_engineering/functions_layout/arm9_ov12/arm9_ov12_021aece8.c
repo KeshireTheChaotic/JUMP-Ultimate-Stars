@@ -1,8 +1,8 @@
 
-/* JUS-CLASS ALWidgetBase_021d12d8::vfunc_25 [class-virtual] slot 25 of vtable 021d12d8 (own slot,
-   not inherited) */
+/* JUS-CLASS jus_Class_021d12d8::vfunc_25 [class-virtual] slot 25 of vtable 021d12d8 (own slot, not
+   inherited) */
 
-void ALWidgetBase_021d12d8::vfunc_25(int param_1)
+void jus_Class_021d12d8::vfunc_25(int param_1)
 
 {
   int iVar1;

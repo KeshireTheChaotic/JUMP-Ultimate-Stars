@@ -1,0 +1,17 @@
+020789c0  ldr r1,[r0,#0x558]
+020789c4  cmp r1,#0x0
+020789c8  moveq r0,#0x0
+020789cc  bxeq lr
+020789d0  b 0x020789f4
+020789d4  ldrb r0,[r1,#0x40]
+020789d8  cmp r0,#0x0
+020789dc  bne 0x020789f0
+020789e0  ldrb r0,[r1,#0xf]
+020789e4  tst r0,#0x10
+020789e8  ldrbne r0,[r1,#0x41]
+020789ec  bxne lr
+020789f0  ldr r1,[r1,#0x0]
+020789f4  cmp r1,#0x0
+020789f8  bne 0x020789d4
+020789fc  mov r0,#0x0
+02078a00  bx lr

@@ -106,7 +106,7 @@ void FUN_0215fc68(int param_1,uint param_2)
   local_148 = 0;
   FUN_0214dc68(auStack_130,&local_148,&local_14c,&local_150);
   FUN_0214f714(&local_144,uVar2,s_Position_0216cda8);
-  iVar10 = jus_AllocDebug(0x4c,s_ALControllerImp_h_0216bbe0,s_Create_0216cbc0,0x2b9);
+  iVar10 = thunk_FUN_0201a228(0x4c,s_ALControllerImp_h_0216bbe0,s_Create_0216cbc0,0x2b9);
   piVar5 = (int *)0x0;
   if (iVar10 != 0) {
     piVar5 = (int *)jus_TagIPCT::jus_TagIPCT
@@ -204,7 +204,7 @@ void FUN_0215fc68(int param_1,uint param_2)
   local_164 = 0;
   local_160 = 0x80000;
   FUN_021511c8(*(undefined4 *)(param_1 + 0x2c),&local_160,&local_164);
-  iVar10 = jus_AllocDebug(0xcc,s_ALWidget_inl_0216bd74,s_Create_0216cbd0,0x1de);
+  iVar10 = thunk_FUN_0201a228(0xcc,s_ALWidget_inl_0216bd74,s_Create_0216cbd0,0x1de);
   piVar5 = (int *)0x0;
   if (iVar10 != 0) {
     piVar5 = (int *)func_0x021af26c(iVar10,FUN_021610f0,FUN_02161420,0);
@@ -213,7 +213,7 @@ void FUN_0215fc68(int param_1,uint param_2)
     (**(code **)(*piVar5 + 0x14))();
   }
   piVar8 = (int *)piVar5[6];
-  iVar10 = jus_AllocDebug(0xbc,s_ALWidget_inl_0216bd64,s_Create_0216cbb8,0x212);
+  iVar10 = thunk_FUN_0201a228(0xbc,s_ALWidget_inl_0216bd64,s_Create_0216cbb8,0x212);
   piVar5 = (int *)0x0;
   if (iVar10 != 0) {
     piVar5 = (int *)func_0x021af358(iVar10,FUN_02161170,0);
@@ -279,7 +279,7 @@ void FUN_0215fc68(int param_1,uint param_2)
   FUN_0214f7f8(*(undefined4 *)(iVar10 + 0x88));
   uVar7 = _DAT_021d5154;
   uVar2 = *(undefined4 *)(iVar3 + 4);
-  iVar10 = jus_AllocDebug(0x17c,s_ALWidgetImp_h_0216cca4,s_Create_0216cbc8,0xb5);
+  iVar10 = thunk_FUN_0201a228(0x17c,s_ALWidgetImp_h_0216cca4,s_Create_0216cbc8,0xb5);
   if (iVar10 != 0) {
     func_0x021acb3c(iVar10,uVar2,uVar7,ALWidgetBaseImp::CreateDrawFunc);
   }
@@ -390,7 +390,7 @@ void FUN_0215fc68(int param_1,uint param_2)
       (**(code **)(*piVar5 + 0x148))(piVar5,8);
     }
   }
-  _DAT_021d514c = &LAB_02161458;
+  _DAT_021d514c = FUN_02161458;
   func_0x021b7260(1,0x30078);
   func_0x021b7260(2,0x30078);
   func_0x021b7260(8,0x30078);

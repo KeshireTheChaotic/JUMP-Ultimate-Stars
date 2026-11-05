@@ -1,7 +1,10 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+/* JUS-GAME JArena::JArena_AddJob [source-string] __FILE__="JArena.cpp" __FUNCTION__="JArena_AddJob"
+   lines=[338] passed to 1 source-location call(s) */
 
-int FUN_0214cd5c(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+int JArena::JArena_AddJob
+              (undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
 
 {
   int *piVar1;
@@ -9,7 +12,7 @@ int FUN_0214cd5c(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefi
   undefined4 uStack_10;
   
   uStack_10 = param_4;
-  piVar1 = (int *)jus_AllocDebug(0xb0,s_JArena_cpp_0215dae8,s_JArena_AddJob_0215daa0,0x152);
+  piVar1 = (int *)thunk_FUN_0201a228(0xb0,s_JArena_cpp_0215dae8,s_JArena_AddJob_0215daa0,0x152);
   FUN_020517fc(piVar1,0,0xb0);
   iVar2 = FUN_020310f4();
   *piVar1 = iVar2;

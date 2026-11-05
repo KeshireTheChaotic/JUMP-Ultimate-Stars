@@ -1,0 +1,10 @@
+02078a04  mov r2,#0x1
+02078a08  strb r2,[r0,#0x5fb]
+02078a0c  add r2,r0,#0x500
+02078a10  mov r3,#0x8
+02078a14  strh r1,[r2,#0xfc]
+02078a18  ldr r12,[0x2078a2c]
+02078a1c  strb r3,[r0,#0x5fa]
+02078a20  sub r1,r3,#0x9
+02078a24  strb r1,[r0,#0x5f1]
+02078a28  bx r12

@@ -28,7 +28,7 @@ undefined4 FUN_0214f514(int *param_1)
   iVar4 = FUN_0214fc2c(0,0,0,0x30bffe);
   if (iVar4 != 0) {
     FUN_020550a0(auStack_40);
-    FUN_02054ee8(auStack_40,0x3fec42,0,&LAB_0214f88c_1,0x13);
+    FUN_02054ee8(auStack_40,0x3fec42,0,0x214f88d,0x13);
     do {
       FUN_02053bd8(&DAT_0216cfac,&local_44,1);
       switch(local_44) {

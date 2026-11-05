@@ -2,6 +2,7 @@
 undefined4 FUN_021cbf5c(int *param_1)
 
 {
+                    /* JUS-TAG source_file_inferred="WiFiVoiceChat.cpp" */
   if (param_1 == (int *)0x0) {
     return 1;
   }

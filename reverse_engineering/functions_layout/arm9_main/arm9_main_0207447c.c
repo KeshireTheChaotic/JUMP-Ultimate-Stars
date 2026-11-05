@@ -11,7 +11,8 @@ int * TitleData::TitleData_Create(void)
   undefined4 in_r3;
   
                     /* JUS-TAG strings=["TitleData.cpp","TitleData_Create","bin/title.bin"] */
-  piVar1 = (int *)jus_AllocDebug(8,s_TitleData_cpp_0209e8ec,s_TitleData_Create_0209e82c,0x1d,in_r3);
+  piVar1 = (int *)thunk_FUN_0201a228(8,s_TitleData_cpp_0209e8ec,s_TitleData_Create_0209e82c,0x1d,
+                                     in_r3);
   FUN_020517fc(piVar1,0,8);
   piVar2 = (int *)FUN_02033410(s_bin_title_bin_0209e8fc,0,0);
   if (piVar2[7] == 0) {

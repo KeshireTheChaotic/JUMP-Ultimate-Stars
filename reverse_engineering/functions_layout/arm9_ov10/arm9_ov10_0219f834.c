@@ -16,8 +16,8 @@ void WiFiGame::WiFiGame_Static_SendCOMM
       param_3 = 0;
     }
     iStack_1c = param_4;
-    iVar1 = jus_AllocDebug(param_3 + 2,s_WiFiGame_cpp_021a72dc,s_WiFiGame_Static_SendCOMM_021a7218,
-                           0x1db);
+    iVar1 = thunk_FUN_0201a228(param_3 + 2,s_WiFiGame_cpp_021a72dc,
+                               s_WiFiGame_Static_SendCOMM_021a7218,0x1db);
     local_20[0] = param_1;
     FUN_02051890(local_20,iVar1,2);
     if (param_2 != 0) {

@@ -28,12 +28,12 @@ int * JQuizMainTextQDisp::JQuizMainTextQDispClass_Create
   undefined4 uStack_28;
   
   uStack_28 = param_4;
-  piVar1 = (int *)jus_AllocDebug(0x38,s_JQuizMainTextQDisp_cpp_02160e24,
-                                 s_JQuizMainTextQDispClass_Create_02160e04,0x32);
+  piVar1 = (int *)thunk_FUN_0201a228(0x38,s_JQuizMainTextQDisp_cpp_02160e24,
+                                     s_JQuizMainTextQDispClass_Create_02160e04,0x32);
   FUN_020517fc(piVar1,0,0x38);
   uVar5 = _DAT_021d5154;
   uVar8 = *(undefined4 *)(param_1 + 4);
-  iVar2 = jus_AllocDebug(0x134,s_ALWidgetImp_h_021608d4,s_Create_02160dfc,0x3e);
+  iVar2 = thunk_FUN_0201a228(0x134,s_ALWidgetImp_h_021608d4,s_Create_02160dfc,0x3e);
   if (iVar2 != 0) {
     func_0x021af0f8(iVar2,uVar8,uVar5,ALWidgetBaseImp::CreateDrawFunc);
   }

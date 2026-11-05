@@ -22,7 +22,7 @@ KomaList::KomaList_Create
   
   iStack_28 = param_4;
   puVar1 = (undefined4 *)
-           jus_AllocDebug(0x554,s_KomaList_cpp_0216f94c,s_KomaList_Create_0216f4d4,0x93);
+           thunk_FUN_0201a228(0x554,s_KomaList_cpp_0216f94c,s_KomaList_Create_0216f4d4,0x93);
   func_0x021b65bc();
   FUN_020517fc(puVar1,0,0x554);
   puVar1[0xfc] = param_1;
@@ -48,7 +48,7 @@ KomaList::KomaList_Create
     uVar3 = DemoData::DemoData_Create();
     puVar1[4] = uVar3;
   }
-  FUN_0214fdb0(puVar1,&LAB_0214fe14,0);
+  FUN_0214fdb0(puVar1,FUN_0214fe14,0);
   uVar3 = TitleData::TitleData_Create();
   puVar1[1] = uVar3;
   piVar4 = (int *)FUN_020101f4(s_deckmake_deckmake_aar_0216f95c,0);
@@ -115,7 +115,7 @@ KomaList::KomaList_Create
   (**(code **)(*piVar4 + 0xc))();
   FUN_0214e5f0(*puVar1,puVar1 + 0xfd,puVar1 + 0x10d);
   if (param_6 == '\0') {
-    FUN_02028384(*(undefined4 *)(puVar1[0xe] + 4),&LAB_0214ff54);
+    FUN_02028384(*(undefined4 *)(puVar1[0xe] + 4),FUN_0214ff54);
   }
   else {
     FUN_02073ef0(0xf,0);

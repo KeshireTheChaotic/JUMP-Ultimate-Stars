@@ -43,7 +43,7 @@ LAB_02084b08:
         iVar6 = *(int *)(iVar5 + 0x10);
         pbVar7 = *(byte **)(iVar5 + 0xc);
         if (iVar6 != 0) {
-          FUN_020428dc(DAT_020a0f64,&LAB_020854a4,iVar5);
+          FUN_020428dc(DAT_020a0f64,FUN_020854a4,iVar5);
           for (iVar5 = 0; iVar5 < (int)(uint)*pbVar7; iVar5 = iVar5 + 1) {
             if (*(int *)(iVar6 + iVar5 * 4) != 0) {
               FUN_02042660(DAT_020a0f64);

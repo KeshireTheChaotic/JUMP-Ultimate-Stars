@@ -1,0 +1,14 @@
+02083724  stmdb sp!,{r3,r4,lr}
+02083728  sub sp,sp,#0x4
+0208372c  ldr r12,[0x208375c]
+02083730  str r3,[sp,#0x0]
+02083734  ldr r12,[r12,#0x0]
+02083738  mov r4,r0
+0208373c  mov lr,r1
+02083740  mov r3,r2
+02083744  ldr r0,[r12,#0x8c]
+02083748  mov r1,r4
+0208374c  mov r2,lr
+02083750  bl 0x0207d2dc
+02083754  add sp,sp,#0x4
+02083758  ldmia sp!,{r3,r4,pc}

@@ -16,7 +16,7 @@ void jus_TagDUMY::vfunc_13(int param_1,undefined4 param_2)
     FUN_0201a958(iVar4,1);
   }
   iVar4 = FUN_02004b04(param_2);
-  uVar2 = jus_AllocDebug(iVar4 + 1);
+  uVar2 = FUN_0201a228(iVar4 + 1);
   *(undefined4 *)(param_1 + 0x10) = uVar2;
   FUN_02004b18(uVar2,param_2);
   iVar4 = *(int *)(param_1 + 0x20);

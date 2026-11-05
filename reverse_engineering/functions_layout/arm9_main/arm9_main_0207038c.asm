@@ -1,0 +1,10 @@
+0207038c  stmdb sp!,{r3,r4,r5,lr}
+02070390  ldr r4,[0x20703b4]
+02070394  mov r5,#0x0
+02070398  mov r0,r5
+0207039c  blx 0x02072300
+020703a0  strb r0,[r4,r5]
+020703a4  add r5,r5,#0x1
+020703a8  cmp r5,#0x4
+020703ac  bcc 0x02070398
+020703b0  ldmia sp!,{r3,r4,r5,pc}

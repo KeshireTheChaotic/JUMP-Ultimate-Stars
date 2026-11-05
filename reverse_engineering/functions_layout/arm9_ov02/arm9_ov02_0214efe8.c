@@ -40,7 +40,7 @@ void ALControllerImp::Create(int param_1)
   local_48 = 0;
   FUN_0214e39c(auStack_28,&local_40,&local_44,&local_48);
   FUN_0214ef10(&local_3c,uVar3,s_Position_0215c048);
-  iVar2 = jus_AllocDebug(0x4c,s_ALControllerImp_h_0215bff4,s_Create_0215be90,0x2b9);
+  iVar2 = thunk_FUN_0201a228(0x4c,s_ALControllerImp_h_0215bff4,&DAT_0215be90,0x2b9);
   if (iVar2 != 0) {
     jus_TagIPCT::jus_TagIPCT(iVar2,0,local_3c,local_38,0x494c,auStack_28,auStack_34,0x400,2);
   }

@@ -14,8 +14,8 @@ int CommuMenuDataLeaderSel::CommuMenuDataLeaderSel_Add(void)
   undefined4 uStack_c;
   
   uStack_c = in_r3;
-  piVar1 = (int *)jus_AllocDebug(0x4c,s_CommuMenuDataLeaderSel_cpp_0216a754,
-                                 s_CommuMenuDataLeaderSel_Add_0216a738,0x54);
+  piVar1 = (int *)thunk_FUN_0201a228(0x4c,s_CommuMenuDataLeaderSel_cpp_0216a754,
+                                     s_CommuMenuDataLeaderSel_Add_0216a738,0x54);
   FUN_020517fc(piVar1,0,0x4c);
   iVar2 = 0;
   do {
@@ -46,7 +46,7 @@ int CommuMenuDataLeaderSel::CommuMenuDataLeaderSel_Add(void)
   iVar2 = FUN_02026f94();
   piVar1[1] = iVar2;
   (**(code **)(**(int **)(iVar2 + 4) + 0x24))(*(int **)(iVar2 + 4),piVar1);
-  FUN_02028384(*(undefined4 *)(piVar1[1] + 4),&LAB_0216266c);
+  FUN_02028384(*(undefined4 *)(piVar1[1] + 4),FUN_0216266c);
   local_10 = 0x80000;
   (**(code **)(**(int **)(piVar1[1] + 4) + 0xa0))(*(int **)(piVar1[1] + 4),&local_10);
   iVar2 = FUN_0215656c(piVar1[0x12]);

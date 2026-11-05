@@ -5,6 +5,7 @@ void FUN_02087de0(void)
   char cVar1;
   undefined4 in_r3;
   
+                    /* JUS-TAG source_file_inferred="CommWrap.cpp" */
   if ((*(char *)((int)DAT_0214be24 + 0x1a) == '\0') &&
      (cVar1 = FUN_02087b70(), (char)DAT_0214be24[6] != cVar1)) {
     FUN_02087b84(0,0,0,0);

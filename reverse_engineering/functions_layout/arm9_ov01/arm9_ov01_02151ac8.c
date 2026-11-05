@@ -9,10 +9,10 @@ void FUN_02151ac8(int param_1)
   undefined4 uVar3;
   int *piVar4;
   
-  iVar1 = jus_AllocDebug(0xcc,s_ALWidget_inl_0216bd74,s_Create_0216bd1c,0x1de);
+  iVar1 = thunk_FUN_0201a228(0xcc,s_ALWidget_inl_0216bd74,s_Create_0216bd1c,0x1de);
   piVar2 = (int *)0x0;
   if (iVar1 != 0) {
-    piVar2 = (int *)func_0x021af26c(iVar1,0x2151bf9,&LAB_02151c68_1,0);
+    piVar2 = (int *)func_0x021af26c(iVar1,0x2151bf9,0x2151c69,0);
   }
   if (piVar2[6] == 0) {
     (**(code **)(*piVar2 + 0x14))();
@@ -43,7 +43,7 @@ void FUN_02151ac8(int param_1)
     *(undefined1 *)(iVar1 + 0x1c) = 1;
     *(undefined1 *)(iVar1 + 0x1b) = 1;
   }
-  iVar1 = jus_AllocDebug(0xbc,s_ALWidget_inl_0216bd64,s_Create_0216bd2c,0x212);
+  iVar1 = thunk_FUN_0201a228(0xbc,s_ALWidget_inl_0216bd64,s_Create_0216bd2c,0x212);
   piVar4 = (int *)0x0;
   if (iVar1 != 0) {
     piVar4 = (int *)func_0x021af358(iVar1,0x2151c91,0);

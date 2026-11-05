@@ -10,7 +10,7 @@ void FUN_021bcad4(int param_1)
   int iVar6;
   
   sVar1 = *(short *)(param_1 + 0x5a);
-  iVar4 = *(int *)(&DAT_021d0120 + ((int)(uint)*(byte *)(param_1 + 0x9b) >> 5 & 1U) * 4);
+  iVar4 = *(int *)(((int)(uint)*(byte *)(param_1 + 0x9b) >> 5 & 1U) * 4 + 0x21d0120);
   if (iVar4 == 0x50) {
     iVar6 = 9;
   }

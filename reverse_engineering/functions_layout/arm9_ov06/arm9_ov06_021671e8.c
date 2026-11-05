@@ -30,8 +30,8 @@ void BattleMapWall::BattleMapInitWall(int param_1,int param_2,undefined4 param_3
   undefined4 uStack_28;
   
   uStack_28 = param_4;
-  uVar2 = jus_AllocDebug((short)(ushort)*(byte *)(*(int *)(param_1 + 0x10) + 0x2c) * 0x34,
-                         s_BattleMapWall_cpp_02172660,s_BattleMapInitWall_0217264c,199);
+  uVar2 = thunk_FUN_0201a228((short)(ushort)*(byte *)(*(int *)(param_1 + 0x10) + 0x2c) * 0x34,
+                             s_BattleMapWall_cpp_02172660,s_BattleMapInitWall_0217264c,199);
   *(undefined4 *)(param_1 + 0x1c) = uVar2;
   FUN_020517fc(uVar2,0,(short)(ushort)*(byte *)(*(int *)(param_1 + 0x10) + 0x2c) * 0x34);
   uVar2 = *(undefined4 *)(*(int *)(param_1 + 0x28) + 0xc);

@@ -32,7 +32,7 @@ void jus_Scene12_Create(void)
   case 4:
   default:
 LAB_0206ed6c:
-    func_0x02070758();
+    FUN_02070758();
     goto code_r0x0206ed70;
   case 5:
     goto LAB_0206ed6c;

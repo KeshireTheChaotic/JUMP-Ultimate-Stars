@@ -1,0 +1,8 @@
+02015544  stmdb sp!,{r4,lr}
+02015548  mov r4,r0
+0201554c  add r0,r4,#0x6c
+02015550  bl 0x0201cf24
+02015554  mov r0,r4
+02015558  bl 0x02021f3c
+0201555c  mov r0,r4
+02015560  ldmia sp!,{r4,pc}

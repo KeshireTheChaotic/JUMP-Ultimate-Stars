@@ -20,8 +20,8 @@ int * JQuizMainAnswerDisp::JQuizMainAnswerDispClass_Create(undefined4 param_1)
   int local_34 [3];
   undefined4 local_28;
   
-  piVar1 = (int *)jus_AllocDebug(0x14,s_JQuizMainAnswerDisp_cpp_02161bf8,
-                                 s_JQuizMainAnswerDispClass_Create_02161bd8,0x45);
+  piVar1 = (int *)thunk_FUN_0201a228(0x14,s_JQuizMainAnswerDisp_cpp_02161bf8,
+                                     s_JQuizMainAnswerDispClass_Create_02161bd8,0x45);
   FUN_020517fc(piVar1,0,0x14);
   iVar2 = ALWidgetBaseImp::Create(piVar1,param_1);
   (**(code **)(**(int **)(iVar2 + 4) + 0xd8))(*(int **)(iVar2 + 4),1);
@@ -68,7 +68,7 @@ int * JQuizMainAnswerDisp::JQuizMainAnswerDispClass_Create(undefined4 param_1)
   *piVar1 = iVar2;
   local_50 = 0x80000;
   (**(code **)(**(int **)(iVar2 + 4) + 0xa0))(*(int **)(iVar2 + 4),&local_50);
-  FUN_02028384(*(undefined4 *)(*piVar1 + 4),&DAT_0215e9fc);
+  FUN_02028384(*(undefined4 *)(*piVar1 + 4),FUN_0215e9fc);
   (**(code **)(**(int **)(*piVar1 + 4) + 0x24))(*(int **)(*piVar1 + 4),piVar1);
   return piVar1;
 }

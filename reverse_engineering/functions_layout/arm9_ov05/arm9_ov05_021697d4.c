@@ -17,7 +17,7 @@ void FUN_021697d4(int param_1)
   FUN_02150a10(param_1,&local_20);
   uVar3 = *(uint *)(*(int *)(param_1 + 4) + 0xac);
   uVar1 = *(undefined4 *)(*(int *)(param_1 + 4) + 0x94);
-  iVar2 = jus_AllocDebug(0xb4,s_ALWidget_inl_0216f494,s_Create_0217186c,0x226);
+  iVar2 = thunk_FUN_0201a228(0xb4,s_ALWidget_inl_0216f494,s_Create_0217186c,0x226);
   piVar4 = (int *)0x0;
   if (iVar2 != 0) {
     piVar4 = (int *)func_0x021af494(iVar2,*(undefined4 *)(param_1 + 4),uVar1,(uVar3 & 1) == 1,

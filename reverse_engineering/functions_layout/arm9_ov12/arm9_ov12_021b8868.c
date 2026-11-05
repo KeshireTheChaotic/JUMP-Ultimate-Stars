@@ -10,7 +10,7 @@ ALDrawLinkImp_021d2e58_Derived_021d2a88::ALDrawLinkImp_021d2e58_Derived_021d2a88
   int iVar1;
   
   if ((param_2 == 0) &&
-     (iVar1 = jus_AllocDebug(0xc0,s_ALWidgetBase_cpp_021d3de8,&DAT_021d3ae0,0xc7d), param_2 = 0,
+     (iVar1 = thunk_FUN_0201a228(0xc0,s_ALWidgetBase_cpp_021d3de8,&DAT_021d3ae0,0xc7d), param_2 = 0,
      iVar1 != 0)) {
     param_2 = ALDrawLinkImp_021d2e58_Derived_021d334c::ALDrawLinkImp_021d2e58_Derived_021d334c();
   }

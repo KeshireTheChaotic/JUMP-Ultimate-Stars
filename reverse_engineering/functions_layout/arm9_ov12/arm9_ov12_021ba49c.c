@@ -26,7 +26,8 @@ undefined4 * CommonWindow::CommonWindow_Create(int param_1,undefined4 param_2,in
   undefined4 local_28;
   
   puVar1 = (undefined4 *)
-           jus_AllocDebug(0x220,s_CommonWindow_cpp_021d3f34,s_CommonWindow_Create_021d3e6c,0x53);
+           thunk_FUN_0201a228(0x220,s_CommonWindow_cpp_021d3f34,s_CommonWindow_Create_021d3e6c,0x53)
+  ;
   FUN_020517fc(puVar1,0,0x220);
   *(undefined1 *)((int)puVar1 + 0xa3) = 0;
   *(undefined1 *)((int)puVar1 + 0xa5) = 1;
@@ -112,7 +113,7 @@ undefined4 * CommonWindow::CommonWindow_Create(int param_1,undefined4 param_2,in
   FUN_021bc018(puVar1[3],0);
   FUN_021bc03c();
   uVar4 = DAT_021d5154;
-  iVar2 = jus_AllocDebug(0x14c,s_ALWidgetBaseImp_h_021d177c,s_Create_021d3e0c,0x2a6);
+  iVar2 = thunk_FUN_0201a228(0x14c,s_ALWidgetBaseImp_h_021d177c,s_Create_021d3e0c,0x2a6);
   if (iVar2 != 0) {
     ALNodeImp::Create(iVar2,0,uVar4,ALWidgetBaseImp::CreateDrawFunc);
   }

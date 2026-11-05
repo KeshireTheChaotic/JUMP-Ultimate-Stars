@@ -20,7 +20,7 @@ int FUN_021529a8(int param_1,undefined4 param_2,undefined4 param_3,undefined4 pa
   _DAT_021d5154 = 5;
   uStack_28 = param_4;
   iVar1 = ALWidgetBaseImp::Create(param_1,0x1f,0,1);
-  FUN_02028384(*(undefined4 *)(iVar1 + 4),&DAT_021533ac);
+  FUN_02028384(*(undefined4 *)(iVar1 + 4),FUN_021533ac);
   local_2c = 0xfff00000;
   FUN_02150a10(iVar1,&local_2c);
   func_0x021b65d8(*(undefined4 *)(iVar1 + 4));

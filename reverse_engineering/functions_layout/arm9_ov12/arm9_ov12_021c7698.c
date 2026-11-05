@@ -7,7 +7,7 @@ void ALTextImp::Clone(undefined4 param_1,undefined4 param_2,undefined4 param_3,u
 {
   int iVar1;
   
-  iVar1 = jus_AllocDebug(0x170,s_ALTextImp_h_021d4634,s_Clone_021d4614,0x80,param_4);
+  iVar1 = thunk_FUN_0201a228(0x170,s_ALTextImp_h_021d4634,s_Clone_021d4614,0x80,param_4);
   if (iVar1 == 0) {
     return;
   }

@@ -24,7 +24,7 @@ void FUN_02157e6c(int param_1,undefined4 param_2,undefined4 param_3,undefined4 p
     iVar7 = 0;
     do {
       iVar4 = FUN_02154a7c(param_1,iVar7 + 2);
-      thunk_FUN_0207400c(auStack_68,&DAT_0215e714);
+      thunk_FUN_0207400c(auStack_68,FUN_0215e714);
       uVar5 = FUN_0214d79c(*(undefined4 *)(iVar8 + 0xd0),*(undefined1 *)(iVar8 + 2),
                            *(undefined1 *)(iVar2 + cVar1 + iVar7 + 0x74));
       thunk_FUN_020741c4(auStack_68,uVar5);

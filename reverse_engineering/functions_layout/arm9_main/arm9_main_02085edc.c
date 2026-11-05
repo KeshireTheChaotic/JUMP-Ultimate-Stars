@@ -23,8 +23,8 @@ void BattleMapObj::BattleMapMoveFloorInitNormal
     *(undefined1 *)(param_1 + 0x17) = 0;
   }
   else {
-    uVar3 = jus_AllocDebug((uint)*(byte *)(param_1 + 0x17) << 4,s_BattleMapObj_cpp_020a0114,
-                           s_BattleMapMoveFloorInitNormal_020a00f4,0x288,iVar7,iVar6,param_4);
+    uVar3 = thunk_FUN_0201a228((uint)*(byte *)(param_1 + 0x17) << 4,s_BattleMapObj_cpp_020a0114,
+                               s_BattleMapMoveFloorInitNormal_020a00f4,0x288,iVar7,iVar6,param_4);
     *(undefined4 *)(param_1 + 4) = uVar3;
     for (uVar9 = 0; uVar9 < *(byte *)(param_1 + 0x17); uVar9 = uVar9 + 1) {
       cVar1 = *(char *)(param_2 + uVar9 * 8);

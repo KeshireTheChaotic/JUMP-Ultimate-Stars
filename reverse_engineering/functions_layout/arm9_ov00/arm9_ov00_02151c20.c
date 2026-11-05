@@ -23,7 +23,7 @@ int * Movie::Movie_Create(byte param_1,undefined4 param_2,int param_3,undefined4
   undefined4 uStack_1c;
   
   uStack_1c = param_4;
-  piVar1 = (int *)jus_AllocDebug(0xe8,s_Movie_cpp_02160fe8,s_Movie_Create_02160fd8,0x5a);
+  piVar1 = (int *)thunk_FUN_0201a228(0xe8,s_Movie_cpp_02160fe8,FUN_02160fd8,0x5a);
   uVar2 = FUN_020517fc(piVar1,0,0xe8);
   if (piVar1 == (int *)0x0) {
     piVar1 = (int *)0x0;
@@ -193,7 +193,7 @@ int * Movie::Movie_Create(byte param_1,undefined4 param_2,int param_3,undefined4
     iVar3 = FUN_0200d338((uVar6 >> 0x10) * 0x7fd88,0x3c);
     piVar1[0x31] = iVar3;
     piVar1[0x32] = 0;
-    FUN_0204267c(DAT_020a0f64,&LAB_02152868,piVar1);
+    FUN_0204267c(DAT_020a0f64,FUN_02152868,piVar1);
   }
   return piVar1;
 }

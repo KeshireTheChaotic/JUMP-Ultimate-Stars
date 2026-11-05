@@ -1,0 +1,12 @@
+02041d78  push {r4,lr}
+02041d7a  mov r0,#0x6c
+02041d7c  blx 0x0201a228
+02041d80  add r4,r0,#0x0
+02041d82  beq 0x02041d90
+02041d84  ldr r1,[0x02041d94]
+02041d86  mov r2,#0x0
+02041d88  blx 0x020327a0
+02041d8c  ldr r0,[0x02041d98]
+02041d8e  str r0,[r4,#0x0]
+02041d90  add r0,r4,#0x0
+02041d92  pop {r4,pc}

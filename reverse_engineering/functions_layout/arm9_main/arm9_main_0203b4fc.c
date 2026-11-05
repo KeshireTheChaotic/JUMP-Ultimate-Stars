@@ -12,7 +12,7 @@ undefined4 * jus_Class_020972e0::jus_Class_020972e0(undefined4 *param_1)
   *param_1 = &vftable;
   param_1[299] = 0x7000000;
   param_1[0x12] = 0x4d4f4432;
-  iVar1 = jus_AllocDebug(8);
+  iVar1 = FUN_0201a228(8);
   uVar2 = 0;
   if (iVar1 != 0) {
     uVar2 = jus_Class_02093cf4::jus_Class_02093cf4(iVar1,param_1);

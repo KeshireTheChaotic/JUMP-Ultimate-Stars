@@ -1,9 +1,10 @@
 
 /* WARNING: Removing unreachable block (ram,0x0215a6bc) */
-/* JUS-SCENE jus_Scene05_CreateImpl [scene-map] called by scene 5 create wrapper 0206ea6c while
-   overlay 2 is resident */
+/* JUS-GAME DeckCheck::DeckCheck_Add [source-string] __FILE__="DeckCheck.cpp"
+   __FUNCTION__="DeckCheck_Add" lines=[54, 678] passed to 2 source-location call(s); header inlines:
+   ALWidgetBaseImp.h:Create */
 
-int jus_Scene05_CreateImpl(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+int DeckCheck::DeckCheck_Add(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
 
 {
   undefined *puVar1;
@@ -45,8 +46,8 @@ int jus_Scene05_CreateImpl(int param_1,undefined4 param_2,undefined4 param_3,und
   undefined4 uStack_28;
   
   uStack_28 = param_4;
-  piVar3 = (int *)jus_AllocDebug(0x5c,PTR_s_DeckCheck_cpp_0215ab94,PTR_s_DeckCheck_Add_0215ab98,0x36
-                                );
+  piVar3 = (int *)thunk_FUN_0201a228(0x5c,PTR_s_DeckCheck_cpp_0215ab94,PTR_s_DeckCheck_Add_0215ab98,
+                                     0x36);
   FUN_020517fc(piVar3,0,0x5c);
   func_0x021b65bc();
   FUN_02043264(1);
@@ -72,7 +73,7 @@ int jus_Scene05_CreateImpl(int param_1,undefined4 param_2,undefined4 param_3,und
   piVar3[3] = iVar4;
   iVar4 = FUN_02076908();
   piVar3[4] = iVar4;
-  uVar7 = func_0x02070ca4(0);
+  uVar7 = FUN_02070ca4(0);
   FUN_020769cc(piVar3[4],uVar7);
   iVar4 = ComicDeckDisp::ComicDeck_DispCreate(1,0,3,1,1);
   piVar3[5] = iVar4;
@@ -128,7 +129,7 @@ int jus_Scene05_CreateImpl(int param_1,undefined4 param_2,undefined4 param_3,und
   piVar3[0xb] = iVar4;
   thunk_FUN_0207400c(auStack_40,PTR_s_deckcheck_win_g_atm_0215abcc);
   if (piVar3[0x14] == 1) {
-    thunk_FUN_02074258(auStack_32,PTR_DAT_0215abd0);
+    thunk_FUN_02074258(auStack_32,PTR_FUN_0215abd0);
   }
   (**(code **)(**(int **)(piVar3[0xb] + 4) + 0x130))(*(int **)(piVar3[0xb] + 4),auStack_40);
   FUN_0215ae70(piVar3[0xb],uVar7,0);
@@ -138,7 +139,7 @@ int jus_Scene05_CreateImpl(int param_1,undefined4 param_2,undefined4 param_3,und
   (**(code **)(**(int **)(piVar3[0xb] + 4) + 0xd8))(*(int **)(piVar3[0xb] + 4),1);
   FUN_02034d7c(uVar7);
   iVar4 = piVar3[4];
-  iVar8 = func_0x021ca3a4(0xa0,0x10,PTR_s_font_jskfont_aft_0215abd4,0,0);
+  iVar8 = func_0x021ca3a4(0xa0,0x10,PTR_LAB_0215abd4,0,0);
   piVar3[0xc] = iVar8;
   piVar6 = *(int **)(*(int *)(iVar8 + 4) + 100);
   (**(code **)(*piVar6 + 0xa4))(piVar6,0);
@@ -154,7 +155,7 @@ int jus_Scene05_CreateImpl(int param_1,undefined4 param_2,undefined4 param_3,und
   (**(code **)(**(int **)(piVar3[0xc] + 4) + 0xd8))(*(int **)(piVar3[0xc] + 4),1);
   FUN_0214d678(piVar3[0xc],piVar3[0xb]);
   iVar4 = FUN_0203b3e4();
-  puVar1 = PTR_s_deckcheck_obj_aar_0215abd8;
+  puVar1 = PTR_FUN_0215abd8;
   *(undefined4 *)PTR_DAT_0215abb8 = *(undefined4 *)(*(int *)(iVar4 + 0x88) + 4);
   iVar4 = FUN_020101f4(puVar1,0);
   puVar1 = PTR_LAB_0215abdc;
@@ -193,7 +194,7 @@ int jus_Scene05_CreateImpl(int param_1,undefined4 param_2,undefined4 param_3,und
   iVar4 = FUN_020101f4(uRam0215abe4,0);
   piVar3[0xd] = iVar4;
   uVar7 = *puRam0215abe8;
-  iVar4 = jus_AllocDebug(0x14c,uRam0215abec,uRam0215abf0,uRam0215abf4);
+  iVar4 = thunk_FUN_0201a228(0x14c,uRam0215abec,uRam0215abf0,uRam0215abf4);
   if (iVar4 != 0) {
     func_0x021b7950(iVar4,0,uVar7,uRam0215abf8);
   }

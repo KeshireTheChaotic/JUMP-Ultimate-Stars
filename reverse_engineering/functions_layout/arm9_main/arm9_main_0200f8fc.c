@@ -54,7 +54,7 @@ void jus_Class_02095ea0::vfunc_24(int *param_1)
           FUN_0201a958(uVar7,1);
           FUN_02002488(iVar8,0xff,iVar2 + 0x40);
           iVar9 = (**(code **)(*(int *)param_1[7] + 0x2c))((int *)param_1[7],0);
-          iVar10 = jus_AllocDebug(0x30);
+          iVar10 = FUN_0201a228(0x30);
           if (iVar10 != 0) {
             ALStreamImp::ALStreamImp(iVar10,iVar8,iVar2,1);
           }
@@ -71,7 +71,7 @@ void jus_Class_02095ea0::vfunc_24(int *param_1)
           }
           *(short *)(iVar8 + 6) = (short)uVar5;
           *(byte *)(iVar8 + 5) = *(byte *)(iVar8 + 5) & 0xfd;
-          iVar8 = jus_AllocDebug(0x34);
+          iVar8 = FUN_0201a228(0x34);
           iVar2 = 0;
           if (iVar8 != 0) {
             iVar2 = jus_Class_02095ea0(iVar8,*(undefined4 *)(iVar10 + 4),0,1);

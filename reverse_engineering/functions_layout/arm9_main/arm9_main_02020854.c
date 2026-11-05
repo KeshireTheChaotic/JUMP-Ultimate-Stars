@@ -1,8 +1,8 @@
 
-/* JUS-CLASS jus_Class_0209bd30::vfunc_47 [class-virtual] slot 47 of vtable 0209bd30 (own slot, not
-   inherited) */
+/* JUS-CLASS jus_TagNDGR_0209bd30::vfunc_47 [class-virtual] slot 47 of vtable 0209bd30 (own slot,
+   not inherited) */
 
-void jus_Class_0209bd30::vfunc_47(void)
+void jus_TagNDGR_0209bd30::vfunc_47(void)
 
 {
   FUN_02024868();

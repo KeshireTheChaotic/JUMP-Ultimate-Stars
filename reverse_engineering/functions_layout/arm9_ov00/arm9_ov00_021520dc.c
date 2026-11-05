@@ -70,7 +70,7 @@ void FUN_021520dc(int param_1)
   uVar3 = FUN_0200d338((uVar5 >> 0x10) * 0x7fd88,0x3c);
   *(undefined4 *)(unaff_r5 + 0xc4) = uVar3;
   *(undefined4 *)(unaff_r5 + 200) = 0;
-  FUN_0204267c(DAT_020a0f64,&LAB_02152868);
+  FUN_0204267c(DAT_020a0f64,FUN_02152868);
   return;
 }
 

@@ -22,7 +22,7 @@ void FUN_0215f708(short *param_1)
   if (*param_1 != 3) {
     return;
   }
-  uVar3 = FUN_02058c74(&LAB_0215f92c);
+  uVar3 = FUN_02058c74(FUN_0215f92c);
   iVar2 = FUN_0215fcb8(iVar1,0x80,uVar3);
   if (iVar2 == 0) {
     return;

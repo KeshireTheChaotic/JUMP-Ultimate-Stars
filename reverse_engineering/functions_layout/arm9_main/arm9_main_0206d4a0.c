@@ -61,7 +61,7 @@ void FUN_0206d4a0(undefined4 *param_1,int param_2,undefined4 param_3,undefined4 
             iVar6 = FUN_0200d12c(iVar6 * (0x168 - psVar8[3]),0x168);
             local_2c = FUN_0200d12c(iVar5 * (0xff - iVar6),0xff);
             iVar6 = FUN_0200d12c((int)*psVar8,0x3c);
-            uVar2 = (*(code *)(&PTR_LAB_0209e29c)[iVar6])(iVar5,&local_34);
+            uVar2 = (*(code *)(&PTR_FUN_0209e29c)[iVar6])(iVar5,&local_34);
           }
           *puVar7 = uVar2;
           puVar7 = puVar7 + 1;

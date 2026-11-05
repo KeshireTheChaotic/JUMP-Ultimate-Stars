@@ -16,7 +16,7 @@ undefined4 * jus_Class_02097124::jus_Class_02097124(undefined4 *param_1)
   FUN_02010970(param_1 + 0x129,0x18);
   FUN_02010970(param_1 + 300,0x10);
   param_1[0x12] = 0x414d4433;
-  iVar1 = jus_AllocDebug(8);
+  iVar1 = FUN_0201a228(8);
   uVar2 = 0;
   if (iVar1 != 0) {
     uVar2 = ScreenInstance_Derived_02093d14::ScreenInstance_Derived_02093d14(iVar1,param_1);

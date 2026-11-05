@@ -30,7 +30,7 @@ KomaEdit::KomaEdit_Create(undefined4 param_1,int param_2,undefined1 param_3,unde
   undefined4 local_28;
   
   puVar1 = (undefined4 *)
-           jus_AllocDebug(0x4f4,s_KomaEdit_cpp_021700d0,s_KomaEdit_Create_02170008,0xb7);
+           thunk_FUN_0201a228(0x4f4,s_KomaEdit_cpp_021700d0,s_KomaEdit_Create_02170008,0xb7);
   func_0x021b65bc();
   FUN_020517fc(puVar1,0,0x4f4);
   *puVar1 = param_1;
@@ -59,7 +59,7 @@ KomaEdit::KomaEdit_Create(undefined4 param_1,int param_2,undefined1 param_3,unde
   FUN_02079c30(uVar3,0x9f);
   FUN_0207903c(puVar1[1],0,0);
   FUN_0215ce18(puVar1);
-  puVar1[0x12d] = &DAT_0215ce14;
+  puVar1[0x12d] = FUN_0215ce14;
   piVar4 = (int *)FUN_020101f4(s_deckmake_deckmake_aar_021700e0,0);
   iVar2 = FUN_0203b424(3);
   uVar3 = FUN_0215e100(*(undefined4 *)(iVar2 + 0x88),3,8,0x2000,3,0x20,0x20,
@@ -81,7 +81,7 @@ KomaEdit::KomaEdit_Create(undefined4 param_1,int param_2,undefined1 param_3,unde
   } while (iVar8 < 4);
   DAT_021722b4 = 0;
   *(undefined1 *)((int)puVar1 + 0x4d6) = 0x27;
-  iVar2 = jus_AllocDebug(0xcc,s_ALWidget_inl_0216f484,s_Create_0216fc44,0x1de);
+  iVar2 = thunk_FUN_0201a228(0xcc,s_ALWidget_inl_0216f484,s_Create_0216fc44,0x1de);
   if (iVar2 != 0) {
     func_0x021af26c(iVar2,ALControllerImp::Create,FUN_02159610,0);
   }
@@ -236,7 +236,7 @@ KomaEdit::KomaEdit_Create(undefined4 param_1,int param_2,undefined1 param_3,unde
   local_34 = 0x90000;
   local_30 = 0x180000;
   FUN_0214ce68(iVar8,&local_30,&local_34);
-  FUN_02028384(*(undefined4 *)(iVar8 + 4),&DAT_0215d140);
+  FUN_02028384(*(undefined4 *)(iVar8 + 4),FUN_0215d140);
   (**(code **)(**(int **)(iVar8 + 4) + 0xd8))(*(int **)(iVar8 + 4),0);
   func_0x021b65d8(*(undefined4 *)(iVar8 + 4));
   puVar9 = &DAT_0216fd5c;
@@ -293,7 +293,7 @@ KomaEdit::KomaEdit_Create(undefined4 param_1,int param_2,undefined1 param_3,unde
   *(undefined1 *)((int)puVar1 + 0x4db) = 0xff;
   puVar1[0x4d] = iVar8;
   iVar2 = ALWidgetBaseImp::Create(puVar1,0x60,0,0);
-  FUN_02028384(*(undefined4 *)(iVar2 + 4),&DAT_0215d140);
+  FUN_02028384(*(undefined4 *)(iVar2 + 4),FUN_0215d140);
   puVar10 = &DAT_0216fdc8;
   iVar8 = 0;
   do {
@@ -362,7 +362,7 @@ KomaEdit::KomaEdit_Create(undefined4 param_1,int param_2,undefined1 param_3,unde
   puVar1[99] = uVar3;
   FUN_0215bd18(puVar1,1);
   iVar8 = ALWidgetBaseImp::Create(puVar1,0x60,0,0);
-  FUN_02028384(*(undefined4 *)(iVar8 + 4),&DAT_0215d140);
+  FUN_02028384(*(undefined4 *)(iVar8 + 4),FUN_0215d140);
   func_0x021b65d8(*(undefined4 *)(iVar8 + 4));
   puVar9 = &DAT_0216fd14;
   iVar2 = 0;

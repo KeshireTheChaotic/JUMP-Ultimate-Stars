@@ -19,7 +19,7 @@ jus_TagDUMY_Derived_02094a7c::jus_TagDUMY_Derived_02094a7c
   param_1[3] = param_4;
   if (((int *)param_1[9])[8] == 0) {
     uVar1 = (**(code **)(*param_2 + 0x28))();
-    uVar2 = jus_AllocDebug(param_4);
+    uVar2 = FUN_0201a228(param_4);
     param_1[8] = uVar2;
     (**(code **)(*param_2 + 0x24))(param_2,param_3);
     (**(code **)(*param_2 + 0x14))(param_2,param_1[8],param_4);

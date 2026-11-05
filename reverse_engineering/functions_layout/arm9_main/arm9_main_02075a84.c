@@ -11,7 +11,7 @@ int AutoSaveLoad::AutoSave_Add(int param_1)
   
                     /* JUS-TAG strings=["AutoSaveLoad.cpp","AutoSave_Add"] */
   FUN_0206dcdc(0);
-  piVar1 = (int *)jus_AllocDebug(0x1c,s_AutoSaveLoad_cpp_0209f4fc,s_AutoSave_Add_0209f4ec,0x2e);
+  piVar1 = (int *)thunk_FUN_0201a228(0x1c,s_AutoSaveLoad_cpp_0209f4fc,s_AutoSave_Add_0209f4ec,0x2e);
   FUN_020517fc(piVar1,0,0x1c);
   if (param_1 == 1) {
     *(undefined1 *)(piVar1 + 6) = 1;

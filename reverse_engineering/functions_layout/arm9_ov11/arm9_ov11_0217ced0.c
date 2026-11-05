@@ -14,8 +14,8 @@ void BattleAI_JobAtkBrh::BattleAIObj_CreateBranchNode
   undefined4 uStack_14;
   
   uStack_14 = param_4;
-  iVar1 = jus_AllocDebug(0x14,s_BattleAI_JobAtkBrh_cpp_021819e0,
-                         s_BattleAIObj_CreateBranchNode_021819c0,0x7a);
+  iVar1 = thunk_FUN_0201a228(0x14,s_BattleAI_JobAtkBrh_cpp_021819e0,
+                             s_BattleAIObj_CreateBranchNode_021819c0,0x7a);
   FUN_020517fc(iVar1,0,0x14);
   *(undefined4 *)(iVar1 + 4) = **(undefined4 **)(param_1 + 0x14);
   *(undefined1 *)(iVar1 + 0xe) = 0xff;

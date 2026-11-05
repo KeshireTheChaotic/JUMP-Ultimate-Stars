@@ -16,7 +16,7 @@ undefined4 * ALObjectImp_020990e0::ALObjectImp_020990e0(undefined4 *param_1,int 
   param_1[0xc] = &DAT_020a11b8;
   param_1[0xd] = DAT_020a0e80;
   param_1[0xe] = 0;
-  param_1[0x10] = &LAB_0202836c;
+  param_1[0x10] = FUN_0202836c;
   DAT_020a0ed8 = DAT_020a0ed8 + 1;
   param_1[0xf] = *(undefined4 *)(param_1[0xd] + 0x254);
   FUN_02037b98(param_1[0xd] + 0x23c,param_1 + 8);

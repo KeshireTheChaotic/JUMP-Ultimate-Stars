@@ -20,8 +20,7 @@ int * JQuizMainTimePlate::JQuizMainTimePlateClass_Create
   undefined4 uStack_28;
   
   uStack_28 = param_4;
-  piVar3 = (int *)jus_AllocDebug(0x1c,s_JQuizMainTimePlate_cpp_02160f6c,
-                                 s_JQuizMainTimePlateClass_Create_02160f4c,0x58);
+  piVar3 = (int *)thunk_FUN_0201a228(0x1c,s_JQuizMainTimePlate_cpp_02160f6c,FUN_02160f4c,0x58);
   FUN_020517fc(piVar3,0,0x1c);
   DAT_02093c08 = DAT_02093c08 + -1;
   pcVar6 = &DAT_02160500;

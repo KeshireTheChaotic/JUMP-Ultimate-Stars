@@ -7,10 +7,11 @@
 /* WARNING: Removing unreachable block (ram,0x02162b08) */
 /* WARNING: Removing unreachable block (ram,0x02162b0c) */
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
-/* JUS-SCENE jus_Scene07_CreateImpl [scene-map] called by scene 7 create wrapper 0206eb10 while
-   overlay 1 is resident */
+/* JUS-GAME RuleSelect::RuleSelect_Add [source-string] __FILE__="RuleSelect.cpp"
+   __FUNCTION__="RuleSelect_Add" lines=[697] passed to 2 source-location call(s); header inlines:
+   ALControllerImp.h:Create */
 
-int jus_Scene07_CreateImpl
+int RuleSelect::RuleSelect_Add
               (undefined1 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
 
 {
@@ -85,13 +86,14 @@ int jus_Scene07_CreateImpl
   
   pdVar15 = &dStack_180;
   uStack_18 = param_4;
-  piVar4 = (int *)jus_AllocDebug(0xe8,s_RuleSelect_cpp_0216d218,s_RuleSelect_Add_0216ce64,0x179);
+  piVar4 = (int *)thunk_FUN_0201a228(0xe8,s_RuleSelect_cpp_0216d218,s_RuleSelect_Add_0216ce64,0x179)
+  ;
   FUN_020517fc(piVar4,0,0xe8);
   *(undefined1 *)((int)piVar4 + 0xe1) = param_1;
   iVar5 = FUN_02026f94();
   piVar4[1] = iVar5;
   (**(code **)(**(int **)(iVar5 + 4) + 0x24))(*(int **)(iVar5 + 4),piVar4);
-  FUN_02028384(*(undefined4 *)(piVar4[1] + 4),&LAB_02163808_1);
+  FUN_02028384(*(undefined4 *)(piVar4[1] + 4),FUN_02163808 + 1);
   iVar5 = FUN_020310f4();
   *piVar4 = iVar5;
   DAT_02093c04 = DAT_02093c04 + -1;
@@ -151,12 +153,11 @@ int jus_Scene07_CreateImpl
   iVar5 = FUN_020101f4(s_common_button_aar_0216d260,0);
   piVar4[4] = iVar5;
   iVar5 = FUN_0203b414(2);
-  iVar5 = func_0x02162da4(s_ruleselect_rule_sel00_atm_0216d274,s_ruleselect_rule_sel00_dig_0216d290,
-                          *(undefined4 *)(iVar5 + 0x88));
+  iVar5 = FUN_02162da4(s_ruleselect_rule_sel00_atm_0216d274,s_ruleselect_rule_sel00_dig_0216d290,
+                       *(undefined4 *)(iVar5 + 0x88));
   piVar4[5] = iVar5;
   iVar5 = FUN_0203b414(3);
-  iVar5 = func_0x02162da4(s_info_bg_atm_0216d2ac,s_info_bg_dig_0216d2b8,
-                          *(undefined4 *)(iVar5 + 0x88));
+  iVar5 = FUN_02162da4(s_info_bg_atm_0216d2ac,s_info_bg_dig_0216d2b8,*(undefined4 *)(iVar5 + 0x88));
   piVar4[6] = iVar5;
   adStack_130[1] = 0;
   adStack_130[0] = 0xfff00000;
@@ -167,7 +168,7 @@ int jus_Scene07_CreateImpl
   uStack_140 = 0;
   FUN_0214dc68(auStack_e0,&uStack_140,&uStack_13c,&uStack_138);
   FUN_0214f714(&uStack_148,piVar4[6],s_Position_0216d2c4);
-  iVar5 = jus_AllocDebug(0x4c,s_ALControllerImp_h_0216bbe0,s_Create_0216ce54,0x2b9);
+  iVar5 = thunk_FUN_0201a228(0x4c,s_ALControllerImp_h_0216bbe0,s_Create_0216ce54,0x2b9);
   piVar6 = (int *)0x0;
   if (iVar5 != 0) {
     dStack_180 = 0x494c;
@@ -181,7 +182,7 @@ int jus_Scene07_CreateImpl
     (**(code **)(*piVar6 + 0x14))();
   }
   FUN_02020f38(piVar4[6],piVar6[6]);
-  iVar5 = jus_AllocDebug(0xcc,0x216bd74,0x216ce3c,0x1de);
+  iVar5 = thunk_FUN_0201a228(0xcc,0x216bd74,0x216ce3c,0x1de);
   piVar6 = (int *)0x0;
   if (iVar5 != 0) {
     piVar6 = (int *)func_0x021af26c(iVar5,0x21630a9,0x21630ed,0);
@@ -225,7 +226,7 @@ int jus_Scene07_CreateImpl
   *(undefined4 *)(*(int *)(piVar4[0x21] + 4) + 0xdc) = 0;
   func_0x021b3fb0(*(undefined4 *)(piVar4[0x21] + 4),uRam0216cef0);
   *(undefined1 *)(*(int *)(piVar4[0x21] + 4) + 0xab) = 0;
-  func_0x021b6760(*(undefined4 *)(piVar4[0x21] + 4),4,uRam0216cf10);
+  func_0x021b6760(*(undefined4 *)(piVar4[0x21] + 4),4,0x21639f5);
   *(undefined1 *)(*(int *)(piVar4[0x21] + 4) + 0xb1) = 1;
   iVar5 = FUN_0203b404();
   iVar5 = ALWidgetImp::Create(piVar4,0x216cf18,piVar4[0x20],*(undefined4 *)(iVar5 + 0x88));
@@ -538,7 +539,7 @@ int jus_Scene07_CreateImpl
     if (!bVar17 || bVar20) {
       puVar14 = (uint *)(iVar7 + uVar9 * -0x10000);
     }
-    iVar8 = FUN_02086798((undefined1 *)((int)pdVar15 + 0xf8));
+    iVar8 = CommWrapDisconnect::CommWrapDisconnect_Create((undefined1 *)((int)pdVar15 + 0xf8));
     piVar6[0x37] = iVar8;
     *(int *)(piVar6[0x36] + 0x54) = piVar6[0x37];
     piVar4 = piVar6;

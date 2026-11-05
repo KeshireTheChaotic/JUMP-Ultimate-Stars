@@ -34,8 +34,8 @@ int FUN_021502e8(undefined4 param_1,undefined4 param_2,undefined4 param_3,code *
     return -9;
   }
   iVar3 = 7;
-  FUN_02053528(&DAT_0216d288,&LAB_0215205c_1,0,DAT_0216d180 + (DAT_0216afd4 & 0xfffffff8),
-               DAT_0216afd4,param_1);
+  FUN_02053528(&DAT_0216d288,0x215205d,0,DAT_0216d180 + (DAT_0216afd4 & 0xfffffff8),DAT_0216afd4,
+               param_1);
   DAT_0216d188 = 1;
   iVar2 = FUN_021504d4();
   DAT_0216afd8 = iVar2 + 60000;

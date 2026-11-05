@@ -1,0 +1,10 @@
+02182b8c  ldr r1,[r1,#0x8]
+02182b8e  cmp r1,#0x0
+02182b90  beq 0x02182b9c
+02182b92  ldr r0,[r1,#0x0]
+02182b94  cmp r0,r2
+02182b96  ble 0x02182b9c
+02182b98  sub r0,r0,#0x1
+02182b9a  str r0,[r1,#0x0]
+02182b9c  mov r0,#0x1
+02182b9e  bx lr

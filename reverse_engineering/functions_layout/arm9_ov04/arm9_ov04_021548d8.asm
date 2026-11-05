@@ -1,0 +1,123 @@
+021548d8  stmdb sp!,{r3,r4,r5,r6,r7,lr}
+021548dc  sub sp,sp,#0x8
+021548e0  ldr r0,[r0,#0x4]
+021548e4  ldr r4,[r0,#0x10]
+021548e8  ldrb r0,[r4,#0x41]
+021548ec  cmp r0,#0x0
+021548f0  beq 0x02154abc
+021548f4  mov r6,#0x0
+021548f8  b 0x02154ab0
+021548fc  add r0,r4,r6, lsl #0x2
+02154900  ldr r0,[r0,#0x44]
+02154904  cmp r0,#0x0
+02154908  bge 0x02154aac
+0215490c  ldrb r0,[r4,#0x42]
+02154910  cmp r0,#0x0
+02154914  mov r0,r6
+02154918  beq 0x02154930
+0215491c  bl 0x020875b0
+02154920  mov r7,r0
+02154924  mov r0,r6
+02154928  bl 0x020875d8
+0215492c  b 0x02154940
+02154930  bl 0x02028920
+02154934  mov r7,r0
+02154938  mov r0,r6
+0215493c  bl 0x020208ec
+02154940  ldr r2,[r7,#0x0]
+02154944  mov r5,r0
+02154948  ldr r0,[r2,#0x74]
+0215494c  ldr r1,[r2,#0x70]
+02154950  add r0,r2,r0, lsl #0x2
+02154954  add r1,r2,r1, lsl #0x2
+02154958  ldr r0,[r0,#0x18]
+0215495c  ldr r1,[r1,#0x18]
+02154960  mvn r0,r0
+02154964  and r0,r1,r0
+02154968  tst r0,#0x40
+0215496c  movne r0,#0x0
+02154970  bne 0x02154a20
+02154974  tst r0,#0x80
+02154978  movne r0,#0x1
+0215497c  bne 0x02154a20
+02154980  tst r0,#0x10
+02154984  movne r0,#0x2
+02154988  bne 0x02154a20
+0215498c  tst r0,#0x20
+02154990  movne r0,#0x3
+02154994  bne 0x02154a20
+02154998  ldr r0,[r5,#0x4]
+0215499c  ldr r1,[r0,#0x0]
+021549a0  ldr r1,[r1,#0x130]
+021549a4  blx r1
+021549a8  cmp r0,#0x0
+021549ac  beq 0x02154a1c
+021549b0  ldr r1,[r5,#0x4]
+021549b4  mov r0,#0x0
+021549b8  ldr r1,[r1,#0x50]
+021549bc  ldr r3,[r1,#0x10]
+021549c0  ldr r5,[r1,#0xc]
+021549c4  mov r2,r3, asr #0xb
+021549c8  mov r1,r5, asr #0xb
+021549cc  add r1,r5,r1, lsr #0x14
+021549d0  add r2,r3,r2, lsr #0x14
+021549d4  mov r12,r1, asr #0xc
+021549d8  mov r5,r2, asr #0xc
+021549dc  mov r1,#0x2f
+021549e0  b 0x02154a14
+021549e4  mul r2,r0,r1
+021549e8  cmp r12,#0x5
+021549ec  add r3,r2,#0x5
+021549f0  add r2,r2,#0x2a
+021549f4  blt 0x02154a10
+021549f8  cmp r12,#0xfa
+021549fc  bgt 0x02154a10
+02154a00  cmp r5,r3
+02154a04  blt 0x02154a10
+02154a08  cmp r5,r2
+02154a0c  ble 0x02154a20
+02154a10  add r0,r0,#0x1
+02154a14  cmp r0,#0x4
+02154a18  blt 0x021549e4
+02154a1c  mvn r0,#0x0
+02154a20  add r1,r4,r6, lsl #0x2
+02154a24  str r0,[r1,#0x44]
+02154a28  cmp r0,#0x0
+02154a2c  blt 0x02154aac
+02154a30  bl 0x0214f704
+02154a34  cmp r6,r0
+02154a38  bne 0x02154aac
+02154a3c  mov r0,#0x78
+02154a40  mov r1,#0xb
+02154a44  bl 0x0207342c
+02154a48  add r2,r4,r6, lsl #0x2
+02154a4c  mov r0,r4
+02154a50  mov r1,#0x0
+02154a54  ldr r5,[r2,#0x44]
+02154a58  bl 0x02154750
+02154a5c  ldr r0,[r4,#0x2c]
+02154a60  mov r1,#0x0
+02154a64  bl 0x021545f8
+02154a68  mov r0,#0x2f
+02154a6c  mul r0,r5,r0
+02154a70  add r0,r0,#0x19
+02154a74  mov r1,r0, lsl #0xc
+02154a78  mov r0,#0x80000
+02154a7c  str r1,[sp,#0x4]
+02154a80  str r0,[sp,#0x0]
+02154a84  ldr r0,[r4,#0x28]
+02154a88  add r1,sp,#0x0
+02154a8c  add r2,sp,#0x4
+02154a90  bl 0x0214e1b8
+02154a94  ldr r0,[r4,#0x28]
+02154a98  mov r1,#0x1
+02154a9c  ldr r0,[r0,#0x4]
+02154aa0  ldr r2,[r0,#0x0]
+02154aa4  ldr r2,[r2,#0xd8]
+02154aa8  blx r2
+02154aac  add r6,r6,#0x1
+02154ab0  bl 0x0214f72c
+02154ab4  cmp r6,r0
+02154ab8  blt 0x021548fc
+02154abc  add sp,sp,#0x8
+02154ac0  ldmia sp!,{r3,r4,r5,r6,r7,pc}

@@ -22,7 +22,7 @@ BattleMapItem::BattleMapGripInit
   iVar1 = FUN_02020dac();
   *(undefined4 *)(*(int *)(iVar3 + 4) + 0x54) = 0x31305053;
   (**(code **)(**(int **)(iVar1 + 4) + 0xb4))(*(int **)(iVar1 + 4),*(undefined4 *)(iVar3 + 4));
-  iVar2 = jus_AllocDebug(0x84,s_BattleMapItem_cpp_021725ec,s_BattleMapGripInit_021725d8,0xa65);
+  iVar2 = thunk_FUN_0201a228(0x84,s_BattleMapItem_cpp_021725ec,s_BattleMapGripInit_021725d8,0xa65);
   if (iVar2 != 0) {
     CommonEffect_0209e114::CommonEffect_0209e114(iVar2,FUN_02024a30);
   }

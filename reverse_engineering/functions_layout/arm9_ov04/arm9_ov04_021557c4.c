@@ -13,8 +13,8 @@ int * JQuizMainBlackBelt::JQuizMainBlackBeltClass_Create(undefined4 param_1)
   undefined4 local_14;
   undefined4 local_10;
   
-  piVar1 = (int *)jus_AllocDebug(0x10,s_JQuizMainBlackBelt_cpp_02161004,
-                                 s_JQuizMainBlackBeltClass_Create_02160fe4,0x32);
+  piVar1 = (int *)thunk_FUN_0201a228(0x10,s_JQuizMainBlackBelt_cpp_02161004,
+                                     s_JQuizMainBlackBeltClass_Create_02160fe4,0x32);
   FUN_020517fc(piVar1,0,0x10);
   iVar2 = ALWidgetBaseImp::Create(piVar1,param_1);
   (**(code **)(**(int **)(iVar2 + 4) + 0xd8))(*(int **)(iVar2 + 4),1);
@@ -29,7 +29,7 @@ int * JQuizMainBlackBelt::JQuizMainBlackBeltClass_Create(undefined4 param_1)
   *piVar1 = iVar2;
   local_18 = 0x80000;
   (**(code **)(**(int **)(iVar2 + 4) + 0xa0))(*(int **)(iVar2 + 4),&local_18);
-  FUN_02028384(*(undefined4 *)(*piVar1 + 4),&DAT_02155a88);
+  FUN_02028384(*(undefined4 *)(*piVar1 + 4),FUN_02155a88);
   (**(code **)(**(int **)(*piVar1 + 4) + 0x24))(*(int **)(*piVar1 + 4),piVar1);
   return piVar1;
 }

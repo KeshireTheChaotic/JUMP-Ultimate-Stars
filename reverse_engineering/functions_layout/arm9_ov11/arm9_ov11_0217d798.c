@@ -15,15 +15,15 @@ void BattleAI_JobAtkCmd::BattleAIObj_CreateCommandNode
   
   uStack_14 = param_4;
   puVar1 = (undefined4 *)
-           jus_AllocDebug(0x10,s_BattleAI_JobAtkCmd_cpp_02181a18,
-                          s_BattleAIObj_CreateCommandNode_021819f8,0x7a);
+           thunk_FUN_0201a228(0x10,s_BattleAI_JobAtkCmd_cpp_02181a18,
+                              s_BattleAIObj_CreateCommandNode_021819f8,0x7a);
   FUN_020517fc(puVar1,0,0x10);
   *puVar1 = **(undefined4 **)(param_1 + 0x14);
   puVar1[1] = *(undefined4 *)(param_1 + 0x18);
   puVar1[2] = 0;
   iVar2 = FUN_02020d90();
   (**(code **)(**(int **)(iVar2 + 4) + 0x94))(*(int **)(iVar2 + 4),0x80000);
-  FUN_02028384(*(undefined4 *)(iVar2 + 4),&LAB_0217d92c);
+  FUN_02028384(*(undefined4 *)(iVar2 + 4),FUN_0217d92c);
   local_18 = 0x95000;
   (**(code **)(**(int **)(iVar2 + 4) + 0xa0))(*(int **)(iVar2 + 4),&local_18);
   (**(code **)(**(int **)(iVar2 + 4) + 0x24))(*(int **)(iVar2 + 4),puVar1);

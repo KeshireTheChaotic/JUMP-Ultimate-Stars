@@ -18,7 +18,7 @@ void ALWidgetImp::Create(int *param_1,int param_2,undefined4 param_3,undefined4 
   uVar3 = _DAT_021d5154;
   uVar5 = *(undefined4 *)(param_2 + 4);
   uStack_1c = param_4;
-  iVar1 = jus_AllocDebug(0x134,s_ALWidgetImp_h_021608d4,s_Create_021613ec,0x3e);
+  iVar1 = thunk_FUN_0201a228(0x134,s_ALWidgetImp_h_021608d4,s_Create_021613ec,0x3e);
   piVar2 = (int *)0x0;
   if (iVar1 != 0) {
     piVar2 = (int *)func_0x021af0f8(iVar1,uVar5,uVar3,ALWidgetBaseImp::CreateDrawFunc);

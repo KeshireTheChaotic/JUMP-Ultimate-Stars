@@ -26,14 +26,14 @@ void FUN_0201eb60(int *param_1)
       *(byte *)(iVar2 + 0x32) = *(byte *)(iVar2 + 0x32) & 0xfe | 1;
     }
   }
-  iVar6 = jus_AllocDebug((uint)*(byte *)(iVar1 + 6) << 2);
+  iVar6 = FUN_0201a228((uint)*(byte *)(iVar1 + 6) << 2);
   param_1[0x17] = iVar6;
   if (*(ushort *)(param_1 + 0x1c) != (ushort)*(byte *)(iVar1 + 8)) {
     iVar6 = param_1[0x18];
     if ((iVar6 != 0) && (iVar2 = FUN_0201a9ec(iVar6), iVar2 == 0)) {
       FUN_0201a958(iVar6,1);
     }
-    iVar6 = jus_AllocDebug((uint)*(byte *)(iVar1 + 8) << 3);
+    iVar6 = FUN_0201a228((uint)*(byte *)(iVar1 + 8) << 3);
     param_1[0x18] = iVar6;
     param_1[0x19] = iVar6 + (uint)*(byte *)(iVar1 + 8) * 4;
     *(ushort *)(param_1 + 0x1c) = (ushort)*(byte *)(iVar1 + 8);
@@ -106,7 +106,7 @@ LAB_0201ed04:
         *(int **)(param_1[0x17] + iVar6 * 4) = param_1;
       }
       else {
-        iVar3 = jus_AllocDebug(0x58);
+        iVar3 = FUN_0201a228(0x58);
         uVar4 = 0;
         if (iVar3 != 0) {
           uVar4 = jus_TagCAMT::jus_TagCAMT(iVar3,iVar2,param_1);

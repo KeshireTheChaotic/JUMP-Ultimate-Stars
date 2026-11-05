@@ -1,0 +1,17 @@
+0215b454  push {r3,lr}
+0215b456  ldr r0,[r0,#0x4]
+0215b458  mov r1,#0x1
+0215b45a  ldr r2,[r0,#0x10]
+0215b45c  add r0,r2,#0x0
+0215b45e  add r0,#0x70
+0215b460  strb r1,[r0,#0x0]
+0215b462  ldr r0,[r2,#0x3c]
+0215b464  mov r2,#0x53
+0215b466  ldr r0,[r0,#0x4]
+0215b468  lsl r2,r2,#0x2
+0215b46a  ldr r3,[r0,#0x0]
+0215b46c  mov r1,#0x8
+0215b46e  ldr r3,[r3,r2]
+0215b470  blx r3
+0215b472  bl 0x021b65cc
+0215b476  pop {r3,pc}

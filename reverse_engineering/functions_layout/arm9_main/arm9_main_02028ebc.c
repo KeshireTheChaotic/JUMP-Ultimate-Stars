@@ -1,8 +1,8 @@
 
-/* JUS-CLASS BattleAI::vfunc_05 [class-virtual] slot 5 of vtable 02094864 (own slot, not inherited)
-    */
+/* JUS-CLASS jus_Class_02094864::vfunc_05 [class-virtual] slot 5 of vtable 02094864 (own slot, not
+   inherited) */
 
-void BattleAI::vfunc_05(int param_1)
+void jus_Class_02094864::vfunc_05(int param_1)
 
 {
   if (*(int *)(param_1 + 8) == 0) {

@@ -18,7 +18,7 @@ undefined4 FUN_021bb624(int param_1,undefined4 param_2,undefined4 param_3,undefi
       FUN_020517fc(iVar2 + iVar5,0,0x2a);
       thunk_FUN_0207400c(iVar2 + iVar5,(&PTR_DAT_021d3e80)[iVar4]);
       FUN_02074374(iVar2 + iVar5,*(undefined4 *)(param_1 + iVar4 * 4 + 0x80),3,0,param_4);
-      thunk_FUN_020741c4(iVar2 + iVar5,&DAT_021d3fa8);
+      thunk_FUN_020741c4(iVar2 + iVar5,FUN_021d3fa8);
       cVar1 = FUN_02074294(iVar2 + iVar5);
       iVar3 = iVar3 + 1;
       if (*(char *)(param_1 + 0x9f) < cVar1) {

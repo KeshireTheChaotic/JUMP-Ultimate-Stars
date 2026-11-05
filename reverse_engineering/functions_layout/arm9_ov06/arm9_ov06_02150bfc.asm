@@ -1,0 +1,14 @@
+02150bfc  add r1,r0,#0x0
+02150bfe  mov r2,#0x2
+02150c00  add r1,#0xac
+02150c02  str r2,[r1,#0x0]
+02150c04  mov r1,#0x0
+02150c06  add r0,#0xcc
+02150c08  strb r1,[r0,#0x0]
+02150c0a  ldr r0,[0x02150c18]
+02150c0c  ldr r1,[r0,#0x1c]
+02150c0e  cmp r1,#0x0
+02150c10  bne 0x02150c16
+02150c12  ldr r1,[0x02150c1c]
+02150c14  str r1,[r0,#0x1c]
+02150c16  bx lr

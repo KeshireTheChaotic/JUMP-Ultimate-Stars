@@ -1,0 +1,1 @@
+{"module":"arm9_main","address":"0206c650","name":"FUN_0206c650","thumb":false,"body_bytes":156,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["0206c6f0","0206c718"],"unresolved_call_targets":[],"status":"decompiled","asm_file":"arm9_main_0206c650.asm","c_file":"arm9_main_0206c650.c"}

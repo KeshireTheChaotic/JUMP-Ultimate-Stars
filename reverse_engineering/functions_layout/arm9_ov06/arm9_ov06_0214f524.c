@@ -15,8 +15,8 @@ int * BattlePauseWiFi::Battle_PauseWiFiCreate(void)
     piVar2 = (int *)0x0;
   }
   else {
-    piVar2 = (int *)jus_AllocDebug(0xc,s_BattlePauseWiFi_cpp_02171b64,
-                                   s_Battle_PauseWiFiCreate_02171b4c,0x30);
+    piVar2 = (int *)thunk_FUN_0201a228(0xc,s_BattlePauseWiFi_cpp_02171b64,
+                                       s_Battle_PauseWiFiCreate_02171b4c,0x30);
     FUN_020517fc(piVar2,0,0xc);
     iVar1 = FUN_02026f94();
     *piVar2 = iVar1;

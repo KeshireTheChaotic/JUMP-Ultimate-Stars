@@ -1,0 +1,17 @@
+021509f0  mov r3,#0x1
+021509f2  mov r2,#0x0
+021509f4  b 0x021509fe
+021509f6  lsl r1,r3,#0x2
+021509f8  add r1,r0,r1
+021509fa  str r2,[r1,#0x4c]
+021509fc  add r3,r3,#0x1
+021509fe  ldr r1,[r0,#0x14]
+02150a00  cmp r3,r1
+02150a02  blt 0x021509f6
+02150a04  ldr r0,[0x02150a14]
+02150a06  ldr r1,[r0,#0x1c]
+02150a08  cmp r1,#0x0
+02150a0a  bne 0x02150a10
+02150a0c  ldr r1,[0x02150a18]
+02150a0e  str r1,[r0,#0x1c]
+02150a10  bx lr

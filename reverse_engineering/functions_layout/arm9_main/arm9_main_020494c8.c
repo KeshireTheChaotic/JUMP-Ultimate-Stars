@@ -7,7 +7,7 @@ void TextureInstance::vfunc_12(undefined4 param_1,undefined4 param_2,undefined4 
 {
   int iVar1;
   
-  iVar1 = jus_AllocDebug(0x14);
+  iVar1 = FUN_0201a228(0x14);
   if (iVar1 == 0) {
     return;
   }

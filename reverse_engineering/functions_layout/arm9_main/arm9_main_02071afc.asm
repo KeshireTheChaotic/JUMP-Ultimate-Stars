@@ -1,0 +1,15 @@
+02071afc  push {r3,lr}
+02071afe  ldr r3,[0x02071b1c]
+02071b00  ldr r2,[r3,#0x0]
+02071b02  cmp r2,r0
+02071b04  beq 0x02071b1a
+02071b06  str r0,[r3,#0x0]
+02071b08  cmp r1,#0x0
+02071b0a  beq 0x02071b12
+02071b0c  ldr r0,[0x02071b20]
+02071b0e  mov r1,#0x1
+02071b10  strb r1,[r0,#0x0]
+02071b12  ldr r0,[0x02071b24]
+02071b14  mov r1,#0x4
+02071b16  bl 0x02073114
+02071b1a  pop {r3,pc}

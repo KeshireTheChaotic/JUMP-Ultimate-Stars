@@ -14,7 +14,7 @@ undefined4 FUN_0215dcac(int param_1)
      iVar1 == 0 && (uVar2 & 0x12) != 0x12)) {
     return 0;
   }
-  FUN_02157494(param_1,0xe,FUN_0215dd48,&LAB_0215ddd4,0);
+  FUN_02157494(param_1,0xe,FUN_0215dd48,FUN_0215ddd4,0);
   return 1;
 }
 

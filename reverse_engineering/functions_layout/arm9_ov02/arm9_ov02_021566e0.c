@@ -25,8 +25,8 @@ int * JGalaxyBackground::JGalaxyBack_Create(int param_1,undefined1 param_2)
   undefined1 auStack_9c [12];
   undefined1 auStack_90 [128];
   
-  piVar1 = (int *)jus_AllocDebug(0x28,s_JGalaxyBackground_cpp_0215c598,s_JGalaxyBack_Create_0215c548
-                                 ,0x5b);
+  piVar1 = (int *)thunk_FUN_0201a228(0x28,s_JGalaxyBackground_cpp_0215c598,
+                                     s_JGalaxyBack_Create_0215c548,0x5b);
   if (piVar1 != (int *)0x0) {
     piVar1[6] = 0;
     piVar1[7] = 0;
@@ -35,9 +35,9 @@ int * JGalaxyBackground::JGalaxyBack_Create(int param_1,undefined1 param_2)
   FUN_020517fc(piVar1,0,0x28);
   piVar1[1] = param_1;
   *(undefined1 *)(piVar1 + 9) = param_2;
-  iVar2 = jus_AllocDebug(0x78,s_ALNodeImp_h_0215bfa4,s_Create_0215c4b0,0x4c3);
+  iVar2 = thunk_FUN_0201a228(0x78,FUN_0215bfa4,s_Create_0215c4b0,0x4c3);
   if (iVar2 != 0) {
-    jus_Class_0209c0b4::jus_Class_0209c0b4(iVar2,FUN_02024a30,1);
+    jus_TagNDGR_0209c0b4::jus_TagNDGR_0209c0b4(iVar2,FUN_02024a30,1);
   }
   iVar2 = FUN_0214d498();
   FUN_0214d678(iVar2,param_1);

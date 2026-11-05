@@ -1,0 +1,1 @@
+{"module":"arm9_ov12","address":"021cc49c","name":"FUN_021cc49c","thumb":true,"body_bytes":156,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["0200d338","02028384","0205bce8","0205bd40","0205be28","0205c018","0205c078"],"unresolved_call_targets":[],"status":"decompiled","asm_file":"arm9_ov12_021cc49c.asm","c_file":"arm9_ov12_021cc49c.c"}

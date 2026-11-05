@@ -36,8 +36,7 @@ undefined4 JQuizStartSinglePlay::JQuizStartCore_Add(undefined4 param_1)
   int local_1c [3];
   
   puVar1 = (undefined4 *)
-           jus_AllocDebug(0xd8,s_JQuizStartSinglePlay_cpp_02160d44,s_JQuizStartCore_Add_02160d30,99)
-  ;
+           thunk_FUN_0201a228(0xd8,s_JQuizStartSinglePlay_cpp_02160d44,FUN_02160d30,99);
   FUN_0214fadc(puVar1,0xd8);
   FUN_0214fc90();
   FUN_02051890(param_1,puVar1 + 0x31,0x14);
@@ -75,7 +74,7 @@ undefined4 JQuizStartSinglePlay::JQuizStartCore_Add(undefined4 param_1)
   FUN_02151ebc(&local_58,iVar2,s_Position_02160d8c);
   local_68 = local_58;
   local_64 = local_54;
-  FUN_02151ebc(&local_50,iVar2,&DAT_02160d98);
+  FUN_02151ebc(&local_50,iVar2,FUN_02160d98);
   local_60 = local_50;
   local_5c = local_4c;
   (**(code **)(**(int **)(iVar2 + 4) + 0xd8))(*(int **)(iVar2 + 4),0);
@@ -107,7 +106,7 @@ undefined4 JQuizStartSinglePlay::JQuizStartCore_Add(undefined4 param_1)
   FUN_02151ebc(&local_38,iVar2,s_Position_02160d8c);
   local_68 = local_38;
   local_64 = local_34;
-  FUN_02151ebc(&local_30,iVar2,&DAT_02160d98);
+  FUN_02151ebc(&local_30,iVar2,FUN_02160d98);
   local_60 = local_30;
   local_5c = local_2c;
   (**(code **)(**(int **)(iVar2 + 4) + 0xd8))(*(int **)(iVar2 + 4),0);
@@ -130,7 +129,7 @@ undefined4 JQuizStartSinglePlay::JQuizStartCore_Add(undefined4 param_1)
   func_0x021b4034(*(undefined4 *)(iVar2 + 4),1);
   (**(code **)(**(int **)(iVar2 + 4) + 0xd8))(*(int **)(iVar2 + 4),0);
   puVar1[0x1d] = iVar2;
-  func_0x021b6760(*(undefined4 *)(iVar2 + 4),0x10,&DAT_02152e68);
+  func_0x021b6760(*(undefined4 *)(iVar2 + 4),0x10,FUN_02152e68);
   uVar3 = func_0x021bcf1c(0x14,2,0,0xffffffff);
   puVar1[0x2c] = uVar3;
   func_0x021bd730(uVar3,puVar1[0x34],0);

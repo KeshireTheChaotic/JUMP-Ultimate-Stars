@@ -12,7 +12,7 @@ void FUN_0208b8ec(int param_1,undefined4 param_2)
   *(undefined1 *)(DAT_0214ccec + 0x3c) = 0;
   *(int *)(DAT_0214ccec + 0x24) = param_1;
   if (param_1 != 0) {
-    FUN_0202788c(*(undefined4 *)(param_1 + 4),1,&LAB_0208b8d4_1);
+    FUN_0202788c(*(undefined4 *)(param_1 + 4),1,0x208b8d5);
   }
   FUN_0205542c(auStack_58);
   *(char *)(DAT_0214ccec + 0x14) = (char)local_40;

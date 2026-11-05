@@ -24,7 +24,7 @@ void FUN_021591e8(int param_1)
     func_0x021b65e0(*(undefined4 *)(*(int *)(iVar1 + 0x4c) + 4));
     func_0x021b65e0(*(undefined4 *)(*(int *)(iVar1 + 0x88) + 4));
     FUN_0215ee44(iVar1 + 0x4b8);
-    FUN_02028384(*(undefined4 *)(param_1 + 4),&LAB_021592d4);
+    FUN_02028384(*(undefined4 *)(param_1 + 4),FUN_021592d4);
   }
   return;
 }

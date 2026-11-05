@@ -1,0 +1,17 @@
+0207d020  ldr r2,[r0,#0x3c]
+0207d024  mvn r3,r1
+0207d028  and r1,r2,r3
+0207d02c  str r1,[r0,#0x3c]
+0207d030  ldr r2,[r0,#0x8]
+0207d034  b 0x0207d058
+0207d038  ldr r0,[r2,#0x1c]
+0207d03c  and r0,r0,r3
+0207d040  str r0,[r2,#0x1c]
+0207d044  ldr r1,[r2,#0x8]
+0207d048  ldr r0,[r1,#0x14]
+0207d04c  and r0,r0,r3
+0207d050  str r0,[r1,#0x14]
+0207d054  ldr r2,[r2,#0x0]
+0207d058  cmp r2,#0x0
+0207d05c  bne 0x0207d038
+0207d060  bx lr

@@ -48,7 +48,7 @@ jus_Class_02093f78::jus_Class_02093f78(undefined4 *param_1,undefined4 param_2,un
     if (iVar7 == 0) {
       FUN_0201a958(uVar3,1);
     }
-    uVar3 = jus_AllocDebug(0x2c);
+    uVar3 = FUN_0201a228(0x2c);
     param_1[2] = uVar3;
     param_1[3] = 0x2c;
   }

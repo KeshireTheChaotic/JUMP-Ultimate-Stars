@@ -17,8 +17,8 @@ int * CommonPaletteAnime::CommonPaletteAnime_Load
   int iVar8;
   
                     /* JUS-TAG strings=["CommonPaletteAnime.cpp","CommonPaletteAnime_Load"] */
-  piVar2 = (int *)jus_AllocDebug(8,s_CommonPaletteAnime_cpp_0209de9c,
-                                 s_CommonPaletteAnime_Load_0209de18,0xee,param_4);
+  piVar2 = (int *)thunk_FUN_0201a228(8,s_CommonPaletteAnime_cpp_0209de9c,
+                                     s_CommonPaletteAnime_Load_0209de18,0xee,param_4);
   FUN_020517fc(piVar2,0,8);
   piVar3 = (int *)FUN_02033410(param_2,0,0);
   if (piVar3[7] == 0) {
@@ -28,8 +28,8 @@ int * CommonPaletteAnime::CommonPaletteAnime_Load
   piVar3 = (int *)(**(code **)(**(int **)(iVar8 + 4) + 0x2c))(*(int **)(iVar8 + 4),0);
   iVar4 = *piVar3;
   piVar2[1] = iVar4;
-  iVar4 = jus_AllocDebug(iVar4 << 2,s_CommonPaletteAnime_cpp_0209de9c,
-                         s_CommonPaletteAnime_Load_0209de18,0xf7);
+  iVar4 = thunk_FUN_0201a228(iVar4 << 2,s_CommonPaletteAnime_cpp_0209de9c,
+                             s_CommonPaletteAnime_Load_0209de18,0xf7);
   *piVar2 = iVar4;
   pcVar5 = (char *)(**(code **)(**(int **)(iVar8 + 4) + 0x2c))(*(int **)(iVar8 + 4),4);
   for (iVar4 = 0; iVar4 < piVar2[1]; iVar4 = iVar4 + 1) {

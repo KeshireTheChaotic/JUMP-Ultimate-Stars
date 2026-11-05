@@ -20,12 +20,13 @@ void JQuizCommonWork::JQuizCommonWork_Quiz_Shuffle_Core(void)
   
   iVar5 = (int)(short)*(undefined4 *)(DAT_02161de8 + 0x44);
   iVar6 = iVar5 << 1;
-  iVar1 = jus_AllocDebug(iVar6,s_JQuizCommonWork_cpp_02160a98,
-                         s_JQuizCommonWork_Quiz_Shuffle_Cor_02160a74,0xd7);
-  uVar2 = jus_AllocDebug(iVar6,s_JQuizCommonWork_cpp_02160a98,
-                         s_JQuizCommonWork_Quiz_Shuffle_Cor_02160a74,0xd8);
-  uVar3 = jus_AllocDebug((int)*(short *)(DAT_02161de8 + 0x10) << 1,s_JQuizCommonWork_cpp_02160a98,
-                         s_JQuizCommonWork_Quiz_Shuffle_Cor_02160a74,0xd9);
+  iVar1 = thunk_FUN_0201a228(iVar6,s_JQuizCommonWork_cpp_02160a98,
+                             s_JQuizCommonWork_Quiz_Shuffle_Cor_02160a74,0xd7);
+  uVar2 = thunk_FUN_0201a228(iVar6,s_JQuizCommonWork_cpp_02160a98,
+                             s_JQuizCommonWork_Quiz_Shuffle_Cor_02160a74,0xd8);
+  uVar3 = thunk_FUN_0201a228((int)*(short *)(DAT_02161de8 + 0x10) << 1,
+                             s_JQuizCommonWork_cpp_02160a98,
+                             s_JQuizCommonWork_Quiz_Shuffle_Cor_02160a74,0xd9);
   iVar6 = 0;
   iVar7 = *(int *)(DAT_02161de8 + 0x40);
   for (iVar8 = 0; iVar8 < iVar5; iVar8 = (iVar8 + 1) * 0x10000 >> 0x10) {

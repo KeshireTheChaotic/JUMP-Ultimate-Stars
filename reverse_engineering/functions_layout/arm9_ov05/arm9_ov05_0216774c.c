@@ -28,15 +28,15 @@ int * DatabaseMenu::Database_MenuCreate(int param_1)
   undefined4 local_2c;
   undefined4 local_28;
   
-  piVar1 = (int *)jus_AllocDebug(0x5c,s_DatabaseMenu_cpp_02171710,s_Database_MenuCreate_021716e4,
-                                 0x43);
+  piVar1 = (int *)thunk_FUN_0201a228(0x5c,s_DatabaseMenu_cpp_02171710,s_Database_MenuCreate_021716e4
+                                     ,0x43);
   FUN_020517fc(piVar1,0);
   func_0x021b65bc();
   piVar1[0x12] = param_1;
   *(bool *)(piVar1 + 0x16) = (DAT_020b0b90 & 0x100) != 0;
   *(bool *)((int)piVar1 + 0x59) = (DAT_020b0b90 & 0x400) != 0;
   *(bool *)((int)piVar1 + 0x5a) = (DAT_020b0b90 & 0x800) != 0;
-  FUN_0216812c(piVar1,&LAB_0216815c,0);
+  FUN_0216812c(piVar1,FUN_0216815c,0);
   iVar2 = FUN_02026f94();
   piVar1[3] = iVar2;
   local_28 = 0x80000;
@@ -69,7 +69,7 @@ int * DatabaseMenu::Database_MenuCreate(int param_1)
     piVar1[iVar2 + 4] = iVar5;
     iVar2 = iVar8;
   } while (iVar8 < 2);
-  iVar2 = jus_AllocDebug(0xcc,s_ALWidget_inl_0216f484,s_Create_021715dc,0x1de);
+  iVar2 = thunk_FUN_0201a228(0xcc,s_ALWidget_inl_0216f484,s_Create_021715dc,0x1de);
   piVar4 = (int *)0x0;
   if (iVar2 != 0) {
     piVar4 = (int *)func_0x021af26c(iVar2,FUN_02168318,FUN_021683b0,0);
@@ -187,7 +187,7 @@ int * DatabaseMenu::Database_MenuCreate(int param_1)
   piVar4 = *(int **)(*(int *)(iVar2 + 4) + 0x68);
   (**(code **)(*piVar4 + 0xac))(piVar4,0);
   FUN_02023c70(*(undefined4 *)(iVar2 + 4),0x820001);
-  func_0x021b6760(*(undefined4 *)(iVar2 + 4),0x10,&DAT_02168424);
+  func_0x021b6760(*(undefined4 *)(iVar2 + 4),0x10,FUN_02168424);
   func_0x021b4034(*(undefined4 *)(iVar2 + 4),0x820001);
   func_0x021b3f78(*(undefined4 *)(iVar2 + 4),0x820000);
   func_0x021b65d8(*(undefined4 *)(iVar2 + 4));

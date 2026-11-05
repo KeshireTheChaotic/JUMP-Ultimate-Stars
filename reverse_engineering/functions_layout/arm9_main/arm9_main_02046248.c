@@ -19,7 +19,7 @@ undefined4 * jus_Class_020944cc::vfunc_20(void)
       if (iVar2 == 0) {
         iVar2 = (**(code **)(*piVar1 + 0x7c))();
         if (iVar2 == 0) {
-          iVar2 = jus_AllocDebug(0x58);
+          iVar2 = FUN_0201a228(0x58);
           puVar3 = (undefined4 *)0x0;
           if (iVar2 != 0) {
             puVar3 = (undefined4 *)jus_Class_02096150::jus_Class_02096150(iVar2,piVar1,0);
@@ -30,7 +30,7 @@ undefined4 * jus_Class_020944cc::vfunc_20(void)
         }
       }
       else {
-        iVar2 = jus_AllocDebug(0x58);
+        iVar2 = FUN_0201a228(0x58);
         puVar3 = (undefined4 *)0x0;
         if (iVar2 != 0) {
           puVar3 = (undefined4 *)jus_Class_020961c4::jus_Class_020961c4(iVar2,piVar1,0);
@@ -40,7 +40,7 @@ undefined4 * jus_Class_020944cc::vfunc_20(void)
     else {
       iVar2 = (**(code **)(*piVar1 + 0x7c))();
       if (iVar2 == 0) {
-        puVar3 = (undefined4 *)jus_AllocDebug(0x70);
+        puVar3 = (undefined4 *)FUN_0201a228(0x70);
         if (puVar3 != (undefined4 *)0x0) {
           TextureImpInstance_Derived_020965e0::TextureImpInstance_Derived_020965e0
                     (puVar3,piVar1,piVar1[0x231],0,in_r3);
@@ -48,7 +48,7 @@ undefined4 * jus_Class_020944cc::vfunc_20(void)
         }
       }
       else {
-        puVar3 = (undefined4 *)jus_AllocDebug(0x70);
+        puVar3 = (undefined4 *)FUN_0201a228(0x70);
         if (puVar3 != (undefined4 *)0x0) {
           TextureImpInstance_Derived_020965e0::TextureImpInstance_Derived_020965e0
                     (puVar3,piVar1,piVar1[0x231],0,in_r3);
@@ -58,7 +58,7 @@ undefined4 * jus_Class_020944cc::vfunc_20(void)
     }
   }
   else {
-    iVar2 = jus_AllocDebug(0x80);
+    iVar2 = FUN_0201a228(0x80);
     puVar3 = (undefined4 *)0x0;
     if (iVar2 != 0) {
       puVar3 = (undefined4 *)jus_Class_02097098::jus_Class_02097098(iVar2,piVar1,0);

@@ -25,7 +25,8 @@ BattleAI_Move::BattleAIMove_Create
   
   uStack_28 = param_4;
   puVar1 = (undefined4 *)
-           jus_AllocDebug(400,s_BattleAI_Move_cpp_0218189c,s_BattleAIMove_Create_02181888,0x221);
+           thunk_FUN_0201a228(400,s_BattleAI_Move_cpp_0218189c,s_BattleAIMove_Create_02181888,0x221)
+  ;
   if (puVar1 != (undefined4 *)0x0) {
     *puVar1 = 0;
     puVar1[1] = 0;

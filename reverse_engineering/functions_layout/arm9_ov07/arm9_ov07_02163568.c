@@ -6,7 +6,7 @@ void FUN_02163568(void)
   undefined1 local_18;
   undefined1 local_17;
   undefined4 local_14;
-  undefined1 *local_10;
+  code *local_10;
   code *local_c;
   undefined4 uStack_8;
   
@@ -15,7 +15,7 @@ void FUN_02163568(void)
   local_18 = 0;
   local_17 = 0;
   local_14 = 1;
-  local_10 = &LAB_021635bc;
+  local_10 = FUN_021635bc;
   local_c = FUN_021635d0;
   CommuMenuWLCmnMemEnt::CommuMenuWLCmnMemEnt_Add(&local_18);
   return;

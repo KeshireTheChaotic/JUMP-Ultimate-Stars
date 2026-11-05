@@ -14,7 +14,7 @@ void FUN_0215550c(int param_1)
   FUN_02152964(&local_18,param_1);
   if (local_18 < -0x20000) {
     FUN_0215541c(uVar1);
-    FUN_02028384(*(undefined4 *)(param_1 + 4),&DAT_02155584);
+    FUN_02028384(*(undefined4 *)(param_1 + 4),FUN_02155584);
   }
   return;
 }

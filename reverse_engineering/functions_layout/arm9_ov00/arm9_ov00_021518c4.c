@@ -38,7 +38,7 @@ void FUN_021518c4(int *param_1,undefined4 param_2,undefined4 param_3,int param_4
 LAB_021519c4:
       if (iVar3 == -1) {
         param_1[0x425] = param_1[0x425] | 1;
-        FUN_02028384(*(undefined4 *)(*param_1 + 4),&DAT_02151bc8);
+        FUN_02028384(*(undefined4 *)(*param_1 + 4),FUN_02151bc8);
         return;
       }
       if ((code *)param_1[2] != (code *)0x0) {

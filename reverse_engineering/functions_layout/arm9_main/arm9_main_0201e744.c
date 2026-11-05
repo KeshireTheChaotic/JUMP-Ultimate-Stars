@@ -24,10 +24,10 @@ int * jus_Class_0209cac0::jus_Class_0209cac0(int *param_1,int param_2)
   (**(code **)(*piVar2 + 8))();
   (**(code **)(*param_1 + 0xd0))();
   iVar3 = FUN_0201e6d4();
-  iVar4 = jus_AllocDebug((uint)*(byte *)(iVar3 + 6) << 2);
+  iVar4 = FUN_0201a228((uint)*(byte *)(iVar3 + 6) << 2);
   param_1[0x17] = iVar4;
   *(undefined2 *)((int)param_1 + 0x6e) = *(undefined2 *)(param_2 + 0x6e);
-  iVar4 = jus_AllocDebug((uint)*(byte *)(iVar3 + 8) << 3);
+  iVar4 = FUN_0201a228((uint)*(byte *)(iVar3 + 8) << 3);
   param_1[0x18] = iVar4;
   param_1[0x19] = iVar4 + (uint)*(byte *)(iVar3 + 8) * 4;
   MIi_CpuCopy32(*(undefined4 *)(param_2 + 0x60),param_1[0x18],(uint)*(byte *)(iVar3 + 8) << 3);
@@ -73,7 +73,7 @@ LAB_0201e8a0:
         *(int **)(param_1[0x17] + iVar10 * 4) = param_1;
       }
       else {
-        iVar7 = jus_AllocDebug(0x58);
+        iVar7 = FUN_0201a228(0x58);
         uVar5 = 0;
         if (iVar7 != 0) {
           uVar5 = jus_TagCAMT::jus_TagCAMT(iVar7,iVar6,param_1);
@@ -87,7 +87,7 @@ LAB_0201e8a0:
       if (*(short *)(iVar4 + iVar10 * 2 + 0x28) != 0) {
         *(undefined4 *)(iVar7 + 0x48) = *(undefined4 *)(iVar11 + 0x48);
         bVar1 = *(byte *)(iVar3 + 8);
-        iVar8 = jus_AllocDebug((uint)bVar1 * 0x10 + 8);
+        iVar8 = FUN_0201a228((uint)bVar1 * 0x10 + 8);
         uVar5 = 0;
         if (iVar8 != 0) {
           uVar5 = FUN_0200ef34(iVar8,(uint)bVar1,0x10,8,0,0);

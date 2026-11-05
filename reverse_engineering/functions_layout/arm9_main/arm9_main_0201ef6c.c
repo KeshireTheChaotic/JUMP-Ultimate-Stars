@@ -43,7 +43,7 @@ void jus_Class_0209cac0::vfunc_44(int *param_1,int *param_2,int param_3,char *pa
     if (pcVar9 == (char *)0x0 || pcVar5 == (char *)0x0) {
       pcVar9 = param_4;
     }
-    iVar6 = jus_AllocDebug(0x38);
+    iVar6 = FUN_0201a228(0x38);
     iVar7 = 0;
     if (iVar6 != 0) {
       iVar7 = jus_TagALMT::jus_TagALMT

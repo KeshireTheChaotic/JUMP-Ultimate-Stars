@@ -42,7 +42,7 @@ void FUN_0215da94(int param_1)
   DAT_020afeb0 = 2;
   DAT_020afeb4 = (undefined1)iVar2;
   FUN_0215de20(iVar3,0);
-  FUN_02028384(*(undefined4 *)(param_1 + 4),&LAB_0215db74_1);
+  FUN_02028384(*(undefined4 *)(param_1 + 4),0x215db75);
   return;
 }
 

@@ -1,0 +1,12 @@
+020075c4  push {r0,r1,r2,r3}
+020075c6  push {r4,lr}
+020075c8  add r4,sp,#0x10
+020075ca  mov r3,#0x3
+020075cc  bic r4,r3
+020075ce  ldr r2,[sp,#0x10]
+020075d0  add r3,r4,#0x4
+020075d2  bl 0x020075e0
+020075d6  pop {r4}
+020075d8  pop {r3}
+020075da  add sp,#0x10
+020075dc  bx r3

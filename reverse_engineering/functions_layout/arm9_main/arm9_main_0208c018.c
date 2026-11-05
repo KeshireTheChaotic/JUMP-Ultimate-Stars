@@ -17,7 +17,7 @@ void FUN_0208c018(void)
   } while (uVar3 < 8);
   uVar2 = FUN_02089f04();
   FUN_020517fc(uVar2,0,8);
-  DAT_02093be4 = &LAB_0208bcd8;
+  DAT_02093be4 = thunk_FUN_0208bb64;
   iVar1 = thunk_FUN_02057adc();
   if (iVar1 == 0) {
     FUN_0208a250(0x24,0xffff);

@@ -14,7 +14,8 @@ undefined4 * BattleMove::Battle_MoveManCreate(void)
   
                     /* JUS-TAG strings=["BattleMove.cpp","Battle_MoveManCreate"] */
   puVar1 = (undefined4 *)
-           jus_AllocDebug(0x2648,s_BattleMove_cpp_0209ff70,s_Battle_MoveManCreate_0209ff58,0x32);
+           thunk_FUN_0201a228(0x2648,s_BattleMove_cpp_0209ff70,s_Battle_MoveManCreate_0209ff58,0x32)
+  ;
   if (puVar1 != (undefined4 *)0x0) {
     *puVar1 = 0;
     puVar1[1] = 0;
@@ -42,7 +43,7 @@ undefined4 * BattleMove::Battle_MoveManCreate(void)
   puVar1[9] = uVar2;
   local_18 = 0xa6000;
   FUN_02012940(puVar1[9],&local_18);
-  FUN_02028384(*(undefined4 *)(puVar1[9] + 4),&LAB_0208317c);
+  FUN_02028384(*(undefined4 *)(puVar1[9] + 4),FUN_0208317c);
   (**(code **)(**(int **)(puVar1[9] + 4) + 0x24))(*(int **)(puVar1[9] + 4),puVar1);
   (**(code **)(**(int **)(puVar1[9] + 4) + 0x94))(*(int **)(puVar1[9] + 4),0x2000000);
   *(undefined2 *)(puVar1 + 0xb) = 0x29;

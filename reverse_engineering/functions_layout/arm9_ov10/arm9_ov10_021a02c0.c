@@ -19,7 +19,7 @@ int FUN_021a02c0(int param_1,undefined4 param_2,undefined4 param_3,undefined4 pa
     iVar3 = iVar3 + 1;
     *(undefined4 *)(param_1 + iVar1 + 0x8b4) = uVar2;
   } while (iVar3 < 4);
-  uVar2 = FUN_021a0364(&LAB_021a05ec,0);
+  uVar2 = FUN_021a0364(FUN_021a05ec,0);
   *(undefined4 *)(param_1 + 0xb08) = uVar2;
   uVar2 = FUN_021a0390(FUN_021a0608,0);
   *(undefined4 *)(param_1 + 0xb0c) = uVar2;

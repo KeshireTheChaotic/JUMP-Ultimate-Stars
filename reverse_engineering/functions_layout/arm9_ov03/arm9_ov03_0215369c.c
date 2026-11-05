@@ -233,7 +233,7 @@ void FUN_0215369c(int param_1,undefined4 param_2,undefined4 param_3,undefined4 p
       piVar5 = *(int **)(*(int *)(iVar4 + 4) + 100);
       (**(code **)(*piVar5 + 0x7c))(piVar5,0);
       (**(code **)(**(int **)(iVar4 + 4) + 0xd8))(*(int **)(iVar4 + 4),1);
-      iVar6 = func_0x021ca3a4(0x10,0x10,s_font_JSKFont_aft_0215e3a8,0,0);
+      iVar6 = func_0x021ca3a4(0x10,0x10,FUN_0215e3a8,0,0);
       aiStack_11c[0x14] = 0xf0000;
       aiStack_11c[0x13] = 0xf0000;
       FUN_0214e990(iVar6,aiStack_11c + 0x13,aiStack_11c + 0x14);
@@ -241,14 +241,14 @@ void FUN_0215369c(int param_1,undefined4 param_2,undefined4 param_3,undefined4 p
       (**(code **)(*(int *)piVar5[0x19] + 0x70))();
       (**(code **)(*piVar5 + 0xc4))();
       piVar5 = *(int **)(*(int *)(iVar6 + 4) + 100);
-      (**(code **)(*piVar5 + 0x68))(piVar5,&DAT_0215e3bc);
+      (**(code **)(*piVar5 + 0x68))(piVar5,0x215e3bc);
       (**(code **)(**(int **)(iVar6 + 4) + 0xd8))(*(int **)(iVar6 + 4),1);
       FUN_0214cfc8();
       FUN_0214e908(iVar3,iVar4);
       FUN_0214e908(iVar3,iVar6);
       iVar6 = FUN_0203b3f4();
       FUN_0214cf8c(*(undefined4 *)(iVar6 + 0x88));
-      iVar6 = func_0x021caa0c(s_font_JSKFont_aft_0215e3a8,0,0);
+      iVar6 = func_0x021caa0c(FUN_0215e3a8,0,0);
       iVar14 = FUN_0214fb7c(*(undefined4 *)(param_1 + 4));
       iVar7 = 0;
       iVar14 = *(int *)(*(int *)(iVar14 + 4) + 0x10);

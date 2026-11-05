@@ -1,0 +1,9 @@
+021504e4  push {r3,lr}
+021504e6  bl 0x0214fdb4
+021504ea  ldr r0,[0x021504f8]
+021504ec  ldr r1,[r0,#0x1c]
+021504ee  cmp r1,#0x0
+021504f0  bne 0x021504f6
+021504f2  ldr r1,[0x021504fc]
+021504f4  str r1,[r0,#0x1c]
+021504f6  pop {r3,pc}

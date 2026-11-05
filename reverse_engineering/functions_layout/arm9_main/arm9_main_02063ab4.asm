@@ -1,0 +1,15 @@
+02063ab4  push {r4,r5,lr}
+02063ab6  sub sp,#0x4
+02063ab8  ldr r5,[r0,#0x8]
+02063aba  ldr r2,[r0,#0x2c]
+02063abc  ldr r3,[r0,#0x38]
+02063abe  ldr r1,[r0,#0x30]
+02063ac0  add r4,r2,r3
+02063ac2  str r4,[r0,#0x2c]
+02063ac4  add r0,r5,#0x0
+02063ac6  ldr r4,[r5,#0x48]
+02063ac8  blx r4
+02063aca  add sp,#0x4
+02063acc  pop {r4,r5}
+02063ace  pop {r3}
+02063ad0  bx r3

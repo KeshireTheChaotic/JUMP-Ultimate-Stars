@@ -25,7 +25,7 @@ void ALTextDS::SetFont(int param_1,int *param_2)
       if (((iVar1 == 0x504d4f43) || (iVar1 = (**(code **)(*param_2 + 0x4c))(), iVar1 == 0x44505845))
          || ((iVar1 = (**(code **)(*param_2 + 0x4c))(), iVar1 == 0x444d4332 &&
              (param_2[0x1c] != *(int *)(param_1 + 0x34))))) {
-        iVar1 = jus_AllocDebug(0x7c,s_ALTextDS_cpp_021d4e30,s_SetFont_021d48f4,0x51c);
+        iVar1 = thunk_FUN_0201a228(0x7c,s_ALTextDS_cpp_021d4e30,s_SetFont_021d48f4,0x51c);
         piVar2 = (int *)0x0;
         if (iVar1 != 0) {
           piVar2 = (int *)ALFont_021d4974::ALFont_021d4974

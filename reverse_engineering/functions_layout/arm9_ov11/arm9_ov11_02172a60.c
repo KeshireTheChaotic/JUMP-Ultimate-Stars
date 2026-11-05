@@ -83,13 +83,13 @@ undefined4 * BattleAI::BattleAI_Create(void)
         (**(code **)(*piVar2 + 0xd4))(piVar2,*(undefined4 *)(DAT_02181a88 + 4));
       }
       FUN_020282f4(*(undefined4 *)(puVar8[7] + 4));
-      iVar1 = jus_AllocDebug(4,s_BattleAI_cpp_021817c0,s_BattleAI_Create_0218179c,0xf9);
+      iVar1 = thunk_FUN_0201a228(4,s_BattleAI_cpp_021817c0,s_BattleAI_Create_0218179c,0xf9);
       uVar4 = 0;
       if (iVar1 != 0) {
         puVar3 = (undefined4 *)
-                 jus_AllocDebug(0x134,s_BattleAI_cpp_021817c0,s_BattleAI_Create_0218179c,0xf9);
+                 thunk_FUN_0201a228(0x134,s_BattleAI_cpp_021817c0,s_BattleAI_Create_0218179c,0xf9);
         if (puVar3 != (undefined4 *)0x0) {
-          BattleAI();
+          jus_Class_02094864::jus_Class_02094864();
           *puVar3 = &jus_Class_02181700::vftable;
           puVar3[0x38] = uVar10;
           puVar3[0x4b] = 0;
@@ -108,9 +108,9 @@ undefined4 * BattleAI::BattleAI_Create(void)
       puVar8[5] = uVar4;
       FUN_0202894c(uVar4);
       puVar3 = (undefined4 *)
-               jus_AllocDebug(0x14,s_BattleAI_cpp_021817c0,s_BattleAI_Create_0218179c,0xfd);
+               thunk_FUN_0201a228(0x14,s_BattleAI_cpp_021817c0,s_BattleAI_Create_0218179c,0xfd);
       if (puVar3 != (undefined4 *)0x0) {
-        FUN_02020860();
+        jus_Class_02095814::jus_Class_02095814();
         *puVar3 = &jus_Class_02181740::vftable;
         puVar3[2] = uVar10;
         *(undefined1 *)(puVar3 + 4) = 0;

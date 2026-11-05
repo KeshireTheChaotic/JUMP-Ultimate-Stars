@@ -13,8 +13,7 @@ void JQuizMainCommon::JQuizMainCommon_ListRandomMix(int param_1,int param_2,int 
   int iVar4;
   int iVar5;
   
-  iVar1 = jus_AllocDebug(param_4 << 1,s_JQuizMainCommon_cpp_02160de8,
-                         s_JQuizMainCommon_ListRandomMix_02160da0,0x1e,param_4);
+  iVar1 = thunk_FUN_0201a228(param_4 << 1,s_JQuizMainCommon_cpp_02160de8,0x2160da0,0x1e,param_4);
   for (iVar4 = 0; iVar4 < param_4; iVar4 = iVar4 + 1) {
     *(undefined2 *)(iVar1 + iVar4 * 2) = 0;
   }

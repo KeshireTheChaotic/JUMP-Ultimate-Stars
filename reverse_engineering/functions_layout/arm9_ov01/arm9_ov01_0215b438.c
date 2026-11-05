@@ -1,7 +1,7 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 /* JUS-GAME ALWidgetImp::Create [source-string-template] __FILE__="ALWidgetImp.h"
-   __FUNCTION__="Create"; one of 6 instantiations in arm9_ov01 */
+   __FUNCTION__="Create"; one of 7 instantiations in arm9_ov01 */
 
 int ALWidgetImp::Create(undefined4 param_1,int param_2,int param_3,undefined4 param_4)
 
@@ -24,7 +24,7 @@ int ALWidgetImp::Create(undefined4 param_1,int param_2,int param_3,undefined4 pa
   DAT_020a0dd0 = uVar2;
   uVar2 = _DAT_021d5154;
   uVar5 = *(undefined4 *)(param_2 + 4);
-  iVar3 = jus_AllocDebug(0x134,s_ALWidgetImp_h_0216b998,s_Create_0216c910,0x3e);
+  iVar3 = thunk_FUN_0201a228(0x134,s_ALWidgetImp_h_0216b998,s_Create_0216c910,0x3e);
   if (iVar3 != 0) {
     func_0x021af0f8(iVar3,uVar5,uVar2,ALWidgetBaseImp::CreateDrawFunc);
   }
@@ -40,7 +40,7 @@ int ALWidgetImp::Create(undefined4 param_1,int param_2,int param_3,undefined4 pa
   local_22 = 0;
   local_20 = 0;
   local_1e = 0x13;
-  piVar4 = (int *)jus_AllocDebug(0x70,s_ALCollision_inl_0216b9b8,s_Create_0216c908,0x1b2);
+  piVar4 = (int *)thunk_FUN_0201a228(0x70,s_ALCollision_inl_0216b9b8,s_Create_0216c908,0x1b2);
   if (piVar4 != (int *)0x0) {
     func_0x021b054c(piVar4,0,&DAT_02093c8c);
     *piVar4 = (int)&jus_Class_0216ba10::vftable;

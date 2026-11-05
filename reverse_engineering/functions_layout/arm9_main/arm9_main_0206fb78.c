@@ -5,7 +5,7 @@ void jus_Scene29_Exit(int param_1,int param_2,undefined4 param_3,undefined4 para
 
 {
   if (param_2 == -1) {
-    func_0x0206e590(param_1,0,param_3,0xffffffff,param_4);
+    FUN_0206e590(param_1,0,param_3,0xffffffff,param_4);
   }
   else {
     FUN_0206e524(1,0x1e,0x1d,0xffffffff,param_2);

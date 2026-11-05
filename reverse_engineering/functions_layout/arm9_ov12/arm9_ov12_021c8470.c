@@ -11,7 +11,7 @@ void ALTextDS::SetFontPaletteIndex(int param_1,uint param_2)
   
   if (*(int *)(param_1 + 0x194) == 0) {
     iVar3 = (*(int *)(param_1 + 0xfc) + 7U >> 3) * (*(int *)(param_1 + 0x100) + 7U >> 3);
-    uVar1 = jus_AllocDebug(iVar3,s_ALTextDS_cpp_021d4e30,s_SetFontPaletteIndex_021d4934,0x1c3);
+    uVar1 = thunk_FUN_0201a228(iVar3,s_ALTextDS_cpp_021d4e30,s_SetFontPaletteIndex_021d4934,0x1c3);
     *(undefined4 *)(param_1 + 0x194) = uVar1;
     thunk_FUN_02002488(uVar1,param_2 & 0xff,iVar3);
     *(char *)(param_1 + 0x198) = (char)param_2;

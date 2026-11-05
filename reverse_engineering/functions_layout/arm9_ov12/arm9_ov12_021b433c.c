@@ -12,7 +12,7 @@ void ALWidgetBase::Init(void)
   int *piVar5;
   
   DAT_021d5164 = FUN_02028920(0);
-  iVar1 = jus_AllocDebug(0x20,s_ALWidgetBase_cpp_021d3de8,&DAT_021d3b10,0x224);
+  iVar1 = thunk_FUN_0201a228(0x20,s_ALWidgetBase_cpp_021d3de8,&DAT_021d3b10,0x224);
   uVar2 = 0;
   if (iVar1 != 0) {
     uVar2 = FUN_020221f8();
@@ -20,17 +20,17 @@ void ALWidgetBase::Init(void)
   }
   DAT_021d5144 = uVar2;
   FUN_02023cd0(0x20204457,ALWidgetBaseImp::CreateImpFunc);
-  iVar1 = jus_AllocDebug(8,s_ALWidgetBase_cpp_021d3de8,&DAT_021d3b10,0x228);
+  iVar1 = thunk_FUN_0201a228(8,s_ALWidgetBase_cpp_021d3de8,&DAT_021d3b10,0x228);
   piVar3 = (int *)0x0;
   if (iVar1 != 0) {
     piVar3 = (int *)ALWidgetBase_021d2b58::ALWidgetBase_021d2b58(iVar1,0);
   }
-  iVar1 = jus_AllocDebug(0xc,s_ALWidgetBase_cpp_021d3de8,&DAT_021d3b10,0x229);
+  iVar1 = thunk_FUN_0201a228(0xc,s_ALWidgetBase_cpp_021d3de8,&DAT_021d3b10,0x229);
   piVar4 = (int *)0x0;
   if (iVar1 != 0) {
     piVar4 = (int *)ALWidgetBase_021d2c98::ALWidgetBase_021d2c98();
   }
-  iVar1 = jus_AllocDebug(8,s_ALWidgetBase_cpp_021d3de8,&DAT_021d3b10,0x22a);
+  iVar1 = thunk_FUN_0201a228(8,s_ALWidgetBase_cpp_021d3de8,&DAT_021d3b10,0x22a);
   piVar5 = (int *)0x0;
   if (iVar1 != 0) {
     piVar5 = (int *)ALWidgetBase_021d2d74::ALWidgetBase_021d2d74(iVar1,0);
@@ -41,7 +41,7 @@ void ALWidgetBase::Init(void)
   (**(code **)(*piVar4 + 8))();
   FUN_020315e4();
   FUN_020315e4();
-  iVar1 = jus_AllocDebug(0x14c,s_ALWidgetBaseImp_h_021d3d04,s_Create_021d3b60,0x2d4);
+  iVar1 = thunk_FUN_0201a228(0x14c,s_ALWidgetBaseImp_h_021d3d04,s_Create_021d3b60,0x2d4);
   piVar3 = (int *)0x0;
   if (iVar1 != 0) {
     piVar3 = (int *)ALWidgetBase_021d3620::ALWidgetBase_021d3620

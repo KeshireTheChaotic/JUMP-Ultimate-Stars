@@ -10,13 +10,13 @@ ALNodeImp::Create(undefined4 *param_1,int param_2,undefined4 param_3,undefined4 
   undefined4 uVar2;
   int *piVar3;
   
-  ALWidgetBase_021d3950::ALWidgetBase_021d3950();
+  jus_Class_021d3950::jus_Class_021d3950();
   *param_1 = &CommonWindow::vftable;
   param_1[0x4f] = *(undefined4 *)(param_2 + 0x13c);
   param_1[0x50] = *(undefined4 *)(param_2 + 0x140);
   param_1[0x51] = *(undefined4 *)(param_2 + 0x144);
   param_1[0x52] = *(undefined4 *)(param_2 + 0x148);
-  iVar1 = jus_AllocDebug(0x20,s_ALNodeImp_h_021d3bcc,s_Create_021d3b58,0x687,param_4);
+  iVar1 = thunk_FUN_0201a228(0x20,s_ALNodeImp_h_021d3bcc,s_Create_021d3b58,0x687,param_4);
   uVar2 = 0;
   if (iVar1 != 0) {
     uVar2 = jus_Class_020945fc::jus_Class_020945fc(iVar1,0x10);

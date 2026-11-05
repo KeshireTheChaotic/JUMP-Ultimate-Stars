@@ -30,8 +30,8 @@ int BattleComicDeck::Battle_ComicDeckCreate(undefined4 param_1,int param_2,int p
   undefined1 auStack_2c [4];
   undefined4 local_28;
   
-  iVar3 = jus_AllocDebug(0x284,s_BattleComicDeck_cpp_02171d6c,s_Battle_ComicDeckCreate_02171d54,0x3d
-                        );
+  iVar3 = thunk_FUN_0201a228(0x284,s_BattleComicDeck_cpp_02171d6c,s_Battle_ComicDeckCreate_02171d54,
+                             0x3d);
   FUN_020517fc(iVar3,0,0x284);
   *(undefined4 *)(iVar3 + 0x94) = param_1;
   iVar4 = FUN_02026f94();

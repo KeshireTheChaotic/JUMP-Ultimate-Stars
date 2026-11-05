@@ -34,7 +34,7 @@ FUN_0218b6f4(int param_1,undefined4 param_2,uint param_3,undefined4 param_4,int 
   local_24 = param_5;
   local_1c = (undefined2)param_3;
   local_20 = param_2;
-  FUN_020011e4(*(undefined4 *)(param_1 + 0x5c),&local_28,&LAB_0218b804_1);
+  FUN_020011e4(*(undefined4 *)(param_1 + 0x5c),&local_28,0x218b805);
   iVar4 = FUN_0200131c(*(undefined4 *)(param_1 + 0x5c));
   if (iVar2 + 1 != iVar4) {
     *param_6 = 1;

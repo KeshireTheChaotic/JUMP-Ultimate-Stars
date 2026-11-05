@@ -5,7 +5,7 @@
 void jus_Class_0209a9bc::vfunc_09(undefined4 param_1,undefined4 param_2,undefined1 *param_3)
 
 {
-  (*(code *)0x2012368)(param_2,*param_3);
+  FUN_02012368(param_2,*param_3);
   return;
 }
 

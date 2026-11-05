@@ -10,8 +10,8 @@ int * JPowerData::JPowerData_Create(void)
   int iVar3;
   undefined4 in_r3;
   
-  piVar1 = (int *)jus_AllocDebug(8,s_JPowerData_cpp_021713ec,s_JPowerData_Create_021713d8,0x15,in_r3
-                                );
+  piVar1 = (int *)thunk_FUN_0201a228(8,s_JPowerData_cpp_021713ec,s_JPowerData_Create_021713d8,0x15,
+                                     in_r3);
   FUN_020517fc(piVar1,0,8);
   piVar2 = (int *)FUN_02033410(s_bin_jpower_bin_021713fc,0,0);
   if (piVar2[7] == 0) {

@@ -1,0 +1,12 @@
+0208a47c  ldr r1,[0x0208a494]
+0208a47e  str r0,[r1,#0x60]
+0208a480  ldrh r3,[r1,#0xe]
+0208a482  lsl r0,r0,#0xe
+0208a484  add r2,r3,#0x1
+0208a486  strh r2,[r1,#0xe]
+0208a488  ldr r1,[0x0208a498]
+0208a48a  and r1,r3
+0208a48c  orr r0,r1
+0208a48e  lsl r0,r0,#0x10
+0208a490  lsr r0,r0,#0x10
+0208a492  bx lr

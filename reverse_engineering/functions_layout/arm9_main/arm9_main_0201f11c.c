@@ -85,12 +85,12 @@ void jus_Class_0209cac0::vfunc_53(int *param_1,undefined4 param_2)
         *(undefined4 *)(iVar7 + 0x48) = 0;
         if ((*(int *)(iVar7 + 0x4c) != 0) &&
            (*(ushort *)(iVar7 + 0x50) < (ushort)*(byte *)(iVar3 + 8))) {
-          FUN_0200f18c(*(int *)(iVar7 + 0x4c),0x10,8,&DAT_0201f6f0);
+          FUN_0200f18c(*(int *)(iVar7 + 0x4c),0x10,8,FUN_0201f6f0);
           *(undefined4 *)(iVar7 + 0x4c) = 0;
         }
         if (*(int *)(iVar7 + 0x4c) == 0) {
           bVar1 = *(byte *)(iVar3 + 8);
-          iVar16 = jus_AllocDebug((uint)bVar1 * 0x10 + 8);
+          iVar16 = FUN_0201a228((uint)bVar1 * 0x10 + 8);
           uVar4 = 0;
           if (iVar16 != 0) {
             uVar4 = FUN_0200ef34(iVar16,(uint)bVar1,0x10,8,0,0);

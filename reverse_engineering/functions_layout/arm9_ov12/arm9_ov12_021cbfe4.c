@@ -5,6 +5,7 @@ undefined4 FUN_021cbfe4(int param_1,uint param_2)
   uint uVar1;
   undefined4 uVar2;
   
+                    /* JUS-TAG source_file_inferred="WiFiVoiceChat.cpp" */
   uVar2 = 0;
   uVar1 = func_0x021766fc();
   if (param_2 == uVar1) {

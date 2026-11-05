@@ -24,7 +24,7 @@ void jus_TagDUMY::vfunc_15(int *param_1,undefined4 param_2,undefined4 param_3,un
     iVar4 = 1;
   }
   if (*(char *)((int)param_1 + 0x1a) == '\0') {
-    iVar1 = jus_AllocDebug(iVar4);
+    iVar1 = FUN_0201a228(iVar4);
     param_1[8] = iVar1;
   }
   else {

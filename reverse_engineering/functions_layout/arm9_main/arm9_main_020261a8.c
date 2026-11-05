@@ -43,7 +43,7 @@ void FUN_020261a8(int *param_1,undefined4 param_2)
       FUN_02003bd8(s_vector_length_error_0209d908);
       FUN_02001f18();
     }
-    iVar1 = jus_AllocDebug(uVar2 * 0xc);
+    iVar1 = FUN_0201a228(uVar2 * 0xc);
     if (iVar1 == 0) {
       FUN_02003bd8(s_Memory_allocation_failure_0209d8b4);
       FUN_02001f18();

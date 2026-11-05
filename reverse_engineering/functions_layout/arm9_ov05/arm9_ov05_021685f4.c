@@ -39,8 +39,8 @@ int * DatabaseList::Database_ListCreate
   undefined4 uStack_28;
   
   uStack_28 = param_4;
-  piVar1 = (int *)jus_AllocDebug(0x74,s_DatabaseList_cpp_02171944,s_Database_ListCreate_021718b4,
-                                 0x52);
+  piVar1 = (int *)thunk_FUN_0201a228(0x74,s_DatabaseList_cpp_02171944,s_Database_ListCreate_021718b4
+                                     ,0x52);
   func_0x021b65bc();
   FUN_020517fc(piVar1,0,0x74);
   piVar1[0x17] = param_1;
@@ -122,7 +122,7 @@ int * DatabaseList::Database_ListCreate
     (**(code **)(**(int **)(iVar2 + 4) + 0xd8))(*(int **)(iVar2 + 4),1);
     FUN_021500cc(piVar1[0x15],piVar1[0xb]);
   }
-  iVar2 = jus_AllocDebug(0xcc,s_ALWidget_inl_0216f484,s_Create_02171874,0x1de);
+  iVar2 = thunk_FUN_0201a228(0xcc,s_ALWidget_inl_0216f484,s_Create_02171874,0x1de);
   piVar4 = (int *)0x0;
   if (iVar2 != 0) {
     piVar4 = (int *)func_0x021af26c(iVar2,FUN_021696ec,FUN_02169760,0);
@@ -131,7 +131,7 @@ int * DatabaseList::Database_ListCreate
     (**(code **)(*piVar4 + 0x14))();
   }
   piVar7 = (int *)piVar4[6];
-  iVar2 = jus_AllocDebug(0xbc,s_ALWidget_inl_0216f464,s_Create_0217187c,0x212);
+  iVar2 = thunk_FUN_0201a228(0xbc,s_ALWidget_inl_0216f464,s_Create_0217187c,0x212);
   piVar4 = (int *)0x0;
   if (iVar2 != 0) {
     piVar4 = (int *)func_0x021af358(iVar2,FUN_021697d4,0);
@@ -222,7 +222,7 @@ int * DatabaseList::Database_ListCreate
   (**(code **)(*piVar4 + 0xac))(piVar4,0);
   FUN_02023c80(*(undefined4 *)(iVar2 + 4),local_4c,0x494c,local_48);
   FUN_02023c70(*(undefined4 *)(iVar2 + 4),0x820001);
-  func_0x021b6760(*(undefined4 *)(iVar2 + 4),0x10,&LAB_02169a58);
+  func_0x021b6760(*(undefined4 *)(iVar2 + 4),0x10,FUN_02169a58);
   func_0x021b4034(*(undefined4 *)(iVar2 + 4),0x820001);
   func_0x021b3f78(*(undefined4 *)(iVar2 + 4),0x820000);
   func_0x021b6214(*(undefined4 *)(iVar2 + 4),1);
@@ -253,7 +253,7 @@ int * DatabaseList::Database_ListCreate
   uVar6 = _DAT_021d5154;
   DAT_020a0dd0 = *(undefined4 *)(*(int *)(iVar2 + 0x88) + 4);
   uVar8 = *(undefined4 *)(iVar5 + 4);
-  iVar2 = jus_AllocDebug(0x17c,s_ALWidgetImp_h_0216f4a4,s_Create_02171884,0xb5);
+  iVar2 = thunk_FUN_0201a228(0x17c,s_ALWidgetImp_h_0216f4a4,s_Create_02171884,0xb5);
   if (iVar2 != 0) {
     func_0x021acb3c(iVar2,uVar8,uVar6,ALWidgetBaseImp::CreateDrawFunc);
   }

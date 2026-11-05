@@ -8,7 +8,7 @@ void FUN_021bc4c4(int param_1,int param_2)
   int iVar4;
   int iVar5;
   
-  iVar3 = *(int *)(&DAT_021d0118 + param_2 * 4);
+  iVar3 = *(int *)(FUN_021d0114 + param_2 * 4 + 4);
   iVar4 = (int)*(short *)(param_1 + 0x58) / 2;
   piVar1 = *(int **)(*(int *)(*(int *)(param_1 + 0x1c) + 4) + 100);
   iVar5 = iVar3 + 8;

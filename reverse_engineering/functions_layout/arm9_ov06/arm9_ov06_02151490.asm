@@ -1,0 +1,17 @@
+02151490  ldr r0,[0x021514b4]
+02151492  ldr r0,[r0,#0x0]
+02151494  add r0,#0xdc
+02151496  ldr r1,[r0,#0x0]
+02151498  mov r0,#0x6a
+0215149a  lsl r0,r0,#0x2
+0215149c  ldr r1,[r1,r0]
+0215149e  sub r0,#0x50
+021514a0  ldr r1,[r1,#0x10]
+021514a2  ldr r1,[r1,r0]
+021514a4  mov r0,#0xf
+021514a6  tst r0,r1
+021514a8  beq 0x021514ae
+021514aa  mov r0,#0x1
+021514ac  bx lr
+021514ae  mov r0,#0x0
+021514b0  bx lr

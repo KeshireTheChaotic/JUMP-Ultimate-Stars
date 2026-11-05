@@ -1,8 +1,8 @@
 
-void jus_AllocDebug(void)
+void thunk_FUN_0201a228(void)
 
 {
-  jus_AllocDebug();
+  thunk_FUN_0201a228();
   return;
 }
 

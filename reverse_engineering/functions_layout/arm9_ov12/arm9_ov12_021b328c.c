@@ -22,7 +22,7 @@ undefined4 * ALMotionDynamic::CreateControl(int param_1,int param_2,undefined4 p
   iStack_4 = param_4;
   FUN_021b2730(&local_30,param_1 + 0x38,&local_c);
   if (local_30 == param_1 + 0x3c) {
-    iVar1 = jus_AllocDebug(0xc,s_ALMotionDynamic_cpp_021d28a0,s_CreateControl_021d2820,0x2c3);
+    iVar1 = thunk_FUN_0201a228(0xc,s_ALMotionDynamic_cpp_021d28a0,s_CreateControl_021d2820,0x2c3);
     uVar2 = 0;
     if (iVar1 != 0) {
       uVar2 = FUN_021b2d2c();
@@ -33,7 +33,7 @@ undefined4 * ALMotionDynamic::CreateControl(int param_1,int param_2,undefined4 p
   else {
     uVar2 = *(undefined4 *)(local_30 + 0x10);
   }
-  iVar1 = jus_AllocDebug(0x24,s_ALMotionDynamic_cpp_021d28a0,s_CreateControl_021d2820,0x2ca);
+  iVar1 = thunk_FUN_0201a228(0x24,s_ALMotionDynamic_cpp_021d28a0,s_CreateControl_021d2820,0x2ca);
   local_2c = (undefined4 *)0x0;
   if (iVar1 != 0) {
     local_2c = (undefined4 *)FUN_021b2b04();

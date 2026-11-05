@@ -1,0 +1,1 @@
+{"module":"arm9_main","address":"0208a524","name":"FUN_0208a524","thumb":true,"body_bytes":24,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":[],"unresolved_call_targets":[],"status":"decompiled","asm_file":"arm9_main_0208a524.asm","c_file":"arm9_main_0208a524.c"}

@@ -29,13 +29,13 @@ void jus_Class_020944cc::vfunc_18(void)
   DAT_020a104c = &DAT_020a1aa4;
   if ((DAT_020a0e2c & 1) == 0) {
     jus_Class_02094100::jus_Class_02094100(&DAT_020a21b0,0x200,0x5000200,0x10);
-    FUN_0200f2b0(&DAT_020a21b0,&LAB_02046adc,&DAT_020a15c0);
+    FUN_0200f2b0(&DAT_020a21b0,FUN_02046adc,&DAT_020a15c0);
     DAT_020a0e2c = DAT_020a0e2c | 1;
   }
   DAT_020a1024 = &DAT_020a21b0;
   if ((DAT_020a0fa0 & 1) == 0) {
     jus_Class_02094100::jus_Class_02094100(&DAT_020a2228,0x200,0x5000600,0x10);
-    FUN_0200f2b0(&DAT_020a2228,&LAB_02046adc,&DAT_020a15cc);
+    FUN_0200f2b0(&DAT_020a2228,FUN_02046adc,&DAT_020a15cc);
     DAT_020a0fa0 = DAT_020a0fa0 | 1;
   }
   DAT_020a0fd0 = &DAT_020a2228;

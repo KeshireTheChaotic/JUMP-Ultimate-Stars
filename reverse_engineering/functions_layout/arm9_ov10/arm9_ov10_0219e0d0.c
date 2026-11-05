@@ -15,7 +15,7 @@ void ALObjectImp::PostMessage(int param_1,undefined4 param_2,undefined4 param_3,
     if (*(int *)(DAT_0214ccf8 + 0x1c40) != 0) {
       uVar3 = *(undefined4 *)(param_1 + 4);
       uVar4 = *(undefined4 *)(*(int *)(DAT_0214ccf8 + 0x1c40) + 4);
-      iVar1 = jus_AllocDebug(0x2c,s_ALObjectImp_h_021a71b4,s_PostMessage_021a71a8,0x10a);
+      iVar1 = thunk_FUN_0201a228(0x2c,s_ALObjectImp_h_021a71b4,s_PostMessage_021a71a8,0x10a);
       uVar2 = 0;
       if (iVar1 != 0) {
         uVar2 = WiFiGame::WiFiGame(iVar1,0x70000006,uVar3,0,0,0,param_4);

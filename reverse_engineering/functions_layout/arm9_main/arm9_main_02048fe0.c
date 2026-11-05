@@ -12,7 +12,7 @@ void VertexBuffer::vfunc_17(int param_1,int param_2)
                     /* JUS-TAG strings=["VertexBuffer"] */
   *(int *)(param_1 + 4) = param_2;
   *(int *)(param_1 + 0x34) = param_2 << 4;
-  uVar1 = jus_AllocDebug();
+  uVar1 = FUN_0201a228();
   FUN_0201ac08(uVar1,s_VertexBuffer_0209da74);
   FUN_02051890(*(undefined4 *)(param_1 + 0x30),uVar1,*(undefined4 *)(param_1 + 0x38));
   uVar3 = *(undefined4 *)(param_1 + 0x30);

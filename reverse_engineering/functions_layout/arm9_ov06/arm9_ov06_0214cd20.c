@@ -1,9 +1,9 @@
 
-/* JUS-SCENE jus_Scene11_CreateImpl [scene-map] called by scene 11 create wrapper 0206eca8 while
-   overlay 6 is resident */
+/* JUS-GAME Battle::Battle_Add [source-string] __FILE__="Battle.cpp" __FUNCTION__="Battle_Add"
+   lines=[127] passed to 1 source-location call(s) */
 
 undefined4
-jus_Scene11_CreateImpl(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+Battle::Battle_Add(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
 
 {
   undefined1 uVar1;
@@ -55,16 +55,16 @@ jus_Scene11_CreateImpl(undefined4 param_1,undefined4 param_2,undefined4 param_3,
   }
   FUN_0207379c();
   FUN_02073778();
-  func_0x02087e48();
-  func_0x02087f58();
+  CommWrap::CommWrap_Loading_Create();
+  FUN_02087f58();
   FUN_02087f48(1);
-  func_0x02087f20();
+  FUN_02087f20();
   DAT_020a0c4d = 1;
-  DAT_02172960 = jus_AllocDebug(0x170,s_Battle_cpp_02171ab0,s_Battle_Add_02171aa4,0x7f);
+  DAT_02172960 = thunk_FUN_0201a228(0x170,s_Battle_cpp_02171ab0,s_Battle_Add_02171aa4,0x7f);
   FUN_020517fc(DAT_02172960,0,0x170);
   *(undefined4 *)(DAT_02172960 + 0x154) = param_1;
   *(undefined4 *)(DAT_02172960 + 0x164) = 0;
-  func_0x02153074();
+  FUN_02153074();
   uVar5 = FUN_02026f94();
   *(undefined4 *)(DAT_02172960 + 0x144) = uVar5;
   uStack_7c = 0x9a000;
@@ -159,22 +159,22 @@ jus_Scene11_CreateImpl(undefined4 param_1,undefined4 param_2,undefined4 param_3,
   case 0:
     uStack_ac = 1;
   default:
-    FUN_02028384(*(undefined4 *)(*(int *)(DAT_02172960 + 0x144) + 4),&LAB_0214daa4_1);
+    FUN_02028384(*(undefined4 *)(*(int *)(DAT_02172960 + 0x144) + 4),FUN_0214daa4 + 1);
     cVar4 = DAT_020afebd;
     *(undefined4 *)(DAT_02172960 + 0x160) = DAT_020afe9c;
     if (unaff_r6 == 0x16) {
       for (iVar7 = 0; iVar7 < *(int *)(DAT_02172960 + 0x158); iVar7 = iVar7 + 1) {
-        uVar5 = func_0x02070ca4(0);
+        uVar5 = FUN_02070ca4(0);
         auStack_28[iVar7] = uVar5;
       }
     }
     else {
       for (iVar7 = 0; iVar7 < *(int *)(DAT_02172960 + 0x158); iVar7 = iVar7 + 1) {
-        uVar5 = func_0x02070ca4(iVar7);
+        uVar5 = FUN_02070ca4(iVar7);
         auStack_28[iVar7] = uVar5;
       }
     }
-    uStack_b0 = func_0x02150f68(unaff_r6);
+    uStack_b0 = FUN_02150f68(unaff_r6);
     break;
   case 5:
     FUN_02028384(*(undefined4 *)(*(int *)(DAT_02172960 + 0x144) + 4),PTR_FUN_0214db94_1_0214d068);
@@ -182,7 +182,7 @@ jus_Scene11_CreateImpl(undefined4 param_1,undefined4 param_2,undefined4 param_3,
     *(undefined4 *)(DAT_02172960 + 0x160) = 0xd;
     FUN_020708e4(1,6,(int)(char)PTR_DAT_0214d06c[0xe]);
     for (iVar7 = 0; iVar7 < *(int *)(DAT_02172960 + 0x158); iVar7 = iVar7 + 1) {
-      uVar5 = func_0x02070d14(iVar7);
+      uVar5 = FUN_02070d14(iVar7);
       auStack_28[iVar7] = uVar5;
     }
     *(undefined1 *)(DAT_02172960 + iRam0214d070) = DAT_020afebb;
@@ -196,7 +196,7 @@ jus_Scene11_CreateImpl(undefined4 param_1,undefined4 param_2,undefined4 param_3,
     *(undefined4 *)(DAT_02172960 + 0x160) = DAT_020afe9c;
     uStack_9c = 1;
     for (iVar7 = 0; iVar7 < *(int *)(DAT_02172960 + 0x158); iVar7 = iVar7 + 1) {
-      uVar5 = func_0x02070ca4(iVar7);
+      uVar5 = FUN_02070ca4(iVar7);
       auStack_28[iVar7] = uVar5;
     }
   }
@@ -297,9 +297,9 @@ jus_Scene11_CreateImpl(undefined4 param_1,undefined4 param_2,undefined4 param_3,
   *(dword *)(DAT_02172960 + 0x14c) = 0x1fff;
   *(dword *)(DAT_02172960 + 0x150) = 0x1fff;
   *(dword *)(DAT_02172960 + 0x14c) = 0x1fff;
-  func_0x0214e284();
+  FUN_0214e284();
   *(dword *)(DAT_02172960 + 0x150) = 0x1fff;
-  func_0x0214e284();
+  FUN_0214e284();
   uVar5 = FUN_0214d934(DAT_020a0e80);
   uVar8 = FUN_020310f4();
   *(undefined4 *)(DAT_02172960 + 0x140) = uVar8;
@@ -312,7 +312,7 @@ jus_Scene11_CreateImpl(undefined4 param_1,undefined4 param_2,undefined4 param_3,
     FUN_020769cc(*(undefined4 *)(DAT_02172960 + iVar7 * 4 + 0x118),auStack_28[iVar7]);
   }
   BattleCharaParam::Battle_CharaParamCreate();
-  func_0x02151be8();
+  BattleCamera::Battle_CameraCreate();
   CommonEffect::CommonEffect_Init(*(undefined4 *)(DAT_02172968 + 4));
   FUN_02153bc8(*(undefined4 *)(DAT_02172968 + 4));
   uVar8 = BattleMarker::Battle_MarkerCreate
@@ -328,9 +328,10 @@ jus_Scene11_CreateImpl(undefined4 param_1,undefined4 param_2,undefined4 param_3,
   piVar6 = (int *)FUN_020101f4(s_chr_ChrBin_aar_02171abc,0);
   uVar8 = BattleObj::Battle_ObjManCreate(0,0,0);
   *(undefined4 *)(DAT_02172960 + 0x108) = uVar8;
-  uVar8 = func_0x02161cb4(*(undefined4 *)(DAT_02172960 + 0x160),uStack_9c,uStack_ac,uStack_b0);
+  uVar8 = BattleMap::BattleMapInit
+                    (*(undefined4 *)(DAT_02172960 + 0x160),uStack_9c,uStack_ac,uStack_b0);
   *(undefined4 *)(DAT_02172960 + 0x104) = uVar8;
-  func_0x02161bbc(*(undefined4 *)(DAT_02172960 + 0x108),*(undefined4 *)(DAT_02172960 + 0x104));
+  FUN_02161bbc(*(undefined4 *)(DAT_02172960 + 0x108),*(undefined4 *)(DAT_02172960 + 0x104));
   if (*(char *)(DAT_02172960 + 0x16e) != '\0') {
     jus_Overlay_SelectSlot2(1);
     uVar8 = func_0x02172a60(*(undefined4 *)(DAT_02172960 + 0x108));
@@ -371,7 +372,7 @@ jus_Scene11_CreateImpl(undefined4 param_1,undefined4 param_2,undefined4 param_3,
       }
     }
     uStack_5a = uStack_5c;
-    func_0x02162b60(*(undefined4 *)(DAT_02172960 + 0x104),uVar12,auStack_68,&uStack_5b);
+    FUN_02162b60(*(undefined4 *)(DAT_02172960 + 0x104),uVar12,auStack_68,&uStack_5b);
     uStack_78 = *(undefined4 *)(DAT_02172960 + uVar12 * 4 + 0x118);
     uStack_74 = *(undefined4 *)(DAT_02172968 + 4);
     cVar3 = acStack_98[uVar12];
@@ -382,7 +383,7 @@ jus_Scene11_CreateImpl(undefined4 param_1,undefined4 param_2,undefined4 param_3,
         uStack_6c = FUN_020208ec(uVar12);
       }
       else {
-        uStack_70 = func_0x020875b0(uVar12);
+        uStack_70 = FUN_020875b0(uVar12);
         uStack_6c = FUN_020875d8(uVar12);
       }
     }
@@ -397,8 +398,8 @@ jus_Scene11_CreateImpl(undefined4 param_1,undefined4 param_2,undefined4 param_3,
       *(undefined4 *)(*(int *)(DAT_02172960 + 0xf0) + uVar12 * 0x28 + 4) =
            *(undefined4 *)(*(int *)(DAT_02172960 + iVar7 + 0xdc) + 0x1a8);
     }
-    func_0x02151ff4(uVar12,*(int *)(*(int *)(*(int *)(*(int *)(DAT_02172960 + uVar12 * 4 + 0xdc) +
-                                                     0x1a8) + 0x10) + 0x5c) + 0xc);
+    FUN_02151ff4(uVar12,*(int *)(*(int *)(*(int *)(*(int *)(DAT_02172960 + uVar12 * 4 + 0xdc) +
+                                                  0x1a8) + 0x10) + 0x5c) + 0xc);
     if (*(char *)(DAT_02172960 + 0x16e) != '\0') {
       if (cVar3 == '\0') {
         uVar8 = func_0x02173024(*(undefined4 *)(DAT_02172960 + 0x128),
@@ -441,7 +442,7 @@ jus_Scene11_CreateImpl(undefined4 param_1,undefined4 param_2,undefined4 param_3,
   *(undefined4 *)(DAT_02172960 + 0x10c) = uVar5;
   uVar5 = BattleObjShot::Battle_ObjShotManCreate();
   *(undefined4 *)(DAT_02172960 + 0x110) = uVar5;
-  func_0x0214f804(DAT_02172960,unaff_r6,*(undefined4 *)(DAT_02172960 + 0x158));
+  FUN_0214f804(DAT_02172960,unaff_r6,*(undefined4 *)(DAT_02172960 + 0x158));
   *(int *)(*(int *)(DAT_02172960 + 0xec) + 4) = DAT_02172960;
   FUN_02152078(*(undefined4 *)(DAT_02172960 + 0x15c));
   iVar7 = FUN_02150318(DAT_02172960);
@@ -450,14 +451,14 @@ jus_Scene11_CreateImpl(undefined4 param_1,undefined4 param_2,undefined4 param_3,
       iVar13 = iVar7 * 4;
       iVar11 = DAT_02172960 + iVar13;
       if (*(int *)(iVar11 + 0x4c) == 0) {
-        func_0x02156fa4(*(undefined4 *)(iVar11 + 0xdc));
-        func_0x0207871c(*(undefined4 *)(DAT_02172960 + iVar13 + 0x118),1);
+        FUN_02156fa4(*(undefined4 *)(iVar11 + 0xdc));
+        FUN_0207871c(*(undefined4 *)(DAT_02172960 + iVar13 + 0x118),1);
       }
       else {
-        func_0x02156fb4(*(undefined4 *)(iVar11 + 0xdc));
+        FUN_02156fb4(*(undefined4 *)(iVar11 + 0xdc));
         FUN_02168660(*(undefined4 *)(DAT_02172960 + 0xf0),iVar7);
-        func_0x0215200c(iVar7);
-        func_0x0207871c(*(undefined4 *)(DAT_02172960 + iVar13 + 0x118),0);
+        FUN_0215200c(iVar7);
+        FUN_0207871c(*(undefined4 *)(DAT_02172960 + iVar13 + 0x118),0);
       }
     }
     if (*(int *)(DAT_02172960 + *(int *)(DAT_02172960 + 0x15c) * 4 + 0x4c) == 0) {
@@ -476,7 +477,7 @@ jus_Scene11_CreateImpl(undefined4 param_1,undefined4 param_2,undefined4 param_3,
   }
   FUN_02073ebc(2,1);
   FUN_02087f48(0);
-  func_0x02087fb8();
+  FUN_02087fb8();
   return *(undefined4 *)(DAT_02172960 + 0x140);
 }
 

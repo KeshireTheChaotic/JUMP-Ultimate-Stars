@@ -6,7 +6,7 @@ void FUN_021602a8(void)
   
   iVar1 = FUN_02166314(0);
   if (iVar1 == 0) {
-    FUN_02157088(&LAB_02160230_1);
+    FUN_02157088(0x2160231);
   }
   return;
 }

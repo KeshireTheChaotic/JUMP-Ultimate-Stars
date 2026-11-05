@@ -16,7 +16,7 @@ ALStreamImp::ALStreamImp(undefined4 *param_1,int param_2,undefined4 param_3,unde
   *(undefined1 *)((int)param_1 + 0x29) = 0;
   param_1[0xb] = 0;
   if (param_2 != 0) {
-    uVar1 = jus_AllocDebug(param_2);
+    uVar1 = FUN_0201a228(param_2);
     param_1[8] = uVar1;
     FUN_0201ac08(uVar1,s_ALMemoryStreamImp_Data_0209d9fc);
   }

@@ -27,7 +27,7 @@ void FUN_021507b0(int param_1)
   local_24 = 0xc8000;
   FUN_0214d650(param_1,&local_24);
   FUN_0214edbc(auStack_2c,0xffffffec,0,0x14,0x7f);
-  piVar3 = (int *)jus_AllocDebug(0x70,s_ALCollision_inl_0215bc1c,s_Create_0215beb8,0x1b2);
+  piVar3 = (int *)thunk_FUN_0201a228(0x70,s_ALCollision_inl_0215bc1c,s_Create_0215beb8,0x1b2);
   if (piVar3 != (int *)0x0) {
     func_0x021b054c(piVar3,0,&DAT_02093c8c);
     *piVar3 = (int)&jus_Class_0215bde0::vftable;

@@ -53,7 +53,7 @@ void FUN_0204267c(undefined4 param_1,int param_2,int param_3,undefined4 param_4)
           FUN_02003bd8(s_vector_length_error_0209d908);
           FUN_02001f18();
         }
-        puVar2 = (undefined4 *)jus_AllocDebug(uVar6 << 3);
+        puVar2 = (undefined4 *)FUN_0201a228(uVar6 << 3);
         if (puVar2 == (undefined4 *)0x0) {
           FUN_02003bd8(s_Memory_allocation_failure_0209d8ec);
           FUN_02001f18();

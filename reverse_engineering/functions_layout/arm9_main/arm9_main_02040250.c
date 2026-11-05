@@ -101,7 +101,7 @@ void jus_TagSPDB::vfunc_07(int param_1)
               *(undefined4 *)(param_1 + 0x6c) = uVar4;
             }
             else if (*(int *)(iVar7 + 0x940) == 1) {
-              uVar4 = FUN_0203d6e8(iVar7,param_1,&LAB_02040d6c);
+              uVar4 = FUN_0203d6e8(iVar7,param_1,FUN_02040d6c);
               *(undefined4 *)(param_1 + 0x6c) = uVar4;
             }
             else {

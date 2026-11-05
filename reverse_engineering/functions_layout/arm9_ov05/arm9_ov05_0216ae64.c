@@ -36,17 +36,17 @@ int * DatabasePersonal::Database_PersonalCreate(int param_1)
   undefined4 local_2c;
   undefined4 local_28;
   
-  piVar3 = (int *)jus_AllocDebug(0x1ac,s_DatabasePersonal_cpp_02171da8,
-                                 s_Database_PersonalCreate_02171d74,0x4f);
+  piVar3 = (int *)thunk_FUN_0201a228(0x1ac,s_DatabasePersonal_cpp_02171da8,
+                                     s_Database_PersonalCreate_02171d74,0x4f);
   func_0x021b65bc();
   FUN_020517fc(piVar3,0,0x1ac);
   piVar3[0x68] = param_1;
-  FUN_0216baa0(piVar3,&LAB_0216bad4,0);
+  FUN_0216baa0(piVar3,FUN_0216bad4,0);
   iVar4 = FUN_02026f94();
   piVar3[5] = iVar4;
   local_28 = 0x80000;
   (**(code **)(**(int **)(iVar4 + 4) + 0xa0))(*(int **)(iVar4 + 4),&local_28);
-  FUN_02028384(*(undefined4 *)(piVar3[5] + 4),&LAB_0216badc);
+  FUN_02028384(*(undefined4 *)(piVar3[5] + 4),FUN_0216badc);
   (**(code **)(**(int **)(piVar3[5] + 4) + 0x24))(*(int **)(piVar3[5] + 4),piVar3);
   iVar4 = LocationData::LocationData_Create();
   piVar3[1] = iVar4;
@@ -75,7 +75,7 @@ int * DatabasePersonal::Database_PersonalCreate(int param_1)
   iVar4 = FUN_0215e2d4(*(undefined4 *)(iVar4 + 0x88),0x800000,0,0x80,0,0x1f);
   piVar3[0x1c] = iVar4;
   (**(code **)(**(int **)(iVar4 + 4) + 0xd8))(*(int **)(iVar4 + 4),1);
-  piVar6 = (int *)FUN_02160ae0(&LAB_0216bcf8,FUN_0216bdc8,0);
+  piVar6 = (int *)FUN_02160ae0(FUN_0216bcf8,FUN_0216bdc8,0);
   func_0x021b3b7c(1,0,piVar6,0);
   iVar4 = (**(code **)(*(int *)piVar6[1] + 0xb0))((int *)piVar6[1],0x31305053);
   if (iVar4 == 0) {
@@ -101,7 +101,7 @@ int * DatabasePersonal::Database_PersonalCreate(int param_1)
   *(undefined1 *)(iVar4 + 0x1b) = 1;
   FUN_02028330(*(undefined4 *)(*(int *)*piVar3 + 4));
   (**(code **)(*piVar6 + 8))();
-  piVar6 = (int *)FUN_02160ae0(&LAB_0216bd08,FUN_0216bdc8,0);
+  piVar6 = (int *)FUN_02160ae0(FUN_0216bd08,FUN_0216bdc8,0);
   func_0x021b3b7c(2,0,piVar6,0);
   (**(code **)(*piVar6 + 8))();
   if ((DAT_021724f0 & 1) == 0) {

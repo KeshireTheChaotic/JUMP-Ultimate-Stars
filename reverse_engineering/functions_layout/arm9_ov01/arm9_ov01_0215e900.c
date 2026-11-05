@@ -32,8 +32,8 @@ int * DeckSelectPersonal::DeckSelect_PersonalCreate(int param_1,int param_2)
   int local_24;
   int local_20 [3];
   
-  piVar4 = (int *)jus_AllocDebug(0x68,s_DeckSelectPersonal_cpp_0216cb00,
-                                 s_DeckSelect_PersonalCreate_0216cae4,0x36);
+  piVar4 = (int *)thunk_FUN_0201a228(0x68,s_DeckSelectPersonal_cpp_0216cb00,
+                                     s_DeckSelect_PersonalCreate_0216cae4,0x36);
   FUN_020517fc(piVar4,0,0x68);
   *piVar4 = param_1;
   piVar4[1] = param_2;

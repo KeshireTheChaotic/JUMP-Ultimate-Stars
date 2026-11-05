@@ -28,7 +28,8 @@ int * JGalaxyMap::JGalaxyMap_Create(int param_1)
   undefined4 local_2c;
   undefined4 local_28;
   
-  piVar3 = (int *)jus_AllocDebug(0x28,s_JGalaxyMap_cpp_0215c17c,s_JGalaxyMap_Create_0215c0f4,0x65);
+  piVar3 = (int *)thunk_FUN_0201a228(0x28,s_JGalaxyMap_cpp_0215c17c,s_JGalaxyMap_Create_0215c0f4,
+                                     0x65);
   FUN_020517fc(piVar3,0,0x28);
   *piVar3 = param_1;
   *(undefined1 *)(piVar3 + 8) = 1;
@@ -116,10 +117,10 @@ int * JGalaxyMap::JGalaxyMap_Create(int param_1)
   iVar4 = FUN_02156d08((&PTR_s_jgalaxy_map00_0215c108)[*(byte *)((int)piVar3 + 0x22)],
                        *(undefined4 *)(iVar4 + 0x88));
   piVar3[1] = iVar4;
-  iVar4 = jus_AllocDebug(0x78,s_ALNodeImp_h_0215bfa4,s_Create_0215c0b4,0x4c3);
+  iVar4 = thunk_FUN_0201a228(0x78,FUN_0215bfa4,s_Create_0215c0b4,0x4c3);
   piVar5 = (int *)0x0;
   if (iVar4 != 0) {
-    piVar5 = (int *)jus_Class_0209c0b4::jus_Class_0209c0b4(iVar4,FUN_02024a30,1);
+    piVar5 = (int *)jus_TagNDGR_0209c0b4::jus_TagNDGR_0209c0b4(iVar4,FUN_02024a30,1);
   }
   if (piVar5[6] == 0) {
     (**(code **)(*piVar5 + 0x14))();
@@ -137,7 +138,7 @@ int * JGalaxyMap::JGalaxyMap_Create(int param_1)
   uVar7 = FUN_020326b0(s_Position_0215c18c);
   uVar7 = (**(code **)(*piVar5 + 0x40))(piVar5,s_Position_0215c18c,&local_4c,uVar7);
   FUN_0202c4a4(&local_48,uVar7,local_4c);
-  iVar4 = jus_AllocDebug(0x4c,s_ALControllerImp_h_0215c008,s_Create_0215c0bc,0x2ef);
+  iVar4 = thunk_FUN_0201a228(0x4c,s_ALControllerImp_h_0215c008,s_Create_0215c0bc,0x2ef);
   if (iVar4 != 0) {
     jus_TagIPMV::jus_TagIPMV(iVar4,0,local_48,local_44,0x494c,&DAT_0215c158,8,0,0);
   }

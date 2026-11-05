@@ -10,7 +10,8 @@ int BattleProp::Battle_CharaPropChrInit(int param_1,int param_2)
   int iVar3;
   
                     /* JUS-TAG strings=["BattleProp.cpp","Battle_CharaPropChrInit"] */
-  iVar1 = jus_AllocDebug(0xe4,s_BattleProp_cpp_0209fabc,s_Battle_CharaPropChrInit_0209f850,0x288);
+  iVar1 = thunk_FUN_0201a228(0xe4,s_BattleProp_cpp_0209fabc,s_Battle_CharaPropChrInit_0209f850,0x288
+                            );
   FUN_020517fc(iVar1,0,0xe4);
   iVar2 = iVar1 + 0x70;
   iVar3 = 8;

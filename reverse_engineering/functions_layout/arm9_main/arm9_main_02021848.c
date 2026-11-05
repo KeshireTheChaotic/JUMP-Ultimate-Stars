@@ -21,7 +21,7 @@ ALWidgetBase_0209c1e0::ALWidgetBase_0209c1e0
   param_1[0x18] = 0;
   param_1[0x1a] = DAT_020a0e68;
   DAT_020a0cf8 = DAT_020a0cf8 + 1;
-  iVar1 = jus_AllocDebug(0x30);
+  iVar1 = FUN_0201a228(0x30);
   uVar2 = 0;
   if (iVar1 != 0) {
     uVar2 = jus_Class_0209647c::jus_Class_0209647c();

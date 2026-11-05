@@ -1,0 +1,17 @@
+020725bc  push {r3,r4,r5,lr}
+020725be  mov r2,#0x14
+020725c0  add r5,r0,#0x0
+020725c2  add r4,r1,#0x0
+020725c4  blx 0x0201b2a4
+020725c8  cmp r0,#0x0
+020725ca  beq 0x020725d0
+020725cc  mov r0,#0x0
+020725ce  pop {r3,r4,r5,pc}
+020725d0  ldr r1,[r5,#0x3c]
+020725d2  ldr r0,[r4,#0x3c]
+020725d4  cmp r1,r0
+020725d6  bne 0x020725dc
+020725d8  mov r0,#0x1
+020725da  pop {r3,r4,r5,pc}
+020725dc  mov r0,#0x0
+020725de  pop {r3,r4,r5,pc}

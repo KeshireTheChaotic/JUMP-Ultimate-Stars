@@ -1,0 +1,33 @@
+0214df28  ldr r3,[r0,#0x0]
+0214df2c  ldrb r0,[r3,#0x6]
+0214df30  cmp r0,#0x0
+0214df34  bne 0x0214df6c
+0214df38  ldrb r0,[r3,#0xb]
+0214df3c  mov r0,r0, asr #0x4
+0214df40  and r0,r0,#0xf
+0214df44  cmp r0,#0x3
+0214df48  bne 0x0214df9c
+0214df4c  ldr r0,[0x214dfac]
+0214df50  ldrb r2,[r3,#0x7]
+0214df54  ldr r3,[r0,#0x0]
+0214df58  mov r0,#0x3c
+0214df5c  smulbb r0,r2,r0
+0214df60  ldr r2,[r3,#0x40]
+0214df64  ldrb r0,[r2,r0]
+0214df68  b 0x0214df9c
+0214df6c  cmp r0,#0x1
+0214df70  movne r0,#0x3
+0214df74  bne 0x0214df9c
+0214df78  ldr r0,[0x214dfac]
+0214df7c  ldrsb r2,[r3,#0x8]
+0214df80  ldr r0,[r0,#0x0]
+0214df84  ldrb r3,[r3,#0x7]
+0214df88  ldr r12,[r0,#0x48]
+0214df8c  mov r0,#0x14
+0214df90  mla r0,r3,r0,r12
+0214df94  sub r2,r2,#0x1
+0214df98  ldrb r0,[r0,r2,lsl #0x3]
+0214df9c  cmp r0,r1
+0214dfa0  moveq r0,#0x1
+0214dfa4  movne r0,#0x0
+0214dfa8  bx lr

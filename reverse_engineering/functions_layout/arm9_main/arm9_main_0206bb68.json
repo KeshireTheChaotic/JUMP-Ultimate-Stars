@@ -1,0 +1,1 @@
+{"module":"arm9_main","address":"0206bb68","name":"FUN_0206bb68","thumb":true,"body_bytes":100,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["02028330","0206bbd0"],"unresolved_call_targets":["021b3bc8","021b3be0","021b70f8"],"status":"decompiled","asm_file":"arm9_main_0206bb68.asm","c_file":"arm9_main_0206bb68.c"}

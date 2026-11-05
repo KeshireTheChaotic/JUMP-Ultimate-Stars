@@ -23,7 +23,7 @@ void FUN_02160a48(int param_1,undefined4 param_2,undefined4 param_3,undefined4 p
   iVar4 = (int)DAT_020aff27;
   for (uVar5 = 0; (int)uVar5 < iVar4; uVar5 = uVar5 + 1) {
     if ((((uint)(byte)(&DAT_020b4084)[DAT_020b4114] & 1 << (uVar5 & 0xff)) == 0) &&
-       (iVar3 = (*(code *)(&PTR_LAB_02172290)
+       (iVar3 = (*(code *)(&PTR_FUN_02172290)
                           [*(byte *)(iVar2 + (uint)(byte)(&DAT_020aff29)[uVar5] * 4)])
                           (param_1,iVar2 + (uint)(byte)(&DAT_020aff29)[uVar5] * 4), iVar3 != 0)) {
       DAT_020aff28 = DAT_020aff28 | (byte)(1 << (uVar5 & 0xff));

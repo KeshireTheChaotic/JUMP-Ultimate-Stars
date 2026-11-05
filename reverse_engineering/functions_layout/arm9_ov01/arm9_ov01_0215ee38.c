@@ -101,11 +101,11 @@ void FUN_0215ee38(int param_1)
       unaff_r10[7] = &local_48;
       unaff_r10[8] = uVar8;
       unaff_r10[9] = 0x215efa8;
-      uVar8 = func_0x02075678(0x216df44,uVar1);
-      func_0x02074178(0x216df44,uVar8,0x10);
+      uVar8 = FUN_02075678(0x216df44,uVar1);
+      FUN_02074178(0x216df44,uVar8,0x10);
       piVar7 = *(int **)(*(int *)(*(int *)(iVar4 + 0x30) + 4) + 100);
       (**(code **)(*piVar7 + 0x68))(piVar7,0x216df44);
-      func_0x02074178(0x216df44,*(int *)(iVar4 + 0xc) + 0x14,0x10);
+      FUN_02074178(0x216df44,*(int *)(iVar4 + 0xc) + 0x14,0x10);
       piVar7 = *(int **)(*(int *)(*(int *)(iVar4 + 0x34) + 4) + 100);
       (**(code **)(*piVar7 + 0x68))(piVar7,0x216df44);
     }

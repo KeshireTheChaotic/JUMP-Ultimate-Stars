@@ -29,13 +29,13 @@ int Option::Option_Add(void)
   undefined1 auStack_3c [12];
   undefined1 auStack_30 [12];
   
-  piVar2 = (int *)jus_AllocDebug(0xac,s_Option_cpp_021614f0,s_Option_Add_0216136c,0xde);
+  piVar2 = (int *)thunk_FUN_0201a228(0xac,s_Option_cpp_021614f0,s_Option_Add_0216136c,0xde);
   FUN_020517fc(piVar2,0,0xac);
   iVar3 = FUN_02026f94();
   *piVar2 = iVar3;
   local_6c[0xb] = 0x80000;
   (**(code **)(**(int **)(iVar3 + 4) + 0xa0))(*(int **)(iVar3 + 4),local_6c + 0xb);
-  FUN_02028384(*(undefined4 *)(*piVar2 + 4),&LAB_02157eb8);
+  FUN_02028384(*(undefined4 *)(*piVar2 + 4),FUN_02157eb8);
   (**(code **)(**(int **)(*piVar2 + 4) + 0x24))(*(int **)(*piVar2 + 4),piVar2);
   iVar3 = FUN_020310f4();
   piVar2[1] = iVar3;
@@ -116,9 +116,9 @@ int Option::Option_Add(void)
   *(undefined1 *)((int)piVar2 + 0x9f) = *(undefined1 *)((int)piVar2 + 0x9a);
   *(undefined1 *)(piVar2 + 0x28) = *(undefined1 *)((int)piVar2 + 0x9b);
   *(char *)((int)piVar2 + 0xa1) = (char)piVar2[0x27];
-  iVar3 = jus_AllocDebug(0x78,s_ALNodeImp_h_02161148,s_Create_0216133c,0x4c3);
+  iVar3 = thunk_FUN_0201a228(0x78,FUN_02161148,s_Create_0216133c,0x4c3);
   if (iVar3 != 0) {
-    jus_Class_0209c0b4::jus_Class_0209c0b4(iVar3,FUN_02024a30,1);
+    jus_TagNDGR_0209c0b4::jus_TagNDGR_0209c0b4(iVar3,FUN_02024a30,1);
   }
   iVar3 = FUN_0214ed84();
   piVar2[7] = iVar3;
@@ -127,18 +127,18 @@ int Option::Option_Add(void)
   iVar3 = FUN_021582d8(s_option_option_02161568,*(undefined4 *)(iVar3 + 0x88));
   piVar2[8] = iVar3;
   iVar3 = FUN_0203b414(2);
-  iVar3 = FUN_021582d8(s_info_bg_02161578,*(undefined4 *)(iVar3 + 0x88));
+  iVar3 = FUN_021582d8(FUN_02161578,*(undefined4 *)(iVar3 + 0x88));
   piVar2[9] = iVar3;
   local_8c = 0;
   local_88 = 0xfff00000;
   local_84 = 0x100000;
   FUN_02151038(auStack_30,&local_84,&local_88,&local_8c);
-  FUN_02150d54(auStack_80,iVar3,s_Position_02161580);
+  FUN_02150d54(auStack_80,iVar3,FUN_02161580);
   uVar5 = ALControllerImp::Create(auStack_80,0x494c,&DAT_02093c8c,auStack_30,0x400,2);
   FUN_02020f38(iVar3,uVar5);
   FUN_0214f3e0(piVar2[8],piVar2[7]);
   iVar3 = FUN_0203b3e4();
-  iVar3 = FUN_021583dc(0xb00000,0xb00000,*(undefined4 *)(iVar3 + 0x88),&DAT_02161424,0,0xa0);
+  iVar3 = FUN_021583dc(0xb00000,0xb00000,*(undefined4 *)(iVar3 + 0x88),FUN_02161424,0,0xa0);
   piVar2[10] = iVar3;
   FUN_021552fc(piVar2[7],piVar2[10]);
   iVar3 = 1;
@@ -146,7 +146,7 @@ int Option::Option_Add(void)
     iVar6 = FUN_0203b3e4();
     iVar6 = FUN_021583dc(*(undefined4 *)(iVar3 * 8 + 0x2160104),0xb00000,
                          *(undefined4 *)(iVar6 + 0x88),
-                         &DAT_02161424 + (uint)*(byte *)(iVar3 * 8 + 0x2160108) * 0xc,piVar2[7],
+                         FUN_02161424 + (uint)*(byte *)(iVar3 * 8 + 0x2160108) * 0xc,piVar2[7],
                          *(undefined1 *)(iVar3 * 8 + 0x2160109));
     iVar8 = iVar3 + 1;
     piVar2[iVar3 + 10] = iVar6;
@@ -180,7 +180,7 @@ int Option::Option_Add(void)
   FUN_0214ed48(*(undefined4 *)(iVar3 + 0x88));
   func_0x021c5f88(s_font_jskfont_aft_0216158c,0,0);
   iVar3 = FUN_0214ed84();
-  FUN_02151170(iVar3,&DAT_02161460);
+  FUN_02151170(iVar3,0x2161460);
   piVar4 = *(int **)(*(int *)(iVar3 + 4) + 100);
   (**(code **)(*piVar4 + 0x88))(piVar4,0x90);
   piVar4 = *(int **)(*(int *)(iVar3 + 4) + 100);
@@ -197,7 +197,7 @@ int Option::Option_Add(void)
   uVar5 = func_0x021bd710(piVar2[0x22],(int)(char)piVar2[0x28]);
   piVar4 = *(int **)(*(int *)(iVar3 + 4) + 100);
   (**(code **)(*piVar4 + 0x68))(piVar4,uVar5);
-  iVar3 = jus_AllocDebug(0xcc,s_ALWidget_inl_02161154,s_Create_02161354,0x1de);
+  iVar3 = thunk_FUN_0201a228(0xcc,FUN_02161154,s_Create_02161354,0x1de);
   piVar4 = (int *)0x0;
   if (iVar3 != 0) {
     piVar4 = (int *)func_0x021af26c(iVar3,FUN_021581d0,FUN_02158224,0);
@@ -250,7 +250,7 @@ int Option::Option_Add(void)
   *(undefined1 *)(*(int *)(iVar3 + 4) + 0xaa) = 1;
   *(undefined1 *)(*(int *)(iVar3 + 4) + 0xab) = 0;
   func_0x021b77a8(*(undefined4 *)(iVar3 + 4),0x20);
-  func_0x021b6760(*(undefined4 *)(iVar3 + 4),4,&LAB_02158e38);
+  func_0x021b6760(*(undefined4 *)(iVar3 + 4),4,FUN_02158e38);
   iVar3 = FUN_0203b3e4();
   FUN_0214ed48(*(undefined4 *)(iVar3 + 0x88));
   _DAT_021d5154 = 1;
@@ -262,7 +262,7 @@ int Option::Option_Add(void)
   iVar3 = 0;
   do {
     iVar6 = ALWidgetImp::Create(piVar2,piVar2[0x15],
-                                &DAT_02161424 + (uint)(byte)(&DAT_02160150)[iVar3 * 8] * 0xc,
+                                FUN_02161424 + (uint)(byte)(&DAT_02160150)[iVar3 * 8] * 0xc,
                                 &DAT_02161378 + (uint)(byte)(&DAT_02160151)[iVar3 * 8] * 8);
     piVar2[iVar3 + 0x17] = iVar6;
     *(undefined4 *)(*(int *)(iVar6 + 4) + 0xdc) = (&DAT_0216014c)[iVar3 * 2];
@@ -294,7 +294,7 @@ int Option::Option_Add(void)
   iVar3 = 5;
   do {
     iVar6 = ALWidgetImp::Create(piVar2,piVar2[0x15],
-                                &DAT_02161424 + (uint)(byte)(&DAT_02160150)[iVar3 * 8] * 0xc,
+                                FUN_02161424 + (uint)(byte)(&DAT_02160150)[iVar3 * 8] * 0xc,
                                 &DAT_02161378 + (uint)(byte)(&DAT_02160151)[iVar3 * 8] * 8);
     piVar2[iVar3 + 0x17] = iVar6;
     func_0x021b65e8(*(undefined4 *)(iVar6 + 4),4,(&DAT_0216014c)[iVar3 * 2]);
@@ -331,7 +331,7 @@ int Option::Option_Add(void)
   local_98 = 0;
   local_94 = 0xfff40000;
   FUN_02151038(auStack_3c,&local_98,&local_94,&local_90);
-  FUN_02150d54(auStack_a0,piVar2[7],s_Position_02161580);
+  FUN_02150d54(auStack_a0,piVar2[7],FUN_02161580);
   uVar5 = ALControllerImp::Create(auStack_a0,0x494c,auStack_3c,&DAT_02093c8c,8,0xb);
   FUN_02020f38(piVar2[7],uVar5);
   return piVar2[1];

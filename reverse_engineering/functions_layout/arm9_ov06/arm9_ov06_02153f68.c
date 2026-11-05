@@ -23,8 +23,8 @@ int * BattleWindow::Battle_WindowCreate(undefined1 param_1,int param_2,int param
   undefined1 auStack_30 [11];
   undefined1 auStack_25 [17];
   
-  piVar2 = (int *)jus_AllocDebug(0xd4,s_BattleWindow_cpp_02171f7c,s_Battle_WindowCreate_02171f68,
-                                 0x57);
+  piVar2 = (int *)thunk_FUN_0201a228(0xd4,s_BattleWindow_cpp_02171f7c,s_Battle_WindowCreate_02171f68
+                                     ,0x57);
   FUN_020517fc(piVar2,0,0xd4);
   *(undefined1 *)((int)piVar2 + 0xc9) = param_1;
   piVar2[0x26] = param_2;

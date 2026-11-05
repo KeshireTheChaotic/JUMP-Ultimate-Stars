@@ -15,8 +15,8 @@ undefined4 DeckMakeTutorial::DeckMakeTutorial_Add(void)
   undefined4 local_10;
   
   puVar1 = (undefined4 *)
-           jus_AllocDebug(0x7c,s_DeckMakeTutorial_cpp_02171148,s_DeckMakeTutorial_Add_02171130,0x4b)
-  ;
+           thunk_FUN_0201a228(0x7c,s_DeckMakeTutorial_cpp_02171148,s_DeckMakeTutorial_Add_02171130,
+                              0x4b);
   FUN_020517fc(puVar1,0,0x7c);
   iVar2 = FUN_02026f94();
   puVar1[0xd] = iVar2;
@@ -69,7 +69,7 @@ undefined4 DeckMakeTutorial::DeckMakeTutorial_Add(void)
   (**(code **)(**(int **)(puVar1[0xf] + 4) + 0xd8))(*(int **)(puVar1[0xf] + 4),0);
   DAT_020a0dd0 = (&DAT_020a16d0)[DAT_02093c08];
   DAT_02093c08 = DAT_02093c08 + 1;
-  uVar3 = FUN_0206b994(s_deckmake_tutorial_bin_02171190,1);
+  uVar3 = CommonTutorial::CommonTutorial_Create(s_deckmake_tutorial_bin_02171190,1);
   puVar1[2] = uVar3;
   (**(code **)(*piVar4 + 0xc))();
   FUN_0206bb68(puVar1[2],puVar1 + 8,puVar1 + 10);

@@ -31,8 +31,8 @@ SelectStandbyBar::SelectStandbyBar_Create
   
   uStack_28 = param_4;
   puVar2 = (undefined4 *)
-           jus_AllocDebug(0x88,s_SelectStandbyBar_cpp_0216d654,s_SelectStandbyBar_Create_0216d5d0,
-                          0x71);
+           thunk_FUN_0201a228(0x88,s_SelectStandbyBar_cpp_0216d654,
+                              s_SelectStandbyBar_Create_0216d5d0,0x71);
   FUN_020517fc(puVar2,0,0x88);
   puVar2[0xd] = param_1;
   puVar2[0x1b] = param_2;
@@ -57,9 +57,9 @@ SelectStandbyBar::SelectStandbyBar_Create
     *puVar2 = uVar4;
     uVar4 = FUN_020101f4(s_deckselect_standby_c_obj_aar_0216d688,0);
     puVar2[1] = uVar4;
-    iVar3 = jus_AllocDebug(0x78,s_ALNodeImp_h_0216bbd4,s_Create_0216d5c8,0x4c3);
+    iVar3 = thunk_FUN_0201a228(0x78,s_ALNodeImp_h_0216bbd4,s_Create_0216d5c8,0x4c3);
     if (iVar3 != 0) {
-      jus_Class_0209c0b4::jus_Class_0209c0b4(iVar3,FUN_02024a30,1);
+      jus_TagNDGR_0209c0b4::jus_TagNDGR_0209c0b4(iVar3,FUN_02024a30,1);
     }
     iVar3 = FUN_0214d37c();
     puVar2[2] = iVar3;

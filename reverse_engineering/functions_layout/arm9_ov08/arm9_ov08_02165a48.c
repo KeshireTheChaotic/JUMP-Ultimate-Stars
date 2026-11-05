@@ -30,7 +30,7 @@ void FUN_02165a48(void)
   if (iVar2 == 0) {
     FUN_02055684();
   }
-  FUN_02063c0c(DAT_0216e830 + 0x22,&LAB_021659a4_1,0x602);
+  FUN_02063c0c(DAT_0216e830 + 0x22,FUN_021659a4 + 1,0x602);
   iVar2 = FUN_02063e7c(DAT_0216e830 + 0x22,local_ac,local_d8,local_d4,local_e0,local_dc,
                        FUN_02165978 + 1,&LAB_02165968_1);
   if (iVar2 == 0) {

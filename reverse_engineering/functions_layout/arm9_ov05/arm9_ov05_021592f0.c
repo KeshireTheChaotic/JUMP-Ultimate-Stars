@@ -22,7 +22,7 @@ void FUN_021592f0(int param_1)
     FUN_02150070(*(undefined4 *)(iVar1 + 0x44),&local_20);
     *(undefined1 *)(iVar1 + 0x4e6) = 1;
     FUN_0215ee44(iVar1 + 0x4b8);
-    FUN_02028384(*(undefined4 *)(param_1 + 4),&LAB_021592d4);
+    FUN_02028384(*(undefined4 *)(param_1 + 4),FUN_021592d4);
   }
   return;
 }

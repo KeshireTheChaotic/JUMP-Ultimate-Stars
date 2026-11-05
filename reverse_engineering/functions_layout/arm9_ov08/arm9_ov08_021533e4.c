@@ -21,7 +21,7 @@ int FUN_021533e4(void)
     return -2;
   }
   FUN_020550a0(auStack_40);
-  FUN_02054ee8(auStack_40,0x3fec42,0,&LAB_02153660_1,0x12);
+  FUN_02054ee8(auStack_40,0x3fec42,0,0x2153661,0x12);
   local_44 = -8;
   while( true ) {
     uVar3 = FUN_021504d4();

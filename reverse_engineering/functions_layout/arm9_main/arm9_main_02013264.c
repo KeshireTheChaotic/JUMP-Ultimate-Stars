@@ -29,7 +29,7 @@ jus_TagIPCT::jus_TagIPCT
   }
   iVar2 = (**(code **)(*param_3 + 0x68))(param_3,param_4);
   iVar4 = (iVar2 + 1U >> 1) + 1 + (uint)(*(ushort *)(param_1[0x12] + 4) >> 1);
-  puVar3 = (undefined2 *)jus_AllocDebug((iVar4 * 2 + 1) * 2);
+  puVar3 = (undefined2 *)FUN_0201a228((iVar4 * 2 + 1) * 2);
   param_1[0xd] = puVar3;
   *puVar3 = 0;
   *(short *)(param_1[0xd] + iVar4 * 2) = (short)param_1[0xe];

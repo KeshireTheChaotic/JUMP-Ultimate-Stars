@@ -1,0 +1,10 @@
+021d0114  lsr r1,r1,#0x20
+021d0116  asr r2,r2,#0x4
+021d0118  mov r0,r2
+021d011a  mov r0,r0
+021d011c  mov r0,r6
+021d011e  mov r0,r0
+021d0120  lsl r0,r2,#0x1
+021d0122  mov r0,r0
+021d0124  lsl r1,r3,#0x1
+021d0126  mov r0,r0

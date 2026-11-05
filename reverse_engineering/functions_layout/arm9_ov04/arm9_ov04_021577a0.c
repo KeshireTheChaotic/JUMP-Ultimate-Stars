@@ -20,8 +20,8 @@ int * JQuizMainSingleScore::JQuizMainSingleScoreClass_Create
   undefined4 uStack_14;
   
   uStack_14 = param_4;
-  piVar1 = (int *)jus_AllocDebug(0x20,s_JQuizMainSingleScore_cpp_0216113c,
-                                 s_JQuizMainSingleScoreClass_Create_02161118,0x45);
+  piVar1 = (int *)thunk_FUN_0201a228(0x20,s_JQuizMainSingleScore_cpp_0216113c,
+                                     s_JQuizMainSingleScoreClass_Create_02161118,0x45);
   FUN_020517fc(piVar1,0,0x20);
   iVar2 = ALWidgetBaseImp::Create(piVar1,param_1);
   (**(code **)(**(int **)(iVar2 + 4) + 0xd8))(*(int **)(iVar2 + 4),1);
@@ -65,7 +65,7 @@ int * JQuizMainSingleScore::JQuizMainSingleScoreClass_Create
   *piVar1 = iVar2;
   local_28 = 0x80000;
   (**(code **)(**(int **)(iVar2 + 4) + 0xa0))(*(int **)(iVar2 + 4),&local_28);
-  FUN_02028384(*(undefined4 *)(*piVar1 + 4),&DAT_02157b70);
+  FUN_02028384(*(undefined4 *)(*piVar1 + 4),FUN_02157b70);
   (**(code **)(**(int **)(*piVar1 + 4) + 0x24))(*(int **)(*piVar1 + 4),piVar1);
   return piVar1;
 }

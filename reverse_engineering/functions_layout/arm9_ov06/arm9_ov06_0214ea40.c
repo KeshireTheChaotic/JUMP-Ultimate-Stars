@@ -17,7 +17,7 @@ void FUN_0214ea40(int param_1)
   FUN_02152738(*(undefined4 *)(DAT_02172960 + 0xf4),1);
   if (*(char *)(iVar1 + 0x9e) == '\0') {
     FUN_02073f24(0x11,0,0x2f);
-    FUN_02028384(*(undefined4 *)(*(int *)(iVar1 + 4) + 4),&LAB_0214eaf8);
+    FUN_02028384(*(undefined4 *)(*(int *)(iVar1 + 4) + 4),FUN_0214eaf8);
     return;
   }
   FUN_0214ea00(iVar1);

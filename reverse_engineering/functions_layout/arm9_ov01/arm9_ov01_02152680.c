@@ -15,7 +15,7 @@ void FUN_02152680(int param_1)
   FUN_0207538c(*(undefined4 *)(puVar2 + 0x140),puVar2[1]);
   FUN_02151924(3);
   FUN_02073ebc(3,1);
-  FUN_02028384(*(undefined4 *)(*(int *)(puVar2 + 8) + 4),&LAB_021500f4_1);
+  FUN_02028384(*(undefined4 *)(*(int *)(puVar2 + 8) + 4),0x21500f5);
   return;
 }
 

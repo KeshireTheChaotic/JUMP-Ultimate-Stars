@@ -19,10 +19,10 @@ void FUN_0215d2e4(int param_1,undefined4 param_2,undefined4 param_3,undefined4 p
     FUN_02157450(param_1,0);
   }
   if (*(char *)(param_1 + 0xdb) == '\0') {
-    FUN_02157494(param_1,0,FUN_0215d3b4,&LAB_0215d530,0,param_4);
+    FUN_02157494(param_1,0,FUN_0215d3b4,FUN_0215d530,0,param_4);
   }
   else {
-    FUN_02157494(param_1,0xd,FUN_0215d564,&LAB_0215d6d4,0,param_4);
+    FUN_02157494(param_1,0xd,FUN_0215d564,FUN_0215d6d4,0,param_4);
   }
   return;
 }

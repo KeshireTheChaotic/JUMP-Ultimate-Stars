@@ -10,7 +10,7 @@ void FUN_02014498(undefined4 param_1)
     return;
   }
   DAT_020a0cbc = param_1;
-  iVar1 = jus_AllocDebug(0x40);
+  iVar1 = FUN_0201a228(0x40);
   uVar2 = 0;
   if (iVar1 != 0) {
     uVar2 = FUN_02014210(iVar1,8);

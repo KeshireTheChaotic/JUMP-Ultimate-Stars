@@ -51,8 +51,8 @@ void BattleCharaInfo::Battle_CharaInfoPopularSet(int param_1)
     goto switchD_02160048_default;
   }
   DAT_020b76ae = DAT_020b76ae + 1;
-  iVar16 = jus_AllocDebug(0x30,s_BattleCharaInfo_cpp_02172310,s_Battle_CharaInfoPopularSet_02172274,
-                          0xbc);
+  iVar16 = thunk_FUN_0201a228(0x30,s_BattleCharaInfo_cpp_02172310,
+                              s_Battle_CharaInfoPopularSet_02172274,0xbc);
   FUN_020517fc(iVar16,0,0x30);
   iVar18 = 0;
   iVar19 = 0;

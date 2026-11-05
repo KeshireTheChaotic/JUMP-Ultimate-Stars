@@ -15,7 +15,7 @@ void WiFiGame::WiFi_SendPersonalData
   
   if (DAT_0214ccf8 != 0) {
     uStack_14 = param_4;
-    iVar1 = jus_AllocDebug(0x4c,s_WiFiGame_cpp_021a72dc,s_WiFi_SendPersonalData_021a71e4,0x36c);
+    iVar1 = thunk_FUN_0201a228(0x4c,s_WiFiGame_cpp_021a72dc,s_WiFi_SendPersonalData_021a71e4,0x36c);
     FUN_02051890(param_1,iVar1,0x4c);
     iVar2 = FUN_0219b620();
     bVar4 = param_2 == iVar2;

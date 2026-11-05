@@ -11,7 +11,7 @@ int * Secret::Secret_Create(void)
   undefined4 in_r3;
   
                     /* JUS-TAG strings=["Secret.cpp","Secret_Create","bin/secret.bin"] */
-  piVar1 = (int *)jus_AllocDebug(8,s_Secret_cpp_0209f4d0,s_Secret_Create_0209f4c0,0x19,in_r3);
+  piVar1 = (int *)thunk_FUN_0201a228(8,s_Secret_cpp_0209f4d0,s_Secret_Create_0209f4c0,0x19,in_r3);
   FUN_020517fc(piVar1,0,8);
   piVar2 = (int *)FUN_02033410(s_bin_secret_bin_0209f4dc,0,0);
   if (piVar2[7] == 0) {

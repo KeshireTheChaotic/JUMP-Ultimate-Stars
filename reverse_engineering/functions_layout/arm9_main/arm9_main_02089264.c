@@ -36,7 +36,7 @@ void FUN_02089264(int param_1)
   FUN_02088eac(4,0xf0);
   if (param_1 != 0) {
     DAT_0214bea4 = 4;
-    iVar1 = FUN_02059428(&LAB_0208924c_1);
+    iVar1 = FUN_02059428(0x208924d);
     if (iVar1 != 2) {
       DAT_0214bea4 = 9;
       return;

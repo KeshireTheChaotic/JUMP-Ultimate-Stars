@@ -14,7 +14,7 @@ void FUN_0214cff8(int param_1)
      (*(char *)((int)piVar2 + 0x1f) == '\0')) {
     iVar1 = (**(code **)(&DAT_0215d2ac + (uint)*(byte *)(piVar2 + 7) * 4))(param_1);
     piVar2[2] = iVar1;
-    FUN_02028384(*(undefined4 *)(param_1 + 4),&DAT_0214d1ac);
+    FUN_02028384(*(undefined4 *)(param_1 + 4),FUN_0214d1ac);
     return;
   }
   if ((piVar2[6] & 4U) == 0) {

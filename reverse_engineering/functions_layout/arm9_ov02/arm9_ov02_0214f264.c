@@ -63,22 +63,22 @@ void FUN_0214f264(int param_1)
   iVar11 = FUN_0203b3f4();
   local_144[0] = FUN_0214d53c(0x1200b,0x12000,*(undefined4 *)(iVar11 + 0x88),
                               *(undefined4 *)(param_1 + 4),0x4f);
-  FUN_0214f960(local_144[0],&DAT_0215bf24);
+  FUN_0214f960(local_144[0],FUN_0215bf24);
   uVar4 = FUN_0214dfa8(*(undefined4 *)(param_1 + 0x88));
   iVar11 = FUN_0203b3e4();
   uVar4 = FUN_0214d53c(uVar4,0xa01000,*(undefined4 *)(iVar11 + 0x88),*(undefined4 *)(param_1 + 4),
                        0x21);
-  FUN_0214f960(uVar4,&DAT_0215bedc);
+  FUN_0214f960(uVar4,FUN_0215bedc);
   iVar11 = FUN_0203b3e4();
   uVar4 = FUN_0214d53c(0x10003,0x10000,*(undefined4 *)(iVar11 + 0x88),*(undefined4 *)(param_1 + 4),
                        0x60);
-  FUN_0214f960(uVar4,&DAT_0215bed0);
+  FUN_0214f960(uVar4,FUN_0215bed0);
   iVar9 = *(int *)(*(int *)(param_1 + 0x84) + 0x34);
   iVar11 = (short)(ushort)*(byte *)(*(int *)(param_1 + 0x88) + 0x2c) * 0x48;
   iVar2 = FUN_0203b3e4();
   iVar2 = FUN_0214d53c(0x10002,0x10000,*(undefined4 *)(iVar2 + 0x88),*(undefined4 *)(param_1 + 4),
                        0x62);
-  FUN_0214f960(iVar2,&DAT_0215bef4);
+  FUN_0214f960(iVar2,0x215bef4);
   (**(code **)(**(int **)(*(int *)(iVar2 + 4) + 0x68) + 0x70))();
   iVar5 = FUN_02074294(iVar9 + iVar11);
   if (iVar5 < 6) {
@@ -96,21 +96,21 @@ void FUN_0214f264(int param_1)
   FUN_0214f9a4(auStack_190,iVar2);
   FUN_0214e39c(auStack_168,&local_198,auStack_190,&local_18c);
   FUN_0214ef10(&local_1a0,iVar2,s_Position_0215c048);
-  iVar11 = jus_AllocDebug(0x4c,s_ALControllerImp_h_0215c008,s_Create_0215bec0,0x2ef);
+  iVar11 = thunk_FUN_0201a228(0x4c,s_ALControllerImp_h_0215c008,s_Create_0215bec0,0x2ef);
   if (iVar11 != 0) {
     jus_TagIPMV::jus_TagIPMV(iVar11,0,local_1a0,local_19c,0x494c,auStack_168,8,0,1);
   }
   iVar11 = FUN_0214f194();
   uVar4 = *(undefined4 *)(iVar11 + 4);
-  iVar11 = jus_AllocDebug(0x48,s_ALControllerImp_h_0215bfe0,s_Create_0215beb0,0x3e3);
+  iVar11 = thunk_FUN_0201a228(0x48,s_ALControllerImp_h_0215bfe0,&DAT_0215beb0,0x3e3);
   if (iVar11 != 0) {
     jus_TagDLST::jus_TagDLST(iVar11,0,uVar4,0x78,0);
   }
   uVar4 = FUN_0214f194();
   FUN_02020f38(iVar2,uVar4);
-  iVar11 = jus_AllocDebug(0x78,s_ALNodeImp_h_0215bfa4,s_Create_0215bea0,0x4c3);
+  iVar11 = thunk_FUN_0201a228(0x78,FUN_0215bfa4,s_Create_0215bea0,0x4c3);
   if (iVar11 != 0) {
-    jus_Class_0209c0b4::jus_Class_0209c0b4(iVar11,FUN_02024a30,1);
+    jus_TagNDGR_0209c0b4::jus_TagNDGR_0209c0b4(iVar11,FUN_02024a30,1);
   }
   uVar4 = FUN_0214d498();
   FUN_0214d6b0(*(undefined4 *)(param_1 + 8),uVar4);
@@ -171,11 +171,11 @@ LAB_0214f714:
       *(undefined1 *)(iVar11 + 0x18) = 0xf;
       *(undefined1 *)(iVar11 + 0x19) = 1;
       *(int *)(param_1 + 0x7c) = iVar11;
-      FUN_0214fa00(auStack_150,&DAT_0215bf00);
+      FUN_0214fa00(auStack_150,0x215bf00);
       FUN_0214fa00(auStack_15c,auStack_150);
       local_158 = local_158 + 0xa000;
       FUN_0214ef10(&local_188,uVar4,s_Position_0215c048);
-      iVar11 = jus_AllocDebug(0x4c,s_ALControllerImp_h_0215bff4,s_Create_0215be90,0x2b9);
+      iVar11 = thunk_FUN_0201a228(0x4c,s_ALControllerImp_h_0215bff4,&DAT_0215be90,0x2b9);
       if (iVar11 != 0) {
         jus_TagIPCT::jus_TagIPCT(iVar11,0,local_188,local_184,0x494c,auStack_150,auStack_15c,0xb4,0)
         ;

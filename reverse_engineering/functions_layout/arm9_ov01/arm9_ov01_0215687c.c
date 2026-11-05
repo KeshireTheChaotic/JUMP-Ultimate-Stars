@@ -15,7 +15,7 @@ void FUN_0215687c(int param_1)
   iVar4 = (*(int **)(param_1 + 4))[4];
   uVar1 = (**(code **)(**(int **)(param_1 + 4) + 0xac))();
   if ((1 < uVar1) && ((*(uint *)(iVar4 + 0xec) & 2) != 0)) {
-    iVar2 = (*(code *)(&PTR_LAB_0215413c_1_02169d3c)[*(int *)(iVar4 + 0xf8)])();
+    iVar2 = (*(code *)(&PTR_FUN_0215413c_1_02169d3c)[*(int *)(iVar4 + 0xf8)])();
     if (iVar2 == 0) {
       puVar5 = &DAT_02169d34;
       local_58 = DAT_0216c1a8;

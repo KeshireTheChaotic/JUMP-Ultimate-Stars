@@ -13,7 +13,7 @@ void FUN_020284c0(int *param_1)
     iVar2 = *piVar1;
   }
   if (piVar1 == (int *)0x0 || iVar2 == 0) {
-    if ((undefined1 *)param_1[0x10] == &LAB_0202836c) {
+    if ((code *)param_1[0x10] == FUN_0202836c) {
       (**(code **)(*param_1 + 0x60))();
       return;
     }
@@ -31,7 +31,7 @@ void FUN_020284c0(int *param_1)
       if ((((-1 < (char)*(byte *)(param_1 + 10)) && ((*(byte *)(param_1 + 10) & 3) >> 1 == 0)) &&
           ((*(byte *)((int)param_1 + 0x29) & 3) >> 1 == 0)) &&
          ((*(uint *)(param_1[0xd] + 0x248) & (param_1[0xf] & 0x7fffffffU | 0x80000000)) != 0)) {
-        if ((undefined1 *)param_1[0x10] == &LAB_0202836c) {
+        if ((code *)param_1[0x10] == FUN_0202836c) {
           (**(code **)(*param_1 + 0x60))();
         }
         else {

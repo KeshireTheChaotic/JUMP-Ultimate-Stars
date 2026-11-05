@@ -34,7 +34,7 @@ int * jus_Class_02094130::vfunc_07(undefined4 param_1,int *param_2)
         if ((0xf < bVar1) && (bVar1 == 0x10 || bVar1 == 0x11)) {
           (**(code **)(*param_2 + 0x24))(param_2,iVar5 + (uint)*(byte *)(iVar4 + 6) * 0x20 + 0xc);
           if (*(char *)(iVar4 + 5) == '\x10') {
-            unaff_r9 = (int *)jus_AllocDebug(0x24);
+            unaff_r9 = (int *)FUN_0201a228(0x24);
             if (unaff_r9 != (int *)0x0) {
               ::jus_Class_02096f04::jus_Class_02096f04
                         (unaff_r9,*(undefined2 *)(iVar4 + 8),*(undefined2 *)(iVar4 + 10),param_2,
@@ -43,7 +43,7 @@ int * jus_Class_02094130::vfunc_07(undefined4 param_1,int *param_2)
             }
           }
           else if ((*(char *)(iVar4 + 5) == '\x11') &&
-                  (unaff_r9 = (int *)jus_AllocDebug(0x24), unaff_r9 != (int *)0x0)) {
+                  (unaff_r9 = (int *)FUN_0201a228(0x24), unaff_r9 != (int *)0x0)) {
             ::jus_Class_02096f04::jus_Class_02096f04
                       (unaff_r9,*(undefined2 *)(iVar4 + 8),*(undefined2 *)(iVar4 + 10),param_2,
                        piVar7);
@@ -53,7 +53,7 @@ int * jus_Class_02094130::vfunc_07(undefined4 param_1,int *param_2)
       }
       else if (bVar1 == 0x20) {
         (**(code **)(*param_2 + 0x24))(param_2,iVar5 + (uint)*(byte *)(iVar4 + 6) * 0x20 + 0xc);
-        iVar2 = jus_AllocDebug(0x24);
+        iVar2 = FUN_0201a228(0x24);
         unaff_r9 = (int *)0x0;
         if (iVar2 != 0) {
           unaff_r9 = (int *)jus_TagPL4R::jus_TagPL4R
@@ -64,7 +64,7 @@ int * jus_Class_02094130::vfunc_07(undefined4 param_1,int *param_2)
     }
     else {
       (**(code **)(*param_2 + 0x24))(param_2,iVar5 + (uint)*(byte *)(iVar4 + 6) * 0x20 + 0xc);
-      unaff_r9 = (int *)jus_AllocDebug(0x24);
+      unaff_r9 = (int *)FUN_0201a228(0x24);
       if (unaff_r9 != (int *)0x0) {
         ::jus_Class_02096f04::jus_Class_02096f04
                   (unaff_r9,*(undefined2 *)(iVar4 + 8),*(undefined2 *)(iVar4 + 10),param_2,piVar7);
@@ -81,7 +81,7 @@ int * jus_Class_02094130::vfunc_07(undefined4 param_1,int *param_2)
         (**(code **)(*param_2 + 0x24))(param_2,iVar5 + (uint)*(byte *)(iVar4 + 6) * 0x20 + 0x10);
         iVar9 = *(int *)(iVar2 + iVar3 + (uint)*(byte *)(iVar4 + 6) * 0x20 + 0xc);
       }
-      iVar8 = jus_AllocDebug(0x78);
+      iVar8 = FUN_0201a228(0x78);
       unaff_r9 = (int *)0x0;
       if (iVar8 != 0) {
         unaff_r9 = (int *)jus_TagFFL4::jus_TagFFL4
@@ -97,7 +97,7 @@ int * jus_Class_02094130::vfunc_07(undefined4 param_1,int *param_2)
   }
   else if (bVar1 == 0x50) {
     (**(code **)(*param_2 + 0x24))(param_2,iVar5 + (uint)*(byte *)(iVar4 + 6) * 0x20 + 0xc);
-    unaff_r9 = (int *)jus_AllocDebug(0x24);
+    unaff_r9 = (int *)FUN_0201a228(0x24);
     if (unaff_r9 != (int *)0x0) {
       ::jus_Class_02096f04::jus_Class_02096f04
                 (unaff_r9,*(undefined2 *)(iVar4 + 8),*(undefined2 *)(iVar4 + 10),param_2,piVar7);

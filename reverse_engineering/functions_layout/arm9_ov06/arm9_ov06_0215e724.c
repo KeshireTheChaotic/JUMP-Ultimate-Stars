@@ -23,10 +23,10 @@ void FUN_0215e724(int param_1)
       FUN_0207d180(*(undefined4 *)(*(int *)(param_1 + 0x1a8) + 0x10));
       FUN_0207d11c(*(undefined4 *)(*(int *)(param_1 + 0x1a8) + 0x10),0);
       if (*(char *)(param_1 + 0x1e7) == '\x01') {
-        FUN_02157494(param_1,0x10,FUN_0215e854,&LAB_0215e938,0x10);
+        FUN_02157494(param_1,0x10,FUN_0215e854,FUN_0215e938,0x10);
       }
       else if (*(char *)(param_1 + 0x1e7) == '\x02') {
-        FUN_02157494(param_1,0x10,FUN_0215e94c,&LAB_0215e988,0x10);
+        FUN_02157494(param_1,0x10,FUN_0215e94c,FUN_0215e988,0x10);
       }
     }
   }

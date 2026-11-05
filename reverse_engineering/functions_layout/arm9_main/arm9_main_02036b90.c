@@ -18,7 +18,7 @@ undefined4 * jus_Class_0209c6bc::jus_Class_0209c6bc(undefined4 *param_1,int para
   }
   else {
     iVar1 = FUN_02004b04();
-    uVar2 = jus_AllocDebug(iVar1 + 1);
+    uVar2 = FUN_0201a228(iVar1 + 1);
     FUN_02004b18(uVar2,*(undefined4 *)(param_2 + 0x70));
     param_1[0x1c] = uVar2;
   }

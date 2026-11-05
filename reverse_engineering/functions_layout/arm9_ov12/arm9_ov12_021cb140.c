@@ -21,7 +21,7 @@ int * ALFont::Create(undefined4 param_1,undefined4 param_2,undefined4 param_3)
       piVar2 = (int *)(**(code **)(*piVar1 + 0x2c))(piVar1,0);
       if (*piVar2 == 0x54464c41) {
         iVar3 = (**(code **)(*piVar1 + 0x2c))(piVar1,0);
-        iVar4 = jus_AllocDebug(0x14,s_ALFont_cpp_021d5060,s_Create_021d4e6c,0x247);
+        iVar4 = thunk_FUN_0201a228(0x14,s_ALFont_cpp_021d5060,s_Create_021d4e6c,0x247);
         uVar5 = 0;
         if (iVar4 != 0) {
           uVar5 = ALFont_021d4ed0::ALFont_021d4ed0(iVar4,iVar3 + 0xe,*(undefined2 *)(iVar3 + 0xc));
@@ -36,7 +36,7 @@ int * ALFont::Create(undefined4 param_1,undefined4 param_2,undefined4 param_3)
         }
         piVar2 = (int *)thunk_FUN_02016628(piVar1,uVar6);
         if ((*(byte *)(iVar3 + 5) & 2) == 0) {
-          iVar4 = jus_AllocDebug(0x6c,s_ALFont_cpp_021d5060,s_Create_021d4e6c,0x251);
+          iVar4 = thunk_FUN_0201a228(0x6c,s_ALFont_cpp_021d5060,s_Create_021d4e6c,0x251);
           piVar7 = (int *)0x0;
           if (iVar4 != 0) {
             piVar7 = (int *)ALFont_021d4fb8::ALFont_021d4fb8
@@ -46,7 +46,7 @@ int * ALFont::Create(undefined4 param_1,undefined4 param_2,undefined4 param_3)
           }
         }
         else {
-          iVar4 = jus_AllocDebug(0x70,s_ALFont_cpp_021d5060,s_Create_021d4e6c,0x256);
+          iVar4 = thunk_FUN_0201a228(0x70,s_ALFont_cpp_021d5060,s_Create_021d4e6c,0x256);
           piVar7 = (int *)0x0;
           if (iVar4 != 0) {
             piVar7 = (int *)ALFont_021d4f60::ALFont_021d4f60
@@ -64,14 +64,14 @@ int * ALFont::Create(undefined4 param_1,undefined4 param_2,undefined4 param_3)
     }
     if ((piVar7 == (int *)0x0) && (piVar1 = (int *)FUN_02016594(param_1), piVar1 != (int *)0x0)) {
       if ((uint)*(ushort *)((int)piVar1 + 10) * (uint)*(ushort *)(piVar1 + 2) < 0x30000) {
-        iVar3 = jus_AllocDebug(0x6c,s_ALFont_cpp_021d5060,s_Create_021d4e6c,0x268);
+        iVar3 = thunk_FUN_0201a228(0x6c,s_ALFont_cpp_021d5060,s_Create_021d4e6c,0x268);
         piVar7 = (int *)0x0;
         if (iVar3 != 0) {
           piVar7 = (int *)ALFont_021d4fb8::ALFont_021d4fb8(iVar3,piVar1,param_2,param_3,0,0x10);
         }
       }
       else {
-        iVar3 = jus_AllocDebug(0x70,s_ALFont_cpp_021d5060,s_Create_021d4e6c,0x26b);
+        iVar3 = thunk_FUN_0201a228(0x70,s_ALFont_cpp_021d5060,s_Create_021d4e6c,0x26b);
         piVar7 = (int *)0x0;
         if (iVar3 != 0) {
           piVar7 = (int *)ALFont_021d4f60::ALFont_021d4f60(iVar3,piVar1,param_2,param_3,0,0);

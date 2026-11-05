@@ -1,8 +1,8 @@
 
-void thunk_FUN_0214cd5c(void)
+void JArena::JArena_AddJob(void)
 
 {
-  FUN_0214cd5c();
+  JArena_AddJob();
   return;
 }
 

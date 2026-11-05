@@ -24,7 +24,7 @@ undefined4 Record::RecordLoad(undefined4 param_1)
   else {
     uVar7 = 0;
     do {
-      iVar4 = jus_AllocDebug(0x7560,s_Record_cpp_0209e61c,s_RecordLoad_0209e5e8,0x690);
+      iVar4 = thunk_FUN_0201a228(0x7560,s_Record_cpp_0209e61c,s_RecordLoad_0209e5e8,0x690);
       local_2c[uVar7 + 4] = iVar4;
       uVar6 = uVar7 + 1;
       local_2c[uVar7 + 2] = local_2c[uVar7 + 4] + 8;

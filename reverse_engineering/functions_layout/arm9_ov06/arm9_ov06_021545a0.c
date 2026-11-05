@@ -26,7 +26,7 @@ void FUN_021545a0(int param_1)
       local_28[0] = (*(byte *)(iVar1 + 200) + 0x28) * 0x1000;
       FUN_02153684(*(undefined4 *)(iVar1 + 0x38),local_28);
     }
-    FUN_02028384(*(undefined4 *)(param_1 + 4),&DAT_02154645);
+    FUN_02028384(*(undefined4 *)(param_1 + 4),0x2154645);
   }
   (*(code *)(&PTR_FUN_02154648_1_02171f14)[*(char *)(iVar1 + 0xc9)])(param_1);
   return;

@@ -1,0 +1,9 @@
+020164e4  stmdb sp!,{r4,lr}
+020164e8  mov r4,r0
+020164ec  mov r0,#0x8
+020164f0  bl 0x0201a228
+020164f4  cmp r0,#0x0
+020164f8  ldrne r1,[0x2016508]
+020164fc  stmiane r0,{r1,r4}
+02016500  str r0,[r4,#0x1c]
+02016504  ldmia sp!,{r4,pc}

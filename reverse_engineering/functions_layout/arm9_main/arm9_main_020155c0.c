@@ -16,7 +16,7 @@ undefined4 FUN_020155c0(int *param_1,int param_2,undefined4 param_3,undefined4 p
   undefined4 uStack_28;
   
   uStack_28 = param_4;
-  uVar1 = jus_Class_0209c0b4::vfunc_45();
+  uVar1 = jus_TagNDGR_0209c0b4::vfunc_45();
   (**(code **)(**(int **)(param_2 + 100) + 0x28))(*(int **)(param_2 + 100),1);
   uVar2 = (**(code **)(*param_1 + 0xac))();
   uVar9 = 0;

@@ -16,10 +16,10 @@ void jus_TagCNTR::vfunc_21(int param_1,int param_2,undefined4 param_3)
     }
   }
   *(undefined1 *)(param_1 + 0x14) = 1;
-  iVar1 = jus_AllocDebug(param_2 << 2);
+  iVar1 = FUN_0201a228(param_2 << 2);
   uVar2 = 0;
   if (iVar1 != 0) {
-    uVar2 = FUN_0200ef34(iVar1,param_2,4,0,&DAT_020354b8,0);
+    uVar2 = FUN_0200ef34(iVar1,param_2,4,0,FUN_020354b8,0);
   }
   MIi_CpuCopy32(param_3,uVar2,param_2 << 2);
   *(undefined4 *)(param_1 + 0x10) = uVar2;

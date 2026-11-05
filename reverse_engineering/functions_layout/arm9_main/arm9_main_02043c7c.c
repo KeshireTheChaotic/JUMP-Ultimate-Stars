@@ -27,7 +27,7 @@ void FUN_02043c7c(int param_1,int param_2)
       iVar2 = (int)(char)(&DAT_0209d81c)[*(byte *)(iVar3 + 2)] * (uint)*(byte *)(iVar3 + 3) + iVar2;
     }
     iVar2 = (iVar2 * 3 + uVar6 * 2) * 2;
-    iVar3 = jus_AllocDebug(iVar2);
+    iVar3 = FUN_0201a228(iVar2);
     iVar9 = 0;
     for (uVar10 = 0; uVar10 < *(uint *)(*(int *)(param_2 + 0x1c) + 4); uVar10 = uVar10 + 1) {
       puVar4 = (ushort *)FUN_02044e78(param_2,uVar10);
@@ -84,7 +84,7 @@ void FUN_02043c7c(int param_1,int param_2)
         if (*(int **)(param_1 + 0x1c) != (int *)0x0) {
           (**(code **)(**(int **)(param_1 + 0x1c) + 4))();
         }
-        iVar9 = jus_AllocDebug(0x14);
+        iVar9 = FUN_0201a228(0x14);
         uVar5 = 0;
         if (iVar9 != 0) {
           uVar5 = jus_TagCLDS::jus_TagCLDS
@@ -94,7 +94,7 @@ void FUN_02043c7c(int param_1,int param_2)
       }
     }
     else {
-      iVar9 = jus_AllocDebug(0x14);
+      iVar9 = FUN_0201a228(0x14);
       uVar5 = 0;
       if (iVar9 != 0) {
         uVar5 = jus_TagCLDS::jus_TagCLDS
@@ -116,7 +116,7 @@ void FUN_02043c7c(int param_1,int param_2)
                      *(undefined4 *)(iVar2 + 0x10),*(undefined4 *)(iVar2 + 8));
       }
       else {
-        iVar3 = jus_AllocDebug(0x14);
+        iVar3 = FUN_0201a228(0x14);
         uVar5 = 0;
         if (iVar3 != 0) {
           uVar5 = jus_TagCLDS::jus_TagCLDS
@@ -134,7 +134,7 @@ void FUN_02043c7c(int param_1,int param_2)
                      *(undefined4 *)(iVar3 + 8));
       }
       else {
-        iVar2 = jus_AllocDebug(0x14);
+        iVar2 = FUN_0201a228(0x14);
         uVar5 = 0;
         if (iVar2 != 0) {
           uVar5 = jus_TagCLDS::jus_TagCLDS

@@ -9,7 +9,8 @@ int CommuMenu::CommuMenu_Add_Core(int param_1,int param_2,int param_3,int param_
   int iVar2;
   
   func_0x02199ee8();
-  piVar1 = (int *)jus_AllocDebug(0x2c,s_CommuMenu_cpp_02169500,s_CommuMenu_Add_Core_021694ec,0xb2);
+  piVar1 = (int *)thunk_FUN_0201a228(0x2c,s_CommuMenu_cpp_02169500,s_CommuMenu_Add_Core_021694ec,
+                                     0xb2);
   FUN_020517fc(piVar1,0,0x2c);
   DAT_0216ad68 = piVar1;
   iVar2 = FUN_020310f4();

@@ -58,7 +58,7 @@ void FUN_020418b8(void)
   puVar1 = &DAT_020a19e4 + DAT_020a0cfc;
   DAT_020a0cfc = DAT_020a0cfc + 1;
   *puVar1 = &DAT_020a0eec;
-  FUN_02032a88(&LAB_02041d78_1);
+  FUN_02032a88(FUN_02041d78 + 1);
   DAT_020a0d7c = FUN_02041d9c;
   FUN_02023cd0(0x20205250);
   if ((DAT_020a0ee8 & 1) == 0) {
@@ -97,7 +97,7 @@ void FUN_020418b8(void)
     DAT_020a0f3c = &DAT_02093ce4;
   }
   DAT_020a0cf0 = &DAT_020a0f3c;
-  iVar2 = jus_AllocDebug(0x58);
+  iVar2 = FUN_0201a228(0x58);
   uVar3 = 0;
   if (iVar2 != 0) {
     uVar3 = jus_Class_02099cf8::jus_Class_02099cf8();

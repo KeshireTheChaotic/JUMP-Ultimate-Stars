@@ -28,7 +28,7 @@ undefined4 FUN_02003bd8(undefined4 param_1,undefined4 param_2,undefined4 param_3
     DAT_020a07fc = *(int *)(DAT_020aab78 + 0x6c);
     DAT_020a0820 = 1;
   }
-  uVar2 = FUN_020035b4(&LAB_02003b94_1,&DAT_02093064,param_1,&uStack_c);
+  uVar2 = FUN_020035b4(0x2003b95,&DAT_02093064,param_1,&uStack_c);
   DAT_020a0820 = DAT_020a0820 + -1;
   if (DAT_020a0820 == 0) {
     FUN_02053e60(&DAT_020a0880);

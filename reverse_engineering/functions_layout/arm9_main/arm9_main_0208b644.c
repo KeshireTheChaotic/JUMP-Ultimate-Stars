@@ -15,7 +15,7 @@ void CommGame::CommInit(void)
                     /* JUS-TAG strings=["CommGame.cpp","CommInit"] */
   uStack_8 = in_r3;
   FUN_02087968();
-  DAT_0214ccec = jus_AllocDebug(0x60,s_CommGame_cpp_020a056c,s_CommInit_020a0538,0x2a4);
+  DAT_0214ccec = thunk_FUN_0201a228(0x60,s_CommGame_cpp_020a056c,s_CommInit_020a0538,0x2a4);
   if (DAT_0214ccec != 0) {
     *(undefined4 *)(DAT_0214ccec + 0x18) = 0;
     *(undefined4 *)(DAT_0214ccec + 0x1c) = 0;
@@ -29,8 +29,8 @@ void CommGame::CommInit(void)
   FUN_02027db0(*(undefined4 *)(*(int *)(DAT_0214ccec + 0x28) + 4),*(undefined4 *)(iVar2 + 4));
   local_c = 0x2000;
   FUN_02012940(*(undefined4 *)(DAT_0214ccec + 0x28),&local_c);
-  FUN_02028384(*(undefined4 *)(*(int *)(DAT_0214ccec + 0x28) + 4),&LAB_0208a6f8_1);
-  FUN_02027834(*(undefined4 *)(*(int *)(DAT_0214ccec + 0x28) + 4),8,&LAB_0208a834_1);
+  FUN_02028384(*(undefined4 *)(*(int *)(DAT_0214ccec + 0x28) + 4),0x208a6f9);
+  FUN_02027834(*(undefined4 *)(*(int *)(DAT_0214ccec + 0x28) + 4),8,0x208a835);
   uVar1 = FUN_02026f94();
   *(undefined4 *)(DAT_0214ccec + 0x2c) = uVar1;
   iVar2 = FUN_02031124();
@@ -38,7 +38,7 @@ void CommGame::CommInit(void)
   local_10 = 0x2000;
   FUN_02012940(*(undefined4 *)(DAT_0214ccec + 0x2c),&local_10);
   FUN_02028384(*(undefined4 *)(*(int *)(DAT_0214ccec + 0x2c) + 4),0x208b5ed);
-  FUN_02027834(*(undefined4 *)(*(int *)(DAT_0214ccec + 0x2c) + 4),8,&LAB_0208a834_1);
+  FUN_02027834(*(undefined4 *)(*(int *)(DAT_0214ccec + 0x2c) + 4),8,0x208a835);
   *(undefined1 *)(DAT_0214ccec + 0x49) = 0;
   *(undefined1 *)(DAT_0214ccec + 0x4a) = 0;
   DAT_0214cce2 = 0;

@@ -17,7 +17,7 @@ int JGalaxy::JGalaxy_Add
   undefined4 local_18;
   
   local_18 = param_4;
-  piVar3 = (int *)jus_AllocDebug(0x5c,s_JGalaxy_cpp_0215be4c,s_JGalaxy_Add_0215bbf0,0xdd);
+  piVar3 = (int *)thunk_FUN_0201a228(0x5c,s_JGalaxy_cpp_0215be4c,s_JGalaxy_Add_0215bbf0,0xdd);
   FUN_020517fc(piVar3,0,0x5c);
   iVar4 = FUN_02026f94();
   piVar3[1] = iVar4;
@@ -40,7 +40,7 @@ int JGalaxy::JGalaxy_Add
     piVar3[iVar4 + 3] = iVar5;
     iVar4 = iVar7;
   } while (iVar7 < 7);
-  piVar6 = (int *)FUN_02033410(s_jgalaxy_jgalaxy_bin_0215be58,0,0);
+  piVar6 = (int *)FUN_02033410(FUN_0215be58,0,0);
   if (piVar6[7] == 0) {
     (**(code **)(*piVar6 + 0x10))();
   }
@@ -75,7 +75,7 @@ int JGalaxy::JGalaxy_Add
   *(undefined1 *)((int)piVar3 + 0x51) = uVar2;
   *(undefined1 *)(piVar3 + 0x14) = uVar2;
   FUN_0214d394(piVar3);
-  _DAT_021d514c = &LAB_0214d524;
+  _DAT_021d514c = FUN_0214d524;
   func_0x021b7260(1,0x30078);
   func_0x021b7260(2,0x30078);
   func_0x021b7260(8,0x30078);

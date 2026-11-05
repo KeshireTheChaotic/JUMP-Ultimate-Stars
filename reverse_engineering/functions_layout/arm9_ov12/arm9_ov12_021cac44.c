@@ -11,7 +11,7 @@ undefined4 * ALFont_021d4ed0::ALFont_021d4ed0(undefined4 *param_1,undefined4 par
   *param_1 = &vftable;
   param_1[3] = param_3;
   param_1[4] = 0;
-  uVar1 = jus_AllocDebug(param_3 * 6,s_ALFont_cpp_021d5060,&DAT_021d4e54,0x14a);
+  uVar1 = thunk_FUN_0201a228(param_3 * 6,s_ALFont_cpp_021d5060,&DAT_021d4e54,0x14a);
   param_1[2] = uVar1;
   FUN_02051890(param_2,param_1[2],param_3 * 6);
   return param_1;

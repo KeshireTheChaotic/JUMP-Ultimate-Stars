@@ -1,0 +1,9 @@
+02049eb8  ldr r2,[r1,#0x0]
+02049ebc  str r2,[r0,#0x64]
+02049ec0  ldr r2,[r1,#0x4]
+02049ec4  str r2,[r0,#0x68]
+02049ec8  ldr r2,[r1,#0x8]
+02049ecc  str r2,[r0,#0x6c]
+02049ed0  ldr r1,[r1,#0xc]
+02049ed4  str r1,[r0,#0x70]
+02049ed8  bx lr

@@ -20,7 +20,8 @@ BattleTutorial::Battle_TutorialCreate
   
   uStack_18 = param_4;
   puVar1 = (undefined4 *)
-           jus_AllocDebug(0x40,s_BattleTutorial_cpp_02171c68,s_Battle_TutorialCreate_02171c08,0x4f);
+           thunk_FUN_0201a228(0x40,s_BattleTutorial_cpp_02171c68,s_Battle_TutorialCreate_02171c08,
+                              0x4f);
   FUN_020517fc(puVar1,0,0x40);
   uVar2 = FUN_02028920(0);
   puVar1[3] = uVar2;
@@ -35,7 +36,7 @@ BattleTutorial::Battle_TutorialCreate
   (**(code **)(**(int **)(iVar3 + 4) + 0xa0))(*(int **)(iVar3 + 4),&local_28);
   FUN_02028384(*(undefined4 *)(puVar1[2] + 4),0x2151311);
   (**(code **)(**(int **)(puVar1[2] + 4) + 0x24))(*(int **)(puVar1[2] + 4),puVar1);
-  uVar2 = FUN_0206b994((&PTR_s_battle_tutorial0_bin_02171c20)[param_1],0);
+  uVar2 = CommonTutorial::CommonTutorial_Create((&PTR_s_battle_tutorial0_bin_02171c20)[param_1],0);
   puVar1[0xb] = uVar2;
   FUN_0206bb68(uVar2,*(int *)(DAT_02172960 + 0xdc) + 0x1c,*(int *)(DAT_02172960 + 0xdc) + 0x20);
   FUN_0206bcf0(puVar1[0xb],*(int *)(DAT_02172960 + 0xe0) + 0x1c,1);
@@ -75,7 +76,7 @@ BattleTutorial::Battle_TutorialCreate
     iVar3 = iVar3 + 1;
     piVar5 = piVar5 + 1;
   } while (iVar3 < 4);
-  FUN_02028384(*(undefined4 *)(puVar1[6] + 4),&LAB_02151abc_1);
+  FUN_02028384(*(undefined4 *)(puVar1[6] + 4),0x2151abd);
   (**(code **)(**(int **)(puVar1[6] + 4) + 0x24))(*(int **)(puVar1[6] + 4),puVar1);
   iVar3 = func_0x021caa0c(s_font_jskfont_aft_02171c94,0,0);
   func_0x021c5fb4(*(undefined4 *)(iVar3 + 4));

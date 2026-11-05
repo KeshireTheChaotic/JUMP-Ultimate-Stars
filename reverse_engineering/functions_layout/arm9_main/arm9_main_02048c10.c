@@ -12,7 +12,7 @@ int * VertexBuffer::VertexBuffer(int *param_1,int param_2,undefined4 param_3,int
   *param_1 = (int)&vftable;
   param_1[0x14] = param_4;
   param_1[0xd] = param_2 << 4;
-  iVar1 = jus_AllocDebug();
+  iVar1 = FUN_0201a228();
   param_1[0xc] = iVar1;
   FUN_0201ac08(iVar1,s_VertexBuffer_0209da74);
   (**(code **)(*param_1 + 0xc))();

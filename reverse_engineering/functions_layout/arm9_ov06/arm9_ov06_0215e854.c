@@ -11,7 +11,7 @@ void FUN_0215e854(int param_1,undefined4 param_2,undefined4 param_3,undefined4 p
     *(undefined1 *)(param_1 + 0x1e9) = 0xf;
   }
   if (*(char *)(param_1 + 0x1e9) == '\0') {
-    FUN_02157494(param_1,0x10,FUN_0215e94c,&LAB_0215e988,0,param_4);
+    FUN_02157494(param_1,0x10,FUN_0215e94c,FUN_0215e988,0,param_4);
   }
   else {
     *(char *)(param_1 + 0x1e9) = *(char *)(param_1 + 0x1e9) + -1;

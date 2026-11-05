@@ -1,0 +1,1 @@
+{"module":"arm9_main","address":"02087e48","name":"CommWrap_Loading_Create","thumb":true,"body_bytes":106,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["020101f4","0201a21c","0204267c","020517fc","02088098","020881f8"],"unresolved_call_targets":[],"status":"decompiled","asm_file":"arm9_main_02087e48.asm","c_file":"arm9_main_02087e48.c"}

@@ -1,0 +1,9 @@
+021505dc  push {r3,lr}
+021505de  bl 0x02150028
+021505e2  ldr r0,[0x021505f0]
+021505e4  ldr r1,[r0,#0x1c]
+021505e6  cmp r1,#0x0
+021505e8  bne 0x021505ee
+021505ea  ldr r1,[0x021505f4]
+021505ec  str r1,[r0,#0x1c]
+021505ee  pop {r3,pc}

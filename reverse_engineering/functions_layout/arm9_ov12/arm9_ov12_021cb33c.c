@@ -24,7 +24,7 @@ void ALFont::MakeFixBounds(int param_1,undefined4 param_2,int param_3,uint param
   }
   iVar3 = param_5 * local_1c;
   *(int *)(param_1 + 0x50) = iVar3;
-  local_2c = jus_AllocDebug(iVar3 * 8,s_ALFont_cpp_021d5060,s_MakeFixBounds_021d4ea8,0x2a6);
+  local_2c = thunk_FUN_0201a228(iVar3 * 8,s_ALFont_cpp_021d5060,s_MakeFixBounds_021d4ea8,0x2a6);
   if (local_2c != 0) {
     local_2c = FUN_0200ef34(local_2c,iVar3,8,0,&DAT_021cb430,0);
   }

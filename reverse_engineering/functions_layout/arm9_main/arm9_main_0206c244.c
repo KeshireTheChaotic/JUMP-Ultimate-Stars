@@ -59,14 +59,14 @@ void CommonEffect::CommonEffect_Init
     piVar5 = piVar5 + 3;
   } while (iVar6 < 4);
   FUN_02023cd0(0x20204e47,CreateImpFunc);
-  iVar6 = jus_AllocDebug(0x20,s_ALPropSetImp_h_0209dff0,s_Create_0209dfbc,0x111);
+  iVar6 = thunk_FUN_0201a228(0x20,s_ALPropSetImp_h_0209dff0,s_Create_0209dfbc,0x111);
   piVar5 = (int *)0x0;
   if (iVar6 != 0) {
     piVar5 = (int *)PropBindInstance_02095200::PropBindInstance_02095200(iVar6,0);
   }
   DAT_020afc48 = piVar5;
   puVar3 = (undefined4 *)
-           jus_AllocDebug(0x28,s_CommonEffect_cpp_0209e258,s_CommonEffect_Init_0209e244,0x67);
+           thunk_FUN_0201a228(0x28,s_CommonEffect_cpp_0209e258,s_CommonEffect_Init_0209e244,0x67);
   if (puVar3 != (undefined4 *)0x0) {
     jus_Class_02098708::jus_Class_02098708(puVar3,s_EffectFlags_0209e280,&DAT_0209e26c);
     *puVar3 = &jus_Class_0209e068::vftable;

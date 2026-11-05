@@ -66,7 +66,7 @@ undefined4 * jus_Class_0209abc8::jus_Class_0209abc8(undefined4 *param_1,undefine
   FUN_0201dc68(auStack_1c,0xffff8000,0xffff8000,0x7fff,0x7fff);
   FUN_0203c360(param_1 + 0x27d,auStack_1c);
   FUN_0201cca0(param_1 + 299,param_1 + 0x277);
-  iVar1 = jus_AllocDebug(8);
+  iVar1 = FUN_0201a228(8);
   uVar2 = 0;
   if (iVar1 != 0) {
     uVar2 = jus_Class_02093d04::jus_Class_02093d04(iVar1,param_1);

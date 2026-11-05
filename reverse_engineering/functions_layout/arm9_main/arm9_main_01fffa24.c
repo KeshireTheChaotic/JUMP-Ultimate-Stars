@@ -51,8 +51,8 @@ void FUN_01fffa24(ushort *param_1,int param_2,undefined4 param_3,int param_4)
     return;
   }
   iVar2 = uVar11 * 2;
-  uVar11 = (uint)(byte)(&DAT_01fffa16)[iVar2];
-  bVar4 = (&DAT_01fffa17)[iVar2];
+  uVar11 = (uint)*(byte *)(iVar2 + 0x1fffa16);
+  bVar4 = *(byte *)(iVar2 + 0x1fffa17);
   piVar7 = (int *)(param_4 + 0x200 + (uint)(uVar5 >> 0xe) * 4);
   puVar6 = param_1 + 1;
   do {

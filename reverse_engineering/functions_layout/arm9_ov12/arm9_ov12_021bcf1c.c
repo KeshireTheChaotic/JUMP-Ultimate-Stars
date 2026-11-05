@@ -35,7 +35,8 @@ int * CommonInfo::CommonInfo_Create(int param_1,int param_2,int param_3,int para
   int iStack_18;
   
   iStack_18 = param_4;
-  piVar1 = (int *)jus_AllocDebug(0xa4,s_CommonInfo_cpp_021d3fcc,s_CommonInfo_Create_021d3fb8,0x3c);
+  piVar1 = (int *)thunk_FUN_0201a228(0xa4,s_CommonInfo_cpp_021d3fcc,s_CommonInfo_Create_021d3fb8,
+                                     0x3c);
   FUN_020517fc(piVar1,0,0xa4);
   if (param_4 == -1) {
     piVar1[0x14] = (int)DAT_020b0b96;

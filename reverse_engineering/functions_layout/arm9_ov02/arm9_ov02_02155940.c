@@ -32,7 +32,7 @@ JGalaxyMenu::JGalaxyMenu_Create(undefined4 param_1,undefined4 param_2,undefined1
   undefined4 local_28;
   
   puVar1 = (undefined4 *)
-           jus_AllocDebug(0x2c,s_JGalaxyMenu_cpp_0215c460,s_JGalaxyMenu_Create_0215c44c,0x7d);
+           thunk_FUN_0201a228(0x2c,s_JGalaxyMenu_cpp_0215c460,s_JGalaxyMenu_Create_0215c44c,0x7d);
   FUN_020517fc(puVar1,0,0x2c);
   *puVar1 = param_1;
   *(undefined1 *)((int)puVar1 + 0x26) = param_3;

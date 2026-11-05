@@ -48,7 +48,8 @@ undefined4 JQuizTop::JQuizTop_Add(int param_1)
   undefined4 local_2c;
   undefined4 local_28;
   
-  puVar2 = (undefined4 *)jus_AllocDebug(0xcc,s_JQuizTop_cpp_02160c1c,s_JQuizTop_Add_02160bfc,0xae);
+  puVar2 = (undefined4 *)
+           thunk_FUN_0201a228(0xcc,s_JQuizTop_cpp_02160c1c,s_JQuizTop_Add_02160bfc,0xae);
   FUN_0214fadc(puVar2,0xcc);
   FUN_0214fc10();
   if (param_1 == 0) {
@@ -68,10 +69,10 @@ undefined4 JQuizTop::JQuizTop_Add(int param_1)
   puVar2[9] = uVar4;
   uVar4 = FUN_020101f4(s_jquiz_top_obj_3d_aar_02160c60,0);
   puVar2[10] = uVar4;
-  iVar3 = jus_AllocDebug(0xcc,s_ALWidget_inl_02160c0c,s_Create_02160b78,0x1de);
+  iVar3 = thunk_FUN_0201a228(0xcc,s_ALWidget_inl_02160c0c,s_Create_02160b78,0x1de);
   piVar5 = (int *)0x0;
   if (iVar3 != 0) {
-    piVar5 = (int *)func_0x021af26c(iVar3,FUN_02151db8,FUN_02151e04,&DAT_02151eb8);
+    piVar5 = (int *)func_0x021af26c(iVar3,FUN_02151db8,FUN_02151e04,FUN_02151eb8);
   }
   if (piVar5[6] == 0) {
     (**(code **)(*piVar5 + 0x14))();
@@ -133,10 +134,10 @@ undefined4 JQuizTop::JQuizTop_Add(int param_1)
   FUN_02023c80(*(undefined4 *)(iVar3 + 4),local_c8,0x494c,local_c4);
   FUN_02023c70(*(undefined4 *)(iVar3 + 4),1);
   func_0x021b4034(*(undefined4 *)(iVar3 + 4),1);
-  func_0x021b6760(*(undefined4 *)(iVar3 + 4),0x10,&DAT_02151f8c);
+  func_0x021b6760(*(undefined4 *)(iVar3 + 4),0x10,FUN_02151f8c);
   uVar4 = _DAT_021d5154;
   uVar11 = *(undefined4 *)(iVar3 + 4);
-  iVar3 = jus_AllocDebug(0x134,s_ALWidgetImp_h_021608d4,s_Create_02160b68,0x3e);
+  iVar3 = thunk_FUN_0201a228(0x134,s_ALWidgetImp_h_021608d4,s_Create_02160b68,0x3e);
   if (iVar3 != 0) {
     func_0x021af0f8(iVar3,uVar11,uVar4,ALWidgetBaseImp::CreateDrawFunc);
   }
@@ -189,7 +190,7 @@ undefined4 JQuizTop::JQuizTop_Add(int param_1)
     iVar6 = FUN_0214ee60(uVar4,*(undefined4 *)(iVar6 + 0x88),0x810000,iVar3 + 2,0x70,&local_a8);
     *(int *)(*(int *)(iVar6 + 4) + 0x124) = iVar3 + 0x40;
     puVar2[iVar3 + 0x1c] = iVar6;
-    piVar5 = (int *)jus_AllocDebug(0x70,s_ALCollision_inl_021608f4,s_Create_02160b70,0x1b2);
+    piVar5 = (int *)thunk_FUN_0201a228(0x70,FUN_021608f4,s_Create_02160b70,0x1b2);
     if (piVar5 != (int *)0x0) {
       func_0x021b054c(piVar5,0,&DAT_02093c8c);
       *piVar5 = (int)&jus_Class_0216094c::vftable;
@@ -317,7 +318,7 @@ undefined4 JQuizTop::JQuizTop_Add(int param_1)
     func_0x021b4034(*(undefined4 *)(iVar6 + 4),1);
     iVar3 = iVar3 + 1;
   } while (iVar3 < 3);
-  func_0x021b6760(*(undefined4 *)(puVar2[0x1c] + 4),0x10,&LAB_02151f90);
+  func_0x021b6760(*(undefined4 *)(puVar2[0x1c] + 4),0x10,thunk_EXT_FUN_021b65cc);
   uVar4 = func_0x021bcf1c(0x12,2,1,0xffffffff);
   puVar2[0x2c] = uVar4;
   func_0x021bd730(uVar4,puVar2[0x2e] + 0x3d,0);

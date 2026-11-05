@@ -27,7 +27,7 @@ void FUN_02053630(void)
     DAT_020aab76 = 0;
     _DAT_027fffa0 = &DAT_020aab74;
     FUN_02052e4c();
-    FUN_02053528(&DAT_020aab84,&LAB_02052e38,0,&DAT_020aadcc);
+    FUN_02053528(&DAT_020aab84,FUN_02052e38,0,&DAT_020aadcc);
     DAT_020aabf4 = 0x20;
     DAT_020aabe8 = 1;
     return;

@@ -1,0 +1,15 @@
+02001c7c  push {lr}
+02001c7e  sub sp,#0x4
+02001c80  mov r1,#0x0
+02001c82  str r1,[sp,#0x0]
+02001c84  add r2,sp,#0x0
+02001c86  add r3,r1,#0x0
+02001c88  bl 0x02001cbc
+02001c8c  cmp r0,#0x1
+02001c8e  bne 0x02001c96
+02001c90  ldr r0,[sp,#0x0]
+02001c92  add sp,#0x4
+02001c94  pop {pc}
+02001c96  mov r0,#0x0
+02001c98  add sp,#0x4
+02001c9a  pop {pc}

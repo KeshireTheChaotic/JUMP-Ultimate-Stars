@@ -1,0 +1,16 @@
+0207ae9c  stmdb sp!,{r4,lr}
+0207aea0  mov r4,r0
+0207aea4  ldr r1,[r4,#0x8]
+0207aea8  b 0x0207aeb8
+0207aeac  mov r0,r4
+0207aeb0  bl 0x0207b000
+0207aeb4  ldr r1,[r4,#0x8]
+0207aeb8  cmp r1,#0x0
+0207aebc  bne 0x0207aeac
+0207aec0  ldr r0,[r4,#0x94]
+0207aec4  ldr r1,[r0,#0x0]
+0207aec8  ldr r1,[r1,#0x8]
+0207aecc  blx r1
+0207aed0  mov r0,r4
+0207aed4  bl 0x0201b244
+0207aed8  ldmia sp!,{r4,pc}

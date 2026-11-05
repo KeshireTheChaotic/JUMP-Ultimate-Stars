@@ -19,7 +19,7 @@ void FUN_02027de8(int param_1,uint param_2)
   }
   else if ((uVar2 & 7) >> 2 != 0) {
     FUN_02027834(param_1,0,*(undefined4 *)(param_1 + 0x40));
-    *(undefined1 **)(param_1 + 0x40) = &LAB_0202836c;
+    *(code **)(param_1 + 0x40) = FUN_0202836c;
   }
   FUN_02027edc(param_1);
   return;

@@ -53,7 +53,7 @@ void FUN_021554d0(undefined4 param_1,undefined4 *param_2)
   FUN_0214ffd0(iVar1,&uStack00000130);
   FUN_02028384(*(undefined4 *)(iVar1 + 4),&LAB_021565f0_1);
   (**(code **)(**(int **)(iVar1 + 4) + 0x24))(*(int **)(iVar1 + 4),unaff_r5);
-  iVar2 = (*(code *)(&PTR_LAB_0215413c_1_02169d3c)[*(int *)(unaff_r5 + 0xf8)])();
+  iVar2 = (*(code *)(&PTR_FUN_0215413c_1_02169d3c)[*(int *)(unaff_r5 + 0xf8)])();
   iVar3 = FUN_0203b404();
   iVar3 = FUN_0214fba8(*(undefined4 *)(iVar3 + 0x88),0x850000,0x25,0x81);
   uStack00000128 = 0x8000;
@@ -82,7 +82,7 @@ void FUN_021554d0(undefined4 param_1,undefined4 *param_2)
   (**(code **)(**(int **)(iVar1 + 4) + 0xd8))(*(int **)(iVar1 + 4),1);
   iVar2 = FUN_0203b404();
   FUN_0214f7f8(*(undefined4 *)(iVar2 + 0x88));
-  iVar2 = (*(code *)(&PTR_LAB_0215413c_1_02169d3c)[*(int *)(unaff_r5 + 0xf8)])();
+  iVar2 = (*(code *)(&PTR_FUN_0215413c_1_02169d3c)[*(int *)(unaff_r5 + 0xf8)])();
   if (iVar2 == 0) {
     uStack00000054 = DAT_0216c1a8;
     puStack00000050 = &DAT_02169d34;
@@ -157,7 +157,7 @@ void FUN_021554d0(undefined4 param_1,undefined4 *param_2)
   if (iVar2 != 0) {
     FUN_02155968(iVar2,0x79f,0x1e);
   }
-  iVar2 = (*(code *)(&PTR_LAB_0215413c_1_02169d3c)[*(int *)(unaff_r5 + 0xf8)])();
+  iVar2 = (*(code *)(&PTR_FUN_0215413c_1_02169d3c)[*(int *)(unaff_r5 + 0xf8)])();
   iVar3 = FUN_02156fa0(*(uint *)(unaff_r5 + 0xf8) & 0xff,
                        *(undefined1 *)
                         (unaff_r4 + unaff_r5 + *(uint *)(unaff_r5 + 0xf8) * 0x14 + 0x178));

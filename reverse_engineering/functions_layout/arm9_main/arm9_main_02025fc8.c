@@ -10,7 +10,7 @@ int jus_Class_0209674c::vfunc_06(int param_1)
   uint uVar3;
   uint uVar4;
   
-  iVar1 = jus_AllocDebug(0xb4);
+  iVar1 = FUN_0201a228(0xb4);
   iVar2 = 0;
   if (iVar1 != 0) {
     iVar2 = jus_Class_0209674c();

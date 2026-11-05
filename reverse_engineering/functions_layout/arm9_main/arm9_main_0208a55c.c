@@ -12,14 +12,14 @@ void FUN_0208a55c(void)
   iVar1 = FUN_02058b2c(local_7c8);
   if (iVar1 == 0) {
     if (((local_7c8[0] != 0) && (local_7c8[0] != 1)) && (local_7c8[0] != 2)) {
-      iVar1 = FUN_02059470(&LAB_0208a540_1);
+      iVar1 = FUN_02059470(0x208a541);
       if (iVar1 != 2) {
         return;
       }
       do {
       } while (DAT_0214be6c == 0);
     }
-    iVar1 = FUN_02059428(&LAB_0208a524_1);
+    iVar1 = FUN_02059428(0x208a525);
     if (iVar1 == 2) {
       do {
       } while (DAT_0214be6c == 0);

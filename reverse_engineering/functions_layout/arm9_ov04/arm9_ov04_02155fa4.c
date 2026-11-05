@@ -12,7 +12,7 @@ void FUN_02155fa4(int *param_1)
   }
   *(undefined1 *)(param_1 + 6) = 0xff;
   FUN_02156014(param_1);
-  FUN_02028384(*(undefined4 *)(*param_1 + 4),&DAT_021561a0);
+  FUN_02028384(*(undefined4 *)(*param_1 + 4),FUN_021561a0);
   return;
 }
 

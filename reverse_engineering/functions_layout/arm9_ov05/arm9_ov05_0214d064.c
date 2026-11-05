@@ -146,11 +146,11 @@ void FUN_0214d064(int param_1,undefined4 param_2,undefined4 param_3,undefined4 p
       FUN_0214ce68(puVar9[4],&local_60,&local_64);
       *(undefined1 *)((int)puVar9 + 0x5d) = 1;
     }
-    FUN_02028384(*(undefined4 *)(param_1 + 4),&DAT_0214d4fc);
+    FUN_02028384(*(undefined4 *)(param_1 + 4),FUN_0214d4fc);
     *(undefined1 *)(puVar9 + 0x17) = 1;
   }
   else {
-    FUN_02028384(*(undefined4 *)(param_1 + 4),&DAT_0214d4fc);
+    FUN_02028384(*(undefined4 *)(param_1 + 4),FUN_0214d4fc);
   }
   return;
 }

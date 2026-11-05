@@ -20,8 +20,8 @@ BattleColPrm::Battle_ColPrmManCreate
                     /* JUS-TAG strings=["BattleColPrm.cpp","Battle_ColPrmManCreate"] */
   uStack_14 = param_4;
   puVar1 = (undefined4 *)
-           jus_AllocDebug(0xfb54,s_BattleColPrm_cpp_0209fec4,s_Battle_ColPrmManCreate_0209fb4c,0x132
-                         );
+           thunk_FUN_0201a228(0xfb54,s_BattleColPrm_cpp_0209fec4,s_Battle_ColPrmManCreate_0209fb4c,
+                              0x132);
   if (puVar1 != (undefined4 *)0x0) {
     *puVar1 = 0;
     puVar1[1] = 0;
@@ -84,7 +84,7 @@ BattleColPrm::Battle_ColPrmManCreate
     puVar1[0x3a] = uVar2;
     local_20 = 0xa0000;
     FUN_02012940(puVar1[0x3a],&local_20);
-    FUN_02028384(*(undefined4 *)(puVar1[0x3a] + 4),&DAT_0207fbb0);
+    FUN_02028384(*(undefined4 *)(puVar1[0x3a] + 4),FUN_0207fbb0);
     (**(code **)(**(int **)(puVar1[0x3a] + 4) + 0x24))(*(int **)(puVar1[0x3a] + 4),puVar1);
     (**(code **)(**(int **)(puVar1[0x3a] + 4) + 0x94))(*(int **)(puVar1[0x3a] + 4),0x1000000);
     puVar1[0x3f] = &DAT_0207d9a4;

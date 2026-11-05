@@ -33,14 +33,14 @@ undefined4 JQuizBattleRuleDisp::JQuizBattleRuleDisp_Add(void)
   undefined4 local_40;
   undefined4 local_3c;
   undefined4 *local_38;
-  undefined1 *local_34;
+  code *local_34;
   undefined1 *local_30;
   undefined1 *local_2c;
   undefined4 local_28;
   
   puVar2 = (undefined4 *)
-           jus_AllocDebug(0xc4,s_JQuizBattleRuleDisp_cpp_02161b00,s_JQuizBattleRuleDisp_Add_02161944
-                          ,0x8c);
+           thunk_FUN_0201a228(0xc4,s_JQuizBattleRuleDisp_cpp_02161b00,
+                              s_JQuizBattleRuleDisp_Add_02161944,0x8c);
   FUN_0214fadc(puVar2,0xc4);
   FUN_0214fc10();
   uVar1 = FUN_02086d80();
@@ -67,11 +67,11 @@ undefined4 JQuizBattleRuleDisp::JQuizBattleRuleDisp_Add(void)
   uVar4 = func_0x021ba49c(0,1,1);
   puVar2[0x2d] = uVar4;
   local_2c = &LAB_0215e2f4;
-  local_34 = &LAB_0215e2c0;
+  local_34 = FUN_0215e2c0;
   local_30 = &LAB_0215e2e0;
   local_28 = puVar2[0x2d];
   local_38 = puVar2;
-  uVar4 = FUN_02086798(&local_38);
+  uVar4 = CommWrapDisconnect::CommWrapDisconnect_Create(&local_38);
   puVar2[0x30] = uVar4;
   iVar3 = FUN_0203b414(2);
   uVar4 = FUN_0214e880(s_jquiz_com_rule00_atm_02161b18,s_jquiz_com_rule00_dig_02161b30,
@@ -98,7 +98,7 @@ undefined4 JQuizBattleRuleDisp::JQuizBattleRuleDisp_Add(void)
   puVar2[0x1b] = iVar3;
   uVar4 = _DAT_021d5154;
   uVar8 = *(undefined4 *)(puVar2[0x11] + 4);
-  iVar3 = jus_AllocDebug(0x134,s_ALWidgetImp_h_021608d4,s_Create_021618c4,0x3e);
+  iVar3 = thunk_FUN_0201a228(0x134,s_ALWidgetImp_h_021608d4,s_Create_021618c4,0x3e);
   piVar5 = (int *)0x0;
   if (iVar3 != 0) {
     piVar5 = (int *)func_0x021af0f8(iVar3,uVar8,uVar4,ALWidgetBaseImp::CreateDrawFunc);
@@ -116,7 +116,7 @@ undefined4 JQuizBattleRuleDisp::JQuizBattleRuleDisp_Add(void)
   FUN_02151ebc(&local_68,iVar9,0x2161bb0);
   local_58 = local_68;
   local_54 = local_64;
-  FUN_02151ebc(local_90 + 8,iVar9,0x2161bbc);
+  FUN_02151ebc(local_90 + 8,iVar9,FUN_02161bbc);
   local_60 = local_90[8];
   local_5c = local_6c;
   (**(code **)(**(int **)(iVar9 + 4) + 0xd8))(*(int **)(iVar9 + 4),1);
@@ -173,7 +173,7 @@ undefined4 JQuizBattleRuleDisp::JQuizBattleRuleDisp_Add(void)
     local_4e = 0;
     local_4c = 0;
     local_4a = 0x18;
-    piVar5 = (int *)jus_AllocDebug(0x70,s_ALCollision_inl_021608f4,s_Create_021618bc,0x1b2);
+    piVar5 = (int *)thunk_FUN_0201a228(0x70,FUN_021608f4,s_Create_021618bc,0x1b2);
     if (piVar5 != (int *)0x0) {
       func_0x021b054c(piVar5,0,&DAT_02093c8c);
       *piVar5 = (int)&jus_Class_0216094c::vftable;
@@ -203,7 +203,7 @@ undefined4 JQuizBattleRuleDisp::JQuizBattleRuleDisp_Add(void)
   puVar2[0x2f] = uVar4;
   local_40 = 0x80000;
   FUN_02152ca0(puVar2[0x2f],&local_40);
-  FUN_02028384(*(undefined4 *)(puVar2[0x2f] + 4),&DAT_0215e480);
+  FUN_02028384(*(undefined4 *)(puVar2[0x2f] + 4),FUN_0215e480);
   FUN_02027834(*(undefined4 *)(puVar2[0x2f] + 4),8,FUN_0215e56c);
   (**(code **)(**(int **)(puVar2[0x2f] + 4) + 0x24))(*(int **)(puVar2[0x2f] + 4),puVar2);
   FUN_02086cac(puVar2[0x2f]);

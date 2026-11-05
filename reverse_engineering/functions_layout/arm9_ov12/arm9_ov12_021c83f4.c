@@ -10,6 +10,7 @@ int ALTextDS_021d4a2c::vfunc_37(int param_1,byte *param_2)
   uint uVar3;
   int iVar4;
   
+                    /* JUS-TAG source_file_inferred="ALTextDS.cpp" */
   iVar4 = 0;
   while( true ) {
     while( true ) {

@@ -51,7 +51,7 @@ void ScreenInstance_Derived_02093d14::vfunc_45(undefined4 param_1,int param_2,in
   if ((*(int *)(iVar4 + 0x20) == 0) || (*(int *)(iVar4 + 0x24) != 1)) {
     iVar5 = (**(code **)(*piVar8 + 0xc4))();
     if (iVar5 != iRam020378a8) {
-      iVar5 = jus_AllocDebug(0x78);
+      iVar5 = FUN_0201a228(0x78);
       piVar8 = (int *)0x0;
       if (iVar5 != 0) {
         piVar8 = (int *)jus_Class_0209b250::jus_Class_0209b250(iVar5,param_2);
@@ -74,7 +74,7 @@ void ScreenInstance_Derived_02093d14::vfunc_45(undefined4 param_1,int param_2,in
   else {
     iVar5 = (**(code **)(*piVar8 + 0xc4))();
     if (iVar5 != iRam020378a4) {
-      iVar5 = jus_AllocDebug(0x78);
+      iVar5 = FUN_0201a228(0x78);
       piVar8 = (int *)0x0;
       if (iVar5 != 0) {
         piVar8 = (int *)jus_Class_0209b330::jus_Class_0209b330(iVar5,param_2);
@@ -129,12 +129,12 @@ void ScreenInstance_Derived_02093d14::vfunc_45(undefined4 param_1,int param_2,in
         iVar5 = FUN_02033bb8();
         if (iVar5 == 0) {
           FUN_02004bcc(PTR_DAT_020378b4,PTR_s____Character__020378bc);
-          uVar7 = func_0x02033d24(PTR_DAT_020378b4);
+          uVar7 = FUN_02033d24(PTR_DAT_020378b4);
           FUN_02004b18(auStack_124,uVar7);
           FUN_02004b18(PTR_DAT_020378b4,auStack_124);
           FUN_02004bcc(PTR_DAT_020378b4,iVar6 + iVar12);
           puVar3 = PTR_DAT_020378b8;
-          uVar7 = func_0x02033cb4(iVar10);
+          uVar7 = FUN_02033cb4(iVar10);
           uVar7 = FUN_02033c20(uVar7,puVar3);
           FUN_02004bcc(auStack_124,uVar7);
           iVar5 = FUN_02033bb8(PTR_DAT_020378b4);

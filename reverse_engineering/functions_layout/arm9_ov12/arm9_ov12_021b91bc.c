@@ -10,7 +10,7 @@ jus_Class_021d2d04::jus_Class_021d2d04
   int iVar1;
   undefined4 uVar2;
   
-  iVar1 = jus_AllocDebug(0xb8,s_ALWidgetBase_inl_021d3c64,&DAT_021d3af8,0x47a,param_4);
+  iVar1 = thunk_FUN_0201a228(0xb8,s_ALWidgetBase_inl_021d3c64,&DAT_021d3af8,0x47a,param_4);
   uVar2 = 0;
   if (iVar1 != 0) {
     if (param_2 == 0) {

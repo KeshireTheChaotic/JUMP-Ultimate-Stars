@@ -120,6 +120,18 @@ def main():
     painted = km.kf.build() != before
     app.undo()
     checks.append(('koma paint+undo', painted and km.kf.build() == before and not km.dirty))
+    # card shape (bin/koma.bin): bb_02 is card 691, 3 cells; change the variant, then undo
+    km.tool.set('select')
+    cards_before = km.cat.cards.build() if km.cat else None
+    card_ok = bool(km.card) and km.card.index == 691 and km.layout_mode.get() == 'Card'
+    other = next(v for v in range(len(km.cat.shapes.groups[2])) if v != km.card.variant) if card_ok else 0
+    km.set_shape(3, other)
+    changed = km.card.variant == other and km.dirty and bytes(km.card.raw[:8]) == cards_before[691 * 12:691 * 12 + 8]
+    app.undo()
+    checks.append(('koma card shape+undo', card_ok and changed and km.cat.cards.build() == cards_before
+                   and not km.dirty))
+    km.load('koma/is_00.dtx')       # series id 2 → 'is' via the ARM9 prefix table (no ambiguity)
+    checks.append(('koma card from prefix table', [c.series_id for c, _ in km.card_choices] == [2]))
     app.show_workspace('level')
     pump(0.4)
     lv = app.suite['level']

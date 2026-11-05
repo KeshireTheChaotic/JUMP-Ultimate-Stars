@@ -1,0 +1,9 @@
+0208c538  stmdb sp!,{r3,lr}
+0208c53c  ldr r0,[0x208c55c]
+0208c540  mov r1,#0x0
+0208c544  mov r2,#0x2
+0208c548  bl 0x020517fc
+0208c54c  ldr r0,[0x208c560]
+0208c550  mov r1,#0x1
+0208c554  strb r1,[r0,#0x1]
+0208c558  ldmia sp!,{r3,pc}

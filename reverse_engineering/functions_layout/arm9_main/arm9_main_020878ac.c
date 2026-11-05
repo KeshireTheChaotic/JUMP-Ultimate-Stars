@@ -13,8 +13,8 @@ void CommWrap::CommWrapAntenna_Create(int param_1)
   if (DAT_0214be24 != (int *)0x0) {
     FUN_02087980();
   }
-  DAT_0214be24 = (int *)jus_AllocDebug(0x24,s_CommWrap_cpp_020a01a4,
-                                       s_CommWrapAntenna_Create_020a0174,0x58d);
+  DAT_0214be24 = (int *)thunk_FUN_0201a228(0x24,s_CommWrap_cpp_020a01a4,
+                                           s_CommWrapAntenna_Create_020a0174,0x58d);
   FUN_020517fc(DAT_0214be24,0,0x24);
   *DAT_0214be24 = param_1;
   if (param_1 == 1) {

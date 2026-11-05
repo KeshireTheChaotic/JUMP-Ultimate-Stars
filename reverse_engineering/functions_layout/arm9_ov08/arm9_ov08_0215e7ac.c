@@ -17,7 +17,7 @@ void FUN_0215e7ac(void)
     FUN_021578c8();
     if (DAT_0216e79c == '\0') {
       FUN_0215707c(2,1);
-      FUN_02157088(&LAB_021600ec_1);
+      FUN_02157088(0x21600ed);
       return;
     }
     FUN_0215707c(0,0);

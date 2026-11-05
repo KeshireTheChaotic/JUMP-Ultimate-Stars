@@ -26,7 +26,7 @@ undefined4 FUN_02192d54(int param_1)
   if ((iVar2 == 0) || (*(int *)(iVar2 + 0x10c) == 0)) {
     return 0;
   }
-  iVar3 = FUN_02191978(&LAB_02192d2c_1,*(int *)(iVar2 + 0x10c),(int)*(char *)(param_1 + 0x72));
+  iVar3 = FUN_02191978(0x2192d2d,*(int *)(iVar2 + 0x10c),(int)*(char *)(param_1 + 0x72));
   if (iVar3 == 0) {
     return 0xffffffdf;
   }

@@ -15,7 +15,7 @@ int BattleCol::Battle_ColObjAddColWork(int param_1,undefined2 param_2)
   if (*(int *)(param_1 + 0x18) == 0) {
     return 0;
   }
-  iVar1 = jus_AllocDebug(100,s_BattleCol_cpp_0209fb0c,s_Battle_ColObjAddColWork_0209faf4,0x225);
+  iVar1 = thunk_FUN_0201a228(100,s_BattleCol_cpp_0209fb0c,s_Battle_ColObjAddColWork_0209faf4,0x225);
   if (iVar1 == 0) {
     return 0;
   }

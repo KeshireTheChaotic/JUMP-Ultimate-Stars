@@ -1,7 +1,7 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void FUN_02153ce8(int *param_1,undefined *param_2,int param_3)
+void FUN_02153ce8(int *param_1,undefined4 param_2,int param_3)
 
 {
   byte bVar1;
@@ -116,7 +116,7 @@ void FUN_02153ce8(int *param_1,undefined *param_2,int param_3)
     FUN_0214e908(unaff_r8,unaff_r4);
     iVar2 = FUN_0203b3f4();
     FUN_0214cf8c(*(undefined4 *)(iVar2 + 0x88));
-    iVar2 = func_0x021caa0c(s_font_JSKFont_aft_0215e3a8,0,0);
+    iVar2 = func_0x021caa0c(FUN_0215e3a8,0,0);
     iVar3 = FUN_0214fb7c(*(undefined4 *)(unaff_r10 + 4));
     iVar12 = 0;
     iVar3 = *(int *)(*(int *)(iVar3 + 4) + 0x10);
@@ -592,14 +592,14 @@ void FUN_02153ce8(int *param_1,undefined *param_2,int param_3)
     piVar5 = *(int **)(*(int *)(unaff_r9 + 4) + 100);
     (**(code **)(*piVar5 + 0x7c))(piVar5,0);
     (**(code **)(**(int **)(unaff_r9 + 4) + 0xd8))(*(int **)(unaff_r9 + 4),1);
-    unaff_r4 = func_0x021ca3a4(0x10,0x10,s_font_JSKFont_aft_0215e3a8);
+    unaff_r4 = func_0x021ca3a4(0x10,0x10,FUN_0215e3a8);
     uStack0000011c = 0xf0000;
     uStack00000118 = 0xf0000;
     FUN_0214e990(unaff_r4,&uStack00000118,&uStack0000011c);
     piVar5 = *(int **)(unaff_r4 + 4);
     (**(code **)(*(int *)piVar5[0x19] + 0x70))();
     (**(code **)(*piVar5 + 0xc4))();
-    param_2 = &DAT_0215e3bc;
+    param_2 = 0x215e3bc;
     param_1 = *(int **)(*(int *)(unaff_r4 + 4) + 100);
     param_3 = *param_1;
   } while( true );

@@ -12,8 +12,8 @@ undefined4 CommuMenuDwldMemberEnt::CommuMenuDwldMemberEnt_Add(void)
   int iVar4;
   
   puVar1 = (undefined4 *)
-           jus_AllocDebug(0xb0,s_CommuMenuDwldMemberEnt_cpp_0216a71c,
-                          s_CommuMenuDwldMemberEnt_Add_0216a700,0x67);
+           thunk_FUN_0201a228(0xb0,s_CommuMenuDwldMemberEnt_cpp_0216a71c,
+                              s_CommuMenuDwldMemberEnt_Add_0216a700,0x67);
   FUN_020517fc(puVar1,0,0xb0);
   func_0x021b65bc();
   thunk_FUN_02070414();

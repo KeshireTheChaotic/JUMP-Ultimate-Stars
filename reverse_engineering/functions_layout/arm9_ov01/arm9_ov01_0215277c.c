@@ -1,9 +1,9 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
-/* JUS-SCENE jus_Scene25_CreateImpl [scene-map] called by scene 25 create wrapper 0206f734 while
-   overlay 1 is resident */
+/* JUS-GAME JArenaMissionResult::JAMisnResult_Add [source-string] __FILE__="JArenaMissionResult.cpp"
+   __FUNCTION__="JAMisnResult_Add" lines=[123] passed to 1 source-location call(s) */
 
-undefined4 jus_Scene25_CreateImpl(void)
+undefined4 JArenaMissionResult::JAMisnResult_Add(void)
 
 {
   undefined *puVar1;
@@ -112,8 +112,8 @@ undefined4 jus_Scene25_CreateImpl(void)
   undefined4 uStack_30;
   int aiStack_2c [2];
   
-  iVar5 = jus_AllocDebug(0x5c,PTR_s_JArenaMissionResult_cpp_0215374c,PTR_s_JAMisnResult_Add_02153750
-                         ,0x7b);
+  iVar5 = thunk_FUN_0201a228(0x5c,PTR_s_JArenaMissionResult_cpp_0215374c,
+                             PTR_s_JAMisnResult_Add_02153750,0x7b);
   FUN_020517fc(iVar5,0,0x5c);
   iVar6 = FUN_020310f4();
   puVar1 = PTR_DAT_02153754;
@@ -211,7 +211,7 @@ undefined4 jus_Scene25_CreateImpl(void)
     iVar6 = iVar6 + 1;
     *(undefined4 *)(iVar5 + iVar13 + 0x1c) = uVar12;
   } while (iVar6 < 2);
-  iVar6 = func_0x0214fd38(iVar5);
+  iVar6 = ALWidgetBaseImp::Create(iVar5);
   (**(code **)(**(int **)(iVar6 + 4) + 0xd8))(*(int **)(iVar6 + 4),1);
   *(undefined4 *)(*(int *)(iVar6 + 4) + 0x124) = 0x100;
   *(int *)(iVar5 + 0x24) = iVar6;
@@ -249,7 +249,7 @@ undefined4 jus_Scene25_CreateImpl(void)
   *(undefined1 *)(*(int *)(iVar6 + 4) + 0xaf) = 0;
   func_0x021b77a8(*(undefined4 *)(iVar6 + 4),0x10);
   (**(code **)(**(int **)(iVar6 + 4) + 0x24))(*(int **)(iVar6 + 4),iVar5);
-  piVar7 = (int *)jus_AllocDebug(0x70,uRam02153780,uRam02153784,uRam02153788);
+  piVar7 = (int *)thunk_FUN_0201a228(0x70,uRam02153780,uRam02153784,uRam02153788);
   if (piVar7 != (int *)0x0) {
     func_0x021b054c(piVar7,0,PTR_DAT_0215378c);
     puVar1 = PTR_DAT_02153794;
@@ -268,7 +268,7 @@ undefined4 jus_Scene25_CreateImpl(void)
   func_0x021b3fc4(*(undefined4 *)(iVar6 + 4),uRam021537a8);
   func_0x021b65d8(*(undefined4 *)(iVar6 + 4));
   *(int *)(iVar5 + 0x38) = iVar6;
-  iVar6 = func_0x0214fd38(iVar5);
+  iVar6 = ALWidgetBaseImp::Create(iVar5);
   *(undefined4 *)(*(int *)(iVar6 + 4) + 0x124) = uRam021537ac;
   *(int *)(iVar5 + 0x28) = iVar6;
   iVar6 = ALWidgetImp::Create(iVar6,_DAT_021d5154);
@@ -296,7 +296,7 @@ undefined4 jus_Scene25_CreateImpl(void)
   uStack_54 = 0;
   FUN_021511c8(iVar6,&uStack_54,&uStack_50);
   *(int *)(iVar5 + 0x3c) = iVar6;
-  iVar6 = func_0x0214fd38(iVar5);
+  iVar6 = ALWidgetBaseImp::Create(iVar5);
   *(undefined4 *)(*(int *)(iVar6 + 4) + 0x124) = uRam021537c0;
   *(undefined4 *)(*(int *)(iVar6 + 4) + 0x140) = 4;
   *(int *)(iVar5 + 0x2c) = iVar6;

@@ -9,8 +9,8 @@ void ALFont::InitFontChar(int param_1)
   int iVar2;
   uint uVar3;
   
-  uVar1 = jus_AllocDebug(*(int *)(param_1 + 0x50) << 3,s_ALFont_cpp_021d5060,s_InitFontChar_021d4e98
-                         ,0x392);
+  uVar1 = thunk_FUN_0201a228(*(int *)(param_1 + 0x50) << 3,s_ALFont_cpp_021d5060,
+                             s_InitFontChar_021d4e98,0x392);
   *(undefined4 *)(param_1 + 0x40) = uVar1;
   uVar3 = 0;
   while (uVar3 < *(uint *)(param_1 + 0x50)) {

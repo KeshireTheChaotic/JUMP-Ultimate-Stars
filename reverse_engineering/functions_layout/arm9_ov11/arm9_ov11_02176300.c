@@ -22,8 +22,8 @@ int * BattleAI_Deck::BattleAIDeck_CallBackCobjWorkCreate
   uVar1 = 1 << (*(uint *)(*(int *)(*(int *)(iVar3 + 4) + 0x10) + 0xd4) >> 0x1c);
   *(uint *)(param_2 + 0x10) = *(uint *)(param_2 + 0x10) | uVar1 | 0x10200000;
   *(uint *)(param_2 + 0x14) = *(uint *)(param_2 + 0x14) | uVar1 | uVar1 << 4 | 0x10200800;
-  piVar4 = (int *)jus_AllocDebug(0x24,s_BattleAI_Deck_cpp_02181820,
-                                 s_BattleAIDeck_CallBackCobjWorkCre_021817fc,0x9f5);
+  piVar4 = (int *)thunk_FUN_0201a228(0x24,s_BattleAI_Deck_cpp_02181820,
+                                     s_BattleAIDeck_CallBackCobjWorkCre_021817fc,0x9f5);
   FUN_020517fc(piVar4,0,0x24);
   iVar3 = FUN_02020d90();
   FUN_02174de4(iVar3,*(undefined4 *)(param_1 + 0x18));

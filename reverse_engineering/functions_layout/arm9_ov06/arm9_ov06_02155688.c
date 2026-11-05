@@ -32,7 +32,7 @@ void FUN_02155688(int param_1,undefined4 param_2,undefined4 param_3,undefined4 p
       pcVar10 = pcVar7;
       for (iVar8 = 7; iVar8 != 0; iVar8 = iVar8 + -1) {
         if ((pcVar10[1] != -1) &&
-           (iVar3 = (*(code *)(&PTR_LAB_02172040)[*pcVar10])(pcVar7,pcVar10), iVar3 != 0)) {
+           (iVar3 = (*(code *)(&PTR_FUN_02172040)[*pcVar10])(pcVar7,pcVar10), iVar3 != 0)) {
           iVar1 = (int)pcVar10[1];
           pcVar10[1] = -1;
           break;

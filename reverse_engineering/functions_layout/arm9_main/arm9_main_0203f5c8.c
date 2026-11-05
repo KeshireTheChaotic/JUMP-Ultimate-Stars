@@ -107,7 +107,7 @@ void jus_TagSPD2::vfunc_07(int param_1)
     }
     if (*(int *)(param_1 + 0x50) == 0) {
       *(int *)(param_1 + 0x54) = piVar4[9];
-      uVar7 = jus_AllocDebug();
+      uVar7 = FUN_0201a228();
       *(undefined4 *)(param_1 + 0x50) = uVar7;
     }
   }

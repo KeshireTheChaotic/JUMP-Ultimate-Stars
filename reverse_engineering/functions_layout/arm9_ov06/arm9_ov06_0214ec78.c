@@ -113,7 +113,7 @@ void FUN_0214ec78(int param_1,undefined4 param_2,undefined4 param_3,undefined4 p
 LAB_0214ee4c:
     *(undefined4 *)(DAT_02172960 + 0x164) = 1;
     FUN_0214df14();
-    FUN_02028384(*(undefined4 *)(*(int *)(iVar4 + 4) + 4),&LAB_0214f0d8);
+    FUN_02028384(*(undefined4 *)(*(int *)(iVar4 + 4) + 4),FUN_0214f0d8);
     break;
   case 6:
     goto LAB_0214ef7c;

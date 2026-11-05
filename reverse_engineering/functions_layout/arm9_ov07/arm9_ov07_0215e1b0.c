@@ -77,7 +77,7 @@ void FUN_0215e1b0(int param_1,undefined1 param_2,undefined4 param_3,undefined4 p
       (**(code **)(**(int **)(iVar7 + 4) + 0x24))(*(int **)(iVar7 + 4),param_1);
       uVar4 = FUN_0214f3bc(0,&DAT_0216a4e8,&DAT_02093c8c);
       FUN_02020e98(iVar7,uVar4);
-      FUN_02027834(*(undefined4 *)(iVar7 + 4),8,&LAB_0215de9c_1);
+      FUN_02027834(*(undefined4 *)(iVar7 + 4),8,0x215de9d);
       func_0x021b4104(*(undefined4 *)(iVar7 + 4),*(undefined4 *)(iVar7 + 4),4);
       FUN_02023894(*(undefined4 *)(iVar7 + 4),0x810001,0);
       (**(code **)(**(int **)(*(int *)(iVar7 + 4) + 0x68) + 0x6c))();

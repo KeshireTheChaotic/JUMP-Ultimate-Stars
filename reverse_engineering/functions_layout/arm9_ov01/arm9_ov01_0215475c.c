@@ -1,0 +1,101 @@
+
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+void FUN_0215475c(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+
+{
+  int iVar1;
+  int *piVar2;
+  int iVar3;
+  undefined4 uVar4;
+  undefined4 uStack_28;
+  undefined4 uStack_24;
+  undefined4 uStack_20;
+  undefined4 uStack_1c;
+  undefined4 uStack_18;
+  undefined4 uStack_14;
+  
+  uStack_14 = param_4;
+  iVar1 = ALWidgetBaseImp::Create();
+  (**(code **)(**(int **)(iVar1 + 4) + 0xd8))(*(int **)(iVar1 + 4),1);
+  *(undefined4 *)(*(int *)(iVar1 + 4) + 0x124) = 0x100;
+  *(int *)(param_1 + 0x34) = iVar1;
+  piVar2 = *(int **)(*(int *)(param_1 + 0x24) + 4);
+  (**(code **)(*piVar2 + 0xd8))(piVar2,1);
+  iVar3 = ALWidgetImp::Create(iVar1,_DAT_021d5154);
+  FUN_0214e688(iVar3,*(undefined4 *)(param_1 + 0x24));
+  (**(code **)(**(int **)(iVar3 + 4) + 0xd8))(*(int **)(iVar3 + 4),1);
+  func_0x021b6214(*(undefined4 *)(iVar3 + 4),0);
+  uStack_20 = 0x82000;
+  FUN_0214ffd0(iVar3,&uStack_20);
+  FUN_02028384(*(undefined4 *)(iVar3 + 4),0x2155ac5);
+  (**(code **)(**(int **)(iVar3 + 4) + 0x24))(*(int **)(iVar3 + 4),param_1);
+  *(int *)(param_1 + 0x3c) = iVar3;
+  uStack_1c = 0x80;
+  uStack_18 = 0;
+  iVar3 = FUN_0203b3e4();
+  iVar3 = ALWidgetImp::Create(iVar1,*(undefined4 *)(iVar3 + 0x88),0x851000,0,0x21,&uStack_1c);
+  (**(code **)(**(int **)(iVar3 + 4) + 0xd8))(*(int **)(iVar3 + 4),1);
+  func_0x021b6214(*(undefined4 *)(iVar3 + 4),0);
+  *(int *)(param_1 + 0x48) = iVar3;
+  uStack_1c = 0x100;
+  uStack_18 = 0xc0;
+  iVar3 = FUN_0203b3e4();
+  iVar3 = ALWidgetImp::Create(iVar1,*(undefined4 *)(iVar3 + 0x88),0x510000,0,0x20,&uStack_1c);
+  (**(code **)(**(int **)(iVar3 + 4) + 0xd8))(*(int **)(iVar3 + 4),1);
+  *(undefined1 *)(*(int *)(iVar3 + 4) + 0xaa) = 1;
+  *(undefined1 *)(*(int *)(iVar3 + 4) + 0xab) = 0;
+  func_0x021b77a8(*(undefined4 *)(iVar3 + 4),0x20);
+  (**(code **)(**(int **)(iVar3 + 4) + 0x24))(*(int **)(iVar3 + 4),param_1);
+  uVar4 = FUN_02150a40(0,&DAT_0216c1e8,&DAT_02093c8c);
+  FUN_02020e98(iVar3,uVar4);
+  func_0x021b65e8(*(undefined4 *)(iVar3 + 4),4,FUN_02155d8c + 1);
+  func_0x021b6760(*(undefined4 *)(iVar3 + 4),4,FUN_02155d9c);
+  FUN_02023894(*(undefined4 *)(iVar3 + 4),0x510000,0);
+  func_0x021b3f78(*(undefined4 *)(iVar3 + 4),0x510000);
+  func_0x021b3fc4(*(undefined4 *)(iVar3 + 4),0x510001);
+  *(undefined4 *)(*(int *)(iVar3 + 4) + 0x124) = 1;
+  *(int *)(param_1 + 0x40) = iVar3;
+  uStack_1c = 0xd0;
+  uStack_18 = 0xc0;
+  iVar3 = FUN_0203b3e4();
+  iVar3 = ALWidgetImp::Create(iVar1,*(undefined4 *)(iVar3 + 0x88),0x510000,0x17,0x20,&uStack_1c);
+  (**(code **)(**(int **)(iVar3 + 4) + 0xd8))(*(int **)(iVar3 + 4),1);
+  *(undefined1 *)(*(int *)(iVar3 + 4) + 0xaa) = 1;
+  *(undefined1 *)(*(int *)(iVar3 + 4) + 0xab) = 0;
+  func_0x021b77a8(*(undefined4 *)(iVar3 + 4),0x40);
+  (**(code **)(**(int **)(iVar3 + 4) + 0x24))(*(int **)(iVar3 + 4),param_1);
+  uStack_24 = 0x83000;
+  FUN_0214ffd0(iVar3,&uStack_24);
+  FUN_02028384(*(undefined4 *)(iVar3 + 4),FUN_02156c28 + 1);
+  uVar4 = FUN_02150a40(0,&DAT_0216c1e8,&DAT_02093c8c);
+  FUN_02020e98(iVar3,uVar4);
+  func_0x021b65e8(*(undefined4 *)(iVar3 + 4),4,FUN_02155d64 + 1);
+  func_0x021b6760(*(undefined4 *)(iVar3 + 4),4,FUN_02155e04);
+  FUN_02023894(*(undefined4 *)(iVar3 + 4),0x510017,0);
+  func_0x021b3f78(*(undefined4 *)(iVar3 + 4),0x510017);
+  func_0x021b3fc4(*(undefined4 *)(iVar3 + 4),0x510018);
+  func_0x021b400c(*(undefined4 *)(iVar3 + 4),0x51002b);
+  *(undefined4 *)(*(int *)(iVar3 + 4) + 0x124) = 2;
+  *(int *)(param_1 + 0x44) = iVar3;
+  uStack_1c = 0xa0;
+  uStack_18 = 0xc0;
+  iVar3 = FUN_0203b3e4();
+  iVar1 = ALWidgetImp::Create(iVar1,*(undefined4 *)(iVar3 + 0x88),0x510000,0x25,0x20,&uStack_1c);
+  (**(code **)(**(int **)(iVar1 + 4) + 0xd8))(*(int **)(iVar1 + 4),1);
+  *(undefined1 *)(*(int *)(iVar1 + 4) + 0xaa) = 1;
+  *(undefined1 *)(*(int *)(iVar1 + 4) + 0xab) = 0;
+  func_0x021b77a8(*(undefined4 *)(iVar1 + 4),0x80);
+  (**(code **)(**(int **)(iVar1 + 4) + 0x24))(*(int **)(iVar1 + 4),param_1);
+  uStack_28 = 0x84000;
+  FUN_0214ffd0(iVar1,&uStack_28);
+  uVar4 = FUN_02150a40(0,&DAT_0216c1e8,&DAT_02093c8c);
+  FUN_02020e98(iVar1,uVar4);
+  func_0x021b65e8(*(undefined4 *)(iVar1 + 4),4,0x2155f60);
+  func_0x021b6760(*(undefined4 *)(iVar1 + 4),4,0x2155f74);
+  FUN_02023894(*(undefined4 *)(iVar1 + 4),0x510025,0);
+  func_0x021b3f78(*(undefined4 *)(iVar1 + 4),0x510025);
+  func_0x021b3fc4(*(undefined4 *)(iVar1 + 4),0x510026);
+  return;
+}
+

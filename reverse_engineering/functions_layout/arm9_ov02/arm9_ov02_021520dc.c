@@ -91,7 +91,7 @@ void ALControllerImp::Create(undefined1 *param_1)
         FUN_0214f960(uVar3,&DAT_0215cba4);
         uVar3 = FUN_0214d718(0,0x42);
         *(undefined4 *)(unaff_r10 + 0x20) = uVar3;
-        iVar4 = jus_AllocDebug(0xcc,s_ALWidget_inl_0215bfc0,s_Create_0215c1a0,0x1de);
+        iVar4 = thunk_FUN_0201a228(0xcc,s_ALWidget_inl_0215bfc0,s_Create_0215c1a0,0x1de);
         if (iVar4 != 0) {
           func_0x021af26c(iVar4,FUN_02153084,FUN_0215313c,0);
         }
@@ -99,7 +99,7 @@ void ALControllerImp::Create(undefined1 *param_1)
         (**(code **)(*(int *)piVar6[1] + 0x24))();
         func_0x021b3b7c(0x10,0,piVar6,0);
         (**(code **)(*piVar6 + 8))();
-        iVar4 = jus_AllocDebug(0xcc,s_ALWidget_inl_0215bfc0,s_Create_0215c1a0,0x1de);
+        iVar4 = thunk_FUN_0201a228(0xcc,s_ALWidget_inl_0215bfc0,s_Create_0215c1a0,0x1de);
         if (iVar4 != 0) {
           func_0x021af26c(iVar4,FUN_021530e0,FUN_0214d434,0);
         }
@@ -142,10 +142,10 @@ void ALControllerImp::Create(undefined1 *param_1)
           iVar15 = (uint)*(byte *)(iVar4 + iVar5 + 0x2d) * 0x48 +
                    *(int *)(*(int *)(unaff_r10 + 0x330) + 0x34);
           if ((DAT_0215cc0c & 1) == 0) {
-            FUN_0214edbc(&DAT_0215c1b8,0xffffffe0,0xffffffe0);
-            FUN_0214edbc(&DAT_0215c1c0,0xffffffd8,0xffffffe0,0x28);
-            FUN_0214edbc(&DAT_0215c1c8,0xffffffd8,0xffffffe0);
-            FUN_0214edbc(&DAT_0215c1d0,0xffffffd8,0xffffffd8);
+            FUN_0214edbc(FUN_0215c1b8,0xffffffe0,0xffffffe0);
+            FUN_0214edbc(0x215c1c0,0xffffffd8,0xffffffe0,0x28);
+            FUN_0214edbc(0x215c1c8,0xffffffd8,0xffffffe0);
+            FUN_0214edbc(0x215c1d0,0xffffffd8,0xffffffd8);
             DAT_0215cc0c = DAT_0215cc0c | 1;
           }
           if ((DAT_0215cc08 & 1) == 0) {
@@ -204,7 +204,7 @@ void ALControllerImp::Create(undefined1 *param_1)
             FUN_0214ef10(&uStack00000040,iVar10,s_Position_0215c31c);
             uVar8 = in_stack_00000044;
             uVar3 = uStack00000040;
-            iVar16 = jus_AllocDebug(0x4c,s_ALControllerImp_h_0215c008,s_Create_0215c198,0x2ef);
+            iVar16 = thunk_FUN_0201a228(0x4c,s_ALControllerImp_h_0215c008,s_Create_0215c198,0x2ef);
             if (iVar16 != 0) {
               jus_TagIPMV::jus_TagIPMV(iVar16,0,uVar3,uVar8);
             }

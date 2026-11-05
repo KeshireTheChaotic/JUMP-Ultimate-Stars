@@ -145,9 +145,9 @@ void ALNodeImp::Create(int param_1)
     puVar9 = (ushort *)((int)piVar2 + iVar13 + 4);
     for (local_338 = 0; local_338 < (int)(uint)*(byte *)((int)piVar2 + iVar13 + 1);
         local_338 = local_338 + 1) {
-      iVar5 = jus_AllocDebug(0x78,s_ALNodeImp_h_021d43b4,s_Create_021d439c,0x4c3);
+      iVar5 = thunk_FUN_0201a228(0x78,s_ALNodeImp_h_021d43b4,s_Create_021d439c,0x4c3);
       if (iVar5 != 0) {
-        jus_Class_0209c0b4::jus_Class_0209c0b4(iVar5,FUN_02024a30,1);
+        jus_TagNDGR_0209c0b4::jus_TagNDGR_0209c0b4(iVar5,FUN_02024a30,1);
       }
       iVar5 = FUN_021acab4();
       local_2d4 = ((int)(short)puVar9[3] >> 1) << 0xc;

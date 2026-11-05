@@ -35,7 +35,7 @@ void FUN_0215c248(int param_1,int *param_2)
           FUN_0215babc(iVar5);
           FUN_02159ea8(iVar5,0x215b8bd);
           func_0x021b6760(*(undefined4 *)(*(int *)(iVar5 + 0x70) + 4),4,0x215a275);
-          FUN_02159e60(iVar5,&LAB_0215ba30_1);
+          FUN_02159e60(iVar5,0x215ba31);
           FUN_02159790(iVar5,0);
         }
         func_0x021b65e0(*(undefined4 *)(*(int *)(iVar5 + 0x60) + 4));

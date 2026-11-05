@@ -59,7 +59,7 @@ void ALWidgetImp::Create(int param_1)
   FUN_0214fb7c(*(undefined4 *)(param_1 + 4));
   uVar10 = _DAT_021d5154;
   uVar9 = *(undefined4 *)(*(int *)(param_1 + 0x38) + 4);
-  iVar1 = jus_AllocDebug(400,s_ALWidgetImp_h_0215e570,s_Create_0215e3f8,0x159);
+  iVar1 = thunk_FUN_0201a228(400,s_ALWidgetImp_h_0215e570,s_Create_0215e3f8,0x159);
   if (iVar1 != 0) {
     func_0x021ae114(iVar1,uVar9,uVar10,CreateDrawFunc);
   }
@@ -111,7 +111,7 @@ void ALWidgetImp::Create(int param_1)
   FUN_0214e908(iVar8,iVar2);
   iVar11 = 0;
   do {
-    iVar4 = func_0x021ca3a4(0x100,0x10,s_font_DSFont_aft_0215e6f0,0,0);
+    iVar4 = func_0x021ca3a4(0x100,0x10,FUN_0215e6f0,0,0);
     local_64 = 0x3000;
     iVar5 = FUN_0214d784(*(undefined1 *)(param_1 + 2),*(undefined1 *)(iVar12 + iVar11 + 0x74));
     for (iVar7 = 0;
@@ -167,7 +167,7 @@ void ALWidgetImp::Create(int param_1)
   iVar11 = 0;
   do {
     iVar4 = func_0x021ca3a4(0xa0,0x10,s_font_JSKFont_aft_0215e700,0,0);
-    thunk_FUN_0207400c(auStack_a4,&DAT_0215e714);
+    thunk_FUN_0207400c(auStack_a4,FUN_0215e714);
     uVar10 = FUN_0214d79c(*(undefined4 *)(param_1 + 0xd0),*(undefined1 *)(param_1 + 2),
                           *(undefined1 *)(iVar12 + iVar11 + 0x74));
     thunk_FUN_020741c4(auStack_a4,uVar10);

@@ -21,7 +21,7 @@ jus_Class_02093f78::vfunc_05
     uVar2 = 0;
   }
   else {
-    iVar1 = jus_AllocDebug(0x28);
+    iVar1 = FUN_0201a228(0x28);
     uVar2 = 0;
     if (iVar1 != 0) {
       uVar2 = jus_TagDUMY_Derived_02094a34::jus_TagDUMY_Derived_02094a34

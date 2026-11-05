@@ -17,7 +17,7 @@ void FUN_020430c4(void)
   FUN_02054c7c();
   FUN_0206475c(0xffffffff);
   uVar1 = FUN_0206477c(0,0);
-  uVar2 = jus_AllocDebug();
+  uVar2 = FUN_0201a228();
   FUN_0201ac08(uVar2,s_RomFSTable_0209da5c);
   FUN_0206477c(uVar2,uVar1);
   FUN_020430a8(1);
@@ -43,9 +43,9 @@ void FUN_020430c4(void)
   DAT_020a0df4 = &DAT_020a0fe8;
   (**(code **)(DAT_020a0fe8 + 4))();
   DAT_020a0e18 = FUN_02034c94;
-  DAT_020a1060 = &LAB_02049188;
+  DAT_020a1060 = FUN_02049188;
   FUN_02034830();
-  FUN_020368c8(&LAB_0204323c);
+  FUN_020368c8(FUN_0204323c);
   DAT_02093bcc = 0x10000;
   return;
 }

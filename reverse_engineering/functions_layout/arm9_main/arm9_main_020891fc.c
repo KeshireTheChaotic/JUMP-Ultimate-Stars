@@ -6,7 +6,7 @@ undefined4 FUN_020891fc(void)
   
                     /* JUS-TAG strings=["CommLib.cpp","WH_StateInEndParentMP"] */
   DAT_0214bea4 = 4;
-  iVar1 = FUN_0205965c(&LAB_02089180_1);
+  iVar1 = FUN_0205965c(0x2089181);
   if (iVar1 == 3) {
     DAT_0214bea4 = 2;
     if (DAT_0214be8c != (code *)0x0) {

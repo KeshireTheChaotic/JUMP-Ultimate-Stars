@@ -1,8 +1,8 @@
 
-/* JUS-CLASS jus_Class_0209c0b4::jus_Class_0209c0b4 [class-default] stores vtable 0209c0b4 into
+/* JUS-CLASS jus_TagNDGR_0209c0b4::jus_TagNDGR_0209c0b4 [class-type-tag] stores vtable 0209c0b4 into
    *this (constructor) */
 
-int * jus_Class_0209c0b4::jus_Class_0209c0b4(int *param_1,int *param_2)
+int * jus_TagNDGR_0209c0b4::jus_TagNDGR_0209c0b4(int *param_1,int *param_2)
 
 {
   uint uVar1;

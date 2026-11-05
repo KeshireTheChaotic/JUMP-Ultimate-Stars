@@ -7,7 +7,7 @@ undefined4 * ALDrawLinkImp_021d2e58::ALDrawLinkImp_021d2e58(undefined4 *param_1,
 {
   uint uVar1;
   
-  FUN_0201539c();
+  jus_Class_0209be5c::jus_Class_0209be5c();
   *param_1 = &vftable;
   FUN_021b3c40(param_1 + 0x1e);
   FUN_021b3c4c(param_1 + 0x21,param_2 + 0x84);

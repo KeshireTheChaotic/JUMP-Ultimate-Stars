@@ -9,7 +9,7 @@ void FUN_02156be8(int param_1)
   FUN_02156990(iVar1);
   FUN_02023894(*(undefined4 *)(*(int *)(iVar1 + 4) + 4),2,0);
   (**(code **)(**(int **)(*(int *)(*(int *)(iVar1 + 4) + 4) + 0x68) + 0x6c))();
-  FUN_02028384(*(undefined4 *)(param_1 + 4),&DAT_02156bb8);
+  FUN_02028384(*(undefined4 *)(param_1 + 4),FUN_02156bb8);
   return;
 }
 

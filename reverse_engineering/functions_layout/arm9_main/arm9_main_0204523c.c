@@ -39,7 +39,7 @@ void FUN_0204523c(int param_1,uint param_2)
     }
     (**(code **)(**(int **)(param_1 + 0x1c) + 0x3c))();
     if (*(int *)(param_1 + 0x60) != 0) {
-      uVar3 = jus_AllocDebug();
+      uVar3 = FUN_0201a228();
       FUN_02051890(*(undefined4 *)(param_1 + 0x5c),uVar3,*(undefined4 *)(param_1 + 0x60));
       *(undefined4 *)(param_1 + 0x5c) = uVar3;
       *(undefined1 *)(param_1 + 0x68) = 1;

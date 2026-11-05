@@ -59,7 +59,7 @@ void FUN_0216dcb8(void)
   FUN_021509f8(auStack_7c,0xffffffe8,0xfffffff7,0x18,9);
   FUN_021546b4(&DAT_0216fd94,auStack_7c);
   FUN_021509f8(auStack_84,0xffffffe8,0xfffffff7,0x18,9);
-  FUN_021546b4(&DAT_0216fdb8,auStack_84);
+  FUN_021546b4(FUN_0216fdb8,auStack_84);
   FUN_021509f8(auStack_8c,0,0,0x100,0xc0);
   FUN_021546b4(&DAT_0216fd04,auStack_8c);
   FUN_021509f8(auStack_94,0xfffffff0,0,0x10,0x20);

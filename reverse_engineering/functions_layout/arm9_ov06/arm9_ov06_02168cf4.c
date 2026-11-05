@@ -100,7 +100,7 @@ int FUN_02168cf4(int param_1,int param_2,int param_3,int param_4,undefined1 para
       FUN_02037c24(DAT_02172994 + 8,iVar6);
       FUN_02037b98(DAT_02172994,iVar6);
       *(undefined **)(iVar6 + 0x14) = &DAT_021696d0;
-      (*(code *)(&PTR_LAB_021726f8)[param_6])(iVar6);
+      (*(code *)(&PTR_FUN_021726f8)[param_6])(iVar6);
     }
   }
   return iVar6;

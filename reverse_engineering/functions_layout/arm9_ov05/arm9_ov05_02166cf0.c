@@ -1,8 +1,8 @@
 
-/* JUS-SCENE jus_Scene32_CreateImpl [scene-map] called by scene 32 create wrapper 0206fbe8 while
-   overlay 5 is resident */
+/* JUS-GAME Database::Database_Add [source-string] __FILE__="Database.cpp"
+   __FUNCTION__="Database_Add" lines=[67] passed to 1 source-location call(s) */
 
-int jus_Scene32_CreateImpl(uint param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+int Database::Database_Add(uint param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
 
 {
   byte bVar1;
@@ -15,7 +15,8 @@ int jus_Scene32_CreateImpl(uint param_1,undefined4 param_2,undefined4 param_3,un
   undefined4 uStack_18;
   
   uStack_18 = param_4;
-  piVar4 = (int *)jus_AllocDebug(0x44,PTR_s_Database_cpp_02166ee0,PTR_s_Database_Add_02166ee4,0x43);
+  piVar4 = (int *)thunk_FUN_0201a228(0x44,PTR_s_Database_cpp_02166ee0,PTR_s_Database_Add_02166ee4,
+                                     0x43);
   FUN_020517fc(piVar4,0,0x44);
   piVar4[6] = 0;
   piVar4[0xd] = (int)param_1 >> 0x10 & 0xffff;

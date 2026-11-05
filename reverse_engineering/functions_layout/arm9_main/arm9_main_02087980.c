@@ -2,6 +2,7 @@
 void FUN_02087980(void)
 
 {
+                    /* JUS-TAG source_file_inferred="CommWrap.cpp" */
   if (DAT_0214be24 != 0) {
     if (*(int **)(DAT_0214be24 + 0x10) != (int *)0x0) {
       (**(code **)(**(int **)(DAT_0214be24 + 0x10) + 8))();

@@ -1,0 +1,16 @@
+0201b814  cmp r1,#0x0
+0201b818  bne 0x0201b82c
+0201b81c  ldr r1,[r0,#0x1c]
+0201b820  cmp r1,#0x0
+0201b824  movne r0,r1
+0201b828  bx lr
+0201b82c  ldr r2,[r0,#0x1c]
+0201b830  cmp r2,#0x0
+0201b834  moveq r2,r0
+0201b838  b 0x0201b844
+0201b83c  ldr r2,[r2,#0x20]
+0201b840  sub r1,r1,#0x1
+0201b844  cmp r1,#0x0
+0201b848  bne 0x0201b83c
+0201b84c  mov r0,r2
+0201b850  bx lr

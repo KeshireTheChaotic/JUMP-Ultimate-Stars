@@ -10,7 +10,7 @@ CommonEffect::CloneMain(int param_1,undefined4 param_2,undefined4 param_3,undefi
   
                     /* JUS-TAG strings=["CloneMain","CommonEffect.h"] */
   puVar1 = (undefined4 *)
-           jus_AllocDebug(0x84,s_CommonEffect_h_0209e040,s_CloneMain_0209dfc4,0xa2,param_4);
+           thunk_FUN_0201a228(0x84,s_CommonEffect_h_0209e040,s_CloneMain_0209dfc4,0xa2,param_4);
   if (puVar1 != (undefined4 *)0x0) {
     CommonEffect_0209c30c::CommonEffect_0209c30c(puVar1,param_1);
     *puVar1 = &CommonEffect_0209e114::vftable;

@@ -1,0 +1,13 @@
+021565c0  mov r2,#0x0
+021565c4  strb r2,[r0,#0xa0]
+021565c8  strh r2,[r0,#0x9e]
+021565cc  strh r2,[r0,#0x9c]
+021565d0  ldr r0,[r0,#0x7c]
+021565d4  ldr r0,[r0,#0x10]
+021565d8  ldr r1,[r0,#0x5c]
+021565dc  strh r2,[r1,#0x26]
+021565e0  strh r2,[r1,#0x24]
+021565e4  ldr r0,[r1,#0x34]
+021565e8  orr r0,r0,#0x1000
+021565ec  str r0,[r1,#0x34]
+021565f0  bx lr

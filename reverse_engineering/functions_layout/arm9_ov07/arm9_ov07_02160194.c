@@ -22,7 +22,7 @@ void FUN_02160194(undefined4 *param_1,undefined4 param_2,undefined4 param_3)
     *(undefined2 *)(DAT_0216ad8c + 0x45) = 0x200;
     *(undefined2 *)((int)DAT_0216ad8c + 0x116) = 0x200;
     *(undefined2 *)((int)DAT_0216ad8c + 0xf6) = 1;
-    FUN_0215eb08(DAT_0216ad8c + 0x48,DAT_0216ad8c + 0x38,&LAB_021602bc,*DAT_0216ad8c);
+    FUN_0215eb08(DAT_0216ad8c + 0x48,DAT_0216ad8c + 0x38,FUN_021602bc,*DAT_0216ad8c);
     uVar3 = OS_DisableInterrupts();
     DAT_0216ad88 = 2;
     if ((code *)DAT_0216ad8c[1] != (code *)0x0) {

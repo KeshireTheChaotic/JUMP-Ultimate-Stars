@@ -7,8 +7,8 @@ int WiFiVoiceChat::WiFiVoiceChat_Initialize(void)
 {
   int iVar1;
   
-  iVar1 = jus_AllocDebug(0x100,s_WiFiVoiceChat_cpp_021d50a4,s_WiFiVoiceChat_Initialize_021d5088,
-                         0x1fd);
+  iVar1 = thunk_FUN_0201a228(0x100,s_WiFiVoiceChat_cpp_021d50a4,s_WiFiVoiceChat_Initialize_021d5088,
+                             0x1fd);
   if (iVar1 == 0) {
     return 0;
   }

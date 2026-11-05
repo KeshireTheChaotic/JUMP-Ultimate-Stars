@@ -25,7 +25,7 @@ void FUN_0200ad6c(uint *param_1,uint param_2)
     local_20 = &PTR_FUN_0200b1b4_1_02093758;
     local_48 = local_1c;
     iVar1 = FUN_02004b04(s_basic_string__reserve_length_err_020937cc);
-    uVar2 = jus_AllocDebug(iVar1 + 1);
+    uVar2 = thunk_FUN_0201a228(iVar1 + 1);
     local_3c = 0;
     local_54 = local_54 & 0xffffff00;
     FUN_0200ab5c(local_48,uVar2,local_54);
@@ -59,11 +59,11 @@ void FUN_0200ad6c(uint *param_1,uint param_2)
     }
     else {
       if (uVar3 < uVar4) {
-        local_40 = (byte *)jus_AllocDebug(uVar4);
+        local_40 = (byte *)thunk_FUN_0201a228(uVar4);
       }
       else {
         local_24 = (undefined1 *)&local_50;
-        local_40 = (byte *)jus_AllocDebug(uVar4);
+        local_40 = (byte *)thunk_FUN_0201a228(uVar4);
       }
       local_44 = 1;
       if (local_4c == 0) {

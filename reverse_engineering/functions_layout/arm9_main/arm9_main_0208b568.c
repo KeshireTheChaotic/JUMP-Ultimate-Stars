@@ -6,6 +6,7 @@ void FUN_0208b568(void)
   undefined4 in_r3;
   uint uVar2;
   
+                    /* JUS-TAG source_file_inferred="CommGame.cpp" */
   uVar2 = 1;
   do {
     iVar1 = FUN_0208c14c(uVar2);

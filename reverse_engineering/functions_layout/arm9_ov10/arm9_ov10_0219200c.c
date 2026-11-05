@@ -5,7 +5,7 @@ undefined4 FUN_0219200c(int param_1)
   int iVar1;
   undefined4 uVar2;
   
-  iVar1 = FUN_02191978(&LAB_02191f98_1,param_1,(int)*(char *)(param_1 + 0x72));
+  iVar1 = FUN_02191978(0x2191f99,param_1,(int)*(char *)(param_1 + 0x72));
   if (iVar1 == 0) {
     return 0xffffffdf;
   }

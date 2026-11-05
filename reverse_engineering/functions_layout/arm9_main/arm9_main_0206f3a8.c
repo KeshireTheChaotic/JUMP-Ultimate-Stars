@@ -5,7 +5,7 @@ void jus_Scene20_Exit(undefined4 param_1)
 
 {
   FUN_0207120c(8,1);
-  func_0x0206e590(param_1,0);
+  FUN_0206e590(param_1,0);
   return;
 }
 

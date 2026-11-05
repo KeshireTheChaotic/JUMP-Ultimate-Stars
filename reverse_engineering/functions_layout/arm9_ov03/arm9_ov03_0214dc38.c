@@ -71,7 +71,7 @@ undefined4 FUN_0214dc38(int *param_1)
     iVar6 = iVar6 + 1;
     *(undefined4 *)(unaff_r10 + iVar1 + 0xc) = uVar3;
   } while (iVar6 < 3);
-  iVar6 = jus_AllocDebug(0xcc,s_ALWidget_inl_0215dbec,s_Create_0215db1c,0x1de);
+  iVar6 = thunk_FUN_0201a228(0xcc,s_ALWidget_inl_0215dbec,&DAT_0215db1c,0x1de);
   piVar2 = (int *)0x0;
   if (iVar6 != 0) {
     piVar2 = (int *)func_0x021af26c(iVar6,FUN_0214ec20,FUN_0214eccc,0);
@@ -121,9 +121,9 @@ undefined4 FUN_0214dc38(int *param_1)
   *(undefined1 *)(*(int *)(iVar6 + 4) + 0xab) = 0;
   func_0x021b77a8(*(undefined4 *)(iVar6 + 4),0x20);
   (**(code **)(**(int **)(iVar6 + 4) + 0x24))();
-  uVar3 = FUN_0214e81c(0,&DAT_0215db58,&DAT_02093c8c);
+  uVar3 = FUN_0214e81c(0,0x215db58,&DAT_02093c8c);
   FUN_02020e98(iVar6,uVar3);
-  func_0x021b65e8(*(undefined4 *)(iVar6 + 4),4,&LAB_0214eb7c);
+  func_0x021b65e8(*(undefined4 *)(iVar6 + 4),4,FUN_0214eb7c);
   func_0x021b6760(*(undefined4 *)(iVar6 + 4),4,FUN_0214eb94);
   FUN_02023894(*(undefined4 *)(iVar6 + 4),0x510000,0);
   func_0x021b3f78(*(undefined4 *)(iVar6 + 4),0x510000);
@@ -151,7 +151,7 @@ undefined4 FUN_0214dc38(int *param_1)
   *(undefined4 *)(*(int *)(iVar6 + 4) + 0x140) = 4;
   func_0x021b7744(*(undefined4 *)(iVar6 + 4),1);
   *(undefined4 *)(*(int *)(iVar6 + 4) + 0x124) = 0x101;
-  func_0x021b65e8(*(undefined4 *)(iVar6 + 4),0x10,&LAB_0214ea38);
+  func_0x021b65e8(*(undefined4 *)(iVar6 + 4),0x10,FUN_0214ea38);
   func_0x021b6760(*(undefined4 *)(iVar6 + 4),0x10,FUN_0214ea48);
   *(int *)(unaff_r10 + 0x24) = iVar6;
   uVar7 = 0;
@@ -176,9 +176,9 @@ undefined4 FUN_0214dc38(int *param_1)
     FUN_02023c80(*(undefined4 *)(iVar6 + 4),uStack00000038,0x494c,in_stack_0000003c);
     FUN_02023c70(*(undefined4 *)(iVar6 + 4),2);
     func_0x021b4034(*(undefined4 *)(iVar6 + 4),2);
-    uVar3 = FUN_0214e81c(0,&DAT_0215db50,&DAT_02093c8c);
+    uVar3 = FUN_0214e81c(0,FUN_0215db50,&DAT_02093c8c);
     FUN_02020e98(iVar6,uVar3);
-    func_0x021b65e8(*(undefined4 *)(iVar6 + 4),1,&LAB_0214ed04);
+    func_0x021b65e8(*(undefined4 *)(iVar6 + 4),1,FUN_0214ed04);
     func_0x021b65e8(*(undefined4 *)(iVar6 + 4),4,FUN_0214eab0);
     func_0x021b6760(*(undefined4 *)(iVar6 + 4),4,FUN_0214eac8);
     func_0x021b65e8(*(undefined4 *)(iVar6 + 4),0x10,FUN_0214ea7c);
@@ -223,7 +223,7 @@ undefined4 FUN_0214dc38(int *param_1)
   } while (iVar6 < 4);
   iVar6 = ALWidgetBaseImp::Create();
   *(undefined4 *)(*(int *)(iVar6 + 4) + 0x124) = 0x103;
-  func_0x021b65e8(*(undefined4 *)(iVar6 + 4),0x10,&LAB_0214ea38);
+  func_0x021b65e8(*(undefined4 *)(iVar6 + 4),0x10,FUN_0214ea38);
   func_0x021b6760(*(undefined4 *)(iVar6 + 4),0x10,FUN_0214ea48);
   *(int *)(unaff_r10 + 0x2c) = iVar6;
   in_stack_00000028 = 0x40;
@@ -244,7 +244,7 @@ undefined4 FUN_0214dc38(int *param_1)
   iVar6 = ALWidgetBaseImp::Create();
   (**(code **)(**(int **)(iVar6 + 4) + 0x24))();
   *(undefined4 *)(*(int *)(iVar6 + 4) + 0x124) = 0x102;
-  func_0x021b65e8(*(undefined4 *)(iVar6 + 4),0x10,&LAB_0214e9dc);
+  func_0x021b65e8(*(undefined4 *)(iVar6 + 4),0x10,FUN_0214e9dc);
   func_0x021b6760(*(undefined4 *)(iVar6 + 4),0x10,FUN_0214e9ec);
   *(int *)(unaff_r10 + 0x28) = iVar6;
   iVar6 = ALWidgetImp::Create(iVar6,_DAT_021d5154);

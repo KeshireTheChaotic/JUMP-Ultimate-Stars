@@ -1,0 +1,7 @@
+020682a8  ldrb r0,[r0,#0xb]
+020682aa  cmp r0,#0x0
+020682ac  bne 0x020682b2
+020682ae  ldr r0,[0x020682b8]
+020682b0  bx lr
+020682b2  ldr r0,[0x020682bc]
+020682b4  bx lr

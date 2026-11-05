@@ -12,7 +12,7 @@ void FUN_021559e4(int param_1)
   FUN_021511c8(param_1,&local_c,&local_10);
   iVar1 = FUN_02155a9c(param_1,0x31305053);
   if ((DAT_0216de44 != 0) && (*(int *)(DAT_0216de44 + 0x30) != 0)) {
-    iVar2 = (*(code *)(&PTR_LAB_0215413c_1_02169d3c)[*(int *)(DAT_0216de44 + 0xf8)])();
+    iVar2 = (*(code *)(&PTR_FUN_0215413c_1_02169d3c)[*(int *)(DAT_0216de44 + 0xf8)])();
     if (iVar2 != 0) {
       iVar2 = (**(code **)(**(int **)(*(int *)(DAT_0216de44 + 0x30) + 4) + 0x194))();
       if (*(byte *)(DAT_0216de44 + *(int *)(DAT_0216de44 + 0xf8) * 0x14 + iVar2 + 0x128) < 3) {

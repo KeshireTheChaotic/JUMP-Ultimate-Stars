@@ -7,7 +7,7 @@ undefined4 * ALWidgetImp_021d0f9c::ALWidgetImp_021d0f9c(undefined4 *param_1)
 {
   int *piVar1;
   
-  ALWidgetBase_021d3498::ALWidgetBase_021d3498();
+  ALWidgetBaseImp::ALWidgetBaseImp();
   *param_1 = &vftable;
   piVar1 = (int *)param_1[0x27];
   if (piVar1 != (int *)0x0) {

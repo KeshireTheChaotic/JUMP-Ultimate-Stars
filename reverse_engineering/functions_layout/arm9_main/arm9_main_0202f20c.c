@@ -9,7 +9,7 @@ undefined4 * jus_Class_02094658::jus_Class_02094658(undefined4 *param_1,undefine
   int iVar2;
   
   *param_1 = &vftable;
-  iVar1 = jus_AllocDebug(0x1c);
+  iVar1 = FUN_0201a228(0x1c);
   iVar2 = 0;
   if (iVar1 != 0) {
     iVar2 = ALCollision_02094f78::ALCollision_02094f78(iVar1,param_2);

@@ -1,22 +1,29 @@
-"""Koma Editor: comic-panel art in ``koma/koma.aar`` (DSTX v1 flags 0x04).
+"""Koma Editor: comic-panel art (``koma/koma.aar``) and card shapes (``bin/koma.bin``).
 
 Layout follows the Unity Sprite Editor / Aseprite-lite pattern:
-asset browser (left dock) · panel canvas with Select / Pencil / Picker tools ·
-inspector with palette · bottom dock with the panel strip and problems.
+asset browser (left dock) · card canvas with Select / Pencil / Picker tools ·
+inspector with card, shape picker and palette · bottom dock with the panel
+strip, the shape dictionary and problems.
 
-Only panel *art* is decoded (byte-exact on 898/898 files).  How panels sit on
-a deck/comic page and any gameplay restriction are unknown and not shown.
+* Panel art: DSTX v1 flags 0x04, byte-exact on 898/898 files (Direct).
+* Card shape: ``bin/kshape.bin`` 66 shapes on a 5×4 grid (5 columns × 4 rows, the deck board width) and ``bin/koma.bin``
+  890 cards selecting (size, variant) — both rebuild byte-exactly (Direct).
+  A shape edit changes only bytes +0x08/+0x09 of one card.
+* Card ↔ art: series id → art prefix from the ARM9 table 0x0209E840, art index →
+  `koma/<prefix>_<NN>.dtx` (FUN_020790F0) — Direct.
+* Deck placement is separate data and not decoded.
 """
 from __future__ import annotations
 
 import re
 import tkinter as tk
+from pathlib import Path
 from tkinter import colorchooser, filedialog, messagebox, ttk
 
 from PIL import Image
 
-from jus_formats import dsig as dsigmod, koma
-from jus_package import images
+from jus_formats import dsig as dsigmod, koma, kshape
+from jus_package import images, komacards
 from jus_package.project import join
 
 from .. import theme as T
@@ -24,7 +31,9 @@ from ..widgets import Filmstrip
 from .base import SuiteWorkspace
 
 ARCHIVE = 'koma/koma.aar'
-GAP = 8
+GAP = 8          # strip mode
+CGAP = 3         # card mode, between grid cells
+CELL = 48
 
 
 class KomaWorkspace(SuiteWorkspace):
@@ -37,16 +46,22 @@ class KomaWorkspace(SuiteWorkspace):
         self.kf: koma.KomaFile | None = None
         self.panel = 0
         self.tool = tk.StringVar(value='select')
+        self.layout_mode = tk.StringVar(value='Card')
         self.colour = 1
         self.show_grid = tk.BooleanVar(value=True)
-        self._dirty = False
+        self._dirty = False                       # art edited, not applied
+        self._cards_dirty = False                 # koma.bin edited, not applied
         self._stroke = None
         self._cache: dict[int, Image.Image] = {}
+        self.cat: komacards.KomaCatalog | None = None
+        self.cat_error = ''
+        self.card_choices: list[tuple[kshape.Card, bool]] = []
+        self.card: kshape.Card | None = None
         super().__init__(app, host, browser_host, k)
 
     # ------------------------------------------------------------ layout
     def build(self, host):
-        ws = self.standard_layout(host, bottom_ratio=0.78)
+        ws = self.standard_layout(host, bottom_ratio=0.74)
         h = self.view_panel.header
         for key, label, tip in (('picker', 'Picker', 'Pick a palette index from the panel (I)'),
                                 ('pencil', 'Pencil', 'Paint the current palette index (B)'),
@@ -57,18 +72,33 @@ class KomaWorkspace(SuiteWorkspace):
             T.Tooltip(b, tip)
         ttk.Checkbutton(h, text='Grid', variable=self.show_grid, style='Toolbar.TCheckbutton',
                         command=lambda: self.view.redraw()).pack(side='right', padx=8)
+        for key, tip in (('Strip', 'Panels in a row (art order)'),
+                         ('Card', 'Panels placed on the card shape (bin/kshape.bin 5×4 grid)')):
+            b = ttk.Radiobutton(h, text=key, value=key, variable=self.layout_mode, style='ToolToggle.TRadiobutton',
+                                command=self.frame_view)
+            b.pack(side='right', padx=1)
+            T.Tooltip(b, tip)
         ttk.Button(h, text='Frame', style='Tool.TButton', command=self.frame_view).pack(side='right', padx=4)
         self.view = self.make_viewport(on_draw=self._draw, on_press=self._press, on_drag=self._drag,
-                                       on_release=self._release, origin_frac=(0.1, 0.2), zoom=4)
+                                       on_release=self._release, origin_frac=(0.1, 0.1), zoom=3)
         page = self.bottom.add('panels', 'Panels')
         self.strip = Filmstrip(page, thumb=56, on_select=self.select_panel)
         self.strip.pack(fill='both', expand=True, padx=4, pady=4)
+        page = self.bottom.add('shapes', 'Shapes')
+        self.shape_canvas = tk.Canvas(page, bg=T.CANVAS_BG, highlightthickness=0, height=int(150 * self.k))
+        sb = ttk.Scrollbar(page, orient='horizontal', command=self.shape_canvas.xview)
+        self.shape_canvas.configure(xscrollcommand=sb.set)
+        self.shape_canvas.pack(fill='both', expand=True, padx=4, pady=(4, 0))
+        sb.pack(fill='x', padx=4)
+        self.shape_canvas.bind('<Button-1>', self._shape_click)
+        self._shape_hits = []
         t = self.bottom.tools
         T.tool_button(t, 'Import panel PNG…', self.import_panel, 'Replace the selected panel (48×48) from a PNG')
         T.tool_button(t, 'Export panel PNG…', self.export_panel, 'Save the selected panel as an indexed PNG')
         T.tool_button(t, 'Export all…', self.export_all, 'Save every panel of this asset')
-        T.tool_button(t, 'Apply', self.apply, 'Write this koma file into koma.aar (Ctrl+Enter)',
-                      style='Accent.TButton')
+        T.tool_button(t, 'Export card PNG…', self.export_card, 'Save the panels as laid out on the card shape')
+        T.tool_button(t, 'Apply', self.apply, 'Write the art into koma.aar and the card shape into bin/koma.bin '
+                                              '(Ctrl+Enter)', style='Accent.TButton')
         self.problems = self.problems_page()
         return ws
 
@@ -80,6 +110,7 @@ class KomaWorkspace(SuiteWorkspace):
     # ------------------------------------------------------------ browser
     def on_root(self):
         self._names = []
+        self.cat, self.cat_error = None, ''
         root = self.app.root_data
         if root and (root.root / ARCHIVE).is_file():
             try:
@@ -88,6 +119,10 @@ class KomaWorkspace(SuiteWorkspace):
                                for e in arc.entries if e.ext == '.dtx']
             except (OSError, ValueError, KeyError) as exc:
                 self.app.status.set(f'koma.aar: {exc}')
+            try:
+                self.cat = komacards.load(root)
+            except (OSError, ValueError, KeyError) as exc:
+                self.cat_error = str(exc)
         self.populate()
 
     def populate(self):
@@ -113,9 +148,10 @@ class KomaWorkspace(SuiteWorkspace):
             self.load(sel[0])
 
     def load(self, name):
-        if self._dirty and self.kf is not None:
-            if not messagebox.askyesno('Koma', 'Discard unapplied panel edits?'):
+        if self.dirty and self.kf is not None:
+            if not messagebox.askyesno('Koma', 'Discard unapplied panel / card edits?'):
                 return
+            self._revert_cards()
         self.path = join(ARCHIVE, name)
         try:
             self.kf = koma.parse(self.app.root_data.read(self.path))
@@ -127,18 +163,70 @@ class KomaWorkspace(SuiteWorkspace):
         self._dirty = False
         self.panel = 0
         self._cache.clear()
+        self.card_choices = self.cat.cards_for_art(name) if self.cat else []
+        self.card = self.card_choices[0][0] if self.card_choices else None
+        self.layout_mode.set('Card' if self._shape() else 'Strip')
         self.refresh(frame=True)
-        self.app.status.set(f'{self.path}: {len(self.kf.panels)} panels, {self.kf.tile_count} tiles')
+        self.app.status.set(f'{self.path}: {len(self.kf.panels)} panels, {self.kf.tile_count} tiles' +
+                            (f' · card {self.card.index}' if self.card else ' · no card record'))
         self.app._update_undo_label()
+
+    # ------------------------------------------------------------ card shape
+    def _shape(self) -> kshape.Shape | None:
+        if not (self.cat and self.card and self.kf):
+            return None
+        try:
+            return self.cat.shapes.get(self.card.size, self.card.variant)
+        except ValueError:
+            return None
+
+    def _card_mode(self) -> bool:
+        return self.layout_mode.get() == 'Card' and self._shape() is not None
+
+    def _placements(self) -> list[tuple[int, int, int, str]]:
+        """(panel index, world x, world y, kind) — kind 'cell', 'dup' (repeated label) or 'unplaced'."""
+        n = len(self.kf.panels) if self.kf else 0
+        if not self._card_mode():
+            out, x = [], 0
+            for i in range(n):
+                out.append((i, x, 0, 'cell'))
+                x += self.kf.panels[i].size[0] + GAP
+            return out
+        out, seen = [], set()
+        for col, row, label in self._shape().coordinates():
+            i = label - 1
+            if i >= n:
+                continue
+            out.append((i, col * (CELL + CGAP), row * (CELL + CGAP), 'dup' if i in seen else 'cell'))
+            seen.add(i)
+        x = 0
+        for i in range(n):                         # panels the shape does not place (shape 59)
+            if i not in seen:
+                out.append((i, x, kshape.ROWS * (CELL + CGAP) + 16, 'unplaced'))
+                x += CELL + GAP
+        return out
 
     # ------------------------------------------------------------ view
     def refresh(self, frame=False):
         n = len(self.kf.panels) if self.kf else 0
         self.strip.set_frames(n, self._panel_rgba, self.panel if n else None)
         self.view_panel.set_title(f'Viewport — {self.path.split("|")[-1]}' if self.path else 'Viewport')
-        self.problems.set_lines([(p, 'warn') for p in self.kf.problems()] if self.kf else [])
-        if self.kf and not self.kf.problems():
-            self.problems.set_lines([('No problems: panel table and tile ranges are consistent.', 'good')])
+        probs = [(p, 'warn') for p in self.kf.problems()] if self.kf else []
+        shape = self._shape()
+        if shape:
+            probs += [(p, 'warn') for p in shape.problems()]
+            if shape.size != n:
+                probs.append((f'card shape has {shape.size} cells but the art has {n} panels', 'bad'))
+        if self.kf and not self.card_choices:
+            probs.append(('no koma.bin card uses this art (dt_20..dt_27 are extra art with no card)', 'muted'))
+        if len({c.index for c, _ in self.card_choices}) > 1:
+            probs.append((f'ambiguous series: cards {", ".join(str(c.index) for c, _ in self.card_choices)} may '
+                          'use this art; pick one in the Inspector', 'warn'))
+        if self.cat_error:
+            probs.append((f'card tables unavailable: {self.cat_error}', 'bad'))
+        self.problems.set_lines(probs or [('No problems: panel table, tile ranges and card shape are consistent.',
+                                           'good')])
+        self._draw_shapes()
         self.refresh_inspector()
         if frame:
             self.frame_view()
@@ -147,8 +235,13 @@ class KomaWorkspace(SuiteWorkspace):
 
     def frame_view(self):
         if self.kf and self.kf.panels:
-            w = len(self.kf.panels) * (48 + GAP) - GAP
-            self.view.frame_rect((0, 0, w, 48))
+            pl = self._placements()
+            w = max(x for _, x, _, _ in pl) + CELL
+            h = max(y for _, _, y, _ in pl) + CELL
+            if self._card_mode():
+                w = max(w, kshape.COLS * (CELL + CGAP))
+                h = max(h, kshape.ROWS * (CELL + CGAP))
+            self.view.frame_rect((-4, -14, w + 4, h + 4))
         else:
             self.view.frame_origin()
 
@@ -160,30 +253,43 @@ class KomaWorkspace(SuiteWorkspace):
         return self._cache[i]
 
     def _origin(self, i):
-        x = 0
-        for p in self.kf.panels[:i]:
-            x += p.size[0] + GAP
-        return x, 0
+        for pi, x, y, _ in self._placements():
+            if pi == i:
+                return x, y
+        return 0, 0
 
     def _panel_at(self, wx, wy):
         if not self.kf:
             return None
-        for i, p in enumerate(self.kf.panels):
-            x, y = self._origin(i)
-            if x <= wx < x + p.size[0] and y <= wy < y + p.size[1]:
-                return i
+        for i, x, y, _ in self._placements():
+            w, h = self.kf.panels[i].size
+            if x <= wx < x + w and y <= wy < y + h:
+                return i, x, y
         return None
 
     def _draw(self, vp):
         if not self.kf:
             vp.hud.configure(text='Select a koma asset in the browser.')
             return
-        for i, p in enumerate(self.kf.panels):
-            x, y = self._origin(i)
+        card = self._card_mode()
+        if card:                                   # the 5×4 card grid underneath
+            for r in range(kshape.ROWS):
+                for c in range(kshape.COLS):
+                    x, y = c * (CELL + CGAP), r * (CELL + CGAP)
+                    vp.rect(x, y, x + CELL, y + CELL, outline='#30353B', dash=(2, 3))
+        for i, x, y, kind in self._placements():
+            p = self.kf.panels[i]
             vp.add_image(self._panel_rgba(i), x, y)
             sel = i == self.panel
-            vp.rect(x, y, x + p.size[0], y + p.size[1], outline=T.ACCENT if sel else T.LINE, width=2 if sel else 1)
-            vp.text(x, y - 2, f'{i}', anchor='sw', fill=T.FG if sel else T.MUTED, font=T.MONO_SMALL)
+            col = T.BAD if kind in ('dup', 'unplaced') else (T.ACCENT if sel else T.LINE)
+            vp.rect(x, y, x + p.size[0], y + p.size[1], outline=col, width=2 if sel or kind != 'cell' else 1)
+            tag = f'{i + 1}' if card else f'{i}'
+            if kind == 'dup':
+                tag += ' dup'
+            elif kind == 'unplaced':
+                tag += ' unplaced'
+            vp.text(x, y - 2, tag, anchor='sw', fill=T.BAD if kind != 'cell' else (T.FG if sel else T.MUTED),
+                    font=T.MONO_SMALL)
         if self.show_grid.get() and vp.zoom >= 6 and self.kf.panels:
             x0, y0 = self._origin(self.panel)
             w, h = self.kf.panels[self.panel].size
@@ -193,15 +299,87 @@ class KomaWorkspace(SuiteWorkspace):
             for j in range(1, h):
                 sx, sy = vp.to_screen(x0, y0 + j)
                 vp.canvas.create_line(sx, sy, sx + w * vp.zoom, sy, fill='#202020' if j % 8 else '#3A6EA5')
-        vp.hud.configure(text=f'{len(self.kf.panels)} panels · page arrangement unknown (shown in a row) · '
-                              f'tool {self.tool.get()} · colour {self.colour}')
+        s = self._shape()
+        where = (f'card {self.card.index} · shape {s.index} (size {s.size}, variant {s.variant})'
+                 if card else 'strip (art order)' + ('' if self.card else ' · no card record'))
+        vp.hud.configure(text=f'{len(self.kf.panels)} panels · {where} · tool {self.tool.get()} · '
+                              f'colour {self.colour}')
+
+    # ------------------------------------------------------------ shape dictionary dock
+    def _draw_shapes(self):
+        c = self.shape_canvas
+        c.delete('all')
+        self._shape_hits = []
+        if not self.cat:
+            c.create_text(10, 20, anchor='w', text=self.cat_error or 'bin/kshape.bin not loaded', fill=T.MUTED,
+                          font=T.UI_FONT)
+            return
+        k = self.k
+        cell = int(7 * k)
+        cur = self._shape()
+        need = len(self.kf.panels) if self.kf else None
+        x = int(8 * k)
+        for g in self.cat.shapes.groups:
+            size = g[0].size
+            c.create_text(x, int(8 * k), anchor='nw', text=f'{size} cell{"s" if size > 1 else ""}',
+                          fill=T.FG if size == need else T.MUTED, font=T.UI_BOLD)
+            y0 = int(26 * k)
+            col = 0
+            for s in g:
+                ox = x + col * (cell * kshape.COLS + int(10 * k))
+                hot = cur is not None and s.index == cur.index
+                ok = size == need
+                c.create_rectangle(ox - 3, y0 - 3, ox + cell * kshape.COLS + 3, y0 + cell * kshape.ROWS + 3,
+                                   outline=T.ACCENT if hot else ('#3A4048' if ok else '#2A2E33'),
+                                   width=2 if hot else 1)
+                for cx, cy, lab in s.coordinates():
+                    fill = T.BAD if s.problems() else (T.GOOD if ok else '#4A5058')
+                    c.create_rectangle(ox + cx * cell, y0 + cy * cell, ox + (cx + 1) * cell - 1,
+                                       y0 + (cy + 1) * cell - 1, fill=fill, outline='')
+                c.create_text(ox, y0 + cell * kshape.ROWS + 6, anchor='nw', text=f'{s.variant}', fill=T.MUTED,
+                              font=T.MONO_SMALL)
+                self._shape_hits.append(((ox - 3, y0 - 3, ox + cell * kshape.COLS + 3, y0 + cell * kshape.ROWS + 3), s))
+                col += 1
+            x += col * (cell * kshape.COLS + int(10 * k)) + int(16 * k)
+        c.configure(scrollregion=(0, 0, x, int(130 * k)))
+
+    def _shape_click(self, e):
+        x, y = self.shape_canvas.canvasx(e.x), self.shape_canvas.canvasy(e.y)
+        for (x0, y0, x1, y1), s in self._shape_hits:
+            if x0 <= x <= x1 and y0 <= y <= y1:
+                self.set_shape(s.size, s.variant)
+                return
+
+    def set_shape(self, size, variant):
+        if not (self.cat and self.card and self.kf):
+            self.app.status.set('No card record for this art: nothing to reshape.')
+            return
+        if size != len(self.kf.panels):
+            self.app.status.set(f'This art has {len(self.kf.panels)} panels; pick a {len(self.kf.panels)}-cell shape.')
+            return
+        if (size, variant) == (self.card.size, self.card.variant):
+            return
+        self.checkpoint('change card shape')
+        self.cat.cards.set_shape(self.card.index, size, variant, self.cat.shapes)
+        self._cards_dirty = self.cat.cards.build() != self.app.root_data.read(komacards.CARDS)
+        self.layout_mode.set('Card')
+        self.refresh(frame=True)
+        self.app.update_dirty()
+        self.app.status.set(f'Card {self.card.index}: shape → size {size}, variant {variant} '
+                            '(bytes +8/+9 only; Apply to stage bin/koma.bin)')
+
+    def _pick_card(self, label):
+        for c, _ in self.card_choices:
+            if label.startswith(f'{c.index} '):
+                self.card = c
+        self.refresh(frame=True)
 
     # ------------------------------------------------------------ tools
     def _pixel(self, wx, wy):
-        i = self._panel_at(wx, wy)
-        if i is None:
+        hit = self._panel_at(wx, wy)
+        if hit is None:
             return None
-        x0, y0 = self._origin(i)
+        i, x0, y0 = hit
         return i, int(wx - x0), int(wy - y0)
 
     def _press(self, wx, wy, e):
@@ -264,21 +442,28 @@ class KomaWorkspace(SuiteWorkspace):
         if not self.kf:
             ins.section('Koma')
             ins.text('Choose an asset in the browser. Each koma file holds 1–8 square panels of 48×48 pixels '
-                     '(6×6 tiles, 16 colours).')
+                     '(6×6 tiles, 16 colours); its card in bin/koma.bin places them on a 5×4 shape grid.')
             ins.section('Evidence')
             ins.evidence('Panel art', 'Direct', 'DSTX v1 flags 0x04 rebuilds byte-exactly on 898/898 files')
-            ins.evidence('Page layout', 'Unknown', 'how panels combine on a deck/comic page is not decoded')
+            ins.evidence('Card shapes', 'Direct', 'kshape.bin 66 shapes / koma.bin 890 cards rebuild byte-exactly')
+            ins.evidence('Deck placement', 'Unknown', 'separate data, not decoded')
             return
         k = self.kf
         ins.section('Asset', note=self.path.split('|')[-1])
         ins.value('Panels', str(len(k.panels)))
         ins.value('Tiles', f'{k.tile_count} (tile 0 unused)')
         ins.value('Palette', f'{k.image.banks} bank, 4bpp')
-        ins.value('State', '● edited, not applied' if self._dirty else 'unchanged',
-                  colour=T.WARN if self._dirty else T.MUTED)
+        state = []
+        if self._dirty:
+            state.append('art edited')
+        if self._cards_dirty:
+            state.append('card shape edited')
+        ins.value('State', ('● ' + ', '.join(state) + ', not applied') if state else 'unchanged',
+                  colour=T.WARN if state else T.MUTED)
+        self._inspect_card(ins)
         if k.panels:
             p = k.panels[self.panel]
-            ins.section(f'Panel {self.panel}')
+            ins.section(f'Panel {self.panel}' + (f'  (label {self.panel + 1})' if self._card_mode() else ''))
             ins.value('Size', f'{p.size[0]}×{p.size[1]} px ({p.width_tiles}×{p.height_tiles} tiles)')
             ins.value('Tiles', f'{p.first_tile}..{p.first_tile + p.tile_count - 1}')
         ins.section('Palette', note='Click: paint colour. Double-click: edit colour. Index 0 is transparent.')
@@ -286,7 +471,60 @@ class KomaWorkspace(SuiteWorkspace):
         ins.value('Colour', f'{self.colour}  {hx4(k.image.palettes[0][self.colour])}')
         ins.section('Evidence')
         ins.evidence('Panel art', 'Direct', 'byte-exact rebuild 898/898; panel edits leave neighbours intact')
-        ins.evidence('Page layout', 'Unknown', 'not decoded; panels are shown in a row')
+        ins.evidence('Card shape', 'Direct', 'kshape.bin / koma.bin byte-exact; occupancy masks match all 66 shapes')
+        ins.evidence('Card ↔ art', 'Direct', 'prefix table 0x0209E840 + art index (FUN_020790F0); '
+                                              'art index = file number')
+        ins.evidence('Deck placement', 'Unknown', 'separate data, not decoded')
+
+    def _inspect_card(self, ins):
+        if self.cat is None:
+            ins.section('Card')
+            ins.value('Tables', self.cat_error or 'bin/kshape.bin / bin/koma.bin not found', colour=T.BAD)
+            return
+        ins.section('Card (bin/koma.bin)', note='A shape edit changes bytes +8/+9 of this card only.')
+        if not self.card_choices:
+            ins.text('No card record uses this art. dt_20..dt_27 are extra art (1..8 panels) with no card; '
+                     'their purpose is not traced.')
+            return
+        if len({c.index for c, _ in self.card_choices}) > 1:
+            labels = [f'{c.index}  (series {c.series_id})' for c, _ in self.card_choices]
+            self._card_var = tk.StringVar(value=next(l for l in labels if l.startswith(f'{self.card.index} ')))
+            ins.combo('Card', self._card_var, labels, 'Series ids with identical panel counts cannot be told apart '
+                      'yet; every candidate is listed', on_change=lambda: self._pick_card(self._card_var.get()),
+                      width=18)
+        else:
+            ins.value('Card', str(self.card.index))
+        c = self.card
+        cands = self.cat.series.get(c.series_id, [])
+        ins.value('Series id', f'{c.series_id}  → ' + (' / '.join(cands) if cands else '?'),
+                  colour=T.WARN if len(cands) != 1 else None,
+                  tip='byte +4; prefix inferred from panel-count sequences')
+        ins.value('Art index', f'{c.art_index}  (byte +5)')
+        s = self._shape()
+        if s:
+            ins.value('Shape', f'#{s.index}: size {s.size}, variant {s.variant}  ({s.bounds[0]}×{s.bounds[1]} cells)')
+            for p in s.problems():
+                ins.value('Anomaly', p, colour=T.BAD)
+        ins.value('Raw', bytes(c.raw).hex(' '), tip='12-byte record; unknown bytes are preserved')
+        if s:
+            ins.section(f'Shape picker ({s.size} cells)', note='Click a shape. The Shapes tab below lists all 66.')
+            ins.widget(self._picker)
+
+    def _picker(self, parent):
+        f = tk.Frame(parent, bg=T.PANEL)
+        cur = self._shape()
+        group = self.cat.shapes.groups[cur.size - 1]
+        cell = int(6 * self.k)
+        for i, s in enumerate(group):
+            cv = tk.Canvas(f, width=cell * kshape.COLS + 6, height=cell * kshape.ROWS + 6, bg=T.CANVAS_BG, highlightthickness=2,
+                           highlightbackground=T.ACCENT if s.index == cur.index else T.PANEL)
+            for cx, cy, _ in s.coordinates():
+                cv.create_rectangle(3 + cx * cell, 3 + cy * cell, 3 + (cx + 1) * cell - 1, 3 + (cy + 1) * cell - 1,
+                                    fill=T.BAD if s.problems() else T.GOOD, outline='')
+            cv.grid(row=i // 7, column=i % 7, padx=2, pady=2)
+            cv.bind('<Button-1>', lambda e, ss=s: self.set_shape(ss.size, ss.variant))
+            T.Tooltip(cv, f'shape {s.index}: variant {s.variant}' + (' — ' + s.problems()[0] if s.problems() else ''))
+        return f
 
     def _swatches(self, parent):
         f = tk.Frame(parent, bg=T.PANEL)
@@ -333,7 +571,7 @@ class KomaWorkspace(SuiteWorkspace):
                                            filetypes=[('PNG', '*.png')])
         if out:
             img = self.kf.panel_image(self.panel)
-            images.save_png(img, self.kf.image.palettes, __import__('pathlib').Path(out))
+            images.save_png(img, self.kf.image.palettes, Path(out))
             self.app.status.set(f'Exported panel {self.panel} → {out}')
 
     def export_all(self):
@@ -342,11 +580,34 @@ class KomaWorkspace(SuiteWorkspace):
         d = filedialog.askdirectory(title='Folder for the panel PNGs')
         if not d:
             return
-        from pathlib import Path
         stem = self.path.split('/')[-1].rsplit('.', 1)[0]
         for i in range(len(self.kf.panels)):
             images.save_png(self.kf.panel_image(i), self.kf.image.palettes, Path(d) / f'{stem}_p{i}.png')
         self.app.status.set(f'Exported {len(self.kf.panels)} panels → {d}')
+
+    def card_image(self) -> Image.Image | None:
+        """RGBA picture of the art laid out on its card shape (cells touching, no gaps)."""
+        s = self._shape()
+        if not s:
+            return None
+        cols, rows = s.bounds
+        img = Image.new('RGBA', (cols * CELL, rows * CELL), (0, 0, 0, 0))
+        for cx, cy, label in s.coordinates():
+            if label - 1 < len(self.kf.panels):
+                img.alpha_composite(self._panel_rgba(label - 1), (cx * CELL, cy * CELL))
+        return img
+
+    def export_card(self):
+        img = self.card_image() if self.kf else None
+        if img is None:
+            self.app.status.set('No card shape for this art.')
+            return
+        stem = self.path.split('/')[-1].rsplit('.', 1)[0]
+        out = filedialog.asksaveasfilename(defaultextension='.png', initialfile=f'{stem}_card.png',
+                                           filetypes=[('PNG', '*.png')])
+        if out:
+            img.save(out)
+            self.app.status.set(f'Exported card layout → {out}')
 
     def import_panel(self):
         if not self.kf:
@@ -354,7 +615,6 @@ class KomaWorkspace(SuiteWorkspace):
         src = filedialog.askopenfilename(filetypes=[('PNG', '*.png')])
         if not src:
             return
-        from pathlib import Path
         w, h = self.kf.panels[self.panel].size
         warn: list[str] = []
         try:
@@ -379,33 +639,56 @@ class KomaWorkspace(SuiteWorkspace):
         return f'koma:{self.path}' if self.kf else None
 
     def snapshot(self):
-        return (self.kf.build(), self.panel, self._dirty) if self.kf else None
+        if not self.kf:
+            return None
+        return (self.kf.build(), self.panel, self._dirty, self.cat.cards.build() if self.cat else None)
 
     def restore(self, snap):
-        data, panel, _ = snap
+        data, panel, _, cards = snap
         self.kf = koma.parse(data)
         self.kf.image_dirty = True
         self._dirty = data != getattr(self, '_orig', None)
+        if cards is not None and self.cat:
+            self.cat.cards = kshape.CardTable.parse(cards, self.cat.shapes)
+            self.card_choices = self.cat.cards_for_art(self.path.split('|')[-1])
+            idx = self.card.index if self.card else None
+            self.card = next((c for c, _ in self.card_choices if c.index == idx),
+                             self.card_choices[0][0] if self.card_choices else None)
+            self._cards_dirty = cards != self.app.root_data.read(komacards.CARDS)
         self.panel = min(panel, len(self.kf.panels) - 1)
         self._cache.clear()
         self.refresh()
 
+    def _revert_cards(self):
+        if self.cat and self._cards_dirty:
+            self.cat.cards = kshape.CardTable.parse(self.app.root_data.read(komacards.CARDS), self.cat.shapes)
+            self._cards_dirty = False
+
     @property
     def dirty(self):
-        return self._dirty
+        return self._dirty or self._cards_dirty
 
     def apply(self):
-        if not self.kf or not self._dirty:
+        if not self.kf or not self.dirty:
             self.app.status.set('Koma: nothing to apply.')
             return
-        blob = self.kf.build()
-        koma.parse(blob)                       # validate before writing
-        self.app.root_data.write(self.path, blob)
-        self._orig = blob
-        self._dirty = False
+        done = []
+        if self._dirty:
+            blob = self.kf.build()
+            koma.parse(blob)                       # validate before writing
+            self.app.root_data.write(self.path, blob)
+            self._orig = blob
+            self._dirty = False
+            done.append('koma.aar')
+        if self._cards_dirty and self.cat:
+            blob = self.cat.cards.build()
+            kshape.CardTable.parse(blob, self.cat.shapes)
+            self.app.root_data.write_file(komacards.CARDS, blob)
+            self._cards_dirty = False
+            done.append('bin/koma.bin')
         self.refresh()
         self.app.update_dirty()
-        self.app.status.set(f'Applied {self.path} — Save (Ctrl+S) to write koma.aar.')
+        self.app.status.set(f'Applied {self.path} → {" + ".join(done)} — Save (Ctrl+S) to write the files.')
 
 
 def hx4(v):

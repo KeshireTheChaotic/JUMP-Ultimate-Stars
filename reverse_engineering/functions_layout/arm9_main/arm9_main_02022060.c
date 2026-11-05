@@ -10,7 +10,7 @@ void FUN_02022060(int param_1,int param_2)
   if (param_2 != 0) {
     iVar1 = (**(code **)(*piVar3 + 100))();
     if ((iVar1 == 0) || (iVar1 = (**(code **)(*piVar3 + 100))(), iVar1 == 1)) {
-      iVar1 = jus_AllocDebug(0x6c);
+      iVar1 = FUN_0201a228(0x6c);
       uVar2 = 0;
       if (iVar1 != 0) {
         uVar2 = jus_Class_020966d0::jus_Class_020966d0(iVar1,piVar3,0);
@@ -21,7 +21,7 @@ void FUN_02022060(int param_1,int param_2)
     piVar3 = *(int **)(param_2 + 0x50);
     iVar1 = (**(code **)(*piVar3 + 100))();
     if ((iVar1 == 0) || (iVar1 = (**(code **)(*piVar3 + 100))(), iVar1 == 1)) {
-      iVar1 = jus_AllocDebug(0x6c);
+      iVar1 = FUN_0201a228(0x6c);
       uVar2 = 0;
       if (iVar1 != 0) {
         uVar2 = jus_Class_020966d0::jus_Class_020966d0(iVar1,piVar3,0);

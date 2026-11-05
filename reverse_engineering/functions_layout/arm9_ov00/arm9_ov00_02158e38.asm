@@ -1,0 +1,9 @@
+02158e38  stmdb sp!,{r4,lr}
+02158e3c  ldr r1,[r0,#0x4]
+02158e40  mov r0,#0x78
+02158e44  ldr r4,[r1,#0x10]
+02158e48  mov r1,#0x1
+02158e4c  bl 0x0207342c
+02158e50  mov r0,r4
+02158e54  bl 0x021586ac
+02158e58  ldmia sp!,{r4,pc}

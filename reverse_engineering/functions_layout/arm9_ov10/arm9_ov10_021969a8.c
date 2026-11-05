@@ -13,7 +13,7 @@ void FUN_021969a8(int param_1,undefined4 param_2)
   else {
     iVar2 = 0x78 - uVar1;
   }
-  FUN_021969fc(param_1,&DAT_021a7104,iVar2);
+  FUN_021969fc(param_1,FUN_021a7104,iVar2);
   FUN_021969fc(param_1,param_2,8);
   FUN_021970d8(param_2,param_1,0x14);
   return;

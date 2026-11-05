@@ -19,14 +19,14 @@ int * BattlePause::Battle_PauseCreate
   undefined4 uStack_28;
   
   uStack_28 = param_4;
-  piVar3 = (int *)jus_AllocDebug(0xa0,s_BattlePause_cpp_02171b28,s_Battle_PauseCreate_02171adc,0x40)
-  ;
+  piVar3 = (int *)thunk_FUN_0201a228(0xa0,s_BattlePause_cpp_02171b28,s_Battle_PauseCreate_02171adc,
+                                     0x40);
   FUN_020517fc(piVar3,0,0xa0);
   iVar4 = FUN_02026f94();
   piVar3[1] = iVar4;
   local_2c = 0x82000;
   (**(code **)(**(int **)(iVar4 + 4) + 0xa0))(*(int **)(iVar4 + 4),&local_2c);
-  FUN_02028384(*(undefined4 *)(piVar3[1] + 4),&LAB_0214f0d8);
+  FUN_02028384(*(undefined4 *)(piVar3[1] + 4),FUN_0214f0d8);
   (**(code **)(**(int **)(piVar3[1] + 4) + 0x24))(*(int **)(piVar3[1] + 4),piVar3);
   (**(code **)(**(int **)(piVar3[1] + 4) + 0x94))(*(int **)(piVar3[1] + 4),0x400000);
   puVar5 = (undefined4 *)FUN_02028920(0);

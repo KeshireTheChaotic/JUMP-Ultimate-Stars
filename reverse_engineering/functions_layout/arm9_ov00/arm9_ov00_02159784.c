@@ -56,7 +56,7 @@ int FUN_02159784(int param_1,int param_2,undefined4 param_3,undefined4 param_4)
   FUN_0214eed0(iVar2,&local_48);
   func_0x021b65e8(*(undefined4 *)(iVar2 + 4),4,FUN_02159f98);
   *(code **)(*(int *)(iVar2 + 4) + 0xdc) = FUN_02159f18;
-  *(undefined1 **)(*(int *)(iVar2 + 4) + 0xe0) = &LAB_02159ed0;
+  *(code **)(*(int *)(iVar2 + 4) + 0xe0) = FUN_02159ed0;
   *(undefined4 *)(*(int *)(iVar2 + 4) + 0x124) = param_4;
   func_0x021b6214(*(undefined4 *)(iVar2 + 4),0);
   func_0x021b6214(*(undefined4 *)(iVar1 + 4),0);

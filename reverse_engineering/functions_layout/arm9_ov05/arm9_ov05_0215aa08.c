@@ -23,7 +23,7 @@ void FUN_0215aa08(int param_1,undefined4 param_2,int param_3,int param_4)
     (**(code **)(**(int **)(iVar2 + 4) + 0x24))(*(int **)(iVar2 + 4),param_1);
   }
   else {
-    FUN_02028384(*(undefined4 *)(iVar2 + 4),&DAT_021593c8);
+    FUN_02028384(*(undefined4 *)(iVar2 + 4),FUN_021593c8);
   }
   if (param_4 == 0) {
     return;

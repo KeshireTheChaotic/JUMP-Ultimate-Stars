@@ -139,16 +139,16 @@ void FUN_02158580(int param_1,undefined4 param_2,undefined4 param_3,undefined4 p
   *(undefined1 *)(iVar1 + 0x901) = 1;
   *(undefined4 *)(iVar1 + 0x8d4) = 0x1a;
   do {
-    uVar3 = FUN_02042460(DAT_020a0f64,0,&LAB_0215a8dc_1,&DAT_0216de54 + iVar4 * 2);
+    uVar3 = FUN_02042460(DAT_020a0f64,0,0x215a8dd,&DAT_0216de54 + iVar4 * 2);
     iVar1 = iVar4 * 4;
     *(undefined4 *)(param_1 + iVar1 + 0xb0) = uVar3;
-    uVar3 = FUN_02042460(DAT_020a0f64,0,&LAB_0215a8dc_1,&DAT_0216de54 + iVar4 * 2);
+    uVar3 = FUN_02042460(DAT_020a0f64,0,0x215a8dd,&DAT_0216de54 + iVar4 * 2);
     iVar4 = iVar4 + 1;
     *(undefined4 *)(param_1 + iVar1 + 0xdc) = uVar3;
   } while (iVar4 < 0xb);
   iVar1 = 0;
   do {
-    uVar3 = FUN_02042460(DAT_020a0f64,0,&LAB_0215a8dc_1,&DAT_0216deac + iVar1 * 8);
+    uVar3 = FUN_02042460(DAT_020a0f64,0,0x215a8dd,&DAT_0216deac + iVar1 * 8);
     iVar4 = iVar1 * 4;
     iVar1 = iVar1 + 1;
     *(undefined4 *)(param_1 + iVar4 + 0x108) = uVar3;

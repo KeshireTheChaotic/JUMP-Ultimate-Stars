@@ -28,8 +28,8 @@ void WiFiGame::WiFiGame_Static_SendCOMMUnreliable
       if (&param_5 == (undefined1 *)0x16) {
         iVar5 = 0;
       }
-      iVar3 = jus_AllocDebug(iVar5 + 2,s_WiFiGame_cpp_021a72dc,
-                             s_WiFiGame_Static_SendCOMMUnreliab_021a72b8,499);
+      iVar3 = thunk_FUN_0201a228(iVar5 + 2,s_WiFiGame_cpp_021a72dc,
+                                 s_WiFiGame_Static_SendCOMMUnreliab_021a72b8,499);
       local_18 = 0x106;
       FUN_02051890(&local_18,iVar3,2);
       if (&local_16 != (undefined2 *)0x0) {

@@ -14,7 +14,7 @@ from app.widgets.viewport import Viewport
 
 def move_with(*keys):
     nt = notetrack.NoteTrack([
-        notetrack.NoteKey(t, [notetrack.Command(op, struct.pack(notetrack.OPCODES[op].fmt, *args))
+        notetrack.NoteKey(t, [notetrack.Command.from_values(op, list(args))
                              for op, args in cmds]) for t, cmds in keys])
     return almt.Move(1, 5, nodes=[almt.NodeAnim([almt.Track('NoteTrack', True, raw=nt.build())])])
 
@@ -73,9 +73,10 @@ class CueTests(unittest.TestCase):
     def test_mapping_specials_and_duplicate_identity(self):
         with tempfile.TemporaryDirectory() as td:
             r = sounds.SoundResolver(td)
+            # SSARs are named after the character id (SEQ_<CHAR>, SEQ_<CHAR>_<k>); the old
+            # assumption that bb_b_01 used SEQ_DB_B_01 (record 0 = Goku) was wrong.
             r.symbols = sdat.SdatSymbols(seqarcs=[sdat.SeqArc(0, ''),
-                sdat.SeqArc(1, 'SEQ_DB_B_01', ['voice']), sdat.SeqArc(2, 'SEQ_DB_B_01_3', ['special'])])
-            r.records = [[1, 2]]
+                sdat.SeqArc(1, 'SEQ_BB_B_01', ['voice']), sdat.SeqArc(2, 'SEQ_BB_B_01_3', ['special'])])
             r.set_characters(['bb_b_01'])
             c = r.resolve(0x0402, 0, 'chr/ChrArc.aar|chr/bb_b_01_3.aar')
             self.assertEqual((c.ssar, c.label), (2, 'special'))

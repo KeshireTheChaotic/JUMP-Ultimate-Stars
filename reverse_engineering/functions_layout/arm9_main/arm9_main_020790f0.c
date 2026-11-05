@@ -44,7 +44,7 @@ void FUN_020790f0(int param_1)
   FUN_0207974c(piVar12);
   puVar13 = *(undefined4 **)(iVar2 + 0x558);
   if (puVar13 == (undefined4 *)0x0) {
-    FUN_02028384(*(undefined4 *)(param_1 + 4),&DAT_02078f84);
+    FUN_02028384(*(undefined4 *)(param_1 + 4),FUN_02078f84);
   }
   else {
     piVar3 = (int *)FUN_020101f4(s_koma_koma_aar_0209f694,0);
@@ -192,7 +192,7 @@ void FUN_020790f0(int param_1)
     }
     FUN_0206c54c();
     (**(code **)(*piVar3 + 0xc))();
-    FUN_02028384(*(undefined4 *)(param_1 + 4),&DAT_02078f84);
+    FUN_02028384(*(undefined4 *)(param_1 + 4),FUN_02078f84);
   }
   return;
 }

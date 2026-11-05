@@ -20,8 +20,8 @@ void FUN_02153508(int param_1,undefined4 param_2,undefined4 param_3,undefined4 p
   *(int *)(param_1 + 0x3c) = iVar1;
   iVar1 = ALWidgetImp::Create(iVar1,_DAT_021d5154);
   (**(code **)(**(int **)(iVar1 + 4) + 0x24))(*(int **)(iVar1 + 4),param_1);
-  func_0x021b65e8(*(undefined4 *)(iVar1 + 4),0x10,&LAB_02154a20);
-  func_0x021b6760(*(undefined4 *)(iVar1 + 4),0x10,&DAT_02154ac4);
+  func_0x021b65e8(*(undefined4 *)(iVar1 + 4),0x10,FUN_02154a20);
+  func_0x021b6760(*(undefined4 *)(iVar1 + 4),0x10,FUN_02154ac4);
   FUN_02028384(*(undefined4 *)(iVar1 + 4),FUN_02154ac8);
   local_28 = 0x84000;
   FUN_02152730(iVar1,&local_28);

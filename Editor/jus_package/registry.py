@@ -42,11 +42,12 @@ MAX_DEPTH = 4
 EVIDENCE = {
     'texture': 'Cross-checked', 'image': 'Direct', 'spawn': 'Direct', 'pursuer': 'Direct',
     'pursuer-use': 'Direct', 'collision': 'Direct', 'shot': 'Inferred', 'tiles': 'Inferred',
+    'koma-card': 'Inferred', 'koma-shape': 'Direct',
 }
 KIND_LABELS = {
     'texture': 'uses texture', 'image': 'uses image', 'spawn': 'spawns effect',
     'pursuer': 'pursuer slot', 'pursuer-use': 'selects pursuer slots', 'collision': 'collision descriptor',
-    'shot': 'shot record', 'tiles': 'uses tiles',
+    'shot': 'shot record', 'tiles': 'uses tiles', 'koma-card': 'card art', 'koma-shape': 'card shapes',
 }
 _CHR_RE = re.compile(r'([a-z]{2}_[bsh]_\d{2})', re.I)
 
@@ -259,9 +260,39 @@ def build(root: DataRoot, progress: Callable[[str, float], None] | None = None,
             if cand in reg.resources:
                 reg._add(Ref(r.path, 'tiles', cand, dst_detail=stem))
                 break
+    # -- edges: koma cards (bin/koma.bin) → art and shape dictionary ----------
+    _link_koma(reg, root)
     if progress:
         progress('Done', 1.0)
     return reg
+
+
+def _link_koma(reg: Registry, root: DataRoot) -> None:
+    from . import komacards
+    if not ((root.root / komacards.CARDS).is_file() and (root.root / komacards.SHAPES).is_file()
+            and komacards.KOMA_ARCHIVE in reg._children):
+        return
+    try:
+        cat = komacards.load(root)
+    except (ValueError, KeyError, OSError) as exc:
+        reg.errors.append(f'{komacards.CARDS}: {exc}')
+        return
+    for rel in (komacards.CARDS, komacards.SHAPES):
+        reg.resources[rel] = Resource(rel, '', rel, '.bin', 0, 0, len(root.read(rel)), False, rel)
+        reg._children.setdefault(rel, [])
+    reg._add(Ref(komacards.CARDS, 'koma-shape', komacards.SHAPES,
+                 f'{len(cat.cards.cards)} cards', f'{len(cat.shapes.shapes)} shapes'))
+    for card in cat.cards.cards:
+        cands = cat.series.get(card.series_id, [])
+        targets = cat.art_for_card(card)
+        shape = f'shape size {card.size} variant {card.variant}'
+        if not targets:
+            reg._add(Ref(komacards.CARDS, 'koma-card', None, f'card {card.index}',
+                         f'series {card.series_id} art {card.art_index}', card.index))
+        for t in targets:
+            note = '' if len(cands) == 1 else f' (ambiguous series: {"/".join(cands)})'
+            reg._add(Ref(komacards.CARDS, 'koma-card', t, f'card {card.index} · {shape}{note}',
+                         f'series {card.series_id} art {card.art_index}', card.index))
 
 
 def _keys(tr: almt.Track):

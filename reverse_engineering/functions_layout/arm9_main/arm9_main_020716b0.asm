@@ -1,0 +1,14 @@
+020716b0  mov r1,#0x1
+020716b2  mov r2,#0x1f
+020716b4  and r2,r0
+020716b6  add r3,r1,#0x0
+020716b8  lsr r0,r0,#0x5
+020716ba  lsl r3,r2
+020716bc  lsl r2,r0,#0x2
+020716be  ldr r0,[0x020716cc]
+020716c0  ldr r0,[r0,r2]
+020716c2  tst r0,r3
+020716c4  bne 0x020716c8
+020716c6  mov r1,#0x0
+020716c8  add r0,r1,#0x0
+020716ca  bx lr

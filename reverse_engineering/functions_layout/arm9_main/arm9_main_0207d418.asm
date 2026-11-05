@@ -1,0 +1,10 @@
+0207d418  stmdb sp!,{r4,lr}
+0207d41c  mov r4,r0
+0207d420  ldr r0,[r4,#0x28]
+0207d424  b 0x0207d434
+0207d428  ldr r0,[r0,#0x8]
+0207d42c  bl 0x0207c070
+0207d430  ldr r0,[r4,#0x28]
+0207d434  cmp r0,#0x0
+0207d438  bne 0x0207d428
+0207d43c  ldmia sp!,{r4,pc}

@@ -1,0 +1,11 @@
+020887d8  stmdb sp!,{r4,r5,r6,lr}
+020887dc  mov r6,r0
+020887e0  mov r5,#0x0
+020887e4  ldr r4,[0x2088804]
+020887e8  b 0x020887f8
+020887ec  ldr r0,[r4,#0x0]
+020887f0  blx r0
+020887f4  add r5,r5,#0x1
+020887f8  cmp r5,r6
+020887fc  bcc 0x020887ec
+02088800  ldmia sp!,{r4,r5,r6,pc}

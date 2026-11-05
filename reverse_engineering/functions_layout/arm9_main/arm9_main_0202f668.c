@@ -5,7 +5,7 @@ void FUN_0202f668(int param_1,undefined4 param_2,undefined4 param_3,undefined4 p
   int iVar1;
   undefined4 uVar2;
   
-  iVar1 = jus_AllocDebug(0x34);
+  iVar1 = FUN_0201a228(0x34);
   uVar2 = 0;
   if (iVar1 != 0) {
     uVar2 = PropBindInstance_020950e0::PropBindInstance_020950e0

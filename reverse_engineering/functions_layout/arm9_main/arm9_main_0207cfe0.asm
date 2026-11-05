@@ -1,0 +1,16 @@
+0207cfe0  ldr r2,[r0,#0x3c]
+0207cfe4  orr r2,r2,r1
+0207cfe8  str r2,[r0,#0x3c]
+0207cfec  ldr r3,[r0,#0x8]
+0207cff0  b 0x0207d014
+0207cff4  ldr r0,[r3,#0x1c]
+0207cff8  orr r0,r0,r1
+0207cffc  str r0,[r3,#0x1c]
+0207d000  ldr r2,[r3,#0x8]
+0207d004  ldr r0,[r2,#0x14]
+0207d008  orr r0,r0,r1
+0207d00c  str r0,[r2,#0x14]
+0207d010  ldr r3,[r3,#0x0]
+0207d014  cmp r3,#0x0
+0207d018  bne 0x0207cff4
+0207d01c  bx lr

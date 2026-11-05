@@ -1,8 +1,5 @@
 
-/* JUS-CLASS jus_Class_021d19e4::vfunc_14 [class-virtual] slot 14 of vtable 021d19e4 (own slot, not
-   inherited) */
-
-undefined4 jus_Class_021d19e4::vfunc_14(undefined4 param_1)
+undefined4 FUN_021b1dc0(undefined4 param_1)
 
 {
   FUN_0202f2ac();

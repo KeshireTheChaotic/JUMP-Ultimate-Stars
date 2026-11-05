@@ -12,7 +12,7 @@ void FUN_021561a4(int param_1)
     FUN_02028384(*(undefined4 *)(param_1 + 4),FUN_0215621c);
     return;
   }
-  FUN_02028384(*(undefined4 *)(param_1 + 4),&DAT_021561a0);
+  FUN_02028384(*(undefined4 *)(param_1 + 4),FUN_021561a0);
   return;
 }
 

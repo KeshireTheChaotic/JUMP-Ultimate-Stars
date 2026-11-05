@@ -1,9 +1,9 @@
 
-/* JUS-SCENE jus_Scene13_CreateImpl [scene-map] called by scene 13 create wrapper 0206eff0 while
-   overlay 1 is resident */
+/* JUS-GAME Result::Result_Add [source-string] __FILE__="Result.cpp" __FUNCTION__="Result_Add"
+   lines=[201] passed to 1 source-location call(s) */
 
 undefined4
-jus_Scene13_CreateImpl(undefined1 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+Result::Result_Add(undefined1 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
 
 {
   bool bVar1;
@@ -17,13 +17,13 @@ jus_Scene13_CreateImpl(undefined1 param_1,undefined4 param_2,undefined4 param_3,
   undefined4 uStack_10;
   
   uStack_10 = param_4;
-  puVar2 = (undefined4 *)jus_AllocDebug(0x98,s_Result_cpp_0216d870,s_Result_Add_0216d6ec,0xc9);
+  puVar2 = (undefined4 *)thunk_FUN_0201a228(0x98,s_Result_cpp_0216d870,s_Result_Add_0216d6ec,0xc9);
   FUN_0214ff80(puVar2,0x98);
   uVar3 = FUN_02026f94();
   puVar2[1] = uVar3;
   FUN_0215f948(auStack_14,0x80);
   FUN_0214ffd0(puVar2[1],auStack_14);
-  FUN_02157480(puVar2[1],&LAB_02166098_1);
+  FUN_02157480(puVar2[1],FUN_02166098 + 1);
   FUN_02150004(puVar2[1],puVar2);
   *(undefined1 *)(puVar2 + 0x25) = param_1;
   uVar3 = FUN_020310f4();
@@ -33,11 +33,11 @@ jus_Scene13_CreateImpl(undefined1 param_1,undefined4 param_2,undefined4 param_3,
   if (iVar4 != 0) {
     FUN_0208730c();
     FUN_02087250();
-    func_0x02167414(puVar2);
+    FUN_02167414(puVar2);
   }
-  func_0x021665ec();
+  FUN_021665ec();
   piVar5 = (int *)FUN_020101f4(s_chr_ChrArc_aar_0216d87c,0);
-  func_0x02166778(puVar2);
+  ALNodeImp::Create(puVar2);
   (**(code **)(*piVar5 + 0xc))();
   if (*(char *)(puVar2 + 0x25) == '\0') {
     uVar3 = ResultRank::ResultRank_Create(0);
@@ -46,25 +46,25 @@ jus_Scene13_CreateImpl(undefined1 param_1,undefined4 param_2,undefined4 param_3,
   else {
     uVar3 = ResultRank::ResultRank_Create(1);
     puVar2[0x1c] = uVar3;
-    uVar3 = func_0x0216603c();
+    uVar3 = FUN_0216603c();
     uVar3 = SelectStandbyBar::SelectStandbyBar_Create(uVar3,0x20,2);
     puVar2[0x1f] = uVar3;
-    func_0x0216604c(uVar3,&LAB_02167688_1,puVar2,5);
-    func_0x0216604c(puVar2[0x1f],FUN_021676a0 + 1,puVar2,2);
-    func_0x0216604c(puVar2[0x1f],FUN_021676e8 + 1,puVar2,1);
-    func_0x0216604c(puVar2[0x1f],FUN_021676fc + 1,puVar2,4);
+    FUN_0216604c(uVar3,FUN_02167688 + 1,puVar2,5);
+    FUN_0216604c(puVar2[0x1f],FUN_021676a0 + 1,puVar2,2);
+    FUN_0216604c(puVar2[0x1f],FUN_021676e8 + 1,puVar2,1);
+    FUN_0216604c(puVar2[0x1f],FUN_021676fc + 1,puVar2,4);
     uVar3 = FUN_02026f94();
     puVar2[2] = uVar3;
     FUN_0215f948(auStack_18,0x80);
     FUN_0214ffd0(puVar2[2],auStack_18);
-    FUN_02157480(puVar2[2],&LAB_021665b0_1);
+    FUN_02157480(puVar2[2],FUN_021665b0 + 1);
     FUN_02150004(puVar2[2],puVar2);
   }
   FUN_02073ebc(2,1);
-  iVar4 = func_0x02166058();
+  iVar4 = FUN_02166058();
   if (iVar4 == 0) {
-    func_0x02166078();
-    iVar4 = func_0x02166088();
+    FUN_02166078();
+    iVar4 = FUN_02166088();
     if (iVar4 == 0) {
       bVar1 = true;
     }
@@ -73,8 +73,8 @@ jus_Scene13_CreateImpl(undefined1 param_1,undefined4 param_2,undefined4 param_3,
     }
   }
   else {
-    func_0x02166078();
-    iVar4 = func_0x02166068();
+    FUN_02166078();
+    iVar4 = FUN_02166068();
     if (iVar4 == 0) {
       bVar1 = true;
     }

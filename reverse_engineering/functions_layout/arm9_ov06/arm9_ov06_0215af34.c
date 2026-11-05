@@ -38,7 +38,7 @@ void FUN_0215af34(int param_1)
     }
     *(undefined1 *)(param_1 + 0x1e9) = 0;
   }
-  (*(code *)(&PTR_LAB_02172190)[*(char *)(param_1 + 0x11e)])(param_1);
+  (*(code *)(&PTR_FUN_02172190)[*(char *)(param_1 + 0x11e)])(param_1);
   iVar3 = (**(code **)(param_1 + 0xfc))(param_1);
   if (iVar3 == 0) {
     return;
@@ -47,7 +47,7 @@ void FUN_0215af34(int param_1)
   iVar3 = FUN_021598f0(param_1);
   if (iVar3 != 0) {
     FUN_02157450(param_1,0xb);
-    FUN_02157494(param_1,0x11,FUN_0215bdf0,&LAB_0215be20,0x10);
+    FUN_02157494(param_1,0x11,FUN_0215bdf0,FUN_0215be20,0x10);
     return;
   }
   iVar3 = FUN_021599f0(param_1);

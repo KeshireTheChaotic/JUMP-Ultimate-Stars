@@ -13,7 +13,7 @@ void FUN_02015af4(int param_1)
     if (iVar1 == 0) {
       FUN_0201a958(uVar3,1);
     }
-    uVar3 = jus_AllocDebug(uVar2);
+    uVar3 = FUN_0201a228(uVar2);
     *(undefined4 *)(param_1 + 8) = uVar3;
     *(uint *)(param_1 + 0xc) = uVar2;
   }

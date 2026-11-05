@@ -12,8 +12,8 @@ int * PopularNameData::PopularNameData_Create(void)
   
                     /* JUS-TAG
                        strings=["PopularNameData.cpp","PopularNameData_Create","bin/pname.bin"] */
-  piVar1 = (int *)jus_AllocDebug(0xc,s_PopularNameData_cpp_0209f474,
-                                 s_PopularNameData_Create_0209f45c,0x14,in_r3);
+  piVar1 = (int *)thunk_FUN_0201a228(0xc,s_PopularNameData_cpp_0209f474,
+                                     s_PopularNameData_Create_0209f45c,0x14,in_r3);
   FUN_020517fc(piVar1,0,0xc);
   piVar2 = (int *)FUN_02033410(s_bin_pname_bin_0209f488,0,0);
   if (piVar2[7] == 0) {

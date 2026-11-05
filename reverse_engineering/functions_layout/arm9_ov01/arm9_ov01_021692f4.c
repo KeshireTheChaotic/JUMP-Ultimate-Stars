@@ -29,8 +29,8 @@ int * CommWrapNewComer::CommWrapNewComer_Create(int param_1,int param_2)
   undefined4 local_18;
   undefined4 local_14;
   
-  piVar1 = (int *)jus_AllocDebug(0x60,s_CommWrapNewComer_cpp_0216ddd4,
-                                 s_CommWrapNewComer_Create_0216ddbc,0xe5);
+  piVar1 = (int *)thunk_FUN_0201a228(0x60,s_CommWrapNewComer_cpp_0216ddd4,
+                                     s_CommWrapNewComer_Create_0216ddbc,0xe5);
   FUN_020517fc(piVar1,0,0x60);
   if (param_1 != 0) {
     FUN_02051890(param_1,piVar1 + 8,0x10);
@@ -67,7 +67,7 @@ int * CommWrapNewComer::CommWrapNewComer_Create(int param_1,int param_2)
   (**(code **)(**(int **)(*(int *)(iVar2 + 4) + 0x68) + 0x6c))();
   (**(code **)(**(int **)(iVar2 + 4) + 0xd8))(*(int **)(iVar2 + 4),0);
   (**(code **)(**(int **)(iVar2 + 4) + 0x24))(*(int **)(iVar2 + 4),piVar1);
-  FUN_02028384(*(undefined4 *)(iVar2 + 4),&DAT_02169b59);
+  FUN_02028384(*(undefined4 *)(iVar2 + 4),0x2169b59);
   piVar1[4] = iVar2;
   func_0x021c5fb4(*(undefined4 *)(piVar1[5] + 4));
   iVar2 = FUN_0214d37c();

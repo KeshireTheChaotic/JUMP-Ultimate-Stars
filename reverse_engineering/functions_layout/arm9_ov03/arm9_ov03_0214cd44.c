@@ -1,5 +1,5 @@
 
-void thunk_FUN_0214cd5c(void)
+void JArena::JArena_AddJob(void)
 
 {
                     /* WARNING: Could not recover jumptable at 0x0214cd48. Too many branches */

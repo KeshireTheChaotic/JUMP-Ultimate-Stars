@@ -65,7 +65,7 @@ int Title::Title_Add(void)
   undefined1 auStack_30 [12];
   undefined1 auStack_24 [12];
   
-  piVar1 = (int *)jus_AllocDebug(0x84,s_Title_cpp_02160e1c,s_Title_Add_02160d30,0x79);
+  piVar1 = (int *)thunk_FUN_0201a228(0x84,FUN_02160e1c,FUN_02160d30,0x79);
   FUN_020517fc(piVar1,0,0x84);
   iVar2 = FUN_02026f94();
   piVar1[1] = iVar2;
@@ -185,7 +185,7 @@ int Title::Title_Add(void)
   iVar2 = FUN_0203b424(3);
   piVar3 = *(int **)(*(int *)(iVar2 + 0x88) + 4);
   (**(code **)(*piVar3 + 0x94))(piVar3,0);
-  iVar2 = FUN_020101f4(s_title_title_aar_02160e28,0);
+  iVar2 = FUN_020101f4(0x2160e28,0);
   piVar1[10] = iVar2;
   iVar2 = FUN_020101f4(s_title_logo_copy_aar_02160e38,0);
   piVar1[0xb] = iVar2;
@@ -257,53 +257,49 @@ int Title::Title_Add(void)
   iVar2 = FUN_02034db8();
   (**(code **)(**(int **)(iVar2 + 4) + 100))();
   uVar4 = FUN_02150ff4();
-  iVar2 = CommonPaletteAnime::CommonPaletteAnime_Load(uVar4,s_title_space_top00_bin_02160f34,0x80);
+  iVar2 = CommonPaletteAnime::CommonPaletteAnime_Load(uVar4,FUN_02160f34,0x80);
   piVar1[0x15] = iVar2;
   FUN_0215101c(piVar1[3],0);
   iVar2 = FUN_02034db8();
   (**(code **)(**(int **)(iVar2 + 4) + 100))();
   uVar4 = FUN_02150ff4();
-  iVar2 = CommonPaletteAnime::CommonPaletteAnime_Load(uVar4,s_title_space_under00_bin_02160f4c,0x80)
-  ;
+  iVar2 = CommonPaletteAnime::CommonPaletteAnime_Load(uVar4,FUN_02160f4c,0x80);
   piVar1[0x16] = iVar2;
   FUN_0215101c(piVar1[4],0);
   iVar2 = FUN_02034db8();
   (**(code **)(**(int **)(iVar2 + 4) + 100))();
   uVar4 = FUN_02150ff4();
-  iVar2 = CommonPaletteAnime::CommonPaletteAnime_Load(uVar4,s_title_space_under00_bin_02160f4c,0x80)
-  ;
+  iVar2 = CommonPaletteAnime::CommonPaletteAnime_Load(uVar4,FUN_02160f4c,0x80);
   piVar1[0x17] = iVar2;
   FUN_0215101c(piVar1[5],0);
   iVar2 = FUN_02034db8();
   (**(code **)(**(int **)(iVar2 + 4) + 100))();
   uVar4 = FUN_02150ff4();
-  iVar2 = CommonPaletteAnime::CommonPaletteAnime_Load(uVar4,s_title_space_top00_bin_02160f34,0x80);
+  iVar2 = CommonPaletteAnime::CommonPaletteAnime_Load(uVar4,FUN_02160f34,0x80);
   piVar1[0x18] = iVar2;
   FUN_0215101c(piVar1[6],0);
   iVar2 = FUN_02034db8();
   (**(code **)(**(int **)(iVar2 + 4) + 100))();
   uVar4 = FUN_02150ff4();
-  iVar2 = CommonPaletteAnime::CommonPaletteAnime_Load(uVar4,s_title_space_under00_bin_02160f4c,0x80)
-  ;
+  iVar2 = CommonPaletteAnime::CommonPaletteAnime_Load(uVar4,FUN_02160f4c,0x80);
   piVar1[0x19] = iVar2;
   FUN_0215101c(piVar1[7],0);
   iVar2 = FUN_02034db8();
   (**(code **)(**(int **)(iVar2 + 4) + 100))();
   uVar4 = FUN_02150ff4();
-  iVar2 = CommonPaletteAnime::CommonPaletteAnime_Load(uVar4,s_title_space_top00_bin_02160f34,0x80);
+  iVar2 = CommonPaletteAnime::CommonPaletteAnime_Load(uVar4,FUN_02160f34,0x80);
   piVar1[0x1a] = iVar2;
   FUN_0215101c(piVar1[8],0);
   iVar2 = FUN_02034db8();
   (**(code **)(**(int **)(iVar2 + 4) + 100))();
   uVar4 = FUN_02150ff4();
-  iVar2 = CommonPaletteAnime::CommonPaletteAnime_Load(uVar4,s_title_space_top00_bin_02160f34,0x80);
+  iVar2 = CommonPaletteAnime::CommonPaletteAnime_Load(uVar4,FUN_02160f34,0x80);
   piVar1[0x1b] = iVar2;
   FUN_0215101c(piVar1[9],0);
   iVar2 = FUN_02034db8();
   (**(code **)(**(int **)(iVar2 + 4) + 100))();
   uVar4 = FUN_02150ff4();
-  iVar2 = CommonPaletteAnime::CommonPaletteAnime_Load(uVar4,s_title_space_under00_bin_02160f4c,0x80)
-  ;
+  iVar2 = CommonPaletteAnime::CommonPaletteAnime_Load(uVar4,FUN_02160f4c,0x80);
   piVar1[0x1c] = iVar2;
   local_a4 = 0;
   local_a0 = 0x48000;
@@ -367,7 +363,7 @@ int Title::Title_Add(void)
   iVar2 = CommonPaletteAnime::CommonPaletteAnime_Load(uVar4,s_title_title_effect_bin_02160f64,0x80);
   piVar1[0x1d] = iVar2;
   _DAT_021d5154 = 0xffffffff;
-  iVar2 = jus_AllocDebug(0x14c,s_ALWidgetBaseImp_h_02160d80,s_Create_02160d18,0x2a6);
+  iVar2 = thunk_FUN_0201a228(0x14c,s_ALWidgetBaseImp_h_02160d80,&DAT_02160d18,0x2a6);
   if (iVar2 != 0) {
     func_0x021b7950(iVar2,0,0xffffffff,ALWidgetBaseImp::CreateDrawFunc);
   }
@@ -381,7 +377,7 @@ int Title::Title_Add(void)
   local_8a = 0xffe8;
   local_88 = 0x58;
   local_86 = 0x18;
-  piVar3 = (int *)jus_AllocDebug(0x70,s_ALCollision_inl_02160d5c,s_Create_02160d10,0x1b2);
+  piVar3 = (int *)thunk_FUN_0201a228(0x70,s_ALCollision_inl_02160d5c,&DAT_02160d10,0x1b2);
   if (piVar3 != (int *)0x0) {
     func_0x021b054c(piVar3,0,&DAT_02093c8c);
     *piVar3 = (int)&jus_Class_02160db0::vftable;

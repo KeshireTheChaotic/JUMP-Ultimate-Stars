@@ -1,0 +1,17 @@
+02163a1c  ldr r1,[r0,#0x4]
+02163a20  ldr r2,[0x2163a60]
+02163a24  ldrb r1,[r1,#0xd]
+02163a28  ldr r12,[0x2163a64]
+02163a2c  add r3,r2,#0x2
+02163a30  add r1,r1,#0x1200
+02163a34  add r1,r1,#0x400000
+02163a38  str r1,[r12,#0xac]
+02163a3c  ldr r1,[r0,#0x4]
+02163a40  ldrb r1,[r1,#0xd]
+02163a44  add r1,r1,r2
+02163a48  str r1,[r12,#0xcc]
+02163a4c  ldr r0,[r0,#0x4]
+02163a50  ldrb r0,[r0,#0xd]
+02163a54  add r0,r0,r3
+02163a58  str r0,[r12,#0x8c]
+02163a5c  bx lr

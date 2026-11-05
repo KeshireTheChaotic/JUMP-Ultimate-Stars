@@ -27,7 +27,7 @@ undefined4 * EndingPiece::EndingPiece_Create(undefined4 param_1)
   undefined1 auStack_30 [12];
   
   puVar1 = (undefined4 *)
-           jus_AllocDebug(0x1e4,s_EndingPiece_cpp_021617c4,s_EndingPiece_Create_02161744,0xa0);
+           thunk_FUN_0201a228(0x1e4,s_EndingPiece_cpp_021617c4,s_EndingPiece_Create_02161744,0xa0);
   if (puVar1 != (undefined4 *)0x0) {
     puVar1[0x1a] = 0;
     puVar1[0x31] = 0;
@@ -71,27 +71,23 @@ undefined4 * EndingPiece::EndingPiece_Create(undefined4 param_1)
   uVar4 = FUN_020101f4(s_ending_sakuhin_chr_aar_02161824,0);
   puVar1[6] = uVar4;
   iVar3 = FUN_0203b414(2);
-  uVar4 = FUN_0214ec98(s_ending_bg_00_atm_0216183c,s_ending_bg_dig_02161850,
-                       *(undefined4 *)(iVar3 + 0x88));
+  uVar4 = FUN_0214ec98(s_ending_bg_00_atm_0216183c,&DAT_02161850,*(undefined4 *)(iVar3 + 0x88));
   puVar1[9] = uVar4;
   iVar3 = FUN_0203b414(1);
-  uVar4 = FUN_0214ec98(s_info_bg_atm_02161860,s_info_bg_dig_0216186c,*(undefined4 *)(iVar3 + 0x88));
+  uVar4 = FUN_0214ec98(s_info_bg_atm_02161860,FUN_0216186c,*(undefined4 *)(iVar3 + 0x88));
   puVar1[10] = uVar4;
   iVar3 = FUN_0203b424(2);
-  iVar3 = FUN_0214ec98(s_ending_bg_00_atm_0216183c,s_ending_bg_dig_02161850,
-                       *(undefined4 *)(iVar3 + 0x88));
+  iVar3 = FUN_0214ec98(s_ending_bg_00_atm_0216183c,&DAT_02161850,*(undefined4 *)(iVar3 + 0x88));
   puVar1[0xb] = iVar3;
   (**(code **)(**(int **)(iVar3 + 4) + 0xd8))(*(int **)(iVar3 + 4),0);
   iVar3 = FUN_0203b424(2);
-  uVar4 = FUN_0214ec98(s_ending_bg_01_atm_02161878,s_ending_bg_dig_02161850,
-                       *(undefined4 *)(iVar3 + 0x88));
+  uVar4 = FUN_0214ec98(&DAT_02161878,&DAT_02161850,*(undefined4 *)(iVar3 + 0x88));
   puVar1[0xd] = uVar4;
   iVar3 = FUN_0203b424(1);
-  uVar4 = FUN_0214ec98(s_info_bg_atm_02161860,s_info_bg_dig_0216186c,*(undefined4 *)(iVar3 + 0x88));
+  uVar4 = FUN_0214ec98(s_info_bg_atm_02161860,FUN_0216186c,*(undefined4 *)(iVar3 + 0x88));
   puVar1[0xe] = uVar4;
   iVar3 = FUN_0203b414(2);
-  uVar4 = FUN_0214ec98(s_ending_bg_01_atm_02161878,s_ending_bg_dig_02161850,
-                       *(undefined4 *)(iVar3 + 0x88));
+  uVar4 = FUN_0214ec98(&DAT_02161878,&DAT_02161850,*(undefined4 *)(iVar3 + 0x88));
   puVar1[0xf] = uVar4;
   uVar4 = puVar1[10];
   local_48 = 0x100000;
@@ -99,7 +95,7 @@ undefined4 * EndingPiece::EndingPiece_Create(undefined4 param_1)
   local_50 = 0;
   FUN_02151038(auStack_30,&local_48,&local_4c,&local_50);
   FUN_02150d54(&local_44,uVar4,s_Position_0216188c);
-  iVar3 = jus_AllocDebug(0x4c,s_ALControllerImp_h_02161174,s_Create_02161734,0x2b9);
+  iVar3 = thunk_FUN_0201a228(0x4c,FUN_02161174,&DAT_02161734,0x2b9);
   if (iVar3 != 0) {
     jus_TagIPCT::jus_TagIPCT(iVar3,0,local_44,local_40,0x494c,&DAT_02093c8c,auStack_30,0x400,2);
   }
@@ -111,7 +107,7 @@ undefined4 * EndingPiece::EndingPiece_Create(undefined4 param_1)
   local_64 = 0;
   FUN_02151038(auStack_3c,&local_5c,&local_60,&local_64);
   FUN_02150d54(&local_58,uVar4,s_Position_0216188c);
-  iVar3 = jus_AllocDebug(0x4c,s_ALControllerImp_h_02161174,s_Create_02161734,0x2b9);
+  iVar3 = thunk_FUN_0201a228(0x4c,FUN_02161174,&DAT_02161734,0x2b9);
   if (iVar3 != 0) {
     jus_TagIPCT::jus_TagIPCT(iVar3,0,local_58,local_54,0x494c,&DAT_02093c8c,auStack_3c,0x400,2);
   }

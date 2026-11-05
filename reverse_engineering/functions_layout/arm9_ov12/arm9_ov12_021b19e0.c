@@ -1,5 +1,8 @@
 
-void FUN_021b19e0(undefined4 param_1,int param_2,undefined4 *param_3)
+/* JUS-CLASS ALCollision_021d213c::vfunc_08 [class-virtual] slot 8 of vtable 021d213c (own slot, not
+   inherited) */
+
+void ALCollision_021d213c::vfunc_08(undefined4 param_1,int param_2,undefined4 *param_3)
 
 {
   undefined4 uVar1;

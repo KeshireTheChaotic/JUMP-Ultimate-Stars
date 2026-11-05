@@ -6,7 +6,7 @@ undefined4 FUN_021beb64(int param_1,uint param_2,uint param_3)
   int iVar2;
   uint uVar3;
   
-  iVar2 = *(int *)(&DAT_021d01f4 + param_1 * 4);
+  iVar2 = *(int *)(FUN_021d01f4 + param_1 * 4);
   if (iVar2 != 0) {
     if (iVar2 == 1) {
       if ((param_2 < 0x2000000) || (0x23fe7ff < param_2)) {

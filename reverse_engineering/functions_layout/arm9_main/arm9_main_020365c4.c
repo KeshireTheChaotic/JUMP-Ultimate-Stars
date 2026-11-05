@@ -16,7 +16,7 @@ int * FUN_020365c4(undefined4 param_1,int *param_2,undefined4 param_3,undefined4
   iVar2 = (**(code **)(*param_2 + 0x2c))(param_2,0);
   iVar3 = (**(code **)(*param_2 + 0x1c))();
   iVar8 = *(int *)(iVar2 + 8) + iVar2;
-  iVar4 = jus_AllocDebug(0x30);
+  iVar4 = FUN_0201a228(0x30);
   if (iVar4 != 0) {
     ALStreamImp::ALStreamImp(iVar4,iVar8,iVar3 - (iVar8 - iVar2),0,param_4);
   }
@@ -53,7 +53,7 @@ int * FUN_020365c4(undefined4 param_1,int *param_2,undefined4 param_3,undefined4
     iVar3 = 0;
     while (iVar4 < (int)(uint)*(ushort *)(iVar2 + 6)) {
       puVar9 = (undefined4 *)(iVar2 + (uint)*(ushort *)(iVar2 + 0xc + iVar4 * 2));
-      iVar6 = jus_AllocDebug(0x48);
+      iVar6 = FUN_0201a228(0x48);
       iVar8 = 0;
       if (iVar6 != 0) {
         iVar8 = jus_Class_02095ba4::jus_Class_02095ba4(iVar6,piVar1);

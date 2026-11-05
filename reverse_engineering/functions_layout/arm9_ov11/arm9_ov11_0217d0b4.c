@@ -51,7 +51,7 @@ void FUN_0217d0b4(int param_1)
   if (*(int *)*piVar5 == 0) {
     return;
   }
-  FUN_02028384(*(undefined4 *)(param_1 + 4),(&PTR_LAB_021819b0)[*(int *)*piVar5]);
+  FUN_02028384(*(undefined4 *)(param_1 + 4),(&PTR_FUN_021819b0)[*(int *)*piVar5]);
   *(undefined1 *)((int)piVar5 + 0x12) = 1;
   piVar3 = (int *)*piVar5;
   if (*piVar3 != 1) {

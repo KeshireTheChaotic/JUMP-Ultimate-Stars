@@ -1,0 +1,9 @@
+0202ca64  stmdb sp!,{r0,r1,r2,r3}
+0202ca68  stmdb sp!,{r3,lr}
+0202ca6c  ldr r3,[r0,#0x0]
+0202ca70  add r2,sp,#0x10
+0202ca74  ldr r3,[r3,#0x24]
+0202ca78  blx r3
+0202ca7c  ldmia sp!,{r3,lr}
+0202ca80  add sp,sp,#0x10
+0202ca84  bx lr

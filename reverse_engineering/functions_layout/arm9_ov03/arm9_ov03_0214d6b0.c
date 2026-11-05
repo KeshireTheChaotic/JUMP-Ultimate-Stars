@@ -12,7 +12,7 @@ int ALWidgetBaseImp::Create
   int iVar2;
   
   uVar1 = _DAT_021d5154;
-  iVar2 = jus_AllocDebug(0x14c,s_ALWidgetBaseImp_h_0215dad4,s_Create_0215da88,0x2a6,param_4);
+  iVar2 = thunk_FUN_0201a228(0x14c,s_ALWidgetBaseImp_h_0215dad4,s_Create_0215da88,0x2a6,param_4);
   if (iVar2 != 0) {
     func_0x021b7950(iVar2,0,uVar1,CreateDrawFunc);
   }

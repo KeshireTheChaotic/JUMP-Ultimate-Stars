@@ -1,0 +1,1 @@
+{"module":"arm9_ov12","address":"021b0fc0","name":"ALCollision_021d1db4","thumb":true,"body_bytes":26,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["021b0d04"],"unresolved_call_targets":[],"status":"decompiled","asm_file":"arm9_ov12_021b0fc0.asm","c_file":"arm9_ov12_021b0fc0.c"}

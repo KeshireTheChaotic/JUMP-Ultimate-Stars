@@ -1,0 +1,34 @@
+0208317c  stmdb sp!,{r4,r5,r6,lr}
+02083180  ldr r0,[r0,#0x4]
+02083184  mov r6,#0x0
+02083188  ldr r0,[r0,#0x10]
+0208318c  ldr r4,[r0,#0x10]
+02083190  b 0x020831f8
+02083194  ldr r0,[r4,#0x8]
+02083198  ldr r2,[r0,#0xc]
+0208319c  ldr r1,[r0,#0x10]
+020831a0  ldr r0,[r0,#0x8]
+020831a4  mov r2,r2, lsl #0x4
+020831a8  cmp r0,#0x0
+020831ac  mov r1,r1, lsl #0x4
+020831b0  beq 0x020831f4
+020831b4  ldr r0,[r0,#0x4]
+020831b8  ldr r5,[r0,#0x50]
+020831bc  str r2,[r5,#0xc]
+020831c0  str r1,[r5,#0x10]
+020831c4  str r6,[r5,#0x14]
+020831c8  ldrb r0,[r5,#0x24]
+020831cc  orr r1,r0,#0x1
+020831d0  cmp r0,r1
+020831d4  beq 0x020831e8
+020831d8  mov r0,r5
+020831dc  ldr r2,[r0,#0x0]
+020831e0  ldr r2,[r2,#0x18]
+020831e4  blx r2
+020831e8  ldrb r0,[r5,#0x24]
+020831ec  orr r0,r0,#0x31
+020831f0  strb r0,[r5,#0x24]
+020831f4  ldr r4,[r4,#0x0]
+020831f8  cmp r4,#0x0
+020831fc  bne 0x02083194
+02083200  ldmia sp!,{r4,r5,r6,pc}

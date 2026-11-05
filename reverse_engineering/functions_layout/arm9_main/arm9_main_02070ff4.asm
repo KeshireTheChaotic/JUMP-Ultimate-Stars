@@ -1,0 +1,7 @@
+02070ff4  push {r3,lr}
+02070ff6  mov r1,#0x96
+02070ff8  mov r0,#0x40
+02070ffa  lsl r1,r1,#0x2
+02070ffc  bl 0x02073114
+02071000  ldr r0,[0x02071004]
+02071002  pop {r3,pc}

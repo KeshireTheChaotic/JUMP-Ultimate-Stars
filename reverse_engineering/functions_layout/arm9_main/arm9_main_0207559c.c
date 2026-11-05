@@ -12,8 +12,8 @@ int * LocationData::LocationData_Create(void)
   
                     /* JUS-TAG strings=["LocationData.cpp","LocationData_Create","bin/location.bin"]
                         */
-  piVar1 = (int *)jus_AllocDebug(0xc,s_LocationData_cpp_0209f434,s_LocationData_Create_0209f420,0x14
-                                 ,in_r3);
+  piVar1 = (int *)thunk_FUN_0201a228(0xc,s_LocationData_cpp_0209f434,s_LocationData_Create_0209f420,
+                                     0x14,in_r3);
   FUN_020517fc(piVar1,0,0xc);
   piVar2 = (int *)FUN_02033410(s_bin_location_bin_0209f448,0,0);
   if (piVar2[7] == 0) {

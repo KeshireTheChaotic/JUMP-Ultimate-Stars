@@ -22,16 +22,16 @@ void jus_Scene26_Exit(char *param_1,uint param_2)
   case 2:
     break;
   case 3:
-    func_0x0207231c(*(undefined1 *)(iRam0206faa0 + 0x11));
-    func_0x020703c8(*(undefined1 *)(iRam0206faa0 + 0x11),0);
-    func_0x0206e5b0(param_1,0);
+    FUN_0207231c(*(undefined1 *)(iRam0206faa0 + 0x11));
+    FUN_020703c8(*(undefined1 *)(iRam0206faa0 + 0x11),0);
+    FUN_0206e5b0(param_1,0);
     return;
   case 4:
-    func_0x0206e590(param_1,0);
+    FUN_0206e590(param_1,0);
     return;
   }
   if (*(int *)(param_1 + 4) == 0x13) {
-    func_0x0206e5b0(param_1,0);
+    FUN_0206e5b0(param_1,0);
     return;
   }
   *(int *)(iRam0206faa0 + 0x18c) = (int)*param_1;

@@ -14,8 +14,8 @@ int * JQuizMainSubWaitPlayer::JQuizMainSubWaitPlayerClass_Create
   undefined4 uStack_10;
   
   uStack_10 = param_4;
-  piVar1 = (int *)jus_AllocDebug(4,s_JQuizMainSubWaitPlayer_cpp_02161c88,
-                                 s_JQuizMainSubWaitPlayerClass_Crea_02161c64,0x1e);
+  piVar1 = (int *)thunk_FUN_0201a228(4,s_JQuizMainSubWaitPlayer_cpp_02161c88,
+                                     s_JQuizMainSubWaitPlayerClass_Crea_02161c64,0x1e);
   FUN_020517fc(piVar1,0,4);
   local_18 = 0xc0;
   local_14 = 0xb4;

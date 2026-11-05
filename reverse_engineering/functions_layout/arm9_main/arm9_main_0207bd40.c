@@ -18,8 +18,8 @@ BattleColJoint::Battle_ColJointManCreate
                     /* JUS-TAG strings=["BattleColJoint.cpp","Battle_ColJointManCreate"] */
   uStack_14 = param_4;
   puVar1 = (undefined4 *)
-           jus_AllocDebug(0x1040,s_BattleColJoint_cpp_0209fb38,s_Battle_ColJointManCreate_0209fb1c,
-                          0x43);
+           thunk_FUN_0201a228(0x1040,s_BattleColJoint_cpp_0209fb38,
+                              s_Battle_ColJointManCreate_0209fb1c,0x43);
   if (puVar1 != (undefined4 *)0x0) {
     puVar4 = puVar1;
     do {
@@ -41,7 +41,7 @@ BattleColJoint::Battle_ColJointManCreate
     puVar1[10] = iVar2;
     local_18 = 0xa2000;
     (**(code **)(**(int **)(iVar2 + 4) + 0xa0))(*(int **)(iVar2 + 4),&local_18);
-    FUN_02028384(*(undefined4 *)(puVar1[10] + 4),&LAB_0207c190);
+    FUN_02028384(*(undefined4 *)(puVar1[10] + 4),FUN_0207c190);
     (**(code **)(**(int **)(puVar1[10] + 4) + 0x24))(*(int **)(puVar1[10] + 4),puVar1);
     (**(code **)(**(int **)(puVar1[10] + 4) + 0x94))(*(int **)(puVar1[10] + 4),0x4000000);
     piVar3 = *(int **)(puVar1[10] + 4);

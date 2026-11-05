@@ -25,7 +25,7 @@ int FUN_0215e9e4(undefined4 param_1,int *param_2,int param_3,int param_4,char pa
     (**(code **)(**(int **)(iVar1 + 4) + 0xb4))(*(int **)(iVar1 + 4),piVar3);
     (**(code **)(*piVar3 + 0xc))();
   }
-  piVar3 = (int *)jus_AllocDebug(0x70,s_ALCollision_inl_0216f8b4,s_Create_021706cc,0x1b2);
+  piVar3 = (int *)thunk_FUN_0201a228(0x70,s_ALCollision_inl_0216f8b4,s_Create_021706cc,0x1b2);
   if (piVar3 != (int *)0x0) {
     func_0x021b054c(piVar3,0,&DAT_02093c8c);
     *piVar3 = (int)&jus_Class_0216f578::vftable;

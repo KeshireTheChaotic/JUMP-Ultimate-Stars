@@ -37,8 +37,8 @@ CommuMenuCmnMemberEnt::CommuMenuCmnMemberEnt_Add
   
   uStack_28 = param_4;
   puVar1 = (undefined4 *)
-           jus_AllocDebug(0x80,s_CommuMenuCmnMemberEnt_cpp_0216a0ac,
-                          s_CommuMenuCmnMemberEnt_Add_0216a090,0xb2);
+           thunk_FUN_0201a228(0x80,s_CommuMenuCmnMemberEnt_cpp_0216a0ac,
+                              s_CommuMenuCmnMemberEnt_Add_0216a090,0xb2);
   FUN_020517fc(puVar1,0,0x80);
   iVar2 = FUN_020310f4();
   puVar1[1] = iVar2;
@@ -105,7 +105,7 @@ CommuMenuCmnMemberEnt::CommuMenuCmnMemberEnt_Add
   iVar2 = FUN_0203b3e4();
   iVar2 = FUN_02150bdc(*puVar1,*(undefined4 *)(iVar2 + 0x88));
   (**(code **)(**(int **)(iVar2 + 4) + 0x24))(*(int **)(iVar2 + 4),puVar1);
-  FUN_02027834(*(undefined4 *)(iVar2 + 4),8,&LAB_02158bd4_1);
+  FUN_02027834(*(undefined4 *)(iVar2 + 4),8,0x2158bd5);
   func_0x021b4104(*(undefined4 *)(iVar2 + 4),*(undefined4 *)(iVar2 + 4),4);
   *(undefined4 *)(*(int *)(iVar2 + 4) + 0x124) = 2;
   puVar1[0xe] = iVar2;
@@ -117,7 +117,7 @@ CommuMenuCmnMemberEnt::CommuMenuCmnMemberEnt_Add
     *(undefined1 *)(*(int *)(iVar2 + 4) + 0xaa) = 1;
     *(undefined1 *)(*(int *)(iVar2 + 4) + 0xab) = 0;
     func_0x021b77a8(*(undefined4 *)(iVar2 + 4),0x8000);
-    piVar4 = (int *)jus_AllocDebug(0x70,s_ALCollision_inl_02169674,s_Create_02169ff8,0x1b2);
+    piVar4 = (int *)thunk_FUN_0201a228(0x70,FUN_02169674,s_Create_02169ff8,0x1b2);
     if (piVar4 != (int *)0x0) {
       func_0x021b054c(piVar4,0,&DAT_02093c8c);
       *piVar4 = (int)&jus_Class_021695c0::vftable;
@@ -131,7 +131,7 @@ CommuMenuCmnMemberEnt::CommuMenuCmnMemberEnt_Add
     *(undefined4 *)(*(int *)(iVar2 + 4) + 0x124) = 6;
     puVar1[0x12] = iVar2;
     (**(code **)(**(int **)(iVar2 + 4) + 0x24))(*(int **)(iVar2 + 4),puVar1);
-    FUN_02027834(*(undefined4 *)(iVar2 + 4),8,&LAB_02158c1c_1);
+    FUN_02027834(*(undefined4 *)(iVar2 + 4),8,0x2158c1d);
     func_0x021b4104(*(undefined4 *)(iVar2 + 4),*(undefined4 *)(iVar2 + 4),4);
     FUN_02023894(*(undefined4 *)(iVar2 + 4),0x8f0001,0);
     (**(code **)(**(int **)(*(int *)(iVar2 + 4) + 0x68) + 0x6c))();
@@ -166,7 +166,7 @@ CommuMenuCmnMemberEnt::CommuMenuCmnMemberEnt_Add
   (**(code **)(**(int **)(iVar2 + 4) + 0xd8))(*(int **)(iVar2 + 4),0);
   uVar3 = _DAT_021d5154;
   uVar8 = *(undefined4 *)(iVar2 + 4);
-  iVar10 = jus_AllocDebug(0x134,s_ALWidgetImp_h_02169654,s_Create_0216a000,0x3e);
+  iVar10 = thunk_FUN_0201a228(0x134,s_ALWidgetImp_h_02169654,s_Create_0216a000,0x3e);
   if (iVar10 != 0) {
     func_0x021af0f8(iVar10,uVar8,uVar3,ALWidgetBaseImp::CreateDrawFunc);
   }
@@ -275,7 +275,7 @@ CommuMenuCmnMemberEnt::CommuMenuCmnMemberEnt_Add
   iVar2 = FUN_02026f94();
   puVar1[2] = iVar2;
   (**(code **)(**(int **)(iVar2 + 4) + 0x24))(*(int **)(iVar2 + 4),puVar1);
-  FUN_02028384(*(undefined4 *)(puVar1[2] + 4),&LAB_021586e0);
+  FUN_02028384(*(undefined4 *)(puVar1[2] + 4),FUN_021586e0);
   local_2c = 0x80000;
   FUN_0214ed20(puVar1[2],&local_2c);
   iVar2 = FUN_02026f94();

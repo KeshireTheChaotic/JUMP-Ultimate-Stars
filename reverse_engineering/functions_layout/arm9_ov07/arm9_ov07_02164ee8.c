@@ -9,8 +9,8 @@ int CommuMenuWiFiError::CommuMenuWiFiError_Add(void)
   int *piVar1;
   int iVar2;
   
-  piVar1 = (int *)jus_AllocDebug(0x98,s_CommuMenuWiFiError_cpp_0216ab2c,
-                                 s_CommuMenuWiFiError_Add_0216ab14,0x5e);
+  piVar1 = (int *)thunk_FUN_0201a228(0x98,s_CommuMenuWiFiError_cpp_0216ab2c,
+                                     s_CommuMenuWiFiError_Add_0216ab14,0x5e);
   FUN_020517fc(piVar1,0,0x98);
   iVar2 = FUN_020310f4();
   *piVar1 = iVar2;

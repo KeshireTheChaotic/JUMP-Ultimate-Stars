@@ -42,6 +42,18 @@ class DataRoot:
         if not self.root.is_dir():
             raise FileNotFoundError(f'Data root not found: {self.root}')
         self._archives: dict[str, _Node] = {}
+        self._files: dict[str, bytes] = {}      # in-session content of edited loose files (bin/koma.bin…)
+        self._files_dirty: set[str] = set()     # loose files changed since the last save
+
+    # ----------------------------------------------------------- loose files
+    def write_file(self, rel: str, data: bytes) -> None:
+        """Stage new bytes for a top-level file that is not an archive (saved by :meth:`save`)."""
+        if len(split(rel)) != 1:
+            raise ValueError(f'{rel} is an archive member; use write()')
+        if data == self.read(rel):
+            return
+        self._files[rel] = bytes(data)
+        self._files_dirty.add(rel)
 
     # ----------------------------------------------------------- archives
     def archive(self, path: str) -> alar.Archive:
@@ -77,6 +89,8 @@ class DataRoot:
         """Payload bytes (DSCP removed) of a member or a whole file."""
         parts = split(path)
         if len(parts) == 1:
+            if parts[0] in self._files:
+                return self._files[parts[0]]
             return (self.root / parts[0]).read_bytes()
         return self.entry(path).payload()
 
@@ -115,7 +129,7 @@ class DataRoot:
         self._mark(container)
 
     def dirty_files(self) -> list[str]:
-        return sorted({split(k)[0] for k, n in self._archives.items() if n.dirty})
+        return sorted({split(k)[0] for k, n in self._archives.items() if n.dirty} | self._files_dirty)
 
     # ----------------------------------------------------------- save
     def _flush(self) -> dict[str, bytes]:
@@ -148,7 +162,9 @@ class DataRoot:
         same relative paths under ``out_root``.
         """
         written = []
-        for rel, blob in self._flush().items():
+        files = self._flush()
+        files.update({rel: self._files[rel] for rel in self._files_dirty})
+        for rel, blob in files.items():
             dst = (Path(out_root) if out_root else self.root) / rel
             dst.parent.mkdir(parents=True, exist_ok=True)
             if out_root is None and backup and dst.exists():
@@ -157,6 +173,7 @@ class DataRoot:
                     shutil.copy2(dst, bak)
             dst.write_bytes(blob)
             written.append(dst)
+        self._files_dirty.clear()             # like archives: edited content stays in the session, now clean
         return written
 
     # ----------------------------------------------------------- discovery

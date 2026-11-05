@@ -16,7 +16,7 @@ bool FUN_0215cec4(int param_1,undefined4 param_2)
   if (local_1c < 0x100000) {
     local_20 = 0x100000;
     FUN_0215ce90(param_1,&local_20);
-    FUN_02028384(*(undefined4 *)(param_1 + 4),&DAT_0215d294);
+    FUN_02028384(*(undefined4 *)(param_1 + 4),FUN_0215d294);
     FUN_0215cf58(uVar1,param_2);
   }
   return local_1c < 0x100000;

@@ -34,8 +34,8 @@ int * FUN_02083fcc(int param_1,int param_2,int param_3,undefined4 param_4,undefi
                     /* JUS-TAG
                        strings=[".aar","BattleMapBG.cpp","BattleMapBG_Create","BattleMapBG_SetAnime","BattleMapBG_SetPriority","stage/","stage/stage.aar"]
                         */
-  piVar4 = (int *)jus_AllocDebug(100,s_BattleMapBG_cpp_020a0048,s_BattleMapBG_Create_020a0004,0x115)
-  ;
+  piVar4 = (int *)thunk_FUN_0201a228(100,s_BattleMapBG_cpp_020a0048,s_BattleMapBG_Create_020a0004,
+                                     0x115);
   FUN_020517fc(piVar4,0,100);
   piVar4[0x10] = param_2;
   *piVar4 = param_3;
@@ -147,8 +147,8 @@ int * FUN_02083fcc(int param_1,int param_2,int param_3,undefined4 param_4,undefi
       FUN_0206c9f8(piVar4[iVar5 + 3],&local_158,local_154);
     }
     if (*(byte *)(piVar6 + 1) != 0) {
-      iVar11 = jus_AllocDebug((uint)*(byte *)(piVar6 + 1) * 0x1c,s_BattleMapBG_cpp_020a0048,
-                              s_BattleMapBG_SetAnime_020a0018,0x39a);
+      iVar11 = thunk_FUN_0201a228((uint)*(byte *)(piVar6 + 1) * 0x1c,s_BattleMapBG_cpp_020a0048,
+                                  s_BattleMapBG_SetAnime_020a0018,0x39a);
       *piVar6 = iVar11;
       FUN_020517fc(iVar11,0,(short)(ushort)*(byte *)(piVar6 + 1) * 0x1c);
       psVar17 = psVar18 + 6;
@@ -236,8 +236,8 @@ int * FUN_02083fcc(int param_1,int param_2,int param_3,undefined4 param_4,undefi
           piVar15 = (int *)(*piVar6 + iVar11);
           iVar11 = FUN_02086bd4();
           if ((iVar11 == 0) || (iVar5 != 2)) {
-            iVar11 = jus_AllocDebug((uint)*pbVar14 << 2,s_BattleMapBG_cpp_020a0048,
-                                    s_BattleMapBG_SetPriority_020a0030,0x4d1);
+            iVar11 = thunk_FUN_0201a228((uint)*pbVar14 << 2,s_BattleMapBG_cpp_020a0048,
+                                        s_BattleMapBG_SetPriority_020a0030,0x4d1);
             piVar15[4] = iVar11;
             FUN_020517fc(iVar11,0,(uint)*pbVar14 << 2);
             piVar15[3] = (int)pbVar14;
@@ -250,7 +250,7 @@ int * FUN_02083fcc(int param_1,int param_2,int param_3,undefined4 param_4,undefi
             FUN_02012940(*piVar15,local_13c + 1);
             (**(code **)(**(int **)(*piVar15 + 4) + 0x24))(*(int **)(*piVar15 + 4),piVar15);
             (**(code **)(**(int **)(*piVar15 + 4) + 0x94))(*(int **)(*piVar15 + 4),0xffff000);
-            FUN_0204267c(DAT_020a0f64,&LAB_020854a4,piVar15);
+            FUN_0204267c(DAT_020a0f64,FUN_020854a4,piVar15);
           }
           psVar17 = psVar17 + (uint)*pbVar14 * 2 + 4;
           break;

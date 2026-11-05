@@ -1,7 +1,7 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 /* JUS-GAME ALWidgetImp::Create [source-string-template] __FILE__="ALWidgetImp.h"
-   __FUNCTION__="Create"; one of 6 instantiations in arm9_ov01 */
+   __FUNCTION__="Create"; one of 7 instantiations in arm9_ov01 */
 
 int ALWidgetImp::Create(undefined4 param_1,int *param_2,undefined4 param_3,int param_4)
 
@@ -19,7 +19,7 @@ int ALWidgetImp::Create(undefined4 param_1,int *param_2,undefined4 param_3,int p
   uVar1 = FUN_02160d54(0,0x510000,param_3,0x20);
   uVar3 = _DAT_021d5154;
   uVar4 = *(undefined4 *)(param_4 + 4);
-  iVar2 = jus_AllocDebug(0x134,s_ALWidgetImp_h_0216b998,s_Create_0216cbd8,0x3e);
+  iVar2 = thunk_FUN_0201a228(0x134,s_ALWidgetImp_h_0216b998,s_Create_0216cbd8,0x3e);
   if (iVar2 != 0) {
     func_0x021af0f8(iVar2,uVar4,uVar3,ALWidgetBaseImp::CreateDrawFunc);
   }

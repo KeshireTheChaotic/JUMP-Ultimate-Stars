@@ -112,7 +112,7 @@ void FUN_0215754c(int param_1,undefined4 param_2,undefined4 param_3,undefined4 p
   local_54[6] = 0;
   FUN_0214dc68(auStack_24,local_54 + 6,local_54 + 5,local_54 + 4);
   FUN_0214f714(local_54 + 7,uVar1,s_Position_0216c840);
-  iVar2 = jus_AllocDebug(0x4c,s_ALControllerImp_h_0216bbe0,s_Create_0216c42c,0x2b9);
+  iVar2 = thunk_FUN_0201a228(0x4c,s_ALControllerImp_h_0216bbe0,s_Create_0216c42c,0x2b9);
   piVar3 = (int *)0x0;
   if (iVar2 != 0) {
     piVar3 = (int *)jus_TagIPCT::jus_TagIPCT
@@ -330,15 +330,15 @@ void FUN_0215754c(int param_1,undefined4 param_2,undefined4 param_3,undefined4 p
   uVar1 = DeckSelectPersonal::DeckSelect_PersonalCreate(local_174,0);
   *(undefined4 *)(param_1 + 0x2f4) = uVar1;
   FUN_0215f008(*(undefined4 *)(param_1 + 0x2f4),0);
-  iVar2 = jus_AllocDebug(0x78,s_ALNodeImp_h_0216bbd4,s_Create_0216c424,0x4c3);
+  iVar2 = thunk_FUN_0201a228(0x78,s_ALNodeImp_h_0216bbd4,s_Create_0216c424,0x4c3);
   if (iVar2 != 0) {
-    jus_Class_0209c0b4::jus_Class_0209c0b4(iVar2,FUN_02024a30,1);
+    jus_TagNDGR_0209c0b4::jus_TagNDGR_0209c0b4(iVar2,FUN_02024a30,1);
   }
   uVar1 = FUN_0214d37c();
   *(undefined4 *)(param_1 + 0x154) = uVar1;
-  iVar2 = jus_AllocDebug(0x78,s_ALNodeImp_h_0216bbd4,s_Create_0216c424,0x4c3);
+  iVar2 = thunk_FUN_0201a228(0x78,s_ALNodeImp_h_0216bbd4,s_Create_0216c424,0x4c3);
   if (iVar2 != 0) {
-    jus_Class_0209c0b4::jus_Class_0209c0b4(iVar2,FUN_02024a30,1);
+    jus_TagNDGR_0209c0b4::jus_TagNDGR_0209c0b4(iVar2,FUN_02024a30,1);
   }
   uVar1 = FUN_0214d37c();
   *(undefined4 *)(param_1 + 0x150) = uVar1;
@@ -389,17 +389,17 @@ void FUN_0215754c(int param_1,undefined4 param_2,undefined4 param_3,undefined4 p
   (**(code **)(*piVar3 + 0x54))(piVar3,*(undefined4 *)(iVar2 + 0x88));
   iVar2 = FUN_0203b3f4();
   FUN_0214f7f8(*(undefined4 *)(iVar2 + 0x88));
-  iVar2 = jus_AllocDebug(0xcc,s_ALWidget_inl_0216bd74,s_Create_0216c43c,0x1de);
+  iVar2 = thunk_FUN_0201a228(0xcc,s_ALWidget_inl_0216bd74,s_Create_0216c43c,0x1de);
   if (iVar2 != 0) {
-    func_0x021af26c(iVar2,0x2158eb9,&LAB_02158f7c_1,0);
+    func_0x021af26c(iVar2,0x2158eb9,0x2158f7d,0);
   }
   piVar3 = (int *)FUN_02158a78();
-  iVar2 = jus_AllocDebug(0xcc,s_ALWidget_inl_0216bd74,s_Create_0216c43c,0x1de);
+  iVar2 = thunk_FUN_0201a228(0xcc,s_ALWidget_inl_0216bd74,s_Create_0216c43c,0x1de);
   if (iVar2 != 0) {
-    func_0x021af26c(iVar2,0x2158f19,&LAB_02158f7c_1,0);
+    func_0x021af26c(iVar2,0x2158f19,0x2158f7d,0);
   }
   piVar8 = (int *)FUN_02158a78();
-  iVar2 = jus_AllocDebug(0xbc,s_ALWidget_inl_0216bd64,s_Create_0216c41c,0x212);
+  iVar2 = thunk_FUN_0201a228(0xbc,s_ALWidget_inl_0216bd64,s_Create_0216c41c,0x212);
   piVar9 = (int *)0x0;
   if (iVar2 != 0) {
     piVar9 = (int *)func_0x021af358(iVar2,0x2158fc1,0);
@@ -496,7 +496,7 @@ void FUN_0215754c(int param_1,undefined4 param_2,undefined4 param_3,undefined4 p
   iVar2 = ALWidgetImp::Create(*(undefined4 *)(param_1 + 0x60),_DAT_021d5154);
   (**(code **)(**(int **)(iVar2 + 4) + 0x24))(*(int **)(iVar2 + 4),param_1);
   func_0x021b4104(*(undefined4 *)(iVar2 + 4),*(undefined4 *)(iVar2 + 4),4);
-  FUN_02027834(*(undefined4 *)(iVar2 + 4),8,&LAB_0215a4fc_1);
+  FUN_02027834(*(undefined4 *)(iVar2 + 4),8,0x215a4fd);
   *(undefined1 *)(*(int *)(iVar2 + 4) + 0xaa) = 1;
   func_0x021b77a8(*(undefined4 *)(iVar2 + 4),0x20);
   (**(code **)(**(int **)(iVar2 + 4) + 0xd8))(*(int **)(iVar2 + 4),1);
@@ -508,7 +508,7 @@ void FUN_0215754c(int param_1,undefined4 param_2,undefined4 param_3,undefined4 p
   FUN_0214f7f8(*(undefined4 *)(iVar2 + 0x88));
   uVar1 = _DAT_021d5154;
   uVar11 = *(undefined4 *)(*(int *)(param_1 + 0x60) + 4);
-  iVar2 = jus_AllocDebug(400,s_ALWidgetImp_h_0216bd84,s_Create_0216c44c,0x159);
+  iVar2 = thunk_FUN_0201a228(400,s_ALWidgetImp_h_0216bd84,s_Create_0216c44c,0x159);
   if (iVar2 != 0) {
     func_0x021ae114(iVar2,uVar11,uVar1,ALWidgetImp::CreateDrawFunc);
   }

@@ -23,8 +23,8 @@ int JGalaxyResult::JGalaxyResult_Add(void)
   undefined4 uStack_20;
   undefined1 auStack_1c [4];
   
-  piVar1 = (int *)jus_AllocDebug(0x34,s_JGalaxyResult_cpp_0216bb74,s_JGalaxyResult_Add_0216bb60,0x44
-                                );
+  piVar1 = (int *)thunk_FUN_0201a228(0x34,s_JGalaxyResult_cpp_0216bb74,s_JGalaxyResult_Add_0216bb60,
+                                     0x44);
   FUN_020517fc(piVar1,0,0x34);
   iVar2 = FUN_02026f94();
   piVar1[1] = iVar2;
@@ -47,7 +47,7 @@ int JGalaxyResult::JGalaxyResult_Add(void)
   iVar2 = FUN_020101f4(s_common_button_aar_0216bb9c,0);
   piVar1[2] = iVar2;
   uVar7 = _DAT_021d5154;
-  iVar2 = jus_AllocDebug(0x14c,s_ALWidgetBaseImp_h_0216b9dc,s_Create_0216bb58,0x2a6);
+  iVar2 = thunk_FUN_0201a228(0x14c,s_ALWidgetBaseImp_h_0216b9dc,s_Create_0216bb58,0x2a6);
   if (iVar2 != 0) {
     func_0x021b7950(iVar2,0,uVar7,ALWidgetBaseImp::CreateDrawFunc);
   }
@@ -71,7 +71,7 @@ int JGalaxyResult::JGalaxyResult_Add(void)
   DAT_020a0dd0 = (&DAT_020a16d0)[DAT_02093c08];
   DAT_02093c08 = DAT_02093c08 + 1;
   uVar6 = *(undefined4 *)(iVar2 + 4);
-  iVar4 = jus_AllocDebug(0x134,s_ALWidgetImp_h_0216b998,s_Create_0216bb50,0x3e);
+  iVar4 = thunk_FUN_0201a228(0x134,s_ALWidgetImp_h_0216b998,s_Create_0216bb50,0x3e);
   if (iVar4 != 0) {
     func_0x021af0f8(iVar4,uVar6,uVar7,ALWidgetBaseImp::CreateDrawFunc);
   }
@@ -101,7 +101,7 @@ int JGalaxyResult::JGalaxyResult_Add(void)
   uStack_2a = 0xfff0;
   uStack_28 = 0;
   uStack_26 = 0;
-  piVar5 = (int *)jus_AllocDebug(0x70,s_ALCollision_inl_0216b9b8,s_Create_0216bb48,0x1b2);
+  piVar5 = (int *)thunk_FUN_0201a228(0x70,s_ALCollision_inl_0216b9b8,s_Create_0216bb48,0x1b2);
   if (piVar5 != (int *)0x0) {
     func_0x021b054c(piVar5,0,&DAT_02093c8c);
     *piVar5 = (int)&jus_Class_0216ba10::vftable;

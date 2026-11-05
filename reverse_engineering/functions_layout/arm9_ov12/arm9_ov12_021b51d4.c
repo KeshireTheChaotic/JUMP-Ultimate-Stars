@@ -16,7 +16,7 @@ void ALWidgetBase::RegistSkin(int param_1,undefined4 param_2,undefined4 param_3,
   while( true ) {
     uStack_18 = param_4;
     if (DAT_021d5190 <= uVar3) {
-      iVar2 = jus_AllocDebug(0x10,s_ALWidgetBase_cpp_021d3de8,s_RegistSkin_021d3ba8,0x35c);
+      iVar2 = thunk_FUN_0201a228(0x10,s_ALWidgetBase_cpp_021d3de8,s_RegistSkin_021d3ba8,0x35c);
       local_1c = 0;
       if (iVar2 != 0) {
         local_1c = FUN_021b8504(iVar2,param_1,param_2,param_3,param_4);
@@ -32,7 +32,7 @@ void ALWidgetBase::RegistSkin(int param_1,undefined4 param_2,undefined4 param_3,
     FUN_021b8558(piVar4);
     FUN_0201b244(piVar4);
   }
-  iVar2 = jus_AllocDebug(0x10,s_ALWidgetBase_cpp_021d3de8,s_RegistSkin_021d3ba8,0x358);
+  iVar2 = thunk_FUN_0201a228(0x10,s_ALWidgetBase_cpp_021d3de8,s_RegistSkin_021d3ba8,0x358);
   uVar1 = 0;
   if (iVar2 != 0) {
     uVar1 = FUN_021b8504(iVar2,param_1,param_2,param_3,param_4);

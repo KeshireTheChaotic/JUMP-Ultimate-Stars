@@ -29,7 +29,7 @@ void FUN_0215dba4(int param_1,undefined4 param_2,undefined4 param_3,undefined4 p
     *(char *)(param_1 + 0x1e8) = *(char *)(param_1 + 0x1e8) + '\x01';
   }
   else if (cVar1 == '\x05') {
-    FUN_02157494(param_1,6,FUN_0215df18,&DAT_0215e0c8,0,param_4);
+    FUN_02157494(param_1,6,FUN_0215df18,FUN_0215e0c8,0,param_4);
   }
   else {
     *(char *)(param_1 + 0x1e8) = cVar1 + '\x01';

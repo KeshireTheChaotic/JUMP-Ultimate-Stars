@@ -12,7 +12,7 @@ int jus_Class_020945fc::vfunc_04(int param_1,int *param_2)
   puVar3 = *(undefined4 **)(param_1 + 0xc);
   puVar1 = puVar3;
   if (*(uint *)(param_1 + 0x14) <= (uint)puVar3[2]) {
-    puVar1 = (undefined4 *)jus_AllocDebug((*(uint *)(param_1 + 0x14) - 1) * 4 + 0x10);
+    puVar1 = (undefined4 *)FUN_0201a228((*(uint *)(param_1 + 0x14) - 1) * 4 + 0x10);
     *puVar3 = puVar1;
     puVar1[1] = puVar3;
     *puVar1 = 0;

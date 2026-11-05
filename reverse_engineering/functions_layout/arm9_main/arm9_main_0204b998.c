@@ -7,7 +7,7 @@ void jus_Class_020966d0::vfunc_04(undefined4 param_1)
 {
   int iVar1;
   
-  iVar1 = jus_AllocDebug(0x6c);
+  iVar1 = FUN_0201a228(0x6c);
   if (iVar1 == 0) {
     return;
   }

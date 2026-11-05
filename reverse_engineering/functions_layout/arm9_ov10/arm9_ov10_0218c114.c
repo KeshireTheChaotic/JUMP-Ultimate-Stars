@@ -36,7 +36,7 @@ undefined4 FUN_0218c114(undefined4 *param_1,undefined4 param_2,int param_3,int p
     FUN_02175814(piVar2);
     return 1;
   }
-  iVar1 = FUN_02001368(4,4,&LAB_0218c2a0_1);
+  iVar1 = FUN_02001368(4,4,0x218c2a1);
   piVar2[4] = iVar1;
   if (piVar2[4] == 0) {
     FUN_02001650(piVar2[3]);

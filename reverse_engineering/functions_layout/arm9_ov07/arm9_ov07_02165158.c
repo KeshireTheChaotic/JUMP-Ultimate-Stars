@@ -11,8 +11,8 @@ undefined4 jus_Scene42_Create(void)
   iVar1 = thunk_FUN_0208c51c();
   if (iVar1 == 0) {
     puVar2 = (undefined4 *)
-             jus_AllocDebug(0xc,s_CommuMenuError_cpp_0216ab74,s_CommuMenuError_Wrls_Add_0216ab44,
-                            0x6d);
+             thunk_FUN_0201a228(0xc,s_CommuMenuError_cpp_0216ab74,s_CommuMenuError_Wrls_Add_0216ab44
+                                ,0x6d);
     FUN_020517fc(puVar2,0,0xc);
     uVar3 = FUN_020310f4();
     *puVar2 = uVar3;
@@ -20,13 +20,13 @@ undefined4 jus_Scene42_Create(void)
     CommuMenuCommon::CMMenuCmn_PackArc_InitLoad(*puVar2);
     iVar1 = FUN_02026f94();
     puVar2[1] = iVar1;
-    FUN_02028384(*(undefined4 *)(iVar1 + 4),&LAB_0216535c);
+    FUN_02028384(*(undefined4 *)(iVar1 + 4),FUN_0216535c);
     (**(code **)(**(int **)(puVar2[1] + 4) + 0x24))(*(int **)(puVar2[1] + 4),puVar2);
     return *puVar2;
   }
   puVar2 = (undefined4 *)
-           jus_AllocDebug(0x10,s_CommuMenuError_cpp_0216ab74,s_CommuMenuError_WiFi_Add_0216ab5c,0xa8
-                         );
+           thunk_FUN_0201a228(0x10,s_CommuMenuError_cpp_0216ab74,s_CommuMenuError_WiFi_Add_0216ab5c,
+                              0xa8);
   FUN_020517fc(puVar2,0,0x10);
   uVar3 = FUN_020310f4();
   *puVar2 = uVar3;

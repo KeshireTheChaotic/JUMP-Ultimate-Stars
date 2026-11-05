@@ -12,8 +12,8 @@ ALFont_021d4f60::ALFont_021d4f60
   undefined4 uVar3;
   
   if ((param_5 == 0) &&
-     (iVar1 = jus_AllocDebug(8,s_ALFont_cpp_021d5060,&DAT_021d4e44,0x45a), param_5 = 0, iVar1 != 0))
-  {
+     (iVar1 = thunk_FUN_0201a228(8,s_ALFont_cpp_021d5060,&DAT_021d4e44,0x45a), param_5 = 0,
+     iVar1 != 0)) {
     param_5 = ALTextDS_021d4ef4::ALTextDS_021d4ef4();
   }
   ALFont_021d5010::ALFont_021d5010(param_1,param_5,0,param_2);
@@ -32,7 +32,7 @@ ALFont_021d4f60::ALFont_021d4f60
   iVar2 = FUN_0200d338(0x100,param_4);
   iVar2 = iVar2 * iVar1;
   param_1[0x14] = iVar2;
-  iVar1 = jus_AllocDebug(iVar2 * 8,s_ALFont_cpp_021d5060,&DAT_021d4e44,0x47f);
+  iVar1 = thunk_FUN_0201a228(iVar2 * 8,s_ALFont_cpp_021d5060,&DAT_021d4e44,0x47f);
   uVar3 = 0;
   if (iVar1 != 0) {
     uVar3 = FUN_0200ef34(iVar1,iVar2,8,0,&DAT_021cb430,0);

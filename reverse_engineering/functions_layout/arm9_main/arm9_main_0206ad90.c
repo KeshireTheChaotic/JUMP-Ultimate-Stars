@@ -14,8 +14,8 @@ int * CommonPaletteAnime::CommonPaletteAnime_Create
   
                     /* JUS-TAG strings=["CommonPaletteAnime.cpp","CommonPaletteAnime_Create"] */
   iStack_1c = param_4;
-  piVar1 = (int *)jus_AllocDebug(0x20,s_CommonPaletteAnime_cpp_0209de9c,
-                                 s_CommonPaletteAnime_Create_0209de30,0x6a);
+  piVar1 = (int *)thunk_FUN_0201a228(0x20,s_CommonPaletteAnime_cpp_0209de9c,
+                                     s_CommonPaletteAnime_Create_0209de30,0x6a);
   FUN_020517fc(piVar1,0,0x20);
   piVar1[1] = param_1;
   *(char *)(piVar1 + 3) = (char)param_4;
@@ -27,8 +27,8 @@ int * CommonPaletteAnime::CommonPaletteAnime_Create
   (**(code **)(**(int **)(iVar2 + 4) + 0xa0))(*(int **)(iVar2 + 4),&local_20);
   (**(code **)(**(int **)(*piVar1 + 4) + 0x24))(*(int **)(*piVar1 + 4),piVar1);
   FUN_02028384(*(undefined4 *)(*piVar1 + 4),(&PTR_FUN_0209de74)[param_4]);
-  iVar2 = jus_AllocDebug(param_3 << 1,s_CommonPaletteAnime_cpp_0209de9c,
-                         s_CommonPaletteAnime_Create_0209de30,0x7e);
+  iVar2 = thunk_FUN_0201a228(param_3 << 1,s_CommonPaletteAnime_cpp_0209de9c,
+                             s_CommonPaletteAnime_Create_0209de30,0x7e);
   piVar1[2] = iVar2;
   FUN_02051890(*(int *)(*(int *)(param_1 + 4) + 0x10) + param_2 * 2,piVar1[2],param_3 << 1);
   return piVar1;

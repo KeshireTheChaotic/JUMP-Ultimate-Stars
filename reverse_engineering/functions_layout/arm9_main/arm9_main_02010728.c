@@ -14,7 +14,7 @@ void FUN_02010728(int *param_1,undefined4 param_2)
   iVar1 = (**(code **)(*param_1 + 0x54))();
   if ((iVar1 == 0) || (*(char *)(param_1[7] + 0x1a) != '\0')) {
     uVar2 = (**(code **)(*param_1 + 0x2c))(param_1,param_2);
-    iVar1 = jus_AllocDebug(0x30);
+    iVar1 = FUN_0201a228(0x30);
     piVar5 = (int *)0x0;
     if (iVar1 != 0) {
       piVar5 = (int *)ALStreamImp::ALStreamImp(iVar1,uVar2);
@@ -33,7 +33,7 @@ void FUN_02010728(int *param_1,undefined4 param_2)
     uVar2 = (**(code **)(*param_1 + 0x2c))(param_1,param_2);
     uVar3 = (**(code **)(*param_1 + 0x28))(param_1,param_2);
     iVar7 = param_1[7];
-    iVar4 = jus_AllocDebug(0x30);
+    iVar4 = FUN_0201a228(0x30);
     iVar1 = 0;
     if (iVar4 != 0) {
       iVar1 = jus_TagDUMY_Derived_02094a7c::jus_TagDUMY_Derived_02094a7c(iVar4,iVar7,uVar3,uVar2,1);

@@ -9,7 +9,7 @@ undefined4 jus_Class_02093f78::vfunc_12(undefined4 param_1,int param_2,undefined
   undefined4 uVar2;
   
   if (param_2 == 0x3147434e) {
-    iVar1 = jus_AllocDebug(0x24);
+    iVar1 = FUN_0201a228(0x24);
     if (iVar1 == 0) {
       return 0;
     }
@@ -17,7 +17,7 @@ undefined4 jus_Class_02093f78::vfunc_12(undefined4 param_1,int param_2,undefined
     return uVar2;
   }
   if (param_2 == 0x3247434e) {
-    iVar1 = jus_AllocDebug(0x24);
+    iVar1 = FUN_0201a228(0x24);
     if (iVar1 == 0) {
       return 0;
     }
@@ -25,7 +25,7 @@ undefined4 jus_Class_02093f78::vfunc_12(undefined4 param_1,int param_2,undefined
     return uVar2;
   }
   if (param_2 == 0x3831474e) {
-    iVar1 = jus_AllocDebug(0x24);
+    iVar1 = FUN_0201a228(0x24);
     if (iVar1 == 0) {
       return 0;
     }
@@ -33,7 +33,7 @@ undefined4 jus_Class_02093f78::vfunc_12(undefined4 param_1,int param_2,undefined
     return uVar2;
   }
   if (param_2 == 0x3443464e) {
-    iVar1 = jus_AllocDebug(0x24);
+    iVar1 = FUN_0201a228(0x24);
     if (iVar1 == 0) {
       return 0;
     }
@@ -43,7 +43,7 @@ undefined4 jus_Class_02093f78::vfunc_12(undefined4 param_1,int param_2,undefined
   if (param_2 != 0x344c4646) {
     return 0;
   }
-  iVar1 = jus_AllocDebug(0x78);
+  iVar1 = FUN_0201a228(0x78);
   if (iVar1 == 0) {
     return 0;
   }

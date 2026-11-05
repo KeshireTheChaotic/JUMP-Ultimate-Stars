@@ -7,7 +7,7 @@ void FUN_0214fa38(int param_1,undefined4 param_2,undefined4 param_3,undefined4 p
   int *piVar1;
   int iVar2;
   
-  FUN_0214fdb0(param_1,&LAB_0214fe14,0,param_4,param_4);
+  FUN_0214fdb0(param_1,FUN_0214fe14,0,param_4,param_4);
   (**(code **)(**(int **)(param_1 + 0xcc) + 8))();
   (**(code **)(**(int **)(param_1 + 0xb0) + 8))();
   (**(code **)(**(int **)(param_1 + 0x90) + 8))();

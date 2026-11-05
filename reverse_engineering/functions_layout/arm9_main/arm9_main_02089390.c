@@ -16,7 +16,7 @@ void FUN_02089390(undefined4 param_1,undefined2 param_2,undefined4 param_3,int p
   DAT_0214be64 = param_3;
   if (DAT_0214bea4 == 1) {
     DAT_0214bea4 = 4;
-    FUN_02059560(&LAB_02088958_1);
+    FUN_02059560(0x2088959);
     FUN_02088eac(4,0x78);
   }
   DAT_0214bf00 = param_1;
@@ -40,12 +40,12 @@ void FUN_02089390(undefined4 param_1,undefined2 param_2,undefined4 param_3,int p
   DAT_0214bf0e = 1;
   DAT_0214bf14 = 0;
   FUN_02058b94(0xe,0x20889b1);
-  iVar2 = FUN_02059320(&LAB_02088958_1,&DAT_0214bf00);
+  iVar2 = FUN_02059320(0x2088959,&DAT_0214bf00);
   if (iVar2 != 2) {
     FUN_02088904(iVar2,s_CommLib_cpp_020a0338,0x496);
   }
   FUN_02088eac(4,0x78);
-  iVar2 = FUN_02059250(&LAB_02088cc4_1);
+  iVar2 = FUN_02059250(0x2088cc5);
   if (iVar2 != 2) {
     FUN_02088904(iVar2,s_CommLib_cpp_020a0338,0x4a2);
   }

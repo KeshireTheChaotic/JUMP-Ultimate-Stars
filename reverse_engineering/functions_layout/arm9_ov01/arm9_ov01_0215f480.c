@@ -91,11 +91,11 @@ void FUN_0215f480(int param_1)
     iVar12 = *piVar9;
     piVar8[1] = iVar12;
     if (iVar12 == 0) {
-      FUN_02028384(*(undefined4 *)(param_1 + 4),&DAT_0215f73c);
+      FUN_02028384(*(undefined4 *)(param_1 + 4),FUN_0215f73c);
     }
   }
   else {
-    FUN_02028384(*(undefined4 *)(param_1 + 4),&DAT_0215f73c);
+    FUN_02028384(*(undefined4 *)(param_1 + 4),FUN_0215f73c);
   }
   return;
 }

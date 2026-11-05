@@ -1,0 +1,12 @@
+02078488  ldrsh r2,[r0,#0x18]
+0207848c  adds r1,r1,r2
+02078490  ldrsh r2,[r0,#0x16]
+02078494  movmi r1,#0x0
+02078498  cmp r1,r2
+0207849c  movgt r1,r2
+020784a0  strh r1,[r0,#0x18]
+020784a4  ldrsh r0,[r0,#0x18]
+020784a8  cmp r0,#0x0
+020784ac  movne r0,#0x1
+020784b0  moveq r0,#0x0
+020784b4  bx lr

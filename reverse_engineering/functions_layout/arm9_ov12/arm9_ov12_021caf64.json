@@ -1,0 +1,1 @@
+{"module":"arm9_ov12","address":"021caf64","name":"~ALFont_021d5010","thumb":true,"body_bytes":190,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["0201b244","0201b268","020323e8","0203254c","021cab54","021cb80c"],"unresolved_call_targets":[],"status":"decompiled","asm_file":"arm9_ov12_021caf64.asm","c_file":"arm9_ov12_021caf64.c"}

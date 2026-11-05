@@ -7,7 +7,7 @@ undefined4 FUN_02162f28(void)
   *(undefined1 *)(DAT_0216e800 + 0x1b84) = 1;
   FUN_02058b2c(DAT_0216e800 + 0x13b8);
   if (*(short *)(DAT_0216e800 + 0x13b8) != 2) {
-    iVar1 = FUN_02059470(&LAB_02162ea8_1);
+    iVar1 = FUN_02059470(0x2162ea9);
     if (iVar1 != 2) {
       return 0;
     }
@@ -15,7 +15,7 @@ undefined4 FUN_02162f28(void)
       FUN_02058b2c(DAT_0216e800 + 0x13b8);
     } while (*(short *)(DAT_0216e800 + 0x13b8) != 2);
   }
-  iVar1 = FUN_02059428(&LAB_02162ea8_1);
+  iVar1 = FUN_02059428(0x2162ea9);
   if (iVar1 != 2) {
     return 0;
   }

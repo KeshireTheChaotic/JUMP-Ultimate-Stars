@@ -20,7 +20,7 @@ void jus_Scene17_Exit(char *param_1,int param_2,undefined4 param_3,undefined4 pa
     else {
       uVar2 = 0xe;
     }
-    iVar1 = func_0x0207060c();
+    iVar1 = FUN_0207060c();
     if (iVar1 == 0) {
       FUN_0206e524(1,4,uVar2,0x11,5);
     }

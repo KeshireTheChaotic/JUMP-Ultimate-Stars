@@ -14,7 +14,7 @@ ALDrawLinkImp_021d2e58_Derived_021d0bcc::ALDrawLinkImp_021d2e58_Derived_021d0bcc
   *param_1 = &vftable;
   param_1[0x27] = param_2;
   param_1[0x28] = param_3;
-  iVar1 = jus_AllocDebug(8,s_ALWidget_cpp_021d17d4,&DAT_021d1678,0x631);
+  iVar1 = thunk_FUN_0201a228(8,s_ALWidget_cpp_021d17d4,&DAT_021d1678,0x631);
   uVar2 = 0;
   if (iVar1 != 0) {
     uVar2 = jus_Class_021d08d8::jus_Class_021d08d8(iVar1,param_1);

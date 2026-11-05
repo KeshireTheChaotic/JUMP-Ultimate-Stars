@@ -15,20 +15,20 @@ void ALWidgetBase::CreatePointingDeviceNode(void)
   
   uStack_c = in_r3;
   FUN_021b1590(*(undefined4 *)(DAT_020a0e80 + 600),0x80000000,0x40000000);
-  iVar1 = jus_AllocDebug(0x6c,s_ALNodeImp_h_021d16fc,s_Create_021d3b40,100);
+  iVar1 = thunk_FUN_0201a228(0x6c,s_ALNodeImp_h_021d16fc,s_Create_021d3b40,100);
   piVar2 = (int *)0x0;
   if (iVar1 != 0) {
     piVar2 = (int *)ALWidgetBase_0209c1e0::ALWidgetBase_0209c1e0(iVar1,FUN_02021ff4,0);
   }
   DAT_021d5148 = piVar2;
-  FUN_02028428(piVar2,&LAB_021b535c_1);
+  FUN_02028428(piVar2,0x21b535d);
   iVar1 = FUN_021acab4(DAT_021d5148);
   FUN_02027834(*(undefined4 *)(iVar1 + 4),10,0x21b67f1);
-  FUN_02028384(DAT_021d5148,&LAB_021b5368_1);
+  FUN_02028384(DAT_021d5148,0x21b5369);
   local_10 = 0x2000;
   (**(code **)(*DAT_021d5148 + 0xa0))(DAT_021d5148,&local_10);
-  iVar1 = jus_AllocDebug(0x68,s_ALWidgetBase_cpp_021d3de8,s_CreatePointingDeviceNode_021d3d2c,0x31e)
-  ;
+  iVar1 = thunk_FUN_0201a228(0x68,s_ALWidgetBase_cpp_021d3de8,s_CreatePointingDeviceNode_021d3d2c,
+                             0x31e);
   uVar3 = 0;
   if (iVar1 != 0) {
     uVar3 = ALWidgetBase_021d1b78::ALWidgetBase_021d1b78(iVar1,0x80000000,&DAT_02093c8c);

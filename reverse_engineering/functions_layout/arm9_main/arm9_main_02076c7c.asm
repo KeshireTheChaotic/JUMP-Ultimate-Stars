@@ -1,0 +1,6 @@
+02076c7c  ldr r12,[0x2076c94]
+02076c80  add r2,r0,#0xfe
+02076c84  mov r0,r1
+02076c88  add r1,r2,#0x500
+02076c8c  mov r2,#0x1a
+02076c90  bx r12

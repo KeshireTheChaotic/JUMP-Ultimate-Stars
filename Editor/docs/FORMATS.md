@@ -35,8 +35,74 @@ are rejected by the sprite parser; they pass through archives untouched. Flags 0
 embedded DSIG v1 mode 0x10 (4bpp 8×8 tiles, one bank; `w08 = 8`, `w0A = 8 × tiles`).
 Every panel is 6×6 tiles (48×48 px); tile 0 is unused and panel *n* starts at tile
 `1 + 36n`, tiles row-major. Evidence: **Direct** (byte-exact on all 898 files; a panel
-edit leaves neighbouring panels untouched). The arrangement of panels on a comic/deck
-page is **unknown**.
+edit leaves neighbouring panels untouched). How panels sit on the card is given by
+`bin/kshape.bin` + `bin/koma.bin`, below; deck placement is still **unknown**.
+
+## Koma card shapes — `bin/kshape.bin` + `bin/koma.bin` (`jus_formats.kshape`)
+
+From the 2026-11-05 trace package (`docs/JUS_GitHub_Sound_Koma_Trace_20261105.zip`),
+re-verified here; both files rebuild byte-for-byte. **Direct.**
+
+* `kshape.bin`: `u32 start[8]`, `u32 count[8]` (`[1,2,6,12,14,14,13,4]` = 66 shapes), then
+  24-byte shapes: `u8 cell[20]` (**5 columns × 4 rows**, row-major; 0 empty, 1..n = art panel)
+  + `u32 mask` (bit `row*5+col` set exactly for occupied cells — true for all 66).
+  **Correction:** the trace package (and the first port) read the grid as 4 columns × 5 rows.
+  ARM9 `FUN_02076E38` walks it as `row*5 + col` (rows < 4, columns < 5) and copies it onto
+  the deck board, which is 5 cells wide (`FUN_020790F0` draws 5 × 4 cells of 48 px). With the
+  right width, shape 9 is a 2×2 square and multi-panel art reads continuously.
+* `koma.bin`: 890 × 12-byte cards. `+0 u16 index` (= record number), `+4 series id`,
+  `+5 art index`, `+6 type` (0 battle koma, 1 support, 2 other), `+7 character record`
+  (`chr_b.bin` / `chr_s.bin`), `+8 size−1`, `+9 variant`; other bytes unknown and
+  preserved. A shape edit changes only `+8/+9` of one card.
+* Card → art (**Direct**): `FUN_020790F0` fills `koma/??_??.dtx` with the prefix table at
+  `0x0209E840` (`roster.KOMA_SERIES_PREFIXES`, indexed by `+4`) and `+5` as two digits. The
+  table settles the ids that panel counts alone could not: 2 = `is`, 11 = `nb`, 17 = `tz`,
+  22 = `tl`, 35 = `mo`. Every card's size equals its art's panel count. Empty deck cells are
+  drawn with `koma/dt_20.dtx`; `dt_21..dt_27` have no card.
+* Shipped anomaly: shape 59 (size 7, variant 10) labels panel 4 twice and omits 5; card
+  678 (`hk_10`) uses it. Reported, never renumbered.
+* `bin/*.bin` are loose files: `DataRoot.write_file` stages them and Save writes them
+  (with the same `.orig` backup rule as archives).
+
+## Sound cues — SSAR mapping (`jus_package.sounds`, `jus_formats.roster`)
+
+* `0x0400` → SSAR 122 `SEQ_BATTLE` (**Direct**). `0x0401`/`0x0402` → character
+  `+0xA4`/`+0xA6`, filled from the form record (`ov06 FUN_02157114`).
+* SSARs are named after the character id: `0x0401` = `SEQ_<CHAR>` (e.g. `SEQ_KN_B_01`),
+  `0x0402` = `SEQ_<CHAR>_<k>` for moves in `chr/<char>_<k>.aar` — battle and support alike
+  (**Inferred**, symbol match). On the shipped data: battle `0x0401` 442/442, support
+  `0x0402` 418/431 (same as the trace package's CSV, all 431 agree).
+* **Where the bank comes from (Direct, ARM9 main):** a "form" is a koma card in the deck.
+  `FUN_02076E38` builds one deck node per `koma.bin` card (byte +6 type, +7 character
+  record, +8 size−1) and zero-fills its form record; the type's init fills it —
+  battle `FUN_02077C0C`: `+0x1E` (→ `+0xA4`, `0x0401`) = `chr_b.bin[+7] + 0x30`,
+  `+0x20` (→ `+0xA6`, `0x0402`) = `chr_b.bin[+7] + 0x32 + (size−4)·2` (sizes 4–8);
+  support `FUN_02077CB8`: `+0x20` = `chr_s.bin[+7] + 0x10 + (size−2)·2` (20-byte records,
+  sizes 2–3), `+0x1E` never written. `Battle_CharaDataInit` / `FUN_0215F3E0` registers the
+  nodes, `FUN_02157114` copies `+0x1E/+0x20` into the NoteTrack object's `+0xA4/+0xA6`.
+  Every non-zero slot names `SEQ_<CHAR>` / `SEQ_<CHAR>_<size>` (battle 187/187, support
+  242/242): the special-move archive `chr/<char>_<k>.aar` is the *k*-cell koma.
+* `0x0402` in `<char>_<k>.aar`: slot *k*; a 0 slot is a real silence. In a base archive
+  (moves shared by every koma) it is the deployed koma's slot — a deck choice. Resolved when
+  `koma.bin` deploys the character at one size only (59 battle cues); otherwise the cue lists
+  each size's outcome (371 battle cues) and the Sound inspector's *Deployed as* choice
+  auditions one (a preview, evidence Unknown). The earlier "only archive whose sequence count
+  fits" rule is dropped: it guessed, the game does not.
+* Support `0x0401` (**Direct**): the summon (`ov06 FUN_021574CC` case 7) gives the support
+  its own NoteTrack (`Battle_NoteTrackCreate` zero-fills 0xA8 bytes) and sets only `+0xA6`
+  from the support form record — `+0xA4` stays 0, so it plays nothing. Spawned effect actors
+  (`ov06 FUN_0216FB10`) copy their parent's `+0xA4/+0xA6`.
+* The "missing" support banks (`na_s_02_2`, `ds_s_03_2`, `oj_s_01_2`, 11 cues): those
+  supports' `chr_s.bin` slots are both 0, so `+0xA6` = 0 and the cue is silent in the game
+  (**Direct**) — no bank is missing. `dn_s_25` (2 cues in its base archive) has 2- and
+  3-cell support koma: the deck decides, like battle base-archive cues.
+* **Record order (Direct):** the game names character archives from tables indexed by
+  record — battle `{char *id, u32 res_base}[74]` at `0x020924B0` (`FUN_02074728`), support
+  `[193]` at `0x02092700` (`FUN_02074CF4`), suffixes `'', _2 … _8` at `0x0209F198` by koma
+  size. `jus_formats.roster` holds them (`BATTLE_IDS`, `SUPPORT_IDS`). Record 0 is `db_b_01`
+  (Goku), record 47 `bb_b_01`: the earlier sorted-order mapping, which made `bb_b_01` play
+  Goku's `SEQ_DB_B_01_5`, was wrong (the trace package's audit missed this). The
+  `chr_b_t.bin` name blocks (53 Shift-JIS strings per record) agree and are kept as a check.
 
 ## ALTM tile maps (`jus_formats.altm`, resource type 0x46)
 

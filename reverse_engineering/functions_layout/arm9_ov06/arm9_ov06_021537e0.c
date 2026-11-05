@@ -14,8 +14,8 @@ int * BattleDemo::Battle_DemoKoCreate(void)
   undefined4 local_2c;
   undefined4 local_28;
   
-  piVar1 = (int *)jus_AllocDebug(0x24,s_BattleDemo_cpp_02171dec,s_Battle_DemoKoCreate_02171dd8,0xe6)
-  ;
+  piVar1 = (int *)thunk_FUN_0201a228(0x24,s_BattleDemo_cpp_02171dec,s_Battle_DemoKoCreate_02171dd8,
+                                     0xe6);
   FUN_020517fc(piVar1,0,0x24);
   *(undefined1 *)(piVar1 + 8) = 0;
   iVar2 = FUN_02026f94();

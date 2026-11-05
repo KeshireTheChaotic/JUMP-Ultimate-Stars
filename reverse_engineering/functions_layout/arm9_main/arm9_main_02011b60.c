@@ -18,13 +18,13 @@ void FUN_02011b60(void)
     uVar2 = jus_Class_02093eb4::jus_Class_02093eb4();
   }
   DAT_020a1094 = uVar2;
-  iVar1 = jus_AllocDebug(8);
+  iVar1 = FUN_0201a228(8);
   uVar2 = 0;
   if (iVar1 != 0) {
     uVar2 = jus_Class_02094964::jus_Class_02094964();
   }
   DAT_020a103c = uVar2;
-  iVar1 = jus_AllocDebug(8);
+  iVar1 = FUN_0201a228(8);
   uVar2 = 0;
   if (iVar1 != 0) {
     uVar2 = jus_Class_02094924::jus_Class_02094924();
@@ -38,20 +38,20 @@ void FUN_02011b60(void)
     DAT_020a0dec = DAT_020a0dec | 1;
   }
   DAT_020a101c = &DAT_020a1a84;
-  puVar3 = (undefined4 *)jus_AllocDebug(0x14);
+  puVar3 = (undefined4 *)FUN_0201a228(0x14);
   if (puVar3 != (undefined4 *)0x0) {
     jus_Class_02099238::jus_Class_02099238(puVar3,s_TypeID_0209d594,&DAT_0209d57c);
     *puVar3 = &jus_Class_0209a910::vftable;
   }
   (**(code **)(*DAT_020a101c + 0x3c))(DAT_020a101c,puVar3);
-  puVar3 = (undefined4 *)jus_AllocDebug(0x14);
+  puVar3 = (undefined4 *)FUN_0201a228(0x14);
   if (puVar3 != (undefined4 *)0x0) {
     jus_Class_020992e4::jus_Class_020992e4(puVar3,s_Sleep_0209d554,&DAT_0209d630);
     *puVar3 = &jus_Class_0209a9bc::vftable;
   }
   DAT_020a0eb8 = puVar3;
   (**(code **)(*DAT_020a101c + 0x3c))(DAT_020a101c,puVar3);
-  puVar3 = (undefined4 *)jus_AllocDebug(0x14);
+  puVar3 = (undefined4 *)FUN_0201a228(0x14);
   if (puVar3 != (undefined4 *)0x0) {
     ALCollision_020985b8::ALCollision_020985b8(puVar3,&DAT_0209d4ac,&DAT_0209d784);
     *puVar3 = &jus_Class_02099038::vftable;
@@ -63,19 +63,19 @@ void FUN_02011b60(void)
     DAT_020a0c90 = DAT_020a0c90 | 1;
   }
   DAT_020a1090 = &DAT_020a18e4;
-  puVar3 = (undefined4 *)jus_AllocDebug(0x14);
+  puVar3 = (undefined4 *)FUN_0201a228(0x14);
   if (puVar3 != (undefined4 *)0x0) {
     ALCollision_02099c4c::ALCollision_02099c4c(puVar3,s_Length_0209d5bc,&DAT_0209d50c);
     *puVar3 = &jus_Class_0209a864::vftable;
   }
   (**(code **)(*DAT_020a1090 + 0x3c))(DAT_020a1090,puVar3);
-  puVar3 = (undefined4 *)jus_AllocDebug(0x14);
+  puVar3 = (undefined4 *)FUN_0201a228(0x14);
   if (puVar3 != (undefined4 *)0x0) {
     ALCollision_020985b8::ALCollision_020985b8(puVar3,s_Frame_0209d55c,&DAT_0209d654);
     *puVar3 = &jus_Class_02098f90::vftable;
   }
   (**(code **)(*DAT_020a1090 + 0x3c))(DAT_020a1090,puVar3);
-  puVar3 = (undefined4 *)jus_AllocDebug(0x14);
+  puVar3 = (undefined4 *)FUN_0201a228(0x14);
   if (puVar3 != (undefined4 *)0x0) {
     jus_Class_020992e4::jus_Class_020992e4(puVar3,&DAT_0209d4d4,&DAT_0209d5ac);
     *puVar3 = &jus_Class_0209a7b8::vftable;

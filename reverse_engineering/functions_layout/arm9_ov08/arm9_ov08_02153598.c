@@ -14,7 +14,7 @@ undefined4 FUN_02153598(int param_1)
   }
   DAT_0216d190 = DAT_0216d1a4 + 0x1fU & 0xffffffe0;
   DAT_0216d1ac = DAT_0216d190 + param_1 * 0xd0 + 0x24af & 0xffffffe0;
-  iVar2 = FUN_02153790(&LAB_0215366c_1);
+  iVar2 = FUN_02153790(0x215366d);
   if (iVar2 == 0) {
     return 0xfffffffe;
   }

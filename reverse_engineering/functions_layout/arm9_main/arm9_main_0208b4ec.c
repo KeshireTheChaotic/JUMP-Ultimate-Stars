@@ -8,6 +8,7 @@ void FUN_0208b4ec(void)
   uint uVar3;
   undefined4 local_20;
   
+                    /* JUS-TAG source_file_inferred="CommGame.cpp" */
   uVar3 = 1;
   local_20 = in_r3;
   do {

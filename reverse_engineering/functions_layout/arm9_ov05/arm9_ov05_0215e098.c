@@ -15,7 +15,7 @@ void FUN_0215e098(int param_1,int param_2,undefined4 param_3,undefined4 param_4)
     return;
   }
   if (iVar2 == 0x7d) {
-    FUN_02028384(*(undefined4 *)(puVar1[2] + 4),&LAB_0215deec);
+    FUN_02028384(*(undefined4 *)(puVar1[2] + 4),FUN_0215deec);
     FUN_0207342c(0x78,1);
     return;
   }

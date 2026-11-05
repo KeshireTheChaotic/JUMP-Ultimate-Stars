@@ -30,8 +30,8 @@ undefined4 FUN_02159358(uint param_1,int param_2,int param_3,undefined4 param_4)
   }
   else {
     *(undefined2 *)(iVar3 + 0x4d6) = *(undefined2 *)(param_1 + 4);
-    *(undefined *)(iVar3 + 0x4d8) = (&DAT_0215c5d4)[*(byte *)(param_1 + 8)];
-    *(undefined *)(iVar3 + 0x4d9) = (&DAT_0215c5d8)[*(byte *)(param_1 + 8)];
+    *(undefined *)(iVar3 + 0x4d8) = ((undefined *)0x215c5d4)[*(byte *)(param_1 + 8)];
+    *(undefined *)(iVar3 + 0x4d9) = ((undefined *)0x215c5d8)[*(byte *)(param_1 + 8)];
     *(undefined1 *)(iVar3 + 0x4da) = *(undefined1 *)(param_1 + 9);
     uVar5 = *(undefined4 *)(iVar3 + 0x348);
     iVar2 = FUN_021594a4(uVar5);

@@ -14,8 +14,8 @@ ALFont_021d4fb8::ALFont_021d4fb8
   
   iVar3 = param_4;
   if ((param_5 == 0) &&
-     (iVar1 = jus_AllocDebug(8,s_ALFont_cpp_021d5060,&DAT_021d4e5c,0x432), param_5 = 0, iVar1 != 0))
-  {
+     (iVar1 = thunk_FUN_0201a228(8,s_ALFont_cpp_021d5060,&DAT_021d4e5c,0x432), param_5 = 0,
+     iVar1 != 0)) {
     param_5 = jus_Class_021d4f18::jus_Class_021d4f18();
   }
   uVar2 = FUN_02035f84(param_2);

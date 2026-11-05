@@ -1,0 +1,11 @@
+020721c8  push {r4,lr}
+020721ca  ldr r1,[0x020721e0]
+020721cc  add r4,r0,#0x0
+020721ce  mul r4,r1
+020721d0  ldr r0,[0x020721e4]
+020721d2  mov r1,#0x1
+020721d4  add r0,r4,r0
+020721d6  bl 0x02073114
+020721da  ldr r0,[0x020721e8]
+020721dc  ldrb r0,[r0,r4]
+020721de  pop {r4,pc}

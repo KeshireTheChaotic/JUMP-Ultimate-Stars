@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <PackageLicenseExpression>LGPL-2.1-or-later</PackageLicenseExpression>
+    <Description>C# port of the Actimagine VX video decoder (FFmpeg-devel patch by Florian Nouwt, 2021). LGPL-2.1-or-later; see COPYING.LGPL.md.</Description>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="COPYING.LGPL.md" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+</Project>

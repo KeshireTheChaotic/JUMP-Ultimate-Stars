@@ -47,8 +47,7 @@ int * JGalaxyClearList::JGalaxyClearList_Create(int param_1,uint param_2)
   int local_30;
   int local_2c;
   
-  piVar2 = (int *)jus_AllocDebug(0x6c,s_JGalaxyClearList_cpp_0216bc30,
-                                 s_JGalaxyClearList_Create_0216bbf4,0x62);
+  piVar2 = (int *)thunk_FUN_0201a228(0x6c,&DAT_0216bc30,s_JGalaxyClearList_Create_0216bbf4,0x62);
   FUN_020517fc(piVar2,0,0x6c);
   piVar2[0x1a] = piVar2[0x1a] & 0xfffffffeU | param_2 & 1;
   piVar2[0x19] = param_1;
@@ -176,9 +175,9 @@ LAB_0214ebfc:
       }
       piVar2[0x10] = iVar3;
       (**(code **)(**(int **)(iVar12 + 4) + 0xc))();
-      iVar3 = jus_AllocDebug(0x78,s_ALNodeImp_h_0216bbd4,s_Create_0216bbc4,0x4c3);
+      iVar3 = thunk_FUN_0201a228(0x78,s_ALNodeImp_h_0216bbd4,s_Create_0216bbc4,0x4c3);
       if (iVar3 != 0) {
-        jus_Class_0209c0b4::jus_Class_0209c0b4(iVar3,FUN_02024a30,1);
+        jus_TagNDGR_0209c0b4::jus_TagNDGR_0209c0b4(iVar3,FUN_02024a30,1);
       }
       iVar3 = FUN_0214d37c();
       *piVar2 = iVar3;
@@ -209,7 +208,7 @@ LAB_0214ebfc:
       local_8c = 0;
       FUN_0214dc68(auStack_60,&local_8c,&local_90,&local_94);
       FUN_0214f714(&local_88,iVar3,s_Position_0216bc60);
-      iVar5 = jus_AllocDebug(0x4c,s_ALControllerImp_h_0216bbe0,s_Create_0216bbcc,0x2b9);
+      iVar5 = thunk_FUN_0201a228(0x4c,s_ALControllerImp_h_0216bbe0,s_Create_0216bbcc,0x2b9);
       piVar4 = (int *)0x0;
       if (iVar5 != 0) {
         piVar4 = (int *)jus_TagIPCT::jus_TagIPCT

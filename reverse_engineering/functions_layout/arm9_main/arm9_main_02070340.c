@@ -4,7 +4,7 @@
 void jus_Scene44_Create(void)
 
 {
-  func_0x02070878();
+  FUN_02070878();
   func_0x0214cd20(6);
   return;
 }

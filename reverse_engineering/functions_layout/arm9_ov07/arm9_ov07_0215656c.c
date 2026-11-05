@@ -35,8 +35,8 @@ undefined4 FUN_0215656c(int param_1)
   undefined4 local_28;
   
   puVar1 = (undefined4 *)
-           jus_AllocDebug(0x7c,s_CommuMenuCmnLeaderSel_cpp_02169f34,
-                          s_CommuMenuCmnLeaderSel_Add_02169ef0,0xe0);
+           thunk_FUN_0201a228(0x7c,s_CommuMenuCmnLeaderSel_cpp_02169f34,
+                              s_CommuMenuCmnLeaderSel_Add_02169ef0,0xe0);
   FUN_020517fc(puVar1,0,0x7c);
   iVar2 = FUN_020310f4();
   puVar1[1] = iVar2;
@@ -74,7 +74,7 @@ undefined4 FUN_0215656c(int param_1)
     puVar1[iVar2 + 8] = uVar3;
     iVar2 = iVar10;
   } while (iVar10 < 2);
-  iVar2 = jus_AllocDebug(0xcc,s_ALWidget_inl_02169644,s_Create_02169e7c,0x1de);
+  iVar2 = thunk_FUN_0201a228(0xcc,s_ALWidget_inl_02169644,s_Create_02169e7c,0x1de);
   piVar4 = (int *)0x0;
   if (iVar2 != 0) {
     piVar4 = (int *)func_0x021af26c(iVar2,0x215775d,0x21577b9,0);
@@ -83,7 +83,7 @@ undefined4 FUN_0215656c(int param_1)
     (**(code **)(*piVar4 + 0x14))();
   }
   piVar8 = (int *)piVar4[6];
-  iVar2 = jus_AllocDebug(0xbc,s_ALWidget_inl_021699c4,s_Create_02169e8c,0x212);
+  iVar2 = thunk_FUN_0201a228(0xbc,FUN_021699c4,&DAT_02169e8c,0x212);
   piVar4 = (int *)0x0;
   if (iVar2 != 0) {
     piVar4 = (int *)func_0x021af358(iVar2,0x21575bd,0);
@@ -122,7 +122,7 @@ undefined4 FUN_0215656c(int param_1)
   iVar2 = FUN_0203b3e4();
   iVar2 = FUN_02150bdc(*puVar1,*(undefined4 *)(iVar2 + 0x88));
   (**(code **)(**(int **)(iVar2 + 4) + 0x24))(*(int **)(iVar2 + 4),puVar1);
-  FUN_02027834(*(undefined4 *)(iVar2 + 4),8,&LAB_0215749c_1);
+  FUN_02027834(*(undefined4 *)(iVar2 + 4),8,0x215749d);
   func_0x021b4104(*(undefined4 *)(iVar2 + 4),*(undefined4 *)(iVar2 + 4),4);
   *(undefined4 *)(*(int *)(iVar2 + 4) + 0x124) = 2;
   puVar1[0xf] = iVar2;
@@ -161,8 +161,8 @@ undefined4 FUN_0215656c(int param_1)
   FUN_02023c70(*(undefined4 *)(iVar2 + 4),2);
   func_0x021b4034(*(undefined4 *)(iVar2 + 4),1);
   func_0x021b3f78(*(undefined4 *)(iVar2 + 4),2);
-  func_0x021b65e8(*(undefined4 *)(iVar2 + 4),0x10,&LAB_021573e4_1);
-  func_0x021b6760(*(undefined4 *)(iVar2 + 4),0x10,&LAB_02157454_1);
+  func_0x021b65e8(*(undefined4 *)(iVar2 + 4),0x10,0x21573e5);
+  func_0x021b6760(*(undefined4 *)(iVar2 + 4),0x10,0x2157455);
   (**(code **)(**(int **)(iVar2 + 4) + 0xd8))(*(int **)(iVar2 + 4),0);
   iVar10 = ALWidgetImp::Create(iVar2,_DAT_021d5154);
   (**(code **)(**(int **)(iVar10 + 4) + 0xd8))(*(int **)(iVar10 + 4),1);
@@ -176,7 +176,7 @@ undefined4 FUN_0215656c(int param_1)
   }
   uVar3 = _DAT_021d5154;
   uVar9 = *(undefined4 *)(iVar2 + 4);
-  iVar2 = jus_AllocDebug(400,s_ALWidgetImp_h_021699e4,s_Create_02169e84,0x159);
+  iVar2 = thunk_FUN_0201a228(400,s_ALWidgetImp_h_021699e4,&DAT_02169e84,0x159);
   if (iVar2 != 0) {
     func_0x021ae114(iVar2,uVar9,uVar3,ALWidgetImp::CreateDrawFunc);
   }
@@ -194,7 +194,7 @@ undefined4 FUN_0215656c(int param_1)
   *(undefined1 *)(*(int *)(iVar2 + 4) + 0x114) = 1;
   (**(code **)(**(int **)(iVar2 + 4) + 0x1a8))();
   (**(code **)(**(int **)(iVar2 + 4) + 0x24))(*(int **)(iVar2 + 4),puVar1);
-  FUN_02028384(*(undefined4 *)(iVar2 + 4),&LAB_021578dc_1);
+  FUN_02028384(*(undefined4 *)(iVar2 + 4),0x21578dd);
   local_5c = 0x80000;
   FUN_0214ed20(iVar2,&local_5c);
   *(undefined4 *)(*(int *)(iVar2 + 4) + 0x13c) = 1;
@@ -203,11 +203,11 @@ undefined4 FUN_0215656c(int param_1)
   puVar1[0x14] = iVar10;
   iVar10 = iVar10 + 6;
   puVar1[0x15] = iVar10;
-  uVar3 = jus_AllocDebug(iVar10 * 4,s_CommuMenuCmnLeaderSel_cpp_02169f34,
-                         s_CommuMenuLeaderSel_InitWidget_fo_02169f0c,0x2e6);
+  uVar3 = thunk_FUN_0201a228(iVar10 * 4,s_CommuMenuCmnLeaderSel_cpp_02169f34,
+                             s_CommuMenuLeaderSel_InitWidget_fo_02169f0c,0x2e6);
   puVar1[0x12] = uVar3;
-  uVar3 = jus_AllocDebug(puVar1[0x15] << 2,s_CommuMenuCmnLeaderSel_cpp_02169f34,
-                         s_CommuMenuLeaderSel_InitWidget_fo_02169f0c,0x2e7);
+  uVar3 = thunk_FUN_0201a228(puVar1[0x15] << 2,s_CommuMenuCmnLeaderSel_cpp_02169f34,
+                             s_CommuMenuLeaderSel_InitWidget_fo_02169f0c,0x2e7);
   puVar1[0x13] = uVar3;
   for (iVar10 = 0; iVar10 < (int)puVar1[0x15]; iVar10 = iVar10 + 1) {
     func_0x021ae3a4(*(undefined4 *)(iVar2 + 4));
@@ -288,7 +288,7 @@ undefined4 FUN_0215656c(int param_1)
   iVar2 = FUN_02026f94();
   puVar1[2] = iVar2;
   (**(code **)(**(int **)(iVar2 + 4) + 0x24))(*(int **)(iVar2 + 4),puVar1);
-  FUN_02028384(*(undefined4 *)(puVar1[2] + 4),&LAB_02157148_1);
+  FUN_02028384(*(undefined4 *)(puVar1[2] + 4),0x2157149);
   local_28 = 0x80000;
   FUN_0214ed20(puVar1[2],&local_28);
   func_0x021b65bc();

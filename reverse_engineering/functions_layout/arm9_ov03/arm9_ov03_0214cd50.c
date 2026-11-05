@@ -5,7 +5,7 @@
 void jus_Scene27_CreateImpl(void)
 
 {
-  FUN_0214cd5c();
+  JArena::JArena_AddJob();
   return;
 }
 

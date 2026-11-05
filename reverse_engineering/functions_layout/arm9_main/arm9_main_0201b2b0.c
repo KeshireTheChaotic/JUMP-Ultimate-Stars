@@ -21,9 +21,9 @@ int * jus_Class_02099cf8::jus_Class_02099cf8
   (**(code **)(*param_1 + 0xa0))(param_1,&local_10);
   FUN_02027de8(param_1,1);
   FUN_020282f4(param_1);
-  iVar1 = jus_AllocDebug(param_1[0x14] << 4);
+  iVar1 = FUN_0201a228(param_1[0x14] << 4);
   param_1[0x11] = iVar1;
-  iVar2 = jus_AllocDebug(8);
+  iVar2 = FUN_0201a228(8);
   iVar1 = 0;
   if (iVar2 != 0) {
     iVar1 = jus_Class_02093ee4::jus_Class_02093ee4();

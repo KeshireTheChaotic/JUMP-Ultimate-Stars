@@ -12,8 +12,8 @@ int * KomaExplanationData::KomaExplanationData_Create(int param_1)
   int iVar4;
   undefined1 auStack_28 [24];
   
-  piVar1 = (int *)jus_AllocDebug(8,s_KomaExplanationData_cpp_02170764,
-                                 s_KomaExplanationData_Create_02170748,0x17);
+  piVar1 = (int *)thunk_FUN_0201a228(8,s_KomaExplanationData_cpp_02170764,
+                                     s_KomaExplanationData_Create_02170748,0x17);
   FUN_020517fc(piVar1,0,8);
   piVar2 = (int *)FUN_020101f4(s_bin_InfoDeck_aar_0217077c,0);
   thunk_FUN_0207400c(auStack_28,s_bin_deck__02170790);

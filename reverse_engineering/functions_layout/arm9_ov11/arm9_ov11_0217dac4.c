@@ -25,7 +25,7 @@ void FUN_0217dac4(int param_1,undefined4 param_2,undefined4 param_3,uint param_4
   }
   else if (cVar1 == '\x05') {
     *(uint *)(*piVar3 + 0xe4) = *(uint *)(*piVar3 + 0xe4) & ~(param_4 | 0x80);
-    FUN_02028384(*(undefined4 *)(param_1 + 4),&LAB_0217d92c);
+    FUN_02028384(*(undefined4 *)(param_1 + 4),FUN_0217d92c);
     piVar3[2] = 0;
   }
   *(char *)(piVar3 + 3) = (char)piVar3[3] + '\x01';

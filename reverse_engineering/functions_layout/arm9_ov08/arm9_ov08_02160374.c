@@ -24,7 +24,7 @@ void FUN_02160374(void)
   if (local_18 == 0) {
     FUN_02067554(*(undefined1 *)(iVar1 + 0xf4),iVar1);
   }
-  FUN_02167814(0,&LAB_021601dc_1,0,0x78);
+  FUN_02167814(0,0x21601dd,0,0x78);
   return;
 }
 

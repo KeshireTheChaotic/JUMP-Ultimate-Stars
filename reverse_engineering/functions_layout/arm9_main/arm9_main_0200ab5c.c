@@ -16,7 +16,7 @@ FUN_0200ab5c(undefined4 *param_1,undefined4 param_2,undefined4 param_3,undefined
   uStack_20 = param_4;
   uStack_8 = param_3;
   uStack_4 = param_4;
-  puVar1 = (undefined4 *)jus_AllocDebug(0x10);
+  puVar1 = (undefined4 *)thunk_FUN_0201a228(0x10);
   if (puVar1 != (undefined4 *)0x0) {
     *puVar1 = &jus_Class_020935c4::vftable;
     puVar1[1] = 1;

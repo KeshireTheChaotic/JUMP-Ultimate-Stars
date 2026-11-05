@@ -10,7 +10,7 @@ void FUN_020360d0(int param_1,undefined4 param_2,undefined4 param_3)
     (**(code **)(**(int **)(param_1 + 0x1c) + 0x44))(*(int **)(param_1 + 0x1c),param_2,param_3);
     return;
   }
-  iVar1 = jus_AllocDebug(0x10);
+  iVar1 = FUN_0201a228(0x10);
   uVar2 = 0;
   if (iVar1 != 0) {
     uVar2 = jus_TagNRML::jus_TagNRML(iVar1,param_2,param_3,1);

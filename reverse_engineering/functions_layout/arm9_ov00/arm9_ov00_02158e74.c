@@ -37,8 +37,7 @@ int * OptionInfoChara::OptionInfoChara_Create
   undefined4 uStack_18;
   
   uStack_18 = param_4;
-  piVar1 = (int *)jus_AllocDebug(0x4c,s_OptionInfoChara_cpp_02161640,
-                                 s_OptionInfoChara_Create_02161628,0x90);
+  piVar1 = (int *)thunk_FUN_0201a228(0x4c,s_OptionInfoChara_cpp_02161640,FUN_02161628,0x90);
   FUN_020517fc(piVar1,0,0x4c);
   *piVar1 = param_1;
   piVar1[6] = 1;
@@ -65,8 +64,8 @@ int * OptionInfoChara::OptionInfoChara_Create
   piVar3 = *(int **)(*(int *)(iVar7 + 4) + 0x68);
   (**(code **)(*piVar3 + 0xac))(piVar3,0);
   piVar3 = *(int **)(iVar7 + 4);
-  uVar4 = FUN_020326b0(s_Position_02161654);
-  uVar4 = (**(code **)(*piVar3 + 0x40))(piVar3,s_Position_02161654,&local_50,uVar4);
+  uVar4 = FUN_020326b0(FUN_02161654);
+  uVar4 = (**(code **)(*piVar3 + 0x40))(piVar3,FUN_02161654,&local_50,uVar4);
   FUN_0202c4a4(&local_2c,uVar4,local_50);
   local_34 = 0;
   local_30 = 0x100000;
@@ -93,12 +92,12 @@ int * OptionInfoChara::OptionInfoChara_Create
   FUN_02023c70(*(undefined4 *)(iVar7 + 4),2);
   func_0x021b4034(*(undefined4 *)(iVar7 + 4),1);
   func_0x021b409c(*(undefined4 *)(iVar7 + 4),2);
-  func_0x021b6760(*(undefined4 *)(iVar7 + 4),0x10,&LAB_02159e8c);
+  func_0x021b6760(*(undefined4 *)(iVar7 + 4),0x10,FUN_02159e8c);
   func_0x021b6760(*(undefined4 *)(iVar7 + 4),0x20,FUN_02159e9c);
   piVar1[2] = iVar7;
   (**(code **)(**(int **)(iVar7 + 4) + 0xd8))(*(int **)(iVar7 + 4),0);
   func_0x021b65d8(*(undefined4 *)(iVar7 + 4));
-  iVar5 = jus_AllocDebug(0xcc,s_ALWidget_inl_02161154,s_Create_021615b0,0x1de);
+  iVar5 = thunk_FUN_0201a228(0xcc,FUN_02161154,&DAT_021615b0,0x1de);
   piVar3 = (int *)0x0;
   if (iVar5 != 0) {
     piVar3 = (int *)func_0x021af26c(iVar5,FUN_021599c4,FUN_02159a40,0);
@@ -107,7 +106,7 @@ int * OptionInfoChara::OptionInfoChara_Create
     (**(code **)(*piVar3 + 0x14))();
   }
   piVar8 = (int *)piVar3[6];
-  iVar5 = jus_AllocDebug(0xbc,s_ALWidget_inl_021615e8,s_Create_021615c0,0x212);
+  iVar5 = thunk_FUN_0201a228(0xbc,s_ALWidget_inl_021615e8,s_Create_021615c0,0x212);
   piVar3 = (int *)0x0;
   if (iVar5 != 0) {
     piVar3 = (int *)func_0x021af358(iVar5,FUN_02159aa4,0);
@@ -125,7 +124,7 @@ int * OptionInfoChara::OptionInfoChara_Create
   (**(code **)(*piVar8 + 8))();
   _DAT_021d5154 = 3;
   uVar4 = *(undefined4 *)(piVar1[2] + 4);
-  iVar5 = jus_AllocDebug(400,s_ALWidgetImp_h_021615f8,s_Create_021615b8,0x159);
+  iVar5 = thunk_FUN_0201a228(400,s_ALWidgetImp_h_021615f8,&DAT_021615b8,0x159);
   if (iVar5 != 0) {
     func_0x021ae114(iVar5,uVar4,3,ALWidgetImp::CreateDrawFunc);
   }
@@ -152,14 +151,14 @@ int * OptionInfoChara::OptionInfoChara_Create
   uVar4 = *(undefined4 *)(*(int *)(iVar5 + 0x88) + 4);
   (&DAT_020a16d0)[DAT_02093c08] = DAT_020a0dd0;
   DAT_020a0dd0 = uVar4;
-  iVar5 = func_0x021caa0c(s_font_jskfont_aft_02161660,0,0);
+  iVar5 = func_0x021caa0c(0x2161660,0,0);
   for (uVar2 = 0; uVar2 < (uint)piVar1[6]; uVar2 = uVar2 + 1) {
     uVar4 = func_0x021bd710(*(undefined4 *)(*piVar1 + 0x88),
                             (int)*(char *)((int)piVar1 + uVar2 + 0x20));
     iVar6 = FUN_02159784(piVar1,iVar5,uVar4,uVar2);
     *(uint *)(*(int *)(iVar6 + 4) + 0x124) = uVar2;
   }
-  iVar6 = FUN_02159784(piVar1,iVar5,&DAT_02161674);
+  iVar6 = FUN_02159784(piVar1,iVar5,0x2161674);
   *(int *)(*(int *)(iVar6 + 4) + 0x124) = piVar1[6];
   (**(code **)(**(int **)(iVar5 + 4) + 0xc))();
   DAT_020a0dd0 = (&DAT_020a16d0)[DAT_02093c08];

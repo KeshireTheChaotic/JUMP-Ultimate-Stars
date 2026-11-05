@@ -44,13 +44,15 @@ projection, DrawPrio ordering once traced.
 | Area | Content |
 |---|---|
 | Browser | `koma/koma.aar`, grouped by series prefix, panel counts |
-| Viewport | panels in a row (page arrangement unknown), Select/Pencil/Picker, pixel grid ≥6× |
-| Inspector | asset/panel facts, clickable 16-colour palette (double-click edits), evidence |
-| Bottom | Panels strip; Import/Export panel PNG, Export all, Apply; Problems |
+| Viewport | Card mode: panels on the card's 5×4 shape grid (5 columns × 4 rows, the deck board width) (repeated/missing labels in red); Strip mode: art order; Select/Pencil/Picker, pixel grid ≥6× |
+| Inspector | asset/panel facts; card record (series → art prefix from the ARM9 table 0x0209E840, art index, raw 12 bytes); same-size shape picker; palette; evidence |
+| Bottom | Panels strip; Shapes (all 66, current highlighted, same-size clickable); panel/card PNG export, panel PNG import, Apply; Problems |
 
-Codec `jus_formats/koma.py`: Direct, 898/898 byte-exact. Editable now (pixels, palette,
-PNG import), undoable, Apply → Save writes `koma.aar`.
-Next: where-used links, page/deck layout once researched.
+Codecs: `jus_formats/koma.py` (art, 898/898 byte-exact), `jus_formats/kshape.py` (shapes +
+cards, byte-exact), `jus_package/komacards.py` (card ↔ art, Inferred). Apply writes the art
+into `koma.aar` and stages `bin/koma.bin` (loose file); Save writes both. The registry
+links `bin/koma.bin` → each art file (`card art`) and → `bin/kshape.bin`.
+Next: deck placement data (the deck board is 5×4 cells, FUN_020790F0; empty cells use koma/dt_20.dtx).
 
 ## Level (Ctrl+5) — `app/workspaces/level.py` (v1 visual-only, locked scope)
 

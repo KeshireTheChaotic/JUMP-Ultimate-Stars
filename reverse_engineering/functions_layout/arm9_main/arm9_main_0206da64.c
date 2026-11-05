@@ -28,7 +28,7 @@ int * ALStreamImp::Create(undefined4 param_1,undefined4 param_2,undefined4 param
       uVar5 = (**(code **)(*(int *)piVar1[1] + 0x2c))((int *)piVar1[1],0);
       uVar6 = FUN_0201a30c();
       FUN_0201a2d4(DAT_020afca0);
-      iVar7 = jus_AllocDebug(0x30,s_ALStreamImp_h_0209e318,s_Create_0209e2d8,0xc5);
+      iVar7 = thunk_FUN_0201a228(0x30,s_ALStreamImp_h_0209e318,s_Create_0209e2d8,0xc5);
       if (iVar7 != 0) {
         ALStreamImp(iVar7,uVar4);
       }

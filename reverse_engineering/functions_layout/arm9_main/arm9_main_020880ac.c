@@ -43,7 +43,7 @@ void FUN_020880ac(int param_1,int param_2,int param_3,int param_4)
     FUN_02023894(*(undefined4 *)(iVar3 + 4),0xc00300,0);
     (**(code **)(**(int **)(*(int *)(iVar3 + 4) + 0x68) + 0x6c))();
     (**(code **)(**(int **)(iVar3 + 4) + 0xd8))(*(int **)(iVar3 + 4),1);
-    FUN_02028384(*(undefined4 *)(iVar3 + 4),&LAB_02088064_1);
+    FUN_02028384(*(undefined4 *)(iVar3 + 4),0x2088065);
     (**(code **)(**(int **)(iVar3 + 4) + 0x94))(*(int **)(iVar3 + 4),0x1000);
     *(int *)(DAT_0214be20 + 4) = iVar3;
     FUN_0206c54c();

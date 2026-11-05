@@ -7,11 +7,11 @@ void ALDrawLinkImp::CloneMain(undefined4 param_1)
 {
   int iVar1;
   
-  iVar1 = jus_AllocDebug(0x78,s_ALDrawLinkImp_h_021d1758,s_CloneMain_021d16c0,0x2a);
+  iVar1 = thunk_FUN_0201a228(0x78,s_ALDrawLinkImp_h_021d1758,s_CloneMain_021d16c0,0x2a);
   if (iVar1 == 0) {
     return;
   }
-  ALDrawLinkImp_0209be5c::ALDrawLinkImp_0209be5c(iVar1,param_1);
+  jus_Class_0209be5c::jus_Class_0209be5c(iVar1,param_1);
   return;
 }
 

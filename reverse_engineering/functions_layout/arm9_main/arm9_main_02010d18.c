@@ -41,9 +41,9 @@ int * FUN_02010d18(undefined4 param_1,int *param_2,int *param_3,undefined4 param
     }
   }
   else {
-    iVar3 = jus_AllocDebug(0x78);
+    iVar3 = FUN_0201a228(0x78);
     if (iVar3 != 0) {
-      jus_Class_0209c0b4::jus_Class_0209c0b4(iVar3,FUN_02024a30,1);
+      jus_TagNDGR_0209c0b4::jus_TagNDGR_0209c0b4(iVar3,FUN_02024a30,1);
     }
     iVar3 = FUN_02011b38();
     piVar11 = *(int **)(iVar3 + 4);

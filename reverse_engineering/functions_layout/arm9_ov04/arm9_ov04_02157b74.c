@@ -15,8 +15,8 @@ char * JQuizMainMultiScore::JQuizMainMultiScoreOneClass_Create
   int iVar6;
   int local_30 [6];
   
-  pcVar2 = (char *)jus_AllocDebug(0x1c,s_JQuizMainMultiScore_cpp_0216119c,
-                                  s_JQuizMainMultiScoreOneClass_Crea_02161178,0x4a);
+  pcVar2 = (char *)thunk_FUN_0201a228(0x1c,s_JQuizMainMultiScore_cpp_0216119c,
+                                      s_JQuizMainMultiScoreOneClass_Crea_02161178,0x4a);
   cVar1 = FUN_020517fc(pcVar2,0,0x1c);
   *pcVar2 = (char)param_2;
   if (param_2 < param_3) {

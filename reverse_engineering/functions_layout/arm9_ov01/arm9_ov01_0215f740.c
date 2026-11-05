@@ -18,7 +18,7 @@ undefined4 StageSelect::StageSelect_Add(undefined1 param_1)
   undefined4 local_14;
   
   puVar1 = (undefined4 *)
-           jus_AllocDebug(0xb4,s_StageSelect_cpp_0216cd98,s_StageSelect_Add_0216ccb4,0x130);
+           thunk_FUN_0201a228(0xb4,s_StageSelect_cpp_0216cd98,s_StageSelect_Add_0216ccb4,0x130);
   FUN_0214ff80(puVar1,0xb4);
   *(byte *)((int)puVar1 + 0xb2) = *(byte *)((int)puVar1 + 0xb2) | 4;
   *(undefined1 *)(puVar1 + 0x2b) = param_1;
@@ -66,7 +66,7 @@ undefined4 StageSelect::StageSelect_Add(undefined1 param_1)
     local_1c = &LAB_02161f08;
     local_14 = puVar1[0x10];
     local_24 = puVar1;
-    uVar2 = FUN_02086798(&local_24);
+    uVar2 = CommWrapDisconnect::CommWrapDisconnect_Create(&local_24);
     puVar1[0x11] = uVar2;
     FUN_0215f990(puVar1[0xf],puVar1[0x11]);
   }

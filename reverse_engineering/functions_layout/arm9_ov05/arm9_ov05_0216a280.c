@@ -32,10 +32,11 @@ undefined4 * DatabasePiece::Database_PieceCreate(int param_1)
   undefined1 auStack_3c [24];
   
   puVar1 = (undefined4 *)
-           jus_AllocDebug(0xa4,s_DatabasePiece_cpp_02171aa8,s_Database_PieceCreate_02171a60,0x2e);
+           thunk_FUN_0201a228(0xa4,s_DatabasePiece_cpp_02171aa8,s_Database_PieceCreate_02171a60,0x2e
+                             );
   func_0x021b65bc();
   FUN_020517fc(puVar1,0,0xa4);
-  puVar1[1] = &LAB_0216ac44;
+  puVar1[1] = FUN_0216ac44;
   puVar1[2] = 0;
   iVar2 = FUN_02026f94();
   puVar1[3] = iVar2;

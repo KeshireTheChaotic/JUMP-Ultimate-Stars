@@ -71,7 +71,7 @@ undefined4 * ResultRank::ResultRank_Create(int param_1)
   int aiStack_20 [3];
   
   puVar4 = (undefined4 *)
-           jus_AllocDebug(0x50,s_ResultRank_cpp_0216171c,s_ResultRank_Create_0216164c,0x88);
+           thunk_FUN_0201a228(0x50,s_ResultRank_cpp_0216171c,s_ResultRank_Create_0216164c,0x88);
   FUN_020517fc(puVar4,0,0x50);
   *(char *)(puVar4 + 0x12) = (char)param_1;
   FUN_02041f7c(DAT_020a0f64,1);
@@ -150,7 +150,7 @@ undefined4 * ResultRank::ResultRank_Create(int param_1)
     piVar6 = *(int **)(*(int *)(iVar5 + 0x88) + 4);
     (**(code **)(*piVar6 + 0x94))(piVar6,1);
   }
-  uVar7 = FUN_020101f4(s_result_result_aar_0216172c,0);
+  uVar7 = FUN_020101f4(FUN_0216172c,0);
   *puVar4 = uVar7;
   uVar7 = FUN_020101f4(s_result_result_rank_obj_aar_02161740,0);
   puVar4[1] = uVar7;
@@ -161,18 +161,18 @@ undefined4 * ResultRank::ResultRank_Create(int param_1)
     pcVar8 = FUN_0215cbf4;
   }
   puVar4[0x13] = pcVar8;
-  iVar5 = jus_AllocDebug(0x78,s_ALNodeImp_h_0216162c,s_Create_02161614,0x4c3);
+  iVar5 = thunk_FUN_0201a228(0x78,&DAT_0216162c,&DAT_02161614,0x4c3);
   if (iVar5 != 0) {
-    jus_Class_0209c0b4::jus_Class_0209c0b4(iVar5,FUN_02024a30,1);
+    jus_TagNDGR_0209c0b4::jus_TagNDGR_0209c0b4(iVar5,FUN_02024a30,1);
   }
   iVar9 = FUN_0214e3ec();
   (**(code **)(**(int **)(iVar9 + 4) + 0xd8))(*(int **)(iVar9 + 4),1);
   FUN_02151ebc(auStack_d4,iVar9,s_Position_0216175c);
   iVar5 = 0;
   do {
-    iVar10 = jus_AllocDebug(0x78,s_ALNodeImp_h_0216162c,s_Create_02161614,0x4c3);
+    iVar10 = thunk_FUN_0201a228(0x78,&DAT_0216162c,&DAT_02161614,0x4c3);
     if (iVar10 != 0) {
-      jus_Class_0209c0b4::jus_Class_0209c0b4(iVar10,FUN_02024a30,1);
+      jus_TagNDGR_0209c0b4::jus_TagNDGR_0209c0b4(iVar10,FUN_02024a30,1);
     }
     iVar10 = FUN_0214e3ec();
     (**(code **)(**(int **)(iVar10 + 4) + 0xd8))(*(int **)(iVar10 + 4),1);
@@ -199,7 +199,7 @@ undefined4 * ResultRank::ResultRank_Create(int param_1)
     puVar4[iVar5 + 5] = iVar10;
     iVar5 = iVar15;
   } while (iVar15 < 4);
-  FUN_02028384(*(undefined4 *)(iVar9 + 4),&LAB_0215ce7c_1);
+  FUN_02028384(*(undefined4 *)(iVar9 + 4),0x215ce7d);
   (**(code **)(**(int **)(iVar9 + 4) + 0x24))(*(int **)(iVar9 + 4),puVar4);
   puVar4[4] = iVar9;
   if (*(char *)(puVar4 + 0x12) == '\x02') {
@@ -215,14 +215,14 @@ undefined4 * ResultRank::ResultRank_Create(int param_1)
     local_a4 = 0;
     FUN_0215cca4(auStack_50,&local_9c,&local_a0,&local_a4);
     FUN_02151ebc(&local_98,uVar7,s_Position_0216175c);
-    iVar5 = jus_AllocDebug(0x4c,s_ALControllerImp_h_02161638,s_Create_02161624,0x2b9);
+    iVar5 = thunk_FUN_0201a228(0x4c,s_ALControllerImp_h_02161638,&DAT_02161624,0x2b9);
     if (iVar5 != 0) {
       jus_TagIPCT::jus_TagIPCT(iVar5,0,local_98,local_94,0x494c,auStack_50,auStack_5c,0x400,2);
     }
     uVar11 = FUN_0215cc7c();
     FUN_02020f38(uVar7,uVar11);
     iVar5 = FUN_0203b424(2);
-    uVar11 = FUN_0215cccc(s_jquiz_com_result00_b_021617a0,*(undefined4 *)(iVar5 + 0x88));
+    uVar11 = FUN_0215cccc(FUN_021617a0,*(undefined4 *)(iVar5 + 0x88));
     puVar4[2] = uVar11;
     FUN_0215cc60(uVar7,0);
     iVar5 = FUN_02034db8();
@@ -246,7 +246,7 @@ undefined4 * ResultRank::ResultRank_Create(int param_1)
   local_cc = 0;
   FUN_0215cca4(auStack_68,&local_c4,&local_c8,&local_cc);
   FUN_02151ebc(&local_c0,puVar4[2],s_Position_0216175c);
-  iVar5 = jus_AllocDebug(0x4c,s_ALControllerImp_h_02161660,s_Create_0216161c,0x2ef);
+  iVar5 = thunk_FUN_0201a228(0x4c,s_ALControllerImp_h_02161660,&DAT_0216161c,0x2ef);
   if (iVar5 != 0) {
     jus_TagIPMV::jus_TagIPMV(iVar5,0,local_c0,local_bc,0x494c,auStack_68,8,0,1);
   }
@@ -312,11 +312,11 @@ undefined4 * ResultRank::ResultRank_Create(int param_1)
           FUN_0215cd80(uVar16 + 0x81000b,0x810000,*(undefined4 *)(iVar10 + 0x88),uVar17,
                        &DAT_021616d4,0xa6);
           iVar10 = FUN_0203b3f4();
-          iVar10 = FUN_0215cd80(0x810028,0x810000,*(undefined4 *)(iVar10 + 0x88),uVar17,
-                                &DAT_02161704,0xa5);
+          iVar10 = FUN_0215cd80(0x810028,0x810000,*(undefined4 *)(iVar10 + 0x88),uVar17,FUN_02161704
+                                ,0xa5);
           (**(code **)(**(int **)(iVar10 + 4) + 0xd8))(*(int **)(iVar10 + 4),0);
           if (uVar16 == DAT_020afe98) {
-            FUN_0215cc30(iVar10,&DAT_02161710);
+            FUN_0215cc30(iVar10,0x2161710);
           }
           puVar4[uVar16 + 9] = iVar10;
           cVar1 = *(char *)(puVar4 + 0x12);

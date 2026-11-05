@@ -14,7 +14,8 @@ int BattleAI_State::BattleAIState_Create
   undefined4 uStack_1c;
   
   uStack_1c = param_4;
-  iVar1 = jus_AllocDebug(0x68,s_BattleAI_State_cpp_0218195c,s_BattleAIState_Create_021818f4,0x7e);
+  iVar1 = thunk_FUN_0201a228(0x68,s_BattleAI_State_cpp_0218195c,s_BattleAIState_Create_021818f4,0x7e
+                            );
   FUN_020517fc(iVar1,0,0x68);
   iVar2 = FUN_02020d90();
   (**(code **)(**(int **)(iVar2 + 4) + 0x94))(*(int **)(iVar2 + 4),0x80000);

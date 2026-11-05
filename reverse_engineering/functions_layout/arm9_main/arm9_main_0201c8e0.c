@@ -15,14 +15,14 @@ jus_Class_02093eb4::jus_Class_02093eb4
   
   *param_1 = &vftable;
   local_1c[4] = param_4;
-  iVar1 = jus_AllocDebug(0x10);
+  iVar1 = FUN_0201a228(0x10);
   uVar2 = 0;
   if (iVar1 != 0) {
     local_1c[3] = 0x80000;
     uVar2 = jus_Class_02094370::jus_Class_02094370(iVar1,local_1c + 3);
   }
   param_1[1] = uVar2;
-  iVar1 = jus_AllocDebug(0x10);
+  iVar1 = FUN_0201a228(0x10);
   uVar2 = 0;
   if (iVar1 != 0) {
     local_1c[3] = 0x80000;

@@ -22,20 +22,20 @@ void DeckSelect::DeckSelect_InitDeckData
   
   uStack_18 = param_4;
   iVar1 = FUN_02070c9c();
-  uVar2 = jus_AllocDebug((iVar1 + 0x46) * 0x5c,s_DeckSelect_cpp_0216c6c8,
-                         s_DeckSelect_InitDeckData_0216c464,0x7b8);
+  uVar2 = thunk_FUN_0201a228((iVar1 + 0x46) * 0x5c,s_DeckSelect_cpp_0216c6c8,
+                             s_DeckSelect_InitDeckData_0216c464,0x7b8);
   *(undefined4 *)(param_1 + 0x2ac) = uVar2;
   iVar1 = FUN_02070c9c();
-  uVar2 = jus_AllocDebug((iVar1 + 0x46) * 0x40,s_DeckSelect_cpp_0216c6c8,
-                         s_DeckSelect_InitDeckData_0216c464,0x7b9);
+  uVar2 = thunk_FUN_0201a228((iVar1 + 0x46) * 0x40,s_DeckSelect_cpp_0216c6c8,
+                             s_DeckSelect_InitDeckData_0216c464,0x7b9);
   *(undefined4 *)(param_1 + 0x2b0) = uVar2;
   iVar1 = FUN_02070c9c();
-  uVar2 = jus_AllocDebug((iVar1 + 0x46) * 4,s_DeckSelect_cpp_0216c6c8,
-                         s_DeckSelect_InitDeckData_0216c464,0x7ba);
+  uVar2 = thunk_FUN_0201a228((iVar1 + 0x46) * 4,s_DeckSelect_cpp_0216c6c8,
+                             s_DeckSelect_InitDeckData_0216c464,0x7ba);
   *(undefined4 *)(param_1 + 0x2b4) = uVar2;
   iVar1 = FUN_02070c9c();
-  uVar2 = jus_AllocDebug((iVar1 + 0x46) * 4,s_DeckSelect_cpp_0216c6c8,
-                         s_DeckSelect_InitDeckData_0216c464,0x7bb);
+  uVar2 = thunk_FUN_0201a228((iVar1 + 0x46) * 4,s_DeckSelect_cpp_0216c6c8,
+                             s_DeckSelect_InitDeckData_0216c464,0x7bb);
   *(undefined4 *)(param_1 + 0x2b8) = uVar2;
   piVar3 = (int *)FUN_020101f4(s_deck_Deck_aar_0216c8f4,0);
   iVar1 = 0;
@@ -88,7 +88,7 @@ void DeckSelect::DeckSelect_InitDeckData
   (**(code **)(*piVar3 + 0xd8))(piVar3,0);
   piVar3 = *(int **)(*(int *)(param_1 + 0x6c) + 4);
   (**(code **)(*piVar3 + 0xd8))(piVar3,0);
-  (*(code *)(&PTR_LAB_0215c580_1_02169d8c)[*(byte *)(param_1 + 0x310)])(param_1);
+  (*(code *)(&PTR_FUN_0215c580_1_02169d8c)[*(byte *)(param_1 + 0x310)])(param_1);
   if (*(int *)(param_1 + 0x304) == 7) {
     *(int *)(param_1 + 0x308) = *(int *)(param_1 + 0x308) + *(int *)(param_1 + 700);
     *(undefined4 *)(param_1 + 0x304) = 1;

@@ -1,5 +1,10 @@
 
-undefined4 FUN_021b0dbc(int param_1,int *param_2,int *param_3,int *param_4,undefined4 param_5)
+/* JUS-CLASS ALCollision_021d1e28::vfunc_22 [class-virtual] slot 22 of vtable 021d1e28 (own slot,
+   not inherited) */
+
+undefined4
+ALCollision_021d1e28::vfunc_22
+          (int param_1,int *param_2,int *param_3,int *param_4,undefined4 param_5)
 
 {
   int iVar1;

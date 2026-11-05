@@ -36,8 +36,7 @@ int * JQuizMainQuizNoDisp::JQuizMainQuizNoDispClass_Create
   undefined4 uStack_28;
   
   uStack_28 = param_4;
-  piVar2 = (int *)jus_AllocDebug(0x20,s_JQuizMainQuizNoDisp_cpp_021610a0,
-                                 s_JQuizMainQuizNoDispClass_Create_02161080,0x78);
+  piVar2 = (int *)thunk_FUN_0201a228(0x20,s_JQuizMainQuizNoDisp_cpp_021610a0,FUN_02161080,0x78);
   FUN_020517fc(piVar2,0,0x20);
   iVar3 = JQuizMainQuizNoSmall::JQuizMainQuizNoSmallClass_Create(param_1);
   piVar2[6] = iVar3;
@@ -45,7 +44,7 @@ int * JQuizMainQuizNoDisp::JQuizMainQuizNoDispClass_Create
   piVar2[7] = iVar3;
   uVar1 = _DAT_021d5154;
   uVar6 = *(undefined4 *)(param_1 + 4);
-  iVar3 = jus_AllocDebug(0x134,s_ALWidgetImp_h_021608d4,s_Create_02161078,0x3e);
+  iVar3 = thunk_FUN_0201a228(0x134,s_ALWidgetImp_h_021608d4,s_Create_02161078,0x3e);
   piVar4 = (int *)0x0;
   if (iVar3 != 0) {
     piVar4 = (int *)func_0x021af0f8(iVar3,uVar6,uVar1,ALWidgetBaseImp::CreateDrawFunc);
@@ -141,7 +140,7 @@ int * JQuizMainQuizNoDisp::JQuizMainQuizNoDispClass_Create
   *piVar2 = iVar3;
   local_70 = 0x80000;
   (**(code **)(**(int **)(iVar3 + 4) + 0xa0))(*(int **)(iVar3 + 4),&local_70);
-  FUN_02028384(*(undefined4 *)(*piVar2 + 4),&DAT_02156bb8);
+  FUN_02028384(*(undefined4 *)(*piVar2 + 4),FUN_02156bb8);
   (**(code **)(**(int **)(*piVar2 + 4) + 0x24))(*(int **)(*piVar2 + 4),piVar2);
   *(undefined1 *)((int)piVar2 + 0x16) = 1;
   return piVar2;

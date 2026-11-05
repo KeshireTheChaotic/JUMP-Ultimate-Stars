@@ -1,0 +1,16 @@
+02180774  ldrb r1,[r0,#0xad]
+02180778  cmp r1,#0x4
+0218077c  bls 0x021807a8
+02180780  ldr r1,[r0,#0x20]
+02180784  ldrsb r1,[r1,#0x18]
+02180788  cmp r1,#0xc
+0218078c  bxeq lr
+02180790  mov r1,#0x0
+02180794  strb r1,[r0,#0xad]
+02180798  strb r1,[r0,#0xac]
+0218079c  mov r1,#0x1
+021807a0  strb r1,[r0,#0x105]
+021807a4  bx lr
+021807a8  add r1,r1,#0x1
+021807ac  strb r1,[r0,#0xad]
+021807b0  bx lr

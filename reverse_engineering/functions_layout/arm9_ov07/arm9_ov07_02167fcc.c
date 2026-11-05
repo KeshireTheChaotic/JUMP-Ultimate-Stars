@@ -19,8 +19,8 @@ int CommunicationWait::Main_CommunicationAdd(void)
   
   FUN_02073778();
   FUN_0207379c();
-  piVar2 = (int *)jus_AllocDebug(0x48,s_CommunicationWait_cpp_0216acac,
-                                 s_Main_CommunicationAdd_0216ac94,0x5a);
+  piVar2 = (int *)thunk_FUN_0201a228(0x48,s_CommunicationWait_cpp_0216acac,
+                                     s_Main_CommunicationAdd_0216ac94,0x5a);
   FUN_020517fc(piVar2,0,0x48);
   iVar3 = FUN_02026f94();
   piVar2[1] = iVar3;
@@ -33,7 +33,7 @@ int CommunicationWait::Main_CommunicationAdd(void)
   piVar2[0xe] = iVar3;
   local_18 = 0x82000;
   FUN_0214ed20(piVar2[0xe],&local_18);
-  FUN_02028384(*(undefined4 *)(piVar2[0xe] + 4),&LAB_02168938);
+  FUN_02028384(*(undefined4 *)(piVar2[0xe] + 4),thunk_FUN_0208c0f0);
   (**(code **)(**(int **)(piVar2[0xe] + 4) + 0x24))(*(int **)(piVar2[0xe] + 4),piVar2);
   iVar3 = FUN_02026f94();
   piVar2[0xf] = iVar3;

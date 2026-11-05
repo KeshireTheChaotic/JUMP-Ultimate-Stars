@@ -1,0 +1,11 @@
+020837e0  stmdb sp!,{r3,lr}
+020837e4  ldr r3,[0x208380c]
+020837e8  mov lr,r0
+020837ec  ldr r0,[r3,#0x0]
+020837f0  mov r12,r1
+020837f4  ldr r0,[r0,#0x8c]
+020837f8  mov r3,r2
+020837fc  mov r1,lr
+02083800  mov r2,r12
+02083804  bl 0x0207d360
+02083808  ldmia sp!,{r3,pc}

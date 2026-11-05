@@ -16,7 +16,7 @@ undefined4 * BattleCol::Battle_ColManCreate(void)
                     /* JUS-TAG strings=["BattleCol.cpp","Battle_ColManCreate"] */
   uStack_14 = in_r3;
   puVar1 = (undefined4 *)
-           jus_AllocDebug(0x219c,s_BattleCol_cpp_0209fb0c,s_Battle_ColManCreate_0209facc,0xf9);
+           thunk_FUN_0201a228(0x219c,s_BattleCol_cpp_0209fb0c,s_Battle_ColManCreate_0209facc,0xf9);
   if (puVar1 != (undefined4 *)0x0) {
     *puVar1 = 0;
     puVar1[1] = 0;

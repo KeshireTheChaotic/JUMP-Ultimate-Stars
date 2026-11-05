@@ -10,8 +10,8 @@ int FUN_021629a4(void)
   undefined4 uStack_10;
   
   uStack_10 = in_r3;
-  piVar1 = (int *)jus_AllocDebug(0x168,s_CommuMenuDataMemberEnt_cpp_0216a790,
-                                 s_CommuMenuDataMemberEnt_Add_Core_0216a770,0x5f);
+  piVar1 = (int *)thunk_FUN_0201a228(0x168,s_CommuMenuDataMemberEnt_cpp_0216a790,
+                                     s_CommuMenuDataMemberEnt_Add_Core_0216a770,0x5f);
   FUN_020517fc(piVar1,0,0x168);
   *(undefined1 *)((int)piVar1 + 0xad) = 1;
   *(undefined1 *)(piVar1 + 0x2b) = 1;

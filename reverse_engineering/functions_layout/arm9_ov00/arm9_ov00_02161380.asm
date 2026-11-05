@@ -1,0 +1,14 @@
+02161380  andeq r0,r0,r0
+02161384  andeq r0,r0,r0
+02161388  andeq r0,r0,r0
+0216138c  andeq r0,r0,r0
+02161390  andeq r0,r0,r0
+02161394  andeq r0,r0,r0
+02161398  andeq r0,r0,r0
+0216139c  andeq r0,r0,r0
+021613a0  andeq r0,r0,r0
+021613a4  andeq r0,r0,r0
+021613a8  andeq r0,r0,r0
+021613ac  andeq r0,r0,r0
+021613b0  andeq r0,r0,r0
+021613b4  andeq r0,r0,r0

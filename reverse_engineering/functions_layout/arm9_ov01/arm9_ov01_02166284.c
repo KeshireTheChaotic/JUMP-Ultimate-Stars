@@ -33,7 +33,7 @@ void FUN_02166284(int param_1,undefined4 param_2,undefined4 param_3,undefined4 p
       FUN_0216638c(uVar1,0x1a);
     }
   }
-  FUN_0214f714(&local_30,*(undefined4 *)(iVar2 + 0x4c),&DAT_0216d898);
+  FUN_0214f714(&local_30,*(undefined4 *)(iVar2 + 0x4c),0x216d898);
   local_34 = 0x1000;
   FUN_02014080(local_30,local_2c,&local_34,4,1);
   uVar1 = FUN_0215e28c();

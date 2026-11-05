@@ -34,14 +34,14 @@ void jus_Scene21_Exit(int param_1,uint param_2,undefined4 param_3,undefined4 par
     else {
       *(undefined4 *)(iRam0206f650 + 0xc) = 0;
       *(undefined1 *)(iVar2 + 0x13) = 1;
-      func_0x0206f81c();
+      FUN_0206f81c();
     }
   }
   else if (uVar1 < 0x16) {
     if (uVar1 == 0x15) {
       *(undefined4 *)(iRam0206f650 + 0xc) = 0;
       *(undefined1 *)(iVar2 + 0x13) = 1;
-      func_0x0206f81c();
+      FUN_0206f81c();
     }
   }
   else {
@@ -49,12 +49,12 @@ void jus_Scene21_Exit(int param_1,uint param_2,undefined4 param_3,undefined4 par
     case 0x16:
       *(undefined4 *)(iRam0206f650 + 0xc) = 0;
       *(undefined1 *)(iVar2 + 0x13) = 1;
-      func_0x0206f81c(2);
+      FUN_0206f81c(2);
       break;
     case 0x17:
       *(undefined4 *)(iRam0206f650 + 0xc) = 0;
       *(undefined1 *)(iVar2 + 0x13) = 1;
-      func_0x0206f81c(3);
+      FUN_0206f81c(3);
       break;
     case 0x18:
       FUN_0206e524(1,0x1c,0x15,0xffffffff,0);

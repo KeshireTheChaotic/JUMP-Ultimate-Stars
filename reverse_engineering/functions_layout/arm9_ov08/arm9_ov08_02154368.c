@@ -10,7 +10,7 @@ void FUN_02154368(undefined4 param_1)
   FUN_021543b0();
   if (local_c <= (int)(uint)DAT_0216a41a) {
     FUN_021543b0();
-    FUN_021677b8(param_1,&LAB_02154338_1);
+    FUN_021677b8(param_1,0x2154339);
   }
   return;
 }

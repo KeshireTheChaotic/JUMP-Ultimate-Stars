@@ -20,7 +20,7 @@ ALTextDS_021d49cc::ALTextDS_021d49cc
     iVar2 = FUN_021ca2a0(param_1);
     (**(code **)(**(int **)(iVar2 + 4) + 0xc))();
   }
-  iVar2 = jus_AllocDebug(0x1b8,s_ALTextDS_cpp_021d4e30,&DAT_021d48e4,0x556);
+  iVar2 = thunk_FUN_0201a228(0x1b8,s_ALTextDS_cpp_021d4e30,&DAT_021d48e4,0x556);
   uVar1 = 0;
   if (iVar2 != 0) {
     uVar1 = ALTextDS_021d4a2c::ALTextDS_021d4a2c

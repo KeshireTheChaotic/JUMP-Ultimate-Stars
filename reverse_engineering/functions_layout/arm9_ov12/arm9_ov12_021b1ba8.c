@@ -7,7 +7,7 @@ void ALObjectImp::CloneMain(undefined4 param_1)
 {
   int iVar1;
   
-  iVar1 = jus_AllocDebug(0x44,s_ALObjectImp_h_021d18fc,s_CloneMain_021d18a4,0x65);
+  iVar1 = thunk_FUN_0201a228(0x44,s_ALObjectImp_h_021d18fc,s_CloneMain_021d18a4,0x65);
   if (iVar1 == 0) {
     return;
   }

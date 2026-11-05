@@ -39,7 +39,7 @@ void FUN_0214cd20(undefined4 param_1,undefined4 param_2,undefined4 param_3,undef
     FUN_02055684();
   }
   func_0x021c01a8(0x100,3);
-  func_0x021beb40(&LAB_0214d228);
+  func_0x021beb40(FUN_0214d228);
   DAT_0216ace8 = 1;
   return;
 }

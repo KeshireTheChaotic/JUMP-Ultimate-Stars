@@ -1,0 +1,12 @@
+020735e4  stmdb sp!,{r4,lr}
+020735e8  ldr r1,[0x2073614]
+020735ec  mvn r0,#0x0
+020735f0  ldr r1,[r1,#0x404]
+020735f4  cmp r1,r0
+020735f8  ldmiaeq sp!,{r4,pc}
+020735fc  ldr r4,[0x2073618]
+02073600  ldr r0,[r4,#0x0]
+02073604  bl 0x0205cb14
+02073608  ldr r0,[r4,#0x0]
+0207360c  bl 0x0205cae8
+02073610  ldmia sp!,{r4,pc}

@@ -49,7 +49,7 @@ LAB_02043514:
     (**(code **)(*piVar3 + 0xc))();
     iVar4 = (**(code **)(*piVar2 + 0x68))();
     if (iVar4 == 0) {
-      piVar3 = (int *)jus_AllocDebug(0x70);
+      piVar3 = (int *)FUN_0201a228(0x70);
       if (piVar3 != (int *)0x0) {
         TextureImpInstance_Derived_020965e0::TextureImpInstance_Derived_020965e0
                   (piVar3,DAT_020a1704,0,0);

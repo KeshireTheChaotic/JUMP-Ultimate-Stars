@@ -55,7 +55,7 @@ void ALObjectImp::PostMessage(int param_1,int *param_2)
     }
     iVar3 = *piVar1;
     uVar5 = *(undefined4 *)(param_1 + 0x90);
-    iVar4 = jus_AllocDebug(0x2c,s_ALObjectImp_h_021d3c10,s_PostMessage_021d3be4,0x10a);
+    iVar4 = thunk_FUN_0201a228(0x2c,s_ALObjectImp_h_021d3c10,s_PostMessage_021d3be4,0x10a);
     uVar2 = 0;
     if (iVar4 != 0) {
       uVar2 = jus_Class_021d293c::jus_Class_021d293c

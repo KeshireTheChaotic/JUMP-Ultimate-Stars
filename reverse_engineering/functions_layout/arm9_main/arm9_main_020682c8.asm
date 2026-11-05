@@ -1,0 +1,10 @@
+020682c8  cmp r0,#0x3
+020682ca  bhi 0x020682f8
+020682cc  add r0,r0,r0
+020682ce  add r0,pc
+020682d0  ldrh r0,[r0,#0x6]
+020682d2  lsl r0,r0,#0x10
+020682d4  asr r0,r0,#0x10
+020682d6  add pc,r0
+020682f8  mov r0,#0x0
+020682fa  bx lr

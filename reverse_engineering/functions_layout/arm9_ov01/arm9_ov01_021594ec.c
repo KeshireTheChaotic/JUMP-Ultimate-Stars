@@ -42,21 +42,21 @@ void FUN_021594ec(int param_1)
         if (extraout_r1 == *(int *)(param_1 + 0x304)) {
           iVar2 = FUN_02158c08(*(undefined4 *)(param_1 + iVar5 * 4 + 0x38));
           if (iVar2 == 0) {
-            func_0x021b65e8(*(undefined4 *)(*(int *)(iVar6 + 0x80) + 4),4,&LAB_0215a4e0_1);
+            func_0x021b65e8(*(undefined4 *)(*(int *)(iVar6 + 0x80) + 4),4,0x215a4e1);
           }
           else {
             func_0x021b65e8(*(undefined4 *)(*(int *)(iVar6 + 0x80) + 4),4,
-                            (&PTR_LAB_0215a3b4_1_02169d80)[iVar5]);
+                            (&PTR_FUN_0215a3b4_1_02169d80)[iVar5]);
           }
         }
         else {
           iVar5 = FUN_02158c08(*(undefined4 *)(param_1 + extraout_r1 * 4 + 0x38));
           if (iVar5 == 0) {
-            func_0x021b65e8(*(undefined4 *)(*(int *)(iVar6 + 0x80) + 4),4,&LAB_0215a4e0_1);
+            func_0x021b65e8(*(undefined4 *)(*(int *)(iVar6 + 0x80) + 4),4,0x215a4e1);
           }
           else {
             func_0x021b65e8(*(undefined4 *)(*(int *)(iVar6 + 0x80) + 4),4,
-                            (&PTR_LAB_0215a3b4_1_02169d80)[extraout_r1]);
+                            (&PTR_FUN_0215a3b4_1_02169d80)[extraout_r1]);
           }
         }
       }

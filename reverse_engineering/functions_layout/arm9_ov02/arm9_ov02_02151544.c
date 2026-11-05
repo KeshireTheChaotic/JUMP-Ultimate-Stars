@@ -18,7 +18,8 @@ JGalaxyPlanet::JGalaxyPlanet_Create
   undefined4 uStack_1c;
   
   uStack_1c = param_4;
-  iVar2 = jus_AllocDebug(0x378,s_JGalaxyPlanet_cpp_0215c300,s_JGalaxyPlanet_Create_0215c2e8,0x104);
+  iVar2 = thunk_FUN_0201a228(0x378,s_JGalaxyPlanet_cpp_0215c300,s_JGalaxyPlanet_Create_0215c2e8,
+                             0x104);
   puVar3 = (undefined4 *)0x0;
   if (iVar2 != 0) {
     puVar3 = (undefined4 *)FUN_021518b4();

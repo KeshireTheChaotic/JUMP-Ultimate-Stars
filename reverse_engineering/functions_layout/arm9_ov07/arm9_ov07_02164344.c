@@ -52,8 +52,7 @@ undefined4 CommuMenuWrlsWatchWait::CommuMenuWrlsWatchWait_Add(void)
   int aiStack_24 [4];
   
   puVar2 = (undefined4 *)
-           jus_AllocDebug(100,s_CommuMenuWrlsWatchWait_cpp_0216aaf0,
-                          s_CommuMenuWrlsWatchWait_Add_0216a9a8,300);
+           thunk_FUN_0201a228(100,FUN_0216aaf0,s_CommuMenuWrlsWatchWait_Add_0216a9a8,300);
   FUN_020517fc(puVar2,0,100);
   iVar3 = FUN_020310f4();
   puVar2[2] = iVar3;
@@ -217,7 +216,7 @@ undefined4 CommuMenuWrlsWatchWait::CommuMenuWrlsWatchWait_Add(void)
   FUN_02023c70(*(undefined4 *)(iVar3 + 4),2);
   uVar4 = *puRam02164b30;
   uVar7 = *(undefined4 *)(iVar3 + 4);
-  iVar5 = jus_AllocDebug(0x134,PTR_s_ALWidgetImp_h_02164b34,PTR_s_Create_02164b38,0x3e);
+  iVar5 = thunk_FUN_0201a228(0x134,PTR_s_ALWidgetImp_h_02164b34,PTR_s_Create_02164b38,0x3e);
   if (iVar5 != 0) {
     func_0x021af0f8(iVar5,uVar7,uVar4,PTR_CreateDrawFunc_02164b3c);
   }

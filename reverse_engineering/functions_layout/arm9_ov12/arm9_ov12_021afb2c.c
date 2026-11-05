@@ -7,7 +7,7 @@ void ALWidgetImp::CloneMain(undefined4 param_1)
 {
   int iVar1;
   
-  iVar1 = jus_AllocDebug(0x134,s_ALWidgetImp_h_021d1728,s_CloneMain_021d16d8,0x39);
+  iVar1 = thunk_FUN_0201a228(0x134,s_ALWidgetImp_h_021d1728,s_CloneMain_021d16d8,0x39);
   if (iVar1 == 0) {
     return;
   }

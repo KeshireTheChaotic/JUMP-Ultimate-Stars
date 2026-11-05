@@ -1,0 +1,14 @@
+0215bedc  andeq r0,r0,r0
+0215bee0  andeq r0,r0,r0
+0215bee4  andeq r0,r0,r0
+0215bee8  andeq r0,r0,r0
+0215beec  andeq r0,r0,r0
+0215bef0  andeq r0,r0,r0
+0215bef4  andeq r0,r0,r0
+0215bef8  andeq r0,r0,r0
+0215befc  andeq r0,r0,r0
+0215bf00  andeq r0,r0,r0
+0215bf04  andeq r0,r0,r0
+0215bf08  andeq r0,r0,r0
+0215bf0c  andeq r0,r0,r0
+0215bf10  andeq r0,r0,r0

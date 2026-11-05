@@ -5,7 +5,7 @@ int FUN_02042460(int param_1,undefined4 param_2,undefined4 param_3,int param_4)
   int local_18;
   
   local_18 = param_4;
-  local_18 = jus_AllocDebug(0x3c);
+  local_18 = FUN_0201a228(0x3c);
   if (local_18 != 0) {
     *(undefined1 *)(local_18 + 8) = 0;
     *(undefined4 *)(local_18 + 0x10) = param_2;

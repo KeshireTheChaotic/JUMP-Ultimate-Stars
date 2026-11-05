@@ -28,7 +28,7 @@ undefined4 FUN_020898c8(void)
   }
   DAT_0214bee6 = FUN_020586ac();
   DAT_0214bee0 = &DAT_0214bf40;
-  iVar2 = FUN_02059108(&LAB_02089974_1,&DAT_0214bee0);
+  iVar2 = FUN_02059108(CommLib::ScanFunc + 1,&DAT_0214bee0);
   if (iVar2 == 2) {
     return 1;
   }

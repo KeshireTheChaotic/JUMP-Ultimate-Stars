@@ -20,10 +20,10 @@ void FUN_0215c360(int param_1)
       FUN_0207d418();
     }
     if (*(char *)(DAT_02172960 + 200) == '\0') {
-      FUN_02157494(param_1,0x17,FUN_0215c5d4,&LAB_0215c664,0x10);
+      FUN_02157494(param_1,0x17,FUN_0215c5d4,FUN_0215c664,0x10);
     }
     else {
-      FUN_02157494(param_1,0x17,FUN_0215c488,&LAB_0215c664,0x10);
+      FUN_02157494(param_1,0x17,FUN_0215c488,FUN_0215c664,0x10);
     }
     FUN_0207342c(0x7a,2);
   }

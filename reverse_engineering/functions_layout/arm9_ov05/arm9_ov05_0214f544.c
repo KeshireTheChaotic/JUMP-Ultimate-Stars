@@ -11,7 +11,7 @@ void FUN_0214f544(int param_1)
   else if (*(int *)(iVar1 + 0x28) == 1) {
     FUN_021590dc(*(undefined4 *)(iVar1 + 0x18),0);
   }
-  FUN_02028384(*(undefined4 *)(param_1 + 4),&DAT_0214eb48);
+  FUN_02028384(*(undefined4 *)(param_1 + 4),FUN_0214eb48);
   return;
 }
 

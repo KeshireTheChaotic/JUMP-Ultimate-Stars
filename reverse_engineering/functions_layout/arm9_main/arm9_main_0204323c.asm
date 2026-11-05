@@ -1,0 +1,9 @@
+0204323c  stmdb sp!,{r3,lr}
+02043240  mov r0,#0x7c
+02043244  bl 0x0201a228
+02043248  cmp r0,#0x0
+0204324c  ldmiaeq sp!,{r3,pc}
+02043250  ldr r1,[0x2043260]
+02043254  mov r2,#0x0
+02043258  bl 0x02046e0c
+0204325c  ldmia sp!,{r3,pc}

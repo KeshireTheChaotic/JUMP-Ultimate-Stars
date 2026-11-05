@@ -15,6 +15,7 @@ void FUN_021504f0(void)
   undefined4 local_18;
   undefined1 auStack_14 [8];
   
+                    /* JUS-TAG source_file_inferred="JArenaMissionTry.cpp" */
   FUN_02043264(1);
   FUN_0203d4e4();
   iVar1 = FUN_0203b414(0);

@@ -1,0 +1,9 @@
+021671ac  stmdb sp!,{r4,lr}
+021671b0  mov r4,r0
+021671b4  bl 0x02073840
+021671b8  cmp r0,#0x0
+021671bc  ldmiaeq sp!,{r4,pc}
+021671c0  ldr r0,[r4,#0x4]
+021671c4  ldr r1,[0x21671d0]
+021671c8  bl 0x02028384
+021671cc  ldmia sp!,{r4,pc}

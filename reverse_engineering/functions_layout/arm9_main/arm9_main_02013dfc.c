@@ -17,7 +17,7 @@ jus_TagDLSE::jus_TagDLSE
   param_1[0xf] = param_6;
   param_1[0x10] = 0;
   iVar1 = (**(code **)(*param_3 + 0x68))(param_3,param_4);
-  uVar2 = jus_AllocDebug(iVar1 + 1U & 0xfffffffe);
+  uVar2 = FUN_0201a228(iVar1 + 1U & 0xfffffffe);
   param_1[0xd] = uVar2;
   uVar2 = (**(code **)(*param_3 + 0x68))(param_3,param_4);
   FUN_02051890(param_5,param_1[0xd],uVar2);

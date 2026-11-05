@@ -1,0 +1,12 @@
+0214df64  push {r4,lr}
+0214df66  mov r1,#0x14
+0214df68  add r4,r0,#0x0
+0214df6a  blx 0x02026fd0
+0214df6e  ldr r0,[0x0214df80]
+0214df70  ldr r1,[r0,#0x0]
+0214df72  add r1,r1,#0x1
+0214df74  str r1,[r0,#0x0]
+0214df76  ldr r0,[r4,#0x4]
+0214df78  ldr r1,[0x0214df84]
+0214df7a  blx 0x02028384
+0214df7e  pop {r4,pc}

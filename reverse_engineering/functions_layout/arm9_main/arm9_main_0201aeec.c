@@ -16,7 +16,7 @@ void FUN_0201aeec(undefined4 param_1,uint param_2)
     (**(code **)(*DAT_020a1088 + 4))();
     return;
   }
-  iVar1 = jus_AllocDebug(8);
+  iVar1 = FUN_0201a228(8);
   uVar2 = 0;
   if (iVar1 != 0) {
     uVar2 = jus_Class_02093ee4::jus_Class_02093ee4();

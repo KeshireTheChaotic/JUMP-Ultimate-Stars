@@ -12,7 +12,7 @@ void FUN_0215054c(int param_1,undefined4 param_2,undefined4 param_3,undefined4 p
     if (-1 < *(char *)(iVar2 + 0xa5)) {
       *(char *)(iVar2 + 0xa7) = *(char *)(iVar2 + 0xa5);
       FUN_021504b8(iVar2,(int)*(char *)(iVar2 + 0xa5),5);
-      FUN_02028384(*(undefined4 *)(param_1 + 4),&LAB_021505a0_1);
+      FUN_02028384(*(undefined4 *)(param_1 + 4),0x21505a1);
       return;
     }
     FUN_02028384(*(undefined4 *)(param_1 + 4),0x215052d);

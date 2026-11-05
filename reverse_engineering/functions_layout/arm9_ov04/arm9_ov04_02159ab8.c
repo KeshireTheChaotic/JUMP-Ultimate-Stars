@@ -19,7 +19,7 @@ void FUN_02159ab8(int param_1)
       FUN_0215570c(*(undefined4 *)(iVar5 + 0xc4),uVar1);
       FUN_02155790(*(undefined4 *)(iVar5 + 0xc4),1);
       FUN_0215446c(*(undefined4 *)(iVar5 + 0xdc),uVar1);
-      FUN_02028384(*(undefined4 *)(*(int *)(iVar5 + 0xe0) + 4),&DAT_0215a030);
+      FUN_02028384(*(undefined4 *)(*(int *)(iVar5 + 0xe0) + 4),FUN_0215a030);
       FUN_02155008(*(undefined4 *)(iVar5 + 0xb8));
       FUN_02028384(*(undefined4 *)(param_1 + 4),FUN_02159ea8);
       return;
@@ -41,7 +41,7 @@ void FUN_02159ab8(int param_1)
     FUN_02155790(*(undefined4 *)(iVar5 + 0xc4),0);
     FUN_0207342c(0x7c,3);
     FUN_02157b48(*(undefined4 *)(iVar5 + 0xd0));
-    FUN_02028384(*(undefined4 *)(*(int *)(iVar5 + 0xe0) + 4),&DAT_0215a030);
+    FUN_02028384(*(undefined4 *)(*(int *)(iVar5 + 0xe0) + 4),FUN_0215a030);
     FUN_02155008(*(undefined4 *)(iVar5 + 0xb8));
     FUN_02028384(*(undefined4 *)(param_1 + 4),FUN_02159f38);
     return;
@@ -50,7 +50,7 @@ void FUN_02159ab8(int param_1)
   FUN_0215570c(*(undefined4 *)(iVar5 + 0xc4),uVar3);
   FUN_02155790(*(undefined4 *)(iVar5 + 0xc4),1);
   FUN_02157b10(*(undefined4 *)(iVar5 + 0xd0));
-  FUN_02028384(*(undefined4 *)(*(int *)(iVar5 + 0xe0) + 4),&DAT_0215a030);
+  FUN_02028384(*(undefined4 *)(*(int *)(iVar5 + 0xe0) + 4),FUN_0215a030);
   FUN_02155008(*(undefined4 *)(iVar5 + 0xb8));
   FUN_02159900(0x1e);
   FUN_0214ce64();

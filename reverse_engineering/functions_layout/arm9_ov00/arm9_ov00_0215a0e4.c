@@ -28,13 +28,13 @@ undefined4 * OptionSaveDelete::OptionSaveDelete_Create(undefined4 param_1)
   undefined4 local_28;
   
   puVar1 = (undefined4 *)
-           jus_AllocDebug(0x2c,s_OptionSaveDelete_cpp_02161708,s_OptionSaveDelete_Create_021616f0,
-                          0xbb);
+           thunk_FUN_0201a228(0x2c,s_OptionSaveDelete_cpp_02161708,
+                              s_OptionSaveDelete_Create_021616f0,0xbb);
   FUN_020517fc(puVar1,0,0x2c);
   *puVar1 = param_1;
-  iVar2 = jus_AllocDebug(0x78,s_ALNodeImp_h_02161148,s_Create_0216167c,0x4c3);
+  iVar2 = thunk_FUN_0201a228(0x78,FUN_02161148,&DAT_0216167c,0x4c3);
   if (iVar2 != 0) {
-    jus_Class_0209c0b4::jus_Class_0209c0b4(iVar2,FUN_02024a30,1);
+    jus_TagNDGR_0209c0b4::jus_TagNDGR_0209c0b4(iVar2,FUN_02024a30,1);
   }
   iVar2 = FUN_0214ed84();
   puVar1[1] = iVar2;
@@ -53,7 +53,7 @@ undefined4 * OptionSaveDelete::OptionSaveDelete_Create(undefined4 param_1)
     iVar2 = FUN_0203b404();
     FUN_021583dc(0xb1000d,0xb10000,*(undefined4 *)(iVar2 + 0x88),&DAT_0216169c,puVar1[1],0x81);
   }
-  iVar2 = jus_AllocDebug(0xcc,s_ALWidget_inl_02161154,s_Create_02161684,0x1de);
+  iVar2 = thunk_FUN_0201a228(0xcc,FUN_02161154,&DAT_02161684,0x1de);
   piVar3 = (int *)0x0;
   if (iVar2 != 0) {
     piVar3 = (int *)func_0x021af26c(iVar2,FUN_0215a9a0,FUN_0215aa18,0);

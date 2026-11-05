@@ -11,8 +11,8 @@ int * JQuizMainTimeGaugeBG::JQuizMainTimeGaugeBGClass_Create
   int iVar2;
   int *piVar3;
   
-  piVar1 = (int *)jus_AllocDebug(4,s_JQuizMainTimeGaugeBG_cpp_02160f30,
-                                 s_JQuizMainTimeGaugeBGClass_Create_02160f0c,0x25,param_4);
+  piVar1 = (int *)thunk_FUN_0201a228(4,s_JQuizMainTimeGaugeBG_cpp_02160f30,
+                                     s_JQuizMainTimeGaugeBGClass_Create_02160f0c,0x25,param_4);
   FUN_020517fc(piVar1,0,4);
   piVar3 = *(int **)(*(int *)(*(int *)(param_1 + 4) + 100) + 0x20);
   if (piVar3[0xe] == 0) {

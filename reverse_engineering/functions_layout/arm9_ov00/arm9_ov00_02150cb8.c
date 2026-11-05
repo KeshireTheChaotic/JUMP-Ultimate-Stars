@@ -14,7 +14,7 @@ int ALControllerImp::Create
   
   uVar3 = param_1[1];
   uVar4 = *param_1;
-  iVar1 = jus_AllocDebug(0x4c,s_ALControllerImp_h_02160d6c,s_Create_02160d20,0x2ef);
+  iVar1 = thunk_FUN_0201a228(0x4c,FUN_02160d6c,&DAT_02160d20,0x2ef);
   piVar2 = (int *)0x0;
   if (iVar1 != 0) {
     piVar2 = (int *)jus_TagIPMV::jus_TagIPMV

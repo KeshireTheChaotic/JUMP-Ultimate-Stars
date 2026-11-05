@@ -52,7 +52,7 @@ void FUN_021916b0(void)
     iVar3 = 0xb;
   }
   FUN_021912c0(iVar3);
-  FUN_02199b70(&LAB_02190ec8_1);
+  FUN_02199b70(0x2190ec9);
   FUN_02191330(0x2192e0d);
   FUN_0219137c(&DAT_021a9d34);
   return;

@@ -1,0 +1,34 @@
+02051c0c  stmdb sp!,{r4,r5,lr}
+02051c10  sub sp,sp,#0x4
+02051c14  mov r1,#0xc
+02051c18  mul r4,r0,r1
+02051c1c  ldr r2,[0x2051c94]
+02051c20  ldr r3,[0x2051c98]
+02051c24  mov r0,r0, lsl #0x1
+02051c28  ldr r1,[r2,r4]
+02051c2c  ldrh r3,[r3,r0]
+02051c30  mov r5,#0x1
+02051c34  mov r0,#0x0
+02051c38  str r0,[r2,r4]
+02051c3c  cmp r1,#0x0
+02051c40  mov r5,r5, lsl r3
+02051c44  beq 0x02051c54
+02051c48  ldr r0,[0x2051c9c]
+02051c4c  ldr r0,[r0,r4]
+02051c50  blx r1
+02051c54  ldr r0,[0x2051ca0]
+02051c58  ldr r1,[0x2051ca4]
+02051c5c  add r0,r0,#0x3000
+02051c60  ldr r2,[r0,#0xff8]
+02051c64  orr r2,r2,r5
+02051c68  str r2,[r0,#0xff8]
+02051c6c  ldr r0,[r1,r4]
+02051c70  cmp r0,#0x0
+02051c74  addne sp,sp,#0x4
+02051c78  ldmiane sp!,{r4,r5,lr}
+02051c7c  bxne lr
+02051c80  mov r0,r5
+02051c84  bl 0x02051d14
+02051c88  add sp,sp,#0x4
+02051c8c  ldmia sp!,{r4,r5,lr}
+02051c90  bx lr

@@ -35,7 +35,7 @@ void ALControllerImp::Create(int param_1)
   (**(code **)(**(int **)(iVar1 + 4) + 0xd8))(*(int **)(iVar1 + 4),1);
   local_3c[2] = 0x20000;
   FUN_0214d650(iVar1,local_3c + 2);
-  FUN_0214f960(iVar1,&DAT_0215bf0c);
+  FUN_0214f960(iVar1,0x215bf0c);
   piVar2 = *(int **)(*(int *)(iVar1 + 4) + 100);
   (**(code **)(*piVar2 + 0x68))(piVar2,*(undefined4 *)(param_1 + 0x88));
   FUN_0214d678(iVar1,*(undefined4 *)(param_1 + 0x68));
@@ -70,13 +70,13 @@ void ALControllerImp::Create(int param_1)
   FUN_0214f9a4(auStack_50,iVar1);
   FUN_0214e39c(auStack_30,&local_48,auStack_50,&local_54);
   FUN_0214ef10(&local_44,iVar1,s_Position_0215c048);
-  iVar4 = jus_AllocDebug(0x4c,s_ALControllerImp_h_0215c008,s_Create_0215bec0,0x2ef);
+  iVar4 = thunk_FUN_0201a228(0x4c,s_ALControllerImp_h_0215c008,s_Create_0215bec0,0x2ef);
   if (iVar4 != 0) {
     jus_TagIPMV::jus_TagIPMV(iVar4,0,local_44,local_40,0x494c,auStack_30,8,0,1);
   }
   iVar4 = FUN_0214f194();
   uVar6 = *(undefined4 *)(iVar4 + 4);
-  iVar4 = jus_AllocDebug(0x48,s_ALControllerImp_h_0215bfe0,s_Create_0215beb0,0x3e3);
+  iVar4 = thunk_FUN_0201a228(0x48,s_ALControllerImp_h_0215bfe0,&DAT_0215beb0,0x3e3);
   if (iVar4 != 0) {
     jus_TagDLST::jus_TagDLST(iVar4,0,uVar6,0x78,0);
   }

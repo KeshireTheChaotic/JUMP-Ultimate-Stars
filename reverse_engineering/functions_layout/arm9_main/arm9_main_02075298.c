@@ -13,8 +13,8 @@ int * MissionData::MissionData_Create
                     /* JUS-TAG
                        strings=["MissionData.cpp","MissionData_Create","jgalaxy/battle.bin","jgalaxy/mission.bin"]
                         */
-  piVar1 = (int *)jus_AllocDebug(0x10,s_MissionData_cpp_0209f3e8,s_MissionData_Create_0209f3d4,0x25,
-                                 param_4);
+  piVar1 = (int *)thunk_FUN_0201a228(0x10,s_MissionData_cpp_0209f3e8,s_MissionData_Create_0209f3d4,
+                                     0x25,param_4);
   FUN_020517fc(piVar1,0,0x10);
   *(char *)(piVar1 + 3) = (char)param_1;
   if (param_1 == 0) {

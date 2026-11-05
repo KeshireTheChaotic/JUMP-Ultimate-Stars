@@ -20,12 +20,12 @@ int * JQuizMainMultiRankFuki::JQuizMainMultiRankFukiClass_Create(int param_1)
   int local_30;
   int local_2c [2];
   
-  piVar2 = (int *)jus_AllocDebug(0x20,s_JQuizMainMultiRankFuki_cpp_021611e0,
-                                 s_JQuizMainMultiRankFukiClass_Crea_021611bc,0x4d);
+  piVar2 = (int *)thunk_FUN_0201a228(0x20,s_JQuizMainMultiRankFuki_cpp_021611e0,
+                                     s_JQuizMainMultiRankFukiClass_Crea_021611bc,0x4d);
   FUN_020517fc(piVar2,0,0x20);
   uVar1 = _DAT_021d5154;
   uVar6 = *(undefined4 *)(param_1 + 4);
-  iVar3 = jus_AllocDebug(0x134,s_ALWidgetImp_h_021608d4,s_Create_021611b4,0x3e);
+  iVar3 = thunk_FUN_0201a228(0x134,s_ALWidgetImp_h_021608d4,s_Create_021611b4,0x3e);
   piVar4 = (int *)0x0;
   if (iVar3 != 0) {
     piVar4 = (int *)func_0x021af0f8(iVar3,uVar6,uVar1,ALWidgetBaseImp::CreateDrawFunc);

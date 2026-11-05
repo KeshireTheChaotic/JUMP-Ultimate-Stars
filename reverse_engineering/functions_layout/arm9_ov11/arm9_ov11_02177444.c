@@ -235,7 +235,7 @@ void FUN_02177444(int param_1,undefined4 param_2,undefined4 param_3,undefined4 p
             }
           }
         }
-        (*(code *)(&PTR_LAB_02181864)[*(char *)(iVar12 + 0x18b)])(iVar12);
+        (*(code *)(&PTR_FUN_02181864)[*(char *)(iVar12 + 0x18b)])(iVar12);
         FUN_02175628(*(undefined4 *)(iVar12 + 0x10));
         FUN_02175628();
         uVar5 = FUN_02175628();

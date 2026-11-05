@@ -1,4 +1,4 @@
-"""Resource registry: groups, edge resolution, where-used (jus_package.registry)."""
+﻿"""Resource registry: groups, edge resolution, where-used (jus_package.registry)."""
 import os
 import sys
 import unittest
@@ -33,10 +33,10 @@ class RealRegistry(unittest.TestCase):
 
     def test_everything_registered_and_resolved(self):
         s = self.reg.stats()
-        self.assertEqual(s['resources'], 12733)
+        self.assertEqual(s['resources'], 12733 + 2)    # + bin/koma.bin, bin/kshape.bin
         self.assertEqual(s['unresolved'], 0, self.reg.unresolved[:5])
         self.assertEqual(self.reg.errors, [])
-        for kind in ('texture', 'image', 'spawn', 'pursuer', 'pursuer-use', 'collision', 'tiles'):
+        for kind in ('texture', 'image', 'spawn', 'pursuer', 'pursuer-use', 'collision', 'tiles', 'koma-card'):
             self.assertGreater(s['by_kind'].get(kind, 0), 0, kind)
 
     def test_where_used_spawned_effect(self):
@@ -66,3 +66,5 @@ class RealRegistry(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
+

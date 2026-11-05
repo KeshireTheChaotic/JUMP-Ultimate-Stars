@@ -1,0 +1,9 @@
+0215d6d4  mov r2,#0x0
+0215d6d8  strb r2,[r0,#0xdb]
+0215d6dc  ldr r1,[r0,#0x1a0]
+0215d6e0  sub r0,r2,#0x1
+0215d6e4  ldr r1,[r1,#0x174]
+0215d6e8  ldr r1,[r1,#0x4]
+0215d6ec  strb r2,[r1,#0x5c]
+0215d6f0  str r0,[r1,#0x54]
+0215d6f4  bx lr

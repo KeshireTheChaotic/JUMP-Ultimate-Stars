@@ -10,7 +10,7 @@ void FUN_02162464(int param_1)
   uVar1 = FUN_0214dd50();
   FUN_0214dd6c(uVar1,5);
   *(undefined1 *)(iVar2 + 0xa0) = 1;
-  FUN_02028384(*(undefined4 *)(param_1 + 4),&DAT_021621e4);
+  FUN_02028384(*(undefined4 *)(param_1 + 4),FUN_021621e4);
   return;
 }
 

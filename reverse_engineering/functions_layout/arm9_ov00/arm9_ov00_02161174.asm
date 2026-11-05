@@ -1,0 +1,5 @@
+02161174  swivs 0x434c41
+02161178  swivs 0x72746e
+0216117c  rsbvc r6,r5,#0x6c00
+02161180  cdpcs p13,0x7,cr6,cr0,cr9,0x2
+02161184  andeq r0,r0,r8, rrx

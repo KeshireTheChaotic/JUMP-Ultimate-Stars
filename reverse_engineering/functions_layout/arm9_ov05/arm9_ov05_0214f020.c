@@ -24,7 +24,7 @@ void FUN_0214f020(int param_1)
                     (*(undefined4 *)(iVar3 + 8),uVar2,*(undefined1 *)(iVar3 + 0x40),
                      *(undefined1 *)(iVar3 + 0x41));
   *(undefined4 *)(iVar3 + 0x18) = uVar2;
-  FUN_02159088(uVar2,&LAB_0214ea0c,iVar3);
+  FUN_02159088(uVar2,FUN_0214ea0c,iVar3);
   FUN_0215a6a8(*(undefined4 *)(iVar3 + 0x18),*(undefined4 *)(iVar3 + 0xc),0xfffffff0,0);
   *(undefined4 *)(iVar3 + 0xc) = 0;
   FUN_02154f78(*(undefined4 *)(iVar3 + 0x1c));

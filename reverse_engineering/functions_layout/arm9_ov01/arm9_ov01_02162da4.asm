@@ -1,0 +1,11 @@
+02162da4  push {r4,r5,r6,lr}
+02162da6  add r6,r0,#0x0
+02162da8  add r4,r1,#0x0
+02162daa  add r0,r2,#0x0
+02162dac  blx 0x0214f7f8
+02162db0  add r0,r4,#0x0
+02162db2  blx 0x02035c90
+02162db6  blx 0x02158558
+02162dba  add r4,r0,#0x0
+02162dbc  blx 0x02036ab8
+02162dc0  blx 0x0214d37c

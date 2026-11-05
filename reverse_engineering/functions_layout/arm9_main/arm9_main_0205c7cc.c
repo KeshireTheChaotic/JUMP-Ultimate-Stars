@@ -14,7 +14,7 @@ undefined4 FUN_0205c7cc(int param_1,int param_2,int param_3)
     return 0;
   }
   if (param_2 != 0) {
-    uVar2 = FUN_0205cc44(param_2,*(undefined4 *)(param_1 + 0x1c),&LAB_0205c394,param_1);
+    uVar2 = FUN_0205cc44(param_2,*(undefined4 *)(param_1 + 0x1c),FUN_0205c394,param_1);
     *(undefined4 *)(param_1 + 0x8c) = uVar2;
     if (*(int *)(param_1 + 0x8c) == 0) {
       return 0;
@@ -28,7 +28,7 @@ undefined4 FUN_0205c7cc(int param_1,int param_2,int param_3)
     if (iVar1 != *(int *)(param_1 + 0x1c)) {
       return 0;
     }
-    uVar2 = FUN_0205cc44(param_2,*(undefined4 *)(param_1 + 0x24),&LAB_0205c388,param_1);
+    uVar2 = FUN_0205cc44(param_2,*(undefined4 *)(param_1 + 0x24),FUN_0205c388,param_1);
     *(undefined4 *)(param_1 + 0x84) = uVar2;
     if (*(int *)(param_1 + 0x84) == 0) {
       return 0;
@@ -43,7 +43,7 @@ undefined4 FUN_0205c7cc(int param_1,int param_2,int param_3)
       return 0;
     }
     if ((param_3 != 0) && (*(int *)(param_1 + 0x14) != 0)) {
-      uVar2 = FUN_0205cc44(param_2,*(int *)(param_1 + 0x14),&LAB_0205c37c,param_1);
+      uVar2 = FUN_0205cc44(param_2,*(int *)(param_1 + 0x14),FUN_0205c37c,param_1);
       *(undefined4 *)(param_1 + 0x88) = uVar2;
       if (*(int *)(param_1 + 0x88) == 0) {
         return 0;

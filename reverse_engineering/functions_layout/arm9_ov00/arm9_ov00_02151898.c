@@ -13,8 +13,8 @@ void FUN_02151898(int *param_1,undefined4 param_2,undefined4 param_3,undefined4 
   param_1[0x425] = 0;
   iVar1 = *(int *)(*param_1 + 4);
   if ((*(byte *)(iVar1 + 0x28) & 0xf) >> 3 != 0) {
-    if (*(undefined1 **)(iVar1 + 0x40) != &LAB_0202836c) {
-      *(undefined1 **)(iVar1 + 0x40) = &LAB_0202836c;
+    if (*(code **)(iVar1 + 0x40) != FUN_0202836c) {
+      *(code **)(iVar1 + 0x40) = FUN_0202836c;
     }
     bVar2 = *(byte *)(iVar1 + 0x28) & 0xfb | 4;
     *(byte *)(iVar1 + 0x28) = bVar2;

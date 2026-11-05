@@ -15,7 +15,7 @@ void ALObjectImp::PostMessage
   uVar2 = *(undefined4 *)(param_1 + 4);
   uVar3 = *(undefined4 *)(param_2 + 4);
   puVar1 = (undefined4 *)
-           jus_AllocDebug(0x2c,s_ALObjectImp_h_020a055c,s_PostMessage_020a0550,0x10a,param_4);
+           thunk_FUN_0201a228(0x2c,s_ALObjectImp_h_020a055c,s_PostMessage_020a0550,0x10a,param_4);
   if (puVar1 != (undefined4 *)0x0) {
     *puVar1 = &DAT_02094584;
     puVar1[3] = 0;

@@ -1,0 +1,9 @@
+0216339c  stmdb sp!,{r4,lr}
+021633a0  mov r4,r0
+021633a4  bl 0x02073fe4
+021633a8  cmp r0,#0x0
+021633ac  ldmiaeq sp!,{r4,pc}
+021633b0  ldr r0,[r4,#0x4]
+021633b4  ldr r1,[0x21633c0]
+021633b8  bl 0x02028384
+021633bc  ldmia sp!,{r4,pc}

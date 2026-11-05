@@ -41,7 +41,7 @@ void FUN_021a3390(int param_1)
 LAB_021a3474:
             FUN_0219a0a4();
             *(undefined1 *)(iVar3 + 10) = 1;
-            FUN_02028384(*(undefined4 *)(param_1 + 4),&DAT_021a3498);
+            FUN_02028384(*(undefined4 *)(param_1 + 4),FUN_021a3498);
             return;
           }
           *(undefined1 *)(iVar3 + 0xd) = 0;

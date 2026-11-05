@@ -21,8 +21,8 @@ void ALMotionDynamic::SetMotionIPType
     if (puVar1[7] != 0) {
       FUN_0201b268();
     }
-    uVar3 = jus_AllocDebug(*(undefined2 *)(puVar1[6] + 4),s_ALMotionDynamic_cpp_021d28a0,
-                           s_SetMotionIPType_021d2830,0x45f);
+    uVar3 = thunk_FUN_0201a228(*(undefined2 *)(puVar1[6] + 4),s_ALMotionDynamic_cpp_021d28a0,
+                               s_SetMotionIPType_021d2830,0x45f);
     puVar1[7] = uVar3;
     iVar2 = (**(code **)(*(int *)*puVar1 + 0x68))((int *)*puVar1,param_5);
     puVar1[8] = (uint)*(ushort *)(puVar1[6] + 4) + iVar2;

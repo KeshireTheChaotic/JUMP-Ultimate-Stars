@@ -17,8 +17,7 @@ JArenaRankBtlAfterLstAll::JARBAftLstAll_Add
   
   uStack_14 = param_4;
   puVar2 = (undefined1 *)
-           jus_AllocDebug(0x58c,s_JArenaRankBtlAfterLstAll_cpp_0215e378,s_JARBAftLstAll_Add_0215e24c
-                          ,0x8b);
+           thunk_FUN_0201a228(0x58c,s_JArenaRankBtlAfterLstAll_cpp_0215e378,FUN_0215e24c,0x8b);
   FUN_0215271c(puVar2,0x58c);
   uVar3 = FUN_02020d90();
   FUN_02152754(auStack_18,0x85);

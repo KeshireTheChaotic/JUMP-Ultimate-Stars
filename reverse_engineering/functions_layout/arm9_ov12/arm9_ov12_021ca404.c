@@ -15,12 +15,12 @@ int * ALFont_021d4974::ALFont_021d4974
   uVar1 = (**(code **)(*param_1 + 0x2c))();
   *(bool *)(param_1 + 0x1e) = 8 < uVar1;
   if (8 < uVar1) {
-    iVar2 = jus_AllocDebug(0x4000,s_ALTextDS_cpp_021d4e30,&DAT_021d48dc,0x567);
+    iVar2 = thunk_FUN_0201a228(0x4000,s_ALTextDS_cpp_021d4e30,&DAT_021d48dc,0x567);
     param_1[0x1d] = iVar2;
     MIi_CpuClear32(0,iVar2,0x4000);
   }
   else {
-    iVar2 = jus_AllocDebug(0x2000,s_ALTextDS_cpp_021d4e30,&DAT_021d48dc,0x56a);
+    iVar2 = thunk_FUN_0201a228(0x2000,s_ALTextDS_cpp_021d4e30,&DAT_021d48dc,0x56a);
     param_1[0x1d] = iVar2;
     MIi_CpuClear32(0,iVar2,0x2000);
   }

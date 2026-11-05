@@ -1,0 +1,15 @@
+02169a14  push {r3,lr}
+02169a16  ldr r1,[r0,#0x4]
+02169a18  ldr r2,[r1,#0x10]
+02169a1a  ldr r1,[r2,#0x54]
+02169a1c  sub r1,r1,#0x1
+02169a1e  str r1,[r2,#0x54]
+02169a20  cmp r1,#0x0
+02169a22  bgt 0x02169a32
+02169a24  mov r1,#0x1
+02169a26  add r2,#0x5c
+02169a28  strb r1,[r2,#0x0]
+02169a2a  ldr r0,[r0,#0x4]
+02169a2c  ldr r1,[0x02169a34]
+02169a2e  blx 0x02028384
+02169a32  pop {r3,pc}

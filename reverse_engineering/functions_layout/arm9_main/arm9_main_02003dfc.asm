@@ -1,0 +1,12 @@
+02003dfc  ldr r1,[0x02003e14]
+02003dfe  ldr r0,[0x02003e18]
+02003e00  ldr r2,[r1,#0x0]
+02003e02  add r3,r2,#0x0
+02003e04  mul r3,r0
+02003e06  ldr r0,[0x02003e1c]
+02003e08  add r0,r3,r0
+02003e0a  str r0,[r1,#0x0]
+02003e0c  lsr r1,r0,#0x10
+02003e0e  ldr r0,[0x02003e20]
+02003e10  and r0,r1
+02003e12  bx lr

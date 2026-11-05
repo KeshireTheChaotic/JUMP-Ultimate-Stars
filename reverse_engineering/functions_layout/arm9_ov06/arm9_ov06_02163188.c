@@ -22,8 +22,8 @@ int * BattleMapGimmick::BattleMapGimmick_Create
   }
   if (DAT_020afebc != '\0' && cVar1 != '\0') {
     uStack_20 = param_4;
-    piVar2 = (int *)jus_AllocDebug(0x20,s_BattleMapGimmick_cpp_02172538,
-                                   s_BattleMapGimmick_Create_02172420,0x139);
+    piVar2 = (int *)thunk_FUN_0201a228(0x20,s_BattleMapGimmick_cpp_02172538,
+                                       s_BattleMapGimmick_Create_02172420,0x139);
     FUN_020517fc(piVar2,0,0x20);
     *(undefined1 *)(piVar2 + 7) = *(undefined1 *)(param_3 + 1);
     piVar2[4] = param_1;
@@ -55,9 +55,9 @@ int * BattleMapGimmick::BattleMapGimmick_Create
     iVar3 = BattlePrmData::Battle_PrmDataInit(2,0);
     piVar2[6] = iVar3;
     *(undefined **)(iVar3 + 0x10) = &DAT_02172438;
-    iVar3 = jus_AllocDebug((short)(ushort)*(byte *)(piVar2 + 7) * 0x14,
-                           s_BattleMapGimmick_cpp_02172538,s_BattleMapGimmick_Create_02172420,0x154)
-    ;
+    iVar3 = thunk_FUN_0201a228((short)(ushort)*(byte *)(piVar2 + 7) * 0x14,
+                               s_BattleMapGimmick_cpp_02172538,s_BattleMapGimmick_Create_02172420,
+                               0x154);
     piVar2[5] = iVar3;
     FUN_020517fc(iVar3,0,(short)(ushort)*(byte *)(piVar2 + 7) * 0x14);
     iVar3 = FUN_02083624(FUN_021635c0,0,0x2000,0x8002800,0);

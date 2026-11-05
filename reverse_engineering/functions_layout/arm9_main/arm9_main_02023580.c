@@ -11,7 +11,7 @@ void FUN_02023580(int param_1)
   if (iVar1 != 0) {
     return;
   }
-  iVar1 = jus_AllocDebug(0x3c);
+  iVar1 = FUN_0201a228(0x3c);
   uVar2 = 0;
   if (iVar1 != 0) {
     uVar2 = jus_Class_02096408::jus_Class_02096408(iVar1,piVar3,0);

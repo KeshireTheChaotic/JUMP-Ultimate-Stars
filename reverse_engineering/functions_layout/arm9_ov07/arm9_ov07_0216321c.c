@@ -14,8 +14,8 @@ int CommuMenuQuizLeaderSel::CommuMenuQuizLeaderSel_Add(void)
   undefined4 uStack_c;
   
   uStack_c = in_r3;
-  piVar1 = (int *)jus_AllocDebug(0x4c,s_CommuMenuQuizLeaderSel_cpp_0216a7c8,
-                                 s_CommuMenuQuizLeaderSel_Add_0216a7ac,0x56);
+  piVar1 = (int *)thunk_FUN_0201a228(0x4c,s_CommuMenuQuizLeaderSel_cpp_0216a7c8,
+                                     s_CommuMenuQuizLeaderSel_Add_0216a7ac,0x56);
   FUN_020517fc(piVar1,0,0x4c);
   iVar2 = 0;
   do {
@@ -39,14 +39,14 @@ int CommuMenuQuizLeaderSel::CommuMenuQuizLeaderSel_Add(void)
   *(code **)(piVar1[0x12] + 0x18) = FUN_02163464;
   *(undefined1 **)(piVar1[0x12] + 0x1c) = &LAB_021634b4;
   *(code **)(piVar1[0x12] + 0x20) = FUN_021634bc;
-  *(undefined1 **)(piVar1[0x12] + 0x24) = &LAB_02163500;
+  *(code **)(piVar1[0x12] + 0x24) = FUN_02163500;
   *(undefined1 *)piVar1[0x12] = 0;
   *(undefined1 *)(piVar1[0x12] + 1) = 0;
   *(undefined1 *)(piVar1[0x12] + 2) = 0;
   iVar2 = FUN_02026f94();
   piVar1[1] = iVar2;
   (**(code **)(**(int **)(iVar2 + 4) + 0x24))(*(int **)(iVar2 + 4),piVar1);
-  FUN_02028384(*(undefined4 *)(piVar1[1] + 4),&LAB_0216339c);
+  FUN_02028384(*(undefined4 *)(piVar1[1] + 4),FUN_0216339c);
   local_10 = 0x80000;
   (**(code **)(**(int **)(piVar1[1] + 4) + 0xa0))(*(int **)(piVar1[1] + 4),&local_10);
   iVar2 = FUN_0215656c(piVar1[0x12]);

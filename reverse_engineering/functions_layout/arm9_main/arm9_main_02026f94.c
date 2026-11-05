@@ -4,7 +4,7 @@ void FUN_02026f94(void)
 {
   int iVar1;
   
-  iVar1 = jus_AllocDebug(8);
+  iVar1 = FUN_0201a228(8);
   if (iVar1 == 0) {
     return;
   }

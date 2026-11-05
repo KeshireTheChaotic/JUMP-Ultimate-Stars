@@ -30,8 +30,8 @@ int * SelectStandby::SelectStandby_Create(int param_1,int param_2,undefined1 par
   int local_24;
   undefined4 local_20;
   
-  piVar1 = (int *)jus_AllocDebug(0x6c,s_SelectStandby_cpp_0216a9e4,s_SelectStandby_Create_0216a960,
-                                 0x81);
+  piVar1 = (int *)thunk_FUN_0201a228(0x6c,s_SelectStandby_cpp_0216a9e4,
+                                     s_SelectStandby_Create_0216a960,0x81);
   piVar1[0x16] = param_1;
   piVar1[0x17] = param_2;
   *(undefined1 *)(piVar1 + 0x1a) = param_3;
@@ -47,9 +47,9 @@ int * SelectStandby::SelectStandby_Create(int param_1,int param_2,undefined1 par
   piVar1[2] = iVar2;
   iVar2 = FUN_020101f4(s_common_title_icon_2d_aar_0216aa34,0);
   piVar1[3] = iVar2;
-  iVar2 = jus_AllocDebug(0x78,s_ALNodeImp_h_0216a92c,s_Create_0216a914,0x4c3);
+  iVar2 = thunk_FUN_0201a228(0x78,s_ALNodeImp_h_0216a92c,s_Create_0216a914,0x4c3);
   if (iVar2 != 0) {
-    jus_Class_0209c0b4::jus_Class_0209c0b4(iVar2,FUN_02024a30,1);
+    jus_TagNDGR_0209c0b4::jus_TagNDGR_0209c0b4(iVar2,FUN_02024a30,1);
   }
   iVar2 = FUN_0214f340();
   *piVar1 = iVar2;
@@ -63,7 +63,7 @@ int * SelectStandby::SelectStandby_Create(int param_1,int param_2,undefined1 par
   FUN_02163ee0(acStack_34,&local_54,&local_50,&local_4c);
   pcVar8 = acStack_34;
   FUN_0214f2a4(&local_5c,*piVar1,s_Position_0216aa50);
-  iVar2 = jus_AllocDebug(0x4c,s_ALControllerImp_h_0216a94c,s_Create_0216a924,0x2ef);
+  iVar2 = thunk_FUN_0201a228(0x4c,s_ALControllerImp_h_0216a94c,s_Create_0216a924,0x2ef);
   if (iVar2 != 0) {
     jus_TagIPMV::jus_TagIPMV(iVar2,0,local_5c,local_58,0x494c,pcVar8,8,0,0);
   }

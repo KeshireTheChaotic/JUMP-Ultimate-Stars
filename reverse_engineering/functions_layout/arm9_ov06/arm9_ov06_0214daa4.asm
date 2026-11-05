@@ -1,0 +1,10 @@
+0214daa4  push {r4,lr}
+0214daa6  mov r1,#0x0
+0214daa8  add r4,r0,#0x0
+0214daaa  bl 0x0214dadc
+0214daae  cmp r0,#0x0
+0214dab0  beq 0x0214daba
+0214dab2  ldr r0,[r4,#0x4]
+0214dab4  ldr r1,[0x0214dabc]
+0214dab6  blx 0x02028384
+0214daba  pop {r4,pc}

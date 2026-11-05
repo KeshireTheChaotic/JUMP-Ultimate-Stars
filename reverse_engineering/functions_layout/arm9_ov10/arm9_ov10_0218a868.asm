@@ -1,0 +1,15 @@
+0218a868  ldr r0,[r0,#0xc]
+0218a86a  cmp r0,#0x5
+0218a86c  bge 0x0218a872
+0218a86e  mov r0,#0x0
+0218a870  bx lr
+0218a872  cmp r0,#0x5
+0218a874  bne 0x0218a87a
+0218a876  mov r0,#0x1
+0218a878  bx lr
+0218a87a  cmp r0,#0x6
+0218a87c  bne 0x0218a882
+0218a87e  mov r0,#0x2
+0218a880  bx lr
+0218a882  mov r0,#0x3
+0218a884  bx lr

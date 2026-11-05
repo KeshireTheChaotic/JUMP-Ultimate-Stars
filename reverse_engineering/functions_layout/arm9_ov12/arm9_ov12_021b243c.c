@@ -23,7 +23,7 @@ int * ALMotionDynamic_021d266c::ALMotionDynamic_021d266c
   uVar5 = 0;
   if (uVar1 != 0) {
     for (; uVar5 < uVar1; uVar5 = uVar5 + 1) {
-      iVar2 = jus_AllocDebug(0x44,s_ALMotionDynamic_cpp_021d28a0,&DAT_021d27d8,0x86);
+      iVar2 = thunk_FUN_0201a228(0x44,s_ALMotionDynamic_cpp_021d28a0,&DAT_021d27d8,0x86);
       piVar4 = (int *)0x0;
       if (iVar2 != 0) {
         uVar3 = (**(code **)(**(int **)(param_2 + 0x44) + 0x28))(*(int **)(param_2 + 0x44),uVar5);

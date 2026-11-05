@@ -16,9 +16,9 @@ void ALNodeImp::Create(int param_1,undefined4 param_2,undefined4 param_3,undefin
   undefined4 uStack_10;
   
   uStack_10 = param_4;
-  iVar1 = jus_AllocDebug(0x78,s_ALNodeImp_h_0215bfa4,s_Create_0215bea0,0x4c3);
+  iVar1 = thunk_FUN_0201a228(0x78,FUN_0215bfa4,s_Create_0215bea0,0x4c3);
   if (iVar1 != 0) {
-    jus_Class_0209c0b4::jus_Class_0209c0b4(iVar1,FUN_02024a30,1);
+    jus_TagNDGR_0209c0b4::jus_TagNDGR_0209c0b4(iVar1,FUN_02024a30,1);
   }
   iVar1 = FUN_0214d498();
   FUN_0214d6b0(*(undefined4 *)(param_1 + 8),iVar1);

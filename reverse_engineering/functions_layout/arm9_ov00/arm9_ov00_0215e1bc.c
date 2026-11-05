@@ -8,8 +8,8 @@ int EndingStaffRoll::EndingStaffRoll_Create
 {
   int iVar1;
   
-  iVar1 = jus_AllocDebug(0x70,s_EndingStaffRoll_cpp_021619cc,s_EndingStaffRoll_Create_02161904,0x61,
-                         param_4);
+  iVar1 = thunk_FUN_0201a228(0x70,s_EndingStaffRoll_cpp_021619cc,s_EndingStaffRoll_Create_02161904,
+                             0x61,param_4);
   FUN_020517fc(iVar1,0,0x70);
   *(undefined4 *)(iVar1 + 0x60) = param_1;
   return iVar1;

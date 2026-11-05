@@ -10,7 +10,7 @@ void jus_Scene22_Exit(char *param_1,uint param_2)
     *(int *)(iRam0206f730 + 0x18c) = (int)*param_1;
   }
   else {
-    iVar1 = func_0x0207060c();
+    iVar1 = FUN_0207060c();
     if (iVar1 == 0) {
       FUN_0206e524(1,4,0xc,0x16,1);
     }

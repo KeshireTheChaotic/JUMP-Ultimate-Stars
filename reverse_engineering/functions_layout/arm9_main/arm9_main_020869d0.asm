@@ -1,0 +1,13 @@
+020869d0  cmp r0,#0x0
+020869d2  beq 0x020869e6
+020869d4  mov r1,#0x20
+020869d6  ldrsb r1,[r0,r1]
+020869d8  cmp r1,#0x0
+020869da  beq 0x020869e0
+020869dc  mov r0,#0x0
+020869de  bx lr
+020869e0  mov r1,#0x1
+020869e2  add r0,#0x24
+020869e4  strb r1,[r0,#0x0]
+020869e6  mov r0,#0x1
+020869e8  bx lr

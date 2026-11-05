@@ -14,8 +14,8 @@ void BattleNoteTrack::Battle_NoteTrackCreate
   undefined4 uStack_1c;
   
   uStack_1c = param_4;
-  iVar1 = jus_AllocDebug(0xa8,s_BattleNoteTrack_cpp_02172114,s_Battle_NoteTrackCreate_021720fc,0x32)
-  ;
+  iVar1 = thunk_FUN_0201a228(0xa8,s_BattleNoteTrack_cpp_02172114,s_Battle_NoteTrackCreate_021720fc,
+                             0x32);
   FUN_020517fc(iVar1,0,0xa8);
   *(undefined4 *)(iVar1 + 0x88) = param_2;
   *(undefined4 *)(iVar1 + 0x98) = 0xffffffff;

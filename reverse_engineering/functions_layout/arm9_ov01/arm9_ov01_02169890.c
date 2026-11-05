@@ -9,7 +9,7 @@ void FUN_02169890(int param_1)
     FUN_02169670(iVar1);
   }
   FUN_02169b38(iVar1);
-  FUN_02028384(*(undefined4 *)(param_1 + 4),&LAB_021698bc_1);
+  FUN_02028384(*(undefined4 *)(param_1 + 4),0x21698bd);
   return;
 }
 

@@ -45,8 +45,8 @@ undefined4 CommuMenuSuretigai::CommuMenuSuretigai_Add(void)
   undefined1 auStack_34 [32];
   
   puVar1 = (undefined4 *)
-           jus_AllocDebug(0x210,s_CommuMenuSuretigai_cpp_0216a5d4,s_CommuMenuSuretigai_Add_0216a5bc,
-                          0x113);
+           thunk_FUN_0201a228(0x210,s_CommuMenuSuretigai_cpp_0216a5d4,
+                              s_CommuMenuSuretigai_Add_0216a5bc,0x113);
   FUN_020517fc(puVar1,0,0x210);
   iVar2 = FUN_020310f4();
   puVar1[1] = iVar2;

@@ -7,7 +7,7 @@ int FUN_020424ec(int param_1,undefined4 param_2,undefined4 param_3,undefined4 pa
   undefined4 uStack_1c;
   
   uStack_1c = param_4;
-  local_20 = jus_AllocDebug(0x3c);
+  local_20 = FUN_0201a228(0x3c);
   if (local_20 != 0) {
     *(undefined1 *)(local_20 + 8) = 0;
     *(undefined4 *)(local_20 + 0x10) = param_2;
@@ -16,7 +16,7 @@ int FUN_020424ec(int param_1,undefined4 param_2,undefined4 param_3,undefined4 pa
     *(undefined4 *)(local_20 + 0x14) = 0;
     *(undefined4 *)(local_20 + 0x20) = 0;
     *(undefined4 *)(local_20 + 0x1c) = 0;
-    iVar1 = jus_AllocDebug(param_5 << 1);
+    iVar1 = FUN_0201a228(param_5 << 1);
     *(int *)(local_20 + 0x24) = iVar1;
     *(int *)(local_20 + 0x28) = iVar1 + param_5;
     MIi_CpuCopy16(param_3,*(undefined4 *)(local_20 + 0x24),param_5);

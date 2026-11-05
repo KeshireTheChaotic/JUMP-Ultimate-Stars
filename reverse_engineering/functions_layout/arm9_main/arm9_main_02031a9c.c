@@ -26,15 +26,15 @@ int * jus_Class_02096658::jus_Class_02096658(int *param_1)
   FUN_02031be8(param_1 + 0x19);
   param_1[0x1d] = 0;
   param_1[0x1e] = 0xff000;
-  param_1[0x21] = (int)&DAT_02031c00;
+  param_1[0x21] = (int)FUN_02031c00;
   jus_Class_02093eb4::jus_Class_02093eb4(param_1 + 0x23);
-  iVar1 = jus_AllocDebug(0x40);
+  iVar1 = FUN_0201a228(0x40);
   uVar2 = 0;
   if (iVar1 != 0) {
     uVar2 = jus_Class_02095a08::jus_Class_02095a08();
   }
   FUN_0201ce14(param_1 + 0x23,uVar2);
-  iVar1 = jus_AllocDebug(0x40);
+  iVar1 = FUN_0201a228(0x40);
   uVar2 = 0;
   if (iVar1 != 0) {
     uVar2 = jus_Class_02095a08::jus_Class_02095a08();

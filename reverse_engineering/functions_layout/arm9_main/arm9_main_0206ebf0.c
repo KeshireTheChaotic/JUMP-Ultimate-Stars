@@ -8,7 +8,7 @@ void jus_Scene08_Exit(int param_1,int param_2,undefined4 param_3,undefined4 para
     *(int *)(iRam0206ec14 + 0x18c) = (int)*(char *)(param_1 + 1);
     return;
   }
-  func_0x0206e5b0(param_1,0,param_3,param_4,param_4);
+  FUN_0206e5b0(param_1,0,param_3,param_4,param_4);
   return;
 }
 

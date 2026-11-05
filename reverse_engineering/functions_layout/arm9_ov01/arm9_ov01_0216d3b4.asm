@@ -1,0 +1,17 @@
+0216d3b4  andeq r0,r0,r0
+0216d3b8  andeq r0,r0,r0
+0216d3bc  andeq r0,r0,r0
+0216d3c0  andeq r0,r0,r0
+0216d3c4  andeq r0,r0,r0
+0216d3c8  andeq r0,r0,r0
+0216d3cc  andeq r0,r0,r0
+0216d3d0  andeq r0,r0,r0
+0216d3d4  andeq r0,r0,r0
+0216d3d8  andeq r0,r0,r0
+0216d3dc  andeq r0,r0,r0
+0216d3e0  andeq r0,r0,r0
+0216d3e4  andeq r0,r0,r0
+0216d3e8  andeq r0,r0,r0
+0216d3ec  andeq r0,r0,r0
+0216d3f0  andeq r0,r0,r0
+0216d3f4  andeq r0,r0,r0

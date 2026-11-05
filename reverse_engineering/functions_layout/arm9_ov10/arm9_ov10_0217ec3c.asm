@@ -1,0 +1,10 @@
+0217ec3c  ldr r1,[0x0217ec50]
+0217ec3e  ldr r2,[r1,#0x0]
+0217ec40  cmp r2,#0x0
+0217ec42  bne 0x0217ec48
+0217ec44  mov r0,#0x0
+0217ec46  bx lr
+0217ec48  ldr r1,[0x0217ec54]
+0217ec4a  str r0,[r2,r1]
+0217ec4c  mov r0,#0x1
+0217ec4e  bx lr

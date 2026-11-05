@@ -16,8 +16,8 @@ void FUN_0214de14(undefined4 param_1,int param_2,undefined4 param_3,undefined4 p
   uVar6 = param_4;
   if (iVar5 != 0) {
     for (; iVar5 != 0; iVar5 = iVar5 + -1) {
-      iVar1 = (*(code *)(&PTR_LAB_0216f3c4)[param_2])
-                        (puVar2,param_3,param_4,(&PTR_LAB_0216f3c4)[param_2],uVar6);
+      iVar1 = (*(code *)(&PTR_FUN_0216f3c4)[param_2])
+                        (puVar2,param_3,param_4,(&PTR_FUN_0216f3c4)[param_2],uVar6);
       if (iVar1 != 0) {
         iVar4 = iVar4 + 1;
         *puVar3 = *puVar2;

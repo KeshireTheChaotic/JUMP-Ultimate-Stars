@@ -8,7 +8,8 @@ int JQuiz::JQuiz_Add_Core(int param_1,int param_2,int param_3,undefined4 param_4
   int *piVar1;
   int iVar2;
   
-  piVar1 = (int *)jus_AllocDebug(0x1c,s_JQuiz_cpp_021608b0,s_JQuiz_Add_Core_021608a0,0x66,param_4);
+  piVar1 = (int *)thunk_FUN_0201a228(0x1c,s_JQuiz_cpp_021608b0,s_JQuiz_Add_Core_021608a0,0x66,
+                                     param_4);
   FUN_020517fc(piVar1,0,0x1c);
   DAT_02161de0 = piVar1;
   iVar2 = FUN_020310f4();

@@ -18,7 +18,7 @@ void FUN_0217dda8(int param_1,undefined4 param_2,undefined4 param_3,undefined4 p
     iVar2 = *(int *)(iVar3 + 4);
     *(undefined1 *)(iVar2 + 0x10) = 1;
     *(undefined1 *)(iVar2 + 0x11) = 4;
-    FUN_02028384(*(undefined4 *)(param_1 + 4),&LAB_0217d92c,1,iVar2,param_4);
+    FUN_02028384(*(undefined4 *)(param_1 + 4),FUN_0217d92c,1,iVar2,param_4);
     *(undefined4 *)(iVar3 + 8) = 0;
     return;
   }

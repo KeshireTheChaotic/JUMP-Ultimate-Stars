@@ -12,7 +12,7 @@ void FUN_02038058(undefined4 *param_1,undefined4 *param_2)
     if (iVar2 == 0) {
       FUN_0201a958(uVar3,1);
     }
-    uVar3 = jus_AllocDebug(param_1[1] * (uint)*(ushort *)((int)param_2 + 10));
+    uVar3 = FUN_0201a228(param_1[1] * (uint)*(ushort *)((int)param_2 + 10));
     *param_1 = uVar3;
     *(undefined2 *)((int)param_1 + 10) = *(undefined2 *)((int)param_2 + 10);
   }

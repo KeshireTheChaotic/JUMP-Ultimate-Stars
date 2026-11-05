@@ -14,8 +14,8 @@ int CommuMenuWiFiFrMatch::CommuMenuWiFiFrMatch_Add(void)
   undefined4 uStack_c;
   
   uStack_c = in_r3;
-  piVar1 = (int *)jus_AllocDebug(0x5f8,s_CommuMenuWiFiFrMatch_cpp_02169d98,
-                                 s_CommuMenuWiFiFrMatch_Add_02169d7c,0x80);
+  piVar1 = (int *)thunk_FUN_0201a228(0x5f8,s_CommuMenuWiFiFrMatch_cpp_02169d98,
+                                     s_CommuMenuWiFiFrMatch_Add_02169d7c,0x80);
   FUN_020517fc(piVar1,0,0x5f8);
   iVar2 = FUN_020310f4();
   *piVar1 = iVar2;
@@ -55,7 +55,7 @@ int CommuMenuWiFiFrMatch::CommuMenuWiFiFrMatch_Add(void)
   iVar2 = FUN_02026f94();
   piVar1[1] = iVar2;
   (**(code **)(**(int **)(iVar2 + 4) + 0x24))(*(int **)(iVar2 + 4),piVar1);
-  FUN_02028384(*(undefined4 *)(piVar1[1] + 4),&LAB_02155a14);
+  FUN_02028384(*(undefined4 *)(piVar1[1] + 4),FUN_02155a14);
   local_10 = 0x80000;
   (**(code **)(**(int **)(piVar1[1] + 4) + 0xa0))(*(int **)(piVar1[1] + 4),&local_10);
   iVar2 = FUN_0215656c(piVar1 + 3);

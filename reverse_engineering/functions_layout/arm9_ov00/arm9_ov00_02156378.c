@@ -101,7 +101,7 @@ LAB_021563e8:
           }
           if (*(char *)(iVar7 + 0x221) != '\0') {
             DAT_020a10a8 = 0;
-            FUN_02028384(*(undefined4 *)(*(int *)(iVar7 + 0x124) + 4),&DAT_021561cc);
+            FUN_02028384(*(undefined4 *)(*(int *)(iVar7 + 0x124) + 4),FUN_021561cc);
             *(undefined1 *)(iVar7 + 0x220) = 0;
             return;
           }

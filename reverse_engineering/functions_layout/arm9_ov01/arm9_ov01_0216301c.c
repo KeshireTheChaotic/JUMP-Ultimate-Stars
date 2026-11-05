@@ -2,7 +2,7 @@
 /* WARNING: Removing unreachable block (ram,0x02163050) */
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 /* JUS-GAME ALWidgetBaseImp::Create [source-string-template] __FILE__="ALWidgetBaseImp.h"
-   __FUNCTION__="Create"; one of 4 instantiations in arm9_ov01 */
+   __FUNCTION__="Create"; one of 5 instantiations in arm9_ov01 */
 
 int ALWidgetBaseImp::Create(void)
 
@@ -12,7 +12,7 @@ int ALWidgetBaseImp::Create(void)
   int *piVar3;
   
   uVar1 = _DAT_021d5154;
-  iVar2 = jus_AllocDebug(0x14c,s_ALWidgetBaseImp_h_0216b9dc,s_Create_0216ce5c,0x2a6);
+  iVar2 = thunk_FUN_0201a228(0x14c,s_ALWidgetBaseImp_h_0216b9dc,s_Create_0216ce5c,0x2a6);
   if (iVar2 != 0) {
     func_0x021b7950(iVar2,0,uVar1,CreateDrawFunc);
   }

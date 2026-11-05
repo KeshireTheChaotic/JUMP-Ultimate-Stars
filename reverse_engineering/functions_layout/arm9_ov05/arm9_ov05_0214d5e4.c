@@ -26,7 +26,7 @@ void FUN_0214d5e4(undefined4 param_1,int param_2)
     iVar6 = iVar6 + 1;
     *(undefined2 *)(DAT_0214bd80 + iVar2 + 0x1900) = 0;
   } while (iVar6 < 8);
-  uVar1 = (*(code *)(&PTR_LAB_0216f3ac)[param_2])
+  uVar1 = (*(code *)(&PTR_FUN_0216f3ac)[param_2])
                     (*(undefined4 *)(DAT_0214bd80 + 0x58),*(undefined4 *)(DAT_0214bd80 + 0x30),
                      *(undefined4 *)(DAT_0214bd80 + 0x18ec));
   *(undefined4 *)(DAT_0214bd80 + 0x18f0) = uVar1;

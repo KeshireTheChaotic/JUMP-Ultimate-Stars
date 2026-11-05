@@ -7,6 +7,7 @@ void ALObjectImp_021d253c::vfunc_24(int param_1)
 {
   uint uVar1;
   
+                    /* JUS-TAG source_file_inferred="ALCollision.cpp" */
   uVar1 = 0;
   do {
     if (*(int *)(param_1 + uVar1 * 4 + 0x48) != 0) {

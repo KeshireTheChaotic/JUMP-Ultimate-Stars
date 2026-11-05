@@ -1,11 +1,11 @@
 
-/* JUS-CLASS ALWidgetBase_021d1124::ALWidgetBase_021d1124 [class-source-file] stores vtable 021d1124
-   into *this (constructor) */
+/* JUS-CLASS jus_Class_021d1124::jus_Class_021d1124 [class-default] stores vtable 021d1124 into
+   *this (constructor) */
 
-undefined4 * ALWidgetBase_021d1124::ALWidgetBase_021d1124(undefined4 *param_1)
+undefined4 * jus_Class_021d1124::jus_Class_021d1124(undefined4 *param_1)
 
 {
-  ALWidgetBase_021d3950::ALWidgetBase_021d3950();
+  jus_Class_021d3950::jus_Class_021d3950();
   *param_1 = &vftable;
   param_1[0x4e] = 0xffffffff;
   param_1[0x4f] = 0;

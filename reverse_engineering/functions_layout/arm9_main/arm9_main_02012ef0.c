@@ -35,7 +35,7 @@ jus_Class_0209af58::jus_Class_0209af58
       DAT_020a0e0c = DAT_020a0e0c | 1;
     }
     DAT_020a1074 = &DAT_020a1a44;
-    iVar2 = jus_AllocDebug(0x14);
+    iVar2 = FUN_0201a228(0x14);
     uVar3 = 0;
     if (iVar2 != 0) {
       uVar3 = jus_Class_02098ee8::jus_Class_02098ee8();

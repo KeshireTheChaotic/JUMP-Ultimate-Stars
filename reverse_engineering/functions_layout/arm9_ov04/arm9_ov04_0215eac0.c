@@ -13,8 +13,8 @@ int * JQuizMainSubPlayerMark::JQuizMainSubPlayerMarkClass_Create
   int iVar4;
   int *piVar5;
   
-  piVar1 = (int *)jus_AllocDebug(0x20,s_JQuizMainSubPlayerMark_cpp_02161c48,
-                                 s_JQuizMainSubPlayerMarkClass_Crea_02161c24,0x2b,param_4);
+  piVar1 = (int *)thunk_FUN_0201a228(0x20,FUN_02161c48,s_JQuizMainSubPlayerMarkClass_Crea_02161c24,
+                                     0x2b,param_4);
   FUN_020517fc(piVar1,0,0x20);
   iVar2 = ALWidgetBaseImp::Create(piVar1,param_1);
   *piVar1 = iVar2;

@@ -32,7 +32,7 @@ int FUN_020633d8(int param_1,uint param_2)
     }
   }
   if (iVar1 == 7) {
-    iVar1 = (*(code *)(&PTR_LAB_02063ab4_1_020921e4)[param_2])(param_1);
+    iVar1 = (*(code *)(&PTR_FUN_02063ab4_1_020921e4)[param_2])(param_1);
   }
   if (iVar1 == 6) {
     if ((*(uint *)(param_1 + 0xc) & 4) != 0) {

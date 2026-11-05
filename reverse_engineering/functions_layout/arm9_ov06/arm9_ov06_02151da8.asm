@@ -1,0 +1,12 @@
+02151da8  stmdb sp!,{r3,lr}
+02151dac  sub sp,sp,#0x8
+02151db0  ldr r3,[r2,#0x0]
+02151db4  add r2,sp,#0x0
+02151db8  str r3,[sp,#0x0]
+02151dbc  ldr r3,[r1,#0x0]
+02151dc0  add r1,sp,#0x4
+02151dc4  str r3,[sp,#0x4]
+02151dc8  ldr r0,[r0,#0x4]
+02151dcc  bl 0x02023630
+02151dd0  add sp,sp,#0x8
+02151dd4  ldmia sp!,{r3,pc}

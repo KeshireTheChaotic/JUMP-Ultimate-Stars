@@ -27,7 +27,7 @@ int FUN_02044774(int param_1)
         iVar4 = (**(code **)(iVar5 + 0x20))();
         if (iVar4 == 0x3450434c) {
           uVar1 = (**(code **)(**(int **)(param_1 + 0x20) + 0x5c))();
-          uVar2 = jus_AllocDebug();
+          uVar2 = FUN_0201a228();
           FUN_020519c8(*(undefined4 *)(*(int *)(param_1 + 0x20) + 0xc),uVar2);
           DC_FlushRange(uVar2,uVar1);
           FUN_0203ef0c(*(undefined4 *)(param_1 + 0x4c),param_1,uVar2,*(undefined4 *)(param_1 + 0x50)

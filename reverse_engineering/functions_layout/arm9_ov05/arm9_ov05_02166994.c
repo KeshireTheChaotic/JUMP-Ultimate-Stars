@@ -11,7 +11,8 @@ undefined4 JPowerKomaList::JPowerKomaList_Add(undefined4 param_1)
   undefined4 local_10;
   
   puVar1 = (undefined4 *)
-           jus_AllocDebug(0x1c,s_JPowerKomaList_cpp_02171528,s_JPowerKomaList_Add_02171514,0x2a);
+           thunk_FUN_0201a228(0x1c,s_JPowerKomaList_cpp_02171528,s_JPowerKomaList_Add_02171514,0x2a)
+  ;
   FUN_020517fc(puVar1,0,0x1c);
   iVar2 = FUN_02026f94();
   puVar1[5] = iVar2;

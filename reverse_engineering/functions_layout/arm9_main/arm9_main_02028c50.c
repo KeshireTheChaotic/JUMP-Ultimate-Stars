@@ -1,8 +1,8 @@
 
-/* JUS-CLASS BattleAI::BattleAI [class-source-file] stores vtable 02094864 into *this (constructor)
-    */
+/* JUS-CLASS jus_Class_02094864::jus_Class_02094864 [class-default] stores vtable 02094864 into
+   *this (constructor) */
 
-undefined4 * BattleAI::BattleAI(undefined4 *param_1)
+undefined4 * jus_Class_02094864::jus_Class_02094864(undefined4 *param_1)
 
 {
   undefined4 *puVar2;

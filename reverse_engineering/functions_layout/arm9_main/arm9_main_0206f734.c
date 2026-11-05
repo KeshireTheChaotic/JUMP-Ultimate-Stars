@@ -7,9 +7,9 @@ void jus_Scene25_Create(void)
   undefined4 uVar1;
   
   if (*pcRam0206f814 == -1) goto LAB_0206f80c;
-  func_0x02071874();
+  FUN_02071874();
   if (pcRam0206f814[8] == '\0') {
-    func_0x02071bb8((int)*pcRam0206f814);
+    FUN_02071bb8((int)*pcRam0206f814);
     goto LAB_0206f80c;
   }
   switch(*(undefined4 *)(iRam0206f818 + 0x10)) {
@@ -62,10 +62,10 @@ code_r0x0206f7cc:
   uVar1 = 0;
 code_r0x0206f7d8:
   if (*(int *)(pcRam0206f814 + 0x30) == -1) {
-    func_0x02071bf4((int)*pcRam0206f814,(int)*(short *)(pcRam0206f814 + 0x16),uVar1);
+    FUN_02071bf4((int)*pcRam0206f814,(int)*(short *)(pcRam0206f814 + 0x16),uVar1);
   }
   else {
-    func_0x02071bf4((int)*pcRam0206f814,*(int *)(pcRam0206f814 + 0x30),uVar1);
+    FUN_02071bf4((int)*pcRam0206f814,*(int *)(pcRam0206f814 + 0x30),uVar1);
   }
 LAB_0206f80c:
   func_0x0215277c();

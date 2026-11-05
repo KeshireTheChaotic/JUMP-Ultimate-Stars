@@ -127,7 +127,7 @@ void jus_TagSPD3::vfunc_07(int param_1,undefined4 param_2,undefined4 param_3,und
           if ((iVar18 != 0) && (iVar13 = FUN_0201a9ec(iVar18), iVar13 == 0)) {
             FUN_0201a958(iVar18,1);
           }
-          uVar14 = jus_AllocDebug(uVar21);
+          uVar14 = FUN_0201a228(uVar21);
           *(undefined4 *)(param_1 + 100) = uVar14;
           *(uint *)(param_1 + 0x68) = uVar21;
         }

@@ -17,8 +17,8 @@ JQuizResultWinLosePlate::JQuizResultWinLosePlateClass_Create
   
   uStack_14 = param_4;
   puVar1 = (undefined4 *)
-           jus_AllocDebug(0x14,s_JQuizResultWinLosePlate_cpp_02161418,
-                          s_JQuizResultWinLosePlateClass_Cre_021613f4,0x28);
+           thunk_FUN_0201a228(0x14,s_JQuizResultWinLosePlate_cpp_02161418,
+                              s_JQuizResultWinLosePlateClass_Cre_021613f4,0x28);
   FUN_020517fc(puVar1,0,0x14);
   *(undefined1 *)(puVar1 + 4) = param_1;
   *(undefined1 *)((int)puVar1 + 0x11) = param_2;

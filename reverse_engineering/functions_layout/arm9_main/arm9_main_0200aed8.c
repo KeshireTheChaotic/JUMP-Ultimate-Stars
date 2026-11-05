@@ -47,7 +47,7 @@ uint * FUN_0200aed8(uint *param_1,uint param_2,uint param_3,int param_4,byte *pa
   if (local_58 < param_2) {
     local_34 = &PTR_FUN_0200b1b4_1_02093758;
     iVar1 = FUN_02004b04(s_basic_string__out_of_range_02093828);
-    uVar2 = jus_AllocDebug(iVar1 + 1);
+    uVar2 = thunk_FUN_0201a228(iVar1 + 1);
     local_8c = local_8c & 0xffffff00;
     FUN_0200ab5c(local_30,uVar2,local_8c);
     FUN_02004b18(local_30[0],s_basic_string__out_of_range_02093828);
@@ -66,7 +66,7 @@ uint * FUN_0200aed8(uint *param_1,uint param_2,uint param_3,int param_4,byte *pa
   if ((0x7ffffffe < uVar5) || (0x7ffffffe - uVar5 < local_58 - uVar3)) {
     local_40 = &PTR_FUN_0200b1b4_1_02093758;
     iVar1 = FUN_02004b04(s_basic_string__length_error_0209387c);
-    uVar2 = jus_AllocDebug(iVar1 + 1);
+    uVar2 = thunk_FUN_0201a228(iVar1 + 1);
     local_8c = local_8c & 0xffffff00;
     FUN_0200ab5c(local_3c,uVar2,local_8c);
     FUN_02004b18(local_3c[0],s_basic_string__length_error_0209387c);
@@ -110,7 +110,7 @@ uint * FUN_0200aed8(uint *param_1,uint param_2,uint param_3,int param_4,byte *pa
   else {
     for (uVar9 = uVar9 + 0xf & 0xfffffff0; uVar9 < uVar6 + 1; uVar9 = uVar9 * 2) {
     }
-    uVar7 = jus_AllocDebug(uVar9);
+    uVar7 = thunk_FUN_0201a228(uVar9);
     if (param_2 != 0) {
       FUN_02002434(uVar7,pbVar10,param_2);
     }

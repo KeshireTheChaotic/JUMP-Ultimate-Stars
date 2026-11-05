@@ -1,0 +1,12 @@
+0208a3e8  push {r3,lr}
+0208a3ea  ldrh r0,[r0,#0x2]
+0208a3ec  cmp r0,#0x0
+0208a3ee  beq 0x0208a3fa
+0208a3f0  ldr r1,[0x0208a404]
+0208a3f2  ldr r2,[0x0208a408]
+0208a3f4  bl 0x02088904
+0208a3f8  pop {r3,pc}
+0208a3fa  ldr r0,[0x0208a40c]
+0208a3fc  mov r1,#0x2
+0208a3fe  str r1,[r0,#0x64]
+0208a400  pop {r3,pc}

@@ -12,7 +12,7 @@ void FUN_02043678(int param_1,uint param_2,undefined4 param_3,undefined4 param_4
     *(undefined4 *)(iVar1 + 8) = param_3;
   }
   else {
-    iVar1 = jus_AllocDebug(0x14);
+    iVar1 = FUN_0201a228(0x14);
     uVar2 = 0;
     if (iVar1 != 0) {
       uVar2 = jus_TagCLDS::jus_TagCLDS(iVar1,param_2,param_3,0,0,param_4);

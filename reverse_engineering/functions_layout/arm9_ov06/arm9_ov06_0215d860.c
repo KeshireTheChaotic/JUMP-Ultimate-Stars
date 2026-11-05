@@ -18,7 +18,7 @@ undefined4 FUN_0215d860(int param_1,undefined4 param_2,undefined4 param_3,undefi
         uVar2 = 0;
       }
       else {
-        FUN_02157494(param_1,2,FUN_0215d91c,&LAB_0215da48,0x10,param_4);
+        FUN_02157494(param_1,2,FUN_0215d91c,FUN_0215da48,0x10,param_4);
         uVar2 = 1;
       }
     }

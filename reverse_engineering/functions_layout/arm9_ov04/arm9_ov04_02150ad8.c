@@ -19,13 +19,13 @@ void FUN_02150ad8(int param_1)
     }
     *(int *)(iVar1 + 0x28) = iVar4;
     FUN_021503b4();
-    FUN_02028384(*(undefined4 *)(param_1 + 4),&DAT_02150ad4);
+    FUN_02028384(*(undefined4 *)(param_1 + 4),FUN_02150ad4);
     return;
   }
   if (uVar3 <= uVar2) {
     *(int *)(iVar1 + 0x28) = iVar4;
     FUN_021503b4();
-    FUN_02028384(*(undefined4 *)(param_1 + 4),&DAT_02150ad4);
+    FUN_02028384(*(undefined4 *)(param_1 + 4),FUN_02150ad4);
     return;
   }
   uVar2 = uVar2 + *(int *)(iVar1 + 0x34);
@@ -36,7 +36,7 @@ void FUN_02150ad8(int param_1)
   }
   *(int *)(iVar1 + 0x28) = *(int *)(iVar1 + 0x2c);
   FUN_021503b4();
-  FUN_02028384(*(undefined4 *)(param_1 + 4),&DAT_02150ad4);
+  FUN_02028384(*(undefined4 *)(param_1 + 4),FUN_02150ad4);
   return;
 }
 

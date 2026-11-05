@@ -15,8 +15,8 @@ int * ComicDeck::ComicDeckCreate
                        strings=["ComicDeck.cpp","ComicDeckCreate","bin/ability.bin","bin/ability_t.bin","bin/chr_b.bin","bin/chr_b_t.bin","bin/chr_s.bin","bin/chr_s_t.bin","bin/kshape.bin"]
                         */
   uStack_1c = param_4;
-  DAT_0214bd80 = (int *)jus_AllocDebug(0x1914,s_ComicDeck_cpp_0209f5b4,s_ComicDeckCreate_0209f584,
-                                       0x98);
+  DAT_0214bd80 = (int *)thunk_FUN_0201a228(0x1914,s_ComicDeck_cpp_0209f5b4,
+                                           s_ComicDeckCreate_0209f584,0x98);
   if (DAT_0214bd80 != (int *)0x0) {
     piVar1 = DAT_0214bd80 + 0x19;
     do {
@@ -72,7 +72,7 @@ int * ComicDeck::ComicDeckCreate
       if (param_1 != 2) {
         return DAT_0214bd80;
       }
-      iVar2 = jus_AllocDebug(0xe8,s_ComicDeck_cpp_0209f5b4,s_ComicDeckCreate_0209f584,0xc5);
+      iVar2 = thunk_FUN_0201a228(0xe8,s_ComicDeck_cpp_0209f5b4,s_ComicDeckCreate_0209f584,0xc5);
       DAT_0214bd80[0x18] = iVar2;
       FUN_020517fc(DAT_0214bd80[0x18],0,0xe8);
     }
@@ -91,11 +91,11 @@ int * ComicDeck::ComicDeckCreate
     iVar2 = (**(code **)(**(int **)(DAT_0214bd80[0xb] + 4) + 0x2c))
                       (*(int **)(DAT_0214bd80[0xb] + 4),0);
     DAT_0214bd80[0x15] = iVar2;
-    iVar2 = jus_AllocDebug(DAT_0214bd80[0x63b] << 3,s_ComicDeck_cpp_0209f5b4,
-                           s_ComicDeckCreate_0209f584,0xdb);
+    iVar2 = thunk_FUN_0201a228(DAT_0214bd80[0x63b] << 3,s_ComicDeck_cpp_0209f5b4,
+                               s_ComicDeckCreate_0209f584,0xdb);
     DAT_0214bd80[0x16] = iVar2;
-    iVar2 = jus_AllocDebug(DAT_0214bd80[0x63b] << 3,s_ComicDeck_cpp_0209f5b4,
-                           s_ComicDeckCreate_0209f584,0xdc);
+    iVar2 = thunk_FUN_0201a228(DAT_0214bd80[0x63b] << 3,s_ComicDeck_cpp_0209f5b4,
+                               s_ComicDeckCreate_0209f584,0xdc);
     DAT_0214bd80[0x17] = iVar2;
   }
   return DAT_0214bd80;

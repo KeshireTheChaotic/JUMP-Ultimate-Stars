@@ -12,7 +12,7 @@ jus_Class_02094118::jus_Class_02094118
   *param_1 = &vftable;
   param_1[1] = param_2;
   param_1[2] = 0;
-  uVar1 = jus_AllocDebug(param_4 * 0xc);
+  uVar1 = FUN_0201a228(param_4 * 0xc);
   param_1[5] = uVar1;
   param_1[6] = 0;
   param_1[7] = param_3;

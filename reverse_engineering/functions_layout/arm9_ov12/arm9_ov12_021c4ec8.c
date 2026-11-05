@@ -33,7 +33,7 @@ void JArenaParam::JArena_ParamInit(int param_1)
   FUN_02073114(iVar13 + 0x3e60);
   uVar4 = FUN_020703b8(param_1);
   (&DAT_020b4dac)[iVar13] = uVar4;
-  iVar5 = jus_AllocDebug(0x2f0,s_JArenaParam_cpp_021d45e0,s_JArena_ParamInit_021d45b8,0x4e);
+  iVar5 = thunk_FUN_0201a228(0x2f0,s_JArenaParam_cpp_021d45e0,s_JArena_ParamInit_021d45b8,0x4e);
   FUN_020517fc(iVar5,0,0x2f0);
   if ((&DAT_020b4dac)[iVar13] == '\0') {
     switch(param_1) {

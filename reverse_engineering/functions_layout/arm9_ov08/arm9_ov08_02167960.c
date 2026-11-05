@@ -1,7 +1,8 @@
 
-/* JUS-SCENE jus_Scene41_Create [scene-map] scene table 0209e32c row 41 create; slot-1 overlay 8 */
+/* JUS-GAME WiFiConnection::WiFi_ConnectionAdd [source-string] __FILE__="WiFiConnection.cpp"
+   __FUNCTION__="WiFi_ConnectionAdd" lines=[43] passed to 1 source-location call(s) */
 
-undefined4 jus_Scene41_Create(void)
+undefined4 WiFiConnection::WiFi_ConnectionAdd(void)
 
 {
   undefined *puVar1;
@@ -15,7 +16,7 @@ undefined4 jus_Scene41_Create(void)
   undefined4 uStack_c;
   
   uStack_c = in_r3;
-  iVar2 = jus_AllocDebug(uRam02167a50,uRam02167a4c,PTR_s_WiFi_ConnectionAdd_02167a54,0x2b);
+  iVar2 = thunk_FUN_0201a228(uRam02167a50,uRam02167a4c,PTR_s_WiFi_ConnectionAdd_02167a54,0x2b);
   FUN_020517fc(iVar2,0,uRam02167a50);
   uVar3 = func_0x021ba49c(1,3,1);
   *(undefined4 *)(iVar2 + 0x40008) = uVar3;

@@ -7,6 +7,7 @@ void FUN_021cc088(int param_1,int param_2)
   int iVar3;
   int iVar4;
   
+                    /* JUS-TAG source_file_inferred="WiFiVoiceChat.cpp" */
   iVar2 = (param_2 + 1) * 0x1000000;
   iVar3 = iVar2 >> 0x18;
   iVar4 = 0;

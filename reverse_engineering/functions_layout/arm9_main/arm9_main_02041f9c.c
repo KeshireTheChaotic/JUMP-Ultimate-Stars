@@ -81,7 +81,7 @@ void FUN_02041f9c(int param_1,undefined4 param_2,undefined4 param_3,undefined4 p
     *(int *)(param_1 + 0x428) = *(int *)(param_1 + 0x428) - iVar6;
     if (DAT_020a0c3d != '\0') {
       uVar8 = DAT_020a0fd4 ^ 1;
-      FUN_02037c54(&DAT_020a10ec,&LAB_02042428,0);
+      FUN_02037c54(&DAT_020a10ec,FUN_02042428,0);
       iVar6 = uVar8 * 0xc;
       *(undefined2 *)(&DAT_020a1780 + iVar6) = 0;
       for (puVar5 = DAT_020a10ec; puVar5 != (undefined4 *)0x0; puVar5 = (undefined4 *)*puVar5) {

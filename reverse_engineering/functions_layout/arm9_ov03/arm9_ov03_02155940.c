@@ -20,11 +20,11 @@ JArenaRankBtlAfterLstSel::JARBAftLstSel_Add
   undefined4 uStack_1c;
   
   uStack_1c = param_4;
-  piVar2 = (int *)FUN_020101f4(s_chr_ChrArc_aar_0215e6a8,0);
+  piVar2 = (int *)FUN_020101f4(FUN_0215e6a8,0);
   thunk_EXT_FUN_021b65bc();
   puVar3 = (undefined1 *)
-           jus_AllocDebug(0xe0,s_JArenaRankBtlAfterLstSel_cpp_0215e6b8,s_JARBAftLstSel_Add_0215e5a4,
-                          0xd3);
+           thunk_FUN_0201a228(0xe0,s_JArenaRankBtlAfterLstSel_cpp_0215e6b8,
+                              s_JARBAftLstSel_Add_0215e5a4,0xd3);
   FUN_0215271c(puVar3,0xe0);
   uVar4 = FUN_02020d90();
   FUN_02152754(auStack_20,0x85);

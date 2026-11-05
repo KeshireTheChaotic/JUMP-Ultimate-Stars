@@ -55,7 +55,7 @@ int FUN_021ace90(int *param_1,int param_2,undefined4 param_3,undefined4 param_4)
         FUN_02003bd8(s_vector_length_error_021d17e4);
         FUN_02001f18();
       }
-      iVar5 = jus_AllocDebug(uVar4 * 0x24);
+      iVar5 = thunk_FUN_0201a228(uVar4 * 0x24);
       if (iVar5 == 0) {
         FUN_02003bd8(s_Memory_allocation_failure_021d05e0);
         FUN_02001f18();

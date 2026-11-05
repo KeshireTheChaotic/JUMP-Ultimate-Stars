@@ -15,7 +15,7 @@ int BattleChara::Battle_CharaCreate(byte param_1,int *param_2,undefined4 param_3
   undefined4 uStack_14;
   
   uStack_14 = param_4;
-  iVar1 = jus_AllocDebug(0x1f0,s_BattleChara_cpp_0217213c,s_Battle_CharaCreate_02172128,0x25);
+  iVar1 = thunk_FUN_0201a228(0x1f0,s_BattleChara_cpp_0217213c,s_Battle_CharaCreate_02172128,0x25);
   FUN_020517fc(iVar1,0,0x1f0);
   *(char *)(iVar1 + 0x1eb) = (char)param_2[7];
   *(byte *)(iVar1 + 0x1e0) = param_1;

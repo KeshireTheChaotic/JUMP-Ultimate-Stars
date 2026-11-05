@@ -19,7 +19,7 @@ void FUN_02160514(void)
       FUN_02157088(0x215e0a9);
       return;
     }
-    FUN_02157088(&LAB_02157f40_1);
+    FUN_02157088(0x2157f41);
   }
   return;
 }

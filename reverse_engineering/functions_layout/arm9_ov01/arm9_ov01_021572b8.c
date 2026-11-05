@@ -12,7 +12,8 @@ DeckSelect::DeckSelect_Add
   uint uVar3;
   
   puVar1 = (undefined4 *)
-           jus_AllocDebug(0x318,s_DeckSelect_cpp_0216c6c8,s_DeckSelect_Add_0216c454,0x23b,param_4);
+           thunk_FUN_0201a228(0x318,s_DeckSelect_cpp_0216c6c8,s_DeckSelect_Add_0216c454,0x23b,
+                              param_4);
   FUN_0214ff80(puVar1,0x318);
   *(undefined1 *)(puVar1 + 0xc4) = param_1;
   *(undefined1 *)((int)puVar1 + 0x313) = 0;
@@ -22,7 +23,7 @@ DeckSelect::DeckSelect_Add
   uVar2 = FUN_02026f94();
   puVar1[1] = uVar2;
   FUN_02150004(uVar2,puVar1);
-  FUN_02157480(puVar1[1],&LAB_02159f2c_1);
+  FUN_02157480(puVar1[1],0x2159f2d);
   uVar2 = FUN_020310f4();
   *puVar1 = uVar2;
   FUN_0214ff94();

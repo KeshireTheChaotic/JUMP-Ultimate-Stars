@@ -1,0 +1,10 @@
+021595b0  ldr r3,[0x21595d8]
+021595b4  ldrsh r0,[r0,#0x4]
+021595b8  smlabb r2,r2,r3,r1
+021595bc  sub r3,r0,#0x1
+021595c0  add r0,r2,#0x400
+021595c4  ldr r1,[0x21595dc]
+021595c8  strh r3,[r0,#0x8e]
+021595cc  str r1,[r2,#0x1dc]
+021595d0  mov r0,#0x1
+021595d4  bx lr

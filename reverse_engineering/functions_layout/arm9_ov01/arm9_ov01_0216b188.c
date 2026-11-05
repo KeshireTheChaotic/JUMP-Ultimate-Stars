@@ -125,27 +125,27 @@ void FUN_0216b188(void)
   FUN_0214dc10(auStack_bc,0);
   FUN_0214dc10(auStack_b8,0xb0);
   FUN_0214dc10(auStack_b4,0xa8);
-  FUN_0214dc68(&DAT_0216d828,auStack_b4,auStack_b8,auStack_bc);
+  FUN_0214dc68(FUN_0216d828,auStack_b4,auStack_b8,auStack_bc);
   FUN_0214dc10(auStack_c8,0);
   FUN_0214dc10(auStack_c4,0xb0);
   FUN_0214dc10(auStack_c0,0xd0);
-  FUN_0214dc68(&DAT_0216d834,auStack_c0,auStack_c4,auStack_c8);
+  FUN_0214dc68(0x216d834,auStack_c0,auStack_c4,auStack_c8);
   FUN_0214dc10(auStack_d4,0);
   FUN_0214dc10(auStack_d0,0xb8);
   FUN_0214dc10(auStack_cc,0x80);
-  FUN_0214dc68(&DAT_0216d840,auStack_cc,auStack_d0,auStack_d4);
+  FUN_0214dc68(0x216d840,auStack_cc,auStack_d0,auStack_d4);
   FUN_0214dc10(auStack_e0,0);
   FUN_0214dc10(auStack_dc,0xb8);
   FUN_0214dc10(auStack_d8,0xa8);
-  FUN_0214dc68(&DAT_0216d84c,auStack_d8,auStack_dc,auStack_e0);
+  FUN_0214dc68(0x216d84c,auStack_d8,auStack_dc,auStack_e0);
   FUN_0214dc10(auStack_ec,0);
   FUN_0214dc10(auStack_e8,0xb8);
   FUN_0214dc10(auStack_e4,0xd0);
-  FUN_0214dc68(&DAT_0216d858,auStack_e4,auStack_e8,auStack_ec);
+  FUN_0214dc68(0x216d858,auStack_e4,auStack_e8,auStack_ec);
   FUN_0214dc10(auStack_f8,0);
   FUN_0214dc10(auStack_f4,0xffffffe3);
   FUN_0214dc10(auStack_f0,0xffffffc2);
-  FUN_0214dc68(&DAT_0216d864,auStack_f0,auStack_f4,auStack_f8);
+  FUN_0214dc68(0x216d864,auStack_f0,auStack_f4,auStack_f8);
   return;
 }
 

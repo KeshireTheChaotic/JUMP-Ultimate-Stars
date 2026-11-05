@@ -1,0 +1,10 @@
+0215c664  ldr r1,[0x215c68c]
+0215c668  add r0,r0,#0x100
+0215c66c  ldr r2,[r1,#0x0]
+0215c670  ldrsb r1,[r0,#0xe0]
+0215c674  ldrb r0,[r2,#0x30]
+0215c678  cmp r1,r0
+0215c67c  ldrbeq r0,[r2,#0x2e]
+0215c680  biceq r0,r0,#0x1
+0215c684  strbeq r0,[r2,#0x2e]
+0215c688  bx lr

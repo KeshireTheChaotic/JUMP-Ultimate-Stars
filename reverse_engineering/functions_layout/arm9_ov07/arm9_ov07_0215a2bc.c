@@ -42,8 +42,8 @@ undefined4 FUN_0215a2bc(void)
   undefined4 local_28;
   
   puVar1 = (undefined4 *)
-           jus_AllocDebug(0x88,s_CommuMenuWrlsLeaderSel_cpp_0216a354,
-                          s_CommuMenuWrlsLeaderSel_Add_0216a2d8,0x127);
+           thunk_FUN_0201a228(0x88,s_CommuMenuWrlsLeaderSel_cpp_0216a354,
+                              s_CommuMenuWrlsLeaderSel_Add_0216a2d8,0x127);
   FUN_020517fc(puVar1,0,0x88);
   thunk_FUN_02070414();
   FUN_02087688();
@@ -82,11 +82,11 @@ undefined4 FUN_0215a2bc(void)
     puVar1[iVar2 + 8] = uVar3;
     iVar2 = iVar8;
   } while (iVar8 < 2);
-  piVar4 = (int *)FUN_0215b880(&LAB_0215b8f0_1,0x215b971,&DAT_0215b96d);
-  iVar2 = jus_AllocDebug(0xbc,s_ALWidget_inl_021699c4,s_Create_0216a2a4,0x212);
+  piVar4 = (int *)FUN_0215b880(0x215b8f1,0x215b971,0x215b96d);
+  iVar2 = thunk_FUN_0201a228(0xbc,FUN_021699c4,s_Create_0216a2a4,0x212);
   piVar5 = (int *)0x0;
   if (iVar2 != 0) {
-    piVar5 = (int *)func_0x021af358(iVar2,&LAB_0215b6e0_1,0);
+    piVar5 = (int *)func_0x021af358(iVar2,0x215b6e1,0);
   }
   if (piVar5[6] == 0) {
     (**(code **)(*piVar5 + 0x14))();
@@ -115,7 +115,7 @@ undefined4 FUN_0215a2bc(void)
   *(undefined1 *)(iVar2 + 0x1c) = 1;
   *(undefined1 *)(iVar2 + 0x1b) = 1;
   (**(code **)(*piVar4 + 8))();
-  piVar5 = (int *)FUN_0215b880(&LAB_0215baf0_1,&LAB_0215bb4c_1,0);
+  piVar5 = (int *)FUN_0215b880(0x215baf1,0x215bb4d,0);
   iVar2 = piVar5[1];
   *(undefined2 *)(iVar2 + 0xbc) = 0x10;
   *(undefined2 *)(iVar2 + 0xbe) = 3;
@@ -128,7 +128,7 @@ undefined4 FUN_0215a2bc(void)
   iVar2 = FUN_0203b3e4();
   iVar2 = FUN_02150bdc(*puVar1,*(undefined4 *)(iVar2 + 0x88));
   (**(code **)(**(int **)(iVar2 + 4) + 0x24))(*(int **)(iVar2 + 4),puVar1);
-  FUN_02027834(*(undefined4 *)(iVar2 + 4),8,&LAB_0215b688_1);
+  FUN_02027834(*(undefined4 *)(iVar2 + 4),8,0x215b689);
   func_0x021b4104(*(undefined4 *)(iVar2 + 4),*(undefined4 *)(iVar2 + 4),4);
   *(undefined4 *)(*(int *)(iVar2 + 4) + 0x124) = 2;
   puVar1[0xf] = iVar2;
@@ -168,8 +168,8 @@ undefined4 FUN_0215a2bc(void)
   FUN_02023c70(*(undefined4 *)(iVar2 + 4),2);
   func_0x021b4034(*(undefined4 *)(iVar2 + 4),1);
   func_0x021b3f78(*(undefined4 *)(iVar2 + 4),2);
-  func_0x021b65e8(*(undefined4 *)(iVar2 + 4),0x10,&LAB_0215b3d8_1);
-  func_0x021b6760(*(undefined4 *)(iVar2 + 4),0x10,&LAB_0215b454_1);
+  func_0x021b65e8(*(undefined4 *)(iVar2 + 4),0x10,0x215b3d9);
+  func_0x021b6760(*(undefined4 *)(iVar2 + 4),0x10,0x215b455);
   iVar8 = ALWidgetImp::Create(iVar2,_DAT_021d5154);
   (**(code **)(**(int **)(iVar8 + 4) + 0xd8))(*(int **)(iVar8 + 4),1);
   (**(code **)(**(int **)(iVar8 + 4) + 0x24))(*(int **)(iVar8 + 4),puVar1);
@@ -182,7 +182,7 @@ undefined4 FUN_0215a2bc(void)
   }
   uVar3 = _DAT_021d5154;
   uVar7 = *(undefined4 *)(iVar2 + 4);
-  iVar2 = jus_AllocDebug(400,s_ALWidgetImp_h_021699e4,s_Create_0216a294,0x159);
+  iVar2 = thunk_FUN_0201a228(400,s_ALWidgetImp_h_021699e4,s_Create_0216a294,0x159);
   if (iVar2 != 0) {
     func_0x021ae114(iVar2,uVar7,uVar3,ALWidgetImp::CreateDrawFunc);
   }
@@ -209,7 +209,7 @@ undefined4 FUN_0215a2bc(void)
   FUN_02023c70(*(undefined4 *)(iVar2 + 4),0);
   func_0x021b3fc4(*(undefined4 *)(iVar2 + 4),0);
   (**(code **)(**(int **)(iVar2 + 4) + 0x24))(*(int **)(iVar2 + 4),puVar1);
-  FUN_02028384(*(undefined4 *)(iVar2 + 4),&LAB_0215be88_1);
+  FUN_02028384(*(undefined4 *)(iVar2 + 4),0x215be89);
   local_5c = 0x84000;
   FUN_0214ed20(iVar2,&local_5c);
   FUN_02027834(*(undefined4 *)(iVar2 + 4),8,0x215b11d);
@@ -220,14 +220,14 @@ undefined4 FUN_0215a2bc(void)
   puVar1[0x15] = iVar8;
   iVar8 = iVar8 + 6;
   puVar1[0x16] = iVar8;
-  uVar3 = jus_AllocDebug(iVar8 * 4,s_CommuMenuWrlsLeaderSel_cpp_0216a354,
-                         s_CommuMenuWLLeaderSel_InitWidget__0216a32c,0x3dc);
+  uVar3 = thunk_FUN_0201a228(iVar8 * 4,s_CommuMenuWrlsLeaderSel_cpp_0216a354,
+                             s_CommuMenuWLLeaderSel_InitWidget__0216a32c,0x3dc);
   puVar1[0x12] = uVar3;
-  uVar3 = jus_AllocDebug(puVar1[0x16] << 2,s_CommuMenuWrlsLeaderSel_cpp_0216a354,
-                         s_CommuMenuWLLeaderSel_InitWidget__0216a32c,0x3dd);
+  uVar3 = thunk_FUN_0201a228(puVar1[0x16] << 2,s_CommuMenuWrlsLeaderSel_cpp_0216a354,
+                             s_CommuMenuWLLeaderSel_InitWidget__0216a32c,0x3dd);
   puVar1[0x13] = uVar3;
-  uVar3 = jus_AllocDebug(puVar1[0x16] << 2,s_CommuMenuWrlsLeaderSel_cpp_0216a354,
-                         s_CommuMenuWLLeaderSel_InitWidget__0216a32c,0x3de);
+  uVar3 = thunk_FUN_0201a228(puVar1[0x16] << 2,s_CommuMenuWrlsLeaderSel_cpp_0216a354,
+                             s_CommuMenuWLLeaderSel_InitWidget__0216a32c,0x3de);
   puVar1[0x14] = uVar3;
   _DAT_021d5154 = 2;
   for (uVar10 = 0; (int)uVar10 < (int)puVar1[0x16]; uVar10 = uVar10 + 1) {

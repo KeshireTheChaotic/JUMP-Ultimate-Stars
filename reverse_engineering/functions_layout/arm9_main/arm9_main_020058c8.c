@@ -14,7 +14,7 @@ undefined8 FUN_020058c8(int param_1,int *param_2)
   
   local_24[1] = 0;
   local_24[0] = param_1;
-  uVar6 = FUN_02004d84(0x7fffffff,&LAB_020049b8_1,local_24,&local_18,local_24 + 2);
+  uVar6 = FUN_02004d84(0x7fffffff,0x20049b9,local_24,&local_18,local_24 + 2);
   iVar1 = (int)((ulonglong)uVar6 >> 0x20);
   if (param_2 != (int *)0x0) {
     *param_2 = param_1 + local_18;

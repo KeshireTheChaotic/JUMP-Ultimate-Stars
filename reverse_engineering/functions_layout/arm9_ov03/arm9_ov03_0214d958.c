@@ -40,12 +40,12 @@ JArenaTopMenu::JATopMenu_Add(int param_1,undefined4 param_2,undefined4 param_3,u
   
   uStack_28 = param_4;
   puVar1 = (undefined1 *)
-           jus_AllocDebug(0x6c,s_JArenaTopMenu_cpp_0215dc94,s_JATopMenu_Add_0215dbfc,0x90);
+           thunk_FUN_0201a228(0x6c,s_JArenaTopMenu_cpp_0215dc94,s_JATopMenu_Add_0215dbfc,0x90);
   FUN_020517fc(puVar1,0,0x6c);
   iVar2 = FUN_02020d90();
   local_2c = 0x85000;
   (**(code **)(**(int **)(iVar2 + 4) + 0xa0))(*(int **)(iVar2 + 4),&local_2c);
-  FUN_02028384(*(undefined4 *)(iVar2 + 4),&LAB_0214e6c4);
+  FUN_02028384(*(undefined4 *)(iVar2 + 4),FUN_0214e6c4);
   (**(code **)(**(int **)(iVar2 + 4) + 0x24))(*(int **)(iVar2 + 4),puVar1);
   piVar3 = *(int **)(iVar2 + 4);
   if (param_1 == 0) {
@@ -141,7 +141,7 @@ JArenaTopMenu::JATopMenu_Add(int param_1,undefined4 param_2,undefined4 param_3,u
     iVar2 = iVar2 + 1;
     *(undefined4 *)(puVar1 + iVar5 + 0xc) = uVar4;
   } while (iVar2 < 3);
-  iVar2 = jus_AllocDebug(0xcc,s_ALWidget_inl_0215dbec,s_Create_0215db1c,0x1de);
+  iVar2 = thunk_FUN_0201a228(0xcc,s_ALWidget_inl_0215dbec,&DAT_0215db1c,0x1de);
   piVar3 = (int *)0x0;
   if (iVar2 != 0) {
     piVar3 = (int *)func_0x021af26c(iVar2,FUN_0214ec20,FUN_0214eccc,0);
@@ -191,9 +191,9 @@ JArenaTopMenu::JATopMenu_Add(int param_1,undefined4 param_2,undefined4 param_3,u
   *(undefined1 *)(*(int *)(iVar2 + 4) + 0xab) = 0;
   func_0x021b77a8(*(undefined4 *)(iVar2 + 4),0x20);
   (**(code **)(**(int **)(iVar2 + 4) + 0x24))(*(int **)(iVar2 + 4),puVar1);
-  uVar4 = FUN_0214e81c(0,&DAT_0215db58,&DAT_02093c8c);
+  uVar4 = FUN_0214e81c(0,0x215db58,&DAT_02093c8c);
   FUN_02020e98(iVar2,uVar4);
-  func_0x021b65e8(*(undefined4 *)(iVar2 + 4),4,&LAB_0214eb7c);
+  func_0x021b65e8(*(undefined4 *)(iVar2 + 4),4,FUN_0214eb7c);
   func_0x021b6760(*(undefined4 *)(iVar2 + 4),4,FUN_0214eb94);
   FUN_02023894(*(undefined4 *)(iVar2 + 4),0x510000,0);
   func_0x021b3f78(*(undefined4 *)(iVar2 + 4),0x510000);
@@ -221,7 +221,7 @@ JArenaTopMenu::JATopMenu_Add(int param_1,undefined4 param_2,undefined4 param_3,u
   *(undefined4 *)(*(int *)(iVar2 + 4) + 0x140) = 4;
   func_0x021b7744(*(undefined4 *)(iVar2 + 4),1);
   *(undefined4 *)(*(int *)(iVar2 + 4) + 0x124) = 0x101;
-  func_0x021b65e8(*(undefined4 *)(iVar2 + 4),0x10,&LAB_0214ea38);
+  func_0x021b65e8(*(undefined4 *)(iVar2 + 4),0x10,FUN_0214ea38);
   func_0x021b6760(*(undefined4 *)(iVar2 + 4),0x10,FUN_0214ea48);
   *(int *)(puVar1 + 0x24) = iVar2;
   uVar8 = 0;
@@ -246,9 +246,9 @@ JArenaTopMenu::JATopMenu_Add(int param_1,undefined4 param_2,undefined4 param_3,u
     FUN_02023c80(*(undefined4 *)(iVar2 + 4),uStack_68,0x494c,uStack_64);
     FUN_02023c70(*(undefined4 *)(iVar2 + 4),2);
     func_0x021b4034(*(undefined4 *)(iVar2 + 4),2);
-    uVar4 = FUN_0214e81c(0,&DAT_0215db50,&DAT_02093c8c);
+    uVar4 = FUN_0214e81c(0,FUN_0215db50,&DAT_02093c8c);
     FUN_02020e98(iVar2,uVar4);
-    func_0x021b65e8(*(undefined4 *)(iVar2 + 4),1,&LAB_0214ed04);
+    func_0x021b65e8(*(undefined4 *)(iVar2 + 4),1,FUN_0214ed04);
     func_0x021b65e8(*(undefined4 *)(iVar2 + 4),4,FUN_0214eab0);
     func_0x021b6760(*(undefined4 *)(iVar2 + 4),4,FUN_0214eac8);
     func_0x021b65e8(*(undefined4 *)(iVar2 + 4),0x10,FUN_0214ea7c);
@@ -293,7 +293,7 @@ JArenaTopMenu::JATopMenu_Add(int param_1,undefined4 param_2,undefined4 param_3,u
   } while (iVar2 < 4);
   iVar2 = ALWidgetBaseImp::Create(puVar1);
   *(undefined4 *)(*(int *)(iVar2 + 4) + 0x124) = 0x103;
-  func_0x021b65e8(*(undefined4 *)(iVar2 + 4),0x10,&LAB_0214ea38);
+  func_0x021b65e8(*(undefined4 *)(iVar2 + 4),0x10,FUN_0214ea38);
   func_0x021b6760(*(undefined4 *)(iVar2 + 4),0x10,FUN_0214ea48);
   *(int *)(puVar1 + 0x2c) = iVar2;
   uStack_78 = 0x40;
@@ -313,7 +313,7 @@ JArenaTopMenu::JATopMenu_Add(int param_1,undefined4 param_2,undefined4 param_3,u
   iVar2 = ALWidgetBaseImp::Create(puVar1);
   (**(code **)(**(int **)(iVar2 + 4) + 0x24))(*(int **)(iVar2 + 4),puVar1);
   *(undefined4 *)(*(int *)(iVar2 + 4) + 0x124) = 0x102;
-  func_0x021b65e8(*(undefined4 *)(iVar2 + 4),0x10,&LAB_0214e9dc);
+  func_0x021b65e8(*(undefined4 *)(iVar2 + 4),0x10,FUN_0214e9dc);
   func_0x021b6760(*(undefined4 *)(iVar2 + 4),0x10,FUN_0214e9ec);
   *(int *)(puVar1 + 0x28) = iVar2;
   iVar2 = ALWidgetImp::Create(iVar2,_DAT_021d5154);

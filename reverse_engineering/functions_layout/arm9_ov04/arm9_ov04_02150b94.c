@@ -19,8 +19,7 @@ int JQuizCommonTime::JQuizCommonTimeClass_Create
   int local_28;
   
   local_28 = param_4;
-  iVar3 = jus_AllocDebug(0x4c,s_JQuizCommonTime_cpp_02160b54,s_JQuizCommonTimeClass_Create_02160b38,
-                         0x4c);
+  iVar3 = thunk_FUN_0201a228(0x4c,s_JQuizCommonTime_cpp_02160b54,FUN_02160b38,0x4c);
   FUN_020517fc(iVar3,0,0x4c);
   *(undefined4 *)(iVar3 + 0x3c) = param_3;
   *(int *)(iVar3 + 0x40) = param_4;

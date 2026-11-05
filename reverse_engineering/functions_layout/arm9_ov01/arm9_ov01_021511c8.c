@@ -5,6 +5,7 @@ void FUN_021511c8(int param_1,int *param_2,int *param_3)
   int *piVar1;
   int iVar2;
   
+                    /* JUS-TAG source_file_inferred="JArenaMissionTry.cpp" */
   iVar2 = *param_3;
   piVar1 = *(int **)(*(int *)(param_1 + 4) + 0x50);
   piVar1[3] = *param_2;

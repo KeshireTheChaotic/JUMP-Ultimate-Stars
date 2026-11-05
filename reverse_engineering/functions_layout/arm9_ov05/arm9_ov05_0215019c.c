@@ -7,12 +7,12 @@ void FUN_0215019c(int param_1)
   int *piVar3;
   int iVar4;
   
-  iVar1 = jus_AllocDebug(0xcc,s_ALWidget_inl_0216f484,s_Create_0216f43c,0x1de);
+  iVar1 = thunk_FUN_0201a228(0xcc,s_ALWidget_inl_0216f484,s_Create_0216f43c,0x1de);
   if (iVar1 != 0) {
     func_0x021af26c(iVar1,FUN_02150524,FUN_02150724,0);
   }
   piVar2 = (int *)FUN_021504ac();
-  iVar1 = jus_AllocDebug(0xbc,s_ALWidget_inl_0216f464,s_Create_0216f41c,0x212);
+  iVar1 = thunk_FUN_0201a228(0xbc,s_ALWidget_inl_0216f464,s_Create_0216f41c,0x212);
   piVar3 = (int *)0x0;
   if (iVar1 != 0) {
     piVar3 = (int *)func_0x021af358(iVar1,FUN_02150798,0);
@@ -44,28 +44,28 @@ void FUN_0215019c(int param_1)
   *(undefined1 *)(iVar1 + 0x1b) = 1;
   FUN_02028330(*(undefined4 *)(**(int **)(param_1 + 8) + 4));
   (**(code **)(*piVar2 + 8))();
-  iVar1 = jus_AllocDebug(0xcc,s_ALWidget_inl_0216f484,s_Create_0216f43c,0x1de);
+  iVar1 = thunk_FUN_0201a228(0xcc,s_ALWidget_inl_0216f484,s_Create_0216f43c,0x1de);
   if (iVar1 != 0) {
     func_0x021af26c(iVar1,FUN_02150570,FUN_02150724,0);
   }
   piVar3 = (int *)FUN_021504ac();
   func_0x021b3b7c(2,0,piVar3,0);
   (**(code **)(*piVar3 + 8))();
-  iVar1 = jus_AllocDebug(0xcc,s_ALWidget_inl_0216f484,s_Create_0216f43c,0x1de);
+  iVar1 = thunk_FUN_0201a228(0xcc,s_ALWidget_inl_0216f484,s_Create_0216f43c,0x1de);
   if (iVar1 != 0) {
     func_0x021af26c(iVar1,FUN_021505ac,FUN_02150724,0);
   }
   piVar3 = (int *)FUN_021504ac();
   func_0x021b3b7c(3,0,piVar3,0);
   (**(code **)(*piVar3 + 8))();
-  iVar1 = jus_AllocDebug(0xcc,s_ALWidget_inl_0216f484,s_Create_0216f43c,0x1de);
+  iVar1 = thunk_FUN_0201a228(0xcc,s_ALWidget_inl_0216f484,s_Create_0216f43c,0x1de);
   if (iVar1 != 0) {
     func_0x021af26c(iVar1,FUN_021505e8,FUN_02150724,0);
   }
   piVar3 = (int *)FUN_021504ac();
   func_0x021b3b7c(4,0,piVar3,0);
   (**(code **)(*piVar3 + 8))();
-  iVar1 = jus_AllocDebug(0xcc,s_ALWidget_inl_0216f484,s_Create_0216f43c,0x1de);
+  iVar1 = thunk_FUN_0201a228(0xcc,s_ALWidget_inl_0216f484,s_Create_0216f43c,0x1de);
   if (iVar1 != 0) {
     func_0x021af26c(iVar1,FUN_02150624,FUN_02150724,0);
   }

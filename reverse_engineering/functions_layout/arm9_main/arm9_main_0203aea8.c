@@ -7,7 +7,7 @@ void FUN_0203aea8(void)
   FUN_02031988(0);
   if ((DAT_020a0d64 & 1) == 0) {
     jus_Class_020972e0::jus_Class_020972e0(&DAT_020a374c);
-    FUN_0200f2b0(&DAT_020a374c,&LAB_0203b368,&DAT_020a1338);
+    FUN_0200f2b0(&DAT_020a374c,FUN_0203b368,&DAT_020a1338);
     DAT_020a0d64 = DAT_020a0d64 | 1;
   }
   if ((DAT_020a0d68 & 1) == 0) {

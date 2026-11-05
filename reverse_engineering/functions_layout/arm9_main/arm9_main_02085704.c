@@ -25,13 +25,13 @@ int * BattleMapObj::BattleMapMoveFloorCreate(int param_1,int param_2,int param_3
     piVar2 = (int *)0x0;
   }
   else {
-    piVar2 = (int *)jus_AllocDebug(0x14,s_BattleMapObj_cpp_020a0114,
-                                   s_BattleMapMoveFloorCreate_020a00d8,0xfd);
+    piVar2 = (int *)thunk_FUN_0201a228(0x14,s_BattleMapObj_cpp_020a0114,
+                                       s_BattleMapMoveFloorCreate_020a00d8,0xfd);
     FUN_020517fc(piVar2,0,0x14);
     *(undefined1 *)(piVar2 + 4) = *(undefined1 *)(param_2 + 1);
     piVar2[3] = param_1;
-    iVar3 = jus_AllocDebug((uint)*(byte *)(piVar2 + 4) << 2,s_BattleMapObj_cpp_020a0114,
-                           s_BattleMapMoveFloorCreate_020a00d8,0x106);
+    iVar3 = thunk_FUN_0201a228((uint)*(byte *)(piVar2 + 4) << 2,s_BattleMapObj_cpp_020a0114,
+                               s_BattleMapMoveFloorCreate_020a00d8,0x106);
     piVar2[2] = iVar3;
     FUN_020517fc(iVar3,0,(uint)*(byte *)(piVar2 + 4) << 2);
     if (param_1 != 0) {
@@ -40,7 +40,7 @@ int * BattleMapObj::BattleMapMoveFloorCreate(int param_1,int param_2,int param_3
       local_128 = 0xa4000;
       (**(code **)(**(int **)(iVar3 + 4) + 0xa0))(*(int **)(iVar3 + 4),&local_128);
       (**(code **)(**(int **)(iVar3 + 4) + 0x94))(*(int **)(iVar3 + 4),0x20000);
-      FUN_02028384(*(undefined4 *)(iVar3 + 4),&LAB_020860c0);
+      FUN_02028384(*(undefined4 *)(iVar3 + 4),FUN_020860c0);
       *piVar2 = iVar3;
     }
     FUN_020517fc(auStack_124,0,0x100);

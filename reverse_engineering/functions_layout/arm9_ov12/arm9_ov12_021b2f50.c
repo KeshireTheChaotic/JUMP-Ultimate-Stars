@@ -44,7 +44,7 @@ int * FUN_021b2f50(int *param_1,uint *param_2,undefined4 param_3,undefined4 para
       FUN_02003bd8(s_tree__insert_length_error_021d28b4);
       FUN_02001f18();
     }
-    piVar5 = (int *)jus_AllocDebug(0x14);
+    piVar5 = (int *)thunk_FUN_0201a228(0x14);
     if (piVar5 == (int *)0x0) {
       FUN_02003bd8(s_Memory_allocation_failure_021d2868);
       FUN_02001f18();

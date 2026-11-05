@@ -1,0 +1,10 @@
+020736b4  stmdb sp!,{r4,lr}
+020736b8  ldr r4,[0x20736dc]
+020736bc  ldr r1,[r4,#0x0]
+020736c0  bl 0x0205d8cc
+020736c4  ldr r0,[0x20736e0]
+020736c8  mov r1,#0x0
+020736cc  bl 0x0205b910
+020736d0  ldr r0,[r4,#0x0]
+020736d4  bl 0x0205cae8
+020736d8  ldmia sp!,{r4,pc}

@@ -70,7 +70,7 @@ void FUN_02153ce8(undefined4 param_1)
     iVar4 = ALWidgetImp::Create(iVar2,_DAT_021d5154);
     (**(code **)(**(int **)(iVar4 + 4) + 0xd8))(*(int **)(iVar4 + 4),1);
     FUN_0214e6e4(&uStack0000000c,5,iVar5 * 0x30 + 5,0xfa);
-    piVar1 = (int *)jus_AllocDebug(0x70,s_ALCollision_inl_021608f4,s_Create_02160e78,0x1b2);
+    piVar1 = (int *)thunk_FUN_0201a228(0x70,FUN_021608f4,&DAT_02160e78,0x1b2);
     if (piVar1 != (int *)0x0) {
       func_0x021b054c(piVar1,0,&DAT_02093c8c);
       *piVar1 = (int)&jus_Class_0216094c::vftable;
@@ -83,7 +83,7 @@ void FUN_02153ce8(undefined4 param_1)
     FUN_02020e98(iVar4,piVar1[6]);
     (**(code **)(**(int **)(iVar4 + 4) + 0x24))();
     FUN_02023940(*(undefined4 *)(iVar4 + 4));
-    FUN_02151ebc(&uStack00000004,iVar4,&DAT_02160ecc);
+    FUN_02151ebc(&uStack00000004,iVar4,FUN_02160ecc);
     (**(code **)(**(int **)(iVar4 + 4) + 0xd8))(*(int **)(iVar4 + 4),1);
     FUN_02023c60(*(undefined4 *)(iVar4 + 4),uStack00000004,0,in_stack_00000008);
     piVar1 = *(int **)(*(int *)(iVar4 + 4) + 0x68);
@@ -128,13 +128,13 @@ void FUN_02153ce8(undefined4 param_1)
   *unaff_r9 = iVar2;
   uStack00000040 = 0x80000;
   FUN_02152ca0(*unaff_r9,&uStack00000040);
-  FUN_02028384(*(undefined4 *)(*unaff_r9 + 4),&DAT_02154870);
+  FUN_02028384(*(undefined4 *)(*unaff_r9 + 4),FUN_02154870);
   (**(code **)(**(int **)(*unaff_r9 + 4) + 0x24))();
   iVar2 = FUN_02026f94();
   unaff_r9[1] = iVar2;
   uStack0000003c = 0x80000;
   FUN_02152ca0(unaff_r9[1],&uStack0000003c);
-  FUN_02028384(*(undefined4 *)(unaff_r9[1] + 4),&LAB_021548d8);
+  FUN_02028384(*(undefined4 *)(unaff_r9[1] + 4),FUN_021548d8);
   (**(code **)(**(int **)(unaff_r9[1] + 4) + 0x24))();
   return;
 }

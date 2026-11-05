@@ -10,7 +10,7 @@ void FUN_02012dd8(void)
   if ((DAT_020a0c5c & 1) == 0) {
     PropBindInstance_02095200::PropBindInstance_02095200(&DAT_020a1c44,DAT_020a101c);
     DAT_020a1c44 = &PropBindInstance_02095200_Derived_02095140::vftable;
-    iVar1 = jus_AllocDebug(0x14);
+    iVar1 = FUN_0201a228(0x14);
     uVar2 = 0;
     if (iVar1 != 0) {
       uVar2 = jus_Class_02097b38::jus_Class_02097b38(iVar1,&DAT_0209d92c,&DAT_0209d924);

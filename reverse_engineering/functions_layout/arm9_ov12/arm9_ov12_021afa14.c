@@ -7,7 +7,7 @@ undefined4 * ALDrawLinkImp::Clone(undefined4 param_1,undefined4 param_2)
 {
   undefined4 *puVar1;
   
-  puVar1 = (undefined4 *)jus_AllocDebug(0x40,s_ALDrawLinkImp_h_021d1748,s_Clone_021d1690,0x1c);
+  puVar1 = (undefined4 *)thunk_FUN_0201a228(0x40,s_ALDrawLinkImp_h_021d1748,s_Clone_021d1690,0x1c);
   if (puVar1 != (undefined4 *)0x0) {
     jus_Class_02095a08::jus_Class_02095a08(puVar1,param_1,param_2);
     *puVar1 = &ALWidgetImp_020958dc::vftable;

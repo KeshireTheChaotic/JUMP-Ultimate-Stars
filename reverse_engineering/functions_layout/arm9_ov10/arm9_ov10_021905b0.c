@@ -48,8 +48,8 @@ void FUN_021905b0(undefined4 param_1,int param_2,int param_3,byte param_4)
     puVar5[8] = 0;
     puVar5[9] = 0;
     if ((param_4 & 2) != 0) {
-      puVar5[10] = (ushort)(byte)(DAT_021a84e4 + 0x2040000 >> 0x18) |
-                   (ushort)((DAT_021a84e4 + 0x2040000 >> 0x10) << 8);
+      puVar5[10] = (ushort)(byte)((uint)(FUN_02040000 + DAT_021a84e4) >> 0x18) |
+                   (ushort)(((uint)(FUN_02040000 + DAT_021a84e4) >> 0x10) << 8);
       puVar5[0xb] = DAT_021a84e4 >> 8 | DAT_021a84e4 << 8;
     }
     uVar2 = FUN_02191234(puVar5 + -6,uVar6 + 0xc,0);

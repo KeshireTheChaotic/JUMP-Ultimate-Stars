@@ -10,7 +10,7 @@ void FUN_02151310(int param_1,undefined4 param_2,undefined4 param_3,undefined4 p
   
   iVar2 = *(int *)(*(int *)(param_1 + 4) + 0x10);
   uStack_18 = param_4;
-  iVar1 = (*(code *)(&PTR_LAB_02151474_1_02171c38)[*(char *)(iVar2 + 0x38)])(iVar2);
+  iVar1 = (*(code *)(&PTR_FUN_02151474_1_02171c38)[*(char *)(iVar2 + 0x38)])(iVar2);
   if (iVar1 != 0) {
     *(undefined4 *)(*(int *)(DAT_02172960 + 0x118) + 0x578) = 0;
     *(undefined1 *)(iVar2 + 0x38) = 0;

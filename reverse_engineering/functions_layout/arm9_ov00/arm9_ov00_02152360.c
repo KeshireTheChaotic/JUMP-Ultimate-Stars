@@ -6,7 +6,7 @@ void FUN_02152360(undefined4 *param_1,undefined4 param_2,undefined4 param_3,unde
   undefined4 uVar2;
   int iVar3;
   
-  FUN_020428dc(DAT_020a0f64,&LAB_02152868,param_1,param_4,param_4);
+  FUN_020428dc(DAT_020a0f64,FUN_02152868,param_1,param_4,param_4);
   if ((*(byte *)(param_1 + 0x39) & 4) != 0) {
     FUN_02152980(param_1);
   }

@@ -10,7 +10,7 @@ void FUN_0217d8d0(int param_1,int param_2)
   if (iVar2 == 0) {
     return;
   }
-  puVar3 = (&PTR_LAB_02181478)[param_2];
+  puVar3 = (&PTR_FUN_02181478)[param_2];
   piVar1 = *(int **)(*(int *)(iVar2 + 4) + 0x10);
   if (puVar3 != (undefined *)0x0) {
     FUN_0217d094();

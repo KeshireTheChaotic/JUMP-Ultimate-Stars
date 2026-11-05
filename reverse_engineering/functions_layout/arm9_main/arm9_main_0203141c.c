@@ -14,7 +14,7 @@ void FUN_0203141c(int param_1)
   if (DAT_020a0f64 == 0) {
     return;
   }
-  iVar1 = jus_AllocDebug(0xcc);
+  iVar1 = FUN_0201a228(0xcc);
   uVar2 = 0;
   if (iVar1 != 0) {
     uVar2 = func_0x021b149c(iVar1,param_1);

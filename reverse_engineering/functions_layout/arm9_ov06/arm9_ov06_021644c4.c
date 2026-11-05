@@ -35,7 +35,7 @@ int BattleMapItem::BattleMapLoadItem
   undefined4 uStack_28;
   
   uStack_28 = param_4;
-  iVar3 = jus_AllocDebug(0x11e4,s_BattleMapItem_cpp_021725ec,s_BattleMapLoadItem_021725b0,0xe5);
+  iVar3 = thunk_FUN_0201a228(0x11e4,s_BattleMapItem_cpp_021725ec,s_BattleMapLoadItem_021725b0,0xe5);
   if (iVar3 != 0) {
     *(undefined4 *)(iVar3 + 0x154) = 0;
     *(undefined4 *)(iVar3 + 0x158) = 0;

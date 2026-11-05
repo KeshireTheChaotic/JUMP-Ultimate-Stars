@@ -9,7 +9,7 @@ int FUN_02037f84(int *param_1)
   
   if (*(short *)((int)param_1 + 10) == (short)param_1[2]) {
     *(short *)((int)param_1 + 10) = *(short *)((int)param_1 + 10) << 1;
-    iVar2 = jus_AllocDebug(param_1[1] * (uint)*(ushort *)((int)param_1 + 10));
+    iVar2 = FUN_0201a228(param_1[1] * (uint)*(ushort *)((int)param_1 + 10));
     FUN_02051890(*param_1,iVar2,(uint)*(ushort *)(param_1 + 2) * param_1[1]);
     iVar4 = *param_1;
     iVar3 = FUN_0201a9ec(iVar4);

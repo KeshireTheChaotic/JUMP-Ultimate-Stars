@@ -1,0 +1,14 @@
+02071d1c  mov r2,#0xc
+02071d1e  mul r2,r0
+02071d20  ldr r0,[0x02071d38]
+02071d22  lsl r1,r1,#0x2
+02071d24  add r0,r0,r2
+02071d26  ldr r1,[r1,r0]
+02071d28  mov r0,#0x1
+02071d2a  lsl r0,r0,#0x1e
+02071d2c  tst r0,r1
+02071d2e  beq 0x02071d34
+02071d30  mov r0,#0x1
+02071d32  bx lr
+02071d34  mov r0,#0x0
+02071d36  bx lr

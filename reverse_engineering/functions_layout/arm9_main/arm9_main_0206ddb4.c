@@ -18,7 +18,7 @@ void FUN_0206ddb4(void)
   DAT_020afc9c = '\x01';
   FUN_0206df9c();
   FUN_0206e134();
-  FUN_02062da8(&LAB_0206dcc8);
+  FUN_02062da8(FUN_0206dcc8);
   FUN_0208c2f8();
   while (iVar3 = (**(code **)(*DAT_020a0f64 + 0x18))(), iVar3 == 0) {
     iVar3 = FUN_02086bd4();

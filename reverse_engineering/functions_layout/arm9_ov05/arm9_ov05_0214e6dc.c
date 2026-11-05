@@ -11,7 +11,8 @@ undefined4 DeckMake::DeckMake_Add(uint param_1)
   undefined4 uVar4;
   undefined4 local_10;
   
-  puVar1 = (undefined4 *)jus_AllocDebug(0x44,s_DeckMake_cpp_0216f3ec,s_DeckMake_Add_0216f3dc,0x53);
+  puVar1 = (undefined4 *)
+           thunk_FUN_0201a228(0x44,s_DeckMake_cpp_0216f3ec,s_DeckMake_Add_0216f3dc,0x53);
   FUN_020517fc(puVar1,0,0x44);
   puVar1[8] = param_1 & 0xff;
   puVar1[9] = (int)param_1 >> 8 & 0xff;

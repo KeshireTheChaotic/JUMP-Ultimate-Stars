@@ -1,0 +1,13 @@
+020019ec  push {lr}
+020019ee  sub sp,#0x4
+020019f0  add r1,sp,#0x0
+020019f2  bl 0x02193608
+020019f6  cmp r0,#0x0
+020019f8  bne 0x02001a02
+020019fa  mov r0,#0x0
+020019fc  mvn r0,r0
+020019fe  add sp,#0x4
+02001a00  pop {pc}
+02001a02  ldr r0,[sp,#0x0]
+02001a04  add sp,#0x4
+02001a06  pop {pc}

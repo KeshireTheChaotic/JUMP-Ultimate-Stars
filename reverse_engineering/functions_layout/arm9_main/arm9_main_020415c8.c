@@ -23,7 +23,7 @@ jus_Class_02093f78::vfunc_06
       uVar2 = FUN_02033c20(auStack_120,*(undefined4 *)(param_3 + uVar3 * 4));
       iVar1 = FUN_020645d8(auStack_128,uVar2);
       if (iVar1 != 0) {
-        iVar1 = jus_AllocDebug(0x28);
+        iVar1 = FUN_0201a228(0x28);
         if (iVar1 == 0) {
           return 0;
         }
@@ -35,7 +35,7 @@ jus_Class_02093f78::vfunc_06
     uVar2 = 0;
   }
   else {
-    iVar1 = jus_AllocDebug(0x28);
+    iVar1 = FUN_0201a228(0x28);
     uVar2 = 0;
     if (iVar1 != 0) {
       uVar2 = jus_TagDUMY_Derived_02094a34::jus_TagDUMY_Derived_02094a34

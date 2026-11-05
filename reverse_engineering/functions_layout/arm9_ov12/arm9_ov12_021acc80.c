@@ -1,8 +1,8 @@
 
-/* JUS-CLASS ALWidgetBase_021d149c::~ALWidgetBase_021d149c [class-source-file] slot 0/1 of vtable
-   021d149c; resets vtables (destructor) */
+/* JUS-CLASS jus_Class_021d149c::~jus_Class_021d149c [class-default] slot 0/1 of vtable 021d149c;
+   resets vtables (destructor) */
 
-undefined4 * ALWidgetBase_021d149c::~ALWidgetBase_021d149c(undefined4 *param_1)
+undefined4 * jus_Class_021d149c::~jus_Class_021d149c(undefined4 *param_1)
 
 {
   *param_1 = &vftable;

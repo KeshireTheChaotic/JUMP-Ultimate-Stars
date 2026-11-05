@@ -1,0 +1,12 @@
+0208a540  ldrh r0,[r0,#0x2]
+0208a542  cmp r0,#0x0
+0208a544  beq 0x0208a550
+0208a546  mov r1,#0x0
+0208a548  ldr r0,[0x0208a558]
+0208a54a  mvn r1,r1
+0208a54c  str r1,[r0,#0x2c]
+0208a54e  bx lr
+0208a550  ldr r0,[0x0208a558]
+0208a552  mov r1,#0x1
+0208a554  str r1,[r0,#0x2c]
+0208a556  bx lr

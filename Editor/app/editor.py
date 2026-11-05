@@ -58,6 +58,13 @@ def parse_int(text: str) -> int:
     return int(str(text).strip(), 0)
 
 
+def _short_cue(c) -> str:
+    """Timeline/HUD text for a sound cue; details stay in the tooltip and Inspector."""
+    if c.ssar is not None:
+        return c.label
+    return '?' if c.evidence == 'Unknown' else '–'
+
+
 def shape_label(code: int) -> str:
     w, h = dstxmod.SHAPES[code]
     kind = 'square' if w == h else ('wide' if w > h else 'tall')
@@ -109,6 +116,7 @@ class EditorApp(tk.Tk):
         self._motion = None
         self._cues = []
         self._sounds = None
+        self.sound_form = tk.StringVar(value='Auto')       # preview choice for base-archive 0x0402 cues
         self._audio = None
         self.sound_enabled = tk.BooleanVar(value=True)
         self._audio_request = 0
@@ -1611,6 +1619,10 @@ class EditorApp(tk.Tk):
         cid = grp[4:] if grp.startswith('chr:') else None
         if ext == '.aar':                      # an archive: open it as the container
             container, name = path, None
+        if path in ('bin/koma.bin', 'bin/kshape.bin'):        # loose card tables → Koma workspace
+            self.show_workspace('koma')
+            self.status.set(f'{path} is edited from the Koma workspace (card shape picker).')
+            return
         try:
             if name and ext == '.dtx' and container == 'koma/koma.aar':
                 self.show_workspace('koma')
@@ -1721,7 +1733,9 @@ class EditorApp(tk.Tk):
 
     def _refresh_notetrack_effects(self):
         self._motion = motion.simulate(self.move, self.almt.node_names, self._motion_params()) if self.move else None
-        self._cues = (self._sounds.cues(self.move, self.almt.node_names, self.container)
+        form = self.sound_form.get()
+        self._cues = (self._sounds.cues(self.move, self.almt.node_names, self.container,
+                                        form=int(form.split('-')[0]) if form.endswith('-cell') else None)
                       if self.move and self._sounds else [])
         if self._audio:
             self._audio.prepare(self._cues)
@@ -1772,7 +1786,7 @@ class EditorApp(tk.Tk):
             rows.append({'id': ('ntfx', 'sound'), 'label': 'Sound', 'indent': 1, 'kind': 'track',
                          'colour': T.GOOD, 'editable': False, 'derived': 'sound', 'badge': f'{len(cues)}',
                          'keys': [(c.tick, ('snd', c.tick)) for c in cues],
-                         'labels': [(c.tick, '♪ ' + c.label,
+                         'labels': [(c.tick, '♪ ' + _short_cue(c),
                                      T.GOOD if c.ssar is not None else T.MUTED) for c in cues],
                          'tooltip': lambda t, p: self._sound_tooltip(t)})
         return rows
@@ -2300,7 +2314,7 @@ class EditorApp(tk.Tk):
         self._draw_motion(vp, tick, info)
         for c, played in sounds.dedupe_same_frame(self._cues):
             if c.tick == tick:
-                info.append('♪ ' + c.label + (' (duplicate)' if c.ssar is not None and not played else ''))
+                info.append('♪ ' + _short_cue(c) + (' (duplicate)' if c.ssar is not None and not played else ''))
         if self._effect_table_error:
             info.append('Effect table: ' + self._effect_table_error)
         vp.hud.configure(text=f'tick {tick}/{self.move.duration}   ' + '   '.join(info))
@@ -2475,14 +2489,38 @@ class EditorApp(tk.Tk):
         for c, _ in cur:
             if self._audio:
                 ins.value('Audio', self._audio.status(c))
+        forms = self._sounds.forms(self.container) if self._sounds else []
+        if forms and not re.search(r'_[bs]_\d{2}_\d+\.aar', self.container or ''):
+            ins.section('Koma size (0x0402)', note='0x0402 plays the special-move bank of the koma the character '
+                        'was deployed with (form record +0x20 = chr_b.bin +0x32 + (size − 4)·2, main '
+                        '0x02077C0C). Base-archive moves are shared by every koma, so the deck decides. Auto '
+                        'resolves only when koma.bin has one size for this character; pick a size to audition '
+                        '(preview only, nothing is saved).')
+            values = ['Auto'] + [f'{k}-cell' for k in forms]
+            if self.sound_form.get() not in values:
+                self.sound_form.set('Auto')
+            ins.combo('Deployed as', self.sound_form, values, on_change=self._motion_changed, width=10)
+            m = re.search(r'([a-z]{2}_[bs]_\d{2})', self.container or '')
+            slots = self._sounds.slots(m.group(1)) if m else None
+            if slots:
+                for k in forms:
+                    v = slots.get(k, 0)
+                    ins.value(f'{k}-cell', self._sounds._name(v) if v else 'silent (slot 0)',
+                              colour=T.GOOD if v else T.MUTED)
+        char = re.search(r'([a-z]{2}_b_\d{2})', self.container or '')
+        if char and self._sounds and self._sounds.display_name(char.group(1)):
+            ins.value('Character', f'{self._sounds.display_name(char.group(1))}  (chr_b record '
+                      f'{self._sounds.roster.index(char.group(1))})', colour=T.MUTED)
         ins.section(f'All cues ({len(self._cues)})')
         for c in self._cues[:40]:
             ins.value(f'@{c.tick}', f'0x{c.opcode:04X} {c.label}',
                       colour=T.GOOD if c.ssar is not None else T.MUTED)
         ins.section('Evidence')
         ins.evidence('0x0400', 'Direct', 'SSAR 0x7A SEQ_BATTLE (ov06 0x021569CC)')
-        ins.evidence('0x0401/0x0402', 'Inferred', 'chara +0xA4/+0xA6 from the form record (ov06 FUN_02157114); '
-                                                  'archive chosen from chr_b.bin record order + SSAR names')
+        ins.evidence('0x0401/0x0402', 'Cross-checked', '+0xA4/+0xA6 from the deck koma form record (main '
+                     '0x02077C0C battle, 0x02077CB8 support); slots name SEQ_<CHAR>[_size] on all 429 entries')
+        ins.evidence('Deck choice', 'Unknown', 'base-archive 0x0402 when the character has koma of several sizes; '
+                                               'support 0x0401 (own vs owner record not traced)')
         ins.evidence('Same-frame repeats', 'Direct', 'FUN_0207342C skips a repeated (ssar, seq)')
 
     def spawn_projection(self, tick=None):

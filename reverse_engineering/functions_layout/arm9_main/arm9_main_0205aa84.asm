@@ -1,0 +1,10 @@
+0205aa84  stmdb sp!,{lr}
+0205aa88  sub sp,sp,#0x4
+0205aa8c  ldr r2,[0x205aaac]
+0205aa90  mov r12,#0x1
+0205aa94  mov r3,#0x2
+0205aa98  str r12,[sp,#0x0]
+0205aa9c  bl 0x0205a7fc
+0205aaa0  add sp,sp,#0x4
+0205aaa4  ldmia sp!,{lr}
+0205aaa8  bx lr

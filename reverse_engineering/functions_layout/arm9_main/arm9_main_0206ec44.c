@@ -10,7 +10,7 @@ void jus_Scene09_Exit(int param_1,int param_2,undefined4 param_3,undefined4 para
   iVar1 = iRam0206eca4;
   uVar2 = param_2 >> 8 & 0xff;
   if ((uVar2 == 0) || (uVar2 != 1)) {
-    func_0x0206e590(param_1,0,param_3,param_4,param_4);
+    FUN_0206e590(param_1,0,param_3,param_4,param_4);
   }
   else {
     *(undefined1 *)(iRam0206eca0 + 0x6e) = 0;

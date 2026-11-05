@@ -13,7 +13,7 @@ void FUN_0215598c(int *param_1,undefined4 param_2,undefined4 param_3,undefined4 
     local_10 = 0x1000;
     FUN_02155970(uVar1,&local_10);
     (**(code **)(**(int **)(param_1[2] + 4) + 0xd8))(*(int **)(param_1[2] + 4),1);
-    FUN_02028384(*(undefined4 *)(*param_1 + 4),&DAT_02155a88);
+    FUN_02028384(*(undefined4 *)(*param_1 + 4),FUN_02155a88);
   }
   return;
 }

@@ -16,7 +16,7 @@ int * FUN_020439e8(int param_1,int param_2,int param_3)
     if (param_3 == DAT_02093bf4) {
       return piVar2;
     }
-    iVar1 = jus_AllocDebug(0x2c);
+    iVar1 = FUN_0201a228(0x2c);
     piVar3 = (int *)0x0;
     if (iVar1 != 0) {
       piVar3 = (int *)jus_Class_02096c70::jus_Class_02096c70(iVar1,piVar2,param_3);
@@ -29,7 +29,7 @@ int * FUN_020439e8(int param_1,int param_2,int param_3)
     return *(int **)(param_1 + 0x20);
   }
   uVar4 = *(undefined4 *)(param_1 + 0x20);
-  iVar1 = jus_AllocDebug(0x2c);
+  iVar1 = FUN_0201a228(0x2c);
   if (iVar1 == 0) {
     return (int *)0x0;
   }

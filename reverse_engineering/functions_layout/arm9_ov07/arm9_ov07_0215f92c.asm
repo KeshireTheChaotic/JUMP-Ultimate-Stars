@@ -1,0 +1,9 @@
+0215f92c  ldrh r1,[r0,#0x2]
+0215f930  ldr r0,[0x215f950]
+0215f934  ldr r0,[r0,#0x0]
+0215f938  cmp r1,#0x8
+0215f93c  addeq r0,r0,#0x5000
+0215f940  moveq r1,#0x6
+0215f944  streq r1,[r0,#0xf4]
+0215f948  streq r1,[r0,#0xf0]
+0215f94c  bx lr

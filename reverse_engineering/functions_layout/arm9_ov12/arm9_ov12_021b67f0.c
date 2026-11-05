@@ -260,8 +260,8 @@ LAB_021b6a96:
                      (iVar2 = *(int *)(piVar11[0x2c] + 0x98), FUN_021ae104(&local_16c),
                      local_16c + iVar2 * 0x1000 <= (int)uVar10)) {
                     iVar5 = piVar11[0x24];
-                    iVar2 = jus_AllocDebug(0x2c,s_ALObjectImp_h_021d3c10,s_PostMessage_021d3be4,
-                                           0x10a);
+                    iVar2 = thunk_FUN_0201a228(0x2c,s_ALObjectImp_h_021d3c10,s_PostMessage_021d3be4,
+                                               0x10a);
                     uVar7 = 0;
                     if (iVar2 != 0) {
                       uVar7 = jus_Class_021d293c::jus_Class_021d293c(iVar2,0x80011006,piVar11,1,0,0)
@@ -278,8 +278,8 @@ LAB_021b6a96:
                 }
                 else {
                   iVar5 = piVar11[0x24];
-                  iVar2 = jus_AllocDebug(0x2c,s_ALObjectImp_h_021d3c10,s_PostMessage_021d3be4,0x10a)
-                  ;
+                  iVar2 = thunk_FUN_0201a228(0x2c,s_ALObjectImp_h_021d3c10,s_PostMessage_021d3be4,
+                                             0x10a);
                   uVar7 = 0;
                   if (iVar2 != 0) {
                     uVar7 = jus_Class_021d293c::jus_Class_021d293c
@@ -296,7 +296,8 @@ LAB_021b6a96:
               }
               else {
                 iVar5 = piVar11[0x24];
-                iVar2 = jus_AllocDebug(0x2c,s_ALObjectImp_h_021d3c10,s_PostMessage_021d3be4,0x10a);
+                iVar2 = thunk_FUN_0201a228(0x2c,s_ALObjectImp_h_021d3c10,s_PostMessage_021d3be4,
+                                           0x10a);
                 uVar7 = 0;
                 if (iVar2 != 0) {
                   uVar7 = jus_Class_021d293c::jus_Class_021d293c(iVar2,0x80011004,piVar11,1,0,0);
@@ -312,7 +313,8 @@ LAB_021b6a96:
             }
             else {
               iVar5 = piVar11[0x24];
-              iVar2 = jus_AllocDebug(0x2c,s_ALObjectImp_h_021d3c10,s_PostMessage_021d3be4,0x10a);
+              iVar2 = thunk_FUN_0201a228(0x2c,s_ALObjectImp_h_021d3c10,s_PostMessage_021d3be4,0x10a)
+              ;
               uVar7 = 0;
               if (iVar2 != 0) {
                 uVar7 = jus_Class_021d293c::jus_Class_021d293c

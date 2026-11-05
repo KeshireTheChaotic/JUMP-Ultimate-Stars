@@ -1,0 +1,10 @@
+020579f0  add r0,r0,#0x1
+020579f4  add r1,r1,#0x1
+020579f8  ldrsb r2,[r1,#0x0]
+020579fc  ldrsb r3,[r0,#0x0]
+02057a00  cmp r3,r2
+02057a04  bne 0x02057a10
+02057a08  cmp r3,#0x0
+02057a0c  bne 0x020579f0
+02057a10  sub r0,r3,r2
+02057a14  bx lr

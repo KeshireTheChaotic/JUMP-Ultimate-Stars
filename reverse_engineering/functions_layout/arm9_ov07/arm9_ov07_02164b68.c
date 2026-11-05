@@ -7,7 +7,7 @@ void FUN_02164b68(int param_1)
   iVar1 = FUN_0207382c();
   if (iVar1 != 0) {
     func_0x021b65cc();
-    FUN_02028384(*(undefined4 *)(param_1 + 4),&LAB_02164b88_1);
+    FUN_02028384(*(undefined4 *)(param_1 + 4),0x2164b89);
   }
   return;
 }

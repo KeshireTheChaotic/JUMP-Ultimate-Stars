@@ -42,7 +42,7 @@ int FUN_0214f330(undefined4 *param_1,undefined4 param_2)
   if (iVar3 != 0) {
     local_50 = 0;
     FUN_020550a0(auStack_44);
-    FUN_02054ee8(auStack_44,0x3fec42,0,&LAB_0214f88c_1,0x12);
+    FUN_02054ee8(auStack_44,0x3fec42,0,0x214f88d,0x12);
     uVar4 = unaff_r6 | 0x30000;
     do {
       FUN_02053bd8(&DAT_0216cfac,&local_48,1);

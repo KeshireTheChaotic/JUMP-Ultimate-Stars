@@ -15,7 +15,7 @@ void jus_Scene04_Exit(char *param_1,int param_2,undefined4 param_3,undefined4 pa
   case 0:
   default:
     if ((*(char *)(iRam0206ea68 + 0x18) == '\0') && (iVar1 = FUN_02086bd4(), iVar1 == 0)) {
-      func_0x0206e590(param_1,0);
+      FUN_0206e590(param_1,0);
     }
     else {
       *(int *)(iRam0206ea68 + 0x18c) = (int)param_1[1];
@@ -23,7 +23,7 @@ void jus_Scene04_Exit(char *param_1,int param_2,undefined4 param_3,undefined4 pa
     break;
   case 1:
     if ((*(char *)(iRam0206ea68 + 0x18) == '\0') && (iVar1 = FUN_02086bd4(), iVar1 == 0)) {
-      func_0x0206e5b0(param_1,0);
+      FUN_0206e5b0(param_1,0);
     }
     else {
       *(int *)(iRam0206ea68 + 0x18c) = (int)*param_1;

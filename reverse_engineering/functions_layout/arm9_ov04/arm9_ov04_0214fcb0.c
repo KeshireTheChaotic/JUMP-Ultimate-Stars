@@ -13,7 +13,7 @@ void ALWidgetImp::Create(int param_1,undefined4 param_2,undefined4 param_3,undef
   
   uVar1 = _DAT_021d5154;
   uVar3 = *(undefined4 *)(param_1 + 4);
-  iVar2 = jus_AllocDebug(0x134,s_ALWidgetImp_h_021608d4,s_Create_02160af8,0x3e);
+  iVar2 = thunk_FUN_0201a228(0x134,s_ALWidgetImp_h_021608d4,&DAT_02160af8,0x3e);
   if (iVar2 != 0) {
     func_0x021af0f8(iVar2,uVar3,uVar1,ALWidgetBaseImp::CreateDrawFunc);
   }

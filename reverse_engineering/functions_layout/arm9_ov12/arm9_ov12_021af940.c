@@ -7,11 +7,11 @@ void ALWidgetBaseImp::CloneMain(undefined4 param_1)
 {
   int iVar1;
   
-  iVar1 = jus_AllocDebug(0x134,s_ALWidgetBaseImp_h_021d1790,s_CloneMain_021d16cc,0xfd);
+  iVar1 = thunk_FUN_0201a228(0x134,s_ALWidgetBaseImp_h_021d1790,s_CloneMain_021d16cc,0xfd);
   if (iVar1 == 0) {
     return;
   }
-  ALWidgetBase_021d3498::ALWidgetBase_021d3498(iVar1,param_1);
+  ALWidgetBaseImp(iVar1,param_1);
   return;
 }
 

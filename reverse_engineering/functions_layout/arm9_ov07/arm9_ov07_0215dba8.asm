@@ -1,0 +1,11 @@
+0215dba8  push {r3,lr}
+0215dbaa  ldr r1,[r0,#0x4]
+0215dbac  ldr r2,[r1,#0x10]
+0215dbae  mov r1,#0x9d
+0215dbb0  ldrsb r1,[r2,r1]
+0215dbb2  cmp r1,#0x0
+0215dbb4  beq 0x0215dbbe
+0215dbb6  ldr r0,[r0,#0x4]
+0215dbb8  ldr r1,[0x0215dbc0]
+0215dbba  blx 0x02028384
+0215dbbe  pop {r3,pc}

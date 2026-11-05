@@ -21,11 +21,11 @@ void FUN_02019228(void)
   
   if (DAT_020a0c3c == '\0') {
     uStack_8 = in_r3;
-    FUN_020193d0(auStack_18,0x494c,&LAB_020188ac_1,0,0,0);
+    FUN_020193d0(auStack_18,0x494c,0x20188ad,0,0,0);
     FUN_0202c740(&DAT_020a1668,auStack_18);
-    FUN_020193d0(auStack_28,0x494c,&LAB_020189b0_1,0,0,0);
+    FUN_020193d0(auStack_28,0x494c,0x20189b1,0,0,0);
     FUN_0202c740(&DAT_020a15e4,auStack_28);
-    FUN_020193d0(auStack_38,0x494c,&LAB_020189b0_1,0,0,0);
+    FUN_020193d0(auStack_38,0x494c,0x20189b1,0,0,0);
     FUN_0202c740(&DAT_020a1500,auStack_38);
     FUN_020193d0(auStack_48,0x4953,0x2018d79,0,0,0);
     FUN_0202c740(&DAT_020a1668,auStack_48);
@@ -45,7 +45,7 @@ void FUN_02019228(void)
     FUN_0202c740(&DAT_020a1500,auStack_b8);
     FUN_020193d0(auStack_c8,0x3244,0x2019105,0,0,0);
     FUN_0202c740(&DAT_020a15e4,auStack_c8);
-    FUN_020193d0(auStack_d8,0x494c,&LAB_02018ae4_1,0,0,0);
+    FUN_020193d0(auStack_d8,0x494c,0x2018ae5,0,0,0);
     FUN_0202c740(&DAT_020a1200,auStack_d8);
     FUN_020193d0(auStack_e8,0x494c,0x2018c7d,0,0,0);
     FUN_0202c740(&DAT_020a1218,auStack_e8);

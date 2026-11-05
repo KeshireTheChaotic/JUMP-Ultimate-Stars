@@ -1,0 +1,12 @@
+02003b94  push {r3,r4,r5,lr}
+02003b96  add r5,r0,#0x0
+02003b98  add r0,r1,#0x0
+02003b9a  mov r1,#0x1
+02003b9c  add r3,r5,#0x0
+02003b9e  add r4,r2,#0x0
+02003ba0  bl 0x020020f8
+02003ba4  cmp r4,r0
+02003ba6  beq 0x02003baa
+02003ba8  mov r5,#0x0
+02003baa  add r0,r5,#0x0
+02003bac  pop {r3,r4,r5,pc}

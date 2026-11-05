@@ -1,0 +1,17 @@
+02069d74  push {r4}
+02069d76  sub sp,#0x4
+02069d78  mov r4,#0xff
+02069d7a  and r1,r4
+02069d7c  ldr r3,[0x02069d98]
+02069d7e  strh r1,[r3,#0x0]
+02069d80  mov r1,#0x1
+02069d82  ldr r0,[0x02069d9c]
+02069d84  str r1,[r0,#0x0]
+02069d86  cmp r2,#0x0
+02069d88  beq 0x02069d8c
+02069d8a  strh r4,[r3,#0x0]
+02069d8c  ldr r0,[0x02069d98]
+02069d8e  ldrh r0,[r0,#0x0]
+02069d90  add sp,#0x4
+02069d92  pop {r4}
+02069d94  bx lr

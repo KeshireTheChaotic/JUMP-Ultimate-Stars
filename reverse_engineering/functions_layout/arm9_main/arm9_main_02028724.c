@@ -8,7 +8,7 @@ void FUN_02028724(int param_1,int *param_2,undefined4 param_3,uint param_4)
   
   if (-1 < *(char *)(param_1 + 0x29)) {
     if (*(int *)(param_1 + 0x38) == 0) {
-      puVar1 = (undefined4 *)jus_AllocDebug(0xc);
+      puVar1 = (undefined4 *)FUN_0201a228(0xc);
       if (puVar1 != (undefined4 *)0x0) {
         *puVar1 = 0;
         puVar1[1] = 0;

@@ -19,7 +19,7 @@ undefined4 FUN_02162ff4(undefined4 param_1)
   iVar2 = DAT_0216e800;
   uVar8 = FUN_02054b44();
   *(undefined8 *)(iVar2 + 0x1b78) = uVar8;
-  iVar2 = FUN_020594b0(iVar2,&LAB_02162ea8_1,3);
+  iVar2 = FUN_020594b0(iVar2,0x2162ea9,3);
   if (iVar2 == 2) {
     do {
       FUN_02058b2c(DAT_0216e800 + 0x13b8);

@@ -8,8 +8,8 @@ int EndingCopyright::EndingCopyright_Create
 {
   int iVar1;
   
-  iVar1 = jus_AllocDebug(0x24,s_EndingCopyright_cpp_02161ab0,s_EndingCopyright_Create_02161a98,0x32,
-                         param_4);
+  iVar1 = thunk_FUN_0201a228(0x24,s_EndingCopyright_cpp_02161ab0,s_EndingCopyright_Create_02161a98,
+                             0x32,param_4);
   FUN_020517fc(iVar1,0,0x24);
   *(undefined4 *)(iVar1 + 0x20) = param_1;
   return iVar1;

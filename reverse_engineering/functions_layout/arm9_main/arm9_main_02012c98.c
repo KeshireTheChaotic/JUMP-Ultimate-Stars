@@ -9,7 +9,7 @@ jus_Class_020974b8::vfunc_24(int param_1,undefined4 param_2,undefined4 param_3,u
   int iVar1;
   int iVar2;
   
-  iVar1 = jus_AllocDebug(8);
+  iVar1 = FUN_0201a228(8);
   iVar2 = 0;
   if (iVar1 != 0) {
     iVar2 = jus_Class_02094e78::jus_Class_02094e78

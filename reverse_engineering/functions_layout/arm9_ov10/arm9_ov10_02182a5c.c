@@ -40,7 +40,7 @@ undefined4 FUN_02182a5c(int *param_1,undefined4 param_2)
     if (*piVar3 < 0) {
       FUN_02002068(s_iconnection_>profileList_numBudd_021a5138,s_gpiBuddy_c_021a512c,0,0x204);
     }
-    FUN_02187518(param_1,&LAB_02182b8c_1,iVar1);
+    FUN_02187518(param_1,0x2182b8d,iVar1);
   }
   return 0;
 }

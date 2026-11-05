@@ -27,7 +27,7 @@ int * ALMotionDynamic_021d266c::ALMotionDynamic_021d266c
   jus_Class_0209cef8::jus_Class_0209cef8();
   *param_1 = (int)&vftable;
   param_1[0x12] = 0;
-  iVar1 = jus_AllocDebug(0x44,s_ALMotionDynamic_cpp_021d28a0,&DAT_021d27e0,0x3c);
+  iVar1 = thunk_FUN_0201a228(0x44,s_ALMotionDynamic_cpp_021d28a0,&DAT_021d27e0,0x3c);
   iVar2 = 0;
   if (iVar1 != 0) {
     iVar2 = ALMotionDynamic_021d2618::ALMotionDynamic_021d2618();

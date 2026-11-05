@@ -18,7 +18,7 @@ undefined4 FUN_02089d44(uint param_1,undefined4 param_2,undefined4 param_3,undef
   else {
     do {
       if ((1 << (param_1 - 1 & 0xff) & uVar1) != 0) {
-        uVar2 = FUN_0205ab10(&LAB_02089cd0_1,3,0x11,param_1,0x1e,param_4);
+        uVar2 = FUN_0205ab10(0x2089cd1,3,0x11,param_1,0x1e,param_4);
         return uVar2;
       }
       param_1 = param_1 + 1 & 0xffff;

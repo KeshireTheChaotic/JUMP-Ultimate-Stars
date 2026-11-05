@@ -34,7 +34,7 @@ TYPE_FILTERS = {
 }
 REF_COLOURS = {
     'texture': '#7AB6FF', 'image': '#5FD3BC', 'spawn': T.EFFECT, 'pursuer': T.WARN, 'pursuer-use': T.WARN,
-    'collision': '#FF8B92', 'shot': '#D2A9FF', 'tiles': '#9DD5FF',
+    'collision': '#FF8B92', 'shot': '#D2A9FF', 'tiles': '#9DD5FF', 'koma-card': '#E5A1CE', 'koma-shape': '#E5A1CE',
 }
 CARD_W, CARD_H, GAP = 230, 46, 8
 

@@ -1,0 +1,11 @@
+0208c0f0  ldr r1,[0x0208c108]
+0208c0f2  mov r0,#0x0
+0208c0f4  ldr r2,[r1,#0xc]
+0208c0f6  cmp r2,#0x0
+0208c0f8  beq 0x0208c104
+0208c0fa  mov r1,#0x48
+0208c0fc  ldrsb r1,[r2,r1]
+0208c0fe  cmp r1,#0x0
+0208c100  beq 0x0208c104
+0208c102  mov r0,#0x1
+0208c104  bx lr

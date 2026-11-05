@@ -7,7 +7,7 @@ undefined4 FUN_021874e4(undefined4 param_1,undefined4 param_2)
   
   local_c = 0;
   local_10 = param_2;
-  FUN_02187518(param_1,&LAB_02187500_1,&local_10);
+  FUN_02187518(param_1,0x2187501,&local_10);
   return local_c;
 }
 

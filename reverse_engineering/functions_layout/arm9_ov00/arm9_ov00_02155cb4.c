@@ -19,7 +19,7 @@ int TopMenuChara::TopMenu_CharaCreate(void)
   undefined4 local_18;
   undefined4 local_14;
   
-  iVar1 = jus_AllocDebug(0x224,s_TopMenuChara_cpp_021612f4,s_TopMenu_CharaCreate_021612cc,0x73);
+  iVar1 = thunk_FUN_0201a228(0x224,s_TopMenuChara_cpp_021612f4,s_TopMenu_CharaCreate_021612cc,0x73);
   FUN_020517fc(iVar1,0,0x224);
   uVar2 = FUN_020101f4(s_chr_ChrArc_aar_02161308,0);
   *(undefined4 *)(iVar1 + 0x13c) = uVar2;

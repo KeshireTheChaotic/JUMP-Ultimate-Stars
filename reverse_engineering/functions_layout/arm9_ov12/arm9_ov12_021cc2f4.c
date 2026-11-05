@@ -54,7 +54,7 @@ void FUN_021cc2f4(int param_1)
       iVar2 = iVar1 >> 0x10;
     }
   }
-  FUN_02028384(*(undefined4 *)(param_1 + 4),&LAB_021cc49c_1);
+  FUN_02028384(*(undefined4 *)(param_1 + 4),0x21cc49d);
   return;
 }
 

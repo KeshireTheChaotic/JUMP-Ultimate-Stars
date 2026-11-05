@@ -14,7 +14,7 @@ void FUN_02055118(int param_1)
   uVar2 = *(uint *)(param_1 + 0xc) - (uint)uVar3;
   iVar1 = *(int *)(param_1 + 0x10) -
           ((int)((ulonglong)uVar3 >> 0x20) + (uint)(*(uint *)(param_1 + 0xc) < (uint)uVar3));
-  FUN_02051dc8(1,&LAB_02054d28);
+  FUN_02051dc8(1,FUN_02054d28);
   _DAT_04000104 = 0;
   if (iVar1 < 0) {
     _DAT_04000104 = 0xfffe;

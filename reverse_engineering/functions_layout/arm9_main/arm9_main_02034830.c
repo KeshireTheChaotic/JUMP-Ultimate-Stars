@@ -30,7 +30,7 @@ void FUN_02034830(void)
   FUN_0201638c();
   if ((DAT_020a0e58 & 1) == 0) {
     DAT_020a0e58 = DAT_020a0e58 | 1;
-    DAT_020a0ce4 = &PTR_LAB_02094424;
+    DAT_020a0ce4 = &PTR_FUN_02094424;
   }
   FUN_020355bc(&DAT_020a0ce4);
   if ((DAT_020a0ee4 & 1) == 0) {
@@ -38,8 +38,8 @@ void FUN_02034830(void)
     DAT_020a0d38 = &PTR_vfunc_05_02094004;
   }
   FUN_02019420(&DAT_020a0d38);
-  FUN_020368c8(&LAB_02034aec);
-  FUN_02032a88(&LAB_02034b70);
+  FUN_020368c8(FUN_02034aec);
+  FUN_02032a88(FUN_02034b70);
   DAT_020a0d7c = FUN_02034c04;
   FUN_02023cd0(0x20205250);
   if (DAT_020a0f64 != (int *)0x0) {
@@ -70,7 +70,7 @@ void FUN_02034830(void)
     jus_Class_02094d7c::jus_Class_02094d7c(&DAT_020a1e4c,0);
     DAT_020a1e4c = &jus_TagALMT::vftable;
     DAT_020a1e80 = 0;
-    FUN_0200f2b0(&DAT_020a1e4c,&LAB_02034c7c,&DAT_020a129c);
+    FUN_0200f2b0(&DAT_020a1e4c,FUN_02034c7c,&DAT_020a129c);
     DAT_020a0eb4 = DAT_020a0eb4 | 1;
   }
   puVar1 = &DAT_020a16b0 + DAT_020a1064;

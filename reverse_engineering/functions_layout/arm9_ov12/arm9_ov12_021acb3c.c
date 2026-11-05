@@ -1,8 +1,8 @@
 
-/* JUS-CLASS ALWidgetBase_021d149c::ALWidgetBase_021d149c [class-source-file] stores vtable 021d149c
-   into *this (constructor) */
+/* JUS-CLASS jus_Class_021d149c::jus_Class_021d149c [class-default] stores vtable 021d149c into
+   *this (constructor) */
 
-int * ALWidgetBase_021d149c::ALWidgetBase_021d149c
+int * jus_Class_021d149c::jus_Class_021d149c
                 (int *param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
 
 {
@@ -13,7 +13,7 @@ int * ALWidgetBase_021d149c::ALWidgetBase_021d149c
   undefined4 uStack_14;
   
   uStack_14 = param_4;
-  ALWidgetBase_021d1124::ALWidgetBase_021d1124();
+  jus_Class_021d1124::jus_Class_021d1124();
   *param_1 = (int)&vftable;
   *(undefined1 *)(param_1 + 0x59) = 1;
   *(undefined1 *)((int)param_1 + 0x165) = 1;

@@ -36,7 +36,7 @@ int JArenaRankingMenu::JARankMenu_Add(int param_1)
   int local_2c [2];
   
   puVar1 = (undefined1 *)
-           jus_AllocDebug(0x78,s_JArenaRankingMenu_cpp_0215ddfc,s_JARankMenu_Add_0215dd74,0xa2);
+           thunk_FUN_0201a228(0x78,s_JArenaRankingMenu_cpp_0215ddfc,s_JARankMenu_Add_0215dd74,0xa2);
   FUN_020517fc(puVar1,0,0x78);
   FUN_0207038c();
   iVar2 = FUN_02020d90();
@@ -133,7 +133,7 @@ int JArenaRankingMenu::JARankMenu_Add(int param_1)
     (**(code **)(*piVar5 + 0x10))(piVar5,local_2c);
     iVar9 = iVar9 + 1;
   } while (iVar9 < 4);
-  iVar9 = jus_AllocDebug(0xcc,s_ALWidget_inl_0215dbec,s_Create_0215dcb4,0x1de);
+  iVar9 = thunk_FUN_0201a228(0xcc,s_ALWidget_inl_0215dbec,s_Create_0215dcb4,0x1de);
   piVar5 = (int *)0x0;
   if (iVar9 != 0) {
     piVar5 = (int *)func_0x021af26c(iVar9,FUN_021501d0,FUN_02150288,0);
@@ -204,7 +204,7 @@ int JArenaRankingMenu::JARankMenu_Add(int param_1)
   (**(code **)(**(int **)(iVar4 + 4) + 0x24))(*(int **)(iVar4 + 4),puVar1);
   uVar3 = FUN_0214e81c(0,&DAT_0215dce0,&DAT_02093c8c);
   FUN_02020e98(iVar4,uVar3);
-  func_0x021b65e8(*(undefined4 *)(iVar4 + 4),4,&LAB_02150130);
+  func_0x021b65e8(*(undefined4 *)(iVar4 + 4),4,FUN_02150130);
   func_0x021b6760(*(undefined4 *)(iVar4 + 4),4,FUN_02150148);
   FUN_02023894(*(undefined4 *)(iVar4 + 4),0x510001,0);
   func_0x021b3f78(*(undefined4 *)(iVar4 + 4),0x510000);
@@ -228,8 +228,8 @@ int JArenaRankingMenu::JARankMenu_Add(int param_1)
   *(undefined4 *)(*(int *)(iVar9 + 4) + 0x140) = 4;
   func_0x021b7744(*(undefined4 *)(iVar9 + 4),1);
   *(undefined4 *)(*(int *)(iVar9 + 4) + 0x124) = 0x101;
-  func_0x021b65e8(*(undefined4 *)(iVar9 + 4),0x10,&LAB_02150380);
-  func_0x021b6760(*(undefined4 *)(iVar9 + 4),0x10,&LAB_02150390);
+  func_0x021b65e8(*(undefined4 *)(iVar9 + 4),0x10,FUN_02150380);
+  func_0x021b6760(*(undefined4 *)(iVar9 + 4),0x10,FUN_02150390);
   *(int *)(puVar1 + 0x24) = iVar9;
   uVar10 = 0;
   do {
@@ -268,7 +268,7 @@ int JArenaRankingMenu::JARankMenu_Add(int param_1)
     func_0x021b4034(*(undefined4 *)(iVar4 + 4),3);
     uVar3 = FUN_0214e81c(0,&DAT_0215dcd8,&DAT_02093c8c);
     FUN_02020e98(iVar4,uVar3);
-    func_0x021b65e8(*(undefined4 *)(iVar4 + 4),1,&LAB_021502c0);
+    func_0x021b65e8(*(undefined4 *)(iVar4 + 4),1,FUN_021502c0);
     func_0x021b65e8(*(undefined4 *)(iVar4 + 4),0x10,FUN_0214fe04);
     func_0x021b65e8(*(undefined4 *)(iVar4 + 4),4,FUN_0214fe38);
     func_0x021b6760(*(undefined4 *)(iVar4 + 4),4,FUN_0214fea4);

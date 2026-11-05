@@ -18,7 +18,7 @@ undefined4 FUN_0214f79c(code *param_1,code *param_2)
   if (DAT_0216cf94 == 0) {
     return 0xffffffff;
   }
-  iVar1 = FUN_0214f998(&LAB_0214f8a0_1,DAT_0216cf94,0x5890);
+  iVar1 = FUN_0214f998(0x214f8a1,DAT_0216cf94,0x5890);
   bVar2 = iVar1 != 0;
   if (bVar2) {
     do {

@@ -11,7 +11,8 @@ int BattleMapObj::BattleMapMoveFloorInit
   int *piVar3;
   
                     /* JUS-TAG strings=["BattleMapMoveFloorInit","BattleMapObj.cpp"] */
-  iVar1 = jus_AllocDebug(0x38,s_BattleMapObj_cpp_020a0114,s_BattleMapMoveFloorInit_020a0090,0x23d);
+  iVar1 = thunk_FUN_0201a228(0x38,s_BattleMapObj_cpp_020a0114,s_BattleMapMoveFloorInit_020a0090,
+                             0x23d);
   FUN_020517fc(iVar1,0,0x38);
   *(int *)(iVar1 + 0xc) = (int)*(short *)(param_2 + 4) << 8;
   *(int *)(iVar1 + 0x10) = (int)*(short *)(param_2 + 6) << 8;

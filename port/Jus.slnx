@@ -1,9 +1,13 @@
 <Solution>
   <Folder Name="/src/">
+    <Project Path="src/Jus.Game/Jus.Game.csproj" />
+    <Project Path="src/Jus.Host/Jus.Host.csproj" />
     <Project Path="src/Jus.Nds/Jus.Nds.csproj" />
     <Project Path="src/Jus.Port/Jus.Port.csproj" />
+    <Project Path="src/Jus.Video.Vx/Jus.Video.Vx.csproj" />
   </Folder>
   <Folder Name="/tests/">
+    <Project Path="tests/Jus.Game.Tests/Jus.Game.Tests.csproj" />
     <Project Path="tests/Jus.Nds.Tests/Jus.Nds.Tests.csproj" />
   </Folder>
 </Solution>

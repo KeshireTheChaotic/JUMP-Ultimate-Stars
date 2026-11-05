@@ -36,7 +36,7 @@ FUN_0205be28(int param_1,int param_2,int param_3,undefined4 param_4,int param_5,
       iVar1 = iVar1 + 1;
     } while (iVar1 < *(int *)(param_1 + 0x48));
   }
-  FUN_020568a0(*(undefined4 *)(param_1 + 0x40),uVar3,uVar3,&LAB_0205bc2c);
+  FUN_020568a0(*(undefined4 *)(param_1 + 0x40),uVar3,uVar3,FUN_0205bc2c);
   FUN_0205e240(&DAT_020adf0c,param_1);
   *(int *)(param_1 + 0x20) = param_2;
   *(int *)(param_1 + 0x2c) = param_6;

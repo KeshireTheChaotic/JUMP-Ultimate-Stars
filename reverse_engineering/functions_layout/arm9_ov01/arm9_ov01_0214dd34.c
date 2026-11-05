@@ -33,7 +33,7 @@ FUN_0214dd34(int param_1,undefined4 param_2,int *param_3,undefined4 param_4,unde
   uVar1 = FUN_020101f4(s_common_button_aar_0216bb9c,0);
   unaff_r7[2] = uVar1;
   uVar1 = _DAT_021d5154;
-  iVar4 = jus_AllocDebug(0x14c,s_ALWidgetBaseImp_h_0216b9dc,s_Create_0216bb58,0x2a6);
+  iVar4 = thunk_FUN_0201a228(0x14c,s_ALWidgetBaseImp_h_0216b9dc,s_Create_0216bb58,0x2a6);
   if (iVar4 != 0) {
     func_0x021b7950(iVar4,0,uVar1,ALWidgetBaseImp::CreateDrawFunc);
   }
@@ -57,7 +57,7 @@ FUN_0214dd34(int param_1,undefined4 param_2,int *param_3,undefined4 param_4,unde
   DAT_020a0dd0 = (&DAT_020a16d0)[DAT_02093c08];
   DAT_02093c08 = DAT_02093c08 + 1;
   uVar6 = *(undefined4 *)(iVar4 + 4);
-  iVar3 = jus_AllocDebug(0x134,s_ALWidgetImp_h_0216b998,s_Create_0216bb50,0x3e);
+  iVar3 = thunk_FUN_0201a228(0x134,s_ALWidgetImp_h_0216b998,s_Create_0216bb50,0x3e);
   if (iVar3 != 0) {
     func_0x021af0f8(iVar3,uVar6,uVar1,ALWidgetBaseImp::CreateDrawFunc);
   }
@@ -87,7 +87,7 @@ FUN_0214dd34(int param_1,undefined4 param_2,int *param_3,undefined4 param_4,unde
   uStack00000006 = 0xfff0;
   param_7 = 0;
   uStack0000000a = 0;
-  piVar5 = (int *)jus_AllocDebug(0x70,s_ALCollision_inl_0216b9b8,s_Create_0216bb48,0x1b2);
+  piVar5 = (int *)thunk_FUN_0201a228(0x70,s_ALCollision_inl_0216b9b8,s_Create_0216bb48,0x1b2);
   if (piVar5 != (int *)0x0) {
     func_0x021b054c(piVar5,0,&DAT_02093c8c);
     *piVar5 = (int)&jus_Class_0216ba10::vftable;

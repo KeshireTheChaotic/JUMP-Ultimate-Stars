@@ -18,7 +18,7 @@ void FUN_02031988(int param_1,undefined4 param_2,undefined4 param_3,undefined4 p
   }
   DAT_020a0cec = puVar1;
   if (DAT_020a0e04 != 0) {
-    iVar2 = jus_AllocDebug(8);
+    iVar2 = FUN_0201a228(8);
     iVar3 = 0;
     if (iVar2 != 0) {
       iVar3 = ScreenInstance::ScreenInstance();

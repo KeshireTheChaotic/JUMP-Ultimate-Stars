@@ -108,7 +108,7 @@ undefined4 FUN_0216220c(void)
   *(undefined4 *)(*(int *)(unaff_r4[0x21] + 4) + 0xdc) = 0;
   func_0x021b3fb0(*(undefined4 *)(unaff_r4[0x21] + 4),uRam0216cef0);
   *(undefined1 *)(*(int *)(unaff_r4[0x21] + 4) + 0xab) = 0;
-  func_0x021b6760(*(undefined4 *)(unaff_r4[0x21] + 4),4,uRam0216cf10);
+  func_0x021b6760(*(undefined4 *)(unaff_r4[0x21] + 4),4,0x21639f5);
   *(undefined1 *)(*(int *)(unaff_r4[0x21] + 4) + 0xb1) = 1;
   iVar4 = FUN_0203b404();
   uVar5 = ALWidgetImp::Create(unaff_r4,0x216cf18,unaff_r4[0x20],*(undefined4 *)(iVar4 + 0x88));
@@ -425,7 +425,8 @@ undefined4 FUN_0216220c(void)
     if (!bVar15 || bVar18) {
       puVar13 = (uint *)(iVar6 + uVar8 * -0x10000);
     }
-    uVar9 = FUN_02086798((undefined1 *)((int)register0x00000054 + 0xf8));
+    uVar9 = CommWrapDisconnect::CommWrapDisconnect_Create
+                      ((undefined1 *)((int)register0x00000054 + 0xf8));
     puVar11[0x37] = uVar9;
     *(undefined4 *)(puVar11[0x36] + 0x54) = puVar11[0x37];
     unaff_r4 = puVar11;

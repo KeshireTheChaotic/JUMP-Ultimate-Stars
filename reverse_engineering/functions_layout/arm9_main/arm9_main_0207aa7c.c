@@ -15,7 +15,7 @@ void BattleProp::Battle_CharaPropInit(void)
                     /* JUS-TAG
                        strings=["ALPropSetImp.h","BattleProp.cpp","Battle_CharaPropInit","Create"]
                         */
-  iVar1 = jus_AllocDebug(0x20,s_ALPropSetImp_h_0209dff0,s_Create_0209f6c4,0x111,in_r3);
+  iVar1 = thunk_FUN_0201a228(0x20,s_ALPropSetImp_h_0209dff0,s_Create_0209f6c4,0x111,in_r3);
   piVar2 = (int *)0x0;
   if (iVar1 != 0) {
     piVar2 = (int *)PropBindInstance_02095200::PropBindInstance_02095200(iVar1,0);
@@ -23,20 +23,22 @@ void BattleProp::Battle_CharaPropInit(void)
   uVar4 = 0;
   DAT_0214bd84 = piVar2;
   do {
-    iVar1 = jus_AllocDebug(0x18,s_BattleProp_cpp_0209fabc,s_Battle_CharaPropInit_0209f838,0x32f,
-                           in_r3);
+    iVar1 = thunk_FUN_0201a228(0x18,s_BattleProp_cpp_0209fabc,s_Battle_CharaPropInit_0209f838,0x32f,
+                               in_r3);
     uVar3 = 0;
     if (iVar1 != 0) {
       uVar3 = BattleProp_0209f96c::BattleProp_0209f96c(iVar1,uVar4);
     }
     (**(code **)(*DAT_0214bd84 + 0x3c))(DAT_0214bd84,uVar3);
-    iVar1 = jus_AllocDebug(0x18,s_BattleProp_cpp_0209fabc,s_Battle_CharaPropInit_0209f838,0x330);
+    iVar1 = thunk_FUN_0201a228(0x18,s_BattleProp_cpp_0209fabc,s_Battle_CharaPropInit_0209f838,0x330)
+    ;
     uVar3 = 0;
     if (iVar1 != 0) {
       uVar3 = BattleProp_0209fa18::BattleProp_0209fa18(iVar1,uVar4);
     }
     (**(code **)(*DAT_0214bd84 + 0x3c))(DAT_0214bd84,uVar3);
-    iVar1 = jus_AllocDebug(0x18,s_BattleProp_cpp_0209fabc,s_Battle_CharaPropInit_0209f838,0x331);
+    iVar1 = thunk_FUN_0201a228(0x18,s_BattleProp_cpp_0209fabc,s_Battle_CharaPropInit_0209f838,0x331)
+    ;
     uVar3 = 0;
     if (iVar1 != 0) {
       uVar3 = BattleProp_0209f8c4::BattleProp_0209f8c4(iVar1,uVar4);

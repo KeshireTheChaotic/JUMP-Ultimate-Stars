@@ -1,0 +1,14 @@
+020714b4  mov r1,#0x1
+020714b6  mov r2,#0x1f
+020714b8  and r2,r0
+020714ba  add r3,r1,#0x0
+020714bc  lsr r0,r0,#0x5
+020714be  lsl r3,r2
+020714c0  lsl r2,r0,#0x2
+020714c2  ldr r0,[0x020714d0]
+020714c4  ldr r0,[r0,r2]
+020714c6  tst r0,r3
+020714c8  bne 0x020714cc
+020714ca  mov r1,#0x0
+020714cc  add r0,r1,#0x0
+020714ce  bx lr

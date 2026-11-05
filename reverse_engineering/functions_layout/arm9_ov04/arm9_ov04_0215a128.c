@@ -18,7 +18,7 @@ void JQuizJGalaxyMode::JQuizJGalaxyMode_Add(void)
   int iVar11;
   undefined2 *local_30;
   
-  iVar3 = jus_AllocDebug(0x28,s_JQuizJGalaxyMode_cpp_021613d4,s_JQuizJGalaxyMode_Add_021613bc,0x3d);
+  iVar3 = thunk_FUN_0201a228(0x28,s_JQuizJGalaxyMode_cpp_021613d4,FUN_021613bc,0x3d);
   FUN_020517fc(iVar3,0,0x28);
   FUN_0214f568(10);
   JQuizMainCommon::JQuizMainCommon_ListRandomMix(iVar3,9,&DAT_02160520,10);
@@ -66,10 +66,9 @@ LAB_0215a1cc:
             pbVar10 = pbVar10 + 0x28;
           }
           puVar6 = (undefined2 *)
-                   jus_AllocDebug(iVar8 << 1,s_JQuizJGalaxyMode_cpp_021613d4,
-                                  s_JQuizJGalaxyMode_Add_021613bc,0x5c);
-          psVar7 = (short *)jus_AllocDebug(iVar4 << 1,s_JQuizJGalaxyMode_cpp_021613d4,
-                                           s_JQuizJGalaxyMode_Add_021613bc,0x5d);
+                   thunk_FUN_0201a228(iVar8 << 1,s_JQuizJGalaxyMode_cpp_021613d4,FUN_021613bc,0x5c);
+          psVar7 = (short *)thunk_FUN_0201a228(iVar4 << 1,s_JQuizJGalaxyMode_cpp_021613d4,
+                                               FUN_021613bc,0x5d);
           uVar1 = *(ushort *)(iVar3 + iVar11 * 2);
           iVar5 = FUN_0214efa0();
           pbVar10 = *(byte **)(iVar5 + 0x40);

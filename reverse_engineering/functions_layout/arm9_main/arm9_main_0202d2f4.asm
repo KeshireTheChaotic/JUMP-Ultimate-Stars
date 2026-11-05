@@ -1,0 +1,16 @@
+0202d2f4  ldrsb r1,[r1,#0x0]
+0202d2f8  cmp r1,#0x78
+0202d2fc  beq 0x0202d314
+0202d300  cmp r1,#0x79
+0202d304  beq 0x0202d31c
+0202d308  cmp r1,#0x7a
+0202d30c  beq 0x0202d324
+0202d310  b 0x0202d32c
+0202d314  add r0,r0,#0x14
+0202d318  bx lr
+0202d31c  add r0,r0,#0x30
+0202d320  bx lr
+0202d324  add r0,r0,#0x4c
+0202d328  bx lr
+0202d32c  mov r0,#0x0
+0202d330  bx lr

@@ -1,0 +1,11 @@
+021563d0  ldr r1,[r0,#0x90]
+021563d4  tst r1,#0x7
+021563d8  beq 0x021563f4
+021563dc  ldr r0,[r0,#0x7c]
+021563e0  ldr r0,[r0,#0x10]
+021563e4  ldr r0,[r0,#0x40]
+021563e8  tst r0,#0x10
+021563ec  movne r0,#0x1
+021563f0  bxne lr
+021563f4  mov r0,#0x0
+021563f8  bx lr

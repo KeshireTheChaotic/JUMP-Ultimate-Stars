@@ -7,7 +7,7 @@ void jus_TagIPCT::vfunc_24(undefined4 param_1)
 {
   int iVar1;
   
-  iVar1 = jus_AllocDebug(0x4c);
+  iVar1 = FUN_0201a228(0x4c);
   if (iVar1 == 0) {
     return;
   }

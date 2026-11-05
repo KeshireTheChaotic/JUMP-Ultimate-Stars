@@ -38,7 +38,7 @@ void FUN_02153108(int param_1)
   }
   else {
     FUN_02028384(*(undefined4 *)(iVar3 + 4),FUN_021534ec);
-    FUN_02027834(*(undefined4 *)(iVar3 + 4),1,&LAB_02153550);
+    FUN_02027834(*(undefined4 *)(iVar3 + 4),1,FUN_02153550);
     if (*(short *)(&DAT_02171056 + iVar6) != -1) {
       FUN_0207342c(0x7a);
     }

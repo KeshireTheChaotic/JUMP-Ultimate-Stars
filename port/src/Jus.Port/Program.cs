@@ -1,13 +1,13 @@
 ﻿using System.Security.Cryptography;
 using Jus.Nds;
 
-// jus <command> [rom]   commands: info | files | extract <dir> | boot
-// The game runtime (HLE of DS hardware + translated game code) plugs in behind `boot`.
+// jus <command> [rom]   commands: info | files | extract <dir> | verify
+// Asset/ROM tooling for the native port; the game itself will be a separate Windows app.
 const string ExpectedSha256 = "52e262163e0d304c96f3cd05b2be0e948c16725bda58a8a8635cf4a0afa111bd";
 
 if (args.Length == 0)
 {
-    Console.WriteLine("usage: jus info|files|boot [rom]  |  jus extract <dir> [rom]");
+    Console.WriteLine("usage: jus info|files|verify [rom]  |  jus extract <dir> [rom]");
     return 1;
 }
 string cmd = args[0];
@@ -42,12 +42,11 @@ switch (cmd)
         }
         Console.WriteLine($"extracted {rom.FileSystem.Files.Count} files to {outDir}");
         return 0;
-    case "boot":
-        var mem = new Arm9Memory();
-        var loader = new Arm9Loader(rom, mem);
+    case "verify":
+        var image = new Jus.Nds.Verification.Arm9Image();
+        var loader = new Jus.Nds.Verification.Arm9Loader(rom, image);
         uint entry = loader.Boot();
-        Console.WriteLine($"ARM9 image loaded; {loader.Autoload.Blocks.Count} autoload blocks; entry 0x{entry:X8}");
-        Console.WriteLine("game runtime not implemented yet (see the C# port section of AGENTS.md)");
+        Console.WriteLine($"original ARM9 image rebuilt for verification; {loader.Autoload.Blocks.Count} autoload blocks; entry 0x{entry:X8}");
         return 0;
     default:
         Console.Error.WriteLine($"unknown command {cmd}");
@@ -63,3 +62,4 @@ static string FindRom()
     }
     throw new FileNotFoundException("JUS.nds not found; pass its path");
 }
+

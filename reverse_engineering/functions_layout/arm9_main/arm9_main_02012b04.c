@@ -11,7 +11,7 @@ jus_Class_02094e78::jus_Class_02094e78
   int iVar1;
   undefined4 uVar2;
   
-  iVar1 = jus_AllocDebug(0x44);
+  iVar1 = FUN_0201a228(0x44);
   uVar2 = 0;
   if (iVar1 != 0) {
     uVar2 = jus_Class_020974b8::jus_Class_020974b8

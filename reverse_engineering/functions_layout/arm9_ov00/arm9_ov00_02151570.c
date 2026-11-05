@@ -12,7 +12,7 @@ int * PassMark::PassMark_Create(void)
   undefined4 uStack_c;
   
   uStack_c = in_r3;
-  piVar1 = (int *)jus_AllocDebug(0x1098,s_PassMark_cpp_02160f94,s_PassMark_Create_02160f84,0x47);
+  piVar1 = (int *)thunk_FUN_0201a228(0x1098,s_PassMark_cpp_02160f94,&DAT_02160f84,0x47);
   if (piVar1 == (int *)0x0) {
     piVar1 = (int *)0x0;
   }
@@ -30,7 +30,7 @@ int * PassMark::PassMark_Create(void)
     piVar1[2] = (int)&DAT_02151b84;
     iVar2 = FUN_0215178c(s_opening_PassMark_bin_02160fa4,0,0);
     piVar1[4] = iVar2;
-    iVar2 = FUN_0215178c(s_opening_pattern_bin_02160fbc,0,0);
+    iVar2 = FUN_0215178c(FUN_02160fbc,0,0);
     piVar1[5] = iVar2;
     iVar2 = (**(code **)(**(int **)(iVar2 + 4) + 0x2c))(*(int **)(iVar2 + 4),0);
     piVar1[6] = iVar2;

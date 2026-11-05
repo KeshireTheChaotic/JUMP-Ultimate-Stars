@@ -17,7 +17,7 @@ void FUN_0203263c(int param_1,int param_2)
   }
   else {
     iVar4 = FUN_02004b04(param_2);
-    uVar3 = jus_AllocDebug(iVar4 + 1);
+    uVar3 = FUN_0201a228(iVar4 + 1);
     *(undefined4 *)(param_1 + 0xc) = uVar3;
     FUN_02004b18(uVar3,param_2);
     uVar1 = FUN_020326b0(param_2);

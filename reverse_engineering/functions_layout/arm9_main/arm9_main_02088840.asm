@@ -1,0 +1,20 @@
+02088840  stmdb sp!,{r3,lr}
+02088844  mov r3,#0x0
+02088848  ldr r2,[0x2088890]
+0208884c  b 0x02088860
+02088850  ldrsb r1,[r2,r3]
+02088854  cmp r1,r0
+02088858  ldmiaeq sp!,{r3,pc}
+0208885c  add r3,r3,#0x1
+02088860  cmp r3,#0x2
+02088864  blt 0x02088850
+02088868  ldr r3,[0x2088894]
+0208886c  ldr r12,[0x2088890]
+02088870  ldrb lr,[r3,#0x1]
+02088874  add r1,lr,#0x1
+02088878  mov r2,r1, lsr #0x1f
+0208887c  rsb r1,r2,r1, lsl #0x1f
+02088880  add r1,r2,r1, ror #0x1f
+02088884  strb r0,[r12,lr]
+02088888  strb r1,[r3,#0x1]
+0208888c  ldmia sp!,{r3,pc}
