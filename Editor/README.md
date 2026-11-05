@@ -30,7 +30,8 @@ for every workspace: `docs/STUDIO_WORKSPACES.md`.
 * **Animation workspace** — *Moves* list (filter, ⟳ = looping) | *Viewport* (wheel zoom,
   middle-drag pan, Frame; sprites, **spawned effects** (GenerateID, incl. nested spawns
   and common `efc/` effects, front/behind the character), collision boxes, onion skin,
-  pursuer effect at its target — all toggled from **Show ▾**) | *Inspector* (move
+  pursuer effect with traced follow smoothing or target-only reference; an explicit first-position
+  seed is required for standalone move replay — all toggled from **Show ▾**) | *Inspector* (move
   ID/length/loop, the selected track, key or NoteTrack events, editable in place; for an
   effect row: spawn node/key/tick, EffectFlags, ParentLink, DrawPrio, anchor). Below it,
   the dock-style **Timeline**: a *Spawned effects* group with one clip bar per GenerateID
@@ -64,10 +65,13 @@ for every workspace: `docs/STUDIO_WORKSPACES.md`.
   flips, undo/redo and Apply → Save | Layers with eye toggles and **read-only overlays**
   (camera, `.mob` objects, `.bin` stage table, collision and gimmicks remain undecoded;
   raw bytes in *Stage data*) | Problems, PNG export. No geometric guesses are saved.
-* **Screen workspace** — menu/scene archive browser (nested archives expand) | DS dual
-  256×192 screens | Layers dock + Inspector to preview each layer's screen, scroll and
-  order (not saved; the real assignment is not traced) | Resources table with decoder
-  status/evidence per member, Problems.
+* **Screen workspace** — menu/scene archive browser with nested AAR expansion **and search** |
+  dual 256×192 DS screens | background layers (ALTM) with preview-only screen/scroll/order |
+  nested sprite objects (DSTX/DSIG) with selectable **Sprite frame**, auto-preview
+  for archives without ALTM backgrounds, and linked ALMT/DSIG member inspection |
+  Resources table with exact-member double-click, decoder evidence, and Problems.
+  Sprite placement is centered for inspection, **not** runtime layout; ALMT
+  animation playback remains pending. See `docs/NESTED_AAR_SCREEN_AUDIT_20261105.md`.
 * **References workspace (Ctrl+7)** — the project-wide **resource registry**
   (`jus_package/registry.py`): every archive member with typed references between them
   (textures, images, spawned effects, pursuer tables, collision descriptors, shot records,
@@ -89,6 +93,7 @@ for every workspace: `docs/STUDIO_WORKSPACES.md`.
   **Save in place** stages replacement files beside their destinations, uses an atomic
   rename per file, retains a `.orig` backup on the first overwrite, and attempts to
   roll back all files if a multi-file commit fails. Dirty state is preserved on failure.
+  Top-level DSCP-compressed AARs retain their compression wrapper after rebuild.
   This is not a global crash-proof transaction across multiple files.
 
 ## Packages
@@ -149,6 +154,7 @@ py -3 tests\sprite_scan.py                           # every character/effect fr
 py -3 tests\validate_chr_textures.py --chr C:\work\chr.zip  # corpus address check
 # GUI smoke with a generated synthetic stage fixture (needs Tkinter / a desktop):
 py -3 tests\gui_level_smoke.py
+py -3 tests\gui_screen_nested_smoke.py D:\Library\Development\JUS\data
 ```
 
 ## Pursuer effect timeline (NoteTrack)
@@ -182,4 +188,24 @@ are never advertised as native writable formats.
 ## Research: effect and format triage (2026-11-05)
 
 Run `py -3 tools\audit_open_effects.py PATH_TO_EXTRACTED_DATA --out effects_audit.json`.
-See `docs/EFFECT_AND_FORMATS_TRACE_20261105.md` for verified ARM9 draw-link comparisons, rare EffectFlags samples, and the read-only DSTX 0x05/0x06 descriptor parser. The Screen workspace can inspect tile-panel descriptors but cannot yet render their auxiliary layout. This patch adds diagnostics only; it does **not** enable inferred runtime effects or alter save-format behavior.
+See `docs/EFFECT_AND_FORMATS_TRACE_20261105.md` for the baseline ARM9 draw-link comparisons,
+rare EffectFlags samples, and read-only DSTX 0x05/0x06 descriptor parser. See
+`docs/EFFECT_DRAW_ORDER_PURSUER_TRACE_20261105.md` for the DrawPrio property-to-drawable
+setter trace, CommonEffect flag read-path, and overlay 6 pursuer smoothing/snap update
+now used by the Animation preview. The Screen workspace can inspect tile-panel
+descriptors but cannot yet render their auxiliary layout. DrawPrio front/back
+composition and EffectFlags bit 0x0004 remain unverified.
+
+## ParentLink / DrawPrio continuation (2026-11-05)
+
+The Animation viewport's **Show → ParentLink translation follow** is now on by
+default. It uses the linked/unlinked translation branches of ARM9
+`0x0206CA8C`, including nested effect ancestry. Uncheck to compare against the
+old spawn-snapshot preview. This preview is **not** a complete runtime transform
+matrix: rotation, scale, facing, camera and owner bone mapping still need
+verification. The existing manual **Effects Front/Behind** compositor remains
+because the final `DrawPrio` submission traversal is not yet established.
+
+See [docs/PARENTLINK_DRAWPRIO_CONTINUED_TRACE_20261105.md](docs/PARENTLINK_DRAWPRIO_CONTINUED_TRACE_20261105.md)
+for the executable offsets, distinction between scheduler `Prio` and child
+`DrawPrio`, evidence limits, and repeatable regression checks.

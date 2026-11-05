@@ -49,7 +49,7 @@ Among 4,060 valid `DSTX`-signature members in the scanned archives, **50** use l
 
 - The `hk_b_03.dtx` piece 128 off-texture UV edge case remains clipped in the editor; emulator comparison is still required to determine hardware edge behavior.
 - `DSIG` b7 remains raw; no interpretation is justified by this audit.
-- `ParentLink` follow transforms, pursuer smoothing, `EffectFlags` lifetime policies, physics, and runtime branch variants have not been simulated.
+- `ParentLink` follow transforms, `EffectFlags` lifetime policies, physics, and runtime branch variants have not been simulated. Pursuer **position smoothing** has since been traced and added to the viewer; see `EFFECT_DRAW_ORDER_PURSUER_TRACE_20261105.md` for scope and initial-state limitations.
 - Other `chr/shot`, `chr/ai`, collision tails, `chara_action(10)` profiles, and `bin/*.bin` formats are outside this focused audit and remain read-only.
 
 ## Next trace targets, in order
@@ -57,7 +57,7 @@ Among 4,060 valid `DSTX`-signature members in the scanned archives, **50** use l
 1. Verify the **draw-list class** containing `FUN_0201582C`, identify the battle effect draw-link insertion, and follow its final traversal to OBJ/3D display dispatch before changing compositing order.
 2. Follow `EffectFlags` **setter / consumer** xrefs at `CommonEffect +0x80`, starting with the three real flagged spawn keys above.
 3. Resolve the `BoundsIndex` / `PatternNo` common register setters and dispatcher ordering, using an artificial case only after verifying safe test-asset construction.
-4. Trace `ParentLink` parent transform accumulation, pursuer `FUN_021618E4` smoothing and snap / facing branches, with two consecutive emulator frames for validation.
+4. Trace `ParentLink` parent transform accumulation; pursuer `FUN_021618E4` position smoothing and snap are now statically reconstructed, but need consecutive emulator frames and persistent controller state to validate the rendered result.
 5. Trace `FUN_020433EC` `DSTX` cases 5/6 and consumers of their descriptor tables, then extend the verified four-byte descriptor parser to decode the opaque auxiliary data and determine placement before enabling rendering or editing.
 
 ## Reproduce

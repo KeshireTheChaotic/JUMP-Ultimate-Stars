@@ -17,8 +17,9 @@ Evidence (see docs/03_VERIFIED_TECHNICAL_FINDINGS in the studio handoff):
 
 What this module does NOT model (shown as provenance, never as fact):
 Marker loops/branches revisiting spawn ticks, runtime facing/mirroring,
-``LifeType`` policies, ParentLink follow behaviour and conditional
-NoteTrack branches.  The projection is the authored, straight-through
+``LifeType`` policies, complete ParentLink transforms (rotation/scale/facing)
+and conditional NoteTrack branches. Translation-only owner following is an
+explicitly marked preview derived from ARM9 ``0x0206CA8C``.  The projection is the authored, straight-through
 timeline ("Visual Playback" of the nominal path).
 """
 from __future__ import annotations
@@ -134,7 +135,7 @@ class EffectInstance:
     parent_link: int
     depth: int = 0
     parent: 'EffectInstance | None' = None
-    draw_prio: int | None = None # spawning node DrawPrio (20.12); ordering rule not traced
+    draw_prio: int | None = None # spawning node DrawPrio (20.12); final compositing not traced
     notes: list[str] = field(default_factory=list)
 
     @property
@@ -165,12 +166,37 @@ def effect_span(spawn: Spawn, child: almt.Move, horizon: int) -> tuple[int, int,
 def project(move: almt.Move, node_names: list[str], tick: int,
             catalog: Mapping[int, CatalogEntry] | Callable[[int], CatalogEntry | None],
             base: tuple[int, int] = (0, 0), depth: int = 0, max_depth: int = 3,
-            parent: EffectInstance | None = None, limit: int = 64) -> Projection:
-    """Effects alive at ``tick`` on the straight-through timeline, nested."""
+            parent: EffectInstance | None = None, limit: int = 64,
+            *, follow_parent: bool = False,
+            origin_at: Callable[[int], tuple[float, float]] | None = None,
+            _timeline_start: int = 0, _world_tick: int | None = None,
+            _parent_world_at: Callable[[int], tuple[float, float]] | None = None) -> Projection:
+    """Project nominal GenerateID effects, optionally following owner translation.
+
+    ``follow_parent`` implements the two offset branches in the ARM9
+    CommonEffect spawner at 0x0206CA8C: ParentLink=0 captures the owner's
+    position at birth, while ParentLink!=0 retains a local offset relative to
+    the owner at playback time. ``origin_at`` supplies the preview's assumed
+    world-space owner position; when omitted the owner is stationary.
+
+    This is *translation only*, not full engine attachment. Scale, facing,
+    rotation, owner bone selection, screen-reference and repeated Marker loops
+    still require further runtime traces. Positions returned for the editor
+    are relative to ``origin_at(_world_tick)`` because the main viewport
+    applies the actor's current root-motion translation itself.
+    """
     lookup = catalog if callable(catalog) else catalog.get
     spawns = keyed_spawns(move, node_names)
     out: list[EffectInstance] = []
     missing: list[Spawn] = []
+    world_now = (_timeline_start + tick) if _world_tick is None else _world_tick
+    if follow_parent:
+        owner_at = _parent_world_at
+        if owner_at is None:
+            def owner_at(frame: int) -> tuple[float, float]:
+                pos = origin_at(frame) if origin_at else (0, 0)
+                return (base[0] + pos[0], base[1] + pos[1])
+        current_root = origin_at(world_now) if origin_at else (0, 0)
     for sp in spawns:
         if sp.tick > tick or len(out) >= limit:
             continue
@@ -188,17 +214,42 @@ def project(move: almt.Move, node_names: list[str], tick: int,
         flags = int(pst.get('EffectFlags', 0) or 0)
         link = int(pst.get('ParentLink', 0) or 0)
         prio = pst.get('DrawPrio')
-        inst = EffectInstance(sp, child, names, path, age, sub, (base[0] + pos[0], base[1] + pos[1]),
+        if follow_parent:
+            birth = _timeline_start + sp.tick
+            # The source node's 2DPos is captured at the GenerateID key.
+            # Runtime ParentLink is Boolean (vtable 02099DA4 slots 8/9);
+            # at 0206CA8C the linked branch supplies this offset without
+            # adding the owner's position, unlike the unlinked branch.
+            def effect_world_at(frame: int, *, owner=owner_at,
+                                anchor=tuple(pos), linked=bool(link), born=birth):
+                ox, oy = owner(frame if linked else born)
+                return (ox + anchor[0], oy + anchor[1])
+            wx, wy = effect_world_at(world_now)
+            anchor = (wx - current_root[0], wy - current_root[1])
+        else:
+            effect_world_at = None
+            anchor = (base[0] + pos[0], base[1] + pos[1])
+        inst = EffectInstance(sp, child, names, path, age, sub, anchor,
                               flags, link, depth, parent, prio if isinstance(prio, int) else None)
-        inst.notes.append('anchored at the spawning node 2DPos on the spawn tick')
+        if follow_parent:
+            inst.notes.append('ParentLink translation preview: owner ' +
+                              ('follows each tick' if link else 'position captured at spawn'))
+            inst.notes.append('Owner scale/rotation/facing, bones and runtime attachment not resolved')
+        else:
+            inst.notes.append('anchored at the spawning node 2DPos on the spawn tick (legacy preview)')
+            if link:
+                inst.notes.append(f'ParentLink={link}: attached-owner movement not simulated')
         if flags & FLAG_SCREEN_REFERENCE and not link:
-            inst.notes.append('EffectFlags 0x0008: screen-referenced (128,96) in game; drawn at character origin')
-        if link:
-            inst.notes.append(f'ParentLink={link}: attachment path differs in game (not simulated)')
+            inst.notes.append('EffectFlags 0x0008: screen-referenced; camera transform not simulated')
         out.append(inst)
         if depth + 1 < max_depth:
-            sub_proj = project(child, names, sub, lookup, inst.anchor, depth + 1, max_depth, inst,
-                               limit - len(out))
+            sub_proj = project(child, names, sub, lookup,
+                               anchor if not follow_parent else (0, 0),
+                               depth + 1, max_depth, inst, limit - len(out),
+                               follow_parent=follow_parent, origin_at=origin_at,
+                               _timeline_start=_timeline_start + sp.tick,
+                               _world_tick=world_now,
+                               _parent_world_at=effect_world_at)
             out.extend(sub_proj.instances)
             missing.extend(sub_proj.missing)
     return Projection(out, missing, spawns)

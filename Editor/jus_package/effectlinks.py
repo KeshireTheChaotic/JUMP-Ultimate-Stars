@@ -115,3 +115,100 @@ def effect_frame_tick(animation: almt.Move, age: int) -> int | None:
     if animation.flags & almt.MOVE_FLAG_LOOP:
         return age % animation.duration
     return age if age <= animation.duration else None
+
+
+# Overlay 6 FUN_021618E4 (BattleCharaPursuer per-frame update): the controller
+# stores x/y as signed 24.8 values at +0x0C/+0x10.  For a target, it computes
+# (target - current) / 4 with truncation toward zero, clamps each component
+# to +/-0x400 (four pixels), and snaps if BOTH step magnitudes are <0x100
+# (one pixel).  FUN_0216186C/02161888 force an immediate snap on request.
+# This is position replay only: runtime facing animation and its A/B choice
+# depend on the controller and combat state, not just the authored move.
+
+from typing import Callable
+
+
+@dataclass(frozen=True)
+class PursuerPosition:
+    tick: int
+    xy_raw: tuple[int, int]
+    target_raw: tuple[int, int]
+    initial_position_assumed: bool
+    snapped_on_update: bool
+
+    @property
+    def xy(self) -> tuple[float, float]:
+        return (self.xy_raw[0] / 256.0, self.xy_raw[1] / 256.0)
+
+    @property
+    def target(self) -> tuple[float, float]:
+        return (self.target_raw[0] / 256.0, self.target_raw[1] / 256.0)
+
+
+def _quarter_toward_zero(delta: int) -> int:
+    """Match ARM signed division by four, including negative remainders."""
+    return (abs(delta) // 4) * (1 if delta >= 0 else -1)
+
+
+def pursuer_step_raw(current: tuple[int, int], target: tuple[int, int],
+                     *, snap: bool = False) -> tuple[int, int]:
+    """One overlay-6 controller update, in signed 24.8 fixed-point units.
+
+    Only the position calculation is reproduced. This does not decide the
+    pursuer's active move or the facing state selected by the game.
+    """
+    if snap:
+        return target
+    sx, sy = (_quarter_toward_zero(t - p) for p, t in zip(current, target))
+    if abs(sx) < 0x100 and abs(sy) < 0x100:
+        return target
+    def advance(pos: int, goal: int, step: int) -> int:
+        step = max(-0x400, min(0x400, step))
+        result = pos + step
+        # Defensive parity with the ARM9 sign/overshoot checks.
+        return min(result, goal) if step > 0 else max(result, goal) if step < 0 else result
+    return (advance(current[0], target[0], sx), advance(current[1], target[1], sy))
+
+
+def pursuer_position_at(events: tuple[PursuerEvent, ...], tick: int,
+                        actor_position: Callable[[int], tuple[float, float]],
+                        *, facing_left: bool = False,
+                        seed: str = 'first_target') -> PursuerPosition | None:
+    """Replay the tracked pursuer target/follow instructions through ``tick``.
+
+    ``actor_position`` is the *world* character position in pixels per tick.
+    The first known pursuer position cannot be recovered from an isolated move;
+    seed='first_target' (default) anchors it to the earliest known target,
+    whereas seed='origin' assumes world (0,0). Both are labelled assumptions.
+    """
+    if seed not in ('first_target', 'origin'):
+        raise ValueError('seed must be first_target or origin')
+    events = tuple(sorted(events, key=lambda e: e.tick))
+    if not events or tick < events[0].tick:
+        return None
+    position: tuple[int, int] | None = None
+    target: tuple[int, int] | None = None
+    active: PursuerEvent | None = None
+    ix = 0
+    snapped = False
+    for frame in range(events[0].tick, tick + 1):
+        target_changed = False
+        while ix < len(events) and events[ix].tick == frame:
+            active = events[ix]
+            target_changed = any(op.startswith('target ') for op in active.operations)
+            ix += 1
+        if active is None or active.target_xy is None:
+            continue
+        x, y = actor_position(frame)
+        dx, dy = active.target_xy
+        if facing_left:
+            dx = -dx
+        target = (round((x + dx) * 256), round((y + dy) * 256))
+        snap = target_changed and bool(active.snap)
+        if position is None:
+            position = target if seed == 'first_target' else (0, 0)
+        position = pursuer_step_raw(position, target, snap=snap)
+        snapped = snap
+    if position is None or target is None:
+        return None
+    return PursuerPosition(tick, position, target, True, snapped)

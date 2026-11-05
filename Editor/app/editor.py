@@ -107,7 +107,8 @@ class EditorApp(tk.Tk):
         self.show_effects = tk.BooleanVar(value=True)      # pursuer (chara_action 13/14)
         self.show_spawns = tk.BooleanVar(value=True)       # GenerateID effects
         self.show_effect_marks = tk.BooleanVar(value=True)
-        self.effect_layer = tk.StringVar(value='Front')    # DrawPrio ordering is not traced
+        self.effect_layer = tk.StringVar(value='Front')    # final DrawPrio compositing not traced
+        self.parent_link_preview = tk.BooleanVar(value=True)  # owner translation only; no scale/facing
         # NoteTrack physics (jus_package.motion) and sound cues (jus_package.sounds)
         self.show_motion = tk.BooleanVar(value=True)       # trajectory overlay
         self.root_motion = tk.BooleanVar(value=True)      # move the character by the simulated offset
@@ -122,6 +123,8 @@ class EditorApp(tk.Tk):
         self._audio_request = 0
         self.show_onion = tk.BooleanVar(value=False)
         self.pursuer_choice = tk.StringVar(value='A')
+        self.pursuer_motion_preview = tk.StringVar(value='Follow (traced)')
+        self.pursuer_start_seed = tk.StringVar(value='First target')
         self.sel_track: tuple[int, int] | None = None
         self.sel_key: int | None = None
         self.sel_virtual: dict | None = None
@@ -367,10 +370,21 @@ class EditorApp(tk.Tk):
         gm.add_checkbutton(label='Assume floor at start height', variable=self.motion_floor,
                            command=self._motion_changed)
         gm.add_separator()
-        gm.add_command(label='Effect layer (DrawPrio rule not traced):', state='disabled')
+        gm.add_checkbutton(label='ParentLink translation follow (no scale/facing)',
+                           variable=self.parent_link_preview, command=self.redraw_view)
+        gm.add_command(label='Effect layer (DrawPrio final traversal not traced):', state='disabled')
         for v in ('Front', 'Behind'):
             gm.add_radiobutton(label=f'   Effects {v.lower()} character', value=v, variable=self.effect_layer,
                                command=self.redraw_view)
+        gm.add_separator()
+        gm.add_command(label='Pursuer position preview:', state='disabled')
+        for mode in ('Follow (traced)', 'Target only'):
+            gm.add_radiobutton(label='   ' + mode, value=mode, variable=self.pursuer_motion_preview,
+                               command=self.redraw_view)
+        gm.add_command(label='Pursuer initial position (unknown across moves):', state='disabled')
+        for seed in ('First target', 'Origin (0,0)'):
+            gm.add_radiobutton(label='   Assume ' + seed.lower(), value=seed,
+                               variable=self.pursuer_start_seed, command=self.redraw_view)
         gm.add_command(label='Pursuer state (picked at run time):', state='disabled')
         for v in ('A', 'B'):
             gm.add_radiobutton(label=f'   State {v}', value=v, variable=self.pursuer_choice, command=self.redraw_view)
@@ -2408,9 +2422,10 @@ class EditorApp(tk.Tk):
             ins.value('Effect tick', str(inst.sub_tick))
             ins.value('Anchor', f'({inst.anchor[0]}, {inst.anchor[1]})')
             ins.value('EffectFlags', f'{hx(inst.flags, 4)}  {spawns.describe_flags(inst.flags)}')
-            ins.value('ParentLink', str(inst.parent_link))
+            ins.value('ParentLink', f'{inst.parent_link} ({"attached" if inst.parent_link else "snapshot"})')
             ins.value('DrawPrio', '—' if inst.draw_prio is None else
                       f'{inst.draw_prio / 4096:g}  (raw {inst.draw_prio})')
+            ins.text('Child priority comparison is descending; final DS front/back traversal is unresolved.')
             for n in inst.notes:
                 ins.text('• ' + n)
         else:
@@ -2542,7 +2557,8 @@ class EditorApp(tk.Tk):
         if not self.move or not self.almt:
             return spawns.Projection([], [], [])
         return spawns.project(self.move, self.almt.node_names, self.tick if tick is None else tick,
-                              self._effect_moves)
+                              self._effect_moves, follow_parent=self.parent_link_preview.get(),
+                              origin_at=self._animation_origin)
 
     def _draw_spawns(self, vp, tick, info, sprites=True, marks=True):
         """GenerateID effects: sprites (front or behind pass) and origin marks (always on top)."""
@@ -2580,9 +2596,26 @@ class EditorApp(tk.Tk):
         if ev.target_xy is None:
             info.append('Pursuer: target unknown (set by an earlier move)')
             return
-        ax, ay = ev.target_xy
-        sx, sy = vp.to_screen(ax, ay)
+        # FUN_021618E4 resolves the target against the live actor and facing,
+        # then performs a capped quarter-distance follow in 24.8 units. The
+        # unknown pre-move state is an explicit, selectable preview assumption.
+        seed = 'origin' if self.pursuer_start_seed.get() == 'Origin (0,0)' else 'first_target'
+        pos = effectlinks.pursuer_position_at(
+            self._pursuer_events, tick, self._animation_origin,
+            facing_left=self.facing_left.get(), seed=seed)
+        if pos is None:
+            return
+        shift_x, shift_y = self._animation_origin(tick)
+        tx, ty = pos.target
+        px, py = pos.xy
+        # The Viewport has already been translated by the root motion shift.
+        sx, sy = vp.to_screen(tx - shift_x, ty - shift_y)
         vp.canvas.create_oval(sx - 5, sy - 5, sx + 5, sy + 5, outline=T.GOOD, dash=(2, 2))
+        if self.pursuer_motion_preview.get() == 'Target only':
+            px, py = tx, ty
+        elif (px, py) != (tx, ty):
+            sx2, sy2 = vp.to_screen(px - shift_x, py - shift_y)
+            vp.canvas.create_line(sx2, sy2, sx, sy, fill=T.GOOD, dash=(2, 3))
         rid = ev.move_a if self.pursuer_choice.get() == 'A' else ev.move_b
         if rid is None or rid not in self._effect_moves:
             if rid is not None:
@@ -2592,8 +2625,11 @@ class EditorApp(tk.Tk):
         sub_tick = effectlinks.effect_frame_tick(effect, tick - ev.tick)
         if sub_tick is None:
             return
-        self._draw_node_sprites(vp, effect, sub_tick, base=(ax, ay), names=names)
-        info.append(f'Pursuer {hx(rid, 6)} t{sub_tick} @({ax},{ay}) [approx]')
+        self._draw_node_sprites(vp, effect, sub_tick,
+                                base=(px - shift_x, py - shift_y), names=names)
+        mode = ('follow (traced; seed assumed)' if self.pursuer_motion_preview.get() != 'Target only'
+                else 'target only (reference)')
+        info.append(f'Pursuer {hx(rid, 6)} t{sub_tick} @({px:.1f},{py:.1f}) [{mode}]')
 
     # ============================================================ inspector
     def refresh_inspector(self, focus_value=False):
@@ -2640,7 +2676,9 @@ class EditorApp(tk.Tk):
                 ins.value('Slots', f'A={ev.slot_a} → {hx(ev.move_a, 6) if ev.move_a is not None else "?"}\n'
                                    f'B={ev.slot_b} → {hx(ev.move_b, 6) if ev.move_b is not None else "?"}')
             ins.text('Driven by NoteTrack chara_action 13 (slots from ChrBin chr/effect) and 14 (target). '
-                     'Positions are approximate; the game smooths the pursuer toward the target.')
+                     'The position follow rule is traced to overlay 6 FUN_021618E4 (quarter-distance, '
+                     'up to four pixels per axis per update, snap near target). Starting position, '
+                     'active A/B state and runtime facing remain scenario assumptions.')
             return
         tr = self._track()
         if tr is None:

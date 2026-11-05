@@ -15,10 +15,10 @@ from __future__ import annotations
 import re
 from dataclasses import dataclass, field
 
-from jus_formats import altm as altmmod
+from jus_formats import altm as altmmod, dsig as dsigmod, dstx as dstxmod, sprite as spritemod
 
 from .project import DataRoot, join, split
-from . import tilemap
+from . import tilemap, images
 
 STAGE_ARCHIVE = 'stage/stage.aar'
 #: top-level archives that belong to other workspaces
@@ -155,6 +155,90 @@ def screen_archives(root: DataRoot) -> list[str]:
             out.append(rel)
     return out
 
+
+
+@dataclass(frozen=True)
+class ScreenSprite:
+    """Resolved sprite-frame source from one screen or nested screen archive.
+
+    This describes *resource* content only.  ALMT runtime placement, DS
+    screen selection and update timing have not been verified.
+    """
+    dtx_path: str
+    image_path: str                     # external .dig path, or dtx_path if embedded
+    frame_count: int
+    dsig_mode: int
+    embedded: bool
+
+
+def screen_sprite(root: DataRoot, archive: str, dtx_name: str):
+    """Return (ScreenSprite, DSTX, SpriteSource) for a screen sprite resource.
+
+    Prefer the original 24-bit resource id for external DSIG pairing rather
+    than basename guesses.  A same-stem fallback is available for exceptional
+    archives without matching resource ids.  Nothing here rebuilds archives.
+    """
+    arc = root.archive(archive)
+    e = arc.get(dtx_name)
+    if e.ext != '.dtx':
+        raise ValueError(f'{dtx_name}: not a DSTX sprite resource')
+    dtx = dstxmod.parse(e.payload())
+    if dtx.embedded:
+        g = dsigmod.parse(dtx.embedded)
+        image_path = join(archive, e.name)
+        embedded = True
+    else:
+        cands = [item for item in arc.entries if item.ext == '.dig']
+        hit = next((x for x in cands if x.resource_id == e.resource_id), None)
+        if hit is None:
+            stem = e.name.rsplit('.', 1)[0].lower().rstrip('_')
+            hit = next((x for x in cands if x.name.rsplit('.', 1)[0].lower().rstrip('_') == stem), None)
+        if hit is None:
+            raise ValueError(f'{dtx_name}: no embedded or paired DSIG image')
+        image_path = join(archive, hit.name)
+        g = dsigmod.parse(hit.payload())
+        embedded = False
+    return (ScreenSprite(join(archive, e.name), image_path, len(dtx.frames), g.mode, embedded),
+            dtx, spritemod.SpriteSource(g))
+
+
+def render_screen_sprite(dtx: dstxmod.DstxFile, source: spritemod.SpriteSource, frame: int):
+    """Return (RGBA PIL image, left, top) for the selected sprite frame."""
+    if not 0 <= frame < len(dtx.frames):
+        raise IndexError(f'Frame {frame} outside 0..{len(dtx.frames) - 1}')
+    indexed = spritemod.compose(dtx.frames[frame], source)
+    if indexed.width * indexed.height > 4_000_000:
+        raise ValueError('Sprite frame too large to preview safely')
+    return images.to_rgba(indexed, source.dsig.palettes), indexed.left, indexed.top
+
+
+def nested_screen_archives(root: DataRoot, top_paths: list[str]) -> list[str]:
+    """Enumerate nested ALAR members as navigable resource paths.
+
+    Uses member names rather than fabricated paths on disk; DSCP wrappers
+    are handled by DataRoot.archive.  Guard against malformed input loops.
+    """
+    found = []
+    seen = set(top_paths)
+    pending = [(p, 0) for p in top_paths]
+    while pending:
+        path, depth = pending.pop()
+        if depth >= 12:
+            continue
+        try:
+            entries = root.archive(path).entries
+        except (ValueError, OSError, KeyError):
+            continue
+        for member in entries:
+            if member.ext != '.aar':
+                continue
+            child = join(path, member.name)
+            if child in seen:
+                continue
+            seen.add(child)
+            found.append(child)
+            pending.append((child, depth + 1))
+    return sorted(found)
 
 def default_screen(name: str) -> str:
     """Heuristic only: which DS screen a layer probably targets (user can change it)."""

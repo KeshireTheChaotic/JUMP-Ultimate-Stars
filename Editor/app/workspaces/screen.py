@@ -43,6 +43,12 @@ class ScreenWorkspace(SuiteWorkspace):
         self.order: list[str] = []
         self.sel: str | None = None
         self.selected_resource: int | None = None
+        self.sprite_info = None
+        self.sprite_dtx = None
+        self.sprite_source = None
+        self.sprite_image = None
+        self.sprite_error: str | None = None
+        self.sprite_frame = tk.StringVar(value='0')
         self.show_outside = tk.BooleanVar(value=False)
         super().__init__(app, host, browser_host, k)
 
@@ -50,6 +56,12 @@ class ScreenWorkspace(SuiteWorkspace):
     def build(self, host):
         ws = self.standard_layout(host, layers=True, bottom_ratio=0.7)
         h = self.view_panel.header
+        ttk.Label(h, text='Sprite frame').pack(side='left', padx=(8, 2))
+        self.frame_spin = ttk.Spinbox(h, from_=0, to=0, width=5,
+                                      textvariable=self.sprite_frame, command=self._frame_changed)
+        self.frame_spin.pack(side='left', padx=2)
+        self.frame_spin.bind('<Return>', self._frame_changed)
+        self.frame_spin.bind('<FocusOut>', self._frame_changed)
         ttk.Checkbutton(h, text='Whole layers', variable=self.show_outside, style='Toolbar.TCheckbutton',
                         command=lambda: self.view.redraw()).pack(side='right', padx=6)
         ttk.Button(h, text='Frame', style='Tool.TButton', command=self.frame_view).pack(side='right', padx=6)
@@ -78,6 +90,7 @@ class ScreenWorkspace(SuiteWorkspace):
     # ------------------------------------------------------------ browser
     def on_root(self):
         self._archives = scenes.screen_archives(self.app.root_data) if self.app.root_data else []
+        self._nested_catalog = None
         self.populate()
 
     def populate(self):
@@ -85,14 +98,25 @@ class ScreenWorkspace(SuiteWorkspace):
         t.delete(*t.get_children())
         flt = self.filter_var.get().strip().lower()
         groups = {}
-        for path in getattr(self, '_archives', []):
+        paths = list(getattr(self, '_archives', []))
+        if flt:
+            # Search nested archives by their *actual* member paths.  They are
+            # not separate files on disk, so rglob cannot discover them.
+            if self._nested_catalog is None and self.app.root_data:
+                self._nested_catalog = scenes.nested_screen_archives(self.app.root_data, paths)
+            paths += self._nested_catalog or []
+        for path in paths:
             if flt and flt not in path.lower():
                 continue
             folder = path.split('/')[0]
             if folder not in groups:
                 groups[folder] = t.insert('', 'end', 'f:' + folder, text=folder, open=bool(flt))
-            iid = t.insert(groups[folder], 'end', path, text=path.split('/')[-1], values=('',))
-            t.insert(iid, 'end', path + '|…', text='…')     # lazy children
+            label = path.split('|')[-1].split('/')[-1]
+            if flt and '|' in path:
+                label = path.split('|')[0].split('/')[-1] + ' › ' + label
+            iid = t.insert(groups[folder], 'end', path, text=label, values=('',))
+            if not flt:
+                t.insert(iid, 'end', path + '|…', text='…')   # lazy children
 
     def _expand(self, _e=None):
         iid = self.tree.focus()
@@ -119,6 +143,7 @@ class ScreenWorkspace(SuiteWorkspace):
         self.archive = path
         self.layers, self.images, self.cfg, self.order, self.sel = [], {}, {}, [], None
         self.selected_resource = None
+        self._clear_sprite()
         probs = []
         try:
             self.layers = scenes.find_layers(self.app.root_data, path)
@@ -131,9 +156,25 @@ class ScreenWorkspace(SuiteWorkspace):
             self.order.append(l.name)
             probs += [(f'{l.name}: {x}', 'warn') for x in l.problems + p]
         self.sel = self.order[0] if self.order else None
+        # Nested UI-object archives normally have DSTX + ALMT but no ALTM.
+        # Automatically preview the first drawable sprite instead of leaving
+        # the viewport blank when the archive loads successfully.
+        if not self.layers:
+            try:
+                arc = self.app.root_data.archive(path)
+                first = next((i for i, e in enumerate(arc.entries)
+                              if e.ext == '.dtx' and e.payload()[:4] == b'DSTX'
+                              and e.payload()[5] & 0x7f == 3), None)
+                if first is not None:
+                    self.selected_resource = first
+                    self._load_sprite(first)
+            except (ValueError, KeyError, OSError, IndexError) as exc:
+                probs.append((f'Sprite preview: {exc}', 'warn'))
         if self.tree.exists(path):
             self.tree.set(path, 'n', str(len(self.layers)))
         self._fill_resources(probs)
+        if self.selected_resource is not None and self.res_tree.exists(str(self.selected_resource)):
+            self.res_tree.selection_set(str(self.selected_resource))
         self._probs = probs
         self.refresh(frame=True)
         self.app.status.set(f'{path}: {len(self.layers)} background layers')
@@ -151,6 +192,8 @@ class ScreenWorkspace(SuiteWorkspace):
             if ext == '.dtx':
                 kind = scenes.dtx_kind(e.payload())
                 label = f'DSTX {kind}'
+                if 'sprite pieces' in kind:
+                    label += ' (frame preview available)'
                 if 'tile panels (read-only' in kind:
                     grade = 'Direct'  # 4-byte descriptors verified by ARM9 loader; positioning still unknown
                 elif 'dedicated' in kind or 'malformed' in kind:
@@ -166,17 +209,79 @@ class ScreenWorkspace(SuiteWorkspace):
             self.selected_resource = int(chosen[0]) if chosen else None
         except (ValueError, TypeError):
             self.selected_resource = None
+        self._load_sprite(self.selected_resource)
         self.refresh_inspector()
+        self.view.redraw()
 
     def _open_resource(self, _e=None):
         sel = self.res_tree.selection()
         if not sel:
             return
-        name = self.res_tree.set(sel[0], 'name')
-        if name.endswith('.aar'):
+        arc = self.app.root_data.archive(self.archive)
+        item = arc.entries[int(sel[0])]
+        if item.ext == '.aar':
+            self.load(join(self.archive, item.name))
+        elif item.ext == '.dtx':
+            self._load_sprite(int(sel[0]))
+            self.refresh_inspector()
+            self.view.redraw()
+
+
+    # --------------------------------------------------------- sprite preview
+    def _clear_sprite(self):
+        self.sprite_info = None
+        self.sprite_dtx = None
+        self.sprite_source = None
+        self.sprite_image = None
+        self.sprite_error = None
+        self.sprite_frame.set('0')
+        if hasattr(self, 'frame_spin'):
+            self.frame_spin.configure(to=0, state='disabled')
+
+    def _load_sprite(self, index):
+        self._clear_sprite()
+        if index is None or not self.archive:
+            return
+        try:
             arc = self.app.root_data.archive(self.archive)
-            full = next(e.name for e in arc.entries if e.name.split('/')[-1] == name)
-            self.load(join(self.archive, full))
+            member = arc.entries[index]
+            if member.ext in ('.amt', '.dig'):
+                # ALMT/DSIG are companions to a sprite, not stand-alone
+                # drawables.  Show the linked DSTX resource for inspection;
+                # this is frame browsing, not ALMT time-driven playback.
+                stem = member.name.rsplit('.', 1)[0].lower().rstrip('_')
+                paired = next((e for e in arc.entries if e.ext == '.dtx' and
+                               e.name.rsplit('.', 1)[0].lower().rstrip('_') == stem), None)
+                if paired is None:
+                    paired = next((e for e in arc.entries if e.ext == '.dtx' and
+                                   e.resource_id == member.resource_id), None)
+                if paired is None:
+                    return
+                member = paired
+            if member.ext != '.dtx' or member.payload()[:4] != b'DSTX' or \
+                    (member.payload()[5] & 0x7F) != 3:
+                return
+            self.sprite_info, self.sprite_dtx, self.sprite_source = scenes.screen_sprite(
+                self.app.root_data, self.archive, member.name)
+            self.frame_spin.configure(to=max(0, self.sprite_info.frame_count - 1),
+                                      state='normal' if self.sprite_info.frame_count else 'disabled')
+            if self.sprite_info.frame_count:
+                self.sprite_image = scenes.render_screen_sprite(self.sprite_dtx, self.sprite_source, 0)
+        except (ValueError, KeyError, IndexError, OSError) as exc:
+            self.sprite_error = str(exc)
+
+    def _frame_changed(self, _e=None):
+        if self.sprite_dtx is None or self.sprite_source is None:
+            return
+        try:
+            frame = int(self.sprite_frame.get())
+            self.sprite_image = scenes.render_screen_sprite(self.sprite_dtx, self.sprite_source, frame)
+            self.sprite_error = None
+        except (ValueError, IndexError) as exc:
+            self.sprite_error = str(exc)
+            self.sprite_image = None
+        self.refresh_inspector()
+        self.view.redraw()
 
     # ------------------------------------------------------------ view
     def _rows(self):
@@ -190,8 +295,8 @@ class ScreenWorkspace(SuiteWorkspace):
         rows.append({'id': 'o', 'name': 'Not drawn yet', 'kind': 'group'})
         rows.append({'id': 'o:dtx', 'parent': 'o', 'name': 'DSTX 0x05/0x06 layouts', 'kind': 'overlay',
                      'available': False, 'status': 'descriptors parsed; rendering pending'})
-        rows.append({'id': 'o:spr', 'parent': 'o', 'name': 'Sprites / animations', 'kind': 'overlay',
-                     'available': False, 'status': 'next milestone'})
+        rows.append({'id': 'o:spr', 'parent': 'o', 'name': 'ALMT animation playback', 'kind': 'overlay',
+                     'available': False, 'status': 'sprite frames previewable; authored timeline not projected'})
         return rows
 
     def refresh(self, frame=False):
@@ -242,11 +347,22 @@ class ScreenWorkspace(SuiteWorkspace):
                 continue
             ox, oy = ORIGIN[c['screen']]
             vp.add_image(self._crop(img, c['sx'], c['sy']), ox, oy)
+        if self.sprite_image is not None:
+            # Sprite-space origin is centered as a resource preview, *not*
+            # presented as a traced menu screen position or runtime layer.
+            frame_image, left, top = self.sprite_image
+            preview = Image.new('RGBA', (SW, SH), (0, 0, 0, 0))
+            preview.alpha_composite(frame_image, (SW // 2 + left, SH // 2 + top))
+            vp.add_image(preview, *ORIGIN['Top'])
+            vp.text(4, 4, f'PREVIEW: sprite frame {self.sprite_frame.get()}',
+                    anchor='nw', fill=T.ACCENT, font=T.MONO_SMALL)
         for name, (ox, oy) in ORIGIN.items():
             hot = self.sel and self.cfg.get(self.sel, {}).get('screen') == name
             vp.rect(ox, oy, ox + SW, oy + SH, outline=T.ACCENT if hot else T.MUTED, width=2 if hot else 1)
             vp.text(ox, oy - 2, f'{name.upper()} SCREEN  256×192', anchor='sw', fill=T.MUTED, font=T.MONO_SMALL)
-        vp.hud.configure(text='Screen assignment, scroll and order are a preview (not traced, not saved).'
+        vp.hud.configure(text=('Sprite centered for resource preview (not runtime screen placement).'
+                               if self.sprite_image is not None else
+                               'Screen assignment, scroll and order are a preview (not traced, not saved).')
                          if self.archive else 'Select a screen archive in the browser.')
 
     def _select_layer(self, row):
@@ -274,11 +390,29 @@ class ScreenWorkspace(SuiteWorkspace):
             return
         ins.section('Archive', note=self.archive)
         ins.value('Layers', str(len(self.layers)))
+        if self.sprite_info is not None:
+            ins.section('Sprite frame preview — read-only', note=self.sprite_info.dtx_path)
+            ins.value('Frame', f'{self.sprite_frame.get()} / {self.sprite_info.frame_count - 1}')
+            ins.value('Texture', 'embedded DSIG' if self.sprite_info.embedded else
+                      self.sprite_info.image_path)
+            ins.value('DSIG mode', f'0x{self.sprite_info.dsig_mode:02X}')
+            if self.sprite_image is not None:
+                im, x, y = self.sprite_image
+                ins.value('Frame bounds', f'({x}, {y})  {im.width}×{im.height} pixels')
+            ins.evidence('Sprite image', 'Direct', 'DSTX frame + DSIG pixel decoder')
+            ins.evidence('Runtime position', 'Unknown', 'centered for inspection only')
+        if self.sprite_error:
+            ins.section('Sprite preview error')
+            ins.value('Detail', self.sprite_error)
         if self.selected_resource is not None:
             try:
                 arc = self.app.root_data.archive(self.archive)
                 item = arc.entries[self.selected_resource]
                 data = item.payload()
+                if item.ext == '.amt':
+                    ins.section('ALMT — animation timing not projected', note=item.name)
+                    ins.text('The associated sprite frames are previewable above. The frame number '
+                             'is a DSTX index, not an ALMT playback tick.')
                 if item.ext == '.dtx' and data[:4] == b'DSTX' and data[5] in (5, 6):
                     from jus_formats.dstx import parse_layout
                     layout = parse_layout(data)

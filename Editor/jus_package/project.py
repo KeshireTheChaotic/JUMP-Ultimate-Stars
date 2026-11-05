@@ -20,6 +20,7 @@ from dataclasses import dataclass
 from pathlib import Path
 
 from jus_formats import alar
+from jus_formats.binary import dscp_wrap, is_dscp
 
 SEP = '|'
 CHAR_RE = re.compile(r'^chr/([a-z]{2}_[bsh]_\d{2})\.aar$', re.I)
@@ -150,7 +151,11 @@ class DataRoot:
             built = node.archive.build()
             parts = split(deepest)
             if len(parts) == 1:
-                out[deepest] = built
+                # Most AAR files are raw ALAR, but a few shipped top-level
+                # screen archives (e.g. Commu/challenge_3d.aar) are DSCP
+                # containers.  Rebuilding must preserve that *outer* wrapper
+                # just as Entry.set_payload preserves nested DSCP members.
+                out[deepest] = dscp_wrap(built) if is_dscp(self.read(deepest)) else built
             else:
                 parent = join(*parts[:-1])
                 self.archive(parent).get(parts[-1]).set_payload(built)

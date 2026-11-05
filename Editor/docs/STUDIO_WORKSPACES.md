@@ -92,7 +92,10 @@ Next: BG priority/scroll from the stage code, then camera/mob tracing.
 
 Screen assignment uses a name heuristic (`top`/`under`…) and is a **preview only** — the
 real BG slot, priority and scroll are not traced and nothing here is saved.
-Next: DSTX 0x05/0x06 layout parser, screen sprite/animation layers on the shared
+Nested DSTX/DSIG screen objects now have a selectable, read-only sprite frame preview
+with nested archive search and correct member selection. ALMT time-driven playback and
+DSTX 0x05/0x06 placement still await tracing. See `NESTED_AAR_SCREEN_AUDIT_20261105.md`.
+Next: ALMT time-driven UI animations and verified on-screen sprite placement on the shared
 timeline, hit-zone overlay later.
 
 ## References (Ctrl+7) — `app/workspaces/references.py`
