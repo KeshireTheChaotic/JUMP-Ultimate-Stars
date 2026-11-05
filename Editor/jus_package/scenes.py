@@ -47,6 +47,13 @@ def dtx_kind(blob: bytes) -> str:
         return f'sprite pieces v{blob[4]}'
     if flags == 0x04:
         return 'koma panels'
+    if flags in (0x05, 0x06):
+        from jus_formats.dstx import parse_layout
+        try:
+            layout = parse_layout(blob)
+            return f'v1 layout {flags:#04x}: {len(layout.panels)} tile panels (read-only; placement unknown)'
+        except ValueError as exc:
+            return f'layout {flags:#04x} malformed: {exc}'
     return f'layout flags 0x{flags:02X} (needs a dedicated parser)'
 
 

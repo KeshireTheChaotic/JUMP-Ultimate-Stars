@@ -9,8 +9,8 @@ Background layers are ALTM maps with their DSIG tiles.  Which screen and
 BG slot a layer uses, its scroll and priority are set by game code that is
 not traced: the editor guesses a screen from the name and lets the user
 override screen, scroll and order as a *preview* (never saved).
-DSTX 0x05/0x06 layouts and nested sprite archives are listed but not yet
-drawn (they need dedicated parsers, docs/03 §1).
+DSTX 0x05/0x06 layout descriptors are read-only and visible in the resource
+inspector; their auxiliary placement sections and sprite rendering remain unknown.
 """
 from __future__ import annotations
 
@@ -42,6 +42,7 @@ class ScreenWorkspace(SuiteWorkspace):
         self.cfg: dict[str, dict] = {}          # name -> {screen, sx, sy, visible}
         self.order: list[str] = []
         self.sel: str | None = None
+        self.selected_resource: int | None = None
         self.show_outside = tk.BooleanVar(value=False)
         super().__init__(app, host, browser_host, k)
 
@@ -64,6 +65,7 @@ class ScreenWorkspace(SuiteWorkspace):
         self.res_tree.tag_configure('Unknown', foreground=T.BAD)
         self.res_tree.tag_configure('Inferred', foreground=T.WARN)
         self.res_tree.bind('<Double-1>', self._open_resource)
+        self.res_tree.bind('<<TreeviewSelect>>', self._select_resource)
         self.problems = self.problems_page()
         return ws
 
@@ -116,6 +118,7 @@ class ScreenWorkspace(SuiteWorkspace):
     def load(self, path):
         self.archive = path
         self.layers, self.images, self.cfg, self.order, self.sel = [], {}, {}, [], None
+        self.selected_resource = None
         probs = []
         try:
             self.layers = scenes.find_layers(self.app.root_data, path)
@@ -148,12 +151,22 @@ class ScreenWorkspace(SuiteWorkspace):
             if ext == '.dtx':
                 kind = scenes.dtx_kind(e.payload())
                 label = f'DSTX {kind}'
-                if 'dedicated' in kind:
+                if 'tile panels (read-only' in kind:
+                    grade = 'Direct'  # 4-byte descriptors verified by ARM9 loader; positioning still unknown
+                elif 'dedicated' in kind or 'malformed' in kind:
                     grade = 'Unknown'
                     probs.append((f'{e.name}: {kind}', 'muted'))
             elif ext == '.atm':
                 label = 'ALTM tile map (shown as a layer)'
             t.insert('', 'end', str(i), values=(e.name.split('/')[-1], ext, len(e.data), label, grade), tags=(grade,))
+
+    def _select_resource(self, _e=None):
+        chosen = self.res_tree.selection()
+        try:
+            self.selected_resource = int(chosen[0]) if chosen else None
+        except (ValueError, TypeError):
+            self.selected_resource = None
+        self.refresh_inspector()
 
     def _open_resource(self, _e=None):
         sel = self.res_tree.selection()
@@ -176,7 +189,7 @@ class ScreenWorkspace(SuiteWorkspace):
                          'status': f'scroll {c["sx"]},{c["sy"]}'})
         rows.append({'id': 'o', 'name': 'Not drawn yet', 'kind': 'group'})
         rows.append({'id': 'o:dtx', 'parent': 'o', 'name': 'DSTX 0x05/0x06 layouts', 'kind': 'overlay',
-                     'available': False, 'status': 'parser needed'})
+                     'available': False, 'status': 'descriptors parsed; rendering pending'})
         rows.append({'id': 'o:spr', 'parent': 'o', 'name': 'Sprites / animations', 'kind': 'overlay',
                      'available': False, 'status': 'next milestone'})
         return rows
@@ -261,6 +274,29 @@ class ScreenWorkspace(SuiteWorkspace):
             return
         ins.section('Archive', note=self.archive)
         ins.value('Layers', str(len(self.layers)))
+        if self.selected_resource is not None:
+            try:
+                arc = self.app.root_data.archive(self.archive)
+                item = arc.entries[self.selected_resource]
+                data = item.payload()
+                if item.ext == '.dtx' and data[:4] == b'DSTX' and data[5] in (5, 6):
+                    from jus_formats.dstx import parse_layout
+                    layout = parse_layout(data)
+                    ins.section('DSTX 0x05/0x06 — read-only', note=item.name)
+                    ins.value('Mode', f'0x{layout.flags:02X} — {"6" if layout.mode6 else "5"}')
+                    ins.value('Panels', str(len(layout.panels)))
+                    ins.value('Auxiliary', f'{len(layout.auxiliary)} bytes (opaque)')
+                    ins.value('DSIG', f'{len(layout.embedded)} bytes' if layout.embedded[:4] == b'DSIG'
+                              else 'not found')
+                    for i, panel in enumerate(layout.panels[:16]):
+                        ins.value(f'Panel {i}', f'base {panel.first_tile}, {panel.tiles_w}×{panel.tiles_h} tiles')
+                    if len(layout.panels) > 16:
+                        ins.value('Additional', f'{len(layout.panels) - 16} panels not listed')
+                    ins.evidence('Descriptors', 'Direct', 'ARM9 0x02044E78 / 0x02043C7C')
+                    ins.evidence('Placement', 'Unknown', 'additional section and layer mapping unresolved')
+            except (ValueError, KeyError, IndexError) as exc:
+                ins.section('Resource')
+                ins.value('Parse problem', str(exc))
         l = next((x for x in self.layers if x.name == self.sel), None)
         if l is None:
             return

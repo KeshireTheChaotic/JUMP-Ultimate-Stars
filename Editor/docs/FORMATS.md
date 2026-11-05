@@ -329,8 +329,7 @@ Open items: ALMT field `EffectFlags`
 (`CommonEffect.cpp` property, values 0/2/3/0x10/0xB…), full ALAR2 flag
 bit-1 split lifecycle and the attribute bit-24 vs bit-25 distinction,
 DSIG v2 `b7`, ALOD property
-descriptors, ALTM screen/priority/scroll assignment, DSTX flags 0x05/0x06 (screen
-layouts), stage `.bin`/`.cam`/`.mob`, the exact battle-state
+descriptors, ALTM screen/priority/scroll assignment, DSTX flags 0x05/0x06 (read-only tile-panel descriptors parsed; opaque auxiliary layout and drawing pending), stage `.bin`/`.cam`/`.mob`, the exact battle-state
 fields behind each branch condition, `chara_action` sub-code semantics, and in-game draw
 order of overlapping effect pieces (the editor draws atlas pieces last-on-top and OBJ
 pieces first-on-top, matching OAM priority). The DS draw path itself was not confirmed

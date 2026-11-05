@@ -178,3 +178,8 @@ See [docs/TRACE_COLLECTION.md](docs/TRACE_COLLECTION.md) for exact commands,
 experiment controls and the evidence needed to decode native serialization.
 Reports and the editor use **Unknown / Inferred / Direct** labels; raw candidates
 are never advertised as native writable formats.
+
+## Research: effect and format triage (2026-11-05)
+
+Run `py -3 tools\audit_open_effects.py PATH_TO_EXTRACTED_DATA --out effects_audit.json`.
+See `docs/EFFECT_AND_FORMATS_TRACE_20261105.md` for verified ARM9 draw-link comparisons, rare EffectFlags samples, and the read-only DSTX 0x05/0x06 descriptor parser. The Screen workspace can inspect tile-panel descriptors but cannot yet render their auxiliary layout. This patch adds diagnostics only; it does **not** enable inferred runtime effects or alter save-format behavior.

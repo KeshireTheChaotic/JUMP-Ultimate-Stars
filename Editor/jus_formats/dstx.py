@@ -19,6 +19,10 @@ The meaning of ``index`` depends on the paired DSIG image mode (see
 stream, a 32-byte tile number for DSIG v1/0x10, or a GPU 8x8 cell for
 DSIG v1/0x20|0x50.  Texture UV cells are arranged 32 per logical row;
 bit 6 selects the 2bpp interpretation of unchanged 4bpp source bytes.
+
+Flags 0x05/0x06 have a separate read-only four-byte tile-panel descriptor
+reader (`parse_layout`), verified against `FUN_02044E78`, `FUN_02043C7C` and
+`FUN_020433EC`. The auxiliary layout payload is deliberately not decoded.
 """
 from __future__ import annotations
 
@@ -207,3 +211,63 @@ class DstxFile:
 
 def parse(blob: bytes) -> DstxFile:
     return DstxFile.parse(blob)
+
+
+@dataclass(frozen=True)
+class LayoutPanel:
+    """One untransformed 4-byte descriptor in a DSTX 0x05/0x06 resource.
+
+    ``FUN_02044E78`` resolves the descriptor as ``blob+0x0A+4*index``.
+    ``FUN_02043C7C`` consumes u16 base, u8 width, u8 height and expands a
+    tile grid into 6-byte pieces.  No screen placement is implied here.
+    """
+    first_tile: int
+    tiles_w: int
+    tiles_h: int
+
+
+@dataclass(frozen=True)
+class LayoutTable:
+    """Read-only *layout descriptor* view, not a decoded screen composition.
+
+    ARM9 FUN_020433EC cases 5 and 6 set auxiliary data region from
+    ``start=8+(panel_count+1)*4`` through ``end=u16(blob+8)``.  Case 6 sets
+    a separate mode to 2.  The meaning of bytes within that region and
+    final render layer assignment is not established; preserve all raw bytes.
+    """
+    version: int
+    flags: int
+    panels: tuple[LayoutPanel, ...]
+    auxiliary: bytes
+    embedded: bytes
+    reserved: bytes
+    raw: bytes
+
+    @property
+    def mode6(self) -> bool:
+        return (self.flags & 0x7F) == 6
+
+    def build(self) -> bytes:
+        """Byte-identical read-only round trip; no editing assumptions."""
+        return self.raw
+
+
+def parse_layout(blob: bytes) -> LayoutTable:
+    """Read DSTX 0x05/0x06 four-byte descriptors and preserve opaque payload.
+
+    Verifies only boundaries established by ARM9 and the shipped corpus;
+    do not pass this view to ``DstxFile`` sprite-piece rendering.
+    """
+    if len(blob) < 12 or blob[:4] != MAGIC:
+        raise ValueError('Not a DSTX layout')
+    version, flags, count, end = blob[4], blob[5], u16(blob, 6), u16(blob, 8)
+    if version != 1 or flags not in (0x05, 0x06):
+        raise ValueError(f'Unsupported DSTX layout version/flags {version}/{flags:#04x}')
+    auxiliary_start = 8 + 4 * (count + 1)
+    if count > 4096 or auxiliary_start > end or end > len(blob):
+        raise ValueError('DSTX layout section boundaries invalid')
+    panels = tuple(LayoutPanel(*struct.unpack_from('<HBB', blob, 10 + i * 4))
+                   for i in range(count))
+    return LayoutTable(version, flags, panels,
+                       bytes(blob[auxiliary_start:end]), bytes(blob[end:]),
+                       bytes(blob[10 + 4 * count:auxiliary_start]), bytes(blob))

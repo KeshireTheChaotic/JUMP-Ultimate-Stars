@@ -118,3 +118,7 @@ refreshed after Apply / Save.
 * Level `.mob`/`.bin`/`.cam`, collision and gimmicks remain read-only. Screen
   backgrounds remain preview-only pending BG slot/priority/scroll tracing.
 * Emulator verification of ALTM rendering, effect draw order and pursuer motion.
+
+### DSTX 0x05/0x06 diagnostic (2026-11-05)
+
+The Screen workspace now reads and inspects the four-byte tile-panel descriptors of these layouts, and displays their count/base tile/dimensions. See `docs/EFFECT_AND_FORMATS_TRACE_20261105.md`. Their auxiliary placement section remains opaque and read-only; this is not sprite/background drawing support.
