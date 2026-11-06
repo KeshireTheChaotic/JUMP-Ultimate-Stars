@@ -246,6 +246,25 @@ class GalaxyGraph:
         b = self.planet_off + i * PLANET_SIZE
         return _name(self._data[b:b+32])
 
+    def planet_location_id(self, planet_id: int) -> int:
+        """Overlay-1 JGalaxyStageInfo_Add: planet +0x2C indexes locations."""
+        if not 0 <= planet_id < self.planet_count:
+            raise IndexError('planet ID out of range')
+        return self._data[self.planet_off + planet_id * PLANET_SIZE + 0x2C]
+
+    def location_name(self, location_id: int) -> str:
+        """Display name in the location-record prefix (name encoding inferred)."""
+        if not 0 <= location_id < self.location_count:
+            raise IndexError('location ID out of range')
+        p = self.location_off + location_id * LOCATION_SIZE
+        return _name(self._data[p:p + 32])
+
+    def location_audio_id(self, location_id: int) -> int:
+        """Overlay-1 JGalaxyStageInfo_Add reads location +0x42 for music."""
+        if not 0 <= location_id < self.location_count:
+            raise IndexError('location ID out of range')
+        return self._data[self.location_off + location_id * LOCATION_SIZE + 0x42]
+
     def get(self, index):
         start = self._node_start(index)
         buf = bytes(self._data[start:start + NODE_SIZE])
