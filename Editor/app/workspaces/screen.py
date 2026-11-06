@@ -17,7 +17,7 @@ from __future__ import annotations
 import tkinter as tk
 from tkinter import ttk
 
-from PIL import Image
+from PIL import Image, ImageTk
 
 from jus_package import scenes
 from jus_package.project import join, split
@@ -50,13 +50,19 @@ class ScreenWorkspace(SuiteWorkspace):
         self.sprite_error: str | None = None
         self.sprite_frame = tk.StringVar(value='0')
         self.show_outside = tk.BooleanVar(value=False)
+        self.mode = tk.StringVar(value='Screens')
+        self._element_paths = None
+        self._atlas_photos = []
         super().__init__(app, host, browser_host, k)
 
     # ------------------------------------------------------------ layout
     def build(self, host):
         ws = self.standard_layout(host, layers=True, bottom_ratio=0.7)
         h = self.view_panel.header
-        ttk.Label(h, text='Sprite frame').pack(side='left', padx=(8, 2))
+        for choice in ('Screens', 'Elements'):
+            ttk.Radiobutton(h, text=choice, value=choice, variable=self.mode,
+                            command=self._mode_changed).pack(side='left', padx=3)
+        ttk.Label(h, text='Atlas cell').pack(side='left', padx=(8, 2))
         self.frame_spin = ttk.Spinbox(h, from_=0, to=0, width=5,
                                       textvariable=self.sprite_frame, command=self._frame_changed)
         self.frame_spin.pack(side='left', padx=2)
@@ -78,6 +84,13 @@ class ScreenWorkspace(SuiteWorkspace):
         self.res_tree.tag_configure('Inferred', foreground=T.WARN)
         self.res_tree.bind('<Double-1>', self._open_resource)
         self.res_tree.bind('<<TreeviewSelect>>', self._select_resource)
+        atlas = self.bottom.add('atlas', 'Element cell atlas')
+        self.atlas_canvas = tk.Canvas(atlas, bg=T.CANVAS_BG, highlightthickness=0)
+        self.atlas_scroll = ttk.Scrollbar(atlas, orient='vertical', command=self.atlas_canvas.yview)
+        self.atlas_canvas.configure(yscrollcommand=self.atlas_scroll.set)
+        self.atlas_scroll.pack(side='right', fill='y')
+        self.atlas_canvas.pack(side='left', fill='both', expand=True)
+        self.atlas_canvas.bind('<Button-1>', self._atlas_click)
         self.problems = self.problems_page()
         return ws
 
@@ -91,20 +104,50 @@ class ScreenWorkspace(SuiteWorkspace):
     def on_root(self):
         self._archives = scenes.screen_archives(self.app.root_data) if self.app.root_data else []
         self._nested_catalog = None
+        self._element_paths = None
         self.populate()
+
+    def _mode_changed(self):
+        self.archive = None
+        self.layers, self.images, self.cfg, self.order, self.sel = [], {}, {}, [], None
+        self._clear_sprite()
+        self.populate()
+        if hasattr(self, 'view'):
+            self.view.redraw()
+
+    def _element_archives(self):
+        if self._element_paths is not None:
+            return self._element_paths
+        paths = list(getattr(self, '_archives', ()))
+        try:
+            if self._nested_catalog is None and self.app.root_data:
+                self._nested_catalog = scenes.nested_screen_archives(self.app.root_data, paths)
+            paths += self._nested_catalog or []
+            self._element_paths = []
+            for p in paths:
+                try:
+                    arc = self.app.root_data.archive(p)
+                    if any(e.ext == '.dtx' for e in arc.entries):
+                        self._element_paths.append(p)
+                except (ValueError, KeyError, OSError):
+                    continue
+        except (ValueError, KeyError, OSError):
+            self._element_paths = paths
+        return self._element_paths
 
     def populate(self):
         t = self.tree
         t.delete(*t.get_children())
         flt = self.filter_var.get().strip().lower()
         groups = {}
-        paths = list(getattr(self, '_archives', []))
-        if flt:
-            # Search nested archives by their *actual* member paths.  They are
-            # not separate files on disk, so rglob cannot discover them.
-            if self._nested_catalog is None and self.app.root_data:
-                self._nested_catalog = scenes.nested_screen_archives(self.app.root_data, paths)
-            paths += self._nested_catalog or []
+        if self.mode.get() == 'Elements':
+            paths = self._element_archives()
+        else:
+            paths = list(getattr(self, '_archives', ()))
+            if flt:
+                if self._nested_catalog is None and self.app.root_data:
+                    self._nested_catalog = scenes.nested_screen_archives(self.app.root_data, paths)
+                paths += self._nested_catalog or []
         for path in paths:
             if flt and flt not in path.lower():
                 continue
@@ -115,8 +158,8 @@ class ScreenWorkspace(SuiteWorkspace):
             if flt and '|' in path:
                 label = path.split('|')[0].split('/')[-1] + ' › ' + label
             iid = t.insert(groups[folder], 'end', path, text=label, values=('',))
-            if not flt:
-                t.insert(iid, 'end', path + '|…', text='…')   # lazy children
+            if self.mode.get() == 'Screens' and not flt:
+                t.insert(iid, 'end', path + '|…', text='…')
 
     def _expand(self, _e=None):
         iid = self.tree.focus()
@@ -149,6 +192,8 @@ class ScreenWorkspace(SuiteWorkspace):
             self.layers = scenes.find_layers(self.app.root_data, path)
         except (ValueError, KeyError, OSError) as exc:
             probs.append((str(exc), 'bad'))
+        if self.mode.get() == 'Elements':
+            self.layers = []
         for l in self.layers:
             img, p = scenes.render_layer(self.app.root_data, l)
             self.images[l.name] = img
@@ -159,7 +204,7 @@ class ScreenWorkspace(SuiteWorkspace):
         # Nested UI-object archives normally have DSTX + ALMT but no ALTM.
         # Automatically preview the first drawable sprite instead of leaving
         # the viewport blank when the archive loads successfully.
-        if not self.layers:
+        if self.mode.get() == 'Elements':
             try:
                 arc = self.app.root_data.archive(path)
                 first = next((i for i, e in enumerate(arc.entries)
@@ -193,7 +238,7 @@ class ScreenWorkspace(SuiteWorkspace):
                 kind = scenes.dtx_kind(e.payload())
                 label = f'DSTX {kind}'
                 if 'sprite pieces' in kind:
-                    label += ' (frame preview available)'
+                    label += ' (atlas cells; select in Elements)'
                 if 'tile panels (read-only' in kind:
                     grade = 'Direct'  # 4-byte descriptors verified by ARM9 loader; positioning still unknown
                 elif 'dedicated' in kind or 'malformed' in kind:
@@ -235,6 +280,9 @@ class ScreenWorkspace(SuiteWorkspace):
         self.sprite_image = None
         self.sprite_error = None
         self.sprite_frame.set('0')
+        self._atlas_photos = []
+        if hasattr(self, 'atlas_canvas'):
+            self.atlas_canvas.delete('all')
         if hasattr(self, 'frame_spin'):
             self.frame_spin.configure(to=0, state='disabled')
 
@@ -267,6 +315,8 @@ class ScreenWorkspace(SuiteWorkspace):
                                       state='normal' if self.sprite_info.frame_count else 'disabled')
             if self.sprite_info.frame_count:
                 self.sprite_image = scenes.render_screen_sprite(self.sprite_dtx, self.sprite_source, 0)
+            if hasattr(self, 'atlas_canvas'):
+                self._draw_atlas()
         except (ValueError, KeyError, IndexError, OSError) as exc:
             self.sprite_error = str(exc)
 
@@ -280,8 +330,56 @@ class ScreenWorkspace(SuiteWorkspace):
         except (ValueError, IndexError) as exc:
             self.sprite_error = str(exc)
             self.sprite_image = None
+        self._atlas_highlight()
         self.refresh_inspector()
         self.view.redraw()
+
+    def _draw_atlas(self):
+        c = self.atlas_canvas
+        c.delete('all')
+        self._atlas_photos = []
+        if self.sprite_dtx is None or self.sprite_source is None:
+            return
+        # DSTX stores cell frames. This atlas is not an ALMT motion timeline.
+        size, cols = 86, 9
+        for i in range(min(self.sprite_info.frame_count, 256)):
+            try:
+                frame, left, top = scenes.render_screen_sprite(self.sprite_dtx, self.sprite_source, i)
+                frame.thumbnail((66, 62))
+                photo = ImageTk.PhotoImage(frame, master=c)
+                self._atlas_photos.append(photo)
+                x, y = (i % cols) * size, (i // cols) * size
+                c.create_rectangle(x+2, y+2, x+size-3, y+size-3, outline=T.LINE, tags=('cell',))
+                c.create_image(x+size//2, y+32, image=photo, tags=('cell',))
+                c.create_text(x+size//2, y+73, text=str(i), fill=T.FG, tags=('cell',))
+            except (ValueError, IndexError, OSError):
+                continue
+        c.configure(scrollregion=(0, 0, cols*size, ((min(self.sprite_info.frame_count,256)+cols-1)//cols)*size))
+        self._atlas_highlight()
+
+    def _atlas_highlight(self):
+        if not hasattr(self, 'atlas_canvas'):
+            return
+        c = self.atlas_canvas
+        c.delete('current_cell')
+        try:
+            i = int(self.sprite_frame.get())
+        except ValueError:
+            return
+        size, cols = 86, 9
+        x, y = (i%cols)*size, (i//cols)*size
+        c.create_rectangle(x+1,y+1,x+size-2,y+size-2, outline=T.ACCENT, width=2, tags='current_cell')
+
+    def _atlas_click(self, event):
+        if self.sprite_info is None:
+            return
+        size, cols = 86, 9
+        x = self.atlas_canvas.canvasx(event.x)
+        y = self.atlas_canvas.canvasy(event.y)
+        index = int(y//size)*cols + int(x//size)
+        if 0 <= index < self.sprite_info.frame_count:
+            self.sprite_frame.set(str(index))
+            self._frame_changed()
 
     # ------------------------------------------------------------ view
     def _rows(self):
@@ -295,7 +393,7 @@ class ScreenWorkspace(SuiteWorkspace):
         rows.append({'id': 'o', 'name': 'Not drawn yet', 'kind': 'group'})
         rows.append({'id': 'o:dtx', 'parent': 'o', 'name': 'DSTX 0x05/0x06 layouts', 'kind': 'overlay',
                      'available': False, 'status': 'descriptors parsed; rendering pending'})
-        rows.append({'id': 'o:spr', 'parent': 'o', 'name': 'ALMT animation playback', 'kind': 'overlay',
+        rows.append({'id': 'o:spr', 'parent': 'o', 'name': 'ALMT motion (cell selection)', 'kind': 'overlay',
                      'available': False, 'status': 'sprite frames previewable; authored timeline not projected'})
         return rows
 
@@ -347,14 +445,14 @@ class ScreenWorkspace(SuiteWorkspace):
                 continue
             ox, oy = ORIGIN[c['screen']]
             vp.add_image(self._crop(img, c['sx'], c['sy']), ox, oy)
-        if self.sprite_image is not None:
+        if self.sprite_image is not None and self.mode.get() == 'Elements':
             # Sprite-space origin is centered as a resource preview, *not*
             # presented as a traced menu screen position or runtime layer.
             frame_image, left, top = self.sprite_image
             preview = Image.new('RGBA', (SW, SH), (0, 0, 0, 0))
             preview.alpha_composite(frame_image, (SW // 2 + left, SH // 2 + top))
             vp.add_image(preview, *ORIGIN['Top'])
-            vp.text(4, 4, f'PREVIEW: sprite frame {self.sprite_frame.get()}',
+            vp.text(4, 4, f'ELEMENT CELL {self.sprite_frame.get()} (atlas, no motion playback)',
                     anchor='nw', fill=T.ACCENT, font=T.MONO_SMALL)
         for name, (ox, oy) in ORIGIN.items():
             hot = self.sel and self.cfg.get(self.sel, {}).get('screen') == name
