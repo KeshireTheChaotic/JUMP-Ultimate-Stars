@@ -41,6 +41,103 @@ class PreviewFrame:
     scroll: tuple[tuple[int, float, float], ...]
     bg_sprites: tuple[PreviewSpawn, ...]
     notes: tuple[str, ...]
+    parallax: tuple[tuple[int, float, float], ...] = ()
+    palette: tuple[tuple[int, str], ...] = ()
+
+
+def _timeline_token(token: str, *, occupancy: bool):
+    """Parse ID@start-end (occupancy) or ID@tick (strikes), with legacy ID at 0."""
+    import re
+    token = token.strip()
+    pattern = (r'(\d+)(?:@(\d+)(?:-(\d+))?)?' if occupancy
+               else r'(\d+)(?:@(\d+))?')
+    match = re.fullmatch(pattern, token)
+    if match is None:
+        raise ValueError(f'Invalid {"floor interval" if occupancy else "hit event"}: {token!r}')
+    values = tuple(int(v) if v is not None else None for v in match.groups())
+    if occupancy:
+        identity, start, end = values
+        start = 0 if start is None else start
+        if end is not None and end < start:
+            raise ValueError('An occupancy interval cannot end before it starts')
+        return identity, start, end
+    identity, tick = values
+    return identity, (0 if tick is None else tick)
+
+
+def parse_occupancy(text: str):
+    """Comma-delimited floor IDs or intervals: 2, 3@40-100, 1@130."""
+    return tuple(_timeline_token(part, occupancy=True)
+                 for part in text.split(',') if part.strip())
+
+
+def parse_hits(text: str):
+    """Comma-delimited switch hits: 2@20, 2@250, 3 (at tick zero)."""
+    return tuple(sorted((_timeline_token(part, occupancy=False)
+                         for part in text.split(',') if part.strip()), key=lambda hit: hit[1]))
+
+
+def parallax_at(anim, camera_x: float, camera_y: float):
+    """Linear interpolation of traced camera input/output pairs (preview model).
+
+    Runtime clamp/interpolation and screen-origin conventions need ARM9 validation.
+    """
+    fields = anim.fields()
+
+    def axis(value, source, target):
+        a, b = source
+        x, y = target
+        if a == b:
+            return float(x)
+        phase = max(0.0, min(1.0, (value - a) / (b - a)))
+        return float(x + (y - x) * phase)
+
+    return (axis(camera_x, fields['cam_x'], fields['out_x']),
+            axis(camera_y, fields['cam_y'], fields['out_y']))
+
+
+def palette_at(anims, original, tick: int):
+    """Non-destructive RGB555 palette projection from BG type 0/1 scripts.
+
+    Rotation indices and periods use the decoded records. Type-0 interpolation
+    and script-to-bank routing are not GPU-verified, so results remain a preview.
+    """
+    if not original:
+        return tuple()
+    sizes = [len(bank) for bank in original]
+    colors = [value for bank in original for value in bank]
+    for anim in anims:
+        if anim.kind == 1:
+            f = anim.fields()
+            start, count = f['start'], f['count']
+            if count < 2 or start + count > len(colors):
+                continue
+            steps = (max(0, int(tick)) // max(1, f['period'] + 1)) * f['step']
+            offset = steps % count
+            segment = colors[start:start + count]
+            if offset:
+                colors[start:start + count] = (segment[offset:] + segment[:offset] if f['left']
+                                                 else segment[-offset:] + segment[:-offset])
+        elif anim.kind == 0:
+            f = anim.fields()
+            index = f['index']
+            n = f['steps']
+            if index >= len(colors) or n <= 0:
+                continue
+            phase = int(tick) % (2 * n)
+            weight = min(phase, 2 * n - phase)
+            src, dst = colors[index], f['colour']
+            out = 0
+            for shift in (0, 5, 10):
+                a, b = (src >> shift) & 31, (dst >> shift) & 31
+                out |= ((a * (n - weight) + b * weight + n // 2) // n) << shift
+            colors[index] = out | (src & 0x8000)
+    result = []
+    off = 0
+    for size in sizes:
+        result.append(tuple(colors[off:off + size]))
+        off += size
+    return tuple(result)
 
 
 def _path(floor, tick):
@@ -89,7 +186,7 @@ def _path(floor, tick):
     return x, y, 'path cycle'
 
 
-def floor_at(floor, tick, index=0, enabled=True, occupied=False):
+def floor_at(floor, tick, index=0, enabled=True, occupied=False, since=0):
     mode = floor.motion_kind
     x, y = float(floor.x), float(floor.y)
     if not enabled:
@@ -99,19 +196,19 @@ def floor_at(floor, tick, index=0, enabled=True, occupied=False):
         return PreviewFloor(index, x, y, True, mode, note)
     if mode == 3:
         if occupied:
-            x, y, note = _path(floor, tick)
+            x, y, note = _path(floor, max(0, tick - since))
             return PreviewFloor(index, x, y, True, mode, f'pressure-active: {note}')
         return PreviewFloor(index, x, y, True, mode, 'waiting for player occupancy')
     if mode == 2:
         if occupied:
             # Source shows 0.5px/frame down while stood on. The precise
             # maximum depth depends on state/collision and is not projected.
-            return PreviewFloor(index, x, y + tick * 0.5, True, mode,
+            return PreviewFloor(index, x, y + max(0, tick - since) * 0.5, True, mode,
                                 'sink while occupied; maximum depth not simulated')
         return PreviewFloor(index, x, y, True, mode, 'no player occupancy')
     if mode == 4:
         if occupied:
-            elapsed = max(0, tick)
+            elapsed = max(0, tick - since)
             solid = elapsed < 360 or elapsed >= 720
             return PreviewFloor(index, x, y, solid, mode,
                                 'crumble cycle (occupancy held since tick 0)')
