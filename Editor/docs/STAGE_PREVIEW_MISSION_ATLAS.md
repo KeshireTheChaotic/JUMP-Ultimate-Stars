@@ -27,8 +27,8 @@ hitboxes need further traces. Type 5 sprite cell
 loops are projected as labeled cell references.
 
 `Stage tick` and **Project** control the visual preview. The read-only runtime
-dock accepts comma-separated floor IDs and gimmick IDs as *manual scenario
-inputs from tick 0*. No scripted combat is inferred. Item placement uses a
+dock accepts timestamped floor occupancy intervals (`ID@start-end`) and switch hits
+(`ID@tick`), with bare IDs still interpreted as tick-zero inputs. No scripted combat is inferred. Item placement uses a
 reproducible local random seed, not the original RNG/eligibility filter; the
 runtime four-item cap and spawn interval are honored. Gimmick hazard spawns
 show the most recent candidate position; hazard lifetime remains unmodeled.
