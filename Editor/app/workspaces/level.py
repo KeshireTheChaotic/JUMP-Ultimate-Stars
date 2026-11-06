@@ -444,7 +444,10 @@ class LevelWorkspace(SuiteWorkspace):
         self.runtime_log.set_lines(lines)
 
     def _preview_bg_image(self, layer, img):
-        """Approximate horizontal scan-band scroll; does not simulate DS palette cycles."""
+        """Project palette animations by re-rendering DSIG banks, then scroll.
+
+        Both transformations are read-only. Source DSIG/ALTM bytes are untouched.
+        """
         if not self._stage_geo or not self._stage_frame:
             return img
         try:
@@ -452,20 +455,30 @@ class LevelWorkspace(SuiteWorkspace):
             bg = self._stage_geo.layers[idx]
         except (ValueError, IndexError, AttributeError):
             return img
-        if not any(a.kind == 2 for a in bg.anims):
+        palette_anims = [a for a in bg.anims if a.kind in (0, 1)]
+        scroll_anims = [a for a in bg.anims if a.kind == 2]
+        if not (scroll_anims or (self.preview_palette.get() and palette_anims)):
             return img
-        key = (layer.name, self._stage_frame.tick, id(img))
+        key = (layer.name, self._stage_frame.tick, id(img), bool(self.preview_palette.get()))
         if key in self._stage_frame_cache:
             return self._stage_frame_cache[key]
         result = img.copy()
-        for anim in bg.anims:
-            if anim.kind != 2:
-                continue
-            row = max(0, min(img.height, anim.fields()['row'] * 8))
-            if row >= img.height:
+        if self.preview_palette.get() and palette_anims and layer.image_path:
+            try:
+                dsig = tilemap.embedded_dsig(self.app.root_data.read(layer.image_path))
+                if dsig is not None:
+                    dsig.palettes = [list(bank) for bank in
+                                     stagepreview.palette_at(palette_anims, dsig.palettes,
+                                                             self._stage_frame.tick)]
+                    result, _ = tilemap.render(layer.map, dsig)
+            except (ValueError, KeyError, OSError, IndexError) as exc:
+                self.app.status.set(f'Palette projection for {layer.name}: {exc}')
+        for anim in scroll_anims:
+            row = max(0, min(result.height, anim.fields()['row'] * 8))
+            if row >= result.height:
                 continue
             sx, sy = stagepreview._scroll(anim, self._stage_frame.tick)
-            strip = result.crop((0, row, img.width, img.height))
+            strip = result.crop((0, row, result.width, result.height))
             shifted = ImageChops.offset(strip, int(round(sx)), int(round(sy)))
             result.paste(shifted, (0, row))
         if len(self._stage_frame_cache) > 16:
