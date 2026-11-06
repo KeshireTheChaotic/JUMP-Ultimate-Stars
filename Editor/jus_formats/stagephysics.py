@@ -416,6 +416,37 @@ class Conveyor:
 
 
 @dataclass(frozen=True)
+class CollisionBox:
+    """Overlay-6 wall/damage consumer: +0/+4 position, +8/+C extents (24.8).
+
+    +0x10/+0x12 are neighbor links, +0x14 runtime type and +0x16 wall ID.
+    Remaining flags must stay raw until all consumers are classified.
+    """
+    index: int
+    x: float
+    y: float
+    width: float
+    height: float
+    type_id: int
+    wall_index: int
+    raw: bytes
+
+    @property
+    def bounds(self):
+        x2, y2 = self.x + self.width, self.y + self.height
+        return min(self.x, x2), min(self.y, y2), max(self.x, x2), max(self.y, y2)
+
+
+@dataclass(frozen=True)
+class WallSpec:
+    """Wall record: +0 collision ID, +2 initial HP (BattleMapInitWall)."""
+    index: int
+    collision_index: int
+    health: int
+    raw: bytes
+
+
+@dataclass(frozen=True)
 class StageGeometry:
     raw: bytes
     offsets: tuple[int, ...]
@@ -426,6 +457,18 @@ class StageGeometry:
     aux_data: bytes
     layers: tuple[BgLayer, ...] = ()
     conveyors: tuple[Conveyor, ...] = ()
+
+    @property
+    def collision_boxes(self) -> tuple[CollisionBox, ...]:
+        return tuple(CollisionBox(i, s32(raw, 0)/256, s32(raw, 4)/256,
+                                  s32(raw, 8)/256, s32(raw, 12)/256,
+                                  raw[0x14], s16(raw, 0x16), raw)
+                     for i, raw in enumerate(self.collision_records))
+
+    @property
+    def walls(self) -> tuple[WallSpec, ...]:
+        return tuple(WallSpec(i, s16(raw, 0), s16(raw, 2), raw)
+                     for i, raw in enumerate(self.wall_records))
 
     @property
     def start_points(self) -> tuple[tuple[int, int], ...]:
