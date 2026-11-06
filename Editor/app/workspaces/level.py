@@ -32,13 +32,14 @@ from ..widgets.layers import LayerList
 from ..widgets.tabs import TextLog
 from .base import SuiteWorkspace
 from .missions import DOC as MISSION_DOC, MissionPanel
+from .level_markers import LevelMarkersMixin
 
 OVERLAYS = (('cam', 'Camera (unverified)', '.cam'), ('mob', 'Stage physics & spawns (.mob)', '.mob'),
             ('bin', 'Stage BG animation/collision (.bin)', '.bin'), ('collision', 'Collision descriptors', None),
             ('gimmick', 'Gimmick assets', None))
 
 
-class LevelWorkspace(SuiteWorkspace):
+class LevelWorkspace(LevelMarkersMixin, SuiteWorkspace):
     key = 'level'
     title = 'Level'
     browser_title = 'J-Space / galaxies / worlds / missions'
@@ -406,6 +407,7 @@ class LevelWorkspace(SuiteWorkspace):
         self.problems.set_lines(self._probs or [('No problems.', 'good')])
         self._fill_raw()
         self._fill_tiles()
+        self._refresh_markers()
         self._preview_changed(redraw=False)
         self.refresh_inspector()
         if frame:
@@ -600,8 +602,11 @@ class LevelWorkspace(SuiteWorkspace):
         return result
 
     def _draw(self, vp):
+        if self.nav_kind != 'mission':
+            self._draw_navigation(vp)
+            return
         if not self.stage:
-            vp.hud.configure(text='Choose a J-Galaxy mission in the left sidebar.')
+            vp.hud.configure(text='Select a mission with a mapped battle stage.')
             return
         for l in self.layers:
             img = self.images.get(l.name)
@@ -647,8 +652,74 @@ class LevelWorkspace(SuiteWorkspace):
             for event in f.spawns:
                 colour = '#9FEAB0' if event.kind == 'item' else '#FF8B92'
                 vp.rect(event.x-4,event.y-4,event.x+4,event.y+4,outline=colour,width=2)
+        self._draw_marker_anchors(vp)
         vp.hud.configure(text=f'{self.stage.stem} · mission {self.missions.node_id} · stage tick '
                               f'{f.tick if f else 0} · physics read-only')
+
+    # ---------------------------------------------------- J-Space navigation
+    def _draw_navigation(self, vp):
+        """Read-only hierarchy overview while selecting galaxy/world records.
+
+        No inferred sprite IDs are rendered as though verified.
+        """
+        c = self.missions.catalog
+        if c is None:
+            vp.hud.configure(text='Open an extracted game data root.')
+            return
+        if self.nav_kind == 'world' and self.nav_id is not None:
+            heading = c.graph.planet_name(self.nav_id) or f'World {self.nav_id}'
+            info = f'World #{self.nav_id} · select a mission below this world'
+        elif self.nav_kind == 'galaxy':
+            if self.nav_id is None:
+                heading = 'Worlds / unresolved galaxy parent'
+                info = 'Galaxy → world link still requires a binary trace'
+            else:
+                heading = c.graph.galaxy_name(self.nav_id) or f'Galaxy {self.nav_id}'
+                info = f'J-Space galaxy #{self.nav_id}'
+        else:
+            heading = 'J-SPACE'
+            info = f'{c.graph.galaxy_count} galaxies · {c.graph.planet_count} worlds'
+        vp.rect(0, 0, 410, 230, outline=T.LINE, width=2)
+        vp.text(18, 42, heading, fill=T.ACCENT, anchor='w')
+        vp.text(18, 85, info, fill=T.FG, anchor='w')
+        vp.text(18, 123, 'Navigation sprite ID mapping unverified', fill=T.MUTED, anchor='w')
+        vp.text(18, 160, 'Choose a mission to edit its level map.', fill=T.FG, anchor='w')
+        vp.hud.configure(text=heading + ' · J-Space navigator')
+
+    def _navigation_inspector(self, ins):
+        c = self.missions.catalog
+        if c is None:
+            ins.section('J-Space')
+            ins.text(self.missions.load_error or 'Open a data root containing jgalaxy.aar.')
+            return
+        if self.nav_kind == 'root':
+            ins.section('J-Space')
+            ins.value('Galaxies', str(c.graph.galaxy_count))
+            ins.value('Worlds', str(c.graph.planet_count))
+            ins.value('Missions / battles', str(c.graph.node_count))
+        elif self.nav_kind == 'galaxy':
+            ins.section('Galaxy')
+            if self.nav_id is None:
+                ins.value('World assignment', 'Unresolved in binary trace')
+            else:
+                ins.value('Galaxy ID', str(self.nav_id))
+                ins.value('Name', c.graph.galaxy_name(self.nav_id))
+            ins.text('Galaxy → world parent fields and map sprite IDs are not '
+                     'classified; worlds are never assigned by guesswork.')
+        elif self.nav_kind == 'world':
+            pid = self.nav_id
+            ins.section('World', note=f'planet record #{pid}')
+            ins.value('Name', c.graph.planet_name(pid))
+            location = c.graph.planet_location_id(pid)
+            ins.value('Location', f'{location} · ' +
+                      (c.graph.location_name(location) if location < c.graph.location_count else '?'))
+            nodes = [i for i in range(c.graph.node_count) if c.graph.get(i).planet_id == pid]
+            ins.value('Missions / battles', str(len(nodes)))
+            ins.text('Select a mission below this world to edit its map, details and rewards.')
+            if nodes:
+                ins.buttons(('Open first mission', lambda i=nodes[0]: self.select_mission(i)))
+        ins.evidence('World → mission', 'Direct', 'node +0x0A stores the planet ID')
+        ins.evidence('Galaxy → world', 'Unknown', 'parent relation not yet traced')
 
     def _tile_at(self, wx, wy):
         l = self.sel_layer
@@ -846,7 +917,11 @@ class LevelWorkspace(SuiteWorkspace):
     def refresh_inspector(self):
         ins = self.inspector
         ins.clear()
+        if self.nav_kind != 'mission':
+            self._navigation_inspector(ins)
+            return
         self._mission_inspector(ins)
+        ins.buttons(('Mission details / rewards', self.show_mission_inspector))
         if not self.stage:
             ins.section('Level editor')
             ins.text('Select a J-Galaxy mission to load its assigned stage. ALTM tiles and mission rewards '
