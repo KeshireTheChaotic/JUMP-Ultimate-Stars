@@ -204,7 +204,7 @@ class LevelWorkspace(SuiteWorkspace):
                         continue
                     label = self.missions.node_label(i)
                     stem = self.missions.stage_of(i) or ''
-                    if flt and not any(flt in x.casefold() for x in (label, planet.casefold(), stem)):
+                    if flt and not any(flt in x.casefold() for x in (label, label_planet, stem)):
                         continue
                     rows.append((i, label, stem, n))
                 if not rows:
