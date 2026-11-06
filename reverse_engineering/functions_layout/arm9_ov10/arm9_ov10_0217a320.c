@@ -1,5 +1,5 @@
 
-void FUN_0217a320(undefined4 param_1)
+void FUN_0217a320(uint param_1)
 
 {
   bool bVar1;
@@ -21,6 +21,8 @@ void FUN_0217a320(undefined4 param_1)
   
   local_38 = 3;
   bVar1 = false;
+  if (4 < param_1) goto switchD_0217a33a_default;
+                    /* WARNING: Switch is manually overridden */
   switch(param_1) {
   case 0:
     iVar9 = FUN_02178448();
@@ -253,6 +255,7 @@ LAB_0217a442:
     iVar9 = FUN_02178448();
     *(undefined1 *)(iVar9 + 0x1a1) = 0;
   }
+switchD_0217a33a_default:
   if ((bVar1) && (iVar9 = FUN_02178448(), *(char *)(iVar9 + 0x15) != '\x03')) {
     iVar9 = FUN_02178448();
     FUN_0217fc10(*(undefined4 *)(iVar9 + 0xe4));

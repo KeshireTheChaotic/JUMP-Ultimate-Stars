@@ -191,7 +191,7 @@ JArenaTopMenu::JATopMenu_Add(int param_1,undefined4 param_2,undefined4 param_3,u
   *(undefined1 *)(*(int *)(iVar2 + 4) + 0xab) = 0;
   func_0x021b77a8(*(undefined4 *)(iVar2 + 4),0x20);
   (**(code **)(**(int **)(iVar2 + 4) + 0x24))(*(int **)(iVar2 + 4),puVar1);
-  uVar4 = FUN_0214e81c(0,0x215db58,&DAT_02093c8c);
+  uVar4 = FUN_0214e81c(0,&DAT_0215db58,&DAT_02093c8c);
   FUN_02020e98(iVar2,uVar4);
   func_0x021b65e8(*(undefined4 *)(iVar2 + 4),4,FUN_0214eb7c);
   func_0x021b6760(*(undefined4 *)(iVar2 + 4),4,FUN_0214eb94);
@@ -246,7 +246,7 @@ JArenaTopMenu::JATopMenu_Add(int param_1,undefined4 param_2,undefined4 param_3,u
     FUN_02023c80(*(undefined4 *)(iVar2 + 4),uStack_68,0x494c,uStack_64);
     FUN_02023c70(*(undefined4 *)(iVar2 + 4),2);
     func_0x021b4034(*(undefined4 *)(iVar2 + 4),2);
-    uVar4 = FUN_0214e81c(0,FUN_0215db50,&DAT_02093c8c);
+    uVar4 = FUN_0214e81c(0,&DAT_0215db50,&DAT_02093c8c);
     FUN_02020e98(iVar2,uVar4);
     func_0x021b65e8(*(undefined4 *)(iVar2 + 4),1,FUN_0214ed04);
     func_0x021b65e8(*(undefined4 *)(iVar2 + 4),4,FUN_0214eab0);

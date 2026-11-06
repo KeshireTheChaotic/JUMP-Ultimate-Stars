@@ -1,5 +1,5 @@
 
-void FUN_02175db8(undefined4 param_1,int param_2)
+void FUN_02175db8(undefined4 param_1,uint param_2)
 
 {
   int iVar1;
@@ -16,19 +16,21 @@ void FUN_02175db8(undefined4 param_1,int param_2)
   local_20 = 0;
   iVar1 = FUN_0217ca60();
   if (iVar1 == 0) {
-    switch(param_2) {
-    case 0:
-    case 1:
-      unaff_r4 = 0;
-      break;
-    case 2:
-    case 3:
-      unaff_r4 = 6;
-      local_24 = 0xffffe250;
-      break;
-    case 4:
-      unaff_r4 = 9;
-      local_24 = 0xffffe24f;
+    if (param_2 < 5) {
+                    /* WARNING: Switch is manually overridden */
+      switch(param_2) {
+      default:
+        unaff_r4 = 0;
+        break;
+      case 2:
+      case 3:
+        unaff_r4 = 6;
+        local_24 = 0xffffe250;
+        break;
+      case 4:
+        unaff_r4 = 9;
+        local_24 = 0xffffe24f;
+      }
     }
     if (unaff_r4 == 0) {
       pbVar2 = (byte *)FUN_0218a804(param_1);

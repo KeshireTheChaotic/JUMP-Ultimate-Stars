@@ -5,7 +5,7 @@
 undefined4 * jus_TagFFL4::jus_TagFFL4(undefined4 *param_1)
 
 {
-  jus_Class_02096958::jus_Class_02096958();
+  jus_TagFFL4_Part_02096958::jus_TagFFL4_Part_02096958();
   *param_1 = &vftable;
   return param_1;
 }

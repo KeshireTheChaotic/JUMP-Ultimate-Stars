@@ -21,34 +21,35 @@ void FUN_021640a4(void)
       return;
     }
     FUN_02164cb8(3);
-    switch(*(undefined4 *)(DAT_0216e828 + 0x44)) {
-    case 0:
-    case 4:
-      iVar1 = FUN_0216489c();
-      if (iVar1 == 0) {
-        FUN_02164170();
-      }
-      break;
-    case 1:
-    case 5:
-      iVar1 = FUN_021647b0();
-      if (iVar1 == 0) {
-        FUN_02164170();
-        return;
-      }
-      break;
-    case 2:
-      iVar1 = FUN_021648c4();
-      if (iVar1 == 0) {
-        FUN_02164170();
-        return;
-      }
-      break;
-    case 3:
-      iVar1 = FUN_021647d8();
-      if (iVar1 == 0) {
-        FUN_02164170();
-        return;
+    if (*(uint *)(DAT_0216e828 + 0x44) < 6) {
+                    /* WARNING: Switch is manually overridden */
+      switch(*(uint *)(DAT_0216e828 + 0x44)) {
+      case 0:
+        iVar1 = FUN_0216489c();
+        if (iVar1 == 0) {
+          FUN_02164170();
+        }
+        break;
+      case 1:
+        iVar1 = FUN_021647b0();
+        if (iVar1 == 0) {
+          FUN_02164170();
+          return;
+        }
+        break;
+      case 2:
+        iVar1 = FUN_021648c4();
+        if (iVar1 == 0) {
+          FUN_02164170();
+          return;
+        }
+        break;
+      case 3:
+        iVar1 = FUN_021647d8();
+        if (iVar1 == 0) {
+          FUN_02164170();
+          return;
+        }
       }
     }
   }

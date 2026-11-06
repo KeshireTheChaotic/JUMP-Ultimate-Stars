@@ -70,7 +70,7 @@ undefined4 * ResultRank::ResultRank_Create(int param_1)
   undefined4 local_24;
   int aiStack_20 [3];
   
-  puVar4 = (undefined4 *)thunk_FUN_0201a228(0x50,s_ResultRank_cpp_0216dcec,FUN_0216dc30,0x88);
+  puVar4 = (undefined4 *)thunk_FUN_0201a228(0x50,s_ResultRank_cpp_0216dcec,&DAT_0216dc30,0x88);
   FUN_020517fc(puVar4,0,0x50);
   *(char *)(puVar4 + 0x12) = (char)param_1;
   FUN_02041f7c(DAT_020a0f64,1);
@@ -229,7 +229,7 @@ undefined4 * ResultRank::ResultRank_Create(int param_1)
   }
   else {
     iVar5 = FUN_0203b424(2);
-    uVar7 = FUN_0216909c(FUN_0216dd38,*(undefined4 *)(iVar5 + 0x88));
+    uVar7 = FUN_0216909c(&DAT_0216dd38,*(undefined4 *)(iVar5 + 0x88));
     puVar4[2] = uVar7;
     if (*(char *)(puVar4 + 0x12) == '\x01') {
       FUN_0215853c(puVar4[2],0);
@@ -245,7 +245,7 @@ undefined4 * ResultRank::ResultRank_Create(int param_1)
   local_cc = 0;
   FUN_0214dc68(auStack_68,&local_c4,&local_c8,&local_cc);
   FUN_0214f714(&local_c0,puVar4[2],s_Position_0216dd2c);
-  iVar5 = thunk_FUN_0201a228(0x4c,FUN_0216c958,s_Create_0216dc20,0x2ef);
+  iVar5 = thunk_FUN_0201a228(0x4c,&DAT_0216c958,s_Create_0216dc20,0x2ef);
   if (iVar5 != 0) {
     jus_TagIPMV::jus_TagIPMV(iVar5,0,local_c0,local_bc,0x494c,auStack_68,8,0,1);
   }
@@ -280,7 +280,8 @@ undefined4 * ResultRank::ResultRank_Create(int param_1)
           iVar10 = (*(code *)puVar4[0x13])(uVar16);
           if (iVar10 == 0) {
             iVar10 = FUN_0203b3f4();
-            FUN_02169150(0x810005,0x810000,*(undefined4 *)(iVar10 + 0x88),uVar17,0x216dc80,0xa9);
+            FUN_02169150(0x810005,0x810000,*(undefined4 *)(iVar10 + 0x88),uVar17,&DAT_0216dc80,0xa9)
+            ;
           }
           iVar10 = FUN_02087724();
           if ((iVar10 != 2) && (uVar16 == DAT_020afe98)) {
@@ -403,7 +404,7 @@ undefined4 * ResultRank::ResultRank_Create(int param_1)
         iVar9 = iVar9 + 1;
       } while (iVar9 < 4);
       iVar5 = FUN_0203b3f4();
-      FUN_02169150(0x810004,0x810000,*(undefined4 *)(iVar5 + 0x88),puVar4[5],0x216dc8c,0xa3);
+      FUN_02169150(0x810004,0x810000,*(undefined4 *)(iVar5 + 0x88),puVar4[5],&DAT_0216dc8c,0xa3);
       return puVar4;
     }
     uVar18 = uVar16;

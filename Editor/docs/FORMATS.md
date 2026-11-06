@@ -135,9 +135,11 @@ u16 map_h, u32 0`.
 ## Stage data (`stage/stage.aar`)
 
 Per stage stem `bg_xx`: `bg_xx.aar` (ALTM layers + tiles), optional `bg_xx_floor.aar`
-and `bg_xx_gimmick.aar`, and `bg_xx.bin` / `.cam` (32 bytes) / `.mob`. The `.bin`,
-`.cam`, `.mob` formats, collision and gimmicks are **not decoded**; the Level editor
-shows them read-only as raw bytes and never draws guessed geometry.
+and `bg_xx_gimmick.aar`, and `bg_xx.bin` / `.cam` (32 bytes) / `.mob`. `.bin`
+(BG records, colliders, AI grid) and `.mob` (physics, spawns, gimmick objects) are
+decoded in `jus_formats.stagephysics`; collider types are in
+`docs/STAGE_COLLIDER_TYPES_TRACE.md` and the AI navigation in `docs/BATTLE_AI_TRACE.md`.
+The Level workspace draws and edits them. `.cam` is **not decoded**.
 
 ## GenerateID effect spawns (`jus_package.spawns`)
 
@@ -329,7 +331,7 @@ Open items: ALMT field `EffectFlags`
 (`CommonEffect.cpp` property, values 0/2/3/0x10/0xB…), full ALAR2 flag
 bit-1 split lifecycle and the attribute bit-24 vs bit-25 distinction,
 DSIG v2 `b7`, ALOD property
-descriptors, ALTM screen/priority/scroll assignment, DSTX flags 0x05/0x06 (read-only tile-panel descriptors parsed; opaque auxiliary layout and drawing pending), stage `.bin`/`.cam`/`.mob`, the exact battle-state
+descriptors, ALTM screen/priority/scroll assignment, DSTX flags 0x05/0x06 (read-only tile-panel descriptors parsed; opaque auxiliary layout and drawing pending), stage `.cam`, the exact battle-state
 fields behind each branch condition, `chara_action` sub-code semantics, and in-game draw
 order of overlapping effect pieces (the editor draws atlas pieces last-on-top and OBJ
 pieces first-on-top, matching OAM priority). The DS draw path itself was not confirmed

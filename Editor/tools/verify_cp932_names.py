@@ -17,7 +17,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from jus_formats.progression import (GALAXY_SIZE, LOCATION_SIZE, PLANET_SIZE,
-                                     RECORD_SIZE, NAMES_SIZE)
+                                     NAMES_SIZE)
 from jus_package.progression import ProgressionCatalog
 from jus_package.project import DataRoot
 

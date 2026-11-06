@@ -1,9 +1,9 @@
 
-/* JUS-CLASS jus_Class_02096958::jus_Class_02096958 [class-default] stores vtable 02096958 into
-   *this (constructor) */
+/* JUS-CLASS jus_TagFFL4_Part_02096958::jus_TagFFL4_Part_02096958 [class-owned] stores vtable
+   02096958 into *this (constructor) */
 
 undefined4 *
-jus_Class_02096958::jus_Class_02096958
+jus_TagFFL4_Part_02096958::jus_TagFFL4_Part_02096958
           (undefined4 *param_1,int *param_2,undefined4 param_3,undefined4 param_4)
 
 {

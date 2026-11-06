@@ -42,7 +42,7 @@ undefined4 JQuizMainSinglePlay::JQuizMainSinglePlay_Add(void)
   uVar3 = FUN_0214e880(s_jquiz_quiz00_b_atm_02161338,s_jquiz_quiz00_b_dig_0216134c,
                        *(undefined4 *)(iVar2 + 0x88));
   puVar1[6] = uVar3;
-  uVar3 = FUN_020101f4(FUN_02161360,0);
+  uVar3 = FUN_020101f4(&DAT_02161360,0);
   puVar1[9] = uVar3;
   uVar3 = FUN_020101f4(s_jquiz_quiz_obj_a_3d_aar_02161374,0);
   puVar1[10] = uVar3;

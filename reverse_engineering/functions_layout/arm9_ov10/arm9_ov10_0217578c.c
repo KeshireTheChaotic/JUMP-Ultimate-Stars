@@ -1,24 +1,23 @@
 
-undefined4 FUN_0217578c(undefined4 *param_1,undefined4 *param_2)
+uint FUN_0217578c(undefined4 *param_1,undefined4 *param_2)
 
 {
   if (param_1 != (undefined4 *)0x0) {
     *param_1 = DAT_021a73e8;
   }
-  if (param_2 != (undefined4 *)0x0) {
+  if (param_2 == (undefined4 *)0x0) {
+    return DAT_021a73e4;
+  }
+  if (DAT_021a73e4 < 0x12) {
+                    /* WARNING: Switch is manually overridden */
     switch(DAT_021a73e4) {
-    default:
-      *param_2 = 0;
-      break;
+    case 0:
+      goto switchD_021757ac_caseD_0;
     case 1:
     case 9:
       *param_2 = 7;
       break;
-    case 2:
-    case 3:
-    case 4:
-    case 5:
-    case 8:
+    default:
       *param_2 = 6;
       break;
     case 6:
@@ -37,12 +36,15 @@ undefined4 FUN_0217578c(undefined4 *param_1,undefined4 *param_2)
       *param_2 = 5;
       break;
     case 0xf:
-    case 0x11:
       *param_2 = 6;
       break;
     case 0x10:
       *param_2 = 2;
     }
+  }
+  else {
+switchD_021757ac_caseD_0:
+    *param_2 = 0;
   }
   return DAT_021a73e4;
 }

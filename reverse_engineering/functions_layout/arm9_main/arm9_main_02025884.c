@@ -1,8 +1,8 @@
 
-/* JUS-CLASS jus_Class_020945fc::vfunc_04 [class-virtual] slot 4 of vtable 020945fc (own slot, not
-   inherited) */
+/* JUS-CLASS CommonWindow_Part_020945fc::vfunc_04 [class-virtual] slot 4 of vtable 020945fc (own
+   slot, not inherited) */
 
-int jus_Class_020945fc::vfunc_04(int param_1,int *param_2)
+int CommonWindow_Part_020945fc::vfunc_04(int param_1,int *param_2)
 
 {
   undefined4 *puVar1;

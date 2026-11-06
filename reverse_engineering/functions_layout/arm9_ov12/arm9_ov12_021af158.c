@@ -1,8 +1,11 @@
 
-/* JUS-CLASS jus_Class_021d08d8::jus_Class_021d08d8 [class-default] stores vtable 021d08d8 into
-   *this (constructor) */
+/* JUS-CLASS
+   ALDrawLinkImp_021d2e58_Derived_021d0bcc_Part_021d08d8::ALDrawLinkImp_021d2e58_Derived_021d0bcc_Part_021d08d8
+   [class-owned] stores vtable 021d08d8 into *this (constructor) */
 
-undefined4 * jus_Class_021d08d8::jus_Class_021d08d8(undefined4 *param_1)
+undefined4 *
+ALDrawLinkImp_021d2e58_Derived_021d0bcc_Part_021d08d8::
+ALDrawLinkImp_021d2e58_Derived_021d0bcc_Part_021d08d8(undefined4 *param_1)
 
 {
   jus_Class_020954a0::jus_Class_020954a0();

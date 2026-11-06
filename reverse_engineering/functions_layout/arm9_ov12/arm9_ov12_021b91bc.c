@@ -1,9 +1,9 @@
 
-/* JUS-CLASS jus_Class_021d2d04::jus_Class_021d2d04 [class-default] stores vtable 021d2d04 into
-   *this (constructor) */
+/* JUS-CLASS ALWidgetBase_021d2d74_Part_021d2d04::ALWidgetBase_021d2d74_Part_021d2d04 [class-owned]
+   stores vtable 021d2d04 into *this (constructor) */
 
 undefined4 *
-jus_Class_021d2d04::jus_Class_021d2d04
+ALWidgetBase_021d2d74_Part_021d2d04::ALWidgetBase_021d2d74_Part_021d2d04
           (undefined4 *param_1,int param_2,undefined4 param_3,undefined4 param_4)
 
 {

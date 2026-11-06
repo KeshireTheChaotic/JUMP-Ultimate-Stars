@@ -89,7 +89,7 @@ undefined4 CommuMenuCmnLeaderSel::CommuMenuCmnLeaderSel_Add(int param_1)
     (**(code **)(*piVar4 + 0x14))();
   }
   piVar8 = (int *)piVar4[6];
-  iVar2 = thunk_FUN_0201a228(0xbc,FUN_021699c4,&DAT_02169e8c,0x212);
+  iVar2 = thunk_FUN_0201a228(0xbc,&DAT_021699c4,&DAT_02169e8c,0x212);
   piVar4 = (int *)0x0;
   if (iVar2 != 0) {
     piVar4 = (int *)func_0x021af358(iVar2,0x21575bd,0);

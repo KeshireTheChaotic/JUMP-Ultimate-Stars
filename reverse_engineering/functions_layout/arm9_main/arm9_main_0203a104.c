@@ -13,7 +13,7 @@ int * jus_TagFFL4::jus_TagFFL4(int *param_1,int param_2,undefined4 param_3,int *
   undefined4 local_20;
   undefined4 uStack_1c;
   
-  jus_Class_02096958::jus_Class_02096958();
+  jus_TagFFL4_Part_02096958::jus_TagFFL4_Part_02096958();
   iVar4 = 0;
   *param_1 = (int)&vftable;
   piVar1 = (int *)param_4[5];

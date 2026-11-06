@@ -1,8 +1,8 @@
 
-/* JUS-CLASS jus_Class_020945fc::vfunc_05 [class-virtual] slot 5 of vtable 020945fc (own slot, not
-   inherited) */
+/* JUS-CLASS CommonWindow_Part_020945fc::vfunc_05 [class-virtual] slot 5 of vtable 020945fc (own
+   slot, not inherited) */
 
-void jus_Class_020945fc::vfunc_05(int param_1,uint param_2)
+void CommonWindow_Part_020945fc::vfunc_05(int param_1,uint param_2)
 
 {
   int iVar1;

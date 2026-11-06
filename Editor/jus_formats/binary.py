@@ -215,8 +215,3 @@ def dscp_unwrap(blob: bytes) -> bytes:
 
 def dscp_wrap(data: bytes) -> bytes:
     return DSCP_MAGIC + lz10_compress(data)
-
-
-def unwrap(blob: bytes) -> bytes:
-    """Return the payload of a DSCP container, or ``blob`` unchanged."""
-    return dscp_unwrap(blob) if is_dscp(blob) else bytes(blob)

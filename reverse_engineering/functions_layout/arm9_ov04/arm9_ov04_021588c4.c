@@ -29,7 +29,7 @@ int * JQuizMainSinglePause::JQuizMainSinglePauseClass_Create(void)
   undefined4 uStack_28;
   
   uStack_28 = in_r3;
-  piVar1 = (int *)thunk_FUN_0201a228(0x20,FUN_021612b4,FUN_02161290,0x3c);
+  piVar1 = (int *)thunk_FUN_0201a228(0x20,&DAT_021612b4,&DAT_02161290,0x3c);
   FUN_020517fc(piVar1,0,0x20);
   piVar1[7] = -1;
   iVar2 = thunk_FUN_0201a228(0xcc,s_ALWidget_inl_02160c0c,s_Create_021611fc,0x1de);
@@ -135,7 +135,7 @@ int * JQuizMainSinglePause::JQuizMainSinglePauseClass_Create(void)
     piVar3 = *(int **)(*(int *)(iVar5 + 4) + 0x68);
     (**(code **)(*piVar3 + 0xac))(piVar3,0);
     FUN_02023c70(*(undefined4 *)(iVar5 + 4),0);
-    piVar3 = (int *)thunk_FUN_0201a228(0x70,FUN_021608f4,s_Create_02161204,0x1b2);
+    piVar3 = (int *)thunk_FUN_0201a228(0x70,&DAT_021608f4,s_Create_02161204,0x1b2);
     if (piVar3 != (int *)0x0) {
       func_0x021b054c(piVar3,0,&DAT_02093c8c);
       *piVar3 = (int)&jus_Class_0216094c::vftable;

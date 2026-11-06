@@ -123,19 +123,21 @@ int * StageView::StageView_Create(undefined1 param_1,undefined1 param_2,byte par
   FUN_021c38d8(piVar1[0x11],piVar1[1]);
   (**(code **)(**(int **)(piVar1[0x11] + 4) + 0xd8))(*(int **)(piVar1[0x11] + 4),0);
   FUN_021bc03c();
-  switch((char)piVar1[0x2a]) {
-  case '\0':
-  case '\x03':
-    unaff_r5 = 0x810000;
-    unaff_r6 = 2;
-    break;
-  case '\x01':
-    unaff_r5 = 0x810001;
-    unaff_r6 = 4;
-    break;
-  case '\x02':
-    unaff_r5 = 0x810002;
-    unaff_r6 = 10;
+  if (*(byte *)(piVar1 + 0x2a) < 4) {
+                    /* WARNING: Switch is manually overridden */
+    switch(*(byte *)(piVar1 + 0x2a)) {
+    case 0:
+      unaff_r5 = 0x810000;
+      unaff_r6 = 2;
+      break;
+    case 1:
+      unaff_r5 = 0x810001;
+      unaff_r6 = 4;
+      break;
+    case 2:
+      unaff_r5 = 0x810002;
+      unaff_r6 = 10;
+    }
   }
   local_8c = 0;
   local_90 = 0xa000;

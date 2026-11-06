@@ -142,10 +142,10 @@ void ALControllerImp::Create(undefined1 *param_1)
           iVar15 = (uint)*(byte *)(iVar4 + iVar5 + 0x2d) * 0x48 +
                    *(int *)(*(int *)(unaff_r10 + 0x330) + 0x34);
           if ((DAT_0215cc0c & 1) == 0) {
-            FUN_0214edbc(FUN_0215c1b8,0xffffffe0,0xffffffe0);
-            FUN_0214edbc(0x215c1c0,0xffffffd8,0xffffffe0,0x28);
-            FUN_0214edbc(0x215c1c8,0xffffffd8,0xffffffe0);
-            FUN_0214edbc(0x215c1d0,0xffffffd8,0xffffffd8);
+            FUN_0214edbc(&DAT_0215c1b8,0xffffffe0,0xffffffe0);
+            FUN_0214edbc(&DAT_0215c1c0,0xffffffd8,0xffffffe0,0x28);
+            FUN_0214edbc(&DAT_0215c1c8,0xffffffd8,0xffffffe0);
+            FUN_0214edbc(&DAT_0215c1d0,0xffffffd8,0xffffffd8);
             DAT_0215cc0c = DAT_0215cc0c | 1;
           }
           if ((DAT_0215cc08 & 1) == 0) {

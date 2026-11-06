@@ -47,7 +47,6 @@ END = 0xFFFF
 # Runtime semantics traced in the ARM9 animation player (FUN_0201F11C,
 # FUN_0201BDEC, FUN_0201E1E4, FUN_0201F7EC, FUN_02016220):
 MOVE_FLAG_LOOP = 0x01          # move flags bit 0: wrap at duration, else end + next queued move
-FPS_UNUSED_NOTE = 'fps byte is not read by the player (60 in every shipped move)'
 FIXED_20_12 = {'DrawPrio', 'Alpha'}      # 0x1000 = 1.0
 FIELD_NOTES = {
     'BoundsIndex': 'DSTX frame index of the node (0xFFFF = none)',
@@ -159,14 +158,6 @@ class Track:
 @dataclass
 class NodeAnim:
     tracks: list[Track] = field(default_factory=list)   # statics first, then keyed
-
-    @property
-    def static_tracks(self):
-        return [t for t in self.tracks if not t.keyed]
-
-    @property
-    def keyed_tracks(self):
-        return [t for t in self.tracks if t.keyed]
 
     def track(self, name: str) -> Track | None:
         return next((t for t in self.tracks if t.field == name), None)

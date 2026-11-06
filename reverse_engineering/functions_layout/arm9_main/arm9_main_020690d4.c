@@ -10,24 +10,27 @@ int FUN_020690d4(void)
   iVar2 = FUN_020673ec(0x10);
   iVar3 = func_0x02198ccc();
   if (iVar3 == 9) {
-    switch(iVar1) {
-    case 10:
-      iVar1 = FUN_02069094(iVar2);
-      break;
-    case 0xb:
-      iVar1 = FUN_02068f50();
-      break;
-    case 0xc:
-      iVar1 = FUN_02069014(iVar2);
-      break;
-    case 0xd:
-      iVar1 = FUN_02068ff0();
-      break;
-    case 0xe:
-      iVar1 = FUN_02068f98(iVar2);
-      break;
-    case 0xf:
-      iVar1 = FUN_02068f80(iVar2);
+    if (iVar1 - 10U < 6) {
+                    /* WARNING: Switch is manually overridden */
+      switch(iVar1 - 10U) {
+      case 0:
+        iVar1 = FUN_02069094(iVar2);
+        break;
+      case 1:
+        iVar1 = FUN_02068f50();
+        break;
+      case 2:
+        iVar1 = FUN_02069014(iVar2);
+        break;
+      case 3:
+        iVar1 = FUN_02068ff0();
+        break;
+      case 4:
+        iVar1 = FUN_02068f98(iVar2);
+        break;
+      case 5:
+        iVar1 = FUN_02068f80(iVar2);
+      }
     }
   }
   else if (iVar1 == 0xb) {

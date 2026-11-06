@@ -16,7 +16,7 @@ int FUN_02151d4c(int param_1)
   undefined4 local_24;
   undefined4 local_20;
   
-  iVar1 = thunk_FUN_0201a228(0x78,FUN_0215bfa4,&DAT_0215c1a8,0x4c3);
+  iVar1 = thunk_FUN_0201a228(0x78,&DAT_0215bfa4,&DAT_0215c1a8,0x4c3);
   if (iVar1 != 0) {
     jus_TagNDGR_0209c0b4::jus_TagNDGR_0209c0b4(iVar1,FUN_02024a30,1);
   }
@@ -29,14 +29,14 @@ int FUN_02151d4c(int param_1)
   local_28 = 0x81000;
   FUN_02152008(iVar1,&local_28);
   (**(code **)(**(int **)(iVar1 + 4) + 0xd8))(*(int **)(iVar1 + 4),1);
-  iVar2 = thunk_FUN_0201a228(0x78,FUN_0215bfa4,&DAT_0215c1a8,0x4c3);
+  iVar2 = thunk_FUN_0201a228(0x78,&DAT_0215bfa4,&DAT_0215c1a8,0x4c3);
   if (iVar2 != 0) {
     jus_TagNDGR_0209c0b4::jus_TagNDGR_0209c0b4(iVar2,FUN_02024a30,1);
   }
   iVar2 = FUN_0214d498();
   FUN_0214d678(iVar2,iVar1);
   (**(code **)(**(int **)(iVar2 + 4) + 0xd8))(*(int **)(iVar2 + 4),1);
-  iVar3 = thunk_FUN_0201a228(0x78,FUN_0215bfa4,&DAT_0215c1a8,0x4c3);
+  iVar3 = thunk_FUN_0201a228(0x78,&DAT_0215bfa4,&DAT_0215c1a8,0x4c3);
   if (iVar3 != 0) {
     jus_TagNDGR_0209c0b4::jus_TagNDGR_0209c0b4(iVar3,FUN_02024a30,1);
   }

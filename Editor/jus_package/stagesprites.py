@@ -27,7 +27,7 @@ from dataclasses import dataclass
 from jus_formats import almt, dsig as dsigmod, dstx as dstxmod, sprite as spritemod
 
 from . import images
-from .project import DataRoot, join
+from .project import DataRoot
 
 FLOOR_BASE = 0x401100
 GIMMICK_BASE = 0x401200

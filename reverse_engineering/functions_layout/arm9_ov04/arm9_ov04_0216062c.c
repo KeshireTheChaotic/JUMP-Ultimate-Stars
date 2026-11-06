@@ -99,11 +99,11 @@ void FUN_0216062c(void)
   FUN_0215ccc0(auStack_a4,0);
   FUN_0215ccc0(auStack_a0,0xfffffff7);
   FUN_0215ccc0(auStack_9c,0xffffffce);
-  FUN_0215cca4(FUN_02161704,auStack_9c,auStack_a0,auStack_a4);
+  FUN_0215cca4(&DAT_02161704,auStack_9c,auStack_a0,auStack_a4);
   FUN_0215ccc0(auStack_b0,0);
   FUN_0215ccc0(auStack_ac,0xfffffff7);
   FUN_0215ccc0(auStack_a8,0xffffffea);
-  FUN_0215cca4((undefined *)0x2161710,auStack_a8,auStack_ac,auStack_b0);
+  FUN_0215cca4(&DAT_02161710,auStack_a8,auStack_ac,auStack_b0);
   return;
 }
 

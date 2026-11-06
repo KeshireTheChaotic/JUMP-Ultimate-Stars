@@ -17,27 +17,30 @@ int FUN_02180328(int param_1)
         return 0;
       }
       iVar2 = *(int *)(param_1 + 0x7c);
-      switch(*(undefined1 *)(iVar2 + 2)) {
-      case 1:
-        iVar4 = FUN_02180790(param_1,iVar2 + 3,uVar3 - 3);
-        break;
-      case 2:
-        iVar4 = FUN_0218046c(param_1,iVar2 + 3,uVar3 - 3);
-        break;
-      case 3:
-        iVar2 = FUN_02001a88(*(undefined4 *)(param_1 + 0x4b0),iVar2,uVar3,0);
-        if (iVar2 < 1) {
-          return 3;
+      if ((uint)(int)*(char *)(iVar2 + 2) < 7) {
+                    /* WARNING: Switch is manually overridden */
+        switch((int)*(char *)(iVar2 + 2)) {
+        case 1:
+          iVar4 = FUN_02180790(param_1,iVar2 + 3,uVar3 - 3);
+          break;
+        case 2:
+          iVar4 = FUN_0218046c(param_1,iVar2 + 3,uVar3 - 3);
+          break;
+        case 3:
+          iVar2 = FUN_02001a88(*(undefined4 *)(param_1 + 0x4b0),iVar2,uVar3,0);
+          if (iVar2 < 1) {
+            return 3;
+          }
+          break;
+        case 4:
+          iVar4 = FUN_02180510(param_1,iVar2 + 3,uVar3 - 3);
+          break;
+        case 5:
+          iVar4 = FUN_02180560(param_1,iVar2 + 3,uVar3 - 3);
+          break;
+        case 6:
+          iVar4 = FUN_02180660(param_1,iVar2 + 3,uVar3 - 3);
         }
-        break;
-      case 4:
-        iVar4 = FUN_02180510(param_1,iVar2 + 3,uVar3 - 3);
-        break;
-      case 5:
-        iVar4 = FUN_02180560(param_1,iVar2 + 3,uVar3 - 3);
-        break;
-      case 6:
-        iVar4 = FUN_02180660(param_1,iVar2 + 3,uVar3 - 3);
       }
       *(uint *)(param_1 + 0x80) = *(int *)(param_1 + 0x80) - (uint)uVar1;
       if (*(int *)(param_1 + 0x80) < 0) {

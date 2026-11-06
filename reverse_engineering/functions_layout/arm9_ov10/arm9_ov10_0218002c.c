@@ -1,20 +1,21 @@
 
-undefined4 FUN_0218002c(undefined4 *param_1)
+undefined4 FUN_0218002c(uint *param_1)
 
 {
   undefined4 uVar1;
   
   FUN_021817dc();
-  switch(*param_1) {
-  case 0:
-    uVar1 = FUN_02180064(param_1);
-    return uVar1;
-  default:
-    return 0;
-  case 2:
-  case 3:
-    uVar1 = FUN_02180278(param_1);
-    return uVar1;
+  if (*param_1 < 4) {
+                    /* WARNING: Switch is manually overridden */
+    switch(*param_1) {
+    case 0:
+      uVar1 = FUN_02180064(param_1);
+      return uVar1;
+    case 2:
+      uVar1 = FUN_02180278(param_1);
+      return uVar1;
+    }
   }
+  return 0;
 }
 

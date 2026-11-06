@@ -23,20 +23,21 @@ void FUN_0217893c(int param_1,undefined4 param_2)
       }
     }
   }
-  else {
-    switch(param_1) {
-    case 0x33:
+  else if (param_1 - 0x33U < 4) {
+                    /* WARNING: Switch is manually overridden */
+    switch(param_1 - 0x33U) {
+    case 0:
       iVar1 = FUN_02178448();
       FUN_0218db38(param_2,*(undefined1 *)(iVar1 + 0x15));
       return;
-    case 0x34:
+    case 1:
       iVar1 = FUN_02178448();
       FUN_0218db38(param_2,*(undefined4 *)(iVar1 + 0x20));
       return;
-    case 0x35:
+    case 2:
       FUN_0218db38(param_2,3);
       return;
-    case 0x36:
+    case 3:
       FUN_0218db38(param_2,1);
       return;
     }

@@ -166,9 +166,9 @@ void ALNodeImp::Create(int param_1)
   uStack_9c = 0;
   uStack_98 = 0;
   FUN_0214dc68(auStack_2c,&uStack_a0,&uStack_9c,&uStack_98);
-  uVar11 = FUN_0214f714(adStack_d0 + 10,*(undefined4 *)(param_1 + 0x54),FUN_0216d88c);
+  uVar11 = FUN_0214f714(adStack_d0 + 10,*(undefined4 *)(param_1 + 0x54),&DAT_0216d88c);
   if ((bool)uVar15) {
-    func_0x03b39334(uVar11,FUN_0216c958);
+    func_0x03b39334(uVar11,&DAT_0216c958);
   }
   if (!(bool)uVar17 || (bool)uVar16) {
     coprocessor_load(0,in_cr2,unaff_r11);
@@ -189,8 +189,8 @@ void ALNodeImp::Create(int param_1)
   uStack_88 = 0;
   uStack_84 = 0;
   FUN_0214dc68(auStack_20,&uStack_8c,&uStack_88,&uStack_84);
-  FUN_0214f714(&uStack_94,*(undefined4 *)(param_1 + 0x50),FUN_0216d88c);
-  iVar8 = thunk_FUN_0201a228(0x4c,FUN_0216c958,PTR_s_Create_02166b30,uRam02166b34);
+  FUN_0214f714(&uStack_94,*(undefined4 *)(param_1 + 0x50),&DAT_0216d88c);
+  iVar8 = thunk_FUN_0201a228(0x4c,&DAT_0216c958,PTR_s_Create_02166b30,uRam02166b34);
   if (iVar8 != 0) {
     jus_TagIPMV::jus_TagIPMV(iVar8,0,uStack_94,uStack_90,uRam02166b38,auStack_20,8,0,1);
   }
@@ -224,7 +224,7 @@ void ALNodeImp::Create(int param_1)
   uStack_100 = 0;
   uStack_fc = 0;
   FUN_0214dc68(auStack_50,&uStack_104,&uStack_100,&uStack_fc);
-  FUN_0214f714(&uStack_10c,uVar7,FUN_0216d88c);
+  FUN_0214f714(&uStack_10c,uVar7,&DAT_0216d88c);
   iVar8 = thunk_FUN_0201a228(0x4c,PTR_s_ALControllerImp_h_02166b54,PTR_s_Create_02166b58,
                              uRam02166b5c);
   if (iVar8 != 0) {
@@ -263,8 +263,8 @@ void ALNodeImp::Create(int param_1)
   uStack_d8 = 0;
   uStack_d4 = 0;
   FUN_0214dc68(auStack_38,&uStack_dc,&uStack_d8,&uStack_d4);
-  FUN_0214f714(adStack_f4 + 4,*(undefined4 *)(param_1 + 0x20),PTR_FUN_02166efc);
-  iVar8 = thunk_FUN_0201a228(0x4c,PTR_FUN_02166f00,PTR_s_Create_02166f04,uRam02166f08);
+  FUN_0214f714(adStack_f4 + 4,*(undefined4 *)(param_1 + 0x20),PTR_DAT_02166efc);
+  iVar8 = thunk_FUN_0201a228(0x4c,PTR_DAT_02166f00,PTR_s_Create_02166f04,uRam02166f08);
   if (iVar8 != 0) {
     jus_TagIPMV::jus_TagIPMV(iVar8,0,adStack_f4[4],uStack_e0,uRam02166ee4,auStack_38,8,0,1);
   }
@@ -354,10 +354,10 @@ void ALNodeImp::Create(int param_1)
       FUN_02164d3c(&iStack_128,uVar7);
       iStack_124 = iStack_128 + -0x100000;
       FUN_0214f764(uVar7,&iStack_124);
-      FUN_0214f714(&uStack_130,uVar7,PTR_FUN_021672c8);
+      FUN_0214f714(&uStack_130,uVar7,PTR_DAT_021672c8);
       uVar6 = uStack_12c;
       uVar11 = uStack_130;
-      iVar9 = thunk_FUN_0201a228(0x4c,PTR_FUN_021672cc,PTR_s_Create_021672d0,uRam021672d4);
+      iVar9 = thunk_FUN_0201a228(0x4c,PTR_DAT_021672cc,PTR_s_Create_021672d0,uRam021672d4);
       if (iVar9 != 0) {
         jus_TagIPMV::jus_TagIPMV(iVar9,0,uVar11,uVar6,uRam021672d8,&iStack_5c,8,0,1);
       }
@@ -374,10 +374,10 @@ void ALNodeImp::Create(int param_1)
       FUN_02164d3c(&iStack_118,uVar7);
       iStack_114 = iStack_118 + 0x100000;
       FUN_0214f764(uVar7,&iStack_114);
-      FUN_0214f714(&uStack_120,uVar7,PTR_FUN_02166efc);
+      FUN_0214f714(&uStack_120,uVar7,PTR_DAT_02166efc);
       uVar6 = uStack_11c;
       uVar11 = uStack_120;
-      iVar9 = thunk_FUN_0201a228(0x4c,PTR_FUN_02166f00,PTR_s_Create_02166f04,uRam02166f08);
+      iVar9 = thunk_FUN_0201a228(0x4c,PTR_DAT_02166f00,PTR_s_Create_02166f04,uRam02166f08);
       if (iVar9 != 0) {
         jus_TagIPMV::jus_TagIPMV(iVar9,0,uVar11,uVar6,uRam02166ee4,&iStack_5c,8,0,1);
       }
@@ -399,7 +399,7 @@ void ALNodeImp::Create(int param_1)
       else {
         iVar9 = FUN_0203b414(1);
         func_0x021675e8(*(undefined4 *)(param_1 + 0x1c),uVar14,*(undefined4 *)(iVar9 + 0x88),iVar8,
-                        PTR_LAB_021672dc);
+                        PTR_DAT_021672dc);
       }
       iVar9 = FUN_0203b404();
       func_0x02167570(iRam021672ec,iRam021672ec + -0xb,*(undefined4 *)(iVar9 + 0x88),
@@ -414,7 +414,7 @@ void ALNodeImp::Create(int param_1)
       else {
         iVar9 = FUN_0203b414(1);
         func_0x021675e8(*(undefined4 *)(param_1 + 0x1c),uVar14 + 2,*(undefined4 *)(iVar9 + 0x88),
-                        iVar8,PTR_LAB_021672dc);
+                        iVar8,PTR_DAT_021672dc);
       }
       iVar9 = FUN_0203b404();
       func_0x02167570(iRam021672e8,iRam021672e8 + -0xc,*(undefined4 *)(iVar9 + 0x88),

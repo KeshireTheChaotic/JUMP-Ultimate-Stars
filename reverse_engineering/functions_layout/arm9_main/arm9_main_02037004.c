@@ -46,7 +46,8 @@ void ScreenInstance_Derived_02093d14::vfunc_53
       iVar2 = FUN_0201a228(0x78);
       piVar3 = (int *)0x0;
       if (iVar2 != 0) {
-        piVar3 = (int *)jus_Class_0209b330::jus_Class_0209b330(iVar2,param_2);
+        piVar3 = (int *)ScreenInstance_Derived_02093d14_Part_0209b330::
+                        ScreenInstance_Derived_02093d14_Part_0209b330(iVar2,param_2);
       }
       FUN_0202201c(param_2,piVar3);
     }
@@ -69,7 +70,8 @@ void ScreenInstance_Derived_02093d14::vfunc_53
       iVar2 = FUN_0201a228(0x78);
       piVar3 = (int *)0x0;
       if (iVar2 != 0) {
-        piVar3 = (int *)jus_Class_0209b250::jus_Class_0209b250(iVar2,param_2);
+        piVar3 = (int *)ScreenInstance_Derived_02093d14_Part_0209b250::
+                        ScreenInstance_Derived_02093d14_Part_0209b250(iVar2,param_2);
       }
       FUN_0202201c(param_2,piVar3);
     }

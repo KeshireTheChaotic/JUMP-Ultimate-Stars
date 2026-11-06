@@ -160,6 +160,23 @@ def main():
     sc.load('title/title.aar')
     pump(0.3)
     checks.append(('screen layers', [sc.cfg[n]['screen'] for n in sc.order] == ['Top', 'Top', 'Bottom', 'Bottom']))
+    sc.load('Common/chr/chr.aar')
+    pump(0.3)
+    sc._select_layer({'id': 'bb_b_01ab', 'kind': 'Top'})
+    shown = [n for n in sc.order if sc._shown(n)]
+    checks.append(('library shows one picture', shown == ['bb_b_01aa', 'bb_b_01ab']
+                   and all(sc.images[n] is not None for n in sc.order)))
+    sc.load('title/title.aar')
+    pump(0.2)
+    checks.append(('screen list has no data archives',
+                   'deck/Deck.aar' not in sc._archives and 'title/title.aar' in sc._archives))
+    app.open_table('bin/commwin.bin')
+    pump(0.3)
+    app.member_tree.focus('t0')
+    app.member_tree.selection_set('t0')
+    pump(0.2)
+    checks.append(('game table view', len(app.member_tree.get_children()) == 129 and app._table is not None))
+    app._table = None
     # the session above leaves no unapplied work (undo returned every edit to clean)
     pending = app.almt_dirty or app.sprite_dirty or any(w.dirty for w in app.suite.values())
     checks.append(('no unapplied work at end', not pending))

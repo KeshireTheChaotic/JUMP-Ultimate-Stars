@@ -20,6 +20,7 @@ from __future__ import annotations
 import json
 import os
 import re
+import struct
 import sys
 import threading
 import tkinter as tk
@@ -30,8 +31,8 @@ HERE = Path(__file__).resolve().parent.parent
 if str(HERE) not in sys.path:
     sys.path.insert(0, str(HERE))
 
-from jus_formats import alar, almt, dsig as dsigmod, dstx as dstxmod, eventops, notetrack, sdat, sprite  # noqa: E402
-from jus_formats import battleai, battleinput, bintables, chrbin, roster  # noqa: E402
+from jus_formats import alar, almt, dsig as dsigmod, dstx as dstxmod, eventops, notetrack, sprite  # noqa: E402
+from jus_formats import battleai, battleinput, bintables, chrbin, gametables, roster  # noqa: E402
 from jus_package import effectlinks, images, motion, package, sounds, spawns, spriteedit  # noqa: E402
 from app.workspaces import SUITE  # noqa: E402
 from jus_package.draworder import submission_note  # noqa: E402
@@ -139,10 +140,8 @@ class EditorApp(tk.Tk):
         self._pursuer_events = ()
         self._effect_moves = {}
         self._common_tables = None      # [(path, AlmtFile)] from efc/*.aar, cached per data root
-        self._spawn_list = []
         self._effect_table_error = ''
         self._frame_cache: dict = {}
-        self._view_info: list[str] = []
         # sprite view state
         self.frame_i: int | None = None
         self.piece_i: int | None = None
@@ -658,13 +657,13 @@ class EditorApp(tk.Tk):
                 messagebox.showerror('Data root', f'Cannot open {path}:\n{exc}')
             self.status.set(f'No data root loaded ({exc}). Use File › Open data root…')
             return
-        self._sdat = None
-        self._sounds = sounds.SoundResolver(self.root_data.root)
+        self._sounds =sounds.SoundResolver(self.root_data.root)
         self._audio = AudioPreview(self.root_data.root)
         self._sounds.set_characters([c for c in self.root_data.characters() if '_b_' in c])
         self.status.set('Select a character or archive in the Project panel.')
         self.root_label.configure(text=str(path))
         self.container = None
+        self._table = None
         self.populate_tree()
         for w in self.suite.values():
             w.on_root()
@@ -691,6 +690,10 @@ class EditorApp(tk.Tk):
         for p in ('battle/ChrWin.aar', 'chr/ChrBin.aar'):
             if (self.root_data.root / p).is_file():
                 t.insert(other, 'end', f'arc:{p}', text=f'▣ {p}')
+        tables = t.insert('', 'end', 'tables', text='Game tables', open=False)
+        for p in gametables.LOOSE_TABLES:
+            if (self.root_data.root / p).is_file() and (not flt or flt in p.lower()):
+                t.insert(tables, 'end', f'tbl:{p}', text=f'▤ {p}')
 
     def on_resource_open(self, _e=None):
         sel = self.res_tree.focus()
@@ -717,6 +720,9 @@ class EditorApp(tk.Tk):
                 self.res_tree.selection_set(kids[0])
                 self.res_tree.focus(kids[0])
             return
+        if sel.startswith('tbl:'):
+            self.open_table(sel[4:])
+            return
         if not sel.startswith('arc:'):
             return
         if not self.confirm_discard():
@@ -738,7 +744,25 @@ class EditorApp(tk.Tk):
         menu.add_command(label='Import package…', command=self.import_package)
         menu.tk_popup(e.x_root, e.y_root)
 
+    def open_table(self, path):
+        """Show a loose game table (bin/*.bin) record by record in the Archive workspace."""
+        try:
+            tv = gametables.view(path, self.root_data.read(path))
+        except (ValueError, OSError, struct.error) as exc:
+            messagebox.showerror('Game table', f'{path}:\n{exc}')
+            return
+        self._table = (path, tv)
+        t = self.member_tree
+        t.delete(*t.get_children())
+        for i, r in enumerate(tv.records):
+            t.insert('', 'end', f't{i}', values=(r.label, 'record', '', '', '', '', ''))
+        self.archive_info.configure(text=f'{path}   {tv.title} · {len(tv.records)} records')
+        self.status.set(f'{path}: {tv.title}, {len(tv.records)} records (read-only)')
+        self.show_workspace('archive')
+        self._member_details()
+
     def select_container(self, path, char_id=None):
+        self._table = None
         self.container = path
         if char_id:
             self.scope = [s['path'] for s in self.root_data.character_sources(char_id)
@@ -1262,17 +1286,6 @@ class EditorApp(tk.Tk):
         self.refresh_animation()
 
     # --------------------------------------------------------------- notes
-    def sdat_symbols(self):
-        if getattr(self, '_sdat', None) is None and self.root_data:
-            self._sdat = False
-            try:
-                f = next((self.root_data.root / 'sound').glob('*.sdat'), None)
-                if f:
-                    self._sdat = sdat.parse_symbols(f.read_bytes())
-            except (OSError, ValueError):
-                self._sdat = False
-        return self._sdat or None
-
     def command_text(self, c: notetrack.Command, short=False) -> str:
         text = c.text()
         if c.opcode == 0x0300:
@@ -1767,7 +1780,6 @@ class EditorApp(tk.Tk):
         """One read-only clip row per GenerateID key (Unity-style sub-clip bars)."""
         sp_list = spawns.keyed_spawns(self.move, self.almt.node_names)
         ref_events = spawns.reference_events(self.move, self.almt.node_names)
-        self._spawn_list = sp_list
         if not sp_list:
             return []
         gid = ('group', 'spawns')
@@ -1827,7 +1839,7 @@ class EditorApp(tk.Tk):
                         'keys': [(t0, csp)], 'label': f'↳ {csp.effect_id:06X}', 'badge': csp.node,
                         'colour': T.EFFECT if centry else T.BAD, 'spawn': csp}
                 if centry:
-                    ca, cb, coe = spawns.effect_span(csp, centry[0], horizon - sp.tick)
+                    ca, cb, _ = spawns.effect_span(csp, centry[0], horizon - sp.tick)
                     crow.update(info=(csp.effect_id, centry[2]),
                                 spans=[(sp.tick + ca, sp.tick + cb, T.EFFECT, split(centry[2])[-1])])
                 rows.append(crow)
@@ -1847,7 +1859,6 @@ class EditorApp(tk.Tk):
         if not payload:
             return ''
         row_events = []
-        tr = self._track()
         _, _, cmd = payload
         lines = [f'tick {tick}  {eventops.category(cmd.opcode)}', self.command_text(cmd)]
         info = cmd.info
@@ -2470,8 +2481,6 @@ class EditorApp(tk.Tk):
                 ins.value(f'0x{c.opcode:04X}', f'{motion.LABELS.get(c.opcode, "?")} {c.values()}\n'
                                                f'{n} · ov06 0x{motion.FUNCTIONS.get(c.opcode, 0):08X}')
         ins.section('Preview')
-        self._mvars = {'face': self.facing_left, 'floor': self.motion_floor, 'root': self.root_motion,
-                       'show': self.show_motion}
         ins.check('Facing left', self.facing_left, 'x impulses are negated when the character faces left',
                   on_change=self._motion_changed)
         ins.check('Assume floor', self.motion_floor, 'Collision is not traced: stop falling at the start height',
@@ -2830,7 +2839,6 @@ class EditorApp(tk.Tk):
         self.sprite_info.configure(text=spriteedit.describe(d, self.sprite_g) if d else '')
         n = len(d.frames) if d else 0
         self.frame_i = None if not n else max(0, min(n - 1, select if select is not None else 0))
-        self._thumb_cache = {}
         self.filmstrip.set_frames(n, self._thumb_for, self.frame_i)
         self.redraw_sprite()
 
@@ -3318,13 +3326,29 @@ class EditorApp(tk.Tk):
 
     def _selected_member(self):
         sel = self.member_tree.focus()
-        if not sel or not self.container:
+        if not sel or not self.container or getattr(self, '_table', None):
             return None
         return self.root_data.archive(self.container).entries[int(sel)]
+
+    def _table_details(self, ins, path, tv):
+        ins.section(tv.title, note=path)
+        ins.value('Records', str(len(tv.records)))
+        ins.value('Read by', tv.source)
+        if tv.note:
+            ins.text(tv.note)
+        sel = self.member_tree.focus()
+        if sel.startswith('t') and sel[1:].isdigit():
+            r = tv.records[int(sel[1:])]
+            ins.section('Record', note=r.label)
+            for k, v in r.fields:
+                ins.value(k, v)
 
     def _member_details(self):
         ins = self.member_details
         ins.clear()
+        if getattr(self, '_table', None):
+            self._table_details(ins, *self._table)
+            return
         if not self.container:
             ins.section('Archive')
             ins.text('Select an archive in the Project panel.')
@@ -3362,6 +3386,21 @@ class EditorApp(tk.Tk):
                                        + (f' · extra {s.extra}' if s.extra else '') + (' · flag 0x1000' if s.flag else ''))
             ins.text('Column/row are the 5×4 deck board position (checked: every preset fits with the cards\' '
                      'shapes). Extra bits 8–11 and the 0x1000 flag are not traced.')
+        if e.ext == '.bin':
+            try:
+                tv = gametables.view(e.name, e.payload())
+            except (ValueError, struct.error) as exc:
+                tv = None
+                ins.value('Table', f'layout check failed: {exc}', colour=T.BAD)
+            if tv is not None:
+                ins.section(tv.title, note=f'{len(tv.records)} records · {tv.source}')
+                for r in tv.records[:40]:
+                    ins.value(r.label.split(':')[0], r.label.split(': ', 1)[-1] + ''.join(
+                        f'\n  {k}: {v}' for k, v in r.fields[:6] if not r.label.endswith(v)))
+                if len(tv.records) > 40:
+                    ins.value('', f'… {len(tv.records) - 40} more')
+                if tv.note:
+                    ins.text(tv.note)
         payload = e.payload() if e.name.startswith('chr/ai/') else b''
         if payload[:4] == b'AIPM':
             prof = battleai.parse_aipm(payload)

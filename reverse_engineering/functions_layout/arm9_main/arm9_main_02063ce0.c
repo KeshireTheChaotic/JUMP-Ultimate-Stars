@@ -1,10 +1,9 @@
 
-void FUN_02063ce0(int param_1)
+undefined4 FUN_02063ce0(int param_1)
 
 {
   int iVar1;
   undefined4 uVar2;
-  code *in_lr;
   
   uVar2 = 0;
   if ((*(uint *)(param_1 + 0x1c) & 2) != 0) {
@@ -21,7 +20,6 @@ void FUN_02063ce0(int param_1)
       FUN_02063c20(param_1);
     }
   }
-  (*in_lr)(uVar2);
-  return;
+  return uVar2;
 }
 

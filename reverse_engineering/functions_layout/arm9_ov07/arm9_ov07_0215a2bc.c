@@ -89,7 +89,7 @@ undefined4 CommuMenuWrlsLeaderSel::CommuMenuWrlsLeaderSel_Add(void)
     iVar2 = iVar8;
   } while (iVar8 < 2);
   piVar4 = (int *)FUN_0215b880(0x215b8f1,0x215b971,0x215b96d);
-  iVar2 = thunk_FUN_0201a228(0xbc,FUN_021699c4,s_Create_0216a2a4,0x212);
+  iVar2 = thunk_FUN_0201a228(0xbc,&DAT_021699c4,s_Create_0216a2a4,0x212);
   piVar5 = (int *)0x0;
   if (iVar2 != 0) {
     piVar5 = (int *)func_0x021af358(iVar2,0x215b6e1,0);

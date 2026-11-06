@@ -1,8 +1,8 @@
 
-/* JUS-CLASS jus_Class_0209b250::vfunc_25 [class-virtual] slot 25 of vtable 0209b250 (own slot, not
-   inherited) */
+/* JUS-CLASS ScreenInstance_Derived_02093d14_Part_0209b250::vfunc_25 [class-virtual] slot 25 of
+   vtable 0209b250 (own slot, not inherited) */
 
-void jus_Class_0209b250::vfunc_25(void)
+void ScreenInstance_Derived_02093d14_Part_0209b250::vfunc_25(void)
 
 {
   undefined2 *puVar1;

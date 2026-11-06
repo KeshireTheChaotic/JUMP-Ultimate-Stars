@@ -155,7 +155,7 @@ int DeckCheck::DeckCheck_Add(int param_1,undefined4 param_2,undefined4 param_3,u
   (**(code **)(**(int **)(piVar3[0xc] + 4) + 0xd8))(*(int **)(piVar3[0xc] + 4),1);
   FUN_0214d678(piVar3[0xc],piVar3[0xb]);
   iVar4 = FUN_0203b3e4();
-  puVar1 = PTR_FUN_0215abd8;
+  puVar1 = PTR_DAT_0215abd8;
   *(undefined4 *)PTR_DAT_0215abb8 = *(undefined4 *)(*(int *)(iVar4 + 0x88) + 4);
   iVar4 = FUN_020101f4(puVar1,0);
   puVar1 = PTR_LAB_0215abdc;

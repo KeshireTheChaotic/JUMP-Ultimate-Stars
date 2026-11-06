@@ -111,7 +111,7 @@ void ALWidgetImp::Create(int param_1)
   FUN_0214e908(iVar8,iVar2);
   iVar11 = 0;
   do {
-    iVar4 = func_0x021ca3a4(0x100,0x10,FUN_0215e6f0,0,0);
+    iVar4 = func_0x021ca3a4(0x100,0x10,&DAT_0215e6f0,0,0);
     local_64 = 0x3000;
     iVar5 = FUN_0214d784(*(undefined1 *)(param_1 + 2),*(undefined1 *)(iVar12 + iVar11 + 0x74));
     for (iVar7 = 0;

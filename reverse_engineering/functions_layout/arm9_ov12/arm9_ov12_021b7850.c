@@ -19,7 +19,7 @@ ALNodeImp::Create(undefined4 *param_1,int param_2,undefined4 param_3,undefined4 
   iVar1 = thunk_FUN_0201a228(0x20,s_ALNodeImp_h_021d3bcc,s_Create_021d3b58,0x687,param_4);
   uVar2 = 0;
   if (iVar1 != 0) {
-    uVar2 = jus_Class_020945fc::jus_Class_020945fc(iVar1,0x10);
+    uVar2 = CommonWindow_Part_020945fc::CommonWindow_Part_020945fc(iVar1,0x10);
   }
   param_1[0x4e] = uVar2;
   piVar3 = (int *)param_1[0x27];

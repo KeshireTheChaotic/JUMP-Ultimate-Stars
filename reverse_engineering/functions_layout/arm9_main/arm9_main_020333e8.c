@@ -1,8 +1,8 @@
 
-/* JUS-CLASS jus_Class_020946b8::vfunc_09 [class-virtual] slot 9 of vtable 020946b8 (own slot, not
-   inherited) */
+/* JUS-CLASS ALStreamImp_Part_020946b8::vfunc_09 [class-virtual] slot 9 of vtable 020946b8 (own
+   slot, not inherited) */
 
-undefined4 jus_Class_020946b8::vfunc_09(undefined4 param_1)
+undefined4 ALStreamImp_Part_020946b8::vfunc_09(undefined4 param_1)
 
 {
   int iVar1;

@@ -63,24 +63,22 @@ int FUN_020035b4(code *param_1,undefined4 param_2,char *param_3,uint *param_4)
     if (uVar6 < 0x62) {
       if (uVar6 < 0x61) {
         if (uVar6 < 0x48) {
-          switch(uVar6) {
-          case 0x41:
-            goto switchD_02003666_caseD_41;
-          case 0x42:
-          case 0x43:
-          case 0x44:
-            goto switchD_02003666_caseD_42;
-          case 0x45:
-          case 0x46:
-          case 0x47:
-            goto switchD_02003666_caseD_45;
-          default:
-            if (uVar6 != 0x25) goto switchD_02003666_caseD_42;
-            local_224[0] = 0x25;
-            pbVar5 = local_224;
-            local_258 = (byte *)0x1;
-            goto LAB_02003a92;
+          if (-1 < (int)(uVar6 - 0x41)) {
+                    /* WARNING: Switch is manually overridden */
+            switch(uVar6 - 0x41) {
+            case 0:
+              goto switchD_02003666_caseD_41;
+            default:
+              goto switchD_02003666_caseD_42;
+            case 4:
+              goto switchD_02003666_caseD_45;
+            }
           }
+          if (uVar6 != 0x25) goto switchD_02003666_caseD_42;
+          local_224[0] = 0x25;
+          pbVar5 = local_224;
+          local_258 = (byte *)0x1;
+          goto LAB_02003a92;
         }
         if (uVar6 != 0x58) goto switchD_02003666_caseD_42;
         goto switchD_0200369a_caseD_6f;
@@ -156,9 +154,18 @@ switchD_02003666_caseD_42:
       local_258 = local_224 + (0x1ff - (int)pbVar5);
       goto LAB_02003a92;
     }
-    switch(uVar6) {
-    case 100:
-    case 0x69:
+    if ((int)(uVar6 - 100) < 0) {
+      if (uVar6 != 99) goto switchD_02003666_caseD_42;
+      pbVar5 = local_224;
+      local_4 = local_4 + 1;
+      local_224[0] = (byte)*puVar8;
+      local_258 = (byte *)0x1;
+      goto LAB_02003a92;
+    }
+                    /* WARNING: Switch is manually overridden */
+    switch(uVar6 - 100) {
+    case 0:
+    case 5:
       uVar6 = local_230 & 0xff;
       if (uVar6 == 3) {
         local_240 = *local_4;
@@ -203,9 +210,9 @@ switchD_02003666_caseD_42:
       if (pbVar5 == (byte *)0x0) goto switchD_02003666_caseD_42;
       local_258 = local_224 + (0x1ff - (int)pbVar5);
       break;
-    case 0x65:
-    case 0x66:
-    case 0x67:
+    case 1:
+    case 2:
+    case 3:
 switchD_02003666_caseD_45:
       if ((char)local_230 == '\t') {
         local_250 = *local_4;
@@ -221,21 +228,14 @@ switchD_02003666_caseD_45:
       if (pbVar5 == (byte *)0x0) goto switchD_02003666_caseD_42;
       local_258 = local_224 + (0x1ff - (int)pbVar5);
       break;
-    case 0x68:
-    case 0x6a:
-    case 0x6b:
-    case 0x6c:
-    case 0x6d:
-    case 0x70:
-    case 0x71:
-    case 0x72:
-    case 0x74:
+    default:
       goto switchD_02003666_caseD_42;
-    case 0x6e:
+    case 10:
       puVar8 = local_4 + 1;
       piVar9 = (int *)*local_4;
       local_4 = puVar8;
       if ((local_230 & 0xff) < 9) {
+                    /* WARNING: Switch is manually overridden */
         switch(local_230 & 0xff) {
         case 0:
           *piVar9 = local_23c;
@@ -262,10 +262,9 @@ switchD_02003666_caseD_45:
         }
       }
       goto switchD_020039f2_caseD_1;
-    case 0x6f:
-    case 0x75:
+    case 0xb:
       goto switchD_0200369a_caseD_6f;
-    case 0x73:
+    case 0xf:
       if ((char)local_230 == '\x05') {
         puVar7 = (undefined *)*local_4;
         if (puVar7 == (undefined *)0x0) {
@@ -302,13 +301,6 @@ switchD_02003666_caseD_45:
           local_258 = local_228;
         }
       }
-      break;
-    default:
-      if (uVar6 != 99) goto switchD_02003666_caseD_42;
-      pbVar5 = local_224;
-      local_4 = local_4 + 1;
-      local_224[0] = (byte)*puVar8;
-      local_258 = (byte *)0x1;
     }
 LAB_02003a92:
     pbVar10 = local_258;

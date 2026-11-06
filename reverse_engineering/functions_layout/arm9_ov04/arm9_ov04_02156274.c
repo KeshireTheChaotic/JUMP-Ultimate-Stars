@@ -36,7 +36,7 @@ int * JQuizMainQuizNoDisp::JQuizMainQuizNoDispClass_Create
   undefined4 uStack_28;
   
   uStack_28 = param_4;
-  piVar2 = (int *)thunk_FUN_0201a228(0x20,s_JQuizMainQuizNoDisp_cpp_021610a0,FUN_02161080,0x78);
+  piVar2 = (int *)thunk_FUN_0201a228(0x20,s_JQuizMainQuizNoDisp_cpp_021610a0,&DAT_02161080,0x78);
   FUN_020517fc(piVar2,0,0x20);
   iVar3 = JQuizMainQuizNoSmall::JQuizMainQuizNoSmallClass_Create(param_1);
   piVar2[6] = iVar3;

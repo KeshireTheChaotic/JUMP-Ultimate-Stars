@@ -1,8 +1,8 @@
 
-/* JUS-CLASS jus_Class_02093f78::vfunc_17 [class-virtual] slot 17 of vtable 02093f78 (own slot, not
-   inherited) */
+/* JUS-CLASS TextureInstance_Part_02093f78::vfunc_17 [class-virtual] slot 17 of vtable 02093f78 (own
+   slot, not inherited) */
 
-void jus_Class_02093f78::vfunc_17(void)
+void TextureInstance_Part_02093f78::vfunc_17(void)
 
 {
   int iVar1;
@@ -12,7 +12,7 @@ void jus_Class_02093f78::vfunc_17(void)
   if (iVar1 == 0) {
     return;
   }
-  jus_Class_02093e14::jus_Class_02093e14();
+  TextureInstance_Part_02093f78_Part_02093e14::TextureInstance_Part_02093f78_Part_02093e14();
   return;
 }
 

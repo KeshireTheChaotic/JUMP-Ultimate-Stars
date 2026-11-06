@@ -4,7 +4,7 @@
 void FUN_0215eb1c(void)
 
 {
-  FUN_02154750(FUN_0216badc,0x2066c19);
+  FUN_02154750(&DAT_0216badc,0x2066c19);
   _DAT_04001008 = _DAT_04001008 & 0xfffc | 3;
   _DAT_0400100a = _DAT_0400100a & 0xfffc | 3;
   _DAT_04000008 = _DAT_04000008 & 0xfffc | 3;

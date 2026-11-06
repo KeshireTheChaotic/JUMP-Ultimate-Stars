@@ -1,8 +1,10 @@
 
-/* JUS-CLASS jus_Class_02093e14::jus_Class_02093e14 [class-default] stores vtable 02093e14 into
-   *this (constructor) */
+/* JUS-CLASS
+   TextureInstance_Part_02093f78_Part_02093e14::TextureInstance_Part_02093f78_Part_02093e14
+   [class-owned] stores vtable 02093e14 into *this (constructor) */
 
-void jus_Class_02093e14::jus_Class_02093e14(undefined4 *param_1)
+void TextureInstance_Part_02093f78_Part_02093e14::TextureInstance_Part_02093f78_Part_02093e14
+               (undefined4 *param_1)
 
 {
   *param_1 = &vftable;

@@ -27,7 +27,7 @@ from .missions import DOC as MISSION_DOC, MissionPanel
 from .mapobjects import MapObjectsPanel
 
 OVERLAYS = (('cam', 'Camera (unverified)', '.cam'), ('mob', 'Stage physics & spawns (.mob)', '.mob'),
-            ('bin', 'Stage BG animation/collision (.bin)', '.bin'), ('collision', 'Collision descriptors', None),
+            ('bin', 'Stage BG animation/collision (.bin)', '.bin'),
             ('gimmick', 'Gimmick assets', None))
 
 
@@ -447,15 +447,17 @@ class LevelWorkspace(SuiteWorkspace):
             rows.append({'id': 'S:' + key, 'parent': 'so', 'name': name, 'kind': 'sprite',
                          'visible': self.show_sprites[key], 'available': sheet is not None,
                          'status': f'{count} object(s)' if sheet is not None else 'no archive'})
+        # Only the decoded stage data gets a row (it toggles the object preview and
+        # opens its inspector); camera / gimmick / collision rows did nothing.
         rows.append({'id': 'ro', 'name': 'Stage object overlays', 'kind': 'group'})
-        for key, name, ext in OVERLAYS:
-            have = bool(self.stage and key in self.stage.members) if ext or key == 'gimmick' else False
+        for key, name, _ in OVERLAYS:
+            if key not in ('mob', 'bin'):
+                continue
+            have = bool(self.stage and key in self.stage.members)
             rows.append({'id': 'O:' + key, 'parent': 'ro', 'name': name, 'kind': 'overlay', 'readonly': True,
-                          'available': key in ('mob', 'bin') and (self._stage_mob is not None
-                              if key == 'mob' else self._stage_geo is not None),
+                          'available': (self._stage_mob if key == 'mob' else self._stage_geo) is not None,
                           'visible': self.preview_objects.get(),
-                          'status': ('runtime inspector' if key in ('mob', 'bin') and have
-                                     else 'not decoded' if have else 'no data')})
+                          'status': 'runtime inspector' if have else 'no data'})
         return rows
 
     def refresh(self, frame=False):
@@ -540,14 +542,6 @@ class LevelWorkspace(SuiteWorkspace):
                 except (ValueError, tk.TclError):
                     pass
         return x, y
-
-    @staticmethod
-    def _ids(text):
-        """Manual preview IDs, not serialized game events."""
-        try:
-            return tuple(sorted({int(x.strip()) for x in text.split(',') if x.strip()}))
-        except ValueError:
-            return ()
 
     def _stop_stage_play(self):
         self._stage_playing = False

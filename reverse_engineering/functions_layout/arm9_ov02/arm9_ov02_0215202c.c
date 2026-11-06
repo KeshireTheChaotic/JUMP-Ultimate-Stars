@@ -141,10 +141,10 @@ void FUN_0215202c(int param_1,undefined4 param_2,undefined4 param_3,undefined4 p
     iVar11 = (uint)*(byte *)(iVar9 + iVar10 + 0x2d) * 0x48 +
              *(int *)(*(int *)(param_1 + 0x330) + 0x34);
     if ((DAT_0215cc0c & 1) == 0) {
-      FUN_0214edbc(FUN_0215c1b8,0xffffffe0,0xffffffe0,0x20,0x20);
-      FUN_0214edbc(0x215c1c0,0xffffffd8,0xffffffe0,0x28,0x20);
-      FUN_0214edbc(0x215c1c8,0xffffffd8,0xffffffe0,0x28,0x28);
-      FUN_0214edbc(0x215c1d0,0xffffffd8,0xffffffd8,0x28,0x28);
+      FUN_0214edbc(&DAT_0215c1b8,0xffffffe0,0xffffffe0,0x20,0x20);
+      FUN_0214edbc(&DAT_0215c1c0,0xffffffd8,0xffffffe0,0x28,0x20);
+      FUN_0214edbc(&DAT_0215c1c8,0xffffffd8,0xffffffe0,0x28,0x28);
+      FUN_0214edbc(&DAT_0215c1d0,0xffffffd8,0xffffffd8,0x28,0x28);
       DAT_0215cc0c = DAT_0215cc0c | 1;
     }
     if ((DAT_0215cc08 & 1) == 0) {
@@ -157,7 +157,7 @@ void FUN_0215202c(int param_1,undefined4 param_2,undefined4 param_3,undefined4 p
     iStack_1c8 = (int)*(short *)(iVar11 + 0x2c) << 0xc;
     FUN_0214e39c(auStack_170,&iStack_1c8,&iStack_1cc,&uStack_1d0);
     iVar13 = ALWidgetImp::Create(param_1,*(undefined4 *)(param_1 + 0x14),auStack_170,
-                                 FUN_0215c1b8 + (*(byte *)(iVar11 + 0x44) - 1) * 8);
+                                 &DAT_0215c1b8 + (*(byte *)(iVar11 + 0x44) - 1) * 8);
     func_0x021b65e8(*(undefined4 *)(iVar13 + 4),4,FUN_02153e8c);
     func_0x021b65e8(*(undefined4 *)(iVar13 + 4),1,FUN_02154558);
     *(code **)(*(int *)(iVar13 + 4) + 0xdc) = FUN_021543ac;
@@ -345,8 +345,8 @@ void FUN_0215202c(int param_1,undefined4 param_2,undefined4 param_3,undefined4 p
   iVar9 = 0;
   do {
     iVar10 = FUN_0203b3e4();
-    uVar6 = FUN_0214da4c(param_1,iVar9 * 0x28 + 0x215c1d8,uVar3,0x60,*(undefined4 *)(iVar10 + 0x88))
-    ;
+    uVar6 = FUN_0214da4c(param_1,&DAT_0215c1d8 + iVar9 * 0x28,uVar3,0x60,
+                         *(undefined4 *)(iVar10 + 0x88));
     iVar10 = param_1 + iVar9 * 4;
     *(undefined4 *)(iVar10 + 0x50) = uVar6;
     if ((&DAT_0215c1fc)[iVar9 * 10] != 0) {

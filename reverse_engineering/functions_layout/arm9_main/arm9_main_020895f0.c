@@ -3,41 +3,47 @@ void FUN_020895f0(int param_1,undefined4 param_2,undefined4 param_3,undefined4 p
 
 {
   short sVar1;
-  int iVar2;
+  uint uVar2;
+  int iVar3;
   
                     /* JUS-TAG strings=["CommLib.cpp"] */
   sVar1 = *(short *)(param_1 + 2);
   if (sVar1 == 0) {
-    switch(*(undefined2 *)(param_1 + 4)) {
-    case 10:
-      iVar2 = FUN_0205a7fc(&DAT_0214c200,0xd,0xff,8,1);
-      if (iVar2 == 0) {
-        DAT_0214bea4 = 6;
-      }
-      else {
-        FUN_02088904(iVar2,s_CommLib_cpp_020a0338,0x565);
-        if (DAT_0214bea4 != 2) {
-          if ((DAT_0214bea4 != 6) && (DAT_0214bea4 != 5)) {
-            DAT_0214bea4 = 4;
-            FUN_02089044();
-            return;
-          }
-          DAT_0214bea4 = 4;
-          switch(DAT_0214be60) {
-          case 0:
-          case 2:
-            iVar2 = FUN_020891fc();
-            if (iVar2 == 0) {
+    uVar2 = *(ushort *)(param_1 + 4) - 10;
+    if (uVar2 < 4) {
+                    /* WARNING: Switch is manually overridden */
+      switch(uVar2) {
+      case 0:
+        iVar3 = FUN_0205a7fc(&DAT_0214c200,0xd,0xff,8,1);
+        if (iVar3 == 0) {
+          DAT_0214bea4 = 6;
+        }
+        else {
+          FUN_02088904(iVar3,s_CommLib_cpp_020a0338,0x565);
+          if (DAT_0214bea4 != 2) {
+            if ((DAT_0214bea4 != 6) && (DAT_0214bea4 != 5)) {
+              DAT_0214bea4 = 4;
               FUN_02089044();
               return;
             }
-            break;
-          case 1:
-          case 3:
-            iVar2 = FUN_02089104();
-            if (iVar2 == 0) {
-              FUN_02089044();
-              return;
+            DAT_0214bea4 = 4;
+            if (DAT_0214be60 < 4) {
+                    /* WARNING: Switch is manually overridden */
+              switch(DAT_0214be60) {
+              case 0:
+                iVar3 = FUN_020891fc();
+                if (iVar3 == 0) {
+                  FUN_02089044();
+                  return;
+                }
+                break;
+              case 1:
+                iVar3 = FUN_02089104();
+                if (iVar3 == 0) {
+                  FUN_02089044();
+                  return;
+                }
+              }
             }
           }
         }

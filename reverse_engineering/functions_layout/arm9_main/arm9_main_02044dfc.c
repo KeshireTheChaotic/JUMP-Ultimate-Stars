@@ -14,7 +14,7 @@ void FUN_02044dfc(int param_1,undefined4 param_2,uint param_3)
   }
   puVar2 = (undefined4 *)FUN_0201a228(0x10);
   if (puVar2 != (undefined4 *)0x0) {
-    *puVar2 = &jus_Class_02094b9c::vftable;
+    *puVar2 = &jus_TagCNTR_Part_02094b9c::vftable;
     *puVar2 = &jus_TagBBDS::vftable;
     puVar2[1] = param_3;
     *(undefined1 *)(puVar2 + 2) = 0;

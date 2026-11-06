@@ -42,7 +42,7 @@ void ALControllerImp::Create(int param_1)
       local_40 = 0;
       FUN_02151038(auStack_20,&local_38,&local_3c,&local_40);
       FUN_02150d54(&local_34,*(undefined4 *)(iVar5 + 0x10),s_Position_02161a3c);
-      iVar3 = thunk_FUN_0201a228(0x4c,FUN_02160d6c,&DAT_021618e8,0x2ef);
+      iVar3 = thunk_FUN_0201a228(0x4c,&DAT_02160d6c,&DAT_021618e8,0x2ef);
       if (iVar3 != 0) {
         jus_TagIPMV::jus_TagIPMV(iVar3,0,local_34,local_30,0x3244,auStack_20,0x1e,0,0);
       }
@@ -53,7 +53,7 @@ void ALControllerImp::Create(int param_1)
       local_54 = 0;
       FUN_02151038(auStack_2c,&local_4c,&local_50,&local_54);
       FUN_02150d54(&local_48,*(undefined4 *)(iVar5 + 0x1c),s_Position_02161a3c);
-      iVar3 = thunk_FUN_0201a228(0x4c,FUN_02160d6c,&DAT_021618e8,0x2ef);
+      iVar3 = thunk_FUN_0201a228(0x4c,&DAT_02160d6c,&DAT_021618e8,0x2ef);
       if (iVar3 != 0) {
         jus_TagIPMV::jus_TagIPMV(iVar3,0,local_48,local_44,0x3244,auStack_2c,0x1e,0,0);
       }

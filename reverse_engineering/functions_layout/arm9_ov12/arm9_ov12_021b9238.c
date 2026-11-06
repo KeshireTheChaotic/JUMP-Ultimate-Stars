@@ -5,7 +5,7 @@
 undefined4 * ALWidgetBase_021d2d74::ALWidgetBase_021d2d74(undefined4 *param_1)
 
 {
-  jus_Class_021d2d04::jus_Class_021d2d04();
+  ALWidgetBase_021d2d74_Part_021d2d04::ALWidgetBase_021d2d74_Part_021d2d04();
   *param_1 = &vftable;
   FUN_021b9228(param_1,0xc);
   *(undefined4 *)(param_1[1] + 0x9c) = 0xd;

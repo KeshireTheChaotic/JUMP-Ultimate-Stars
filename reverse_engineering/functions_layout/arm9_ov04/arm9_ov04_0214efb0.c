@@ -14,7 +14,7 @@ void JQuizCommonWork::JQuizCommonWork_Create(undefined4 param_1)
     return;
   }
   DAT_02161de8 = (undefined4 *)
-                 thunk_FUN_0201a228(0x1850,s_JQuizCommonWork_cpp_02160a98,FUN_02160a5c,0x2f);
+                 thunk_FUN_0201a228(0x1850,s_JQuizCommonWork_cpp_02160a98,&DAT_02160a5c,0x2f);
   FUN_020517fc(DAT_02161de8,0,0x1850);
   *DAT_02161de8 = param_1;
   uVar1 = FUN_020101f4(s_jquiz_jquiz_pack_aar_02160aac,0);

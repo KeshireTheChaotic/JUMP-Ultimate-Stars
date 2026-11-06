@@ -1,27 +1,30 @@
 
-void FUN_0207231c(int param_1)
+void FUN_0207231c(uint param_1)
 
 {
-  switch(param_1) {
-  case 0:
-    *(uint *)(iRam020723a4 + 100) = uRam020723a8 & *(uint *)(iRam020723a4 + 100);
-    FUN_02073114(uRam020723ac,4);
-    break;
-  case 1:
-    *(uint *)(iRam020723a4 + 100) = uRam020723b0 & *(uint *)(iRam020723a4 + 100);
-    FUN_02073114(uRam020723ac,4);
-    break;
-  case 2:
-    *(uint *)(iRam020723a4 + 100) = uRam020723b4 & *(uint *)(iRam020723a4 + 100);
-    FUN_02073114(uRam020723ac,4);
-    break;
-  case 3:
-    *(uint *)(iRam020723a4 + 100) = uRam020723b8 & *(uint *)(iRam020723a4 + 100);
-    FUN_02073114(uRam020723ac,4);
+  if (param_1 < 4) {
+                    /* WARNING: Switch is manually overridden */
+    switch(param_1) {
+    case 0:
+      DAT_020b0b90 = DAT_020b0b90 & 0xfffeffff;
+      FUN_02073114(0x8d8,4);
+      break;
+    case 1:
+      DAT_020b0b90 = DAT_020b0b90 & 0xfffdffff;
+      FUN_02073114(0x8d8,4);
+      break;
+    case 2:
+      DAT_020b0b90 = DAT_020b0b90 & 0xfffbffff;
+      FUN_02073114(0x8d8,4);
+      break;
+    case 3:
+      DAT_020b0b90 = DAT_020b0b90 & 0xfff7ffff;
+      FUN_02073114(0x8d8,4);
+    }
   }
-  *(undefined1 *)(param_1 * 0xca4U + 0x20b4dac) = 0;
+  *(undefined1 *)(param_1 * 0xca4 + 0x20b4dac) = 0;
   DAT_020b02ac = 1;
-  FUN_02073114(param_1 * 0xca4U + 0x4af4);
+  FUN_02073114(param_1 * 0xca4 + 0x4af4);
   return;
 }
 

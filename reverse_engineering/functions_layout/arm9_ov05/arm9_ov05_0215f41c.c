@@ -397,29 +397,30 @@ undefined4 Input::Input_Add(undefined4 param_1)
   puVar3[0x16] = puVar3[0x25];
   *(undefined1 *)((int)puVar3 + 0x3e1) = 1;
   (**(code **)(*piVar6 + 0xc))();
-  switch(puVar3[1]) {
-  case 0:
-    FUN_02070d14(0);
-    FUN_02078aa0();
-    break;
-  case 1:
-    iVar4 = FUN_02071f10(*(undefined1 *)(iRam02160088 + 4));
-    FUN_02051890(iVar4 + 0x40,(int)puVar3 + iRam0216008c,0x1a);
-    uVar2 = FUN_02074294(iVar4 + 0x40);
-    iVar4 = iRam02160090;
-    *(undefined2 *)((int)puVar3 + iRam02160090) = uVar2;
-    *(undefined2 *)((int)puVar3 + iVar4 + 2) = *(undefined2 *)((int)puVar3 + iVar4);
-    break;
-  case 2:
-    iVar4 = FUN_02070cdc(0);
-    FUN_02051890(iVar4 + 0x14,(int)puVar3 + iRam0216008c,0x20);
-    uVar2 = FUN_02074294(iVar4 + 0x14);
-    iVar4 = iRam02160090;
-    *(undefined2 *)((int)puVar3 + iRam02160090) = uVar2;
-    *(undefined2 *)((int)puVar3 + iVar4 + 2) = *(undefined2 *)((int)puVar3 + iVar4);
-    break;
-  case 3:
-    FUN_021607a4(puVar3,2,0);
+  if ((uint)puVar3[1] < 5) {
+                    /* WARNING: Switch is manually overridden */
+    switch(puVar3[1]) {
+    case 0:
+      FUN_02070d14(0);
+      FUN_02078aa0();
+      break;
+    case 1:
+      iVar4 = FUN_02071f10(DAT_020afeb4);
+      FUN_02051890(iVar4 + 0x40,(int)puVar3 + 0x2b7,0x1a);
+      uVar2 = FUN_02074294(iVar4 + 0x40);
+      *(undefined2 *)((int)puVar3 + 0x2ae) = uVar2;
+      *(undefined2 *)(puVar3 + 0xac) = *(undefined2 *)((int)puVar3 + 0x2ae);
+      break;
+    case 2:
+      iVar4 = FUN_02070cdc(0);
+      FUN_02051890(iVar4 + 0x14,(int)puVar3 + 0x2b7,0x20);
+      uVar2 = FUN_02074294(iVar4 + 0x14);
+      *(undefined2 *)((int)puVar3 + 0x2ae) = uVar2;
+      *(undefined2 *)(puVar3 + 0xac) = *(undefined2 *)((int)puVar3 + 0x2ae);
+      break;
+    case 3:
+      FUN_021607a4(puVar3,2,0);
+    }
   }
   FUN_02073ebc(2,1);
   return puVar3[4];

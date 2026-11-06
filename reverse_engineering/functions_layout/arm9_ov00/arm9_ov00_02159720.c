@@ -10,7 +10,7 @@ ALWidgetImp::CreateDrawFunc
   undefined4 *puVar1;
   
   puVar1 = (undefined4 *)
-           thunk_FUN_0201a228(0x44,FUN_02161608,s_CreateDrawFunc_02161618,0x14e,param_4);
+           thunk_FUN_0201a228(0x44,&DAT_02161608,s_CreateDrawFunc_02161618,0x14e,param_4);
   if (puVar1 != (undefined4 *)0x0) {
     jus_Class_02095a08::jus_Class_02095a08(puVar1,param_1,0);
     *puVar1 = 0x21d2a24;

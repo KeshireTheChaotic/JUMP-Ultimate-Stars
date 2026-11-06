@@ -122,7 +122,7 @@ int Opening::Opening_Add(void)
   if (piVar3[6] == 0) {
     (**(code **)(*piVar3 + 0x10))();
   }
-  iVar2 = CommonPaletteAnime::CommonPaletteAnime_Load(piVar3[6],FUN_02160c98,0x80);
+  iVar2 = CommonPaletteAnime::CommonPaletteAnime_Load(piVar3[6],&DAT_02160c98,0x80);
   piVar1[0xd] = iVar2;
   iVar2 = PassMark::PassMark_Create();
   piVar1[0xf] = iVar2;

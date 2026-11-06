@@ -1,9 +1,10 @@
 
-/* JUS-CLASS jus_Class_02093f78::jus_Class_02093f78 [class-default] stores vtable 02093f78 into
-   *this (constructor) */
+/* JUS-CLASS TextureInstance_Part_02093f78::TextureInstance_Part_02093f78 [class-owned] stores
+   vtable 02093f78 into *this (constructor) */
 
 undefined4 *
-jus_Class_02093f78::jus_Class_02093f78(undefined4 *param_1,undefined4 param_2,undefined4 param_3)
+TextureInstance_Part_02093f78::TextureInstance_Part_02093f78
+          (undefined4 *param_1,undefined4 param_2,undefined4 param_3)
 
 {
   undefined4 *puVar1;

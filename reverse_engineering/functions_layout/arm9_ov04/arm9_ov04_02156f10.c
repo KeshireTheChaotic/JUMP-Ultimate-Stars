@@ -30,7 +30,7 @@ int * JQuizMainResultDisp::JQuizMainResultDispClass_Create(undefined4 param_1)
   undefined4 local_14;
   undefined4 local_10;
   
-  piVar1 = (int *)thunk_FUN_0201a228(0x14,FUN_021610ec,FUN_021610cc,0x4f);
+  piVar1 = (int *)thunk_FUN_0201a228(0x14,&DAT_021610ec,&DAT_021610cc,0x4f);
   FUN_020517fc(piVar1,0,0x14);
   iVar2 = ALWidgetBaseImp::Create(piVar1,param_1);
   (**(code **)(**(int **)(iVar2 + 4) + 0xd8))(*(int **)(iVar2 + 4),1);

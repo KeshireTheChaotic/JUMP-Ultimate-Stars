@@ -13,8 +13,8 @@ void FUN_02152a40(int param_1,int param_2)
   int iVar6;
   int iVar7;
   int iVar8;
-  int iVar9;
-  uint uVar10;
+  uint uVar9;
+  int iVar10;
   uint uVar11;
   int iVar12;
   undefined4 uVar13;
@@ -52,40 +52,43 @@ void FUN_02152a40(int param_1,int param_2)
     iVar8 = iVar8 + iVar14 * 0xc;
   }
   if (iVar8 == 0) {
-    uVar15 = 0;
+    uVar9 = 0;
   }
   else {
-    uVar15 = func_0x021a2934(iVar8);
+    uVar9 = func_0x021a2934(iVar8);
   }
-  switch(uVar15) {
-  case 0:
-    FUN_021524c8(iVar12,0);
-    local_60 = -1;
-    break;
-  case 1:
-    FUN_021524c8(iVar12,2);
-    bVar2 = true;
-    break;
-  case 2:
-    FUN_021524c8(iVar12,1);
-    break;
-  case 3:
-    iVar9 = func_0x021a26e0(iVar14);
-    if (iVar9 == 0) {
+  if (uVar9 < 4) {
+                    /* WARNING: Switch is manually overridden */
+    switch(uVar9) {
+    case 0:
+      FUN_021524c8(iVar12,0);
+      local_60 = -1;
+      break;
+    case 1:
+      FUN_021524c8(iVar12,2);
       bVar2 = true;
-      if ((local_48[8] < 1) || (0xc < local_48[8])) {
-        FUN_021524c8(iVar12,2);
+      break;
+    case 2:
+      FUN_021524c8(iVar12,1);
+      break;
+    case 3:
+      iVar10 = func_0x021a26e0(iVar14);
+      if (iVar10 == 0) {
+        bVar2 = true;
+        if ((local_48[8] < 1) || (0xc < local_48[8])) {
+          FUN_021524c8(iVar12,2);
+        }
+        else {
+          FUN_021524c8(iVar12,3);
+        }
       }
       else {
-        FUN_021524c8(iVar12,3);
+        FUN_021524c8(iVar12,1);
       }
-    }
-    else {
-      FUN_021524c8(iVar12,1);
-    }
-    iVar8 = func_0x021a2940(iVar8);
-    if (iVar8 != 0) {
-      local_60 = 1;
+      iVar8 = func_0x021a2940(iVar8);
+      if (iVar8 != 0) {
+        local_60 = 1;
+      }
     }
   }
   uVar15 = 0;
@@ -100,7 +103,7 @@ void FUN_02152a40(int param_1,int param_2)
   iVar5 = local_48[8];
   iVar4 = local_48[7];
   iVar3 = local_48[6];
-  iVar9 = local_48[5];
+  iVar10 = local_48[5];
   iVar8 = local_48[4];
   sVar1 = *(short *)(*(int *)(*(int *)(iVar12 + 4) + 100) + 0x4a);
   if (sVar1 == 1) {
@@ -159,7 +162,7 @@ void FUN_02152a40(int param_1,int param_2)
         iVar12 = iVar12 + 1;
         local_48[0] = local_48[0] + 6;
       } while (iVar12 < 2);
-      FUN_02151668(iVar9,2,local_4c);
+      FUN_02151668(iVar10,2,local_4c);
       local_48[0] = 0x6b;
       local_48[1] = 0x1e;
       iVar12 = 0;
@@ -178,7 +181,7 @@ void FUN_02152a40(int param_1,int param_2)
         local_48[0] = local_48[0] + 6;
       } while (iVar12 < 2);
     }
-    uVar10 = FUN_02071200(iVar14);
+    uVar9 = FUN_02071200(iVar14);
     uVar11 = FUN_020711c0(iVar14);
     FUN_02152f38(uVar13,0x6d665053);
     if (uVar11 < 1000) {
@@ -196,7 +199,7 @@ void FUN_02152a40(int param_1,int param_2)
       FUN_021529e4(uVar13,local_58[iVar12] + 0x14,0x6d665053,local_54);
       local_54[0] = local_54[0] + 6;
     }
-    if (uVar10 < 1000) {
+    if (uVar9 < 1000) {
       iVar14 = 3;
       iVar12 = 0xb3;
     }
@@ -204,7 +207,7 @@ void FUN_02152a40(int param_1,int param_2)
       iVar14 = 4;
       iVar12 = 0xaf;
     }
-    FUN_02151668(uVar10,iVar14,local_58);
+    FUN_02151668(uVar9,iVar14,local_58);
     local_54[0] = iVar12;
     local_54[1] = 0x11;
     for (iVar12 = 0; iVar12 < iVar14; iVar12 = iVar12 + 1) {

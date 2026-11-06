@@ -1,9 +1,9 @@
 
-/* JUS-CLASS jus_Class_02093f78::vfunc_05 [class-virtual] slot 5 of vtable 02093f78 (own slot, not
-   inherited) */
+/* JUS-CLASS TextureInstance_Part_02093f78::vfunc_05 [class-virtual] slot 5 of vtable 02093f78 (own
+   slot, not inherited) */
 
 undefined4
-jus_Class_02093f78::vfunc_05
+TextureInstance_Part_02093f78::vfunc_05
           (undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
 
 {

@@ -3,7 +3,7 @@
 /* JUS-GAME JArenaParam::JArena_ParamResult [source-string] __FILE__="JArenaParam.cpp"
    __FUNCTION__="JArena_ParamResult" lines=[] passed to 1 source-location call(s) */
 
-int JArenaParam::JArena_ParamResult(int param_1,undefined1 *param_2)
+int JArenaParam::JArena_ParamResult(uint param_1,undefined1 *param_2)
 
 {
   byte bVar1;
@@ -197,18 +197,21 @@ int JArenaParam::JArena_ParamResult(int param_1,undefined1 *param_2)
     else if (bVar1 == 0x14) {
       if (DAT_020aff10 == '\0') {
         iVar7 = 2;
-        switch(param_1) {
-        case 0:
-          FUN_0207120c(0x1000,1);
-          break;
-        case 1:
-          FUN_0207120c(0x2000,1);
-          break;
-        case 2:
-          FUN_0207120c(0x4000,1);
-          break;
-        case 3:
-          FUN_0207120c(0x8000,1);
+        if (param_1 < 4) {
+                    /* WARNING: Switch is manually overridden */
+          switch(param_1) {
+          case 0:
+            FUN_0207120c(0x1000,1);
+            break;
+          case 1:
+            FUN_0207120c(0x2000,1);
+            break;
+          case 2:
+            FUN_0207120c(0x4000,1);
+            break;
+          case 3:
+            FUN_0207120c(0x8000,1);
+          }
         }
         if ((((DAT_020b0b90 & 0x1000) != 0) && ((DAT_020b0b90 & 0x2000) != 0)) &&
            ((DAT_020b0b90 & 0x4000) != 0)) {

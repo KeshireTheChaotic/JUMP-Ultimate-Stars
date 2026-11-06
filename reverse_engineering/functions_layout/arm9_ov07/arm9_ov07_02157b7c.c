@@ -117,7 +117,7 @@ CommuMenuCmnMemberEnt::CommuMenuCmnMemberEnt_Add
     *(undefined1 *)(*(int *)(iVar2 + 4) + 0xaa) = 1;
     *(undefined1 *)(*(int *)(iVar2 + 4) + 0xab) = 0;
     func_0x021b77a8(*(undefined4 *)(iVar2 + 4),0x8000);
-    piVar4 = (int *)thunk_FUN_0201a228(0x70,FUN_02169674,s_Create_02169ff8,0x1b2);
+    piVar4 = (int *)thunk_FUN_0201a228(0x70,&DAT_02169674,s_Create_02169ff8,0x1b2);
     if (piVar4 != (int *)0x0) {
       func_0x021b054c(piVar4,0,&DAT_02093c8c);
       *piVar4 = (int)&jus_Class_021695c0::vftable;

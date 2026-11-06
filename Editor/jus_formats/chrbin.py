@@ -14,7 +14,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
-from .binary import u16, u32
+from .binary import u32
 
 STRIDES = {'col': 20, 'shot': 32, 'effect': 8}
 
@@ -49,10 +49,6 @@ class RecordTable:
             raise IndexError(i)
         return self.raw[i * self.stride:(i + 1) * self.stride]
 
-    def words16(self, i: int) -> tuple[int, ...]:
-        r = self.record(i)
-        return tuple(u16(r, k) for k in range(0, len(r) - 1, 2))
-
     def words32(self, i: int) -> tuple[int, ...]:
         r = self.record(i)
         return tuple(u32(r, k) for k in range(0, len(r) - 3, 4))
@@ -72,7 +68,3 @@ def parse(blob: bytes, member_name: str) -> RecordTable:
     if stride and len(blob) % stride:
         stride = 0
     return RecordTable(kind, stride, bytes(blob))
-
-
-def signature(blob: bytes) -> str:
-    return blob[:4].decode('ascii') if blob[:4] in (b'AIPM', b'AIMV') else 'opaque-binary'

@@ -2,7 +2,7 @@
 /* JUS-GAME JArenaParam::JArena_ParamInit [source-string] __FILE__="JArenaParam.cpp"
    __FUNCTION__="JArena_ParamInit" lines=[78] passed to 1 source-location call(s) */
 
-void JArenaParam::JArena_ParamInit(int param_1)
+void JArenaParam::JArena_ParamInit(uint param_1)
 
 {
   uint *puVar1;
@@ -36,18 +36,21 @@ void JArenaParam::JArena_ParamInit(int param_1)
   iVar5 = thunk_FUN_0201a228(0x2f0,s_JArenaParam_cpp_021d45e0,s_JArena_ParamInit_021d45b8,0x4e);
   FUN_020517fc(iVar5,0,0x2f0);
   if ((&DAT_020b4dac)[iVar13] == '\0') {
-    switch(param_1) {
-    case 0:
-      FUN_0207120c(0x10000,1);
-      break;
-    case 1:
-      FUN_0207120c(0x20000,1);
-      break;
-    case 2:
-      FUN_0207120c(0x40000,1);
-      break;
-    case 3:
-      FUN_0207120c(0x80000,1);
+    if (param_1 < 4) {
+                    /* WARNING: Switch is manually overridden */
+      switch(param_1) {
+      case 0:
+        FUN_0207120c(0x10000,1);
+        break;
+      case 1:
+        FUN_0207120c(0x20000,1);
+        break;
+      case 2:
+        FUN_0207120c(0x40000,1);
+        break;
+      case 3:
+        FUN_0207120c(0x80000,1);
+      }
     }
     iVar8 = 0;
     iVar7 = 0;

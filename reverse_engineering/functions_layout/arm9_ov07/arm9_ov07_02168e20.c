@@ -137,7 +137,7 @@ void FUN_02168e20(void)
   FUN_02163e78(auStack_bc,0);
   FUN_02163e78(auStack_b8,0);
   FUN_02163e78(auStack_b4,0);
-  FUN_02163ee0(FUN_0216a8f0,auStack_b4,auStack_b8,auStack_bc);
+  FUN_02163ee0(&DAT_0216a8f0,auStack_b4,auStack_b8,auStack_bc);
   FUN_02163e78(auStack_c8,0);
   FUN_02163e78(auStack_c4,0xfffffff0);
   FUN_02163e78(auStack_c0,0xfffffff2);

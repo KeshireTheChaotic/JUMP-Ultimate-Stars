@@ -190,7 +190,7 @@ undefined4 JQuizTop::JQuizTop_Add(int param_1)
     iVar6 = FUN_0214ee60(uVar4,*(undefined4 *)(iVar6 + 0x88),0x810000,iVar3 + 2,0x70,&local_a8);
     *(int *)(*(int *)(iVar6 + 4) + 0x124) = iVar3 + 0x40;
     puVar2[iVar3 + 0x1c] = iVar6;
-    piVar5 = (int *)thunk_FUN_0201a228(0x70,FUN_021608f4,s_Create_02160b70,0x1b2);
+    piVar5 = (int *)thunk_FUN_0201a228(0x70,&DAT_021608f4,s_Create_02160b70,0x1b2);
     if (piVar5 != (int *)0x0) {
       func_0x021b054c(piVar5,0,&DAT_02093c8c);
       *piVar5 = (int)&jus_Class_0216094c::vftable;

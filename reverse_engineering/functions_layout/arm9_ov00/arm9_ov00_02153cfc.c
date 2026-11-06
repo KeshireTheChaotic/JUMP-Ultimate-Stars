@@ -197,7 +197,7 @@ int TopMenu::TopMenu_Add(int param_1)
   (**(code **)(**(int **)(iVar7 + 4) + 0x50))(*(int **)(iVar7 + 4),1);
   (**(code **)(**(int **)(piVar6[3] + 8) + 0x50))();
   FUN_0214edac();
-  iVar7 = thunk_FUN_0201a228(0xcc,PTR_FUN_02154c40,PTR_s_Create_02154c44,uRam02154c48);
+  iVar7 = thunk_FUN_0201a228(0xcc,PTR_DAT_02154c40,PTR_s_Create_02154c44,uRam02154c48);
   if (iVar7 != 0) {
     func_0x021af26c(iVar7,uRam02154c4c,uRam02154c50,0);
   }
@@ -284,7 +284,7 @@ int TopMenu::TopMenu_Add(int param_1)
     FUN_02150d54(&uStack_c4,iVar9,PTR_s_Scale_02154c88);
     uVar23 = uStack_c0;
     uVar14 = uStack_c4;
-    iVar17 = thunk_FUN_0201a228(0x4c,PTR_FUN_02154c8c,PTR_s_Create_02154c90,uRam02154c94);
+    iVar17 = thunk_FUN_0201a228(0x4c,PTR_DAT_02154c8c,PTR_s_Create_02154c90,uRam02154c94);
     if (iVar17 != 0) {
       jus_TagIPCT::jus_TagIPCT(iVar17,0,uVar14,uVar23,uRam02154c98,auStack_3c,auStack_30,0x1e,0);
     }

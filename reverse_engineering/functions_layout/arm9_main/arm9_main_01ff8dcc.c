@@ -21,8 +21,6 @@ void OS_IrqHandler(void)
     uVar2 = uVar2 & ~(0x80000000U >> iVar1);
   } while (uVar2 != 0);
   _DAT_04000214 = 0x80000000 >> iVar1;
-                    /* WARNING: Could not emulate address calculation at 0x01ff8e10 */
-                    /* WARNING: Treating indirect jump as call */
   (*(code *)(&DAT_027c0000)[0x1f - iVar1])();
   return;
 }

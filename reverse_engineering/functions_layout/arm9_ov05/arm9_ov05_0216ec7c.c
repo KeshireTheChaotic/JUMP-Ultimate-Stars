@@ -20,7 +20,7 @@ void FUN_0216ec7c(void)
   FUN_021509f8(auStack_2c,0xffffffc8,0xfffffff0,0x38,0x10);
   FUN_021546b4(&DAT_0217169c,auStack_2c);
   FUN_021509f8(auStack_34,0xffffffd0,0xfffffff0,0,10);
-  FUN_021546b4(FUN_021716c0,auStack_34);
+  FUN_021546b4(&DAT_021716c0,auStack_34);
   return;
 }
 

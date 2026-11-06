@@ -11,7 +11,7 @@ jus_TagDLSE::jus_TagDLSE
   int iVar1;
   undefined4 uVar2;
   
-  jus_Class_0209af58::jus_Class_0209af58();
+  jus_TagDLSE_Part_0209af58::jus_TagDLSE_Part_0209af58();
   *param_1 = &vftable;
   *(undefined1 *)(param_1 + 0xe) = param_7;
   param_1[0xf] = param_6;

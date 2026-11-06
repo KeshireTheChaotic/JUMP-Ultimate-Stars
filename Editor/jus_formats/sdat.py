@@ -30,10 +30,6 @@ class SdatSymbols:
     sequences: list[str] = field(default_factory=list)
     seqarcs: list[SeqArc] = field(default_factory=list)
 
-    def seqarc_by_name(self, name: str) -> SeqArc | None:
-        up = name.upper()
-        return next((a for a in self.seqarcs if a.name.upper() == up), None)
-
     def sound_name(self, arc_index: int, seq_index: int) -> str | None:
         if 0 <= arc_index < len(self.seqarcs):
             a = self.seqarcs[arc_index]

@@ -36,11 +36,10 @@ void FUN_0215f678(void)
       FUN_0215707c(0,0);
       FUN_02157088(0x2157f41);
     }
-    else {
+    else if (DAT_0216e7b0 < 4) {
+                    /* WARNING: Switch is manually overridden */
       switch(DAT_0216e7b0) {
-      case 0:
-      case 1:
-      case 2:
+      default:
         FUN_0215707c(2,0);
         iVar1 = FUN_021622d4();
         if (*(char *)(iVar1 + 0xe7) == -1) {

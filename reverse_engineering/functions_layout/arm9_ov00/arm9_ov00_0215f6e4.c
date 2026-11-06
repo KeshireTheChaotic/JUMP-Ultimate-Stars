@@ -23,7 +23,7 @@ void ALNodeImp::Create(int *param_1,undefined4 param_2,undefined4 param_3,undefi
   (**(code **)(**(int **)(iVar1 + 4) + 0x24))(*(int **)(iVar1 + 4),param_1);
   FUN_02028384(*(undefined4 *)(*param_1 + 4),FUN_0215fe4c);
   FUN_020282f4(*(undefined4 *)(*param_1 + 4));
-  iVar1 = thunk_FUN_0201a228(0x78,FUN_02161148,s_Create_02161a90,0x4c3);
+  iVar1 = thunk_FUN_0201a228(0x78,&DAT_02161148,s_Create_02161a90,0x4c3);
   piVar2 = (int *)0x0;
   if (iVar1 != 0) {
     piVar2 = (int *)jus_TagNDGR_0209c0b4::jus_TagNDGR_0209c0b4(iVar1,FUN_02024a30,1);

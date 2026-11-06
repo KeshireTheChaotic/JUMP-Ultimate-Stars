@@ -32,7 +32,7 @@ undefined4 * KomaHelp::KomaHelp_Create(undefined4 param_1)
   (**(code **)(**(int **)(puVar1[2] + 4) + 0x24))(*(int **)(puVar1[2] + 4),puVar1);
   uVar3 = func_0x021bcf1c(0x15,0xffffffff,0,0);
   *puVar1 = uVar3;
-  piVar4 = (int *)FUN_020101f4(FUN_021706b4,0);
+  piVar4 = (int *)FUN_020101f4(&DAT_021706b4,0);
   uVar3 = FUN_020101f4(DAT_0217017c,0);
   puVar1[0x3a] = uVar3;
   iVar2 = thunk_FUN_0201a228(0xcc,s_ALWidget_inl_0216f484,s_Create_0217066c,0x1de);

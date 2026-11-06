@@ -9,7 +9,6 @@ from __future__ import annotations
 from dataclasses import dataclass
 
 from jus_formats import dsig as dsigmod, dstx as dstxmod, sprite
-from jus_formats.binary import is_dscp
 
 from .project import DataRoot, join
 
@@ -73,7 +72,3 @@ class ResourceIndex:
             self._sprites.clear()
         else:
             self._sprites.pop(rid & 0xFFFFFF, None)
-
-
-def is_archive_blob(blob: bytes) -> bool:
-    return blob[:4] == b'ALAR' or (is_dscp(blob))

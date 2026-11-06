@@ -1,5 +1,5 @@
 
-void FUN_02006328(int param_1,int param_2,uint param_3,uint param_4,int param_5,int param_6)
+short * FUN_02006328(int param_1,int param_2,uint param_3,uint param_4,int param_5,int param_6)
 
 {
   uint uVar1;
@@ -11,7 +11,6 @@ void FUN_02006328(int param_1,int param_2,uint param_3,uint param_4,int param_5,
   short sVar6;
   int iVar7;
   int iVar8;
-  code *in_lr;
   uint uStack_38;
   int iStack_34;
   int iStack_2c;
@@ -26,8 +25,7 @@ void FUN_02006328(int param_1,int param_2,uint param_3,uint param_4,int param_5,
   bVar3 = false;
   *psVar4 = 0;
   if (((param_1 == 0) && (param_6 == 0)) && ((uVar1 == 0 || (uVar2 != 0x6f)))) {
-    (*in_lr)(psVar4);
-    return;
+    return psVar4;
   }
   if (uVar2 < 0x6a) {
     if (uVar2 < 0x69) {
@@ -100,8 +98,7 @@ LAB_020063d8:
     }
   }
   if ((int)0x1fd < iStack_34 + (param_2 - (int)psVar4) / 2) {
-    (*in_lr)(0);
-    return;
+    return (short *)0x0;
   }
   for (; iVar7 < iStack_34; iVar7 = iVar7 + 1) {
     psVar4 = psVar4 + -1;
@@ -124,7 +121,6 @@ LAB_020063d8:
     psVar4 = psVar4 + -1;
     *psVar4 = 0x20;
   }
-  (*in_lr)(psVar4);
-  return;
+  return psVar4;
 }
 

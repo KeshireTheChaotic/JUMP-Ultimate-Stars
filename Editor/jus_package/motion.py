@@ -119,10 +119,6 @@ class Motion:
             return None
         return self.frames[max(0, min(tick, len(self.frames) - 1))]
 
-    @property
-    def has_motion(self) -> bool:
-        return any(c.opcode in (0x0100, 0x0103, 0x0104, 0x0101) for _, _, c in self.commands)
-
 
 def physics_commands(move: almt.Move, node_names: list[str]) -> list[tuple[int, str, notetrack.Command]]:
     out = []

@@ -21,7 +21,7 @@ void FUN_0216a7a4(void)
   undefined1 auStack_c [12];
   
   FUN_0214dc98(auStack_c,0xffffffd0,0xfffffff0,0,0);
-  FUN_0214dc84(FUN_0216cefc,auStack_c);
+  FUN_0214dc84(&DAT_0216cefc,auStack_c);
   FUN_0214dc98(auStack_14,0xffffff80,0xfffffff4,0,0xc);
   FUN_0214dc84(&DAT_0216cf2c,auStack_14);
   FUN_0214dc98(auStack_1c,0xffffffe8,0xfffffff8,0x18,8);
@@ -51,7 +51,7 @@ void FUN_0216a7a4(void)
   FUN_0214dc98(auStack_7c,0xffffffb8,0xfffffff8,0x48,8);
   FUN_0214dc84(&DAT_0216d19c,auStack_7c);
   FUN_0214dc98(auStack_84,0xffffffb8,0xfffffff8,0x48,8);
-  FUN_0214dc84(FUN_0216d1cc,auStack_84);
+  FUN_0214dc84(&DAT_0216d1cc,auStack_84);
   FUN_0214dc98(auStack_8c,0xffffffb8,0xfffffff8,0x48,8);
   FUN_0214dc84(&DAT_0216d1fc,auStack_8c);
   return;

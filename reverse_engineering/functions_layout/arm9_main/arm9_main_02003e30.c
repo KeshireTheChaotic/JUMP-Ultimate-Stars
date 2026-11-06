@@ -195,67 +195,22 @@ LAB_02003f62:
     }
     if (iVar9 < 0x48) {
       if (-1 < iVar9 + -0x41) {
-                    /* WARNING: Could not recover jumptable at 0x02003f8c. Too many branches */
-                    /* WARNING: Treating indirect jump as call */
-        pcVar13 = (char *)(*(code *)(*(short *)(&DAT_02003f8e + (iVar9 + -0x41) * 2) + 0x2003f90))()
-        ;
-        return pcVar13;
+                    /* WARNING: Switch is manually overridden */
+        switch(iVar9 + -0x41) {
+        case 0:
+          goto switchD_02003fbc_caseD_65;
+        }
       }
     }
-    else if (iVar9 == 0x58) goto switchD_02003fbc_caseD_64;
-  }
-  else {
-    if (0x61 < iVar9) {
-      switch(iVar9) {
-      case 99:
-        if (local_40._2_1_ == '\x03') {
-          local_40._2_1_ = 10;
-        }
-        else if (local_40._2_1_ != '\0') {
-          local_40._3_1_ = 0xff;
-        }
-        break;
-      case 100:
-      case 0x69:
-      case 0x6f:
-      case 0x75:
-      case 0x78:
+    else if (iVar9 == 0x58) {
 switchD_02003fbc_caseD_64:
-        if (local_40._2_1_ == '\t') {
-          local_40._3_1_ = 0xff;
-        }
-        break;
-      case 0x65:
-      case 0x66:
-      case 0x67:
-        goto switchD_02003fbc_caseD_65;
-      default:
-        goto switchD_02003fbc_caseD_68;
-      case 0x6e:
-        break;
-      case 0x70:
-        local_40._2_1_ = 3;
-        local_40._3_1_ = 0x78;
-        break;
-      case 0x73:
-        if (local_40._2_1_ == '\x03') {
-          local_40._2_1_ = 10;
-        }
-        else if (local_40._2_1_ != '\0') {
-          local_40._3_1_ = 0xff;
-        }
-        iVar9 = 0x20;
-        pbVar6 = local_38;
-        do {
-          iVar9 = iVar9 + -1;
-          *pbVar6 = 0xff;
-          pbVar6 = pbVar6 + 1;
-        } while (0 < iVar9);
-        local_38[1] = 0xc1;
-        local_34 = 0xfe;
+      if (local_40._2_1_ == '\t') {
+        local_40._3_1_ = 0xff;
       }
       goto switchD_02003fbc_caseD_6e;
     }
+  }
+  else if (iVar9 < 0x62) {
     if (iVar9 == 0x61) {
 switchD_02003fbc_caseD_65:
       if (((local_40._2_1_ == '\x01') || (local_40._2_1_ == '\x02')) ||
@@ -267,6 +222,52 @@ switchD_02003fbc_caseD_65:
       }
       goto switchD_02003fbc_caseD_6e;
     }
+  }
+  else if (iVar9 - 99U < 0x16) {
+                    /* WARNING: Switch is manually overridden */
+    switch(iVar9 - 99U) {
+    case 0:
+      if (local_40._2_1_ == '\x03') {
+        local_40._2_1_ = 10;
+      }
+      else if (local_40._2_1_ != '\0') {
+        local_40._3_1_ = 0xff;
+      }
+      break;
+    case 1:
+    case 6:
+    case 0xc:
+      goto switchD_02003fbc_caseD_64;
+    case 2:
+    case 3:
+    case 4:
+      goto switchD_02003fbc_caseD_65;
+    default:
+      goto switchD_02003fbc_caseD_68;
+    case 0xb:
+      break;
+    case 0xd:
+      local_40._2_1_ = 3;
+      local_40._3_1_ = 0x78;
+      break;
+    case 0x10:
+      if (local_40._2_1_ == '\x03') {
+        local_40._2_1_ = 10;
+      }
+      else if (local_40._2_1_ != '\0') {
+        local_40._3_1_ = 0xff;
+      }
+      iVar9 = 0x20;
+      pbVar6 = local_38;
+      do {
+        iVar9 = iVar9 + -1;
+        *pbVar6 = 0xff;
+        pbVar6 = pbVar6 + 1;
+      } while (0 < iVar9);
+      local_38[1] = 0xc1;
+      local_34 = 0xfe;
+    }
+    goto switchD_02003fbc_caseD_6e;
   }
 switchD_02003fbc_caseD_68:
   local_40._3_1_ = 0xff;

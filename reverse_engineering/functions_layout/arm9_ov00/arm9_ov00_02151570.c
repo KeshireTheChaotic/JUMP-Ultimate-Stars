@@ -30,7 +30,7 @@ int * PassMark::PassMark_Create(void)
     piVar1[2] = (int)FUN_02151b84;
     iVar2 = FUN_0215178c(s_opening_PassMark_bin_02160fa4,0,0);
     piVar1[4] = iVar2;
-    iVar2 = FUN_0215178c(FUN_02160fbc,0,0);
+    iVar2 = FUN_0215178c(&DAT_02160fbc,0,0);
     piVar1[5] = iVar2;
     iVar2 = (**(code **)(**(int **)(iVar2 + 4) + 0x2c))(*(int **)(iVar2 + 4),0);
     piVar1[6] = iVar2;

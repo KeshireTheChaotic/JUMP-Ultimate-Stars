@@ -6,5 +6,17 @@
 020682d2  lsl r0,r0,#0x10
 020682d4  asr r0,r0,#0x10
 020682d6  add pc,r0
+020682e0  mov r0,#0x8
+020682e2  mvn r0,r0
+020682e4  bx lr
+020682e6  mov r0,#0x9
+020682e8  mvn r0,r0
+020682ea  bx lr
+020682ec  mov r0,#0x7
+020682ee  mvn r0,r0
+020682f0  bx lr
+020682f2  mov r0,#0x6
+020682f4  mvn r0,r0
+020682f6  bx lr
 020682f8  mov r0,#0x0
 020682fa  bx lr

@@ -106,9 +106,6 @@ class Archive:
             raise KeyError(name)
         return e
 
-    def by_resource_id(self, rid: int) -> list[Entry]:
-        return [e for e in self.entries if e.resource_id == rid & 0xFFFFFF]
-
     def uses_resource_hash(self) -> bool:
         return self.version == 3 and bool(self.flags & 0x40)
 
@@ -237,10 +234,6 @@ class Archive:
 
 def parse(blob: bytes) -> Archive:
     return Archive.parse(blob)
-
-
-def is_alar(blob: bytes) -> bool:
-    return blob[:4] == MAGIC
 
 
 def open_nested(blob: bytes) -> Archive:

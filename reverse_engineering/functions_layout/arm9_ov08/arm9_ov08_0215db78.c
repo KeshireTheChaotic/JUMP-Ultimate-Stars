@@ -1,5 +1,5 @@
 
-void FUN_0215db78(int param_1)
+void FUN_0215db78(uint param_1)
 
 {
   int iVar1;
@@ -10,20 +10,22 @@ void FUN_0215db78(int param_1)
     FUN_02162378(9);
     return;
   }
-  switch(param_1) {
-  case 2:
-  case 3:
-    FUN_02162378(6);
-    FUN_0215db24(param_1 != 3);
-    return;
-  case 7:
-  case 8:
-    FUN_02162378(6);
-    FUN_0215dafc(param_1 != 8);
-    return;
+  if (param_1 < 9) {
+                    /* WARNING: Switch is manually overridden */
+    switch(param_1) {
+    case 2:
+    case 3:
+      FUN_02162378(6);
+      FUN_0215db24(param_1 != 3);
+      return;
+    case 7:
+      FUN_02162378(6);
+      FUN_0215dafc(param_1 != 8);
+      return;
+    }
   }
   *(char *)(DAT_0216e794 + 0x40) = (char)param_1;
-  if (param_1 - 0xbU < 2) {
+  if (param_1 - 0xb < 2) {
     FUN_0215ca40();
     iVar1 = FUN_0215c924();
     if (iVar1 == 0) {

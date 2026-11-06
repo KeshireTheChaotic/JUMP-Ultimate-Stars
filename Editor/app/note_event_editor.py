@@ -28,13 +28,11 @@ class NoteEventEditor(tk.Toplevel):
         self.data = notetrack.parse(self.original)
         self._locations = []
         self._selected = None
-        self._updating = False
         self.tick_var = tk.StringVar(value=str(initial_tick))
         self.op_var = tk.StringVar()
         self.detail_var = tk.StringVar()
         self.raw_var = tk.StringVar()
         self.arg_vars: list[tk.StringVar] = []
-        self._chara_arg_var = None
         self._build()
         self._populate(select_tick=initial_tick)
         if operation == 'add':
@@ -165,7 +163,6 @@ class NoteEventEditor(tk.Toplevel):
         for child in self.args_frame.winfo_children():
             child.destroy()
         self.arg_vars = []
-        self._chara_arg_var = None
         info = notetrack.op_info(opcode)
         self.detail_var.set(f'{eventops.category(opcode)}: {info.meaning}' if info else
                             'Unknown command. Preserve its opcode and raw argument bytes.')
@@ -179,7 +176,6 @@ class NoteEventEditor(tk.Toplevel):
                     choices = [f'{n} — {eventops.CHARA_ACTION_NAMES.get(n, "unlabeled")}' for n in range(34)]
                     widget = ttk.Combobox(r, values=choices, width=42, textvariable=var)
                     widget.pack(side='left', fill='x', expand=True)
-                    self._chara_arg_var = var
                     # The combobox is editable to preserve subcodes outside this observed range.
                     var.set(f'{value} — {eventops.CHARA_ACTION_NAMES.get(value, "unlabeled")}' if 0 <= value <= 33 else str(value))
                 else:

@@ -16,7 +16,7 @@ int * CommuMenuCommon::CMMenuCmn_BaseBG_Create
   undefined4 uStack_18;
   
   uStack_18 = param_4;
-  piVar1 = (int *)thunk_FUN_0201a228(8,FUN_02169890,s_CMMenuCmn_BaseBG_Create_02169768,0x66);
+  piVar1 = (int *)thunk_FUN_0201a228(8,&DAT_02169890,s_CMMenuCmn_BaseBG_Create_02169768,0x66);
   FUN_020517fc(piVar1,0,8);
   FUN_0203d0b4(*(undefined4 *)(param_1 + 4),1);
   FUN_0203d478(*(undefined4 *)(param_1 + 4),4);

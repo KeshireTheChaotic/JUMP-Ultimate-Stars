@@ -20,7 +20,7 @@ int * JQuizMainTimeGauge::JQuizMainTimeGaugeClass_Create
   undefined4 uStack_28;
   
   uStack_28 = param_4;
-  piVar3 = (int *)thunk_FUN_0201a228(0xf8,s_JQuizMainTimeGauge_cpp_02160ef4,0x2160ed4,0xaa);
+  piVar3 = (int *)thunk_FUN_0201a228(0xf8,s_JQuizMainTimeGauge_cpp_02160ef4,&DAT_02160ed4,0xaa);
   FUN_020517fc(piVar3,0,0xf8);
   DAT_02093c08 = DAT_02093c08 + -1;
   pcVar6 = &DAT_02160410;

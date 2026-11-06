@@ -2,15 +2,11 @@
 void FUN_02066e44(undefined4 param_1,int param_2,uint param_3)
 
 {
-  code *in_lr;
-  
   if ((DAT_0209dd40 == -1) || (param_3 < 0x31)) {
     MIi_CpuCopy32(param_1,param_2 + 0x7000000,param_3);
-    (*in_lr)();
     return;
   }
   MI_DmaCopy32(DAT_0209dd40,param_1,param_2 + 0x7000000);
-  (*in_lr)();
   return;
 }
 

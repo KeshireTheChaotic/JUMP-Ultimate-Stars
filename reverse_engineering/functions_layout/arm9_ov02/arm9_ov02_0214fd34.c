@@ -35,7 +35,7 @@ void ALControllerImp::Create(int param_1)
   (**(code **)(**(int **)(iVar1 + 4) + 0xd8))(*(int **)(iVar1 + 4),1);
   local_3c[2] = 0x20000;
   FUN_0214d650(iVar1,local_3c + 2);
-  FUN_0214f960(iVar1,0x215bf0c);
+  FUN_0214f960(iVar1,&DAT_0215bf0c);
   piVar2 = *(int **)(*(int *)(iVar1 + 4) + 100);
   (**(code **)(*piVar2 + 0x68))(piVar2,*(undefined4 *)(param_1 + 0x88));
   FUN_0214d678(iVar1,*(undefined4 *)(param_1 + 0x68));

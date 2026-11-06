@@ -15,14 +15,12 @@ int * FUN_0217756c(void)
     piVar1 = piVar2;
     if (piVar2 < (int *)0x6) {
       piVar1 = (int *)(int)(short)(&switchD_02177594::switchdataD_02177596)[(int)piVar2];
+                    /* WARNING: Switch is manually overridden */
       switch(piVar2) {
-      case (int *)0x0:
-      case (int *)0x5:
-        break;
       case (int *)0x1:
         piVar1 = (int *)FUN_021770c0();
         return piVar1;
-      default:
+      case (int *)0x2:
         if (((int *)*DAT_021a759c != (int *)0x0) && (*(int *)*DAT_021a759c != 0)) {
           FUN_021823ac();
         }

@@ -155,7 +155,7 @@ void FUN_0215e2bc(int *param_1)
   local_80 = 0;
   FUN_02151038(auStack_30,&local_78,&local_7c,&local_80);
   FUN_02150d54(&local_74,iVar4,s_Position_02161a3c);
-  iVar1 = thunk_FUN_0201a228(0x4c,FUN_02161174,&DAT_021618e0,0x2b9);
+  iVar1 = thunk_FUN_0201a228(0x4c,&DAT_02161174,&DAT_021618e0,0x2b9);
   if (iVar1 != 0) {
     jus_TagIPCT::jus_TagIPCT(iVar1,0,local_74,local_70,0x494c,&DAT_02093c8c,auStack_30,0x400,2);
   }
@@ -167,7 +167,7 @@ void FUN_0215e2bc(int *param_1)
   local_94 = 0;
   FUN_02151038(auStack_3c,&local_8c,&local_90,&local_94);
   FUN_02150d54(&local_88,iVar4,s_Position_02161a3c);
-  iVar1 = thunk_FUN_0201a228(0x4c,FUN_02161174,&DAT_021618e0,0x2b9);
+  iVar1 = thunk_FUN_0201a228(0x4c,&DAT_02161174,&DAT_021618e0,0x2b9);
   if (iVar1 != 0) {
     jus_TagIPCT::jus_TagIPCT(iVar1,0,local_88,local_84,0x494c,&DAT_02093c8c,auStack_3c,0x400,2);
   }
@@ -175,7 +175,7 @@ void FUN_0215e2bc(int *param_1)
   FUN_02020f38(iVar4,uVar3);
   *(undefined1 *)((int)param_1 + 0x6a) = 0;
   *(undefined1 *)((int)param_1 + 0x6b) = 2;
-  iVar1 = thunk_FUN_0201a228(0x78,FUN_02161148,s_Create_021618d0,0x4c3);
+  iVar1 = thunk_FUN_0201a228(0x78,&DAT_02161148,s_Create_021618d0,0x4c3);
   piVar2 = (int *)0x0;
   if (iVar1 != 0) {
     piVar2 = (int *)jus_TagNDGR_0209c0b4::jus_TagNDGR_0209c0b4(iVar1,FUN_02024a30,1);

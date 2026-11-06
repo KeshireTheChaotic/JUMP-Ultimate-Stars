@@ -8,7 +8,6 @@ void FUN_037fb948(uint param_1)
   int iVar2;
   undefined4 *puVar3;
   undefined4 uVar4;
-  code *UNRECOVERED_JUMPTABLE_00;
   undefined4 in_stack_00000004;
   undefined4 in_stack_00000008;
   
@@ -28,10 +27,7 @@ void FUN_037fb948(uint param_1)
     param_1 = 0;
   }
   puVar1 = DAT_038082dc;
-                    /* WARNING: Could not recover jumptable at 0x037fb9a4. Too many branches */
-                    /* WARNING: Treating indirect jump as call */
   if (DAT_038082d8 == 0) {
-    (*UNRECOVERED_JUMPTABLE_00)();
     return;
   }
   DAT_038082d8 = 0;
@@ -44,9 +40,6 @@ void FUN_037fb948(uint param_1)
     puVar3 = (undefined4 *)puVar3[0x13];
   }
   if ((puVar3 == (undefined4 *)0x0) || (puVar3 == DAT_038082dc)) {
-                    /* WARNING: Could not recover jumptable at 0x037fb9e4. Too many branches */
-                    /* WARNING: Treating indirect jump as call */
-    (*UNRECOVERED_JUMPTABLE_00)();
     return;
   }
   if (DAT_038082e4 != (code *)0x0) {

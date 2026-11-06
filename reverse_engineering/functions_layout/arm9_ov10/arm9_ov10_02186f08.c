@@ -1,4 +1,6 @@
 
+/* WARNING: Switch with 1 destination removed at 0x02186fd4 */
+
 int FUN_02186f08(int *param_1,int *param_2)
 
 {
@@ -71,19 +73,8 @@ int FUN_02186f08(int *param_1,int *param_2)
           FUN_02182c24(param_1,param_2[3],0x67,&DAT_021a5e44);
         }
       }
-      else {
-        switch(local_1c) {
-        case 200:
-        case 0xc9:
-        case 0xca:
-        case 0xcb:
-        case 0xcc:
-        case 0xcd:
-        case 0xce:
-        case 0xcf:
-        case 0xd0:
-          FUN_02188fe8(param_1,param_2,local_1c,param_2[6],local_20,local_18);
-        }
+      else if (local_1c - 200U < 9) {
+        FUN_02188fe8(param_1,param_2,local_1c,param_2[6],local_20,local_18);
       }
       FUN_02183634(param_1,param_2 + 6);
     }

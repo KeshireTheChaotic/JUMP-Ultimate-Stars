@@ -68,7 +68,7 @@ int * SelectStandby::SelectStandby_Create
   uVar3 = FUN_020326b0(s_Position_0216d528);
   uVar3 = (**(code **)(*piVar6 + 0x40))(piVar6,s_Position_0216d528,&local_50,uVar3);
   FUN_0202c4a4(&local_64,uVar3,local_50);
-  iVar2 = thunk_FUN_0201a228(0x4c,FUN_0216c958,s_Create_0216d374,0x2ef);
+  iVar2 = thunk_FUN_0201a228(0x4c,&DAT_0216c958,s_Create_0216d374,0x2ef);
   if (iVar2 != 0) {
     jus_TagIPMV::jus_TagIPMV(iVar2,0,local_64,local_60,0x494c,auStack_38,8,0,0);
   }
@@ -111,11 +111,11 @@ int * SelectStandby::SelectStandby_Create
   FUN_0214f7c0(iVar2,*piVar1);
   piVar1[4] = iVar2;
   FUN_0214f834();
-  iVar2 = FUN_02164db4(0xa01000,0xa01000,piVar1[0x17],*piVar1,100,0x216d3f0);
+  iVar2 = FUN_02164db4(0xa01000,0xa01000,piVar1[0x17],*piVar1,100,&DAT_0216d3f0);
   piVar1[5] = iVar2;
   iVar2 = 1;
   do {
-    iVar5 = FUN_02164db4(0x885000,0x885000,piVar1[0x17],*piVar1,100,iVar2 * 0xc + 0x216d3f0);
+    iVar5 = FUN_02164db4(0x885000,0x885000,piVar1[0x17],*piVar1,100,&DAT_0216d3f0 + iVar2 * 0xc);
     iVar7 = iVar2 + 1;
     piVar1[iVar2 + 5] = iVar5;
     iVar2 = iVar7;
@@ -145,8 +145,8 @@ int * SelectStandby::SelectStandby_Create
     }
     else {
       iVar2 = (iVar2 + 5) * 0xc;
-      local_2c = *(int *)(iVar2 + 0x216d3f0);
-      local_28 = *(int *)(iVar2 + 0x216d3f4);
+      local_2c = *(int *)(&DAT_0216d3f0 + iVar2);
+      local_28 = *(int *)(&DAT_0216d3f4 + iVar2);
       local_24 = *(undefined4 *)(&DAT_0216d3f8 + iVar2);
       FUN_0214f864(piVar1[0x13],&local_2c);
       local_2c = local_2c + DAT_0216d4a4;
@@ -198,7 +198,7 @@ int * SelectStandby::SelectStandby_Create
     FUN_0214f864(iVar5,&DAT_0216d4b0);
   }
   else {
-    FUN_0214f864(iVar5,0x216d3e4);
+    FUN_0214f864(iVar5,&DAT_0216d3e4);
   }
   (**(code **)(**(int **)(iVar2 + 4) + 0xc))();
   FUN_0214f834();

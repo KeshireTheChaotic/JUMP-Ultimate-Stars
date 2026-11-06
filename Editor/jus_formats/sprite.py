@@ -30,7 +30,7 @@ from dataclasses import dataclass, field
 from .binary import align
 from .dsig import (DsigFile, MODE_CHARSTREAM, MODE_LINEAR4, MODE_LINEAR4_LZ,
                    MODE_TILED4, MODE_TILED8, rgb555_to_rgb)
-from .dstx import DstxFile, Frame, Piece, SHAPES, SHAPE_CODES
+from .dstx import DstxFile, Frame, Piece, SHAPES
 
 OBJ_MODES = (MODE_CHARSTREAM, MODE_TILED4, MODE_TILED8)
 ATLAS_MODES = (MODE_LINEAR4, MODE_LINEAR4_LZ)
@@ -268,10 +268,6 @@ def charstream_slots(frame: Frame) -> list[int]:
         w, h = p.size
         cur += align(w * h // 2, CHARSTREAM_SLOT)
     return offs
-
-
-def charstream_size(frame: Frame) -> int:
-    return sum(align(p.width * p.height // 2, CHARSTREAM_SLOT) for p in frame.pieces)
 
 
 # ---------------------------------------------------------------- compose

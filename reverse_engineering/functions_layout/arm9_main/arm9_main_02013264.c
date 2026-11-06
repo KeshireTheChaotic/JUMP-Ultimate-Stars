@@ -16,7 +16,7 @@ jus_TagIPCT::jus_TagIPCT
   if (param_2 == 0) {
     param_2 = DAT_020a1078;
   }
-  jus_Class_0209af58::jus_Class_0209af58(param_1,param_2,param_3,param_4);
+  jus_TagDLSE_Part_0209af58::jus_TagDLSE_Part_0209af58(param_1,param_2,param_3,param_4);
   *param_1 = &vftable;
   param_1[0xe] = param_8;
   param_1[0xf] = 0;

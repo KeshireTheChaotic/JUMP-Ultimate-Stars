@@ -2,7 +2,8 @@
 
 Stages (``stage/stage.aar``) group per stem ``bg_xx``:
 ``bg_xx.aar`` (background layers), ``bg_xx_gimmick.aar`` (optional),
-``bg_xx.bin`` / ``.cam`` / ``.mob`` (stage data, **not decoded**: read-only).
+``bg_xx.bin`` / ``.mob`` (stage geometry, physics and spawns; see
+:mod:`jus_formats.stagephysics`) and ``.cam`` (camera, not decoded).
 
 Screens are the menu/scene archives (title, topmenu, deckmake, …) holding
 ALTM layers, DSIG tile sheets, DSTX 0x05/0x06 layouts and nested archives.
@@ -32,9 +33,9 @@ STATUS = {
     '.amt': ('ALMT animation', 'Direct'),
     '.aod': ('ALOD object list', 'Direct'),
     '.aar': ('nested archive', 'Direct'),
-    '.bin': ('binary table', 'Unknown'),
+    '.bin': ('binary table (typed views in the Archive inspector)', 'Inferred'),
     '.cam': ('stage camera', 'Unknown'),
-    '.mob': ('stage objects', 'Unknown'),
+    '.mob': ('stage physics & spawns', 'Direct'),
     '.ncl': ('Nitro palette?', 'Unknown'),
 }
 
@@ -86,6 +87,13 @@ def find_layers(root: DataRoot, archive: str) -> list[Layer]:
         img = next((e for ext, e in items if ext == '.dig'), None) or \
             next((e for ext, e in items if ext == '.dtx'), None)
         probs = []
+        if img is None and re.search(r'_\d\d[a-z]{2}$', stem):
+            # Common/chr portraits: bb_b_01aa / _01va use bb_b_01a.dig, _01ab uses
+            # bb_b_01b.dig (drop the second-to-last letter).  Inferred: the tile
+            # and palette counts fit for all 231 maps; the loader is not traced.
+            img = next((e for ext, e in by_stem.get(stem[:-2] + stem[-1], ()) if ext == '.dig'), None)
+            if img is not None:
+                probs.append(f'tiles from {img.name.rsplit("/", 1)[-1]} (portrait naming rule; inferred)')
         try:
             m = altmmod.parse(atm.payload())
         except ValueError as exc:
@@ -160,11 +168,43 @@ def stage_sets(root: DataRoot) -> list[StageSet]:
     return out
 
 
-def screen_archives(root: DataRoot) -> list[str]:
+def classify_archive(root: DataRoot, path: str) -> str:
+    """What a menu-folder archive holds, from its members (not its name).
+
+    * ``screen``   ALTM backgrounds plus other scene content (nested archives,
+                   sprites, palette scripts), e.g. title/title.aar;
+    * ``library``  only ALTM + DSIG picture pairs, many of them (portrait /
+                   comic collections such as Common/chr/chr.aar);
+    * ``elements`` sprites (DSTX) or nested sprite archives but no backgrounds
+                   (battle HUD parts, Common/button.aar, battle/ChrWin.aar);
+    * ``data``     no image resources at all (bin/InfoDeck.aar, deck/Deck.aar).
+    """
+    try:
+        arc = root.archive(path)
+    except (ValueError, KeyError, OSError):
+        return 'data'
+    exts = [e.ext for e in arc.entries]
+    atm, dtx, nested = exts.count('.atm'), exts.count('.dtx'), exts.count('.aar')
+    if atm:
+        others = len(exts) - atm - exts.count('.dig')
+        return 'library' if not others and atm > 8 else 'screen'
+    if dtx:
+        return 'elements'
+    if nested:
+        for e in arc.entries:
+            if e.ext == '.aar' and classify_archive(root, join(path, e.name)) != 'data':
+                return 'elements'
+    return 'data'
+
+
+def screen_archives(root: DataRoot, kinds: tuple[str, ...] = ('screen', 'library')) -> list[str]:
+    """Top-level menu/scene archives of the given kinds (see classify_archive)."""
     out = []
     for f in sorted(root.root.rglob('*.aar')):
         rel = f.relative_to(root.root).as_posix()
-        if not rel.lower().startswith(NOT_SCREENS):
+        if rel.lower().startswith(NOT_SCREENS):
+            continue
+        if classify_archive(root, rel) in kinds:
             out.append(rel)
     return out
 

@@ -11,7 +11,7 @@ void FUN_020355bc(undefined4 *param_1)
   }
   DAT_020a0dbc = (undefined4 *)FUN_0201a228(8);
   if (DAT_020a0dbc != (undefined4 *)0x0) {
-    *DAT_020a0dbc = &jus_Class_02094b9c::vftable;
+    *DAT_020a0dbc = &jus_TagCNTR_Part_02094b9c::vftable;
     *DAT_020a0dbc = &PTR_vfunc_18_02094b54;
     DAT_020a0dbc[1] = 0;
   }

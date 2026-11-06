@@ -36,8 +36,8 @@ int ALControllerImp::Create(int param_1)
     local_3c = 0;
     local_40 = 0;
     FUN_0214dc68(auStack_20,&local_38,&local_3c,&local_40);
-    FUN_0214f714(&local_34,*(undefined4 *)(iVar5 + 0x5c),FUN_0216d88c);
-    iVar1 = thunk_FUN_0201a228(0x4c,FUN_0216c958,s_Create_0216d6d4,0x2ef);
+    FUN_0214f714(&local_34,*(undefined4 *)(iVar5 + 0x5c),&DAT_0216d88c);
+    iVar1 = thunk_FUN_0201a228(0x4c,&DAT_0216c958,s_Create_0216d6d4,0x2ef);
     if (iVar1 != 0) {
       jus_TagIPMV::jus_TagIPMV(iVar1,0,local_34,local_30,0x494c,auStack_20,6,0,1);
     }
@@ -47,8 +47,8 @@ int ALControllerImp::Create(int param_1)
     local_50 = 0;
     local_54 = 0;
     FUN_0214dc68(auStack_2c,&local_4c,&local_50,&local_54);
-    FUN_0214f714(&local_48,*(undefined4 *)(iVar5 + 0x58),FUN_0216d88c);
-    iVar1 = thunk_FUN_0201a228(0x4c,FUN_0216c958,s_Create_0216d6d4,0x2ef);
+    FUN_0214f714(&local_48,*(undefined4 *)(iVar5 + 0x58),&DAT_0216d88c);
+    iVar1 = thunk_FUN_0201a228(0x4c,&DAT_0216c958,s_Create_0216d6d4,0x2ef);
     if (iVar1 != 0) {
       jus_TagIPMV::jus_TagIPMV(iVar1,0,local_48,local_44,0x494c,auStack_2c,6,0,1);
     }

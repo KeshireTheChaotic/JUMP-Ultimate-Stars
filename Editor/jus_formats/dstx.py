@@ -39,7 +39,6 @@ EMPTY_BOUNDS = (0x7FFF, 0x7FFF, -0x7FFF, -0x7FFF)
 SHAPES = {0: (8, 8), 1: (16, 16), 2: (32, 32), 3: (64, 64),
           4: (16, 8), 5: (32, 8), 6: (32, 16), 7: (64, 32),
           8: (8, 16), 9: (8, 32), 10: (16, 32), 11: (32, 64)}
-SHAPE_CODES = {wh: code for code, wh in SHAPES.items()}
 
 ATTR_HFLIP = 0x10
 ATTR_VFLIP = 0x20
@@ -117,10 +116,6 @@ class DstxFile:
     embedded: bytes | None = None      # embedded DSIG bytes
     tail: bytes = b''                  # bytes after data_end when nothing embedded
     frame_refs: list[int] | None = None  # original offset-table sharing (exactness)
-
-    @property
-    def has_embedded_image(self) -> bool:
-        return self.embedded is not None
 
     @classmethod
     def parse(cls, blob: bytes) -> 'DstxFile':

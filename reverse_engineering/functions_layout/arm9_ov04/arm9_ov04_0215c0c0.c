@@ -150,7 +150,7 @@ undefined4 * ResultRank::ResultRank_Create(int param_1)
     piVar6 = *(int **)(*(int *)(iVar5 + 0x88) + 4);
     (**(code **)(*piVar6 + 0x94))(piVar6,1);
   }
-  uVar7 = FUN_020101f4(FUN_0216172c,0);
+  uVar7 = FUN_020101f4(&DAT_0216172c,0);
   *puVar4 = uVar7;
   uVar7 = FUN_020101f4(s_result_result_rank_obj_aar_02161740,0);
   puVar4[1] = uVar7;
@@ -222,7 +222,7 @@ undefined4 * ResultRank::ResultRank_Create(int param_1)
     uVar11 = FUN_0215cc7c();
     FUN_02020f38(uVar7,uVar11);
     iVar5 = FUN_0203b424(2);
-    uVar11 = FUN_0215cccc(FUN_021617a0,*(undefined4 *)(iVar5 + 0x88));
+    uVar11 = FUN_0215cccc(&DAT_021617a0,*(undefined4 *)(iVar5 + 0x88));
     puVar4[2] = uVar11;
     FUN_0215cc60(uVar7,0);
     iVar5 = FUN_02034db8();
@@ -312,11 +312,11 @@ undefined4 * ResultRank::ResultRank_Create(int param_1)
           FUN_0215cd80(uVar16 + 0x81000b,0x810000,*(undefined4 *)(iVar10 + 0x88),uVar17,
                        &DAT_021616d4,0xa6);
           iVar10 = FUN_0203b3f4();
-          iVar10 = FUN_0215cd80(0x810028,0x810000,*(undefined4 *)(iVar10 + 0x88),uVar17,FUN_02161704
-                                ,0xa5);
+          iVar10 = FUN_0215cd80(0x810028,0x810000,*(undefined4 *)(iVar10 + 0x88),uVar17,
+                                &DAT_02161704,0xa5);
           (**(code **)(**(int **)(iVar10 + 4) + 0xd8))(*(int **)(iVar10 + 4),0);
           if (uVar16 == DAT_020afe98) {
-            FUN_0215cc30(iVar10,0x2161710);
+            FUN_0215cc30(iVar10,&DAT_02161710);
           }
           puVar4[uVar16 + 9] = iVar10;
           cVar1 = *(char *)(puVar4 + 0x12);

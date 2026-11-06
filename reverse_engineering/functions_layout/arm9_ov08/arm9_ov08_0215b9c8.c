@@ -4,7 +4,7 @@
 void FUN_0215b9c8(void)
 
 {
-  FUN_02154750(FUN_0216b8f4,0x2066ed5);
+  FUN_02154750(&DAT_0216b8f4,0x2066ed5);
   FUN_02154750(s_char_jbBgStep3_ncg_l_0216b908,0x20669f9);
   FUN_02154750(s_char_ybBgStep3_ncl_l_0216b920,0x2066f65);
   FUN_02154750(s_char_xb4Edit_nsc_l_0216b938,0x2066c19);

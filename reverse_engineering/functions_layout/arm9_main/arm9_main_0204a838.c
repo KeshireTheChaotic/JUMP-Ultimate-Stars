@@ -1,8 +1,8 @@
 
-/* JUS-CLASS jus_Class_0209b250::vfunc_28 [class-virtual] slot 28 of vtable 0209b250 (own slot, not
-   inherited) */
+/* JUS-CLASS ScreenInstance_Derived_02093d14_Part_0209b250::vfunc_28 [class-virtual] slot 28 of
+   vtable 0209b250 (own slot, not inherited) */
 
-uint jus_Class_0209b250::vfunc_28(int param_1)
+uint ScreenInstance_Derived_02093d14_Part_0209b250::vfunc_28(int param_1)
 
 {
   ushort *puVar1;

@@ -13,6 +13,8 @@ undefined4 FUN_02180820(undefined4 *param_1)
   
   pbVar5 = (byte *)param_1[0x1f];
   iVar6 = param_1[0x20];
+  if (4 < (uint)param_1[0x172]) goto switchD_02180842_default;
+                    /* WARNING: Switch is manually overridden */
   switch(param_1[0x172]) {
   case 0:
     if (iVar6 < 1) goto switchD_02180842_default;
@@ -25,16 +27,12 @@ undefined4 FUN_02180820(undefined4 *param_1)
     iVar6 = iVar6 - iVar4;
     FUN_0217ef10(param_1 + 0x12f,pbVar5,iVar6);
     break;
-  case 1:
-    break;
   case 2:
     goto switchD_02180842_caseD_2;
   case 3:
     goto switchD_02180842_caseD_3;
   case 4:
     goto switchD_02180842_caseD_4;
-  default:
-    goto switchD_02180842_default;
   }
   if (iVar6 < 6) goto switchD_02180842_default;
   *(byte *)(param_1 + 0x128) = *pbVar5;

@@ -121,7 +121,7 @@ undefined4 FUN_0214dc38(int *param_1)
   *(undefined1 *)(*(int *)(iVar6 + 4) + 0xab) = 0;
   func_0x021b77a8(*(undefined4 *)(iVar6 + 4),0x20);
   (**(code **)(**(int **)(iVar6 + 4) + 0x24))();
-  uVar3 = FUN_0214e81c(0,0x215db58,&DAT_02093c8c);
+  uVar3 = FUN_0214e81c(0,&DAT_0215db58,&DAT_02093c8c);
   FUN_02020e98(iVar6,uVar3);
   func_0x021b65e8(*(undefined4 *)(iVar6 + 4),4,FUN_0214eb7c);
   func_0x021b6760(*(undefined4 *)(iVar6 + 4),4,FUN_0214eb94);
@@ -176,7 +176,7 @@ undefined4 FUN_0214dc38(int *param_1)
     FUN_02023c80(*(undefined4 *)(iVar6 + 4),uStack00000038,0x494c,in_stack_0000003c);
     FUN_02023c70(*(undefined4 *)(iVar6 + 4),2);
     func_0x021b4034(*(undefined4 *)(iVar6 + 4),2);
-    uVar3 = FUN_0214e81c(0,FUN_0215db50,&DAT_02093c8c);
+    uVar3 = FUN_0214e81c(0,&DAT_0215db50,&DAT_02093c8c);
     FUN_02020e98(iVar6,uVar3);
     func_0x021b65e8(*(undefined4 *)(iVar6 + 4),1,FUN_0214ed04);
     func_0x021b65e8(*(undefined4 *)(iVar6 + 4),4,FUN_0214eab0);

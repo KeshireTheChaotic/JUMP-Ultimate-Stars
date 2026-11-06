@@ -17,24 +17,27 @@ void FUN_0215fd08(void)
       FUN_02157088(0x215fbd1);
       return;
     }
-    switch(DAT_0216e7bc) {
-    case 0:
-      FUN_0215707c(2,1);
-      FUN_02157088(0x215f281);
-      return;
-    case 1:
-      FUN_0215707c(2,1);
-      FUN_02157088(0x215a205);
-      return;
-    case 2:
-      FUN_0215707c(2,1);
-      FUN_02157088(0x215eec5);
-      return;
-    case 3:
-      FUN_0215707c(2);
-      FUN_02157054(0,0);
-      FUN_0215c8c8(1);
-      FUN_02157088(0x215e0a9);
+    if ((uint)(int)DAT_0216e7bc < 4) {
+                    /* WARNING: Switch is manually overridden */
+      switch((int)DAT_0216e7bc) {
+      case 0:
+        FUN_0215707c(2,1);
+        FUN_02157088(0x215f281);
+        return;
+      case 1:
+        FUN_0215707c(2,1);
+        FUN_02157088(0x215a205);
+        return;
+      case 2:
+        FUN_0215707c(2,1);
+        FUN_02157088(0x215eec5);
+        return;
+      case 3:
+        FUN_0215707c(2);
+        FUN_02157054(0,0);
+        FUN_0215c8c8(1);
+        FUN_02157088(0x215e0a9);
+      }
     }
   }
   return;

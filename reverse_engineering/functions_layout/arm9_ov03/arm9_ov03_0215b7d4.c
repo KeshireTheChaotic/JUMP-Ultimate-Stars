@@ -127,7 +127,7 @@ undefined4 VsCall::VsCall_Add(undefined4 param_1)
   FUN_0214e990(puVar1[0xd],&local_64,&local_60);
   iVar6 = FUN_0203b3e4();
   DAT_020a0dd0 = *(undefined4 *)(*(int *)(iVar6 + 0x88) + 4);
-  uVar2 = FUN_020101f4(FUN_0215ebb0,0);
+  uVar2 = FUN_020101f4(&DAT_0215ebb0,0);
   puVar1[0xf] = uVar2;
   iVar6 = 0;
   do {
@@ -140,7 +140,7 @@ undefined4 VsCall::VsCall_Add(undefined4 param_1)
   } while (iVar7 < 9);
   iVar6 = FUN_0203b3f4();
   DAT_020a0dd0 = *(undefined4 *)(*(int *)(iVar6 + 0x88) + 4);
-  uVar2 = FUN_020101f4(FUN_0215ebc4,0);
+  uVar2 = FUN_020101f4(&DAT_0215ebc4,0);
   puVar1[0x10] = uVar2;
   iVar6 = 0;
   do {
@@ -222,7 +222,7 @@ LAB_0215beb0:
   iVar6 = FUN_0203b404();
   DAT_020a0dd0 = *(undefined4 *)(*(int *)(iVar6 + 0x88) + 4);
   iVar6 = func_0x021caa0c(s_font_jskfont_aft_0215ebd8,0,0);
-  iVar7 = func_0x021caa0c(FUN_0215ebec,0,0);
+  iVar7 = func_0x021caa0c(&DAT_0215ebec,0,0);
   iVar5 = 0;
   do {
     func_0x021c5fb4(*(undefined4 *)(iVar7 + 4));
@@ -281,7 +281,7 @@ LAB_0215beb0:
   DAT_020a0dd0 = *(undefined4 *)(*(int *)(iVar6 + 0x88) + 4);
   iVar6 = 0;
   do {
-    iVar7 = func_0x021ca3a4(0x78,0x10,FUN_0215ebec,0,0);
+    iVar7 = func_0x021ca3a4(0x78,0x10,&DAT_0215ebec,0,0);
     puVar1[iVar6 * 2 + 0x27] = iVar7;
     piVar3 = *(int **)(*(int *)(iVar7 + 4) + 100);
     (**(code **)(*piVar3 + 0xa4))(piVar3,1);

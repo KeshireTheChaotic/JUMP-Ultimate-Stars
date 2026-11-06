@@ -52,7 +52,7 @@ undefined4 CommuMenuWrlsWatchWait::CommuMenuWrlsWatchWait_Add(void)
   int aiStack_24 [4];
   
   puVar2 = (undefined4 *)
-           thunk_FUN_0201a228(100,FUN_0216aaf0,s_CommuMenuWrlsWatchWait_Add_0216a9a8,300);
+           thunk_FUN_0201a228(100,&DAT_0216aaf0,s_CommuMenuWrlsWatchWait_Add_0216a9a8,300);
   FUN_020517fc(puVar2,0,100);
   iVar3 = FUN_020310f4();
   puVar2[2] = iVar3;

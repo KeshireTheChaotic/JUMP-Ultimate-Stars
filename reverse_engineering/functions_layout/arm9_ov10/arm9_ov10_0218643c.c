@@ -1,5 +1,5 @@
 
-undefined4 FUN_0218643c(int param_1,int param_2,int param_3)
+undefined4 FUN_0218643c(int param_1,uint param_2,int param_3)
 
 {
   int extraout_r1;
@@ -9,22 +9,20 @@ undefined4 FUN_0218643c(int param_1,int param_2,int param_3)
   if (((param_1 == 0) && (param_2 == 0)) && (param_3 == 0)) {
     return 1;
   }
-  if (((param_1 < 0) || (param_2 < 0)) || (param_3 < 0)) {
+  if (((param_1 < 0) || ((int)param_2 < 0)) || (param_3 < 0)) {
     return 0;
   }
+  if (0xc < param_2) {
+    return 0;
+  }
+                    /* WARNING: Switch is manually overridden */
   switch(param_2) {
   case 0:
     if (param_1 != 0) {
       return 0;
     }
     break;
-  case 1:
-  case 3:
-  case 5:
-  case 7:
-  case 8:
-  case 10:
-  case 0xc:
+  default:
     if (0x1f < param_1) {
       return 0;
     }
@@ -42,15 +40,9 @@ undefined4 FUN_0218643c(int param_1,int param_2,int param_3)
     }
     break;
   case 4:
-  case 6:
-  case 9:
-  case 0xb:
     if (0x1e < param_1) {
       return 0;
     }
-    break;
-  default:
-    return 0;
   }
   if (param_3 < 0x76c) {
     return 0;
@@ -59,7 +51,7 @@ undefined4 FUN_0218643c(int param_1,int param_2,int param_3)
     return 0;
   }
   if (param_3 == 0x81f) {
-    if (6 < param_2) {
+    if (6 < (int)param_2) {
       return 0;
     }
     if ((param_2 == 6) && (6 < param_1)) {

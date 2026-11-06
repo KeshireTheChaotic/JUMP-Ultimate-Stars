@@ -13,7 +13,7 @@ int ALWidgetImp::Create(undefined4 param_1,int param_2,undefined4 param_3,undefi
   
   uVar1 = _DAT_021d5154;
   uVar4 = *(undefined4 *)(param_2 + 4);
-  iVar2 = thunk_FUN_0201a228(0x134,0x2160d3c,s_Create_02161364,0x3e);
+  iVar2 = thunk_FUN_0201a228(0x134,&DAT_02160d3c,s_Create_02161364,0x3e);
   if (iVar2 != 0) {
     func_0x021af0f8(iVar2,uVar4,uVar1,ALWidgetBaseImp::CreateDrawFunc);
   }

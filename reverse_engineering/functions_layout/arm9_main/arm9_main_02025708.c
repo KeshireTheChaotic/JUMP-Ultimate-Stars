@@ -1,8 +1,8 @@
 
-/* JUS-CLASS jus_Class_020945fc::jus_Class_020945fc [class-default] stores vtable 020945fc into
-   *this (constructor) */
+/* JUS-CLASS CommonWindow_Part_020945fc::CommonWindow_Part_020945fc [class-owned] stores vtable
+   020945fc into *this (constructor) */
 
-undefined4 * jus_Class_020945fc::jus_Class_020945fc(undefined4 *param_1,int param_2)
+undefined4 * CommonWindow_Part_020945fc::CommonWindow_Part_020945fc(undefined4 *param_1,int param_2)
 
 {
   undefined4 *puVar1;

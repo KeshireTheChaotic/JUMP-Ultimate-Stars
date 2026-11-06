@@ -1,0 +1,10 @@
+02005f80  cmp r2,#0x0
+02005f82  beq 0x02005f90
+02005f84  ldrh r3,[r0,#0x0]
+02005f86  cmp r3,r1
+02005f88  beq 0x02005f92
+02005f8a  add r0,r0,#0x2
+02005f8c  sub r2,r2,#0x1
+02005f8e  bne 0x02005f84
+02005f90  mov r0,#0x0
+02005f92  bx lr

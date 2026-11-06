@@ -286,46 +286,41 @@ void FUN_0215754c(int param_1,undefined4 param_2,undefined4 param_3,undefined4 p
   FUN_02157528(iVar2);
   *(int *)(param_1 + 0x144) = iVar2;
   *(int *)(param_1 + 0x148) = iVar4;
-  switch(*(undefined1 *)(param_1 + 0x310)) {
-  case 0:
-  case 2:
-  case 3:
-  case 8:
-  case 9:
-  case 10:
-  case 0xb:
-  case 0xc:
-    FUN_0215853c(*(undefined4 *)(param_1 + 0x20),0);
-    iVar2 = FUN_02034db8();
-    FUN_0201710c(*(undefined4 *)(iVar2 + 4),s_deckselect_deck_t_sel00_ncl_0216c88c);
-    FUN_0215853c(*(undefined4 *)(param_1 + 0x28),0);
-    iVar2 = FUN_02034db8();
-    FUN_0201710c(*(undefined4 *)(iVar2 + 4),s_commu_com_bg_ncl_0216c8a8);
-    local_170 = 0x880002;
-    local_174 = 2;
-    break;
-  case 1:
-  case 4:
-    FUN_0215853c(*(undefined4 *)(param_1 + 0x20),0);
-    iVar2 = FUN_02034db8();
-    FUN_0201710c(*(undefined4 *)(iVar2 + 4),s_deckselect_deck_a_sel00_ncl_0216c8bc);
-    FUN_0215853c(*(undefined4 *)(param_1 + 0x28),0);
-    iVar2 = FUN_02034db8();
-    FUN_0201710c(*(undefined4 *)(iVar2 + 4),s_Jarena_arena_bg_ncl_0216c8d8);
-    local_170 = 0x880001;
-    local_174 = 1;
-    break;
-  case 5:
-  case 7:
-    local_170 = 0x880000;
-    local_174 = 0;
-    break;
-  case 6:
-    FUN_0215853c(*(undefined4 *)(param_1 + 0x20),0);
-    iVar2 = FUN_02034db8();
-    FUN_0201710c(*(undefined4 *)(iVar2 + 4),s_deckselect_deck_c_sel00_ncl_0216c870);
-    local_170 = 0x880003;
-    local_174 = 0;
+  if (*(byte *)(param_1 + 0x310) < 0xd) {
+                    /* WARNING: Switch is manually overridden */
+    switch(*(byte *)(param_1 + 0x310)) {
+    default:
+      FUN_0215853c(*(undefined4 *)(param_1 + 0x20),0);
+      iVar2 = FUN_02034db8();
+      FUN_0201710c(*(undefined4 *)(iVar2 + 4),s_deckselect_deck_t_sel00_ncl_0216c88c);
+      FUN_0215853c(*(undefined4 *)(param_1 + 0x28),0);
+      iVar2 = FUN_02034db8();
+      FUN_0201710c(*(undefined4 *)(iVar2 + 4),s_commu_com_bg_ncl_0216c8a8);
+      local_170 = 0x880002;
+      local_174 = 2;
+      break;
+    case 1:
+    case 4:
+      FUN_0215853c(*(undefined4 *)(param_1 + 0x20),0);
+      iVar2 = FUN_02034db8();
+      FUN_0201710c(*(undefined4 *)(iVar2 + 4),s_deckselect_deck_a_sel00_ncl_0216c8bc);
+      FUN_0215853c(*(undefined4 *)(param_1 + 0x28),0);
+      iVar2 = FUN_02034db8();
+      FUN_0201710c(*(undefined4 *)(iVar2 + 4),s_Jarena_arena_bg_ncl_0216c8d8);
+      local_170 = 0x880001;
+      local_174 = 1;
+      break;
+    case 5:
+      local_170 = 0x880000;
+      local_174 = 0;
+      break;
+    case 6:
+      FUN_0215853c(*(undefined4 *)(param_1 + 0x20),0);
+      iVar2 = FUN_02034db8();
+      FUN_0201710c(*(undefined4 *)(iVar2 + 4),s_deckselect_deck_c_sel00_ncl_0216c870);
+      local_170 = 0x880003;
+      local_174 = 0;
+    }
   }
   uVar1 = DeckSelectPersonal::DeckSelect_PersonalCreate(local_174,0);
   *(undefined4 *)(param_1 + 0x2f4) = uVar1;

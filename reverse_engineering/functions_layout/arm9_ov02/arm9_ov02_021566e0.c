@@ -35,7 +35,7 @@ int * JGalaxyBackground::JGalaxyBack_Create(int param_1,undefined1 param_2)
   FUN_020517fc(piVar1,0,0x28);
   piVar1[1] = param_1;
   *(undefined1 *)(piVar1 + 9) = param_2;
-  iVar2 = thunk_FUN_0201a228(0x78,FUN_0215bfa4,s_Create_0215c4b0,0x4c3);
+  iVar2 = thunk_FUN_0201a228(0x78,&DAT_0215bfa4,s_Create_0215c4b0,0x4c3);
   if (iVar2 != 0) {
     jus_TagNDGR_0209c0b4::jus_TagNDGR_0209c0b4(iVar2,FUN_02024a30,1);
   }

@@ -6,8 +6,6 @@
 void GX_SetBankForOBJExtPltt(int param_1)
 
 {
-  code *in_lr;
-  
                     /* JUS-TAG hw={"GX_2D_main":1,"VRAMCNT":2} io=["04000000","04000245","04000246"]
                         */
   DAT_020afba0 = ~(ushort)param_1 & (DAT_020afba0 | DAT_020afbb0);
@@ -24,7 +22,6 @@ void GX_SetBankForOBJExtPltt(int param_1)
   }
   DAT_020afbb0 = (ushort)param_1;
   GX_VRAMCNT_SetLCDC_(DAT_020afba0);
-  (*in_lr)();
   return;
 }
 

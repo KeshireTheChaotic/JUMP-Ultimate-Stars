@@ -7,7 +7,7 @@ int * jus_TagCNTR::jus_TagCNTR(int *param_1,int param_2,undefined4 param_3,undef
 {
   code *pcVar1;
   
-  jus_Class_02094b9c::jus_Class_02094b9c();
+  jus_TagCNTR_Part_02094b9c::jus_TagCNTR_Part_02094b9c();
   *param_1 = (int)&vftable;
   if (*(char *)(param_2 + 0x14) == '\0') {
     pcVar1 = *(code **)(*param_1 + 0x50);

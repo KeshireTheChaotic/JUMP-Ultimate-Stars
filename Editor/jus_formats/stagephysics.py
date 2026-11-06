@@ -26,7 +26,7 @@ x − 192 (layer record 0 is placed at (−192, 0)).
 from __future__ import annotations
 
 import struct
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 
 
 def u16(b: bytes, p: int) -> int: return struct.unpack_from('<H', b, p)[0]

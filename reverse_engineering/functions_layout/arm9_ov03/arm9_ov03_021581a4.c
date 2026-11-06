@@ -44,7 +44,7 @@ void FUN_021581a4(int param_1,undefined4 param_2,undefined4 param_3,undefined4 p
     FUN_0214e908(param_1,iVar1);
     uVar3 = *(uint *)(*(int *)(param_1 + 4) + 0xac);
     uVar2 = *(undefined4 *)(*(int *)(param_1 + 4) + 0x94);
-    iVar1 = thunk_FUN_0201a228(0xb4,FUN_0215e540,s_Create_0215e408,0x226);
+    iVar1 = thunk_FUN_0201a228(0xb4,&DAT_0215e540,s_Create_0215e408,0x226);
     piVar4 = (int *)0x0;
     if (iVar1 != 0) {
       piVar4 = (int *)func_0x021af494(iVar1,*(undefined4 *)(param_1 + 4),uVar2,(uVar3 & 1) == 1,

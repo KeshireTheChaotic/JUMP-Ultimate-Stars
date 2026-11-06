@@ -35,7 +35,7 @@ int * JQuizMainSubScreenPlate::JQuizMainSubScreenPlateClass_Create
   (**(code **)(**(int **)(iVar2 + 4) + 0xd8))(*(int **)(iVar2 + 4),1);
   FUN_02023940(*(undefined4 *)(iVar2 + 4));
   FUN_02151ebc(&local_34,iVar2,s_Position_02160ec0);
-  FUN_02151ebc(aiStack_50 + 5,iVar2,FUN_02160ecc);
+  FUN_02151ebc(aiStack_50 + 5,iVar2,&DAT_02160ecc);
   (**(code **)(**(int **)(iVar2 + 4) + 0xd8))(*(int **)(iVar2 + 4),1);
   aiStack_50[3] = 0;
   aiStack_50[4] = 0x100000;
@@ -85,7 +85,7 @@ int * JQuizMainSubScreenPlate::JQuizMainSubScreenPlateClass_Create
     iVar6 = ALWidgetImp::Create(iVar2,_DAT_021d5154);
     (**(code **)(**(int **)(iVar6 + 4) + 0xd8))(*(int **)(iVar6 + 4),1);
     FUN_0214e6e4(auStack_5c,5,iVar4 * 0x30 + 5,0xfa,iVar4 * 0x30 + 0x2a);
-    piVar3 = (int *)thunk_FUN_0201a228(0x70,FUN_021608f4,&DAT_02160e78,0x1b2);
+    piVar3 = (int *)thunk_FUN_0201a228(0x70,&DAT_021608f4,&DAT_02160e78,0x1b2);
     if (piVar3 != (int *)0x0) {
       func_0x021b054c(piVar3,0,&DAT_02093c8c);
       *piVar3 = (int)&jus_Class_0216094c::vftable;
@@ -98,7 +98,7 @@ int * JQuizMainSubScreenPlate::JQuizMainSubScreenPlateClass_Create
     FUN_02020e98(iVar6,piVar3[6]);
     (**(code **)(**(int **)(iVar6 + 4) + 0x24))(*(int **)(iVar6 + 4),piVar1);
     FUN_02023940(*(undefined4 *)(iVar6 + 4));
-    FUN_02151ebc(&uStack_64,iVar6,FUN_02160ecc);
+    FUN_02151ebc(&uStack_64,iVar6,&DAT_02160ecc);
     (**(code **)(**(int **)(iVar6 + 4) + 0xd8))(*(int **)(iVar6 + 4),1);
     FUN_02023c60(*(undefined4 *)(iVar6 + 4),uStack_64,0,uStack_60);
     piVar3 = *(int **)(*(int *)(iVar6 + 4) + 0x68);

@@ -63,22 +63,22 @@ void FUN_0214f264(int param_1)
   iVar11 = FUN_0203b3f4();
   local_144[0] = FUN_0214d53c(0x1200b,0x12000,*(undefined4 *)(iVar11 + 0x88),
                               *(undefined4 *)(param_1 + 4),0x4f);
-  FUN_0214f960(local_144[0],FUN_0215bf24);
+  FUN_0214f960(local_144[0],&DAT_0215bf24);
   uVar4 = FUN_0214dfa8(*(undefined4 *)(param_1 + 0x88));
   iVar11 = FUN_0203b3e4();
   uVar4 = FUN_0214d53c(uVar4,0xa01000,*(undefined4 *)(iVar11 + 0x88),*(undefined4 *)(param_1 + 4),
                        0x21);
-  FUN_0214f960(uVar4,FUN_0215bedc);
+  FUN_0214f960(uVar4,&DAT_0215bedc);
   iVar11 = FUN_0203b3e4();
   uVar4 = FUN_0214d53c(0x10003,0x10000,*(undefined4 *)(iVar11 + 0x88),*(undefined4 *)(param_1 + 4),
                        0x60);
-  FUN_0214f960(uVar4,FUN_0215bed0);
+  FUN_0214f960(uVar4,&DAT_0215bed0);
   iVar9 = *(int *)(*(int *)(param_1 + 0x84) + 0x34);
   iVar11 = (short)(ushort)*(byte *)(*(int *)(param_1 + 0x88) + 0x2c) * 0x48;
   iVar2 = FUN_0203b3e4();
   iVar2 = FUN_0214d53c(0x10002,0x10000,*(undefined4 *)(iVar2 + 0x88),*(undefined4 *)(param_1 + 4),
                        0x62);
-  FUN_0214f960(iVar2,0x215bef4);
+  FUN_0214f960(iVar2,&DAT_0215bef4);
   (**(code **)(**(int **)(*(int *)(iVar2 + 4) + 0x68) + 0x70))();
   iVar5 = FUN_02074294(iVar9 + iVar11);
   if (iVar5 < 6) {
@@ -108,7 +108,7 @@ void FUN_0214f264(int param_1)
   }
   uVar4 = FUN_0214f194();
   FUN_02020f38(iVar2,uVar4);
-  iVar11 = thunk_FUN_0201a228(0x78,FUN_0215bfa4,s_Create_0215bea0,0x4c3);
+  iVar11 = thunk_FUN_0201a228(0x78,&DAT_0215bfa4,s_Create_0215bea0,0x4c3);
   if (iVar11 != 0) {
     jus_TagNDGR_0209c0b4::jus_TagNDGR_0209c0b4(iVar11,FUN_02024a30,1);
   }
@@ -171,7 +171,7 @@ LAB_0214f714:
       *(undefined1 *)(iVar11 + 0x18) = 0xf;
       *(undefined1 *)(iVar11 + 0x19) = 1;
       *(int *)(param_1 + 0x7c) = iVar11;
-      FUN_0214fa00(auStack_150,0x215bf00);
+      FUN_0214fa00(auStack_150,&DAT_0215bf00);
       FUN_0214fa00(auStack_15c,auStack_150);
       local_158 = local_158 + 0xa000;
       FUN_0214ef10(&local_188,uVar4,s_Position_0215c048);

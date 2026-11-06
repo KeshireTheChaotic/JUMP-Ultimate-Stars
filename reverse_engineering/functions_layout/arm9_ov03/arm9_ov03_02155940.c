@@ -20,7 +20,7 @@ JArenaRankBtlAfterLstSel::JARBAftLstSel_Add
   undefined4 uStack_1c;
   
   uStack_1c = param_4;
-  piVar2 = (int *)FUN_020101f4(FUN_0215e6a8,0);
+  piVar2 = (int *)FUN_020101f4(&DAT_0215e6a8,0);
   thunk_EXT_FUN_021b65bc();
   puVar3 = (undefined1 *)
            thunk_FUN_0201a228(0xe0,s_JArenaRankBtlAfterLstSel_cpp_0215e6b8,

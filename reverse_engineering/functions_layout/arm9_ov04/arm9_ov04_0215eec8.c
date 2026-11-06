@@ -9,7 +9,7 @@ int JQuizMainBattleInfo::JQuizMainBattleInfoClass_Create
 {
   int iVar1;
   
-  iVar1 = thunk_FUN_0201a228(0x12,FUN_02161cc4,s_JQuizMainBattleInfoClass_Create_02161ca4,0x2a,
+  iVar1 = thunk_FUN_0201a228(0x12,&DAT_02161cc4,s_JQuizMainBattleInfoClass_Create_02161ca4,0x2a,
                              param_4);
   FUN_020517fc(iVar1,0,0x12);
   *(undefined1 *)(iVar1 + 0x10) = param_1;

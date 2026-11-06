@@ -5,8 +5,6 @@
 void GX_SetBankForARM7(int param_1)
 
 {
-  code *in_lr;
-  
                     /* JUS-TAG hw={"VRAMCNT":2} io=["04000242","04000243"] */
   DAT_020afba0 = ~(ushort)param_1 & (DAT_020afba0 | DAT_020afba6);
   if (param_1 < 9) {
@@ -25,7 +23,6 @@ void GX_SetBankForARM7(int param_1)
   }
   DAT_020afba6 = (ushort)param_1;
   GX_VRAMCNT_SetLCDC_(DAT_020afba0);
-  (*in_lr)();
   return;
 }
 

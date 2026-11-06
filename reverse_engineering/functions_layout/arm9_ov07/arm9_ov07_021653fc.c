@@ -127,7 +127,7 @@ LAB_021654c8:
       FUN_02023894(*(undefined4 *)(piVar1[0xf] + 4),0x810000,0);
       (**(code **)(**(int **)(*(int *)(piVar1[0xf] + 4) + 0x68) + 0x6c))();
       (**(code **)(**(int **)(piVar1[0xf] + 4) + 0xd8))(*(int **)(piVar1[0xf] + 4),0);
-      iVar2 = func_0x021caa0c(FUN_0216ac10,0,0);
+      iVar2 = func_0x021caa0c(&DAT_0216ac10,0,0);
       func_0x021c5fb4(*(undefined4 *)(iVar2 + 4));
       iVar4 = FUN_0214f340();
       piVar1[0x10] = iVar4;

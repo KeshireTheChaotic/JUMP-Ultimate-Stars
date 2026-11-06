@@ -188,7 +188,7 @@ LAB_0200616a:
   uStack_1c._1_3_ = SUB43(uVar4,1);
   if (uVar7 < 0x62) {
     if (0x60 < uVar7) {
-LAB_02006244:
+override_jmp_02006192_case_0:
       if (uStack_20._2_1_ == '\0') {
         uStack_14 = 0xd;
       }
@@ -201,19 +201,37 @@ LAB_02006244:
       goto LAB_02006312;
     }
     if (uVar7 < 0x48) {
-      switch(uVar7) {
-      case 0x41:
-        goto LAB_02006244;
-      case 0x45:
-        goto code_r0x0200627e;
-      case 0x46:
-        goto code_r0x02006218;
-      case 0x47:
-        goto code_r0x02006274;
+      if (-1 < (int)(uVar7 - 0x41)) {
+                    /* WARNING: Switch is manually overridden */
+        switch(uVar7 - 0x41) {
+        case 0:
+          goto override_jmp_02006192_case_0;
+        case 4:
+          goto override_jmp_02006192_case_4;
+        case 5:
+          goto override_jmp_02006192_case_5;
+        case 6:
+          goto override_jmp_02006192_case_6;
+        }
       }
     }
-    else if (uVar7 == 0x58) goto LAB_020061f0;
-LAB_0200630c:
+    else if (uVar7 == 0x58) {
+override_jmp_020061c4_case_0:
+      if ((char)uStack_1c == '\t') {
+        uStack_1c = CONCAT31(uStack_1c._1_3_,4);
+        uVar4 = uStack_1c;
+      }
+      uStack_1c = uVar4;
+      uVar4 = uStack_1c;
+      if (uStack_20._2_1_ == '\0') {
+        uStack_14 = 1;
+      }
+      else if ((char)uStack_20 == '\x02') {
+        uStack_20 = CONCAT31(uStack_20._1_3_,1);
+      }
+      goto LAB_02006312;
+    }
+override_jmp_02006192_case_3:
     uStack_1c = CONCAT22(0xffff,uVar10);
     uVar4 = uStack_1c;
   }
@@ -230,30 +248,17 @@ LAB_0200630c:
         }
         goto LAB_02006312;
       }
-      goto LAB_0200630c;
+      goto override_jmp_02006192_case_3;
     }
-    switch(uVar7) {
-    case 100:
-    case 0x69:
-    case 0x6f:
-    case 0x75:
-    case 0x78:
-LAB_020061f0:
-      if ((char)uStack_1c == '\t') {
-        uStack_1c = CONCAT31(uStack_1c._1_3_,4);
-        uVar4 = uStack_1c;
-      }
-      uStack_1c = uVar4;
-      uVar4 = uStack_1c;
-      if (uStack_20._2_1_ == '\0') {
-        uStack_14 = 1;
-      }
-      else if ((char)uStack_20 == '\x02') {
-        uStack_20 = CONCAT31(uStack_20._1_3_,1);
-      }
-      break;
-    case 0x66:
-code_r0x02006218:
+    if (0x14 < uVar7 - 100) goto override_jmp_02006192_case_3;
+                    /* WARNING: Switch is manually overridden */
+    switch(uVar7 - 100) {
+    case 0:
+    case 5:
+    case 0xb:
+      goto override_jmp_020061c4_case_0;
+    case 2:
+override_jmp_02006192_case_5:
       uVar6 = uVar10 & 0xff;
       if ((((uVar6 == 2) || (uVar6 == 6)) || (uVar6 == 7)) || ((uVar6 == 8 || (uVar6 == 4)))) {
         uStack_1c = CONCAT22(0xffff,uVar10);
@@ -263,13 +268,13 @@ code_r0x02006218:
         uStack_14 = 6;
       }
       break;
-    case 0x67:
-code_r0x02006274:
+    case 3:
+override_jmp_02006192_case_6:
       if (uStack_14 == 0) {
         uStack_14 = 1;
       }
-    case 0x65:
-code_r0x0200627e:
+    case 1:
+override_jmp_02006192_case_4:
       uVar6 = uVar10 & 0xff;
       if (((uVar6 == 2) || (uVar6 == 6)) ||
          ((uVar6 == 7 || (((uVar6 == 8 || (uVar6 == 4)) || (uVar6 == 1)))))) {
@@ -281,21 +286,21 @@ code_r0x0200627e:
       }
       break;
     default:
-      goto LAB_0200630c;
-    case 0x6e:
+      goto override_jmp_02006192_case_3;
+    case 10:
       if ((char)uStack_1c == '\t') {
         uStack_1c = CONCAT31(uStack_1c._1_3_,4);
         uVar4 = uStack_1c;
       }
       break;
-    case 0x70:
+    case 0xc:
       uStack_1c = CONCAT31(uStack_1c._1_3_,3);
       uStack_20 = CONCAT13(1,(undefined3)uStack_20);
       uStack_1c = CONCAT22(0x78,(ushort)uStack_1c);
       uStack_14 = 8;
       uVar4 = uStack_1c;
       break;
-    case 0x73:
+    case 0xf:
       if ((uVar10 & 0xff) == 3) {
         uStack_1c = CONCAT31(uStack_1c._1_3_,5);
         uVar4 = uStack_1c;

@@ -14,6 +14,7 @@ inspector; their auxiliary placement sections and sprite rendering remain unknow
 """
 from __future__ import annotations
 
+import re
 import tkinter as tk
 from tkinter import ttk
 
@@ -102,7 +103,11 @@ class ScreenWorkspace(SuiteWorkspace):
 
     # ------------------------------------------------------------ browser
     def on_root(self):
-        self._archives = scenes.screen_archives(self.app.root_data) if self.app.root_data else []
+        root = self.app.root_data
+        # Screens mode: archives with backgrounds; data-only and sprite-only archives are excluded
+        self._archives = scenes.screen_archives(root) if root else []
+        self._kind = {p: scenes.classify_archive(root, p) for p in self._archives} if root else {}
+        self._element_roots = scenes.screen_archives(root, ('screen', 'elements')) if root else []
         self._nested_catalog = None
         self._element_paths = None
         self.populate()
@@ -118,11 +123,9 @@ class ScreenWorkspace(SuiteWorkspace):
     def _element_archives(self):
         if self._element_paths is not None:
             return self._element_paths
-        paths = list(getattr(self, '_archives', ()))
+        paths = list(getattr(self, '_element_roots', ()))
         try:
-            if self._nested_catalog is None and self.app.root_data:
-                self._nested_catalog = scenes.nested_screen_archives(self.app.root_data, paths)
-            paths += self._nested_catalog or []
+            paths += scenes.nested_screen_archives(self.app.root_data, paths) if self.app.root_data else []
             self._element_paths = []
             for p in paths:
                 try:
@@ -152,6 +155,8 @@ class ScreenWorkspace(SuiteWorkspace):
             if flt and flt not in path.lower():
                 continue
             folder = path.split('/')[0]
+            if self.mode.get() == 'Screens' and getattr(self, '_kind', {}).get(path.split('|')[0]) == 'library':
+                folder = 'Picture libraries'
             if folder not in groups:
                 groups[folder] = t.insert('', 'end', 'f:' + folder, text=folder, open=bool(flt))
             label = path.split('|')[-1].split('/')[-1]
@@ -383,18 +388,14 @@ class ScreenWorkspace(SuiteWorkspace):
 
     # ------------------------------------------------------------ view
     def _rows(self):
-        rows = [{'id': 'g', 'name': 'Backgrounds (back → front)', 'kind': 'group'}]
+        title = 'Pictures (select one to view)' if self._library() else 'Backgrounds (back → front)'
+        rows = [{'id': 'g', 'name': title, 'kind': 'group'}]
         for n in self.order:
             c = self.cfg[n]
             rows.append({'id': n, 'parent': 'g', 'name': n, 'kind': c['screen'],
-                         'visible': c['visible'] and c['screen'] != 'Hidden',
+                         'visible': self._shown(n),
                          'available': self.images.get(n) is not None,
                          'status': f'scroll {c["sx"]},{c["sy"]}'})
-        rows.append({'id': 'o', 'name': 'Not drawn yet', 'kind': 'group'})
-        rows.append({'id': 'o:dtx', 'parent': 'o', 'name': 'DSTX 0x05/0x06 layouts', 'kind': 'overlay',
-                     'available': False, 'status': 'descriptors parsed; rendering pending'})
-        rows.append({'id': 'o:spr', 'parent': 'o', 'name': 'ALMT motion (cell selection)', 'kind': 'overlay',
-                     'available': False, 'status': 'sprite frames previewable; authored timeline not projected'})
         return rows
 
     def refresh(self, frame=False):
@@ -425,13 +426,29 @@ class ScreenWorkspace(SuiteWorkspace):
             y += h
         return out
 
+    def _library(self) -> bool:
+        return getattr(self, '_kind', {}).get(self.archive) == 'library' and self.mode.get() == 'Screens'
+
+    @staticmethod
+    def _picture(name: str) -> str:
+        """Library layers drawn together: a portrait's head (…aa) and body (…ab)."""
+        return name[:-1] if re.search(r'_\d\d[a-z]{2}$', name) and name[-2] == 'a' else name
+
+    def _shown(self, n) -> bool:
+        c = self.cfg[n]
+        if self.images.get(n) is None or c['screen'] == 'Hidden':
+            return False
+        if self._library():          # a picture collection: one picture at a time
+            return bool(self.sel) and self._picture(n) == self._picture(self.sel)
+        return c['visible']
+
     def _draw(self, vp):
         for name, (ox, oy) in ORIGIN.items():
             vp.rect(ox, oy, ox + SW, oy + SH, fill='#000000', outline='')
         if self.show_outside.get():
             for n in self.order:
                 c, img = self.cfg[n], self.images.get(n)
-                if img is None or not c['visible'] or c['screen'] == 'Hidden':
+                if not self._shown(n):
                     continue
                 ox, oy = ORIGIN[c['screen']]
                 faded = img.copy()
@@ -439,9 +456,11 @@ class ScreenWorkspace(SuiteWorkspace):
                 vp.add_image(faded, ox - c['sx'], oy - c['sy'])
                 vp.rect(ox - c['sx'], oy - c['sy'], ox - c['sx'] + img.width, oy - c['sy'] + img.height,
                         outline=T.LINE, dash=(3, 3))
-        for n in self.order:
+        # library pictures: body (…ab) behind, head (…aa) in front
+        names = sorted(self.order, key=lambda n: n[-1] == 'a') if self._library() else self.order
+        for n in names:
             c, img = self.cfg[n], self.images.get(n)
-            if img is None or not c['visible'] or c['screen'] == 'Hidden':
+            if not self._shown(n):
                 continue
             ox, oy = ORIGIN[c['screen']]
             vp.add_image(self._crop(img, c['sx'], c['sy']), ox, oy)
@@ -465,7 +484,12 @@ class ScreenWorkspace(SuiteWorkspace):
 
     def _select_layer(self, row):
         if row and row.get('kind') not in ('group', 'overlay'):
+            changed = self.sel != str(row['id'])
             self.sel = str(row['id'])
+            if self._library():
+                if changed:          # the eye column follows the shown picture
+                    self.refresh()   # (re-selects the row; unchanged sel ends the loop)
+                return
             self.refresh_inspector()
             self.view.redraw()
 

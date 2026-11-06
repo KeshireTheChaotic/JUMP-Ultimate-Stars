@@ -1,8 +1,8 @@
 
-/* JUS-CLASS jus_Class_020945fc::~jus_Class_020945fc [class-default] slot 0/1 of vtable 020945fc;
-   resets vtables (destructor) */
+/* JUS-CLASS CommonWindow_Part_020945fc::~CommonWindow_Part_020945fc [class-owned] slot 0/1 of
+   vtable 020945fc; resets vtables (destructor) */
 
-int * jus_Class_020945fc::~jus_Class_020945fc(int *param_1)
+int * CommonWindow_Part_020945fc::~CommonWindow_Part_020945fc(int *param_1)
 
 {
   int iVar1;

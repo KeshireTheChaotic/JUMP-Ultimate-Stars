@@ -1,8 +1,9 @@
 
-void FUN_02160d50(undefined4 param_1)
+void FUN_02160d50(uint param_1)
 
 {
-  if (DAT_0216e7d8 == '\0') {
+  if ((DAT_0216e7d8 == '\0') && (param_1 < 4)) {
+                    /* WARNING: Switch is manually overridden */
     switch(param_1) {
     case 0:
       DAT_0216e7d8 = 3;

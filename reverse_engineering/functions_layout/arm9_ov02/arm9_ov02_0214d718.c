@@ -11,7 +11,7 @@ int FUN_0214d718(int param_1,int param_2)
   
   iVar1 = FUN_0203b404();
   FUN_0214d614(*(undefined4 *)(iVar1 + 0x88));
-  iVar1 = func_0x021caa0c(FUN_0215be6c,0,0);
+  iVar1 = func_0x021caa0c(&DAT_0215be6c,0,0);
   func_0x021c5fb4(*(undefined4 *)(iVar1 + 4));
   iVar2 = FUN_0214d498();
   piVar3 = *(int **)(*(int *)(iVar2 + 4) + 100);

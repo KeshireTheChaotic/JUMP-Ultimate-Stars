@@ -40,7 +40,7 @@ int JGalaxy::JGalaxy_Add
     piVar3[iVar4 + 3] = iVar5;
     iVar4 = iVar7;
   } while (iVar7 < 7);
-  piVar6 = (int *)FUN_02033410(FUN_0215be58,0,0);
+  piVar6 = (int *)FUN_02033410(&DAT_0215be58,0,0);
   if (piVar6[7] == 0) {
     (**(code **)(*piVar6 + 0x10))();
   }

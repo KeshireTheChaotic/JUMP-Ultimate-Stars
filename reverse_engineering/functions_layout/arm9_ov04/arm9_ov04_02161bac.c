@@ -24,7 +24,7 @@ void FUN_02161bac(undefined4 param_1,undefined4 param_2,undefined4 param_3,int p
     cVar1 = (char)(unaff_r4 >> 0x12) - (char)param_4;
   }
   if ((bool)uVar3) {
-    pcVar2 = "font_q.aft";
+    pcVar2 = (char *)0x2161bcc;
     func_0x03e3c48c(param_1);
   }
   else {

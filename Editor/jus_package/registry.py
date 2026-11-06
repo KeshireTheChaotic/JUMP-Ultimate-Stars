@@ -139,9 +139,6 @@ class Registry:
     def roots(self) -> list[str]:
         return sorted(p for p in self._children if len(split(p)) == 1)
 
-    def find_move(self, move_id: int) -> list[tuple[str, int]]:
-        return list(self._move_any.get(move_id, ()))
-
     def search(self, text: str, exts: Iterable[str] | None = None, limit: int = 500) -> list[Resource]:
         """Name substring, or a hex/decimal id (resource id or move id)."""
         text = text.strip().lower()

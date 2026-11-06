@@ -13,7 +13,7 @@ int * RuleData::RuleData_Create(void)
   piVar1 = (int *)thunk_FUN_0201a228(8,s_RuleData_cpp_0216d350,s_RuleData_Create_0216d340,0x17,in_r3
                                     );
   FUN_020517fc(piVar1,0,8);
-  piVar2 = (int *)FUN_02033410(FUN_0216d360,0,0);
+  piVar2 = (int *)FUN_02033410(&DAT_0216d360,0,0);
   if (piVar2[7] == 0) {
     (**(code **)(*piVar2 + 0x10))();
   }

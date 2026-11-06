@@ -18,7 +18,7 @@ int JGalaxyBattle::JGalaxyBattle_Create
   int local_34 [10];
   
   local_34[9] = param_4;
-  iVar2 = thunk_FUN_0201a228(0x90,FUN_0215c034,s_JGalaxyBattle_Create_0215c01c,0xe0);
+  iVar2 = thunk_FUN_0201a228(0x90,&DAT_0215c034,s_JGalaxyBattle_Create_0215c01c,0xe0);
   FUN_020517fc(iVar2,0,0x90);
   *(undefined4 *)(iVar2 + 0x84) = param_1;
   FUN_0214d394(param_1);
@@ -134,7 +134,7 @@ int JGalaxyBattle::JGalaxyBattle_Create
   iVar3 = *(int *)(*(int *)(iVar2 + 0x84) + 0x38) + (uint)bVar1 * 0x40;
   *(int *)(iVar2 + 0x88) = iVar3;
   iVar6 = (uint)*(byte *)(iVar3 + 0x2c) * 0x48 + *(int *)(*(int *)(iVar2 + 0x84) + 0x34);
-  iVar3 = thunk_FUN_0201a228(0x78,FUN_0215bfa4,s_Create_0215bea0,0x4c3);
+  iVar3 = thunk_FUN_0201a228(0x78,&DAT_0215bfa4,s_Create_0215bea0,0x4c3);
   if (iVar3 != 0) {
     jus_TagNDGR_0209c0b4::jus_TagNDGR_0209c0b4(iVar3,FUN_02024a30,1);
   }
@@ -142,7 +142,7 @@ int JGalaxyBattle::JGalaxyBattle_Create
   *(undefined4 *)(iVar2 + 8) = uVar5;
   local_3c = 0x4c000;
   FUN_0214d650(*(undefined4 *)(iVar2 + 8),&local_3c);
-  iVar3 = thunk_FUN_0201a228(0x78,FUN_0215bfa4,s_Create_0215bea0,0x4c3);
+  iVar3 = thunk_FUN_0201a228(0x78,&DAT_0215bfa4,s_Create_0215bea0,0x4c3);
   if (iVar3 != 0) {
     jus_TagNDGR_0209c0b4::jus_TagNDGR_0209c0b4(iVar3,FUN_02024a30,1);
   }

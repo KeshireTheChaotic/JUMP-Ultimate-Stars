@@ -26,7 +26,6 @@ from pathlib import Path
 from PIL import Image
 
 from jus_formats import almt, dsig as dsigmod, dstx as dstxmod, roster, sprite
-from jus_formats.dsig import rgb555_to_rgb
 from jus_package import package
 from jus_package.project import DataRoot, join, split
 
@@ -270,7 +269,6 @@ def scaffold(root: DataRoot, template: str, slot: str, work: Path, *, name: str 
     pkg = package.export_character(root, template, work / 'template_package')
     man = _rj(pkg / 'package.json')
     units = _unit_paths(man)
-    char_archives = [p for p in units.values() if not p.startswith('efc/')]
     usage = _texture_usage(root, list(units.values()))
     sprites = []
     taken: set[str] = set()

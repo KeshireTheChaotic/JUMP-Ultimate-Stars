@@ -11,7 +11,7 @@ ALWidgetBase_021d2b58::ALWidgetBase_021d2b58
   undefined4 uStack_c;
   
   uStack_c = param_4;
-  jus_Class_021d2af0::jus_Class_021d2af0();
+  ALWidgetBase_021d2b58_Part_021d2af0::ALWidgetBase_021d2b58_Part_021d2af0();
   *param_1 = &vftable;
   FUN_021b85ec(auStack_14,10,10,10,10);
   FUN_021ac9b0(param_1[1] + 0x94,auStack_14);

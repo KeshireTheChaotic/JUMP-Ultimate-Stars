@@ -62,7 +62,7 @@ undefined4 JQuizResultMultiPlay::JQuizResultMultiPlay_Add(void)
   uVar4 = JQuizCommon::JQuizCmn_BaseBG_Create(*(undefined4 *)(iVar3 + 0x88));
   puVar2[2] = uVar4;
   iVar3 = FUN_0203b414(2);
-  uVar4 = FUN_0214e880(s_jquiz_result00_atm_0216182c,FUN_02161840,*(undefined4 *)(iVar3 + 0x88));
+  uVar4 = FUN_0214e880(s_jquiz_result00_atm_0216182c,&DAT_02161840,*(undefined4 *)(iVar3 + 0x88));
   puVar2[5] = uVar4;
   uVar4 = FUN_020101f4(s_Common_button_aar_02161854,0);
   puVar2[9] = uVar4;

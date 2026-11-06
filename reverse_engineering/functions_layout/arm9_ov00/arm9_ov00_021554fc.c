@@ -21,7 +21,7 @@ int ALWidgetImp::Create(undefined4 param_1,undefined4 param_2,int *param_3,int p
   iVar2 = FUN_02155334(0,param_5,param_6,param_7);
   uVar1 = _DAT_021d5154;
   if (param_4 == 0) {
-    iVar3 = thunk_FUN_0201a228(0x134,0x2160d3c,s_Create_02161064,0x3e);
+    iVar3 = thunk_FUN_0201a228(0x134,&DAT_02160d3c,s_Create_02161064,0x3e);
     if (iVar3 != 0) {
       func_0x021af0f8(iVar3,0,uVar1,ALWidgetBaseImp::CreateDrawFunc);
     }
@@ -29,7 +29,7 @@ int ALWidgetImp::Create(undefined4 param_1,undefined4 param_2,int *param_3,int p
   }
   else {
     uVar5 = *(undefined4 *)(param_4 + 4);
-    iVar3 = thunk_FUN_0201a228(0x134,0x2160d3c,s_Create_02161064,0x3e);
+    iVar3 = thunk_FUN_0201a228(0x134,&DAT_02160d3c,s_Create_02161064,0x3e);
     if (iVar3 != 0) {
       func_0x021af0f8(iVar3,uVar5,uVar1,ALWidgetBaseImp::CreateDrawFunc);
     }

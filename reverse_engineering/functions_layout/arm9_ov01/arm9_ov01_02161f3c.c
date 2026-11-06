@@ -226,7 +226,7 @@ int RuleSelect::RuleSelect_Add
   *(undefined4 *)(*(int *)(piVar4[0x21] + 4) + 0xdc) = 0;
   func_0x021b3fb0(*(undefined4 *)(piVar4[0x21] + 4),uRam0216cef0);
   *(undefined1 *)(*(int *)(piVar4[0x21] + 4) + 0xab) = 0;
-  func_0x021b6760(*(undefined4 *)(piVar4[0x21] + 4),4,0x21639f5);
+  func_0x021b6760(*(undefined4 *)(piVar4[0x21] + 4),4,uRam0216cf10);
   *(undefined1 *)(*(int *)(piVar4[0x21] + 4) + 0xb1) = 1;
   iVar5 = FUN_0203b404();
   iVar5 = ALWidgetImp::Create(piVar4,0x216cf18,piVar4[0x20],*(undefined4 *)(iVar5 + 0x88));

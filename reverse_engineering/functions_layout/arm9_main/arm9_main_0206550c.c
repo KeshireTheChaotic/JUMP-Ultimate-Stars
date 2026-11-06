@@ -3,7 +3,6 @@ void FUN_0206550c(uint param_1)
 
 {
   ushort uVar1;
-  code *in_lr;
   
   uVar1 = (ushort)param_1;
   DAT_020afba0 = ~uVar1 & (DAT_020afba0 | DAT_020afbac);
@@ -13,7 +12,6 @@ void FUN_0206550c(uint param_1)
     return;
   }
   GX_VRAMCNT_SetLCDC_(DAT_020afba0);
-  (*in_lr)();
   return;
 }
 

@@ -249,9 +249,9 @@ void FUN_021564a0(int param_1)
   (**(code **)(*piVar12 + 0xc4))();
   thunk_FUN_0207400c(auStack_34,&DAT_0215e6e4);
   if (uVar8 != 0) {
-    thunk_FUN_020741c4(auStack_34,(&PTR_LAB_0215e48c)[uVar8]);
+    thunk_FUN_020741c4(auStack_34,(&PTR_DAT_0215e48c)[uVar8]);
   }
-  thunk_FUN_020741c4(auStack_34,(&PTR_LAB_0215e48c)[uVar11 + (short)uVar8 * -10 & 0xff]);
+  thunk_FUN_020741c4(auStack_34,(&PTR_DAT_0215e48c)[uVar11 + (short)uVar8 * -10 & 0xff]);
   thunk_FUN_020741c4(auStack_34,&DAT_0215e6e8);
   piVar12 = *(int **)(*(int *)(iVar5 + 4) + 100);
   (**(code **)(*piVar12 + 0x68))(piVar12,auStack_34);

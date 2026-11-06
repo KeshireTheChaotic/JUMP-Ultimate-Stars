@@ -6,8 +6,6 @@
 void GX_SetBankForSubOBJExtPltt(dword param_1)
 
 {
-  code *in_lr;
-  
                     /* JUS-TAG hw={"GX_2D_sub":1,"VRAMCNT":1} io=["04000249","04001000"] */
   DAT_020afba0 = ~(ushort)param_1 & (DAT_020afba0 | DAT_020afbb8);
   if (param_1 == 0) {
@@ -19,7 +17,6 @@ void GX_SetBankForSubOBJExtPltt(dword param_1)
   }
   DAT_020afbb8 = (ushort)param_1;
   GX_VRAMCNT_SetLCDC_(DAT_020afba0);
-  (*in_lr)();
   return;
 }
 

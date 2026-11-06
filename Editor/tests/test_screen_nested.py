@@ -38,7 +38,8 @@ class ScreenNestedTest(unittest.TestCase):
         with tempfile.TemporaryDirectory() as td:
             nested = fixture(Path(td))
             root = DataRoot(td)
-            self.assertIn(nested, scenes.nested_screen_archives(root, scenes.screen_archives(root)))
+            tops = scenes.screen_archives(root, ('screen', 'library', 'elements'))
+            self.assertIn(nested, scenes.nested_screen_archives(root, tops))
             self.assertEqual(scenes.find_layers(root, nested), [])
             info, dtx, source = scenes.screen_sprite(root, nested, 'ui/part.dtx')
             self.assertEqual(info.frame_count, 2)
@@ -89,7 +90,7 @@ class ScreenNestedTest(unittest.TestCase):
         if not folder or not Path(folder, 'deckmake/deckmake.aar').is_file():
             self.skipTest('extracted game assets not present')
         root = DataRoot(folder)
-        screens = scenes.screen_archives(root)
+        screens = scenes.screen_archives(root, ('screen', 'library', 'elements'))
         nested = scenes.nested_screen_archives(root, screens)
         self.assertGreaterEqual(len(nested), 300)
         count = 0

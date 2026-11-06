@@ -19,7 +19,8 @@ ALDrawLinkImp_021d0e50::ALDrawLinkImp_021d0e50
   iVar1 = thunk_FUN_0201a228(8,s_ALWidget_cpp_021d17d4,&DAT_021d1660,0x661,uVar2);
   uVar2 = 0;
   if (iVar1 != 0) {
-    uVar2 = jus_Class_021d0870::jus_Class_021d0870(iVar1,param_1);
+    uVar2 = ALDrawLinkImp_021d0e50_Part_021d0870::ALDrawLinkImp_021d0e50_Part_021d0870
+                      (iVar1,param_1);
   }
   param_1[6] = uVar2;
   (*param_2)();

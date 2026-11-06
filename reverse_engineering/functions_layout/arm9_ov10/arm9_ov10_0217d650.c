@@ -48,6 +48,7 @@ void FUN_0217d650(int param_1)
   uVar11 = CONCAT44(0x198,puVar2);
   if (puVar2 < &DAT_0000000e) {
     uVar11 = CONCAT44(0x198,(int)(short)(&switchD_0217d6c4::switchdataD_0217d6c6)[(int)puVar2]);
+                    /* WARNING: Switch is manually overridden */
     switch(puVar2) {
     case (undefined1 *)0x1:
       uVar11 = FUN_02176640();

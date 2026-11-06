@@ -117,7 +117,7 @@ int * JGalaxyMap::JGalaxyMap_Create(int param_1)
   iVar4 = FUN_02156d08((&PTR_s_jgalaxy_map00_0215c108)[*(byte *)((int)piVar3 + 0x22)],
                        *(undefined4 *)(iVar4 + 0x88));
   piVar3[1] = iVar4;
-  iVar4 = thunk_FUN_0201a228(0x78,FUN_0215bfa4,s_Create_0215c0b4,0x4c3);
+  iVar4 = thunk_FUN_0201a228(0x78,&DAT_0215bfa4,s_Create_0215c0b4,0x4c3);
   piVar5 = (int *)0x0;
   if (iVar4 != 0) {
     piVar5 = (int *)jus_TagNDGR_0209c0b4::jus_TagNDGR_0209c0b4(iVar4,FUN_02024a30,1);

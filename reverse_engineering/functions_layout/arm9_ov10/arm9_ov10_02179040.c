@@ -1,5 +1,5 @@
 
-int FUN_02179040(int param_1)
+uint FUN_02179040(uint param_1)
 
 {
   int iVar1;
@@ -9,26 +9,29 @@ int FUN_02179040(int param_1)
   if (param_1 == 0) {
     return 0;
   }
-  switch(param_1) {
-  case 1:
-    unaff_r5 = 6;
-    unaff_r4 = -0x32;
-    break;
-  case 2:
-    unaff_r5 = 6;
-    unaff_r4 = -0x3c;
-    break;
-  case 3:
-    unaff_r5 = 6;
-    unaff_r4 = -0x1e;
-    break;
-  case 4:
-    unaff_r5 = 6;
-    unaff_r4 = -0x50;
-    break;
-  case 5:
-    unaff_r5 = 6;
-    unaff_r4 = -0x14;
+  if (param_1 < 6) {
+                    /* WARNING: Switch is manually overridden */
+    switch(param_1) {
+    case 1:
+      unaff_r5 = 6;
+      unaff_r4 = -0x32;
+      break;
+    case 2:
+      unaff_r5 = 6;
+      unaff_r4 = -0x3c;
+      break;
+    case 3:
+      unaff_r5 = 6;
+      unaff_r4 = -0x1e;
+      break;
+    case 4:
+      unaff_r5 = 6;
+      unaff_r4 = -0x50;
+      break;
+    case 5:
+      unaff_r5 = 6;
+      unaff_r4 = -0x14;
+    }
   }
   iVar1 = FUN_02176640();
   if (iVar1 == 2) {

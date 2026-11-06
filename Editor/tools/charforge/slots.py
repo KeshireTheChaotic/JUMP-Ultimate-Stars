@@ -26,7 +26,6 @@ from __future__ import annotations
 import re
 import struct
 from dataclasses import dataclass, field
-from pathlib import Path
 
 from jus_formats import roster
 from jus_package.project import DataRoot, join, split

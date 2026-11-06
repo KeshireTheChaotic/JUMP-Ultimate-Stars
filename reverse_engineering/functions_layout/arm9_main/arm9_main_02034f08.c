@@ -1,8 +1,8 @@
 
-/* JUS-CLASS jus_Class_02094b9c::jus_Class_02094b9c [class-default] stores vtable 02094b9c into
-   *this (constructor) */
+/* JUS-CLASS jus_TagCNTR_Part_02094b9c::jus_TagCNTR_Part_02094b9c [class-owned] stores vtable
+   02094b9c into *this (constructor) */
 
-int * jus_Class_02094b9c::jus_Class_02094b9c(int *param_1,int param_2)
+int * jus_TagCNTR_Part_02094b9c::jus_TagCNTR_Part_02094b9c(int *param_1,int param_2)
 
 {
   int iVar1;

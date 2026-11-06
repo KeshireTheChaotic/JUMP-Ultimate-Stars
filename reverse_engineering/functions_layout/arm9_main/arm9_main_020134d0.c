@@ -8,7 +8,7 @@ undefined4 * jus_TagIPCT::jus_TagIPCT(undefined4 *param_1,int param_2)
   int iVar1;
   undefined4 uVar2;
   
-  jus_Class_0209af58::jus_Class_0209af58();
+  jus_TagDLSE_Part_0209af58::jus_TagDLSE_Part_0209af58();
   *param_1 = &vftable;
   param_1[0xe] = *(undefined4 *)(param_2 + 0x38);
   param_1[0xf] = *(undefined4 *)(param_2 + 0x3c);

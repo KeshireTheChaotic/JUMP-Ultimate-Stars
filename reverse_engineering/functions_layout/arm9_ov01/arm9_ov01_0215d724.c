@@ -94,7 +94,7 @@ void DeckSelectPassword::DeckSelectPassword_Create
   (**(code **)(**(int **)(iVar1 + 4) + 0xd8))(*(int **)(iVar1 + 4),0);
   FUN_0214e688(*piVar3,iVar1);
   FUN_0214f714(&uStack_ac,iVar1,s_Position_0216ca6c);
-  iVar4 = thunk_FUN_0201a228(0x4c,FUN_0216c958,s_Create_0216c940,0x2ef);
+  iVar4 = thunk_FUN_0201a228(0x4c,&DAT_0216c958,s_Create_0216c940,0x2ef);
   if (iVar4 != 0) {
     jus_TagIPMV::jus_TagIPMV(iVar4,0,uStack_ac,uStack_a8,0x494c,&DAT_02093c8c,8,0,0);
   }
@@ -113,7 +113,7 @@ void DeckSelectPassword::DeckSelectPassword_Create
   uStack_8c = 0;
   FUN_0214dc68(auStack_30,&uStack_94,&uStack_90,&uStack_8c);
   FUN_0214f714(&uStack_9c,iVar1,s_Position_0216ca6c);
-  iVar4 = thunk_FUN_0201a228(0x4c,FUN_0216c958,s_Create_0216c940,0x2ef);
+  iVar4 = thunk_FUN_0201a228(0x4c,&DAT_0216c958,s_Create_0216c940,0x2ef);
   if (iVar4 != 0) {
     jus_TagIPMV::jus_TagIPMV(iVar4,0,uStack_9c,uStack_98,0x494c,auStack_30,8,0,0);
   }

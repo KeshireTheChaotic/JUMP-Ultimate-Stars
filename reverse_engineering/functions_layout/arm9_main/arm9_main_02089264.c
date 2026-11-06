@@ -18,19 +18,20 @@ void FUN_02089264(int param_1)
     FUN_02088eac(4,0x78);
   }
   DAT_0214bea4 = 4;
-  switch(DAT_0214be60) {
-  case 0:
-  case 2:
-    iVar1 = FUN_020891fc();
-    if (iVar1 == 0) {
-      FUN_02089044();
-    }
-    break;
-  case 1:
-  case 3:
-    iVar1 = FUN_02089104();
-    if (iVar1 == 0) {
-      FUN_02089044();
+  if (DAT_0214be60 < 4) {
+                    /* WARNING: Switch is manually overridden */
+    switch(DAT_0214be60) {
+    case 0:
+      iVar1 = FUN_020891fc();
+      if (iVar1 == 0) {
+        FUN_02089044();
+      }
+      break;
+    case 1:
+      iVar1 = FUN_02089104();
+      if (iVar1 == 0) {
+        FUN_02089044();
+      }
     }
   }
   FUN_02088eac(4,0xf0);

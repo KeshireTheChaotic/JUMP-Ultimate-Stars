@@ -2,12 +2,10 @@
 void FUN_02003cc4(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
 
 {
-  code *in_lr;
   undefined4 uStack_4;
   
   uStack_4 = param_4;
   FUN_02003c88(param_1,param_2,param_3,&uStack_4);
-  (*in_lr)();
   return;
 }
 

@@ -55,7 +55,8 @@ void ScreenInstance_Derived_02093d14::vfunc_45(undefined4 param_1,int param_2,in
       iVar5 = FUN_0201a228(0x78);
       piVar8 = (int *)0x0;
       if (iVar5 != 0) {
-        piVar8 = (int *)jus_Class_0209b250::jus_Class_0209b250(iVar5,param_2);
+        piVar8 = (int *)ScreenInstance_Derived_02093d14_Part_0209b250::
+                        ScreenInstance_Derived_02093d14_Part_0209b250(iVar5,param_2);
       }
       FUN_0202201c(param_2,piVar8);
     }
@@ -78,7 +79,8 @@ void ScreenInstance_Derived_02093d14::vfunc_45(undefined4 param_1,int param_2,in
       iVar5 = FUN_0201a228(0x78);
       piVar8 = (int *)0x0;
       if (iVar5 != 0) {
-        piVar8 = (int *)jus_Class_0209b330::jus_Class_0209b330(iVar5,param_2);
+        piVar8 = (int *)ScreenInstance_Derived_02093d14_Part_0209b330::
+                        ScreenInstance_Derived_02093d14_Part_0209b330(iVar5,param_2);
       }
       FUN_0202201c(param_2,piVar8);
     }

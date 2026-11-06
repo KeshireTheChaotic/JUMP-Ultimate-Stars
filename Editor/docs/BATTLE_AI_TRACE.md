@@ -92,8 +92,18 @@ per-character byte (+0x34) and reads +0x2E as a rating. The other fields are not
 
 ## Still undecoded
 
-* AIPM block header beyond +0x04/+0x0C; the AIMV movement rows and node head; the
-  ai_param fields. The decision logic itself is in BattleAI_State/JobAtk, not traced.
-* jquiz.bin, the counted 8-byte UI and J-Galaxy tables, the tutorials, StaffRoll /
-  TitleOrder, commwin / demo / piece / jpower / bgm / location / pname / secret,
-  deck p-files, dwc/utility.bin.
+* AIPM block header beyond +0x04/+0x0C; the AIMV node head; the ai_param fields.
+  The decision logic itself is in BattleAI_State/JobAtk, not traced.
+
+## Global tables (read-only views)
+
+`jus_formats.gametables` reads jquiz.bin, StaffRoll / TitleOrder, commwin, demo,
+piece, jpower, bgm, location, pname, secret and the 36 counted 8-byte
+CommonPaletteAnime scripts, with the layouts from `docs/Research` (2026-11-06).
+`tests/test_gametables.py` checks every record count on the shipped data, and that
+every text slot is valid CP932. The loose files are listed under **Game tables** in
+the Project panel. Archive members (jquiz, ending, palette scripts) get a table
+section in the Archive inspector.
+
+Not yet read: the tutorial command scripts, the deck p-files and the NitroFS
+inside dwc/utility.bin.

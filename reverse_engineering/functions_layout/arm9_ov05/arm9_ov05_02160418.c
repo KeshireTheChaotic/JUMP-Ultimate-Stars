@@ -11,7 +11,8 @@ void FUN_02160418(int param_1)
   puVar3 = *(undefined4 **)(*(int *)(param_1 + 4) + 0x10);
   iVar1 = FUN_0207382c();
   if (iVar1 != 0) {
-    if (puVar3[2] == 0) {
+    if ((puVar3[2] == 0) && ((uint)puVar3[1] < 5)) {
+                    /* WARNING: Switch is manually overridden */
       switch(puVar3[1]) {
       case 0:
         uVar2 = FUN_02070d14(0);

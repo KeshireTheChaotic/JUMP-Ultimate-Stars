@@ -19,8 +19,6 @@ void OS_IrqHandler(void)
   for (uVar1 = 0; _DAT_04000214 = uVar2 & 1 << (uVar1 & 0xff), _DAT_04000214 == 0; uVar1 = uVar1 + 1
       ) {
   }
-                    /* WARNING: Could not recover jumptable at 0x037fb93c. Too many branches */
-                    /* WARNING: Treating indirect jump as call */
   (*(code *)(&DAT_03808138)[uVar1])();
   return;
 }

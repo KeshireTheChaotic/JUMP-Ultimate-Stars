@@ -10,7 +10,7 @@ undefined4 * jus_TagBBDS::vfunc_08(int param_1)
   
   puVar1 = (undefined4 *)FUN_0201a228(0x10);
   if (puVar1 != (undefined4 *)0x0) {
-    *puVar1 = &jus_Class_02094b9c::vftable;
+    *puVar1 = &jus_TagCNTR_Part_02094b9c::vftable;
     puVar1[1] = *(undefined4 *)(param_1 + 4);
     *puVar1 = &vftable;
     *(undefined1 *)(puVar1 + 2) = *(undefined1 *)(param_1 + 8);

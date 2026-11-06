@@ -52,7 +52,7 @@ void ALControllerImp::Create(int param_1,int *param_2,undefined4 param_3,undefin
   local_64[1] = 0;
   FUN_02151038(auStack_34,local_64 + 3,local_64 + 2,local_64 + 1);
   FUN_02150d54(local_64 + 4,param_2[3],s_Position_0216188c);
-  iVar1 = thunk_FUN_0201a228(0x4c,FUN_02160d6c,s_Create_0216173c,0x2ef);
+  iVar1 = thunk_FUN_0201a228(0x4c,&DAT_02160d6c,s_Create_0216173c,0x2ef);
   if (iVar1 != 0) {
     jus_TagIPMV::jus_TagIPMV(iVar1,0,local_64[4],local_50,0x3244,auStack_34,0x1e,0,0);
   }

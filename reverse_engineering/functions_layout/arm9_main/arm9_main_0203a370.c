@@ -1,8 +1,8 @@
 
-/* JUS-CLASS jus_Class_02093f78::vfunc_10 [class-virtual] slot 10 of vtable 02093f78 (own slot, not
-   inherited) */
+/* JUS-CLASS TextureInstance_Part_02093f78::vfunc_10 [class-virtual] slot 10 of vtable 02093f78 (own
+   slot, not inherited) */
 
-undefined4 jus_Class_02093f78::vfunc_10(undefined4 param_1,int param_2)
+undefined4 TextureInstance_Part_02093f78::vfunc_10(undefined4 param_1,int param_2)
 
 {
   uint uVar1;

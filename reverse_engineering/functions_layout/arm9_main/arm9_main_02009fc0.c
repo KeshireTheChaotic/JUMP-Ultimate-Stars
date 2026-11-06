@@ -23,64 +23,65 @@ void FUN_02009fc0(undefined2 *param_1,uint param_2)
       return;
     }
   }
-  else {
-    switch(param_2) {
+  else if (param_2 + 0x20 < 0x29) {
+                    /* WARNING: Switch is manually overridden */
+    switch(param_2 + 0x20) {
     case 0:
-      FUN_02009f60(param_1,&DAT_020934f8,0);
-      return;
-    case 1:
-      FUN_02009f60(param_1,&DAT_020934fc,0);
-      return;
-    case 2:
-      FUN_02009f60(param_1,&DAT_02093500,0);
-      return;
-    case 3:
-      FUN_02009f60(param_1,&DAT_02093504,0);
-      return;
-    case 4:
-      FUN_02009f60(param_1,&DAT_02093508,1);
-      return;
-    case 5:
-      FUN_02009f60(param_1,&DAT_0209350c,1);
-      return;
-    case 6:
-      FUN_02009f60(param_1,&DAT_02093510,1);
-      return;
-    case 7:
-      FUN_02009f60(param_1,&DAT_02093514,2);
-      return;
-    case 8:
-      FUN_02009f60(param_1,&DAT_02093518,2);
-      return;
-    case 0xffffffe0:
       FUN_02009f60(param_1,s_23283064365386962890625_020934a0,0xfffffff6);
       return;
-    case 0xfffffff0:
+    case 0x10:
       FUN_02009f60(param_1,s_152587890625_020934b8,0xfffffffb);
       return;
-    case 0xfffffff8:
+    case 0x18:
       FUN_02009f60(param_1,s_390625_020934c8,0xfffffffd);
       return;
-    case 0xfffffff9:
+    case 0x19:
       FUN_02009f60(param_1,s_78125_020934d0,0xfffffffd);
       return;
-    case 0xfffffffa:
+    case 0x1a:
       FUN_02009f60(param_1,s_15625_020934d8,0xfffffffe);
       return;
-    case 0xfffffffb:
+    case 0x1b:
       FUN_02009f60(param_1,&DAT_020934e0,0xfffffffe);
       return;
-    case 0xfffffffc:
+    case 0x1c:
       FUN_02009f60(param_1,&DAT_020934e8,0xfffffffe);
       return;
-    case 0xfffffffd:
+    case 0x1d:
       FUN_02009f60(param_1,&DAT_020934ec,0xffffffff);
       return;
-    case 0xfffffffe:
+    case 0x1e:
       FUN_02009f60(param_1,&DAT_020934f0,0xffffffff);
       return;
-    case 0xffffffff:
+    case 0x1f:
       FUN_02009f60(param_1,&DAT_020934f4,0xffffffff);
+      return;
+    case 0x20:
+      FUN_02009f60(param_1,&DAT_020934f8,0);
+      return;
+    case 0x21:
+      FUN_02009f60(param_1,&DAT_020934fc,0);
+      return;
+    case 0x22:
+      FUN_02009f60(param_1,&DAT_02093500,0);
+      return;
+    case 0x23:
+      FUN_02009f60(param_1,&DAT_02093504,0);
+      return;
+    case 0x24:
+      FUN_02009f60(param_1,&DAT_02093508,1);
+      return;
+    case 0x25:
+      FUN_02009f60(param_1,&DAT_0209350c,1);
+      return;
+    case 0x26:
+      FUN_02009f60(param_1,&DAT_02093510,1);
+      return;
+    case 0x27:
+      FUN_02009f60(param_1,&DAT_02093514,2);
+      return;
+    case 0x28:
+      FUN_02009f60(param_1,&DAT_02093518,2);
       return;
     }
   }

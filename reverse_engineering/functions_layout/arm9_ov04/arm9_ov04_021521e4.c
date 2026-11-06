@@ -30,7 +30,7 @@ int * JQuizStartBackPlate::JQuizStartBackPlateClass_Create
   piVar2 = (int *)thunk_FUN_0201a228(0x14,s_JQuizStartBackPlate_cpp_02160cb4,
                                      s_JQuizStartBackPlateClass_Create_02160c94,0x28);
   FUN_020517fc(piVar2,0,0x14);
-  iVar3 = FUN_0214e880(FUN_02160ccc,s_JArena_direction_dig_02160ce4,param_2);
+  iVar3 = FUN_0214e880(&DAT_02160ccc,s_JArena_direction_dig_02160ce4,param_2);
   FUN_0214e92c(iVar3,s_jquiz_q_direction00_ncl_02160cfc);
   iVar4 = ALWidgetBaseImp::Create(piVar2,param_4);
   *piVar2 = iVar4;
