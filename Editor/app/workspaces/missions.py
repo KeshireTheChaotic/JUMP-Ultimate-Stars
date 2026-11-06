@@ -52,6 +52,7 @@ class MissionPanel:
         self.stage_var = tk.StringVar()
         self.environment_var = tk.BooleanVar(value=False)
         self.goal_code_var = tk.StringVar()
+        self.prune_definition_var = tk.StringVar()
         self.frame = self._build(parent)
 
     # ------------------------------------------------------------ layout
@@ -90,8 +91,17 @@ class MissionPanel:
             row=1, column=2, columnspan=3, sticky='w', padx=8)
         ttk.Button(link, text='Update shared definition', command=self.update_stage).grid(
             row=1, column=5, padx=4)
-        ttk.Label(link, text='IDs are fixed; reassigning a shared definition changes all linked nodes.',
-                  style='Toolbar.TLabel').grid(row=2, column=0, columnspan=6, sticky='w', padx=5)
+        ttk.Button(link, text='Duplicate mission + node', command=self.duplicate_node).grid(
+            row=2, column=0, columnspan=3, sticky='w', padx=4, pady=2)
+        ttk.Button(link, text='Delete map node', command=self.delete_node).grid(
+            row=2, column=3, columnspan=3, sticky='w', padx=4, pady=2)
+        ttk.Label(link, text='Unused definition ID').grid(row=3, column=0, columnspan=2, sticky='w', padx=4)
+        ttk.Entry(link, textvariable=self.prune_definition_var, width=6).grid(row=3, column=2)
+        ttk.Button(link, text='Delete unused definition', command=self.delete_unused_definition).grid(
+            row=3, column=3, columnspan=3, sticky='w', padx=4)
+        ttk.Label(link, text='Structural changes require a NEW SAVE; node count/IDs and stage availability '
+                  'must be validated in melonDS.', style='Toolbar.TLabel').grid(
+                      row=4, column=0, columnspan=6, sticky='w', padx=5)
         table = ttk.Frame(left)
         table.pack(fill='both', expand=True, pady=(4, 0))
         self.goals = ttk.Treeview(table, columns=('code', 'kind', 'detail'), show='tree headings', height=4,
@@ -465,6 +475,98 @@ class MissionPanel:
         self.slot = max(0, slot - 1) if slot else None
         self.refresh()
         self._edited('Last objective deactivated without erasing its bytes. Apply, then Save.')
+
+    # ------------------------------------------------------------ fresh-save structural edits
+    def duplicate_node(self):
+        """Duplicate the selected J-Galaxy node and its definition atomically."""
+        c = self.catalog
+        if c is None or self.node_id is None:
+            return
+        node = c.graph.get(self.node_id)
+        old_definition = c.definition(node)
+        try:
+            trial_graph = GalaxyGraph.parse(c.graph.build())
+            trial_missions = DefinitionTable.parse(c.missions.build())
+            trial_battles = DefinitionTable.parse(c.battles.build())
+            trial_table = trial_missions if node.mission else trial_battles
+            # Keep ASCII name termination within the fixed-size name field.
+            name = old_definition.name[:100] + ' Copy'
+            new_definition = trial_table.clone_definition(node.definition_id, name)
+            new_node = trial_graph.append_clone_node(
+                self.node_id, definition_id=new_definition,
+                missions=trial_missions, battles=trial_battles)
+            errors = trial_graph.validate_references(trial_missions, trial_battles, c.card_count)
+            if errors:
+                raise ValueError('; '.join(errors[:5]))
+        except (ValueError, IndexError) as exc:
+            messagebox.showerror('Duplicate mission', str(exc))
+            return
+        if not messagebox.askyesno('Experimental fresh-save operation',
+                f'Append a J-Galaxy node #{new_node} and {"mission" if node.mission else "battle"} '
+                f'definition #{new_definition}, cloned from this node? This changes progression '
+                'table counts. Old saves are not supported; map enumeration requires melonDS testing.'):
+            return
+        self.checkpoint('duplicate mission node and definition')
+        c.graph, c.missions, c.battles = trial_graph, trial_missions, trial_battles
+        self._edited(f'Added J-Galaxy node {new_node} and definition {new_definition}. '
+                     'Use a fresh save after Apply/Save.')
+        self.ws.select_mission(new_node)
+
+    def delete_node(self):
+        c = self.catalog
+        if c is None or self.node_id is None:
+            return
+        doomed = self.node_id
+        trial = GalaxyGraph.parse(c.graph.build())
+        try:
+            trial.remove_node(doomed)
+            errors = trial.validate_references(c.missions, c.battles, c.card_count)
+            if errors:
+                raise ValueError('; '.join(errors[:5]))
+        except (ValueError, IndexError) as exc:
+            messagebox.showerror('Delete J-Galaxy node', str(exc))
+            return
+        if not messagebox.askyesno('Delete progression node (NEW SAVE ONLY)',
+                f'Permanently remove node {doomed}? All higher node IDs will shift by one; '
+                'existing saves are incompatible. Back up the data and test the J-Galaxy '
+                'map in melonDS before distribution.'):
+            return
+        self.checkpoint('delete progression node')
+        c.graph = trial
+        self.node_id = None
+        self.slot = None
+        self._edited('Node removed and planet table relocated. Start a fresh save.')
+        self.ws.select_mission(min(doomed, trial.node_count - 1))
+
+    def delete_unused_definition(self):
+        c = self.catalog
+        if c is None:
+            return
+        mission = self.node_kind_var.get() == 'Mission'
+        try:
+            definition_id = _number(self.prune_definition_var.get())
+            trial_graph = GalaxyGraph.parse(c.graph.build())
+            trial_missions = DefinitionTable.parse(c.missions.build())
+            trial_battles = DefinitionTable.parse(c.battles.build())
+            table = trial_missions if mission else trial_battles
+            trial_graph.remove_definition_references(mission=mission, index=definition_id)
+            table.remove_definition(definition_id)
+            errors = trial_graph.validate_references(trial_missions, trial_battles, c.card_count)
+            if errors:
+                raise ValueError('; '.join(errors[:5]))
+        except (ValueError, IndexError) as exc:
+            messagebox.showerror('Delete unused definition', str(exc))
+            return
+        if not messagebox.askyesno('Delete unused definition (NEW SAVE ONLY)',
+                f'Delete unused {"mission" if mission else "battle"} definition '
+                f'#{definition_id} and compact all higher definition IDs?'):
+            return
+        self.checkpoint('delete unused definition')
+        c.graph, c.missions, c.battles = trial_graph, trial_missions, trial_battles
+        self.node_id = None
+        self.slot = None
+        self._edited('Unused definition deleted; references compacted. Start a fresh save.')
+        self.ws.select_mission(0)
 
     # ------------------------------------------------------------ undo / apply
     def snapshot(self):
