@@ -68,7 +68,7 @@ class LevelWorkspace(SuiteWorkspace):
         self.preview_hits = tk.StringVar(value='')      # 2@60, 2@290
         self.camera_x = tk.StringVar(value='0')
         self.camera_y = tk.StringVar(value='0')
-        self.preview_palette = tk.BooleanVar(value=True)
+        self.preview_palette = tk.BooleanVar(value=False)
         self._item_prob = None
         self._stage_mob = None
         self._stage_geo = None
@@ -139,7 +139,7 @@ class LevelWorkspace(SuiteWorkspace):
         ttk.Label(camera_bar, text='Camera X/Y:').pack(side='left', padx=(2, 2))
         ttk.Entry(camera_bar, textvariable=self.camera_x, width=7).pack(side='left')
         ttk.Entry(camera_bar, textvariable=self.camera_y, width=7).pack(side='left', padx=(3, 0))
-        ttk.Checkbutton(camera_bar, text='Palette preview', variable=self.preview_palette,
+        ttk.Checkbutton(camera_bar, text='Palette preview (CPU)', variable=self.preview_palette,
                         command=self._preview_changed).pack(side='left', padx=8)
         ttk.Label(camera_bar, text='Inputs: floor ID@start-end, hit ID@tick; bare IDs start at tick 0',
                   style='Toolbar.TLabel').pack(side='left', padx=8)
