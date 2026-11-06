@@ -7,9 +7,10 @@ mission belongs to one stage of ``stage/stage.aar``.  The Level workspace
 lists missions next to stages and loads the mission's stage when one is
 selected.
 
-Progression node IDs, mission/battle IDs, goal counts and the battle setup
-bytes stay fixed.  Only the verified Koma reward ID / six resource
-quantities and the ASCII definition title are writable.
+Progression nodes and mission/battle definitions support experimental fresh-save
+structural cloning/deletion with reference validation. Shared stage references,
+planet placement, known battle fields, raw goal codes and rewards can be edited.
+Unknown bytes and flags are retained; runtime validation remains required.
 """
 from __future__ import annotations
 
