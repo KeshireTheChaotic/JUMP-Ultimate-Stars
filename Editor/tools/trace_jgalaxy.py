@@ -53,7 +53,7 @@ def collect(root: DataRoot) -> dict:
                        'koma_records': cat.card_count, 'active_rewards': sum(counts.values()),
                        'koma_grants': counts['koma'], 'resource_grants': counts['resources']},
             'notes': ['Goal codes and remaining node flags remain unclassified.',
-                      'Only slot reward signed Koma ID and six u16 resources are writable.',
+                      'Fresh-save-only graph/definition authoring is experimental; map capacity remains unverified.',
                       'Node/mission/battle indices and slot counts are fixed.'],
             'nodes': records}
 
