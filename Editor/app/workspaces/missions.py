@@ -1,28 +1,42 @@
-"""J-Galaxy mission browser and lossless objective reward editor.
+"""J-Galaxy mission panel (hosted by the Level workspace's bottom dock).
 
-In-game progression node IDs, mission/battle IDs and goal counts remain fixed.
-Only the verified Koma reward ID / six resource quantities and the ASCII
-mission/battle definition title are writable. All other fields are read-only.
+A mission is a progression node in ``jgalaxy.bin`` that points at a 0xA4-byte
+mission/battle definition; definition ``+0x75`` is the battle stage index
+(``FUN_0207538C`` → battle object +0x160 → stage table 0x02092D08), so every
+mission belongs to one stage of ``stage/stage.aar``.  The Level workspace
+lists missions next to stages and loads the mission's stage when one is
+selected.
+
+Progression node IDs, mission/battle IDs, goal counts and the battle setup
+bytes stay fixed.  Only the verified Koma reward ID / six resource
+quantities and the ASCII definition title are writable.
 """
 from __future__ import annotations
 
 import tkinter as tk
 from tkinter import ttk, messagebox
 
+from jus_formats import roster
 from jus_formats.progression import DefinitionTable, GalaxyGraph
 from jus_formats.roster import KOMA_SERIES_PREFIXES
 from jus_package import progression as prog
 
 from .. import theme as T
-from .base import SuiteWorkspace
+
+DOC = 'missions:galaxy'
 
 
-class MissionWorkspace(SuiteWorkspace):
-    key = 'missions'
-    title = 'Missions'
-    browser_title = 'J-Galaxy progression'
+def _number(value):
+    value = str(value).strip()
+    return int(value, 0) if value.lower().startswith(('0x', '0b', '0o')) else int(value, 10)
 
-    def __init__(self, app, host, browser_host, k):
+
+class MissionPanel:
+    """Mission data, reward editor and its undo/apply state (no browser of its own)."""
+
+    def __init__(self, workspace, parent):
+        self.ws = workspace
+        self.app = workspace.app
         self.catalog: prog.ProgressionCatalog | None = None
         self.load_error = ''
         self.node_id: int | None = None
@@ -32,90 +46,74 @@ class MissionWorkspace(SuiteWorkspace):
         self.koma_var = tk.StringVar()
         self.resources = [tk.StringVar(value='0') for _ in range(6)]
         self.title_var = tk.StringVar()
-        super().__init__(app, host, browser_host, k)
+        self.frame = self._build(parent)
 
-    def build(self, host):
-        main = ttk.Frame(host)
-        toolbar = ttk.Frame(main)
-        toolbar.pack(fill='x', padx=8, pady=8)
-        ttk.Label(toolbar, text='Story progression and rewards', font=T.UI_BOLD).pack(side='left')
-        ttk.Button(toolbar, text='Apply changes', style='Accent.TButton', command=self.apply).pack(side='right', padx=3)
-        ttk.Button(toolbar, text='Reload selection', command=self.refresh).pack(side='right', padx=3)
-        ttk.Label(main, text='Mission/battle IDs, progression nodes, objective counts and condition codes are fixed. '
-                            'Reward records are used only for newly cleared objectives.',
-                  wraplength=850, justify='left').pack(fill='x', padx=10, pady=(0, 8))
-        self.heading = ttk.Label(main, text='Open a game data root to browse J-Galaxy missions.', font=T.UI_BOLD)
-        self.heading.pack(fill='x', padx=10, pady=(0, 8))
-        data = ttk.Frame(main)
-        data.pack(fill='x', padx=10)
-        ttk.Label(data, text='Definition type / ID:').grid(row=0, column=0, sticky='w', pady=3)
+    # ------------------------------------------------------------ layout
+    def _build(self, parent):
+        main = ttk.Frame(parent)
+        main.pack(fill='both', expand=True)
+        left = ttk.Frame(main)
+        left.pack(side='left', fill='both', expand=True, padx=(6, 3), pady=4)
+        self.heading = ttk.Label(left, text='Open a game data root to browse J-Galaxy missions.', font=T.UI_BOLD)
+        self.heading.pack(fill='x', pady=(0, 4))
+        data = ttk.Frame(left)
+        data.pack(fill='x')
+        ttk.Label(data, text='Definition:').grid(row=0, column=0, sticky='w')
         self.type_label = ttk.Label(data, text='—')
-        self.type_label.grid(row=0, column=1, sticky='w', padx=5)
-        ttk.Label(data, text='Planet:').grid(row=1, column=0, sticky='w', pady=3)
+        self.type_label.grid(row=0, column=1, columnspan=2, sticky='w', padx=5)
+        ttk.Label(data, text='Planet / goals:').grid(row=1, column=0, sticky='w')
         self.planet_label = ttk.Label(data, text='—')
-        self.planet_label.grid(row=1, column=1, sticky='w', padx=5)
-        ttk.Label(data, text='Goal slots / flags:').grid(row=2, column=0, sticky='w', pady=3)
-        self.flags_label = ttk.Label(data, text='—')
-        self.flags_label.grid(row=2, column=1, sticky='w', padx=5)
-        ttk.Label(data, text='Definition title:').grid(row=3, column=0, sticky='w', pady=3)
-        self.title_entry = ttk.Entry(data, textvariable=self.title_var, width=45)
-        self.title_entry.grid(row=3, column=1, sticky='ew', padx=5)
-        ttk.Button(data, text='Rename definition', command=self.rename_definition).grid(row=3, column=2, padx=4)
+        self.planet_label.grid(row=1, column=1, columnspan=2, sticky='w', padx=5)
+        ttk.Label(data, text='Title:').grid(row=2, column=0, sticky='w', pady=2)
+        self.title_entry = ttk.Entry(data, textvariable=self.title_var, width=36)
+        self.title_entry.grid(row=2, column=1, sticky='ew', padx=5)
+        ttk.Button(data, text='Rename', command=self.rename_definition).grid(row=2, column=2)
         data.columnconfigure(1, weight=1)
-        ttk.Label(main, text='Objective rewards', font=T.UI_BOLD).pack(anchor='w', padx=10, pady=(12, 3))
-        table_frame = ttk.Frame(main)
-        table_frame.pack(fill='both', expand=True, padx=10)
-        columns = ('code', 'kind', 'detail')
-        self.goals = ttk.Treeview(table_frame, columns=columns, show='tree headings', height=7, selectmode='browse')
-        self.goals.heading('#0', text='Slot')
-        self.goals.heading('code', text='Raw goal code')
-        self.goals.heading('kind', text='Reward type')
-        self.goals.heading('detail', text='Reward')
-        self.goals.column('#0', width=60, stretch=False)
-        self.goals.column('code', width=120, stretch=False)
-        self.goals.column('kind', width=105, stretch=False)
-        self.goals.column('detail', width=400)
-        sb = ttk.Scrollbar(table_frame, command=self.goals.yview)
+        table = ttk.Frame(left)
+        table.pack(fill='both', expand=True, pady=(4, 0))
+        self.goals = ttk.Treeview(table, columns=('code', 'kind', 'detail'), show='tree headings', height=4,
+                                  selectmode='browse')
+        for col, text, width, stretch in (('#0', 'Slot', 44, False), ('code', 'Goal code', 80, False),
+                                          ('kind', 'Reward', 80, False), ('detail', 'Grant', 240, True)):
+            self.goals.heading(col, text=text)
+            self.goals.column(col, width=int(width * self.ws.k), stretch=stretch)
+        sb = ttk.Scrollbar(table, command=self.goals.yview)
         self.goals.configure(yscrollcommand=sb.set)
         self.goals.pack(side='left', fill='both', expand=True)
         sb.pack(side='right', fill='y')
         self.goals.bind('<<TreeviewSelect>>', self.select_goal)
+
         edit = T.Panel(main, 'Selected reward')
-        edit.pack(fill='x', padx=10, pady=9)
+        edit.pack(side='left', fill='y', padx=(3, 6), pady=4)
         row = ttk.Frame(edit.body)
         row.pack(fill='x', padx=8, pady=4)
         ttk.Label(row, text='Grant:').pack(side='left', padx=(0, 6))
-        kind = ttk.Combobox(row, textvariable=self.kind_var, values=('Koma', 'Resources'), state='readonly', width=12)
+        kind = ttk.Combobox(row, textvariable=self.kind_var, values=('Koma', 'Resources'), state='readonly', width=10)
         kind.pack(side='left')
         kind.bind('<<ComboboxSelected>>', lambda _e: self._update_kind())
-        ttk.Label(row, text='Koma ID:').pack(side='left', padx=(14, 4))
-        self.koma_entry = ttk.Entry(row, textvariable=self.koma_var, width=8)
+        ttk.Label(row, text='Koma ID:').pack(side='left', padx=(10, 4))
+        self.koma_entry = ttk.Entry(row, textvariable=self.koma_var, width=7)
         self.koma_entry.pack(side='left')
-        self.koma_info = ttk.Label(row, text='')
-        self.koma_info.pack(side='left', padx=8)
+        self.koma_info = ttk.Label(edit.body, text='')
+        self.koma_info.pack(fill='x', padx=8)
         self.koma_var.trace_add('write', lambda *_: self._update_koma_info())
         line = ttk.Frame(edit.body)
         line.pack(fill='x', padx=8, pady=4)
         self.resource_entries = []
         for i, var in enumerate(self.resources):
-            ttk.Label(line, text=f'R{i}:').pack(side='left', padx=(6 if i else 0, 3))
-            entry = ttk.Entry(line, width=7, textvariable=var)
+            ttk.Label(line, text=f'R{i}').pack(side='left', padx=(4 if i else 0, 2))
+            entry = ttk.Entry(line, width=6, textvariable=var)
             entry.pack(side='left')
             self.resource_entries.append(entry)
         foot = ttk.Frame(edit.body)
-        foot.pack(fill='x', padx=8, pady=(2, 8))
-        ttk.Label(foot, text='R0–R5 are the six native resource quantities (types not yet verified).').pack(side='left')
-        ttk.Button(foot, text='Update reward', command=self.update_reward).pack(side='right')
-        self.detail = ttk.Label(main, text='Select a mission, then an objective slot.', wraplength=850, justify='left')
-        self.detail.pack(fill='x', padx=10, pady=(3, 9))
+        foot.pack(fill='x', padx=8, pady=(2, 6))
+        ttk.Label(foot, text='R0–R5: six resource quantities (types unverified)',
+                  style='Toolbar.TLabel').pack(side='left')
+        ttk.Button(foot, text='Update reward', command=self.update_reward).pack(side='right', padx=(8, 0))
         self._update_kind()
         return main
 
-    def build_browser(self, parent):
-        self.tree = self.browser_tree(parent, ('definition',), (82,), ('ID',))
-        self.tree.bind('<<TreeviewSelect>>', self._browse)
-        self.filter_var.trace_add('write', lambda *_: self.populate())
-
+    # ------------------------------------------------------------ data
     def on_root(self):
         self.catalog = None
         self._original = None
@@ -131,78 +129,63 @@ class MissionWorkspace(SuiteWorkspace):
                 self.load_error = str(exc)
         elif root:
             self.load_error = 'jgalaxy/jgalaxy.aar (mission, battle, graph) not found in data root'
-        self.populate()
         self.refresh()
 
     def _blobs(self):
         c = self.catalog
         return c.graph.build(), c.missions.build(), c.battles.build()
 
-    def populate(self):
-        tree = self.tree
-        selected = self.node_id
-        tree.delete(*tree.get_children())
-        c = self.catalog
-        if not c:
-            return
-        flt = self.filter_var.get().casefold().strip()
-        for planet_id in range(c.graph.planet_count):
-            planet = c.graph.planet_name(planet_id) or f'Planet {planet_id}'
-            matching = []
-            for i in range(c.graph.node_count):
-                node = c.graph.get(i)
-                if node.planet_id != planet_id:
-                    continue
-                title = c.definition(node).name
-                label = f'{i:03d}  {title}'
-                if flt and not any(flt in x.casefold() for x in (label, planet, str(i))):
-                    continue
-                matching.append((i, label, node))
-            if not matching:
-                continue
-            parent = tree.insert('', 'end', iid=f'p:{planet_id}', text=f'{planet_id:02d} {planet}',
-                                 open=bool(flt or (selected is not None and
-                                                   c.graph.get(selected).planet_id == planet_id)))
-            for idx, label, node in matching:
-                tree.insert(parent, 'end', iid=f'n:{idx}', text=label,
-                            values=(('M' if node.mission else 'B') + str(node.definition_id),))
-        if selected is not None and tree.exists(f'n:{selected}'):
-            tree.selection_set(f'n:{selected}')
-            tree.see(f'n:{selected}')
+    def definition(self, node_id):
+        return self.catalog.definition(self.catalog.graph.get(node_id))
 
-    def _browse(self, _event=None):
-        selected = self.tree.selection()
-        if not selected or not selected[0].startswith('n:'):
-            return
-        node_id = int(selected[0][2:])
+    def stage_of(self, node_id) -> str | None:
+        """Stage stem the node's battle runs on (definition +0x75 → stage table)."""
+        return roster.stage_stem(self.definition(node_id).stage_index)
+
+    def nodes_by_stage(self) -> dict[str, list[int]]:
+        out: dict[str, list[int]] = {}
+        if self.catalog is not None:
+            for i in range(self.catalog.graph.node_count):
+                stem = self.stage_of(i)
+                if stem:
+                    out.setdefault(stem, []).append(i)
+        return out
+
+    def node_label(self, i):
+        return f'{i:03d}  {self.definition(i).name}'
+
+    # ------------------------------------------------------------ view
+    def select_node(self, node_id):
         if node_id != self.node_id:
             self.node_id = node_id
             self.slot = None
-            self.refresh()
+        self.refresh()
 
     def refresh(self):
         c = self.catalog
+        self.goals.delete(*self.goals.get_children())
         if c is None:
             self.heading.configure(text=self.load_error or 'Open a data root with J-Galaxy files.')
-            self.goals.delete(*self.goals.get_children())
-            self.detail.configure(text='Mission reward editing requires jgalaxy/jgalaxy.aar and bin/koma.bin.')
             return
         if self.node_id is None:
             self.heading.configure(text=f'{c.graph.node_count} progression nodes · {c.missions.count} missions · '
-                                        f'{c.battles.count} battles · {c.card_count} Koma records')
-            self.goals.delete(*self.goals.get_children())
-            self.detail.configure(text='Select a progression node on the left to view its linked mission and rewards.')
+                                        f'{c.battles.count} battles · {c.card_count} Koma records — '
+                                        'select a mission in the browser')
+            self.type_label.configure(text='—')
+            self.planet_label.configure(text='—')
+            self.title_var.set('')
             return
         n = c.graph.get(self.node_id)
         d = c.definition(n)
         typ = 'Mission' if n.mission else 'Battle'
+        stem = roster.stage_stem(d.stage_index) or f'stage {d.stage_index} (not in table)'
         self.heading.configure(text=f'Node {n.index:03d} — {d.name}')
-        self.type_label.configure(text=f'{typ} #{d.index} · record stride 0xA4')
-        self.planet_label.configure(text=f'#{n.planet_id:02d} {c.graph.planet_name(n.planet_id)}')
-        self.flags_label.configure(text=f'{n.goal_count}/6 goals · flags 0x{n.flags:02X} (only bit 0x04 typed)')
+        self.type_label.configure(text=f'{typ} #{d.index} · stage {stem} · rule {d.rule} · '
+                                       f'{d.opponents} opponent(s)')
+        self.planet_label.configure(text=f'#{n.planet_id:02d} {c.graph.planet_name(n.planet_id)} · '
+                                         f'{n.goal_count}/6 goals · flags 0x{n.flags:02X}')
         self.title_var.set(d.name)
         old_slot = self.slot
-        self.goals.delete(*self.goals.get_children())
         for reward in n.rewards:
             detail = (f'Koma #{reward.koma_id}' if reward.is_koma else
                       ', '.join(f'R{i}={v}' for i, v in enumerate(reward.resources)))
@@ -216,8 +199,6 @@ class MissionWorkspace(SuiteWorkspace):
         elif n.goal_count:
             self.goals.selection_set('s:0')
             self.select_goal()
-        self.detail.configure(text='Edit only reward type/ID or six resource quantities. Goal condition codes, '
-                                   'node identifiers, level setup and unknown record fields are preserved byte-for-byte.')
 
     def select_goal(self, _event=None):
         selected = self.goals.selection()
@@ -235,10 +216,9 @@ class MissionWorkspace(SuiteWorkspace):
 
     def _update_kind(self):
         is_koma = self.kind_var.get() == 'Koma'
-        if hasattr(self, 'koma_entry'):
-            self.koma_entry.configure(state='normal' if is_koma else 'disabled')
-            for entry in self.resource_entries:
-                entry.configure(state='disabled' if is_koma else 'normal')
+        self.koma_entry.configure(state='normal' if is_koma else 'disabled')
+        for entry in self.resource_entries:
+            entry.configure(state='disabled' if is_koma else 'normal')
         self._update_koma_info()
 
     def _update_koma_info(self):
@@ -248,56 +228,63 @@ class MissionWorkspace(SuiteWorkspace):
             self.koma_info.configure(text='')
             return
         try:
-            id_ = self._number(self.koma_var.get())
+            id_ = _number(self.koma_var.get())
             if not 0 <= id_ < self.catalog.card_count:
                 raise ValueError
         except ValueError:
             self.koma_info.configure(text=f'Valid IDs: 0–{self.catalog.card_count - 1}')
-        else:
-            try:
-                raw = self.app.root_data.read(prog.CARD_TABLE)
-                card = raw[id_ * 12:id_ * 12 + 12]
-                series = (KOMA_SERIES_PREFIXES[card[4]]
-                          if card[4] < len(KOMA_SERIES_PREFIXES) else f'series {card[4]}')
-                typ = ('Battle', 'Support', 'Other')[min(card[6], 2)]
-                self.koma_info.configure(text=f'{series} art {card[5]:02d} · {typ} · {card[8] + 1} panels')
-            except (OSError, KeyError, IndexError):
-                self.koma_info.configure(text='Existing Koma record')
+            return
+        try:
+            card = self.app.root_data.read(prog.CARD_TABLE)[id_ * 12:id_ * 12 + 12]
+            series = (KOMA_SERIES_PREFIXES[card[4]]
+                      if card[4] < len(KOMA_SERIES_PREFIXES) else f'series {card[4]}')
+            typ = ('Battle', 'Support', 'Other')[min(card[6], 2)]
+            self.koma_info.configure(text=f'{series} art {card[5]:02d} · {typ} · {card[8] + 1} panels')
+        except (OSError, KeyError, IndexError):
+            self.koma_info.configure(text='Existing Koma record')
 
-    @staticmethod
-    def _number(value):
-        value = str(value).strip()
-        return int(value, 0) if value.lower().startswith(('0x', '0b', '0o')) else int(value, 10)
+    # ------------------------------------------------------------ edits
+    def checkpoint(self, label):
+        snap = self.snapshot()
+        if snap is not None:
+            self.ws.focus = 'mission'
+            self.app.history.push(DOC, label, snap)
+            self.app._update_undo_label()
+
+    def _edited(self, status):
+        self.ws.focus = 'mission'
+        self.ws.mission_changed()
+        self.app.update_dirty()
+        self.app.status.set(status)
 
     def update_reward(self):
         if self.catalog is None or self.node_id is None or self.slot is None:
             self.app.status.set('Missions: select an objective first.')
             return
         try:
+            reward = self.catalog.graph.get(self.node_id).rewards[self.slot]
             if self.kind_var.get() == 'Koma':
-                arg = self._number(self.koma_var.get())
-                if self.catalog.graph.get(self.node_id).rewards[self.slot].koma_id == arg:
+                arg = _number(self.koma_var.get())
+                if reward.koma_id == arg:
                     return
                 if not 0 <= arg < self.catalog.card_count:
                     raise ValueError(f'Koma ID must be in 0..{self.catalog.card_count - 1}')
                 self.checkpoint('change Koma reward')
-                self.catalog.graph.grant_koma(self.node_id, self.slot, arg,
-                                              card_count=self.catalog.card_count)
+                self.catalog.graph.grant_koma(self.node_id, self.slot, arg, card_count=self.catalog.card_count)
             else:
-                quantities = tuple(self._number(v.get()) for v in self.resources)
-                reward = self.catalog.graph.get(self.node_id).rewards[self.slot]
+                quantities = tuple(_number(v.get()) for v in self.resources)
                 if reward.koma_id == -1 and reward.resources == quantities:
                     return
                 if len(quantities) != 6 or any(not 0 <= x <= 0xFFFF for x in quantities):
                     raise ValueError('Resource values must be between 0 and 65535')
                 self.checkpoint('change resource reward')
                 self.catalog.graph.grant_resources(self.node_id, self.slot, quantities)
-            self.refresh()
-            self.app.update_dirty()
-            self.app.status.set(f'Node {self.node_id} objective {self.slot + 1}: reward updated in memory; '
-                                'Apply (Ctrl+Enter), then Save (Ctrl+S).')
         except (ValueError, IndexError) as exc:
             messagebox.showerror('Reward validation', str(exc))
+            return
+        self.refresh()
+        self._edited(f'Node {self.node_id} objective {self.slot + 1}: reward updated in memory; '
+                     'Apply (Ctrl+Enter), then Save (Ctrl+S).')
 
     def rename_definition(self):
         if self.catalog is None or self.node_id is None:
@@ -308,23 +295,18 @@ class MissionWorkspace(SuiteWorkspace):
         if title == table.get(node.definition_id).name:
             return
         try:
-            # Validate on copy, so malformed titles never create an undo entry.
-            check = DefinitionTable.parse(table.build())
-            check.rename(node.definition_id, title)
+            # Validate on a copy, so malformed titles never create an undo entry.
+            DefinitionTable.parse(table.build()).rename(node.definition_id, title)
         except ValueError as exc:
             messagebox.showerror('Mission title', str(exc))
             return
         self.checkpoint('rename mission definition')
         table.rename(node.definition_id, title)
-        self.populate()
         self.refresh()
-        self.app.update_dirty()
-        self.app.status.set(f'Renamed {"mission" if node.mission else "battle"} definition #{node.definition_id}. '
-                            'All world nodes referencing this definition share its title.')
+        self._edited(f'Renamed {"mission" if node.mission else "battle"} definition #{node.definition_id}. '
+                     'All world nodes referencing this definition share its title.')
 
-    def doc(self):
-        return 'missions:galaxy' if self.catalog is not None else None
-
+    # ------------------------------------------------------------ undo / apply
     def snapshot(self):
         return self._blobs() if self.catalog is not None else None
 
@@ -333,34 +315,31 @@ class MissionWorkspace(SuiteWorkspace):
         self.catalog.graph = GalaxyGraph.parse(g)
         self.catalog.missions = DefinitionTable.parse(m)
         self.catalog.battles = DefinitionTable.parse(b)
-        self.populate()
         self.refresh()
+        self.ws.mission_changed()
 
     @property
     def dirty(self):
         return self.catalog is not None and self._blobs() != self._original
 
-    def apply(self):
-        if self.catalog is None or not self.dirty:
-            self.app.status.set('Missions: nothing to apply.')
-            return
-        c = self.catalog
+    def apply(self) -> list[str] | None:
+        """Write changed progression files; returns their names, or None on a validation error."""
+        if not self.dirty:
+            return []
         blobs = self._blobs()
         try:
-            graph, missions, battles = GalaxyGraph.parse(blobs[0]), DefinitionTable.parse(blobs[1]), DefinitionTable.parse(blobs[2])
-            problems = graph.validate_references(missions, battles, c.card_count)
+            graph = GalaxyGraph.parse(blobs[0])
+            problems = graph.validate_references(DefinitionTable.parse(blobs[1]), DefinitionTable.parse(blobs[2]),
+                                                 self.catalog.card_count)
             if problems:
                 raise ValueError('; '.join(problems[:8]))
         except (ValueError, IndexError) as exc:
             messagebox.showerror('Missions', f'Cannot Apply progression edits: {exc}')
-            return
-        files = (prog.GRAPH, prog.MISSIONS, prog.BATTLES)
+            return None
         changed = []
-        for path, current, previous in zip(files, blobs, self._original):
+        for path, current, previous in zip((prog.GRAPH, prog.MISSIONS, prog.BATTLES), blobs, self._original):
             if current != previous:
                 self.app.root_data.write(path, current)
                 changed.append(path.rsplit('|', 1)[-1])
         self._original = blobs
-        self.app.update_dirty()
-        self.app.resources_applied()
-        self.app.status.set('Applied ' + ', '.join(changed) + ' into jgalaxy.aar. Save (Ctrl+S) to write archive.')
+        return changed

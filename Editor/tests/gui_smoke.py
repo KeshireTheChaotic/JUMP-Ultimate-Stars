@@ -138,29 +138,32 @@ def main():
     lv.load('bg_bb')
     pump(0.3)
     checks.append(('level layers', len(lv.layers) == 4 and all(lv.images[n] is not None for n in lv.images)))
+    # J-Galaxy missions live in the Level workspace: node 12 = mission #1 "Wall Breaker",
+    # definition +0x75 = 8 → bg_hh in the ARM9 stage table
+    mp = lv.missions
+    lv.tree.selection_set('n:12')
+    pump(0.4)
+    linked = (mp.node_id == 12 and lv.stage is not None and lv.stage.stem == 'bg_hh' and
+              lv.bottom.current == 'mission' and 12 in lv._by_stage.get('bg_hh', []))
+    graph_before = mp.catalog.graph.build() if mp.catalog else None
+    mp.slot = 0
+    mp.kind_var.set('Koma')
+    mp.koma_var.set('1')
+    mp.update_reward()
+    edited = lv.dirty and mp.catalog.graph.get(12).rewards[0].koma_id == 1
+    app.undo()
+    checks.append(('mission ↔ stage link + reward undo', linked and edited and
+                   mp.catalog.graph.build() == graph_before and not lv.dirty))
     app.show_workspace('screen')
     pump(0.4)
     sc = app.suite['screen']
     sc.load('title/title.aar')
     pump(0.3)
     checks.append(('screen layers', [sc.cfg[n]['screen'] for n in sc.order] == ['Top', 'Top', 'Bottom', 'Bottom']))
-    # resource registry: where-used and open-in-workspace
-    end = time.time() + 60
-    while app.registry is None and time.time() < end:
-        pump(0.3)
-    rf = app.suite['references']
-    app.show_workspace('references')
-    rf.select('chr/ChrArc.aar|chr/dg_b_01.aar|dg_b_01_e0.amt', move_id=0x0004C150)
-    pump(0.3)
-    users = rf._in_refs()
-    # switching resources asks to apply unapplied work; the session above left none
+    # the session above leaves no unapplied work (undo returned every edit to clean)
     pending = app.almt_dirty or app.sprite_dirty or any(w.dirty for w in app.suite.values())
-    checks.append(('no unapplied work before switch', not pending))
-    app.open_resource('chr/ChrArc.aar|chr/dg_b_01.aar|dg_b_01_e0.amt', 0x0004C150)
-    pump(0.4)
-    checks.append(('registry where-used + open', bool(app.registry) and app.registry.stats()['unresolved'] == 0 and
-                   any(r.kind == 'pursuer' for r in users) and app.workspace == 'animation' and
-                   app.move is not None and app.move.id == 0x0004C150))
+    checks.append(('no unapplied work at end', not pending))
+    checks.append(('no references workspace', 'references' not in app.suite and 'missions' not in app.suite))
     app.destroy()
     checks.append(('no unexpected dialogs', not prompts))
     for p in prompts:

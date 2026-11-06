@@ -5,7 +5,7 @@ mission clear requirements make starting/help Komas available; the Koma evolutio
 chart exposes support/battle variants and costs gems. A new Koma needs links from
 both the game-data side and the character acquisition graph.
 
-**Updated 2026-11-05:** The user supplied raw executable traces and the extracted game assets. **Mission reward Koma IDs and six-resource grants are now verified and editable** via the Missions workspace (Ctrl+8). See `docs/MISSION_REWARD_TRACE.md` for proof and offsets. Evolution links and costs, mission condition codes, and expanded runtime capacity remain unverified. This document retains the collection steps for those remaining areas.
+**Updated 2026-11-05:** The user supplied raw executable traces and the extracted game assets. **Mission reward Koma IDs and six-resource grants are now verified and editable** in the Level workspace (Mission tab). See `docs/MISSION_REWARD_TRACE.md` for proof and offsets. Evolution links and costs, mission condition codes, and expanded runtime capacity remain unverified. This document retains the collection steps for those remaining areas.
 
 ## 1. Locate executable references and candidate game tables
 

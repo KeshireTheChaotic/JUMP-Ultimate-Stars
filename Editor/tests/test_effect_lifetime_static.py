@@ -28,15 +28,17 @@ class TestExecutableVtables(unittest.TestCase):
 @unittest.skipUnless((DATA / 'chr/ChrArc.aar').is_file(), 'requires extracted JUS assets')
 class TestMove41Reality(unittest.TestCase):
     def test_repeated_aura_move_and_exact_phases(self):
+        # chara_action(4) at 9/45/49 tears the previous aura down before the new spawn
         report = collect(DataRoot(DATA), 'db_b_01', 41, 55)
         self.assertEqual(report['move_id'], '0x05C12C')
-        self.assertEqual(report['nominal_live_count'], 4)
-        self.assertEqual(report['nominal_loop_overlap'], {'0x05C189': 1, '0x05C18A': 3})
+        self.assertEqual(report['nominal_live_count'], 1)
+        self.assertEqual(report['nominal_loop_overlap'], {'0x05C189': 0, '0x05C18A': 1})
         live = [(e['id'], e['spawn_tick'], e['frame_tick'], e['frames'][0]['frame'])
                 for e in report['spawned_effects']
                 if e.get('nominal_phase') == 'looping-until-runtime-removal']
-        self.assertEqual(live, [('0x05C189', 0, 7, 2), ('0x05C18A', 9, 14, 7),
-                                ('0x05C18A', 45, 10, 5), ('0x05C18A', 49, 6, 3)])
+        self.assertEqual(live, [('0x05C18A', 49, 6, 3)])
+        self.assertEqual([e['spawn_tick'] for e in report['spawned_effects']
+                          if e.get('nominal_phase') == 'torn-down'], [0, 9, 45])
 
     def test_aura_uses_gx_texture_atlas_not_obj(self):
         root = DataRoot(DATA)

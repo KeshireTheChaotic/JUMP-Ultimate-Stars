@@ -827,7 +827,6 @@ class KomaWorkspace(SuiteWorkspace):
         self.refresh()
         self.app.update_dirty()
         self.app.status.set(f'Applied {self.path} → {" + ".join(done)} — Save (Ctrl+S) to write the files.')
-        self.app.resources_applied()
 
 
 def hx4(v):

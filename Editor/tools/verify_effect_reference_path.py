@@ -11,6 +11,13 @@ from pathlib import Path
 
 BASE = 0x02000000
 SLOTS = {
+    # chara_action(4/5) call +0x08 on the *wrapper* returned by FUN_02011B38 (node+0x18),
+    # created by node slot 5; both wrapper classes tear the node down.
+    'Effect node slot 5 → wrapper factory': (0x0209C0B4 + 0x14, 0x02023CA8),
+    'GN node slot 5 → wrapper factory': (0x0209C30C + 0x14, 0x020160C8),
+    'Effect wrapper +0x08 teardown': (0x020955C0 + 0x08, 0x02049460),
+    'GN wrapper +0x08 teardown': (0x02095878 + 0x08, 0x02049460),
+    # the node implementations' own +0x08 is a retain (not what chara_action calls)
     'EffectWidget +0x08 retain (Thumb)': (0x0209C0B4 + 0x08, 0x020102D1),
     'EffectWidget +0x0C release': (0x0209C0B4 + 0x0C, 0x0202771C),
     'EffectWidget +0xDC lifetime setter': (0x0209C0B4 + 0xDC, 0x02025278),

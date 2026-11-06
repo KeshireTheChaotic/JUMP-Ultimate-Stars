@@ -111,6 +111,8 @@ class EditorApp(tk.Tk):
         self.show_effect_marks = tk.BooleanVar(value=True)
         self.effect_layer = tk.StringVar(value='Front')    # viewport occlusion override; high-first submission verified
         self.parent_link_preview = tk.BooleanVar(value=True)  # owner translation only; no scale/facing
+        self.effect_teardown = tk.BooleanVar(value=True)   # chara_action(4/5) tear GN effects down
+        self._teardowns = {}
         # NoteTrack physics (jus_package.motion) and sound cues (jus_package.sounds)
         self.show_motion = tk.BooleanVar(value=True)       # trajectory overlay
         self.root_motion = tk.BooleanVar(value=True)      # move the character by the simulated offset
@@ -134,7 +136,6 @@ class EditorApp(tk.Tk):
         self._pursuer_events = ()
         self._effect_moves = {}
         self._common_tables = None      # [(path, AlmtFile)] from efc/*.aar, cached per data root
-        self.registry = None            # jus_package.registry.Registry (built by the References workspace)
         self._spawn_list = []
         self._effect_table_error = ''
         self._frame_cache: dict = {}
@@ -209,10 +210,8 @@ class EditorApp(tk.Tk):
         v.add_command(label='Sprite workspace', accelerator='Ctrl+2', command=lambda: self.show_workspace('sprite'))
         v.add_command(label='Archive workspace', accelerator='Ctrl+3', command=lambda: self.show_workspace('archive'))
         v.add_command(label='Koma editor', accelerator='Ctrl+4', command=lambda: self.show_workspace('koma'))
-        v.add_command(label='Level editor', accelerator='Ctrl+5', command=lambda: self.show_workspace('level'))
-        v.add_command(label='Mission editor', accelerator='Ctrl+8', command=lambda: self.show_workspace('missions'))
+        v.add_command(label='Level & mission editor', accelerator='Ctrl+5', command=lambda: self.show_workspace('level'))
         v.add_command(label='Screen editor', accelerator='Ctrl+6', command=lambda: self.show_workspace('screen'))
-        v.add_command(label='References', accelerator='Ctrl+7', command=lambda: self.show_workspace('references'))
         v.add_separator()
         v.add_checkbutton(label='Collision boxes', variable=self.show_collision, command=self.redraw_view)
         v.add_checkbutton(label='Spawned effects (GenerateID)', variable=self.show_spawns, command=self.redraw_view)
@@ -238,8 +237,8 @@ class EditorApp(tk.Tk):
         self._tab_buttons = {}
         # Move Lab (Animation + Sprite) · suite workspaces · Archive
         for key, label in (('animation', 'Animation'), ('sprite', 'Sprite'), ('|', None),
-                           ('koma', 'Koma'), ('missions', 'Missions'), ('level', 'Level'), ('screen', 'Screen'), ('|', None),
-                           ('references', 'References'), ('archive', 'Archive')):
+                           ('koma', 'Koma'), ('level', 'Level'), ('screen', 'Screen'), ('|', None),
+                           ('archive', 'Archive')):
             if key == '|':
                 tk.Frame(top, width=1, bg=T.LINE).pack(side='left', fill='y', padx=5, pady=8)
                 continue
@@ -249,11 +248,10 @@ class EditorApp(tk.Tk):
         T.Tooltip(self._tab_buttons['animation'], 'Move Lab: animations, effects, NoteTrack (Ctrl+1)')
         T.Tooltip(self._tab_buttons['sprite'], 'Move Lab: sprite frames and pieces (Ctrl+2)')
         T.Tooltip(self._tab_buttons['koma'], 'Koma Editor: comic panel art (Ctrl+4)')
-        T.Tooltip(self._tab_buttons['missions'], 'J-Galaxy progression missions and Koma rewards (Ctrl+8)')
-        T.Tooltip(self._tab_buttons['level'], 'Level Editor v1: stage backgrounds; overlays read-only (Ctrl+5)')
+        T.Tooltip(self._tab_buttons['level'], 'Level Editor: stage backgrounds and the J-Galaxy missions '
+                                              'fought on them, with Koma rewards (Ctrl+5)')
         T.Tooltip(self._tab_buttons['screen'], 'Screen Editor: menu screens on the DS dual screen (Ctrl+6)')
         T.Tooltip(self._tab_buttons['archive'], 'Archive members (Ctrl+3)')
-        T.Tooltip(self._tab_buttons['references'], 'Resource registry: where used / uses, search by id (Ctrl+7)')
         T.separator(top)
         T.tool_button(top, '↶', self.undo, 'Undo (Ctrl+Z)', width=3)
         T.tool_button(top, '↷', self.redo, 'Redo (Ctrl+Y)', width=3)
@@ -374,6 +372,8 @@ class EditorApp(tk.Tk):
         gm.add_separator()
         gm.add_checkbutton(label='Isolate selected spawned effect (diagnostic only)',
                            variable=self.isolate_selected_spawn, command=self.redraw_view)
+        gm.add_checkbutton(label='Effect teardown by chara_action 4/5', variable=self.effect_teardown,
+                           command=self.refresh_animation)
         gm.add_checkbutton(label='ParentLink translation follow (no scale/facing)',
                            variable=self.parent_link_preview, command=self.redraw_view)
         gm.add_command(label='Effect layer (high-first callbacks; final occlusion unverified):', state='disabled')
@@ -575,8 +575,6 @@ class EditorApp(tk.Tk):
         self.bind_all('<Control-Key-4>', guard(lambda e: self.show_workspace('koma'), True))
         self.bind_all('<Control-Key-5>', guard(lambda e: self.show_workspace('level'), True))
         self.bind_all('<Control-Key-6>', guard(lambda e: self.show_workspace('screen'), True))
-        self.bind_all('<Control-Key-7>', guard(lambda e: self.show_workspace('references'), True))
-        self.bind_all('<Control-Key-8>', guard(lambda e: self.show_workspace('missions'), True))
         for key, tool in (('v', 'select'), ('b', 'pencil'), ('i', 'picker')):
             self.bind_all(f'<KeyPress-{key}>', guard(lambda e, t=tool: self.suite[self.workspace].tool.set(t)
                                                      if self.workspace in ('koma', 'level') else None))
@@ -733,10 +731,6 @@ class EditorApp(tk.Tk):
         menu = tk.Menu(self, tearoff=False)
         menu.add_command(label='Export package…', command=self.export_package)
         menu.add_command(label='Import package…', command=self.import_package)
-        if item.startswith('arc:'):
-            path = item[4:].split('|@')[0]
-            menu.add_separator()
-            menu.add_command(label='Show references', command=lambda: self.show_references(path))
         menu.tk_popup(e.x_root, e.y_root)
 
     def select_container(self, path, char_id=None):
@@ -833,12 +827,6 @@ class EditorApp(tk.Tk):
             self.almt_dirty = self.sprite_dirty = False
         return True
 
-    def resources_applied(self):
-        """Refresh the where-used registry against applied (not only saved) data."""
-        refs = self.suite.get('references') if hasattr(self, 'suite') else None
-        if refs:
-            refs.request_refresh()
-
     def apply_current(self):
         if self.workspace in self.suite:
             self.suite[self.workspace].apply()
@@ -873,7 +861,6 @@ class EditorApp(tk.Tk):
             return
         self.update_dirty()
         self.status.set(f'Saved {len(written)} archive file(s).')
-        self.resources_applied()
         messagebox.showinfo('Save', 'Wrote:\n' + '\n'.join(str(w) for w in written))
 
     def revert(self):
@@ -945,7 +932,6 @@ class EditorApp(tk.Tk):
             if rep.warnings:
                 msg += '\n\nWarnings:\n' + '\n'.join(rep.warnings[:20])
             msg += '\n\nUse Save to write the rebuilt archives.'
-            self.resources_applied()
             messagebox.showinfo('Import package', msg)
         self.run_task('Importing package…', work, done)
 
@@ -1196,7 +1182,6 @@ class EditorApp(tk.Tk):
         self.update_dirty()
         self.populate_archive()
         self.status.set(f'Applied {self.almt_path} ({len(data)} bytes). {" ".join(rep.warnings)}')
-        self.resources_applied()
 
     def export_almt_json(self):
         if not self.almt:
@@ -1640,107 +1625,6 @@ class EditorApp(tk.Tk):
                                              'info': (eid, path)})
         return rows
 
-    # ======================================================== registry links
-    def open_resource(self, path, move_id=None):
-        """Open a registry resource in the workspace that edits it."""
-        if not self.root_data or not self.confirm_discard():
-            return
-        parts = split(path)
-        container, name = join(*parts[:-1]), parts[-1]
-        ext = '.' + name.rsplit('.', 1)[-1].lower() if '.' in name else ''
-        grp = self.registry.resources[path].group if self.registry and path in self.registry.resources else ''
-        cid = grp[4:] if grp.startswith('chr:') else None
-        if ext == '.aar':                      # an archive: open it as the container
-            container, name = path, None
-        if path in ('bin/koma.bin', 'bin/kshape.bin'):        # loose card tables → Koma workspace
-            self.show_workspace('koma')
-            self.status.set(f'{path} is edited from the Koma workspace (card shape picker).')
-            return
-        try:
-            if name and ext == '.dtx' and container == 'koma/koma.aar':
-                self.show_workspace('koma')
-                self.suite['koma'].load(name)
-                return
-            if name and ext in ('.atm', '.dig', '.dtx') and container.startswith('stage/stage.aar'):
-                m = re.search(r'(bg_[a-z0-9_]+?)(_floor|_gimmick)?\.aar', container)
-                if m:
-                    self.show_workspace('level')
-                    self.suite['level'].load(m.group(1))
-                    return
-            if name and ext in ('.atm', '.dig') and not container.startswith(('chr/', 'efc/')):
-                self.show_workspace('screen')
-                self.suite['screen'].load(container)
-                return
-            self.select_container(container, cid)
-            if name and ext == '.amt':
-                if self.almt_path != path:
-                    self.almt_combo.set(name)
-                    self.load_almt(name)
-                idx = None
-                if move_id is not None and self.almt:
-                    idx = next((i for i, m in enumerate(self.almt.moves) if m.id == move_id), None)
-                if idx is not None:
-                    self.move_filter.set('')
-                    self.populate_moves(select=idx)
-                self.show_workspace('animation')
-                return
-            if name and ext == '.dtx':
-                label = next((lab for lab, p in self._sprite_paths.items() if p == path), None)
-                if label:
-                    self.sprite_combo.set(label)
-                    self.load_sprite(label)
-                    self.show_workspace('sprite')
-                    return
-            self.show_workspace('archive')
-            if name:
-                arc = self.root_data.archive(container)
-                k = next((i for i, e in enumerate(arc.entries) if e.name == name), None)
-                if k is not None and self.member_tree.exists(str(k)):
-                    self.member_tree.selection_set(str(k))
-                    self.member_tree.focus(str(k))
-                    self.member_tree.see(str(k))
-                    self._member_details()
-        finally:
-            self.status.set(f'Opened {path}')
-
-    def on_registry_ready(self):
-        """Refresh inspectors that show where-used once the index exists."""
-        if self.workspace == 'animation':
-            self.refresh_inspector()
-        elif self.workspace == 'sprite':
-            self.refresh_details()
-        elif self.workspace == 'archive':
-            self._member_details()
-
-    def show_references(self, path, move_id=None):
-        self.show_workspace('references')
-        self.suite['references'].select(path, move_id=move_id)
-
-    def _refs_section(self, ins, path, move_id=None, title='Where used'):
-        """Inspector section listing registry references for a resource (and move)."""
-        reg = self.registry
-        if reg is None:
-            ins.section(title)
-            ins.text('Resource index is being built…')
-            return
-        if path not in reg.resources:
-            return
-        users = reg.used_by(path, move_id)
-        uses = reg.uses(path)
-        if move_id is not None and path in reg.moves:
-            idx = next((i for i, m in reg.moves[path] if m == move_id), None)
-            uses = [r for r in uses if idx is not None and r.src_detail.startswith(f'move {idx} (')]
-        ins.section(title)
-        if not users:
-            ins.value('Used by', 'nothing (no known reference)', colour=T.MUTED)
-        for r in users[:6]:
-            src = split(r.src)[-1].rsplit('/', 1)[-1]
-            ins.value(src, f'{r.label}\n{r.src_detail}', tip=f'{r.src}\nevidence: {r.evidence}')
-        if len(users) > 6:
-            ins.value('', f'… {len(users) - 6} more')
-        ins.value('Uses', f'{len(uses)} reference(s)', colour=T.MUTED)
-        ins.buttons(('Show references', lambda: self.show_references(path, move_id)))
-
     def open_effect_move(self, eid, path):
         """Jump to an effect's own move table (like opening a sub-timeline)."""
         parts = split(path)
@@ -1858,16 +1742,19 @@ class EditorApp(tk.Tk):
                  'editable': False}]
         if collapsed:
             return rows
+        kills = (spawns.teardowns(self.move, self.almt.node_names, self._effect_moves)
+                 if self.effect_teardown.get() else {})
+        self._teardowns = kills
         if ref_events:
             rows.append({'id': ('spawn', 'references'), 'kind': 'track', 'indent': 1,
-                         'label': 'GN child ref+ (actions 4/5)', 'colour': T.WARN,
+                         'label': 'GN effect teardown (4/5)', 'colour': T.BAD,
                          'editable': False, 'keys': [(e.tick, ('ref', e.tick)) for e in ref_events],
-                         'labels': [(e.tick, '+ref', T.WARN) for e in ref_events],
+                         'labels': [(e.tick, '✕ all' if e.action == 4 else '✕ oldest', T.BAD) for e in ref_events],
                          'tooltip': lambda t, p, events=ref_events: '\n'.join(
-                             f'{ev.node} tick {ev.tick}: action {ev.action} retains {ev.kind}'
+                             f'{ev.node} tick {ev.tick}: chara_action({ev.action}) — {ev.kind}'
                              for ev in events if ev.tick == t) +
-                             '\nARM9 0x0206C650/0x0206C760 → virtual +8 increments refcount; '
-                             'not a kill command.'})
+                             '\nARM9 0x0206C650 / 0x0206C760 → handle +0x08 (0x02049460) → '
+                             'teardown 0x02027560. Runs before the same tick\'s spawns (inferred).'})
         horizon = self.move.duration
         for sp in sp_list:
             entry = self._effect_moves.get(sp.effect_id)
@@ -1880,15 +1767,20 @@ class EditorApp(tk.Tk):
                 rows.append(row)
                 continue
             child, names, path = entry
-            a, b, open_end = spawns.effect_span(sp, child, horizon)
+            kill = kills.get(sp.key)
+            a, b, open_end = spawns.effect_span(sp, child, horizon, kill)
             src = 'common' if path.startswith('efc/') else 'char'
+            end_note = (f' ✕{kill.tick}' if kill else (' ⟳ →' if open_end else ''))
             row.update(label=f'{sp.effect_id:06X} #{sp.occurrence}', colour=T.EFFECT, badge=sp.node,
                        info=(sp.effect_id, path),
-                       spans=[(a, b, T.EFFECT, f'{split(path)[-1]} ({src}){" ⟳" if open_end else ""}')],
-                       tooltip=lambda t, s, c=child, p=path, oe=open_end: (
+                       spans=[(a, b, T.EFFECT, f'{split(path)[-1]} ({src}){end_note}')],
+                       tooltip=lambda t, s, c=child, p=path, oe=open_end, k=kill: (
                            f'GenerateID {s.effect_id:06X} — node {s.node}, key {s.key_index}, tick {s.tick}\n'
-                           f'{p}\nlength {c.duration}{" (loops; lifetime set at run time)" if oe else ""}\n'
-                           f'Double-click to open the effect move.'))
+                           f'{p}\nlength {c.duration}' +
+                           (f'\ntorn down at tick {k.tick} by chara_action({k.action})' if k else
+                            '\nloops; no teardown in this move — the owner keeps it past the move end'
+                            if oe else '') +
+                           '\nDouble-click to open the effect move.'))
             rows.append(row)
             # one level of nested spawns, shifted into parent time
             for csp in spawns.keyed_spawns(child, names):
@@ -2436,20 +2328,19 @@ class EditorApp(tk.Tk):
         ins.value('Nominal state', lifetime.phase)
         ins.value('Authored end tick', str(lifetime.scheduled_end) if lifetime.scheduled_end is not None
                   else 'not defined: loop / owner-controlled')
-        ins.text('Verified lifecycle: an ALMT loop wrap dispatches event 6 (0x02027B14); '
-                 'child removal is registered on event 1 (0x020161D8/0x020160F0), '
-                 'dispatched on object deactivation (0x02022380/0x020279D0). '
-                 'A loop does not automatically remove the child.')
-        ins.text('Nominal playback is not the live object registry. Owner deactivation, '
-                 'collision-driven state changes and branches are not simulated.')
-        refs = [ev for ev in spawns.reference_events(self.move, self.almt.node_names)
-                if ev.tick >= sp.tick and ev.tick <= self.tick]
-        if refs:
-            ins.value('GN reference actions', ', '.join(f'{ev.tick}: +ref {ev.action}' for ev in refs[:8]),
-                      colour=T.WARN)
-            ins.text('chara_action(4/5) raises child references (FUN_020102D0). It does NOT '
-                     'remove a previous aura or force a 16-tick loop to finish. '
-                     'The inherited owner lifecycle determines subsequent deactivation.')
+        kill = getattr(self, '_teardowns', {}).get(sp.key)
+        if kill is not None:
+            ins.value('Torn down', f'tick {kill.tick} by chara_action({kill.action})'
+                      f' — {"all GN effects" if kill.action == 4 else "oldest live GN effect"}', colour=T.BAD)
+        elif child.flags & almt.MOVE_FLAG_LOOP:
+            ins.value('Torn down', 'not in this move: the loop outlives the move until a later '
+                      'chara_action(4/5) or the owner\'s teardown', colour=T.MUTED)
+        ins.text('Lifecycle (ARM9): a loop wrap only fires event 6 (0x02027B14) and keeps playing; a '
+                 'one-shot ends after its length (0x0201BDEC → 0x02028868). Effects spawned by GN01..GN09 '
+                 'are torn down by NoteTrack chara_action(4) (all) and (5) (oldest live): '
+                 '0x0206C650 / 0x0206C760 → handle +0x08 = 0x02049460 → 0x02027560. '
+                 'Same-tick order (action before spawn) is inferred from the data.')
+        ins.text('Not simulated: branches, combat hits, and effects carried over from a previous move.')
         live = [i for i in self.spawn_projection().instances if i.spawn == sp]
         if live:
             inst = live[0]
@@ -2612,7 +2503,8 @@ class EditorApp(tk.Tk):
             return spawns.Projection([], [], [])
         return spawns.project(self.move, self.almt.node_names, self.tick if tick is None else tick,
                               self._effect_moves, follow_parent=self.parent_link_preview.get(),
-                              origin_at=self._animation_origin)
+                              origin_at=self._animation_origin,
+                              apply_teardown=self.effect_teardown.get())
 
     def _visible_spawn_instances(self, projection):
         if not self.isolate_selected_spawn.get():
@@ -2716,8 +2608,6 @@ class EditorApp(tk.Tk):
                   on_change=self.apply_move_props)
         ins.value('fps', f'{m.fps}  (not read by the game)', colour=T.MUTED)
         ins.value('Flags', hx(m.flags, 2), colour=T.MUTED)
-        if self.sel_virtual is None and self._track() is None and self.almt_path:
-            self._refs_section(ins, self.almt_path, m.id, title='Where used (this move)')
         if self.sel_virtual is not None and self.sel_virtual.get('spawn') is not None:
             self._inspect_spawn(ins, self.sel_virtual)
             return
@@ -3059,12 +2949,6 @@ class EditorApp(tk.Tk):
                       (f'\natlas {g.width}×{g.height}' if mode in sprite.ATLAS_MODES else '') +
                       (' (embedded)' if d.embedded else ''))
             ins.value('Banks', str(g.banks))
-        if self.registry is not None and self.sprite_path in self.registry.resources:
-            users = self.registry.used_by(self.sprite_path)
-            tables = sorted({split(r.src)[-1] for r in users})
-            ins.value('Used by', f'{len(users)} move(s) in {len(tables)} table(s)' if users else 'no known user',
-                      tip='\n'.join(tables[:12]))
-            ins.buttons(('Show references', lambda: self.show_references(self.sprite_path)))
         if self.frame_i is not None:
             fr = d.frames[self.frame_i]
             ins.section(f'Frame {self.frame_i}')
@@ -3206,7 +3090,6 @@ class EditorApp(tk.Tk):
         self.update_dirty()
         self.populate_archive()
         self.status.set(f'Applied {self.sprite_path}')
-        self.resources_applied()
 
     def export_frames(self):
         d, g = self.sprite_d, self.sprite_g
@@ -3405,7 +3288,6 @@ class EditorApp(tk.Tk):
         ins.value('Size', f'{len(e.data):,} bytes' + ('  (DSCP)' if e.compressed else ''))
         ins.buttons(('Extract…', self.extract_member), ('Replace…', self.replace_member),
                     ('Remove', self.remove_member))
-        self._refs_section(ins, join(self.container, e.name))
 
     def extract_member(self):
         e = self._selected_member()
@@ -3453,7 +3335,6 @@ class EditorApp(tk.Tk):
             self.after_archive_edit()
 
     def after_archive_edit(self):
-        self.resources_applied()
         if self.index:
             self.index.rebuild()
         self.update_dirty()

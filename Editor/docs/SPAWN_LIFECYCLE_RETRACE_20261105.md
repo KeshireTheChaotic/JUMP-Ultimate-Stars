@@ -1,5 +1,9 @@
 # JUS `db_b_01` special-effect spawning and termination retrace
 
+> **Update (2026-11-06):** the deletion path asked for below is found: NoteTrack
+> `chara_action(4)` / `(5)` tear down GN-spawned effects (`FUN_0206C650` / `FUN_0206C760` →
+> `FUN_02027560`). See `EFFECT_TEARDOWN_TRACE_20261106.md`.
+
 **Source:** the uploaded editor/game screenshots; supplied extracted game assets; `reverse_engineering(1).zip` original ARM9 executable and Ghidra corpus. **Static binary and asset evidence only; no simultaneous emulator debugger state.**
 
 ## Reproduction

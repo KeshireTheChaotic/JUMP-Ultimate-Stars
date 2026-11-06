@@ -1,5 +1,11 @@
 # JUS: static-only effect lifetime and render-path trace — 2026-11-05
 
+> **Superseded in part (2026-11-06):** step 7 and "do not treat actions 4/5 as effect-kill
+> commands" are wrong. Both walks call the *wrapper* `+0x08` (`FUN_02049460` →
+> `FUN_02027560` teardown). At `db_b_01` move 41 tick 55 one aura is live, not four. See
+> `EFFECT_TEARDOWN_TRACE_20261106.md`. Loop wrapping, spawn-per-key and the
+> render-path notes below still hold.
+
 ## Scope and source evidence
 
 No melonDS debugger or runtime trace was used. All addresses below are from the supplied `reverse_engineering(1).zip` ARM9 image, loaded at `0x02000000`, and its Ghidra decompilation corpus. The ALMT and DSIG values were read directly from the supplied `data(1).zip` extracted data. ARM9 SHA-256: `6464c6e726cd536756476392bf21996ae7289d16e269863cd0b88c1703d09287` (692,568 bytes).

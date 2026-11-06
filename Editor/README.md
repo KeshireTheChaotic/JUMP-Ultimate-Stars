@@ -22,8 +22,8 @@ drives the window against the real data.
 The window follows the 2D animation editors of Unity (Animation window + Inspector),
 Godot (AnimationPlayer dock, SpriteFrames) and Unreal (Paper2D Flipbook/Sprite editors):
 a resource browser on the left (each workspace shows its own), the workspaces
-**Animation** / **Sprite** (the Move Lab, Ctrl+1/2), **Koma** / **Missions** / **Level** / **Screen**
-(the JUS Studio suite, Ctrl+4/8/5/6) and **Archive** (Ctrl+3), a dark engine-style theme,
+**Animation** / **Sprite** (the Move Lab, Ctrl+1/2), **Koma** / **Level** / **Screen**
+(the JUS Studio suite, Ctrl+4/5/6) and **Archive** (Ctrl+3), a dark engine-style theme,
 tooltips, undo/redo and keyboard shortcuts (F1 lists them all). Layout and evidence rules
 for every workspace: `docs/STUDIO_WORKSPACES.md`.
 
@@ -59,13 +59,20 @@ for every workspace: `docs/STUDIO_WORKSPACES.md`.
   `koma.aar`, dictionary → `bin/kshape.bin`, selectors → `bin/koma.bin`). All edits are
   undoable. Deck placement is not part of this editor. Additional variants require
   emulator testing because runtime shape-array capacity is not yet traced.
-* **Missions workspace (Ctrl+8)** — browse J-Galaxy progression nodes by planet; inspect 56 mission / 75 battle definition links, up to six objective grants per node, raw condition codes and flags. Change an objective reward to a Koma ID or six resource quantities; rename shared mission/battle definition titles. Apply updates to the nested `jgalaxy/jgalaxy.aar` archive, then Save. Mission/objective insertion, unknown conditions and evolution costs remain read-only (see `docs/MISSION_REWARD_TRACE.md`).
-* **Level workspace** — stage browser (`bg_xx` sets) | composited background layers
-  (ALTM + tiles, ¼×–12× zoom, tile hover/inspect) | **Select / Paint / Picker** for
-  background tile entries, with a tile-set brush, palette bank, horizontal/vertical
-  flips, undo/redo and Apply → Save | Layers with eye toggles and **read-only overlays**
-  (camera, `.mob` objects, `.bin` stage table, collision and gimmicks remain undecoded;
-  raw bytes in *Stage data*) | Problems, PNG export. No geometric guesses are saved.
+* **Level workspace (Ctrl+5)** — stages and the J-Galaxy missions fought on them. The browser
+  has two groups: *Stages* (`bg_xx` sets, labelled with their battle stage index from the
+  ARM9 stage table 0x02092D08 and the number of missions using them) and *J-Galaxy missions*
+  (142 progression nodes by planet). Selecting a mission loads the stage its battle uses
+  (definition `+0x75` → stage table) and opens the **Mission** tab: linked mission/battle
+  definition, stage/rule/opponent count (read-only), up to six objective grants. A reward
+  can be changed to a Koma ID or six resource quantities, and shared definition titles
+  renamed; Apply writes the nested `jgalaxy/jgalaxy.aar`. Background editing: composited
+  layers (ALTM + tiles, ¼×–12× zoom, tile hover/inspect), **Select / Paint / Picker** for
+  tile entries with a tile-set brush, palette bank, flips | Layers with eye toggles and
+  **read-only overlays** (camera, `.mob` objects, `.bin` stage table, collision and gimmicks
+  remain undecoded; raw bytes in *Stage data*) | Problems, PNG export. Undo/redo follows the
+  active bottom tab (Mission vs. tile maps); Apply writes both. No geometric guesses are saved.
+  Details: `docs/MISSION_REWARD_TRACE.md`.
 * **Screen workspace** — menu/scene archive browser with nested AAR expansion **and search** |
   dual 256×192 DS screens | background layers (ALTM) with preview-only screen/scroll/order |
   nested sprite objects (DSTX/DSIG) with selectable **Sprite frame**, auto-preview
@@ -73,16 +80,6 @@ for every workspace: `docs/STUDIO_WORKSPACES.md`.
   Resources table with exact-member double-click, decoder evidence, and Problems.
   Sprite placement is centered for inspection, **not** runtime layout; ALMT
   animation playback remains pending. See `docs/NESTED_AAR_SCREEN_AUDIT_20261105.md`.
-* **References workspace (Ctrl+7)** — the project-wide **resource registry**
-  (`jus_package/registry.py`): every archive member with typed references between them
-  (textures, images, spawned effects, pursuer tables, collision descriptors, shot records,
-  tile images) and the reverse *where used* index. Search by name, resource id or move id;
-  a reference viewer (referencers → selected → dependencies, click to re-centre); per-move
-  filter; tables with the exact source location (move, node, key, tick, record) and
-  evidence; *Open in workspace*. The Archive, Animation and Sprite inspectors show
-  *Where used* too, and Project right-click has *Show references*. The index is built in
-  the background from a detached snapshot of **applied** edits and unchanged files on disk;
-  Apply and Save trigger refreshes.
 * **Archive workspace** — member table and details (type, resource id, attribute bits,
   verified name hash, size, DSCP) with extract/replace/add/remove and a rebuild check.
 * Edits stay in memory with **undo/redo** (Ctrl+Z / Ctrl+Y) until **Apply** (Ctrl+Enter)

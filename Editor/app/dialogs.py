@@ -147,8 +147,7 @@ class TrackDialog(tk.Toplevel):
 SHORTCUTS = """\
 Global
   Ctrl+1 / 2 / 3     Animation / Sprite / Archive workspace
-  Ctrl+4 / 5 / 6     Koma / Level / Screen workspace
-  Ctrl+7 / 8         References / Missions workspace
+  Ctrl+4 / 5 / 6     Koma / Level (stages + J-Galaxy missions) / Screen workspace
   Ctrl+Z, Ctrl+Y     Undo / redo (move-table, sprites, koma, missions and stage edits)
   Ctrl+S             Save rebuilt archives in place (asks first)
   Ctrl+Shift+S       Save rebuilt archives to a folder

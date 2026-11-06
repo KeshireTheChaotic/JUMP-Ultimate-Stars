@@ -124,16 +124,25 @@ def keyed_spawns(move: almt.Move, node_names: list[str]) -> list[Spawn]:
 
 @dataclass(frozen=True)
 class ReferenceEvent:
-    """Battle chara_action(4/5) affecting references to GN child objects.
+    """Battle chara_action(4/5): **tear down** effects spawned by GN01..GN09.
 
-    ARM9 overlay 6 FUN_02157A44 dispatches actions 4 and 5 to main
-    FUN_0206C650/0206C760. Those functions call virtual +8 on selected
-    GN01..GN09 children. On the effect widget vtable, +8 resolves to
-    Thumb FUN_020102D0, which *increments* the reference count; it is not
-    the object destructor or a timed effect kill.
+    ARM9 overlay 6 ``FUN_02157A44`` dispatches action 4 to main
+    ``FUN_0206C650`` and action 5 to ``FUN_0206C760``.  Both look up the owner's
+    generator nodes GN01, GN02, … (stopping at the first missing one) and walk
+    each generator's children through ``+0xAC`` (count = spawned children + 1,
+    ``FUN_0201542C``) and ``+0xC0`` (index 0 = the generator itself, index *i* =
+    the *i*-th spawned child in spawn order, ``FUN_02015410``).  For each child
+    whose ``+0x29`` bit 7 is clear they call the child's *handle* virtual
+    ``+0x08``.  The handle classes created by the effect containers
+    (``0x020955C0``, from ``FUN_02023CA8``) and by GN nodes (``0x02095878``,
+    from ``FUN_020160C8``) both put ``FUN_02049460`` there, which calls
+    ``FUN_02027560`` — object **teardown**.
 
-    The caller's retained references, later releases and execution under
-    Marker/NoteTrack branches are not simulated in the preview.
+    * action 4: every live spawned child of every generator (newest first);
+    * action 5: the oldest live spawned child of the first generator that has one.
+
+    (A 2026-11-05 trace read ``+0x08`` from the node vtable instead of the
+    handle vtable, ``0x020102D0``, and called these a reference increment.)
     """
     tick: int
     node: str
@@ -164,9 +173,68 @@ def reference_events(move: almt.Move, node_names: list[str]) -> tuple[ReferenceE
                 action = args[0]
                 events.append(ReferenceEvent(key.tick,
                             node_names[ni] if ni < len(node_names) else f'N{ni}',
-                            'all GN children' if action == 4 else 'first eligible GN child',
+                            'tear down all GN effects' if action == 4 else 'tear down oldest live GN effect',
                             action))
     return tuple(sorted(events, key=lambda ev: (ev.tick, ev.node)))
+
+
+def generator_chain(node_names: list[str]) -> list[str]:
+    """GN01, GN02, … as looked up by FUN_0206C650/0206C760 (stops at the first missing name)."""
+    out = []
+    for i in range(1, 10):
+        name = f'GN0{i}'
+        if name not in node_names:
+            break
+        out.append(name)
+    return out
+
+
+@dataclass(frozen=True)
+class Teardown:
+    tick: int        # first parent tick at which the effect is gone
+    action: int      # 4 or 5
+
+
+def teardowns(move: almt.Move, node_names: list[str],
+              catalog: Mapping[int, CatalogEntry] | Callable[[int], CatalogEntry | None]
+              ) -> dict[tuple[int, int, int], Teardown]:
+    """Which spawned effects chara_action(4/5) tears down, and when (by spawn key).
+
+    Same-tick order (**Inferred** from the data): at a tick, the NoteTrack
+    actions run before that tick's GenerateID spawns.  Otherwise 97 authored
+    ``action(5)`` + first-spawn pairs would destroy their effect on its first
+    frame.  One-shots that already ended removed themselves from the
+    generator (event-1 callback ``FUN_020160F0``), so they are never picked.
+    """
+    lookup = catalog if callable(catalog) else catalog.get
+    chain = generator_chain(node_names)
+    events = reference_events(move, node_names)
+    spawns = [s for s in keyed_spawns(move, node_names) if s.node in chain and lookup(s.effect_id)]
+    ticks = sorted({e.tick for e in events} | {s.tick for s in spawns})
+    live: dict[str, list[Spawn]] = {n: [] for n in chain}
+    out: dict[tuple[int, int, int], Teardown] = {}
+
+    def alive(s: Spawn, t: int) -> bool:
+        return effect_frame_tick(lookup(s.effect_id)[0], t - s.tick) is not None
+
+    for t in ticks:
+        for n in chain:
+            live[n] = [s for s in live[n] if alive(s, t)]
+        for ev in (e for e in events if e.tick == t):
+            if ev.action == 4:
+                for n in chain:
+                    for s in reversed(live[n]):
+                        out[s.key] = Teardown(t, 4)
+                    live[n] = []
+            else:
+                for n in chain:
+                    if live[n]:
+                        out[live[n].pop(0).key] = Teardown(t, 5)
+                        break
+        for s in spawns:
+            if s.tick == t:
+                live[s.node].append(s)
+    return out
 
 
 @dataclass
@@ -234,11 +302,22 @@ def nominal_lifetime(spawn: Spawn, child: almt.Move, tick: int) -> NominalLifeti
                            None if child.flags & almt.MOVE_FLAG_LOOP else spawn.tick + child.duration)
 
 
-def effect_span(spawn: Spawn, child: almt.Move, horizon: int) -> tuple[int, int, bool]:
-    """(first, last, open-ended) parent ticks during which the effect plays."""
+def effect_span(spawn: Spawn, child: almt.Move, horizon: int,
+                teardown: 'Teardown | None' = None) -> tuple[int, int, bool]:
+    """(first, last, open-ended) parent ticks during which the effect plays.
+
+    A teardown by chara_action(4/5) ends the span the tick before the action.
+    A looping effect without one stays open-ended: nothing in the effect itself
+    ends a loop (the controller wraps, ``FUN_0201BDEC``), and the owner keeps it
+    across move changes until a teardown or the owner's own teardown.
+    """
     if child.flags & almt.MOVE_FLAG_LOOP:
-        return spawn.tick, max(spawn.tick, horizon), True
-    return spawn.tick, spawn.tick + max(0, child.duration), False
+        first, last, open_end = spawn.tick, max(spawn.tick, horizon), True
+    else:
+        first, last, open_end = spawn.tick, spawn.tick + max(0, child.duration), False
+    if teardown is not None and teardown.tick - 1 < last:
+        return first, max(first, teardown.tick - 1), False
+    return first, last, open_end
 
 
 def project(move: almt.Move, node_names: list[str], tick: int,
@@ -248,7 +327,8 @@ def project(move: almt.Move, node_names: list[str], tick: int,
             *, follow_parent: bool = False,
             origin_at: Callable[[int], tuple[float, float]] | None = None,
             _timeline_start: int = 0, _world_tick: int | None = None,
-            _parent_world_at: Callable[[int], tuple[float, float]] | None = None) -> Projection:
+            _parent_world_at: Callable[[int], tuple[float, float]] | None = None,
+            apply_teardown: bool = True) -> Projection:
     """Project nominal GenerateID effects, optionally following owner translation.
 
     ``follow_parent`` implements the two offset branches in the ARM9
@@ -267,6 +347,9 @@ def project(move: almt.Move, node_names: list[str], tick: int,
     """
     lookup = catalog if callable(catalog) else catalog.get
     spawns = keyed_spawns(move, node_names)
+    # chara_action(4/5) run from the owner's BattleNoteTrack only (depth 0); nested
+    # effects die with the effect object that spawned them.
+    kills = teardowns(move, node_names, lookup) if (apply_teardown and depth == 0) else {}
     out: list[EffectInstance] = []
     missing: list[Spawn] = []
     world_now = (_timeline_start + tick) if _world_tick is None else _world_tick
@@ -285,6 +368,9 @@ def project(move: almt.Move, node_names: list[str], tick: int,
             missing.append(sp)
             continue
         child, names, path = entry
+        kill = kills.get(sp.key)
+        if kill is not None and tick >= kill.tick:
+            continue
         age = tick - sp.tick
         sub = effect_frame_tick(child, age)
         if sub is None:
@@ -321,6 +407,9 @@ def project(move: almt.Move, node_names: list[str], tick: int,
                 inst.notes.append(f'ParentLink={link}: attached-owner movement not simulated')
         if flags & FLAG_SCREEN_REFERENCE and not link:
             inst.notes.append('EffectFlags 0x0008: screen-referenced; camera transform not simulated')
+        if kill is not None:
+            inst.notes.append(f'torn down at tick {kill.tick} by chara_action({kill.action}) '
+                              '(0x0206C650/0x0206C760 → 0x02027560)')
         out.append(inst)
         if depth + 1 < max_depth:
             sub_proj = project(child, names, sub, lookup,

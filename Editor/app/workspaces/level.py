@@ -1,8 +1,13 @@
-"""Level Editor: editable ALTM background maps from ``stage/stage.aar``.
+"""Level Editor: stage backgrounds from ``stage/stage.aar`` plus J-Galaxy missions.
 
-Godot 2D scene / Unity Tilemap layout: stage browser (left dock) · scene
-canvas with the background layers stacked · Layers dock (eye toggles) over
-the Inspector · bottom dock with the tile set, raw stage data and problems.
+Godot 2D scene / Unity Tilemap layout: browser (left dock) with two groups,
+*Stages* and *J-Galaxy missions* · scene canvas with the background layers
+stacked · Layers dock (eye toggles) over the Inspector · bottom dock with the
+mission rewards, tile set, raw stage data and problems.
+
+Stages and missions are linked by the battle stage index: mission/battle
+definition ``+0x75`` → battle object +0x160 → stage table 0x02092D08
+(``jus_formats.roster.STAGES``).  Selecting a mission loads its stage.
 
 The supported edit surface is ALTM tile entries only. Backgrounds are decoded (ALTM + DSIG) and shown;
 camera (.cam), objects (.mob), stage table (.bin), collision and gimmicks are
@@ -19,6 +24,7 @@ from tkinter import filedialog, messagebox, ttk
 from PIL import Image, ImageTk
 
 from jus_formats import altm as altmmod
+from jus_formats import roster
 from jus_package import scenes, tilemap
 from jus_package.project import split
 
@@ -26,6 +32,7 @@ from .. import theme as T
 from ..widgets.layers import LayerList
 from ..widgets.tabs import TextLog
 from .base import SuiteWorkspace
+from .missions import DOC as MISSION_DOC, MissionPanel
 
 OVERLAYS = (('cam', 'Camera / view framing', '.cam'), ('mob', 'Objects (mob)', '.mob'),
             ('bin', 'Stage table', '.bin'), ('collision', 'Collision', None), ('gimmick', 'Gimmicks', None))
@@ -34,7 +41,7 @@ OVERLAYS = (('cam', 'Camera / view framing', '.cam'), ('mob', 'Objects (mob)', '
 class LevelWorkspace(SuiteWorkspace):
     key = 'level'
     title = 'Level'
-    browser_title = 'Stages'
+    browser_title = 'Stages & missions'
 
     def __init__(self, app, host, browser_host, k):
         self.stage: scenes.StageSet | None = None
@@ -53,6 +60,9 @@ class LevelWorkspace(SuiteWorkspace):
         self._original_maps: dict[str, bytes] = {}
         self._dsig_cache = {}
         self._sets: list[scenes.StageSet] = []
+        self._probs = []
+        self._by_stage: dict[str, list[int]] = {}
+        self.focus = 'level'           # which half Undo/Redo acts on: 'level' (tile maps) or 'mission'
         super().__init__(app, host, browser_host, k)
 
     # ------------------------------------------------------------ layout
@@ -72,6 +82,7 @@ class LevelWorkspace(SuiteWorkspace):
         self.view.canvas.bind('<Motion>', self._hover, add='+')
         self.layer_list = LayerList(self.layers_panel.body, on_select=self._select_layer, on_toggle=self._toggle)
         self.layer_list.pack(fill='both', expand=True, padx=4, pady=4)
+        self.missions = MissionPanel(self, self.bottom.add('mission', 'Mission'))
         tiles = self.bottom.add('tiles', 'Tile set')
         self.tile_canvas = tk.Canvas(tiles, bg=T.CANVAS_BG, highlightthickness=0, height=int(150 * self.k))
         tsb = ttk.Scrollbar(tiles, orient='horizontal', command=self.tile_canvas.xview)
@@ -94,7 +105,12 @@ class LevelWorkspace(SuiteWorkspace):
         t = self.bottom.tools
         T.tool_button(t, 'Export layer PNG…', self.export_layer, 'Save the selected background layer as a PNG')
         T.tool_button(t, 'Export composite…', self.export_composite, 'Save all visible layers as one PNG')
+        self.bottom.on_change = self._tab_changed
         return ws
+
+    def _tab_changed(self, name):
+        self.focus = 'mission' if name == 'mission' else 'level'
+        self.app._update_undo_label()
 
     def build_browser(self, parent):
         self.tree = self.browser_tree(parent, ('kind',), (78,), ('Content',))
@@ -109,34 +125,93 @@ class LevelWorkspace(SuiteWorkspace):
                 self._sets = scenes.stage_sets(self.app.root_data)
             except (OSError, ValueError, KeyError) as exc:
                 self.app.status.set(f'stage.aar: {exc}')
+        self.missions.on_root()
+        self._by_stage = self.missions.nodes_by_stage()
+        self.stage = None
         self.populate()
+        self.refresh_inspector()
 
     def populate(self):
         t = self.tree
+        selected = t.selection()
         t.delete(*t.get_children())
         flt = self.filter_var.get().strip().lower()
+        stages = t.insert('', 'end', 'g:stages', text='Stages', open=True, values=(f'{len(self._sets)}',))
         for s in self._sets:
-            if flt and flt not in s.stem.lower():
+            idx = roster.stage_index(s.stem)
+            used = self._by_stage.get(s.stem, [])
+            label = f'{s.stem}' if idx is None else f'{idx:02d}  {s.stem}'
+            if flt and flt not in label.lower():
                 continue
             kinds = '+'.join(a for r, a in (('layers', 'BG'), ('floor', 'F'), ('gimmick', 'G'), ('shared', 'data'))
                              if r in s.members)
-            iid = t.insert('', 'end', s.stem, text=s.stem, values=(kinds or '—',))
+            iid = t.insert(stages, 'end', s.stem, text=label,
+                           values=((f'{len(used)} M · ' if used else '') + (kinds or '—'),))
             for role, path in sorted(s.members.items()):
                 ext = '.' + path.rsplit('.', 1)[-1]
                 label, grade = scenes.STATUS.get(ext, ('', 'Unknown'))
                 t.insert(iid, 'end', f'{s.stem}|{role}', text=split(path)[-1].split('/')[-1],
                          values=('✓' if grade != 'Unknown' else 'raw',))
+        c = self.missions.catalog
+        if c is not None:
+            group = t.insert('', 'end', 'g:missions', text='J-Galaxy missions', open=bool(flt),
+                             values=(f'{c.graph.node_count}',))
+            node = self.missions.node_id
+            for planet_id in range(c.graph.planet_count):
+                planet = c.graph.planet_name(planet_id) or f'Planet {planet_id}'
+                rows = []
+                for i in range(c.graph.node_count):
+                    n = c.graph.get(i)
+                    if n.planet_id != planet_id:
+                        continue
+                    label = self.missions.node_label(i)
+                    stem = self.missions.stage_of(i) or ''
+                    if flt and not any(flt in x.casefold() for x in (label, planet.casefold(), stem)):
+                        continue
+                    rows.append((i, label, stem, n))
+                if not rows:
+                    continue
+                open_ = bool(flt) or (node is not None and c.graph.get(node).planet_id == planet_id)
+                p = t.insert(group, 'end', f'p:{planet_id}', text=f'{planet_id:02d} {planet}', open=open_)
+                for i, label, stem, n in rows:
+                    t.insert(p, 'end', f'n:{i}', text=label,
+                             values=(('M' if n.mission else 'B') + f'{n.definition_id} · {stem[3:]}',))
+            if node is not None and t.exists(f'n:{node}'):
+                t.item('g:missions', open=True)
+        for iid in selected:
+            if t.exists(iid):
+                t.selection_set(iid)
+                t.see(iid)
+                break
 
     def _browse(self, _e=None):
         sel = self.tree.selection()
-        if not sel:
+        if not sel or sel[0].startswith(('g:', 'p:')):
+            return
+        if sel[0].startswith('n:'):
+            self.select_mission(int(sel[0][2:]))
             return
         stem = sel[0].split('|')[0]
         if not self.stage or self.stage.stem != stem:
             self.load(stem)
 
+    def select_mission(self, node_id):
+        """Show a J-Galaxy node in the Mission tab and load the stage its battle uses."""
+        self.missions.select_node(node_id)
+        self.bottom.show('mission')
+        stem = self.missions.stage_of(node_id)
+        if stem and (not self.stage or self.stage.stem != stem):
+            if any(s.stem == stem for s in self._sets):
+                self.load(stem)
+        self.refresh_inspector()
+
+    def mission_changed(self):
+        """A mission edit or undo changed titles; keep the browser labels current."""
+        self.populate()
+        self.refresh_inspector()
+
     def load(self, stem):
-        if self.stage and self.stage.stem != stem and self.dirty:
+        if self.stage and self.stage.stem != stem and self.maps_dirty:
             if not messagebox.askyesno('Level', 'Discard unapplied tile-map edits before switching stages?'):
                 return
         self.stage = next((s for s in self._sets if s.stem == stem), None)
@@ -414,10 +489,12 @@ class LevelWorkspace(SuiteWorkspace):
     def refresh_inspector(self):
         ins = self.inspector
         ins.clear()
+        self._mission_inspector(ins)
         if not self.stage:
             ins.section('Level editor')
             ins.text('ALTM background tile maps can be painted and saved. Collision, gimmicks, camera and '
-                     'objects remain read-only until their formats are traced.')
+                     'objects remain read-only until their formats are traced. Selecting a J-Galaxy mission '
+                     'loads the stage its battle uses.')
             return
         ov = getattr(self, 'sel_overlay', None)
         if ov:
@@ -431,6 +508,21 @@ class LevelWorkspace(SuiteWorkspace):
             return
         l = self.sel_layer
         ins.section('Stage', note=self.stage.stem)
+        idx = roster.stage_index(self.stage.stem)
+        if idx is None:
+            ins.value('Battle stage index', '— (not in stage table)')
+        else:
+            _, a, b = roster.STAGES[idx]
+            ins.value('Battle stage index', f'{idx} (0x{idx:02X})')
+            ins.value('Table words', f'0x{a:02X}, 0x{b:02X}')
+            ins.evidence('Stage table', 'Direct','ARM9 0x02092D08 {name, s16, s16}; index = definition +0x75')
+            ins.evidence('Table words', 'Inferred', 'ov06 passes them to FUN_020734E0 / FUN_0207361C (music?)')
+        used = self._by_stage.get(self.stage.stem, [])
+        ins.value('Missions here', str(len(used)))
+        for i in used[:12]:
+            ins.value('', self.missions.node_label(i))
+        if len(used) > 12:
+            ins.value('', f'… {len(used) - 12} more (filter the browser by {self.stage.stem})')
         ins.value('Layers', str(len(self.layers)))
         ins.value('Gimmick archive', 'yes' if 'gimmick' in self.stage.members else 'no')
         if l is None:
@@ -463,17 +555,46 @@ class LevelWorkspace(SuiteWorkspace):
         ins.text('Paint edits only ALTM tile entries. Camera, .mob/.bin, collision and gimmicks are read-only. '
                  'Use Apply, then Save; the stage archive is not modified before Save.')
 
+    def _mission_inspector(self, ins):
+        m = self.missions
+        if m.catalog is None or m.node_id is None:
+            return
+        n = m.catalog.graph.get(m.node_id)
+        d = m.definition(m.node_id)
+        ins.section('Mission', note=f'node {n.index:03d}')
+        ins.value('Title', d.name)
+        ins.value('Definition', f'{"mission" if n.mission else "battle"}.bin #{d.index}')
+        stem = roster.stage_stem(d.stage_index)
+        ins.value('Stage', f'{d.stage_index} → {stem or "not in table"}',
+                  colour=None if stem == (self.stage.stem if self.stage else None) else T.WARN)
+        ins.value('Rule', str(d.rule))
+        ins.value('Opponents', str(d.opponents))
+        ins.value('Time value', str(d.time_value))
+        ins.evidence('Battle setup', 'Direct', 'FUN_0207538C copies +0x70..+0xA3 into the battle globals; '
+                                               'read-only here')
+
     # ------------------------------------------------------------ undo / apply
     def doc(self):
+        if self.focus == 'mission':
+            return MISSION_DOC if self.missions.catalog is not None else None
         return 'level:' + self.stage.stem if self.stage else None
 
     def snapshot(self):
+        if self.focus == 'mission':
+            return self.missions.snapshot()
         if not self.stage:
             return None
         return ({l.atm_path: l.map.build() for l in self.layers},
                 self.sel_layer.name if self.sel_layer else None, self.sel_tile)
 
+    def checkpoint(self, label):
+        self.focus = 'level'
+        super().checkpoint(label)
+
     def restore(self, snap):
+        if self.focus == 'mission':
+            self.missions.restore(snap)
+            return
         blobs, selected, tile = snap
         for l in self.layers:
             if l.atm_path in blobs:
@@ -484,13 +605,32 @@ class LevelWorkspace(SuiteWorkspace):
         self.refresh()
 
     @property
-    def dirty(self):
+    def maps_dirty(self):
         return any(l.map.build() != self._original_maps.get(l.atm_path) for l in self.layers)
+
+    @property
+    def dirty(self):
+        return self.maps_dirty or self.missions.dirty
 
     def apply(self):
         if not self.dirty:
             self.app.status.set('Level: nothing to apply.')
             return
+        done = []
+        if self.missions.dirty:
+            changed = self.missions.apply()
+            if changed is None:
+                return
+            done.append(', '.join(changed) + ' into jgalaxy.aar')
+        if self.maps_dirty:
+            n = self._apply_maps()
+            if n is None:
+                return
+            done.append(f'{n} ALTM map(s) into the stage archive')
+        self.app.update_dirty()
+        self.app.status.set('Applied ' + '; '.join(done) + '. Save (Ctrl+S) to write the archives.')
+
+    def _apply_maps(self):
         updates = []
         try:
             for l in self.layers:
@@ -504,15 +644,13 @@ class LevelWorkspace(SuiteWorkspace):
                 updates.append((l, blob))
         except (ValueError, IndexError) as exc:
             messagebox.showerror('Stage map', f'Cannot apply ALTM edits: {exc}')
-            return
+            return None
         for l, blob in updates:
             self.app.root_data.write(l.atm_path, blob)
             self._original_maps[l.atm_path] = blob
             l.map = altmmod.parse(blob)
         self.refresh()
-        self.app.update_dirty()
-        self.app.resources_applied()
-        self.app.status.set(f'Applied {len(updates)} ALTM map(s); Save (Ctrl+S) to write the stage archive.')
+        return len(updates)
 
     # ------------------------------------------------------------ export
     def export_layer(self):

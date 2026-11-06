@@ -1,5 +1,11 @@
 # Jump Ultimate Stars — looped effect lifetime and reference-count trace
 
+> **Superseded in part (2026-11-06):** `chara_action(4/5)` call `+0x08` on each child's
+> *wrapper* (`node+0x18`, vtables `0x020955C0` / `0x02095878`), whose `+0x08` is
+> `FUN_02049460` → `FUN_02027560` **teardown** — not the node vtable's retain
+> `0x020102D0`. Action 4 kills all GN-spawned effects, action 5 the oldest live one. See
+> `EFFECT_TEARDOWN_TRACE_20261106.md`. The loop-flag findings below still hold.
+
 **Date:** 2026-11-05
 **Inputs:** `reverse_engineering(1).zip` (ARM9/overlay 6 binaries and Ghidra function corpus), `data(1).zip` / extracted `chr/ChrArc.aar`, Editor Spawn Lifecycle build, user-provided screenshots of `db_b_01` move 41.
 **Confidence:** direct code/data evidence for loop flags, retain/release methods, and NoteTrack action dispatch; **no live emulator object lifetime samples**.

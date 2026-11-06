@@ -1,4 +1,5 @@
-"""Synthetic GUI Missions smoke: xvfb-run -a python tests/gui_missions_smoke.py"""
+"""Synthetic GUI Missions smoke (missions live in the Level workspace's Mission tab):
+xvfb-run -a python tests/gui_missions_smoke.py"""
 import sys
 import time
 import tempfile
@@ -37,30 +38,33 @@ def main():
             for _ in range(12):
                 app.update()
                 time.sleep(.04)
-            w = app.suite['missions']
-            app.show_workspace('missions')
+            lv = app.suite['level']
+            app.show_workspace('level')
+            w = lv.missions
             assert w.catalog is not None, w.load_error
-            w.node_id = 0
-            w.refresh()
+            assert lv.tree.exists('n:0'), 'mission node missing from the Level browser'
+            lv.tree.selection_set('n:0')
+            app.update()
+            assert w.node_id == 0 and lv.bottom.current == 'mission'
             original = w.catalog.graph.build()
-            assert not w.dirty
+            assert not lv.dirty
             w.slot = 0
             w.kind_var.set('Koma')
             w.koma_var.set('522')
             w.update_reward()
-            assert w.dirty, app.status.get()
+            assert lv.dirty, app.status.get()
             assert w.catalog.graph.get(0).rewards[0].koma_id == 522
             app.undo()
-            assert not w.dirty and w.catalog.graph.build() == original
+            assert not lv.dirty and w.catalog.graph.build() == original
             app.redo()
-            assert w.dirty and w.catalog.graph.get(0).rewards[0].koma_id == 522
-            w.apply()
-            assert not w.dirty and app.root_data.dirty_files()
+            assert lv.dirty and w.catalog.graph.get(0).rewards[0].koma_id == 522
+            lv.apply()
+            assert not lv.dirty and app.root_data.dirty_files()
             with tempfile.TemporaryDirectory() as out:
                 app.root_data.save(out)
                 blob = DataRoot(out).read(GRAPH)
                 assert GalaxyGraph.parse(blob).get(0).rewards[0].koma_id == 522
-            print('OK: Mission reward → Undo/Redo → Apply → Save → reload')
+            print('OK: Level ▸ Mission reward → Undo/Redo → Apply → Save → reload')
         finally:
             app.destroy()
 

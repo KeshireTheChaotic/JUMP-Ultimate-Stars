@@ -44,7 +44,7 @@ The 142 nodes contain **671 active grants: 300 Koma / 371 resources**. All 300 o
 
 ## Editor behavior
 
-**Missions (Ctrl+8)** browses nodes grouped by planet, displays the linked mission/battle title and raw goal codes, and edits only a reward slot's signed Koma ID, its `-1` sentinel and six resource quantities. Mission/battle definition titles are ASCII-editable, shared across nodes referencing that definition. All other bytes remain preserved. There are no node or slot insertions because these indices are referenced by game state and fixed-size save structures.
+**Level workspace → J-Galaxy missions / Mission tab** (Ctrl+5) browses nodes grouped by planet, loads the stage each battle uses (definition `+0x75` → stage table 0x02092D08), displays the linked mission/battle title and raw goal codes, and edits only a reward slot's signed Koma ID, its `-1` sentinel and six resource quantities. Mission/battle definition titles are ASCII-editable, shared across nodes referencing that definition. All other bytes remain preserved. There are no node or slot insertions because these indices are referenced by game state and fixed-size save structures.
 
 The canonical editor API stages edits in the nested archive, supports undo/redo, then Apply and atomic-per-file Save. Validations reject out-of-range Koma references and malformed layout; original archive rebuild is byte-exact. Runtime interpretation is not substituted for explicit testing on melonDS.
 

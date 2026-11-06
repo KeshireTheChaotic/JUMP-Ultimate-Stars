@@ -50,34 +50,38 @@ projection, DrawPrio ordering once traced.
 
 Codecs: `jus_formats/koma.py` (art, 898/898 byte-exact), `jus_formats/kshape.py` (shapes +
 cards, byte-exact), `jus_package/komacards.py` (card ↔ art, Inferred). Apply writes art into `koma.aar` and stages `bin/kshape.bin` and/or `bin/koma.bin`; Save writes
-all changed files. New dictionary counts have valid offsets but unverified runtime limits. The registry
-links `bin/koma.bin` → each art file (`card art`) and → `bin/kshape.bin`.
-Next: Koma evolution/purchase graphs and new-card runtime constraints. Mission rewards are now editable (Ctrl+8); deck placement is explicitly out of scope.
+all changed files. New dictionary counts have valid offsets but unverified runtime limits.
+Next: Koma evolution/purchase graphs and new-card runtime constraints. Mission rewards are editable in the Level workspace; deck placement is explicitly out of scope.
 
-## Missions (Ctrl+8) — `app/workspaces/missions.py` (J-Galaxy progression)
-
-| Area | Content |
-|---|---|
-| Browser | 142 progression nodes grouped by 65 named planets; filter by name and node ID |
-| Content | Linked mission/battle definition ID and title, raw flags, up to six objective rewards per node |
-| Editor | Change signed Koma grant ID or six u16 resource quantities, rename a shared mission/battle definition |
-| Safety | Preserve goal/condition fields and unknown tail bytes; fixed record counts and IDs; undo/redo, Apply → Save |
-
-Verified executable flow: overlay1 `FUN_0214E380` reads the node's 20-byte reward slots and passes Koma IDs into main `FUN_02075F98` → `FUN_02071360` save unlock bits. The original `jgalaxy.aar` (174 members) rebuilds byte-for-byte identically; changing one reward preserves every other member. Details: `docs/MISSION_REWARD_TRACE.md`. The separate evolution data in `bin/jpower.bin` is still read-only until traced.
-
-## Level (Ctrl+5) — `app/workspaces/level.py` (ALTM tile painting; raw gameplay overlays)
+## Level (Ctrl+5) — `app/workspaces/level.py` + `missions.py` (stages, J-Galaxy missions)
 
 | Area | Content |
 |---|---|
-| Browser | 36 `bg_xx` stage sets (+ shared `SuddenDeath.bin`): layers / floor / gimmick / data |
+| Browser | **Stages**: 36 `bg_xx` sets (+ shared `SuddenDeath.bin`) labelled by battle stage index, mission count, layers / floor / gimmick / data · **J-Galaxy missions**: 142 progression nodes grouped by 65 planets (definition id and stage per node); one filter for both |
 | Viewport | background layers composited back→front; tile hover readout; Select / Paint / Picker brush tools |
 | Layers | Backgrounds (eye toggles; `*_sud` alternates start hidden) · **Read-only overlays**: camera, objects, stage table, collision, gimmicks — *unavailable*, never drawn |
-| Inspector | layer map/storage/tiles/banks/pairing + evidence; tile entry, brush and unapplied status; overlay provenance |
-| Bottom | Selectable tile set sheet, palette bank and flip controls; Stage data (read-only hex of .cam/.mob/.bin, gimmick member list); Problems; PNG export |
+| Inspector | selected mission (title, definition, stage index → stem, rule, opponents, time value); stage (battle stage index, table words, missions on this stage); layer map/storage/tiles/banks/pairing + evidence; tile entry, brush and unapplied status |
+| Bottom | **Mission** (goal slots, reward editor, definition rename); Tile set sheet, palette bank and flip controls; Stage data (read-only hex of .cam/.mob/.bin, gimmick member list); Problems; PNG export |
+
+Missions and stages are one workspace because every mission is a battle on a stage:
+ARM9 `FUN_0207538C` copies definition `+0x75` to 0x020AFE9C → battle object +0x160,
+which indexes the stage table at 0x02092D08 (36 × `{char *stem, s16, s16}`,
+`jus_formats.roster.STAGES`, checked against the ARM9 by `tests/test_stage_table.py`).
+Every one of the 56 mission and 75 battle definitions names a shipped stage set. The
+two s16 words are passed by ov06 to `FUN_020734E0` / `FUN_0207361C` (likely music, not
+verified). Rule (`+0x76`), opponent count (`+0x79`+1) and time (`+0x7A`) are shown read-only.
+
+Mission rewards: overlay1 `FUN_0214E380` reads the node's 20-byte reward slots and passes
+Koma IDs into main `FUN_02075F98` → `FUN_02071360` save unlock bits. The original
+`jgalaxy.aar` (174 members) rebuilds byte-for-byte identically; changing one reward
+preserves every other member. Goal/condition fields, unknown tail bytes, record counts and
+IDs are fixed. Details: `docs/MISSION_REWARD_TRACE.md`. `bin/jpower.bin` (evolution) is
+still read-only.
 
 Codecs: `jus_formats/altm.py` (Inferred; 1,558/1,558 decode), `jus_package/tilemap.py`,
-`jus_package/scenes.py`. ALTM edits have undo/redo and Apply → Save with
-rebuild validation. No save path exists for gameplay overlays.
+`jus_package/scenes.py`, `jus_formats/progression.py`. Undo/redo acts on the half shown in the
+bottom dock (the Mission tab → progression files, any other tab → the stage's tile maps).
+Apply writes both, with rebuild/reference validation. No save path exists for gameplay overlays.
 Next: BG priority/scroll from the stage code, then camera/mob tracing.
 
 ## Screen (Ctrl+6) — `app/workspaces/screen.py`
@@ -98,26 +102,11 @@ DSTX 0x05/0x06 placement still await tracing. See `NESTED_AAR_SCREEN_AUDIT_20261
 Next: ALMT time-driven UI animations and verified on-screen sprite placement on the shared
 timeline, hit-zone overlay later.
 
-## References (Ctrl+7) — `app/workspaces/references.py`
-
-| Area | Content |
-|---|---|
-| Browser | search (name / resource id / move id), type filter, archive tree when empty |
-| Viewport | reference viewer: referencers → selected → dependencies (Unreal style), click to re-centre, Back |
-| Inspector | resource facts, group, *Open in workspace*, per-move filter, reference counts + evidence |
-| Bottom | Referenced by · Uses (exact move/node/key/tick or record) · Unresolved · Summary |
-
-Registry `jus_package/registry.py`: 12,733 resources, 25,348 references, 0 unresolved
-on the shipped data. Ids resolve in the source's group (one character's archives or the
-top-level file), then `efc/*.aar`. Built on a background thread from a detached
-in-memory `DataRoot` snapshot so it reflects applied edits plus unchanged files on disk;
-refreshed after Apply / Save.
-
 ## Not done / open
 
-* Registry: dependency-driven preview invalidation and cross-archive transactions
-  (docs/04) build on this index next; edges for DSTX 0x05/0x06 layouts, ALOD and
-  stage .bin/.cam/.mob wait for their formats.
+* The References workspace was dropped (2026-11-05): where-used browsing is not an edit.
+  `jus_package/registry.py` stays as a library (tests, save checks) for future
+  dependency-driven invalidation.
 * Level `.mob`/`.bin`/`.cam`, collision and gimmicks remain read-only. Screen
   backgrounds remain preview-only pending BG slot/priority/scroll tracing.
 * Emulator verification of ALTM rendering, effect draw order and pursuer motion.

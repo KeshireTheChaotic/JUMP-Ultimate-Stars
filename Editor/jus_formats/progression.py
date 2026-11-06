@@ -43,9 +43,33 @@ def _name(raw):
 
 @dataclass(frozen=True)
 class BattleDefinition:
+    """One 0xA4-byte mission/battle record.
+
+    Battle setup fields as copied by ARM9 ``FUN_0207538C`` (read-only here):
+    ``+0x75`` stage index → global 0x020AFE9C → battle object +0x160, which
+    indexes the stage table ``roster.STAGES`` (0x02092D08); ``+0x76`` battle
+    rule → 0x020AFEA0 (ov06 picks the rule pair from it); ``+0x79`` opponent
+    count − 1; ``+0x7A`` time value; ``+0x7C`` three flag bits.
+    """
     index: int
     name: str
     data: bytes
+
+    @property
+    def stage_index(self) -> int:
+        return self.data[0x75]
+
+    @property
+    def rule(self) -> int:
+        return self.data[0x76]
+
+    @property
+    def opponents(self) -> int:
+        return self.data[0x79] + 1
+
+    @property
+    def time_value(self) -> int:
+        return _u16(self.data, 0x7A)
 
 
 class DefinitionTable:

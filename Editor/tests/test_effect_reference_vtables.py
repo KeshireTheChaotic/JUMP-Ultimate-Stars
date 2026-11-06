@@ -7,7 +7,8 @@ from pathlib import Path
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
 from tools.verify_effect_reference_path import BASE,SLOTS,verify
 
-BIN = Path(os.environ.get('JUS_ARM9','/mnt/data/jus_progression_work/bins/arm9.bin'))
+BIN = Path(os.environ.get('JUS_ARM9', r'D:\Library\Development\JUS\reverse_engineering\verified_binaries'
+                                      r'\52e262163e0d304c\arm9.bin'))
 
 class VtableSynthetic(unittest.TestCase):
     def test_expected_slots(self):
@@ -22,6 +23,6 @@ class VtableSynthetic(unittest.TestCase):
 @unittest.skipUnless(BIN.is_file(),'unpacked ARM9 not provided via JUS_ARM9')
 class VtableReal(unittest.TestCase):
     def test_shipped_arm9(self):
-        self.assertEqual(len(verify(BIN.read_bytes())),8)
+        self.assertEqual(len(verify(BIN.read_bytes())),len(SLOTS))
 
 if __name__=='__main__':unittest.main()

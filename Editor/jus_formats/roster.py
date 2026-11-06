@@ -68,6 +68,30 @@ KOMA_SERIES_PREFIXES = (
 #: chr/<id><suffix>.aar suffix by koma size (0x0209F198)
 SIZE_SUFFIX = ('', '_2', '_3', '_4', '_5', '_6', '_7', '_8')
 
+#: Battle stage table at 0x02092D08: ``{char *stem, s16 a, s16 b}`` per stage index.
+#: The index is battle object +0x160 (= mission/battle definition +0x75, FUN_0207538C);
+#: archive names are built from the stem (FUN_02083FCC / FUN_02085704, ov06 FUN_02163188),
+#: and ov06 passes the two s16 words to FUN_020734E0 / FUN_0207361C (likely music; not verified).
+STAGES = (
+    ('bg_es', 0x19, 0x19), ('bg_gt', 0x18, 0x18), ('bg_kn', 0x1C, 0x1C), ('bg_kk', 0x1E, 0x1E),
+    ('bg_oj', 0x1D, 0x1D), ('bg_ss', 0x1B, 0x1B), ('bg_db', 0x12, 0x12), ('bg_na', 0x14, 0x14),
+    ('bg_hh', 0x15, 0x15), ('bg_bl', 0x16, 0x16), ('bg_hk', 0x1A, 0x1A), ('bg_bb', 0x17, 0x17),
+    ('bg_op', 0x13, 0x13), ('bg_cs', 0x1F, 0x1F), ('bg_cm', 0x20, 0x20), ('bg_cg', 0x21, 0x21),
+    ('bg_cu', 0x23, 0x23), ('bg_ch', 0x22, 0x22), ('bg_cj', 0x24, 0x24), ('bg_old_ig', 0x2A, 0x2A),
+    ('bg_old_tr', 0x27, 0x27), ('bg_old_sk', 0x2B, 0x2B), ('bg_old_jj', 0x29, 0x29), ('bg_old_sd', 0x28, 0x28),
+    ('bg_old_dg', 0x2B, 0x2B), ('bg_old_dn', 0x2B, 0x2B), ('bg_old_to', 0x28, 0x28), ('bg_old_ds', 0x27, 0x27),
+    ('bg_old_pj', 0x27, 0x27), ('bg_old_bu', 0x2B, 0x2B), ('bg_old_bc', 0x2B, 0x2B), ('bg_old_yo', 0x2B, 0x2B),
+    ('bg_old_yh', 0x29, 0x29), ('bg_old_rk', 0x2D, 0x2D), ('bg_old_cs', 0x2C, 0x2C), ('bg_old_ch', 0x2E, 0x2E),
+)
+
+
+def stage_stem(index: int) -> str | None:
+    return STAGES[index][0] if 0 <= index < len(STAGES) else None
+
+
+def stage_index(stem: str) -> int | None:
+    return next((i for i, (s, _, _) in enumerate(STAGES) if s == stem), None)
+
 STRINGS_PER_RECORD = 53
 RECORD_SIZE = 60
 

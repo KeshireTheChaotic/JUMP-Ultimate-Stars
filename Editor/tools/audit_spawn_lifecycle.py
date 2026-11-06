@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """Read-only ALMT effect-lifecycle audit for side-by-side emulator comparisons.
 
-No inference about hit-confirmed effects, scene callbacks, occlusion, or actual
-runtime deletion is made. See docs/SPAWN_LIFECYCLE_RETRACE_20261105.md.
+Includes the traced chara_action(4/5) teardown of GN01..GN09 effects
+(docs/EFFECT_TEARDOWN_TRACE_20261106.md). Hit-confirmed effects, branches and
+occlusion are not reconstructed.
 """
 from __future__ import annotations
 
@@ -34,6 +35,7 @@ def collect(root: DataRoot, character: str, move_index: int, tick: int) -> dict:
     move = base.moves[move_index]
     catalog = spawns.build_catalog(tables)
     refs = spawns.reference_events(move, base.node_names)
+    kills = spawns.teardowns(move, base.node_names, catalog)
     rows = []
     for sp in spawns.keyed_spawns(move, base.node_names):
         entry = catalog.get(sp.effect_id)
@@ -43,6 +45,9 @@ def collect(root: DataRoot, character: str, move_index: int, tick: int) -> dict:
             continue
         child,names,path = entry
         lf = spawns.nominal_lifetime(sp,child,tick)
+        kill = kills.get(sp.key)
+        if kill is not None and tick >= kill.tick:
+            lf = spawns.NominalLifetime('torn-down', lf.age, None, lf.scheduled_end)
         node_frames = []
         if lf.frame_tick is not None:
             for ni,st in spawns.state_at(child,lf.frame_tick).items():
@@ -53,7 +58,8 @@ def collect(root: DataRoot, character: str, move_index: int, tick: int) -> dict:
                      'resolved':True,'effect_move':path,'duration':child.duration,
                      'loops':bool(child.flags & almt.MOVE_FLAG_LOOP),
                      'nominal_phase':lf.phase,'age':lf.age,'frame_tick':lf.frame_tick,
-                     'scheduled_end_inclusive':lf.scheduled_end,'frames':node_frames})
+                     'scheduled_end_inclusive':lf.scheduled_end,'frames':node_frames,
+                     'torn_down':({'tick':kill.tick,'action':kill.action} if kill else None)})
     commands=[]
     for i,node in enumerate(move.nodes):
         if node is None: continue
@@ -73,7 +79,8 @@ def collect(root: DataRoot, character: str, move_index: int, tick: int) -> dict:
             'nominal_loop_overlap':{eid:sum(x.get('id') == eid and x.get('loops')
                         and x.get('nominal_phase') == 'looping-until-runtime-removal' for x in rows)
                         for eid in sorted({x['id'] for x in rows if x.get('loops')})},
-            'warning':'No emulator battle state: hit effects, owner cleanup, visibility and actual deletion not reconstructed',
+            'warning':'Teardown by chara_action(4/5) is modelled (same-tick order inferred); branches, '
+                      'hit effects and effects carried over from earlier moves are not reconstructed',
             'spawned_effects':rows,'notetrack_commands_up_to_tick':commands}
 
 
