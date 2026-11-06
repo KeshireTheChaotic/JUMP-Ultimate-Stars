@@ -1,8 +1,8 @@
-"""Mission-first Level editor with a read-only runtime preview.
+"""J-Space hierarchy and stage/mission Level workspace.
 
 J-Galaxy missions occupy the left browser and load their assigned stage.
 The central viewport displays editable ALTM tiles plus projected stage events.
-The bottom dock contains mission rewards, runtime diagnostics and tile tools.
+The bottom ribbon edits verified stage markers, triggers and spawns, and hosts tile tools.\nMission properties and objective rewards are edited in the right inspector.
 
 Stages and missions are linked by the battle stage index: mission/battle
 definition ``+0x75`` → battle object +0x160 → stage table 0x02092D08
@@ -22,7 +22,7 @@ from tkinter import filedialog, messagebox, ttk
 from PIL import Image, ImageTk, ImageChops
 
 from jus_formats import altm as altmmod
-from jus_formats import roster, stagephysics, itemprob
+from jus_formats import roster, stagephysics, stageauthoring, itemprob
 from jus_package import scenes, tilemap, stagepreview
 from jus_package.project import split
 
@@ -40,7 +40,7 @@ OVERLAYS = (('cam', 'Camera (unverified)', '.cam'), ('mob', 'Stage physics & spa
 class LevelWorkspace(SuiteWorkspace):
     key = 'level'
     title = 'Level'
-    browser_title = 'J-Galaxy missions'
+    browser_title = 'J-Space / galaxies / worlds / missions'
 
     def __init__(self, app, host, browser_host, k):
         self.stage: scenes.StageSet | None = None
@@ -61,7 +61,7 @@ class LevelWorkspace(SuiteWorkspace):
         self._sets: list[scenes.StageSet] = []
         self._probs = []
         self._by_stage: dict[str, list[int]] = {}
-        self.focus = 'level'           # edit history target
+        self.focus = 'level'           # edit history target\n        self.nav_kind = 'root'\n        self.nav_id = None\n        self._active_marker = None\n        self._original_mob = b''\n        self._mob_working = b''\n        self.show_markers = tk.BooleanVar(value=True)
         self.stage_tick = tk.IntVar(value=0)
         self.preview_objects = tk.BooleanVar(value=True)
         self.preview_items = tk.BooleanVar(value=True)
@@ -93,6 +93,8 @@ class LevelWorkspace(SuiteWorkspace):
         ttk.Button(h, text='Frame', style='Tool.TButton', command=self.frame_view).pack(side='right', padx=6)
         ttk.Checkbutton(h, text='Physics/spawns', variable=self.preview_objects,
                         command=self._preview_changed).pack(side='right', padx=3)
+        ttk.Checkbutton(h, text='Markers', variable=self.show_markers,
+                        command=lambda: self.view.redraw()).pack(side='right', padx=3)
         ttk.Label(h, text='Stage tick').pack(side='right', padx=(9, 2))
         self.stage_spin = ttk.Spinbox(h, from_=0, to=36000, width=6,
                                       textvariable=self.stage_tick, command=self._preview_changed)
@@ -108,7 +110,13 @@ class LevelWorkspace(SuiteWorkspace):
         self.view.canvas.bind('<Motion>', self._hover, add='+')
         self.layer_list = LayerList(self.layers_panel.body, on_select=self._select_layer, on_toggle=self._toggle)
         self.layer_list.pack(fill='both', expand=True, padx=4, pady=4)
-        self.missions = MissionPanel(self, self.bottom.add('mission', 'Mission'))
+        self.missions = MissionPanel(self, self.inspector.master)
+        self.missions.frame.pack_forget()
+        self._inspector_mode = 'stage'
+        for key, title, kinds in (('markers', 'Map markers', ('floor', 'grip')),
+                                  ('triggers', 'Triggers / gimmicks', ('gimmick',)),
+                                  ('spawns', 'Spawns', ('item', 'symbol'))):
+            self._build_marker_ribbon(key, title, kinds)
         tiles = self.bottom.add('tiles', 'Tile set')
         self.tile_canvas = tk.Canvas(tiles, bg=T.CANVAS_BG, highlightthickness=0, height=int(150 * self.k))
         tsb = ttk.Scrollbar(tiles, orient='horizontal', command=self.tile_canvas.xview)
@@ -161,8 +169,24 @@ class LevelWorkspace(SuiteWorkspace):
         return ws
 
     def _tab_changed(self, name):
-        self.focus = 'mission' if name == 'mission' else 'level'
+        # Dock tabs select a stage editing tool; mission undo scope is controlled
+        # by MissionPanel.checkpoint, not by the active ribbon tab.
         self.app._update_undo_label()
+
+    def show_mission_inspector(self):
+        if self.missions.catalog is None or self.missions.node_id is None:
+            return
+        self.inspector.pack_forget()
+        self.missions.frame.pack(fill='both', expand=True)
+        self._inspector_mode = 'mission'
+        self.missions.refresh()
+
+    def show_stage_inspector(self):
+        self.missions.frame.pack_forget()
+        self.inspector.pack(fill='both', expand=True)
+        self._inspector_mode = 'stage'
+        self.refresh_inspector()
+
 
     def build_browser(self, parent):
         self.tree = self.browser_tree(parent, ('kind',), (78,), ('Content',))
@@ -190,39 +214,58 @@ class LevelWorkspace(SuiteWorkspace):
         self.refresh_inspector()
 
     def populate(self):
+        """Render the verified J-Space → galaxy → world → mission hierarchy.
+
+        Mission->world is decoded. Galaxy->world parent references have not yet
+        been traced; never invent them. For multi-galaxy data, worlds appear in
+        a clearly labelled unresolved bucket until that relationship is proved.
+        """
         t = self.tree
         selected = t.selection()
         t.delete(*t.get_children())
-        flt = self.filter_var.get().strip().lower()
+        flt = self.filter_var.get().strip().casefold()
         c = self.missions.catalog
-        if c is not None:
-            group = ''  # planets are top-level; stage resources live in the mission's Inspector
-            node = self.missions.node_id
-            for planet_id in range(c.graph.planet_count):
-                planet = c.graph.planet_name(planet_id) or f'Planet {planet_id}'
-                location_id = c.graph.planet_location_id(planet_id)
-                location = (c.graph.location_name(location_id) if
-                            location_id < c.graph.location_count else f'Unknown location {location_id}')
-                label_planet = f'{planet} · location {location_id:02d} {location}'
-                rows = []
-                for i in range(c.graph.node_count):
-                    n = c.graph.get(i)
-                    if n.planet_id != planet_id:
-                        continue
-                    label = self.missions.node_label(i)
-                    stem = self.missions.stage_of(i) or ''
-                    if flt and not any(flt in x.casefold() for x in (label, label_planet, stem)):
-                        continue
-                    rows.append((i, label, stem, n))
-                if not rows:
+        root = t.insert('', 'end', 'js:0', text='J-SPACE', values=('Map',), open=True)
+        if c is None:
+            return
+        for galaxy_id in range(c.graph.galaxy_count):
+            galaxy = c.graph.galaxy_name(galaxy_id) or f'Galaxy {galaxy_id}'
+            t.insert(root, 'end', f'g:{galaxy_id}',
+                     text=f'{galaxy_id:02d}  {galaxy}', values=('Galaxy',),
+                     open=(c.graph.galaxy_count == 1 or bool(flt)))
+        parent = 'g:0' if c.graph.galaxy_count == 1 else None
+        for planet_id in range(c.graph.planet_count):
+            world = c.graph.planet_name(planet_id) or f'World {planet_id}'
+            loc_id = c.graph.planet_location_id(planet_id)
+            location = (c.graph.location_name(loc_id) if loc_id < c.graph.location_count
+                        else f'Location {loc_id}')
+            nodes = []
+            for node_id in range(c.graph.node_count):
+                node = c.graph.get(node_id)
+                if node.planet_id != planet_id:
                     continue
-                open_ = bool(flt) or (node is not None and c.graph.get(node).planet_id == planet_id)
-                p = t.insert(group, 'end', f'p:{planet_id}', text=f'{planet_id:02d} {label_planet}', open=open_)
-                for i, label, stem, n in rows:
-                    t.insert(p, 'end', f'n:{i}', text=label,
-                             values=(('M' if n.mission else 'B') + f'{n.definition_id} · {stem[3:]}',))
-            if node is not None and t.exists(f'n:{node}'):
-                t.see(f'n:{node}')
+                title = self.missions.node_label(node_id)
+                stage = self.missions.stage_of(node_id) or ''
+                if (not flt or any(flt in text.casefold()
+                                   for text in (world, location, title, stage))):
+                    nodes.append((node_id, title, stage, node))
+            if not nodes:
+                continue
+            if parent is None:
+                parent = t.insert(root, 'end', 'g:unresolved',
+                                  text='Worlds (galaxy parents unverified)',
+                                  values=('Unresolved',), open=True)
+            node = self.missions.node_id
+            expanded = bool(flt) or (node is not None and
+                                      node < c.graph.node_count and
+                                      c.graph.get(node).planet_id == planet_id)
+            wid = t.insert(parent, 'end', f'p:{planet_id}',
+                           text=f'{planet_id:02d}  {world}',
+                           values=(f'World / loc {loc_id:02d}',), open=expanded)
+            for node_id, title, stage, nd in nodes:
+                t.insert(wid, 'end', f'n:{node_id}', text=title,
+                         values=(('M' if nd.mission else 'B') +
+                                 f'{nd.definition_id} · {stage[3:]}',))
         for iid in selected:
             if t.exists(iid):
                 t.selection_set(iid)
@@ -231,32 +274,48 @@ class LevelWorkspace(SuiteWorkspace):
 
     def _browse(self, _e=None):
         sel = self.tree.selection()
-        if not sel or sel[0].startswith(('g:', 'p:')):
+        if not sel:
             return
-        if sel[0].startswith('n:'):
-            self.select_mission(int(sel[0][2:]))
+        iid = sel[0]
+        if iid.startswith('n:'):
+            self.select_mission(int(iid[2:]))
             return
-        # Browsing is mission-first; stages are selected through a mission definition.
+        if iid == 'js:0':
+            self.nav_kind, self.nav_id = 'root', None
+        elif iid.startswith('g:'):
+            self.nav_kind = 'galaxy'
+            self.nav_id = None if iid == 'g:unresolved' else int(iid[2:])
+        elif iid.startswith('p:'):
+            self.nav_kind, self.nav_id = 'world', int(iid[2:])
+        else:
+            return
+        self.show_stage_inspector()
+        self.refresh_inspector()
+        self.view.redraw()
 
     def select_mission(self, node_id):
-        """Show a J-Galaxy node in the Mission tab and load the stage its battle uses."""
+        """Select one mission, load its battle stage, and show its inspector."""
         self._stop_stage_play()
+        self.nav_kind, self.nav_id = 'mission', node_id
         self.missions.select_node(node_id)
-        self.bottom.show('mission')
         stem = self.missions.stage_of(node_id)
         if stem and (not self.stage or self.stage.stem != stem):
             if any(s.stem == stem for s in self._sets):
                 self.load(stem)
+        self.show_mission_inspector()
         self._preview_changed()
         self.refresh_inspector()
 
     def mission_changed(self):
-        """A mission edit or undo changed titles; keep the browser labels current."""
+        """Keep the hierarchy and shared stage-reference list in sync."""
+        self._by_stage = self.missions.nodes_by_stage()
         self.populate()
         self.refresh_inspector()
+        if self._inspector_mode == 'mission':
+            self.missions.refresh()
 
     def load(self, stem):
-        if self.stage and self.stage.stem != stem and self.maps_dirty:
+        if self.stage and self.stage.stem != stem and (self.maps_dirty or self.mob_dirty):
             if not messagebox.askyesno('Level', 'Discard unapplied tile-map edits before switching stages?'):
                 return
         self.stage = next((s for s in self._sets if s.stem == stem), None)
@@ -265,6 +324,8 @@ class LevelWorkspace(SuiteWorkspace):
         self._original_maps = {}
         self._dsig_cache = {}
         self._stage_mob, self._stage_geo, self._stage_frame = None, None, None
+        self._original_mob, self._mob_working = b'', b''
+        self._active_marker = None
         self._item_prob = None
         self._stage_frame_cache = {}
         self.layers, self.images, self.sel_layer, self.sel_tile = [], {}, None, None
@@ -281,7 +342,10 @@ class LevelWorkspace(SuiteWorkspace):
                 path = self.stage.members.get(role)
                 if path:
                     try:
-                        setattr(self, dest, parse(self.app.root_data.read(path)))
+                        blob = self.app.root_data.read(path)
+                        setattr(self, dest, parse(blob))
+                        if role == 'mob':
+                            self._original_mob = self._mob_working = blob
                     except (ValueError, IndexError, KeyError, OSError) as exc:
                         probs.append((f'{role} parser: {exc}', 'warn'))
         if self.stage:
