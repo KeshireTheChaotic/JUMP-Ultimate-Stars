@@ -21,7 +21,7 @@ from tkinter import filedialog, messagebox, ttk
 from PIL import Image, ImageTk, ImageChops
 
 from jus_formats import altm as altmmod
-from jus_formats import roster, stagephysics
+from jus_formats import roster, stagephysics, itemprob
 from jus_package import scenes, tilemap, stagepreview
 from jus_package.project import split
 
@@ -69,6 +69,7 @@ class LevelWorkspace(SuiteWorkspace):
         self.camera_x = tk.StringVar(value='0')
         self.camera_y = tk.StringVar(value='0')
         self.preview_palette = tk.BooleanVar(value=True)
+        self._item_prob = None
         self._stage_mob = None
         self._stage_geo = None
         self._stage_frame = None
@@ -252,6 +253,7 @@ class LevelWorkspace(SuiteWorkspace):
         self._original_maps = {}
         self._dsig_cache = {}
         self._stage_mob, self._stage_geo, self._stage_frame = None, None, None
+        self._item_prob = None
         self._stage_frame_cache = {}
         self.layers, self.images, self.sel_layer, self.sel_tile = [], {}, None, None
         probs = []
@@ -270,6 +272,14 @@ class LevelWorkspace(SuiteWorkspace):
                         setattr(self, dest, parse(self.app.root_data.read(path)))
                     except (ValueError, IndexError, KeyError, OSError) as exc:
                         probs.append((f'{role} parser: {exc}', 'warn'))
+        if self.stage:
+            for ipath in ('item/itemprob.ipf', 'bin/item/itemprob.ipf'):
+                if self.app.root_data.exists(ipath):
+                    try:
+                        self._item_prob = itemprob.ItemProb.parse(self.app.root_data.read(ipath))
+                    except (ValueError, KeyError, OSError) as exc:
+                        probs.append((f'Item probability table {ipath}: {exc}', 'warn'))
+                    break
         for l in self.layers:
             self._original_maps[l.atm_path] = self.app.root_data.read(l.atm_path)
             img, p = scenes.render_layer(self.app.root_data, l)
@@ -438,6 +448,20 @@ class LevelWorkspace(SuiteWorkspace):
                   for layer,px,py in f.parallax]
         lines += [f'BG {layer}: {description}' for layer,description in f.palette]
         lines += list(f.notes)
+        cfg = getattr(self._stage_mob, 'items', None)
+        if self._item_prob is not None and cfg is not None:
+            try:
+                rule = self.missions.definition(self.missions.node_id).rule
+                for jp_enabled in (False, True):
+                    for row, weights in enumerate(self._item_prob.combined(
+                            cfg, jpower_enabled=jp_enabled, battle_rule=rule)):
+                        lines.append(f'Item outcome weights ({("J-Power on" if jp_enabled else "normal")}, '
+                                     f'row {row}, total {sum(weights)}/1000000): '
+                                     + ', '.join(str(w) for w in weights))
+                lines.append('Outcome-row selection and game RNG are combat-dependent and unresolved. '
+                             'Item weights are decoded, not a claim of exact drops.')
+            except (ValueError, IndexError, AttributeError) as exc:
+                lines.append(f'Item probability diagnostics: {exc}')
         if self._stage_geo:
             lines += [f'Collision descriptors: {len(self._stage_geo.collision_records)} (read-only, geometry still unverified)',
                       f'Wall descriptors: {len(self._stage_geo.wall_records)} (read-only)']
