@@ -12,7 +12,9 @@ assigned stage and presents its objective and reward editor in the Mission tab.
 Every shipped stage is covered by at least one mission; stage resources are
 inspected through the selected mission. Tile editing remains ALTM-only.
 
-The Stage runtime tab provides a scrubbable frame position, with `.mob` and
+The Stage runtime tab provides a frame scrubber and Play/Pause projection (one
+simulated game tick per displayed preview step, throttled to 30 steps/sec for
+large maps), with `.mob` and
 `.bin` parsed by the existing `jus_formats.stagephysics` module. In the viewport,
 BG layers use their traced position records, floor paths use their speed and
 waypoints, gimmicks and spawns are positioned from their decoded coordinates.
