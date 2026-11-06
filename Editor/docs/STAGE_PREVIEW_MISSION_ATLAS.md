@@ -38,6 +38,8 @@ The executable environment gate is `definition[0x7C] & 0x02`. When false, the
 preview does not activate floor paths and gimmick events.
 
 None of these preview controls write `.bin`, `.mob`, or `.cam` data.
+Mission authoring (including experimental node/definition growth) is a separate
+writer and requires a new save after structural changes.
 
 ## Screen workspace
 
