@@ -325,7 +325,7 @@ class LevelWorkspace(LevelMarkersMixin, SuiteWorkspace):
 
     def load(self, stem):
         if self.stage and self.stage.stem != stem and (self.maps_dirty or self.mob_dirty):
-            if not messagebox.askyesno('Level', 'Discard unapplied tile-map edits before switching stages?'):
+            if not messagebox.askyesno('Level', 'Discard unapplied stage tile and marker edits before switching stages?'):
                 return
         self.stage = next((s for s in self._sets if s.stem == stem), None)
         self._stroke = False
@@ -1021,7 +1021,8 @@ class LevelWorkspace(LevelMarkersMixin, SuiteWorkspace):
         if not self.stage:
             return None
         return ({l.atm_path: l.map.build() for l in self.layers},
-                self.sel_layer.name if self.sel_layer else None, self.sel_tile)
+                self.sel_layer.name if self.sel_layer else None, self.sel_tile,
+                self._mob_working)
 
     def checkpoint(self, label):
         self.focus = 'level'
@@ -1031,7 +1032,12 @@ class LevelWorkspace(LevelMarkersMixin, SuiteWorkspace):
         if self.focus == 'mission':
             self.missions.restore(snap)
             return
-        blobs, selected, tile = snap
+        blobs, selected, tile, *extra = snap
+        if extra:
+            self._mob_working = extra[0]
+            self._stage_mob = (stagephysics.parse_mob(self._mob_working)
+                               if self._mob_working else None)
+            self._stage_frame_cache.clear()
         for l in self.layers:
             if l.atm_path in blobs:
                 l.map = altmmod.parse(blobs[l.atm_path])
@@ -1045,8 +1051,12 @@ class LevelWorkspace(LevelMarkersMixin, SuiteWorkspace):
         return any(l.map.build() != self._original_maps.get(l.atm_path) for l in self.layers)
 
     @property
+    def mob_dirty(self):
+        return bool(self._mob_working and self._mob_working != self._original_mob)
+
+    @property
     def dirty(self):
-        return self.maps_dirty or self.missions.dirty
+        return self.maps_dirty or self.mob_dirty or self.missions.dirty
 
     def apply(self):
         if not self.dirty:
@@ -1063,6 +1073,10 @@ class LevelWorkspace(LevelMarkersMixin, SuiteWorkspace):
             if n is None:
                 return
             done.append(f'{n} ALTM map(s) into the stage archive')
+        if self.mob_dirty:
+            if not self._apply_mob():
+                return
+            done.append('verified .mob marker positions into the stage archive')
         self.app.update_dirty()
         self.app.status.set('Applied ' + '; '.join(done) + '. Save (Ctrl+S) to write the archives.')
 
@@ -1087,6 +1101,28 @@ class LevelWorkspace(LevelMarkersMixin, SuiteWorkspace):
             l.map = altmmod.parse(blob)
         self.refresh()
         return len(updates)
+
+    def _apply_mob(self):
+        """Apply byte-patched .mob coordinates only, preserving all other data."""
+        path = self.stage.members.get('mob') if self.stage else None
+        if path is None:
+            messagebox.showerror('Stage markers', 'Selected stage has no .mob archive member.')
+            return False
+        try:
+            original = stagephysics.parse_mob(self._original_mob)
+            modified = stagephysics.parse_mob(self._mob_working)
+            if (len(original.floors), len(original.grips), len(original.item_candidates),
+                    len(original.gimmicks), len(original.raw)) != (
+                    len(modified.floors), len(modified.grips),
+                    len(modified.item_candidates), len(modified.gimmicks),
+                    len(modified.raw)):
+                raise ValueError('Stage records changed size or count unexpectedly')
+            self.app.root_data.write(path, self._mob_working)
+        except (ValueError, IndexError, KeyError, OSError) as exc:
+            messagebox.showerror('Stage markers', f'Cannot apply .mob edits: {exc}')
+            return False
+        self._original_mob = self._mob_working
+        return True
 
     # ------------------------------------------------------------ export
     def export_layer(self):
