@@ -210,7 +210,7 @@ class LevelWorkspace(SuiteWorkspace):
                 if not rows:
                     continue
                 open_ = bool(flt) or (node is not None and c.graph.get(node).planet_id == planet_id)
-                p = t.insert(group, 'end', f'p:{planet_id}', text=f'{planet_id:02d} {planet}', open=open_)
+                p = t.insert(group, 'end', f'p:{planet_id}', text=f'{planet_id:02d} {label_planet}', open=open_)
                 for i, label, stem, n in rows:
                     t.insert(p, 'end', f'n:{i}', text=label,
                              values=(('M' if n.mission else 'B') + f'{n.definition_id} · {stem[3:]}',))
