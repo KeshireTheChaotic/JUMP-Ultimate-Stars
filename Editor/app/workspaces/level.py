@@ -21,11 +21,11 @@ import tkinter as tk
 from pathlib import Path
 from tkinter import filedialog, messagebox, ttk
 
-from PIL import Image, ImageTk
+from PIL import Image, ImageTk, ImageChops
 
 from jus_formats import altm as altmmod
-from jus_formats import roster
-from jus_package import scenes, tilemap
+from jus_formats import roster, stagephysics
+from jus_package import scenes, tilemap, stagepreview
 from jus_package.project import split
 
 from .. import theme as T
@@ -41,7 +41,7 @@ OVERLAYS = (('cam', 'Camera / view framing', '.cam'), ('mob', 'Objects (mob)', '
 class LevelWorkspace(SuiteWorkspace):
     key = 'level'
     title = 'Level'
-    browser_title = 'Stages & missions'
+    browser_title = 'J-Galaxy missions'
 
     def __init__(self, app, host, browser_host, k):
         self.stage: scenes.StageSet | None = None
@@ -62,7 +62,16 @@ class LevelWorkspace(SuiteWorkspace):
         self._sets: list[scenes.StageSet] = []
         self._probs = []
         self._by_stage: dict[str, list[int]] = {}
-        self.focus = 'level'           # which half Undo/Redo acts on: 'level' (tile maps) or 'mission'
+        self.focus = 'level'           # edit history target
+        self.stage_tick = tk.IntVar(value=0)
+        self.preview_objects = tk.BooleanVar(value=True)
+        self.preview_items = tk.BooleanVar(value=True)
+        self.preview_pressure = tk.StringVar(value='')  # comma-separated floor IDs (held from t0)
+        self.preview_hits = tk.StringVar(value='')      # gimmick IDs struck at t0
+        self._stage_mob = None
+        self._stage_geo = None
+        self._stage_frame = None
+        self._stage_frame_cache = {}
         super().__init__(app, host, browser_host, k)
 
     # ------------------------------------------------------------ layout
@@ -75,6 +84,14 @@ class LevelWorkspace(SuiteWorkspace):
         ttk.Checkbutton(h, text='Layer bounds', variable=self.show_bounds, style='Toolbar.TCheckbutton',
                         command=lambda: self.view.redraw()).pack(side='right', padx=6)
         ttk.Button(h, text='Frame', style='Tool.TButton', command=self.frame_view).pack(side='right', padx=6)
+        ttk.Checkbutton(h, text='Physics/spawns', variable=self.preview_objects,
+                        command=self._preview_changed).pack(side='right', padx=3)
+        ttk.Label(h, text='Stage tick').pack(side='right', padx=(9, 2))
+        self.stage_spin = ttk.Spinbox(h, from_=0, to=36000, width=6,
+                                      textvariable=self.stage_tick, command=self._preview_changed)
+        self.stage_spin.pack(side='right')
+        self.stage_spin.bind('<Return>', self._preview_changed)
+        self.stage_spin.bind('<FocusOut>', self._preview_changed)
         self.view = self.make_viewport(on_draw=self._draw, on_press=self._press,
                                        on_drag=self._drag, on_release=self._release,
                                        origin_frac=(0.05, 0.08), zoom=1)
@@ -101,6 +118,18 @@ class LevelWorkspace(SuiteWorkspace):
         raw = self.bottom.add('raw', 'Stage data (read-only)')
         self.raw_log = TextLog(raw)
         self.raw_log.pack(fill='both', expand=True, padx=4, pady=4)
+        sim = self.bottom.add('runtime', 'Stage runtime')
+        controls = ttk.Frame(sim)
+        controls.pack(fill='x', padx=6, pady=4)
+        ttk.Checkbutton(controls, text='Item candidates/spawns', variable=self.preview_items,
+                        command=self._preview_changed).pack(side='left')
+        ttk.Label(controls, text='Pressure floors (IDs):').pack(side='left', padx=(12, 2))
+        ttk.Entry(controls, width=12, textvariable=self.preview_pressure).pack(side='left')
+        ttk.Label(controls, text='Hit switches (IDs):').pack(side='left', padx=(12, 2))
+        ttk.Entry(controls, width=12, textvariable=self.preview_hits).pack(side='left')
+        ttk.Button(controls, text='Project', command=self._preview_changed).pack(side='left', padx=6)
+        self.runtime_log = TextLog(sim)
+        self.runtime_log.pack(fill='both', expand=True, padx=4, pady=4)
         self.problems = self.problems_page()
         t = self.bottom.tools
         T.tool_button(t, 'Export layer PNG…', self.export_layer, 'Save the selected background layer as a PNG')
@@ -129,6 +158,11 @@ class LevelWorkspace(SuiteWorkspace):
         self._by_stage = self.missions.nodes_by_stage()
         self.stage = None
         self.populate()
+        if self.missions.catalog is not None and self.missions.catalog.graph.node_count:
+            self.select_mission(0)
+            if self.tree.exists('n:0'):
+                self.tree.selection_set('n:0')
+                self.tree.see('n:0')
         self.refresh_inspector()
 
     def populate(self):
@@ -136,26 +170,9 @@ class LevelWorkspace(SuiteWorkspace):
         selected = t.selection()
         t.delete(*t.get_children())
         flt = self.filter_var.get().strip().lower()
-        stages = t.insert('', 'end', 'g:stages', text='Stages', open=True, values=(f'{len(self._sets)}',))
-        for s in self._sets:
-            idx = roster.stage_index(s.stem)
-            used = self._by_stage.get(s.stem, [])
-            label = f'{s.stem}' if idx is None else f'{idx:02d}  {s.stem}'
-            if flt and flt not in label.lower():
-                continue
-            kinds = '+'.join(a for r, a in (('layers', 'BG'), ('floor', 'F'), ('gimmick', 'G'), ('shared', 'data'))
-                             if r in s.members)
-            iid = t.insert(stages, 'end', s.stem, text=label,
-                           values=((f'{len(used)} M · ' if used else '') + (kinds or '—'),))
-            for role, path in sorted(s.members.items()):
-                ext = '.' + path.rsplit('.', 1)[-1]
-                label, grade = scenes.STATUS.get(ext, ('', 'Unknown'))
-                t.insert(iid, 'end', f'{s.stem}|{role}', text=split(path)[-1].split('/')[-1],
-                         values=('✓' if grade != 'Unknown' else 'raw',))
         c = self.missions.catalog
         if c is not None:
-            group = t.insert('', 'end', 'g:missions', text='J-Galaxy missions', open=bool(flt),
-                             values=(f'{c.graph.node_count}',))
+            group = ''  # planets are top-level; stage resources live in the mission's Inspector
             node = self.missions.node_id
             for planet_id in range(c.graph.planet_count):
                 planet = c.graph.planet_name(planet_id) or f'Planet {planet_id}'
@@ -177,7 +194,7 @@ class LevelWorkspace(SuiteWorkspace):
                     t.insert(p, 'end', f'n:{i}', text=label,
                              values=(('M' if n.mission else 'B') + f'{n.definition_id} · {stem[3:]}',))
             if node is not None and t.exists(f'n:{node}'):
-                t.item('g:missions', open=True)
+                t.see(f'n:{node}')
         for iid in selected:
             if t.exists(iid):
                 t.selection_set(iid)
@@ -191,9 +208,7 @@ class LevelWorkspace(SuiteWorkspace):
         if sel[0].startswith('n:'):
             self.select_mission(int(sel[0][2:]))
             return
-        stem = sel[0].split('|')[0]
-        if not self.stage or self.stage.stem != stem:
-            self.load(stem)
+        # Browsing is mission-first; stages are selected through a mission definition.
 
     def select_mission(self, node_id):
         """Show a J-Galaxy node in the Mission tab and load the stage its battle uses."""
@@ -203,6 +218,7 @@ class LevelWorkspace(SuiteWorkspace):
         if stem and (not self.stage or self.stage.stem != stem):
             if any(s.stem == stem for s in self._sets):
                 self.load(stem)
+        self._preview_changed()
         self.refresh_inspector()
 
     def mission_changed(self):
@@ -219,6 +235,8 @@ class LevelWorkspace(SuiteWorkspace):
         self.sel_overlay = None
         self._original_maps = {}
         self._dsig_cache = {}
+        self._stage_mob, self._stage_geo, self._stage_frame = None, None, None
+        self._stage_frame_cache = {}
         self.layers, self.images, self.sel_layer, self.sel_tile = [], {}, None, None
         probs = []
         for role in ('layers', 'floor'):
@@ -227,6 +245,15 @@ class LevelWorkspace(SuiteWorkspace):
                     self.layers += scenes.find_layers(self.app.root_data, self.stage.members[role])
                 except (ValueError, KeyError) as exc:
                     probs.append((f'{role}: {exc}', 'bad'))
+        if self.stage:
+            for role, parse, dest in (('mob', stagephysics.parse_mob, '_stage_mob'),
+                                      ('bin', stagephysics.parse_stage_bin, '_stage_geo')):
+                path = self.stage.members.get(role)
+                if path:
+                    try:
+                        setattr(self, dest, parse(self.app.root_data.read(path)))
+                    except (ValueError, IndexError, KeyError, OSError) as exc:
+                        probs.append((f'{role} parser: {exc}', 'warn'))
         for l in self.layers:
             self._original_maps[l.atm_path] = self.app.root_data.read(l.atm_path)
             img, p = scenes.render_layer(self.app.root_data, l)
@@ -239,13 +266,14 @@ class LevelWorkspace(SuiteWorkspace):
         if self.sel_layer and self.sel_layer.map.entries:
             self._set_brush(self.sel_layer.map.entries[0])
         self._probs = probs
+        self._preview_changed(redraw=False)
         self.refresh(frame=True)
         self.app.status.set(f'{stem}: {len(self.layers)} background layers')
 
     # ------------------------------------------------------------ view
     def _layer_rows(self):
         rows = [{'id': 'bg', 'name': 'Backgrounds', 'kind': 'group'}]
-        # draw order: listed back (first) to front (last); the game's BG priority is not traced
+        # Draw/display priority is recorded in the stage BG records; editor layer toggles remain local.
         for l in self.layers:
             w, h = l.map.width, l.map.height
             rows.append({'id': 'L:' + l.name, 'parent': 'bg', 'name': l.name, 'kind': 'ALTM',
@@ -255,8 +283,11 @@ class LevelWorkspace(SuiteWorkspace):
         for key, name, ext in OVERLAYS:
             have = bool(self.stage and key in self.stage.members) if ext or key == 'gimmick' else False
             rows.append({'id': 'O:' + key, 'parent': 'ro', 'name': name, 'kind': 'overlay', 'readonly': True,
-                         'available': False, 'visible': False,
-                         'status': ('file present, not decoded' if have else 'no data / not decoded')})
+                          'available': key in ('mob', 'bin') and (self._stage_mob is not None
+                              if key == 'mob' else self._stage_geo is not None),
+                          'visible': self.preview_objects.get(),
+                          'status': ('runtime inspector' if key in ('mob', 'bin') and have
+                                     else 'not decoded' if have else 'no data')})
         return rows
 
     def refresh(self, frame=False):
@@ -265,6 +296,7 @@ class LevelWorkspace(SuiteWorkspace):
         self.problems.set_lines(self._probs or [('No problems.', 'good')])
         self._fill_raw()
         self._fill_tiles()
+        self._preview_changed(redraw=False)
         self.refresh_inspector()
         if frame:
             self.frame_view()
@@ -274,31 +306,144 @@ class LevelWorkspace(SuiteWorkspace):
     def frame_view(self):
         vis = [l for l in self.layers if self.visible.get(l.name, True)]
         if vis:
-            self.view.frame_rect((0, 0, max(l.size[0] for l in vis), max(l.size[1] for l in vis)))
+            rects = [(self._layer_position(l)[0], self._layer_position(l)[1],
+                      self._layer_position(l)[0] + l.size[0],
+                      self._layer_position(l)[1] + l.size[1]) for l in vis]
+            self.view.frame_rect((min(r[0] for r in rects), min(r[1] for r in rects),
+                                  max(r[2] for r in rects), max(r[3] for r in rects)))
+
+    def _layer_position(self, layer):
+        """Stage BG layer i uses the i-th verified .bin record."""
+        try:
+            suffix = layer.name.rsplit('_', 1)[1]
+            i = int(suffix)
+            if self._stage_geo and i < len(self._stage_geo.layers):
+                record = self._stage_geo.layers[i]
+                return record.x, record.y
+        except (ValueError, IndexError, AttributeError):
+            pass
+        return 0, 0
+
+    @staticmethod
+    def _ids(text):
+        """Manual preview IDs, not serialized game events."""
+        try:
+            return tuple(sorted({int(x.strip()) for x in text.split(',') if x.strip()}))
+        except ValueError:
+            return ()
+
+    def _preview_changed(self, _event=None, *, redraw=True):
+        try:
+            tick = max(0, int(self.stage_tick.get()))
+        except (ValueError, tk.TclError):
+            tick = 0
+        c = self.missions.catalog
+        n = self.missions.node_id
+        enabled = bool(c and n is not None and (self.missions.definition(n).data[0x7C] & 0x02))
+        self._stage_frame = None
+        if self._stage_mob is not None:
+            self._stage_frame = stagepreview.project(
+                self._stage_mob, self._stage_geo, tick, environment=enabled,
+                items_enabled=self.preview_items.get(),
+                occupied_floors=self._ids(self.preview_pressure.get()),
+                struck_gimmicks=self._ids(self.preview_hits.get()))
+        if hasattr(self, 'runtime_log'):
+            self._fill_runtime()
+        if redraw and hasattr(self, 'view'):
+            self.view.redraw()
+
+    def _fill_runtime(self):
+        f = self._stage_frame
+        if f is None:
+            self.runtime_log.set_lines(['No decoded .mob runtime for this mission/stage.'])
+            return
+        lines = [f'Frame {f.tick}: runtime projection (not an emulator replay)',
+                 f'{len(f.floors)} moving floors · {len(f.gimmicks)} gimmicks · {len(f.spawns)} shown spawns',
+                 'Trigger IDs are applied from tick 0; random choices use a fixed preview seed.']
+        lines += [f'Floor {x.index}: ({x.x:.1f},{x.y:.1f}) mode {x.mode} '
+                  f'{"solid" if x.solid else "absent"} — {x.note}' for x in f.floors]
+        lines += [f'{x.kind} {x.index}: ({x.x:.0f},{x.y:.0f}) {x.label}' for x in f.spawns]
+        lines += [f'BG {layer}: scripted scroll ({sx:+.2f},{sy:+.2f}) px' for layer,sx,sy in f.scroll]
+        lines += list(f.notes)
+        if self._stage_geo:
+            lines += [f'Collision descriptors: {len(self._stage_geo.collision_records)} (read-only, geometry still unverified)',
+                      f'Wall descriptors: {len(self._stage_geo.wall_records)} (read-only)']
+        self.runtime_log.set_lines(lines)
+
+    def _preview_bg_image(self, layer, img):
+        """Approximate horizontal scan-band scroll; does not simulate DS palette cycles."""
+        if not self._stage_geo or not self._stage_frame:
+            return img
+        try:
+            idx = int(layer.name.rsplit('_', 1)[1])
+            bg = self._stage_geo.layers[idx]
+        except (ValueError, IndexError, AttributeError):
+            return img
+        if not any(a.kind == 2 for a in bg.anims):
+            return img
+        key = (layer.name, self._stage_frame.tick, id(img))
+        if key in self._stage_frame_cache:
+            return self._stage_frame_cache[key]
+        result = img.copy()
+        for anim in bg.anims:
+            if anim.kind != 2:
+                continue
+            row = max(0, min(img.height, anim.fields()['row'] * 8))
+            if row >= img.height:
+                continue
+            sx, sy = stagepreview._scroll(anim, self._stage_frame.tick)
+            strip = result.crop((0, row, img.width, img.height))
+            shifted = ImageChops.offset(strip, int(round(sx)), int(round(sy)))
+            result.paste(shifted, (0, row))
+        if len(self._stage_frame_cache) > 16:
+            self._stage_frame_cache.clear()
+        self._stage_frame_cache[key] = result
+        return result
 
     def _draw(self, vp):
         if not self.stage:
-            vp.hud.configure(text='Select a stage in the browser.')
+            vp.hud.configure(text='Choose a J-Galaxy mission in the left sidebar.')
             return
         for l in self.layers:
             img = self.images.get(l.name)
             if img is None or not self.visible.get(l.name, True):
                 continue
-            vp.add_image(img, 0, 0)
+            ox, oy = self._layer_position(l)
+            vp.add_image(self._preview_bg_image(l, img), ox, oy)
             if self.show_bounds.get():
                 sel = l is self.sel_layer
-                vp.rect(0, 0, *l.size, outline=T.ACCENT if sel else T.LINE, dash=() if sel else (3, 3))
+                vp.rect(ox, oy, ox + l.size[0], oy + l.size[1],
+                        outline=T.ACCENT if sel else T.LINE, dash=() if sel else (3, 3))
         if self.sel_layer is not None and self.sel_tile is not None:
             tx, ty = self.sel_tile
-            vp.rect(tx * 8, ty * 8, tx * 8 + 8, ty * 8 + 8, outline=T.WARN, width=2)
-        vp.hud.configure(text=f'{self.stage.stem}: {self.tool.get()} · tile {self.brush} · '
-                              'layers back→front in list order (priority/scroll unverified)')
+            ox, oy = self._layer_position(self.sel_layer)
+            vp.rect(ox + tx*8, oy + ty*8, ox + tx*8+8, oy + ty*8+8,
+                    outline=T.WARN, width=2)
+        f = self._stage_frame
+        if f and self.preview_objects.get():
+            for floor in f.floors:
+                source = self._stage_mob.floors[floor.index]
+                hw = max(4, min(256, source.half_width))
+                colour = '#72BBF7' if floor.solid else '#E68B89'
+                vp.rect(floor.x-hw, floor.y-3, floor.x+hw, floor.y+3, outline=colour, width=2)
+                vp.text(floor.x, floor.y-9, f'F{floor.index}', anchor='s', fill=colour)
+            for event in f.bg_sprites:
+                vp.text(event.x, event.y, event.label, anchor='nw', fill='#A0C4F0')
+            for event in f.gimmicks:
+                vp.rect(event.x-6,event.y-6,event.x+6,event.y+6,outline='#E8A35D')
+                vp.text(event.x+8,event.y, f'G{event.index}', anchor='w',fill='#E8A35D')
+            for event in f.spawns:
+                colour = '#9FEAB0' if event.kind == 'item' else '#FF8B92'
+                vp.rect(event.x-4,event.y-4,event.x+4,event.y+4,outline=colour,width=2)
+        vp.hud.configure(text=f'{self.stage.stem} · mission {self.missions.node_id} · stage tick '
+                              f'{f.tick if f else 0} · physics read-only')
 
     def _tile_at(self, wx, wy):
         l = self.sel_layer
         if l is None:
             return None
-        tx, ty = int(wx // 8), int(wy // 8)
+        ox, oy = self._layer_position(l)
+        tx, ty = int((wx-ox) // 8), int((wy-oy) // 8)
         if 0 <= tx < l.map.width and 0 <= ty < l.map.height:
             return tx, ty
         return None
@@ -502,7 +647,9 @@ class LevelWorkspace(SuiteWorkspace):
             ins.section(name, note='Read-only overlay (Level v1 policy)')
             path = self.stage.members.get(ov)
             ins.value('Source', split(path)[-1] if path else '—')
-            ins.evidence('Format', 'Unknown', 'not traced; shown as raw bytes in the bottom dock')
+            ins.evidence('Format', 'Direct' if ov in ('mob','bin') else 'Unknown',
+                         'verified .mob/.bin structures and read-only simulation' if ov in ('mob','bin')
+                         else 'not yet traced')
             ins.text('Nothing is drawn for this overlay: the editor does not invent geometry or behaviour. '
                      'There is no save path for it.')
             return
@@ -537,7 +684,8 @@ class LevelWorkspace(SuiteWorkspace):
                   (f'  (borrowed from {l.borrowed})' if l.borrowed else ''))
         ins.evidence('ALTM map', 'Inferred', 'structure validated on all 1,558 ALTM files; loader not traced')
         ins.evidence('Pairing', 'Inferred', 'same-stem .dig / .dtx in the stage archive')
-        ins.evidence('Position', 'Unknown', 'BG priority, scroll/parallax and camera not decoded')
+        ins.evidence('Position', 'Direct' if self._stage_geo else 'Unknown',
+             'BG record position/priority from stage .bin; camera projection incomplete')
         if self.sel_tile:
             tx, ty = self.sel_tile
             v = m.get(tx, ty)
