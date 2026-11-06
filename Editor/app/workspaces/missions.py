@@ -46,6 +46,12 @@ class MissionPanel:
         self.koma_var = tk.StringVar()
         self.resources = [tk.StringVar(value='0') for _ in range(6)]
         self.title_var = tk.StringVar()
+        self.planet_var = tk.StringVar()
+        self.node_kind_var = tk.StringVar(value='Mission')
+        self.definition_var = tk.StringVar()
+        self.stage_var = tk.StringVar()
+        self.environment_var = tk.BooleanVar(value=False)
+        self.goal_code_var = tk.StringVar()
         self.frame = self._build(parent)
 
     # ------------------------------------------------------------ layout
@@ -69,6 +75,23 @@ class MissionPanel:
         self.title_entry.grid(row=2, column=1, sticky='ew', padx=5)
         ttk.Button(data, text='Rename', command=self.rename_definition).grid(row=2, column=2)
         data.columnconfigure(1, weight=1)
+        link = ttk.LabelFrame(left, text='J-Galaxy node / shared battle definition')
+        link.pack(fill='x', pady=(5, 3))
+        ttk.Label(link, text='Planet ID').grid(row=0, column=0, sticky='w', padx=(5, 2))
+        ttk.Entry(link, textvariable=self.planet_var, width=5).grid(row=0, column=1)
+        ttk.Label(link, text='Definition').grid(row=0, column=2, sticky='w', padx=(8, 2))
+        ttk.Combobox(link, textvariable=self.node_kind_var, values=('Mission', 'Battle'),
+                     width=9, state='readonly').grid(row=0, column=3)
+        ttk.Entry(link, textvariable=self.definition_var, width=5).grid(row=0, column=4)
+        ttk.Button(link, text='Reassign node', command=self.reassign_node).grid(row=0, column=5, padx=4)
+        ttk.Label(link, text='Stage ID').grid(row=1, column=0, sticky='w', padx=(5, 2))
+        ttk.Entry(link, textvariable=self.stage_var, width=5).grid(row=1, column=1)
+        ttk.Checkbutton(link, text='Stage physics', variable=self.environment_var).grid(
+            row=1, column=2, columnspan=3, sticky='w', padx=8)
+        ttk.Button(link, text='Update shared definition', command=self.update_stage).grid(
+            row=1, column=5, padx=4)
+        ttk.Label(link, text='IDs are fixed; reassigning a shared definition changes all linked nodes.',
+                  style='Toolbar.TLabel').grid(row=2, column=0, columnspan=6, sticky='w', padx=5)
         table = ttk.Frame(left)
         table.pack(fill='both', expand=True, pady=(4, 0))
         self.goals = ttk.Treeview(table, columns=('code', 'kind', 'detail'), show='tree headings', height=4,
@@ -110,6 +133,16 @@ class MissionPanel:
         ttk.Label(foot, text='R0–R5: six resource quantities (types unverified)',
                   style='Toolbar.TLabel').pack(side='left')
         ttk.Button(foot, text='Update reward', command=self.update_reward).pack(side='right', padx=(8, 0))
+        goals_edit = ttk.Frame(edit.body)
+        goals_edit.pack(fill='x', padx=8, pady=(2, 5))
+        ttk.Label(goals_edit, text='Raw goal code:').pack(side='left')
+        ttk.Entry(goals_edit, width=8, textvariable=self.goal_code_var).pack(side='left', padx=4)
+        ttk.Button(goals_edit, text='Set code', command=self.update_goal_code).pack(side='left')
+        ttk.Button(goals_edit, text='Activate next slot', command=self.add_goal).pack(side='left', padx=5)
+        ttk.Button(goals_edit, text='Deactivate last', command=self.remove_goal).pack(side='left')
+        ttk.Label(edit.body, text='Experimental objective codes: runtime condition semantics are unverified. '
+                  'Only the six fixed slots are supported.', style='Toolbar.TLabel').pack(
+                      fill='x', padx=8, pady=(0, 4))
         self._update_kind()
         return main
 
@@ -174,6 +207,10 @@ class MissionPanel:
             self.type_label.configure(text='—')
             self.planet_label.configure(text='—')
             self.title_var.set('')
+            self.planet_var.set('')
+            self.definition_var.set('')
+            self.stage_var.set('')
+            self.goal_code_var.set('')
             return
         n = c.graph.get(self.node_id)
         d = c.definition(n)
@@ -185,6 +222,11 @@ class MissionPanel:
         self.planet_label.configure(text=f'#{n.planet_id:02d} {c.graph.planet_name(n.planet_id)} · '
                                          f'{n.goal_count}/6 goals · flags 0x{n.flags:02X}')
         self.title_var.set(d.name)
+        self.planet_var.set(str(n.planet_id))
+        self.node_kind_var.set(typ)
+        self.definition_var.set(str(n.definition_id))
+        self.stage_var.set(str(d.stage_index))
+        self.environment_var.set(bool(d.data[0x7C] & 0x02))
         old_slot = self.slot
         for reward in n.rewards:
             detail = (f'Koma #{reward.koma_id}' if reward.is_koma else
@@ -208,6 +250,7 @@ class MissionPanel:
         slot = int(selected[0][2:])
         reward = self.catalog.graph.get(self.node_id).rewards[slot]
         self.slot = slot
+        self.goal_code_var.set(f'0x{reward.goal_code:04X}')
         self.kind_var.set('Koma' if reward.is_koma else 'Resources')
         self.koma_var.set(str(max(0, reward.koma_id)))
         for var, quantity in zip(self.resources, reward.resources):
@@ -305,6 +348,123 @@ class MissionPanel:
         self.refresh()
         self._edited(f'Renamed {"mission" if node.mission else "battle"} definition #{node.definition_id}. '
                      'All world nodes referencing this definition share its title.')
+
+    # ------------------------------------------------------------ bounded graph authoring
+    def reassign_node(self):
+        if self.catalog is None or self.node_id is None:
+            return
+        try:
+            c = self.catalog
+            planet = _number(self.planet_var.get())
+            definition = _number(self.definition_var.get())
+            mission = self.node_kind_var.get() == 'Mission'
+            check = GalaxyGraph.parse(c.graph.build())
+            check.place_node(self.node_id, planet_id=planet, definition_id=definition,
+                             mission=mission, missions=c.missions, battles=c.battles)
+            if check.build() == c.graph.build():
+                return
+        except (ValueError, IndexError) as exc:
+            messagebox.showerror('J-Galaxy node', str(exc))
+            return
+        self.checkpoint('reassign progression node')
+        c.graph = check
+        self._edited('J-Galaxy node reassigned (fixed node ID preserved). Apply, then Save.')
+        self.ws.select_mission(self.node_id)
+
+    def update_stage(self):
+        if self.catalog is None or self.node_id is None:
+            return
+        c = self.catalog
+        node = c.graph.get(self.node_id)
+        table = c.missions if node.mission else c.battles
+        try:
+            index = _number(self.stage_var.get())
+            if roster.stage_stem(index) is None:
+                raise ValueError(f'Stage ID {index} is absent from the verified stage table')
+            trial = DefinitionTable.parse(table.build())
+            trial.set_stage(node.definition_id, index)
+            trial.set_environment(node.definition_id, self.environment_var.get())
+            if trial.build() == table.build():
+                return
+        except (ValueError, IndexError) as exc:
+            messagebox.showerror('Stage definition', str(exc))
+            return
+        linked = sum(1 for i in range(c.graph.node_count)
+                     if (other := c.graph.get(i)).mission == node.mission
+                     and other.definition_id == node.definition_id)
+        if linked > 1 and not messagebox.askyesno('Shared definition',
+                f'This definition is referenced by {linked} J-Galaxy nodes. '
+                'Changing its stage/gate changes all of them. Continue?'):
+            return
+        self.checkpoint('edit shared battle stage')
+        if node.mission:
+            c.missions = trial
+        else:
+            c.battles = trial
+        self._edited('Shared battle definition stage/gate updated in memory. Apply, then Save.')
+        self.ws.select_mission(self.node_id)
+
+    def update_goal_code(self):
+        if self.catalog is None or self.node_id is None or self.slot is None:
+            return
+        try:
+            code = _number(self.goal_code_var.get())
+            check = GalaxyGraph.parse(self.catalog.graph.build())
+            check.set_goal_code(self.node_id, self.slot, code)
+            if check.build() == self.catalog.graph.build():
+                return
+        except (ValueError, IndexError) as exc:
+            messagebox.showerror('Raw objective code', str(exc))
+            return
+        if not messagebox.askyesno('Unclassified condition',
+                'The objective code is raw/unclassified. It may change how mission clear '
+                'conditions are evaluated in-game. Write this code?'):
+            return
+        self.checkpoint('edit raw objective code')
+        self.catalog.graph = check
+        self.refresh()
+        self._edited('Raw objective code updated. Validate mission conditions in melonDS.')
+
+    def add_goal(self):
+        if self.catalog is None or self.node_id is None:
+            return
+        try:
+            code = _number(self.goal_code_var.get())
+            koma_id = _number(self.koma_var.get())
+            trial = GalaxyGraph.parse(self.catalog.graph.build())
+            slot = trial.append_goal(self.node_id, code, koma_id=koma_id,
+                                     card_count=self.catalog.card_count)
+        except (ValueError, IndexError) as exc:
+            messagebox.showerror('Activate objective slot', str(exc))
+            return
+        if not messagebox.askyesno('Activate objective slot',
+                f'Activate fixed objective slot {slot + 1} with raw condition 0x{code:04X}? '
+                'Condition semantics are not fully decoded; test in melonDS before using a save.'):
+            return
+        self.checkpoint('activate fixed objective slot')
+        self.catalog.graph = trial
+        self.slot = slot
+        self.refresh()
+        self._edited(f'Activated objective slot {slot + 1} (no node IDs shifted). Apply, then Save.')
+
+    def remove_goal(self):
+        if self.catalog is None or self.node_id is None:
+            return
+        trial = GalaxyGraph.parse(self.catalog.graph.build())
+        try:
+            slot = trial.remove_last_goal(self.node_id)
+        except ValueError as exc:
+            messagebox.showerror('Deactivate objective slot', str(exc))
+            return
+        if not messagebox.askyesno('Deactivate last objective',
+                f'Deactivate objective slot {slot + 1}? Its 20 raw bytes will be retained, '
+                'and no other objective will be renumbered.'):
+            return
+        self.checkpoint('deactivate final objective slot')
+        self.catalog.graph = trial
+        self.slot = max(0, slot - 1) if slot else None
+        self.refresh()
+        self._edited('Last objective deactivated without erasing its bytes. Apply, then Save.')
 
     # ------------------------------------------------------------ undo / apply
     def snapshot(self):
