@@ -64,8 +64,11 @@ class LevelWorkspace(SuiteWorkspace):
         self.stage_tick = tk.IntVar(value=0)
         self.preview_objects = tk.BooleanVar(value=True)
         self.preview_items = tk.BooleanVar(value=True)
-        self.preview_pressure = tk.StringVar(value='')  # comma-separated floor IDs (held from t0)
-        self.preview_hits = tk.StringVar(value='')      # gimmick IDs struck at t0
+        self.preview_pressure = tk.StringVar(value='')  # 0@12-90, 1@200
+        self.preview_hits = tk.StringVar(value='')      # 2@60, 2@290
+        self.camera_x = tk.StringVar(value='0')
+        self.camera_y = tk.StringVar(value='0')
+        self.preview_palette = tk.BooleanVar(value=True)
         self._stage_mob = None
         self._stage_geo = None
         self._stage_frame = None
@@ -125,11 +128,20 @@ class LevelWorkspace(SuiteWorkspace):
         controls.pack(fill='x', padx=6, pady=4)
         ttk.Checkbutton(controls, text='Item candidates/spawns', variable=self.preview_items,
                         command=self._preview_changed).pack(side='left')
-        ttk.Label(controls, text='Pressure floors (IDs):').pack(side='left', padx=(12, 2))
+        ttk.Label(controls, text='Floor intervals:').pack(side='left', padx=(12, 2))
         ttk.Entry(controls, width=12, textvariable=self.preview_pressure).pack(side='left')
-        ttk.Label(controls, text='Hit switches (IDs):').pack(side='left', padx=(12, 2))
+        ttk.Label(controls, text='Hit timeline:').pack(side='left', padx=(12, 2))
         ttk.Entry(controls, width=12, textvariable=self.preview_hits).pack(side='left')
         ttk.Button(controls, text='Project', command=self._preview_changed).pack(side='left', padx=6)
+        camera_bar = ttk.Frame(sim)
+        camera_bar.pack(fill='x', padx=6)
+        ttk.Label(camera_bar, text='Camera X/Y:').pack(side='left', padx=(2, 2))
+        ttk.Entry(camera_bar, textvariable=self.camera_x, width=7).pack(side='left')
+        ttk.Entry(camera_bar, textvariable=self.camera_y, width=7).pack(side='left', padx=(3, 0))
+        ttk.Checkbutton(camera_bar, text='Palette preview', variable=self.preview_palette,
+                        command=self._preview_changed).pack(side='left', padx=8)
+        ttk.Label(camera_bar, text='Inputs: floor ID@start-end, hit ID@tick; bare IDs start at tick 0',
+                  style='Toolbar.TLabel').pack(side='left', padx=8)
         self.runtime_log = TextLog(sim)
         self.runtime_log.pack(fill='both', expand=True, padx=4, pady=4)
         self.problems = self.problems_page()
@@ -323,7 +335,18 @@ class LevelWorkspace(SuiteWorkspace):
             i = int(suffix)
             if self._stage_geo and i < len(self._stage_geo.layers):
                 record = self._stage_geo.layers[i]
-                return record.x, record.y
+                x, y = float(record.x), float(record.y)
+                for anim in record.anims:
+                    if anim.kind == 3:
+                        try:
+                            baseline = stagepreview.parallax_at(anim, 0, 0)
+                            result = stagepreview.parallax_at(
+                                anim, float(self.camera_x.get()), float(self.camera_y.get()))
+                            x += result[0] - baseline[0]
+                            y += result[1] - baseline[1]
+                        except (ValueError, tk.TclError):
+                            pass
+                return x, y
         except (ValueError, IndexError, AttributeError):
             pass
         return 0, 0
@@ -383,11 +406,16 @@ class LevelWorkspace(SuiteWorkspace):
         enabled = bool(c and n is not None and (self.missions.definition(n).data[0x7C] & 0x02))
         self._stage_frame = None
         if self._stage_mob is not None:
-            self._stage_frame = stagepreview.project(
-                self._stage_mob, self._stage_geo, tick, environment=enabled,
-                items_enabled=self.preview_items.get(),
-                occupied_floors=self._ids(self.preview_pressure.get()),
-                struck_gimmicks=self._ids(self.preview_hits.get()))
+            try:
+                floor_timeline = stagepreview.parse_occupancy(self.preview_pressure.get())
+                hits = stagepreview.parse_hits(self.preview_hits.get())
+                camera = (float(self.camera_x.get()), float(self.camera_y.get()))
+                self._stage_frame = stagepreview.project(
+                    self._stage_mob, self._stage_geo, tick, environment=enabled,
+                    items_enabled=self.preview_items.get(),
+                    occupied_history=floor_timeline, hit_history=hits, camera=camera)
+            except (ValueError, IndexError, tk.TclError) as exc:
+                self.app.status.set(f'Invalid stage preview scenario: {exc}')
         if hasattr(self, 'runtime_log'):
             self._fill_runtime()
         if redraw and hasattr(self, 'view'):
@@ -400,11 +428,15 @@ class LevelWorkspace(SuiteWorkspace):
             return
         lines = [f'Frame {f.tick}: runtime projection (not an emulator replay)',
                  f'{len(f.floors)} moving floors · {len(f.gimmicks)} gimmicks · {len(f.spawns)} shown spawns',
-                 'Trigger IDs are applied from tick 0; random choices use a fixed preview seed.']
+                 'Trigger timelines are manual inputs, not collision-derived battle events.']
         lines += [f'Floor {x.index}: ({x.x:.1f},{x.y:.1f}) mode {x.mode} '
                   f'{"solid" if x.solid else "absent"} — {x.note}' for x in f.floors]
         lines += [f'{x.kind} {x.index}: ({x.x:.0f},{x.y:.0f}) {x.label}' for x in f.spawns]
         lines += [f'BG {layer}: scripted scroll ({sx:+.2f},{sy:+.2f}) px' for layer,sx,sy in f.scroll]
+        lines += [f'BG {layer}: parallax displacement ({px:+.2f},{py:+.2f}) at '
+                  f'camera ({self.camera_x.get()}, {self.camera_y.get()})'
+                  for layer,px,py in f.parallax]
+        lines += [f'BG {layer}: {description}' for layer,description in f.palette]
         lines += list(f.notes)
         if self._stage_geo:
             lines += [f'Collision descriptors: {len(self._stage_geo.collision_records)} (read-only, geometry still unverified)',
