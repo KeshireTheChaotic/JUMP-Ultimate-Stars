@@ -67,6 +67,8 @@ class LevelWorkspace(SuiteWorkspace):
         self.preview_items = tk.BooleanVar(value=True)
         self.preview_pressure = tk.StringVar(value='')  # 0@12-90, 1@200
         self.preview_hits = tk.StringVar(value='')      # 2@60, 2@290
+        self.preview_wall_hits = tk.StringVar(value='')  # 0@120:20
+        self.preview_collisions = tk.BooleanVar(value=False)
         self.camera_x = tk.StringVar(value='0')
         self.camera_y = tk.StringVar(value='0')
         self.preview_palette = tk.BooleanVar(value=False)
@@ -142,6 +144,11 @@ class LevelWorkspace(SuiteWorkspace):
         ttk.Entry(camera_bar, textvariable=self.camera_y, width=7).pack(side='left', padx=(3, 0))
         ttk.Checkbutton(camera_bar, text='Palette preview (CPU)', variable=self.preview_palette,
                         command=self._preview_changed).pack(side='left', padx=8)
+        ttk.Checkbutton(camera_bar, text='Collision boxes', variable=self.preview_collisions,
+                        command=self._preview_changed).pack(side='left', padx=6)
+        ttk.Label(camera_bar, text='Wall damage:').pack(side='left', padx=(6, 2))
+        ttk.Entry(camera_bar, textvariable=self.preview_wall_hits, width=18).pack(side='left')
+        ttk.Label(camera_bar, text='ID@tick:damage', style='Toolbar.TLabel').pack(side='left', padx=4)
         ttk.Label(camera_bar, text='Inputs: floor ID@start-end, hit ID@tick; bare IDs start at tick 0',
                   style='Toolbar.TLabel').pack(side='left', padx=8)
         self.runtime_log = TextLog(sim)
@@ -424,11 +431,13 @@ class LevelWorkspace(SuiteWorkspace):
             try:
                 floor_timeline = stagepreview.parse_occupancy(self.preview_pressure.get())
                 hits = stagepreview.parse_hits(self.preview_hits.get())
+                wall_hits = stagepreview.parse_wall_hits(self.preview_wall_hits.get())
                 camera = (float(self.camera_x.get()), float(self.camera_y.get()))
                 self._stage_frame = stagepreview.project(
                     self._stage_mob, self._stage_geo, tick, environment=enabled,
                     items_enabled=self.preview_items.get(),
-                    occupied_history=floor_timeline, hit_history=hits, camera=camera)
+                    occupied_history=floor_timeline, hit_history=hits, camera=camera,
+                    wall_damage_history=wall_hits)
             except (ValueError, IndexError, tk.TclError) as exc:
                 self.app.status.set(f'Invalid stage preview scenario: {exc}')
         if hasattr(self, 'runtime_log'):
@@ -452,6 +461,9 @@ class LevelWorkspace(SuiteWorkspace):
                   f'camera ({self.camera_x.get()}, {self.camera_y.get()})'
                   for layer,px,py in f.parallax]
         lines += [f'BG {layer}: {description}' for layer,description in f.palette]
+        lines += [f'Wall {wall.index} / collision {wall.collision_index}: '
+                  f'{wall.hp}/{wall.initial_hp} HP, phase {wall.damage_phase}'
+                  for wall in f.walls]
         lines += list(f.notes)
         cfg = getattr(self._stage_mob, 'items', None)
         if self._item_prob is not None and cfg is not None:
@@ -535,6 +547,19 @@ class LevelWorkspace(SuiteWorkspace):
             vp.rect(ox + tx*8, oy + ty*8, ox + tx*8+8, oy + ty*8+8,
                     outline=T.WARN, width=2)
         f = self._stage_frame
+        if self._stage_geo and self.preview_collisions.get():
+            phases = {wall.index: wall.damage_phase for wall in f.walls} if f else {}
+            for coll in self._stage_geo.collision_boxes:
+                x0, y0, x1, y1 = coll.bounds
+                if x1 - x0 < 0.01 or y1 - y0 < 0.01:
+                    continue
+                damage_phase = phases.get(coll.wall_index, 0)
+                colour = ('#E75D5D' if damage_phase == 3 else '#F0A764'
+                          if coll.type_id == 2 else '#AC98D0')
+                vp.rect(x0, y0, x1, y1, outline=colour, width=1, dash=(3, 3))
+                if coll.wall_index >= 0:
+                    vp.text(x0, y0, f'C{coll.index}/W{coll.wall_index}',
+                            anchor='sw', fill=colour)
         if f and self.preview_objects.get():
             for floor in f.floors:
                 source = self._stage_mob.floors[floor.index]
