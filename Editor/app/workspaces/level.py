@@ -480,7 +480,7 @@ class LevelWorkspace(SuiteWorkspace):
             except (ValueError, IndexError, AttributeError) as exc:
                 lines.append(f'Item probability diagnostics: {exc}')
         if self._stage_geo:
-            lines += [f'Collision descriptors: {len(self._stage_geo.collision_records)} (read-only, geometry still unverified)',
+            lines += [f'Collision descriptors: {len(self._stage_geo.collision_records)} (rectangles decoded; contact response incomplete)',
                       f'Wall descriptors: {len(self._stage_geo.wall_records)} (read-only)']
         self.runtime_log.set_lines(lines)
 
