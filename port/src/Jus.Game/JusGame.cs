@@ -29,6 +29,7 @@ public sealed class JusGame
         Register(SceneId.Copyright, d => new Scenes.Ov00.CopyrightScene(this));
         Register(SceneId.Title, d => new Scenes.Ov00.TitleScene(this));
         Register(SceneId.Opening, d => new Scenes.Ov00.OpeningScene(this));
+        Register(SceneId.TopMenu, d => new Scenes.Ov00.TopMenuScene(this, d.D.MenuCursor));     // jus_Scene03_Create
     }
 
     public IPlatform Platform { get; }
@@ -41,7 +42,14 @@ public sealed class JusGame
     /// <summary>Register a translated scene. Unregistered scenes run as <see cref="PlaceholderScene"/>.</summary>
     public void Register(SceneId id, Func<SceneDirector, ISceneTask> factory) => _scenes[id] = factory;
 
-    public void Start() => Director.Init();
+    /// <summary>Boot: load the save (RecordLoad, via the boot autosave/load task in FUN_0206df9c), then
+    /// start the scene director.</summary>
+    public void Start()
+    {
+        var result = Globals.Save.Load(Platform.Save);
+        Platform.Log($"save: {result} (progress flags 0x{Globals.Save.ProgressFlags:X}, play {Globals.Save.PlayFrames / 60} s)");
+        Director.Init();
+    }
 
     private bool _resetRequested;
 

@@ -24,9 +24,10 @@ def geometry():
 
 class StageOverlayTests(unittest.TestCase):
     def test_full_stage_stem_bg_lookup_no_guess(self):
-        self.assertEqual(stageoverlay.bg_slot('bg_cm_02', 'bg_cm_02_00'), 0)
+        # resource ids: _02 = 0x400000 (slot 0), _01 = 0x400001, _00 = 0x400002, _sud = 0x400003
+        self.assertEqual(stageoverlay.bg_slot('bg_cm_02', 'bg_cm_02_00'), 2)
         self.assertEqual(stageoverlay.bg_slot('bg_cm_02', 'bg_cm_02_01'), 1)
-        self.assertEqual(stageoverlay.bg_slot('bg_cm_02', 'bg_cm_02_02'), 2)
+        self.assertEqual(stageoverlay.bg_slot('bg_cm_02', 'bg_cm_02_02'), 0)
         self.assertEqual(stageoverlay.bg_slot('bg_cm_02', 'bg_cm_02_sud'), 0)
         self.assertIsNone(stageoverlay.bg_slot('bg_cm_02', 'bg_cm_03_02'))
         self.assertIsNone(stageoverlay.bg_slot('bg_cm_02', 'bg_cm_02_floor_00'))
@@ -36,10 +37,21 @@ class StageOverlayTests(unittest.TestCase):
         g = geometry()
         names = ['bg_cm_02_00', 'bg_cm_02_02', 'bg_cm_02_01']
         layers = [SimpleNamespace(name=n) for n in names]
+        # back → front by descending priority: slot 1 (9), slot 0 (4), slot 2 (2)
         self.assertEqual([x.name for x in stageoverlay.bg_draw_order(layers, g, 'bg_cm_02')],
-                         ['bg_cm_02_01', 'bg_cm_02_00', 'bg_cm_02_02'])
+                         ['bg_cm_02_01', 'bg_cm_02_02', 'bg_cm_02_00'])
         self.assertEqual([(x.x, x.y, bool(x.enabled)) for x in g.layers],
                          [(-192,0,True),(0,24,True),(32,8,False)])
+
+    def test_priority_tie_puts_higher_bg_number_behind(self):
+        b = bytearray(bin_fixture())
+        for i in range(3):
+            b[24 + 12 * i + 6] = 2           # every slot at priority 2
+        g = stagephysics.parse_stage_bin(bytes(b))
+        layers = [SimpleNamespace(name=n) for n in ('bg_hh_02', 'bg_hh_00', 'bg_hh_01')]
+        # slot 0 (BG1, play layer) is in front of slot 1 (BG2) in front of slot 2 (BG3)
+        self.assertEqual([x.name for x in stageoverlay.bg_draw_order(layers, g, 'bg_hh')],
+                         ['bg_hh_00', 'bg_hh_01', 'bg_hh_02'])
 
     def test_path_waypoints_are_absolute_and_waits_have_no_line(self):
         mob = stagephysics.parse_mob(mob_fixture())

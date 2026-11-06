@@ -103,6 +103,22 @@ public sealed class StageWork
 /// <summary>The parts of the save image (0x020B02B8, 0x7558 bytes) the scene flow touches.</summary>
 public sealed class SaveWork
 {
+    /// <summary>The whole loaded image (<see cref="SaveImage"/>); later scenes read decks etc. from it.</summary>
+    public SaveImage Image { get; } = new();
+    public SaveLoadResult LoadResult { get; private set; } = SaveLoadResult.NoData;
+
+    /// <summary>RecordLoad at boot: fill the image and the fields mirrored here.</summary>
+    public SaveLoadResult Load(ISaveStorage storage)
+    {
+        LoadResult = Image.Load(storage);
+        if (LoadResult is SaveLoadResult.Ok or SaveLoadResult.OneCopyBad)
+        {
+            ProgressFlags = Image.ProgressFlags;
+            PlayFrames = Image.PlayFrames;
+        }
+        return LoadResult;
+    }
+
     /// <summary>Save +0x8D8 (0x020B0B90): progress/event flag bits.</summary>
     public uint ProgressFlags;
     /// <summary>0x020B02AC: save data changed; an autosave runs at the next scene change.</summary>

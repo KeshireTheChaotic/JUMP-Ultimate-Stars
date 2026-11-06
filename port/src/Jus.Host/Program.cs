@@ -222,7 +222,16 @@ internal sealed record Options(long? Frames, string? Snapshot, Dictionary<long, 
         return new(frames, snap, presses, at, rom);
     }
 
-    public PadButtons Injected(long frame) => Presses.GetValueOrDefault(frame);
+    /// <summary>Frames an injected press is held: scenes such as the Opening sample the pad once per
+    /// movie frame (30 fps), so a 1-frame press could fall between two samples.</summary>
+    public const int HoldFrames = 4;
+
+    public PadButtons Injected(long frame)
+    {
+        var held = PadButtons.None;
+        for (long f = frame - HoldFrames + 1; f <= frame; f++) held |= Presses.GetValueOrDefault(f);
+        return held;
+    }
 }
 
 /// <summary>Minimal 32-bit BMP writer for snapshots.</summary>

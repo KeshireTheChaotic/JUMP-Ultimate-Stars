@@ -24,8 +24,10 @@ def main():
         path = root/'stage/stage.aar'
         a = alar.open_nested(path.read_bytes())
         b = bytearray(bin_fixture())
-        struct.pack_into('<hh', b, 24, -24, 4)
-        b[24 + 9] = 1
+        # The fixture's only layer is bg_aa_00 = resource 0x400002 = BG record 2
+        # (record i draws 0x400000+i; bg_xx_02 is record 0).
+        struct.pack_into('<hh', b, 24 + 2 * 12, -24, 4)
+        b[24 + 2 * 12 + 9] = 1
         a.add(alar.Entry('stage/bg_aa.bin', bytes(b)))
         a.add(alar.Entry('stage/bg_aa.mob', mob_fixture()))
         path.write_bytes(a.build())

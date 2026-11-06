@@ -86,11 +86,18 @@ class _UnitInfo:
     path: str
     dir: str
     members: dict[str, bytes] = field(default_factory=dict)   # name -> payload
+    ids: dict[str, int] = field(default_factory=dict)         # name -> 24-bit resource id
 
 
 def export_package(root: DataRoot, sources: list[str], out_dir: Path | str, *, name: str,
-                   kind: str = 'custom', zip_output: bool = False, progress=None) -> Path:
-    """Export ``sources`` (archive or member resource paths) to a package folder."""
+                   kind: str = 'custom', zip_output: bool = False, progress=None,
+                   effects: dict | None = None) -> Path:
+    """Export ``sources`` (archive or member resource paths) to a package folder.
+
+    ``effects`` (from :func:`effect_dependencies`) adds ``effects.json``: the
+    GenerateID spawn graph with every effect move linked to the exported unit
+    and to the sprite folders of the textures it uses.
+    """
     out = Path(out_dir)
     if out.exists() and any(out.iterdir()):
         raise FileExistsError(f'{out} is not empty')
@@ -115,6 +122,8 @@ def export_package(root: DataRoot, sources: list[str], out_dir: Path | str, *, n
         if progress:
             progress(f'exported {src}')
     _export_sprites(units, out, manifest, progress)
+    if effects is not None:
+        _write_effects(out, manifest, units, effects)
     _write_json(out / 'package.json', manifest)
     _write_readme(out, manifest)
     if zip_output:
@@ -142,6 +151,7 @@ def _export_unit(root: DataRoot, path: str, out: Path, manifest: dict) -> _UnitI
     for e in arc.entries:
         payload = e.payload()
         unit.members[e.name] = payload
+        unit.ids[e.name] = e.resource_id
         mk = member_kind(e.name, payload)
         raw_rel = f'raw/{_safe(e.name)}'
         (base / raw_rel).parent.mkdir(parents=True, exist_ok=True)
@@ -224,6 +234,7 @@ def _export_sprites(units: list[_UnitInfo], out: Path, manifest: dict, progress=
                 manifest['warnings'].append(f'{unit.path}|{name}: {exc}')
                 continue
             manifest['sprites'].append({'dir': sdir, 'dstx': {'unit': unit.dir, 'member': name},
+                                        'resource_id': _hex(unit.ids.get(name, 0), 6),
                                         'dsig': src_ref, 'mode': _hex(g.mode if g.version == 1 else 0x40, 2)})
             if progress:
                 progress(f'sprite {name}: {len(d.frames)} frames')
@@ -654,9 +665,123 @@ def character_sources(root: DataRoot, char_id: str, include_tables: bool = True,
     return out
 
 
-def export_character(root: DataRoot, char_id: str, out_dir, **kw) -> Path:
-    return export_package(root, character_sources(root, char_id), out_dir,
-                          name=char_id, kind='character', **kw)
+def _amt_tables(root: DataRoot, archives: list[str]) -> list[tuple[str, almt.AlmtFile]]:
+    out = []
+    for path in archives:
+        if not path.lower().endswith('.aar'):
+            continue
+        try:
+            arc = root.archive(path)
+        except (KeyError, ValueError, OSError):
+            continue
+        for e in arc.entries:
+            if e.ext == '.amt':
+                try:
+                    out.append((join(path, e.name), almt.parse(e.payload())))
+                except ValueError:
+                    continue
+    return out
+
+
+def _texture_ids(move: almt.Move) -> set[int]:
+    ids = set()
+    for node in move.nodes:
+        tr = node.track('TextureID') if node else None
+        if tr is None or tr.opaque:
+            continue
+        for v in ([k.value for k in tr.keys] if tr.keyed else [tr.value]):
+            if isinstance(v, int) and v:
+                ids.add(v)
+    return ids
+
+
+def effect_dependencies(root: DataRoot, sources: list[str]) -> dict:
+    """GenerateID effects reachable from the moves in ``sources`` (nested spawns included).
+
+    Resolution is the editor's: move ids are looked up in the sources' own
+    ``.amt`` tables first, then in ``efc/*.aar`` (spawns.build_catalog; on the
+    shipped data every GenerateID resolves there).  Returns the spawn edges,
+    the resolved effect moves with their TextureIDs, missing ids, and the
+    effect archives outside ``sources`` that must be exported with them.
+    """
+    from . import spawns        # local import: spawns imports nothing from package
+    own = _amt_tables(root, sources)
+    common = _amt_tables(root, root.effect_archives())
+    catalog = spawns.build_catalog(own + common)
+    own_paths = {p for p, _ in own}
+    queue = [(path, m, table.node_names) for path, table in own for m in table.moves]
+    edges, effects, missing = [], {}, set()
+    seen_moves = {(p, m.id) for p, m, _ in queue}
+    while queue:
+        path, move, names = queue.pop(0)
+        for sp in spawns.keyed_spawns(move, names):
+            hit = catalog.get(sp.effect_id)
+            edges.append({'from_table': path, 'from_move': _hex(move.id, 6), 'node': sp.node,
+                          'key': sp.key_index, 'tick': sp.tick, 'effect': _hex(sp.effect_id, 6),
+                          'resolved': hit[2] if hit else None})
+            if hit is None:
+                missing.add(sp.effect_id)
+                continue
+            emove, enames, epath = hit
+            if sp.effect_id not in effects:
+                effects[sp.effect_id] = {'id': _hex(sp.effect_id, 6), 'table': epath,
+                                         'archive': join(*split(epath)[:-1]),
+                                         'duration': emove.duration, 'nodes': list(enames),
+                                         'textures': sorted(_hex(t, 6) for t in _texture_ids(emove)),
+                                         'shared': epath not in own_paths}
+            if (epath, emove.id) not in seen_moves:
+                seen_moves.add((epath, emove.id))
+                queue.append((epath, emove, enames))
+    extra = sorted({e['archive'] for e in effects.values()} - set(sources))
+    return {'spawns': edges, 'effects': [effects[k] for k in sorted(effects)],
+            'missing': [_hex(m, 6) for m in sorted(missing)], 'archives': extra}
+
+
+def _write_effects(out: Path, manifest: dict, units: list[_UnitInfo], effects: dict) -> None:
+    """effects.json: spawn graph + effect moves linked to units and sprite folders."""
+    unit_dir = {u.path: u.dir for u in units}
+    by_res: dict[int, list[tuple[str, str]]] = {}
+    for s in manifest['sprites']:
+        by_res.setdefault(_int(s['resource_id']), []).append((s['dstx']['unit'], s['dir']))
+
+    def sprites_for(tex: int, udir: str | None) -> list[str]:
+        # The effect's own archive first; otherwise any loaded archive of the
+        # package (e.g. a form archive drawing the base archive's texture).
+        hits = by_res.get(tex, [])
+        own = [d for u, d in hits if u == udir]
+        return own or [d for _, d in hits]
+
+    rows = []
+    for e in effects['effects']:
+        udir = unit_dir.get(e['archive'])
+        links = {t: sprites_for(_int(t), udir) for t in e['textures']}
+        rows.append({**e, 'unit': udir, 'sprites': links})
+        if udir is None:
+            manifest['warnings'].append(f'effect {e["id"]}: archive {e["archive"]} not exported')
+        for t, dirs in links.items():
+            if not dirs:
+                manifest['warnings'].append(f'effect {e["id"]}: texture {t} has no exported sprite')
+    for m in effects['missing']:
+        manifest['warnings'].append(f'GenerateID {m}: no ALMT move in the character or efc/*.aar')
+    _write_json(out / 'effects.json', {
+        'notes': 'GenerateID spawn graph (nested spawns followed). "resolved" is the move table '
+                 'the id resolves to (own tables first, then efc/*.aar). Effect archives outside '
+                 'the character are exported as units too; "sprites" maps each TextureID to the '
+                 'exported sprite folders with that resource id.',
+        'spawns': effects['spawns'], 'effects': rows, 'missing': effects['missing']})
+    manifest['effects'] = {'file': 'effects.json', 'count': len(rows),
+                           'spawns': len(effects['spawns']), 'archives': effects['archives']}
+
+
+def export_character(root: DataRoot, char_id: str, out_dir, *, include_effects: bool = True, **kw) -> Path:
+    """Whole character: animation/image archives, tables, window, and (by default)
+    every effect its moves spawn, with the shared ``efc/*.aar`` archives they live in."""
+    sources = character_sources(root, char_id)
+    effects = None
+    if include_effects:
+        effects = effect_dependencies(root, sources)
+        sources = sources + effects['archives']
+    return export_package(root, sources, out_dir, name=char_id, kind='character', effects=effects, **kw)
 
 
 def export_effect(root: DataRoot, archive_path: str, out_dir, **kw) -> Path:

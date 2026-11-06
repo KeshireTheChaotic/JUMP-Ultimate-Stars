@@ -8,10 +8,11 @@ namespace Jus.Game.Scenes.Ov00;
 /// 0x02151470 (Start / A / touch: result 0) and 0x0215149C (B: result 1), 0x02150F48 (leave).
 ///
 /// Translated: the eight scrolling "space" maps (four per screen, two BG layers each, tasks
-/// 0x021512E8 / 0x021513B0), their palette animations (CommonPaletteAnime_Load), the fades, input
-/// and the result. Not yet: the sprite actors (logo 0x710000/0x710002, start prompt 0x700000,
-/// effects 0x720000/0x720001: DSTX textures + animation sets in the nested archives), the logo
-/// glow palette animation that runs on the logo's palette, music, and display blending.</summary>
+/// 0x021512E8 / 0x021513B0), their palette animations (CommonPaletteAnime_Load), the logo actor
+/// (motion 0x710000 build-up, then the 0x710001 glint loop) and subtitle 0x710002 on the top screen,
+/// the start prompt 0x700000 with its glow (CommonPaletteAnime kind 5) on the bottom screen, the
+/// effect glows 0x720000/0x720001 behind the logo (opacity, scale tween, title_effect.bin), the
+/// fades, input and the result. Not yet: music, the display's own blend settings (+0x8E8..).</summary>
 public sealed class TitleScene : ISceneTask
 {
     /// <summary>One space map widget: 20.12 fixed-point vertical position, scrolled 0.5 px per frame.</summary>
@@ -49,6 +50,17 @@ public sealed class TitleScene : ISceneTask
 
     private readonly JusGame _game;
     private readonly SpaceMap[] _maps;
+    private readonly SpriteActor _logo, _copy, _prompt;   // work +0x38, +0x3C, +0x40
+    private readonly PaletteAnimation _startGlow;         // work +0x50
+    private readonly SpriteActor _fx1, _fx2;              // work +0x44, +0x48
+    private readonly List<PaletteAnimation> _fxGlow;      // work +0x74
+    private int _fxTween = -1;                            // "Scale" controller frame, -1 = not running
+
+    /// <summary>The effects' "Scale" controller (jus_TagIPMV via ALControllerImp::Create(.., 0x494C,
+    /// target, 4, 0, 1)): from the current scale 1.2 to the target vector (1, 1, 1) built in the
+    /// static initializer 0x0208C5E4, over 4 frames, once (flags 0xB). Interpolator 0x494C is taken
+    /// as linear (its curve function is not read yet).</summary>
+    public const int FxTweenFrames = 4;
     private readonly TimeSpan _start;        // work +0x78 (OS tick at creation)
     private Phase _phase = Phase.WaitFadeIn;
     private int _result;                     // work +0x82
@@ -79,7 +91,26 @@ public sealed class TitleScene : ISceneTask
             Map("space_top00", true, 2, 0x100000, false, "space_top00"),
             Map("space_top01", false, 3, 0x200000, false, "space_under00"),
         ];
-        game.Platform.Log("Title: sprite actors (logo, start prompt, effects) are not rendered yet (DSTX format)");
+        // Sprite actors (FUN_02151238(motion, texture, display, position)); positions are 20.12 in the original.
+        res.Mount("title/logo_copy.aar");
+        res.Mount("title/start.aar");
+        var logoBank = new DstxBank(res.Read(0x710000, (byte)'@'));
+        var logoMotions = new AlmtMotionSet(res.Read(0x710000, (byte)'A'));
+        _logo = new SpriteActor(logoBank, logoMotions, 0x710000) { X = 128, Y = 72 };        // top, (0x80000, 0x48000)
+        _copy = new SpriteActor(logoBank, logoMotions, 0x710002) { X = 128, Y = 168 };       // top, (0x80000, 0xA8000)
+        _prompt = new SpriteActor(new DstxBank(res.Read(0x700000, (byte)'@')),
+            new AlmtMotionSet(res.Read(0x700000, (byte)'A')), 0x700000) { X = 128, Y = 96 }; // bottom, (0x80000, 0x60000)
+        // CommonPaletteAnime_Create(start palette, 0x11, 0xF, 5, 0x80): the start prompt's glow
+        _startGlow = new PaletteAnimation(_prompt.Bank.Texture, 0x11, 0xF, 5) { P16 = 0x8DF, P18 = 0, P1A = 0x1E, Dir1B = 1, Flags1C = 1 };
+        // Effect glows around the logo (display 0x0203B404, top): one bank, cells 0 and 1, opacity
+        // 0.9 / 0.8 (vfunc 0xF8 with 0xE66 / 0xCCC), scale 1.2 (FUN_020235dc 0x1333), hidden until
+        // the logo's build-up ends. title_effect.bin animates their shared palette.
+        res.Mount("title/title_effect.aar");
+        var fxBank = new DstxBank(res.Read(0x720000, (byte)'@'));
+        var fxMotions = new AlmtMotionSet(res.Read(0x720000, (byte)'A'));
+        _fx1 = new SpriteActor(fxBank, fxMotions, 0x720000) { X = 128, Y = 72, Alpha = 0xE66 / 4096.0, Scale = 0x1333 / 4096.0, Visible = false };
+        _fx2 = new SpriteActor(fxBank, fxMotions, 0x720001) { X = 128, Y = 72, Alpha = 0xCCC / 4096.0, Scale = 0x1333 / 4096.0, Visible = false };
+        _fxGlow = PaletteAnimation.Load(fxBank.Texture, res.Read("title/title_effect.bin"));
         game.Platform.Sound.PlayMusic(0, 0);                                    // FUN_020734e0, FUN_0207361c(0, 0)
         _start = game.Platform.Clock;                                           // FUN_02054b44 → +0x78
         game.Fade.Start(FadeKind.FromBlack, 1);                                 // FUN_02073ebc(2, 1)
@@ -97,15 +128,24 @@ public sealed class TitleScene : ISceneTask
             m.Scroll();
             foreach (var a in m.Anims) a.Update();
         }
+        _startGlow.Update();
         switch (_phase)
         {
             case Phase.WaitFadeIn:                                              // 0x02150B20
-                if (_game.Fade.Step()) _phase = Phase.WaitLogo;                 // widgets enabled (0x021B65CC)
+                if (_game.Fade.Step())
+                {
+                    _logo.SetMotion(0x710000);                                  // restart the logo motion (vfunc 0x6C)
+                    _phase = Phase.WaitLogo;                                    // widgets enabled (0x021B65CC)
+                }
                 break;
             case Phase.WaitLogo:                                                // 0x02150B74
-                // The original waits for the logo actor's animation to end, then switches it to
-                // animation 0x710001 and shows the pulsing start prompt. Without actors this is immediate.
-                _phase = Phase.Ready;
+                if (_logo.AtEnd)
+                {
+                    _logo.SetMotion(0x710001);                                  // the logo's looping glint
+                    _fx1.Visible = _fx2.Visible = true;                         // vfunc 0xD8(1)
+                    _fxTween = 0;                                               // attach the "Scale" controllers
+                    _phase = Phase.Ready;
+                }
                 break;
             case Phase.Ready:                                                   // 0x02150DA4
                 if (_game.Platform.Clock - _start >= IdleTimeout) Press(1, playEffect: false);
@@ -120,8 +160,26 @@ public sealed class TitleScene : ISceneTask
                 break;
         }
         if (_phase is Phase.WaitLogo or Phase.Ready) HandleInput();
+        _logo.Update();
+        _copy.Update();
+        _prompt.Update();
+        _fx1.Update();
+        _fx2.Update();
+        foreach (var a in _fxGlow) a.Update();
+        if (_fxTween >= 0 && _fxTween < FxTweenFrames)
+        {
+            _fxTween++;
+            double s = 0x1333 / 4096.0 + (1.0 - 0x1333 / 4096.0) * _fxTween / FxTweenFrames;
+            _fx1.Scale = _fx2.Scale = s;
+        }
         Draw();
     }
+
+    /// <summary>For tests: the effects' visibility and scale.</summary>
+    public (bool Visible, double Scale) Effects => (_fx1.Visible, _fx1.Scale);
+
+    /// <summary>For tests: the logo's current motion and cell.</summary>
+    public (int Motion, int Cell) Logo => (_logo.MotionId, _logo.Cell);
 
     /// <summary>The three widgets: Start (0x8000, with the touch box ±88 x ±24 around the bottom
     /// screen's centre), A (0x10) → 0x02151470; B (0x20) → 0x0215149C.</summary>
@@ -147,6 +205,11 @@ public sealed class TitleScene : ISceneTask
     {
         DrawScreen(_game.Platform.TopScreen, 0);
         DrawScreen(_game.Platform.BottomScreen, 4);
+        _fx1.Draw(_game.Platform.TopScreen);                                   // behind the logo
+        _fx2.Draw(_game.Platform.TopScreen);
+        _logo.Draw(_game.Platform.TopScreen);
+        _copy.Draw(_game.Platform.TopScreen);
+        _prompt.Draw(_game.Platform.BottomScreen);
     }
 
     /// <summary>BG3 below BG2 (equal priority: the lower BG number is in front).</summary>

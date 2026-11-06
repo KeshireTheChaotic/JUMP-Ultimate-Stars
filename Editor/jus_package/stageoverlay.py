@@ -35,27 +35,34 @@ class PathStep:
     count: int | None = None
 
 
-def bg_slot(stage_stem: str, layer_name: str) -> int | None:
-    """Map the *full* stem to the three .bin BG slots.
+#: .bin BG record i loads ALTM resource 0x400000+i and tiles 0x400100+i
+#: (ARM9 BattleMapBG_Create 02083FCC → FUN_02084F10).  In every shipped stage
+#: archive those ids belong to the *reversed* file suffixes:
+#:   0x400000 bg_xx_02.atm (the 1408×1024 play layer), 0x400001 bg_xx_01.atm,
+#:   0x400002 bg_xx_00.atm, 0x400003 bg_xx_sud.atm (slot-0 substitute that
+#:   reuses tiles 0x400100 = bg_xx_02.dtx).
+SUFFIX_SLOT = {'_02': 0, '_01': 1, '_00': 2, '_sud': 0}
 
-    ``bg_cm_02_01`` is slot 1, *not* slot 1 because of a loose trailing
-    suffix on an unrelated archive.  The sudden-death resource 0x400003
-    substitutes BG slot 0 at runtime (ARM9 02083FCC).
+
+def bg_slot(stage_stem: str, layer_name: str) -> int | None:
+    """BG record index for a stage ALTM layer, from its resource id (see SUFFIX_SLOT).
+
+    The whole stem must match, so ``bg_cm_02_01`` of stem ``bg_cm_02`` is slot 1
+    and an unrelated archive with a similar suffix is not mapped.
     """
-    if layer_name == stage_stem + '_sud':
-        return 0
-    for i in range(3):
-        if layer_name == f'{stage_stem}_{i:02d}':
-            return i
-    return None
+    if not layer_name.startswith(stage_stem):
+        return None
+    return SUFFIX_SLOT.get(layer_name[len(stage_stem):])
 
 
 def bg_draw_order(layers, geometry, stage_stem: str):
-    """High draw-link priorities are submitted first (ARM9 02084EEC).
+    """Back-to-front paint order of the stage BG layers.
 
-    Tk canvas images are painted in list order, hence high priorities must
-    be emitted earlier, behind low-priority images, like the runtime's
-    high-first traversal.  In a missing .bin preview, preserve archive order.
+    Record +6 is the BG priority (BattleMapBG_SetPriority changes it at run
+    time, FUN_02084EEC): a larger value is further back.  On a tie the DS draws
+    the lower BG number in front; slot i is BG i+1 (FUN_0203B414(i + 1)), so the
+    higher slot goes behind.  Tk paints in list order → emit back layers first.
+    Without a .bin, archive order is kept.
     """
     if geometry is None:
         return list(layers)
@@ -63,7 +70,7 @@ def bg_draw_order(layers, geometry, stage_stem: str):
         index = bg_slot(stage_stem, layer.name)
         if index is None or index >= len(geometry.layers):
             return (-1, 0)
-        return geometry.layers[index].draw_priority, -index
+        return geometry.layers[index].draw_priority, index
     return sorted(layers, key=key, reverse=True)
 
 

@@ -419,13 +419,72 @@ class Conveyor:
         return s16(self.raw, 0)
 
 
+#: Collider type (descriptor +0x14 = grid cell +2), traced in overlay 6.
+#:
+#: Character-vs-stage movement is the grid sweep FUN_0216220C (cells of the
+#: 0x8000-byte grid, 64×64 × 8 bytes {u16 collider, u8 type, u8 off, u16 x, u16 y}):
+#: * a cell whose ``off`` byte is set is never collided (empty, 7, 11 on all 36 stages);
+#: * type 7 ends the sweep in that direction;
+#: * moving sideways or down hits every other cell, except that types with
+#:   ``0x02171558[type]`` are ignored entirely by head points and, when the
+#:   caller asks (param 7), by foot points: one-way platforms;
+#: * moving up hits only types with ``0x02171528[type]`` (ceilings).
+#: ``0x02171548[type]`` (wall break, FUN_02167A20) marks the collider above a
+#: broken wall as exposed (+0x15 |= 4).
+#: Fields: label, solid_sides, solid_top, solid_below, one_way, in_grid, note, evidence.
+COLLIDER_TYPES = {
+    0: ('Empty', False, False, False, False, True, 'no collider (grid filler)', 'Direct'),
+    1: ('Ground', True, True, False, False, True,
+        'solid floor and sides; not a ceiling (jumping up into it does not bump)', 'Direct'),
+    2: ('Breakable wall', True, True, True, False, True,
+        'solid block with a wall record (+0x16): HP, break animation, exposes neighbours', 'Direct'),
+    3: ('Solid block', True, True, True, False, True,
+        'solid in every direction (e.g. the stage ceiling band)', 'Direct'),
+    4: ('One-way platform', False, True, False, True, True,
+        'stand on it; pass through from below or drop through', 'Direct'),
+    5: ('One-way platform (wall-linked)', False, True, False, True, True,
+        'one-way platform tied to a breakable wall (+0x16); exposed when it breaks', 'Direct'),
+    6: ('One-way platform (conveyor)', False, True, False, True, True,
+        'one-way platform used by .bin conveyors (only bg_bb / bg_old_bu)', 'Direct'),
+    7: ('Lower out-of-play zone', False, False, False, False, True,
+        'cells flagged off, ends the sweep; placed below the playfield', 'Inferred'),
+    8: ('Left boundary wall', True, True, True, False, True, 'solid; the stage\'s left edge column', 'Direct'),
+    9: ('Right boundary wall', True, True, True, False, True, 'solid; the stage\'s right edge column', 'Direct'),
+    10: ('Bottom boundary', True, True, True, False, True, 'solid strip at the bottom edge', 'Direct'),
+    11: ('Side out-of-play zone', False, False, False, False, True,
+         'cells flagged off; placed left/right of the camera area', 'Inferred'),
+    12: ('Wall-top platform', False, True, False, True, False,
+         'one-way, wall-linked (+0x16), never written to the grid; its consumer is not traced', 'Inferred'),
+}
+
+#: descriptor +0x15 runtime/authoring bits
+COLLIDER_FLAGS = {
+    0x01: 'left neighbour exposed (FUN_02167A20)',
+    0x02: 'right neighbour exposed (FUN_02167A20)',
+    0x04: 'surface off: broken wall / blink or crumble floor (FUN_02167A20, 0x02086178, 0x02086364)',
+    0x08: 'gimmick collider: cleared at load unless definition +0x7C bit 1 (BattleMapInit)',
+}
+
+
+def collider_type_name(type_id: int) -> str:
+    return COLLIDER_TYPES.get(type_id, (f'type {type_id}',))[0]
+
+
+@dataclass(frozen=True)
+class GridCell:
+    index: int
+    collider: int            # 0xFFFF = none
+    type_id: int
+    off: int                 # nonzero: the sweep never collides with this cell
+    x: int
+    y: int
+
+
 @dataclass(frozen=True)
 class CollisionBox:
-    """Overlay-6 wall/damage consumer: +0/+4 position, +8/+C extents (24.8).
-
-    +0x10/+0x12 are neighbor links, +0x14 runtime type and +0x16 wall ID.
-    Remaining flags must stay raw until all consumers are classified.
-    """
+    """Stage collider: +0/+4 position, +8/+C extents (24.8), +0x10/+0x12 left/right
+    neighbour links, +0x14 type (COLLIDER_TYPES), +0x15 flags (COLLIDER_FLAGS),
+    +0x16 wall record (−1 = none)."""
     index: int
     x: float
     y: float
@@ -439,6 +498,23 @@ class CollisionBox:
     def bounds(self):
         x2, y2 = self.x + self.width, self.y + self.height
         return min(self.x, x2), min(self.y, y2), max(self.x, x2), max(self.y, y2)
+
+    @property
+    def label(self) -> str:
+        return collider_type_name(self.type_id)
+
+    @property
+    def flags(self) -> int:
+        return self.raw[0x15]
+
+    @property
+    def flag_names(self) -> list[str]:
+        return [n for bit, n in COLLIDER_FLAGS.items() if self.flags & bit] + (
+            [f'other 0x{self.flags & ~0x0F:02X}'] if self.flags & ~0x0F else [])
+
+    @property
+    def neighbours(self) -> tuple[int, int]:
+        return s16(self.raw, 0x10), s16(self.raw, 0x12)
 
 
 @dataclass(frozen=True)
@@ -461,6 +537,12 @@ class StageGeometry:
     aux_data: bytes
     layers: tuple[BgLayer, ...] = ()
     conveyors: tuple[Conveyor, ...] = ()
+
+    @property
+    def grid_cells(self) -> tuple[GridCell, ...]:
+        """The 64×64 collision grid (16 px cells) the movement sweep reads."""
+        return tuple(GridCell(i, *struct.unpack_from('<HBBHH', self.grid_data, 8 * i))
+                     for i in range(len(self.grid_data) // 8))
 
     @property
     def collision_boxes(self) -> tuple[CollisionBox, ...]:

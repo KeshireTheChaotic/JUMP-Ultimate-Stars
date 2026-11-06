@@ -53,7 +53,8 @@ public sealed class DsigImage
     {
         if (data.Length < 12 || BinaryPrimitives.ReadUInt32LittleEndian(data) != 0x47495344) throw new InvalidDataException("not DSIG");
         Format = data[5];
-        if (Format is not (0x10 or 0x11)) throw new NotSupportedException($"DSIG format 0x{Format:X2}");
+        // 0x20: 4bpp as well (0.5 bytes per pixel; used for the translucent Title effect sprites)
+        if (Format is not (0x10 or 0x11 or 0x20)) throw new NotSupportedException($"DSIG format 0x{Format:X2}");
         int pals = BinaryPrimitives.ReadUInt16LittleEndian(data.AsSpan(6));
         Width = BinaryPrimitives.ReadUInt16LittleEndian(data.AsSpan(8));
         Height = BinaryPrimitives.ReadUInt16LittleEndian(data.AsSpan(10));
@@ -81,9 +82,25 @@ public sealed class DsigImage
         return 0xFF000000 | r << 16 | g << 8 | b;
     }
 
+    /// <summary>Format 0x20 is a linear (texture-style) 4bpp bitmap, row-major, not 8x8 tiles.</summary>
+    public bool IsLinear => Format == 0x20;
+
+    /// <summary>Colour index at bitmap position (x, y) of a linear 4bpp image (low nibble = even x).</summary>
+    public int PixelAt(int x, int y)
+    {
+        if (x < 0 || y < 0 || x >= Width || y >= Height) return 0;
+        int o = (y * Width + x) >> 1;
+        return o < Tiles.Length ? (Tiles[o] >> ((x & 1) * 4)) & 0xF : 0;
+    }
+
     /// <summary>Colour index of pixel (x, y) of tile <paramref name="tile"/>.</summary>
     public int Pixel(int tile, int x, int y)
     {
+        if (IsLinear)
+        {
+            int cols = Width / 8;
+            return PixelAt((tile % cols) * 8 + x, (tile / cols) * 8 + y);
+        }
         if (Is8Bpp)
         {
             int p = tile * 64 + y * 8 + x;

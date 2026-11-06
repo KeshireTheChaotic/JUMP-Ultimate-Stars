@@ -28,11 +28,14 @@ def embedded_dsig(blob: bytes) -> dsigmod.DsigFile | None:
 
 
 def _palette_rgba(dsig: dsigmod.DsigFile) -> list[tuple[int, int, int, int]]:
-    out = []
-    for bank in dsig.palettes:
-        for i, v in enumerate(bank):
-            out.append(dsigmod.rgb555_to_rgb(v) + ((0,) if i == 0 else (255,)))
-    return out
+    """Opaque colours; transparency is decided per pixel in :func:`render`.
+
+    DS text BGs: 4bpp tiles are transparent where the 4-bit colour is 0 (in any
+    bank); 8bpp tiles index one 256-colour palette and only index 0 is
+    transparent.  Marking colour 0 of every 16-colour bank transparent here made
+    8bpp pixels with indices 16, 32, … 240 vanish (holes in e.g. bg_op_00).
+    """
+    return [dsigmod.rgb555_to_rgb(v) + (255,) for bank in dsig.palettes for v in bank]
 
 
 def tile_count(dsig: dsigmod.DsigFile) -> int:

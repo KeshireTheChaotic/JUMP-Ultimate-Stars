@@ -1,5 +1,20 @@
 # Level Workspace — stage-space alignment, objects, and physics paths
 
+> **Correction 2026-11-06.** The resource ids below are right, but the file
+> names were mapped the wrong way round. In all 36 shipped stage archives
+> 0x400000 is `bg_xx_02.atm` (the 1408×1024 play layer), 0x400001 is `_01`,
+> 0x400002 is `_00` and 0x400003 is `_sud`, whose tiles 0x400100 are
+> `bg_xx_02.dtx`. `stageoverlay.bg_slot` mapped `_00` to slot 0, so the
+> play layer got record 2's position (256, 256) instead of (−192, 0), and
+> `_sud` borrowed `_00`'s tiles. The paint-order tie-break was reversed too:
+> on equal record +6 priorities the DS draws the lower BG number in front,
+> and slot i is BG i+1, so the higher slot goes behind. Record +7 is the BG
+> type (`+0x8E4`, FUN_0203D0B4) and +8 is the colour depth (4/8,
+> FUN_0203D478); neither is a priority. With the corrected mapping, the
+> collision boxes, conveyors and gimmick sprites line up with the play layer
+> on real data (`bg_es`, `bg_bb`, `bg_hk`). Floor and gimmick sprites are now
+> loaded the way the battle loads them: see `jus_package/stagesprites.py`.
+
 ## Root cause and runtime evidence
 
 The previous renderer treated all discovered ALTM maps as simultaneously visible, painted them in archive/filename order, and located them by loosely interpreting the filename's final underscore suffix. The bottom object editor decoded every source object, but the *viewport* drew only a subset of the simulated objects: at most four seeded item picks, visible dynamic floors/gimmicks, and optional colliders. It never drew authored path lines, all item candidates, grips, item symbols or hazard emitter positions. Consequently there was no reliable visual match between the object list and the level background.

@@ -887,7 +887,9 @@ class EditorApp(tk.Tk):
         if cid:
             choice = messagebox.askyesnocancel(
                 'Export package', f'Export the full character package for {cid}?\n\n'
-                                  'Yes = whole character (animations, images, tables, window)\n'
+                                  'Yes = whole character (animations, images, tables, window) plus '
+                                  'every effect its moves spawn (incl. shared efc/*.aar), with '
+                                  'effects.json linking spawns → effect moves → sprites\n'
                                   'No = only the selected archive')
             if choice is None:
                 return

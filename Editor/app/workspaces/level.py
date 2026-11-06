@@ -16,7 +16,7 @@ from PIL import Image, ImageTk, ImageChops
 
 from jus_formats import altm as altmmod
 from jus_formats import roster, stagephysics, itemprob
-from jus_package import scenes, tilemap, stagepreview, stageoverlay
+from jus_package import scenes, tilemap, stagepreview, stageoverlay, stagesprites
 from jus_package.project import split
 
 from .. import theme as T
@@ -68,6 +68,8 @@ class LevelWorkspace(SuiteWorkspace):
         self.camera_x = tk.StringVar(value='0')
         self.camera_y = tk.StringVar(value='0')
         self.preview_palette = tk.BooleanVar(value=False)
+        self.show_sprites = {'floor': True, 'gimmick': True}   # Layers dock toggles
+        self._stage_sprites = None                              # jus_package.stagesprites.StageSprites
         self._item_prob = None
         self._stage_mob = None
         self._stage_geo = None
@@ -371,6 +373,13 @@ class LevelWorkspace(SuiteWorkspace):
                     except (ValueError, KeyError, OSError) as exc:
                         probs.append((f'Item probability table {ipath}: {exc}', 'warn'))
                     break
+        self._stage_sprites = None
+        if self.stage:
+            # Floor and gimmick objects, loaded as BattleMapMoveFloorCreate /
+            # BattleMapGimmick_Create do (see jus_package/stagesprites.py).
+            self._stage_sprites = stagesprites.StageSprites(self.app.root_data, self.stage.members,
+                                                           self.stage.stem)
+            probs += [(p, 'warn') for p in self._stage_sprites.problems]
         self.map_objects.load(self._stage_mob.raw if self._stage_mob else None,
                               self._stage_geo.raw if self._stage_geo else None)
         for l in self.layers:
@@ -414,6 +423,17 @@ class LevelWorkspace(SuiteWorkspace):
             rows.append({'id': 'L:' + l.name, 'parent': 'bg', 'name': l.name, 'kind': 'ALTM',
                          'visible': self.visible.get(l.name, True),
                          'status': f'{w}×{h}' + record_status})
+        rows.append({'id': 'so', 'name': 'Stage objects', 'kind': 'group'})
+        sp = self._stage_sprites
+        mob = self.map_objects.model.m
+        for key, name, sheet, count in (
+                ('floor', 'Moving floors (_floor.aar)', sp.floor if sp else None,
+                 len(mob.floors) if mob else 0),
+                ('gimmick', 'Gimmick objects (_gimmick.aar)', sp.gimmick if sp else None,
+                 sum(g.type_id in stagesprites.GIMMICK_OBJECT_TYPES for g in mob.gimmicks) if mob else 0)):
+            rows.append({'id': 'S:' + key, 'parent': 'so', 'name': name, 'kind': 'sprite',
+                         'visible': self.show_sprites[key], 'available': sheet is not None,
+                         'status': f'{count} object(s)' if sheet is not None else 'no archive'})
         rows.append({'id': 'ro', 'name': 'Stage object overlays', 'kind': 'group'})
         for key, name, ext in OVERLAYS:
             have = bool(self.stage and key in self.stage.members) if ext or key == 'gimmick' else False
@@ -691,6 +711,7 @@ class LevelWorkspace(SuiteWorkspace):
         mob, geo = model.m, model.g
         selected = self.map_objects.selected
         f = self._stage_frame
+        self._draw_stage_sprites(vp, mob, f)
         phases = {wall.index: wall.damage_phase for wall in f.walls} if f else {}
         if geo is not None and self.preview_collisions.get():
             for coll in geo.collision_boxes:
@@ -769,6 +790,39 @@ class LevelWorkspace(SuiteWorkspace):
         vp.hud.configure(text=f'{self.stage.stem} · mission {self.missions.node_id} · '
                               f'stage tick {f.tick if f else 0} · '
                               f'BG / object positions: world pixels · select an overlay to edit')
+
+    def _draw_stage_sprites(self, vp, mob, f):
+        """Floor and gimmick sprites at their world positions (above the BG layers).
+
+        Floors use the simulated position of the current stage tick when the
+        runtime preview is on (BattleMapMoveFloorInit places the node at the
+        record x/y; path motion moves it), else the authored start.  A blink
+        floor that is off shows motion base+1 (0x02086178); a crumbled floor
+        is not drawn.  Gimmicks stay at their 24.8 record position.
+        """
+        sp = self._stage_sprites
+        if sp is None or mob is None:
+            return
+        tick = f.tick if f else 0
+        if self.show_sprites['floor'] and sp.floor is not None:
+            runtime = {fl.index: fl for fl in f.floors} if (f and self.preview_objects.get()) else {}
+            for i, rec in enumerate(mob.floors):
+                state = runtime.get(i)
+                x, y = (state.x, state.y) if state else (rec.x, rec.y)
+                variant = 0
+                if state is not None and not state.solid:
+                    if rec.motion_kind != 1:
+                        continue
+                    variant = 1
+                frame = sp.floor_frame(rec, tick, variant)
+                if frame is not None:
+                    vp.add_image(frame.image, x + frame.left, y + frame.top)
+        if self.show_sprites['gimmick'] and sp.gimmick is not None:
+            for rec in mob.gimmicks:
+                frame = sp.gimmick_frame(rec, tick)
+                if frame is not None:
+                    gx, gy = rec.pixel_xy
+                    vp.add_image(frame.image, gx + frame.left, gy + frame.top)
 
     def _hit_map_object(self, wx, wy):
         """Hit-test editable stage points and collider rectangles in world px."""
@@ -943,6 +997,9 @@ class LevelWorkspace(SuiteWorkspace):
         iid = str(row['id'])
         if iid.startswith('L:'):
             self.visible[iid[2:]] = row['visible']
+            self.view.redraw()
+        elif iid.startswith('S:'):
+            self.show_sprites[iid[2:]] = row['visible']
             self.view.redraw()
 
     # ------------------------------------------------------------ docks

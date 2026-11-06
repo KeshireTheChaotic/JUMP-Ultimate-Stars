@@ -1,0 +1,19 @@
+{
+ "version": 1,
+ "template": "db_b_01",
+ "slot": "db_b_01",
+ "display_name": "チェンソーマン",
+ "concept": "Denji / Chainsaw Man: a scrappy devil hunter who pulls the cord in his chest to become a chainsaw-headed devil with blades bursting from both forearms. Human-form brawling for light attacks, revving chainsaw slashes for strong attacks, a lunging grinder dash, a spinning blade whirl as the finisher. Effects: blood sprays, sparks, motion streaks.",
+ "palette": {
+  "mode": "from_art",
+  "alt_banks": "copy",
+  "colours": ["#141414", "#3a1212", "#7a1d1d", "#b8322a", "#d8662e", "#6e7680", "#aeb6bf", "#f0f2f4", "#f1c9a5", "#c98f6b", "#2a2f3a", "#e8d24a"],
+  "note": "colours are used by `draft` (brightness-matched recolour) and as the target palette; build derives the final ≤15-colour palette from the art"
+ },
+ "require_all_frames": true,
+ "moves": {
+  "0x05C100": "idle: hunched, chainsaw arms lowered, engine idling (blades jitter on alternate frames)",
+  "0x05C101": "walk: heavy stomping walk, arm blades trailing"
+ },
+ "notes": "Example only. `scaffold` writes the real move list for the chosen template."
+}

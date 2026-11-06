@@ -7,6 +7,14 @@
 *.dsv
 *.zip
 
+#Tests
+port\tests\
+Editor\tests\
+
+#Temp Tools
+Editor\tools\
+Editor\.claude\
+
 # .NET
 bin/
 obj/

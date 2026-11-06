@@ -95,15 +95,15 @@ def find_layers(root: DataRoot, archive: str) -> list[Layer]:
             probs.append('no same-stem tile image (pair unknown)')
         out.append(Layer(stem, join(archive, atm.name), join(archive, img.name) if img else None, m, probs))
     # ARM9 BattleMapBG_Create 02083FCC loads resource 0x400003 (the sudden-
-    # death substitute for slot 0) with *the same tiles* as BG0 (0x400100).
-    # Earlier code paired bg_xx_sud with any map of equal size, usually BG2;
-    # that may decode tiles with the wrong palette or graphic indices.
+    # death substitute for BG slot 0) with slot 0's tiles 0x400100, which in
+    # every stage archive is bg_xx_02.dtx (bg_xx_02.atm is 0x400000; the
+    # suffixes run opposite to the slot numbers).
     for l in out:
         if l.image_path is None:
             twin = None
             exact = re.fullmatch(r'(bg_[a-z0-9_]+)_sud', l.name, re.I)
             if exact:
-                twin = next((o for o in out if o.name == exact.group(1) + '_00'
+                twin = next((o for o in out if o.name == exact.group(1) + '_02'
                              and o.image_path), None)
             if twin is not None:
                 l.image_path = twin.image_path
