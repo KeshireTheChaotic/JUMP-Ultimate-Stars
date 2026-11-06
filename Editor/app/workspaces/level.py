@@ -8,9 +8,10 @@ Stages and missions are linked by the battle stage index: mission/battle
 definition ``+0x75`` → battle object +0x160 → stage table 0x02092D08
 (``jus_formats.roster.STAGES``).  Selecting a mission loads its stage.
 
-Only ALTM tiles and verified mission rewards are writable. Decoded .mob/.bin
-physics, spawns, BG scripts and gimmicks are projected as read-only diagnostics;
-camera, collision geometry and combat-dependent responses are not fully modeled.
+ALTM tiles, J-Galaxy mission definitions and known progression fields are editable.
+Fresh-save-only mission/graph resizing is experimental. Decoded .mob/.bin
+physics, spawns, BG scripts and gimmicks remain read-only projections;
+collision geometry and inferred combat responses are not fully modeled.
 """
 from __future__ import annotations
 
