@@ -30,7 +30,9 @@ loops are projected as labeled cell references.
 dock accepts timestamped floor occupancy intervals (`ID@start-end`) and switch hits
 (`ID@tick`), with bare IDs still interpreted as tick-zero inputs. No scripted combat is inferred. Item placement uses a
 reproducible local random seed, not the original RNG/eligibility filter; the
-runtime four-item cap and spawn interval are honored. Gimmick hazard spawns
+runtime four-item cap and spawn interval are honored. `itemprob.ipf`'s four-by-six
+weight table and stage/J-Power blend are decoded for diagnostics, but combat-state
+row selection and the original RNG are still unresolved. Gimmick hazard spawns
 show the most recent candidate position; hazard lifetime remains unmodeled.
 The executable environment gate is `definition[0x7C] & 0x02`. When false, the
 preview does not activate floor paths and gimmick events.
