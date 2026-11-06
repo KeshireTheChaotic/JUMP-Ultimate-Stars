@@ -1,7 +1,9 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+/* JUS-SDK jus_Rtc_WriteData [behavioral] data line output (0x74); clocks out r1 bytes from the
+   buffer r0, LSB first */
 
-void FUN_027f7a60(ushort *param_1,int param_2)
+void jus_Rtc_WriteData(ushort *param_1,int param_2)
 
 {
   ushort uVar1;

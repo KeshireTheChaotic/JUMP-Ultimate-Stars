@@ -1,8 +1,9 @@
 
 /* WARNING: Removing unreachable block (ram,0x027f7b34) */
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+/* JUS-SDK jus_Rtc_ReadData [behavioral] data line input (0x64); clocks in bytes, LSB first */
 
-void FUN_027f7af0(ushort *param_1,int param_2)
+void jus_Rtc_ReadData(ushort *param_1,int param_2)
 
 {
   int iVar1;

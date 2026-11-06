@@ -21,13 +21,13 @@ void FUN_038062fc(int param_1)
       FUN_038046a0(2);
       OS_RestoreInterrupts(uVar1);
       if ((*(uint *)(param_1 + 8) & 1) == 1) {
-        _DAT_027fff94 = FUN_03806910();
+        _DAT_027fff94 = jus_Mic_Sample12();
         if ((*(uint *)(param_1 + 8) & 2) != 0) {
           _DAT_027fff94 = _DAT_027fff94 ^ 0x8000;
         }
       }
       else {
-        _DAT_027fff94 = FUN_038069d8();
+        _DAT_027fff94 = jus_Mic_Sample8();
         if ((*(uint *)(param_1 + 8) & 2) != 0) {
           _DAT_027fff94 = _DAT_027fff94 ^ 0x80;
         }

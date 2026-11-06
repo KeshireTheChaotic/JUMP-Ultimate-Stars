@@ -1,7 +1,8 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+/* JUS-SDK jus_Rtc_Select [behavioral] all lines output, clock high, CS low (0x72), then CS high */
 
-void FUN_027f797c(void)
+void jus_Rtc_Select(void)
 
 {
   int iVar1;

@@ -36,14 +36,14 @@ void FUN_038055f0(int param_1)
       DAT_0380aa98 = 4;
       DAT_0380aaa0 = *(uint *)(param_1 + 8);
       DAT_0380aa9c = *(uint *)(param_1 + 0xc);
-      FUN_03805ac4(DAT_0380aaa0 & 0xffff,DAT_0380aa9c & 0xff);
+      jus_SpiPm_WriteRegister(DAT_0380aaa0 & 0xffff,DAT_0380aa9c & 0xff);
       FUN_038046d4(100,0);
       break;
     case 0x65:
       DAT_0380aa98 = 3;
       DAT_0380aaa0 = *(uint *)(param_1 + 8);
       uVar1 = DAT_0380aaa0 & 0xffff;
-      uVar2 = FUN_03805a34(uVar1);
+      uVar2 = jus_SpiPm_ReadRegister(uVar1);
       FUN_038046d4(uVar1 + 0x70 & 0xffff,uVar2);
       break;
     case 0x66:

@@ -1,7 +1,9 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+/* JUS-SDK jus_Rtc_SendCommand [behavioral] data line output (0x74); clocks out the byte r0 | r1,
+   LSB first */
 
-void FUN_027f79f0(uint param_1,uint param_2)
+void jus_Rtc_SendCommand(uint param_1,uint param_2)
 
 {
   uint uVar1;

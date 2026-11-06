@@ -18,7 +18,7 @@ undefined2 FUN_03805ce4(void)
   _DAT_04000208 = 0;
   uVar3 = OS_DisableInterrupts();
   uVar4 = OS_DisableIrqMask(0x1ffffff);
-  uVar5 = FUN_03805a34(0);
+  uVar5 = jus_SpiPm_ReadRegister(0);
   FUN_03805edc(2);
   FUN_03805b50(2);
   FUN_03805b50(2);
@@ -49,7 +49,7 @@ undefined2 FUN_03805ce4(void)
   OS_RestoreInterrupts(uVar3);
   _DAT_04000208 = 1;
   SVC_Sleep();
-  FUN_03805ac4(0,uVar5);
+  jus_SpiPm_WriteRegister(0,uVar5);
   if ((DAT_0380aa70 & 0x20) == 0) {
     uVar5 = 7;
   }

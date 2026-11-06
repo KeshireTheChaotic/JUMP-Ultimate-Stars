@@ -1,7 +1,8 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+/* JUS-SDK jus_Rtc_Deselect [behavioral] CS low */
 
-void FUN_027f79bc(void)
+void jus_Rtc_Deselect(void)
 
 {
   int iVar1;

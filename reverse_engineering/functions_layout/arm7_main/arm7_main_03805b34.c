@@ -1,7 +1,9 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+/* JUS-SDK jus_SpiPm_SetControl [behavioral] SPICNT = 0x8002 | r0 << 11: enabled, device 0 (power
+   management), 1 MHz, chip-select hold = r0 */
 
-void FUN_03805b34(short param_1)
+void jus_SpiPm_SetControl(short param_1)
 
 {
                     /* JUS-TAG hw={"SPI":1} io=["040001c0"] */

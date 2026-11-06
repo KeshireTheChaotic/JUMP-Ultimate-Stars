@@ -22,13 +22,13 @@ void FUN_03806158(void)
   iVar3 = FUN_03804560();
   if ((iVar3 == 0) && (iVar3 = FUN_038046b8(2), iVar3 != 0)) {
     if ((uVar1 & 1) == 1) {
-      uVar2 = FUN_03806910();
+      uVar2 = jus_Mic_Sample12();
       if ((uVar1 & 2) != 0) {
         uVar2 = uVar2 ^ 0x8000;
       }
     }
     else {
-      uVar2 = FUN_038069d8();
+      uVar2 = jus_Mic_Sample8();
       if ((uVar1 & 2) != 0) {
         uVar2 = uVar2 ^ 0x80;
       }
