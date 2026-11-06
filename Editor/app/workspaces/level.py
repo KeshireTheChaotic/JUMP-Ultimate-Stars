@@ -2,7 +2,8 @@
 
 J-Galaxy missions occupy the left browser and load their assigned stage.
 The central viewport displays editable ALTM tiles plus projected stage events.
-The bottom ribbon edits verified stage markers, triggers and spawns, and hosts tile tools.\nMission properties and objective rewards are edited in the right inspector.
+The bottom ribbon edits verified stage markers, triggers and spawns, and hosts tile tools.
+Mission properties and objective rewards are edited in the right inspector.
 
 Stages and missions are linked by the battle stage index: mission/battle
 definition ``+0x75`` → battle object +0x160 → stage table 0x02092D08
@@ -61,7 +62,14 @@ class LevelWorkspace(SuiteWorkspace):
         self._sets: list[scenes.StageSet] = []
         self._probs = []
         self._by_stage: dict[str, list[int]] = {}
-        self.focus = 'level'           # edit history target\n        self.nav_kind = 'root'\n        self.nav_id = None\n        self._active_marker = None\n        self._original_mob = b''\n        self._mob_working = b''\n        self.show_markers = tk.BooleanVar(value=True)
+        self.focus = 'level'           # edit history target
+        self.nav_kind = 'root'
+        self.nav_id = None
+        self._active_marker = None
+        self._ribbons = {}
+        self._original_mob = b''
+        self._mob_working = b''
+        self.show_markers = tk.BooleanVar(value=True)
         self.stage_tick = tk.IntVar(value=0)
         self.preview_objects = tk.BooleanVar(value=True)
         self.preview_items = tk.BooleanVar(value=True)
