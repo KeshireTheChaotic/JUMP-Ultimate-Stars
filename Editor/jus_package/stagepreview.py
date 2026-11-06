@@ -258,20 +258,49 @@ def _sprite_cell(anim, tick):
 
 
 def project(mob, geometry, tick, *, environment=True, items_enabled=True,
-            occupied_floors=(), struck_gimmicks=(), pickups=(), seed=0):
-    """Snapshot at an explicit frame and trigger scenario.
+            occupied_floors=(), struck_gimmicks=(), pickups=(), seed=0,
+            occupied_history=(), hit_history=(), camera=(0, 0)):
+    """Deterministic scenario projection, not an emulator battle replay.
 
-    ``occupied_floors`` identifies floors occupied since frame 0; ``struck_gimmicks``
-    identifies switches struck at frame 0; ``pickups`` lists frames when one item
-    was removed. Random choices use a seeded local RNG, *not* the game's RNG.
+    Legacy IDs apply from tick zero; histories support floor (id,start,end)
+    and strike (id,tick) inputs. Combat collisions and RNG are NOT inferred.
     """
     tick = max(0, int(tick))
-    occupied = frozenset(occupied_floors)
-    struck = frozenset(struck_gimmicks)
-    floors = tuple(floor_at(f, tick, i, environment, i in occupied)
-                   for i, f in enumerate(mob.floors))
-    spawns, gimmicks, scroll, bg_sprites, notes = [], [], [], [], []
+    floor_events = (tuple((int(i), 0, None) for i in occupied_floors)
+                    + tuple(occupied_history))
+    hit_events = sorted((tuple((int(i), 0) for i in struck_gimmicks)
+                         + tuple(hit_history)), key=lambda event: event[1])
+    occupancy = {}
+    for ident, start, end in floor_events:
+        if ident < 0 or not 0 <= start or (end is not None and end < start):
+            raise ValueError('Invalid floor occupancy timeline')
+        if start <= tick and (end is None or tick <= end):
+            occupancy[ident] = max(start, occupancy.get(ident, -1))
+    hits = {}
+    for ident, at in hit_events:
+        if ident < 0 or at < 0:
+            raise ValueError('Invalid switch timeline')
+        if at <= tick:
+            hits.setdefault(ident, []).append(at)
+    spawns, gimmicks, scroll, bg_sprites, notes, parallax, palette = [], [], [], [], [], [], []
     rng = random.Random(int(seed))
+
+    # Type-9 switches hold targeted moving floors for 180 ticks after a hit.
+    frozen = {}
+    if environment:
+        for ident, times in hits.items():
+            if 0 <= ident < len(mob.gimmicks):
+                g = mob.gimmicks[ident]
+                if g.type_id == 9:
+                    for at in times:
+                        if at <= tick < at + 180:
+                            for target in getattr(g, 'targets', ()):
+                                frozen[target] = at
+    floors = tuple(floor_at(f, min(tick, frozen[i]) if i in frozen and f.motion_kind in (0, 5) else tick,
+                            i, environment, i in occupancy, occupancy.get(i, 0))
+                   for i, f in enumerate(mob.floors))
+    if frozen:
+        notes.append('Floor switch freeze is approximate; prior motion state not replayed')
 
     candidates = tuple(mob.item_candidates)
     config = getattr(mob, 'items', None)
@@ -300,7 +329,8 @@ def project(mob, geometry, tick, *, environment=True, items_enabled=True,
                 available.remove(i)
         spawns = [PreviewSpawn('item', i, *candidates[i].pixel_xy, f'item candidate {i} (seeded)')
                   for i in live]
-        notes.append(f'Items: {len(spawns)}/4 projected; item selection/weights approximate')
+        notes.append(f'Items: {len(spawns)}/4 projected; candidate positions seeded; '
+                     'itemprob.ipf eligibility/weights and game RNG still unverified')
     for i, g in enumerate(mob.gimmicks):
         x, y = (getattr(g, 'pixel_xy', None) or
                 tuple(v / 256.0 for v in struct.unpack_from('<ii', g.raw, 4)))
@@ -319,8 +349,30 @@ def project(mob, geometry, tick, *, environment=True, items_enabled=True,
                     # combat-dependent and not traced sufficiently to retain it.
                     if j == count - 1:
                         spawns.append(PreviewSpawn('hazard', i, px, py, f'{label} event #{count}'))
-        elif g.type_id in (2, 8, 9) and i in struck:
-            notes.append(f'Gimmick {i} hit-switch fired: targets {getattr(g, "targets", ())}')
+        elif g.type_id in (0, 2, 8, 9, 11) and i in hits:
+            times = hits[i]
+            # Trap/floor switches rearm after 180 frames. All events remain
+            # explicit player inputs, never inferred from overlap/contact.
+            accepted = []
+            for at in times:
+                if not accepted or g.type_id not in (8, 9) or at - accepted[-1] >= 180:
+                    accepted.append(at)
+            if accepted:
+                when = accepted[-1]
+                targets = getattr(g, 'targets', ())
+                if g.type_id in (2, 8, 9):
+                    notes.append(f'Gimmick {i} hit-switch fired at t={when}; targets {targets}; '
+                                 f'accepted {len(accepted)}/{len(times)} manual hit(s)')
+                elif g.type_id == 0:
+                    notes.append(f'Gimmick {i} reactive prop hit at t={when}')
+                else:
+                    notes.append(f'Gimmick {i} cannon hit/turn input at t={when}')
+                if g.type_id == 8 and tick == when:
+                    for target in targets:
+                        if 0 <= target < len(mob.gimmicks):
+                            tx, ty = mob.gimmicks[target].pixel_xy
+                            spawns.append(PreviewSpawn('trigger-hazard', target, tx, ty,
+                                                       f'trap {i} fired at t={when}'))
         elif g.type_id == 1 and getattr(g, 'timers', None):
             off, on = g.timers
             period = max(1, off + on + 2)
@@ -343,13 +395,27 @@ def project(mob, geometry, tick, *, environment=True, items_enabled=True,
                 if anim.kind == 2:
                     sx, sy = _scroll(anim, tick)
                     scroll.append((layer.index, sx, sy))
+                elif anim.kind == 3:
+                    px, py = parallax_at(anim, float(camera[0]), float(camera[1]))
+                    parallax.append((layer.index, px, py))
+                elif anim.kind in (0, 1):
+                    palette.append((layer.index, anim.summary()))
+                elif anim.kind == 4:
+                    f = anim.fields()
+                    priority = f['default']
+                    for threshold, value in f['switches']:
+                        if float(camera[1]) >= threshold:
+                            priority = value
+                    notes.append(f'BG {layer.index} camera-Y priority {priority} (preview)')
                 elif anim.kind == 5:
                     f = anim.fields()
                     bg_sprites.append(PreviewSpawn('sprite-cell', layer.index, float(f['x']), float(f['y']),
                                                    f'cell {_sprite_cell(anim, tick)}'))
     if not environment and mob.gimmicks:
         notes.append('Selected mission disables moving-floor and gimmick initialization')
-    if occupied or struck:
-        notes.append('Manual triggers are a preview scenario, not authored mission events')
+    if floor_events or hit_events:
+        notes.append('Manual combat timeline only; collisions and battle conditions not inferred')
+    if parallax:
+        notes.append('Camera parallax is a clamped linear projection; runtime interpolation unverified')
     return PreviewFrame(tick, floors, tuple(spawns), tuple(gimmicks), tuple(scroll),
-                        tuple(bg_sprites), tuple(notes))
+                        tuple(bg_sprites), tuple(notes), tuple(parallax), tuple(palette))
