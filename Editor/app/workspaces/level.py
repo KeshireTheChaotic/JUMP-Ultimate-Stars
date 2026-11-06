@@ -193,6 +193,10 @@ class LevelWorkspace(SuiteWorkspace):
             node = self.missions.node_id
             for planet_id in range(c.graph.planet_count):
                 planet = c.graph.planet_name(planet_id) or f'Planet {planet_id}'
+                location_id = c.graph.planet_location_id(planet_id)
+                location = (c.graph.location_name(location_id) if
+                            location_id < c.graph.location_count else f'Unknown location {location_id}')
+                label_planet = f'{planet} · location {location_id:02d} {location}'
                 rows = []
                 for i in range(c.graph.node_count):
                     n = c.graph.get(i)
