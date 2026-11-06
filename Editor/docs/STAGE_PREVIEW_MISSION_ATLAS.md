@@ -22,8 +22,10 @@ For `BgAnim` type 2, the rendered background uses an **approximate wrapped
 band-scroll preview**; this is not a pixel-identical DS scanline implementation.
 Palette fade/rotation is now an opt-in, non-destructive DSIG re-render; parallax
 camera X/Y transforms are projected with a clamped linear model. Those projections
-still need GPU camera/origin validation. Sprite-loop artwork and collision grid
-hitboxes need further traces. Type 5 sprite cell
+still need GPU camera/origin validation. Collision rectangles and linked wall HP
+phases can be inspected with manual `ID@tick:damage` inputs, while the collision
+grid, neighbor propagation and sprite-loop artwork require further tracing.
+Type 5 sprite cell
 loops are projected as labeled cell references.
 
 `Stage tick` and **Project** control the visual preview. The read-only runtime
