@@ -43,9 +43,20 @@ def main():
             w = lv.missions
             assert w.catalog is not None, w.load_error
             assert lv.tree.exists('n:0'), 'mission node missing from the Level browser'
+            assert lv.tree.exists('js:0') and lv.tree.exists('g:0')
+            assert lv.tree.exists('p:0'), 'world node missing from hierarchy'
+            assert lv.tree.parent('n:0') == 'p:0', 'mission must belong to its world'
+            assert lv.tree.parent('p:0') == 'g:0', 'single galaxy must contain its worlds'
+            lv.tree.selection_set('js:0')
+            app.update()
+            assert lv.nav_kind == 'root' and lv._inspector_mode == 'stage'
+            lv.tree.selection_set('p:0')
+            app.update()
+            assert lv.nav_kind == 'world'
             lv.tree.selection_set('n:0')
             app.update()
-            assert w.node_id == 0 and lv.bottom.current == 'mission'
+            assert w.node_id == 0 and lv._inspector_mode == 'mission'
+            assert lv.bottom.current == 'markers', 'marker tools belong in bottom ribbon'
             original = w.catalog.graph.build()
             assert not lv.dirty
             w.slot = 0
