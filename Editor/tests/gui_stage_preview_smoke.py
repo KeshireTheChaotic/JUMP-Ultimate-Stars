@@ -25,6 +25,10 @@ def main(root):
         assert w._stage_geo is not None
         assert len(w._stage_frame.floors)==len(w._stage_mob.floors)
         assert w._stage_frame.tick==55
+        w._toggle_stage_play()
+        assert w._stage_playing and w._stage_frame.tick == 56
+        w._toggle_stage_play()
+        assert not w._stage_playing and w._stage_play_job is None
         assert not errors,'\n'.join(errors)
         print('OK: mission-first sidebar, assigned stage, floor/gimmick runtime preview')
     finally:app.destroy()
