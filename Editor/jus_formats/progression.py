@@ -117,6 +117,20 @@ class DefinitionTable:
         # fixed-size name field in the ROM; only its first 0x70 bytes are used.
         self._data[base:base + NAMES_SIZE] = raw + b'\x00' * (NAMES_SIZE - len(raw))
 
+    def set_stage(self, index: int, stage_id: int):
+        """Change the verified +0x75 stage selector; leaves all rule bytes intact.
+
+        This definition may be shared by multiple J-Galaxy nodes.
+        """
+        if not isinstance(stage_id, int) or not 0 <= stage_id <= 255:
+            raise ValueError('Stage index must fit in a u8')
+        self._data[self._start(index) + 0x75] = stage_id
+
+    def set_environment(self, index: int, enabled: bool):
+        """Toggle only the confirmed stage floor/gimmick initialization gate."""
+        pos = self._start(index) + 0x7C
+        self._data[pos] = (self._data[pos] | 0x02) if enabled else (self._data[pos] & ~0x02)
+
     def build(self):
         return bytes(self._data)
 
@@ -222,6 +236,64 @@ class GalaxyGraph:
         if not 0 <= slot < node.goal_count:
             raise IndexError(f'node {node_id} goal slot {slot} is inactive')
         return self._node_start(node_id) + 0x10 + slot * REWARD_SIZE
+
+    def place_node(self, node_id: int, *, planet_id=None, definition_id=None,
+                   mission=None, missions=None, battles=None):
+        """Reassign an existing map node without changing its persistent node ID.
+
+        Only the verified planet (+0x0A), definition (+0x08), and mission selector
+        (flags +0x0C bit 0x04) are touched. All other flags survive.
+        """
+        node = self.get(node_id)
+        planet = node.planet_id if planet_id is None else planet_id
+        is_mission = node.mission if mission is None else bool(mission)
+        definition = node.definition_id if definition_id is None else definition_id
+        if not isinstance(planet, int) or not 0 <= planet < self.planet_count:
+            raise ValueError('Planet ID is outside the J-Galaxy planet table')
+        table = missions if is_mission else battles
+        if table is None:
+            raise ValueError('The destination definition table is required')
+        if not isinstance(definition, int) or not 0 <= definition < min(table.count, 256):
+            raise ValueError('Definition ID is outside the selected mission/battle table')
+        pos = self._node_start(node_id)
+        self._data[pos + 8] = definition
+        self._data[pos + 0x0A] = planet
+        old_flags = self._data[pos + 0x0C]
+        self._data[pos + 0x0C] = (old_flags | 0x04) if is_mission else (old_flags & ~0x04)
+
+    def set_goal_code(self, node_id: int, slot: int, code: int):
+        """Edit a raw, *unclassified* objective code in one active slot."""
+        if not isinstance(code, int) or not 0 <= code <= 0xFFFF:
+            raise ValueError('Raw goal code must be 0..65535')
+        struct.pack_into('<H', self._data, self._reward_start(node_id, slot), code)
+
+    def append_goal(self, node_id: int, code: int, *, koma_id: int, card_count: int):
+        """Activate the next fixed slot, without shifting save-indexed objectives.
+
+        A removed slot's opaque four-byte tail is deliberately preserved.
+        The objective code's meaning remains unknown; caller supplies raw data.
+        """
+        node = self.get(node_id)
+        if node.goal_count >= REWARD_SLOTS:
+            raise ValueError('This node already uses all six objective slots')
+        if not isinstance(code, int) or not 0 <= code <= 0xFFFF:
+            raise ValueError('Raw goal code must be 0..65535')
+        if not isinstance(koma_id, int) or not 0 <= koma_id < min(card_count, 32768):
+            raise ValueError('Koma ID is outside the existing card table')
+        slot = node.goal_count
+        start = self._node_start(node_id)
+        pos = start + 0x10 + slot * REWARD_SIZE
+        struct.pack_into('<Hh6H', self._data, pos, code, koma_id, *([0] * 6))
+        self._data[start + 0x0B] = slot + 1
+        return slot
+
+    def remove_last_goal(self, node_id: int):
+        """Deactivate the final goal without erasing its bytes or renumbering slots."""
+        node = self.get(node_id)
+        if not node.goal_count:
+            raise ValueError('This node has no objectives to deactivate')
+        self._data[self._node_start(node_id) + 0x0B] = node.goal_count - 1
+        return node.goal_count - 1
 
     def grant_koma(self, node_id, slot, koma_id, *, card_count):
         if not isinstance(koma_id, int) or not 0 <= koma_id < min(32768, card_count):
