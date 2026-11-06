@@ -66,7 +66,10 @@ for every workspace: `docs/STUDIO_WORKSPACES.md`.
   reference is traced; the UI never fabricates parent IDs. Galaxy and world
   selections have a dedicated navigation view and Inspector; stage maps load
   only after selecting an actual mission. Native J-Space/world sprite identity
-  still requires matching the game's UI assets to progression records.
+  still requires matching the game's UI assets to progression records. For
+  inspection, each J-Space/galaxy/world selection can preview a real DSTX/DSIG
+  sprite chosen from the **Browse .dtx assets** dialog in the right Inspector.
+  These art choices are editor-local and do not rewrite unverified game links.
   The mission's **right inspector** includes a battle definition, title, stage
   assignment, objective codes, Koma or resource rewards, and the fresh-save-only
   clone/remove controls. Editing the shared definition affects all nodes that
