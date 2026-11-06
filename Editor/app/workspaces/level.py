@@ -1,19 +1,16 @@
-"""Level Editor: stage backgrounds from ``stage/stage.aar`` plus J-Galaxy missions.
+"""Mission-first Level editor with a read-only runtime preview.
 
-Godot 2D scene / Unity Tilemap layout: browser (left dock) with two groups,
-*Stages* and *J-Galaxy missions* · scene canvas with the background layers
-stacked · Layers dock (eye toggles) over the Inspector · bottom dock with the
-mission rewards, tile set, raw stage data and problems.
+J-Galaxy missions occupy the left browser and load their assigned stage.
+The central viewport displays editable ALTM tiles plus projected stage events.
+The bottom dock contains mission rewards, runtime diagnostics and tile tools.
 
 Stages and missions are linked by the battle stage index: mission/battle
 definition ``+0x75`` → battle object +0x160 → stage table 0x02092D08
 (``jus_formats.roster.STAGES``).  Selecting a mission loads its stage.
 
-The supported edit surface is ALTM tile entries only. Backgrounds are decoded (ALTM + DSIG) and shown;
-camera (.cam), objects (.mob), stage table (.bin), collision and gimmicks are
-**read-only overlays**.  None of those formats is decoded yet, so they are
-listed as *unavailable* with their raw bytes, never drawn as guessed
-geometry. They have no save path.
+Only ALTM tiles and verified mission rewards are writable. Decoded .mob/.bin
+physics, spawns, BG scripts and gimmicks are projected as read-only diagnostics;
+camera, collision geometry and combat-dependent responses are not fully modeled.
 """
 from __future__ import annotations
 
@@ -34,8 +31,9 @@ from ..widgets.tabs import TextLog
 from .base import SuiteWorkspace
 from .missions import DOC as MISSION_DOC, MissionPanel
 
-OVERLAYS = (('cam', 'Camera / view framing', '.cam'), ('mob', 'Objects (mob)', '.mob'),
-            ('bin', 'Stage table', '.bin'), ('collision', 'Collision', None), ('gimmick', 'Gimmicks', None))
+OVERLAYS = (('cam', 'Camera (unverified)', '.cam'), ('mob', 'Stage physics & spawns (.mob)', '.mob'),
+            ('bin', 'Stage BG animation/collision (.bin)', '.bin'), ('collision', 'Collision descriptors', None),
+            ('gimmick', 'Gimmick assets', None))
 
 
 class LevelWorkspace(SuiteWorkspace):
@@ -72,6 +70,8 @@ class LevelWorkspace(SuiteWorkspace):
         self._stage_geo = None
         self._stage_frame = None
         self._stage_frame_cache = {}
+        self._stage_playing = False
+        self._stage_play_job = None
         super().__init__(app, host, browser_host, k)
 
     # ------------------------------------------------------------ layout
@@ -92,6 +92,8 @@ class LevelWorkspace(SuiteWorkspace):
         self.stage_spin.pack(side='right')
         self.stage_spin.bind('<Return>', self._preview_changed)
         self.stage_spin.bind('<FocusOut>', self._preview_changed)
+        self.stage_play_button = ttk.Button(h, text='Play stage', command=self._toggle_stage_play)
+        self.stage_play_button.pack(side='right', padx=4)
         self.view = self.make_viewport(on_draw=self._draw, on_press=self._press,
                                        on_drag=self._drag, on_release=self._release,
                                        origin_frac=(0.05, 0.08), zoom=1)
@@ -148,6 +150,7 @@ class LevelWorkspace(SuiteWorkspace):
 
     # ------------------------------------------------------------ browser
     def on_root(self):
+        self._stop_stage_play()
         self._sets = []
         if self.app.root_data:
             try:
@@ -212,6 +215,7 @@ class LevelWorkspace(SuiteWorkspace):
 
     def select_mission(self, node_id):
         """Show a J-Galaxy node in the Mission tab and load the stage its battle uses."""
+        self._stop_stage_play()
         self.missions.select_node(node_id)
         self.bottom.show('mission')
         stem = self.missions.stage_of(node_id)
@@ -331,6 +335,43 @@ class LevelWorkspace(SuiteWorkspace):
             return tuple(sorted({int(x.strip()) for x in text.split(',') if x.strip()}))
         except ValueError:
             return ()
+
+    def _stop_stage_play(self):
+        self._stage_playing = False
+        job = self._stage_play_job
+        self._stage_play_job = None
+        if job is not None:
+            try:
+                self.app.after_cancel(job)
+            except tk.TclError:
+                pass
+        if hasattr(self, 'stage_play_button'):
+            self.stage_play_button.configure(text='Play stage')
+
+    def _toggle_stage_play(self):
+        if self._stage_playing:
+            self._stop_stage_play()
+            return
+        if not self._stage_mob:
+            self.app.status.set('Select a mission with stage physics before preview playback.')
+            return
+        self._stage_playing = True
+        self.stage_play_button.configure(text='Pause stage')
+        self._advance_stage()
+
+    def _advance_stage(self):
+        if not self._stage_playing or self.app.workspace != 'level':
+            self._stop_stage_play()
+            return
+        try:
+            self.stage_tick.set(max(0, int(self.stage_tick.get())) + 1)
+            self._preview_changed()
+        except tk.TclError:
+            self._stop_stage_play()
+            return
+        # Preview samples at 30 ticks/s to keep large tile maps responsive;
+        # actual in-game physics still advances in 60-Hz tick units.
+        self._stage_play_job = self.app.after(33, self._advance_stage)
 
     def _preview_changed(self, _event=None, *, redraw=True):
         try:
@@ -637,9 +678,9 @@ class LevelWorkspace(SuiteWorkspace):
         self._mission_inspector(ins)
         if not self.stage:
             ins.section('Level editor')
-            ins.text('ALTM background tile maps can be painted and saved. Collision, gimmicks, camera and '
-                     'objects remain read-only until their formats are traced. Selecting a J-Galaxy mission '
-                     'loads the stage its battle uses.')
+            ins.text('Select a J-Galaxy mission to load its assigned stage. ALTM tiles and mission rewards '
+                     'are writable. Parsed .mob/.bin floor, gimmick and spawner behavior is preview-only; '
+                     'collision hitboxes and camera state are not yet reproduced.')
             return
         ov = getattr(self, 'sel_overlay', None)
         if ov:
@@ -650,8 +691,8 @@ class LevelWorkspace(SuiteWorkspace):
             ins.evidence('Format', 'Direct' if ov in ('mob','bin') else 'Unknown',
                          'verified .mob/.bin structures and read-only simulation' if ov in ('mob','bin')
                          else 'not yet traced')
-            ins.text('Nothing is drawn for this overlay: the editor does not invent geometry or behaviour. '
-                     'There is no save path for it.')
+            ins.text('Decoded stage physics and spawner markers are projected when their mission enables them. '
+                     'This diagnostic cannot alter the underlying .mob/.bin data.')
             return
         l = self.sel_layer
         ins.section('Stage', note=self.stage.stem)
@@ -718,6 +759,7 @@ class LevelWorkspace(SuiteWorkspace):
         ins.value('Rule', str(d.rule))
         ins.value('Opponents', str(d.opponents))
         ins.value('Time value', str(d.time_value))
+        ins.value('Stage physics/gimmicks', 'enabled' if d.data[0x7C] & 0x02 else 'disabled')
         ins.evidence('Battle setup', 'Direct', 'FUN_0207538C copies +0x70..+0xA3 into the battle globals; '
                                                'read-only here')
 
