@@ -230,7 +230,11 @@ class MissionPanel:
         self.heading.configure(text=f'Node {n.index:03d} — {d.name}')
         self.type_label.configure(text=f'{typ} #{d.index} · stage {stem} · rule {d.rule} · '
                                        f'{d.opponents} opponent(s)')
-        self.planet_label.configure(text=f'#{n.planet_id:02d} {c.graph.planet_name(n.planet_id)} · '
+        location = c.graph.planet_location_id(n.planet_id)
+        location_label = (c.graph.location_name(location) if location < c.graph.location_count
+                          else 'unknown')
+        self.planet_label.configure(text=f'#{n.planet_id:02d} {c.graph.planet_name(n.planet_id)} '
+                                         f'→ location #{location:02d} {location_label} · '
                                          f'{n.goal_count}/6 goals · flags 0x{n.flags:02X}')
         self.title_var.set(d.name)
         self.planet_var.set(str(n.planet_id))
