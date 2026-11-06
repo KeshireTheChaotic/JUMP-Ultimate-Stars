@@ -59,20 +59,29 @@ for every workspace: `docs/STUDIO_WORKSPACES.md`.
   `koma.aar`, dictionary → `bin/kshape.bin`, selectors → `bin/koma.bin`). All edits are
   undoable. Deck placement is not part of this editor. Additional variants require
   emulator testing because runtime shape-array capacity is not yet traced.
-* **Level workspace (Ctrl+5)** — stages and the J-Galaxy missions fought on them. The browser
-  has two groups: *Stages* (`bg_xx` sets, labelled with their battle stage index from the
-  ARM9 stage table 0x02092D08 and the number of missions using them) and *J-Galaxy missions*
-  (142 progression nodes by planet). Selecting a mission loads the stage its battle uses
-  (definition `+0x75` → stage table) and opens the **Mission** tab: linked mission/battle
-  definition, stage/rule/opponent count (read-only), up to six objective grants. A reward
-  can be changed to a Koma ID or six resource quantities, and shared definition titles
-  renamed; Apply writes the nested `jgalaxy/jgalaxy.aar`. Background editing: composited
-  layers (ALTM + tiles, ¼×–12× zoom, tile hover/inspect), **Select / Paint / Picker** for
-  tile entries with a tile-set brush, palette bank, flips | Layers with eye toggles and
-  **read-only overlays** (camera, `.mob` objects, `.bin` stage table, collision and gimmicks
-  remain undecoded; raw bytes in *Stage data*) | Problems, PNG export. Undo/redo follows the
-  active bottom tab (Mission vs. tile maps); Apply writes both. No geometric guesses are saved.
-  Details: `docs/MISSION_REWARD_TRACE.md`.
+* **Level workspace (Ctrl+5)** — navigation follows the game-facing hierarchy:
+  **J-Space → Galaxy → World / Planet → Mission or Battle**. The world-to-mission
+  relationship is directly decoded from node +0x0A. For multi-galaxy data, worlds
+  appear under **Worlds (galaxy parents unverified)** until the galaxy parent
+  reference is traced; the UI never fabricates parent IDs. Galaxy and world
+  selections have a dedicated navigation view and Inspector; stage maps load
+  only after selecting an actual mission. Native J-Space/world sprite identity
+  still requires matching the game's UI assets to progression records.
+  The mission's **right inspector** includes a battle definition, title, stage
+  assignment, objective codes, Koma or resource rewards, and the fresh-save-only
+  clone/remove controls. Editing the shared definition affects all nodes that
+  reference it. The **bottom ribbon** now provides **Map markers** (moving floors,
+  grip anchors), **Triggers / gimmicks**, and **Spawns** (item candidate positions,
+  item symbols), plus the original Tile set, runtime projection, raw stage data and
+  Problems. Selected .mob X/Y coordinate fields are editable and written losslessly:
+  moving-floor coordinates are whole pixels, and grip/item/gimmick/symbol records
+  use 24.8 fixed-point coordinates. Record sizes, unknown flags, trigger logic,
+  item probability weights, combat-derived events and .bin collision handlers
+  remain untouched. Stage ALTM tile painting still supports palette banks,
+  flip bits, composite PNG export and Undo / Apply / Save. A stage switch prompts
+  before discarding unapplied tile/marker changes. Creating/deleting graph nodes
+  remains experimental and requires a **fresh game save**, plus emulator testing.
+  Details: `docs/MISSION_REWARD_TRACE.md`, `docs/JGALAXY_FRESH_SAVE_MAP_TRACE.md`.
 * **Screen workspace** — menu/scene archive browser with nested AAR expansion **and search** |
   dual 256×192 DS screens | background layers (ALTM) with preview-only screen/scroll/order |
   nested sprite objects (DSTX/DSIG) with selectable **Sprite frame**, auto-preview
