@@ -213,14 +213,19 @@ class LevelWorkspace(LevelMarkersMixin, SuiteWorkspace):
                 self.app.status.set(f'stage.aar: {exc}')
         self.missions.on_root()
         self._by_stage = self.missions.nodes_by_stage()
+        self.nav_kind, self.nav_id = 'root', None
         self.stage = None
+        self._stage_mob = None
+        self._original_mob = self._mob_working = b''
+        self.layers, self.images, self.sel_layer, self.sel_tile = [], {}, None, None
+        self._probs = []
         self.populate()
-        if self.missions.catalog is not None and self.missions.catalog.graph.node_count:
-            self.select_mission(0)
-            if self.tree.exists('n:0'):
-                self.tree.selection_set('n:0')
-                self.tree.see('n:0')
+        self.show_stage_inspector()
+        if self.tree.exists('js:0'):
+            self.tree.selection_set('js:0')
+        self._refresh_markers()
         self.refresh_inspector()
+        self.view.redraw()
 
     def populate(self):
         """Render the verified J-Space → galaxy → world → mission hierarchy.
@@ -305,15 +310,20 @@ class LevelWorkspace(LevelMarkersMixin, SuiteWorkspace):
     def select_mission(self, node_id):
         """Select one mission, load its battle stage, and show its inspector."""
         self._stop_stage_play()
-        self.nav_kind, self.nav_id = 'mission', node_id
-        self.missions.select_node(node_id)
         stem = self.missions.stage_of(node_id)
         if stem and (not self.stage or self.stage.stem != stem):
             if any(s.stem == stem for s in self._sets):
-                self.load(stem)
+                if not self.load(stem):
+                    previous = self.missions.node_id
+                    if previous is not None and self.tree.exists(f'n:{previous}'):
+                        self.tree.selection_set(f'n:{previous}')
+                    return
+        self.nav_kind, self.nav_id = 'mission', node_id
+        self.missions.select_node(node_id)
         self.show_mission_inspector()
         self._preview_changed()
         self.refresh_inspector()
+        self.view.redraw()
 
     def mission_changed(self):
         """Keep the hierarchy and shared stage-reference list in sync."""
@@ -326,7 +336,7 @@ class LevelWorkspace(LevelMarkersMixin, SuiteWorkspace):
     def load(self, stem):
         if self.stage and self.stage.stem != stem and (self.maps_dirty or self.mob_dirty):
             if not messagebox.askyesno('Level', 'Discard unapplied stage tile and marker edits before switching stages?'):
-                return
+                return False
         self.stage = next((s for s in self._sets if s.stem == stem), None)
         self._stroke = False
         self.sel_overlay = None
@@ -380,6 +390,7 @@ class LevelWorkspace(LevelMarkersMixin, SuiteWorkspace):
         self._preview_changed(redraw=False)
         self.refresh(frame=True)
         self.app.status.set(f'{stem}: {len(self.layers)} background layers')
+        return True
 
     # ------------------------------------------------------------ view
     def _layer_rows(self):
@@ -987,8 +998,9 @@ class LevelWorkspace(LevelMarkersMixin, SuiteWorkspace):
                   (' H' if self.flip_h.get() else '') + (' V' if self.flip_v.get() else ''))
         ins.value('Unapplied edits', 'yes' if l.map.build() != self._original_maps.get(l.atm_path) else 'no',
                   colour=T.WARN if l.map.build() != self._original_maps.get(l.atm_path) else None)
-        ins.text('Paint edits only ALTM tile entries. Camera, .mob/.bin, collision and gimmicks are read-only. '
-                 'Use Apply, then Save; the stage archive is not modified before Save.')
+        ins.text('ALTM tiles and verified .mob marker XY coordinates can be changed. '
+                 'Trigger behavior, collision and item probabilities remain read-only. '
+                 'Use Apply, then Save to write nested archives.')
 
     def _mission_inspector(self, ins):
         m = self.missions
