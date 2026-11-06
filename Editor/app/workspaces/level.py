@@ -219,7 +219,7 @@ class LevelWorkspace(LevelArtworkMixin, LevelMarkersMixin, SuiteWorkspace):
         self.nav_kind, self.nav_id = 'root', None
         self._sync_nav_art_fields()
         self.stage = None
-        self._stage_mob = None
+        self._stage_mob = self._stage_geo = self._stage_frame = None
         self._original_mob = self._mob_working = b''
         self.layers, self.images, self.sel_layer, self.sel_tile = [], {}, None, None
         self._probs = []
@@ -343,6 +343,8 @@ class LevelWorkspace(LevelArtworkMixin, LevelMarkersMixin, SuiteWorkspace):
             if not messagebox.askyesno('Level', 'Discard unapplied stage tile and marker edits before switching stages?'):
                 return False
         self.stage = next((s for s in self._sets if s.stem == stem), None)
+        if self.stage is not None:
+            self.nav_kind = 'mission'  # Directly opening a stage also shows its map.
         self._stroke = False
         self.sel_overlay = None
         self._original_maps = {}
@@ -695,7 +697,7 @@ class LevelWorkspace(LevelArtworkMixin, LevelMarkersMixin, SuiteWorkspace):
         else:
             heading = 'J-SPACE'
             info = f'{c.graph.galaxy_count} galaxies · {c.graph.planet_count} worlds'
-        vp.rect(0, 0, 410, 230, outline=T.LINE, width=2)
+        vp.rect(0, 0, 410, 460, outline=T.LINE, width=2)
         vp.text(18, 42, heading, fill=T.ACCENT, anchor='w')
         vp.text(18, 85, info, fill=T.FG, anchor='w')
         vp.text(18, 123, 'Navigation sprite ID mapping unverified', fill=T.MUTED, anchor='w')
