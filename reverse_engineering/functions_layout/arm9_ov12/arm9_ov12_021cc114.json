@@ -1,0 +1,1 @@
+{"module":"arm9_ov12","address":"021cc114","name":"FUN_021cc114","thumb":true,"body_bytes":54,"calling_convention":"unknown","return_type":"undefined","parameter_count":0,"calls":["021ce388","021ce408","021cf7cc"],"unresolved_call_targets":[],"status":"decompiled","asm_file":"arm9_ov12_021cc114.asm","c_file":"arm9_ov12_021cc114.c"}

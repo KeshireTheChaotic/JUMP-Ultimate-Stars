@@ -1,5 +1,8 @@
 
-void FUN_020653d4(int param_1)
+/* JUS-SDK GX_SetBankForSubOBJ [behavioral] every VRAMCNT write selects a SubOBJ mode (bank/MST per
+   GBATEK) */
+
+void GX_SetBankForSubOBJ(int param_1)
 
 {
                     /* JUS-TAG hw={"VRAMCNT":2} io=["04000243","04000249"] */
@@ -13,7 +16,7 @@ void FUN_020653d4(int param_1)
     }
   }
   DAT_020afbb4 = (ushort)param_1;
-  FUN_02065af4(DAT_020afba0);
+  GX_VRAMCNT_SetLCDC_(DAT_020afba0);
   return;
 }
 

@@ -1,0 +1,14 @@
+0218c2ac  ldr r3,[r0,#0x0]
+0218c2ae  ldr r2,[r1,#0x0]
+0218c2b0  ldr r1,[r2,#0x0]
+0218c2b2  ldr r0,[r3,#0x0]
+0218c2b4  cmp r0,r1
+0218c2b6  beq 0x0218c2bc
+0218c2b8  sub r0,r0,r1
+0218c2ba  bx lr
+0218c2bc  ldrh r1,[r3,#0x4]
+0218c2be  ldrh r0,[r2,#0x4]
+0218c2c0  sub r0,r1,r0
+0218c2c2  lsl r0,r0,#0x10
+0218c2c4  asr r0,r0,#0x10
+0218c2c6  bx lr

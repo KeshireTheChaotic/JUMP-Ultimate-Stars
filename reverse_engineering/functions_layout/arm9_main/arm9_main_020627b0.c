@@ -18,7 +18,7 @@ void FUN_020627b0(int param_1)
         *(uint *)(param_1 + 8) = uVar2;
         uVar4 = param_1 + 0x20;
       }
-      FUN_02062a84(uVar2 >> 8 | 0xb7000000,0);
+      CARDi_SetRomOp(uVar2 >> 8 | 0xb7000000,0);
       uVar2 = 0;
       _DAT_040001a4 = *(uint *)(param_1 + 4);
       do {

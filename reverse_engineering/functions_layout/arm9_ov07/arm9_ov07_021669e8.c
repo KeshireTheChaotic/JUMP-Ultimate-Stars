@@ -10,7 +10,7 @@ void FUN_021669e8(int param_1,undefined4 param_2,undefined4 param_3,undefined4 p
   if (*(int *)(DAT_0214ccf8 + 0xc) != 0) {
     iVar2 = 0;
     iVar4 = 0;
-    FUN_02054b44();
+    OS_GetTick();
     if (param_1 != 0) {
       iVar4 = 0x14;
     }
@@ -21,7 +21,7 @@ void FUN_021669e8(int param_1,undefined4 param_2,undefined4 param_3,undefined4 p
       }
       (*DAT_020a0e18)();
     }
-    FUN_02054b44();
+    OS_GetTick();
     uVar3 = 0;
     *(undefined4 *)(DAT_0214ccf8 + 0xc) = 0;
     if (iVar2 != 0) {

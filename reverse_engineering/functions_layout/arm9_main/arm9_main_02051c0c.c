@@ -17,7 +17,7 @@ void FUN_02051c0c(int param_1)
   }
   _DAT_027c3ff8 = _DAT_027c3ff8 | uVar1;
   if ((&DAT_020aaafc)[param_1 * 3] == 0) {
-    FUN_02051d14(uVar1);
+    OS_DisableIrqMask(uVar1);
     return;
   }
   return;

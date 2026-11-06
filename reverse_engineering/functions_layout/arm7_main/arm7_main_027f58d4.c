@@ -6,9 +6,9 @@ void FUN_027f58d4(void)
   
   do {
     while( true ) {
-      FUN_027f66a4(local_10);
+      jus_SpiFlash_ReadStatus(local_10);
       if ((local_10[0] & 0x20) == 0) break;
-      FUN_027f5ecc();
+      jus_SpiFlash_SoftwareReset();
     }
   } while ((local_10[0] & 1) != 0);
   return;

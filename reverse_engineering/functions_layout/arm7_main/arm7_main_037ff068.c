@@ -1,5 +1,7 @@
 
-void FUN_037ff068(int param_1,short param_2)
+/* JUS-SDK SND_SetChannelTimer [behavioral] SOUNDxTMR (+8) = 0x10000 - timer */
+
+void SND_SetChannelTimer(int param_1,short param_2)
 
 {
                     /* JUS-TAG hw={"SOUND":1} io=["04000408"] */

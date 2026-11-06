@@ -12,7 +12,7 @@ undefined4 FUN_0215fe58(int *param_1)
       param_1[1] = 0;
     }
     if (param_1[1] == param_1[2]) {
-      uVar1 = FUN_02054b44();
+      uVar1 = OS_GetTick();
       param_1[2] = uVar1 & 3;
       param_1[1] = param_1[2];
     }

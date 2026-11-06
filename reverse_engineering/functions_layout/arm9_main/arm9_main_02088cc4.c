@@ -16,6 +16,9 @@ void CommLib::ParentFunc(int param_1)
   int iVar8;
   undefined4 uVar9;
   
+                    /* JUS-TAG
+                       strings=["ALObjectImp.h","CommLib.cpp","ParentFunc","PostSyncDelayMessage","PostSyncMessage"]
+                        */
   uVar3 = (ushort)(1 << (*(ushort *)(param_1 + 0x10) & 0xff));
   if (*(short *)(param_1 + 2) != 0) {
     FUN_02088904(*(short *)(param_1 + 2),s_CommLib_cpp_020a0338,0x22a);

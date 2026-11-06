@@ -5,6 +5,7 @@
 undefined * jus_Class_02094300::vfunc_02(void)
 
 {
+                    /* JUS-TAG strings=[".atx"] */
   return &DAT_0209d504;
 }
 

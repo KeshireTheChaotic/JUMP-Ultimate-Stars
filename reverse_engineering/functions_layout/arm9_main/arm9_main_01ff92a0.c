@@ -1,5 +1,5 @@
 
-void FUN_01ff92a0(int *param_1)
+int FUN_01ff92a0(int *param_1)
 
 {
   int *piVar1;
@@ -15,7 +15,6 @@ void FUN_01ff92a0(int *param_1)
   int iVar11;
   int iVar12;
   int iVar13;
-  uint in_lr;
   undefined8 uVar14;
   
   uVar14 = CONCAT44(*param_1 + 2,param_1 + 9);
@@ -62,9 +61,6 @@ void FUN_01ff92a0(int *param_1)
   piVar1[2] = iVar6;
   piVar1[3] = iVar8;
   piVar1[4] = iVar10;
-                    /* WARNING: Could not recover jumptable at 0x01ff9408. Too many branches */
-                    /* WARNING: Treating indirect jump as call */
-  (*(code *)(in_lr & 0xfffffffc))(((int)((ulonglong)uVar14 >> 0x20) - piVar1[-9]) + -2);
-  return;
+  return ((int)((ulonglong)uVar14 >> 0x20) - piVar1[-9]) + -2;
 }
 

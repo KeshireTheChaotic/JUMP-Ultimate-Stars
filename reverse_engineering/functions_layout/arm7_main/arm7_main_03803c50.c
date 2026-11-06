@@ -15,7 +15,7 @@ undefined4 FUN_03803c50(void)
   DAT_03809cbc = (code *)0x0;
   DAT_03809cc0 = 0;
   OS_RestoreInterrupts(uVar2);
-  uVar3 = FUN_03803d18();
+  uVar3 = CARDi_ReadRomIDCore();
   *DAT_03809c80 = 0;
   uVar2 = DAT_03809cc0;
   pcVar1 = DAT_03809cbc;

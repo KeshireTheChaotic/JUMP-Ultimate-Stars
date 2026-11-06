@@ -1,9 +1,15 @@
 
-ushort FUN_020651c0(ushort *param_1)
+/* JUS-SDK disableBankForX_ [behavioral] clears the field it is given and writes 0 (disabled) to the
+   VRAMCNT of every bank that was in it */
+
+ushort disableBankForX_(ushort *param_1)
 
 {
   ushort uVar1;
   
+                    /* JUS-TAG hw={"VRAMCNT":9}
+                       io=["04000240","04000241","04000242","04000243","04000244","04000245","04000246","04000248","04000249"]
+                        */
   uVar1 = *param_1;
   *param_1 = 0;
   if ((uVar1 & 1) != 0) {

@@ -28,7 +28,7 @@ void FUN_021740e4(int param_1)
   FUN_0218f378();
   if (*(int *)(param_1 + 0x112c) == 1) {
     FUN_020517fc(param_1 + 0x1198,0,0x830);
-    *(undefined1 **)(param_1 + 0x19a8) = &LAB_02173dfc_1;
+    *(undefined4 *)(param_1 + 0x19a8) = 0x2173dfd;
     *(undefined4 *)(param_1 + 0x1998) = *(undefined4 *)(param_1 + 0x1124);
     *(int *)(param_1 + 0x1140) = param_1 + 0x1198;
     FUN_02196174(&PTR_DAT_021a3950,0xb);
@@ -57,7 +57,7 @@ void FUN_021740e4(int param_1)
     else {
       *(int *)(param_1 + 0x1a08) = *(int *)(param_1 + 0x1a04);
       *(int *)(param_1 + 0x1a0c) = *(int *)(param_1 + 0x1a04) + *(int *)(param_1 + 0x1a10);
-      lVar7 = FUN_02054b44();
+      lVar7 = OS_GetTick();
       do {
         if (DAT_021a8538 == 0) {
           *(undefined4 *)(param_1 + 0x1020) = 5;
@@ -66,7 +66,7 @@ void FUN_021740e4(int param_1)
         local_1c[0] = FUN_0218ec54();
         if ((int)local_1c[0] < 0) goto LAB_021742ac;
         if (0 < (int)local_1c[0]) {
-          lVar7 = FUN_02054b44();
+          lVar7 = OS_GetTick();
           iVar1 = FUN_0218f044(local_1c);
           if (iVar1 == 0) goto LAB_021742ac;
           uVar3 = (*(int *)(param_1 + 0x1a0c) + -1) - *(int *)(param_1 + 0x1a08);
@@ -101,7 +101,7 @@ LAB_021742ac:
           *(undefined4 *)(param_1 + 0x1020) = 8;
           return;
         }
-        lVar8 = FUN_02054b44();
+        lVar8 = OS_GetTick();
         uVar4 = (uint)(lVar8 - lVar7);
         uVar9 = FUN_0200d0c4(uVar4 * 0x40,
                              (int)((ulonglong)(lVar8 - lVar7) >> 0x20) * 0x40 | uVar4 >> 0x1a,0x82ea

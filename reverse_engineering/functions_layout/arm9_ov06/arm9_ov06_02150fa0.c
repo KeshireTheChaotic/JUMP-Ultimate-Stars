@@ -42,9 +42,9 @@ BattleTutorial::Battle_TutorialCreate
   FUN_0206bcf0(puVar1[0xb],*(int *)(DAT_02172960 + 0xe0) + 0x1c,1);
   *(undefined4 **)(puVar1[0xb] + 0x1c) = puVar1;
   iVar3 = 1;
-  *(undefined1 **)(puVar1[0xb] + 0x10) = &LAB_02151664_1;
+  *(undefined4 *)(puVar1[0xb] + 0x10) = 0x2151665;
   *(undefined4 *)(puVar1[0xb] + 0x14) = 0x2151b1d;
-  *(undefined1 **)(puVar1[0xb] + 0x18) = &LAB_02151ba8_1;
+  *(undefined4 *)(puVar1[0xb] + 0x18) = 0x2151ba9;
   *(ushort *)(puVar1[0xb] + 0x6e) = *(ushort *)(puVar1[0xb] + 0x6e) | 1;
   if (*(char *)(DAT_02172960 + 0x16e) != '\0') {
     for (; iVar3 < *(int *)(DAT_02172960 + 0x158); iVar3 = iVar3 + 1) {

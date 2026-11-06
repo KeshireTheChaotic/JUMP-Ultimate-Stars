@@ -12,7 +12,7 @@ void FUN_0219627c(int param_1,int param_2,uint param_3)
   undefined8 uVar8;
   
   uVar1 = OS_DisableInterrupts();
-  uVar8 = FUN_02054b44();
+  uVar8 = OS_GetTick();
   uVar2 = (uint)uVar8 >> 0x10 | (int)((ulonglong)uVar8 >> 0x20) << 0x10;
   uVar5 = 0;
   puVar7 = &DAT_021a9f24;

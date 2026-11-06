@@ -7,7 +7,7 @@ void FUN_021691d8(int *param_1,undefined4 param_2,undefined4 param_3,undefined4 
   int *piVar1;
   int iVar2;
   
-  param_1[4] = (int)&LAB_0216937c;
+  param_1[4] = (int)FUN_0216937c;
   param_1[5] = 0;
   FUN_02169624(param_1,param_1[0x19],param_3,param_4,param_4);
   piVar1 = _DAT_021d52d8;

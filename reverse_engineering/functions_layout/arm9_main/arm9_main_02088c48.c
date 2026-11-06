@@ -4,6 +4,7 @@ void FUN_02088c48(int param_1,undefined4 param_2,undefined4 param_3,undefined4 p
 {
   int iVar1;
   
+                    /* JUS-TAG strings=["CommLib.cpp"] source_file_inferred="CommLib.cpp" */
   if (*(short *)(param_1 + 2) != 0) {
     FUN_02088904(*(short *)(param_1 + 2),s_CommLib_cpp_020a0338,0x1cc);
     return;

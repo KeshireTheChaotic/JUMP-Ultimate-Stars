@@ -1,11 +1,15 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+/* JUS-SDK GX_SetBankForOBJExtPltt [behavioral] every VRAMCNT write selects a OBJExtPltt mode
+   (bank/MST per GBATEK) */
 
-void FUN_02065784(int param_1)
+void GX_SetBankForOBJExtPltt(int param_1)
 
 {
-  code *UNRECOVERED_JUMPTABLE;
+  code *in_lr;
   
+                    /* JUS-TAG hw={"GX_2D_main":1,"VRAMCNT":2} io=["04000000","04000245","04000246"]
+                        */
   DAT_020afba0 = ~(ushort)param_1 & (DAT_020afba0 | DAT_020afbb0);
   if (param_1 == 0) {
     _DAT_04000000 = _DAT_04000000 & 0x7fffffff;
@@ -19,10 +23,8 @@ void FUN_02065784(int param_1)
     DAT_04000246 = 0x85;
   }
   DAT_020afbb0 = (ushort)param_1;
-  FUN_02065af4(DAT_020afba0);
-                    /* WARNING: Could not recover jumptable at 0x020657de. Too many branches */
-                    /* WARNING: Treating indirect jump as call */
-  (*UNRECOVERED_JUMPTABLE)();
+  GX_VRAMCNT_SetLCDC_(DAT_020afba0);
+  (*in_lr)();
   return;
 }
 

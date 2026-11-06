@@ -2,7 +2,7 @@
 void FUN_0219d7ec(void)
 
 {
-  (*(code *)&LAB_02167b14)(DAT_0214ccf8 + 0xa88);
+  (*(code *)&SUB_02167b14)(DAT_0214ccf8 + 0xa88);
   return;
 }
 

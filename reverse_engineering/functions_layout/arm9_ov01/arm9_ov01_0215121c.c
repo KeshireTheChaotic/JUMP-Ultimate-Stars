@@ -152,7 +152,7 @@ void JArenaMissionTry::JAMissionTry_InitPanelWidgetItem
       uVar2 = FUN_02150a40(0,0x216bdb4,0x2093c8c);
       FUN_02020e98(iVar4,uVar2);
       *(code **)(*(int *)(iVar4 + 4) + 0xdc) = FUN_0215265c + 1;
-      *(undefined1 **)(*(int *)(iVar4 + 4) + 0xe0) = &LAB_0215267c_1;
+      *(code **)(*(int *)(iVar4 + 4) + 0xe0) = FUN_0215267c + 1;
       func_0x021b65e8(*(undefined4 *)(iVar4 + 4),4,FUN_02152680);
       iVar5 = FUN_0203b414(3);
       FUN_0214f7f8(*(undefined4 *)(iVar5 + 0x88));
@@ -168,7 +168,7 @@ void JArenaMissionTry::JAMissionTry_InitPanelWidgetItem
       FUN_0214f834();
       FUN_0214e688(iVar4,iVar5);
       (**(code **)(**(int **)(iVar7 + 4) + 0x24))(*(int **)(iVar7 + 4),iVar4);
-      *(undefined1 **)(*(int *)(iVar7 + 4) + 0xdc) = &LAB_021525dc_1;
+      *(code **)(*(int *)(iVar7 + 4) + 0xdc) = FUN_021525dc + 1;
       *(code **)(*(int *)(iVar7 + 4) + 0xe0) = FUN_0215261c + 1;
       iVar4 = FUN_02152728(uVar9);
       if (iVar4 != 0) {

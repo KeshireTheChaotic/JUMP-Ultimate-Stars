@@ -17,7 +17,7 @@ undefined4 FUN_02162ff4(undefined4 param_1)
   DAT_0216e800 = FUN_02166b8c(0x1ba0,0x20);
   *(undefined4 *)(DAT_0216e800 + 0x1370) = param_1;
   iVar2 = DAT_0216e800;
-  uVar8 = FUN_02054b44();
+  uVar8 = OS_GetTick();
   *(undefined8 *)(iVar2 + 0x1b78) = uVar8;
   iVar2 = FUN_020594b0(iVar2,0x2162ea9,3);
   if (iVar2 == 2) {

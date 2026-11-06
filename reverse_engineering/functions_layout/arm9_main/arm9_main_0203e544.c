@@ -96,21 +96,21 @@ void jus_Class_0209aa68::vfunc_40(void)
       if (iVar6 == 1) {
         iVar6 = *(int *)(DAT_020a171c + 0x8e4);
         if (iVar6 == 1) {
-          FUN_02064e28(0);
+          GXS_SetGraphicsMode(0);
         }
         else if (iVar6 == 2) {
-          FUN_02064e28(1);
+          GXS_SetGraphicsMode(1);
         }
         else if (iVar6 - 3U < 3) {
-          FUN_02064e28(3);
+          GXS_SetGraphicsMode(3);
         }
       }
       else if (iVar6 == 2) {
         if (*(int *)(DAT_020a171c + 0x8e4) == 2) {
-          FUN_02064e28(2);
+          GXS_SetGraphicsMode(2);
         }
         else if (*(int *)(DAT_020a171c + 0x8e4) - 3U < 3) {
-          FUN_02064e28(4);
+          GXS_SetGraphicsMode(4);
         }
       }
       else {
@@ -119,7 +119,7 @@ void jus_Class_0209aa68::vfunc_40(void)
           uVar8 = *(int *)(DAT_020a171c + 0x8e4) - 3;
         }
         if (uVar8 < 3) {
-          FUN_02064e28(5);
+          GXS_SetGraphicsMode(5);
         }
       }
     }
@@ -270,7 +270,7 @@ LAB_0203e8dc:
       if (local_38[uVar8] != (*(uint *)(iVar3 + 0x964) & 0x3fff) + iVar6) {
         iVar3 = (&DAT_020a1710)[uVar8];
         iVar6 = (**(code **)(iVar3 + 0x948))();
-        FUN_0205160c(uVar4,local_38[uVar8],
+        MI_DmaCopy32(uVar4,local_38[uVar8],
                      (*(uint *)((&DAT_020a1710)[uVar8] + 0x964) & 0x3fff) + iVar6,
                      *(undefined4 *)(iVar3 + 0x960));
       }

@@ -81,7 +81,7 @@ undefined4 FUN_021cea2c(int param_1,int param_2)
   uVar5 = uVar1 + uVar4;
   *(uint *)(param_2 + 0x46c) = uVar2 + uVar5;
   *(uint *)(param_2 + 0x470) = iVar6 + (uint)CARRY4(uVar1,uVar4) + (uint)CARRY4(uVar2,uVar5);
-  lVar9 = FUN_02054b44();
+  lVar9 = OS_GetTick();
   uVar2 = (uint)((ulonglong)lVar9 >> 0x20);
   uVar5 = *(uint *)(param_2 + 0x46c);
   uVar4 = *(uint *)(param_2 + 0x470);

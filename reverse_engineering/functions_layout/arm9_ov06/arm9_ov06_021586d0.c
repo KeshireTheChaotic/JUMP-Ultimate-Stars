@@ -67,8 +67,8 @@ void FUN_021586d0(int param_1,int param_2)
   DAT_020a0dd0 = (&DAT_020a16d0)[DAT_02093c08];
   DAT_02093c08 = DAT_02093c08 + 1;
   *(undefined1 *)(param_1 + 0xdf) = *(undefined1 *)(param_2 + 0x5cd);
-  *(undefined1 **)(param_1 + 0x7c) = &LAB_02159258;
-  *(undefined1 **)(param_1 + 0x94) = &LAB_02159258;
+  *(code **)(param_1 + 0x7c) = FUN_02159258;
+  *(code **)(param_1 + 0x94) = FUN_02159258;
   *(undefined2 *)(param_1 + 0x8e) = 0xffff;
   *(undefined2 *)(param_1 + 0xa6) = 0xffff;
   return;

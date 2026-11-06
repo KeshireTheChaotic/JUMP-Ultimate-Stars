@@ -8,7 +8,7 @@ void FUN_027ec560(uint param_1,uint param_2)
   int iVar2;
   undefined2 *puVar3;
   
-  uVar1 = FUN_037fbc10(0x1000000);
+  uVar1 = OS_DisableIrqMask(0x1000000);
   if (param_2 < 0x40) {
     FUN_027ec480(param_1);
     *(ushort *)(_DAT_0380fff4 + 0x532) =
@@ -27,7 +27,7 @@ void FUN_027ec560(uint param_1,uint param_2)
   }
   puVar3 = (undefined2 *)FUN_027ec1ac(param_1);
   *puVar3 = (short)param_2;
-  FUN_037fbc4c(uVar1);
+  OS_EnableIrqMask(uVar1);
   return;
 }
 

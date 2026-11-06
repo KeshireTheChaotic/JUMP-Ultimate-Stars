@@ -14,7 +14,7 @@ void FUN_02165dcc(int param_1,int param_2,int param_3)
   
   iVar1 = param_1 * 0x228;
   iVar2 = FUN_0216609c(*(undefined4 *)(DAT_0216e834 + iVar1 + 0x224));
-  uVar3 = FUN_02051d14(1);
+  uVar3 = OS_DisableIrqMask(1);
   if (param_3 == 0) {
     iVar7 = DAT_0216e834 + param_1 * 0x228;
     piVar8 = (int *)(iVar7 + 0x210);
@@ -57,7 +57,7 @@ void FUN_02165dcc(int param_1,int param_2,int param_3)
       FUN_02055684();
     }
   }
-  FUN_02051d5c(uVar3);
+  OS_EnableIrqMask(uVar3);
   *(char *)(iVar2 + 0xc) = (char)param_2;
   return;
 }

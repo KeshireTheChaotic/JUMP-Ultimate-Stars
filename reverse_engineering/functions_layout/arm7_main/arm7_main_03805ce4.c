@@ -17,7 +17,7 @@ undefined2 FUN_03805ce4(void)
   uVar2 = _DAT_04000208;
   _DAT_04000208 = 0;
   uVar3 = OS_DisableInterrupts();
-  uVar4 = FUN_037fbc10(0x1ffffff);
+  uVar4 = OS_DisableIrqMask(0x1ffffff);
   uVar5 = FUN_03805a34(0);
   FUN_03805edc(2);
   FUN_03805b50(2);
@@ -26,10 +26,10 @@ undefined2 FUN_03805ce4(void)
   FUN_038059e4(1);
   if ((DAT_0380aa70 & 1) != 0) {
     _DAT_04000132 = DAT_0380aa6c | 0x4000;
-    FUN_037fbc4c(0x1000);
+    OS_EnableIrqMask(0x1000);
   }
   if ((DAT_0380aa70 & 4) != 0) {
-    FUN_037fbc4c(0x400000);
+    OS_EnableIrqMask(0x400000);
   }
   uVar1 = _DAT_04000134;
   bVar7 = (DAT_0380aa70 & 2) != 0;
@@ -37,14 +37,14 @@ undefined2 FUN_03805ce4(void)
     FUN_037fec00(0x8000);
     FUN_037fec1c(0x40,0);
     FUN_037fec1c(0x100,0x100);
-    FUN_037fbc4c(0x80);
+    OS_EnableIrqMask(0x80);
     unaff_r6 = uVar1;
   }
   if ((DAT_0380aa70 & 8) != 0) {
-    FUN_037fbc4c(0x100000);
+    OS_EnableIrqMask(0x100000);
   }
   if ((DAT_0380aa70 & 0x10) != 0) {
-    FUN_037fbc4c(0x2000);
+    OS_EnableIrqMask(0x2000);
   }
   OS_RestoreInterrupts(uVar3);
   _DAT_04000208 = 1;
@@ -72,7 +72,7 @@ undefined2 FUN_03805ce4(void)
   DAT_0380aa98 = 0;
   FUN_03805988(0x62,0,0);
   OS_DisableInterrupts();
-  FUN_037fbc84(uVar4);
+  OS_SetIrqMask(uVar4);
   OS_RestoreInterrupts(uVar3);
   uVar1 = _DAT_04000208;
   _DAT_04000208 = uVar2;

@@ -121,8 +121,8 @@ class MissionPanel:
         table.pack(fill='x', padx=4, pady=4)
         self.goals = ttk.Treeview(table, columns=('code', 'kind', 'detail'),
                                   show='tree headings', height=5, selectmode='browse')
-        for col, text, width, stretch in (('#0', 'Slot', 35, False), ('code', 'Goal', 60, False),
-                                          ('kind', 'Grant', 65, False), ('detail', 'Details', 130, True)):
+        for col, text, width, stretch in (('#0', 'Slot', 35, False), ('code', 'Goal', 190, True),
+                                          ('kind', 'Grant', 65, False), ('detail', 'Details', 110, True)):
             self.goals.heading(col, text=text)
             self.goals.column(col, width=int(width * self.ws.k), stretch=stretch)
         sb = ttk.Scrollbar(table, command=self.goals.yview)
@@ -159,14 +159,20 @@ class MissionPanel:
             fill='x', padx=6, pady=4)
         row = ttk.Frame(objectives)
         row.pack(fill='x', padx=6, pady=3)
-        ttk.Label(row, text='Raw goal code').pack(side='left')
-        ttk.Entry(row, width=8, textvariable=self.goal_code_var).pack(side='left', padx=4)
+        ttk.Label(row, text='Goal').pack(side='left')
+        # clear-list id: text from bin/clearlst.bin, rule from bin/clear.bin (ov06 FUN_02160A48)
+        self.goal_combo = ttk.Combobox(row, textvariable=self.goal_code_var, width=30)
+        self.goal_combo.pack(side='left', padx=4, fill='x', expand=True)
         ttk.Button(row, text='Set', command=self.update_goal_code).pack(side='left')
+        self.goal_rule = ttk.Label(objectives, text='', wraplength=int(280 * self.ws.k),
+                                   style='Toolbar.TLabel', justify='left')
+        self.goal_rule.pack(fill='x', padx=6)
         row = ttk.Frame(objectives)
         row.pack(fill='x', padx=6, pady=3)
         ttk.Button(row, text='+ Goal slot', command=self.add_goal).pack(side='left')
         ttk.Button(row, text='− Last slot', command=self.remove_goal).pack(side='left', padx=4)
-        ttk.Label(objectives, text='Raw objective codes are not fully classified. '
+        ttk.Label(objectives, text='Goal = clear-list id: its text is the shipped bin/clearlst.bin string and '
+                  'its rule is the bin/clear.bin predicate. Ids with the same text can have different rules. '
                   'Only existing fixed slots can be enabled/disabled.', wraplength=int(280*self.ws.k),
                   style='Toolbar.TLabel').pack(fill='x', padx=6, pady=4)
 
@@ -277,11 +283,13 @@ class MissionPanel:
         self.time_var.set(str(d.time_value))
         self.environment_var.set(bool(d.data[0x7C] & 0x02))
         old_slot = self.slot
+        goals = c.goals
+        self.goal_combo.configure(values=[g.label() for g in goals.goals] if goals else [])
         for reward in n.rewards:
             detail = (f'Koma #{reward.koma_id}' if reward.is_koma else
                       ', '.join(f'R{i}={v}' for i, v in enumerate(reward.resources)))
             self.goals.insert('', 'end', iid=f's:{reward.slot}', text=f'{reward.slot + 1}',
-                              values=(f'0x{reward.goal_code:04X}',
+                              values=(goals.describe(reward.goal_code) if goals else f'0x{reward.goal_code:04X}',
                                       'Koma' if reward.is_koma else 'Resources', detail))
         self.slot = None
         if old_slot is not None and old_slot < n.goal_count:
@@ -299,7 +307,10 @@ class MissionPanel:
         slot = int(selected[0][2:])
         reward = self.catalog.graph.get(self.node_id).rewards[slot]
         self.slot = slot
-        self.goal_code_var.set(f'0x{reward.goal_code:04X}')
+        goals = self.catalog.goals
+        self.goal_code_var.set(goals.describe(reward.goal_code) if goals else f'0x{reward.goal_code:04X}')
+        g = goals.get(reward.goal_code) if goals else None
+        self.goal_rule.configure(text=('Rule: ' + g.rule) if g else '')
         self.kind_var.set('Koma' if reward.is_koma else 'Resources')
         self.koma_var.set(str(max(0, reward.koma_id)))
         for var, quantity in zip(self.resources, reward.resources):
@@ -489,28 +500,40 @@ class MissionPanel:
         if self.catalog is None or self.node_id is None or self.slot is None:
             return
         try:
-            code = _number(self.goal_code_var.get())
+            code = self._goal_id()
             check = GalaxyGraph.parse(self.catalog.graph.build())
             check.set_goal_code(self.node_id, self.slot, code)
             if check.build() == self.catalog.graph.build():
                 return
         except (ValueError, IndexError) as exc:
-            messagebox.showerror('Raw objective code', str(exc))
+            messagebox.showerror('Mission goal', str(exc))
             return
-        if not messagebox.askyesno('Unclassified condition',
-                'The objective code is raw/unclassified. It may change how mission clear '
-                'conditions are evaluated in-game. Write this code?'):
+        goals = self.catalog.goals
+        g = goals.get(code) if goals else None
+        if g is None and not messagebox.askyesno(
+                'Unknown goal', f'0x{code & 0xFFFF:04X} has no clear-list entry; the game would show '
+                'no or wrong text and evaluate an unknown rule. Write it anyway?'):
             return
-        self.checkpoint('edit raw objective code')
+        self.checkpoint('edit mission goal')
         self.catalog.graph = check
         self.refresh()
-        self._edited('Raw objective code updated. Validate mission conditions in melonDS.')
+        self._edited(f'Goal set to {goals.describe(code) if goals else hex(code)}. Apply, then Save.')
+
+    def _goal_id(self) -> int:
+        """Goal id from the picker text ('0x0007 Make 1 ring-out KO!') or a plain number."""
+        text = self.goal_code_var.get().strip()
+        code = _number(text.split()[0]) if text else 0
+        goals = self.catalog.goals
+        problem = goals.validate(code) if goals else None
+        if problem:
+            raise ValueError(problem)
+        return code
 
     def add_goal(self):
         if self.catalog is None or self.node_id is None:
             return
         try:
-            code = _number(self.goal_code_var.get())
+            code = self._goal_id()
             koma_id = _number(self.koma_var.get())
             trial = GalaxyGraph.parse(self.catalog.graph.build())
             slot = trial.append_goal(self.node_id, code, koma_id=koma_id,
@@ -518,9 +541,10 @@ class MissionPanel:
         except (ValueError, IndexError) as exc:
             messagebox.showerror('Activate objective slot', str(exc))
             return
+        goals = self.catalog.goals
         if not messagebox.askyesno('Activate objective slot',
-                f'Activate fixed objective slot {slot + 1} with raw condition 0x{code:04X}? '
-                'Condition semantics are not fully decoded; test in melonDS before using a save.'):
+                f'Activate fixed objective slot {slot + 1} with goal '
+                f'{goals.describe(code) if goals else hex(code)}? Test in melonDS before using a save.'):
             return
         self.checkpoint('activate fixed objective slot')
         self.catalog.graph = trial

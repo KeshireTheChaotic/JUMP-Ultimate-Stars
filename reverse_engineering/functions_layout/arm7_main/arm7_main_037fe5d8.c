@@ -1,5 +1,8 @@
 
-void FUN_037fe5d8(int param_1)
+/* JUS-SDK MI_WaitDma [behavioral] interrupts off: spins until the DMAxCNT enable bit clears;
+   channel-0 workaround */
+
+void MI_WaitDma(int param_1)
 
 {
                     /* JUS-TAG hw={"DMA":3} io=["040000b0","040000b4","040000b8"] */

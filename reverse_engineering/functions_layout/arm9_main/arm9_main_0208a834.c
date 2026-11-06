@@ -32,6 +32,8 @@ void CommGame::MessageFunc(undefined4 param_1,int *param_2,undefined4 param_3,un
   int iStack_1c;
   undefined4 uStack_18;
   
+                    /* JUS-TAG strings=["CommGame.cpp","Memory allocation
+                       failure","MessageFunc","vector length error"] */
   uStack_18 = param_4;
   iVar2 = (**(code **)(*param_2 + 8))();
   if (iVar2 == 0x70000000) {

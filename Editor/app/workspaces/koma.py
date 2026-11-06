@@ -24,7 +24,7 @@ from tkinter import colorchooser, filedialog, messagebox, ttk
 
 from PIL import Image
 
-from jus_formats import dsig as dsigmod, koma, kshape
+from jus_formats import bintables, dsig as dsigmod, koma, kshape
 from jus_package import images, komacards
 from jus_package.project import join
 
@@ -116,6 +116,7 @@ class KomaWorkspace(SuiteWorkspace):
     # ------------------------------------------------------------ browser
     def on_root(self):
         self._names = []
+        self._koma_names = None          # bin/komatxt.bin, loaded on first use
         self.cat, self.cat_error = None, ''
         root = self.app.root_data
         if root and (root.root / ARCHIVE).is_file():
@@ -558,6 +559,16 @@ class KomaWorkspace(SuiteWorkspace):
         self.view.redraw()
 
     # ------------------------------------------------------------ inspector
+    def koma_name(self, index: int) -> str:
+        """Card name from bin/komatxt.bin ('|' is the game's word separator)."""
+        if getattr(self, '_koma_names', None) is None:
+            try:
+                self._koma_names = bintables.koma_names(self.app.root_data) if self.app.root_data else []
+            except (ValueError, KeyError, OSError):
+                self._koma_names = []
+        names = self._koma_names
+        return names[index].replace('|', ' ').strip() if 0 <= index < len(names) else ''
+
     def refresh_inspector(self):
         ins = self.inspector
         ins.clear()
@@ -619,6 +630,9 @@ class KomaWorkspace(SuiteWorkspace):
         else:
             ins.value('Card', str(self.card.index))
         c = self.card
+        name = self.koma_name(c.index)
+        if name:
+            ins.value('Name', name, tip='bin/komatxt.bin word 0 of record ' + str(c.index))
         cands = self.cat.series.get(c.series_id, [])
         ins.value('Series id', f'{c.series_id}  → ' + (' / '.join(cands) if cands else '?'),
                   colour=T.WARN if len(cands) != 1 else None,

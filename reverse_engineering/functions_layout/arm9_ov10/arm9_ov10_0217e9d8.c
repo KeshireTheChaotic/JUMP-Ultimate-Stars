@@ -21,7 +21,7 @@ void FUN_0217e9d8(void)
         iVar3 = FUN_02176654(uVar6);
         if (((iVar3 != 0) && (iVar3 = FUN_0217e970(uVar6), *(int *)(DAT_021a7d10 + 0x608) != 0)) &&
            (*(int *)(iVar3 + 0x2c) != 0)) {
-          lVar7 = FUN_02054b44();
+          lVar7 = OS_GetTick();
           lVar1 = lVar7 - *(longlong *)(iVar3 + 0x24);
           uVar4 = (uint)lVar1;
           uVar4 = FUN_0200d0c4(uVar4 * 0x40,(int)((ulonglong)lVar1 >> 0x20) * 0x40 | uVar4 >> 0x1a,

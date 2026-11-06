@@ -20,7 +20,7 @@ void FUN_02151c90(int param_1,undefined4 param_2,undefined4 param_3,undefined4 p
                 *(int *)(*(int *)(param_1 + 4) + 0x94)) * 0x1000;
   FUN_021511c8(param_1,local_38 + 5,local_38 + 4);
   *(int *)(*(int *)(param_1 + 4) + 0x98) = *(int *)(*(int *)(param_1 + 4) + 0x98) + -9;
-  *(undefined1 **)(*(int *)(param_1 + 4) + 0xb4) = &LAB_02151e7c_1;
+  *(undefined4 *)(*(int *)(param_1 + 4) + 0xb4) = 0x2151e7d;
   if ((*(uint *)(*(int *)(param_1 + 4) + 0xac) & 1) == 0) {
     local_1e = 0;
     local_1a = (undefined2)*(undefined4 *)(*(int *)(param_1 + 4) + 0x98);
@@ -48,7 +48,7 @@ void FUN_02151c90(int param_1,undefined4 param_2,undefined4 param_3,undefined4 p
     piVar4 = (int *)0x0;
     if (iVar1 != 0) {
       piVar4 = (int *)func_0x021af494(iVar1,*(undefined4 *)(param_1 + 4),uVar2,(uVar3 & 1) == 1,
-                                      &LAB_02151e1c_1,0);
+                                      0x2151e1d,0);
     }
     if (piVar4[6] == 0) {
       (**(code **)(*piVar4 + 0x14))();

@@ -21,7 +21,7 @@ void jus_Class_020966d0::vfunc_06(int param_1,byte param_2)
   }
   if ((param_2 & 1) == 0) {
     *(code **)(param_1 + 0x28) = FUN_0202ae88;
-    *(undefined **)(param_1 + 0x2c) = &DAT_02029f90;
+    *(code **)(param_1 + 0x2c) = FUN_02029f90;
   }
   else {
     *(code **)(param_1 + 0x28) = FUN_0202aec8;

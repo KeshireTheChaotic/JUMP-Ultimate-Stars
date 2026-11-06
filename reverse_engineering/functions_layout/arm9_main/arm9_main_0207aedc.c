@@ -32,9 +32,9 @@ int BattleCol::Battle_ColObjCreate
     *(short *)(iVar1 + 0x3a) = (short)((int)(local_1c + ((uint)(local_1c >> 0xb) >> 0x14)) >> 0xc);
     *(undefined2 *)(iVar1 + 0x3c) = *(undefined2 *)(iVar1 + 0x3a);
     *(undefined2 *)(iVar1 + 0x36) = *(undefined2 *)(iVar1 + 0x3a);
-    *(undefined1 **)(iVar1 + 0x1c) = &LAB_0207bd30;
-    *(undefined **)(iVar1 + 0x20) = &DAT_0207bd38;
-    *(undefined **)(iVar1 + 0x24) = &DAT_0207bd3c;
+    *(code **)(iVar1 + 0x1c) = FUN_0207bd30;
+    *(code **)(iVar1 + 0x20) = FUN_0207bd38;
+    *(code **)(iVar1 + 0x24) = FUN_0207bd3c;
     *(undefined4 *)(iVar1 + 0x2c) = 0;
     *(undefined4 *)(iVar1 + 0x30) = 0;
   }

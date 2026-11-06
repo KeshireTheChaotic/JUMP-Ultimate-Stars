@@ -1,7 +1,9 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+/* JUS-SDK G3X_InitMtxStack [behavioral] called by G3X_Init: acknowledges a stack error (GXSTAT bit
+   15), identity on the texture/position matrices, pops both stacks to level 0 */
 
-void FUN_02066468(void)
+void G3X_InitMtxStack(void)
 
 {
   int iVar1;
@@ -11,10 +13,10 @@ void FUN_02066468(void)
                     /* JUS-TAG hw={"GX_3D":4} io=["04000440","04000448","04000454","04000600"] */
   _DAT_04000600 = _DAT_04000600 | 0x8000;
   do {
-    iVar1 = FUN_020663b0(&local_10);
+    iVar1 = G3X_GetMtxStackLevelPV(&local_10);
   } while (iVar1 != 0);
   do {
-    iVar1 = FUN_02066384(&local_c);
+    iVar1 = G3X_GetMtxStackLevelPJ(&local_c);
   } while (iVar1 != 0);
   _DAT_04000440 = 2;
   _DAT_04000448 = local_10;

@@ -6,6 +6,7 @@ void FUN_02000e10(undefined4 param_1)
   int iVar2;
   undefined4 auStack_50 [17];
   
+                    /* JUS-TAG strings=["%s.available.gs.nintendowifi.net"] */
   puVar1 = auStack_50;
   FUN_02004b18(&DAT_020a0604,param_1);
   DAT_020a0644 = -1;
@@ -16,7 +17,7 @@ void FUN_02000e10(undefined4 param_1)
   else {
     puVar1 = &DAT_020a05c4;
   }
-  iVar2 = func_0x02000ee4(puVar1,0x6cfc,0x20a0648);
+  iVar2 = FUN_02000ee4(puVar1,0x6cfc,0x20a0648);
   if ((iVar2 != 0) && (DAT_020a0644 = FUN_02001b94(2,2,0), DAT_020a0644 != -1)) {
     DAT_020a0650 = 9;
     iVar2 = FUN_02004b04(param_1);

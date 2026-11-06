@@ -14,7 +14,7 @@ void FUN_0214e6d0(int param_1,undefined4 param_2)
     FUN_0201ad30(DAT_020a0dd8,1,0);
     FUN_0214da24(*(undefined4 *)(iVar3 + 0x44));
     iVar1 = *(int *)(iVar3 + 0x44);
-    *(undefined1 **)(iVar1 + 0xd4) = &LAB_0214de00;
+    *(code **)(iVar1 + 0xd4) = FUN_0214de00;
     *(int *)(iVar1 + 0xdc) = iVar3;
     piVar2 = (int *)FUN_02033410(s_bin_koma_bin_02160cac,0,0);
     if (piVar2[7] == 0) {

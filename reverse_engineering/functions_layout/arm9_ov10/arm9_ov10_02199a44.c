@@ -1,10 +1,10 @@
 
-uint FUN_02199a44(undefined4 param_1,undefined4 param_2,uint param_3)
+undefined4 FUN_02199a44(undefined4 param_1,undefined4 param_2,uint param_3)
 
 {
   undefined4 uVar1;
   int iVar2;
-  undefined4 uVar3;
+  uint uVar3;
   
   uVar1 = OS_DisableInterrupts();
   iVar2 = FUN_02198c00();
@@ -26,19 +26,10 @@ uint FUN_02199a44(undefined4 param_1,undefined4 param_2,uint param_3)
   }
   FUN_02051890(param_2,iVar2 + 0xf00,param_3);
   uVar3 = FUN_02059b80(0x2199a15,param_1,iVar2 + 0xf00,param_3 & 0xffff);
-  switch(uVar3) {
-  default:
-    FUN_02053e60(&DAT_021aa0a4);
-    OS_RestoreInterrupts(uVar1);
-    return 0xfffffffb;
-  case 2:
-    break;
-  }
-  FUN_02053290(&DAT_021aa09c);
-  if (DAT_021aa0bc == 0) {
-    FUN_02053e60(&DAT_021aa0a4);
-    OS_RestoreInterrupts(uVar1);
-    return param_3;
+  if (uVar3 < 9) {
+    uVar1 = (*(code *)((int)&switchD_02199aea::switchdataD_02199aec +
+                      (int)(short)(&switchD_02199aea::switchdataD_02199aec)[uVar3]))();
+    return uVar1;
   }
   FUN_02053e60(&DAT_021aa0a4);
   OS_RestoreInterrupts(uVar1);

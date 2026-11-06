@@ -36,7 +36,7 @@ KomaEdit::KomaEdit_Create(undefined4 param_1,int param_2,undefined1 param_3,unde
   *puVar1 = param_1;
   *(undefined1 *)((int)puVar1 + 0x4e2) = param_3;
   *(undefined1 *)((int)puVar1 + 0x4e3) = param_4;
-  puVar1[0x82] = &LAB_02159094;
+  puVar1[0x82] = FUN_02159094;
   puVar1[0x81] = 0;
   iVar2 = FUN_02026f94();
   puVar1[0xc] = iVar2;
@@ -113,7 +113,7 @@ KomaEdit::KomaEdit_Create(undefined4 param_1,int param_2,undefined1 param_3,unde
     uVar12 = uVar11 + 1;
     *(code **)(*(int *)(puVar1[uVar11 + 0x14] + 4) + 0xec) = FUN_02159840;
     piVar5 = piVar5 + 9;
-    *(undefined **)(*(int *)(puVar1[uVar11 + 0x14] + 4) + 0xe4) = &DAT_02159af8;
+    *(code **)(*(int *)(puVar1[uVar11 + 0x14] + 4) + 0xe4) = FUN_02159af8;
     *(undefined1 *)(*(int *)(puVar1[uVar11 + 0x14] + 4) + 0xb1) = 1;
     uVar11 = uVar12;
   } while ((int)uVar12 < 5);

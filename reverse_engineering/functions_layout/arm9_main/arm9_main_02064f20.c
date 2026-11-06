@@ -1,7 +1,9 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+/* JUS-SDK GX_SetVCountEqVal [behavioral] DISPSTAT = (DISPSTAT & 0x3F) | (line & 0xFF) << 8 | (line
+   & 0x100) >> 1 */
 
-void FUN_02064f20(uint param_1)
+void GX_SetVCountEqVal(uint param_1)
 
 {
                     /* JUS-TAG hw={"GX_2D_main":1} io=["04000004"] */

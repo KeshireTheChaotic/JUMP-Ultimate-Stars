@@ -12,9 +12,9 @@ void FUN_0218f130(void)
     if (*(char *)(iVar2 + 9) != '\0') {
       FUN_02193c84(iVar2);
     }
-    uVar3 = FUN_02054b44();
+    uVar3 = OS_GetTick();
     while ((iVar1 = (*DAT_021a8530)(), iVar1 != 0 && (*(char *)(iVar2 + 8) != '\0'))) {
-      uVar4 = FUN_02054b44();
+      uVar4 = OS_GetTick();
       if (0x26 < (int)(((uint)uVar4 >> 0x10 | (int)((ulonglong)uVar4 >> 0x20) << 0x10) -
                       ((uint)uVar3 >> 0x10 | (int)((ulonglong)uVar3 >> 0x20) << 0x10))) break;
       FUN_02191554();

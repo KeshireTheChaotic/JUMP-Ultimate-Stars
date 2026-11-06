@@ -1,0 +1,9 @@
+0203e490  ldr r1,[0x203e4b4]
+0203e494  cmp r0,#0x0
+0203e498  ldrhne r0,[r1,#0x0]
+0203e49c  orrne r0,r0,#0x40
+0203e4a0  strhne r0,[r1,#0x0]
+0203e4a4  ldrheq r0,[r1,#0x0]
+0203e4a8  biceq r0,r0,#0x40
+0203e4ac  strheq r0,[r1,#0x0]
+0203e4b0  bx lr

@@ -1,7 +1,9 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+/* JUS-SDK jus_SpiFlash_WriteEnable [behavioral] SPICNT 0x8100/0x8900 (device 1 = firmware flash),
+   first SPIDATA byte = command 0x06 (WriteEnable) */
 
-void FUN_027f6758(void)
+void jus_SpiFlash_WriteEnable(void)
 
 {
   do {

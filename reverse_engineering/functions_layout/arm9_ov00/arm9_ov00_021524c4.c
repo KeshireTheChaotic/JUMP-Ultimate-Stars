@@ -70,7 +70,7 @@ void FUN_021524c4(int param_1)
           uVar3 = FUN_02152b6c(*(undefined4 *)(iVar7 + 0x9c));
           FUN_02152894(iVar7,uVar3);
           *(byte *)(iVar7 + 0xe4) = *(byte *)(iVar7 + 0xe4) | 4;
-          uVar11 = FUN_02054b44();
+          uVar11 = OS_GetTick();
           *(uint *)(iVar7 + 0xcc) = (uint)uVar11 - *(uint *)(iVar7 + 0xc4);
           *(uint *)(iVar7 + 0xd0) =
                (int)((ulonglong)uVar11 >> 0x20) -

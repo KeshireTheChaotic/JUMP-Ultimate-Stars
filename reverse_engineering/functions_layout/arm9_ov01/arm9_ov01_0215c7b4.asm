@@ -1,0 +1,9 @@
+0215c7b4  push {r4,lr}
+0215c7b6  add r4,r0,#0x0
+0215c7b8  blx 0x02087268
+0215c7bc  blx 0x02087390
+0215c7c0  blx 0x020882e0
+0215c7c4  blx 0x02088330
+0215c7c8  add r0,r4,#0x0
+0215c7ca  bl 0x02159ef4
+0215c7ce  pop {r4,pc}

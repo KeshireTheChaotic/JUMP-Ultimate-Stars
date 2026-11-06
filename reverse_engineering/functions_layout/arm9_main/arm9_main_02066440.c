@@ -1,7 +1,9 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+/* JUS-SDK G3X_SetClearColor [behavioral] CLEAR_COLOR = color | alpha << 16 | polygonID << 24 | (fog
+   ? 0x8000 : 0), CLEAR_DEPTH = depth */
 
-void FUN_02066440(uint param_1,int param_2,undefined2 param_3,int param_4,int param_5)
+void G3X_SetClearColor(uint param_1,int param_2,undefined2 param_3,int param_4,int param_5)
 
 {
                     /* JUS-TAG hw={"GX_3D":2} io=["04000350","04000354"] */

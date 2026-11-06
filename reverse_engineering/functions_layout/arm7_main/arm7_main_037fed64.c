@@ -9,7 +9,7 @@ void FUN_037fed64(void)
   FUN_03805a10(1);
   SVC_SetSoundBias(0x100);
   FUN_037fe408(0x7ab80);
-  FUN_037fee74();
+  SND_Enable();
   return;
 }
 

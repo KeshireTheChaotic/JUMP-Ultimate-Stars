@@ -21,7 +21,7 @@ void FUN_02156364(int param_1,undefined4 param_2,undefined4 param_3,undefined4 p
        * 0x1000;
   FUN_021511c8(param_1,aiStack_38 + 5,aiStack_38 + 4);
   *(int *)(*(int *)(param_1 + 4) + 0x98) = *(int *)(*(int *)(param_1 + 4) + 0x98) + -1;
-  *(undefined1 **)(*(int *)(param_1 + 4) + 0xb4) = &LAB_02156558_1;
+  *(undefined4 *)(*(int *)(param_1 + 4) + 0xb4) = 0x2156559;
   if ((*(uint *)(*(int *)(param_1 + 4) + 0xac) & 1) == 0) {
     uStack_1e = 0;
     uStack_1a = (undefined2)*(undefined4 *)(*(int *)(param_1 + 4) + 0x98);
@@ -49,7 +49,7 @@ void FUN_02156364(int param_1,undefined4 param_2,undefined4 param_3,undefined4 p
     piVar4 = (int *)0x0;
     if (iVar1 != 0) {
       piVar4 = (int *)func_0x021af494(iVar1,*(undefined4 *)(param_1 + 4),uVar2,(uVar3 & 1) == 1,
-                                      &LAB_021564f8_1,0);
+                                      0x21564f9,0);
     }
     if (piVar4[6] == 0) {
       (**(code **)(*piVar4 + 0x14))();

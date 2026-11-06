@@ -1,7 +1,9 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+/* JUS-SDK MI_WaitDma [behavioral] interrupts off: spins until the DMAxCNT enable bit clears;
+   channel-0 workaround */
 
-void FUN_02051314(int param_1)
+void MI_WaitDma(int param_1)
 
 {
                     /* JUS-TAG hw={"DMA":3} io=["040000b0","040000b4","040000b8"] */

@@ -6,6 +6,7 @@ undefined * FUN_02001c20(void)
 {
   undefined4 uVar1;
   
+                    /* JUS-TAG strings=["localhost"] */
   _DAT_020a06a4 = s_localhost_0209300c;
   puRam020a06a8 = &DAT_020a069c;
   uRam020a06ac = 2;

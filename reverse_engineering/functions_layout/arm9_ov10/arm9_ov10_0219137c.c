@@ -9,7 +9,7 @@ void FUN_0219137c(undefined4 *param_1)
   FUN_02000b54(s__SDK_UBIQUITOUS_CPS__02000be0);
   uVar1 = *(undefined8 *)(param_1 + 5);
   if (param_1[6] == 0 && param_1[5] == 0) {
-    uVar1 = FUN_02054b44();
+    uVar1 = OS_GetTick();
   }
   DAT_021a855c = (undefined4)((ulonglong)uVar1 >> 0x20);
   DAT_021a8558 = (undefined4)uVar1;
@@ -17,13 +17,13 @@ void FUN_0219137c(undefined4 *param_1)
   DAT_021a8568 = 0x269ec3;
   DAT_021a8564 = 0x5d588b65;
   DAT_021a8560 = 0x6c078965;
-  DAT_021a84fc = (undefined *)param_1[1];
-  if ((DAT_021a84fc == (undefined *)0x0) || (param_1[2] == 0)) {
-    DAT_021a84fc = &DAT_02191551;
-    DAT_021a8528 = &DAT_02191551;
+  DAT_021a84fc = param_1[1];
+  if ((DAT_021a84fc == 0) || (param_1[2] == 0)) {
+    DAT_021a84fc = 0x2191551;
+    DAT_021a8528 = 0x2191551;
   }
   else {
-    DAT_021a8528 = (undefined *)param_1[2];
+    DAT_021a8528 = param_1[2];
   }
   DAT_021a84f8 = *param_1;
   if (param_1[9] == 0) {
@@ -34,13 +34,13 @@ void FUN_0219137c(undefined4 *param_1)
   }
   DAT_021a851c = param_1[10];
   DAT_021a850c = param_1[0xb];
-  DAT_021a8500 = (undefined *)param_1[3];
-  if (DAT_021a8500 == (undefined *)0x0) {
-    DAT_021a8500 = &DAT_02191551;
+  DAT_021a8500 = param_1[3];
+  if (DAT_021a8500 == 0) {
+    DAT_021a8500 = 0x2191551;
   }
-  DAT_021a8530 = (undefined1 *)param_1[4];
-  if (DAT_021a8530 == (undefined1 *)0x0) {
-    DAT_021a8530 = &LAB_0219154c_1;
+  DAT_021a8530 = param_1[4];
+  if (DAT_021a8530 == 0) {
+    DAT_021a8530 = 0x219154d;
   }
   DAT_021a8540 = param_1[7];
   DAT_021a8544 = param_1[8];

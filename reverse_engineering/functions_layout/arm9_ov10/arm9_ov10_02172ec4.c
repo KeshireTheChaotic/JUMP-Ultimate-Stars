@@ -70,8 +70,8 @@ void FUN_02172ec4(undefined4 param_1)
       uStack00000004 = 1;
     }
     in_stack_00000000 = in_stack_00000000 + 1;
-    lVar6 = FUN_02054b44();
-    lVar7 = FUN_02054b44();
+    lVar6 = OS_GetTick();
+    lVar7 = OS_GetTick();
     uVar1 = (uint)(lVar7 - lVar6);
     uVar8 = FUN_0200d0c4(uVar1 * 0x40,
                          (int)((ulonglong)(lVar7 - lVar6) >> 0x20) * 0x40 | uVar1 >> 0x1a,0x82ea,
@@ -90,7 +90,7 @@ void FUN_02172ec4(undefined4 param_1)
         }
         FUN_02053e60(DAT_021a7348 + 0x13d8);
         FUN_02052ea0(5000);
-        lVar7 = FUN_02054b44();
+        lVar7 = OS_GetTick();
         uVar1 = (uint)(lVar7 - lVar6);
         uVar8 = FUN_0200d0c4(uVar1 * 0x40,
                              (int)((ulonglong)(lVar7 - lVar6) >> 0x20) * 0x40 | uVar1 >> 0x1a,0x82ea

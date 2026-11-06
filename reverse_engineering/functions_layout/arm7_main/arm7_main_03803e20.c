@@ -38,7 +38,7 @@ LAB_03803ea4:
     FUN_03803760();
     break;
   case 3:
-    uVar2 = FUN_03803d18();
+    uVar2 = CARDi_ReadRomIDCore();
     DAT_03809c80[2] = uVar2;
     break;
   case 4:

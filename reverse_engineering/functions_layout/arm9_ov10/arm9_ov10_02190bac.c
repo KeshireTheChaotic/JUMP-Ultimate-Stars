@@ -13,7 +13,7 @@ void FUN_02190bac(undefined4 param_1,int param_2,int param_3)
   
   if ((((param_2 != 0x7f000001) && (param_2 != DAT_021a8538)) &&
       (iVar2 = FUN_0219117c(param_2), iVar2 != 0)) && (iVar2 = FUN_02191114(param_2), iVar2 == 0)) {
-    uVar3 = FUN_02054b44();
+    uVar3 = OS_GetTick();
     uVar5 = 0;
     piVar6 = &DAT_021a85ac;
     do {

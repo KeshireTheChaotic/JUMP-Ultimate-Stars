@@ -39,7 +39,7 @@ int JGalaxyResult::JGalaxyResult_Add(void)
   FUN_020314a0(*(undefined4 *)(iVar2 + 4));
   iVar2 = ResultMission::ResultMission_Create(0);
   piVar1[10] = iVar2;
-  *(undefined1 **)(iVar2 + 0x3c) = &LAB_0214e370;
+  *(code **)(iVar2 + 0x3c) = FUN_0214e370;
   *(code **)(piVar1[10] + 0x40) = FUN_0214e380;
   *(int **)(piVar1[10] + 0x44) = piVar1;
   iVar2 = FUN_020101f4(s_jgalaxy_jgalaxy_aar_0216bb88,0);

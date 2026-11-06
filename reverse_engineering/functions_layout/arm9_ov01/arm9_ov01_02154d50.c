@@ -135,7 +135,7 @@ void ALWidgetImp::Create(int param_1,undefined4 param_2,undefined4 param_3,undef
     (**(code **)(**(int **)(iVar5 + 4) + 0xd8))(*(int **)(iVar5 + 4),1);
     FUN_0214e688(iVar4,iVar5);
     (**(code **)(**(int **)(iVar3 + 4) + 0x24))(*(int **)(iVar3 + 4),iVar4);
-    *(undefined1 **)(*(int *)(iVar3 + 4) + 0xdc) = &LAB_02156edc_1;
+    *(code **)(*(int *)(iVar3 + 4) + 0xdc) = FUN_02156edc + 1;
     *(code **)(*(int *)(iVar3 + 4) + 0xe0) = FUN_02156f1c + 1;
     iVar4 = Create(iVar3,_DAT_021d5154);
     uStack_f8 = 0;

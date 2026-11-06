@@ -1,5 +1,5 @@
 
-void FUN_01fff9a8(undefined4 *param_1)
+undefined1 FUN_01fff9a8(undefined4 *param_1)
 
 {
   int iVar1;
@@ -10,7 +10,6 @@ void FUN_01fff9a8(undefined4 *param_1)
   undefined2 *puVar4;
   int *unaff_r4;
   int iVar5;
-  uint in_lr;
   undefined1 uVar6;
   
   uVar6 = *(ushort *)*param_1 >> 9 == 0x7f;
@@ -40,9 +39,6 @@ void FUN_01fff9a8(undefined4 *param_1)
     puVar4 = puVar4 + 1;
     unaff_r4 = unaff_r4 + 1;
   } while (iVar3 != 0);
-                    /* WARNING: Could not recover jumptable at 0x01fffa14. Too many branches */
-                    /* WARNING: Treating indirect jump as call */
-  (*(code *)(in_lr & 0xfffffffc))(*(undefined1 *)(*(byte *)((int)param_1 + 0x73) + 0x1fffa1e));
-  return;
+  return *(undefined1 *)(*(byte *)((int)param_1 + 0x73) + 0x1fffa1e);
 }
 

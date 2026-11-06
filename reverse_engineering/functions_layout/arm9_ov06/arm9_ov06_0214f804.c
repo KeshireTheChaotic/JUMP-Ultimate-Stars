@@ -6,7 +6,7 @@ void FUN_0214f804(undefined4 *param_1,undefined4 param_2,undefined4 param_3)
   int iVar2;
   byte bVar3;
   
-  *param_1 = &LAB_02150f64_1;
+  *param_1 = FUN_02150f64 + 1;
   param_1[2] = param_2;
   param_1[5] = param_3;
   param_1[6] = param_3;

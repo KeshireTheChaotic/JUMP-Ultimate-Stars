@@ -7,7 +7,7 @@ undefined1 * FUN_021cf544(void)
   uint uVar3;
   longlong lVar4;
   
-  lVar4 = FUN_02054b44();
+  lVar4 = OS_GetTick();
   puVar1 = &DAT_021d7be0;
   if ((DAT_021d7bf0 == 2) && (puVar1 = (undefined1 *)0x0, DAT_021d7bec != 0)) {
     puVar1 = DAT_021d66dc;

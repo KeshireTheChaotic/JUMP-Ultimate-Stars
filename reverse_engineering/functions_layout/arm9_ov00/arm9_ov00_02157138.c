@@ -310,7 +310,7 @@ int Option::Option_Add(void)
   *(undefined1 *)(*(int *)(piVar2[0x21] + 4) + 0xa5) = 1;
   FUN_0214f3e0(piVar2[0x15],piVar2[7]);
   _DAT_021d5154 = 0;
-  _DAT_021d514c = &LAB_021582c0;
+  _DAT_021d514c = FUN_021582c0;
   func_0x021b7260(1,0x30078);
   func_0x021b7260(2,0x30078);
   func_0x021b7260(8,0x30078);

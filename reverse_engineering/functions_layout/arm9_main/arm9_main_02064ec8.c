@@ -1,7 +1,9 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+/* JUS-SDK GX_DispOff [behavioral] saves the display mode (DISPCNT bits 16-17) to a global, clears
+   the display-on flag, masks the mode off */
 
-void FUN_02064ec8(void)
+void GX_DispOff(void)
 
 {
                     /* JUS-TAG hw={"GX_2D_main":1} io=["04000000"] */

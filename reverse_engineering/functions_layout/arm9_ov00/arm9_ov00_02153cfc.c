@@ -247,7 +247,7 @@ int TopMenu::TopMenu_Add(int param_1)
   iVar7 = 0;
   do {
     iVar20 = iVar7 * 0x18;
-    puStack_d8 = PTR_LAB_02154c68;
+    puStack_d8 = PTR_FUN_02154c68;
     iVar18 = *(int *)(puVar3 + iVar20 + 8);
     iVar9 = (**(code **)(puVar3 + iVar20 + 0x10))();
     iVar17 = iVar7;

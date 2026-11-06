@@ -16,8 +16,8 @@ void NitroSpMain(void)
   uVar1 = FUN_037f83b0();
   FUN_037ff798(6);
   FUN_037fec7c();
-  FUN_037fbd04(1,FUN_037f8000);
-  FUN_037fbc4c(1);
+  OS_SetIrqFunction(1,FUN_037f8000);
+  OS_EnableIrqMask(1);
   _DAT_04000004 = _DAT_04000004 | 8;
   _DAT_04000208 = 1;
   OS_EnableInterrupts();

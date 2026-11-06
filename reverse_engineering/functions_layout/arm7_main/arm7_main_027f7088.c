@@ -18,8 +18,8 @@ void FUN_027f7088(undefined4 param_1)
     FUN_037fec1c(0x40,0);
     FUN_037fec1c(0x100,0x100);
     uVar1 = OS_DisableInterrupts();
-    FUN_037fbd04(0x80,FUN_027f69c0);
-    FUN_037fbc4c(0x80);
+    OS_SetIrqFunction(0x80,FUN_027f69c0);
+    OS_EnableIrqMask(0x80);
     OS_RestoreInterrupts(uVar1);
   }
   return;

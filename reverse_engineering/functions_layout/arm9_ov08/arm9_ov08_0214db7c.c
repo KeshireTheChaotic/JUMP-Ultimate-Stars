@@ -23,8 +23,6 @@ code_r0x0214db7c:
                 if ((int)(param_1 - 0x10) < 0) {
                   return 0xffffffff;
                 }
-                    /* WARNING: Could not recover jumptable at 0x0214dbbc. Too many branches */
-                    /* WARNING: Treating indirect jump as call */
                 uVar1 = (*(code *)((int)&switchD_0214dbbc::switchdataD_0214dbbe +
                                   (int)(short)(&switchD_0214dbbc::switchdataD_0214dbbe)
                                               [param_1 - 0x10]))();
@@ -74,24 +72,17 @@ code_r0x0214db7c:
           if (param_1 < 0x24) {
             if ((0x22 < param_1) || (param_1 == 0x22)) goto code_r0x0214db7c;
           }
-          else if (param_1 == 0x25) goto switchD_0214db44_caseD_15;
+          else if ((param_1 == 0x25) && (0x21 < unaff_r4)) {
+            return 0xffffffff;
+          }
         }
         if (0x20 < param_1) goto code_r0x0214db7c;
         if (0x15 < param_1) break;
-        switch(param_1) {
-        case 0x10:
-        case 0x11:
-        case 0x12:
-        case 0x13:
-          if (5 < unaff_r4) {
-            return 0xffffffff;
-          }
-          break;
-        case 0x15:
-switchD_0214db44_caseD_15:
-          if (0x21 < unaff_r4) {
-            return 0xffffffff;
-          }
+        if (-1 < (int)(param_1 - 0x10)) {
+          uVar1 = (*(code *)((int)&switchD_0214db44::switchdataD_0214db46 +
+                            (int)(short)(&switchD_0214db44::switchdataD_0214db46)[param_1 - 0x10]))
+                            ();
+          return uVar1;
         }
       }
     } while (param_1 != 0x20);

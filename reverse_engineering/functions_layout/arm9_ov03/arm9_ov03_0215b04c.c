@@ -8,7 +8,7 @@ void FUN_0215b04c(int param_1,undefined4 param_2,undefined4 param_3,undefined4 p
   undefined8 uVar4;
   
   iVar3 = *(int *)(*(int *)(param_1 + 4) + 0x10);
-  uVar4 = FUN_02054b44();
+  uVar4 = OS_GetTick();
   uVar2 = (uint)uVar4 - *(uint *)(iVar3 + 0xf8);
   if ((int)((ulonglong)uVar4 >> 0x20) !=
       *(int *)(iVar3 + 0xfc) + (uint)((uint)uVar4 < *(uint *)(iVar3 + 0xf8)) || 2999999 < uVar2) {

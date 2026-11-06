@@ -13,7 +13,7 @@ void jus_Scene02_Exit(undefined4 param_1,int param_2)
     }
     return;
   }
-  uVar1 = FUN_02054b44();
+  uVar1 = OS_GetTick();
   FUN_02030f24(*(undefined4 *)(*piRam0206e6e8 + 4),uVar1);
   iVar2 = FUN_02070518();
   if (iVar2 == 0) {

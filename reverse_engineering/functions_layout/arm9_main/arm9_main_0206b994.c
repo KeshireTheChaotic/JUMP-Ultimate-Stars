@@ -13,6 +13,7 @@ int * CommonTutorial::CommonTutorial_Create
   int iVar5;
   undefined4 uStack_18;
   
+                    /* JUS-TAG strings=[" pGpG","CommonTutorial.cpp","CommonTutorial_Create"] */
   uStack_18 = param_4;
   piVar1 = (int *)thunk_FUN_0201a228(0x74,s_CommonTutorial_cpp_0209dfa8,
                                      s_CommonTutorial_Create_0209deb4,99);
@@ -68,9 +69,9 @@ int * CommonTutorial::CommonTutorial_Create
   piVar1[0xc] = (int)puVar4;
   FUN_02020910(puVar4);
   *(undefined2 *)(piVar1 + 0x1c) = 0;
-  piVar1[4] = (int)&LAB_0206c0f4_1;
-  piVar1[5] = (int)&LAB_0206c0f8_1;
-  piVar1[6] = (int)&LAB_0206c0fc_1;
+  piVar1[4] = (int)(FUN_0206c0f4 + 1);
+  piVar1[5] = (int)(FUN_0206c0f8 + 1);
+  piVar1[6] = (int)(FUN_0206c0fc + 1);
   FUN_020282f4(*(undefined4 *)(*piVar1 + 4));
   return piVar1;
 }

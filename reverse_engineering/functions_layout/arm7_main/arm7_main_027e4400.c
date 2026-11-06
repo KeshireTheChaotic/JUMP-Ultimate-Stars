@@ -155,7 +155,7 @@ void FUN_027e4400(int param_1)
                       psVar2[0xc1] = 1;
                       psVar2[0x43] = 1;
                       if (*(int *)(psVar2 + 0x3de) != 0 || *(int *)(psVar2 + 0x3dc) != 0) {
-                        uVar11 = FUN_037fd6ac();
+                        uVar11 = OS_GetTick();
                         *(uint *)(psVar2 + 0x39c) = (uint)uVar11 | 1;
                         *(int *)(psVar2 + 0x39e) = (int)((ulonglong)uVar11 >> 0x20);
                       }

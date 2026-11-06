@@ -7,6 +7,7 @@ undefined4 jus_Class_02093ff0::vfunc_10(undefined4 param_1,int param_2)
 {
   uint uVar1;
   
+                    /* JUS-TAG strings=["888855514444PAL8PAL4PL4RPAL1"] */
   uVar1 = 0;
   while( true ) {
     if (6 < uVar1) {

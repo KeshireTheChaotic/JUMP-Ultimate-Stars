@@ -38,13 +38,13 @@ void FUN_02152360(undefined4 *param_1,undefined4 param_2,undefined4 param_3,unde
     param_1[2] = 0;
   }
   FUN_0204329c();
-  FUN_020651b0();
-  FUN_02065150();
+  GX_DisableBankForBG();
+  GX_DisableBankForTex();
   FUN_02065490(0xb);
   MIi_CpuClearFast(0,0x6800000,0xa4000);
   FUN_02065110();
-  FUN_02065978(1);
-  FUN_02065660(10);
+  GX_SetBankForBG(1);
+  GX_SetBankForTex(10);
   (**(code **)(*(int *)*param_1 + 8))();
   FUN_0201b244(param_1);
   return;

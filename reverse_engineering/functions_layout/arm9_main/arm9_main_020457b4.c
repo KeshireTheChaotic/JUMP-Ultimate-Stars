@@ -6,9 +6,7 @@ void jus_Class_02094100::vfunc_02(int param_1)
 
 {
   *(undefined4 *)(param_1 + 0x74) = 0;
-  *(undefined4 *)(param_1 + 8) = 0;
-  *(undefined4 *)(param_1 + 0xc) = 0;
-  *(undefined4 *)(param_1 + 0x10) = *(undefined4 *)(param_1 + 4);
+  FUN_02045684();
   return;
 }
 

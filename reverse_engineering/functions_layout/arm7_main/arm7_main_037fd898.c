@@ -1,7 +1,8 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+/* JUS-SDK OSi_ArrangeTimer [behavioral] the only call of the OSi_AlarmHandler stub */
 
-void FUN_037fd898(void)
+void OSi_ArrangeTimer(void)
 
 {
   undefined4 *puVar1;
@@ -12,9 +13,9 @@ void FUN_037fd898(void)
   
                     /* JUS-TAG hw={"TIMER":1} io=["04000106"] */
   _DAT_04000106 = 0;
-  FUN_037fbc10(0x10);
+  OS_DisableIrqMask(0x10);
   _DAT_0380fff8 = _DAT_0380fff8 | 0x10;
-  uVar5 = FUN_037fd6ac();
+  uVar5 = OS_GetTick();
   puVar1 = DAT_03808470;
   uVar2 = (uint)((ulonglong)uVar5 >> 0x20);
   if (DAT_03808470 != (undefined4 *)0x0) {
@@ -42,11 +43,11 @@ void FUN_037fd898(void)
         FUN_037fdb18(puVar1,0,0);
       }
       if (DAT_03808470 != (undefined4 *)0x0) {
-        FUN_037fdcb8();
+        OSi_SetTimer();
       }
     }
     else {
-      FUN_037fdcb8(DAT_03808470);
+      OSi_SetTimer(DAT_03808470);
     }
   }
   return;

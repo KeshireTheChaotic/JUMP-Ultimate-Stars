@@ -12,12 +12,12 @@ void FUN_020552d0(undefined4 param_1)
   }
   uVar1 = FUN_02051fa0();
   FUN_02061dc0(uVar1);
-  FUN_02051290(0);
-  FUN_02051290(1);
-  FUN_02051290(2);
-  FUN_02051290(3);
-  FUN_02051d94(0x40000);
-  FUN_02051ce0(0xffffffff);
+  MI_StopDma(0);
+  MI_StopDma(1);
+  MI_StopDma(2);
+  MI_StopDma(3);
+  OS_SetIrqMask(0x40000);
+  OS_ResetRequestIrqMask(0xffffffff);
   _DAT_027ffc20 = param_1;
   FUN_02055350(0x10);
   FUN_01ff9254();

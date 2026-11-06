@@ -12,7 +12,7 @@ undefined4 FUN_037fec7c(void)
   }
   else if (DAT_03808518 == 0) {
     FUN_037fdc48(&DAT_0380851c);
-    lVar3 = FUN_037fd6ac();
+    lVar3 = OS_GetTick();
     FUN_037fda28(&DAT_0380851c,(int)(lVar3 + 0x82e),(int)((ulonglong)(lVar3 + 0x82e) >> 0x20),0x82e,
                  0,FUN_037fec3c,0);
     uVar2 = 1;

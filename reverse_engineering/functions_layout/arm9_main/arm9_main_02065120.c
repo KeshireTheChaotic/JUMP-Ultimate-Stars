@@ -1,8 +1,11 @@
 
-void FUN_02065120(void)
+/* JUS-SDK GX_DisableBankForARM7 [behavioral] tail-calls disableBankForX_ with the manager field
+   0x020afba6, which GX_SetBankForARM7 updates */
+
+void GX_DisableBankForARM7(void)
 
 {
-  FUN_020651c0(0x20afba6);
+  disableBankForX_(0x20afba6);
   return;
 }
 

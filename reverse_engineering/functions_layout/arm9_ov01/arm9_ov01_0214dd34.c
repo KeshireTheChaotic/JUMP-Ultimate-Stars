@@ -25,7 +25,7 @@ FUN_0214dd34(int param_1,undefined4 param_2,int *param_3,undefined4 param_4,unde
   FUN_020314a0(*(undefined4 *)(param_1 + 4));
   iVar4 = ResultMission::ResultMission_Create(0);
   unaff_r7[10] = iVar4;
-  *(undefined1 **)(iVar4 + 0x3c) = &LAB_0214e370;
+  *(code **)(iVar4 + 0x3c) = FUN_0214e370;
   *(code **)(unaff_r7[10] + 0x40) = FUN_0214e380;
   *(undefined4 **)(unaff_r7[10] + 0x44) = unaff_r7;
   uVar1 = FUN_020101f4(s_jgalaxy_jgalaxy_aar_0216bb88,0);

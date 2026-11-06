@@ -31,6 +31,7 @@ if str(HERE) not in sys.path:
     sys.path.insert(0, str(HERE))
 
 from jus_formats import alar, almt, dsig as dsigmod, dstx as dstxmod, eventops, notetrack, sdat, sprite  # noqa: E402
+from jus_formats import battleai, battleinput, bintables, chrbin, roster  # noqa: E402
 from jus_package import effectlinks, images, motion, package, sounds, spawns, spriteedit  # noqa: E402
 from app.workspaces import SUITE  # noqa: E402
 from jus_package.draworder import submission_note  # noqa: E402
@@ -105,6 +106,8 @@ class EditorApp(tk.Tk):
         self.loop = tk.BooleanVar(value=True)
         self.speed = tk.StringVar(value='1×')
         self.show_collision = tk.BooleanVar(value=True)
+        self.show_ai_profile = tk.BooleanVar(value=True)    # chr/ai AIPM boxes for the move's input selector
+        self._ai_profiles = {}                               # cid -> AttackProfile | None
         self.show_effects = tk.BooleanVar(value=True)      # pursuer (chara_action 13/14)
         self.show_spawns = tk.BooleanVar(value=True)       # GenerateID effects
         self.isolate_selected_spawn = tk.BooleanVar(value=False)  # viewport diagnostic, not saved
@@ -339,8 +342,8 @@ class EditorApp(tk.Tk):
         fe = ttk.Entry(clips.body, textvariable=self.move_filter)
         fe.pack(fill='x', padx=6, pady=2)
         T.Tooltip(fe, 'Filter by index or id')
-        mf, self.moves_tree = T.tree(clips.body, ('#', 'id', 'len', 'loop'), (34, 86, 40, 34), height=20,
-                                     style='Mono.Treeview')
+        mf, self.moves_tree = T.tree(clips.body, ('#', 'id', 'len', 'loop', 'control'), (34, 86, 40, 34, 120),
+                                     height=20, style='Mono.Treeview')
         mf.pack(fill='both', expand=True, padx=(6, 0), pady=2)
         self.moves_tree.bind('<<TreeviewSelect>>', self.on_move_select)
         mb = ttk.Frame(clips.body)
@@ -358,6 +361,7 @@ class EditorApp(tk.Tk):
                           ('Effect origin markers', self.show_effect_marks),
                           ('Pursuer effect (chara_action 13/14)', self.show_effects),
                           ('Collision boxes', self.show_collision),
+                          ('AI attack profile (chr/ai AIPM)', self.show_ai_profile),
                           ('Onion skin', self.show_onion)):
             gm.add_checkbutton(label=text, variable=var, command=self.redraw_view)
         gm.add_separator()
@@ -647,6 +651,7 @@ class EditorApp(tk.Tk):
             self.root_data = DataRoot(path)
             self.root_data.characters()
             self._common_tables = None
+            self._ai_profiles = {}
         except Exception as exc:  # noqa: BLE001
             self.root_data = None
             if not quiet:
@@ -1090,6 +1095,32 @@ class EditorApp(tk.Tk):
         self.populate_moves()
         self.update_dirty()
 
+    def _ai_block(self):
+        """AIPM block (chr/ai/<id>.bin) for the selected move's input selector, or None."""
+        if self.move is None or not self._battle_base_table() or not self.root_data:
+            return None
+        entry = battleinput.MOVE_CONTROLS.get(self.move.id & 0xFF)
+        if entry is None:
+            return None
+        cid = split(self.almt_path)[-1][:-4]
+        if cid not in self._ai_profiles:
+            path = battleai.AIPM_PATH.format(cid=cid)
+            try:
+                self._ai_profiles[cid] = battleai.parse_aipm(self.root_data.read(path)) \
+                    if self.root_data.exists(path) else None
+            except (ValueError, KeyError, OSError):
+                self._ai_profiles[cid] = None
+        prof = self._ai_profiles[cid]
+        return prof.for_selector(entry[1]) if prof else None
+
+    def _battle_base_table(self) -> bool:
+        """True for a battle character's base move table (chr/<id>.aar|<id>.amt), the
+        only table the input selector 0x021712B8 indexes."""
+        if not self.almt_path:
+            return False
+        name = split(self.almt_path)[-1]
+        return name.endswith('.amt') and name[:-4] in roster.BATTLE_IDS
+
     def populate_moves(self, keep=False, select=None):
         t = self.moves_tree
         cur = self.almt.moves.index(self.move) if keep and self.move in (self.almt.moves if self.almt else []) else select
@@ -1099,10 +1130,12 @@ class EditorApp(tk.Tk):
             self.refresh_animation()
             return
         flt = self.move_filter.get().strip().lower()
+        base_table = self._battle_base_table()
         for i, m in enumerate(self.almt.moves):
-            if flt and flt not in str(i) and flt not in hx(m.id).lower():
+            control = (battleinput.control_for(m.id) or '') if base_table else ''
+            if flt and flt not in str(i) and flt not in hx(m.id).lower() and flt not in control.lower():
                 continue
-            t.insert('', 'end', str(i), values=(i, hx(m.id, 6), m.duration, '⟳' if m.flags & 1 else ''))
+            t.insert('', 'end', str(i), values=(i, hx(m.id, 6), m.duration, '⟳' if m.flags & 1 else '', control))
         target = str(cur if cur is not None else 0)
         if t.exists(target):
             t.selection_set(target)
@@ -1244,8 +1277,8 @@ class EditorApp(tk.Tk):
         text = c.text()
         if c.opcode == 0x0300:
             v = c.values()
-            if v and v[0] in eventops.CHARA_ACTION_NAMES:
-                text += f'  — {eventops.CHARA_ACTION_NAMES[v[0]]}'
+            if v:
+                text += f'  — {eventops.chara_action_text(v)}'
         if c.opcode in (0x0400, 0x0401, 0x0402) and self._sounds is not None:
             v = c.values()
             if v:
@@ -2298,6 +2331,17 @@ class EditorApp(tk.Tk):
                     if hot:
                         vp.text(pos[0] + x0, pos[1] + y0 - 2, f'{f} ({x0},{y0})-({x1},{y1})', anchor='sw',
                                 fill=col, font=T.MONO_SMALL)
+        if self.show_ai_profile.get():
+            block = self._ai_block()
+            if block is not None:
+                for k, rec in enumerate(block.records):
+                    a, b = rec.active
+                    x0, y0, x1, y1 = rec.rect
+                    live = a <= tick <= b
+                    vp.rect(x0, y0, x1, y1, outline=T.WARN, dash=() if live else (2, 4), width=2 if live else 1)
+                    if live:
+                        vp.text(x0, y1 + 2, f'AI {k}: ticks {a}–{b}, power {rec.power}, {rec.reach}',
+                                anchor='nw', fill=T.WARN, font=T.MONO_SMALL)
         for ni, st in state.items():
             name = self.almt.node_names[ni]
             pos = st.get('2DPos', [0, 0])
@@ -2610,6 +2654,22 @@ class EditorApp(tk.Tk):
                   on_change=self.apply_move_props)
         ins.value('fps', f'{m.fps}  (not read by the game)', colour=T.MUTED)
         ins.value('Flags', hx(m.flags, 2), colour=T.MUTED)
+        if self._battle_base_table():
+            control = battleinput.MOVE_CONTROLS.get(m.id & 0xFF)
+            if control:
+                ins.value('Control', f'{control[0]} (selector {control[1]})', tip=control[2])
+                block = self._ai_block()
+                if block is not None:
+                    ins.section('AI attack profile', note=f'chr/ai AIPM selector {block.selector}')
+                    for k, rec in enumerate(block.records):
+                        a, b = rec.active
+                        ins.value(f'Hit {k}', f'box {rec.rect}  ticks {a}–{b}\npower {rec.power} · {rec.reach} · '
+                                              f'col bytes {rec.col_byte0}/{rec.col_byte1}'
+                                              + (f' · status {rec.status}' if rec.status else ''))
+                    if not block.records:
+                        ins.value('Hits', 'none (the AI does not attack with this move)', colour=T.MUTED)
+                    ins.evidence('Profile', 'Direct', 'overlay 11 BattleAIDeck_Create / 0x02175AD0; box and ticks '
+                                                      'match the move\'s collision tracks')
         if self.sel_virtual is not None and self.sel_virtual.get('spawn') is not None:
             self._inspect_spawn(ins, self.sel_virtual)
             return
@@ -3290,6 +3350,50 @@ class EditorApp(tk.Tk):
         ins.value('Size', f'{len(e.data):,} bytes' + ('  (DSCP)' if e.compressed else ''))
         ins.buttons(('Extract…', self.extract_member), ('Replace…', self.replace_member),
                     ('Remove', self.remove_member))
+        if self.container.endswith('deck/Deck.aar') and len(e.payload()) == 0x5C:
+            deck = bintables.parse_deck(e.payload())
+            names = bintables.koma_names(self.root_data)
+            ins.section('Deck preset', note=f'{deck.name} — FUN_02070A28 copies 0x5C bytes')
+            for i, s in enumerate(deck.slots):
+                if s.empty:
+                    continue
+                label = names[s.koma].replace('|', ' ').strip() if s.koma < len(names) else '?'
+                ins.value(f'Slot {i}', f'Koma {s.koma} {label} · column {s.column}, row {s.row}'
+                                       + (f' · extra {s.extra}' if s.extra else '') + (' · flag 0x1000' if s.flag else ''))
+            ins.text('Column/row are the 5×4 deck board position (checked: every preset fits with the cards\' '
+                     'shapes). Extra bits 8–11 and the 0x1000 flag are not traced.')
+        payload = e.payload() if e.name.startswith('chr/ai/') else b''
+        if payload[:4] == b'AIPM':
+            prof = battleai.parse_aipm(payload)
+            ins.section('AI attack profile (AIPM)', note='index i = input selector i+1 (overlay 11)')
+            for i, block in sorted(prof.blocks.items()):
+                ctrl = next((c[0] for c in battleinput.MOVE_CONTROLS.values() if c[1] == block.selector),
+                            f'selector {block.selector}')
+                ins.value(f'#{i}', f'{ctrl}: {len(block.records)} hit(s)' +
+                          ''.join(f'\n  {r.rect} ticks {r.active[0]}–{r.active[1]} power {r.power}'
+                                  for r in block.records[:3]))
+        elif payload[:4] == b'AIMV':
+            g = battleai.parse_aimv(payload)
+            ins.section('AI navigation graph (AIMV)', note='node i = stage collider i (overlay 11)')
+            ins.value('Nodes', str(len(g.nodes)))
+            for row in range(battleai.AIMV_ROWS):
+                ins.value(f'Row {row}', f'{len(g.edges(row))} links')
+        elif e.name.endswith('ai_param.bin'):
+            p = battleai.parse_ai_param(payload)
+            ins.section('AI parameters', note='0x30-byte records; +0x2E rating (ov12 0x021C56D0)')
+            ins.value('Records', str(p.count))
+            ins.value('Ratings', ', '.join(str(p.rating(i)) for i in range(min(p.count, 24))))
+        if chrbin.kind_of(e.name) == 'shot':
+            table = chrbin.parse(e.payload(), e.name)
+            if table.stride:
+                ins.section('Shot records', note='byte 0 = handler id → ov06 table 0x02172864')
+                for i in range(min(table.count, 24)):
+                    r = table.record(i)
+                    ins.value(f'#{i}', f'handler {r[0]:#04x} → {chrbin.shot_handler(r[0])}'
+                                       f'  · +0x0C {hx(table.words32(i)[3], 8)}')
+                if table.count > 24:
+                    ins.value('', f'… {table.count - 24} more')
+                ins.text('Handler ids are code-backed; gameplay names for them are not traced.')
 
     def extract_member(self):
         e = self._selected_member()

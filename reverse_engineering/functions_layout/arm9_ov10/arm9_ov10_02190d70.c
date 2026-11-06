@@ -21,7 +21,7 @@ undefined * FUN_02190d70(int param_1)
       piVar3 = &DAT_021a85ac;
       do {
         if (param_1 == *piVar3) {
-          FUN_02054b44();
+          OS_GetTick();
           (&DAT_021a85b6)[uVar4 * 6] = extraout_var;
           puVar5 = &DAT_021a85b0 + uVar4 * 0xc;
           break;

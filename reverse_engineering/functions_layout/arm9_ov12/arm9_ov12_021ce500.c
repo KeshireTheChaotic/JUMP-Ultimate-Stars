@@ -6,7 +6,7 @@ undefined4 FUN_021ce500(void)
   uint uVar2;
   undefined *puVar3;
   
-  DAT_021d5780 = FUN_02054b34();
+  DAT_021d5780 = OS_GetTickLo();
   DAT_021d50b8 = 1;
   DAT_021d57a0 = 0;
   DAT_021d5784 = 0;

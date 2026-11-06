@@ -1,6 +1,9 @@
 
-void FUN_037ff298(uint param_1,undefined4 param_2,int param_3,int param_4,undefined2 param_5,
-                 undefined4 param_6,uint param_7,int param_8,short param_9,int param_10)
+/* JUS-SDK SND_SetupChannelPcm [behavioral] SOUNDxCNT with format/loop bits, source (+4), timer
+   (+8), loop start (+0xA), length (+0xC) */
+
+void SND_SetupChannelPcm(uint param_1,undefined4 param_2,int param_3,int param_4,undefined2 param_5,
+                        undefined4 param_6,uint param_7,int param_8,short param_9,int param_10)
 
 {
   int iVar1;

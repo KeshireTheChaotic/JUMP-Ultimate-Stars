@@ -1,5 +1,11 @@
 
-undefined4 FUN_021b7b4c(int *param_1,uint param_2,undefined4 param_3,undefined4 param_4)
+/* JUS-GAME ALObjectImp::PostDelayMessage [source-string-inlined] __FILE__="ALObjectImp.h"
+   __FUNCTION__="PostDelayMessage" lines=[]; candidates ['ALObjectImp.h:PostDelayMessage',
+   'ALObjectImp.h:PostMessage']: the other candidates are named functions elsewhere in this program
+   (inlined copies) */
+
+undefined4
+ALObjectImp::PostDelayMessage(int *param_1,uint param_2,undefined4 param_3,undefined4 param_4)
 
 {
   int iVar1;

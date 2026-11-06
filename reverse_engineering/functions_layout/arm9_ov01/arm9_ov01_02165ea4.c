@@ -90,7 +90,7 @@ Result::Result_Add(undefined1 param_1,undefined4 param_2,undefined4 param_3,unde
     FUN_020734e0(0x31);
     FUN_0207361c(0x31,0);
   }
-  uVar6 = FUN_02054b44();
+  uVar6 = OS_GetTick();
   *(undefined8 *)(puVar2 + 0x20) = uVar6;
   thunk_EXT_FUN_021b65bc();
   return *puVar2;

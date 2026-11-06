@@ -1,18 +1,15 @@
 
-void FUN_0214f218(int param_1,int *param_2,int *param_3)
+void FUN_0214f218(int param_1,undefined4 *param_2,undefined4 *param_3)
 
 {
-  int *piVar1;
-  int iVar2;
+  int iVar1;
+  undefined4 uVar2;
   
-  iVar2 = *param_3;
-  piVar1 = *(int **)(*(int *)(param_1 + 4) + 0x50);
-  piVar1[3] = *param_2;
-  piVar1[4] = iVar2;
-  if (*(byte *)(piVar1 + 9) != (*(byte *)(piVar1 + 9) | 1)) {
-    (**(code **)(*piVar1 + 0x18))();
-  }
-  *(byte *)(piVar1 + 9) = *(byte *)(piVar1 + 9) | 0x31;
+  uVar2 = *param_3;
+  iVar1 = *(int *)(*(int *)(param_1 + 4) + 0x50);
+  *(undefined4 *)(iVar1 + 0xc) = *param_2;
+  *(undefined4 *)(iVar1 + 0x10) = uVar2;
+  FUN_0214f240(iVar1,1);
   return;
 }
 

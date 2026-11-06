@@ -11,7 +11,7 @@ void FUN_037fddf0(void)
   code *pcVar5;
   
                     /* JUS-TAG hw={"IO_other":2} io=["04000004","04000006"] */
-  FUN_037fbc10(4);
+  OS_DisableIrqMask(4);
   _DAT_04000004 = _DAT_04000004 & 0xffdf;
   _DAT_0380fff8 = _DAT_0380fff8 | 4;
   FUN_037fdd54(((int)(uint)_DAT_04000004 >> 8 | (_DAT_04000004 & 0x80) << 1) - 1);
@@ -32,9 +32,9 @@ LAB_037fdf48:
       if (puVar1[3] != iVar3) {
         return;
       }
-      FUN_037fbc10(4);
+      OS_DisableIrqMask(4);
       _DAT_04000004 = _DAT_04000004 & 0xffdf;
-      FUN_037fbbdc(4);
+      OS_ResetRequestIrqMask(4);
     }
     else if (iVar4 != 1) {
       if (iVar4 == 2) {

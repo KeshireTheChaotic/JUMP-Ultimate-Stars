@@ -70,7 +70,7 @@ void FUN_02158b20(int param_1,undefined4 param_2,undefined4 param_3,undefined4 p
         }
         (*(code *)*puVar8)(param_1,puVar8);
         if (*(short *)((int)puVar8 + 0xe) == 0) {
-          *puVar8 = &LAB_02159258;
+          *puVar8 = FUN_02159258;
           FUN_0215911c(param_1,iVar6);
         }
         if (*(char *)(DAT_02172960 + 0x16d) == '\0') {

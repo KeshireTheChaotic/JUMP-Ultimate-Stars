@@ -4,19 +4,13 @@ void FUN_0215c61c(int param_1)
 {
   undefined4 uVar1;
   int iVar2;
-  int local_30 [2];
-  undefined1 *local_28;
-  undefined4 local_24;
-  undefined4 local_20;
-  int local_1c;
-  undefined1 *local_18;
-  undefined4 local_14;
-  undefined4 local_10;
+  int local_30 [5];
+  int local_1c [4];
   
   uVar1 = *(undefined4 *)(*(int *)(param_1 + 0xac) + 4);
   func_0x021b4104(uVar1,uVar1,4);
   iVar2 = *(int *)(param_1 + 0x2e4);
-  *(undefined1 **)(iVar2 + 0x3c) = &LAB_0215c7b4_1;
+  *(undefined4 *)(iVar2 + 0x3c) = 0x215c7b5;
   *(int *)(iVar2 + 0x50) = param_1;
   iVar2 = *(int *)(param_1 + 0x2e4);
   *(undefined4 *)(iVar2 + 0x4c) = 0x215c7d1;
@@ -28,17 +22,17 @@ void FUN_0215c61c(int param_1)
   FUN_0215a9cc(*(undefined4 *)(param_1 + 0x7c));
   *(undefined4 *)(param_1 + 0x304) = 0;
   *(uint *)(param_1 + 0x308) = (uint)(byte)(&DAT_020afeb4)[DAT_020afe98];
-  local_18 = &LAB_0215ccb8_1;
-  local_14 = 0x215ccc5;
-  local_10 = *(undefined4 *)(param_1 + 0x2d8);
-  local_1c = param_1;
+  local_1c[1] = 0x215ccb9;
+  local_1c[2] = 0x215ccc5;
+  local_1c[3] = *(undefined4 *)(param_1 + 0x2d8);
+  local_1c[0] = param_1;
   iVar2 = FUN_0203b404();
-  uVar1 = CommWrapNewComer::CommWrapNewComer_Create(&local_1c,*(undefined4 *)(iVar2 + 0x88));
+  uVar1 = CommWrapNewComer::CommWrapNewComer_Create(local_1c,*(undefined4 *)(iVar2 + 0x88));
   *(undefined4 *)(param_1 + 0x2f0) = uVar1;
   local_30[1] = 0x215cb39;
-  local_28 = &LAB_0215ccb8_1;
-  local_24 = 0x215ccc5;
-  local_20 = *(undefined4 *)(param_1 + 0x2d8);
+  local_30[2] = 0x215ccb9;
+  local_30[3] = 0x215ccc5;
+  local_30[4] = *(undefined4 *)(param_1 + 0x2d8);
   local_30[0] = param_1;
   uVar1 = CommWrapDisconnect::CommWrapDisconnect_Create(local_30);
   *(undefined4 *)(param_1 + 0x2ec) = uVar1;

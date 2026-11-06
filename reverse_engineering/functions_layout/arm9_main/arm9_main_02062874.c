@@ -58,11 +58,11 @@ int FUN_02062874(int param_1)
     }
     DC_InvalidateRange(uVar8,uVar7);
     DC_WaitWriteBufferEmpty();
-    FUN_02051eec(0x80000,0x2062995);
-    FUN_02051ce0(0x80000);
-    FUN_02051d5c(0x80000);
+    OS_SetIrqFunction(0x80000,0x2062995);
+    OS_ResetRequestIrqMask(0x80000);
+    OS_EnableIrqMask(0x80000);
     OS_RestoreInterrupts(uVar5);
-    FUN_02062a40();
+    CARDi_SetCardDma();
   }
   return local_24;
 }

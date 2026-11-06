@@ -6,6 +6,7 @@ undefined4 FUN_020014e4(int *param_1,undefined4 param_2)
   int iVar2;
   undefined4 uVar3;
   
+                    /* JUS-TAG strings=["hashtable.c","table"] */
   if (param_1 == (int *)0x0) {
     FUN_02002068(0x2092f94,0x2092f88,0,0x94);
     return 0;

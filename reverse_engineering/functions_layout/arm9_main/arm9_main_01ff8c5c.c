@@ -1,7 +1,10 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+/* JUS-SDK MIi_DmaSetParams_wait [behavioral] writes src/dest/control to DMA0SAD + 12*dmaNo,
+   interrupts off, then reads back and applies the channel-0 workaround (dummy control 0x81400001)
+    */
 
-void FUN_01ff8c5c(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+void MIi_DmaSetParams_wait(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
 
 {
   int iVar1;

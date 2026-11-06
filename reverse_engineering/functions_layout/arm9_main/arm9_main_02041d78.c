@@ -8,7 +8,7 @@ undefined4 * FUN_02041d78(void)
   if (puVar1 != (undefined4 *)0x0) {
     ALWidgetBase_0209c1e0_Derived_0209bad8::ALWidgetBase_0209c1e0_Derived_0209bad8
               (puVar1,FUN_02041050,0);
-    *puVar1 = &jus_Class_0209b9ac::vftable;
+    *puVar1 = &jus_TagSPDS_0209b9ac::vftable;
   }
   return puVar1;
 }

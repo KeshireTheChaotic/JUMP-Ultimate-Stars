@@ -5,11 +5,11 @@ void FUN_02167104(void)
 
 {
   DAT_0216e86c = _DAT_04000210;
-  FUN_02051d94(0x40018);
-  FUN_02051d5c(1);
+  OS_SetIrqMask(0x40018);
+  OS_EnableIrqMask(1);
   DAT_0216e868 = FUN_02051e60(1);
-  FUN_02051eec(1,0x21670b1);
-  FUN_02051ce0(1);
+  OS_SetIrqFunction(1,0x21670b1);
+  OS_ResetRequestIrqMask(1);
   _DAT_04000208 = 1;
   OS_EnableInterrupts();
   return;

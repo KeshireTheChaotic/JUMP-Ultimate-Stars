@@ -10,12 +10,12 @@ uint FUN_027ec34c(undefined4 param_1)
   uint uVar4;
   
   iVar2 = _DAT_0380fff4;
-  uVar1 = FUN_037fbc10(0x1000000);
+  uVar1 = OS_DisableIrqMask(0x1000000);
   uVar4 = 1;
   uVar3 = 2;
   while( true ) {
     if (0xf < uVar4) {
-      FUN_037fbc4c(uVar1);
+      OS_EnableIrqMask(uVar1);
       return 0;
     }
     if ((*(ushort *)(iVar2 + 0x53a) & uVar3) == 0) break;
@@ -29,7 +29,7 @@ uint FUN_027ec34c(undefined4 param_1)
   }
   iVar2 = FUN_027ec1ac(param_1);
   *(short *)(iVar2 + 2) = (short)uVar4;
-  FUN_037fbc4c(uVar1);
+  OS_EnableIrqMask(uVar1);
   return uVar4;
 }
 

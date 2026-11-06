@@ -16,7 +16,7 @@ undefined4 FUN_0217972c(void)
      && (iVar1 = FUN_02178448(), *(int *)(iVar1 + 0x198) != 0xf)) {
     return 1;
   }
-  lVar7 = FUN_02054b44();
+  lVar7 = OS_GetTick();
   iVar1 = FUN_02178448();
   lVar7 = lVar7 - *(longlong *)(iVar1 + 0x1e0);
   uVar4 = (uint)lVar7;
@@ -75,7 +75,7 @@ undefined4 FUN_0217972c(void)
           iVar1 = FUN_02178448();
           *(undefined1 *)(iVar1 + 0x1a4) = 0;
           iVar1 = FUN_02178448();
-          uVar8 = FUN_02054b44();
+          uVar8 = OS_GetTick();
           *(undefined8 *)(iVar1 + 0x1e0) = uVar8;
         }
       }

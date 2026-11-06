@@ -6,6 +6,7 @@ void FUN_02089cd0(int param_1)
   int iVar2;
   uint uVar3;
   
+                    /* JUS-TAG strings=["CommLib.cpp"] */
   if (*(short *)(param_1 + 2) != 0) {
     FUN_02088904(*(short *)(param_1 + 2),s_CommLib_cpp_020a0338,0x81d);
     return;

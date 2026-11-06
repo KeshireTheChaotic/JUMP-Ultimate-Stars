@@ -28,7 +28,7 @@ undefined4 FUN_02153ce8(int param_1)
         iVar1 = ResultMission::ResultMission_Create(1);
         *(int *)(unaff_r8 + 0x50) = iVar1;
         *(int *)(iVar1 + 0x44) = unaff_r8;
-        *(undefined1 **)(*(int *)(unaff_r8 + 0x50) + 0x3c) = &LAB_02154098;
+        *(code **)(*(int *)(unaff_r8 + 0x50) + 0x3c) = FUN_02154098;
         piVar2 = *(int **)(*(int *)(unaff_r8 + 0x28) + 4);
         (**(code **)(*piVar2 + 0x148))(piVar2,0x10);
         return *(undefined4 *)(unaff_r8 + 4);

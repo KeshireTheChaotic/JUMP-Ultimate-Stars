@@ -1,8 +1,9 @@
 
-/* JUS-SCENE jus_Scene14_CreateImpl [scene-map] called by scene 14 create wrapper 0206f038 while
-   overlay 2 is resident */
+/* JUS-GAME Demo::Demo_Add [source-string-entry] __FILE__="Demo.cpp" __FUNCTION__="Demo_Add"
+   lines=[372, 2573]; candidates ['Demo.cpp:Demo_Add', 'Demo.cpp:Demo_InitTexture']: the only entry
+   point (_Create/_Add) among same-file candidates */
 
-int jus_Scene14_CreateImpl(short param_1)
+int Demo::Demo_Add(short param_1)
 
 {
   int iVar1;

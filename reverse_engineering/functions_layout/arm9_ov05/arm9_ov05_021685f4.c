@@ -44,7 +44,7 @@ int * DatabaseList::Database_ListCreate
   func_0x021b65bc();
   FUN_020517fc(piVar1,0,0x74);
   piVar1[0x17] = param_1;
-  piVar1[4] = (int)&LAB_0216937c;
+  piVar1[4] = (int)FUN_0216937c;
   piVar1[5] = 0;
   FUN_02169624(piVar1,piVar1[0x19]);
   iVar2 = FUN_02026f94();

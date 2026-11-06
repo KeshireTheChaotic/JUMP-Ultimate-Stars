@@ -11,15 +11,15 @@ void FUN_03802758(void)
   if (DAT_03808aa4 != 0) {
     uVar4 = 0;
     do {
-      iVar1 = FUN_037fefd0(uVar4);
+      iVar1 = SND_IsChannelActive(uVar4);
       if (iVar1 != 0) {
         uVar3 = uVar3 | 1 << (uVar4 & 0xff) & 0xffffU;
       }
       uVar4 = uVar4 + 1;
     } while ((int)uVar4 < 0x10);
-    iVar1 = FUN_037ff7d0(0);
+    iVar1 = SND_IsCaptureActive(0);
     uVar2 = (ushort)(iVar1 != 0);
-    iVar1 = FUN_037ff7d0(1);
+    iVar1 = SND_IsCaptureActive(1);
     if (iVar1 != 0) {
       uVar2 = uVar2 | 2;
     }

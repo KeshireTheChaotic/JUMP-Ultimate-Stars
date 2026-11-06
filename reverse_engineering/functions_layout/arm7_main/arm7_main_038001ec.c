@@ -30,7 +30,7 @@ void FUN_038001ec(undefined4 param_1)
     bVar1 = (&DAT_03808aab)[iVar5];
     if ((bVar1 & 1) != 0) {
       if ((bVar1 & 3) >> 1 == 0) {
-        iVar6 = FUN_037fefd0(iVar10);
+        iVar6 = SND_IsChannelActive(iVar10);
         if (iVar6 == 0) {
           if ((code *)(&DAT_03808af0)[iVar10 * 0x15] == (code *)0x0) {
             (&DAT_03808aca)[iVar5] = 0;

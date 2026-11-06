@@ -1,5 +1,7 @@
 
-void FUN_0205157c(int param_1,undefined4 param_2,undefined4 param_3,uint param_4)
+/* JUS-SDK MI_DmaFill16 [behavioral] source = DMAxFILL, control 0x81000000 | size/2 (16-bit fill) */
+
+void MI_DmaFill16(int param_1,undefined4 param_2,undefined4 param_3,uint param_4)
 
 {
   undefined4 uVar1;
@@ -12,7 +14,7 @@ void FUN_0205157c(int param_1,undefined4 param_2,undefined4 param_3,uint param_4
   } while ((*(uint *)(&DAT_040000b0 + (param_1 * 3 + 2) * 4) & 0x80000000) != 0);
   uVar1 = OS_DisableInterrupts();
   *(undefined4 *)(param_1 * 4 + 0x40000e0) = param_3;
-  FUN_01ff8bc4(param_1,param_1 * 4 + 0x40000e0,param_2,param_4 >> 1 | 0x81000000);
+  MIi_DmaSetParams_wait_noInt(param_1,param_1 * 4 + 0x40000e0,param_2,param_4 >> 1 | 0x81000000);
   OS_RestoreInterrupts(uVar1);
   do {
   } while ((*(uint *)(&DAT_040000b0 + (param_1 * 3 + 2) * 4) & 0x80000000) != 0);

@@ -42,7 +42,7 @@ undefined4 FUN_021ce408(int param_1)
   }
   if (DAT_021d57a0 == 1) {
     FUN_021cfac4();
-    DAT_021d5780 = FUN_02054b34();
+    DAT_021d5780 = OS_GetTickLo();
     DAT_021d5790 = 0;
     DAT_021d5792 = 0;
     DAT_021d5794 = 1;

@@ -1,8 +1,8 @@
 
-/* JUS-CLASS jus_Class_0209b9ac::vfunc_06 [class-virtual] slot 6 of vtable 0209b9ac (own slot, not
+/* JUS-CLASS jus_TagSPDS_0209b9ac::vfunc_06 [class-virtual] slot 6 of vtable 0209b9ac (own slot, not
    inherited) */
 
-undefined4 * jus_Class_0209b9ac::vfunc_06(undefined4 param_1)
+undefined4 * jus_TagSPDS_0209b9ac::vfunc_06(undefined4 param_1)
 
 {
   undefined4 *puVar1;

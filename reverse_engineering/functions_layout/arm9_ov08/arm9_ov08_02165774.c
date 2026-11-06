@@ -20,9 +20,9 @@ void FUN_02165774(int param_1,undefined4 *param_2)
   *(undefined4 *)(DAT_0216e82c + 0xac8) = param_2[5];
   *(undefined1 *)(DAT_0216e82c + 0xa92) = *(undefined1 *)(param_2 + 6);
   *(undefined1 *)(DAT_0216e82c + 0xacc) = 2;
-  FUN_02054b44();
+  OS_GetTick();
   FUN_0206a404(DAT_0216e82c + 0x64c);
-  FUN_02054b44();
+  OS_GetTick();
   uVar1 = FUN_02161c68();
   *(undefined4 *)(DAT_0216e82c + 0xaa4) = uVar1;
   return;

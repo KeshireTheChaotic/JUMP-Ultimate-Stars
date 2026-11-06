@@ -28,7 +28,7 @@ int * FUN_0217756c(void)
         }
         piVar1 = (int *)0x0;
         if (DAT_021a759c[0xc] != 0) {
-          lVar5 = FUN_02054b44();
+          lVar5 = OS_GetTick();
           uVar4 = (uint)(lVar5 - *(longlong *)(DAT_021a759c + 0xd));
           uVar6 = FUN_0200d0c4(uVar4 * 0x40,
                                (int)((ulonglong)(lVar5 - *(longlong *)(DAT_021a759c + 0xd)) >> 0x20)

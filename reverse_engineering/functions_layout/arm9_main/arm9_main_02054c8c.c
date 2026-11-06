@@ -1,7 +1,9 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+/* JUS-SDK OS_InitTick [behavioral] once-only: clears the counter, starts timer 0 (0xC1), enables IE
+   bit 3 (timer 0) */
 
-void FUN_02054c8c(void)
+void OS_InitTick(void)
 
 {
                     /* JUS-TAG hw={"TIMER":2} io=["04000100","04000102"] */
@@ -12,8 +14,8 @@ void FUN_02054c8c(void)
     DAT_020aae94 = 0;
     _DAT_04000100 = 0;
     _DAT_04000102 = 0xc1;
-    FUN_02051eec(8,FUN_02054bf4);
-    FUN_02051d5c(8);
+    OS_SetIrqFunction(8,OSi_CountUpTick);
+    OS_EnableIrqMask(8);
     DAT_020aae8c = 0;
     return;
   }

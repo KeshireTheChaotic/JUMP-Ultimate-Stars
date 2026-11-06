@@ -1,9 +1,13 @@
 
-void FUN_020654a4(int param_1)
+/* JUS-SDK GX_SetBankForARM7 [behavioral] every VRAMCNT write selects a ARM7 mode (bank/MST per
+   GBATEK) */
+
+void GX_SetBankForARM7(int param_1)
 
 {
-  code *UNRECOVERED_JUMPTABLE;
+  code *in_lr;
   
+                    /* JUS-TAG hw={"VRAMCNT":2} io=["04000242","04000243"] */
   DAT_020afba0 = ~(ushort)param_1 & (DAT_020afba0 | DAT_020afba6);
   if (param_1 < 9) {
     if (param_1 < 8) {
@@ -20,10 +24,8 @@ void FUN_020654a4(int param_1)
     DAT_04000242 = 0x82;
   }
   DAT_020afba6 = (ushort)param_1;
-  FUN_02065af4(DAT_020afba0);
-                    /* WARNING: Could not recover jumptable at 0x020654fc. Too many branches */
-                    /* WARNING: Treating indirect jump as call */
-  (*UNRECOVERED_JUMPTABLE)();
+  GX_VRAMCNT_SetLCDC_(DAT_020afba0);
+  (*in_lr)();
   return;
 }
 

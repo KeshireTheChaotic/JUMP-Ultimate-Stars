@@ -56,7 +56,7 @@ byte * FUN_0218f624(byte *param_1,undefined4 *param_2)
       *puVar12 = uVar14;
       *(short *)((int)puVar12 + 6) = sVar1;
       *(undefined2 *)(puVar12 + 2) = 0;
-      uVar15 = FUN_02054b44();
+      uVar15 = OS_GetTick();
       puVar12[0xb] = (uint)uVar15 >> 0x10 | (int)((ulonglong)uVar15 >> 0x20) << 0x10;
       puVar12[0xc] = puVar12[0xd] + 0xe + iVar4;
       FUN_02051890(param_1,puVar12[0xd] + 0xe,iVar4);

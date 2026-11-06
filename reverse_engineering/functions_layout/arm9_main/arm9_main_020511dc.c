@@ -1,5 +1,8 @@
 
-void FUN_020511dc(int param_1,uint param_2)
+/* JUS-SDK MIi_CheckAnotherAutoDMA [behavioral] loops over the other DMA channels and compares their
+   timing field (bits 27-29); panics on a clash */
+
+void MIi_CheckAnotherAutoDMA(int param_1,uint param_2)
 
 {
   uint uVar1;

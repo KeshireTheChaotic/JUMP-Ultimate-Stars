@@ -1,7 +1,9 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+/* JUS-SDK G3X_InitTable [behavioral] called by G3X_Init: clears EDGE_COLOR (0x04000330, 16 bytes),
+   FOG_TABLE (0x04000360, 0x60) and the 32-word SHININESS table (0x040004D0) */
 
-void FUN_020663dc(void)
+void G3X_InitTable(void)
 
 {
   int iVar1;
@@ -12,8 +14,8 @@ void FUN_020663dc(void)
     MIi_CpuClear32(0,0x4000360,0x60);
   }
   else {
-    FUN_0205142c(DAT_0209dd40,0x4000330,0,0x10,0,0);
-    FUN_02051688(DAT_0209dd40,0x4000360,0,0x60);
+    MI_DmaFillAsync(DAT_0209dd40,0x4000330,0,0x10,0,0);
+    MI_DmaFill32(DAT_0209dd40,0x4000360,0,0x60);
   }
   iVar1 = 0;
   do {

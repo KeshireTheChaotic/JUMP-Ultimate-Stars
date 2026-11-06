@@ -310,8 +310,9 @@ void ALNodeImp::Create(int param_1)
                       (0,(int)piVar2 + *piVar2,*(undefined1 *)(param_1 + 0xa7),
                        *(undefined4 *)(param_1 + 4));
     *(undefined4 *)(param_1 + 0x8c) = uVar1;
-    uVar1 = FUN_02083fcc(*(undefined1 *)(param_1 + 0xa7),*(undefined4 *)(param_1 + 4),
-                         *(undefined4 *)(param_1 + 0x2c),1,0,0);
+    uVar1 = BattleMapBG::BattleMapBG_Create
+                      (*(undefined1 *)(param_1 + 0xa7),*(undefined4 *)(param_1 + 4),
+                       *(undefined4 *)(param_1 + 0x2c),1,0,0);
     *(undefined4 *)(param_1 + 0x6c) = uVar1;
   }
   iVar13 = FUN_020751a4(*(undefined4 *)(param_1 + 0x70),*(undefined1 *)(param_1 + 0xa7));

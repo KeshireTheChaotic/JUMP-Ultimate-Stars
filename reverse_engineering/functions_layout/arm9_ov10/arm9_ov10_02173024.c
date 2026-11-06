@@ -85,8 +85,8 @@ void FUN_02173024(uint param_1,uint param_2,undefined4 param_3,undefined4 param_
           param_6 = 1;
         }
         param_5 = param_5 + 1;
-        lVar6 = FUN_02054b44();
-        lVar7 = FUN_02054b44();
+        lVar6 = OS_GetTick();
+        lVar7 = OS_GetTick();
         uVar5 = (uint)(lVar7 - lVar6);
         uVar8 = FUN_0200d0c4(uVar5 * 0x40,
                              (int)((ulonglong)(lVar7 - lVar6) >> 0x20) * 0x40 | uVar5 >> 0x1a,0x82ea
@@ -106,7 +106,7 @@ void FUN_02173024(uint param_1,uint param_2,undefined4 param_3,undefined4 param_
     }
     FUN_02053e60(iVar3 + unaff_r7);
     FUN_02052ea0(5000);
-    lVar7 = FUN_02054b44();
+    lVar7 = OS_GetTick();
     uVar5 = (uint)(lVar7 - lVar6);
     uVar8 = FUN_0200d0c4(uVar5 * 0x40,
                          (int)((ulonglong)(lVar7 - lVar6) >> 0x20) * 0x40 | uVar5 >> 0x1a,0x82ea,

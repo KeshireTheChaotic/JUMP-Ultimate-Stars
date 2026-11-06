@@ -45,7 +45,7 @@ undefined4 FUN_0217ce60(int param_1,int param_2)
               if (*(int *)(iVar1 + 0x198) == 1) {
                 FUN_02178434(0x12);
                 iVar1 = FUN_02178448();
-                uVar2 = FUN_02054b44();
+                uVar2 = OS_GetTick();
                 *(undefined8 *)(iVar1 + 0x1e8) = uVar2;
               }
               else {

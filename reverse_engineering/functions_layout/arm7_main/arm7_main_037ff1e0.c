@@ -1,5 +1,9 @@
 
-void FUN_037ff1e0(uint param_1,int param_2,uint param_3,int param_4,short param_5,int param_6)
+/* JUS-SDK SND_SetupChannelPsg [behavioral] SOUNDxCNT format 3 (0x60000000) with a duty field, timer
+   (+8); no source/length */
+
+void SND_SetupChannelPsg(uint param_1,int param_2,uint param_3,int param_4,short param_5,int param_6
+                        )
 
 {
                     /* JUS-TAG hw={"SOUND":2} io=["04000400","04000408"] */

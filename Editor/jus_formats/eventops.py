@@ -12,9 +12,68 @@ from . import notetrack
 
 CATEGORIES = {0: 'Branch / conditional', 1: 'Physics / state', 2: 'Presentation',
               3: 'Character action', 4: 'Audio'}
-# Only the character-action subcodes whose roles were confirmed through ov06.
-CHARA_ACTION_NAMES = {13: 'Select pursuer animations (effect slots A/B)',
-                      14: 'Set pursuer target (x, y, snap)'}
+# chara_action subcodes 0x00–0x21 from the ov06 switch FUN_02157A44 (verified case by
+# case 2026-11-06).  Labels describe what the case does in code, not an in-game name;
+# "no-op" cases exist in shipped data and must be kept.  Cases 0x41–0x48 of the same
+# switch are branch-condition queries, not authored subcodes.
+CHARA_ACTION_NAMES = {
+    0x00: 'No-op (case only breaks)',
+    0x01: 'Arm grounded follow-up (actor +0xF3 = 1)',
+    0x02: 'Spawn attack work object (attack slot a1, offset a2/a3; FUN_02158470)',
+    0x03: 'Request removal of active attack objects (+0x26 |= 1; FUN_0215857C)',
+    0x04: 'Tear down all live GN effects (FUN_0206C650)',
+    0x05: 'Tear down oldest live GN effect (FUN_0206C760)',
+    0x06: 'Turn around (set opposite facing)',
+    0x07: 'Set blink/lock timer (actor +0xCE = a1)',
+    0x08: 'Signal battle outcome transition (FUN_0214E22C)',
+    0x09: 'Arm delayed hit effect (selector a1; FUN_0215C034)',
+    0x0A: 'Status work: a1 → status id (table 0x0217215C) → handler (0x02171168)',
+    0x0B: 'Spawn battle item: a1 → item type (table 0x0217214C) → ALMT 0x300000+type',
+    0x0C: 'Add a1 to both side counters (FUN_02157FB0/FD8)',
+    0x0D: 'Select pursuer animations (effect slots A/B)',
+    0x0E: 'Set pursuer target (x, y, snap)',
+    0x0F: 'No-op (case only breaks)',
+    0x10: 'No-op (case only breaks)',
+    0x11: 'Set actor +0xE2 = a2 (only when a1 = 0)',
+    0x12: 'Conditional blink/lock timer (FUN_02078660 check)',
+    0x13: 'Actor resource call FUN_02078618',
+    0x14: 'Item feedback: a1 → table 0x021710E4 (FUN_0216650C)',
+    0x15: 'Arm airborne follow-up (actor +0xF4 = 1)',
+    0x16: 'Set follow-up override (+0xCC = a1, +0xF6 = a2==0, +0xF7 = a3==0)',
+    0x17: 'Actor resource call FUN_020783CC(a1)',
+    0x18: 'Adjust actor meter accumulator by a1 (+0x5C8; FUN_020781E4)',
+    0x19: 'Target object call FUN_0216FA9C',
+    0x1A: 'Target object call FUN_0216FB04',
+    0x1B: 'No-op (case only breaks)',
+    0x1C: 'No-op (case only breaks)',
+    0x1D: 'Clear actor action flag (+0xC8 = 0)',
+    0x1E: 'No-op (case only breaks)',
+    0x1F: 'No-op (case only breaks)',
+    0x20: 'Adjust linked object counters by a1 (FUN_020783DC)',
+    0x21: 'Seek target animation to Marker a1 (vtable +0xEC)',
+}
+
+#: ov06 0x0217214C: chara_action 0x0B a1 → item type (object ALMT 0x300000 + type)
+ITEM_SELECTOR = (0x0A, 0x0E, 0x08, 0x10, 0x12, 0x08, 0x14, 0x1C, 0x1A, 0x18, 0x3D, 0x20, 0x26)
+#: ov06 0x0217215C: chara_action 0x0A a1 → status id (42-record table 0x02171168)
+STATUS_SELECTOR = (0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D,
+                   0x0E, 0x0F, 0x10, 0x11, 0x23, 0x24, 0x25, 0x26, 0x27, 0x28, 0x29, 0x18, 0x21)
+
+
+def chara_action_text(values) -> str:
+    """Label for a chara_action command's values (subcode first), with selector lookups."""
+    if not values:
+        return ''
+    sub = values[0]
+    name = CHARA_ACTION_NAMES.get(sub, 'unlabeled subcode')
+    a1 = values[1] if len(values) > 1 else None
+    if sub == 0x0B and a1 is not None:
+        name += (f' — item 0x{ITEM_SELECTOR[a1]:02X} (ALMT 0x{0x300000 + ITEM_SELECTOR[a1]:06X})'
+                 if 0 <= a1 < len(ITEM_SELECTOR) else f' — a1 {a1} outside the 13-entry table')
+    elif sub == 0x0A and a1 is not None:
+        name += (f' — status 0x{STATUS_SELECTOR[a1]:02X}' if 0 <= a1 < len(STATUS_SELECTOR)
+                 else f' — a1 {a1} outside the 26-entry table')
+    return name
 
 
 def opcode_label(opcode: int) -> str:

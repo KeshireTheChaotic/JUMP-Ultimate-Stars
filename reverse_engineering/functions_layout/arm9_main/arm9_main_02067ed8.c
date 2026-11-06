@@ -49,7 +49,7 @@ undefined4 FUN_02067ed8(int param_1)
   }
   else if (iVar4 == 9) {
     *(undefined1 *)(param_1 + 0xd15) = 0;
-    uVar8 = FUN_02054b44();
+    uVar8 = OS_GetTick();
     *(undefined8 *)(param_1 + 0xcb0) = uVar8;
     return 10;
   }

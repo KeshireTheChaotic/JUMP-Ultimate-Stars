@@ -11,7 +11,7 @@ void FUN_02165a20(int param_1)
   if (iVar1 == 0) {
     return;
   }
-  uVar3 = FUN_02054b44();
+  uVar3 = OS_GetTick();
   *(undefined8 *)(iVar2 + 0x5c) = uVar3;
   FUN_02028384(*(undefined4 *)(param_1 + 4),FUN_02165a7c);
   return;

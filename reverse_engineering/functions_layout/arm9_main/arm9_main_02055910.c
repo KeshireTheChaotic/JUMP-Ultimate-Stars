@@ -22,9 +22,9 @@ void FUN_02055910(void)
       iVar3 = iVar3 + 1;
     } while (iVar3 < 0x20);
     _DAT_04000184 = 0xc408;
-    FUN_02051ce0(0x40000);
-    FUN_02051eec(0x40000,FUN_020556a4);
-    FUN_02051d5c(0x40000);
+    OS_ResetRequestIrqMask(0x40000);
+    OS_SetIrqFunction(0x40000,FUN_020556a4);
+    OS_EnableIrqMask(0x40000);
     iVar3 = 0;
     while( true ) {
       uVar1 = _DAT_04000180 & 0xf;

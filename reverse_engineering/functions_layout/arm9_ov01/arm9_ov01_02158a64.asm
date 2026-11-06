@@ -1,0 +1,8 @@
+02158a64  push {r3,lr}
+02158a66  lsl r0,r1,#0x10
+02158a68  lsr r0,r0,#0x10
+02158a6a  cmp r0,#0x78
+02158a6c  bne 0x02158a74
+02158a6e  lsr r1,r1,#0x10
+02158a70  blx 0x0207342c
+02158a74  pop {r3,pc}

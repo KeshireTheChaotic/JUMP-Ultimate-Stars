@@ -18,6 +18,21 @@ from .binary import u16, u32
 
 STRIDES = {'col': 20, 'shot': 32, 'effect': 8}
 
+#: chr/shot record byte 0 = shot work handler id → callback (ov06 table 0x02172864,
+#: verified 2026-11-06).  Several ids share a callback; keep ids distinct.  Byte 0 of
+#: chr/col and ALMT CollisionType are different namespaces.
+SHOT_HANDLERS = (
+    0x0216EEF4, 0x0216B4F4, 0x0216B514, 0x0216B4F4, 0x0216B4F4, 0x0216B910, 0x0216D88C, 0x0216DF50,
+    0x02170044, 0x0216B2C8, 0x0216D99C, 0x0216EF7C, 0x0216D05C, 0x0216FB10, 0x0216B768, 0x0216EEF4,
+    0x0216D9DC, 0x02170500, 0x0216D9F8, 0x0217061C, 0x0216D0C8, 0x0216EEF4, 0x0216EEF4, 0x0216B9B0,
+    0x02170900, 0x0216B9D8,
+)
+
+
+def shot_handler(handler_id: int) -> str:
+    return (f'0x{SHOT_HANDLERS[handler_id]:08X}' if 0 <= handler_id < len(SHOT_HANDLERS)
+            else 'outside the 26-entry table')
+
 
 @dataclass
 class RecordTable:

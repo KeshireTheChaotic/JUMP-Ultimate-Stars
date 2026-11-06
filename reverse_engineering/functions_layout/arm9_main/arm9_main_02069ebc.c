@@ -83,7 +83,7 @@ undefined4 FUN_02069ebc(int param_1,uint param_2,uint param_3,uint param_4)
           {
             bVar6 = true;
           }
-          lVar8 = FUN_02054b44();
+          lVar8 = OS_GetTick();
           break;
         case 4:
         case 5:
@@ -148,7 +148,7 @@ undefined4 FUN_02069ebc(int param_1,uint param_2,uint param_3,uint param_4)
           return 1;
         }
         if ((DAT_020afc20 & 0x20) == 0) {
-          lVar9 = FUN_02054b44();
+          lVar9 = OS_GetTick();
           uVar4 = (uint)(lVar9 - lVar8);
           uVar10 = FUN_0200d0c4(uVar4 * 0x40,
                                 (int)((ulonglong)(lVar9 - lVar8) >> 0x20) * 0x40 | uVar4 >> 0x1a,

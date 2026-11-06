@@ -14,7 +14,7 @@ void FUN_0205eff4(int param_1,undefined4 param_2)
     uVar2 = 2;
   }
   *(undefined2 *)(param_1 + 10) = uVar2;
-  *(undefined1 **)(param_1 + 4) = &LAB_020609d0;
+  *(code **)(param_1 + 4) = FUN_020609d0;
   return;
 }
 

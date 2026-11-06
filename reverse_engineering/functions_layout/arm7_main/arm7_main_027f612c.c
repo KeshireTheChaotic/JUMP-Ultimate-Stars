@@ -1,7 +1,9 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+/* JUS-SDK jus_SpiFlash_PageErase [behavioral] SPICNT 0x8100/0x8900 (device 1 = firmware flash),
+   first SPIDATA byte = command 0xDB (PageErase) */
 
-void FUN_027f612c(ushort param_1)
+void jus_SpiFlash_PageErase(ushort param_1)
 
 {
                     /* JUS-TAG hw={"SPI":2} io=["040001c0","040001c2"] */

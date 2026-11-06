@@ -9,6 +9,7 @@ void Record::Record_Deck_DataLocalChange
 {
   undefined4 uVar1;
   
+                    /* JUS-TAG strings=["Record.cpp","Record_Deck_DataLocalChange"] */
   uVar1 = thunk_FUN_0201a228(0x5c,0x209e61c,0x209e600,0x51b);
   FUN_02051890(param_1 + param_3 * 0x5c,uVar1,0x5c);
   FUN_02051890(param_1 + param_4 * 0x5c,param_1 + param_3 * 0x5c,0x5c);

@@ -61,13 +61,13 @@ int * Movie::Movie_Create(byte param_1,undefined4 param_2,int param_3,undefined4
     }
     FUN_02054710(0,piVar1[1]);
     FUN_0203d4e4();
-    FUN_020651b0();
-    FUN_02065150();
+    GX_DisableBankForBG();
+    GX_DisableBankForTex();
     FUN_02065490(0xb);
     MIi_CpuClearFast(0,0x6800000,0xa4000);
     FUN_02065110();
-    FUN_02065978(3);
-    FUN_02065660(8);
+    GX_SetBankForBG(3);
+    GX_SetBankForTex(8);
     iVar3 = FUN_0203b414(0);
     local_40 = 0;
     piVar5 = *(int **)(*(int *)(iVar3 + 0x88) + 4);

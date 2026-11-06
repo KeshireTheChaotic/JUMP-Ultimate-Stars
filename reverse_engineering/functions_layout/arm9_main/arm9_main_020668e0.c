@@ -3,9 +3,9 @@ void FUN_020668e0(void)
 
 {
   if (DAT_0209dd40 != -1) {
-    FUN_02051314();
+    MI_WaitDma();
   }
-  FUN_020657f8(DAT_020afbc8);
+  GX_SetBankForBGExtPltt(DAT_020afbc8);
   DAT_020afbc8 = 0;
   DAT_020afbc4 = 0;
   DAT_020afbc0 = 0;

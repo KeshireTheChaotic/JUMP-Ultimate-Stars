@@ -34,7 +34,7 @@ public enum SceneId
     /// <summary>Scene 13: overlay 1.</summary>
     Result13 = 13,
     /// <summary>Scene 14: overlay 2.</summary>
-    Scene14 = 14,
+    Demo = 14,
     /// <summary>Scene 15: overlay 3.</summary>
     VsCall = 15,
     /// <summary>Scene 16: overlay 2.</summary>
@@ -47,20 +47,20 @@ public enum SceneId
     JGalaxyResult = 19,
     /// <summary>Scene 20: overlay 0.</summary>
     Ending = 20,
-    /// <summary>Scene 21: overlay 3. Hints: JArena_AddJob, JArena_AddJob.</summary>
-    Scene21 = 21,
+    /// <summary>Scene 21: overlay 3.</summary>
+    JArena21 = 21,
     /// <summary>Scene 22: overlay 1.</summary>
     JAMissionTry = 22,
-    /// <summary>Scene 23: overlay 3. Hints: JArena_AddJob, JArena_AddJob.</summary>
-    Scene23 = 23,
-    /// <summary>Scene 24: overlay 3. Hints: JArena_AddJob, JArena_AddJob.</summary>
-    Scene24 = 24,
+    /// <summary>Scene 23: overlay 3.</summary>
+    JArena23 = 23,
+    /// <summary>Scene 24: overlay 3.</summary>
+    JArena24 = 24,
     /// <summary>Scene 25: overlay 1.</summary>
     JAMisnResult = 25,
-    /// <summary>Scene 26: overlay 3. Hints: JArena_AddJob, JArena_AddJob.</summary>
-    Scene26 = 26,
-    /// <summary>Scene 27: overlay 3. Hints: JArena_AddJob.</summary>
-    Scene27 = 27,
+    /// <summary>Scene 26: overlay 3.</summary>
+    JArena26 = 26,
+    /// <summary>Scene 27: overlay 3.</summary>
+    JArena27 = 27,
     /// <summary>Scene 28: overlay 1.</summary>
     JARankLst = 28,
     /// <summary>Scene 29: overlay 5.</summary>
@@ -125,20 +125,20 @@ public static partial class SceneTable
         new(SceneId.Battle11, "Battle", 6, 0x0206ECA8u, 0x0206ECB8u),
         new(SceneId.Battle12, "Battle", 6, 0x0206ECE0u, 0x0206ED80u),
         new(SceneId.Result13, "Result", 1, 0x0206EFF0u, 0x0206F00Cu),
-        new(SceneId.Scene14, null, 2, 0x0206F038u, 0x0206E5D0u),
+        new(SceneId.Demo, "Demo", 2, 0x0206F038u, 0x0206E5D0u),
         new(SceneId.VsCall, "VsCall", 3, 0x0206F050u, 0x0206E5D0u),
         new(SceneId.JGalaxy, "JGalaxy", 2, 0x0206F068u, 0x0206F088u),
         new(SceneId.JGalaxyStageInfo, "JGalaxyStageInfo", 1, 0x0214CD20u, 0x0206F148u),
         new(SceneId.JQuiz18, "JQuiz", 4, 0x0214CE4Cu, 0x0206F2A4u),
         new(SceneId.JGalaxyResult, "JGalaxyResult", 1, 0x0214DCB0u, 0x0206F300u),
         new(SceneId.Ending, "Ending", 0, 0x0214E860u, 0x0206F3A8u),
-        new(SceneId.Scene21, null, 3, 0x0206F3CCu, 0x0206F3E4u),
+        new(SceneId.JArena21, "JArena", 3, 0x0206F3CCu, 0x0206F3E4u),
         new(SceneId.JAMissionTry, "JAMissionTry", 1, 0x0206F654u, 0x0206F680u),
-        new(SceneId.Scene23, null, 3, 0x0206F90Cu, 0x0206E5D0u),
-        new(SceneId.Scene24, null, 3, 0x0206F930u, 0x0206F954u),
+        new(SceneId.JArena23, "JArena", 3, 0x0206F90Cu, 0x0206E5D0u),
+        new(SceneId.JArena24, "JArena", 3, 0x0206F930u, 0x0206F954u),
         new(SceneId.JAMisnResult, "JAMisnResult", 1, 0x0206F734u, 0x0206E5D0u),
-        new(SceneId.Scene26, null, 3, 0x0206F9B8u, 0x0206F9D4u),
-        new(SceneId.Scene27, null, 3, 0x0206FAA8u, 0x0206FACCu),
+        new(SceneId.JArena26, "JArena", 3, 0x0206F9B8u, 0x0206F9D4u),
+        new(SceneId.JArena27, "JArena", 3, 0x0206FAA8u, 0x0206FACCu),
         new(SceneId.JARankLst, "JARankLst", 1, 0x0206FB1Cu, 0x0206FB34u),
         new(SceneId.JPowerKomaList, "JPowerKomaList", 5, 0x0206FB4Cu, 0x0206FB78u),
         new(SceneId.JPower, "JPower", 5, 0x0206FBC8u, 0x0206E5D0u),

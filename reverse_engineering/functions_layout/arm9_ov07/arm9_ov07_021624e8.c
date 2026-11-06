@@ -35,11 +35,11 @@ int CommuMenuDataLeaderSel::CommuMenuDataLeaderSel_Add(void)
   iVar2 = FUN_02159aec();
   piVar1[0x12] = iVar2;
   *(int **)(iVar2 + 0x10) = piVar1;
-  *(undefined **)(piVar1[0x12] + 0x14) = &DAT_02162730;
+  *(code **)(piVar1[0x12] + 0x14) = FUN_02162730;
   *(code **)(piVar1[0x12] + 0x18) = FUN_02162734;
-  *(undefined1 **)(piVar1[0x12] + 0x1c) = &LAB_02162784;
+  *(code **)(piVar1[0x12] + 0x1c) = FUN_02162784;
   *(code **)(piVar1[0x12] + 0x20) = FUN_0216278c;
-  *(undefined1 **)(piVar1[0x12] + 0x24) = &LAB_021627d0;
+  *(code **)(piVar1[0x12] + 0x24) = FUN_021627d0;
   *(undefined1 *)piVar1[0x12] = 0;
   *(undefined1 *)(piVar1[0x12] + 1) = 0;
   *(undefined1 *)(piVar1[0x12] + 2) = 1;
@@ -49,7 +49,7 @@ int CommuMenuDataLeaderSel::CommuMenuDataLeaderSel_Add(void)
   FUN_02028384(*(undefined4 *)(piVar1[1] + 4),FUN_0216266c);
   local_10 = 0x80000;
   (**(code **)(**(int **)(piVar1[1] + 4) + 0xa0))(*(int **)(piVar1[1] + 4),&local_10);
-  iVar2 = FUN_0215656c(piVar1[0x12]);
+  iVar2 = CommuMenuCmnLeaderSel::CommuMenuCmnLeaderSel_Add(piVar1[0x12]);
   piVar1[0x10] = iVar2;
   return *piVar1;
 }

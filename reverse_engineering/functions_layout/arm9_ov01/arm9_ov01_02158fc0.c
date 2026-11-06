@@ -28,7 +28,7 @@ void FUN_02158fc0(int param_1)
   piVar3 = (int *)0x0;
   if (iVar1 != 0) {
     piVar3 = (int *)func_0x021af494(iVar1,*(undefined4 *)(param_1 + 4),uVar4,(uVar2 & 1) == 1,
-                                    &LAB_0215911c_1,0);
+                                    0x215911d,0);
   }
   if (piVar3[6] == 0) {
     (**(code **)(*piVar3 + 0x14))();

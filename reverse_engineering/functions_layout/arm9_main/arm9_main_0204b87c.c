@@ -1,12 +1,9 @@
 
-void FUN_0204b87c(int *param_1,int *param_2)
+void FUN_0204b87c(int param_1,undefined4 *param_2)
 
 {
-  param_1[0xd] = *param_2;
-  if (*(byte *)(param_1 + 9) != (*(byte *)(param_1 + 9) | 4)) {
-    (**(code **)(*param_1 + 0x18))();
-  }
-  *(byte *)(param_1 + 9) = *(byte *)(param_1 + 9) | 0x34;
+  *(undefined4 *)(param_1 + 0x34) = *param_2;
+  FUN_02024c3c(param_1,4);
   return;
 }
 

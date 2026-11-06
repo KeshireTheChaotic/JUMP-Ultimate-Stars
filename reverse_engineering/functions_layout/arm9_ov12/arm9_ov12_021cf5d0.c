@@ -30,7 +30,7 @@ undefined4 FUN_021cf5d0(int *param_1)
   DAT_021d66d8 = 0;
   DAT_021d66d4 = 0;
   DAT_021d7bf4 = 0;
-  DAT_021d66ec = FUN_02054b44;
+  DAT_021d66ec = OS_GetTick;
   DAT_021d66f0 = 0x5d588b65;
   DAT_021d66f4 = 0x269ec3;
   return 1;

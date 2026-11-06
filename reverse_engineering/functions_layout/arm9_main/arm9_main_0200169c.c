@@ -7,6 +7,9 @@ int * FUN_0200169c(int param_1,int param_2,undefined4 param_3,int param_4,int pa
   undefined4 uVar3;
   int iVar4;
   
+                    /* JUS-TAG
+                       strings=["compFn","elemSize","hashFn","hashtable.c","nBuckets","table","table->buckets"]
+                        */
   if (param_4 == 0) {
     FUN_02002068(s_hashFn_02092f9c,s_hashtable_c_02092f88,0,0x38);
   }

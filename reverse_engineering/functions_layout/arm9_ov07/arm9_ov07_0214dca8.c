@@ -4,8 +4,6 @@
 void jus_Scene38_Create(void)
 
 {
-                    /* WARNING: Could not recover jumptable at 0x0214dcbc. Too many branches */
-                    /* WARNING: Treating indirect jump as call */
   (*pcRam0214dcc0)(10,2,0,0);
   return;
 }

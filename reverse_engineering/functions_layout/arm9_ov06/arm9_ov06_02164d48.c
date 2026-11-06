@@ -38,7 +38,7 @@ FUN_02164d48(uint param_1,undefined4 param_2,undefined4 param_3,short param_4,sh
       iVar3 = *(int *)(iVar2 + 0x30);
       FUN_02083b74(iVar2,FUN_02166780,1);
       *(code **)(iVar3 + 0x14) = FUN_0216682c;
-      *(undefined1 **)(iVar3 + 0x18) = &LAB_02166810;
+      *(code **)(iVar3 + 0x18) = FUN_02166810;
       *(char *)(DAT_02172988 + 0x152) = *(char *)(DAT_02172988 + 0x152) + '\x01';
     }
     else if (param_1 == 0x3d) {

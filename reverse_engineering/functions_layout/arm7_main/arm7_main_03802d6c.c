@@ -65,18 +65,19 @@ void FUN_03802d6c(void)
         FUN_03802a60(local_2c,local_28,local_24,local_20);
         break;
       case 0xe:
-        FUN_037ff298((uint)local_2c & 0xffff,local_28 & 0x7ffffff,local_20 >> 0x18 & 3,
-                     local_20 >> 0x1a & 3,local_20 & 0xffff,local_24 & 0x3fffff,
-                     local_24 >> 0x18 & 0x7f,local_24 >> 0x16 & 3,(uint)local_2c >> 0x10,
-                     local_20 >> 0x10 & 0x7f);
+        SND_SetupChannelPcm((uint)local_2c & 0xffff,local_28 & 0x7ffffff,local_20 >> 0x18 & 3,
+                            local_20 >> 0x1a & 3,local_20 & 0xffff,local_24 & 0x3fffff,
+                            local_24 >> 0x18 & 0x7f,local_24 >> 0x16 & 3,(uint)local_2c >> 0x10,
+                            local_20 >> 0x10 & 0x7f);
         break;
       case 0xf:
-        FUN_037ff1e0(local_2c,local_20,local_28 & 0x7f,local_28 >> 8 & 3,local_24 >> 8 & 0xffff,
-                     local_24 & 0x7f);
+        SND_SetupChannelPsg(local_2c,local_20,local_28 & 0x7f,local_28 >> 8 & 3,
+                            local_24 >> 8 & 0xffff,local_24 & 0x7f);
         break;
       case 0x10:
-        FUN_037ff130(local_2c,local_28 & 0x7f,local_28 >> 8 & 3,local_24 >> 8 & 0xffff,
-                     local_24 & 0x7f);
+        SND_SetupChannelNoise
+                  (local_2c,local_28 & 0x7f,local_28 >> 8 & 3,local_24 >> 8 & 0xffff,local_24 & 0x7f
+                  );
         break;
       case 0x11:
         FUN_037ff7e8(local_24 >> 0x1f,local_24 >> 0x1e & 1,local_2c,local_28,local_24 >> 0x1d & 1,
@@ -98,13 +99,13 @@ void FUN_03802d6c(void)
         FUN_037feef8(local_2c);
         break;
       case 0x17:
-        FUN_037fed54(local_2c);
+        SND_SetMasterVolume(local_2c);
         break;
       case 0x18:
         FUN_037fef6c(local_2c);
         break;
       case 0x19:
-        FUN_037fed1c(local_2c,local_28,local_24,local_20);
+        SND_SetOutputSelector(local_2c,local_28,local_24,local_20);
         break;
       case 0x1a:
         FUN_037ffcd0(local_2c,local_28);

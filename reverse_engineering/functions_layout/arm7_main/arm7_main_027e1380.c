@@ -106,7 +106,7 @@ void FUN_027e1380(int param_1)
         }
       }
       if (*(int *)(iVar3 + 0x7bc) != 0 || *(int *)(iVar3 + 0x7b8) != 0) {
-        uVar12 = FUN_037fd6ac();
+        uVar12 = OS_GetTick();
         *(uint *)(iVar3 + 0x738) = (uint)uVar12 | 1;
         *(int *)(iVar3 + 0x73c) = (int)((ulonglong)uVar12 >> 0x20);
       }

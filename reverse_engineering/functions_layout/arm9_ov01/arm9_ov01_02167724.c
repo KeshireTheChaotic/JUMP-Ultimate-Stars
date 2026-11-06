@@ -400,7 +400,7 @@ int ResultMission::ResultMission_Create(undefined1 param_1)
   piVar6 = *(int **)(*(int *)(iVar4 + 0x20) + 4);
   (**(code **)(*piVar6 + 0x24))(piVar6,iVar4);
   FUN_02028384(*(undefined4 *)(*(int *)(iVar4 + 0x20) + 4),0x21682a1);
-  uVar17 = FUN_02054b44();
+  uVar17 = OS_GetTick();
   *(undefined8 *)(iVar4 + 0x48) = uVar17;
   if ((int)((uint)*(byte *)(iVar4 + 0x76) << 0x1f) < 0) {
     FUN_020734e0(0x30);

@@ -1,0 +1,13 @@
+021937a4  push {r4,lr}
+021937a6  add r4,r0,#0x4
+021937a8  mov r0,#0x0
+021937aa  add r1,r4,#0x0
+021937ac  ldr r2,[0x021937c0]
+021937ae  ldr r2,[r2,#0x0]
+021937b0  blx r2
+021937b2  cmp r0,#0x0
+021937b4  beq 0x021937b8
+021937b6  stmia r0!,{r4}
+021937b8  pop {r4}
+021937ba  pop {r3}
+021937bc  bx r3

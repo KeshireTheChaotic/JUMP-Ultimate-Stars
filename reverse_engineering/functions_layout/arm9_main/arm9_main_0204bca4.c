@@ -5,6 +5,7 @@
 char * jus_TagIPMV::vfunc_30(void)
 
 {
+                    /* JUS-TAG strings=["IPMove"] */
   return s_IPMove_0209d5b4;
 }
 

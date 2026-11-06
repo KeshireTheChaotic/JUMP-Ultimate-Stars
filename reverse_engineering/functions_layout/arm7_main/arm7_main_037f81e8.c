@@ -5,7 +5,7 @@ undefined4 FUN_037f81e8(void)
   undefined4 uVar1;
   byte local_8 [8];
   
-  FUN_027f6584(0x1d,1,local_8);
+  jus_SpiFlash_Read(0x1d,1,local_8);
   if (local_8[0] == 0xff) {
     uVar1 = 0;
   }

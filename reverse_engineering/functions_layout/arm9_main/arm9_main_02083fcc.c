@@ -1,6 +1,13 @@
 
-int * FUN_02083fcc(int param_1,int param_2,int param_3,undefined4 param_4,undefined4 param_5,
-                  char param_6)
+/* JUS-GAME BattleMapBG::BattleMapBG_Create [source-string-entry] __FILE__="BattleMapBG.cpp"
+   __FUNCTION__="BattleMapBG_Create" lines=[277, 922, 1233]; candidates
+   ['BattleMapBG.cpp:BattleMapBG_Create', 'BattleMapBG.cpp:BattleMapBG_SetAnime',
+   'BattleMapBG.cpp:BattleMapBG_SetPriority']: the only entry point (_Create/_Add) among same-file
+   candidates */
+
+int * BattleMapBG::BattleMapBG_Create
+                (int param_1,int param_2,int param_3,undefined4 param_4,undefined4 param_5,
+                char param_6)
 
 {
   undefined1 uVar1;

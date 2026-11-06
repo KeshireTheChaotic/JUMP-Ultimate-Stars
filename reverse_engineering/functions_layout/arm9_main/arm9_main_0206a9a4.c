@@ -45,7 +45,7 @@ undefined4 FUN_0206a9a4(int param_1)
   }
   iVar1 = FUN_02054c7c(pcVar8);
   if (iVar1 != 0) {
-    pcVar8 = FUN_02054b44 + (int)pcVar8;
+    pcVar8 = OS_GetTick + (int)pcVar8;
   }
   FUN_020554a8(&local_38);
   uVar2 = (uint)local_36;

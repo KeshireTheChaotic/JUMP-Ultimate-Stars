@@ -1,5 +1,8 @@
 
-void FUN_037ff104(int param_1,uint param_2)
+/* JUS-SDK SND_StopChannel [behavioral] SOUNDxCNT: clear the start bit (31), set hold (15) when
+   flags & 1 */
+
+void SND_StopChannel(int param_1,uint param_2)
 
 {
   uint uVar1;

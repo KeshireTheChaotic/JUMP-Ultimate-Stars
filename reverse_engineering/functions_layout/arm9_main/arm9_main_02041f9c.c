@@ -20,10 +20,10 @@ void FUN_02041f9c(int param_1,undefined4 param_2,undefined4 param_3,undefined4 p
   
                     /* JUS-TAG hw={"GX_3D":1} io=["04000540"] */
   uStack_28 = param_4;
-  uVar10 = FUN_02054b44();
+  uVar10 = OS_GetTick();
   FUN_020315e4();
   (**(code **)(*DAT_020a0dfc + 0x10))();
-  uVar11 = FUN_02054b44();
+  uVar11 = OS_GetTick();
   FUN_020322bc(DAT_020a0cec);
   uVar1 = (uint)DAT_020a1484;
   while (uVar1 = uVar1 - 1, -1 < (int)uVar1) {
@@ -43,13 +43,13 @@ void FUN_02041f9c(int param_1,undefined4 param_2,undefined4 param_3,undefined4 p
     }
   }
   DAT_020a1484 = 0;
-  uVar12 = FUN_02054b44();
+  uVar12 = OS_GetTick();
   DAT_020a10e4 = (uint)uVar12 - (uint)uVar11;
   DAT_020a10e8 = (int)((ulonglong)uVar12 >> 0x20) -
                  ((int)((ulonglong)uVar11 >> 0x20) + (uint)((uint)uVar12 < (uint)uVar11));
   _DAT_04000540 = 0;
   DAT_02093be8 = DAT_02093be8 + 1;
-  uVar11 = FUN_02054b44();
+  uVar11 = OS_GetTick();
   DAT_020a10d4 = (uint)uVar11 - DAT_020a10fc;
   DAT_020a10d8 = (int)((ulonglong)uVar11 >> 0x20) -
                  (DAT_020a1100 + (uint)((uint)uVar11 < DAT_020a10fc));
@@ -104,7 +104,7 @@ void FUN_02041f9c(int param_1,undefined4 param_2,undefined4 param_3,undefined4 p
   DAT_020a0c3e = 0;
   DAT_020a0c3d = 0;
   DAT_020a0c36 = 0;
-  uVar11 = FUN_02054b44();
+  uVar11 = OS_GetTick();
   DAT_020a1100 = (int)((ulonglong)uVar11 >> 0x20);
   DAT_020a10fc = (uint)uVar11;
   (*DAT_02093be4)(0);
@@ -124,12 +124,12 @@ void FUN_02041f9c(int param_1,undefined4 param_2,undefined4 param_3,undefined4 p
     FUN_0203c5ac((&DAT_020a1710)[uVar1]);
     uVar1 = uVar1 + 1;
   } while (uVar1 < 4);
-  uVar11 = FUN_02054b44();
+  uVar11 = OS_GetTick();
   DAT_020a10dc = (uint)uVar11 - DAT_020a10fc;
   DAT_020a10e0 = (int)((ulonglong)uVar11 >> 0x20) -
                  (DAT_020a1100 + (uint)((uint)uVar11 < DAT_020a10fc));
   FUN_020345d4(DAT_020a0f64);
-  uVar11 = FUN_02054b44();
+  uVar11 = OS_GetTick();
   DAT_020a10f4 = (uint)uVar11 - (uint)uVar10;
   DAT_020a10f8 = (int)((ulonglong)uVar11 >> 0x20) -
                  ((int)((ulonglong)uVar10 >> 0x20) + (uint)((uint)uVar11 < (uint)uVar10));

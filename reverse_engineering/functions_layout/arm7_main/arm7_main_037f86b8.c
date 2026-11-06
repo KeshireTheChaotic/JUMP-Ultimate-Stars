@@ -10,7 +10,7 @@ uint FUN_037f86b8(int param_1)
   int iVar4;
   
   iVar2 = _DAT_0380fff4;
-  FUN_037fbc10(0x1000010);
+  OS_DisableIrqMask(0x1000010);
   param_1 = param_1 * 2;
   uVar3 = (uint)*(ushort *)(iVar2 + param_1);
   if (uVar3 != 0xffff) {
@@ -26,7 +26,7 @@ uint FUN_037f86b8(int param_1)
       *(undefined2 *)(iVar4 + uVar3 * 8) = 0xffff;
     }
   }
-  FUN_037fbc4c();
+  OS_EnableIrqMask();
   return uVar3;
 }
 

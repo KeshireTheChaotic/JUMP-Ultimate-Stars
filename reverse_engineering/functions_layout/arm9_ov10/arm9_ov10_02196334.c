@@ -23,7 +23,7 @@ LAB_0219639c:
   }
   FUN_02051890(puVar3,param_1 + 0x74,0x20);
   FUN_02051890(puVar3 + 0x20,param_1,0x30);
-  uVar4 = FUN_02054b44();
+  uVar4 = OS_GetTick();
   *(uint *)(puVar3 + 0x50) = (uint)uVar4 >> 0x10 | (int)((ulonglong)uVar4 >> 0x20) << 0x10;
   *(undefined1 *)(param_1 + 0x30) = 1;
   goto LAB_0219639c;

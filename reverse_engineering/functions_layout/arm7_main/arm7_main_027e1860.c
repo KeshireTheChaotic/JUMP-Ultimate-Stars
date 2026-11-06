@@ -37,7 +37,7 @@ void FUN_027e1860(int param_1)
       }
       FUN_037fe788(param_1 + 0x10,puVar16,uVar9);
       FUN_027e16c4(param_1,*puVar16,*(undefined2 *)(iVar2 + 0x92));
-      uVar19 = FUN_037fd6ac();
+      uVar19 = OS_GetTick();
       iVar7 = (int)((ulonglong)uVar19 >> 0x20);
       uVar9 = (uint)uVar19 | 1;
       puVar15 = puVar16 + 5;

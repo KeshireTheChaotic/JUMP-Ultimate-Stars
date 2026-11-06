@@ -64,8 +64,8 @@ KomaList::KomaList_Create
   FUN_0215e244(uVar3,1,4,0x8000,3,0x20,0x20);
   iVar2 = FUN_0203b424(1);
   uVar7 = *(undefined4 *)(iVar2 + 0x88);
-  iVar2 = FUN_0215e100(uVar7,1,4,0x2000,2,0x20,0x20,s_deckmake_list01_dtx_0216f99c,
-                       s_deckmake_list01_atm_0216f9b0,puVar1 + 0x15);
+  iVar2 = FUN_0215e100(uVar7,1,4,0x2000,2,0x20,0x20,FUN_0216f99c,s_deckmake_list01_atm_0216f9b0,
+                       puVar1 + 0x15);
   puVar1[0x14] = iVar2;
   (**(code **)(**(int **)(iVar2 + 4) + 0xd8))(*(int **)(iVar2 + 4),1);
   iVar2 = FUN_0203b424(0);

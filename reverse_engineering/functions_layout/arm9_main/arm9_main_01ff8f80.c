@@ -23,8 +23,6 @@ void FUN_01ff8f80(void)
   do {
   } while ((_DAT_04000180 & 0xf) == 1);
   _DAT_04000180 = 0;
-                    /* WARNING: Could not recover jumptable at 0x01ff9014. Too many branches */
-                    /* WARNING: Treating indirect jump as call */
   (*_DAT_027ffe24)(_DAT_027fff80,_DAT_027fff84,_DAT_027fff88,_DAT_027fff8c);
   return;
 }

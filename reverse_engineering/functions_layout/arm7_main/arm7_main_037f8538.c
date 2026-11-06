@@ -18,13 +18,13 @@ void FUN_037f8538(void)
       if (iVar3 != 0) {
         FUN_037f8774(auStack_28);
       }
-      FUN_037fbc10(0x1000010);
+      OS_DisableIrqMask(0x1000010);
       *(undefined2 *)(iVar1 + 0x12) = *(undefined2 *)(iVar1 + 0x10);
       if (*(short *)(iVar1 + (uint)*(ushort *)(iVar1 + 0x12) * 2) != -1) break;
       *(short *)(iVar1 + 0x10) = *(short *)(iVar1 + 0x10) + 1;
-      FUN_037fbc4c();
+      OS_EnableIrqMask();
     }
-    FUN_037fbc4c();
+    OS_EnableIrqMask();
     uVar2 = FUN_037f86b8(*(undefined2 *)(iVar1 + 0x12));
     *(undefined2 *)(iVar1 + 0x14) = uVar2;
     (**(code **)(iVar1 + (uint)*(ushort *)(iVar1 + 0x14) * 8 + 0xc0))();

@@ -1,5 +1,8 @@
 
-void FUN_037fe554(int param_1)
+/* JUS-SDK MI_StopDma [behavioral] clears repeat/timing bits, then the enable bit of DMAxCNT_H;
+   channel-0 workaround */
+
+void MI_StopDma(int param_1)
 
 {
   int iVar1;

@@ -9,7 +9,7 @@ void jus_Scene35_Create(void)
   
   iVar1 = FUN_0206e5f4();
   if (iVar1 != 0) {
-    uVar2 = FUN_02054b44();
+    uVar2 = OS_GetTick();
     FUN_02030f24(*(undefined4 *)(DAT_020a0da8 + 4),uVar2);
     FUN_020703d8();
   }

@@ -34,8 +34,8 @@ undefined4 JQuizBattleRuleDisp::JQuizBattleRuleDisp_Add(void)
   undefined4 local_3c;
   undefined4 *local_38;
   code *local_34;
-  undefined1 *local_30;
-  undefined1 *local_2c;
+  code *local_30;
+  code *local_2c;
   undefined4 local_28;
   
   puVar2 = (undefined4 *)
@@ -66,9 +66,9 @@ undefined4 JQuizBattleRuleDisp::JQuizBattleRuleDisp_Add(void)
   }
   uVar4 = func_0x021ba49c(0,1,1);
   puVar2[0x2d] = uVar4;
-  local_2c = &LAB_0215e2f4;
+  local_2c = FUN_0215e2f4;
   local_34 = FUN_0215e2c0;
-  local_30 = &LAB_0215e2e0;
+  local_30 = FUN_0215e2e0;
   local_28 = puVar2[0x2d];
   local_38 = puVar2;
   uVar4 = CommWrapDisconnect::CommWrapDisconnect_Create(&local_38);

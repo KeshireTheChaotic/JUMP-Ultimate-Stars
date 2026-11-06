@@ -1,7 +1,9 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+/* JUS-SDK GX_SetBankForBGExtPltt [behavioral] every VRAMCNT write selects a BGExtPltt mode
+   (bank/MST per GBATEK) */
 
-void FUN_020657f8(int param_1)
+void GX_SetBankForBGExtPltt(int param_1)
 
 {
                     /* JUS-TAG hw={"GX_2D_main":1,"VRAMCNT":3}
@@ -36,7 +38,7 @@ void FUN_020657f8(int param_1)
   _DAT_04000000 = _DAT_04000000 | 0x40000000;
 LAB_02065878:
   DAT_020afbae = (ushort)param_1;
-  FUN_02065af4(DAT_020afba0);
+  GX_VRAMCNT_SetLCDC_(DAT_020afba0);
   return;
 }
 

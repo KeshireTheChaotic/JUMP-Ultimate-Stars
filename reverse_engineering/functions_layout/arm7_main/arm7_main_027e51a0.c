@@ -74,7 +74,7 @@ void FUN_027e51a0(int param_1)
       psVar1[0x35] = 0;
       psVar1[0x5f] = -1;
       psVar1[0x60] = 1;
-      uVar10 = FUN_037fd6ac();
+      uVar10 = OS_GetTick();
       iVar8 = 0;
       do {
         *(uint *)(psVar1 + iVar8 * 4 + 0x39c) = (uint)uVar10 | 1;

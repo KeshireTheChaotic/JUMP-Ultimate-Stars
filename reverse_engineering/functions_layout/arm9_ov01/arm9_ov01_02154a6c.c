@@ -102,7 +102,7 @@ void FUN_02154a6c(int param_1,undefined4 param_2,undefined4 param_3,undefined4 p
     FUN_0214f7c0(iVar5,*(undefined4 *)(param_1 + 0x4c));
     uVar4 = FUN_02150a40(0,&DAT_0216c1e0 + (iVar3 + 2) * 8,&DAT_02093c8c);
     FUN_02020e98(iVar5,uVar4);
-    *(undefined1 **)(*(int *)(iVar5 + 4) + 0xdc) = &LAB_02156cb4_1;
+    *(code **)(*(int *)(iVar5 + 4) + 0xdc) = FUN_02156cb4 + 1;
     iStack_64 = iVar3 * 2 + 0xd;
     if (*(int *)(param_1 + 0xf8) == iVar3) {
       iStack_64 = iVar3 * 2 + 0xe;

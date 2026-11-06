@@ -1,7 +1,9 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+/* JUS-SDK GX_SetGraphicsMode [behavioral] DISPCNT = mode << 16 | bgMode | bg0_2d3d << 3; remembers
+   the mode in the GX_DispOff global */
 
-void FUN_02064e3c(ushort param_1,uint param_2,int param_3)
+void GX_SetGraphicsMode(ushort param_1,uint param_2,int param_3)
 
 {
   ushort uVar1;

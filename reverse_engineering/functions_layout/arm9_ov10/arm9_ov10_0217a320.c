@@ -112,7 +112,7 @@ LAB_0217a442:
           iVar9 = FUN_02178448();
           *(undefined4 *)(iVar9 + 0xe8) = 2;
           iVar9 = FUN_02178448();
-          uVar10 = FUN_02054b44();
+          uVar10 = OS_GetTick();
           *(undefined8 *)(iVar9 + 0xec) = uVar10;
         }
         else {

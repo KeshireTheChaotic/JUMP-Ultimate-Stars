@@ -1,5 +1,8 @@
 
-void FUN_0205116c(int param_1,uint param_2,int param_3,int param_4)
+/* JUS-SDK MIi_CheckDma9 [behavioral] dir 0 / 0x800000 (source decrement) range end; panics if the
+   range touches I/O or cartridge space */
+
+void MIi_CheckDma9(int param_1,uint param_2,int param_3,int param_4)
 
 {
   uint uVar1;

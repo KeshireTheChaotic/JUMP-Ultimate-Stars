@@ -15,7 +15,7 @@ void FUN_027e62cc(void)
   if (*(int *)(DAT_027f97f0 + 0xc) == 1) {
     FUN_027e6680(200,FUN_027e6414,1);
     if (*(int *)(iVar2 + 0x7bc) != 0 || *(int *)(iVar2 + 0x7b8) != 0) {
-      uVar8 = FUN_037fd6ac();
+      uVar8 = OS_GetTick();
       uVar5 = (uint)uVar8 | 1;
       uVar4 = *(uint *)(iVar2 + 0x738);
       if (*(int *)(iVar2 + 0x73c) != 0 || uVar4 != 0) {

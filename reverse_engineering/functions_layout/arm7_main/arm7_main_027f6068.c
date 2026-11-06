@@ -1,7 +1,9 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+/* JUS-SDK jus_SpiFlash_SectorErase [behavioral] SPICNT 0x8100/0x8900 (device 1 = firmware flash),
+   first SPIDATA byte = command 0xD8 (SectorErase) */
 
-void FUN_027f6068(ushort param_1)
+void jus_SpiFlash_SectorErase(ushort param_1)
 
 {
                     /* JUS-TAG hw={"SPI":2} io=["040001c0","040001c2"] */

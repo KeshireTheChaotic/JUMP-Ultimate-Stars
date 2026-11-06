@@ -8,9 +8,9 @@ void FUN_037ff5c0(void)
   FUN_038006f0();
   FUN_038023b8();
   FUN_038029c8();
-  FUN_037fee74();
-  FUN_037fed1c(0,0,0,0);
-  FUN_037fed54(0x7f);
+  SND_Enable();
+  SND_SetOutputSelector(0,0,0,0);
+  SND_SetMasterVolume(0x7f);
   FUN_037ff6c0();
   do {
     iVar1 = FUN_037ff680();

@@ -36,7 +36,7 @@ undefined4 FUN_020582a0(int *param_1,uint param_2,undefined4 param_3)
     return uVar2;
   }
   DC_InvalidateRange(param_1,param_3);
-  FUN_02051688(param_2,param_1,0,param_3);
+  MI_DmaFill32(param_2,param_1,0,param_3);
   DAT_020acae8 = param_1;
   *param_1 = (int)(param_1 + 0x80);
   DAT_020acae8[1] = *DAT_020acae8 + 0x300;

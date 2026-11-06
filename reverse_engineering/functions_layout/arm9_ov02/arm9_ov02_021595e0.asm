@@ -1,0 +1,12 @@
+021595e0  ldr r3,[0x2159610]
+021595e4  add r0,r1,#0x8e
+021595e8  smulbb r1,r2,r3
+021595ec  add r2,r0,#0x400
+021595f0  ldrsh r0,[r2,r1]
+021595f4  sub r0,r0,#0x1
+021595f8  strh r0,[r2,r1]
+021595fc  ldrsh r0,[r2,r1]
+02159600  cmp r0,#0x0
+02159604  movne r0,#0x1
+02159608  moveq r0,#0x0
+0215960c  bx lr

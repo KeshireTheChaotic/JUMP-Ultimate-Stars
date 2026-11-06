@@ -2,20 +2,20 @@
 void FUN_021676d0(void)
 
 {
-  DAT_0216e878 = FUN_020651b0();
-  DAT_0216e87c = FUN_020651a0();
-  DAT_0216e880 = FUN_02065180();
-  DAT_0216e884 = FUN_02065160();
-  DAT_0216e888 = FUN_02065150();
-  DAT_0216e88c = FUN_02065140();
+  DAT_0216e878 = GX_DisableBankForBG();
+  DAT_0216e87c = GX_DisableBankForOBJ();
+  DAT_0216e880 = GX_DisableBankForBGExtPltt();
+  DAT_0216e884 = GX_DisableBankForOBJExtPltt();
+  DAT_0216e888 = GX_DisableBankForTex();
+  DAT_0216e88c = GX_DisableBankForTexPltt();
   DAT_0216e890 = FUN_02065130();
-  DAT_0216e894 = FUN_02065100();
-  DAT_0216e898 = FUN_020650f0();
-  DAT_0216e89c = FUN_020650d0();
-  DAT_0216e8a0 = FUN_020650b0();
-  DAT_0216e8a4 = FUN_02065120();
+  DAT_0216e894 = GX_DisableBankForSubBG();
+  DAT_0216e898 = GX_DisableBankForSubOBJ();
+  DAT_0216e89c = GX_DisableBankForSubBGExtPltt();
+  DAT_0216e8a0 = GX_DisableBankForSubOBJExtPltt();
+  DAT_0216e8a4 = GX_DisableBankForARM7();
   DAT_0216e8a8 = FUN_02065110();
-  FUN_020654a4(DAT_0216e8a4);
+  GX_SetBankForARM7(DAT_0216e8a4);
   FUN_0216757c();
   return;
 }

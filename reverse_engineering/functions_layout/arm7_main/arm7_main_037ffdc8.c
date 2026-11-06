@@ -12,7 +12,7 @@ void FUN_037ffdc8(uint param_1)
         (*(code *)(&DAT_03808af0)[uVar2 * 0x15])
                   (&DAT_03808aa8 + iVar1,0,(&DAT_03808af4)[uVar2 * 0x15]);
       }
-      FUN_037ff104(uVar2,0);
+      SND_StopChannel(uVar2,0);
       (&DAT_03808aca)[iVar1] = 0;
       FUN_037ffe90(&DAT_03808aa8 + iVar1);
       (&DAT_03808aab)[iVar1] = (&DAT_03808aab)[iVar1] & 7;

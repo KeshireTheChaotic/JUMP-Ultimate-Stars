@@ -4,7 +4,7 @@ void FUN_02063ce0(int param_1)
 {
   int iVar1;
   undefined4 uVar2;
-  code *UNRECOVERED_JUMPTABLE;
+  code *in_lr;
   
   uVar2 = 0;
   if ((*(uint *)(param_1 + 0x1c) & 2) != 0) {
@@ -21,9 +21,7 @@ void FUN_02063ce0(int param_1)
       FUN_02063c20(param_1);
     }
   }
-                    /* WARNING: Could not recover jumptable at 0x02063d42. Too many branches */
-                    /* WARNING: Treating indirect jump as call */
-  (*UNRECOVERED_JUMPTABLE)(uVar2);
+  (*in_lr)(uVar2);
   return;
 }
 

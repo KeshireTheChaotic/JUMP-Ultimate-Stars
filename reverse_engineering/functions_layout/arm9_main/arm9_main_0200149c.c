@@ -5,6 +5,7 @@ void FUN_0200149c(int *param_1,int param_2,undefined4 param_3)
   int iVar1;
   int iVar2;
   
+                    /* JUS-TAG strings=["hashtable.c"] */
   if (param_2 == 0) {
     FUN_02002068(0x2092f84,0x2092f88,0,0xb6);
   }

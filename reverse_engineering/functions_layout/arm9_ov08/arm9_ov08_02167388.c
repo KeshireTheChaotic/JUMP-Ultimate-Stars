@@ -16,7 +16,7 @@ int FUN_02167388(int param_1,int param_2,int param_3,uint *param_4)
   iVar2 = FUN_0216609c(*(undefined4 *)(DAT_0216e874 + iVar1 + 0x19c));
   iVar6 = param_2 + 3 >> 2;
   *(short *)(iVar2 + 10) = (short)iVar6;
-  uVar3 = FUN_02051d14(1);
+  uVar3 = OS_DisableIrqMask(1);
   if (param_3 == 0) {
     iVar7 = DAT_0216e874 + param_1 * 0x1a0;
     piVar8 = (int *)(iVar7 + 0x18c);
@@ -60,7 +60,7 @@ int FUN_02167388(int param_1,int param_2,int param_3,uint *param_4)
     }
   }
   *param_4 = (uint)*(ushort *)(iVar2 + 8);
-  FUN_02051d5c(uVar3);
+  OS_EnableIrqMask(uVar3);
   return iVar2;
 }
 

@@ -8,6 +8,7 @@ void jus_Class_020948e4::vfunc_05(int param_1)
 {
   ushort uVar1;
   
+                    /* JUS-TAG hw={"SYSTEM_SHARED":1,"KEYPAD":1} io=["027fffa8","04000130"] */
   if (*(int *)(param_1 + 0xe0) != 0) {
     return;
   }

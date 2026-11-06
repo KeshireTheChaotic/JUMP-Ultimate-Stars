@@ -13,13 +13,13 @@ int FUN_0218e438(uint param_1,int param_2)
   undefined8 uVar9;
   uint local_18;
   
-  uVar8 = FUN_02054b44();
+  uVar8 = OS_GetTick();
   iVar7 = 0;
   do {
     while( true ) {
       iVar4 = (*DAT_021a8530)();
       if (((iVar4 == 0) || (iVar7 != 0)) ||
-         (uVar9 = FUN_02054b44(),
+         (uVar9 = OS_GetTick(),
          (param_2 + 1) * 0xf <=
          (int)(((uint)uVar9 >> 0x10 | (int)((ulonglong)uVar9 >> 0x20) << 0x10) -
               ((uint)uVar8 >> 0x10 | (int)((ulonglong)uVar8 >> 0x20) << 0x10)))) {

@@ -8,7 +8,7 @@ void FUN_021cc544(int param_1,undefined4 param_2,undefined4 param_3,undefined4 p
   undefined1 uStack_24;
   undefined4 uStack_20;
   undefined4 uStack_1c;
-  undefined1 *puStack_18;
+  undefined4 uStack_18;
   int iStack_14;
   undefined4 uStack_10;
   
@@ -18,7 +18,7 @@ void FUN_021cc544(int param_1,undefined4 param_2,undefined4 param_3,undefined4 p
   aiStack_30[1] = 3;
   uStack_10 = param_4;
   uStack_24 = func_0x021766fc();
-  puStack_18 = &LAB_021cc114_1;
+  uStack_18 = 0x21cc115;
   uStack_20 = *(undefined4 *)(iVar2 + 0xf0);
   uStack_1c = *(undefined4 *)(iVar2 + 0xec);
   iStack_14 = iVar2;

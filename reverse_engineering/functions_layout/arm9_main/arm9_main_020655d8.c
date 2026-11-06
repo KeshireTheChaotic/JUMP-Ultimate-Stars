@@ -1,5 +1,8 @@
 
-void FUN_020655d8(int param_1)
+/* JUS-SDK GX_SetBankForTexPltt [behavioral] every VRAMCNT write selects a TexPltt mode (bank/MST
+   per GBATEK) */
+
+void GX_SetBankForTexPltt(int param_1)
 
 {
                     /* JUS-TAG hw={"VRAMCNT":3} io=["04000244","04000245","04000246"] */
@@ -33,7 +36,7 @@ LAB_02065634:
   DAT_04000244 = 0x83;
 LAB_02065640:
   DAT_020afbaa = (ushort)param_1;
-  FUN_02065af4(DAT_020afba0);
+  GX_VRAMCNT_SetLCDC_(DAT_020afba0);
   return;
 }
 

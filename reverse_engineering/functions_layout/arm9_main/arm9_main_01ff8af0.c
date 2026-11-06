@@ -27,7 +27,7 @@ void FUN_01ff8af0(void)
   }
   else {
     DAT_020a0e48 = DAT_020a0e48 + 1;
-    FUN_02064f20(*(int *)(*piVar1 + DAT_020a0fb8 * 4 + 0xc) + -1);
+    GX_SetVCountEqVal(*(int *)(*piVar1 + DAT_020a0fb8 * 4 + 0xc) + -1);
   }
   _DAT_027c3ff8 = _DAT_027c3ff8 | 4;
   return;

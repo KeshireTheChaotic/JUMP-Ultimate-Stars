@@ -1,11 +1,14 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+/* JUS-SDK GX_SetBankForSubOBJExtPltt [behavioral] every VRAMCNT write selects a SubOBJExtPltt mode
+   (bank/MST per GBATEK) */
 
-void FUN_0206531c(dword param_1)
+void GX_SetBankForSubOBJExtPltt(dword param_1)
 
 {
-  code *UNRECOVERED_JUMPTABLE;
+  code *in_lr;
   
+                    /* JUS-TAG hw={"GX_2D_sub":1,"VRAMCNT":1} io=["04000249","04001000"] */
   DAT_020afba0 = ~(ushort)param_1 & (DAT_020afba0 | DAT_020afbb8);
   if (param_1 == 0) {
     _DAT_04001000 = _DAT_04001000 & 0x7fffffff;
@@ -15,10 +18,8 @@ void FUN_0206531c(dword param_1)
     DAT_04000249 = 0x83;
   }
   DAT_020afbb8 = (ushort)param_1;
-  FUN_02065af4(DAT_020afba0);
-                    /* WARNING: Could not recover jumptable at 0x02065360. Too many branches */
-                    /* WARNING: Treating indirect jump as call */
-  (*UNRECOVERED_JUMPTABLE)();
+  GX_VRAMCNT_SetLCDC_(DAT_020afba0);
+  (*in_lr)();
   return;
 }
 

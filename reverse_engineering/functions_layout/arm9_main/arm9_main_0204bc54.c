@@ -5,6 +5,7 @@
 char * jus_TagDLSE::vfunc_30(void)
 
 {
+                    /* JUS-TAG strings=["DelaySet"] */
   return s_DelaySet_0209d60c;
 }
 

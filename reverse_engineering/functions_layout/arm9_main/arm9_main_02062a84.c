@@ -1,7 +1,9 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+/* JUS-SDK CARDi_SetRomOp [behavioral] waits for ROMCTRL busy (bit 31) to clear, sets AUXSPICNT_H =
+   0xC0 (ROM mode, enable, IRQ), writes the 8 command bytes from (r0, r1) */
 
-void FUN_02062a84(undefined4 param_1,undefined4 param_2)
+void CARDi_SetRomOp(undefined4 param_1,undefined4 param_2)
 
 {
   do {

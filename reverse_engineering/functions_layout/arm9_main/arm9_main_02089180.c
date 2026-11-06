@@ -5,6 +5,7 @@ void FUN_02089180(int param_1,undefined4 param_2,undefined4 param_3,undefined4 p
   bool bVar1;
   int iVar2;
   
+                    /* JUS-TAG strings=["CommLib.cpp","WH_StateInEndParent"] */
   if (*(short *)(param_1 + 2) != 0) {
     FUN_02088904(*(short *)(param_1 + 2),s_CommLib_cpp_020a0338,0x398,param_4,param_4);
     FUN_02089044();

@@ -692,7 +692,7 @@ undefined4 JArenaMissionResult::JAMisnResult_Add(void)
   iVar6 = ResultMission::ResultMission_Create(1);
   *(int *)(iVar5 + 0x50) = iVar6;
   *(int *)(iVar6 + 0x44) = iVar5;
-  *(undefined1 **)(*(int *)(iVar5 + 0x50) + 0x3c) = &LAB_02154098;
+  *(code **)(*(int *)(iVar5 + 0x50) + 0x3c) = FUN_02154098;
   piVar7 = *(int **)(*(int *)(iVar5 + 0x28) + 4);
   (**(code **)(*piVar7 + 0x148))(piVar7,0x10);
   return *(undefined4 *)(iVar5 + 4);

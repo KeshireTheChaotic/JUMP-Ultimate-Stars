@@ -5,6 +5,7 @@
 char * jus_TagDLST::vfunc_30(void)
 
 {
+                    /* JUS-TAG strings=["DelayStart"] */
   return s_DelayStart_0209d6b4;
 }
 

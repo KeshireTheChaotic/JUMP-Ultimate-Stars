@@ -11,6 +11,7 @@ int * CommWrapDisconnect::CommWrapDisconnect_Create
   int *piVar1;
   int iVar2;
   
+                    /* JUS-TAG strings=["CommWrapDisconnect.cpp","CommWrapDisconnect_Create"] */
   piVar1 = (int *)thunk_FUN_0201a228(0x28,s_CommWrapDisconnect_cpp_020a0158,
                                      s_CommWrapDisconnect_Create_020a013c,0x6b,param_4);
   FUN_020517fc(piVar1,0,0x28);

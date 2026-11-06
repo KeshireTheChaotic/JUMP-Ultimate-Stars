@@ -13,7 +13,7 @@ void FUN_02176de8(undefined4 *param_1,int param_2,undefined4 param_3,undefined4 
   DAT_021a7410[1] = FUN_0217d21c + 1;
   DAT_021a7410[2] = FUN_02176030 + 1;
   DAT_021a7410[3] = FUN_02175db8 + 1;
-  DAT_021a7410[4] = &LAB_02175db0_1;
+  DAT_021a7410[4] = thunk_FUN_0217eaf0 + 1;
   if (param_6 == 0) {
     param_6 = 0x2000;
   }
@@ -43,7 +43,7 @@ void FUN_02176de8(undefined4 *param_1,int param_2,undefined4 param_3,undefined4 
   DAT_021a7410[0x25] = 0;
   FUN_02176514();
   FUN_0217763c(DAT_021a7410 + 0x26,param_2,DAT_021a7410 + 7,param_3,*(undefined4 *)(param_2 + 0x24),
-               (int)DAT_021a7410 + 0x2e,&LAB_0217626c_1,0);
+               (int)DAT_021a7410 + 0x2e,FUN_0217626c + 1,0);
   FUN_02178194(DAT_021a7410 + 0xbe,DAT_021a7410 + 7,(int)DAT_021a7410 + 0x2e,param_8,param_9);
   FUN_0217e2cc(DAT_021a7410 + 0xd5,DAT_021a7410 + 7,DAT_021a7410,DAT_021a7410 + 1,&DAT_021a7d40,
                &DAT_021a7e40,param_8,param_9);

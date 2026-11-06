@@ -26,7 +26,7 @@ void FUN_0204523c(int param_1,uint param_2)
     iVar2 = *(int *)(iVar2 + 0x1c);
     iVar6 = (*(int **)(param_1 + 0x20))[3];
     uVar4 = (**(code **)(**(int **)(param_1 + 0x20) + 0x5c))();
-    FUN_0205160c(uVar3,iVar6,iVar2 + *(int *)(param_1 + 0x50),uVar4);
+    MI_DmaCopy32(uVar3,iVar6,iVar2 + *(int *)(param_1 + 0x50),uVar4);
     piVar5 = (int *)(**(code **)(**(int **)(param_1 + 0x20) + 100))();
     *(int **)(param_1 + 0x30) = piVar5;
     (**(code **)(*piVar5 + 8))();

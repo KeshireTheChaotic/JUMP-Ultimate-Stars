@@ -214,7 +214,7 @@ undefined4 JQuizTop::JQuizTop_Add(int param_1)
     FUN_02027834(*(undefined4 *)(iVar6 + 4),8,FUN_02151ff8);
     func_0x021b4104(*(undefined4 *)(iVar6 + 4),*(undefined4 *)(iVar6 + 4),5);
     *(undefined1 *)(*(int *)(iVar6 + 4) + 0xb1) = 1;
-    *(undefined1 **)(*(int *)(iVar6 + 4) + 0xec) = &LAB_02151f9c;
+    *(code **)(*(int *)(iVar6 + 4) + 0xec) = FUN_02151f9c;
     uVar12 = (uint)(byte)(&DAT_020b7654)[iVar3];
     uVar1 = (&DAT_020b7658)[iVar3];
     uVar11 = puVar2[iVar3 + 0x1c];

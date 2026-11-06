@@ -12,7 +12,7 @@ undefined4 FUN_0217ab10(undefined4 param_1)
   iVar1 = FUN_02178448();
   *(undefined1 *)(iVar1 + 0x19f) = 0;
   iVar1 = FUN_02178448();
-  uVar2 = FUN_02054b44();
+  uVar2 = OS_GetTick();
   *(undefined8 *)(iVar1 + 0x1c4) = uVar2;
   iVar1 = FUN_02178448();
   if (*(char *)(iVar1 + 0x15) == '\0') {

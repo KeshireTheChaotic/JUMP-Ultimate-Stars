@@ -38,11 +38,11 @@ int CommuMenuWiFiFrMatch::CommuMenuWiFiFrMatch_Add(void)
     iVar2 = iVar3;
   } while (iVar3 < 0x32);
   piVar1[7] = (int)piVar1;
-  piVar1[10] = (int)&LAB_02155970;
-  piVar1[0xb] = (int)&LAB_021559c0;
-  piVar1[0xc] = (int)&LAB_021559e4;
-  piVar1[0xd] = (int)&LAB_021559f0;
-  piVar1[0xe] = (int)&LAB_02155a08;
+  piVar1[10] = (int)FUN_02155970;
+  piVar1[0xb] = (int)FUN_021559c0;
+  piVar1[0xc] = (int)FUN_021559e4;
+  piVar1[0xd] = (int)FUN_021559f0;
+  piVar1[0xe] = (int)thunk_EXT_FUN_021a3248;
   piVar1[0xf] = (int)FUN_02155988;
   *(undefined1 *)(piVar1 + 3) = 0;
   *(undefined1 *)((int)piVar1 + 0xd) = 1;
@@ -58,7 +58,7 @@ int CommuMenuWiFiFrMatch::CommuMenuWiFiFrMatch_Add(void)
   FUN_02028384(*(undefined4 *)(piVar1[1] + 4),FUN_02155a14);
   local_10 = 0x80000;
   (**(code **)(**(int **)(piVar1[1] + 4) + 0xa0))(*(int **)(piVar1[1] + 4),&local_10);
-  iVar2 = FUN_0215656c(piVar1 + 3);
+  iVar2 = CommuMenuCmnLeaderSel::CommuMenuCmnLeaderSel_Add(piVar1 + 3);
   piVar1[0x17b] = iVar2;
   return *piVar1;
 }

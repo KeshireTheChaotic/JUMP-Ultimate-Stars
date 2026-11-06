@@ -1,7 +1,13 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+/* JUS-GAME CommuMenuCmnLeaderSel::CommuMenuCmnLeaderSel_Add [source-string-entry]
+   __FILE__="CommuMenuCmnLeaderSel.cpp" __FUNCTION__="CommuMenuCmnLeaderSel_Add" lines=[224, 345,
+   742, 743]; candidates ['ALWidgetImp.h:Create',
+   'CommuMenuCmnLeaderSel.cpp:CommuMenuCmnLeaderSel_Add',
+   'CommuMenuCmnLeaderSel.cpp:CommuMenuLeaderSel_InitWidget_forItem']: the only entry point
+   (_Create/_Add) among same-file candidates */
 
-undefined4 FUN_0215656c(int param_1)
+undefined4 CommuMenuCmnLeaderSel::CommuMenuCmnLeaderSel_Add(int param_1)
 
 {
   undefined4 *puVar1;

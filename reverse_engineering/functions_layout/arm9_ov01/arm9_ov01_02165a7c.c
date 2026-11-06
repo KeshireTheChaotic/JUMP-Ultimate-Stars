@@ -12,7 +12,7 @@ void FUN_02165a7c(int param_1)
   undefined8 uVar8;
   
   iVar6 = *(int *)(*(int *)(param_1 + 4) + 0x10);
-  uVar8 = FUN_02054b44();
+  uVar8 = OS_GetTick();
   iVar3 = (int)((ulonglong)uVar8 >> 0x20);
   uVar1 = (uint)uVar8;
   if ((*(int *)(iVar6 + 0x54) != 0) && (iVar2 = FUN_020869b8(), iVar2 != 0)) {

@@ -25,7 +25,7 @@ int ALControllerImp::Create(int param_1)
   undefined1 auStack_20 [12];
   
   iVar5 = *(int *)(*(int *)(param_1 + 4) + 0x10);
-  lVar6 = FUN_02054b44();
+  lVar6 = OS_GetTick();
   lVar6 = lVar6 - *(longlong *)(iVar5 + 0x80);
   uVar4 = (uint)lVar6;
   iVar3 = (int)((ulonglong)lVar6 >> 0x20);

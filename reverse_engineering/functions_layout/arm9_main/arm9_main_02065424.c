@@ -1,5 +1,8 @@
 
-void FUN_02065424(int param_1)
+/* JUS-SDK GX_SetBankForSubBG [behavioral] every VRAMCNT write selects a SubBG mode (bank/MST per
+   GBATEK) */
+
+void GX_SetBankForSubBG(int param_1)
 
 {
                     /* JUS-TAG hw={"VRAMCNT":3} io=["04000242","04000248","04000249"] */
@@ -19,7 +22,7 @@ void FUN_02065424(int param_1)
   DAT_04000248 = 0x81;
 LAB_0206546c:
   DAT_020afbb2 = (ushort)param_1;
-  FUN_02065af4(DAT_020afba0);
+  GX_VRAMCNT_SetLCDC_(DAT_020afba0);
   return;
 }
 

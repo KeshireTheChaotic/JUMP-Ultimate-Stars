@@ -2,29 +2,13 @@
 undefined4 FUN_02153b38(void)
 
 {
-  int iVar1;
+  undefined4 uVar1;
   
-  switch(DAT_0216d17c) {
-  default:
-    return 0;
-  case 1:
-    iVar1 = func_0x0219936c(DAT_0216d158,0x2153bbd);
-    if (iVar1 != 3) {
-      return 0;
-    }
-    break;
-  case 5:
-    iVar1 = func_0x02199294(0,0,0);
-    if (iVar1 != 3) {
-      return 0;
-    }
-    break;
-  case 7:
-    iVar1 = func_0x02198e80();
-    if (iVar1 != 3) {
-      return 0;
-    }
+  if (DAT_0216d17c < 9) {
+    uVar1 = (*(code *)((int)&switchD_02153b50::switchdataD_02153b52 +
+                      (int)(short)(&switchD_02153b50::switchdataD_02153b52)[DAT_0216d17c]))();
+    return uVar1;
   }
-  return 1;
+  return 0;
 }
 

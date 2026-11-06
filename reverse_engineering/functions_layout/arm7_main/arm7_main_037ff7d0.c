@@ -1,5 +1,7 @@
 
-bool FUN_037ff7d0(int param_1)
+/* JUS-SDK SND_IsCaptureActive [behavioral] returns SNDCAPxCNT (0x04000508 + n) bit 7 */
+
+bool SND_IsCaptureActive(int param_1)
 
 {
                     /* JUS-TAG hw={"SOUND":1} io=["04000508"] */

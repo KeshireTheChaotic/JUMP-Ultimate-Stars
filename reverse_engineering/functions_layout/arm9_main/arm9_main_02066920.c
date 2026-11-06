@@ -2,7 +2,7 @@
 void FUN_02066920(void)
 
 {
-  DAT_020afbc8 = FUN_020652d8();
+  DAT_020afbc8 = GX_ResetBankForBGExtPltt();
   if (DAT_020afbc8 < 0x21) {
     if (DAT_020afbc8 < 0x20) {
       if (DAT_020afbc8 < 1) {

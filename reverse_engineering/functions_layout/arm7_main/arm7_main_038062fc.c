@@ -42,7 +42,7 @@ void FUN_038062fc(int param_1)
       DAT_0380ba56 = 0;
       DAT_0380ba54 = 0;
       uVar1 = OS_DisableInterrupts();
-      FUN_037fbc4c(0x40);
+      OS_EnableIrqMask(0x40);
       FUN_03806cdc(0x40,FUN_038062c0);
       FUN_03806c70();
       _DAT_0400010c = DAT_0380ba50;

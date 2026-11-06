@@ -33,7 +33,7 @@ int Record::RecordSave(void)
   
                     /* JUS-TAG strings=["JSSGXu","Record.cpp","RecordSave"] */
   iVar14 = 1;
-  FUN_02054b44();
+  OS_GetTick();
   bVar2 = true;
   uVar15 = 1;
   do {
@@ -141,7 +141,7 @@ int Record::RecordSave(void)
     FUN_02061d90(uVar15 & 0xffff);
     FUN_02051ff8(uVar15 & 0xffff);
     if (iVar14 != 0) {
-      FUN_02054b44();
+      OS_GetTick();
     }
     FUN_02051890(iVar6,&DAT_020b02b8,0x7558);
     iVar11 = FUN_02072a60(&DAT_020b02b8);

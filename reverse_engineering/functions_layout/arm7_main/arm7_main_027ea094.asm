@@ -1,0 +1,13 @@
+027ea094  ldrh r3,[r1,#0x0]
+027ea098  strh r3,[r0,#0x0]
+027ea09c  ldrh r3,[r1,#0x2]
+027ea0a0  strh r3,[r0,#0x2]
+027ea0a4  ldrh r1,[r1,#0x4]
+027ea0a8  strh r1,[r0,#0x4]
+027ea0ac  ldrh r1,[r2,#0x0]
+027ea0b0  strh r1,[r0,#0x6]
+027ea0b4  ldrh r1,[r2,#0x2]
+027ea0b8  strh r1,[r0,#0x8]
+027ea0bc  ldrh r1,[r2,#0x4]
+027ea0c0  strh r1,[r0,#0xa]
+027ea0c4  bx lr

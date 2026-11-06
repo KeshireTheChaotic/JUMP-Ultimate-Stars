@@ -11,9 +11,9 @@ void FUN_0218eba8(void)
     FUN_02190ccc();
     FUN_02052ea0(100);
     FUN_02190ccc(DAT_021a8538);
-    uVar2 = FUN_02054b44();
+    uVar2 = OS_GetTick();
     while (iVar1 = (*DAT_021a8530)(), iVar1 != 0) {
-      uVar3 = FUN_02054b44();
+      uVar3 = OS_GetTick();
       if (0x16 < (int)(((uint)uVar3 >> 0x10 | (int)((ulonglong)uVar3 >> 0x20) << 0x10) -
                       ((uint)uVar2 >> 0x10 | (int)((ulonglong)uVar2 >> 0x20) << 0x10))) {
         return;

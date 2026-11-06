@@ -21,14 +21,14 @@ void FUN_020647c8(undefined4 param_1)
     DAT_020afb34 = 0xffffffff;
     DAT_020afb38 = 0;
     FUN_02063c0c(&DAT_020afb3c,0x20648bd);
-    FUN_02063e7c(&DAT_020afb3c,0,0,0,0,0,&LAB_020648c0_1,&LAB_02064914_1);
+    FUN_02063e7c(&DAT_020afb3c,0,0,0,0,0,0x20648c1,0x2064915);
     return;
   }
   FUN_02063c0c(&DAT_020afb3c,0x20648c5,0x602);
   if ((((_DAT_027ffe40 != -1) && (_DAT_027ffe40 != 0)) && (_DAT_027ffe48 != -1)) &&
      (_DAT_027ffe48 != 0)) {
     FUN_02063e7c(&DAT_020afb3c,0,_DAT_027ffe48,_DAT_027ffe4c,_DAT_027ffe40,_DAT_027ffe44,0x2064919,
-                 &LAB_02064914_1);
+                 0x2064915);
   }
   return;
 }

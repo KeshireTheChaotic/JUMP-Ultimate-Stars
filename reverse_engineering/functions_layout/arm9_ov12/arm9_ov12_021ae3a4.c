@@ -1,5 +1,10 @@
 
-int * FUN_021ae3a4(int *param_1)
+/* JUS-GAME ALWidgetBaseImp::Create [source-string-inlined] __FILE__="ALWidgetBaseImp.h"
+   __FUNCTION__="Create" lines=[100, 678]; candidates ['ALNodeImp.h:Create',
+   'ALWidgetBaseImp.h:Create']: the other candidates are named functions elsewhere in this program
+   (inlined copies) */
+
+int * ALWidgetBaseImp::Create(int *param_1)
 
 {
   int iVar1;
@@ -17,9 +22,9 @@ int * FUN_021ae3a4(int *param_1)
   iVar1 = thunk_FUN_0201a228(0x14c,s_ALWidgetBaseImp_h_021d177c,s_Create_021d16a8,0x2a6);
   piVar2 = (int *)0x0;
   if (iVar1 != 0) {
-    piVar2 = (int *)ALNodeImp::Create(iVar1,param_1,iVar3,ALWidgetBaseImp::CreateDrawFunc);
+    piVar2 = (int *)ALNodeImp::Create(iVar1,param_1,iVar3,CreateDrawFunc);
   }
-  piVar2[0x52] = (int)&LAB_021af08c_1;
+  piVar2[0x52] = 0x21af08d;
   (**(code **)(*local_14 + 0xd4))(local_14,param_1);
   (**(code **)(*piVar2 + 0xd4))(piVar2,local_14);
   FUN_021ae4c0(param_1 + 0x58,&local_14);

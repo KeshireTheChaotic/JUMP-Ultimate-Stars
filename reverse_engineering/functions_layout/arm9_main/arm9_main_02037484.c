@@ -44,6 +44,7 @@ void ScreenInstance_Derived_02093d14::vfunc_45(undefined4 param_1,int param_2,in
   undefined2 uStack_12a;
   undefined1 auStack_124 [256];
   
+                    /* JUS-TAG strings=["../Character/",".ncg"] */
   iVar4 = (**(code **)(*param_3 + 0x2c))(param_3,0);
   iVar5 = (**(code **)(*param_3 + 0x28))();
   iVar4 = iVar4 + iVar5;

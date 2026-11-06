@@ -17,7 +17,7 @@ undefined4 FUN_021cfefc(undefined4 param_1,int *param_2,undefined4 param_3,undef
   }
   *param_4 = 0;
   param_4[1] = 0;
-  uVar3 = FUN_02054b44();
+  uVar3 = OS_GetTick();
   bVar1 = *(byte *)(param_2 + 1);
   if ((bVar1 & 0xf0) == 0x40) {
     DAT_021d7bd8 = DAT_021d7bd8 + 1;

@@ -4,10 +4,10 @@
 void FUN_021570e4(void)
 
 {
-  FUN_02064efc(0);
-  FUN_02065978(1);
-  FUN_020658a4(2);
-  FUN_02064e3c(1,0,0);
+  GX_VBlankIntr(0);
+  GX_SetBankForBG(1);
+  GX_SetBankForOBJ(2);
+  GX_SetGraphicsMode(1,0,0);
   _DAT_04000000 = _DAT_04000000 & 0xffff00ff;
   FUN_02064e00(&DAT_0400006c,0);
   _DAT_04000000 = _DAT_04000000 & 0xffcfffef | 0x200010;
@@ -20,9 +20,9 @@ void FUN_021570e4(void)
   _DAT_04000018 = 0;
   _DAT_0400001c = 0;
   FUN_0206602c(&DAT_04000050,0x3f,0x10);
-  FUN_02065424(0x80);
-  FUN_020653d4(0x100);
-  FUN_02064e28(0);
+  GX_SetBankForSubBG(0x80);
+  GX_SetBankForSubOBJ(0x100);
+  GXS_SetGraphicsMode(0);
   _DAT_04001000 = _DAT_04001000 & 0xffff00ff;
   FUN_02064e00(0x400106c,0);
   _DAT_04001000 = _DAT_04001000 & 0xffcfffef | 0x10;
@@ -49,9 +49,9 @@ void FUN_021570e4(void)
   FUN_021672d4();
   FUN_02167498();
   FUN_02165f20();
-  FUN_02064e88();
+  GX_DispOn();
   _DAT_04001000 = _DAT_04001000 | 0x10000;
-  FUN_02064efc(1);
+  GX_VBlankIntr(1);
   return;
 }
 

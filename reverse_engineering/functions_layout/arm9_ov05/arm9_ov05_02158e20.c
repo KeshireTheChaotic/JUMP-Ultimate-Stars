@@ -8,7 +8,7 @@ void FUN_02158e20(int param_1)
   int iVar2;
   
   FUN_0215ee44(param_1 + 0x4b8);
-  *(undefined1 **)(param_1 + 0x208) = &LAB_02159094;
+  *(code **)(param_1 + 0x208) = FUN_02159094;
   *(undefined4 *)(param_1 + 0x204) = 0;
   (**(code **)(**(int **)(param_1 + 0x1ec) + 8))();
   if (*(int *)(param_1 + 0x1fc) != 0) {

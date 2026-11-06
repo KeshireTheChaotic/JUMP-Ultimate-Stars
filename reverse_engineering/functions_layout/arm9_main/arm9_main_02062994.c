@@ -6,14 +6,14 @@ void FUN_02062994(void)
   undefined4 uVar2;
   undefined4 uVar3;
   
-  FUN_02051290(DAT_020aecc8);
+  MI_StopDma(DAT_020aecc8);
   DAT_020aecbc = DAT_020aecbc + 0x200;
   DAT_020aecc0 = DAT_020aecc0 + 0x200;
   DAT_020aecc4 = DAT_020aecc4 + -0x200;
   if (DAT_020aecc4 == 0) {
-    FUN_02051d14(0x80000);
-    FUN_02051ce0(0x80000);
-    FUN_0206275c();
+    OS_DisableIrqMask(0x80000);
+    OS_ResetRequestIrqMask(0x80000);
+    CARDi_ReadRomIDCore();
     FUN_02062cfc();
     *DAT_020aeca0 = 0;
     uVar2 = DAT_020aecdc;
@@ -31,7 +31,7 @@ void FUN_02062994(void)
     }
   }
   else {
-    FUN_02062a40();
+    CARDi_SetCardDma();
   }
   return;
 }

@@ -17,7 +17,7 @@ LAB_0217ae2a:
     iVar2 = FUN_02178448();
     *(undefined4 *)(iVar2 + 0x1b4) = 1;
     iVar2 = FUN_02178448();
-    uVar6 = FUN_02054b44();
+    uVar6 = OS_GetTick();
     *(undefined8 *)(iVar2 + 0x1b8) = uVar6;
     iVar2 = FUN_02178448();
     *(undefined4 *)(iVar2 + 0xf4) = param_1;
@@ -63,7 +63,7 @@ LAB_0217ae2a:
   iVar2 = FUN_02178448();
   *(undefined4 *)(iVar2 + 0x1c0) = 6000;
   iVar2 = FUN_02178448();
-  uVar6 = FUN_02054b44();
+  uVar6 = OS_GetTick();
   *(undefined8 *)(iVar2 + 0x1c4) = uVar6;
   iVar2 = FUN_02178448();
   *(undefined4 *)(iVar2 + 0x1b4) = 0;

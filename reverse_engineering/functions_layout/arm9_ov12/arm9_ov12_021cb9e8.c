@@ -20,7 +20,7 @@ ALFont_021d4f60::ALFont_021d4f60
   iVar1 = thunk_FUN_0201a228(iVar3 << 3,s_ALFont_cpp_021d5060,&DAT_021d4e64,0x493);
   uVar2 = 0;
   if (iVar1 != 0) {
-    uVar2 = FUN_0200ef34(iVar1,iVar3,8,0,&DAT_021cb430,0,param_4);
+    uVar2 = FUN_0200ef34(iVar1,iVar3,8,0,FUN_021cb430,0,param_4);
   }
   param_1[0x1b] = uVar2;
   ALFont::InitFontChar(param_1);

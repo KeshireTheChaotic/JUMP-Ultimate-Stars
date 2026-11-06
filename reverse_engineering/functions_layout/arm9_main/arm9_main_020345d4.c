@@ -2,7 +2,7 @@
 void FUN_020345d4(int param_1)
 
 {
-  DAT_020a0e18 = (undefined *)DAT_020a1060;
+  DAT_020a0e18 = (code *)DAT_020a1060;
   DAT_020a0fc8 = *(int *)(*(int *)(param_1 + 8) + 0xc);
   FUN_01ff8000(DAT_020a0f00);
   while (DAT_020a0e30 != 0) {
@@ -18,7 +18,7 @@ void FUN_020345d4(int param_1)
       FUN_01ff8000(DAT_020a0f00);
     }
   }
-  DAT_020a0e18 = &DAT_02015b98;
+  DAT_020a0e18 = FUN_02015b98;
   return;
 }
 

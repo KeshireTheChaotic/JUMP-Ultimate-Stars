@@ -20,7 +20,7 @@ void FUN_02054e50(int *param_1)
   if (param_1[5] == 0) {
     DAT_020aae9c = iVar2;
     if (iVar2 != 0) {
-      FUN_02055118();
+      OSi_SetTimer();
     }
   }
   else {

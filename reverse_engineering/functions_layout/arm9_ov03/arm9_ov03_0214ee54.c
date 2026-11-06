@@ -35,8 +35,7 @@ int JArenaRankingMenu::JARankMenu_Add(int param_1)
   undefined4 local_30;
   int local_2c [2];
   
-  puVar1 = (undefined1 *)
-           thunk_FUN_0201a228(0x78,s_JArenaRankingMenu_cpp_0215ddfc,s_JARankMenu_Add_0215dd74,0xa2);
+  puVar1 = (undefined1 *)thunk_FUN_0201a228(0x78,FUN_0215ddfc,s_JARankMenu_Add_0215dd74,0xa2);
   FUN_020517fc(puVar1,0,0x78);
   FUN_0207038c();
   iVar2 = FUN_02020d90();

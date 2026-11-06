@@ -11,7 +11,7 @@ void FUN_020626dc(void)
   if (iVar3 != 0) {
     (*DAT_020af2e0)(&DAT_020af2e0);
   }
-  FUN_0206275c();
+  CARDi_ReadRomIDCore();
   FUN_02062cfc();
   *DAT_020aeca0 = 0;
   uVar2 = DAT_020aecdc;

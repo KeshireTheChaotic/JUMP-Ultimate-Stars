@@ -149,7 +149,7 @@ int * JQuizMainSinglePause::JQuizMainSinglePauseClass_Create(void)
     (**(code **)(**(int **)(iVar5 + 4) + 0x24))(*(int **)(iVar5 + 4),piVar1);
     FUN_02027834(*(undefined4 *)(iVar5 + 4),8,FUN_02159184);
     func_0x021b4104(*(undefined4 *)(iVar5 + 4),*(undefined4 *)(iVar5 + 4),4);
-    *(undefined1 **)(*(int *)(iVar5 + 4) + 0xec) = &LAB_0215912c;
+    *(code **)(*(int *)(iVar5 + 4) + 0xec) = FUN_0215912c;
     func_0x021b3f78(*(undefined4 *)(iVar5 + 4),0);
     func_0x021b3fb0(*(undefined4 *)(iVar5 + 4),0);
     func_0x021b3fc4(*(undefined4 *)(iVar5 + 4),0);

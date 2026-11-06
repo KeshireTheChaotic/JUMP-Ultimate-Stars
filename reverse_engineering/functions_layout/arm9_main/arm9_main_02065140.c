@@ -1,8 +1,11 @@
 
-void FUN_02065140(void)
+/* JUS-SDK GX_DisableBankForTexPltt [behavioral] tail-calls disableBankForX_ with the manager field
+   0x020afbaa, which GX_SetBankForTexPltt updates */
+
+void GX_DisableBankForTexPltt(void)
 
 {
-  FUN_020651c0(&DAT_020afbaa);
+  disableBankForX_(&DAT_020afbaa);
   return;
 }
 

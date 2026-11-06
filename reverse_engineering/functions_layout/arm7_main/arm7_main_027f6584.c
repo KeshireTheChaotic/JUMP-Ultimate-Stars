@@ -1,7 +1,9 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+/* JUS-SDK jus_SpiFlash_Read [behavioral] SPICNT 0x8100/0x8900 (device 1 = firmware flash), first
+   SPIDATA byte = command 0x03 (Read) */
 
-void FUN_027f6584(undefined4 param_1,int param_2,int param_3)
+void jus_SpiFlash_Read(undefined4 param_1,int param_2,int param_3)
 
 {
   uint uVar1;

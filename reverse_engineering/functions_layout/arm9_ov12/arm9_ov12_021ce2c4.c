@@ -42,7 +42,7 @@ int FUN_021ce2c4(undefined4 param_1,int param_2)
     sVar1 = DAT_021d5780 + 1;
     *(short *)((int)&DAT_021d5dc6 + iVar2) = DAT_021d5780;
     DAT_021d5780 = sVar1;
-    uVar5 = FUN_02054b44();
+    uVar5 = OS_GetTick();
     *(uint *)((int)&DAT_021d5dc8 + iVar2) =
          (uint)uVar5 >> 6 | (int)((ulonglong)uVar5 >> 0x20) << 0x1a;
     DAT_021d6684 = DAT_021d6684 + 1;

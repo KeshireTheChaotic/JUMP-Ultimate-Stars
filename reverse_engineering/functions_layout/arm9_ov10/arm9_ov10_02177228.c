@@ -33,7 +33,7 @@ void FUN_02177228(undefined4 param_1,undefined4 param_2)
       }
     }
     else {
-      uVar5 = FUN_02054b44();
+      uVar5 = OS_GetTick();
       lVar4 = FUN_0200d10c((int)uVar5,(int)((ulonglong)uVar5 >> 0x20),0x6c078965,0x5d588b65);
       FUN_02069c70(DAT_021a759c + 0x3c,(int)((ulonglong)(lVar4 + 0x269ec3) >> 0x20),
                    (int)(lVar4 + 0x269ec3));
@@ -51,7 +51,7 @@ void FUN_02177228(undefined4 param_1,undefined4 param_2)
   local_14 = 0x21758a5;
   uVar3 = FUN_021758b8(0,0x1c10,4);
   *(undefined4 *)(DAT_021a759c + 0x24) = uVar3;
-  uVar5 = FUN_02054b44();
+  uVar5 = OS_GetTick();
   *(undefined8 *)(DAT_021a759c + 0x28) = uVar5;
   FUN_02173340(auStack_58,uVar3);
   return;

@@ -9,6 +9,8 @@ void CommWrap::CommWrap_Loading_Create(void)
   int iVar2;
   undefined4 in_r3;
   
+                    /* JUS-TAG
+                       strings=["CommWrap.cpp","CommWrap_Loading_Create","common/loading.aar"] */
   if (DAT_0214be20 == (undefined4 *)0x0) {
     DAT_0214be20 = (undefined4 *)
                    thunk_FUN_0201a228(0x50,s_CommWrap_cpp_020a01a4,

@@ -7,7 +7,7 @@ void FUN_037fdc68(void)
     FUN_037fd690();
     DAT_03808470 = 0;
     DAT_03808474 = 0;
-    FUN_037fbc10(0x10);
+    OS_DisableIrqMask(0x10);
   }
   return;
 }

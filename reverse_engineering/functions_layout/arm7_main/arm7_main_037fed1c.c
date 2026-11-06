@@ -1,5 +1,8 @@
 
-void FUN_037fed1c(byte param_1,char param_2,char param_3,char param_4)
+/* JUS-SDK SND_SetOutputSelector [behavioral] SOUNDCNT_H = left | right << 2 | ch1 << 4 | ch3 << 5,
+   keeping the enable bit */
+
+void SND_SetOutputSelector(byte param_1,char param_2,char param_3,char param_4)
 
 {
                     /* JUS-TAG hw={"SOUND":1} io=["04000501"] */

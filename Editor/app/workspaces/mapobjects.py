@@ -5,6 +5,7 @@ import tkinter as tk
 from tkinter import ttk, messagebox
 
 from jus_formats.stageauthoring import StageObjects
+from jus_formats.stagephysics import COLLIDER_TYPES
 from .. import theme as T
 
 GROUPS = (
@@ -109,11 +110,35 @@ class MapObjectsPanel(ttk.Frame):
         for row, (name, value) in enumerate(self.model.fields(kind, i).items()):
             ttk.Label(self.detail, text=name.replace('_', ' ').title()).grid(
                 row=row, column=0, sticky='w', pady=2, padx=(0, 6))
-            var = tk.StringVar(value=str(value))
-            entry = ttk.Entry(self.detail, textvariable=var, width=13)
+            if kind == 'collider' and name == 'type_id':
+                # Traced collider types (stagephysics.COLLIDER_TYPES, overlay-6 grid sweep)
+                choices = [f'{t} {v[0]}' for t, v in COLLIDER_TYPES.items()]
+                var = tk.StringVar(value=next((c for c in choices if c.split()[0] == str(value)), str(value)))
+                entry = ttk.Combobox(self.detail, textvariable=var, values=choices, state='readonly', width=26)
+                entry.bind('<<ComboboxSelected>>', lambda _e: self.commit())
+            else:
+                var = tk.StringVar(value=str(value))
+                entry = ttk.Entry(self.detail, textvariable=var, width=13)
+                entry.bind('<Return>', lambda _e: self.commit())
             entry.grid(row=row, column=1, sticky='ew', pady=2)
-            entry.bind('<Return>', lambda _e: self.commit())
             self.fields[name] = var
+        if kind == 'collider':
+            box = self.model.g.collision_boxes[i]
+            t = COLLIDER_TYPES.get(box.type_id)
+            r = len(self.model.fields(kind, i))
+            if t:
+                solid = ', '.join(n for n, on in zip(('sides', 'top', 'below'), t[1:4]) if on) or 'none'
+                text = (f'{t[0]}: {t[6]}\nSolid: {solid}' + (' · one-way' if t[4] else '') +
+                        ('' if t[5] else ' · not in grid') + f' · evidence {t[7]}')
+            else:
+                text = f'Type {box.type_id} is not used by the game.'
+            if box.wall_index >= 0:
+                text += f'\nWall record #{box.wall_index}'
+            if box.flag_names:
+                text += '\nFlags: ' + '; '.join(box.flag_names)
+            text += '\nEdits rewrite the 16 px movement grid cells this collider owns.'
+            ttk.Label(self.detail, text=text, wraplength=int(240 * self.ws.k), justify='left',
+                      style='Toolbar.TLabel').grid(row=r, column=0, columnspan=2, sticky='w', pady=(4, 0))
         self.detail.columnconfigure(1, weight=1)
 
     def commit(self):

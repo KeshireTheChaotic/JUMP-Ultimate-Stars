@@ -550,7 +550,7 @@ void FUN_0215754c(int param_1,undefined4 param_2,undefined4 param_3,undefined4 p
     func_0x021ae3a4(*(undefined4 *)(iVar2 + 4));
     iVar4 = FUN_0214d37c();
     FUN_0214d354(iVar4,0);
-    *(undefined1 **)(*(int *)(iVar4 + 4) + 0xdc) = &LAB_0215a634_1;
+    *(undefined4 *)(*(int *)(iVar4 + 4) + 0xdc) = 0x215a635;
     (**(code **)(**(int **)(iVar4 + 4) + 0x24))(*(int **)(iVar4 + 4),param_1);
     local_138 = 0xfa000;
     FUN_0214e6c0(iVar4,&local_138);
@@ -558,7 +558,7 @@ void FUN_0215754c(int param_1,undefined4 param_2,undefined4 param_3,undefined4 p
     iVar5 = ALWidgetImp::Create(iVar4,_DAT_021d5154);
     func_0x021b6214(*(undefined4 *)(iVar5 + 4),0);
     *(undefined4 *)(*(int *)(iVar5 + 4) + 0xdc) = *(undefined4 *)(param_1 + 0x2f8);
-    *(undefined1 **)(*(int *)(iVar5 + 4) + 0xe0) = &LAB_0215a658_1;
+    *(undefined4 *)(*(int *)(iVar5 + 4) + 0xe0) = 0x215a659;
     func_0x021b4104(*(undefined4 *)(iVar5 + 4),*(undefined4 *)(iVar5 + 4),4);
     FUN_02027834(*(undefined4 *)(iVar5 + 4),8,*(undefined4 *)(param_1 + 0x2fc));
     (**(code **)(**(int **)(iVar5 + 4) + 0x24))(*(int **)(iVar5 + 4),param_1);
@@ -580,7 +580,7 @@ void FUN_0215754c(int param_1,undefined4 param_2,undefined4 param_3,undefined4 p
   FUN_0214f7c0(*(undefined4 *)(param_1 + 0x44),*(undefined4 *)(param_1 + 0x60));
   FUN_0214f7c0(*(undefined4 *)(param_1 + 0x48),*(undefined4 *)(param_1 + 0x60));
   FUN_0214f7c0(*(undefined4 *)(param_1 + 0x60),*(undefined4 *)(param_1 + 0x150));
-  _DAT_021d514c = &LAB_02158a64_1;
+  _DAT_021d514c = 0x2158a65;
   func_0x021b7260(1,0x30078);
   func_0x021b7260(2,0x30078);
   func_0x021b7260(8,0x30078);

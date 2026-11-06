@@ -10,7 +10,7 @@ void FUN_0215ae24(int param_1)
   undefined8 uVar6;
   
   iVar4 = *(int *)(*(int *)(param_1 + 4) + 0x10);
-  uVar6 = FUN_02054b44();
+  uVar6 = OS_GetTick();
   if ((int)((ulonglong)uVar6 >> 0x20) ==
       *(int *)(iVar4 + 0xfc) + (uint)((uint)uVar6 < *(uint *)(iVar4 + 0xf8)) &&
       (uint)uVar6 - *(uint *)(iVar4 + 0xf8) < 5000000) {
@@ -26,7 +26,7 @@ void FUN_0215ae24(int param_1)
   }
   piVar1 = *(int **)(*(int *)(iVar4 + 0x48) + 4);
   (**(code **)(*piVar1 + 0x148))(piVar1,0x10);
-  uVar6 = FUN_02054b44();
+  uVar6 = OS_GetTick();
   *(undefined8 *)(iVar4 + 0xf8) = uVar6;
   FUN_02028384(*(undefined4 *)(param_1 + 4),FUN_0215b04c);
   FUN_02073f64(8,0,0x3f);

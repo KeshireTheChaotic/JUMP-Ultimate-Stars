@@ -20,9 +20,9 @@ void FUN_037feb24(void)
       iVar2 = iVar2 + 1;
     } while (iVar2 < 0x20);
     _DAT_04000184 = 0xc408;
-    FUN_037fbbdc(0x40000);
-    FUN_037fbd04(0x40000,FUN_037fe8cc);
-    FUN_037fbc4c(0x40000);
+    OS_ResetRequestIrqMask(0x40000);
+    OS_SetIrqFunction(0x40000,FUN_037fe8cc);
+    OS_EnableIrqMask(0x40000);
     for (uVar3 = 8; -1 < (int)uVar3; uVar3 = uVar3 - 1) {
       _DAT_04000180 = (ushort)(uVar3 << 8);
       FUN_037fe408(1000);

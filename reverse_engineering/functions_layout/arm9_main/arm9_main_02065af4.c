@@ -1,5 +1,8 @@
 
-void FUN_02065af4(uint param_1)
+/* JUS-SDK GX_VRAMCNT_SetLCDC_ [behavioral] writes 0x80 (enabled, LCDC mode) to the VRAMCNT of every
+   bank in its mask */
+
+void GX_VRAMCNT_SetLCDC_(uint param_1)
 
 {
                     /* JUS-TAG hw={"VRAMCNT":9}

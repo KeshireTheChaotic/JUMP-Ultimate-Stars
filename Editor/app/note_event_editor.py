@@ -186,7 +186,7 @@ class NoteEventEditor(tk.Toplevel):
                     ttk.Entry(r, textvariable=var, width=16).pack(side='left', fill='x', expand=True)
                 self.arg_vars.append(var)
             if opcode == 0x0300 and values:
-                hint = eventops.CHARA_ACTION_NAMES.get(values[0])
+                hint = eventops.chara_action_text(values) if values[0] in eventops.CHARA_ACTION_NAMES else None
                 if hint:
                     ttk.Label(self.args_frame, text=hint, foreground='#F3C178').pack(anchor='w', pady=3)
         self._raw_toggle()

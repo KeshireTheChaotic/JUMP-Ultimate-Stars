@@ -15,8 +15,8 @@ int FUN_020834d4(code *param_1,undefined4 param_2,undefined4 param_3,undefined4 
     iVar5 = 0;
   }
   else {
-    *(undefined **)(iVar5 + 0x28) = &DAT_02083fc4;
-    *(undefined **)(iVar5 + 0x24) = &DAT_02083fc8;
+    *(code **)(iVar5 + 0x28) = FUN_02083fc4;
+    *(code **)(iVar5 + 0x24) = FUN_02083fc8;
     *(undefined1 *)(iVar5 + 0x38) = 0xff;
     uVar6 = param_4;
     uVar1 = (*param_1)(iVar5);

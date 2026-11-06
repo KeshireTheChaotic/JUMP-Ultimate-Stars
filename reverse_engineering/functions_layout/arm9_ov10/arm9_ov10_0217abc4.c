@@ -54,7 +54,7 @@ undefined4 FUN_0217abc4(undefined4 param_1,int param_2,int param_3)
           iVar2 = FUN_02178448();
           *(undefined4 *)(iVar2 + 0x1c0) = 3000;
           iVar2 = FUN_02178448();
-          uVar9 = FUN_02054b44();
+          uVar9 = OS_GetTick();
           *(undefined8 *)(iVar2 + 0x1c4) = uVar9;
           iVar2 = FUN_02178448();
           *(undefined4 *)(iVar2 + 0x1b4) = 0;

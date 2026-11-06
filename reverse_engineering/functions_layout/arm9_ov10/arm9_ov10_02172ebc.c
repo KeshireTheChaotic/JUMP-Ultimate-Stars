@@ -65,8 +65,8 @@ void FUN_02172ebc(void)
       local_24 = 1;
     }
     local_28 = local_28 + 1;
-    lVar6 = FUN_02054b44();
-    lVar7 = FUN_02054b44();
+    lVar6 = OS_GetTick();
+    lVar7 = OS_GetTick();
     uVar1 = (uint)(lVar7 - lVar6);
     uVar8 = FUN_0200d0c4(uVar1 * 0x40,
                          (int)((ulonglong)(lVar7 - lVar6) >> 0x20) * 0x40 | uVar1 >> 0x1a,0x82ea,0);
@@ -84,7 +84,7 @@ void FUN_02172ebc(void)
         }
         FUN_02053e60(DAT_021a7348 + 0x13d8);
         FUN_02052ea0(5000);
-        lVar7 = FUN_02054b44();
+        lVar7 = OS_GetTick();
         uVar1 = (uint)(lVar7 - lVar6);
         uVar8 = FUN_0200d0c4(uVar1 * 0x40,
                              (int)((ulonglong)(lVar7 - lVar6) >> 0x20) * 0x40 | uVar1 >> 0x1a,0x82ea

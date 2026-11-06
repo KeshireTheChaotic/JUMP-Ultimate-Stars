@@ -10,7 +10,7 @@ undefined4 FUN_027f5730(void)
   FUN_03804814(*(undefined4 *)(_DAT_0380fff4 + 0x314));
   FUN_027f58d4();
   local_8[0] = 0;
-  FUN_027f6584(0x2c,2,local_8);
+  jus_SpiFlash_Read(0x2c,2,local_8);
   FUN_038047a8(*(undefined4 *)(_DAT_0380fff4 + 0x314));
   if ((local_8[0] < 0xa4) || (0x1d6 < local_8[0])) {
     uVar1 = 0;
@@ -26,7 +26,7 @@ undefined4 FUN_027f5730(void)
       *(int *)(_DAT_0380fff4 + 0x318) = *(int *)(_DAT_0380fff4 + 0x318) + 0xc;
       FUN_03804814(*(undefined4 *)(_DAT_0380fff4 + 0x314));
       FUN_027f58d4();
-      FUN_027f6584(0x2a,local_8[0],*(undefined4 *)(_DAT_0380fff4 + 0x318));
+      jus_SpiFlash_Read(0x2a,local_8[0],*(undefined4 *)(_DAT_0380fff4 + 0x318));
       FUN_038047a8(*(undefined4 *)(_DAT_0380fff4 + 0x314));
       uVar1 = 1;
     }

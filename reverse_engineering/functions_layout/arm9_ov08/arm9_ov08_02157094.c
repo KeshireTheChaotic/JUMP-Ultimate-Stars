@@ -4,7 +4,7 @@
 void FUN_02157094(void)
 
 {
-  FUN_02064ec8();
+  GX_DispOff();
   _DAT_04001000 = _DAT_04001000 & 0xfffeffff;
   FUN_02167550();
   FUN_02167038();

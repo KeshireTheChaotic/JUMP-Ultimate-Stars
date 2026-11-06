@@ -2,18 +2,15 @@
 void FUN_021987b4(int param_1)
 
 {
+  uint uVar1;
+  
   if (((*(short *)(param_1 + 2) == 8) && (*(short *)(param_1 + 4) == 0x16)) &&
      (*(short *)(param_1 + 6) == 0x25)) {
-    switch(*(undefined4 *)(DAT_021aa094 + 0x2260)) {
-    case 8:
-      FUN_021988cc(0xc);
+    uVar1 = *(int *)(DAT_021aa094 + 0x2260) - 8;
+    if (uVar1 < 5) {
+      (*(code *)((int)&switchD_021987e4::switchdataD_021987e6 +
+                (int)(short)(&switchD_021987e4::switchdataD_021987e6)[uVar1]))();
       return;
-    case 9:
-    case 0xc:
-      FUN_0219881c();
-      return;
-    case 10:
-      FUN_021988cc(0xc);
     }
   }
   return;

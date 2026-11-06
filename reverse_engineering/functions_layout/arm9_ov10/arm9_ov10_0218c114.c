@@ -30,7 +30,7 @@ undefined4 FUN_0218c114(undefined4 *param_1,undefined4 param_2,int param_3,int p
   piVar2[0xf] = param_4;
   piVar2[0xe] = param_3;
   piVar2[9] = param_5;
-  iVar1 = FUN_0200169c(4,0x20,2,0x218c2c9,&LAB_0218c2ac_1,0);
+  iVar1 = FUN_0200169c(4,0x20,2,0x218c2c9,0x218c2ad,0);
   piVar2[3] = iVar1;
   if (piVar2[3] == 0) {
     FUN_02175814(piVar2);

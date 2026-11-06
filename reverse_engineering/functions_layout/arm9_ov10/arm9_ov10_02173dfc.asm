@@ -1,0 +1,8 @@
+02173dfc  ldr r1,[0x02173e0c]
+02173dfe  add r2,r0,#0x0
+02173e00  and r2,r1
+02173e02  cmp r2,#0x0
+02173e04  beq 0x02173e0a
+02173e06  ldr r1,[0x02173e10]
+02173e08  and r0,r1
+02173e0a  bx lr

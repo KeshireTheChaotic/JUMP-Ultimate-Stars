@@ -125,7 +125,7 @@ int * DatabasePersonal::Database_PersonalCreate(int param_1)
     (**(code **)(**(int **)(piVar3[iVar4 + 10] + 4) + 0x24))
               (*(int **)(piVar3[iVar4 + 10] + 4),piVar3);
     iVar11 = iVar4 + 1;
-    *(undefined1 **)(*(int *)(piVar3[iVar4 + 10] + 4) + 0xec) = &LAB_0216be54;
+    *(code **)(*(int *)(piVar3[iVar4 + 10] + 4) + 0xec) = FUN_0216be54;
     piVar6 = piVar6 + 9;
     *(code **)(*(int *)(piVar3[iVar4 + 10] + 4) + 0xdc) = FUN_0216bf78;
     iVar4 = iVar11;

@@ -154,7 +154,7 @@ undefined4 * ResultRank::ResultRank_Create(int param_1)
   uVar7 = FUN_020101f4(s_result_result_rank_obj_aar_0216dd10,0);
   puVar4[1] = uVar7;
   if (DAT_020afebd == '\0') {
-    pcVar8 = (code *)&LAB_0216908c;
+    pcVar8 = FUN_0216908c;
   }
   else {
     pcVar8 = FUN_0216907c;

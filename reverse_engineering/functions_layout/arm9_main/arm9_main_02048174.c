@@ -36,7 +36,7 @@ void FUN_02048174(int param_1,int param_2)
       for (uVar9 = (uint)(short)puVar3[1]; uVar9 < (uint)(int)(short)puVar3[3]; uVar9 = uVar9 + 1) {
         uVar1 = *puVar3;
         iVar5 = (**(code **)(iVar10 + 0x948))();
-        FUN_02051504(uVar2,*(int *)(param_1 + 0xac) +
+        MI_DmaCopy16(uVar2,*(int *)(param_1 + 0xac) +
                            (uVar9 * *(int *)(param_1 + 0x6c) + (int)(short)*puVar3 + 1 & 0xfffffffe)
                      ,uVar7 * (uVar9 & uVar6 - 1) + ((int)(short)uVar1 & uVar7 - 2) + iVar5,
                      iVar4 * 2);

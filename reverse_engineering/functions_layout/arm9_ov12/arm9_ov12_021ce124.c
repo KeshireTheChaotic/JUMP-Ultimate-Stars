@@ -28,7 +28,7 @@ undefined4 FUN_021ce124(undefined4 param_1,undefined4 param_2,int param_3,uint *
       }
       return 0;
     }
-    lVar13 = FUN_02054b44();
+    lVar13 = OS_GetTick();
     uVar7 = (uint)((ulonglong)lVar13 >> 0x20);
     uVar3 = (uint)lVar13;
     iVar4 = FUN_021ce884(param_3);

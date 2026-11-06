@@ -30,8 +30,8 @@ void FUN_020616a8(uint param_1)
   FUN_020614bc(DAT_020aebc4);
   _DAT_04000208 = 0;
   uVar1 = OS_DisableInterrupts();
-  FUN_02051d14(0x3fffff);
-  FUN_02051d94(0x40000);
+  OS_DisableIrqMask(0x3fffff);
+  OS_SetIrqMask(0x40000);
   OS_RestoreInterrupts(uVar1);
   _DAT_04000208 = 1;
   if (((param_1 & 8) != 0) && (_DAT_027ffc40 == 2)) {

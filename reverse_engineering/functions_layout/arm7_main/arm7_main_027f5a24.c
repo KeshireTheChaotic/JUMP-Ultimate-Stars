@@ -16,13 +16,13 @@ void FUN_027f5a24(int param_1)
     OS_RestoreInterrupts(uVar1);
     switch(*(undefined4 *)(param_1 + 4)) {
     case 0x20:
-      FUN_027f6758();
+      jus_SpiFlash_WriteEnable();
       break;
     case 0x21:
-      FUN_027f6718();
+      jus_SpiFlash_WriteDisable();
       break;
     case 0x22:
-      FUN_027f66a4(*(undefined4 *)(param_1 + 0x10));
+      jus_SpiFlash_ReadStatus(*(undefined4 *)(param_1 + 0x10));
       break;
     case 0x23:
       iVar2 = FUN_027f59f8();
@@ -31,8 +31,8 @@ void FUN_027f5a24(int param_1)
         FUN_0380465c(1);
         return;
       }
-      FUN_027f6584(*(undefined4 *)(param_1 + 8),*(undefined4 *)(param_1 + 0xc),
-                   *(undefined4 *)(param_1 + 0x10));
+      jus_SpiFlash_Read(*(undefined4 *)(param_1 + 8),*(undefined4 *)(param_1 + 0xc),
+                        *(undefined4 *)(param_1 + 0x10));
       break;
     case 0x24:
       iVar2 = FUN_027f59f8();
@@ -41,8 +41,9 @@ void FUN_027f5a24(int param_1)
         FUN_0380465c(1);
         return;
       }
-      FUN_027f6448(*(undefined4 *)(param_1 + 8),*(undefined4 *)(param_1 + 0xc),
-                   *(undefined4 *)(param_1 + 0x10));
+      jus_SpiFlash_FastRead
+                (*(undefined4 *)(param_1 + 8),*(undefined4 *)(param_1 + 0xc),
+                 *(undefined4 *)(param_1 + 0x10));
       break;
     case 0x25:
       iVar2 = FUN_027f59c0();
@@ -51,8 +52,9 @@ void FUN_027f5a24(int param_1)
         FUN_0380465c(1);
         return;
       }
-      FUN_027f631c(*(undefined4 *)(param_1 + 8),*(uint *)(param_1 + 0xc) & 0xffff,
-                   *(undefined4 *)(param_1 + 0x10));
+      jus_SpiFlash_PageWrite
+                (*(undefined4 *)(param_1 + 8),*(uint *)(param_1 + 0xc) & 0xffff,
+                 *(undefined4 *)(param_1 + 0x10));
       break;
     case 0x26:
       iVar2 = FUN_027f59c0();
@@ -61,8 +63,9 @@ void FUN_027f5a24(int param_1)
         FUN_0380465c(1);
         return;
       }
-      FUN_027f61f0(*(undefined4 *)(param_1 + 8),*(uint *)(param_1 + 0xc) & 0xffff,
-                   *(undefined4 *)(param_1 + 0x10));
+      jus_SpiFlash_PageProgram
+                (*(undefined4 *)(param_1 + 8),*(uint *)(param_1 + 0xc) & 0xffff,
+                 *(undefined4 *)(param_1 + 0x10));
       break;
     case 0x27:
       iVar2 = FUN_027f59c0();
@@ -71,7 +74,7 @@ void FUN_027f5a24(int param_1)
         FUN_0380465c(1);
         return;
       }
-      FUN_027f612c(*(undefined4 *)(param_1 + 8));
+      jus_SpiFlash_PageErase(*(undefined4 *)(param_1 + 8));
       break;
     case 0x28:
       iVar2 = FUN_027f59c0();
@@ -80,13 +83,13 @@ void FUN_027f5a24(int param_1)
         FUN_0380465c(1);
         return;
       }
-      FUN_027f6068(*(undefined4 *)(param_1 + 8));
+      jus_SpiFlash_SectorErase(*(undefined4 *)(param_1 + 8));
       break;
     case 0x29:
-      FUN_027f6028();
+      jus_SpiFlash_DeepPowerDown();
       break;
     case 0x2a:
-      FUN_027f5fe8();
+      jus_SpiFlash_ReleasePowerDown();
       break;
     case 0x2b:
       iVar2 = FUN_027f59c0();
@@ -95,13 +98,13 @@ void FUN_027f5a24(int param_1)
         FUN_0380465c(1);
         return;
       }
-      FUN_027f5fa8();
+      jus_SpiFlash_ChipErase();
       break;
     case 0x2c:
-      FUN_027f5f0c(*(undefined4 *)(param_1 + 0x10));
+      jus_SpiFlash_ReadJedecId(*(undefined4 *)(param_1 + 0x10));
       break;
     case 0x2d:
-      FUN_027f5ecc();
+      jus_SpiFlash_SoftwareReset();
       break;
     default:
       FUN_0380465c(1);

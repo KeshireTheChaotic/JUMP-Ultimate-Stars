@@ -76,7 +76,7 @@ int FUN_0207c988(int param_1,int param_2,uint param_3,undefined4 param_4,uint pa
     puVar10 = puVar10 + 1;
   } while (iVar11 < 2);
   *(uint *)(iVar7 + 0x40) = *(uint *)(iVar7 + 0x40) & 0xfffffdff;
-  *(undefined **)(iVar7 + 0x50) = &DAT_0207d9a0;
+  *(code **)(iVar7 + 0x50) = FUN_0207d9a0;
   return iVar7;
 }
 

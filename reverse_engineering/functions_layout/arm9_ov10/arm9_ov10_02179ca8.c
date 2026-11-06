@@ -37,7 +37,7 @@ void FUN_02179ca8(uint param_1,int param_2)
   }
   FUN_0217eddc(param_2,param_1,&local_18,4);
   iVar2 = FUN_02178448();
-  uVar4 = FUN_02054b44();
+  uVar4 = OS_GetTick();
   *(undefined8 *)(iVar2 + 0x1d8) = uVar4;
   return;
 }

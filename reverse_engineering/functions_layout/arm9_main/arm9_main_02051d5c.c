@@ -1,7 +1,9 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+/* JUS-SDK OS_EnableIrqMask [behavioral] IME saved/cleared/restored around IE |= r0; returns old IE
+    */
 
-uint FUN_02051d5c(uint param_1)
+uint OS_EnableIrqMask(uint param_1)
 
 {
   uint uVar1;

@@ -28,13 +28,13 @@ void FUN_0203be54(int param_1,int param_2)
         sVar2 = *psVar5;
         sVar3 = psVar5[2];
         iVar6 = (**(code **)(iVar7 + 0x948))();
-        FUN_0205157c(uVar4,iVar6 + (uVar8 * (uVar11 & uVar12) + ((int)sVar2 & uVar8 - 1)) * 2,0,
+        MI_DmaFill16(uVar4,iVar6 + (uVar8 * (uVar11 & uVar12) + ((int)sVar2 & uVar8 - 1)) * 2,0,
                      ((int)sVar3 - (int)sVar2) * 2);
       }
       else {
         sVar2 = *psVar5;
         iVar6 = (**(code **)(iVar7 + 0x948))();
-        FUN_0205157c(uVar4,iVar6 + (uVar8 * (uVar11 & uVar12) + ((int)sVar2 & uVar8 - 1)) * 2,
+        MI_DmaFill16(uVar4,iVar6 + (uVar8 * (uVar11 & uVar12) + ((int)sVar2 & uVar8 - 1)) * 2,
                      uVar9 & 0xffff,((int)psVar5[2] - (int)*psVar5) * 2);
       }
     }

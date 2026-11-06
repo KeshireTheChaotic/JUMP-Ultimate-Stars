@@ -1,8 +1,11 @@
 
-void FUN_020652c8(void)
+/* JUS-SDK GX_ResetBankForTex [behavioral] tail-calls resetBankForX_ with the manager field
+   0x020afba8, which GX_SetBankForTex updates */
+
+void GX_ResetBankForTex(void)
 
 {
-  FUN_020652f8(&DAT_020afba8);
+  resetBankForX_(&DAT_020afba8);
   return;
 }
 

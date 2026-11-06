@@ -9,7 +9,7 @@ undefined4 * FUN_0217f6f8(undefined4 param_1,undefined4 param_2,undefined2 param
   if (puVar1 == (undefined4 *)0x0) {
     return (undefined4 *)0x0;
   }
-  uVar2 = FUN_0200169c(8,8,4,0x217f771,&LAB_0217f764_1,0x217f77d);
+  uVar2 = FUN_0200169c(8,8,4,0x217f771,0x217f765,0x217f77d);
   puVar1[6] = uVar2;
   if (puVar1[6] == 0) {
     FUN_02175814(puVar1);

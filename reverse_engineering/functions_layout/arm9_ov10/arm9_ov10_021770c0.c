@@ -19,7 +19,7 @@ void FUN_021770c0(void)
   if (iVar1 != 0x15) {
     iVar1 = FUN_021731c8();
     if (iVar1 != 0) {
-      lVar3 = FUN_02054b44();
+      lVar3 = OS_GetTick();
       lVar3 = lVar3 - *(longlong *)(DAT_021a759c + 0x28);
       uVar2 = (uint)lVar3;
       uVar4 = FUN_0200d0c4(uVar2 * 0x40,(int)((ulonglong)lVar3 >> 0x20) * 0x40 | uVar2 >> 0x1a,

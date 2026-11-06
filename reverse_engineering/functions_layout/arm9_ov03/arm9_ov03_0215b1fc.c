@@ -1,6 +1,4 @@
 
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
-
 void FUN_0215b1fc(undefined4 param_1,int param_2)
 
 {
@@ -21,8 +19,7 @@ void FUN_0215b1fc(undefined4 param_1,int param_2)
   if (iVar2 < 0) {
     iVar2 = 0;
   }
-  _DAT_04001040 = (ushort)(iVar1 << 8) | (ushort)iVar2 & 0xff;
-  _DAT_04001044 = 0x109c;
+  FUN_0215b23c(iVar1,0x10,iVar2,0x9c);
   return;
 }
 

@@ -39,10 +39,10 @@ void FUN_021916b0(void)
   DAT_021a8538 = 0;
   bVar4 = *piVar1 == 0;
   if (bVar4) {
-    DAT_021a9d40 = &LAB_0219166c_1;
+    DAT_021a9d40 = 0x219166d;
   }
   else {
-    DAT_021a9d40 = &LAB_0219165c_1;
+    DAT_021a9d40 = 0x219165d;
     DAT_021a9d5c = DAT_021a9d28;
   }
   DAT_021a9d34 = (uint)bVar4;

@@ -118,8 +118,8 @@ void FUN_020418b8(void)
   }
   local_8[0] = &DAT_020a0fa4;
   FUN_02030110(&DAT_020a1284,local_8);
-  FUN_02051eec(4,FUN_01ff8af0);
-  FUN_02051eec(1,FUN_02042988);
+  OS_SetIrqFunction(4,FUN_01ff8af0);
+  OS_SetIrqFunction(1,FUN_02042988);
   return;
 }
 

@@ -52,7 +52,8 @@ void BattleMap::BattleMapInit(int param_1,int param_2,undefined4 param_3,undefin
   if (param_2 != 1) {
     uVar7 = 0;
   }
-  iVar3 = FUN_02083fcc(param_1,*(undefined4 *)(*(int *)PTR_DAT_021620b0 + 4),piVar2[1],0,1,uVar7);
+  iVar3 = BattleMapBG::BattleMapBG_Create
+                    (param_1,*(undefined4 *)(*(int *)PTR_DAT_021620b0 + 4),piVar2[1],0,1,uVar7);
   piVar2[10] = iVar3;
   iVar3 = (**(code **)(**(int **)(piVar2[1] + 4) + 0x2c))(*(int **)(piVar2[1] + 4),0);
   iVar4 = iVar3 + *(int *)(iVar3 + 4);

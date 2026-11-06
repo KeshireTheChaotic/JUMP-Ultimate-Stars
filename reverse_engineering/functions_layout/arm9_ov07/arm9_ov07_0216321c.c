@@ -35,9 +35,9 @@ int CommuMenuQuizLeaderSel::CommuMenuQuizLeaderSel_Add(void)
   iVar2 = FUN_02159aec();
   piVar1[0x12] = iVar2;
   *(int **)(iVar2 + 0x10) = piVar1;
-  *(undefined **)(piVar1[0x12] + 0x14) = &DAT_02163460;
+  *(code **)(piVar1[0x12] + 0x14) = FUN_02163460;
   *(code **)(piVar1[0x12] + 0x18) = FUN_02163464;
-  *(undefined1 **)(piVar1[0x12] + 0x1c) = &LAB_021634b4;
+  *(code **)(piVar1[0x12] + 0x1c) = FUN_021634b4;
   *(code **)(piVar1[0x12] + 0x20) = FUN_021634bc;
   *(code **)(piVar1[0x12] + 0x24) = FUN_02163500;
   *(undefined1 *)piVar1[0x12] = 0;
@@ -49,7 +49,7 @@ int CommuMenuQuizLeaderSel::CommuMenuQuizLeaderSel_Add(void)
   FUN_02028384(*(undefined4 *)(piVar1[1] + 4),FUN_0216339c);
   local_10 = 0x80000;
   (**(code **)(**(int **)(piVar1[1] + 4) + 0xa0))(*(int **)(piVar1[1] + 4),&local_10);
-  iVar2 = FUN_0215656c(piVar1[0x12]);
+  iVar2 = CommuMenuCmnLeaderSel::CommuMenuCmnLeaderSel_Add(piVar1[0x12]);
   piVar1[0x10] = iVar2;
   return *piVar1;
 }

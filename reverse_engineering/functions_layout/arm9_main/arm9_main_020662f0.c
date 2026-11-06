@@ -1,5 +1,8 @@
 
-void FUN_020662f0(undefined4 *param_1)
+/* JUS-SDK GXi_NopClearFifo128_ [behavioral] writes 128 bytes of zero words (NOP commands) to the
+   FIFO address in r0 */
+
+void GXi_NopClearFifo128_(undefined4 *param_1)
 
 {
   *param_1 = 0;

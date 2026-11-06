@@ -19,9 +19,8 @@ int * JGalaxyDemo::JGalaxyDemo_Create
   FUN_02028384(*(undefined4 *)(*piVar1 + 4),FUN_021566a4);
   FUN_020282f4(*(undefined4 *)(*piVar1 + 4));
   FUN_02043264(0);
-  iVar2 = jus_Scene14_CreateImpl
-                    ((int)*(char *)(*(int *)(param_1 + 0x38) +
-                                    (uint)*(byte *)(param_1 + 0x53) * 0x40 + 0x2e));
+  iVar2 = Demo::Demo_Add((int)*(char *)(*(int *)(param_1 + 0x38) +
+                                        (uint)*(byte *)(param_1 + 0x53) * 0x40 + 0x2e));
   piVar1[2] = iVar2;
   return piVar1;
 }

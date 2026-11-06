@@ -40,12 +40,12 @@ void FUN_0203bc4c(int param_1,int param_2)
         if (uVar7 == 0) {
           uVar10 = (uint)local_2c;
           iVar3 = (**(code **)(iVar4 + 0x948))();
-          FUN_0205157c(uVar1,uVar6 * (uVar9 & uVar5 - 1) + (uVar10 & uVar6 - 2) + iVar3,0,iVar11);
+          MI_DmaFill16(uVar1,uVar6 * (uVar9 & uVar5 - 1) + (uVar10 & uVar6 - 2) + iVar3,0,iVar11);
         }
         else {
           uVar10 = (uint)local_2c;
           iVar3 = (**(code **)(iVar4 + 0x948))();
-          FUN_0205157c(uVar1,uVar6 * (uVar9 & uVar5 - 1) + (uVar10 & uVar6 - 2) + iVar3,
+          MI_DmaFill16(uVar1,uVar6 * (uVar9 & uVar5 - 1) + (uVar10 & uVar6 - 2) + iVar3,
                        uVar7 & 0xffff,iVar11);
         }
       }

@@ -4,7 +4,7 @@ void FUN_0380760c(void)
 {
   int iVar1;
   
-  FUN_037fd7f4();
+  OS_InitTick();
   FUN_037fdc68();
   FUN_037fdc48(&DAT_0380ba9c);
   if (DAT_0380ba80 == 0) {

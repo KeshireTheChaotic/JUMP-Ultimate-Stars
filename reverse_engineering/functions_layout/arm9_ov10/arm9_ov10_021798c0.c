@@ -29,7 +29,7 @@ undefined4 FUN_021798c0(undefined4 param_1,int param_2,undefined4 param_3)
   else if (param_2 == 0xe) {
     iVar2 = FUN_02178448();
     if (*(int *)(iVar2 + 0x198) == 0xe) {
-      lVar7 = FUN_02054b44();
+      lVar7 = OS_GetTick();
       iVar2 = FUN_02178448();
       lVar1 = lVar7 - *(longlong *)(iVar2 + 0x1e0);
       uVar3 = (uint)lVar1;

@@ -3,20 +3,16 @@ void FUN_02066ac4(undefined4 param_1,int param_2,uint param_3)
 
 {
   int iVar1;
-  code *UNRECOVERED_JUMPTABLE_00;
+  code *in_lr;
   
   iVar1 = FUN_02065d08();
   if ((DAT_0209dd40 == -1) || (param_3 < 0x31)) {
     MIi_CpuCopy32(param_1,iVar1 + param_2,param_3);
-                    /* WARNING: Could not recover jumptable at 0x02066b00. Too many branches */
-                    /* WARNING: Treating indirect jump as call */
-    (*UNRECOVERED_JUMPTABLE_00)();
+    (*in_lr)();
     return;
   }
-  FUN_0205160c(DAT_0209dd40,param_1,iVar1 + param_2,param_3);
-                    /* WARNING: Could not recover jumptable at 0x02066af0. Too many branches */
-                    /* WARNING: Treating indirect jump as call */
-  (*UNRECOVERED_JUMPTABLE_00)();
+  MI_DmaCopy32(DAT_0209dd40,param_1,iVar1 + param_2,param_3);
+  (*in_lr)();
   return;
 }
 

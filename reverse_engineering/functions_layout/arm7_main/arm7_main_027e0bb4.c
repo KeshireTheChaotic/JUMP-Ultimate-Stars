@@ -38,7 +38,7 @@ void FUN_027e0bb4(int param_1)
       uVar5 = OS_DisableInterrupts();
       *(ushort *)(iVar3 + 0x182) = *(ushort *)(iVar3 + 0x182) | (ushort)(1 << (uVar7 & 0xff));
       *(ushort *)(iVar3 + 0x86) = *(ushort *)(iVar3 + 0x86) & ~(ushort)(1 << (uVar7 & 0xff));
-      uVar8 = FUN_037fd6ac();
+      uVar8 = OS_GetTick();
       iVar6 = iVar3 + uVar7 * 8;
       *(uint *)(iVar6 + 0x738) = (uint)uVar8 | 1;
       *(int *)(iVar6 + 0x73c) = (int)((ulonglong)uVar8 >> 0x20);

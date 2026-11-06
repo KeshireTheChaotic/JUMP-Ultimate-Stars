@@ -4,6 +4,7 @@
 void FUN_0208546c(undefined4 param_1,ushort param_2)
 
 {
+                    /* JUS-TAG hw={"GX_2D_main":1} io=["0400000c"] */
   _DAT_0400000c = _DAT_0400000c & 0xfffc | param_2;
   return;
 }

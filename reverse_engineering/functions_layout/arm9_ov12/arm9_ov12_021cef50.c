@@ -34,7 +34,7 @@ undefined4 FUN_021cef50(int param_1,int *param_2)
 LAB_021cf01e:
     if (*param_2 == 10) {
       FUN_021cf3c4(1);
-      uVar5 = FUN_02054b44();
+      uVar5 = OS_GetTick();
     }
     else {
       FUN_021cf3c4(0);

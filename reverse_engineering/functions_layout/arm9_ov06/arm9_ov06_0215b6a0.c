@@ -15,7 +15,7 @@ undefined4 FUN_0215b6a0(int param_1)
   else {
     FUN_02157450(param_1,*(undefined4 *)(&DAT_021713e8 + (uint)*(ushort *)(param_1 + 0x100) * 8));
   }
-  *(undefined1 **)(param_1 + 0xfc) = &LAB_0215b720;
+  *(code **)(param_1 + 0xfc) = thunk_FUN_0215b4fc;
   return 0;
 }
 

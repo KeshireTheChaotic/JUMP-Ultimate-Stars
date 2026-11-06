@@ -1,5 +1,7 @@
 
-void FUN_037fee74(void)
+/* JUS-SDK SND_Enable [behavioral] SOUNDCNT_H (0x04000501) |= 0x80 (master enable) */
+
+void SND_Enable(void)
 
 {
                     /* JUS-TAG hw={"SOUND":1} io=["04000501"] */

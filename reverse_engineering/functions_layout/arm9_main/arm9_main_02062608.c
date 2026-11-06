@@ -20,7 +20,7 @@ void FUN_02062608(uint param_1,int param_2,undefined4 param_3,undefined4 param_4
   DAT_020aecc4 = param_4;
   DAT_020aecc8 = param_1;
   if (param_1 < 4) {
-    FUN_02051290();
+    MI_StopDma();
   }
   iVar2 = FUN_02062874(&DAT_020af2e0);
   if (iVar2 == 0) {

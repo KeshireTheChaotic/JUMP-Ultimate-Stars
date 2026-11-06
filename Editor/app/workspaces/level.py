@@ -15,7 +15,7 @@ from tkinter import filedialog, messagebox, ttk
 from PIL import Image, ImageTk, ImageChops
 
 from jus_formats import altm as altmmod
-from jus_formats import roster, stagephysics, itemprob
+from jus_formats import battleai, roster, stagephysics, itemprob
 from jus_package import scenes, tilemap, stagepreview, stageoverlay, stagesprites
 from jus_package.project import split
 
@@ -69,6 +69,9 @@ class LevelWorkspace(SuiteWorkspace):
         self.camera_y = tk.StringVar(value='0')
         self.preview_palette = tk.BooleanVar(value=False)
         self.show_sprites = {'floor': True, 'gimmick': True}   # Layers dock toggles
+        self.ai_nav_row = tk.StringVar(value='AI nav: off')
+        self.ai_nav_profile = tk.StringVar(value='n')
+        self._ai_nav = None                                     # battleai.NavGraph
         self._stage_sprites = None                              # jus_package.stagesprites.StageSprites
         self._item_prob = None
         self._stage_mob = None
@@ -99,6 +102,15 @@ class LevelWorkspace(SuiteWorkspace):
         self.stage_spin.bind('<FocusOut>', self._preview_changed)
         self.stage_play_button = ttk.Button(h, text='Play stage', command=self._toggle_stage_play)
         self.stage_play_button.pack(side='right', padx=4)
+        # AI navigation graph (chr/ai/move/<stage>/{f,n,s}_m.bin, overlay 11 BattleAIMove_Create)
+        nav = ttk.Combobox(h, textvariable=self.ai_nav_row, state='readonly', width=11,
+                           values=['AI nav: off', 'AI nav: all'] + [f'AI nav: row {i}' for i in range(7)])
+        nav.pack(side='right', padx=3)
+        nav.bind('<<ComboboxSelected>>', lambda _e: self.view.redraw())
+        prof = ttk.Combobox(h, textvariable=self.ai_nav_profile, state='readonly', width=3,
+                            values=list(battleai.AIMV_PROFILES))
+        prof.pack(side='right')
+        prof.bind('<<ComboboxSelected>>', lambda _e: (self._load_ai_nav(), self.view.redraw()))
         self.view = self.make_viewport(on_draw=self._draw, on_press=self._press,
                                        on_drag=self._drag, on_release=self._release,
                                        origin_frac=(0.05, 0.08), zoom=1)
@@ -382,6 +394,7 @@ class LevelWorkspace(SuiteWorkspace):
             probs += [(p, 'warn') for p in self._stage_sprites.problems]
         self.map_objects.load(self._stage_mob.raw if self._stage_mob else None,
                               self._stage_geo.raw if self._stage_geo else None)
+        self._load_ai_nav()
         for l in self.layers:
             self._original_maps[l.atm_path] = self.app.root_data.read(l.atm_path)
             img, p = scenes.render_layer(self.app.root_data, l)
@@ -712,6 +725,7 @@ class LevelWorkspace(SuiteWorkspace):
         selected = self.map_objects.selected
         f = self._stage_frame
         self._draw_stage_sprites(vp, mob, f)
+        self._draw_ai_nav(vp, geo)
         phases = {wall.index: wall.damage_phase for wall in f.walls} if f else {}
         if geo is not None and self.preview_collisions.get():
             for coll in geo.collision_boxes:
@@ -720,12 +734,16 @@ class LevelWorkspace(SuiteWorkspace):
                     continue
                 active = selected == ('collider', coll.index)
                 phase = phases.get(coll.wall_index, 0)
+                info = stagephysics.COLLIDER_TYPES.get(coll.type_id)
+                # colour by traced behaviour: breakable, solid, one-way, no collision
                 colour = (T.WARN if active else '#E75D5D' if phase == 3 else
-                          '#F0A764' if coll.type_id == 2 else '#AC98D0')
+                          '#F0A764' if coll.type_id == 2 else
+                          '#7FD28C' if info and info[4] else
+                          '#8A8F98' if info and not any(info[1:4]) else '#AC98D0')
                 vp.rect(x0, y0, x1, y1, outline=colour, width=2 if active else 1,
                         dash=() if active else (2, 3))
-                vp.text(x0, y0, f'C{coll.index}' +
-                        (f'/W{coll.wall_index}' if coll.wall_index >= 0 else ''),
+                vp.text(x0, y0, f'C{coll.index} {coll.label}' +
+                        (f' /W{coll.wall_index}' if coll.wall_index >= 0 else ''),
                         anchor='sw', fill=colour)
 
         if mob is not None and self.preview_paths.get():
@@ -790,6 +808,44 @@ class LevelWorkspace(SuiteWorkspace):
         vp.hud.configure(text=f'{self.stage.stem} · mission {self.missions.node_id} · '
                               f'stage tick {f.tick if f else 0} · '
                               f'BG / object positions: world pixels · select an overlay to edit')
+
+    def _load_ai_nav(self):
+        self._ai_nav = None
+        if not self.stage:
+            return
+        path = battleai.AIMV_PATH.format(stem=self.stage.stem, profile=self.ai_nav_profile.get())
+        try:
+            if self.app.root_data.exists(path):
+                self._ai_nav = battleai.parse_aimv(self.app.root_data.read(path))
+        except (ValueError, KeyError, OSError) as exc:
+            self.app.status.set(f'AI navigation graph: {exc}')
+
+    def _draw_ai_nav(self, vp, geo):
+        """AIMV links between collider top centres (node i = collider i)."""
+        choice = self.ai_nav_row.get()
+        g = self._ai_nav
+        if g is None or geo is None or choice.endswith('off'):
+            return
+        rows = range(battleai.AIMV_ROWS) if choice.endswith('all') else [int(choice.split()[-1])]
+        boxes = geo.collision_boxes
+        colours = ('#7FDBFF', '#2ECC40', '#FFDC00', '#FF851B', '#F012BE', '#B10DC9', '#39CCCC')
+
+        def anchor(i):
+            x0, y0, x1, _ = boxes[i].bounds
+            return (x0 + x1) / 2, y0
+
+        for row in rows:
+            col = colours[row % len(colours)]
+            for a, b in g.edges(row):
+                if a >= len(boxes) or b >= len(boxes) or a == b:
+                    continue
+                (ax, ay), (bx, by) = anchor(a), anchor(b)
+                sx, sy = vp.to_screen(ax, ay)
+                tx, ty = vp.to_screen(bx, by)
+                vp.canvas.create_line(sx, sy, tx, ty, fill=col, arrow='last', arrowshape=(7, 8, 3),
+                                      width=1, dash=(4, 2))
+        vp.canvas.create_text(8, 24, text=f'AI nav {self.ai_nav_profile.get()}_m: {choice[8:]}',
+                              anchor='nw', fill='#7FDBFF', font=T.MONO_SMALL)
 
     def _draw_stage_sprites(self, vp, mob, f):
         """Floor and gimmick sprites at their world positions (above the BG layers).

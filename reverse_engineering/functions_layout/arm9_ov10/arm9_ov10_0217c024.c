@@ -53,7 +53,7 @@ LAB_0217c0d8:
     iVar1 = FUN_02178448();
     *(int *)(iVar1 + 0x450) = param_6;
     iVar1 = FUN_02178448();
-    uVar5 = FUN_02054b44();
+    uVar5 = OS_GetTick();
     *(undefined8 *)(iVar1 + 0x454) = uVar5;
     if ((param_5 != (undefined4 *)0x0) && (param_6 != 0)) {
       iVar1 = FUN_02178448();

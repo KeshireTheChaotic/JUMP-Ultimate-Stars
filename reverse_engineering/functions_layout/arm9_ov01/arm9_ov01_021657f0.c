@@ -60,7 +60,7 @@ void FUN_021657f0(int param_1,undefined4 param_2,undefined4 param_3,undefined4 p
   if (*(char *)(param_1 + 0x71) != '\0') {
     return;
   }
-  uVar11 = FUN_02054b44();
+  uVar11 = OS_GetTick();
   uVar3 = (uint)uVar11 - *(uint *)(param_1 + 0x5c);
   uVar11 = FUN_0200d0c4(uVar3 * 0x40,
                         ((int)((ulonglong)uVar11 >> 0x20) -

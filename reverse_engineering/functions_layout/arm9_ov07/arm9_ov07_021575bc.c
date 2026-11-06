@@ -39,7 +39,7 @@ void FUN_021575bc(int param_1,undefined4 param_2,undefined4 param_3,undefined4 p
     piVar4 = (int *)0x0;
     if (iVar2 != 0) {
       piVar4 = (int *)func_0x021af494(iVar2,*(undefined4 *)(param_1 + 4),uVar1,(uVar3 & 1) == 1,
-                                      &LAB_021576fc_1,0);
+                                      0x21576fd,0);
     }
     if (piVar4[6] == 0) {
       (**(code **)(*piVar4 + 0x14))();

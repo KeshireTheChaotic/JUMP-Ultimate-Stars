@@ -4,30 +4,21 @@ void FUN_021bde3c(void)
 {
   int iVar1;
   uint uVar2;
-  ushort local_20;
-  ushort local_1e;
-  ushort local_1c;
-  ushort local_1a;
-  ushort local_18;
+  uint uVar3;
+  short local_20;
+  short local_1e;
+  short local_1c;
+  short local_1a;
+  short local_18;
   
   MIi_CpuClear16(0,&local_20,10);
   uVar2 = 1;
   do {
-    switch(*(undefined4 *)(DAT_021d525c + (uVar2 - 1) * 4 + 0x14e8)) {
-    case 2:
-      local_20 = local_20 | (ushort)(1 << (uVar2 & 0xff));
-      break;
-    case 4:
-      local_1c = local_1c | (ushort)(1 << (uVar2 & 0xff));
-      break;
-    case 5:
-      local_1e = local_1e | (ushort)(1 << (uVar2 & 0xff));
-      break;
-    case 8:
-      local_1a = local_1a | (ushort)(1 << (uVar2 & 0xff));
-      break;
-    case 0xb:
-      local_18 = local_18 | (ushort)(1 << (uVar2 & 0xff));
+    uVar3 = *(uint *)(DAT_021d525c + (uVar2 - 1) * 4 + 0x14e8);
+    if (uVar3 < 0xc) {
+      (*(code *)((int)&switchD_021bde76::switchdataD_021bde78 +
+                (int)(short)(&switchD_021bde76::switchdataD_021bde78)[uVar3]))(1);
+      return;
     }
     uVar2 = uVar2 + 1 & 0xffff;
   } while (uVar2 < 0x10);

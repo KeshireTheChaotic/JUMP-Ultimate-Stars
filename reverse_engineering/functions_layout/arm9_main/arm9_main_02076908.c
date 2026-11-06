@@ -20,7 +20,7 @@ int FUN_02076908(int param_1,undefined4 param_2,undefined4 param_3,undefined4 pa
     *(undefined2 *)(iVar2 + 0xc) = 0xffff;
     iVar2 = iVar2 + 0x50;
   } while (0 < iVar3);
-  *(undefined1 **)(iVar1 + 0x5e8) = &LAB_02076984;
+  *(code **)(iVar1 + 0x5e8) = FUN_02076984;
   return iVar1;
 }
 

@@ -1,5 +1,8 @@
 
-void FUN_01ff8cd0(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+/* JUS-SDK MIi_DmaSetParams [behavioral] writes src/dest/control to DMA0SAD + 12*dmaNo, interrupts
+   off */
+
+void MIi_DmaSetParams(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
 
 {
                     /* JUS-TAG hw={"DMA":3} io=["040000b0","040000b4","040000b8"] */

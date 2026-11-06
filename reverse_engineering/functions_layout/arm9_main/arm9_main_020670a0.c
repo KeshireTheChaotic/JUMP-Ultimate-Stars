@@ -19,13 +19,13 @@ void FUN_020670a0(int param_1,uint param_2,int param_3)
         MIi_CpuCopy32(param_1,DAT_020afbcc + param_2,uVar2);
       }
       else {
-        FUN_0205160c(DAT_0209dd40,param_1,DAT_020afbcc + param_2,uVar2);
+        MI_DmaCopy32(DAT_0209dd40,param_1,DAT_020afbcc + param_2,uVar2);
       }
       if (DAT_0209dd40 == -1) {
         MIi_CpuCopy32(param_1 + uVar2,iVar1,param_3 - uVar2);
         return;
       }
-      FUN_02051384(DAT_0209dd40,param_1 + uVar2,iVar1,param_3 - uVar2,0,0);
+      MI_DmaCopy32Async(DAT_0209dd40,param_1 + uVar2,iVar1,param_3 - uVar2,0,0);
       return;
     }
     iVar1 = (DAT_020afbdc + param_2) - DAT_020afbe0;
@@ -34,7 +34,7 @@ void FUN_020670a0(int param_1,uint param_2,int param_3)
     MIi_CpuCopy32(param_1,iVar1,param_3);
     return;
   }
-  FUN_02051384(DAT_0209dd40,param_1,iVar1,param_3,0,0);
+  MI_DmaCopy32Async(DAT_0209dd40,param_1,iVar1,param_3,0,0);
   return;
 }
 

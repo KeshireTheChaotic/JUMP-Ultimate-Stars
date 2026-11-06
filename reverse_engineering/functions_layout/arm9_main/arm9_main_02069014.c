@@ -9,7 +9,7 @@ undefined4 FUN_02069014(int param_1)
   
   iVar1 = func_0x021938c0();
   if (iVar1 == 0) {
-    lVar3 = FUN_02054b44();
+    lVar3 = OS_GetTick();
     lVar3 = lVar3 - *(longlong *)(param_1 + 0xcb0);
     uVar2 = (uint)lVar3;
     uVar4 = FUN_0200d0c4(uVar2 * 0x40,(int)((ulonglong)lVar3 >> 0x20) * 0x40 | uVar2 >> 0x1a,

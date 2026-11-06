@@ -1,7 +1,9 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+/* JUS-SDK jus_SpiFlash_ReleasePowerDown [behavioral] SPICNT 0x8100/0x8900 (device 1 = firmware
+   flash), first SPIDATA byte = command 0xAB (ReleasePowerDown) */
 
-void FUN_027f5fe8(void)
+void jus_SpiFlash_ReleasePowerDown(void)
 
 {
   do {

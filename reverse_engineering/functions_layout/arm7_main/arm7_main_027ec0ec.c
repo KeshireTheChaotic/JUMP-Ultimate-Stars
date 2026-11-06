@@ -14,7 +14,7 @@ void FUN_027ec0ec(uint param_1)
   if ((iVar2 == 0x40) && (((uint)*(ushort *)(_DAT_0380fff4 + 0x534) & 1 << (param_1 & 0xff)) == 0))
   {
     uVar5 = (uint)*(ushort *)(_DAT_0380fff4 + 0x3d8);
-    uVar3 = FUN_037fbc10(0x1000000);
+    uVar3 = OS_DisableIrqMask(0x1000000);
     if (param_1 == 0) {
       bVar1 = FUN_027e93b0(uVar5 + 0x4804260);
       FUN_027e93d0(uVar5 + 0x4804260,bVar1 | 1);
@@ -25,7 +25,7 @@ void FUN_027ec0ec(uint param_1)
       uVar5 = FUN_027e93b0(iVar2);
       FUN_027e93d0(iVar2,(uVar5 | 1 << (uVar4 & 7)) & 0xff);
     }
-    FUN_037fbc4c(uVar3);
+    OS_EnableIrqMask(uVar3);
   }
   return;
 }

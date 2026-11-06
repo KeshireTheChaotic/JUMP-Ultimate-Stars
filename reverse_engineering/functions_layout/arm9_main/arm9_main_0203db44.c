@@ -61,21 +61,21 @@ void jus_Class_0209ab18::vfunc_40(void)
     if (iVar6 == 1) {
       iVar6 = *(int *)(DAT_020a170c + 0x8e4);
       if (iVar6 == 1) {
-        FUN_02064e3c(1,0,bVar9,uVar5,in_r3);
+        GX_SetGraphicsMode(1,0,bVar9,uVar5,in_r3);
       }
       else if (iVar6 == 2) {
-        FUN_02064e3c(1,1,bVar9,uVar5,in_r3);
+        GX_SetGraphicsMode(1,1,bVar9,uVar5,in_r3);
       }
       else if (iVar6 - 3U < 3) {
-        FUN_02064e3c(1,3,bVar9,uVar5,in_r3);
+        GX_SetGraphicsMode(1,3,bVar9,uVar5,in_r3);
       }
     }
     else if (iVar6 == 2) {
       if (*(int *)(DAT_020a170c + 0x8e4) == 2) {
-        FUN_02064e3c(1,2,bVar9,uVar5,in_r3);
+        GX_SetGraphicsMode(1,2,bVar9,uVar5,in_r3);
       }
       else if (*(int *)(DAT_020a170c + 0x8e4) - 3U < 3) {
-        FUN_02064e3c(1,4,bVar9,uVar5,in_r3);
+        GX_SetGraphicsMode(1,4,bVar9,uVar5,in_r3);
       }
     }
     else {
@@ -84,7 +84,7 @@ void jus_Class_0209ab18::vfunc_40(void)
         uVar7 = *(int *)(DAT_020a170c + 0x8e4) - 3;
       }
       if (uVar7 < 3) {
-        FUN_02064e3c(1,5,bVar9,uVar5,in_r3);
+        GX_SetGraphicsMode(1,5,bVar9,uVar5,in_r3);
       }
     }
   }

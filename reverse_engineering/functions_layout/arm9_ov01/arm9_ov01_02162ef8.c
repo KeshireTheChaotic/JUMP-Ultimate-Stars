@@ -26,7 +26,7 @@ int ALWidgetImp::Create(undefined4 param_1,int *param_2,int param_3,undefined4 p
   (**(code **)(**(int **)(iVar3 + 4) + 0x24))(*(int **)(iVar3 + 4),param_1);
   func_0x021b3f78(*(undefined4 *)(iVar3 + 4),param_2[2]);
   func_0x021b3fc4(*(undefined4 *)(iVar3 + 4),param_2[2]);
-  *(undefined1 **)(*(int *)(iVar3 + 4) + 0xdc) = &LAB_02163990_1;
+  *(undefined4 *)(*(int *)(iVar3 + 4) + 0xdc) = 0x2163991;
   if (param_2[2] == 0) {
     (**(code **)(**(int **)(iVar2 + 4) + 0xd8))(*(int **)(iVar2 + 4),0);
   }

@@ -13,8 +13,8 @@ undefined4 StageSelect::StageSelect_Add(undefined1 param_1)
   undefined1 auStack_28 [4];
   undefined4 *local_24;
   code *local_20;
-  undefined1 *local_1c;
-  undefined1 *local_18;
+  code *local_1c;
+  code *local_18;
   undefined4 local_14;
   
   puVar1 = (undefined4 *)
@@ -61,9 +61,9 @@ undefined4 StageSelect::StageSelect_Add(undefined1 param_1)
   else {
     uVar2 = func_0x021c2b58(uVar3 & 0xff,2,0);
     puVar1[0xc] = uVar2;
-    local_18 = &LAB_02161f28;
+    local_18 = FUN_02161f28;
     local_20 = FUN_02161edc;
-    local_1c = &LAB_02161f08;
+    local_1c = FUN_02161f08;
     local_14 = puVar1[0x10];
     local_24 = puVar1;
     uVar2 = CommWrapDisconnect::CommWrapDisconnect_Create(&local_24);

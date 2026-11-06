@@ -15,6 +15,8 @@ void CommLib::ScanFunc(int param_1)
   bool bVar7;
   undefined4 uVar8;
   
+                    /* JUS-TAG strings=["ALObjectImp.h","CommLib.cpp","PostSyncMessage","ScanFunc"]
+                        */
   if (*(short *)(param_1 + 2) == 0) {
     if (DAT_0214bea4 == 3) {
       uVar4 = FUN_0201a30c();

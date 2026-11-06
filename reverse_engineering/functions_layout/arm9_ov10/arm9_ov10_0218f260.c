@@ -12,7 +12,7 @@ undefined4 FUN_0218f260(int param_1)
   while( true ) {
     *(undefined4 *)(param_1 + 0x28) = uVar1;
     *(undefined1 *)(param_1 + 8) = 2;
-    uVar4 = FUN_02054b44();
+    uVar4 = OS_GetTick();
     *(uint *)(param_1 + 0x10) = (uint)uVar4 >> 0x10 | (int)((ulonglong)uVar4 >> 0x20) << 0x10;
     FUN_02190030(param_1,2,0x18);
     uVar2 = OS_DisableInterrupts();

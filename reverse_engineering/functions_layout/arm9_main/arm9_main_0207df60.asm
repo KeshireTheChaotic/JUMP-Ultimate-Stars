@@ -1,0 +1,24 @@
+0207df60  cmp r2,#0x6
+0207df64  addls pc,pc,r2, lsl #0x2
+0207df68  b 0x0207dfb8
+0207df6c  b 0x0207df88
+0207df70  b 0x0207df9c
+0207df74  b 0x0207df9c
+0207df78  b 0x0207df9c
+0207df7c  b 0x0207df9c
+0207df80  b 0x0207dfa4
+0207df84  b 0x0207df9c
+0207df88  sub r0,r1,#0x1
+0207df8c  cmp r0,#0x1
+0207df90  movls r0,#0x1
+0207df94  movhi r0,#0x0
+0207df98  bx lr
+0207df9c  mov r0,#0x0
+0207dfa0  bx lr
+0207dfa4  sub r0,r1,#0x1
+0207dfa8  cmp r0,#0x1
+0207dfac  movhi r0,#0x1
+0207dfb0  movls r0,#0x0
+0207dfb4  bx lr
+0207dfb8  mov r0,#0x0
+0207dfbc  bx lr

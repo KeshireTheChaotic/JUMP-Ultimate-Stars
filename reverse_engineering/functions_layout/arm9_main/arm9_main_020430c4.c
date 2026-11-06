@@ -10,9 +10,9 @@ void FUN_020430c4(void)
   FUN_02064f50();
   FUN_02042d14();
   FUN_02053630();
-  FUN_02051d5c(0x40000);
+  OS_EnableIrqMask(0x40000);
   FUN_02043090();
-  FUN_02054c8c();
+  OS_InitTick();
   FUN_020550c0();
   FUN_02054c7c();
   FUN_0206475c(0xffffffff);

@@ -29,7 +29,7 @@ void FUN_027e5d20(int param_1)
       }
       *(ulonglong *)(iVar3 + 0x7b8) = uVar2;
     }
-    uVar7 = FUN_037fd6ac();
+    uVar7 = OS_GetTick();
     iVar4 = 0;
     do {
       iVar5 = iVar3 + iVar4 * 8;

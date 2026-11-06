@@ -17,10 +17,10 @@ void FUN_02179474(int param_1)
     pcVar1[0xe] = '\0';
     pcVar1[0xf] = '\0';
     DAT_021a75a8[2] = '\0';
-    uVar2 = FUN_02054b44();
+    uVar2 = OS_GetTick();
     *(undefined8 *)(DAT_021a75a8 + 0x18) = uVar2;
     if (param_1 == 0) {
-      uVar2 = FUN_02054b44();
+      uVar2 = OS_GetTick();
       *(undefined8 *)(DAT_021a75a8 + 0x10) = uVar2;
     }
   }

@@ -1,7 +1,9 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+/* JUS-SDK OSi_SetTimer [behavioral] programs timer 1 (0xC1) for the next alarm from OS_GetTick,
+   registers its callback (timer 1), enables IE bit 4 */
 
-void FUN_02055118(int param_1)
+void OSi_SetTimer(int param_1)
 
 {
   int iVar1;
@@ -9,12 +11,12 @@ void FUN_02055118(int param_1)
   undefined8 uVar3;
   
                     /* JUS-TAG hw={"TIMER":2} io=["04000104","04000106"] */
-  uVar3 = FUN_02054b44();
+  uVar3 = OS_GetTick();
   _DAT_04000106 = 0;
   uVar2 = *(uint *)(param_1 + 0xc) - (uint)uVar3;
   iVar1 = *(int *)(param_1 + 0x10) -
           ((int)((ulonglong)uVar3 >> 0x20) + (uint)(*(uint *)(param_1 + 0xc) < (uint)uVar3));
-  FUN_02051dc8(1,FUN_02054d28);
+  OSi_EnterTimerCallback(1,OSi_AlarmHandler);
   _DAT_04000104 = 0;
   if (iVar1 < 0) {
     _DAT_04000104 = 0xfffe;
@@ -23,7 +25,7 @@ void FUN_02055118(int param_1)
     _DAT_04000104 = ~(ushort)uVar2;
   }
   _DAT_04000106 = 0xc1;
-  FUN_02051d5c(0x10);
+  OS_EnableIrqMask(0x10);
   return;
 }
 

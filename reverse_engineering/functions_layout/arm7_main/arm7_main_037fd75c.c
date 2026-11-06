@@ -1,7 +1,9 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+/* JUS-SDK OSi_CountUpTick [behavioral] timer-0 IRQ handler: 64-bit counter += 1, restarts timer 0
+   (TM0CNT_H = 0xC1) when asked */
 
-void FUN_037fd75c(void)
+void OSi_CountUpTick(void)
 
 {
   bool bVar1;
@@ -15,7 +17,7 @@ void FUN_037fd75c(void)
     _DAT_04000102 = 0xc1;
     DAT_03808460 = 0;
   }
-  FUN_037fbcb8(0,FUN_037fd75c,0);
+  OSi_EnterTimerCallback(0,OSi_CountUpTick,0);
   return;
 }
 

@@ -67,13 +67,13 @@ int FUN_0218e100(char *param_1,uint param_2,uint param_3,undefined4 param_4,uint
   pcVar5[4] = '\x01';
   FUN_0218eca8(&local_54,pcVar5 + (5 - (int)&local_54));
   iVar10 = 0;
-  uVar11 = FUN_02054b44();
+  uVar11 = OS_GetTick();
   local_5c = -1;
   do {
     while( true ) {
       iVar4 = (*DAT_021a8530)();
       if (((iVar4 == 0) || (iVar10 != 0)) ||
-         (uVar12 = FUN_02054b44(),
+         (uVar12 = OS_GetTick(),
          0xe < (int)(((uint)uVar12 >> 0x10 | (int)((ulonglong)uVar12 >> 0x20) << 0x10) -
                     ((uint)uVar11 >> 0x10 | (int)((ulonglong)uVar11 >> 0x20) << 0x10)))) {
         return iVar10;

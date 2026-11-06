@@ -37,7 +37,7 @@ SelectStandbyBar::SelectStandbyBar_Create
   puVar2[0xd] = param_1;
   puVar2[0x1b] = param_2;
   *(undefined1 *)((int)puVar2 + 0x85) = param_3;
-  uVar8 = FUN_02054b44();
+  uVar8 = OS_GetTick();
   *(undefined8 *)(puVar2 + 0x17) = uVar8;
   iVar3 = FUN_020876f8();
   if (iVar3 == 0) {

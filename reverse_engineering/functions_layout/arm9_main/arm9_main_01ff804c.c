@@ -309,7 +309,8 @@ void jus_TagSPD3::vfunc_07(int param_1,undefined4 param_2,undefined4 param_3,und
           *(int *)(param_1 + 0x50) = iVar9;
           *(int *)(param_1 + 0x54) = iVar20;
         }
-        FUN_01ff8d20(DAT_0209dd40,*(undefined4 *)(param_1 + 100),*(undefined4 *)(param_1 + 0x6c));
+        MI_SendGXCommand(DAT_0209dd40,*(undefined4 *)(param_1 + 100),*(undefined4 *)(param_1 + 0x6c)
+                        );
         *(uint *)(*(int *)(param_1 + 0x34) + 0x4bc) =
              uVar11 + *(int *)(*(int *)(param_1 + 0x34) + 0x4bc);
       }

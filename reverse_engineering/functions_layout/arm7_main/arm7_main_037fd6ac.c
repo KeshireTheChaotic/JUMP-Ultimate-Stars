@@ -1,7 +1,9 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+/* JUS-SDK OS_GetTick [behavioral] interrupts off: timer-0 count + 64-bit counter, +1 if the timer-0
+   IRQ (IF bit 3) is pending and the count has not wrapped; returns (counter << 16) | count */
 
-undefined8 FUN_037fd6ac(void)
+undefined8 OS_GetTick(void)
 
 {
   ushort uVar1;

@@ -16,8 +16,8 @@ undefined4 * jus_Class_0209647c::jus_Class_0209647c(undefined4 *param_1)
   *(undefined1 *)(param_1 + 9) = 0;
   *(undefined1 *)((int)param_1 + 0x25) = 0;
   *(undefined2 *)((int)param_1 + 0x26) = 0x524e;
-  param_1[10] = &DAT_02029f8c;
-  param_1[0xb] = &DAT_02029f90;
+  param_1[10] = FUN_02029f8c;
+  param_1[0xb] = FUN_02029f90;
   DAT_020a0cc8 = DAT_020a0cc8 + 1;
   return param_1;
 }

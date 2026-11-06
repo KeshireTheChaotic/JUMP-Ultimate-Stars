@@ -10,7 +10,7 @@ undefined4 FUN_02175ba8(int param_1)
   if ((DAT_021a73fc == 0 && DAT_021a73f8 == 0) && (DAT_021a7404 == 0 && DAT_021a7400 == 0)) {
     if (DAT_021a740c == 0 && DAT_021a7408 == 0) {
       FUN_020554a8(&local_18);
-      lVar1 = FUN_02054b44();
+      lVar1 = OS_GetTick();
       DAT_021a73fc = (uint)((ulonglong)lVar1 >> 8);
       DAT_021a73f8 = local_18 >> 0x18 | (local_14 & 0xffff) << 8 | (uint)(lVar1 << 0x18);
       DAT_021a7400 = 0x6c078965;

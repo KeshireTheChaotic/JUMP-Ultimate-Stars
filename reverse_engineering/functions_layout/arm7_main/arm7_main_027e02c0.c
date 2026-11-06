@@ -1,30 +1,17 @@
 
-undefined4 FUN_027e02c0(void)
+void FUN_027e02c0(void)
 
 {
-  undefined4 uVar1;
-  uint uVar2;
-  int iVar3;
+  uint uVar1;
+  int iVar2;
   
-  uVar2 = 0;
-  iVar3 = 0;
+  uVar1 = 0;
+  iVar2 = 0;
   do {
-    uVar2 = uVar2 + (byte)(&DAT_027f97f4)[iVar3];
-    iVar3 = iVar3 + 1;
-  } while (iVar3 < 0x20);
-  uVar2 = uVar2 >> 5;
-  if (uVar2 < 8) {
-    return 0;
-  }
-  if (uVar2 < 0xe) {
-    return 1;
-  }
-  if (uVar2 < 0x14) {
-    uVar1 = 2;
-  }
-  else {
-    uVar1 = 3;
-  }
-  return uVar1;
+    uVar1 = uVar1 + (byte)(&DAT_027f97f4)[iVar2];
+    iVar2 = iVar2 + 1;
+  } while (iVar2 < 0x20);
+  FUN_027e0298(uVar1 >> 5);
+  return;
 }
 

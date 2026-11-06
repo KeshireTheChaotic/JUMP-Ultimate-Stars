@@ -13,7 +13,7 @@ void FUN_037fdaa4(int *param_1,undefined4 param_2,undefined4 param_3,int param_4
   param_1[8] = 0;
   *param_1 = param_4;
   param_1[1] = param_5;
-  lVar2 = FUN_037fd6ac();
+  lVar2 = OS_GetTick();
   lVar2 = lVar2 + CONCAT44(param_3,param_2);
   FUN_037fdb18(param_1,(int)lVar2,(int)((ulonglong)lVar2 >> 0x20));
   OS_RestoreInterrupts(uVar1);

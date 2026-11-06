@@ -1,0 +1,13 @@
+0207de08  cmp r2,#0x0
+0207de0c  movlt r0,#0x3
+0207de10  bxlt lr
+0207de14  cmp r2,#0x20000
+0207de18  movgt r0,#0x0
+0207de1c  bxgt lr
+0207de20  cmp r1,#0x4000
+0207de24  movlt r0,#0x1
+0207de28  bxlt lr
+0207de2c  cmp r1,#0x3c000
+0207de30  movgt r0,#0x2
+0207de34  mvnle r0,#0x0
+0207de38  bx lr

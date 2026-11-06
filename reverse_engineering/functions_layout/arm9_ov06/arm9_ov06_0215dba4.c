@@ -9,7 +9,7 @@ void FUN_0215dba4(int param_1,undefined4 param_2,undefined4 param_3,undefined4 p
   if (iVar2 != 0) {
     FUN_02157450(param_1,8);
     *(undefined1 *)(param_1 + 0x1e8) = 0;
-    *(undefined1 **)(param_1 + 0x1d8) = &LAB_0215ddfc;
+    *(code **)(param_1 + 0x1d8) = FUN_0215ddfc;
     *(undefined1 *)(param_1 + 0xdb) = 0;
     FUN_0215d82c(*(undefined4 *)(param_1 + 0x1a4),2);
   }

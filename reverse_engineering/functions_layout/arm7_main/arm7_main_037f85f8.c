@@ -12,7 +12,7 @@ void FUN_037f85f8(int param_1,int param_2)
   
   iVar2 = _DAT_0380fff4;
   iVar5 = _DAT_0380fff4 + 0xbc;
-  FUN_037fbc10(0x1000010);
+  OS_DisableIrqMask(0x1000010);
   iVar4 = iVar5 + param_2 * 8;
   if (*(short *)(iVar4 + 2) == 0) {
     *(undefined2 *)(iVar4 + 2) = 1;
@@ -30,7 +30,7 @@ void FUN_037f85f8(int param_1,int param_2)
       *(short *)(iVar2 + 0x10) = (short)param_1;
     }
   }
-  FUN_037fbc4c();
+  OS_EnableIrqMask();
   if ((param_1 != 3) && (*(short *)(iVar2 + 0x12) == 3)) {
     FUN_037fcc6c(*(undefined4 *)(_DAT_0380fff4 + 0x308),0,0);
   }

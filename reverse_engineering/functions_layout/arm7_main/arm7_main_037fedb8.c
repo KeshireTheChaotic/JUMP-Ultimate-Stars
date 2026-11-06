@@ -5,7 +5,7 @@ void FUN_037fedb8(void)
 
 {
                     /* JUS-TAG hw={"POWCNT":1} io=["04000304"] */
-  FUN_037fee5c();
+  SND_Disable();
   SVC_ResetSoundBias(0x80);
   FUN_037fe408(0x40000);
   FUN_038059e4(1);

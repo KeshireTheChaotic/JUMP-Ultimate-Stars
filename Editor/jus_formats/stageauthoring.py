@@ -33,6 +33,42 @@ def _fixed(value, label):
     return n
 
 
+#: grid cells of these types carry off = 1 on every shipped stage (never collided)
+GRID_OFF_TYPES = frozenset({0, 7, 11})
+
+
+def sync_collider_grid(blob: bytearray, geo: 'sp.StageGeometry', index: int, box) -> None:
+    """Keep the movement grid in step with an edited collider.
+
+    The sweep FUN_0216220C reads only the 64×64 grid (16 px cells), never the
+    collider records.  On all 36 shipped stages every collider except type 12
+    owns exactly the cells its rectangle covers (sampled every 16 px from the
+    top-left corner), and each cell repeats its collider's type; cells of
+    types 0/7/11 have the "off" byte set.  This rewrites collider ``index``'s
+    cells the same way and refuses an edit that would take cells owned by
+    another collider.
+    """
+    base = geo.offsets[1] + 0x34
+    x0, y0, x1, y1 = box.bounds
+    new = set()
+    if box.type_id != 12:
+        new = {(int(y) // 16) * 64 + int(x) // 16
+               for y in range(int(y0), int(y1) + 1, 16) for x in range(int(x0), int(x1) + 1, 16)
+               if 0 <= x < 1024 and 0 <= y < 1024}
+    for cell in new:
+        owner = struct.unpack_from('<H', blob, base + 8 * cell)[0]
+        if owner not in (0xFFFF, index):
+            raise ValueError(f'collider #{index} would overlap grid cell {cell} owned by collider #{owner}')
+    off = 1 if box.type_id in GRID_OFF_TYPES else 0
+    for cell in range(4096):
+        p = base + 8 * cell
+        owner = struct.unpack_from('<H', blob, p)[0]
+        if cell in new:
+            struct.pack_into('<HBB', blob, p, index, box.type_id, off)
+        elif owner == index:
+            struct.pack_into('<HBB', blob, p, 0xFFFF, 0, 1)
+
+
 @dataclass(frozen=True)
 class StageObject:
     kind: str
@@ -79,7 +115,7 @@ class StageObjects:
                 category = 'trigger' if g.type_id in (1, 2, 8, 9, 10) else 'gimmick'
                 result.append(StageObject(category, i, f'{g.label} #{i}'))
         if self.g:
-            result += [StageObject('collider', i, f'Collision shape #{i} · type {c.type_id}')
+            result += [StageObject('collider', i, f'Collider #{i} · {c.type_id} {c.label}')
                        for i, c in enumerate(self.g.collision_boxes)]
             result += [StageObject('conveyor', i, f'Conveyor #{i}') for i in range(len(self.g.conveyors))]
         return result
@@ -126,7 +162,12 @@ class StageObjects:
                 pos = self.g.offsets[2] + 24 * i
                 for o, key in zip((0, 4, 8, 12), ('x', 'y', 'width', 'height')):
                     struct.pack_into('<i', blob, pos + o, _fixed(values[key], key))
-                blob[pos + 0x14] = _integer(values['type_id'], 0, 255, 'type_id')
+                type_id = _integer(str(values['type_id']).split()[0], 0, 255, 'type_id')
+                if type_id not in sp.COLLIDER_TYPES:
+                    raise ValueError(f'collider type {type_id} is not one the game uses (0–12)')
+                blob[pos + 0x14] = type_id
+                g = sp.parse_stage_bin(bytes(blob))
+                sync_collider_grid(blob, g, i, g.collision_boxes[i])
             else:
                 struct.pack_into('<h', blob, self.g.offsets[4] + 8 * i,
                                  _integer(values['speed'], -32768, 32767, 'speed'))

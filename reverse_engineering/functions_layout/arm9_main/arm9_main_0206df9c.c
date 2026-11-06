@@ -9,7 +9,7 @@ void FUN_0206df9c(void)
   FUN_02073134();
   FUN_020517fc(&DAT_020afcb0,0,0x1c);
   FUN_020517fc(&DAT_020afccc,0,0x174);
-  uVar1 = FUN_02054b44();
+  uVar1 = OS_GetTick();
   FUN_02030f24(*(undefined4 *)(DAT_020a0da8 + 4),uVar1);
   FUN_02070d64();
   FUN_020704f4();

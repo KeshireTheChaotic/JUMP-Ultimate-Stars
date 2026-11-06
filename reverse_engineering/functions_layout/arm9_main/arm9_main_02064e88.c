@@ -1,7 +1,9 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+/* JUS-SDK GX_DispOn [behavioral] sets the display-on flag and restores the display mode saved by
+   GX_DispOff (globals ['0x209dd3c', '0x20afb9c']) */
 
-void FUN_02064e88(void)
+void GX_DispOn(void)
 
 {
                     /* JUS-TAG hw={"GX_2D_main":1} io=["04000000"] */

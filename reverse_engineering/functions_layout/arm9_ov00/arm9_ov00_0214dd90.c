@@ -13,7 +13,7 @@ void FUN_0214dd90(int param_1)
   FUN_02028330(*(undefined4 *)(*(int *)(param_1 + 4) + 4));
   FUN_02028384(*(undefined4 *)(*(int *)(param_1 + 4) + 4),FUN_0214db84);
   iVar1 = *(int *)(param_1 + 0x44);
-  *(undefined1 **)(iVar1 + 0xd4) = &LAB_0214de00;
+  *(code **)(iVar1 + 0xd4) = FUN_0214de00;
   *(int *)(iVar1 + 0xdc) = param_1;
   return;
 }

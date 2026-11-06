@@ -22,7 +22,7 @@ void FUN_027f258c(int param_1)
   psVar11 = (short *)(param_1 * 0x14 + _DAT_0380fff4 + 0x42c);
   piVar12 = (int *)(param_1 * 0xc + _DAT_0380fff4 + 0x194);
   if ((short)piVar12[2] != 0) {
-    uVar4 = FUN_037fbc10(0x1000000);
+    uVar4 = OS_DisableIrqMask(0x1000000);
     if (*psVar11 == 0) {
       iVar5 = *piVar12;
       while (local_34 = iVar5, local_34 != -1) {
@@ -68,7 +68,7 @@ LAB_027f26fc:
               else {
                 *puVar8 = uVar2 | 0x8000;
               }
-              FUN_037fbc4c(uVar4);
+              OS_EnableIrqMask(uVar4);
               return;
             }
             *(undefined2 *)(local_34 + 0x18) = 2;
@@ -77,10 +77,10 @@ LAB_027f26fc:
           }
         }
       }
-      FUN_037fbc4c(uVar4);
+      OS_EnableIrqMask(uVar4);
     }
     else {
-      FUN_037fbc4c();
+      OS_EnableIrqMask();
     }
   }
   return;

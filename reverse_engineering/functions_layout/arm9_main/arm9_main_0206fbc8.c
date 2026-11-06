@@ -8,8 +8,6 @@ void jus_Scene30_Create(void)
   
   iVar1 = iRam0206fbe0;
   *(undefined1 *)(iRam0206fbe0 + 0x17) = 1;
-                    /* WARNING: Could not recover jumptable at 0x0206fbdc. Too many branches */
-                    /* WARNING: Treating indirect jump as call */
   (*pcRam0206fbe4)(*(undefined4 *)(iVar1 + 0x110));
   return;
 }

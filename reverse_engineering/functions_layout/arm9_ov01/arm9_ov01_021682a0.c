@@ -11,7 +11,7 @@ int FUN_021682a0(int param_1,undefined4 param_2,undefined4 param_3,undefined4 pa
   longlong lVar7;
   
   iVar6 = *(int *)(*(int *)(param_1 + 4) + 0x10);
-  lVar7 = FUN_02054b44();
+  lVar7 = OS_GetTick();
   lVar7 = lVar7 - *(longlong *)(iVar6 + 0x48);
   uVar5 = (uint)lVar7;
   iVar3 = (int)((ulonglong)lVar7 >> 0x20);

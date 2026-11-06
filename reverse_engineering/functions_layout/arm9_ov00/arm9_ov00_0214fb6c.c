@@ -413,7 +413,7 @@ int Title::Title_Add(void)
   _DAT_021d5154 = 0;
   FUN_020734e0();
   FUN_0207361c(0,0);
-  uVar6 = FUN_02054b44();
+  uVar6 = OS_GetTick();
   *(undefined8 *)(piVar1 + 0x1e) = uVar6;
   FUN_02073ebc(2,1);
   iVar2 = FUN_0203b3e4();

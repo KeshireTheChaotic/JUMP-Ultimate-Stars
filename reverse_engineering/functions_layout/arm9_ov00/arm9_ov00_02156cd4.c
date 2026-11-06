@@ -16,7 +16,7 @@ void FUN_02156cd4(undefined4 param_1,undefined4 *param_2)
   param_2[9] = 0;
   *(undefined1 *)(param_2 + 0x11) = 1;
   *(undefined1 *)((int)param_2 + 0x31) = 1;
-  *param_2 = &DAT_02156d44;
+  *param_2 = FUN_02156d44;
   return;
 }
 

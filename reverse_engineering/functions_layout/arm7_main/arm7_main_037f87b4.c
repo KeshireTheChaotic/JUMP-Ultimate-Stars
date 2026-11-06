@@ -4,7 +4,7 @@ undefined4 FUN_037f87b4(undefined4 *param_1,int *param_2)
 {
   int iVar1;
   
-  FUN_037fbc10(0x1000000);
+  OS_DisableIrqMask(0x1000000);
   if (*(short *)(param_1 + 2) == 0) {
     *param_2 = -1;
     *param_1 = param_2;
@@ -19,7 +19,7 @@ undefined4 FUN_037f87b4(undefined4 *param_1,int *param_2)
   *(undefined2 *)((int)param_2 + 10) = 0xbf1d;
   param_1[1] = param_2;
   *(short *)(param_1 + 2) = *(short *)(param_1 + 2) + 1;
-  FUN_037fbc4c();
+  OS_EnableIrqMask();
   return 0;
 }
 

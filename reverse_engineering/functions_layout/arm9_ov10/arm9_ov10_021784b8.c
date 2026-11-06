@@ -33,7 +33,7 @@ void FUN_021784b8(int param_1,undefined4 param_2,int param_3,char *param_4)
           *(ushort *)(iVar2 + (uVar7 - 1) * 2 + 0x288) = uVar1 >> 8 | uVar1 << 8;
         }
         iVar2 = FUN_02178448();
-        uVar8 = FUN_02054b44();
+        uVar8 = OS_GetTick();
         *(undefined8 *)(iVar2 + 0x184) = uVar8;
         FUN_02178434(7);
         return;
@@ -103,7 +103,7 @@ void FUN_021784b8(int param_1,undefined4 param_2,int param_3,char *param_4)
       }
       else {
         iVar6 = FUN_02178448();
-        uVar8 = FUN_02054b44();
+        uVar8 = OS_GetTick();
         *(undefined8 *)(iVar6 + 0x17c) = uVar8;
         if ((iVar2 == 1) ||
            ((iVar2 == 2 && (iVar2 = FUN_02178448(), *(char *)(iVar2 + 0x174) != '\0')))) {

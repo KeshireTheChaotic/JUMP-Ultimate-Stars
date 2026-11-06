@@ -7,6 +7,7 @@ int FUN_02001600(int *param_1)
   int iVar3;
   int iVar4;
   
+                    /* JUS-TAG strings=["hashtable.c","table"] */
   iVar3 = 0;
   if (param_1 == (int *)0x0) {
     FUN_02002068(0x2092f94,0x2092f88,0,0x61);

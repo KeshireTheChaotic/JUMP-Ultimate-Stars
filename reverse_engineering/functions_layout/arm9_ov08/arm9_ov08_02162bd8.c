@@ -14,7 +14,7 @@ int FUN_02162bd8(undefined4 param_1)
   int iVar10;
   undefined8 uVar11;
   
-  uVar11 = FUN_02054b44();
+  uVar11 = OS_GetTick();
   iVar3 = DAT_0216e800;
   uVar6 = (uint)((ulonglong)uVar11 >> 0x20);
   bVar1 = false;

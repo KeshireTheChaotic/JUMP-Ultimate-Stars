@@ -27,7 +27,7 @@ int * PassMark::PassMark_Create(void)
     FUN_020282f4(*(undefined4 *)(*piVar1 + 4));
     iVar2 = FUN_020208ec(0);
     piVar1[1] = iVar2;
-    piVar1[2] = (int)&DAT_02151b84;
+    piVar1[2] = (int)FUN_02151b84;
     iVar2 = FUN_0215178c(s_opening_PassMark_bin_02160fa4,0,0);
     piVar1[4] = iVar2;
     iVar2 = FUN_0215178c(FUN_02160fbc,0,0);

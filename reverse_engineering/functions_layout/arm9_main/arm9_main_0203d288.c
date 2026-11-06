@@ -16,11 +16,11 @@ void FUN_0203d288(int param_1)
     uVar2 = *(ushort *)(param_1 + 0x8ca);
     iVar5 = *(int *)(param_1 + 0x940);
     uVar3 = (**(code **)(param_1 + 0x948))();
-    FUN_02051688(DAT_0209dd40,uVar3,0,iVar5 * (uint)uVar1 * (uint)uVar2);
+    MI_DmaFill32(DAT_0209dd40,uVar3,0,iVar5 * (uint)uVar1 * (uint)uVar2);
     return;
   }
   uVar4 = (**(code **)(param_1 + 0x948))();
-  FUN_0205157c(uVar3,uVar4,uVar6 & 0xffff,
+  MI_DmaFill16(uVar3,uVar4,uVar6 & 0xffff,
                *(int *)(param_1 + 0x940) *
                (uint)*(ushort *)(param_1 + 0x8c8) * (uint)*(ushort *)(param_1 + 0x8ca));
   return;

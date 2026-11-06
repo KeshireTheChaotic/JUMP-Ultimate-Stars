@@ -42,7 +42,7 @@ void FUN_021686a4(int param_1)
       uVar6 = FUN_020876ac();
       FUN_02086e04(uVar5,uVar6);
       (*DAT_020a0e18)();
-      FUN_02054b44();
+      OS_GetTick();
       FUN_020870e8();
       FUN_02168674(8);
       FUN_020872d4();

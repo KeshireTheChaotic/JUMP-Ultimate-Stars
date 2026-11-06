@@ -5,7 +5,7 @@ undefined4 FUN_02158ed0(int param_1,int param_2,undefined4 param_3,undefined4 pa
   int iVar1;
   char cVar2;
   short sVar3;
-  undefined1 *puVar4;
+  code *pcVar4;
   uint uVar5;
   undefined4 *puVar6;
   int iVar7;
@@ -36,12 +36,12 @@ undefined4 FUN_02158ed0(int param_1,int param_2,undefined4 param_3,undefined4 pa
          *(short *)((int)puVar8 + 0xe);
     iVar7 = (*(code *)*puVar6)(param_1,puVar8);
     if (iVar7 == 0) {
-      puVar4 = &LAB_02159258;
+      pcVar4 = FUN_02159258;
     }
     else {
-      puVar4 = (undefined1 *)*puVar6;
+      pcVar4 = (code *)*puVar6;
     }
-    *puVar8 = puVar4;
+    *puVar8 = pcVar4;
     if (*(char *)((int)puVar8 + 0x15) == '\0') {
       *(undefined2 *)(puVar8 + 3) = 0;
     }

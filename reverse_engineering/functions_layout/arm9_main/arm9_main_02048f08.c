@@ -28,7 +28,8 @@ void VertexBuffer::vfunc_07(int param_1,undefined4 param_2,undefined4 param_3,un
   case 6:
     _DAT_04000500 = 3;
   }
-  FUN_01ff8d20(3,*(undefined4 *)(param_1 + 0x30),*(undefined4 *)(param_1 + 0x38),param_4,param_4);
+  MI_SendGXCommand(3,*(undefined4 *)(param_1 + 0x30),*(undefined4 *)(param_1 + 0x38),param_4,param_4
+                  );
   _DAT_04000504 = 0;
   return;
 }

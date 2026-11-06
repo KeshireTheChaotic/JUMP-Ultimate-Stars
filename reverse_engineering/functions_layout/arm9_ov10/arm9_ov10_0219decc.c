@@ -12,7 +12,7 @@ void FUN_0219decc(uint *param_1)
   if (param_1 == (uint *)0x0) {
     return;
   }
-  uVar6 = FUN_02054b44();
+  uVar6 = OS_GetTick();
   uVar2 = (int)((ulonglong)uVar6 >> 0x20) - (param_1[9] + (uint)((uint)uVar6 < param_1[8]));
   param_1[4] = (uint)uVar6 - param_1[8];
   param_1[5] = uVar2;

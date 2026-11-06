@@ -10,7 +10,7 @@ undefined4 FUN_020688b8(int param_1)
   longlong lVar6;
   undefined8 uVar7;
   
-  lVar6 = FUN_02054b44();
+  lVar6 = OS_GetTick();
   lVar6 = lVar6 - *(longlong *)(param_1 + 0xcb0);
   uVar5 = (uint)lVar6;
   uVar7 = FUN_0200d0c4(uVar5 * 0x40,(int)((ulonglong)lVar6 >> 0x20) * 0x40 | uVar5 >> 0x1a,0x82ea,0)
@@ -34,7 +34,7 @@ undefined4 FUN_020688b8(int param_1)
       uVar3 = FUN_0206882c(param_1,5);
       return uVar3;
     }
-    uVar7 = FUN_02054b44();
+    uVar7 = OS_GetTick();
     *(undefined8 *)(param_1 + 0xcb0) = uVar7;
     FUN_02068724(0x21a3630,param_1 + 0x304 + (uint)*(byte *)(param_1 + 0xd0f) * 0x24,
                  (int)*(char *)(param_1 + 0xd11),0x300000);

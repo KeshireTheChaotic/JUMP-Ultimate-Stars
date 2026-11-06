@@ -1,7 +1,9 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+/* JUS-SDK MI_StopDma [behavioral] clears repeat/timing bits, then the enable bit of DMAxCNT_H;
+   channel-0 workaround */
 
-void FUN_02051290(int param_1)
+void MI_StopDma(int param_1)
 
 {
   int iVar1;

@@ -1,5 +1,8 @@
 
-void FUN_02051eec(uint param_1,undefined4 param_2)
+/* JUS-SDK OS_SetIrqFunction [behavioral] OS_InitTick passes it (mask 8 = IE timer 0,
+   OSi_CountUpTick 0x02054bf4) */
+
+void OS_SetIrqFunction(uint param_1,undefined4 param_2)
 
 {
   undefined4 *puVar1;

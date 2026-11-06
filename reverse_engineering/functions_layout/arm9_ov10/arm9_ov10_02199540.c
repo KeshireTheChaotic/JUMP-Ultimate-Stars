@@ -34,7 +34,7 @@ undefined4 FUN_02199540(uint param_1,uint param_2)
   FUN_02199cac();
   iVar2 = FUN_02054c7c();
   if (iVar2 == 0) {
-    FUN_02054c8c();
+    OS_InitTick();
   }
   iVar2 = FUN_020550b0();
   if (iVar2 == 0) {

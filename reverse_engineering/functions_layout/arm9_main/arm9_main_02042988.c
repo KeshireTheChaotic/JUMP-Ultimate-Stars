@@ -32,7 +32,7 @@ void FUN_02042988(void)
   }
   else {
     _DAT_04000004 = _DAT_04000004 | 0x20;
-    FUN_02064f20(*(int *)(*DAT_020a0e48 + DAT_020a0fb8 * 4 + 0xc) + -1);
+    GX_SetVCountEqVal(*(int *)(*DAT_020a0e48 + DAT_020a0fb8 * 4 + 0xc) + -1);
   }
   if (DAT_020a0c53 == '\0') {
     uVar3 = 0;
