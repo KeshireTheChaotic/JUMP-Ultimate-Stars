@@ -1,4 +1,4 @@
-"""J-Galaxy mission panel (hosted by the Level workspace's bottom dock).
+"""J-Galaxy mission panel (hosted by the Level workspace's right inspector).
 
 A mission is a progression node in ``jgalaxy.bin`` that points at a 0xA4-byte
 mission/battle definition; definition ``+0x75`` is the battle stage index
@@ -51,6 +51,9 @@ class MissionPanel:
         self.node_kind_var = tk.StringVar(value='Mission')
         self.definition_var = tk.StringVar()
         self.stage_var = tk.StringVar()
+        self.rule_var = tk.StringVar()
+        self.opponents_var = tk.StringVar()
+        self.time_var = tk.StringVar()
         self.environment_var = tk.BooleanVar(value=False)
         self.goal_code_var = tk.StringVar()
         self.prune_definition_var = tk.StringVar()
@@ -58,104 +61,129 @@ class MissionPanel:
 
     # ------------------------------------------------------------ layout
     def _build(self, parent):
-        main = ttk.Frame(parent)
-        main.pack(fill='both', expand=True)
-        left = ttk.Frame(main)
-        left.pack(side='left', fill='both', expand=True, padx=(6, 3), pady=4)
-        self.heading = ttk.Label(left, text='Open a game data root to browse J-Galaxy missions.', font=T.UI_BOLD)
-        self.heading.pack(fill='x', pady=(0, 4))
-        data = ttk.Frame(left)
-        data.pack(fill='x')
-        ttk.Label(data, text='Definition:').grid(row=0, column=0, sticky='w')
-        self.type_label = ttk.Label(data, text='—')
-        self.type_label.grid(row=0, column=1, columnspan=2, sticky='w', padx=5)
-        ttk.Label(data, text='Planet / goals:').grid(row=1, column=0, sticky='w')
-        self.planet_label = ttk.Label(data, text='—')
-        self.planet_label.grid(row=1, column=1, columnspan=2, sticky='w', padx=5)
-        ttk.Label(data, text='Title:').grid(row=2, column=0, sticky='w', pady=2)
-        self.title_entry = ttk.Entry(data, textvariable=self.title_var, width=36)
-        self.title_entry.grid(row=2, column=1, sticky='ew', padx=5)
-        ttk.Button(data, text='Rename', command=self.rename_definition).grid(row=2, column=2)
-        data.columnconfigure(1, weight=1)
-        link = ttk.LabelFrame(left, text='J-Galaxy node / shared battle definition')
-        link.pack(fill='x', pady=(5, 3))
-        ttk.Label(link, text='Planet ID').grid(row=0, column=0, sticky='w', padx=(5, 2))
-        ttk.Entry(link, textvariable=self.planet_var, width=5).grid(row=0, column=1)
-        ttk.Label(link, text='Definition').grid(row=0, column=2, sticky='w', padx=(8, 2))
-        ttk.Combobox(link, textvariable=self.node_kind_var, values=('Mission', 'Battle'),
-                     width=9, state='readonly').grid(row=0, column=3)
-        ttk.Entry(link, textvariable=self.definition_var, width=5).grid(row=0, column=4)
-        ttk.Button(link, text='Reassign node', command=self.reassign_node).grid(row=0, column=5, padx=4)
-        ttk.Label(link, text='Stage ID').grid(row=1, column=0, sticky='w', padx=(5, 2))
-        ttk.Entry(link, textvariable=self.stage_var, width=5).grid(row=1, column=1)
-        ttk.Checkbutton(link, text='Stage physics', variable=self.environment_var).grid(
-            row=1, column=2, columnspan=3, sticky='w', padx=8)
-        ttk.Button(link, text='Update shared definition', command=self.update_stage).grid(
-            row=1, column=5, padx=4)
-        ttk.Button(link, text='Duplicate mission + node', command=self.duplicate_node).grid(
-            row=2, column=0, columnspan=3, sticky='w', padx=4, pady=2)
-        ttk.Button(link, text='Delete map node', command=self.delete_node).grid(
-            row=2, column=3, columnspan=3, sticky='w', padx=4, pady=2)
-        ttk.Label(link, text='Unused definition ID').grid(row=3, column=0, columnspan=2, sticky='w', padx=4)
-        ttk.Entry(link, textvariable=self.prune_definition_var, width=6).grid(row=3, column=2)
-        ttk.Button(link, text='Delete unused definition', command=self.delete_unused_definition).grid(
-            row=3, column=3, columnspan=3, sticky='w', padx=4)
-        ttk.Label(link, text='Structural changes require a NEW SAVE; node count/IDs and stage availability '
-                  'must be validated in melonDS.', style='Toolbar.TLabel').grid(
-                      row=4, column=0, columnspan=6, sticky='w', padx=5)
-        table = ttk.Frame(left)
-        table.pack(fill='both', expand=True, pady=(4, 0))
-        self.goals = ttk.Treeview(table, columns=('code', 'kind', 'detail'), show='tree headings', height=4,
-                                  selectmode='browse')
-        for col, text, width, stretch in (('#0', 'Slot', 44, False), ('code', 'Goal code', 80, False),
-                                          ('kind', 'Reward', 80, False), ('detail', 'Grant', 240, True)):
+        """Compact scrollable right-side mission/details/reward editor."""
+        body = ttk.Frame(parent)
+        body.pack(fill='both', expand=True)
+        canvas = tk.Canvas(body, bg=T.PANEL, highlightthickness=0)
+        scrollbar = ttk.Scrollbar(body, orient='vertical', command=canvas.yview)
+        canvas.configure(yscrollcommand=scrollbar.set)
+        canvas.pack(side='left', fill='both', expand=True)
+        scrollbar.pack(side='right', fill='y')
+        main = ttk.Frame(canvas)
+        window = canvas.create_window((0, 0), window=main, anchor='nw')
+        main.bind('<Configure>', lambda _e: canvas.configure(scrollregion=canvas.bbox('all')))
+        canvas.bind('<Configure>', lambda e: canvas.itemconfigure(window, width=e.width))
+        self.heading = ttk.Label(main, text='Open game data to browse J-Galaxy missions.',
+                                 font=T.UI_BOLD, wraplength=int(280 * self.ws.k))
+        self.heading.pack(fill='x', padx=8, pady=(9, 5))
+        summary = ttk.LabelFrame(main, text='Selected mission')
+        summary.pack(fill='x', padx=6, pady=3)
+        self.type_label = ttk.Label(summary, text='—')
+        self.type_label.pack(fill='x', padx=6)
+        self.planet_label = ttk.Label(summary, text='—', wraplength=int(270 * self.ws.k))
+        self.planet_label.pack(fill='x', padx=6, pady=(0, 3))
+        title_row = ttk.Frame(summary)
+        title_row.pack(fill='x', padx=6, pady=3)
+        self.title_entry = ttk.Entry(title_row, textvariable=self.title_var)
+        self.title_entry.pack(side='left', fill='x', expand=True)
+        ttk.Button(title_row, text='Rename', command=self.rename_definition).pack(side='left', padx=(4, 0))
+        ttk.Label(summary, text='CP932 / Shift-JIS · byte-exact edits only',
+                  style='Toolbar.TLabel').pack(anchor='w', padx=6, pady=(0, 4))
+
+        node = ttk.LabelFrame(main, text='World / battle setup')
+        node.pack(fill='x', padx=6, pady=4)
+        for i, (label, var) in enumerate((('World ID', self.planet_var),
+                                          ('Definition ID', self.definition_var),
+                                          ('Stage ID', self.stage_var))):
+            ttk.Label(node, text=label).grid(row=i, column=0, sticky='w', padx=6, pady=2)
+            ttk.Entry(node, textvariable=var, width=8).grid(row=i, column=1, sticky='ew', padx=4, pady=2)
+        ttk.Label(node, text='Kind').grid(row=3, column=0, sticky='w', padx=6)
+        ttk.Combobox(node, textvariable=self.node_kind_var, values=('Mission', 'Battle'),
+                     state='readonly', width=12).grid(row=3, column=1, sticky='w', padx=4)
+        ttk.Checkbutton(node, text='Enable stage physics', variable=self.environment_var).grid(
+            row=4, column=0, columnspan=2, sticky='w', padx=6, pady=3)
+        ttk.Button(node, text='Update world / definition link', command=self.reassign_node).grid(
+            row=5, column=0, columnspan=2, sticky='ew', padx=6, pady=2)
+        ttk.Button(node, text='Update shared stage settings', command=self.update_stage).grid(
+            row=6, column=0, columnspan=2, sticky='ew', padx=6, pady=2)
+        for i, (label, var) in enumerate((('Battle rule (raw)', self.rule_var),
+                                          ('Opponent count', self.opponents_var),
+                                          ('Time value (raw)', self.time_var)), start=7):
+            ttk.Label(node, text=label).grid(row=i, column=0, sticky='w', padx=6, pady=2)
+            ttk.Entry(node, textvariable=var, width=8).grid(row=i, column=1, sticky='ew', padx=4, pady=2)
+        ttk.Button(node, text='Update shared battle settings', command=self.update_battle_parameters).grid(
+            row=10, column=0, columnspan=2, sticky='ew', padx=6, pady=(3, 6))
+        node.columnconfigure(1, weight=1)
+
+        objectives = ttk.LabelFrame(main, text='Mission objectives & rewards')
+        objectives.pack(fill='x', padx=6, pady=4)
+        table = ttk.Frame(objectives)
+        table.pack(fill='x', padx=4, pady=4)
+        self.goals = ttk.Treeview(table, columns=('code', 'kind', 'detail'),
+                                  show='tree headings', height=5, selectmode='browse')
+        for col, text, width, stretch in (('#0', 'Slot', 35, False), ('code', 'Goal', 60, False),
+                                          ('kind', 'Grant', 65, False), ('detail', 'Details', 130, True)):
             self.goals.heading(col, text=text)
             self.goals.column(col, width=int(width * self.ws.k), stretch=stretch)
         sb = ttk.Scrollbar(table, command=self.goals.yview)
         self.goals.configure(yscrollcommand=sb.set)
-        self.goals.pack(side='left', fill='both', expand=True)
+        self.goals.pack(side='left', fill='x', expand=True)
         sb.pack(side='right', fill='y')
         self.goals.bind('<<TreeviewSelect>>', self.select_goal)
-
-        edit = T.Panel(main, 'Selected reward')
-        edit.pack(side='left', fill='y', padx=(3, 6), pady=4)
-        row = ttk.Frame(edit.body)
-        row.pack(fill='x', padx=8, pady=4)
-        ttk.Label(row, text='Grant:').pack(side='left', padx=(0, 6))
-        kind = ttk.Combobox(row, textvariable=self.kind_var, values=('Koma', 'Resources'), state='readonly', width=10)
-        kind.pack(side='left')
-        kind.bind('<<ComboboxSelected>>', lambda _e: self._update_kind())
-        ttk.Label(row, text='Koma ID:').pack(side='left', padx=(10, 4))
-        self.koma_entry = ttk.Entry(row, textvariable=self.koma_var, width=7)
-        self.koma_entry.pack(side='left')
-        self.koma_info = ttk.Label(edit.body, text='')
-        self.koma_info.pack(fill='x', padx=8)
+        row = ttk.Frame(objectives)
+        row.pack(fill='x', padx=6, pady=3)
+        ttk.Label(row, text='Reward type').pack(side='left')
+        combo = ttk.Combobox(row, textvariable=self.kind_var, values=('Koma', 'Resources'),
+                             width=12, state='readonly')
+        combo.pack(side='right')
+        combo.bind('<<ComboboxSelected>>', lambda _e: self._update_kind())
+        row = ttk.Frame(objectives)
+        row.pack(fill='x', padx=6, pady=3)
+        ttk.Label(row, text='Koma ID').pack(side='left')
+        self.koma_entry = ttk.Entry(row, textvariable=self.koma_var, width=10)
+        self.koma_entry.pack(side='right')
+        self.koma_info = ttk.Label(objectives, text='', wraplength=int(270 * self.ws.k))
+        self.koma_info.pack(fill='x', padx=6)
         self.koma_var.trace_add('write', lambda *_: self._update_koma_info())
-        line = ttk.Frame(edit.body)
-        line.pack(fill='x', padx=8, pady=4)
+        ttk.Label(objectives, text='Resources R0–R5', style='Toolbar.TLabel').pack(
+            anchor='w', padx=6, pady=(6, 0))
+        resource_grid = ttk.Frame(objectives)
+        resource_grid.pack(fill='x', padx=6)
         self.resource_entries = []
         for i, var in enumerate(self.resources):
-            ttk.Label(line, text=f'R{i}').pack(side='left', padx=(4 if i else 0, 2))
-            entry = ttk.Entry(line, width=6, textvariable=var)
-            entry.pack(side='left')
+            ttk.Label(resource_grid, text=f'R{i}').grid(row=i//3, column=2*(i%3), padx=(0, 2), pady=2)
+            entry = ttk.Entry(resource_grid, textvariable=var, width=5)
+            entry.grid(row=i//3, column=2*(i%3)+1, padx=(0, 5), pady=2)
             self.resource_entries.append(entry)
-        foot = ttk.Frame(edit.body)
-        foot.pack(fill='x', padx=8, pady=(2, 6))
-        ttk.Label(foot, text='R0–R5: six resource quantities (types unverified)',
-                  style='Toolbar.TLabel').pack(side='left')
-        ttk.Button(foot, text='Update reward', command=self.update_reward).pack(side='right', padx=(8, 0))
-        goals_edit = ttk.Frame(edit.body)
-        goals_edit.pack(fill='x', padx=8, pady=(2, 5))
-        ttk.Label(goals_edit, text='Raw goal code:').pack(side='left')
-        ttk.Entry(goals_edit, width=8, textvariable=self.goal_code_var).pack(side='left', padx=4)
-        ttk.Button(goals_edit, text='Set code', command=self.update_goal_code).pack(side='left')
-        ttk.Button(goals_edit, text='Activate next slot', command=self.add_goal).pack(side='left', padx=5)
-        ttk.Button(goals_edit, text='Deactivate last', command=self.remove_goal).pack(side='left')
-        ttk.Label(edit.body, text='Experimental objective codes: runtime condition semantics are unverified. '
-                  'Only the six fixed slots are supported.', style='Toolbar.TLabel').pack(
-                      fill='x', padx=8, pady=(0, 4))
+        ttk.Button(objectives, text='Update selected reward', command=self.update_reward).pack(
+            fill='x', padx=6, pady=4)
+        row = ttk.Frame(objectives)
+        row.pack(fill='x', padx=6, pady=3)
+        ttk.Label(row, text='Raw goal code').pack(side='left')
+        ttk.Entry(row, width=8, textvariable=self.goal_code_var).pack(side='left', padx=4)
+        ttk.Button(row, text='Set', command=self.update_goal_code).pack(side='left')
+        row = ttk.Frame(objectives)
+        row.pack(fill='x', padx=6, pady=3)
+        ttk.Button(row, text='+ Goal slot', command=self.add_goal).pack(side='left')
+        ttk.Button(row, text='− Last slot', command=self.remove_goal).pack(side='left', padx=4)
+        ttk.Label(objectives, text='Raw objective codes are not fully classified. '
+                  'Only existing fixed slots can be enabled/disabled.', wraplength=int(280*self.ws.k),
+                  style='Toolbar.TLabel').pack(fill='x', padx=6, pady=4)
+
+        structural = ttk.LabelFrame(main, text='Experimental · new saves only')
+        structural.pack(fill='x', padx=6, pady=5)
+        ttk.Button(structural, text='Clone mission + definition', command=self.duplicate_node).pack(
+            fill='x', padx=6, pady=2)
+        ttk.Button(structural, text='Delete selected node', command=self.delete_node).pack(
+            fill='x', padx=6, pady=2)
+        row = ttk.Frame(structural)
+        row.pack(fill='x', padx=6, pady=3)
+        ttk.Label(row, text='Unused definition ID').pack(side='left')
+        ttk.Entry(row, textvariable=self.prune_definition_var, width=6).pack(side='right')
+        ttk.Button(structural, text='Delete unused definition', command=self.delete_unused_definition).pack(
+            fill='x', padx=6, pady=(0, 5))
         self._update_kind()
-        return main
+        return body
 
     # ------------------------------------------------------------ data
     def on_root(self):
@@ -221,6 +249,9 @@ class MissionPanel:
             self.planet_var.set('')
             self.definition_var.set('')
             self.stage_var.set('')
+            self.rule_var.set('')
+            self.opponents_var.set('')
+            self.time_var.set('')
             self.goal_code_var.set('')
             return
         n = c.graph.get(self.node_id)
@@ -241,6 +272,9 @@ class MissionPanel:
         self.node_kind_var.set(typ)
         self.definition_var.set(str(n.definition_id))
         self.stage_var.set(str(d.stage_index))
+        self.rule_var.set(str(d.rule))
+        self.opponents_var.set(str(d.opponents))
+        self.time_var.set(str(d.time_value))
         self.environment_var.set(bool(d.data[0x7C] & 0x02))
         old_slot = self.slot
         for reward in n.rewards:
@@ -349,7 +383,7 @@ class MissionPanel:
             return
         node = self.catalog.graph.get(self.node_id)
         table = self.catalog.missions if node.mission else self.catalog.battles
-        title = self.title_var.get().strip()
+        title = self.title_var.get()
         if title == table.get(node.definition_id).name:
             return
         try:
@@ -417,6 +451,38 @@ class MissionPanel:
         else:
             c.battles = trial
         self._edited('Shared battle definition stage/gate updated in memory. Apply, then Save.')
+        self.ws.select_mission(self.node_id)
+
+    def update_battle_parameters(self):
+        if self.catalog is None or self.node_id is None:
+            return
+        c = self.catalog
+        node = c.graph.get(self.node_id)
+        table = c.missions if node.mission else c.battles
+        try:
+            trial = DefinitionTable.parse(table.build())
+            trial.set_battle_parameters(
+                node.definition_id, rule=_number(self.rule_var.get()),
+                opponents=_number(self.opponents_var.get()),
+                time_value=_number(self.time_var.get()))
+            if trial.build() == table.build():
+                return
+        except (ValueError, IndexError) as exc:
+            messagebox.showerror('Battle settings', str(exc))
+            return
+        linked = sum(1 for i in range(c.graph.node_count)
+                     if (other := c.graph.get(i)).mission == node.mission
+                     and other.definition_id == node.definition_id)
+        if linked > 1 and not messagebox.askyesno('Shared definition',
+                f'This definition is referenced by {linked} nodes. Changing battle '
+                'settings changes all of them. Continue?'):
+            return
+        self.checkpoint('edit battle rule/opponents/time')
+        if node.mission:
+            c.missions = trial
+        else:
+            c.battles = trial
+        self._edited('Battle rule/opponents/time updated in memory. Apply, then Save.')
         self.ws.select_mission(self.node_id)
 
     def update_goal_code(self):
@@ -494,8 +560,9 @@ class MissionPanel:
             trial_missions = DefinitionTable.parse(c.missions.build())
             trial_battles = DefinitionTable.parse(c.battles.build())
             trial_table = trial_missions if node.mission else trial_battles
-            # Keep ASCII name termination within the fixed-size name field.
-            name = old_definition.name[:100] + ' Copy'
+            # Validate CP932 byte length before adding the cloned definition.
+            name = (old_definition.name if not old_definition.name.startswith('⟦raw CP932:')
+                    else 'Mission')[:48] + ' Copy'
             new_definition = trial_table.clone_definition(node.definition_id, name)
             new_node = trial_graph.append_clone_node(
                 self.node_id, definition_id=new_definition,
@@ -596,10 +663,18 @@ class MissionPanel:
         blobs = self._blobs()
         try:
             graph = GalaxyGraph.parse(blobs[0])
+            DefinitionTable.parse(blobs[1]).validate_name_edits(self._original[1])
+            DefinitionTable.parse(blobs[2]).validate_name_edits(self._original[2])
             problems = graph.validate_references(DefinitionTable.parse(blobs[1]), DefinitionTable.parse(blobs[2]),
                                                  self.catalog.card_count)
             if problems:
                 raise ValueError('; '.join(problems[:8]))
+            # Never introduce new broken navigation edges during an edit.
+            # Pre-existing quirks in an original ROM are diagnostic only.
+            baseline = set(GalaxyGraph.parse(self._original[0]).validate_navigation())
+            introduced = [p for p in graph.validate_navigation() if p not in baseline]
+            if introduced:
+                raise ValueError('New broken J-Galaxy menu links: ' + '; '.join(introduced[:8]))
         except (ValueError, IndexError) as exc:
             messagebox.showerror('Missions', f'Cannot Apply progression edits: {exc}')
             return None

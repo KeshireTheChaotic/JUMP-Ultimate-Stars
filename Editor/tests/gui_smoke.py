@@ -144,7 +144,7 @@ def main():
     lv.tree.selection_set('n:12')
     pump(0.4)
     linked = (mp.node_id == 12 and lv.stage is not None and lv.stage.stem == 'bg_hh' and
-              lv.bottom.current == 'mission' and 12 in lv._by_stage.get('bg_hh', []))
+              lv.right_tabs.index('current') == 0 and 12 in lv._by_stage.get('bg_hh', []))
     graph_before = mp.catalog.graph.build() if mp.catalog else None
     mp.slot = 0
     mp.kind_var.set('Koma')

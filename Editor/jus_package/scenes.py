@@ -94,15 +94,28 @@ def find_layers(root: DataRoot, archive: str) -> list[Layer]:
         if img is None:
             probs.append('no same-stem tile image (pair unknown)')
         out.append(Layer(stem, join(archive, atm.name), join(archive, img.name) if img else None, m, probs))
-    # Unpaired maps (e.g. bg_xx_sud): borrow the tiles of a paired map with the same size.
+    # ARM9 BattleMapBG_Create 02083FCC loads resource 0x400003 (the sudden-
+    # death substitute for slot 0) with *the same tiles* as BG0 (0x400100).
+    # Earlier code paired bg_xx_sud with any map of equal size, usually BG2;
+    # that may decode tiles with the wrong palette or graphic indices.
     for l in out:
         if l.image_path is None:
-            twin = next((o for o in out if o.image_path and (o.map.width, o.map.height) ==
-                         (l.map.width, l.map.height)), None)
+            twin = None
+            exact = re.fullmatch(r'(bg_[a-z0-9_]+)_sud', l.name, re.I)
+            if exact:
+                twin = next((o for o in out if o.name == exact.group(1) + '_00'
+                             and o.image_path), None)
             if twin is not None:
                 l.image_path = twin.image_path
                 l.borrowed = twin.name
-                l.problems = [f'tiles borrowed from {twin.name} (same map size; pairing is a guess)']
+                l.problems = [f'alternative BG0 tiles from {twin.name} (ARM9 02083FCC)']
+            else:
+                twin = next((o for o in out if o.image_path and (o.map.width, o.map.height) ==
+                             (l.map.width, l.map.height)), None)
+                if twin is not None:
+                    l.image_path = twin.image_path
+                    l.borrowed = twin.name
+                    l.problems = [f'tiles borrowed from {twin.name} (same map size; unverified)']
     return out
 
 

@@ -59,20 +59,21 @@ for every workspace: `docs/STUDIO_WORKSPACES.md`.
   `koma.aar`, dictionary → `bin/kshape.bin`, selectors → `bin/koma.bin`). All edits are
   undoable. Deck placement is not part of this editor. Additional variants require
   emulator testing because runtime shape-array capacity is not yet traced.
-* **Level workspace (Ctrl+5)** — stages and the J-Galaxy missions fought on them. The browser
-  has two groups: *Stages* (`bg_xx` sets, labelled with their battle stage index from the
-  ARM9 stage table 0x02092D08 and the number of missions using them) and *J-Galaxy missions*
-  (142 progression nodes by planet). Selecting a mission loads the stage its battle uses
-  (definition `+0x75` → stage table) and opens the **Mission** tab: linked mission/battle
-  definition, stage/rule/opponent count (read-only), up to six objective grants. A reward
-  can be changed to a Koma ID or six resource quantities, and shared definition titles
-  renamed; Apply writes the nested `jgalaxy/jgalaxy.aar`. Background editing: composited
-  layers (ALTM + tiles, ¼×–12× zoom, tile hover/inspect), **Select / Paint / Picker** for
-  tile entries with a tile-set brush, palette bank, flips | Layers with eye toggles and
-  **read-only overlays** (camera, `.mob` objects, `.bin` stage table, collision and gimmicks
-  remain undecoded; raw bytes in *Stage data*) | Problems, PNG export. Undo/redo follows the
-  active bottom tab (Mission vs. tile maps); Apply writes both. No geometric guesses are saved.
-  Details: `docs/MISSION_REWARD_TRACE.md`.
+* **Level workspace (Ctrl+5)** — left J-Galaxy hierarchy follows the in-game menu:
+  **space node → galaxy cluster → world/planet → mission**, using verified child
+  ID lists rather than name matching. The **right inspector** edits mission and
+  battle definition titles (strict reversible CP932), planet/definition/stage,
+  battle rule, opponent count, time value, environment gate, goal conditions,
+  Koma/resource rewards, and experimental cloned/deleted mission definitions.
+  The **bottom map ribbon** contains Map Objects (spawners, triggers, gimmick
+  positions/timers, collision geometry, moving platforms/paths, conveyors),
+  Map Layers, Tile Set, raw stage data and runtime diagnostics. The viewport
+  shows editable ALTM stage tiles and object overlays. All staged changes support
+  undo/redo, Apply and Save. Stage-record cloning and graph structural editing
+  require new-save emulator testing; original menu sprites need asset-ID mapping.
+  Run `python tools/verify_cp932_names.py --data <extracted game data>` for a
+  read-only original-name CP932 vs Shift-JIS byte audit.
+  Details: `docs/STUDIO_WORKSPACES.md` and `docs/LEVEL_WORKSPACE_PATCH.md`.
 * **Screen workspace** — menu/scene archive browser with nested AAR expansion **and search** |
   dual 256×192 DS screens | background layers (ALTM) with preview-only screen/scroll/order |
   nested sprite objects (DSTX/DSIG) with selectable **Sprite frame**, auto-preview

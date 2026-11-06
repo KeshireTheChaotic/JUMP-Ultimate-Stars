@@ -103,7 +103,7 @@ class RealData(unittest.TestCase):
         self.assertTrue({'layers', 'bin', 'cam', 'mob'} <= set(sets['bg_bb'].members))
         layers = {l.name: l for l in scenes.find_layers(self.root, sets['bg_bb'].members['layers'])}
         self.assertEqual(set(layers), {'bg_bb_00', 'bg_bb_01', 'bg_bb_02', 'bg_bb_sud'})
-        self.assertEqual(layers['bg_bb_sud'].borrowed, 'bg_bb_02')
+        self.assertEqual(layers['bg_bb_sud'].borrowed, 'bg_bb_00')
         img, probs = scenes.render_layer(self.root, layers['bg_bb_00'])
         self.assertEqual((img.size, probs), ((512, 512), []))
         # extended palette: an opaque pixel from palette slot 1 is not black

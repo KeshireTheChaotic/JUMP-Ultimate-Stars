@@ -53,36 +53,43 @@ cards, byte-exact), `jus_package/komacards.py` (card ↔ art, Inferred). Apply w
 all changed files. New dictionary counts have valid offsets but unverified runtime limits.
 Next: Koma evolution/purchase graphs and new-card runtime constraints. Mission rewards are editable in the Level workspace; deck placement is explicitly out of scope.
 
-## Level (Ctrl+5) — `app/workspaces/level.py` + `missions.py` (stages, J-Galaxy missions)
+## Level (Ctrl+5) — `app/workspaces/level.py` + `missions.py` + `mapobjects.py`
+
+The Level Workspace now mirrors the original J-Galaxy map navigation. The
+left-hand tree is **space node → galaxy cluster → world/planet → mission**,
+using the three explicit child-ID arrays in `jgalaxy.bin` rather than inferring
+relationships from display names. The four graph section sizes are 0x3C,
+0x48, 0x40 and 0x88 bytes respectively. Their runtime traversal is traced in
+ARM9 overlay 00 at 0x02153CFC. Unlinked records appear in a diagnostic branch
+rather than being silently hidden. A filter searches the whole hierarchy.
 
 | Area | Content |
 |---|---|
-| Browser | **Stages**: 36 `bg_xx` sets (+ shared `SuddenDeath.bin`) labelled by battle stage index, mission count, layers / floor / gimmick / data · **J-Galaxy missions**: 142 progression nodes grouped by 65 planets (definition id and stage per node); one filter for both |
-| Viewport | background layers composited back→front; tile hover readout; Select / Paint / Picker brush tools |
-| Layers | Backgrounds (eye toggles; `*_sud` alternates start hidden) · **Read-only overlays**: camera, objects, stage table, collision, gimmicks — *unavailable*, never drawn |
-| Inspector | selected mission (title, definition, stage index → stem, rule, opponents, time value); stage (battle stage index, table words, missions on this stage); layer map/storage/tiles/banks/pairing + evidence; tile entry, brush and unapplied status |
-| Bottom | **Mission** (goal slots, reward editor, definition rename); Tile set sheet, palette bank and flip controls; Stage data (read-only hex of .cam/.mob/.bin, gimmick member list); Problems; PNG export |
+| Left browser | Space nodes (J-Space etc.) > galaxy clusters (Demoniac etc.) > planets > missions. Shows original CP932 titles and mission type/definition ID. |
+| Viewport | Mission's assigned stage, background layers, tile Select/Paint/Picker tools, collision and spawn projections. |
+| Right inspector | **Mission / Rewards**: editable CP932 title, world/mission links, stage, environment gate, raw battle rule, opponent count, time value, goal codes, Koma/resource rewards, and experimental clone/delete. **Stage / Map**: stage and layer facts. |
+| Bottom dock | **Map objects**: spawners, item markers, trigger/gimmick positions and timers, collision shapes, moving platforms/paths and conveyors; **Map layers**, **Tile set**, read-only raw data, runtime diagnostics, Problems. |
+| Persistence | In-memory edit → Undo/Redo → Apply (reparse, validate name/reference integrity, stage codecs) → Save archive. Structural cloning modifies known binary counts and offsets but remains emulator-unverified. |
 
-Missions and stages are one workspace because every mission is a battle on a stage:
-ARM9 `FUN_0207538C` copies definition `+0x75` to 0x020AFE9C → battle object +0x160,
-which indexes the stage table at 0x02092D08 (36 × `{char *stem, s16, s16}`,
-`jus_formats.roster.STAGES`, checked against the ARM9 by `tests/test_stage_table.py`).
-Every one of the 56 mission and 75 battle definitions names a shipped stage set. The
-two s16 words are passed by ov06 to `FUN_020734E0` / `FUN_0207361C` (likely music, not
-verified). Rule (`+0x76`), opponent count (`+0x79`+1) and time (`+0x7A`) are shown read-only.
+**Encoding safety:** all graph and mission/battle names are displayed as strict
+CP932 (Windows Shift-JIS) with exact re-encoding; noncanonical or malformed
+original bytes are shown as hex and left untouched. Explicit title edits must
+round-trip in CP932 and fit the existing 0x70-byte name field. The Apply path
+checks changed title fields without requiring malformed originals to be
+rewritten. `tools/verify_cp932_names.py --data <extracted data root>` produces
+a per-title comparison of CP932 and strict `shift_jis` against exact name
+bytes. **The full original-data audit must be run with the actual game data;
+no original name corpus was mounted for this patch**. The two codecs are not
+interchangeable for CP932 extensions.
 
-Mission rewards: overlay1 `FUN_0214E380` reads the node's 20-byte reward slots and passes
-Koma IDs into main `FUN_02075F98` → `FUN_02071360` save unlock bits. The original
-`jgalaxy.aar` (174 members) rebuilds byte-for-byte identically; changing one reward
-preserves every other member. Goal/condition fields, unknown tail bytes, record counts and
-IDs are fixed. Details: `docs/MISSION_REWARD_TRACE.md`. `bin/jpower.bin` (evolution) is
-still read-only.
-
-Codecs: `jus_formats/altm.py` (Inferred; 1,558/1,558 decode), `jus_package/tilemap.py`,
-`jus_package/scenes.py`, `jus_formats/progression.py`. Undo/redo acts on the half shown in the
-bottom dock (the Mission tab → progression files, any other tab → the stage's tile maps).
-Apply writes both, with rebuild/reference validation. No save path exists for gameplay overlays.
-Next: BG priority/scroll from the stage code, then camera/mob tracing.
+**Scope / known gaps:** map tree items use text/glyph labels; exact in-game
+space/galaxy/world sprites cannot be bound until the corresponding asset atlas
+and ID-to-sprite mapping are located in the game data. Stage object cloning
+is not proven safe for savegame or runtime references. The raw battle rule and
+time selectors remain numerical because their gameplay enums are incompletely
+classified. Triggers are labeled from currently understood gimmick classes;
+not every unclassified gimmick or camera field is editable. Test with a fresh
+save in melonDS.
 
 ## Screen (Ctrl+6) — `app/workspaces/screen.py`
 
@@ -107,7 +114,7 @@ timeline, hit-zone overlay later.
 * The References workspace was dropped (2026-11-05): where-used browsing is not an edit.
   `jus_package/registry.py` stays as a library (tests, save checks) for future
   dependency-driven invalidation.
-* Level `.mob`/`.bin`/`.cam`, collision and gimmicks remain read-only. Screen
+* Level `.cam` and unclassified `.mob`/`.bin` fields remain read-only; known spawner, physics, collider and gimmick fields have bounded editing. Screen
   backgrounds remain preview-only pending BG slot/priority/scroll tracing.
 * Emulator verification of ALTM rendering, effect draw order and pursuer motion.
 

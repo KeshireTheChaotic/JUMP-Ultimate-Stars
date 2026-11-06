@@ -1,4 +1,4 @@
-"""Synthetic GUI Missions smoke (missions live in the Level workspace's Mission tab):
+"""Synthetic GUI Missions smoke (missions live in the Level workspace's right inspector):
 xvfb-run -a python tests/gui_missions_smoke.py"""
 import sys
 import time
@@ -8,9 +8,9 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from app.editor import EditorApp
 from jus_formats.alar import Archive, Entry
-from jus_formats.progression import GalaxyGraph
+from jus_formats.progression import GalaxyGraph, DefinitionTable
 from jus_package.project import DataRoot
-from jus_package.progression import GRAPH
+from jus_package.progression import GRAPH, MISSIONS
 from test_progression import definition_table, galaxy_graph
 
 
@@ -45,7 +45,7 @@ def main():
             assert lv.tree.exists('n:0'), 'mission node missing from the Level browser'
             lv.tree.selection_set('n:0')
             app.update()
-            assert w.node_id == 0 and lv.bottom.current == 'mission'
+            assert w.node_id == 0 and lv.right_tabs.index('current') == 0
             original = w.catalog.graph.build()
             assert not lv.dirty
             w.slot = 0
@@ -58,13 +58,31 @@ def main():
             assert not lv.dirty and w.catalog.graph.build() == original
             app.redo()
             assert lv.dirty and w.catalog.graph.get(0).rewards[0].koma_id == 522
+            before_params = w.catalog.missions.build()
+            w.rule_var.set('7')
+            w.opponents_var.set('3')
+            w.time_var.set('1200')
+            w.update_battle_parameters()
+            record = w.catalog.missions.get(0)
+            assert (record.rule, record.opponents, record.time_value) == (7, 3, 1200)
+            app.undo()
+            assert w.catalog.missions.build() == before_params
+            app.redo()
+            assert w.catalog.missions.get(0).opponents == 3
+            w.title_var.set('ラオウの城')
+            w.rename_definition()
+            assert w.catalog.missions.get(0).name == 'ラオウの城'
             lv.apply()
             assert not lv.dirty and app.root_data.dirty_files()
             with tempfile.TemporaryDirectory() as out:
                 app.root_data.save(out)
-                blob = DataRoot(out).read(GRAPH)
+                root = DataRoot(out)
+                blob = root.read(GRAPH)
                 assert GalaxyGraph.parse(blob).get(0).rewards[0].koma_id == 522
-            print('OK: Level ▸ Mission reward → Undo/Redo → Apply → Save → reload')
+                battle = DefinitionTable.parse(root.read(MISSIONS)).get(0)
+                assert (battle.name, battle.rule, battle.opponents, battle.time_value) == (
+                    'ラオウの城', 7, 3, 1200)
+            print('OK: Level ▸ CP932 names / battle settings / rewards → Undo/Redo → Apply → Save')
         finally:
             app.destroy()
 

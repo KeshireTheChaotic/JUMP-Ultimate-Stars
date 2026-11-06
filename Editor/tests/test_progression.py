@@ -50,9 +50,12 @@ class TestProgression(unittest.TestCase):
 
     def test_definitions_reject_bad_titles_and_count(self):
         table = DefinitionTable.parse(definition_table(['First']))
-        for title in ('', 'x'*0x70, '日本語', 'has\0nul'):
+        for title in ('', 'x'*0x70, '😀', 'has\0nul'):
             with self.assertRaises(ValueError):
                 table.rename(0, title)
+        self.assertEqual(table.get(0).name, 'First')
+        table.rename(0, '日本語')
+        self.assertEqual(table.get(0).name, '日本語')
         with self.assertRaises(ValueError):
             DefinitionTable.parse(struct.pack('<I', 2) + bytes(0xA4))
 

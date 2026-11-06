@@ -38,15 +38,45 @@ def _u32(data, at):
     return struct.unpack_from('<I', data, at)[0]
 
 
+def decode_name(raw: bytes) -> str:
+    """Display NUL-terminated game text without lossy character replacement.
+
+    DS names in J-Galaxy are CP932/Windows Shift-JIS. Malformed or noncanonical
+    sequences are exposed as raw hex instead of fabricated replacement glyphs.
+    The record stays untouched until explicitly renamed.
+    """
+    payload = bytes(raw).split(b'\x00', 1)[0]
+    try:
+        decoded = payload.decode('cp932', 'strict')
+        if decoded.encode('cp932', 'strict') != payload:
+            raise UnicodeError('noncanonical CP932 round-trip')
+        return decoded
+    except UnicodeError:
+        return f'⟦raw CP932: {payload.hex(" ").upper()}⟧'
+
+
+def encode_name(title: str) -> bytes:
+    """Never save unrepresentable Unicode or lossy CP932 substitutions."""
+    if not title or '\x00' in title:
+        raise ValueError('Name must not be empty or contain NUL')
+    try:
+        encoded = title.encode('cp932', 'strict')
+        if encoded.decode('cp932', 'strict') != title:
+            raise ValueError('Name is not a reversible CP932 string')
+    except UnicodeError as exc:
+        raise ValueError('Name must be encodable and round-trip in CP932/Shift-JIS') from exc
+    return encoded
+
+
 def _name(raw):
-    return raw.split(b'\x00', 1)[0].decode('ascii', 'replace')
+    return decode_name(raw)
 
 
 @dataclass(frozen=True)
 class BattleDefinition:
     """One 0xA4-byte mission/battle record.
 
-    Battle setup fields as copied by ARM9 ``FUN_0207538C`` (read-only here):
+    Battle setup fields as copied by ARM9 ``FUN_0207538C``:
     ``+0x75`` stage index → global 0x020AFE9C → battle object +0x160, which
     indexes the stage table ``roster.STAGES`` (0x02092D08); ``+0x76`` battle
     rule → 0x020AFEA0 (ov06 picks the rule pair from it); ``+0x79`` opponent
@@ -100,23 +130,40 @@ class DefinitionTable:
         return BattleDefinition(index, _name(b[:NAMES_SIZE]), b)
 
     def rename(self, index, title):
-        """Only overwrite the known ASCII name field; preserve battle settings."""
-        if '\x00' in title:
-            raise ValueError('Title cannot include a NUL byte')
-        try:
-            raw = title.encode('ascii')
-        except UnicodeEncodeError as exc:
-            raise ValueError('Mission title must use ASCII') from exc
-        if not raw or len(raw) >= NAMES_SIZE:
-            raise ValueError(f'Mission title must contain 1–{NAMES_SIZE - 1} ASCII bytes')
+        """Rewrite only encoded title bytes; retain the rest of the original record.
+
+        A title that merely displays a malformed original is never silently
+        re-encoded; only explicit, strictly round-tripping CP932 is accepted.
+        """
+        raw = encode_name(title)
+        if len(raw) >= NAMES_SIZE:
+            raise ValueError(f'Name must fit in {NAMES_SIZE - 1} CP932 bytes')
         base = self._start(index)
-        old = self._data[base:base + NAMES_SIZE]
-        end = old.find(0)
-        if end < 0:
-            raise ValueError('Cannot safely rename: original title is not NUL-terminated')
-        # Preserve all unknown bytes after the original terminator. This is a
-        # fixed-size name field in the ROM; only its first 0x70 bytes are used.
-        self._data[base:base + NAMES_SIZE] = raw + b'\x00' * (NAMES_SIZE - len(raw))
+        previous = bytes(self._data[base:base + NAMES_SIZE])
+        if 0 not in previous:
+            raise ValueError('Cannot safely rename an unterminated original title')
+        self._data[base:base + len(raw) + 1] = raw + b'\x00'
+
+    def validate_name_edits(self, original: bytes):
+        """Validate *only edited* title fields before staging archive writes.
+
+        Original bytes with invalid CP932 remain legal, since preserving them is
+        safer than repair-by-decode. All changed name fields must round-trip.
+        """
+        old = DefinitionTable.parse(original)
+        for i in range(self.count):
+            new_data = self.get(i).data[:NAMES_SIZE]
+            if i < old.count and new_data == old.get(i).data[:NAMES_SIZE]:
+                continue
+            raw = new_data.split(b'\x00', 1)[0]
+            if not raw or b'\x00' not in new_data:
+                raise ValueError(f'Definition #{i} has an invalid title terminator')
+            try:
+                title = raw.decode('cp932', 'strict')
+                if encode_name(title) != raw:
+                    raise ValueError('noncanonical CP932 bytes')
+            except (UnicodeError, ValueError) as exc:
+                raise ValueError(f'Definition #{i} title fails CP932 round-trip') from exc
 
     def clone_definition(self, index: int, name: str) -> int:
         """Append a complete known-good definition with its 0xA4 layout intact.
@@ -125,6 +172,10 @@ class DefinitionTable:
         """
         if self.count >= 256:
             raise ValueError('Definition ID is a byte; maximum 256 records')
+        # A failed title validation must not leave a partially extended table.
+        raw = encode_name(name)
+        if len(raw) >= NAMES_SIZE:
+            raise ValueError(f'Name must fit in {NAMES_SIZE - 1} CP932 bytes')
         template = self.get(index)
         new_id = self.count
         self._data.extend(template.data)
@@ -154,6 +205,24 @@ class DefinitionTable:
         if not isinstance(stage_id, int) or not 0 <= stage_id <= 255:
             raise ValueError('Stage index must fit in a u8')
         self._data[self._start(index) + 0x75] = stage_id
+
+    def set_battle_parameters(self, index: int, *, rule: int,
+                              opponents: int, time_value: int):
+        """Edit the ARM9-confirmed battle setup offsets without touching other bytes.
+
+        Opponent count is stored as a zero-based u8; elapsed/battle time as
+        an unsigned 16-bit raw value. Actual rule/time semantics depend on game.
+        """
+        if not isinstance(rule, int) or not 0 <= rule <= 255:
+            raise ValueError('Battle rule must be between 0 and 255')
+        if not isinstance(opponents, int) or not 1 <= opponents <= 256:
+            raise ValueError('Opponent count must be between 1 and 256')
+        if not isinstance(time_value, int) or not 0 <= time_value <= 65535:
+            raise ValueError('Battle time must be between 0 and 65535')
+        start = self._start(index)
+        self._data[start + 0x76] = rule
+        self._data[start + 0x79] = opponents - 1
+        struct.pack_into('<H', self._data, start + 0x7A, time_value)
 
     def set_environment(self, index: int, enabled: bool):
         """Toggle only the confirmed stage floor/gimmick initialization gate."""
@@ -240,6 +309,75 @@ class GalaxyGraph:
         b = self.galaxy_off + i * GALAXY_SIZE
         return _name(self._data[b:b+32])
 
+    def galaxy_locations(self, galaxy_id: int) -> tuple[int, ...]:
+        """ARM9 ov00 0x02153CFC: galaxy +0x2C count, +0x2D child IDs."""
+        if not 0 <= galaxy_id < self.galaxy_count:
+            raise IndexError('space node ID out of range')
+        p = self.galaxy_off + galaxy_id * GALAXY_SIZE
+        count = self._data[p + 0x2C]
+        if count > GALAXY_SIZE - 0x2D:
+            raise ValueError(f'space node {galaxy_id}: location list exceeds record')
+        children = tuple(self._data[p + 0x2D:p + 0x2D + count])
+        if any(i >= self.location_count for i in children):
+            raise ValueError(f'space node {galaxy_id}: invalid galaxy cluster ID')
+        return children
+
+    def location_planets(self, location_id: int) -> tuple[int, ...]:
+        """ARM9 ov00 0x02153CFC: location +0x44 count, +0x38 world IDs."""
+        if not 0 <= location_id < self.location_count:
+            raise IndexError('location ID out of range')
+        p = self.location_off + location_id * LOCATION_SIZE
+        count = self._data[p + 0x44]
+        if count > 0x44 - 0x38:
+            raise ValueError(f'galaxy cluster {location_id}: world list exceeds record')
+        children = tuple(self._data[p + 0x38:p + 0x38 + count])
+        if any(i >= self.planet_count for i in children):
+            raise ValueError(f'galaxy cluster {location_id}: invalid world ID')
+        return children
+
+    def planet_nodes(self, planet_id: int) -> tuple[int, ...]:
+        """ARM9 ov00 0x02153CFC: planet +0x30 count, +0x31 mission IDs."""
+        if not 0 <= planet_id < self.planet_count:
+            raise IndexError('world ID out of range')
+        p = self.planet_off + planet_id * PLANET_SIZE
+        count = self._data[p + 0x30]
+        if count > PLANET_SIZE - 0x31:
+            raise ValueError(f'world {planet_id}: mission list exceeds record')
+        children = tuple(self._data[p + 0x31:p + 0x31 + count])
+        if any(i >= self.node_count for i in children):
+            raise ValueError(f'world {planet_id}: invalid mission ID')
+        return children
+
+    def validate_navigation(self) -> list[str]:
+        """Report broken links, including children absent from runtime menus."""
+        problems = []
+        locations, planets, nodes = set(), set(), set()
+        for g in range(self.galaxy_count):
+            for l in self.galaxy_locations(g):
+                if l in locations:
+                    problems.append(f'galaxy cluster {l} is linked multiple times')
+                locations.add(l)
+        for l in range(self.location_count):
+            for p in self.location_planets(l):
+                if p in planets:
+                    problems.append(f'world {p} is linked multiple times')
+                planets.add(p)
+                if self.planet_location_id(p) != l:
+                    problems.append(f'world {p} belongs to cluster {self.planet_location_id(p)}, but linked under {l}')
+        for p in range(self.planet_count):
+            for n in self.planet_nodes(p):
+                if n in nodes:
+                    problems.append(f'mission node {n} is linked multiple times')
+                nodes.add(n)
+                if self.get(n).planet_id != p:
+                    problems.append(f'mission node {n} belongs to world {self.get(n).planet_id}, but linked under {p}')
+        for label, total, linked in (('cluster', self.location_count, locations),
+                                     ('world', self.planet_count, planets),
+                                     ('mission', self.node_count, nodes)):
+            for i in sorted(set(range(total)) - linked):
+                problems.append(f'unlinked {label} {i}')
+        return problems
+
     def planet_name(self, i):
         if not 0 <= i < self.planet_count:
             raise IndexError('planet ID out of range')
@@ -305,7 +443,7 @@ class GalaxyGraph:
         struct.pack_into('<H', self._data, 6, self.node_count)
         struct.pack_into('<I', self._data, 0x10, self.planet_off)
         self.place_node(new_id, definition_id=definition_id,
-                        missions=missions, battles=battles)
+                        missions=missions, battles=battles, add_link=True)
         return new_id
 
     def remove_node(self, index: int):
@@ -315,6 +453,13 @@ class GalaxyGraph:
             raise ValueError('Cannot remove the last progression node')
         if self.node_off + self.node_count * NODE_SIZE != self.planet_off:
             raise ValueError('Cannot resize noncontiguous node and planet sections')
+        # Record IDs are embedded in world child lists. Remove the selected
+        # link and decrement every subsequent ID before compacting records.
+        for p in range(self.planet_count):
+            ids = self.planet_nodes(p)
+            mapped = tuple(n - (n > index) for n in ids if n != index)
+            if mapped != ids:
+                self._set_planet_nodes(p, mapped)
         del self._data[start:start + NODE_SIZE]
         self.node_count -= 1
         self.planet_off -= NODE_SIZE
@@ -335,13 +480,23 @@ class GalaxyGraph:
                 pos = self._node_start(node_id) + 8
                 self._data[pos] -= 1
 
-    def place_node(self, node_id: int, *, planet_id=None, definition_id=None,
-                   mission=None, missions=None, battles=None):
-        """Reassign an existing map node without changing its persistent node ID.
+    def _set_planet_nodes(self, planet_id: int, children: tuple[int, ...]):
+        """Rewrite verified world child-count/list bytes, retain opaque fields."""
+        if len(children) > PLANET_SIZE - 0x31 or len(set(children)) != len(children):
+            raise ValueError('World mission links exceed capacity or contain duplicates')
+        if any(not 0 <= n < self.node_count for n in children):
+            raise ValueError('World has an out-of-range mission node reference')
+        p = self.planet_off + planet_id * PLANET_SIZE
+        previous_count = self._data[p + 0x30]
+        self._data[p + 0x30] = len(children)
+        self._data[p + 0x31:p + 0x31 + len(children)] = bytes(children)
+        if len(children) < previous_count:
+            # The remaining inactive child slots belong to the known link list.
+            self._data[p + 0x31 + len(children):p + 0x31 + previous_count] = bytes(previous_count-len(children))
 
-        Only the verified planet (+0x0A), definition (+0x08), and mission selector
-        (flags +0x0C bit 0x04) are touched. All other flags survive.
-        """
+    def place_node(self, node_id: int, *, planet_id=None, definition_id=None,
+                   mission=None, missions=None, battles=None, add_link=False):
+        """Reassign a node AND its verified world menu references atomically."""
         node = self.get(node_id)
         planet = node.planet_id if planet_id is None else planet_id
         is_mission = node.mission if mission is None else bool(mission)
@@ -353,6 +508,19 @@ class GalaxyGraph:
             raise ValueError('The destination definition table is required')
         if not isinstance(definition, int) or not 0 <= definition < min(table.count, 256):
             raise ValueError('Definition ID is outside the selected mission/battle table')
+        original = self.planet_nodes(node.planet_id)
+        destination = self.planet_nodes(planet)
+        if planet != node.planet_id or add_link:
+            if planet == node.planet_id:
+                if node_id not in destination:
+                    self._set_planet_nodes(planet, destination + (node_id,))
+            else:
+                if node_id in destination:
+                    raise ValueError('Destination world already references the mission node')
+                if len(destination) >= PLANET_SIZE - 0x31:
+                    raise ValueError('Destination world has no free mission slots')
+                self._set_planet_nodes(node.planet_id, tuple(i for i in original if i != node_id))
+                self._set_planet_nodes(planet, destination + (node_id,))
         pos = self._node_start(node_id)
         self._data[pos + 8] = definition
         self._data[pos + 0x0A] = planet

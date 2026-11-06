@@ -39,7 +39,7 @@ class SuiteWorkspace:
         self._sashed = False
 
     # -- layout helpers --------------------------------------------------
-    def standard_layout(self, host, *, right_title='Inspector', layers=False, bottom_ratio=0.68):
+    def standard_layout(self, host, *, right_title='Inspector', layers=False, bottom_ratio=0.68, inspector_tabs=False):
         """viewport | (layers over) inspector, with a tabbed bottom dock."""
         ws = ttk.PanedWindow(host, orient='vertical')
         upper = ttk.PanedWindow(ws, orient='horizontal')
@@ -54,7 +54,16 @@ class SuiteWorkspace:
             right.add(self.layers_panel, weight=1)
         ins = T.Panel(right, right_title)
         right.add(ins, weight=2)
-        self.inspector = Inspector(ins.body)
+        if inspector_tabs:
+            self.right_tabs = ttk.Notebook(ins.body)
+            self.right_tabs.pack(fill='both', expand=True)
+            self.right_mission_page = ttk.Frame(self.right_tabs)
+            stage_page = ttk.Frame(self.right_tabs)
+            self.right_tabs.add(self.right_mission_page, text='Mission / Rewards')
+            self.right_tabs.add(stage_page, text='Stage / Map')
+            self.inspector = Inspector(stage_page)
+        else:
+            self.inspector = Inspector(ins.body)
         self.inspector.pack(fill='both', expand=True)
         self.bottom = TabbedPanel(ws)
         ws.add(self.bottom, weight=1)

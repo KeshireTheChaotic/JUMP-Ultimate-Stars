@@ -209,6 +209,10 @@ class GimmickRecord:
         if self.type_id not in (4, 5, 6) or len(self.params) < 4:
             return ()
         n = u32(self.params, 0)
+        # Type-specific bodies are not validated by the general .mob parser.
+        # A malformed count must not crash the editor while drawing overlays.
+        if n > (len(self.params) - 4) // 8:
+            return ()
         return tuple((s32(self.params, 4 + 8 * i) / 256, s32(self.params, 8 + 8 * i) / 256) for i in range(n))
 
     @property
@@ -475,7 +479,7 @@ class StageGeometry:
         """Grid header +8: four x then four y (24.8) — player start points (inferred)."""
         xs = struct.unpack_from('<4i', self.grid_header, 8)
         ys = struct.unpack_from('<4i', self.grid_header, 0x18)
-        return tuple((x // 256, y // 256) for x, y in zip(xs, ys))
+        return tuple((x / 256, y / 256) for x, y in zip(xs, ys))
 
 
 def parse_bg_layers(blob: bytes, start: int, end: int) -> tuple[BgLayer, ...]:
