@@ -33,6 +33,15 @@ class PreviewSpawn:
 
 
 @dataclass(frozen=True)
+class PreviewWall:
+    index: int
+    collision_index: int
+    initial_hp: int
+    hp: int
+    damage_phase: int
+
+
+@dataclass(frozen=True)
 class PreviewFrame:
     tick: int
     floors: tuple[PreviewFloor, ...]
@@ -43,6 +52,7 @@ class PreviewFrame:
     notes: tuple[str, ...]
     parallax: tuple[tuple[int, float, float], ...] = ()
     palette: tuple[tuple[int, str], ...] = ()
+    walls: tuple[PreviewWall, ...] = ()
 
 
 def _timeline_token(token: str, *, occupancy: bool):
@@ -75,6 +85,24 @@ def parse_hits(text: str):
     """Comma-delimited switch hits: 2@20, 2@250, 3 (at tick zero)."""
     return tuple(sorted((_timeline_token(part, occupancy=False)
                          for part in text.split(',') if part.strip()), key=lambda hit: hit[1]))
+
+
+def parse_wall_hits(text: str):
+    """ID@tick:damage, comma-separated (explicit synthetic combat inputs)."""
+    import re
+    result = []
+    for part in text.split(','):
+        part = part.strip()
+        if not part:
+            continue
+        match = re.fullmatch(r'(\d+)@(\d+):(\d+)', part)
+        if match is None:
+            raise ValueError(f'Invalid wall damage event {part!r}; use ID@tick:damage')
+        wall, at, damage = (int(x) for x in match.groups())
+        if damage <= 0:
+            raise ValueError('Wall damage must be positive')
+        result.append((wall, at, damage))
+    return tuple(sorted(result, key=lambda event: event[1]))
 
 
 def parallax_at(anim, camera_x: float, camera_y: float):
@@ -259,7 +287,8 @@ def _sprite_cell(anim, tick):
 
 def project(mob, geometry, tick, *, environment=True, items_enabled=True,
             occupied_floors=(), struck_gimmicks=(), pickups=(), seed=0,
-            occupied_history=(), hit_history=(), camera=(0, 0)):
+            occupied_history=(), hit_history=(), camera=(0, 0),
+            wall_damage_history=()):
     """Deterministic scenario projection, not an emulator battle replay.
 
     Legacy IDs apply from tick zero; histories support floor (id,start,end)
@@ -389,7 +418,23 @@ def project(mob, geometry, tick, *, environment=True, items_enabled=True,
             if tick % 197 >= 180:
                 notes.append(f'Gimmick {i} cannon aiming/firing (approximate repeat)')
 
+    walls = []
     if geometry is not None:
+        for wall in getattr(geometry, 'walls', ()):
+            total = sum(damage for ident, at, damage in wall_damage_history
+                        if ident == wall.index and 0 <= at <= tick and damage > 0)
+            hp = max(0, wall.health - total)
+            # FUN_02167958: health thresholds maxHP/2, maxHP/5, then zero.
+            phase = (0 if hp > wall.health // 2 else
+                     1 if hp > wall.health // 5 else
+                     2 if hp > 0 else 3)
+            walls.append(PreviewWall(wall.index, wall.collision_index, wall.health, hp, phase))
+            if total:
+                notes.append(f'Wall {wall.index}: {hp}/{wall.health} HP, damage phase {phase} '
+                             '(explicit hit timeline; collision/neighbor effects unmodeled)')
+        if walls:
+            notes.append('Wall damage phases traced to ov06 02167958; phase 3 can '
+                         'activate linked collision objects (not simulated)')
         for layer in getattr(geometry, 'layers', ()):
             for anim in layer.anims:
                 if anim.kind == 2:
@@ -413,9 +458,10 @@ def project(mob, geometry, tick, *, environment=True, items_enabled=True,
                                                    f'cell {_sprite_cell(anim, tick)}'))
     if not environment and mob.gimmicks:
         notes.append('Selected mission disables moving-floor and gimmick initialization')
-    if floor_events or hit_events:
-        notes.append('Manual combat timeline only; collisions and battle conditions not inferred')
+    if floor_events or hit_events or wall_damage_history:
+        notes.append('Manual combat timeline only; contact detection and battle outcomes not inferred')
     if parallax:
         notes.append('Camera parallax is a clamped linear projection; runtime interpolation unverified')
     return PreviewFrame(tick, floors, tuple(spawns), tuple(gimmicks), tuple(scroll),
-                        tuple(bg_sprites), tuple(notes), tuple(parallax), tuple(palette))
+                        tuple(bg_sprites), tuple(notes), tuple(parallax), tuple(palette),
+                        tuple(walls))
