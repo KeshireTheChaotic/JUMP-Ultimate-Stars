@@ -117,6 +117,34 @@ class DefinitionTable:
         # fixed-size name field in the ROM; only its first 0x70 bytes are used.
         self._data[base:base + NAMES_SIZE] = raw + b'\x00' * (NAMES_SIZE - len(raw))
 
+    def clone_definition(self, index: int, name: str) -> int:
+        """Append a complete known-good definition with its 0xA4 layout intact.
+
+        This is a fresh-save structural edit; old definition indices stay valid.
+        """
+        if self.count >= 256:
+            raise ValueError('Definition ID is a byte; maximum 256 records')
+        template = self.get(index)
+        new_id = self.count
+        self._data.extend(template.data)
+        self.count += 1
+        struct.pack_into('<I', self._data, 0, self.count)
+        self.rename(new_id, name)
+        return new_id
+
+    def remove_definition(self, index: int):
+        """Delete a definition and compact higher IDs.
+
+        Callers MUST first check for live node references and update every
+        reference greater than this index in the same transaction.
+        """
+        start = self._start(index)
+        if self.count <= 1:
+            raise ValueError('Cannot delete the last definition')
+        del self._data[start:start + RECORD_SIZE]
+        self.count -= 1
+        struct.pack_into('<I', self._data, 0, self.count)
+
     def set_stage(self, index: int, stage_id: int):
         """Change the verified +0x75 stage selector; leaves all rule bytes intact.
 
@@ -236,6 +264,56 @@ class GalaxyGraph:
         if not 0 <= slot < node.goal_count:
             raise IndexError(f'node {node_id} goal slot {slot} is inactive')
         return self._node_start(node_id) + 0x10 + slot * REWARD_SIZE
+
+    def append_clone_node(self, template_id: int, *, definition_id: int,
+                          missions, battles) -> int:
+        """Append a J-Galaxy node, relocating the planet-section offset.
+
+        The original node is a complete binary template, preserving opaque fields.
+        No bytes in the galaxy/location/planet records are reinterpreted.
+        EXPERIMENTAL: executable map enumeration and capacity remain to be tested.
+        """
+        if self.node_count >= 255:
+            raise ValueError('Experimental J-Galaxy node limit is 255')
+        if self.node_off + self.node_count * NODE_SIZE != self.planet_off:
+            raise ValueError('Cannot resize noncontiguous node and planet sections')
+        template = self.get(template_id)
+        new_id = self.node_count
+        self._data[self.planet_off:self.planet_off] = template.raw
+        self.node_count += 1
+        self.planet_off += NODE_SIZE
+        struct.pack_into('<H', self._data, 6, self.node_count)
+        struct.pack_into('<I', self._data, 0x10, self.planet_off)
+        self.place_node(new_id, definition_id=definition_id,
+                        missions=missions, battles=battles)
+        return new_id
+
+    def remove_node(self, index: int):
+        """Compact node IDs, relocating planets; permitted only for new saves."""
+        start = self._node_start(index)
+        if self.node_count <= 1:
+            raise ValueError('Cannot remove the last progression node')
+        if self.node_off + self.node_count * NODE_SIZE != self.planet_off:
+            raise ValueError('Cannot resize noncontiguous node and planet sections')
+        del self._data[start:start + NODE_SIZE]
+        self.node_count -= 1
+        self.planet_off -= NODE_SIZE
+        struct.pack_into('<H', self._data, 6, self.node_count)
+        struct.pack_into('<I', self._data, 0x10, self.planet_off)
+
+    def remove_definition_references(self, *, mission: bool, index: int):
+        """Refuse deletion of a referenced definition; compact higher IDs."""
+        for node_id in range(self.node_count):
+            node = self.get(node_id)
+            if node.mission != mission:
+                continue
+            if node.definition_id == index:
+                raise ValueError(f'Definition #{index} is used by J-Galaxy node {node_id}')
+        for node_id in range(self.node_count):
+            node = self.get(node_id)
+            if node.mission == mission and node.definition_id > index:
+                pos = self._node_start(node_id) + 8
+                self._data[pos] -= 1
 
     def place_node(self, node_id: int, *, planet_id=None, definition_id=None,
                    mission=None, missions=None, battles=None):
