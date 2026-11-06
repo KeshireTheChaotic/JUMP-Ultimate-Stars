@@ -6,8 +6,9 @@ Field offsets cross-checked against shipped jgalaxy/jgalaxy.aar and ARM9:
   overlay1 FUN_0214E380: node +0x12 + 0x14*slot signed Koma grant,
       -1 sentinel for six u16 resources at +0x14..+0x1E.
 
-Undecoded fields are retained verbatim. No insertion/removal of world nodes,
-objectives or definitions: the game's save bitmaps and pointers depend on IDs.
+Undecoded fields are retained verbatim. Experimental node and definition table
+resizing is supported for NEW saves only; map-screen enumeration and fixed RAM
+capacities still require executable and emulator validation.
 """
 from __future__ import annotations
 
