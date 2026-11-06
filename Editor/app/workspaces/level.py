@@ -33,13 +33,14 @@ from ..widgets.tabs import TextLog
 from .base import SuiteWorkspace
 from .missions import DOC as MISSION_DOC, MissionPanel
 from .level_markers import LevelMarkersMixin
+from .level_art import LevelArtworkMixin
 
 OVERLAYS = (('cam', 'Camera (unverified)', '.cam'), ('mob', 'Stage physics & spawns (.mob)', '.mob'),
             ('bin', 'Stage BG animation/collision (.bin)', '.bin'), ('collision', 'Collision descriptors', None),
             ('gimmick', 'Gimmick assets', None))
 
 
-class LevelWorkspace(LevelMarkersMixin, SuiteWorkspace):
+class LevelWorkspace(LevelArtworkMixin, LevelMarkersMixin, SuiteWorkspace):
     key = 'level'
     title = 'Level'
     browser_title = 'J-Space / galaxies / worlds / missions'
@@ -71,6 +72,7 @@ class LevelWorkspace(LevelMarkersMixin, SuiteWorkspace):
         self._original_mob = b''
         self._mob_working = b''
         self.show_markers = tk.BooleanVar(value=True)
+        self._init_navigation_art()
         self.stage_tick = tk.IntVar(value=0)
         self.preview_objects = tk.BooleanVar(value=True)
         self.preview_items = tk.BooleanVar(value=True)
@@ -212,8 +214,10 @@ class LevelWorkspace(LevelMarkersMixin, SuiteWorkspace):
             except (OSError, ValueError, KeyError) as exc:
                 self.app.status.set(f'stage.aar: {exc}')
         self.missions.on_root()
+        self._discover_navigation_art()
         self._by_stage = self.missions.nodes_by_stage()
         self.nav_kind, self.nav_id = 'root', None
+        self._sync_nav_art_fields()
         self.stage = None
         self._stage_mob = None
         self._original_mob = self._mob_working = b''
@@ -303,6 +307,7 @@ class LevelWorkspace(LevelMarkersMixin, SuiteWorkspace):
             self.nav_kind, self.nav_id = 'world', int(iid[2:])
         else:
             return
+        self._sync_nav_art_fields()
         self.show_stage_inspector()
         self.refresh_inspector()
         self.view.redraw()
@@ -695,6 +700,7 @@ class LevelWorkspace(LevelMarkersMixin, SuiteWorkspace):
         vp.text(18, 85, info, fill=T.FG, anchor='w')
         vp.text(18, 123, 'Navigation sprite ID mapping unverified', fill=T.MUTED, anchor='w')
         vp.text(18, 160, 'Choose a mission to edit its level map.', fill=T.FG, anchor='w')
+        self._draw_navigation_art(vp)
         vp.hud.configure(text=heading + ' · J-Space navigator')
 
     def _navigation_inspector(self, ins):
@@ -731,6 +737,7 @@ class LevelWorkspace(LevelMarkersMixin, SuiteWorkspace):
                 ins.buttons(('Open first mission', lambda i=nodes[0]: self.select_mission(i)))
         ins.evidence('World → mission', 'Direct', 'node +0x0A stores the planet ID')
         ins.evidence('Galaxy → world', 'Unknown', 'parent relation not yet traced')
+        self._navigation_sprite_inspector(ins)
 
     def _tile_at(self, wx, wy):
         l = self.sel_layer
