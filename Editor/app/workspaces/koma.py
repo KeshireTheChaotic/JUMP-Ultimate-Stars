@@ -382,6 +382,30 @@ class KomaWorkspace(SuiteWorkspace):
                 self.card = c
         self.refresh(frame=True)
 
+    def open_card_by_id(self, card_index: int) -> bool:
+        """Navigate a text-linked ALMT resource back to its owning Koma art/card."""
+        if self.cat is None or not 0 <= card_index < len(self.cat.cards.cards):
+            self.app.status.set(f'Koma card #{card_index} unavailable')
+            return False
+        card = self.cat.cards.cards[card_index]
+        candidates = self.cat.art_for_card(card)
+        if len(candidates) != 1:
+            self.app.status.set(f'Koma card #{card_index} has {len(candidates)} matching art sources')
+            return False
+        target = candidates[0]
+        if self.path != target or self.kf is None:
+            self.load(target.split('|')[-1])
+            if self.path != target or self.kf is None:
+                return False
+        linked = next((c for c, _ in self.card_choices if c.index == card_index), None)
+        if linked is None:
+            self.app.status.set(f'Koma #{card_index} is not present for {target}')
+            return False
+        self.card = linked
+        self.refresh(frame=True)
+        self.app.status.set(f'Koma card #{card_index}: {self.koma_name(card_index)}')
+        return True
+
     # ------------------------------------------------------------ authored shape variants
     def _update_shape_dirty(self):
         if self.cat:
@@ -644,9 +668,83 @@ class KomaWorkspace(SuiteWorkspace):
             for p in s.problems():
                 ins.value('Anomaly', p, colour=T.BAD)
         ins.value('Raw', bytes(c.raw).hex(' '), tip='12-byte record; unknown bytes are preserved')
+        self._inspect_linked_moves(ins, c)
         if s:
             ins.section(f'Shape picker ({s.size} cells)', note='Click a shape. The Shapes tab below lists all 66.')
             ins.widget(self._picker)
+
+    def _inspect_linked_moves(self, ins, card):
+        """Read-only, original game source links; no inferred attack names."""
+        ins.section('Moves (BIN / ALMT)', note='Card size determines Special A/B or support action')
+        if card.raw[6] == 2:
+            ins.text('Help/other Koma. No battle or support ALMT move is assigned to '
+                     'this type by the verified roster/resource linkage.')
+            return
+        svc = self.app._move_xref() if hasattr(self.app, '_move_xref') else None
+        if svc is None:
+            msg = getattr(self.app, '_move_xrefs_error', '') or 'Move lookup unavailable'
+            ins.value('Cross-reference', msg, colour=T.WARN)
+            return
+        try:
+            linked = svc.card_moves(card)
+        except (ValueError, KeyError, OSError) as exc:
+            ins.value('Cross-reference', str(exc), colour=T.BAD)
+            return
+        self._move_link_choices = {}
+        ins.value('Character', f'{svc.character_name(linked[0].form)} ({linked[0].form})')
+        ins.value('Source ALMT', linked[0].almt_member)
+        if card.raw[6] == 0:
+            specs = {x.variant: x for x in linked if x.category == 'battle-special'}
+            for variant in ('A', 'B'):
+                x = specs.get(variant)
+                if x is not None:
+                    title = x.text.display_title if x.text else ''
+                    ins.value(f'Special {variant}', f'{title or "(blank source title)"}  '
+                              f'[0x{x.resource_id:08X}]',
+                              tip=f'{x.text.source} / record {x.text.record}, '
+                                  f'title slot {x.text.title_slot}' if x.text else '')
+                    if x.text:
+                        ins.value(f'Type {variant}', x.text.type_label or '(blank BIN type)')
+                        ins.value(f'Description {variant}',
+                                  x.text.display_description or '(none in BIN)')
+            if len(specs) == 2:
+                ins.buttons(('Open Special A', lambda x=specs['A']:
+                             self.app.open_move_resource(x.form, x.resource_id, x.almt_member)),
+                            ('Open Special B', lambda x=specs['B']:
+                             self.app.open_move_resource(x.form, x.resource_id, x.almt_member)))
+            ins.value('Common actions', f'{len(linked)-len(specs)} input/actor actions shared '
+                      'by this battle form', colour=T.MUTED)
+        else:
+            x = linked[0]
+            title = x.text.display_title if x.text else ''
+            ins.value('Support action', f'{title or "(blank source title)"}  [0x{x.resource_id:08X}]')
+            if x.text:
+                ins.value('Type', x.text.type_label or '(blank BIN type)')
+                ins.value('Description', x.text.display_description or '(none in BIN)')
+                ins.value('Text source', f'{x.text.source} row {x.text.record} / '
+                          f'title slot {x.text.title_slot}')
+            ins.buttons(('Open support move', lambda x=x:
+                         self.app.open_move_resource(x.form, x.resource_id, x.almt_member)))
+        for x in linked:
+            label = f'0x{x.offset:02X}  {x.display_name}  [{x.duration} ticks]'
+            self._move_link_choices[label] = x
+        options = list(self._move_link_choices)
+        if options:
+            self._move_link_var = tk.StringVar(value=options[-1] if card.raw[6] == 0 else options[0])
+            ins.combo('Go to move', self._move_link_var, options,
+                      'Source move identity and authored ticks, not observed runtime duration',
+                      width=34)
+            ins.buttons(('Open selected ALMT move', self._open_linked_move))
+        ins.evidence('Card ? ALMT', 'Direct',
+                     'koma.bin +6 kind, +7 roster, +8 size; ROM resource offsets and actual AMT IDs')
+        ins.evidence('Move ? BIN', 'Direct',
+                     'chr_b_t.bin 53-slot or chr_s_t.bin 9-slot self-relative text definitions')
+
+    def _open_linked_move(self):
+        x = getattr(self, '_move_link_choices', {}).get(self._move_link_var.get())
+        if x is not None:
+            return self.app.open_move_resource(x.form, x.resource_id, x.almt_member)
+        return False
 
     def _picker(self, parent):
         f = tk.Frame(parent, bg=T.PANEL)
@@ -838,6 +936,10 @@ class KomaWorkspace(SuiteWorkspace):
             self.app.root_data.write_file(komacards.CARDS, blob)
             self._cards_dirty = False
             done.append('bin/koma.bin')
+            # Rebuild reverse card?move references from staged source bytes.
+            if hasattr(self.app, '_move_xrefs'):
+                self.app._move_xrefs = None
+                self.app._move_xrefs_error = ''
         self.refresh()
         self.app.update_dirty()
         self.app.status.set(f'Applied {self.path} → {" + ".join(done)} — Save (Ctrl+S) to write the files.')

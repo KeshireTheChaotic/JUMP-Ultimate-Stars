@@ -20,9 +20,9 @@ stream, a 32-byte tile number for DSIG v1/0x10, or a GPU 8x8 cell for
 DSIG v1/0x20|0x50.  Texture UV cells are arranged 32 per logical row;
 bit 6 selects the 2bpp interpretation of unchanged 4bpp source bytes.
 
-Flags 0x05/0x06 have a separate read-only four-byte tile-panel descriptor
-reader (`parse_layout`), verified against `FUN_02044E78`, `FUN_02043C7C` and
-`FUN_020433EC`. The auxiliary layout payload is deliberately not decoded.
+Flags 0x05/0x06 have a separate read-only decoder for indexed panel
+tilemaps (u8/u16). The exact 50-file auxiliary map layout is validated
+against original game data; scene placement/palette attributes are not.
 """
 from __future__ import annotations
 
@@ -222,13 +222,29 @@ class LayoutPanel:
 
 
 @dataclass(frozen=True)
-class LayoutTable:
-    """Read-only *layout descriptor* view, not a decoded screen composition.
+class LayoutPanelMap:
+    """One row-major panel-local grid, NOT hardware screen XY or a sprite OAM table."""
+    panel_index: int
+    offset: int  # relative to the auxiliary region
+    tiles_w: int
+    tiles_h: int
+    cell_bytes: int
+    cells: tuple[int, ...]
+    raw: bytes
 
-    ARM9 FUN_020433EC cases 5 and 6 set auxiliary data region from
-    ``start=8+(panel_count+1)*4`` through ``end=u16(blob+8)``.  Case 6 sets
-    a separate mode to 2.  The meaning of bytes within that region and
-    final render layer assignment is not established; preserve all raw bytes.
+    def row(self, y: int) -> tuple[int, ...]:
+        if not 0 <= y < self.tiles_h:
+            raise IndexError(y)
+        i = y * self.tiles_w
+        return self.cells[i:i + self.tiles_w]
+
+
+@dataclass(frozen=True)
+class LayoutTable:
+    """Original 0x05/0x06 DSTX panel descriptors and verified local tilemaps.
+
+    The raw source is untouched; neither DS palette-bank application nor
+    top/bottom screen assignment or scene-space positioning is inferred.
     """
     version: int
     flags: int
@@ -237,21 +253,30 @@ class LayoutTable:
     embedded: bytes
     reserved: bytes
     raw: bytes
+    panel_maps: tuple[LayoutPanelMap, ...]
+    map_offsets: tuple[int, ...]
+    padding: bytes
 
     @property
     def mode6(self) -> bool:
-        return (self.flags & 0x7F) == 6
+        return self.flags == 0x06
+
+    @property
+    def cell_bytes(self) -> int:
+        return 2 if self.mode6 else 1
 
     def build(self) -> bytes:
-        """Byte-identical read-only round trip; no editing assumptions."""
+        """Byte-identical read-only round trip; no unverified edits."""
         return self.raw
 
 
 def parse_layout(blob: bytes) -> LayoutTable:
-    """Read DSTX 0x05/0x06 four-byte descriptors and preserve opaque payload.
+    """Decode original panel-local offset table and u8/u16 tilemap cells.
 
-    Verifies only boundaries established by ARM9 and the shipped corpus;
-    do not pass this view to ``DstxFile`` sprite-piece rendering.
+    After N 4-byte panel descriptors and 2 reserved bytes: N u16 offsets
+    (relative to auxiliary start); then each panel's tiles_w*tiles_h cells.
+    In mode 5 each cell is u8, in mode 6 each is u16 little-endian.
+    All 50 originals have adjacent offsets and 0..3 bytes zero tail.
     """
     if len(blob) < 12 or blob[:4] != MAGIC:
         raise ValueError('Not a DSTX layout')
@@ -263,6 +288,30 @@ def parse_layout(blob: bytes) -> LayoutTable:
         raise ValueError('DSTX layout section boundaries invalid')
     panels = tuple(LayoutPanel(*struct.unpack_from('<HBB', blob, 10 + i * 4))
                    for i in range(count))
-    return LayoutTable(version, flags, panels,
-                       bytes(blob[auxiliary_start:end]), bytes(blob[end:]),
-                       bytes(blob[10 + 4 * count:auxiliary_start]), bytes(blob))
+    auxiliary = bytes(blob[auxiliary_start:end])
+    cell_bytes = 2 if flags == 0x06 else 1
+    if len(auxiliary) < 2 * count:
+        raise ValueError('DSTX layout auxiliary map offset table truncated')
+    offsets = tuple(struct.unpack_from('<' + str(count) + 'H', auxiliary, 0)) if count else ()
+    maps: list[LayoutPanelMap] = []
+    expected = 2 * count
+    for i, (panel, off) in enumerate(zip(panels, offsets)):
+        if off != expected:
+            raise ValueError(f'DSTX panel {i} map offset {off} != expected {expected}')
+        size = panel.tiles_w * panel.tiles_h * cell_bytes
+        expected = off + size
+        if expected > len(auxiliary):
+            raise ValueError(f'DSTX panel {i} map exceeds auxiliary section')
+        data = auxiliary[off:expected]
+        cells = (tuple(data) if cell_bytes == 1 else
+                 struct.unpack('<' + str(len(data)//2) + 'H', data) if data else ())
+        maps.append(LayoutPanelMap(i, off, panel.tiles_w, panel.tiles_h,
+                                   cell_bytes, tuple(cells), data))
+    padding = auxiliary[expected:]
+    if len(padding) > 3 or any(padding):
+        raise ValueError('DSTX panel map tail is not zero alignment (0..3 bytes)')
+    return LayoutTable(
+        version, flags, panels, auxiliary, bytes(blob[end:]),
+        bytes(blob[10+4*count:auxiliary_start]), bytes(blob),
+        tuple(maps), offsets, padding,
+    )

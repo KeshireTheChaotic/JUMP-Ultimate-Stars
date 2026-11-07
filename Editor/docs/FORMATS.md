@@ -24,9 +24,10 @@ All values little-endian. "Verified" means checked against every relevant file i
 | ALTM decode, every row exactly `map_w` entries (`jus_formats.altm`) | 1,558 / 1,558 (1,431 raw byte-identical, 127 packed) |
 | GenerateID move ids resolved (character tables or `efc/*.aar`) | 1,538 / 1,538 keys in the first 60 characters |
 
-DSTX tables with flags 0x05/0x06 (menu screen layouts) are a different layout and
-are rejected by the sprite parser; they pass through archives untouched. Flags 0x04
-(koma panels) has its own codec, below.
+DSTX flags 0x05/0x06 (menu/stage tile-panel layouts) are decoded by the separate
+read-only panel map parser in jus_formats.dstx; the sprite-piece parser still
+rejects them. Mode 5 uses u8 cells; mode 6 uses u16 LE cells. The parser
+retains all original bytes. Flags 0x04 (koma panels) has its own codec below.
 
 ## Koma panels — DSTX v1 flags 0x04 (`jus_formats.koma`)
 
@@ -331,7 +332,7 @@ Open items: ALMT field `EffectFlags`
 (`CommonEffect.cpp` property, values 0/2/3/0x10/0xB…), full ALAR2 flag
 bit-1 split lifecycle and the attribute bit-24 vs bit-25 distinction,
 DSIG v2 `b7`, ALOD property
-descriptors, ALTM screen/priority/scroll assignment, DSTX flags 0x05/0x06 (read-only tile-panel descriptors parsed; opaque auxiliary layout and drawing pending), stage `.cam`, the exact battle-state
+descriptors, ALTM screen/priority/scroll assignment, DSTX flags 0x05/0x06 (tile-panel auxiliary grids decoded; final screen draw/palette/parent placement pending), stage `.cam`, the exact battle-state
 fields behind each branch condition, `chara_action` sub-code semantics, and in-game draw
 order of overlapping effect pieces (the editor draws atlas pieces last-on-top and OBJ
 pieces first-on-top, matching OAM priority). The DS draw path itself was not confirmed
@@ -389,3 +390,106 @@ An independent corpus scan of the uploaded `data.zip` found 1,842 NoteTrack
 bodies, 17,791 commands and no unknown opcode values in 1,210 relevant ALMT
 files. Among 6,010 Marker field values, 271 were in the special auto-goto
 range (270 keyed, one static); this count does not imply 271 distinct jumps.
+
+
+## DSTX 0x05/0x06 grid and ChrBin shot/col inspector (2026-11-06)
+
+The Screen Workspace now inspects 0x05 and 0x06 DSTX panel-local tilemaps,
+without treating them as OAM sprite-piece records. DSTX count N supplies N
+four-byte panel descriptors (u16 first tile, u8 width, u8 height), followed by
+N relative u16 auxiliary offsets and N row-major cell grids. Mode 5 stores
+u8 per tile cell; mode 6 stores u16 LE per cell; every grid is width*height
+and a final 0..3 zero-alignment byte tail is allowed. Source bytes always
+roundtrip exactly. The Screen Resource inspector displays the chosen panel
+index, source offsets, dimensions and first 16x16 raw hex cells. The original
+50 DSTX members / 1,094 panels validate. Palette bit meaning and scene-level
+placement remain unknown; no guessed screenshot preview is presented.
+
+The Archive Workspace now displays typed read-only 32-byte chr/shot records,
+with original dispatch handler ID/address, raw +4 u16 work parameter,
++6 signed lifetime (0 means effective 30), +8 behavior flags, +0x0C/+0x10
+references, conditional +0x14 reference, overloaded selector at +0x1D,
+and handler-0x0B +0x1E callback. Executable-backed flags are 0x1 (optional
+reference), 0x4000 (X displacement), 0x10000 (audio selector), 0x80000
+(Y displacement); all other bits are shown as raw unknown flags. The
+20-byte chr/col records present +4 signed score/power and raw +0/+1
+selector bytes without inventing gameplay names. The three namespaces
+(ALMT CollisionType, chr/col byte0, chr/shot byte0) remain independent.
+Original ChrBin census: 184 shot members / 1,258 records, and 281 col
+members / 2,837 records, all roundtrip exactly. No AI editing features.
+
+Verification: python -m unittest tests.test_dstx_layout_0506
+tests.test_shot_runtime_fields; complete test discovery 227 tests, one
+skipped, all passed; gui_screen_layout_smoke.py passed. The independent
+scene hierarchy / physical LCD trace is in
+D:/Library/Development/JUS/docs/Research/
+JGALAXY_PARENT_TRANSFORMS_LCD_ROUTING_TRACE_20261106.md.
+
+
+## P3 and P6 updates (2026-11-06)
+
+The DSTX 0x05/0x06 Editor Elements inspector now renders actual selected
+panel-local images from embedded DSIG 4bpp/8bpp tile and RGB555 palette bytes.
+Mode5 has u8 tile cells; mode6 has u16 tile cells using the hardware BG
+tile index/H,V-flip/palette-bank convention. 8bpp uses flat palette indexing,
+including opaque colour16. A distinct pure read-only renderer
+jus_formats/tilepanel.py returns RGBA source pixels; the GUI displays the
+panel as an explicitly isolated resource (not an original hardware screenshot).
+All 50 originals/1094 panels are rendered with no missing tiles/banks and
+the exact decoded pixel hashes are cataloged under docs/Research/P3_*.
+
+Shot/collision inspection now recognizes conditional u16 spawn cap at shot+2,
+the +0x1D three-way audio route under shot flags bit0x10000, and
+*handler-scoped* source-backed flags: 0x07(0x400,0x8000),
+0x0D(0x200,0x400), and shared 0x0C/0x14(0x100).
+It displays mechanical callback descriptions, raw unknown flags, and
+chr/col's +2,+8,+0x0C,+0x10 original words; no invented gameplay collision
+names. See docs/Research/P6_SHOT_COL_RUNTIME_HANDLERS_TRACE_20261106.md.
+
+No AI editing added. Actual scene-wide screen composition, physical LCD
+presentation, user-visible col class names and untraced shot flags remain
+future reverse-engineering tasks.
+
+
+### Follow-through: collision work row resolution and conditional CLDS panel pieces
+Original main ARM9 0207D440 now confirms that ALMT CollisionType work IDs
+0x0100 and up resolve to chr/col source record (id - 0x0100)*20, while
+lower IDs use a 20-byte ROM table starting 0209FC2C. Do not conflate
+the **record's byte0 class** with this index. The new read-only
+jus_formats/collisionwork.py holds 3 exact 32-entry ARM9 bit-mask tables
+for chr/col+0x08 contributions to work+0x14/+0x18/+0x1C, and a local
+CollisionRect-to-center/half-extents transform from ARM9 02079E40.
+Archive inspector exposes class-zero vs nonzero runtime branches and raw
+unknowns. See docs/Research/COLLISION_WORK_ID_DIRECT_JOIN_TRACE_20261106.md.
+
+The new read-only jus_formats/panelmesh.py reconstructs the *conditional*
+ARM9 02043C7C fallback CLDS six-byte pieces, with 4/2/1 horizontal spans,
+original 17-entry width lookup (0..16), and signed-byte local coordinates.
+The real source census is 1,035 supported panels and 59 panels that exceed
+the lookup. Screen inspector labels this alternate mesh as conditional,
+never as confirmed final scene composition. See
+docs/Research/DSTX_0506_CONDITIONAL_MESH_AND_SCENE_TRACE_20261106.md.
+
+All original game assets/ROM/Ghidra exports are untouched. No AI editing
+functions have been added. Final emulator screen placement, LCD routing and
+contact-result damage/guard/status are still unverified.
+
+## Koma / move / BIN text source cross-reference
+
+The Animation workspace shows original BIN-authored names, types and descriptions for the exact resource ID of sized Special A/B or support actions. Koma inspector shows all 14 shared+special actions for a type0 battle card, one 2-/3-Koma action for a type1 support card, and none for help/other cards. Navigation is bidirectional: Koma Inspector -> Open ALMT move; Animation Move Inspector -> choose source Koma card -> Open Koma card. The read-only mapper in jus_package/movelinks.py derives original text fields from bin/chr_b_t.bin (74 x 53 words, 51 text pointers) and bin/chr_s_t.bin (193 x 9 text pointers, ov05 0214E370/0214E3D4); the original Koma type, roster and size are from bin/koma.bin. Matching enforces the full 32-bit move ID and actual primary ALMT source member, rather than a guessed name or array index. Ordinary fighter inputs have only code-backed control labels, not invented source names. The Editor only normalizes | to spaces for display. Research: ../../../../docs/Research/ALMT_KOMA_TEXT_MOVE_LINK_TRACE_20261106.md. Tests: tests/test_move_text_links.py, tests/gui_move_text_links_smoke.py.
+
+## NoteTrack shot objects and source-frame inspection
+
+The original battle 0x0300 NoteTrack chara_action subcode2 references a 0x20-byte chr/shot record, not a parent GenerateID child. In overlay6 FUN_0216B514, handler1 constructs a source ALMT animation from shot offset+0x14 if nonzero, and another from +0x0C; offset+0x10 is retained in separate work. Those are full animation IDs, NOT direct DSTX IDs. The Editor animation viewport Show > Shot animation sources displays original ALMT TextureID+BoundsIndex frames at their authored launch anchor, and the Shot objects timeline/inspector shows record/handler/animation IDs and nominal authored lifetime. This is a SOURCE DIAGNOSTIC ONLY, not frame-accurate DS projectile stretch, travel, hit or on-screen beam geometry. Other shot handlers are kept as numeric source events and are not assigned fictional art. For original ground/air/crouch input masks in Animation Inspector, see jus_formats/battleinput.py SOURCE_INPUT_CONDITIONS and ../../../../docs/Research/ALMT_SHOT_SOURCE_AND_NORMAL_BUTTON_CONTROL_TRACE_20261106.md. Tests: tests/test_shot_visual_source.py, tests/gui_shot_source_visual_smoke.py, tests/test_battleinput_source_trace.py, tests/gui_battleinput_source_trace_smoke.py.
+
+## Native dynamic effect geometry and shot work (read-only)
+
+The original 26 callback table entries at overlay6 0x02172864 are exposed by jus_package/dynamicgeometry.py. Their runtime constructors, child translation, fixed-point velocity, stage collision and target/arc dependencies are kept distinct from ALMT GenerateID spawns and ChrBin persistent pursuer actions. The Animation Shot Inspector identifies native handler, raw shot fields, original ALMT source, source TextureID/frame, DSIG 0x50 or 0x20 GX atlas and DSTX pieces. For handler01 with a proven cardinal direction, launch child positions reproduce the native 0x1800 24.8 child spacing (24px); non-cardinal native float trig remains source-only. The editor still does NOT simulate full beam extension, dynamic shot travel, hits or frame-accurate DS GX matrices. GenerateID Inspector now reports child keyed geometry fields separately. Run tests/test_dynamic_geometry_code.py, tests/test_all_effect_geometry_source.py and tests/gui_shot_source_visual_smoke.py. Full source research: D:\Library\Development\JUS\docs\Research\EFFECT_DYNAMIC_GEOMETRY_PROJECTILE_RUNTIME_TRACE_20261106.md.
+
+## Source-proven handler01 beam role lifecycle
+
+The original constructor ROM array at ov06 0x02172864 maps shot handler01 to FUN_0216B4F4; a second 26-entry per-frame update array at 0x0217278C maps it to FUN_0216BA2C. Constructor 0216B514 creates record+0x14 initial anchored ALMT (when nonzero) then record+0x0C moving ALMT without a hit test. Updater 0216BA2C creates additional record+0x10 ALMT instances when native spacing/slot conditions pass. These source field roles are shared across the 68 original handler01 records; source+0x0C is not contact-only by construction. Handler01 sets work+0x26 bit2, bypassing ordinary record-lifetime countdown, so the current source-only preview cap is not native expiry. The Animation Shot Inspector shows all three source roles, original per-frame update callback and code provenance; it still does not extrapolate a fabricated full beam. Research: D:\Library\Development\JUS\docs\Research\HANDLER01_BEAM_FIELD_LIFECYCLE_PROOF_20261106.md. Regression: tests/test_shot_handler01_lifecycle.py.
+
+## Native shot source repeats and handler05 D-pad history
+
+The Animation View and viewport Show menu support Handler01 repeats (unobstructed model). This projects actual original +0x10 child ALMT art at native 0216BA2C spacing counter events. The model is **not** an emulator frame reconstruction: it assumes one update/tick, fixed owner and facing, no hit/stage collision, free child actor slots and constant initial raw q8 velocity; post-birth XY is estimated. No synthetic pixels or fake beam polygon. Hiei (yh_b_03) 5-Koma Special B 0x9832C uses handler05 (constructor 0216B910; updater 0216BE0C), reads D-Pad delta0x40, keeps 128 historical XY/rotation samples and selects source 0x98357 (+0x0C head), 0x98358 (+0x10 body), 0x98359 (+0x18 terminal). This does NOT auto-home toward the opponent; the curved trail cannot be reconstructed without live input/history. Original source NoteTrack status event tick112 chara_action(10,18) resolves to code status36/0x24 callback 021593E8. The self-contact conditional branch is not yet proved. Original scripts/exports are saved in D:\Library\Development\JUS\docs\Research\EFFECT_NATIVE_SHOT_REPEAT_AND_HIEI_TRACKING_TRACE_20261106.md. Tests: test_shotprojection_native.py, test_hiei_steered_ultimate.py, gui_shot_source_visual_smoke.py, gui_hiei_steering_source_smoke.py.

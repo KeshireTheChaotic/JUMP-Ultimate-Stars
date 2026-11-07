@@ -52,7 +52,7 @@ def dtx_kind(blob: bytes) -> str:
         from jus_formats.dstx import parse_layout
         try:
             layout = parse_layout(blob)
-            return f'v1 layout {flags:#04x}: {len(layout.panels)} tile panels (read-only; placement unknown)'
+            return f'v1 layout {flags:#04x}: {len(layout.panel_maps)} tile panels (maps decoded; placement unknown)'
         except ValueError as exc:
             return f'layout {flags:#04x} malformed: {exc}'
     return f'layout flags 0x{flags:02X} (needs a dedicated parser)'
@@ -253,6 +253,18 @@ def screen_sprite(root: DataRoot, archive: str, dtx_name: str):
         embedded = False
     return (ScreenSprite(join(archive, e.name), image_path, len(dtx.frames), g.mode, embedded),
             dtx, spritemod.SpriteSource(g))
+
+
+def render_screen_tile_panel(layout: dstxmod.LayoutTable, panel_index: int):
+    """Render source DSIG/panel pixels, not a simulated hardware screen.
+
+    Returns (RGBA PIL Image, RenderedTilePanel) for the selected original
+    panel-local tilemap; no guessed menu X/Y or BG ordering.
+    """
+    from PIL import Image
+    from jus_formats.tilepanel import render_layout_panel
+    panel = render_layout_panel(layout, panel_index)
+    return Image.frombytes('RGBA', (panel.width, panel.height), panel.rgba), panel
 
 
 def render_screen_sprite(dtx: dstxmod.DstxFile, source: spritemod.SpriteSource, frame: int):

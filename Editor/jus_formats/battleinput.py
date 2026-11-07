@@ -46,3 +46,42 @@ def control_for(move_id: int) -> str | None:
     """Control label for a move of a battle character's base table (by its offset)."""
     entry = MOVE_CONTROLS.get(move_id & 0xFF)
     return entry[0] if entry else None
+
+# Original actor+0x6C bitmask predicates, 0x0215A720 (ground), 0x0215A8C0
+# (air), 0x0215A8F8 (crouch). These are raw input masks, NOT invented
+# movement/move names. Physical labels are guide-derived; bit0x1000's
+# physical identity remains unverified.
+SOURCE_INPUT_CONDITIONS = {
+    0x1E: ('ground', 'input & 0x80', 'facing-forward predicate false', '0215A720'),
+    0x1F: ('ground', 'input & 0x100', 'facing-forward predicate false', '0215A720'),
+    0x20: ('ground', 'input & 0x80', 'facing-forward predicate true', '0215A720'),
+    0x21: ('ground', 'input & 0x100', 'facing-forward predicate true', '0215A720'),
+    0x22: ('ground', '(input & 0x81) == 0x81', 'facing-forward predicate false; checked before plain B/Y', '0215A720'),
+    0x23: ('ground', '(input & 0x101) == 0x101', 'facing-forward predicate false; checked before plain B/Y', '0215A720'),
+    0x24: ('crouch', '(input & 0x82) == 0x82', 'state handler mode2', '0215A8F8'),
+    0x25: ('crouch', '(input & 0x102) == 0x102', 'state handler mode2', '0215A8F8'),
+    0x26: ('air', 'input & 0x80', 'state handler mode1', '0215A8C0'),
+    0x27: ('air', 'input & 0x100', 'state handler mode1', '0215A8C0'),
+    0x18: ('ground/crouch', 'input & 0x1000',
+           'physical button not independently identified; no alternate name assigned', '0215A720/0215A8F8'),
+    0x28: ('ground', 'actor+0xD1 != 0',
+           'scripted action, NOT a physical button', '0215A720'),
+}
+for _size in range(4, 9):
+    _base = 0x29 + 2 * (_size - 4)
+    SOURCE_INPUT_CONDITIONS[_base] = (
+        f'ground (size {_size})', 'input & 0x40',
+        'needs deployed battle koma size and meter gate FUN_0207834C', '0215A720')
+    SOURCE_INPUT_CONDITIONS[_base + 1] = (
+        f'ground (size {_size})', '(input & 0x41) == 0x41',
+        'Up+X tested before plain X; requires size/meter gate', '0215A720')
+
+
+def source_trace(move_id: int) -> tuple[str, str, str, str] | None:
+    """(mode, exact raw predicate, extra runtime condition, original function).
+
+    Input selectors are code-authenticated; this is NOT a transition graph.
+    The actor+0xC0 restriction mask and dynamic+0xC4 mask can veto playback,
+    and a NoteTrack follow-up permission is distinct from accepting the input.
+    """
+    return SOURCE_INPUT_CONDITIONS.get(move_id & 0xff)

@@ -9,8 +9,8 @@ Background layers are ALTM maps with their DSIG tiles.  Which screen and
 BG slot a layer uses, its scroll and priority are set by game code that is
 not traced: the editor guesses a screen from the name and lets the user
 override screen, scroll and order as a *preview* (never saved).
-DSTX 0x05/0x06 layout descriptors are read-only and visible in the resource
-inspector; their auxiliary placement sections and sprite rendering remain unknown.
+DSTX 0x05/0x06 panel-local tilemaps are decoded and inspectable; their
+runtime scene placement/composition remains unresolved.
 """
 from __future__ import annotations
 
@@ -50,6 +50,10 @@ class ScreenWorkspace(SuiteWorkspace):
         self.sprite_image = None
         self.sprite_error: str | None = None
         self.sprite_frame = tk.StringVar(value='0')
+        self.layout_panel_index = tk.StringVar(value='0')
+        self.selected_layout = None
+        self.layout_image = None
+        self.layout_render_info = None
         self.show_outside = tk.BooleanVar(value=False)
         self.mode = tk.StringVar(value='Screens')
         self._element_paths = None
@@ -69,6 +73,13 @@ class ScreenWorkspace(SuiteWorkspace):
         self.frame_spin.pack(side='left', padx=2)
         self.frame_spin.bind('<Return>', self._frame_changed)
         self.frame_spin.bind('<FocusOut>', self._frame_changed)
+        ttk.Label(h, text='Tile panel').pack(side='left', padx=(8, 2))
+        self.panel_spin = ttk.Spinbox(h, from_=0, to=0, width=5, state='disabled',
+                                      textvariable=self.layout_panel_index,
+                                      command=self._layout_panel_changed)
+        self.panel_spin.pack(side='left', padx=2)
+        self.panel_spin.bind('<Return>', self._layout_panel_changed)
+        self.panel_spin.bind('<FocusOut>', self._layout_panel_changed)
         ttk.Checkbutton(h, text='Whole layers', variable=self.show_outside, style='Toolbar.TCheckbutton',
                         command=lambda: self.view.redraw()).pack(side='right', padx=6)
         ttk.Button(h, text='Frame', style='Tool.TButton', command=self.frame_view).pack(side='right', padx=6)
@@ -215,9 +226,16 @@ class ScreenWorkspace(SuiteWorkspace):
                 first = next((i for i, e in enumerate(arc.entries)
                               if e.ext == '.dtx' and e.payload()[:4] == b'DSTX'
                               and e.payload()[5] & 0x7f == 3), None)
+                if first is None:
+                    # Archives containing only panel maps should open their
+                    # actual tile grid rather than a fabricated sprite preview.
+                    first = next((i for i, e in enumerate(arc.entries)
+                                  if e.ext == '.dtx' and e.payload()[:4] == b'DSTX'
+                                  and e.payload()[5] in (5, 6)), None)
                 if first is not None:
                     self.selected_resource = first
                     self._load_sprite(first)
+                    self._load_layout(first)
             except (ValueError, KeyError, OSError, IndexError) as exc:
                 probs.append((f'Sprite preview: {exc}', 'warn'))
         if self.tree.exists(path):
@@ -244,7 +262,7 @@ class ScreenWorkspace(SuiteWorkspace):
                 label = f'DSTX {kind}'
                 if 'sprite pieces' in kind:
                     label += ' (atlas cells; select in Elements)'
-                if 'tile panels (read-only' in kind:
+                if 'tile panels (maps decoded' in kind:
                     grade = 'Direct'  # 4-byte descriptors verified by ARM9 loader; positioning still unknown
                 elif 'dedicated' in kind or 'malformed' in kind:
                     grade = 'Unknown'
@@ -260,6 +278,7 @@ class ScreenWorkspace(SuiteWorkspace):
         except (ValueError, TypeError):
             self.selected_resource = None
         self._load_sprite(self.selected_resource)
+        self._load_layout(self.selected_resource)
         self.refresh_inspector()
         self.view.redraw()
 
@@ -272,10 +291,53 @@ class ScreenWorkspace(SuiteWorkspace):
         if item.ext == '.aar':
             self.load(join(self.archive, item.name))
         elif item.ext == '.dtx':
-            self._load_sprite(int(sel[0]))
+            self.selected_resource = int(sel[0])
+            self._load_sprite(self.selected_resource)
+            self._load_layout(self.selected_resource)
             self.refresh_inspector()
             self.view.redraw()
 
+    def _load_layout(self, index):
+        self.selected_layout = None
+        self.layout_image = None
+        self.layout_render_info = None
+        self.layout_panel_index.set('0')
+        if hasattr(self, 'panel_spin'):
+            self.panel_spin.configure(to=0, state='disabled')
+        if index is None or not self.archive:
+            return
+        try:
+            from jus_formats.dstx import parse_layout
+            entry = self.app.root_data.archive(self.archive).entries[index]
+            blob = entry.payload()
+            if entry.ext != '.dtx' or blob[:4] != b'DSTX' or blob[5] not in (5, 6):
+                return
+            self.selected_layout = parse_layout(blob)
+            n = len(self.selected_layout.panel_maps)
+            self.panel_spin.configure(to=max(0, n-1), state='normal' if n else 'disabled')
+            self._render_layout_panel()
+        except (ValueError, IndexError, KeyError, OSError) as exc:
+            self.sprite_error = str(exc)
+
+    def _render_layout_panel(self):
+        self.layout_image = None
+        self.layout_render_info = None
+        if self.selected_layout is None:
+            return
+        try:
+            idx = int(self.layout_panel_index.get())
+            self.layout_image, self.layout_render_info = scenes.render_screen_tile_panel(
+                self.selected_layout, idx)
+            self.sprite_error = None
+        except (ValueError, IndexError, OSError) as exc:
+            self.sprite_error = str(exc)
+
+    def _layout_panel_changed(self, _event=None):
+        # Actual DSIG source pixels only. No guessed screen coordinates.
+        self._render_layout_panel()
+        self.refresh_inspector()
+        if hasattr(self, 'view'):
+            self.view.redraw()
 
     # --------------------------------------------------------- sprite preview
     def _clear_sprite(self):
@@ -285,6 +347,12 @@ class ScreenWorkspace(SuiteWorkspace):
         self.sprite_image = None
         self.sprite_error = None
         self.sprite_frame.set('0')
+        self.selected_layout = None
+        self.layout_image = None
+        self.layout_render_info = None
+        self.layout_panel_index.set('0')
+        if hasattr(self, 'panel_spin'):
+            self.panel_spin.configure(to=0, state='disabled')
         self._atlas_photos = []
         if hasattr(self, 'atlas_canvas'):
             self.atlas_canvas.delete('all')
@@ -464,6 +532,15 @@ class ScreenWorkspace(SuiteWorkspace):
                 continue
             ox, oy = ORIGIN[c['screen']]
             vp.add_image(self._crop(img, c['sx'], c['sy']), ox, oy)
+        if self.layout_image is not None and self.mode.get() == 'Elements':
+            # Genuine source tile pixels, centered only as an inspection image.
+            # This is NOT a gameplay screenshot or traced screen position.
+            img = self.layout_image
+            x = SW // 2 - img.width // 2
+            y = SH // 2 - img.height // 2
+            vp.add_image(img, ORIGIN['Top'][0] + x, ORIGIN['Top'][1] + y)
+            vp.text(4, 4, f'SOURCE TILE PANEL {self.layout_panel_index.get()} '
+                          '(no runtime X/Y)', anchor='nw', fill=T.ACCENT, font=T.MONO_SMALL)
         if self.sprite_image is not None and self.mode.get() == 'Elements':
             # Sprite-space origin is centered as a resource preview, *not*
             # presented as a traced menu screen position or runtime layer.
@@ -477,10 +554,13 @@ class ScreenWorkspace(SuiteWorkspace):
             hot = self.sel and self.cfg.get(self.sel, {}).get('screen') == name
             vp.rect(ox, oy, ox + SW, oy + SH, outline=T.ACCENT if hot else T.MUTED, width=2 if hot else 1)
             vp.text(ox, oy - 2, f'{name.upper()} SCREEN  256×192', anchor='sw', fill=T.MUTED, font=T.MONO_SMALL)
-        vp.hud.configure(text=('Sprite centered for resource preview (not runtime screen placement).'
-                               if self.sprite_image is not None else
-                               'Screen assignment, scroll and order are a preview (not traced, not saved).')
-                         if self.archive else 'Select a screen archive in the browser.')
+        vp.hud.configure(text=(
+            'Original DSIG panel pixels (isolated resource; not a hardware screenshot).'
+            if self.layout_image is not None else
+            'Sprite centered for resource preview (not runtime screen placement).'
+            if self.sprite_image is not None else
+            'Screen assignment, scroll and order are a preview (not traced, not saved).')
+            if self.archive else 'Select a screen archive in the browser.')
 
     def _select_layer(self, row):
         if row and row.get('kind') not in ('group', 'overlay'):
@@ -537,19 +617,76 @@ class ScreenWorkspace(SuiteWorkspace):
                              'is a DSTX index, not an ALMT playback tick.')
                 if item.ext == '.dtx' and data[:4] == b'DSTX' and data[5] in (5, 6):
                     from jus_formats.dstx import parse_layout
-                    layout = parse_layout(data)
-                    ins.section('DSTX 0x05/0x06 — read-only', note=item.name)
-                    ins.value('Mode', f'0x{layout.flags:02X} — {"6" if layout.mode6 else "5"}')
-                    ins.value('Panels', str(len(layout.panels)))
-                    ins.value('Auxiliary', f'{len(layout.auxiliary)} bytes (opaque)')
-                    ins.value('DSIG', f'{len(layout.embedded)} bytes' if layout.embedded[:4] == b'DSIG'
-                              else 'not found')
-                    for i, panel in enumerate(layout.panels[:16]):
-                        ins.value(f'Panel {i}', f'base {panel.first_tile}, {panel.tiles_w}×{panel.tiles_h} tiles')
-                    if len(layout.panels) > 16:
-                        ins.value('Additional', f'{len(layout.panels) - 16} panels not listed')
-                    ins.evidence('Descriptors', 'Direct', 'ARM9 0x02044E78 / 0x02043C7C')
-                    ins.evidence('Placement', 'Unknown', 'additional section and layer mapping unresolved')
+                    layout = (self.selected_layout if self.selected_layout is not None
+                              else parse_layout(data))
+                    ins.section('DSTX 0x05/0x06 - tilemap inspection', note=item.name)
+                    ins.value('Mode', f'0x{layout.flags:02X}; unsigned {layout.cell_bytes * 8}-bit cells')
+                    ins.value('Panels', str(len(layout.panel_maps)))
+                    ins.value('Offset table', f'{len(layout.map_offsets)} relative u16 offsets')
+                    ins.value('Auxiliary', f'{len(layout.auxiliary)} bytes, '
+                              f'{len(layout.padding)} final zero padding bytes')
+                    ins.value('DSIG', f'{len(layout.embedded)} embedded bytes'
+                              if layout.embedded[:4] == b'DSIG' else 'not found')
+                    try:
+                        panel_index = int(self.layout_panel_index.get())
+                    except ValueError:
+                        panel_index = -1
+                    if 0 <= panel_index < len(layout.panel_maps):
+                        grid = layout.panel_maps[panel_index]
+                        panel = layout.panels[panel_index]
+                        ins.section(f'Panel {panel_index} - raw tile grid',
+                                    note='row-major; read-only; local coordinates')
+                        ins.value('Descriptor', f'first tile {panel.first_tile}, '
+                                  f'{grid.tiles_w} x {grid.tiles_h} tile cells')
+                        base = 8 + 4 * (len(layout.panels) + 1)
+                        ins.value('Data offset', f'aux +0x{grid.offset:04X}, '
+                                  f'DSTX +0x{base + grid.offset:04X}')
+                        ins.value('Stored cells', f'{len(grid.cells)} x u{grid.cell_bytes * 8}')
+                        # Conditional ARM9 02043C7C CLDS-conversion geometry.
+                        # This path does not necessarily run for a given resource.
+                        from jus_formats.panelmesh import expand_conditional_fallback
+                        try:
+                            fallback = expand_conditional_fallback(layout, panel_index)
+                            ins.value('Conditional CLDS pieces', str(len(fallback.pieces)))
+                            ins.value('CLDS tile sequence',
+                                      f'{fallback.first_tile} .. {fallback.next_tile - 1}')
+                            ins.evidence('Conditional CLDS mesh', 'Direct',
+                                         'ARM9 02043C7C when branch selected; '
+                                         'not proven as active display path')
+                        except ValueError as exc:
+                            ins.value('Conditional CLDS mesh', str(exc))
+                            ins.evidence('Conditional CLDS mesh', 'Unknown',
+                                         'ROM width lookup ends at 16; wider panels '
+                                         'need another runtime branch')
+                        digits = grid.cell_bytes * 2
+                        lines = [' '.join(f'{v:0{digits}X}' for v in grid.row(y)[:16])
+                                 for y in range(min(grid.tiles_h, 16))]
+                        ins.value('Tile grid (hex)', '\n'.join(lines) if lines else '(empty)')
+                        if self.layout_render_info is not None:
+                            info = self.layout_render_info
+                            ins.value('Rendered pixels', f'{info.width} x {info.height} RGBA')
+                            ins.value('DSIG pixel mode', f'0x{info.dsig_mode:02X}')
+                            ins.value('Distinct source tiles', str(len(info.referenced_tiles)))
+                            ins.value('4bpp palette bank IDs', ', '.join(map(str, info.palette_banks)))
+                            ins.value('Flipped cells (H,V)',
+                                      f'{info.hflip_cells}, {info.vflip_cells}')
+                            ins.evidence('Rendered panel', 'Inferred',
+                                         'Original DSIG pixels + NDS text-BG map bits; '
+                                         'hardware frame capture pending')
+                        elif self.sprite_error:
+                            ins.value('Render problem', self.sprite_error)
+                        if grid.tiles_w > 16 or grid.tiles_h > 16:
+                            ins.text('Only the first 16 columns and 16 rows are shown here. '
+                                     'The parser retains the complete original panel map.')
+                    else:
+                        ins.value('Selected panel', 'Choose a valid tile-panel index above.')
+                    ins.evidence('Map offsets and cells', 'Direct',
+                                 '50 original files; ARM9 0x020433EC / 0x02043C7C')
+                    ins.evidence('Screen placement', 'Unknown',
+                                 'panel cells do not encode scene-level X/Y')
+                    ins.evidence('Palette/flip interpretation', 'Inferred',
+                                 'NDS text-BG bit interpretation, validated for all 50 files; '
+                                 'hardware frame capture pending')
             except (ValueError, KeyError, IndexError) as exc:
                 ins.section('Resource')
                 ins.value('Parse problem', str(exc))

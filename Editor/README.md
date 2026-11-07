@@ -247,3 +247,23 @@ GX `0x50` atlas.  The Inspector now labels this image mode and warns that
 Tk's straight RGBA compositing is not DS polygon-alpha/depth compositing.
 To verify the ARM9 vtable and call edges offline, run
 `python tools/verify_lifetime_dispatch.py reverse_engineering.zip`.
+
+### Original Koma and ALMT move-name links
+
+In the Koma workspace, select a card: its Inspector displays actual size-specific Special A/B names and descriptions from bin/chr_b_t.bin (battle) or its 2-/3-Koma support action from bin/chr_s_t.bin. Select an entry in the Move chooser and click Open selected ALMT move to inspect its exact original animation resource. In Move Lab, select a named move and use the Koma references chooser and Open Koma card to return to the card art/shape. This is read-only metadata/navigation; no source BIN or ALMT text data is changed by browsing, and unnamed normal input actions remain explicitly unnamed.
+
+### Shot objects and original normal-action input masks
+
+In Animation, select a battle move that has a NoteTrack shot invocation. View > Shot animation sources (or the viewport Show dropdown) displays the original ALMT child frames for handler1 shot sources at the authored launch position; the shot timeline and Inspector show the shot record, handler, resource IDs and references. A giant collision box is NOT a rendered beam: static previews intentionally omit runtime geometry and projectile motion. Select a common input or Special move to see the original raw input mask and function in the Inspector. Ordinary unnamed base states remain unlabeled rather than receiving guessed move names. No JUS game assets are modified by previewing.
+
+### Original projectile geometry inspection
+
+In Animation, select a battle attack with NoteTrack chara_action(2), select the Shot objects timeline lane and inspect its original ChrBin handler, source ALMT/TextureID, GX sprite mode and code-backed motion/geometry family. For verified cardinal handler01 shots, the source children are spaced according to the native 24.8 work increment. View > Shot animation sources is a SOURCE-ONLY preview: it does not fake long beams or claim to display observed in-game movement. GenerateID and persistent pursuer effects are separate code paths. Original data is not written by inspecting these diagnostics.
+
+### Handler01 constructor and repeating shot-body roles
+
+The original constructor ROM array at ov06 0x02172864 maps shot handler01 to FUN_0216B4F4; a second 26-entry per-frame update array at 0x0217278C maps it to FUN_0216BA2C. Constructor 0216B514 creates record+0x14 initial anchored ALMT (when nonzero) then record+0x0C moving ALMT without a hit test. Updater 0216BA2C creates additional record+0x10 ALMT instances when native spacing/slot conditions pass. These source field roles are shared across the 68 original handler01 records; source+0x0C is not contact-only by construction. Handler01 sets work+0x26 bit2, bypassing ordinary record-lifetime countdown, so the current source-only preview cap is not native expiry. The Animation Shot Inspector shows all three source roles, original per-frame update callback and code provenance; it still does not extrapolate a fabricated full beam. Research: D:\Library\Development\JUS\docs\Research\HANDLER01_BEAM_FIELD_LIFECYCLE_PROOF_20261106.md. Regression: tests/test_shot_handler01_lifecycle.py.
+
+### Source-derived projectile repeat preview and Hiei steering trace
+
+For Bo-bobo 0x8412B, View > Shot animation sources plus View > Handler01 repeats (unobstructed model) show real original 0x84181 ALMT repeat segments. Counter-based source IDs are exact for cardinal source angles; post-birth XY is modeled, NOT proven native trajectory. The shot Inspector shows emitted source count and original callback evidence. For Hiei yh_b_03 / 0x9832C, the source head frame can be inspected, and the shot Inspector explains native D-Pad steering, the 128-position/angle ring, 12-child body and terminal source 0x98359, plus original status36 cue/callback. It does not fabricate a curved or tracking path. No original game files are changed by viewing either.

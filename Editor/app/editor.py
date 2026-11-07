@@ -33,7 +33,7 @@ if str(HERE) not in sys.path:
 
 from jus_formats import alar, almt, dsig as dsigmod, dstx as dstxmod, eventops, notetrack, sprite  # noqa: E402
 from jus_formats import battleai, battleinput, bintables, chrbin, gametables, roster  # noqa: E402
-from jus_package import effectlinks, images, motion, package, sounds, spawns, spriteedit  # noqa: E402
+from jus_package import dynamicgeometry, effectlinks, images, motion, movelinks, package, shotprojection, shotvisuals, sounds, spawns, spriteedit, steeredtrail  # noqa: E402
 from app.workspaces import SUITE  # noqa: E402
 from jus_package.draworder import submission_note  # noqa: E402
 from jus_package.audio_preview import AudioPreview
@@ -109,8 +109,12 @@ class EditorApp(tk.Tk):
         self.show_collision = tk.BooleanVar(value=True)
         self.show_ai_profile = tk.BooleanVar(value=True)    # chr/ai AIPM boxes for the move's input selector
         self._ai_profiles = {}                               # cid -> AttackProfile | None
+        self._move_xrefs = None                               # read-only BIN/ALMT/Koma lookup
+        self._move_xrefs_error = ''
         self.show_effects = tk.BooleanVar(value=True)      # pursuer (chara_action 13/14)
         self.show_spawns = tk.BooleanVar(value=True)       # GenerateID effects
+        self.show_shot_sources = tk.BooleanVar(value=True) # source ALMT frames
+        self.show_shot_repeat_model = tk.BooleanVar(value=True) # no-contact cardinal source model
         self.isolate_selected_spawn = tk.BooleanVar(value=False)  # viewport diagnostic, not saved
         self.show_effect_marks = tk.BooleanVar(value=True)
         self.effect_layer = tk.StringVar(value='Front')    # viewport occlusion override; high-first submission verified
@@ -217,6 +221,10 @@ class EditorApp(tk.Tk):
         v.add_separator()
         v.add_checkbutton(label='Collision boxes', variable=self.show_collision, command=self.redraw_view)
         v.add_checkbutton(label='Spawned effects (GenerateID)', variable=self.show_spawns, command=self.redraw_view)
+        v.add_checkbutton(label='Shot animation sources (read-only)', variable=self.show_shot_sources,
+                          command=self.redraw_view)
+        v.add_checkbutton(label='Handler01 repeats (unobstructed model)',
+                          variable=self.show_shot_repeat_model, command=self.redraw_view)
         v.add_checkbutton(label='Effect origin markers', variable=self.show_effect_marks, command=self.redraw_view)
         v.add_checkbutton(label='Pursuer effects', variable=self.show_effects, command=self.redraw_view)
         v.add_checkbutton(label='Onion skin', variable=self.show_onion, command=self.redraw_view)
@@ -340,8 +348,8 @@ class EditorApp(tk.Tk):
         self.move_filter.trace_add('write', lambda *_: self.populate_moves(keep=True))
         fe = ttk.Entry(clips.body, textvariable=self.move_filter)
         fe.pack(fill='x', padx=6, pady=2)
-        T.Tooltip(fe, 'Filter by index or id')
-        mf, self.moves_tree = T.tree(clips.body, ('#', 'id', 'len', 'loop', 'control'), (34, 86, 40, 34, 120),
+        T.Tooltip(fe, 'Filter by index, resource id, input control or original BIN move title')
+        mf, self.moves_tree = T.tree(clips.body, ('#', 'id', 'len', 'loop', 'control'), (34, 86, 40, 34, 255),
                                      height=20, style='Mono.Treeview')
         mf.pack(fill='both', expand=True, padx=(6, 0), pady=2)
         self.moves_tree.bind('<<TreeviewSelect>>', self.on_move_select)
@@ -357,6 +365,8 @@ class EditorApp(tk.Tk):
         giz = ttk.Menubutton(vp.header, text='Show ▾', style='Tool.TButton')
         gm = tk.Menu(giz, tearoff=False)
         for text, var in (('Spawned effects (GenerateID)', self.show_spawns),
+                          ('Shot animation sources (chara_action 2)', self.show_shot_sources),
+                          ('Handler01 repeats: no contact/terrain model', self.show_shot_repeat_model),
                           ('Effect origin markers', self.show_effect_marks),
                           ('Pursuer effect (chara_action 13/14)', self.show_effects),
                           ('Collision boxes', self.show_collision),
@@ -651,6 +661,8 @@ class EditorApp(tk.Tk):
             self.root_data.characters()
             self._common_tables = None
             self._ai_profiles = {}
+            self._move_xrefs = None
+            self._move_xrefs_error = ''
         except Exception as exc:  # noqa: BLE001
             self.root_data = None
             if not quiet:
@@ -1137,6 +1149,84 @@ class EditorApp(tk.Tk):
         prof = self._ai_profiles[cid]
         return prof.for_selector(entry[1]) if prof else None
 
+    def _move_xref(self):
+        """Read-only, session-local BIN/Koma/ALMT references."""
+        if self.root_data is None:
+            return None
+        if self._move_xrefs is None and not self._move_xrefs_error:
+            try:
+                self._move_xrefs = movelinks.MoveLinks(self.root_data)
+            except (OSError, ValueError, KeyError) as exc:
+                self._move_xrefs_error = str(exc)
+        return self._move_xrefs
+
+    def _move_source_form(self):
+        if not self.almt_path:
+            return None, None
+        member = split(self.almt_path)[-1]
+        stem = member[:-4] if member.endswith('.amt') else ''
+        if stem in roster.BATTLE_IDS:
+            return stem, member
+        for size in (2, 3):
+            tail = f'_{size}'
+            if stem.endswith(tail) and stem[:-len(tail)] in roster.SUPPORT_IDS:
+                return stem[:-len(tail)], member
+        return None, None
+
+    def _move_control_and_title(self, move):
+        form, member = self._move_source_form()
+        if not form:
+            return ''
+        label = (battleinput.control_for(move.id) or '') if form in roster.BATTLE_IDS else ''
+        svc = self._move_xref()
+        if svc:
+            title = svc.text_for_move(form, move.id, almt_member=member)
+            if title and title.display_title:
+                return f'{label} - {title.display_title}' if label else title.display_title
+        return label or (f'Support ({member})' if form in roster.SUPPORT_IDS else '')
+
+    def open_move_resource(self, form: str, resource_id: int, member: str):
+        """Go to the original ALMT whose ID this Koma actually references."""
+        if not self.root_data or not member or not member.endswith('.amt'):
+            return False
+        stem = member[:-4]
+        valid = (stem == form and form in roster.BATTLE_IDS) or (
+            form in roster.SUPPORT_IDS and stem in (f'{form}_2', f'{form}_3'))
+        if not valid:
+            self.status.set(f'Unverified move source: {form} / {member}')
+            return False
+        archive = join('chr/ChrArc.aar', f'chr/{stem}.aar')
+        target = join(archive, member)
+        if not self.root_data.exists(target):
+            self.status.set(f'Missing ALMT: {target}')
+            return False
+        if self.almt_path != target and not self.confirm_discard():
+            return False
+        if self.container != archive:
+            self.select_container(archive, form)
+        if self.almt_path != target:
+            self.almt_combo.set(member)
+            self.load_almt(member)
+        if not self.almt:
+            return False
+        found = next((i for i, m in enumerate(self.almt.moves) if m.id == resource_id), None)
+        if found is None:
+            self.status.set(f'Missing move {hx(resource_id)} in {target}')
+            return False
+        self.show_workspace('animation')
+        if self.move_filter.get():
+            self.move_filter.set('')
+        self.populate_moves(select=found)
+        self.status.set(f'Koma source: {form} / {member} / {hx(resource_id)}')
+        return True
+
+    def open_koma_card(self, card_index: int):
+        ws = self.suite.get('koma')
+        if ws is None or self.root_data is None:
+            return False
+        self.show_workspace('koma')
+        return ws.open_card_by_id(card_index)
+
     def _battle_base_table(self) -> bool:
         """True for a battle character's base move table (chr/<id>.aar|<id>.amt), the
         only table the input selector 0x021712B8 indexes."""
@@ -1154,9 +1244,8 @@ class EditorApp(tk.Tk):
             self.refresh_animation()
             return
         flt = self.move_filter.get().strip().lower()
-        base_table = self._battle_base_table()
         for i, m in enumerate(self.almt.moves):
-            control = (battleinput.control_for(m.id) or '') if base_table else ''
+            control = self._move_control_and_title(m)
             if flt and flt not in str(i) and flt not in hx(m.id).lower() and flt not in control.lower():
                 continue
             t.insert('', 'end', str(i), values=(i, hx(m.id, 6), m.duration, '⟳' if m.flags & 1 else '', control))
@@ -1189,7 +1278,7 @@ class EditorApp(tk.Tk):
     def _move_row(self, i):
         m = self.almt.moves[i]
         if self.moves_tree.exists(str(i)):
-            self.moves_tree.item(str(i), values=(i, hx(m.id, 6), m.duration, '⟳' if m.flags & 1 else ''))
+            self.moves_tree.item(str(i), values=(i, hx(m.id, 6), m.duration, '⟳' if m.flags & 1 else '', self._move_control_and_title(m)))
 
     def mark_almt(self):
         self.almt_dirty = True
@@ -1641,6 +1730,7 @@ class EditorApp(tk.Tk):
                 rows.extend(child_rows)
         rows.extend(self._spawn_rows())
         rows.extend(self._notetrack_effect_rows())
+        rows.extend(self._shot_rows())
         if self._pursuer_events:
             gid = ('group', 'effects')
             collapsed = gid in self._collapsed
@@ -2364,6 +2454,7 @@ class EditorApp(tk.Tk):
             if 'Marker' in st and st['Marker']:
                 info.append(f'{name}: {eventops.marker_label(st["Marker"])}')
         self._draw_spawns(vp, tick, info, sprites=not behind)
+        self._draw_shot_source_sprites(vp, tick, info)
         self._draw_pursuer(vp, tick, info)
 
     def _inspect_spawn(self, ins, row):
@@ -2426,6 +2517,18 @@ class EditorApp(tk.Tk):
             ins.value('DrawPrio', '—' if inst.draw_prio is None else
                       f'{inst.draw_prio / 4096:g}  (raw {inst.draw_prio})')
             ins.value('Renderer link priority', submission_note(inst.draw_prio))
+            dynamic_tracks = sorted({
+                tr.field for node in child.nodes if node
+                for tr in node.tracks if tr.keyed and len(tr.keys) > 1
+            })
+            ins.section('Authored dynamic geometry (GenerateID)')
+            ins.value('Keyed child fields',
+                      ', '.join(dynamic_tracks) if dynamic_tracks else
+                      'None: static authored child ALMT')
+            ins.text('FUN_0206CA8C / 02022060 create linked effects; '
+                     'FUN_0202AA28 evaluates inherited transforms. '
+                     'Animated 2DPos, BoundsIndex, Alpha, DrawPrio and '
+                     'runtime camera/GX transforms are distinct from shots.')
             ins.text('Verified: DrawPrio setter → sorted list → high-first draw callbacks. '
                      'DS depth, alpha and BG/OBJ rules still determine visible front/back.')
             for n in inst.notes:
@@ -2561,6 +2664,294 @@ class EditorApp(tk.Tk):
                               origin_at=self._animation_origin,
                               apply_teardown=self.effect_teardown.get())
 
+    def _shot_events_current(self):
+        """All original 0x0300/action2 shot invocations for this base battle AMT."""
+        if not self.move or not self.almt or not self.root_data or not self._battle_base_table():
+            return ()
+        form, _ = self._move_source_form()
+        if form is None:
+            return ()
+        member = join('chr/ChrBin.aar', f'chr/shot/{form}.bin')
+        if not self.root_data.exists(member):
+            return ()
+        try:
+            table = chrbin.parse(self.root_data.read(member), f'chr/shot/{form}.bin')
+            return shotvisuals.source_shots(self.move, self.almt.node_names, table)
+        except (ValueError, OSError, KeyError) as exc:
+            self._shot_source_error = str(exc)
+            return ()
+
+    def _draw_shot_source_sprites(self, vp, tick, info):
+        """Real ALMT source frames with optional code-derived repeat projection.
+
+        0216BA2C cardinal repeat events are source-derived; post-birth
+        actor XY is a clearly labeled unobstructed constant-velocity model.
+        There is no simulated hit, terrain collision or GX pixel synthesis.
+        """
+        if not self.show_shot_sources.get() or not self.index:
+            return
+        here = [ev for ev in self._shot_events_current()
+                if ev.directly_constructed_animations and ev.nominally_active(tick)]
+        count = 0
+        now_x, now_y = self._animation_origin(tick)
+        for ev in here:
+            # FUN_0216A944 mirrors the authored x offset when actor facing
+            # changes. Owner origin is captured at the original shot spawn.
+            born_x, born_y = self._animation_origin(ev.tick)
+            facex = -ev.launch_x if self.facing_left.get() else ev.launch_x
+            launch_x = born_x + facex - now_x
+            launch_y = born_y + ev.launch_y - now_y
+            age = tick - ev.tick
+            model = (shotprojection.project_handler01_unobstructed(
+                ev.record, age, self.facing_left.get())
+                if self.show_shot_repeat_model.get() and ev.handler == 1 else None)
+            if model is not None:
+                instances = tuple((i.animation_id, i.current_dx_q8,
+                                   i.current_dy_q8, i.age_updates, i.source_field)
+                                  for i in model.sprites)
+                if model.body_emissions:
+                    info.append(f'shot #{ev.record_index}: {model.body_emissions} '
+                                '+0x10 repeat launches (source spacing; XY modeled)')
+            else:
+                layout = dynamicgeometry.handler1_child_placement_q8(
+                    ev.record, self.facing_left.get())
+                if layout is None:
+                    layout = tuple((rid, 0, 0) for rid in ev.directly_constructed_animations)
+                    if ev.handler != 5:
+                        info.append(f'shot {ev.record_index}: angular child spacing '
+                                    '(native DS floating-point math unavailable)')
+                instances = tuple((rid, x, y, age, 'birth source')
+                                  for rid, x, y in layout)
+            for animation_id, dx_raw, dy_raw, child_age, field_role in instances:
+                entry = self._effect_moves.get(animation_id)
+                if entry is None:
+                    info.append(f'shot {ev.record_index}: ALMT {hx(animation_id, 6)} '
+                                f'{field_role} unavailable')
+                    continue
+                child, names, _path = entry
+                shot_tick = effectlinks.effect_frame_tick(child, child_age)
+                if shot_tick is None:
+                    continue
+                self._draw_node_sprites(vp, child, shot_tick,
+                                        base=(launch_x + dx_raw / 256,
+                                              launch_y + dy_raw / 256), names=names)
+                count += 1
+            if ev.handler == 5:
+                info.append('handler05: original head ALMT only; '
+                            'live D-pad / 128-sample curved path NOT simulated')
+            if self.show_effect_marks.get():
+                vp.text(launch_x, launch_y, '+', fill=T.WARN, font=T.MONO_SMALL)
+        if count:
+            info.append(f'shot ALMT instances: {count} '
+                        '(handler01 source-derived projection; NO contact/terrain/GX physics)')
+
+    def _shot_rows(self):
+        """Timeline source events, including other handlers not rendered yet."""
+        events = self._shot_events_current()
+        if not events:
+            return []
+        gid = ('group', 'shot')
+        collapsed = gid in self._collapsed
+        out = [{'id': gid, 'kind': 'group',
+                'label': 'Shot objects (NoteTrack action 2; source-only)',
+                'collapsed': collapsed, 'editable': False,
+                'keys': [(ev.tick, ev) for ev in events]}]
+        if not collapsed:
+            out.append({'id': ('virt', 'shot'), 'kind': 'track', 'derived': 'shot',
+                        'label': 'chr/shot records', 'indent': 1, 'editable': False,
+                        'colour': T.WARN,
+                        'keys': [(ev.tick, ev) for ev in events],
+                        'spans': [(ev.tick, min(self.move.duration, ev.nominal_end),
+                                   T.WARN, 'nominal only') for ev in events],
+                        'labels': [(ev.tick, f'#{ev.record_index} h{ev.handler:02X}', T.WARN)
+                                   for ev in events],
+                        'tooltip': lambda t, ev: (
+                            f'tick {ev.tick}: original shot record {ev.record_index}, '
+                            f'handler 0x{ev.handler:02X}, launch ({ev.launch_x},{ev.launch_y}), '
+                            f'authored lifetime {ev.record.effective_lifetime} ticks\\n'
+                            + 'geometry: ' + dynamicgeometry.shot_dynamic_path(
+                                ev.handler).geometry_family + '\\n'
+                            + 'refs: ' + ', '.join(hx(r, 6) for r in ev.references)
+                            + '\\nStatic source only. Hit/contact, runtime position, repeats, '
+                              'conditional branch result and 3D transforms not simulated.')})
+        return out
+
+    def _inspect_shot_source(self, ins):
+        """Inspector for a selected shot timeline entry."""
+        events = self._shot_events_current()
+        ins.section('Shot source (read-only)', note='Original chr/shot table; runtime != static preview')
+        if not events:
+            ins.text('No source shot commands in this ALMT.')
+            return
+        found = [ev for ev in events if ev.tick == self.tick]
+        if not found:
+            found = [ev for ev in events if ev.tick <= self.tick]
+        if not found:
+            found = list(events[:1])
+        for ev in found[-5:]:
+            ins.section(f'Shot #{ev.record_index} @ tick {ev.tick}')
+            ins.value('Handler', f'0x{ev.handler:02X}, {ev.record.handler_address}')
+            ins.value('Behavior', ev.record.handler_behavior)
+            ins.value('Source event', f'chara_action(2) record {ev.record_index} '
+                      f'offset ({ev.launch_x}, {ev.launch_y})')
+            ins.value('Source preview window', f'{ev.record.effective_lifetime} ticks; '
+                      f'preview cap tick {ev.nominal_end} (NOT runtime expiry)')
+            if ev.handler05_timer_exemption_is_code_proven:
+                ins.section('Handler05 - D-pad controlled history trail',
+                            note='Native 0216B910/0216BE0C/0216C028; no live input playback')
+                for field,resource,role in ev.handler05_source_roles:
+                    ins.value(f'{field} {hx(resource,6)}',role)
+                ins.value('D-pad raw steering',
+                          'Up: Y-0x40; Down: Y+0x40; Left: X-0x40; Right: X+0x40')
+                ins.value('History region', '128 positions + rotations, stride 12 bytes')
+                ins.value('Trail instance cap', '12 total (head + 10 body + terminal)')
+                ins.value('Native update', 'FUN_0216BE0C with FUN_0216C028')
+                ins.value('Native timer', 'exempt via work+0x26 bit1 from FUN_0216B910')
+                if ev.move_id == 0x0009832C:
+                    ins.section('Authored status/teardown cues',
+                                note='Original NoteTrack events, not guaranteed runtime branch')
+                    ins.value('Move name', 'True Dragon of the Darkness Flame (original BIN)')
+                    ins.value('Shot source', 'tick 34: record2 handler05; '
+                              'tick 82/112: chara_action(3) shot cleanup')
+                    ins.value('Original status event', 'tick 112: chara_action(10,18)')
+                    ins.value('Original ROM byte mapping',
+                              'DAT_0217215C[18] = 0x24')
+                    ins.value('Original status callback',
+                              'FUN_021593E8 (writes fighter+0xBC = 0x140 on start)')
+                    ins.text('Original move text describes a self-hit power effect, '
+                             'but whether that status event is conditional on '
+                             'self-contact, Marker branch selection or another '
+                             'live runtime flag is not proven by static sources.')
+                if self.tick >= ev.tick:
+                    trail = steeredtrail.hiei_handler05_source_plan(
+                        ev.record, self.tick-ev.tick)
+                    ins.value('No-contact source child count',str(len(trail.sources)))
+                    ins.value('Native history write index',str(trail.history_write_index))
+                    ins.value('Terminal source instanced',
+                              'yes (conditional)' if trail.terminal_bodies else
+                              'not yet (in uninterrupted model)')
+                ins.text('The original text says Use D-Pad to control. This is '
+                         'direct steering, NOT automatic enemy homing. No '
+                         'D-pad sequence, target hit, self-hit, native DS '
+                         'float normalization, historical path or physical '
+                         'contact is reproduced by a static ALMT preview.')
+            if ev.handler01_timer_exemption_is_code_proven:
+                ins.value('Repeat projection', 'Unobstructed cardinal source model '
+                          if self.show_shot_repeat_model.get() else 'Disabled')
+                model = (shotprojection.project_handler01_unobstructed(
+                    ev.record, max(0, self.tick-ev.tick), self.facing_left.get())
+                    if self.tick >= ev.tick else None)
+                if model:
+                    ins.value('Total +0x10 launches',str(model.body_emissions)
+                              + ' (source 0216BA2C counter path)')
+                    ins.value('Modeled child objects',str(len(model.sprites)))
+                    ins.value('Native spacing counter (q8)',str(model.next_spacing_q8))
+                    ins.value('Constant-velocity seed (q8)',str(model.velocity_q8))
+                    ins.text('Child XY after birth assumes linear unobstructed '
+                             'actor movement, NOT an observed game trajectory. '
+                             'Live collision, owner movement, GX transform '
+                             'and interrupted slot allocation remain unknown.')
+                ins.text('Native handler01 sets work+0x26 flag2 in 0216B4F4. '
+                         'Scheduler 0216AF04 skips its usual countdown for '
+                         'this flag. True retirement is hit/work-state dependent.')
+                ins.section('Handler01 field roles (verified native code)')
+                for field, resource, behavior in ev.handler1_source_roles:
+                    ins.value(f'{field}  {hx(resource,6)}',behavior)
+                ins.text('Original 0216B514 unconditionally calls the +0x0C '
+                         'child constructor on launch. Thus +0x0C is NOT '
+                         'constructed exclusively on impact. '
+                         'ROM update callback 0216BA2C reads +0x10 '
+                         'to construct repeated body segments when the '
+                         'source 0x1800 spacing counter crosses its threshold.')
+
+            ins.value('References', ', '.join(hx(v, 6) for v in ev.references))
+            ins.value('Flags', hx(ev.record.flags))
+            primary = self._effect_moves.get(ev.record.reference0)
+            if primary:
+                source_move, source_names, source_path = primary
+                ins.section('Primary source animation')
+                ins.value('ALMT', f'{hx(ev.record.reference0, 6)}  {source_path}')
+                for st in spawns.state_at(source_move, 0).values():
+                    if 'TextureID' not in st:
+                        continue
+                    tid, bound = st['TextureID'], st.get('BoundsIndex')
+                    original = self.index.sprite(tid) if self.index else None
+                    ins.value('Original texture', f'{hx(tid, 6)}, BoundsIndex {bound}')
+                    if original:
+                        dstx, spr_source = original
+                        ins.value('Original renderer',
+                                  f'DSIG 0x{spr_source.mode:02X} - '
+                                  + ('GX textured atlas' if spr_source.is_atlas else
+                                     'DS OBJ/tile source' if spr_source.is_obj else 'other source'))
+                        if isinstance(bound, int) and 0 <= bound < len(dstx.frames):
+                            ins.value('DSTX pieces',str(len(dstx.frames[bound].pieces)))
+                        ins.text('Original sprite pixels are source data; native rotation, '
+                                 'stretch, transform inheritance and occlusion are '
+                                 'runtime GPU state, NOT collision rectangle geometry.')
+                    break
+            else:
+                ins.value('Primary ALMT', f'{hx(ev.record.reference0, 6)} '
+                          '(not in current character/common catalog)',colour=T.WARN)
+            ins.value('Raw source byte +0x01', f'0x{ev.record.byte1:02X}')
+            ins.value('Speed work +0x04', f'{ev.record.work_param} (raw u16)')
+            profile = dynamicgeometry.shot_dynamic_path(ev.handler)
+            ins.section('Original dynamic geometry', note='Code-backed mechanism, not a simulated hit')
+            ins.value('Movement family', profile.geometry_family)
+            ins.value('Native per-frame callback', profile.per_frame_update)
+            ins.value('ROM dispatch tables', 'ov06 0x02172864 constructor / 0x0217278C updater')
+            ins.value('Renderer', profile.visual_model)
+            ins.value('Position logic', profile.position_model)
+            ins.value('Required runtime state', ', '.join(profile.runtime_dependencies))
+            ins.value('Native functions', ', '.join(profile.native_functions))
+            if profile.uses_trig_direction_byte:
+                unit = dynamicgeometry.cardinal_direction_q8(
+                    ev.record.byte1, self.facing_left.get())
+                ins.value('Native direction argument',
+                          f'0x{ev.record.byte1:02X} via FUN_0216E898 (256-angle cycle)')
+                if unit and profile.uses_speed_param_u16:
+                    ins.value('Cardinal source velocity',
+                              f'{dynamicgeometry.native_velocity_q8(ev.record.work_param, unit)}'
+                              ' raw 24.8, BEFORE stage/hit adjustments')
+                elif profile.uses_speed_param_u16:
+                    ins.value('Native velocity formula',
+                              '(u16 shot+4 * signed_q8_trig(shot+1, facing)) >> 8'
+                              ' (live DS FP rounding and collision required)')
+            arrangement = dynamicgeometry.handler1_child_placement_q8(
+                ev.record, self.facing_left.get()) if ev.handler == 1 else None
+            if arrangement:
+                ins.section('Proven source child spacing', note='ov06 0216B514/0216C5F0')
+                for rid, x, y in arrangement:
+                    ins.value(f'ALMT {hx(rid, 6)}',
+                              f'({x / 256:g}, {y / 256:g}) px relative to launch')
+            if ev.directly_constructed_animations:
+                for rid in ev.directly_constructed_animations:
+                    child = self._effect_moves.get(rid)
+                    ins.value('Constructed ALMT', f'{hx(rid, 6)}: '
+                              + (child[2] if child else 'source animation missing'))
+                    if child:
+                        ins.value('ALMT duration', str(child[0].duration)
+                                  + (' (loop)' if child[0].flags & 1 else ''))
+                        for st in spawns.state_at(child[0], 0).values():
+                            if 'TextureID' in st:
+                                ref = self.index.sprite_ref(st['TextureID']) if self.index else None
+                                ins.value('Rendered texture',
+                                          f'{hx(st["TextureID"], 6)} '
+                                          + (ref.dstx_path if ref else 'DSTX missing'))
+                                break
+                ins.text('Direct original handler 1 FUN_0216B514 calls FUN_0216C5F0 '
+                         'for +0x14 (if nonzero), then +0x0C. Those IDs are ALMT '
+                         'animations whose own TextureID/BoundsIndex choose the '
+                         'original sprite frames. This viewport holds their '
+                         'authored shot launch anchor fixed: NOT a reconstructed '
+                         'full-length beam, moving projectile, or repeated/rotated '
+                         'DS geometry. Stored +0x10 has a separate consumer.')
+            else:
+                ins.text('Handler has no individually traced static source-sprite '
+                         'constructor in this diagnostic; no visual guess rendered.')
+        ins.evidence('Projectile source', 'Direct',
+                     'ov06 FUN_02157A44(2) ? FUN_02158470 ? FUN_0216A944 ? '
+                     'FUN_0216ACC8; handler1 FUN_0216B514 ? FUN_0216C5F0')
+
     def _visible_spawn_instances(self, projection):
         if not self.isolate_selected_spawn.get():
             return projection.instances
@@ -2663,10 +3054,61 @@ class EditorApp(tk.Tk):
                   on_change=self.apply_move_props)
         ins.value('fps', f'{m.fps}  (not read by the game)', colour=T.MUTED)
         ins.value('Flags', hx(m.flags, 2), colour=T.MUTED)
+        # Dynamic read-only source correlation; BIN titles are never written to ALMT.
+        form, member = self._move_source_form()
+        if form:
+            svc = self._move_xref()
+            if svc:
+                source = svc.text_for_move(form, m.id, almt_member=member)
+                source_cards = svc.cards_for_move(form, m.id, almt_member=member)
+                if source:
+                    ins.section('Original move text', note=f'{source.source} | record {source.record}')
+                    ins.value('Title', source.display_title or '(blank in supplied BIN)')
+                    ins.value('BIN title slot', str(source.title_slot),
+                              tip=f'{source.source}, word {source.record}*'
+                                  f'{53 if form in roster.BATTLE_IDS else 9}+{source.title_slot}')
+                    ins.value('Type', source.type_label or '(blank in supplied BIN)')
+                    ins.value('Description', source.display_description or '(none in supplied BIN)')
+                    ins.value('Description slots', ', '.join(map(str, source.description_slots)),
+                              colour=T.MUTED)
+                    ins.evidence('Text', 'Direct', 'original self-relative BIN pointers; '
+                                 'battle special overlay5 0214E0A4/0214E11C; '
+                                 'support original overlay5 0214E370/0214E3D4')
+                elif form in roster.BATTLE_IDS and m.id & 0xFF in battleinput.MOVE_CONTROLS:
+                    ins.section('Original move text')
+                    ins.text('No individual move title is defined by the verified '
+                             'bin/chr_b_t.bin special-name accessor for this action. '
+                             'The input/control label is code-derived.')
+                if source_cards:
+                    ins.section('Koma references', note='bin/koma.bin +7 roster, +8 size; read-only')
+                    labels = [f'#{c.index} ({c.size} koma)' for c in source_cards]
+                    self._source_card_choice = tk.StringVar(value=labels[0])
+                    self._source_card_lookup = dict(zip(labels, (c.index for c in source_cards)))
+                    ins.combo('Card', self._source_card_choice, labels,
+                              'This ALMT action is available to these original Koma records',
+                              width=22)
+                    ins.buttons(('Open Koma card',
+                                 lambda: self.open_koma_card(
+                                     self._source_card_lookup[self._source_card_choice.get()])))
+            elif self._move_xrefs_error:
+                ins.value('Move text lookup', self._move_xrefs_error, colour=T.WARN)
         if self._battle_base_table():
             control = battleinput.MOVE_CONTROLS.get(m.id & 0xFF)
             if control:
                 ins.value('Control', f'{control[0]} (selector {control[1]})', tip=control[2])
+                trace = battleinput.source_trace(m.id)
+                if trace:
+                    mode, predicate, guard, function = trace
+                    ins.section('Original input to ALMT', note='Code predicate; input acceptance is conditional')
+                    ins.value('State mode', mode)
+                    ins.value('Input predicate', predicate)
+                    ins.value('Condition', guard)
+                    ins.value('Code source', 'ov06 ' + function)
+                    ins.value('Selected ALMT offset', hx(m.id & 0xFF, 2))
+                    ins.text('The actor+0xC0 and +0xC4 masks can block a transition; '
+                             'ground/air NoteTrack permissions (+0xF3/+0xF4) and '
+                             'follow-up fields (+0xCC/+0xF6/+0xF7) alter eligibility. '
+                             'Matching an input mask does NOT prove a successful cancel.')
                 block = self._ai_block()
                 if block is not None:
                     ins.section('AI attack profile', note=f'chr/ai AIPM selector {block.selector}')
@@ -2679,6 +3121,18 @@ class EditorApp(tk.Tk):
                         ins.value('Hits', 'none (the AI does not attack with this move)', colour=T.MUTED)
                     ins.evidence('Profile', 'Direct', 'overlay 11 BattleAIDeck_Create / 0x02175AD0; box and ticks '
                                                       'match the move\'s collision tracks')
+        if self._battle_base_table() and (m.id & 0xFF) not in battleinput.MOVE_CONTROLS:
+            offset = m.id & 0xFF
+            if offset in (0x33, 0x34, 0x35, 0x36):
+                ins.section('Grabbed-victim pose')
+                ins.text('One of the four source victim reaction poses (user-confirmed). '
+                         'Not an independently named attacking move.')
+            else:
+                ins.section('Unnamed base action')
+                ins.value('Original ALMT offset', hx(offset, 2))
+                ins.text('No individually verified source move title. Code-call '
+                         'sites for this numeric resource are cataloged separately; '
+                         'a human-facing move name is not inferred from its position.')
         if self.sel_virtual is not None and self.sel_virtual.get('spawn') is not None:
             self._inspect_spawn(ins, self.sel_virtual)
             return
@@ -2687,6 +3141,9 @@ class EditorApp(tk.Tk):
             return
         if self.sel_virtual is not None and self.sel_virtual.get('derived') == 'sound':
             self._inspect_sound(ins)
+            return
+        if self.sel_virtual is not None and self.sel_virtual.get('derived') == 'shot':
+            self._inspect_shot_source(ins)
             return
         if self.sel_virtual is not None:
             row = self.sel_virtual
@@ -3422,17 +3879,82 @@ class EditorApp(tk.Tk):
             ins.section('AI parameters', note='0x30-byte records; +0x2E rating (ov12 0x021C56D0)')
             ins.value('Records', str(p.count))
             ins.value('Ratings', ', '.join(str(p.rating(i)) for i in range(min(p.count, 24))))
-        if chrbin.kind_of(e.name) == 'shot':
+        if chrbin.kind_of(e.name) in ('shot', 'col'):
             table = chrbin.parse(e.payload(), e.name)
-            if table.stride:
-                ins.section('Shot records', note='byte 0 = handler id → ov06 table 0x02172864')
+            if table.kind == 'shot' and table.stride == 32:
+                ins.section('Shot work records - read-only',
+                            note='0x20 stride; byte0 selects ov06 callback table at 0x02172864')
+                ins.value('Count', str(table.count))
                 for i in range(min(table.count, 24)):
-                    r = table.record(i)
-                    ins.value(f'#{i}', f'handler {r[0]:#04x} → {chrbin.shot_handler(r[0])}'
-                                       f'  · +0x0C {hx(table.words32(i)[3], 8)}')
+                    rec = table.shot_record(i)
+                    detail = (f'handler 0x{rec.handler_id:02X} -> {rec.handler_address}'
+                              f' | {rec.handler_behavior}'
+                              f'\n  +0x02 spawn cap {rec.spawn_limit} (only with active counter);'
+                              f' duration {rec.lifetime} '
+                              f'(effective {rec.effective_lifetime})'
+                              f' | +0x04 0x{rec.work_param:04X}'
+                              f'\n  flags 0x{rec.flags:08X} : '
+                              f'{", ".join(rec.known_flags) or "no global flags"}'
+                              f'\n  handler flags: '
+                              f'{", ".join(rec.handler_scoped_flags) or "none traced"}'
+                              f' | unclassified 0x{rec.unknown_flags:08X}'
+                              f'\n  +0x0C 0x{rec.reference0:08X},'
+                              f' +0x10 0x{rec.reference1:08X},'
+                              f' +0x14 0x{rec.optional_reference:08X}'
+                              f' ({"enabled" if rec.optional_reference_active else "inactive"})'
+                              f'\n  +0x01 0x{rec.byte1:02X},'
+                              f' +0x1D 0x{rec.selector_byte:02X}'
+                              f' (s8 {rec.selector_signed}),'
+                              f' +0x1E 0x{rec.handler_parameter_1e:04X}')
+                    if rec.handler_0b_update is not None:
+                        detail += f' | handler 0x0B update {rec.handler_0b_update}'
+                    if rec.sound_route is not None:
+                        detail += f'\n  audio: {rec.sound_route}'
+                    ins.value(f'#{i}', detail)
                 if table.count > 24:
-                    ins.value('', f'… {table.count - 24} more')
-                ins.text('Handler ids are code-backed; gameplay names for them are not traced.')
+                    ins.value('Additional', f'{table.count - 24} records not listed')
+                ins.evidence('Shot duration/flags', 'Direct',
+                             'overlay6 02158470/0216ACC8 and per-handler callbacks')
+                ins.evidence('Handler operation', 'Direct',
+                             'mechanical code paths, not canonical move names')
+                ins.evidence('Named gameplay attack types', 'Unknown',
+                             'require original collision/runtime verification')
+                ins.text('The +0x1D selector is context-dependent (coordinate, audio, or '
+                         'target slot). Unknown flag bits and record bytes are retained.')
+            elif table.kind == 'col' and table.stride == 20:
+                ins.section('Collision metadata - read-only',
+                            note='0x14 stride; not ALMT CollisionType work IDs')
+                ins.value('Count', str(table.count))
+                for i in range(min(table.count, 24)):
+                    rec = table.col_record(i)
+                    contribution = rec.work_mask_contributions
+                    ins.value(f'#{i} - ALMT work 0x{0x100+i:04X}',
+                              f'col+0x00 class 0x{rec.class_byte:02X} (gameplay label unknown);'
+                              f' +0x01 secondary 0x{rec.selector_byte:02X};'
+                              f' +0x02 u16 0x{rec.word02:04X};'
+                              f' +0x04 signed power/score {rec.power}'
+                              f'\n  class: {rec.runtime_class_branch}'
+                              f'\n  +0x08 bit flags 0x{rec.raw_word08:08X};'
+                              f' runtime OR masks (+14,+18,+1C):'
+                              f' {contribution[0]:08X}, {contribution[1]:08X},'
+                              f' {contribution[2]:08X}'
+                              f'\n  +0x08 bit23: '
+                              f'{"add work+0x14 flag 0x100" if rec.special_work_flag_100 else "clear"}'
+                              f'\n  unclassified +0x0C 0x{rec.raw_word0c:08X};'
+                              f' +0x10 0x{rec.raw_word10:08X}')
+                if table.count > 24:
+                    ins.value('Additional', f'{table.count - 24} records not listed')
+                ins.evidence('Signed score term', 'Direct',
+                             'overlay11 opponent threat scoring')
+                ins.evidence('ALMT work to source row', 'Direct',
+                             'ARM9 main 0207D440: work 0x100+i -> chr/col row i;'
+                             ' 0x0000..0x00FF use builtin ROM table')
+                ins.evidence('Class zero/nonzero branch', 'Direct',
+                             'ARM9 main 0207D440; human gameplay class labels unknown')
+                ins.evidence('+0x08 OR-mask contributions', 'Direct',
+                             'Original ARM9 32-entry mask tables; output is not final flags')
+                ins.evidence('Class/selector gameplay names', 'Unknown',
+                             'byte0 and byte1 are distinct from the ALMT work ID')
 
     def extract_member(self):
         e = self._selected_member()
