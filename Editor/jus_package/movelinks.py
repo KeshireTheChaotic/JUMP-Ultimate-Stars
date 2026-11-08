@@ -219,9 +219,16 @@ class MoveLinks:
         self._move_ids_by_path[resource_path] = (blob, ids)
         return ids
 
-    def cards_for_move(self, form: str, move_id: int, *, almt_member: str | None = None
+    def cards_for_move(self, form: str, move_id: int, *, almt_member: str | None = None,
+                       source_ids: frozenset[int] | None = None
                        ) -> tuple[kshape.Card, ...]:
-        """All and only Koma cards which can select the given resource ID."""
+        """All and only Koma cards which can select the given resource ID.
+
+        The editor may supply IDs from its already loaded ALMT when inspecting
+        that exact source member. This skips decompressing the same DSCP
+        archive for every inspector refresh (and every animation tick).
+        Other consumers retain strict DataRoot revalidation by default.
+        """
         off = move_id & 0xFF
         # No low-byte-only inference: the exact 32-bit ID must occur in the
         # currently loaded source member, even after a modified ALMT was staged.
@@ -235,7 +242,8 @@ class MoveLinks:
             return ()
         stem = member[:-4]
         resource_path = join('chr/ChrArc.aar', f'chr/{stem}.aar', member)
-        if not self.root.exists(resource_path) or move_id not in self._source_ids(resource_path):
+        if not self.root.exists(resource_path) or move_id not in (
+                source_ids if source_ids is not None else self._source_ids(resource_path)):
             return ()
         out = []
         for c in self._card_table.cards:
@@ -258,10 +266,12 @@ class MoveLinks:
             out.append(c)
         return tuple(out)
 
-    def text_for_move(self, form: str, move_id: int, *, almt_member: str | None = None
+    def text_for_move(self, form: str, move_id: int, *, almt_member: str | None = None,
+                      source_ids: frozenset[int] | None = None
                       ) -> MoveText | None:
         """Return only text supported by an existing Koma/form/size link."""
-        cards = self.cards_for_move(form, move_id, almt_member=almt_member)
+        cards = self.cards_for_move(form, move_id, almt_member=almt_member,
+                                    source_ids=source_ids)
         if not cards:
             return None
         c = cards[0]

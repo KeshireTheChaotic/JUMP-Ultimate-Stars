@@ -237,7 +237,7 @@ class SoundResolver:
         return sorted(k for k in self.archives(char) if k != 'base')
 
     def resolve(self, opcode: int, seq: int, container: str | None, tick: int = 0, node: str = '',
-                form: int | None = None) -> Cue:
+                form: int | None = None, card_index: int | None = None) -> Cue:
         """``form`` = koma size chosen for preview of base-archive 0x0402 cues (never inferred)."""
         if opcode not in FUNCTIONS:
             raise ValueError(f'Not an audio opcode: 0x{opcode:04X}')
@@ -267,6 +267,17 @@ class SoundResolver:
                               f'{sub}-cell koma: {src} slot (+0xA6)')
         sizes = self.deck_sizes(char) or sorted(k for k in slots if k != 'base')
         if form is not None and form in slots:
+            # Koma Roster selection is a concrete original form record. The
+            # preview bank is exact for that selected card, even though a real
+            # match may deploy a different card (do not claim live selection).
+            if card_index is not None and 0 <= card_index < len(self.koma_cards):
+                typ, rec_index, card_size = self.koma_cards[card_index]
+                if (typ, rec_index, card_size) == (
+                        0 if '_b_' in char else 1, self.record(char)[1], form):
+                    return self._slot(
+                        tick, node, opcode, seq, slots[form],
+                        f'original Koma #{card_index} ({form}-cell), '
+                        f'{src} form slot; exact for this selected Koma preview')
             c = self._slot(tick, node, opcode, seq, slots[form],
                            f'preview: deployed with a {form}-cell koma (a deck choice in the game)')
             return Cue(c.tick, c.node, c.opcode, c.seq, c.ssar, c.ssar_name, c.name, 'Unknown', c.note)
@@ -318,7 +329,7 @@ class SoundResolver:
         return self.symbols.sound_name(ssar, seq) if self.symbols else None
 
     def cues(self, move: almt.Move, node_names: list[str], container: str | None,
-             form: int | None = None) -> list[Cue]:
+             form: int | None = None, card_index: int | None = None) -> list[Cue]:
         out = []
         for ni, node in enumerate(move.nodes):
             if node is None:
@@ -335,7 +346,8 @@ class SoundResolver:
                 for c in key.commands:
                     if c.opcode in FUNCTIONS:
                         v = c.values() or [0]
-                        out.append(self.resolve(c.opcode, v[0], container, key.tick, name, form))
+                        out.append(self.resolve(c.opcode, v[0], container, key.tick, name,
+                                                form, card_index))
         out.sort(key=lambda c: c.tick)
         return out
 

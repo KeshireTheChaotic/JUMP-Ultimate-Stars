@@ -19,46 +19,72 @@ drives the window against the real data.
 
 ## Editor
 
-The window follows the 2D animation editors of Unity (Animation window + Inspector),
-Godot (AnimationPlayer dock, SpriteFrames) and Unreal (Paper2D Flipbook/Sprite editors):
-a resource browser on the left (each workspace shows its own), the workspaces
-**Animation** / **Sprite** (the Move Lab, Ctrl+1/2), **Koma** / **Level** / **Screen**
-(the JUS Studio suite, Ctrl+4/5/6) and **Archive** (Ctrl+3), a dark engine-style theme,
-tooltips, undo/redo and keyboard shortcuts (F1 lists them all). Layout and evidence rules
-for every workspace: `docs/STUDIO_WORKSPACES.md`.
+The **Roster** tab (Ctrl+1) unifies the existing Animation, Sprite and Koma
+editors without replacing their parsers, undo systems or original serializers.
+The left tree uses original koma.bin/kshape.bin, original roster BIN tables,
+and archive-qualified ALMT resources.
 
-* **Animation workspace** — *Moves* list (filter, ⟳ = looping) | *Viewport* (wheel zoom,
-  middle-drag pan, Frame; sprites, **spawned effects** (GenerateID, incl. nested spawns
-  and common `efc/` effects, front/behind the character), collision boxes, onion skin,
-  pursuer effect with traced follow smoothing or target-only reference; an explicit first-position
-  seed is required for standalone move replay — all toggled from **Show ▾**) | *Inspector* (move
-  ID/length/loop, the selected track, key or NoteTrack events, editable in place; for an
-  effect row: spawn node/key/tick, EffectFlags, ParentLink, DrawPrio, **stored renderer priority**
-  (high-first submission only, not a proven front/back rule), and anchor). Below it,
-  the dock-style **Timeline**: a *Spawned effects* group with one clip bar per GenerateID
-  key (double-click opens the effect's own move), transport (⏮ ◀| ◀ ▶ ▶ |▶ ⏭,
-  tick field, loop, speed), Fit, ruler with draggable playhead, per-node groups that
-  collapse, ◆ keys with hold bars (values step), ⚑ NoteTrack event flags coloured by
-  category, Marker labels with **jump arcs** (0xFF80+n → label 0xFF00+n) and dashed
-  **branch arcs** from NoteTrack branch commands to their Marker labels, and read-only
-  pursuer-effect rows. Click = scrub/select, drag a key = retime, double-click = edit,
-  right-click = add/delete key or event, edit as text, delete track; Ctrl+wheel zooms.
-  K adds a key at the playhead, E adds an event, Delete removes the selected key.
-* **Sprite workspace** — viewport where pieces are selected by clicking, moved by dragging
-  or arrow keys (Shift = 8 px), with onion skin and bank preview; *Details* with typed piece
-  fields (index, x, y, shape, flips, 2bpp, bank) and a palette you click to assign banks;
-  a thumbnail **Frames** filmstrip with flipbook playback and replace/append/re-layout/
-  delete/export; atlas import/export and palette editing for effects.
-* **Koma workspace** — `koma/koma.aar` browser grouped by series | card canvas: the art
-  laid out on its card shape (5×4 grid from `bin/kshape.bin`, selected by the
-  `bin/koma.bin` card) or as a strip, with Select / Pencil / Picker (V/B/I) and pixel grid |
-  Inspector with the card record (series → art prefix from the game table, art index, raw bytes; card
-  choice), a same-size **shape picker**, the 16-colour palette and evidence | Panels strip,
-  **Shapes** dictionary (66 shipped variants), panel / card PNG export, panel PNG import,
-  Edit / New / Remove variant (5×4 polyomino and reference migration), Apply (art →
-  `koma.aar`, dictionary → `bin/kshape.bin`, selectors → `bin/koma.bin`). All edits are
-  undoable. Deck placement is not part of this editor. Additional variants require
-  emulator testing because runtime shape-array capacity is not yet traced.
+- **Battle Characters (74)** -> character -> **Moves** and **Koma** (206 cards).
+  Input-key icons and actual original Koma art are shown. Unmapped ALMT
+  entries remain under Other / scripted animations, without invented controls.
+- **Support Characters (193)** -> character -> **Koma** (372 cards).
+  A support Koma Inspector can open its actual ALMT support-action editor.
+- **Passive / Help Koma (312)** -> original series -> one-panel Koma.
+  Original type-2 records are not assigned invented attack moves.
+
+**Move selection:** animation viewport in the center, bottom Timeline with
+Add/Remove Key and NoteTrack tools, editable Key Inspector on the right.
+The Roster toolbar switches Animation / Sprite; Sprite uses the original
+TextureID to select the related source image where available. The established
+sprite frame/atlas editing, flipbook and controls are reused.
+
+**Koma selection:** full-height 5x4 panel/sprite viewport, no bottom dock,
+right Koma Info Inspector. Select/Pencil/Picker and import/export/shape
+commands are available in the main viewport header. In Select mode, drag a
+panel onto another panel to swap its placement, or into an empty cell to move
+it. The grid must be a valid connected original 5x4 shape. Shared shape
+editing explicitly prompts for clone (new-variant runtime capacity unverified),
+modify all, or cancel. Painting original 4bpp pixels remains independent.
+
+**Unillustrated ROM-source Koma:** Card #889 (Dr. Mashirito, ds_s_03) uses
+koma/dt_19.dtx, which has only two identical flat-fill panels in the
+original ROM; it is byte-identical to dt_09..dt_16. This is not a
+sprite-decoding failure. The Roster labels the source as a ROM placeholder
+and omits a misleading blank thumbnail. Koma Info keeps the actual tiles
+editable, explains the limitation, and links to the **different**
+illustrated Dr. Mashirito 2-Koma #428 (ds_09.dtx), without substituting
+its art for #889. Any authentic replacement or modded dt_19.dtx is
+preserved and no longer classified as the exact original placeholder.
+See docs/Research/MASHIRITO_889_DT19_ORIGINAL_ROM_ART_VALIDATION_20261107.json
+in the JUS project research directory.
+
+Save now offers to Apply dirty suite workspaces including Koma even while
+another Roster mode is visible. Original game data is not written until Save.
+
+Top-level tabs: Roster, Level (Ctrl+5), Screen (Ctrl+6), Archive (Ctrl+3).
+Ctrl+2 selects the Roster Sprite editor, Ctrl+4 selects the Roster Koma editor.
+Non-character assets remain available in Archive.
+
+**Original Koma-linked gameplay metadata:** The Passive/Help Koma Inspector
+displays the source ability name, both description lines, and exact numeric
+record bytes from bin/ability.bin and bin/ability_t.bin. Raw parameters whose
+gameplay units are not proven stay labeled raw. Opening a character action from
+a Koma carries the selected original card into NoteTrack sound decoding:
+0x0402 resolves its source SSAR group from that Koma's original chr_b.bin or
+chr_s.bin record, while source-ambiguous shared moves remain unselected.
+
+**Generated effects:** The animation viewport's Frame action now includes
+authored generated-effect extents across the move, not just the first pose.
+Goku Cheap Joke (0x0005C12A) has two original GN child sprites at tick 7.
+It also launches handler00 shot record1 at tick 33: the original ALMT
+0x0005C16C draws its sprite and immediately generates nested child
+0x0005C16B. Both are source-backed, and the viewport frames their extents.
+The separate 0x0005C16D exit animation is conditional on native shot
+retirement and is deliberately not rendered as a guaranteed launch effect.
+Source/ROM proof, known conditional-runtime limits, and 312 passive-card
+records are documented in
+D:\Library\Development\JUS\docs\Research\ROSTER_GOKU_CHEAP_JOKE_SOUND_PASSIVE_IMPLEMENTATION_20261107.md.
+
 * **Level workspace (Ctrl+5)** — left J-Galaxy hierarchy follows the in-game menu:
   **space node → galaxy cluster → world/planet → mission**, using verified child
   ID lists rather than name matching. The **right inspector** edits mission and

@@ -35,6 +35,7 @@ from jus_formats import alar, almt, dsig as dsigmod, dstx as dstxmod, eventops, 
 from jus_formats import battleai, battleinput, bintables, chrbin, gametables, roster  # noqa: E402
 from jus_package import dynamicgeometry, effectlinks, images, motion, movelinks, package, shotprojection, shotvisuals, sounds, spawns, spriteedit, steeredtrail  # noqa: E402
 from app.workspaces import SUITE  # noqa: E402
+from app.workspaces.roster import RosterBrowser  # noqa: E402
 from jus_package.draworder import submission_note  # noqa: E402
 from jus_package.audio_preview import AudioPreview
 from jus_package.project import DataRoot, join, split  # noqa: E402
@@ -130,6 +131,7 @@ class EditorApp(tk.Tk):
         self._cues = []
         self._sounds = None
         self.sound_form = tk.StringVar(value='Auto')       # preview choice for base-archive 0x0402 cues
+        self._sound_koma_card = None              # original Koma chosen as sound form, if known
         self._audio = None
         self.sound_enabled = tk.BooleanVar(value=True)
         self._audio_request = 0
@@ -212,10 +214,10 @@ class EditorApp(tk.Tk):
         s.add_command(label='Apply sprite', command=self.apply_sprite)
         m.add_cascade(label='Sprite', menu=s)
         v = tk.Menu(m, tearoff=False)
-        v.add_command(label='Animation workspace', accelerator='Ctrl+1', command=lambda: self.show_workspace('animation'))
-        v.add_command(label='Sprite workspace', accelerator='Ctrl+2', command=lambda: self.show_workspace('sprite'))
+        v.add_command(label='Roster workspace', accelerator='Ctrl+1', command=lambda: self.show_workspace('roster'))
+        v.add_command(label='Roster Sprite editor', accelerator='Ctrl+2', command=self.show_roster_sprite)
         v.add_command(label='Archive workspace', accelerator='Ctrl+3', command=lambda: self.show_workspace('archive'))
-        v.add_command(label='Koma editor', accelerator='Ctrl+4', command=lambda: self.show_workspace('koma'))
+        v.add_command(label='Roster Koma editor', accelerator='Ctrl+4', command=lambda: self.show_workspace('koma'))
         v.add_command(label='Level & mission editor', accelerator='Ctrl+5', command=lambda: self.show_workspace('level'))
         v.add_command(label='Screen editor', accelerator='Ctrl+6', command=lambda: self.show_workspace('screen'))
         v.add_separator()
@@ -245,23 +247,29 @@ class EditorApp(tk.Tk):
         tk.Label(top, text='JUS', fg=T.ACCENT, bg=T.PANEL2, font=('Segoe UI Black', 13)).pack(side='left', padx=(10, 2))
         tk.Label(top, text='Editor', fg=T.FG, bg=T.PANEL2, font=('Segoe UI', 12)).pack(side='left', padx=(0, 14))
         self._tab_buttons = {}
-        # Move Lab (Animation + Sprite) · suite workspaces · Archive
-        for key, label in (('animation', 'Animation'), ('sprite', 'Sprite'), ('|', None),
-                           ('koma', 'Koma'), ('level', 'Level'), ('screen', 'Screen'), ('|', None),
-                           ('archive', 'Archive')):
+        # One Roster: reusable Animation/Sprite/Koma editors, not duplicate parsers.
+        for key, label in (('roster', 'Roster'), ('level', 'Level'), ('screen', 'Screen'),
+                           ('|', None), ('archive', 'Archive')):
             if key == '|':
                 tk.Frame(top, width=1, bg=T.LINE).pack(side='left', fill='y', padx=5, pady=8)
                 continue
             b = ttk.Button(top, text=label, style='Tab.TButton', command=lambda kk=key: self.show_workspace(kk))
             b.pack(side='left', padx=1, pady=(4, 0))
             self._tab_buttons[key] = b
-        T.Tooltip(self._tab_buttons['animation'], 'Move Lab: animations, effects, NoteTrack (Ctrl+1)')
-        T.Tooltip(self._tab_buttons['sprite'], 'Move Lab: sprite frames and pieces (Ctrl+2)')
-        T.Tooltip(self._tab_buttons['koma'], 'Koma Editor: comic panel art (Ctrl+4)')
+        T.Tooltip(self._tab_buttons['roster'],
+                  'Unified Roster: battle moves, sprites, Koma, support and passive cards (Ctrl+1)')
         T.Tooltip(self._tab_buttons['level'], 'Level Editor: stage backgrounds and the J-Galaxy missions '
                                               'fought on them, with Koma rewards (Ctrl+5)')
         T.Tooltip(self._tab_buttons['screen'], 'Screen Editor: menu screens on the DS dual screen (Ctrl+6)')
         T.Tooltip(self._tab_buttons['archive'], 'Archive members (Ctrl+3)')
+        self._roster_modes = ttk.Frame(top)
+        self._roster_mode_buttons = {}
+        for mode, label, fn in (
+            ('animation', 'Animation', self.show_roster_animation),
+            ('sprite', 'Sprite', self.show_roster_sprite)):
+            b = ttk.Button(self._roster_modes, text=label, style='Tab.TButton', command=fn)
+            b.pack(side='left', padx=1)
+            self._roster_mode_buttons[mode] = b
         T.separator(top)
         T.tool_button(top, '↶', self.undo, 'Undo (Ctrl+Z)', width=3)
         T.tool_button(top, '↷', self.redo, 'Redo (Ctrl+Y)', width=3)
@@ -299,7 +307,8 @@ class EditorApp(tk.Tk):
             w = cls(self, self.ws_host, self._project_panel.body, k)
             self.suite[w.key] = w
             self.ws[w.key] = w.frame
-        self.show_workspace('animation')
+        self._last_roster_view = 'animation'
+        self.show_workspace('roster')
         self.after(250, self._init_sashes)
 
     def _build_project(self, body, k):
@@ -328,6 +337,7 @@ class EditorApp(tk.Tk):
         self.res_tree.bind('<<TreeviewSelect>>', self.on_resource_select)
         self.res_tree.bind('<<TreeviewOpen>>', self.on_resource_open)
         self.res_tree.bind('<Button-3>', self._project_context)
+        self.roster_browser = RosterBrowser(self, p.body, k)
 
     # ------------------------------------------------------ animation tab
     def _build_animation(self, host, k):
@@ -337,6 +347,7 @@ class EditorApp(tk.Tk):
         self._upper = upper
         # moves (clips) panel
         clips = T.Panel(upper, 'Moves')
+        self._animation_clips = clips
         upper.add(clips, weight=0)
         tb = ttk.Frame(clips.body)
         tb.pack(fill='x', padx=6, pady=(6, 2))
@@ -449,6 +460,7 @@ class EditorApp(tk.Tk):
         T.Tooltip(sc, 'Playback speed (the game runs one tick per frame at 60 Hz)')
         T.separator(bar)
         T.tool_button(bar, '◆ Key', self.add_key_at_playhead, 'Add a key at the playhead on the selected track (K)')
+        T.tool_button(bar, '− Key', self.delete_selected_key, 'Remove the selected key (Delete)')
         T.tool_button(bar, '⚑ Event', self.add_note_event, 'Add a NoteTrack event at the playhead (E)')
         T.tool_button(bar, '＋ Track', self.add_track, 'Add a track to a node')
         T.tool_button(bar, '✎ Text', self.edit_track, 'Edit the selected track as text')
@@ -538,22 +550,96 @@ class EditorApp(tk.Tk):
         self.member_details.pack(fill='both', expand=True)
         return ws
 
+    def _set_roster_clips(self, hidden=True):
+        """Roster tree replaces the redundant internal move-list pane."""
+        if not hasattr(self, '_animation_clips'):
+            return
+        panes = self._upper.panes()
+        child = str(self._animation_clips)
+        if hidden and child in panes:
+            self._upper.forget(self._animation_clips)
+        elif not hidden and child not in panes:
+            self._upper.insert(0, self._animation_clips, weight=0)
+
+    def show_roster_animation(self):
+        self.show_workspace('animation')
+
+    def show_roster_sprite(self):
+        """Open the sprite named by the current move's authored TextureID, if present."""
+        if not self.root_data:
+            return
+        if self.move and self.index:
+            candidates = []
+            for node in self.move.nodes:
+                if node is None:
+                    continue
+                for track in node.tracks:
+                    if track.field != 'TextureID':
+                        continue
+                    if track.keyed:
+                        entries = [k.value for k in track.keys if k.tick <= self.tick]
+                        if entries:
+                            candidates.append(entries[-1])
+                    else:
+                        candidates.append(track.value)
+            for rid in candidates:
+                if not isinstance(rid, int):
+                    continue
+                ref = self.index.sprite_ref(rid)
+                if ref is None:
+                    continue
+                matching = next((label for label, path in self._sprite_paths.items()
+                                 if path == ref.dstx_path), None)
+                if matching:
+                    if self.sprite_path != ref.dstx_path:
+                        if (self.sprite_dirty or self.almt_dirty) and not self.confirm_discard():
+                            return
+                        self.sprite_combo.set(matching)
+                        self.load_sprite(matching, force=True)
+                    break
+        self.show_workspace('sprite')
+
     def show_workspace(self, name):
+        # The true editor subview remains 'animation'/'sprite'/'koma' so all
+        # existing undo, keyboard shortcuts, apply, and playback paths work.
+        if name == 'roster':
+            name = getattr(self, '_last_roster_view', 'animation')
+        if name not in self.ws:
+            return
         if name == 'animation' or self.workspace == 'animation':
             self._stop_play()
         if self.workspace == 'sprite' and name != 'sprite':
             self._stop_flipbook()
         self.workspace = name
+        is_roster = name in ('animation', 'sprite', 'koma')
+        if is_roster:
+            self._last_roster_view = name
+            self._set_roster_clips(True)
+        active_tab = 'roster' if is_roster else name
         for key, frame in self.ws.items():
             frame.pack_forget()
-            self._tab_buttons[key].configure(style='TabOn.TButton' if key == name else 'Tab.TButton')
+        for key, button in self._tab_buttons.items():
+            button.configure(style='TabOn.TButton' if key == active_tab else 'Tab.TButton')
         self.ws[name].pack(fill='both', expand=True)
-        # left dock: the workspace's own browser (one resource column, swapped per workspace)
+        if is_roster and name in ('animation', 'sprite'):
+            self._roster_modes.pack(side='left', padx=(10, 6))
+            for key, button in self._roster_mode_buttons.items():
+                button.configure(style='TabOn.TButton' if key == name else 'Tab.TButton')
+        else:
+            self._roster_modes.pack_forget()
         suite = self.suite.get(name) if hasattr(self, 'suite') else None
-        for b in [self._movelab_browser] + [w.browser for w in getattr(self, 'suite', {}).values()]:
-            b.pack_forget()
-        (suite.browser if suite else self._movelab_browser).pack(fill='both', expand=True)
-        self._project_panel.set_title(suite.browser_title if suite else 'Project')
+        for browser in [self._movelab_browser, self.roster_browser.frame] + [
+            w.browser for w in getattr(self, 'suite', {}).values()]:
+            browser.pack_forget()
+        if is_roster:
+            self.roster_browser.frame.pack(fill='both', expand=True)
+            self._project_panel.set_title('Roster')
+        elif suite:
+            suite.browser.pack(fill='both', expand=True)
+            self._project_panel.set_title(suite.browser_title)
+        else:
+            self._movelab_browser.pack(fill='both', expand=True)
+            self._project_panel.set_title('Project')
         if suite:
             suite.on_show()
         self._update_undo_label() if hasattr(self, 'undo_label') else None
@@ -582,8 +668,8 @@ class EditorApp(tk.Tk):
         self.bind_all('<Control-s>', guard(lambda e: self.save(True), True))
         self.bind_all('<Control-S>', guard(lambda e: self.save(False), True))
         self.bind_all('<Control-Return>', guard(lambda e: self.apply_current(), True))
-        self.bind_all('<Control-Key-1>', guard(lambda e: self.show_workspace('animation'), True))
-        self.bind_all('<Control-Key-2>', guard(lambda e: self.show_workspace('sprite'), True))
+        self.bind_all('<Control-Key-1>', guard(lambda e: self.show_workspace('roster'), True))
+        self.bind_all('<Control-Key-2>', guard(lambda e: self.show_roster_sprite(), True))
         self.bind_all('<Control-Key-3>', guard(lambda e: self.show_workspace('archive'), True))
         self.bind_all('<Control-Key-4>', guard(lambda e: self.show_workspace('koma'), True))
         self.bind_all('<Control-Key-5>', guard(lambda e: self.show_workspace('level'), True))
@@ -679,6 +765,7 @@ class EditorApp(tk.Tk):
         self.populate_tree()
         for w in self.suite.values():
             w.on_root()
+        self.roster_browser.on_root()
         self.update_dirty()
 
     def populate_tree(self):
@@ -880,6 +967,18 @@ class EditorApp(tk.Tk):
     def save(self, in_place):
         if not self.root_data or not self.confirm_discard():
             return
+        # The Roster reuses Koma alongside the ALMT/Sprite editors. Save must
+        # never omit dirty Koma (or other suite) edits merely because another
+        # editor subview is currently visible.
+        for suite in self.suite.values():
+            if suite.dirty:
+                if not messagebox.askokcancel(
+                    'Unapplied workspace edits',
+                    f'{suite.title} has unapplied edits. Apply them before Save?'):
+                    return
+                suite.apply()
+                if suite.dirty:
+                    return
         if not self.root_data.dirty_files():
             messagebox.showinfo('Save', 'Nothing to save. Apply edits first (Ctrl+Enter).')
             return
@@ -1178,6 +1277,14 @@ class EditorApp(tk.Tk):
         if not form:
             return ''
         label = (battleinput.control_for(move.id) or '') if form in roster.BATTLE_IDS else ''
+        # The Roster tree already shows the original BIN-backed move titles.
+        # This legacy Moves Treeview is deliberately hidden in Roster mode but
+        # remains the selection model for Timeline/Undo. Never decompress the
+        # same ChrArc ALMT once per row just to label a *hidden* list:
+        # MoveLinks.text_for_move -> _source_ids -> DataRoot.read decompresses
+        # the full nested DSCP payload for every row (an observable UI freeze).
+        if getattr(self, 'roster_browser', None) is not None:
+            return label or (f'Support ({member})' if form in roster.SUPPORT_IDS else '')
         svc = self._move_xref()
         if svc:
             title = svc.text_for_move(form, move.id, almt_member=member)
@@ -1185,7 +1292,7 @@ class EditorApp(tk.Tk):
                 return f'{label} - {title.display_title}' if label else title.display_title
         return label or (f'Support ({member})' if form in roster.SUPPORT_IDS else '')
 
-    def open_move_resource(self, form: str, resource_id: int, member: str):
+    def open_move_resource(self, form: str, resource_id: int, member: str, card_index: int | None = None):
         """Go to the original ALMT whose ID this Koma actually references."""
         if not self.root_data or not member or not member.endswith('.amt'):
             return False
@@ -1213,7 +1320,43 @@ class EditorApp(tk.Tk):
         if found is None:
             self.status.set(f'Missing move {hx(resource_id)} in {target}')
             return False
+        # The same battle ALMT move can be played from several deployed Koma.
+        # Resolve NoteTrack 0x0402 through the explicitly chosen Koma, or the
+        # size-specific Special A/B source link. Never guess a size for a
+        # common/unnamed action without an associated card.
+        idx = self.roster_browser.index
+        matched_card = None
+        if idx is not None:
+            source_cards = []
+            if card_index is not None:
+                source_cards.append(card_index)
+            elif self._sound_koma_card is not None:
+                source_cards.append(self._sound_koma_card)
+            for number in source_cards:
+                if not 0 <= number < len(idx.cards.cards):
+                    continue
+                candidate = idx.cards.cards[number]
+                if any(v.resource_id == resource_id and v.almt_member == member
+                       for v in idx.moves.card_moves(candidate)):
+                    matched_card = candidate
+                    break
+            # Offset 0x29..0x32 encodes the 4..8 battle-Koma size in ROM.
+            # Even when several cards use the same size, their sound bank is
+            # identical (chr_b.bin +0x32 + 2*(size-4)).
+            off = resource_id & 0xff
+            if matched_card is None and form in roster.BATTLE_IDS and 0x29 <= off <= 0x32:
+                size = 4 + (off - 0x29) // 2
+                matched_card = next(
+                    (c for c in idx.by_form.get(form, ())
+                     if c.size == size and
+                     any(v.resource_id == resource_id and v.almt_member == member
+                         for v in idx.moves.card_moves(c))),
+                    None)
+        self._sound_koma_card = matched_card.index if matched_card is not None else None
+        self.sound_form.set(f'{matched_card.size}-cell' if
+                            matched_card is not None and form in roster.BATTLE_IDS else 'Auto')
         self.show_workspace('animation')
+        self.roster_browser.select_move(form, resource_id, member)
         if self.move_filter.get():
             self.move_filter.set('')
         self.populate_moves(select=found)
@@ -1225,7 +1368,11 @@ class EditorApp(tk.Tk):
         if ws is None or self.root_data is None:
             return False
         self.show_workspace('koma')
-        return ws.open_card_by_id(card_index)
+        ok = ws.open_card_by_id(card_index)
+        if ok:
+            self._sound_koma_card = card_index
+            self.roster_browser.select_card(card_index)
+        return ok
 
     def _battle_base_table(self) -> bool:
         """True for a battle character's base move table (chr/<id>.aar|<id>.amt), the
@@ -1259,11 +1406,18 @@ class EditorApp(tk.Tk):
         self.on_move_select()
 
     def on_move_select(self, _e=None):
+        # Roster owns move selection. Its old Moves Treeview remains an internal
+        # model for Undo/Timeline but is hidden; queued Tk selection events from
+        # that hidden widget must not trigger another expensive redraw.
+        if (_e is not None and hasattr(self, '_animation_clips') and
+                not self._animation_clips.winfo_ismapped()):
+            return
         sel = self.moves_tree.focus()
         new = self.almt.moves[int(sel)] if self.almt and sel else None
         changed = new is not self.move
         if changed:
             self._stop_play()
+            self._need_frame = True
             self.sel_track = self.sel_key = self.sel_virtual = None
         self.move = new
         if changed:
@@ -1384,8 +1538,18 @@ class EditorApp(tk.Tk):
         if c.opcode in (0x0400, 0x0401, 0x0402) and self._sounds is not None:
             v = c.values()
             if v:
-                cue = self._sounds.resolve(c.opcode, v[0], self.container)
-                text += f' = {cue.label}' if cue.ssar is not None else f'  (silent: {cue.note})'
+                selection = self.sound_form.get()
+                deployed_size = (int(selection.split('-')[0])
+                                 if selection.endswith('-cell') else None)
+                cue = self._sounds.resolve(
+                    c.opcode, v[0], self.container, form=deployed_size,
+                    card_index=self._sound_koma_card if deployed_size is not None else None)
+                if cue.ssar is not None:
+                    text += f' = {cue.label}'
+                elif cue.evidence == 'Unknown':
+                    text += f'  (unresolved: {cue.note})'
+                else:
+                    text += f'  (silent: {cue.note})'
         if short and len(text) > 48:
             text = text[:46] + '…'
         return text
@@ -1789,8 +1953,10 @@ class EditorApp(tk.Tk):
     def _refresh_notetrack_effects(self):
         self._motion = motion.simulate(self.move, self.almt.node_names, self._motion_params()) if self.move else None
         form = self.sound_form.get()
+        card_index = (self._sound_koma_card if form.endswith('-cell') else None)
         self._cues = (self._sounds.cues(self.move, self.almt.node_names, self.container,
-                                        form=int(form.split('-')[0]) if form.endswith('-cell') else None)
+                                        form=int(form.split('-')[0]) if form.endswith('-cell') else None,
+                                        card_index=card_index)
                       if self.move and self._sounds else [])
         if self._audio:
             self._audio.prepare(self._cues)
@@ -2284,8 +2450,11 @@ class EditorApp(tk.Tk):
             if w < 400:
                 self.after(200, self._init_sashes)
                 return
-            self._upper.sashpos(0, int(200 * k))
-            self._upper.sashpos(1, max(int(420 * k), w - int(340 * k)))
+            if len(self._upper.panes()) == 2:
+                self._upper.sashpos(0, max(int(420 * k), w - int(340 * k)))
+            else:
+                self._upper.sashpos(0, int(200 * k))
+                self._upper.sashpos(1, max(int(420 * k), w - int(340 * k)))
             self.ws['animation'].sashpos(0, int(h * 0.56))
         except tk.TclError:
             pass
@@ -2310,11 +2479,123 @@ class EditorApp(tk.Tk):
             pass
 
     def frame_view(self):
-        rect = self._move_extent()
+        # A Koma special can generate sprites well outside the base character
+        # pose. Frame the authored move *and* its source-resolved children
+        # across the key span rather than only tick 0 (Goku Cheap Joke,
+        # 0x5C12A, spawns two original 24-tick children at tick 7).
+        rect = self._move_scope_extent()
         if rect:
             self.view.frame_rect(rect)
         else:
             self.view.frame_origin()
+
+    def _move_scope_extent(self):
+        if not self.move:
+            return None
+        if not self.show_spawns.get() or not self.index:
+            return self._move_extent()
+        candidates = {0, self.tick}
+        # Original character frame keys; include move extremes where available.
+        for node in self.move.nodes:
+            if node is None:
+                continue
+            for tr in node.tracks:
+                if tr.field in ('BoundsIndex', 'TextureID', '2DPos', 'CollisionRect0') and tr.keyed:
+                    candidates.update(k.tick for k in tr.keys if 0 <= k.tick <= self.move.duration)
+        for sp in spawns.keyed_spawns(self.move, self.almt.node_names):
+            if sp.tick > self.move.duration:
+                continue
+            candidates.add(sp.tick)
+            child = self._effect_moves.get(sp.effect_id)
+            if child is not None:
+                last = min(child[0].duration - 1, self.move.duration - sp.tick)
+                if last > 0:
+                    candidates.add(sp.tick + last)
+                    candidates.add(sp.tick + last // 2)
+        ticks = sorted(candidates)
+        if len(ticks) > 48:
+            # Deterministic sampling bounded for long/many-effect attacks.
+            ticks = sorted({ticks[round(i * (len(ticks)-1)/47)] for i in range(48)}
+                           | {0, self.tick})
+        save_tick = self.tick
+        extents = []
+        try:
+            for t in ticks:
+                self.tick = t
+                bounds = self._move_extent()
+                if bounds:
+                    extents.append(bounds)
+        finally:
+            self.tick = save_tick
+        # The original NoteTrack can also launch shot objects (action2).
+        # These are not GN GenerateID children of the parent and would be
+        # omitted from an otherwise complete effect-aware viewport frame.
+        extents.extend(self._handler00_launch_extents())
+        if not extents:
+            return None
+        return (min(v[0] for v in extents), min(v[1] for v in extents),
+                max(v[2] for v in extents), max(v[3] for v in extents))
+
+    def _handler00_launch_extents(self):
+        """Only original shot birth sprites and their authored 1-level GN keys.
+
+        Uses original shot launch XY and image pixels. Deliberately excludes
+        native projectile travel, contact termination and conditional exit.
+        """
+        if not self.show_shot_sources.get() or not self.index:
+            return []
+        bounds = []
+        for ev in self._shot_events_current():
+            if ev.handler != 0:
+                continue
+            origin_x, origin_y = self._animation_origin(ev.tick)
+            base_x = origin_x + (-ev.launch_x if self.facing_left.get() else ev.launch_x)
+            base_y = origin_y + ev.launch_y
+            for rid in ev.directly_constructed_animations:
+                entry = self._effect_moves.get(rid)
+                if entry is None:
+                    continue
+                child, child_names, _child_path = entry
+                ages = {0, max(0, child.duration // 2), max(0, child.duration - 1)}
+                for age in ages:
+                    tick = effectlinks.effect_frame_tick(child, age)
+                    if tick is None:
+                        continue
+                    for st in self._state(child, tick).values():
+                        tid, frame = st.get('TextureID'), st.get('BoundsIndex')
+                        if tid is None or frame in (None, 0xFFFF):
+                            continue
+                        fi = self._frame_image(tid, frame)
+                        if fi:
+                            img, l, top = fi
+                            pos = st.get('2DPos', [0, 0])
+                            x, y = base_x + pos[0] + l, base_y + pos[1] + top
+                            bounds.append((x, y, x + img.width, y + img.height))
+                for nested in spawns.keyed_spawns(child, child_names):
+                    nxt = self._effect_moves.get(nested.effect_id)
+                    if nxt is None or nested.tick >= child.duration:
+                        continue
+                    nm, _nnames, _path = nxt
+                    at_tick = effectlinks.effect_frame_tick(nm, 0)
+                    if at_tick is None:
+                        continue
+                    try:
+                        ni = child_names.index(nested.node)
+                    except ValueError:
+                        continue
+                    pos = spawns.state_at(child, nested.tick).get(ni, {}).get('2DPos', [0, 0])
+                    for st in self._state(nm, at_tick).values():
+                        tid, frame = st.get('TextureID'), st.get('BoundsIndex')
+                        if tid is None or frame in (None, 0xFFFF):
+                            continue
+                        fi = self._frame_image(tid, frame)
+                        if fi:
+                            img, left, top = fi
+                            xy = st.get('2DPos', [0, 0])
+                            x = base_x + pos[0] + xy[0] + left
+                            y = base_y + pos[1] + xy[1] + top
+                            bounds.append((x, y, x + img.width, y + img.height))
+        return bounds
 
     def _move_extent(self):
         if not self.move:
@@ -2623,6 +2904,16 @@ class EditorApp(tk.Tk):
             if self._audio:
                 ins.value('Audio', self._audio.status(c))
         forms = self._sounds.forms(self.container) if self._sounds else []
+        if self._sound_koma_card is not None and self.roster_browser.index is not None:
+            c = self.roster_browser.index.cards.cards[self._sound_koma_card]
+            if c.raw[6] == 0 and self.sound_form.get() == f'{c.size}-cell':
+                ins.value('Selected Koma', f'#{c.index} · {c.size}-cell · '
+                          f'{self.roster_browser.index.card_label(c)}',
+                          tip='Original bin/koma.bin card byte+7 and +8; sound form '
+                              'chr_b.bin record +0x32 + 2*(size-4)')
+            elif c.raw[6] == 1:
+                ins.value('Selected Koma', f'#{c.index} · {c.size}-cell (support source)',
+                          tip='Original bin/chr_s.bin +0x10/0x12, NoteTrack +0xA6')
         if forms and not re.search(r'_[bs]_\d{2}_\d+\.aar', self.container or ''):
             ins.section('Koma size (0x0402)', note='0x0402 plays the special-move bank of the koma the character '
                         'was deployed with (form record +0x20 = chr_b.bin +0x32 + (size − 4)·2, main '
@@ -2717,9 +3008,12 @@ class EditorApp(tk.Tk):
                     ev.record, self.facing_left.get())
                 if layout is None:
                     layout = tuple((rid, 0, 0) for rid in ev.directly_constructed_animations)
-                    if ev.handler != 5:
+                    if ev.handler not in (0, 5):
                         info.append(f'shot {ev.record_index}: angular child spacing '
                                     '(native DS floating-point math unavailable)')
+                    if ev.handler == 0:
+                        info.append('handler00: original +0x0C launch ALMT; '
+                                    'child XY held at authored shot anchor, native motion unavailable')
                 instances = tuple((rid, x, y, age, 'birth source')
                                   for rid, x, y in layout)
             for animation_id, dx_raw, dy_raw, child_age, field_role in instances:
@@ -2732,10 +3026,39 @@ class EditorApp(tk.Tk):
                 shot_tick = effectlinks.effect_frame_tick(child, child_age)
                 if shot_tick is None:
                     continue
+                source_base = (launch_x + dx_raw / 256,
+                               launch_y + dy_raw / 256)
                 self._draw_node_sprites(vp, child, shot_tick,
-                                        base=(launch_x + dx_raw / 256,
-                                              launch_y + dy_raw / 256), names=names)
+                                        base=source_base, names=names)
                 count += 1
+                # Handler00 birth animation (record+0x0C) can itself have
+                # authored GN GenerateID keys. Cheap Joke's record1 +0x0C
+                # 0x5C16C immediately generates 0x5C16B on GN01 tick0.
+                # Only show original source pixels at their authored local
+                # offsets; no native projectile travel/rot/scale prediction.
+                if ev.handler == 0:
+                    for nested in spawns.keyed_spawns(child, names):
+                        nested_age = child_age - nested.tick
+                        if nested_age < 0:
+                            continue
+                        nested_entry = self._effect_moves.get(nested.effect_id)
+                        if nested_entry is None:
+                            continue
+                        nest_move, nest_names, _nest_path = nested_entry
+                        nest_tick = effectlinks.effect_frame_tick(nest_move, nested_age)
+                        if nest_tick is None:
+                            continue
+                        try:
+                            node_idx = names.index(nested.node)
+                        except ValueError:
+                            continue
+                        state = spawns.state_at(child, nested.tick).get(node_idx, {})
+                        local = state.get('2DPos', [0, 0])
+                        self._draw_node_sprites(
+                            vp, nest_move, nest_tick,
+                            base=(source_base[0] + local[0], source_base[1] + local[1]),
+                            names=nest_names)
+                        count += 1
             if ev.handler == 5:
                 info.append('handler05: original head ALMT only; '
                             'live D-pad / 128-sample curved path NOT simulated')
@@ -2743,7 +3066,7 @@ class EditorApp(tk.Tk):
                 vp.text(launch_x, launch_y, '+', fill=T.WARN, font=T.MONO_SMALL)
         if count:
             info.append(f'shot ALMT instances: {count} '
-                        '(handler01 source-derived projection; NO contact/terrain/GX physics)')
+                        '(original source visuals; NO contact/terrain/GX physics)')
 
     def _shot_rows(self):
         """Timeline source events, including other handlers not rendered yet."""
@@ -2796,6 +3119,23 @@ class EditorApp(tk.Tk):
                       f'offset ({ev.launch_x}, {ev.launch_y})')
             ins.value('Source preview window', f'{ev.record.effective_lifetime} ticks; '
                       f'preview cap tick {ev.nominal_end} (NOT runtime expiry)')
+            if ev.handler == 0:
+                ins.section('Handler00 — native launch and exit phases',
+                            note='Original actor constructor, not a collision simulation')
+                ins.value('Launch ALMT (+0x0C)',
+                          hx(ev.record.reference0, 6) + ' via 0216EEF4 → 0216E3D0 → 0216F100')
+                ins.value('End ALMT (+0x14)',
+                          (hx(ev.record.optional_reference, 6)
+                           if ev.record.optional_reference else '(none)') +
+                          (' · conditional on shot retirement, flags bit0'
+                           if ev.record.flags & 1 else ' · flag0 not set'))
+                ins.value('Native launch visual', 'FUN_0216EB8C selects source+0x0C')
+                ins.value('Native terminal visual', 'FUN_0216E5A0 uses work+0x1C on teardown')
+                ins.text('The viewport shows real +0x0C birth ALMT sprite frames '
+                         'and one level of authored GenerateID children at the '
+                         'original launch anchor. Dynamic projectile travel, '
+                         'collisions, and the conditional +0x14 exit are '
+                         'not reconstructed or presented as guaranteed.')
             if ev.handler05_timer_exemption_is_code_proven:
                 ins.section('Handler05 - D-pad controlled history trail',
                             note='Native 0216B910/0216BE0C/0216C028; no live input playback')
@@ -3059,8 +3399,14 @@ class EditorApp(tk.Tk):
         if form:
             svc = self._move_xref()
             if svc:
-                source = svc.text_for_move(form, m.id, almt_member=member)
-                source_cards = svc.cards_for_move(form, m.id, almt_member=member)
+                # Current ALMT is already parsed, and may contain unapplied
+                # edits. Reuse its exact 32-bit IDs rather than decompressing
+                # its original archive again on every inspector refresh.
+                source_ids = frozenset(clip.id for clip in self.almt.moves)
+                source = svc.text_for_move(form, m.id, almt_member=member,
+                                           source_ids=source_ids)
+                source_cards = svc.cards_for_move(form, m.id, almt_member=member,
+                                                   source_ids=source_ids)
                 if source:
                     ins.section('Original move text', note=f'{source.source} | record {source.record}')
                     ins.value('Title', source.display_title or '(blank in supplied BIN)')

@@ -14,6 +14,7 @@ card either.
 """
 from __future__ import annotations
 
+import hashlib
 import re
 from dataclasses import dataclass, field
 
@@ -23,6 +24,27 @@ from jus_formats.roster import KOMA_SERIES_PREFIXES
 from .project import DataRoot, join
 
 KOMA_ARCHIVE = 'koma/koma.aar'
+# Exact original ROM payload, observed for dt_09..dt_16 and dt_19.
+# This is a flat two-panel source template: both panels use only indices
+# 0/15 and every nontransparent palette entry is RGB555 0x8000.
+# Do NOT replace it with art from another Koma or synthesize artwork.
+_ORIGINAL_UNILLUSTRATED_DT_SHA256 = (
+    '91e9d3470d8cd487087a0cf4c4082dfc6e7af2f8c17ac1fe0b16bb7d69660a01'
+)
+
+
+def is_unillustrated_original_dt_art(member: str, blob: bytes) -> bool:
+    """Only the exact unillustrated 2-panel payload in the verified JUS ROM.
+
+    This source-quality check is separate from the DSTX decoder: the source
+    is valid and rebuilds byte-exactly but contains no character illustration.
+    The warning automatically clears if the user supplies genuine modded art.
+    """
+    return (member.replace('\\', '/').split('/')[-1].lower().startswith('dt_') and
+            len(blob) == 2400 and
+            hashlib.sha256(blob).hexdigest() == _ORIGINAL_UNILLUSTRATED_DT_SHA256)
+
+
 CARDS = 'bin/koma.bin'
 SHAPES = 'bin/kshape.bin'
 _ART = re.compile(r'koma/([a-z]+)_(\d+)\.dtx$', re.I)

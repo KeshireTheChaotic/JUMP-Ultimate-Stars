@@ -57,6 +57,14 @@ class ShotInvocation:
         # Hiei's handler05 FUN_0216B910 calls the exact shared
         # FUN_0216B514 constructor. It creates the original +0x0C head
         # at birth; the live D-pad/history trail remains unavailable.
+        # Handler00 creates its actor via FUN_0216EEF4 -> FUN_0216E3D0.
+        # The temporary work+0x14 is copied from shot record+0x0C by
+        # FUN_0216ACC8, and FUN_0216F100 -> FUN_0216EB8C plays that
+        # resource at birth. Source+0x14 is NOT the birth animation: when
+        # flags bit0 is set FUN_0216ACC8 stores it for conditional teardown
+        # via FUN_0216E5A0. Never show teardown as an initial shot child.
+        if self.handler == 0:
+            return (self.record.reference0,) if self.record.reference0 else ()
         if self.handler not in (1, 5):
             return ()
         return tuple(ref for ref in (self.record.optional_reference,

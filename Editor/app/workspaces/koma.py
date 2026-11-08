@@ -25,7 +25,7 @@ from tkinter import colorchooser, filedialog, messagebox, ttk
 from PIL import Image
 
 from jus_formats import bintables, dsig as dsigmod, koma, kshape
-from jus_package import images, komacards
+from jus_package import images, komacards, passivekoma
 from jus_package.project import join
 
 from .. import theme as T
@@ -55,16 +55,22 @@ class KomaWorkspace(SuiteWorkspace):
         self._cards_dirty = False                 # koma.bin edited, not applied
         self._shape_dirty = False                 # kshape.bin edited, not applied
         self._stroke = None
+        self._dragging_panel = None
+        self._drag_target = None
+        self._problems = []
         self._cache: dict[int, Image.Image] = {}
         self.cat: komacards.KomaCatalog | None = None
         self.cat_error = ''
+        self._passive_catalog = None
+        self._passive_error = ''
+        self._source_art_unillustrated = False
         self.card_choices: list[tuple[kshape.Card, bool]] = []
         self.card: kshape.Card | None = None
         super().__init__(app, host, browser_host, k)
 
     # ------------------------------------------------------------ layout
     def build(self, host):
-        ws = self.standard_layout(host, bottom_ratio=0.74)
+        ws = self.standard_layout(host, right_title='Koma Info', with_bottom=False)
         h = self.view_panel.header
         for key, label, tip in (('picker', 'Picker', 'Pick a palette index from the panel (I)'),
                                 ('pencil', 'Pencil', 'Paint the current palette index (B)'),
@@ -84,28 +90,27 @@ class KomaWorkspace(SuiteWorkspace):
         ttk.Button(h, text='Frame', style='Tool.TButton', command=self.frame_view).pack(side='right', padx=4)
         self.view = self.make_viewport(on_draw=self._draw, on_press=self._press, on_drag=self._drag,
                                        on_release=self._release, origin_frac=(0.1, 0.1), zoom=3)
-        page = self.bottom.add('panels', 'Panels')
-        self.strip = Filmstrip(page, thumb=56, on_select=self.select_panel)
-        self.strip.pack(fill='both', expand=True, padx=4, pady=4)
-        page = self.bottom.add('shapes', 'Shapes')
-        self.shape_canvas = tk.Canvas(page, bg=T.CANVAS_BG, highlightthickness=0, height=int(150 * self.k))
-        sb = ttk.Scrollbar(page, orient='horizontal', command=self.shape_canvas.xview)
-        self.shape_canvas.configure(xscrollcommand=sb.set)
-        self.shape_canvas.pack(fill='both', expand=True, padx=4, pady=(4, 0))
-        sb.pack(fill='x', padx=4)
-        self.shape_canvas.bind('<Button-1>', self._shape_click)
-        self._shape_hits = []
-        t = self.bottom.tools
-        T.tool_button(t, 'Import panel PNG…', self.import_panel, 'Replace the selected panel (48×48) from a PNG')
-        T.tool_button(t, 'Export panel PNG…', self.export_panel, 'Save the selected panel as an indexed PNG')
-        T.tool_button(t, 'Export all…', self.export_all, 'Save every panel of this asset')
-        T.tool_button(t, 'Export card PNG…', self.export_card, 'Save the panels as laid out on the card shape')
-        T.tool_button(t, 'Edit shape…', self.edit_shape_variant, 'Edit the selected 5×4 polyomino variant')
-        T.tool_button(t, 'New variant…', self.add_shape_variant, 'Append a shape variant, selecting it for this Koma')
-        T.tool_button(t, 'Remove variant…', self.remove_shape_variant, 'Delete a shape with safe reference migration')
-        T.tool_button(t, 'Apply', self.apply, 'Stage art in koma.aar, shapes in bin/kshape.bin and card selectors in bin/koma.bin '
-                                              '(Ctrl+Enter)', style='Accent.TButton')
-        self.problems = self.problems_page()
+        # Roster Koma view is full height; controls formerly in the bottom
+        # strip/dictionary now live in the main toolbar and right inspector.
+        t = self.view_panel.header
+        # Keep the viewport usable at the minimum window width: all former
+        # bottom-dock actions remain available through one compact menu.
+        tools = ttk.Menubutton(t, text='Koma Tools', style='Tool.TButton')
+        actions = tk.Menu(tools, tearoff=False)
+        for caption, action in (
+            ('Import selected panel PNG…', self.import_panel),
+            ('Export selected panel PNG…', self.export_panel),
+            ('Export all panels…', self.export_all),
+            ('Export composed Koma…', self.export_card),
+            ('Edit selected shape…', self.edit_shape_variant),
+            ('New shape variant…', self.add_shape_variant),
+            ('Remove shape variant…', self.remove_shape_variant)):
+            actions.add_command(label=caption, command=action)
+        tools.configure(menu=actions)
+        tools.pack(side='right', padx=2)
+        T.tool_button(t, 'Apply', self.apply,
+                      'Stage Koma edits in original data archives (Ctrl+Enter)',
+                      style='Accent.TButton')
         return ws
 
     def build_browser(self, parent):
@@ -118,7 +123,13 @@ class KomaWorkspace(SuiteWorkspace):
         self._names = []
         self._koma_names = None          # bin/komatxt.bin, loaded on first use
         self.cat, self.cat_error = None, ''
+        self._passive_catalog, self._passive_error = None, ''
         root = self.app.root_data
+        if root is not None:
+            try:
+                self._passive_catalog = passivekoma.PassiveCatalog(root)
+            except (OSError, ValueError, KeyError) as exc:
+                self._passive_error = str(exc)
         if root and (root.root / ARCHIVE).is_file():
             try:
                 arc = root.archive(ARCHIVE)
@@ -156,9 +167,17 @@ class KomaWorkspace(SuiteWorkspace):
 
     def load(self, name):
         if self.dirty and self.kf is not None:
-            if not messagebox.askyesno('Koma', 'Discard unapplied panel / card edits?'):
+            answer = messagebox.askyesnocancel(
+                'Koma edits', 'Apply the current Koma art/shape edits before switching?\n'
+                'Yes: stage them in the data archive. No: discard. Cancel: stay here.')
+            if answer is None:
                 return
-            self._revert_cards()
+            if answer:
+                self.apply()
+                if self.dirty:
+                    return
+            else:
+                self._revert_cards()
         self.path = join(ARCHIVE, name)
         try:
             self.kf = koma.parse(self.app.root_data.read(self.path))
@@ -167,6 +186,8 @@ class KomaWorkspace(SuiteWorkspace):
             messagebox.showerror('Koma', f'{name}: {exc}')
             return
         self._orig = self.app.root_data.read(self.path)
+        self._source_art_unillustrated = komacards.is_unillustrated_original_dt_art(
+            self.path, self._orig)
         self._dirty = False
         self._shape_dirty = False
         self.panel = 0
@@ -217,9 +238,16 @@ class KomaWorkspace(SuiteWorkspace):
     # ------------------------------------------------------------ view
     def refresh(self, frame=False):
         n = len(self.kf.panels) if self.kf else 0
-        self.strip.set_frames(n, self._panel_rgba, self.panel if n else None)
         self.view_panel.set_title(f'Viewport — {self.path.split("|")[-1]}' if self.path else 'Viewport')
         probs = [(p, 'warn') for p in self.kf.problems()] if self.kf else []
+        self._source_art_unillustrated = bool(
+            self.kf and self.path and
+            komacards.is_unillustrated_original_dt_art(self.path, self.kf.build()))
+        if self._source_art_unillustrated:
+            probs.append((
+                'ROM artwork placeholder: both panels have only one visible '
+                'flat colour; no original character illustration exists in this asset.',
+                'warn'))
         shape = self._shape()
         if shape:
             probs += [(p, 'warn') for p in shape.problems()]
@@ -232,9 +260,7 @@ class KomaWorkspace(SuiteWorkspace):
                           'use this art; pick one in the Inspector', 'warn'))
         if self.cat_error:
             probs.append((f'card tables unavailable: {self.cat_error}', 'bad'))
-        self.problems.set_lines(probs or [('No problems: panel table, tile ranges and card shape are consistent.',
-                                           'good')])
-        self._draw_shapes()
+        self._problems = probs
         self.refresh_inspector()
         if frame:
             self.frame_view()
@@ -298,6 +324,10 @@ class KomaWorkspace(SuiteWorkspace):
                 tag += ' unplaced'
             vp.text(x, y - 2, tag, anchor='sw', fill=T.BAD if kind != 'cell' else (T.FG if sel else T.MUTED),
                     font=T.MONO_SMALL)
+        if self._drag_target is not None and card:
+            pos = self._drag_target
+            x, y = (pos % kshape.COLS) * (CELL + CGAP), (pos // kshape.COLS) * (CELL + CGAP)
+            vp.rect(x, y, x + CELL, y + CELL, outline=T.ACCENT, width=3)
         if self.show_grid.get() and vp.zoom >= 6 and self.kf.panels:
             x0, y0 = self._origin(self.panel)
             w, h = self.kf.panels[self.panel].size
@@ -313,51 +343,7 @@ class KomaWorkspace(SuiteWorkspace):
         vp.hud.configure(text=f'{len(self.kf.panels)} panels · {where} · tool {self.tool.get()} · '
                               f'colour {self.colour}')
 
-    # ------------------------------------------------------------ shape dictionary dock
-    def _draw_shapes(self):
-        c = self.shape_canvas
-        c.delete('all')
-        self._shape_hits = []
-        if not self.cat:
-            c.create_text(10, 20, anchor='w', text=self.cat_error or 'bin/kshape.bin not loaded', fill=T.MUTED,
-                          font=T.UI_FONT)
-            return
-        k = self.k
-        cell = int(7 * k)
-        cur = self._shape()
-        need = len(self.kf.panels) if self.kf else None
-        x = int(8 * k)
-        for g in self.cat.shapes.groups:
-            size = g[0].size
-            c.create_text(x, int(8 * k), anchor='nw', text=f'{size} cell{"s" if size > 1 else ""}',
-                          fill=T.FG if size == need else T.MUTED, font=T.UI_BOLD)
-            y0 = int(26 * k)
-            col = 0
-            for s in g:
-                ox = x + col * (cell * kshape.COLS + int(10 * k))
-                hot = cur is not None and s.index == cur.index
-                ok = size == need
-                c.create_rectangle(ox - 3, y0 - 3, ox + cell * kshape.COLS + 3, y0 + cell * kshape.ROWS + 3,
-                                   outline=T.ACCENT if hot else ('#3A4048' if ok else '#2A2E33'),
-                                   width=2 if hot else 1)
-                for cx, cy, lab in s.coordinates():
-                    fill = T.BAD if s.problems() else (T.GOOD if ok else '#4A5058')
-                    c.create_rectangle(ox + cx * cell, y0 + cy * cell, ox + (cx + 1) * cell - 1,
-                                       y0 + (cy + 1) * cell - 1, fill=fill, outline='')
-                c.create_text(ox, y0 + cell * kshape.ROWS + 6, anchor='nw', text=f'{s.variant}', fill=T.MUTED,
-                              font=T.MONO_SMALL)
-                self._shape_hits.append(((ox - 3, y0 - 3, ox + cell * kshape.COLS + 3, y0 + cell * kshape.ROWS + 3), s))
-                col += 1
-            x += col * (cell * kshape.COLS + int(10 * k)) + int(16 * k)
-        c.configure(scrollregion=(0, 0, x, int(130 * k)))
-
-    def _shape_click(self, e):
-        x, y = self.shape_canvas.canvasx(e.x), self.shape_canvas.canvasy(e.y)
-        for (x0, y0, x1, y1), s in self._shape_hits:
-            if x0 <= x <= x1 and y0 <= y <= y1:
-                self.set_shape(s.size, s.variant)
-                return
-
+    # Shared shape variants are selected in the right-side Koma Inspector.
     def set_shape(self, size, variant):
         if not (self.cat and self.card and self.kf):
             self.app.status.set('No card record for this art: nothing to reshape.')
@@ -537,6 +523,9 @@ class KomaWorkspace(SuiteWorkspace):
         if i != self.panel:
             self.select_panel(i)
         tool = self.tool.get()
+        if tool == 'select' and self._card_mode():
+            self._dragging_panel = i
+            self._drag_target = None
         if tool == 'picker':
             w = self.kf.panels[i].size[0]
             self.colour = self.kf.panel_colours(i)[py * w + px]
@@ -548,11 +537,66 @@ class KomaWorkspace(SuiteWorkspace):
             self._paint(px, py)
 
     def _drag(self, wx, wy, e):
+        if self._dragging_panel is not None:
+            self._drag_target = self._grid_index(wx, wy)
+            self.view.redraw()
+            return
         if self._stroke is None:
             return
         hit = self._pixel(wx, wy)
         if hit and hit[0] == self._stroke[0]:
             self._paint(hit[1], hit[2])
+
+    @staticmethod
+    def _grid_index(wx, wy):
+        col, row = int(wx // (CELL + CGAP)), int(wy // (CELL + CGAP))
+        if 0 <= col < kshape.COLS and 0 <= row < kshape.ROWS:
+            return row * kshape.COLS + col
+        return None
+
+    def rearrange_panel(self, panel, destination, *, shared=None):
+        """Swap/move a panel label on the original 5×4 koma.bin shape grid.
+
+        Does NOT reorder the source DSTX tiles or silently mutate other cards.
+        When shared, the caller explicitly decides clone versus shared edit.
+        """
+        if self.cat is None or self.card is None or not self._card_mode():
+            return False
+        shape = self._shape()
+        if shape is None or not 0 <= destination < kshape.COLS * kshape.ROWS:
+            return False
+        cells = list(shape.cells)
+        if cells.count(panel + 1) != 1:
+            raise ValueError('Original shape contains a duplicate/missing panel label; edit it explicitly.')
+        source = cells.index(panel + 1)
+        if source == destination:
+            return False
+        cells[source], cells[destination] = cells[destination], cells[source]
+        # Reject disconnected or duplicate polyomino layouts before checkpoint/mutation.
+        kshape.ShapeTable._validated_cells(shape.size, cells)
+        users = [c for c in self.cat.cards.cards
+                 if c.size == shape.size and c.variant == shape.variant]
+        if shared is None and len(users) > 1:
+            choice = messagebox.askyesnocancel(
+                'Shared Koma shape',
+                f'{len(users)} Koma share shape #{shape.index}.\n\n'
+                'Yes: create a separate variant for this card (new variant game capacity unverified).\n'
+                'No: edit the shared shape for every Koma using it.\n'
+                'Cancel: make no change.')
+            if choice is None:
+                return False
+            shared = not choice
+        self.checkpoint('rearrange Koma panels')
+        if not shared and len(users) > 1:
+            variant = self.cat.shapes.append_variant(shape.size, cells)
+            self.cat.cards.set_shape(self.card.index, shape.size, variant.variant, self.cat.shapes)
+        else:
+            self.cat.shapes.replace_variant(shape.size, shape.variant, cells)
+        self._update_shape_dirty()
+        self.refresh()
+        self.app.update_dirty()
+        self.app.status.set(f'Koma {self.card.index}: moved panel {panel + 1} on original 5×4 grid; Apply to stage.')
+        return True
 
     def _paint(self, px, py):
         i, cols = self._stroke
@@ -566,6 +610,18 @@ class KomaWorkspace(SuiteWorkspace):
         self.view.redraw()
 
     def _release(self, wx, wy, e):
+        if self._dragging_panel is not None:
+            panel = self._dragging_panel
+            target = self._grid_index(wx, wy)
+            self._dragging_panel = None
+            self._drag_target = None
+            if target is not None:
+                try:
+                    self.rearrange_panel(panel, target)
+                except ValueError as exc:
+                    messagebox.showwarning('Koma layout', str(exc))
+            self.view.redraw()
+            return
         if self._stroke is None:
             return
         i, cols = self._stroke
@@ -573,12 +629,10 @@ class KomaWorkspace(SuiteWorkspace):
         self.kf.set_panel_colours(i, cols)
         self._dirty = True
         self._cache.pop(i, None)
-        self.strip.invalidate(i)
         self.app.update_dirty()
 
     def select_panel(self, i):
         self.panel = i
-        self.strip.set_current(i)
         self.refresh_inspector()
         self.view.redraw()
 
@@ -620,6 +674,19 @@ class KomaWorkspace(SuiteWorkspace):
         ins.value('State', ('● ' + ', '.join(state) + ', not applied') if state else 'unchanged',
                   colour=T.WARN if state else T.MUTED)
         self._inspect_card(ins)
+        if self._source_art_unillustrated:
+            ins.section('Unillustrated original ROM asset',
+                        note='This is a valid DSTX file, not a broken decoder or missing archive.')
+            ins.value('Original source', self.path.split('|')[-1], colour=T.WARN)
+            ins.value('Visible artwork', 'Flat-fill placeholder; neither panel contains an illustration',
+                      colour=T.WARN)
+            ins.text('The original ROM contains this flat placeholder. '
+                     'Rendering it differently cannot restore missing pixels. '
+                     'Its original shape and raw graphics are preserved for editing.')
+            if self.card is not None and self.card.index == 889:
+                ins.value('Other source', 'Dr. Mashirito card #428: ds_09.dtx (different support Koma)')
+                ins.buttons(('View different Mashirito 2-Koma (#428)',
+                             lambda: self.app.open_koma_card(428)))
         if k.panels:
             p = k.panels[self.panel]
             ins.section(f'Panel {self.panel}' + (f'  (label {self.panel + 1})' if self._card_mode() else ''))
@@ -628,6 +695,11 @@ class KomaWorkspace(SuiteWorkspace):
         ins.section('Palette', note='Click: paint colour. Double-click: edit colour. Index 0 is transparent.')
         ins.widget(self._swatches)
         ins.value('Colour', f'{self.colour}  {hx4(k.image.palettes[0][self.colour])}')
+        if self._problems:
+            ins.section('Problems')
+            for problem, level in self._problems:
+                ins.value('Warning' if level == 'warn' else 'Issue', problem,
+                          colour=T.BAD if level == 'bad' else T.WARN if level == 'warn' else T.MUTED)
         ins.section('Evidence')
         ins.evidence('Panel art', 'Direct', 'byte-exact rebuild 898/898; panel edits leave neighbours intact')
         ins.evidence('Card shape', 'Direct', 'kshape.bin / koma.bin byte-exact; occupancy masks match all 66 shapes')
@@ -668,10 +740,53 @@ class KomaWorkspace(SuiteWorkspace):
             for p in s.problems():
                 ins.value('Anomaly', p, colour=T.BAD)
         ins.value('Raw', bytes(c.raw).hex(' '), tip='12-byte record; unknown bytes are preserved')
-        self._inspect_linked_moves(ins, c)
+        if c.raw[6] == passivekoma.PASSIVE_KIND:
+            self._inspect_passive_ability(ins, c)
+        else:
+            self._inspect_linked_moves(ins, c)
         if s:
             ins.section(f'Shape picker ({s.size} cells)', note='Click a shape. The Shapes tab below lists all 66.')
             ins.widget(self._picker)
+
+    def _inspect_passive_ability(self, ins, card):
+        """Decoded original ability text and numeric descriptor, never invented bonuses."""
+        ins.section('Passive Koma — Ability',
+                    note='Type-2 Koma byte +7 → ability.bin[ID*4] and ability_t.bin[ID*3].')
+        if self._passive_catalog is None:
+            ins.value('Source', self._passive_error or 'ability tables unavailable',
+                      colour=T.BAD)
+            return
+        try:
+            ability = self._passive_catalog.for_card(card)
+        except ValueError as exc:
+            ins.value('Ability', str(exc), colour=T.BAD)
+            return
+        if ability is None:
+            return
+        ins.value('Ability ID', f'{ability.id}  (koma.bin card #{card.index} byte +7)')
+        ins.value('Name', ability.display_name or '(blank source text)',
+                  tip=f'bin/ability_t.bin record {ability.id}, string 0; raw: {ability.name!r}')
+        for index, line in enumerate(ability.description_lines, 1):
+            if line:
+                ins.value(f'Description {index}', line.replace('|', ' '),
+                          tip=f'bin/ability_t.bin record {ability.id}, string {index}; raw: {line!r}')
+        ins.section('Passive Stats / Native Descriptor',
+                    note='These are actual ability.bin fields, not computed gameplay damage or buffs.')
+        ins.value('Category +0', str(ability.category),
+                  tip='Original dispatch family: FUN_02077768, byte[0]. Numeric identity retained.')
+        ins.value('Subtype +1', str(ability.subtype),
+                  tip='Original dispatch subtype; category2 uses PTR_FUN_0209F544[subtype].')
+        ins.value('Parameter +2', f'{ability.parameter_raw} (signed {ability.parameter_signed})',
+                  tip='Native raw byte. The effect unit/scale is not uniformly established.')
+        ins.value('Reserved +3', str(ability.raw[3]))
+        ins.value('Raw descriptor', ability.raw.hex(' '),
+                  tip=f'bin/ability.bin, bytes [{ability.id*4}:{ability.id*4+4}]')
+        ins.evidence('Ability ID', 'Direct',
+                     'bin/koma.bin type2 +0x07; main FUN_02077768 indexes ability.bin by card+0x41')
+        ins.evidence('Descriptions', 'Direct',
+                     'bin/ability_t.bin: 57 groups × 3 original CP932 strings')
+        ins.evidence('Stat magnitude', 'Limited',
+                     'Only raw parameter bytes shown; no fabricated percent, HP, SP or duration units')
 
     def _inspect_linked_moves(self, ins, card):
         """Read-only, original game source links; no inferred attack names."""
@@ -709,9 +824,9 @@ class KomaWorkspace(SuiteWorkspace):
                                   x.text.display_description or '(none in BIN)')
             if len(specs) == 2:
                 ins.buttons(('Open Special A', lambda x=specs['A']:
-                             self.app.open_move_resource(x.form, x.resource_id, x.almt_member)),
+                             self.app.open_move_resource(x.form, x.resource_id, x.almt_member, card_index=card.index)),
                             ('Open Special B', lambda x=specs['B']:
-                             self.app.open_move_resource(x.form, x.resource_id, x.almt_member)))
+                             self.app.open_move_resource(x.form, x.resource_id, x.almt_member, card_index=card.index)))
             ins.value('Common actions', f'{len(linked)-len(specs)} input/actor actions shared '
                       'by this battle form', colour=T.MUTED)
         else:
@@ -724,7 +839,7 @@ class KomaWorkspace(SuiteWorkspace):
                 ins.value('Text source', f'{x.text.source} row {x.text.record} / '
                           f'title slot {x.text.title_slot}')
             ins.buttons(('Open support move', lambda x=x:
-                         self.app.open_move_resource(x.form, x.resource_id, x.almt_member)))
+                         self.app.open_move_resource(x.form, x.resource_id, x.almt_member, card_index=card.index)))
         for x in linked:
             label = f'0x{x.offset:02X}  {x.display_name}  [{x.duration} ticks]'
             self._move_link_choices[label] = x
@@ -743,7 +858,8 @@ class KomaWorkspace(SuiteWorkspace):
     def _open_linked_move(self):
         x = getattr(self, '_move_link_choices', {}).get(self._move_link_var.get())
         if x is not None:
-            return self.app.open_move_resource(x.form, x.resource_id, x.almt_member)
+            return self.app.open_move_resource(x.form, x.resource_id, x.almt_member,
+                                               card_index=self.card.index if self.card else None)
         return False
 
     def _picker(self, parent):
@@ -865,7 +981,6 @@ class KomaWorkspace(SuiteWorkspace):
         self.kf.set_panel_colours(self.panel, [v & 15 for v in img.pixels])
         self._dirty = True
         self._cache.pop(self.panel, None)
-        self.strip.invalidate(self.panel)
         self.refresh()
         self.app.update_dirty()
         self.app.status.set(f'Imported panel {self.panel} from {src}' + (f' ({warn[0]})' if warn else ''))
@@ -941,6 +1056,8 @@ class KomaWorkspace(SuiteWorkspace):
                 self.app._move_xrefs = None
                 self.app._move_xrefs_error = ''
         self.refresh()
+        if hasattr(self.app, 'roster_browser'):
+            self.app.roster_browser.refresh_from_staged()
         self.app.update_dirty()
         self.app.status.set(f'Applied {self.path} → {" + ".join(done)} — Save (Ctrl+S) to write the files.')
 

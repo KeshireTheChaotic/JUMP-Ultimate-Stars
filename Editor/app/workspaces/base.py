@@ -39,7 +39,8 @@ class SuiteWorkspace:
         self._sashed = False
 
     # -- layout helpers --------------------------------------------------
-    def standard_layout(self, host, *, right_title='Inspector', layers=False, bottom_ratio=0.68, inspector_tabs=False):
+    def standard_layout(self, host, *, right_title='Inspector', layers=False, bottom_ratio=0.68,
+                        inspector_tabs=False, with_bottom=True):
         """viewport | (layers over) inspector, with a tabbed bottom dock."""
         ws = ttk.PanedWindow(host, orient='vertical')
         upper = ttk.PanedWindow(ws, orient='horizontal')
@@ -65,8 +66,9 @@ class SuiteWorkspace:
         else:
             self.inspector = Inspector(ins.body)
         self.inspector.pack(fill='both', expand=True)
-        self.bottom = TabbedPanel(ws)
-        ws.add(self.bottom, weight=1)
+        self.bottom = TabbedPanel(ws) if with_bottom else None
+        if self.bottom is not None:
+            ws.add(self.bottom, weight=1)
         self._ws, self._upper, self._right = ws, upper, right
         self._bottom_ratio = bottom_ratio
         return ws
@@ -91,7 +93,8 @@ class SuiteWorkspace:
                 self.frame.after(150, self.init_sashes)
                 return
             self._upper.sashpos(0, max(int(420 * self.k), w - int(360 * self.k)))
-            self._ws.sashpos(0, int(h * self._bottom_ratio))
+            if self.bottom is not None:
+                self._ws.sashpos(0, int(h * self._bottom_ratio))
             if self.layers_panel is not None:
                 self._right.sashpos(0, int(self._right.winfo_height() * 0.42))
         except tk.TclError:
