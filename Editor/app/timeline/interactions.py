@@ -88,10 +88,8 @@ def edit_track(editor):
 def add_track(editor):
     if not editor.move:
         return
-    snap = editor._almt_snapshot()
-    ni = editor.sel_track[0] if editor.sel_track else 0
-    TrackDialog(editor, editor.almt, editor.move, ni, None, lambda: editor._track_done('add track', snap),
-                editor.notes_to_text, editor.text_to_notes)
+    from app.widgets.add_track import AddTrackDialog
+    AddTrackDialog(editor)
 
 
 def delete_track(editor):

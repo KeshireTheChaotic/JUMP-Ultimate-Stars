@@ -1,7 +1,7 @@
 """Source-backed JUS _member_details presenter (R08). No native behavior simulated."""
 import struct
 from app import theme as T
-from jus_formats import alod,battleai,battleinput,bintables,chrbin,deckcompanion,gametables
+from jus_formats import alod,bintables,chrbin,deckcompanion,gametables
 from jus_package import chrdiagnostics
 
 def render_archive_member_details(editor, hex_id):
@@ -127,32 +127,14 @@ def render_archive_member_details(editor, hex_id):
                 ins.value('', f'… {len(tv.records) - 40} more')
             if tv.note:
                 ins.text(tv.note)
-    payload = e.payload() if e.name.startswith('chr/ai/') else b''
-    if payload[:4] == b'AIPM':
-        prof = battleai.parse_aipm(payload)
-        ins.section('AI attack profile (AIPM)', note='index i = input selector i+1 (overlay 11)')
-        for i, block in sorted(prof.blocks.items()):
-            ctrl = next((c[0] for c in battleinput.MOVE_CONTROLS.values() if c[1] == block.selector),
-                        f'selector {block.selector}')
-            ins.value(f'#{i}', f'{ctrl}: {len(block.records)} hit(s)' +
-                      ''.join(f'\n  {r.rect} ticks {r.active[0]}–{r.active[1]} power {r.power}'
-                              for r in block.records[:3]))
-    elif payload[:4] == b'AIMV':
-        g = battleai.parse_aimv(payload)
-        ins.section('AI navigation graph (AIMV)', note='node i = stage collider i (overlay 11)')
-        ins.value('Nodes', str(len(g.nodes)))
-        for row in range(battleai.AIMV_ROWS):
-            ins.value(f'Row {row}', f'{len(g.edges(row))} links')
-    elif e.name.endswith('ai_param.bin'):
-        p = battleai.parse_ai_param(payload)
-        ins.section('AI parameters', note='0x30-byte records; +0x2E rating (ov12 0x021C56D0)')
-        ins.value('Records', str(p.count))
-        ins.value('Ratings', ', '.join(str(p.rating(i)) for i in range(min(p.count, 24))))
     if chrbin.kind_of(e.name) in ('shot', 'col', 'effect'):
         table = chrbin.parse(e.payload(), e.name)
         if table.kind == 'shot' and table.stride == 32:
-            ins.section('Shot work records - read-only',
+            ins.section('Shot work records',
                         note='0x20 stride; byte0 selects ov06 callback table at 0x02172864')
+            from app.widgets.shot_editor import ShotEditor
+            from jus_package.project import join
+            ins.buttons(('Edit shot records…', lambda: ShotEditor(editor, join(editor.container, e.name))))
             ins.value('Count', str(table.count))
             for i in range(min(table.count, 24)):
                 rec = table.shot_record(i)

@@ -5,6 +5,7 @@ import tkinter as tk
 from tkinter import messagebox, ttk
 
 from jus_formats import eventops, notetrack
+from app.widgets.audio_cues import AUDIO_OPS, AudioCuePicker, CuePreview
 
 
 class NoteEventEditor(tk.Toplevel):
@@ -33,6 +34,8 @@ class NoteEventEditor(tk.Toplevel):
         self.detail_var = tk.StringVar()
         self.raw_var = tk.StringVar()
         self.arg_vars: list[tk.StringVar] = []
+        self.audio_status = tk.StringVar(master=self)
+        self.audio_preview = CuePreview(self, master, self.audio_status)
         self._build()
         self._populate(select_tick=initial_tick)
         if operation == 'add':
@@ -132,6 +135,8 @@ class NoteEventEditor(tk.Toplevel):
         selected = self._selected_location()
         if selected is None:
             return
+        if selected is self._selected:
+            return
         self._selected = selected
         cmd = selected.command
         self.tick_var.set(str(selected.tick))
@@ -160,6 +165,8 @@ class NoteEventEditor(tk.Toplevel):
         self._update_arg_form(opcode, values)
 
     def _update_arg_form(self, opcode, values):
+        self.audio_preview.stop()
+        self.audio_status.set('')
         for child in self.args_frame.winfo_children():
             child.destroy()
         self.arg_vars = []
@@ -185,7 +192,51 @@ class NoteEventEditor(tk.Toplevel):
                 hint = eventops.chara_action_text(values) if values[0] in eventops.CHARA_ACTION_NAMES else None
                 if hint:
                     ttk.Label(self.args_frame, text=hint, foreground='#F3C178').pack(anchor='w', pady=3)
+        if opcode in AUDIO_OPS:
+            controls = ttk.Frame(self.args_frame)
+            controls.pack(fill='x', pady=6)
+            ttk.Button(controls, text='Choose cue…', command=self._choose_audio).pack(side='left')
+            ttk.Button(controls, text='▶ Preview', command=self._preview_audio).pack(side='left', padx=4)
+            ttk.Button(controls, text='■ Stop', command=self._stop_audio).pack(side='left')
+            ttk.Label(self.args_frame, textvariable=self.audio_status, wraplength=365).pack(fill='x')
         self._raw_toggle()
+
+    def _preview_audio(self):
+        try:
+            _, command = self._command_from_form()
+            values = command.values()
+            if command.opcode not in AUDIO_OPS or not values:
+                raise ValueError('Enter a valid sound cue to preview.')
+            self.audio_preview.play(command.opcode, values[0])
+        except (ValueError, OverflowError) as exc:
+            self.audio_status.set(str(exc))
+
+    def _stop_audio(self):
+        self.audio_preview.stop()
+        self.audio_status.set('Preview stopped.')
+
+    def _choose_audio(self):
+        opcode = self.opcodes.get(self.op_var.get())
+        if opcode not in AUDIO_OPS:
+            return
+        if self.audio_preview.resolver is None:
+            self.audio_status.set('Sound metadata is unavailable in this data root.')
+            return
+        try:
+            current = int(self.arg_vars[0].get(), 0) if self.arg_vars else 0
+        except ValueError:
+            current = 0
+        def choose(seq):
+            self.raw_enabled.set(False)
+            self._update_arg_form(opcode, [seq])
+            cue = self.audio_preview.resolve(opcode, seq)
+            self.audio_status.set(f'{cue.label} — Apply event changes to keep this selection.')
+        AudioCuePicker(self, self.audio_preview, opcode, current, choose)
+
+    def destroy(self):
+        if hasattr(self, 'audio_preview'):
+            self.audio_preview.close()
+        super().destroy()
 
     def _command_from_form(self) -> tuple[int, notetrack.Command]:
         tick = int(self.tick_var.get(), 0)

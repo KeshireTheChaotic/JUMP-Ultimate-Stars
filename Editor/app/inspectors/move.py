@@ -1,5 +1,4 @@
 """Original source-backed editor refresh_inspector responsibility (R08)."""
-import json
 import tkinter as tk
 from app import theme as T
 from jus_formats import almt,battleinput,roster
@@ -87,18 +86,6 @@ def render_move_inspector(editor, hex_id, focus_value=False):
                          'ground/air NoteTrack permissions (+0xF3/+0xF4) and '
                          'follow-up fields (+0xCC/+0xF6/+0xF7) alter eligibility. '
                          'Matching an input mask does NOT prove a successful cancel.')
-            block = editor._ai_block()
-            if block is not None:
-                ins.section('AI attack profile', note=f'chr/ai AIPM selector {block.selector}')
-                for k, rec in enumerate(block.records):
-                    a, b = rec.active
-                    ins.value(f'Hit {k}', f'box {rec.rect}  ticks {a}–{b}\npower {rec.power} · {rec.reach} · '
-                                          f'col bytes {rec.col_byte0}/{rec.col_byte1}'
-                                          + (f' · status {rec.status}' if rec.status else ''))
-                if not block.records:
-                    ins.value('Hits', 'none (the AI does not attack with this move)', colour=T.MUTED)
-                ins.evidence('Profile', 'Direct', 'overlay 11 BattleAIDeck_Create / 0x02175AD0; box and ticks '
-                                                  'match the move\'s collision tracks')
     if editor._battle_base_table() and (m.id & 0xFF) not in battleinput.MOVE_CONTROLS:
         offset = m.id & 0xFF
         if offset in (0x33, 0x34, 0x35, 0x36):
@@ -156,35 +143,5 @@ def render_move_inspector(editor, hex_id, focus_value=False):
         ins.value('Body', f'{len(tr.encoded())} raw bytes')
         ins.buttons(('Edit raw…', editor.edit_track))
         return
-    if not tr.keyed:
-        ins.value('Kind', 'static (whole move)')
-        editor._key_val = tk.StringVar(value=json.dumps(tr.value))
-        e = ins.entry('Value', editor._key_val, editor._value_hint(tr.field),
-                      on_return=lambda: editor.set_key('0', editor._key_val.get()))
-        ins.value('Shown as', editor._fmt(tr.field, tr.value), colour=T.MUTED)
-        ins.buttons(('Set', lambda: editor.set_key('0', editor._key_val.get()), 'Accent.TButton'),
-                    ('Edit as text…', editor.edit_track))
-        if focus_value:
-            e.focus_set()
-            e.select_range(0, 'end')
-        return
-    ins.value('Keys', f'{len(tr.keys)} (values hold until the next key)')
-    key = next((k for k in tr.keys if k.tick == editor.sel_key), None)
-    if key is None:
-        ins.value('At playhead', editor._fmt(tr.field, editor._active_value(tr, editor.tick)))
-        ins.buttons(('◆ Add key at playhead', editor.add_key_at_playhead, 'Accent.TButton'),
-                    ('Edit as text…', editor.edit_track))
-        return
-    ins.section(f'Key @ {key.tick}')
-    editor._key_tick = tk.StringVar(value=str(key.tick))
-    editor._key_val = tk.StringVar(value=json.dumps(key.value))
-    ins.entry('Tick', editor._key_tick, 'Move the key to another tick',
-              on_return=lambda: editor.set_key(editor._key_tick.get(), editor._key_val.get()))
-    e = ins.entry('Value', editor._key_val, editor._value_hint(tr.field),
-                  on_return=lambda: editor.set_key(editor._key_tick.get(), editor._key_val.get()))
-    ins.value('Shown as', editor._fmt(tr.field, key.value), colour=T.MUTED)
-    ins.buttons(('Set', lambda: editor.set_key(editor._key_tick.get(), editor._key_val.get()), 'Accent.TButton'),
-                ('Delete', editor.delete_selected_key))
-    if focus_value:
-        e.focus_set()
-        e.select_range(0, 'end')
+    from app.inspectors.track_controls import render_track_controls
+    render_track_controls(editor, ins, tr, focus_value=focus_value)

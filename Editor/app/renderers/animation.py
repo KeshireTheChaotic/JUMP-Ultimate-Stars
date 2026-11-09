@@ -86,17 +86,6 @@ def draw_animation_body(editor,vp,tick,info,shift,hex_id):
                 if hot:
                     vp.text(pos[0] + x0, pos[1] + y0 - 2, f'{f} ({x0},{y0})-({x1},{y1})', anchor='sw',
                             fill=col, font=T.MONO_SMALL)
-    if editor.show_ai_profile.get():
-        block = editor._ai_block()
-        if block is not None:
-            for k, rec in enumerate(block.records):
-                a, b = rec.active
-                x0, y0, x1, y1 = rec.rect
-                live = a <= tick <= b
-                vp.rect(x0, y0, x1, y1, outline=T.WARN, dash=() if live else (2, 4), width=2 if live else 1)
-                if live:
-                    vp.text(x0, y1 + 2, f'AI {k}: ticks {a}–{b}, power {rec.power}, {rec.reach}',
-                            anchor='nw', fill=T.WARN, font=T.MONO_SMALL)
     for ni, st in state.items():
         name = editor.almt.node_names[ni]
         pos = st.get('2DPos', [0, 0])

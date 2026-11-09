@@ -5,12 +5,18 @@ from jus_package import dynamicgeometry,shotprojection,spawns,steeredtrail,timel
 def render_shot_source_inspector(editor, ins, hex_id):
     """Inspector for a selected shot timeline entry."""
     events = editor._shot_events_current()
-    ins.section('Shot source (read-only)', note='Original chr/shot table; runtime != static preview')
+    ins.section('Shot source', note='Original chr/shot table; runtime != static preview')
     if not events:
         ins.text('No source shot commands in this ALMT.')
         return
     for ev in timelineprojection.shot_events_for_inspector(events, editor.tick):
         ins.section(f'Shot #{ev.record_index} @ tick {ev.tick}')
+        from app.widgets.shot_editor import ShotEditor
+        from jus_package.project import join
+        form, _ = editor._move_source_form()
+        if form:
+            path = join('chr/ChrBin.aar', f'chr/shot/{form}.bin')
+            ins.buttons(('Edit shot record…', lambda path=path, i=ev.record_index: ShotEditor(editor, path, i)))
         ins.value('Handler', f'0x{ev.handler:02X}, {ev.record.handler_address}')
         ins.value('Behavior', ev.record.handler_behavior)
         ins.value('Source event', f'chara_action(2) record {ev.record_index} '

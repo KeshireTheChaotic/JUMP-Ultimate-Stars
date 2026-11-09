@@ -103,15 +103,6 @@ class LevelWorkspace(SuiteWorkspace):
         self.stage_spin.bind('<FocusOut>', self._preview_changed)
         self.stage_play_button = ttk.Button(h, text='Play stage', command=self._toggle_stage_play)
         self.stage_play_button.pack(side='right', padx=4)
-        # AI navigation graph (chr/ai/move/<stage>/{f,n,s}_m.bin, overlay 11 BattleAIMove_Create)
-        nav = ttk.Combobox(h, textvariable=self.ai_nav_row, state='readonly', width=11,
-                           values=['AI nav: off', 'AI nav: all'] + [f'AI nav: row {i}' for i in range(7)])
-        nav.pack(side='right', padx=3)
-        nav.bind('<<ComboboxSelected>>', lambda _e: self.view.redraw())
-        prof = ttk.Combobox(h, textvariable=self.ai_nav_profile, state='readonly', width=3,
-                            values=list(battleai.AIMV_PROFILES))
-        prof.pack(side='right')
-        prof.bind('<<ComboboxSelected>>', lambda _e: (self._load_ai_nav(), self.view.redraw()))
         self.view = self.make_viewport(on_draw=self._draw, on_press=self._press,
                                        on_drag=self._drag, on_release=self._release,
                                        origin_frac=(0.05, 0.08), zoom=1)
@@ -400,7 +391,6 @@ class LevelWorkspace(SuiteWorkspace):
             probs += [(p, 'warn') for p in self._stage_sprites.problems]
         self.map_objects.load(self._stage_mob.raw if self._stage_mob else None,
                               self._stage_geo.raw if self._stage_geo else None)
-        self._load_ai_nav()
         for l in self.layers:
             self._original_maps[l.atm_path] = self.app.root_data.read(l.atm_path)
             img, p = scenes.render_layer(self.app.root_data, l)
@@ -727,7 +717,6 @@ class LevelWorkspace(SuiteWorkspace):
         selected = self.map_objects.selected
         f = self._stage_frame
         self._draw_stage_sprites(vp, mob, f)
-        self._draw_ai_nav(vp, geo)
         phases = {wall.index: wall.damage_phase for wall in f.walls} if f else {}
         if geo is not None and self.preview_collisions.get():
             for coll in geo.collision_boxes:

@@ -72,7 +72,7 @@ class FormatterTest(unittest.TestCase):
             values=[args for tag,args,_ in ins.records if tag=='value']
             self.assertIn('Archive',sections)
             self.assertIn('Member',sections)
-            self.assertIn('Shot work records - read-only' if kind=='shot'
+            self.assertIn('Shot work records' if kind=='shot'
                           else 'Collision metadata - read-only',sections)
             self.assertTrue(any(a[0]=='Count' for a in values))
 
@@ -80,7 +80,7 @@ class FormatterTest(unittest.TestCase):
         ins=SpyInspector()
         actor=SimpleNamespace(_shot_events_current=lambda:())
         EditorApp._inspect_shot_source(actor,ins)
-        self.assertTrue(any(tag=='section' and args[0]=='Shot source (read-only)'
+        self.assertTrue(any(tag=='section' and args[0]=='Shot source'
                             for tag,args,_ in ins.records))
         self.assertTrue(any(tag=='text' and 'No source shot commands' in args[0]
                             for tag,args,_ in ins.records))

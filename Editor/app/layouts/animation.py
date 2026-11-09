@@ -46,7 +46,6 @@ def build_animation(editor, host, k, speeds):
                       ('Effect origin markers', editor.show_effect_marks),
                       ('Pursuer effect (chara_action 13/14)', editor.show_effects),
                       ('Collision boxes', editor.show_collision),
-                      ('AI attack profile (chr/ai AIPM)', editor.show_ai_profile),
                       ('Onion skin', editor.show_onion)):
         gm.add_checkbutton(label=text, variable=var, command=editor.redraw_view)
     gm.add_separator()

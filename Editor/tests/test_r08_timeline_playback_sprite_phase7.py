@@ -44,7 +44,8 @@ class OriginalSourceTransferTests(unittest.TestCase):
                 # Timeline selection intentionally evolved after the extraction:
                 # node headers select elements and stop playback. Its behavioral
                 # contract is covered by test_animation_timeline_selection.py.
-                if name != '_timeline_select':
+                # Add Track now uses native value controls instead of a text list.
+                if name not in {'_timeline_select', 'add_track'}:
                     self.assertEqual(hashlib.sha256(body.encode('utf8')).hexdigest(),
                                      entry['transformed_body_sha256'])
                 self.assertLessEqual(wrappers[name].end_lineno-wrappers[name].lineno+1,3)
