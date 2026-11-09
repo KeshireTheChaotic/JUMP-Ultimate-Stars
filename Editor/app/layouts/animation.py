@@ -3,6 +3,7 @@ import tkinter as tk
 from tkinter import ttk
 from app import theme as T
 from app.widgets import DopeSheet, Inspector, Viewport
+from app.renderers import node_drag
 
 def build_animation(editor, host, k, speeds):
     ws = ttk.PanedWindow(host, orient='vertical')
@@ -88,7 +89,13 @@ def build_animation(editor, host, k, speeds):
     cb.pack(side='right', padx=4)
     T.Tooltip(cb, 'Effects spawned by GenerateID keys, incl. nested spawns')
     ttk.Button(vp.header, text='Frame', style='Tool.TButton', command=editor.frame_view).pack(side='right', padx=6)
-    editor.view = Viewport(vp.body, on_draw=editor._draw_animation, zoom=3)
+    editor.view = Viewport(vp.body, on_draw=editor._draw_animation, zoom=3,
+                           on_press=lambda x, y, e: node_drag.press(editor, x, y, e),
+                           on_drag=lambda x, y, e: node_drag.drag(editor, x, y, e),
+                           on_release=lambda x, y, e: node_drag.release(editor, x, y, e))
+    T.Tooltip(editor.view.canvas, 'Drag collider corners to resize; drag inside a box to move it. '
+              'Drag a node handle or sprite to move 2DPos. Edits key the current frame. '
+              'Middle-drag or Space+drag pans.')
     editor.view.pack(fill='both', expand=True)
     # inspector
     ins = T.Panel(upper, 'Inspector')

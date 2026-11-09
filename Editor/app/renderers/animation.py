@@ -4,6 +4,7 @@ import re
 from app import theme as T
 from jus_formats import eventops
 from jus_package import effectlinks,sounds,spawns
+from app.renderers.collider_drag import CORNERS, HANDLE_RADIUS
 
 def draw_node_sprites(editor,vp,move,tick,base=(0,0),alpha=None,info=None,names=None,hex_id=None):
     for ni, st in editor._state(move, tick).items():
@@ -76,6 +77,12 @@ def draw_animation_body(editor,vp,tick,info,shift,hex_id):
                 x0, y0, x1, y1 = v
                 vp.rect(pos[0] + x0, pos[1] + y0, pos[0] + x1, pos[1] + y1, outline=col,
                         dash=() if en else (3, 3), width=3 if hot else (2 if en else 1))
+                for xi, yi in CORNERS:
+                    sx, sy = vp.to_screen(pos[0] + v[xi], pos[1] + v[yi])
+                    r = HANDLE_RADIUS
+                    vp.canvas.create_rectangle(sx - r, sy - r, sx + r, sy + r,
+                                               outline=col, fill=T.ACCENT if hot else T.CANVAS_BG,
+                                               width=2 if hot else 1)
                 if hot:
                     vp.text(pos[0] + x0, pos[1] + y0 - 2, f'{f} ({x0},{y0})-({x1},{y1})', anchor='sw',
                             fill=col, font=T.MONO_SMALL)
@@ -93,9 +100,10 @@ def draw_animation_body(editor,vp,tick,info,shift,hex_id):
     for ni, st in state.items():
         name = editor.almt.node_names[ni]
         pos = st.get('2DPos', [0, 0])
-        if pos != [0, 0]:
-            vp.text(pos[0], pos[1], '+', fill=T.WARN, font=T.UI_BOLD)
-            vp.text(pos[0] + 2, pos[1] + 2, name, anchor='nw', fill=T.MUTED, font=T.MONO_SMALL)
+        hot = sel is not None and sel[0] == ni
+        vp.text(pos[0], pos[1], '+', fill=T.ACCENT if hot else T.WARN, font=T.UI_BOLD)
+        vp.text(pos[0] + 2, pos[1] + 2, name, anchor='nw',
+                fill=T.ACCENT if hot else T.MUTED, font=T.MONO_SMALL)
         if st.get('GenerateID'):
             info.append(f'{name}: GenerateID {hex_id(st["GenerateID"])}')
         if 'Marker' in st and st['Marker']:

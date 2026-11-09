@@ -238,8 +238,10 @@ class DopeSheet(tk.Frame):
         kind = row.get('kind')
         indent = row.get('indent', 0) * 14
         mid = y + self.ROW_H / 2
+        sel = self.selected and row.get('id') == self.selected[0] and row.get('id') is not None
         if kind == 'group':
-            c.create_rectangle(0, y, self.HEADER_W, y + self.ROW_H, fill='#2B3036', outline='')
+            c.create_rectangle(0, y, self.HEADER_W, y + self.ROW_H,
+                               fill=T.SELECT if sel else '#2B3036', outline='')
             arrow = '▸' if row.get('collapsed') else '▾'
             c.create_text(6 + indent, mid, anchor='w', text=arrow, fill=T.MUTED, font=T.UI_FONT)
             c.create_text(20 + indent, mid, anchor='w', text=row['label'], fill=T.FG, font=T.UI_BOLD)
@@ -379,11 +381,15 @@ class DopeSheet(tk.Frame):
             return
         row = self.rows[i]
         if e.x < self.HEADER_W:
-            if row.get('kind') == 'group' and self.on_toggle_group:
+            if (row.get('kind') == 'group' and self.on_toggle_group
+                    and (e.x < 20 + row.get('indent', 0) * 14
+                         or row.get('id', (None,))[0] != 'node')):
                 self.on_toggle_group(row)
                 return
+            self.selected = (row.get('id'), None)
             if self.on_select:
                 self.on_select(row, None, None)
+            self.redraw()
             return
         _, hit = self._key_at(e.x, e.y)
         if hit:
@@ -395,7 +401,7 @@ class DopeSheet(tk.Frame):
             if row.get('editable') and row.get('kind') in ('track', 'events'):
                 self._drag = ('key', row, t, t)
             return
-        self.selected = None
+        self.selected = (row.get('id'), None)
         if self.on_select:
             self.on_select(row, None, None)
         self._drag = ('scrub',)

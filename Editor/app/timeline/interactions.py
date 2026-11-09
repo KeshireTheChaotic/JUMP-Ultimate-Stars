@@ -255,7 +255,16 @@ def add_note_event(editor):
 
 def _timeline_select(editor, row, tick, payload):
     if row.get('kind') == 'group':
-        return
+        ident = row.get('id', ())
+        if len(ident) != 2 or ident[0] != 'node' or not editor.move:
+            return
+        node = editor.move.nodes[ident[1]]
+        if node is None or not node.tracks:
+            return
+        ti = next((i for i, tr in enumerate(node.tracks) if tr.field == '2DPos'), 0)
+        row = dict(row, sel=(ident[1], ti))
+    editor._stop_play()
+    editor._node_drag = None
     if row.get('sel'):
         editor.sel_track = row['sel']
         editor.sel_virtual = None
@@ -263,6 +272,10 @@ def _timeline_select(editor, row, tick, payload):
         editor.sel_track = None
         editor.sel_virtual = row
     editor.sel_key = tick
+    if row.get('kind') == 'group':
+        tr = editor.move.nodes[editor.sel_track[0]].tracks[editor.sel_track[1]]
+        if not tr.keyed or not any(k.tick == tick for k in tr.keys):
+            editor.sel_key = None
     if tick is not None:
         editor.set_tick(tick)
     editor.refresh_inspector()
