@@ -9,10 +9,10 @@ from jus_formats.stagephysics import COLLIDER_TYPES
 from .. import theme as T
 
 GROUPS = (
-    ('spawns', 'Spawners & item markers', ('spawner', 'item', 'symbol')),
-    ('triggers', 'Triggers & gimmicks', ('trigger', 'gimmick')),
-    ('collisions', 'Colliders', ('collider',)),
-    ('physics', 'Moving platforms & paths', ('floor', 'path', 'conveyor')),
+    ('spawns', 'Spawners & item settings', ('spawner', 'itemweights', 'itemjpower', 'itemcategory', 'item', 'symbol')),
+    ('triggers', 'Triggers & gimmicks', ('trigger', 'gimmick', 'gimmick-visual')),
+    ('collisions', 'Colliders & wall records', ('stage-tail', 'collider', 'wallhp')),
+    ('physics', 'Moving platforms & paths', ('floor', 'floor-shape', 'path', 'conveyor')),
     ('grips', 'Grip points', ('grip',)),
 )
 
@@ -122,6 +122,14 @@ class MapObjectsPanel(ttk.Frame):
                 entry.bind('<Return>', lambda _e: self.commit())
             entry.grid(row=row, column=1, sticky='ew', pady=2)
             self.fields[name] = var
+        if kind in ('stage-tail', 'itemcategory', 'gimmick-visual'):
+            r = len(self.model.fields(kind, i))
+            ttk.Label(self.detail, text=(
+                'These are source-preserved raw fields. Byte offsets are verified, but the '
+                'native effect of every value is not established; edit deliberately and '
+                'test the resulting game data.'),
+                wraplength=int(240 * self.ws.k), justify='left',
+                style='Toolbar.TLabel').grid(row=r, column=0, columnspan=2, sticky='w', pady=(4, 0))
         if kind == 'collider':
             box = self.model.g.collision_boxes[i]
             t = COLLIDER_TYPES.get(box.type_id)

@@ -54,6 +54,7 @@ from dataclasses import dataclass
 from pathlib import Path
 
 from jus_formats import almt, notetrack, roster, sdat
+from .notecommands import iter_note_commands
 
 FUNCTIONS = {0x0400: 0x021569CC, 0x0401: 0x021569E0, 0x0402: 0x021569FC}
 PLAY = 0x0207342C
@@ -331,23 +332,12 @@ class SoundResolver:
     def cues(self, move: almt.Move, node_names: list[str], container: str | None,
              form: int | None = None, card_index: int | None = None) -> list[Cue]:
         out = []
-        for ni, node in enumerate(move.nodes):
-            if node is None:
-                continue
-            tr = node.track('NoteTrack')
-            if tr is None:
-                continue
-            try:
-                nt = notetrack.parse(tr.encoded())
-            except (ValueError, IndexError, struct.error):
-                continue
-            name = node_names[ni] if ni < len(node_names) else f'N{ni}'
-            for key in nt.keys:
-                for c in key.commands:
-                    if c.opcode in FUNCTIONS:
-                        v = c.values() or [0]
-                        out.append(self.resolve(c.opcode, v[0], container, key.tick, name,
-                                                form, card_index))
+        for item in iter_note_commands(move, node_names):
+            command = item.command
+            if command.opcode in FUNCTIONS:
+                values = command.values() or [0]
+                out.append(self.resolve(command.opcode, values[0], container,
+                                        item.tick, item.node, form, card_index))
         out.sort(key=lambda c: c.tick)
         return out
 

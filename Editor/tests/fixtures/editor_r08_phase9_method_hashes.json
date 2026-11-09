@@ -1,0 +1,150 @@
+{
+  "phase": "R08 Phase 9",
+  "original_controller_sha256": "1e0d81fdbf15b7b5ed3c3fa154cd127ba4adcb8bf78b5b2abca9bdde9affba08",
+  "original_method_body_contracts": {
+    "show_roster_sprite": {
+      "module": "app/lifecycle/roster_navigation.py",
+      "callable": "show_roster_sprite",
+      "original_lines": 34,
+      "original_source_sha256": "46d7c1f830a439fac13764b025d881d7f837a335e4cc2de73884e5eaf9fa6323",
+      "transformed_body_sha256": "80492f94c8a62de4ddd814928e0466feddad69d3dfaa9c8199cb050878a4eccb",
+      "injected_formatter": false
+    },
+    "_switch_almt": {
+      "module": "app/lifecycle/roster_navigation.py",
+      "callable": "_switch_almt",
+      "original_lines": 5,
+      "original_source_sha256": "313f24e3d29bcadc793da600f7a79ea3bd886f4732719c9ecda3e6e673dddcaa",
+      "transformed_body_sha256": "7230f5c133e071207f5ce08555b578993509bcb3bb2ceeb04339c5740e569b8b",
+      "injected_formatter": false
+    },
+    "_ai_block": {
+      "module": "app/lifecycle/roster_navigation.py",
+      "callable": "_ai_block",
+      "original_lines": 17,
+      "original_source_sha256": "afc3c5fd3126f58460a1b2351d3762b757789049bf4737f54a0acc3d7baf8225",
+      "transformed_body_sha256": "e45754159633e7568cf0bfbd85eb6a2ee1f0cc067af79aaa2f4f31a039deb177",
+      "injected_formatter": false
+    },
+    "_move_xref": {
+      "module": "app/lifecycle/roster_navigation.py",
+      "callable": "_move_xref",
+      "original_lines": 10,
+      "original_source_sha256": "b5bfaeefb23e432a0b8c0f5bac80efc5956392165d2d0bc24e95aebf04d4889a",
+      "transformed_body_sha256": "9d90a9921c0764c0c97c818d0bbb70730a237c33fe39eec5bc3cf485b7176134",
+      "injected_formatter": false
+    },
+    "_move_source_form": {
+      "module": "app/lifecycle/roster_navigation.py",
+      "callable": "_move_source_form",
+      "original_lines": 12,
+      "original_source_sha256": "7f15677d937049b3ca824be2ddcd9c7526faf82ec1b55ee2661ab5bc7970a6af",
+      "transformed_body_sha256": "60414ffeb5a25f5f1d0ec16fd13f90f1551d2fbf26350f78a013a88cc9c04f6e",
+      "injected_formatter": false
+    },
+    "_move_control_and_title": {
+      "module": "app/lifecycle/roster_navigation.py",
+      "callable": "_move_control_and_title",
+      "original_lines": 19,
+      "original_source_sha256": "cfcf22476d2e98375f7e7406ccc946523b5e6a75b96c1bd8ae5536b9a9b40033",
+      "transformed_body_sha256": "0689dab5d6c4cc0e867de8f84832e8510617d9ed45f0817d818b59a8fb893187",
+      "injected_formatter": false
+    },
+    "open_move_resource": {
+      "module": "app/lifecycle/roster_navigation.py",
+      "callable": "open_move_resource",
+      "original_lines": 70,
+      "original_source_sha256": "b43cdf75b7c7aebfb431e6cb3906b1b31fc7943829f5c0052fc1e6be24767bf2",
+      "transformed_body_sha256": "2b57a22cf61ab2a79ff2d1d99bef0cefa2a2df9aa1a03435cba013a687c70251",
+      "injected_formatter": true
+    },
+    "open_koma_card": {
+      "module": "app/lifecycle/roster_navigation.py",
+      "callable": "open_koma_card",
+      "original_lines": 10,
+      "original_source_sha256": "6d0b24767640671e999f5fcaa8fdbfd7e2ac3b8e287cfb59235882962d26b51e",
+      "transformed_body_sha256": "cbe98d156a2e962966f6a2b0a0a28aa86f8fbf597c3253a811bb754be0d38eb6",
+      "injected_formatter": false
+    },
+    "_battle_base_table": {
+      "module": "app/lifecycle/roster_navigation.py",
+      "callable": "_battle_base_table",
+      "original_lines": 7,
+      "original_source_sha256": "a3a77bf976878302254fdd7838a19782fb0aaf1b6c9cda983e1ef14d6442be03",
+      "transformed_body_sha256": "0f9bbc87560db092961fa4b06130a6adf3034629fcec826c60c7012739812df3",
+      "injected_formatter": false
+    },
+    "populate_moves": {
+      "module": "app/lifecycle/move_list.py",
+      "callable": "populate_moves",
+      "original_lines": 22,
+      "original_source_sha256": "745e3a91d50cc8c37a10fe4e0d3456b8410c39693fcd62a70a385b95f2d42b66",
+      "transformed_body_sha256": "0688d816b4070455642df579a376cafe9b1271b5953e903577ce3cabc830dd7d",
+      "injected_formatter": true
+    },
+    "on_move_select": {
+      "module": "app/lifecycle/move_list.py",
+      "callable": "on_move_select",
+      "original_lines": 23,
+      "original_source_sha256": "1c6b080eeece43bc9c6c50989bfafdaaa47ad88bcafb0bb0b9c667a3bff7562d",
+      "transformed_body_sha256": "d9aa13119ad4682c277ef55c7820093a9952ca8a1651e9bac626da96ad728895",
+      "injected_formatter": false
+    },
+    "_move_row": {
+      "module": "app/lifecycle/move_list.py",
+      "callable": "_move_row",
+      "original_lines": 4,
+      "original_source_sha256": "cbc574a3432fbf43a4bcab97fffadf36248ccb222cf17c5541e6103a5d01ab76",
+      "transformed_body_sha256": "0b0299ce069207c5c6a671e98b2e715abe3c0997e8740194c8a74a25064c3f09",
+      "injected_formatter": true
+    },
+    "duplicate_move": {
+      "module": "app/lifecycle/move_list.py",
+      "callable": "duplicate_move",
+      "original_lines": 12,
+      "original_source_sha256": "f97b3e7563b9c232c3d9262d36180d12c2905f7d49013299bb8c68168ad40bb7",
+      "transformed_body_sha256": "fd1422876e72932945c15dc11f186030049c85de704a6d029cd0eea9039d4e03",
+      "injected_formatter": true
+    },
+    "delete_move": {
+      "module": "app/lifecycle/move_list.py",
+      "callable": "delete_move",
+      "original_lines": 9,
+      "original_source_sha256": "a3eee1b615d57c97824016e0dcbca216c53a5a655aa13a071f184b31b44db233",
+      "transformed_body_sha256": "f3dadd5523ac9d4e1a617695ed5ae031f564da46bded6e59576e93ef078af1e6",
+      "injected_formatter": true
+    },
+    "populate_archive": {
+      "module": "app/lifecycle/archive_navigation.py",
+      "callable": "populate_archive",
+      "original_lines": 17,
+      "original_source_sha256": "0f9079567cf9179f0ea3174083c9412352c28f42c1258b9525629bb8660fbec6",
+      "transformed_body_sha256": "4ef03ba74a7541d08c813b061b9a34a82409486cfb168cf145d9244245d1b130",
+      "injected_formatter": true
+    },
+    "_selected_member": {
+      "module": "app/lifecycle/archive_navigation.py",
+      "callable": "_selected_member",
+      "original_lines": 5,
+      "original_source_sha256": "fbc14df3c21802748f425c7e4de83bb913f4510920a3a5fb07ecd13dd98514b5",
+      "transformed_body_sha256": "7c0474c9bc4e10fe4f06d5d26778dba1827e01b893bcb5318252f1c275369900",
+      "injected_formatter": false
+    },
+    "_table_details": {
+      "module": "app/lifecycle/archive_navigation.py",
+      "callable": "_table_details",
+      "original_lines": 12,
+      "original_source_sha256": "a6d6aba7ebcca40d10425b9f1054ed69423af3a530f57230f4da0ccfaa5c728d",
+      "transformed_body_sha256": "6862c1d6422d3cd33fb78fa1dee9ada6c028c8a9f2d992104046f97f1f3eac30",
+      "injected_formatter": false
+    },
+    "rebuild_check": {
+      "module": "app/lifecycle/archive_navigation.py",
+      "callable": "rebuild_check",
+      "original_lines": 9,
+      "original_source_sha256": "0d120f65dee70a0f4c8137c5fa07d93b9f97cc0df61aa9e66a67b37d716b9ffa",
+      "transformed_body_sha256": "36d45c0216c0ff056bfc9d5887ad6ab36647834c67f944092411bf51d3d97b3a",
+      "injected_formatter": false
+    }
+  }
+}

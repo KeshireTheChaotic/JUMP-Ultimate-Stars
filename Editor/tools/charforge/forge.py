@@ -35,6 +35,11 @@ ID_FIELDS = ('TextureID', 'GenerateID')
 WORK_VERSION = 1
 
 
+def _texture_depths(info: dict) -> set[int]:
+    return {2 if int(piece[3], 16) & 0x40 else 4
+            for frame in info['frames'] for piece in frame['pieces']}
+
+
 def _rj(p: Path):
     return json.loads(Path(p).read_text(encoding='utf-8'))
 
@@ -202,7 +207,12 @@ def _sprite_key(path: str, member: str, taken: set[str]) -> str:
 
 
 def _texture_usage(root: DataRoot, archives: list[str]) -> dict[int, list[dict]]:
-    """TextureID → [{move, duration, loop, cells: [(tick, cell)]}] over the given archives."""
+    """Trace every keyed TextureID interval to its active BoundsIndex frames.
+
+    A node can change TextureID mid-move; associating all frames with just
+    the first texture silently omits authored assets.  Key ticks are decoded
+    by the native ALMT codec, not inferred from preview animations.
+    """
     use: dict[int, list[dict]] = {}
     for path in archives:
         try:
@@ -214,18 +224,29 @@ def _texture_usage(root: DataRoot, archives: list[str]) -> dict[int, list[dict]]
                 continue
             f = almt.parse(e.payload())
             for mv in f.moves:
-                for node in mv.nodes:
+                for node_index, node in enumerate(mv.nodes):
                     if node is None:
                         continue
-                    tex = node.track('TextureID')
-                    cells = node.track('BoundsIndex')
-                    if tex is None or tex.opaque or cells is None or cells.opaque:
+                    tex, cells = node.track('TextureID'), node.track('BoundsIndex')
+                    if (tex is None or tex.opaque or cells is None or cells.opaque):
                         continue
-                    t = tex.keys[0].value if tex.keyed and tex.keys else tex.value
-                    keys = [(k.tick, k.value) for k in cells.keys] if cells.keyed else [(0, cells.value)]
-                    use.setdefault(t & 0xFFFFFF, []).append(
-                        {'move': _h(mv.id & 0xFFFFFF), 'table': join(path, e.name), 'duration': mv.duration,
-                         'loop': bool(mv.flags & almt.MOVE_FLAG_LOOP), 'cells': keys})
+                    textures = ([(int(k.tick), k.value) for k in tex.keys]
+                                if tex.keyed else [(0, tex.value)])
+                    frames = ([(int(k.tick), k.value) for k in cells.keys]
+                              if cells.keyed else [(0, cells.value)])
+                    textures = sorted((t, v) for t, v in textures if isinstance(v, int))
+                    frames = sorted((t, v) for t, v in frames if isinstance(v, int))
+                    for i, (start, resource_id) in enumerate(textures):
+                        stop = textures[i + 1][0] if i + 1 < len(textures) else mv.duration + 1
+                        active = [fv for ft, fv in frames if ft <= start]
+                        current = [(start, active[-1])] if active else []
+                        current += [(tick, cell) for tick, cell in frames if start < tick < stop]
+                        use.setdefault(resource_id & 0xFFFFFF, []).append({
+                            'move': _h(mv.id & 0xFFFFFF),
+                            'table': join(path, e.name), 'node_index': node_index,
+                            'texture_start_tick': start, 'texture_end_tick': stop,
+                            'duration': mv.duration,
+                            'loop': bool(mv.flags & almt.MOVE_FLAG_LOOP), 'cells': current})
     return use
 
 
@@ -272,6 +293,12 @@ def scaffold(root: DataRoot, template: str, slot: str, work: Path, *, name: str 
     usage = _texture_usage(root, list(units.values()))
     sprites = []
     taken: set[str] = set()
+    depths_by_dsig: dict[str, set[int]] = {}
+    for s in man['sprites']:
+        info_ = _rj(pkg / s['dir'] / 'sprite.json')
+        if 'atlas' in info_:
+            key = s['dir'] if s['dsig'].get('embedded') else json.dumps(s['dsig'], sort_keys=True)
+            depths_by_dsig.setdefault(key, set()).update(_texture_depths(info_))
     for s in man['sprites']:
         upath = units[s['dstx']['unit']]
         info_ = _rj(pkg / s['dir'] / 'sprite.json')
@@ -279,6 +306,10 @@ def scaffold(root: DataRoot, template: str, slot: str, work: Path, *, name: str 
         shared = upath.startswith('efc/')
         rid = int(s['resource_id'], 16)
         atlas = 'atlas' in info_
+        dsig_key = s['dir'] if s['dsig'].get('embedded') else json.dumps(s['dsig'], sort_keys=True)
+        depths = depths_by_dsig.get(dsig_key, set())
+        mixed = depths == {2, 4}
+        two_bpp = depths == {2}
         ref = work / 'reference' / key
         frames, sheet = [], []
         for i, fr in enumerate(info_['frames']):
@@ -295,26 +326,33 @@ def scaffold(root: DataRoot, template: str, slot: str, work: Path, *, name: str 
         _contact_sheet(sheet, ref / 'sheet.png') if sheet else None
         if atlas:
             ref.mkdir(parents=True, exist_ok=True)
-            _rgba(pkg / s['dir'] / info_['atlas']['png']).save(ref / 'atlas.png')
+            atlas_info = info_['atlas']
+            preview = atlas_info['two_bpp_preview'] if two_bpp else atlas_info['png']
+            _rgba(pkg / s['dir'] / preview).save(ref / 'atlas.png')
+            if mixed:
+                _rgba(pkg / s['dir'] / atlas_info['two_bpp_preview']).save(ref / 'texture_2bpp.png')
         uses = usage.get(rid, [])
         cells_used = sorted({c for u in uses for _, c in u['cells'] if isinstance(c, int)})
         sprites.append({
             'key': key, 'archive': upath, 'dstx': s['dstx']['member'], 'resource_id': s['resource_id'],
             'sprite_dir': s['dir'], 'dsig': s['dsig'], 'mode': info_['mode_name'], 'banks': info_['banks'],
-            'atlas': {'size': [info_['atlas']['width'], info_['atlas']['height']]} if atlas else None,
+            'atlas': {'size': [info_['atlas']['width'] * (2 if two_bpp else 1), info_['atlas']['height']],
+                      'bpp': 2 if two_bpp else 4, 'mixed': mixed} if atlas else None,
             'frames': frames, 'shared': shared,
             'role': ('shared effect (efc) — used by other characters too; not replaced'
                      if shared else 'effect texture' if '_e' in s['dstx']['member'] else 'character body'),
             'used_by_moves': uses, 'cells_used': cells_used,
-            'deliver': ('nothing (shared)' if shared else
-                        f'art/{key}/atlas.png ({info_["atlas"]["width"]}×{info_["atlas"]["height"]})' if atlas
+            'deliver': ('nothing (shared)' if shared else 'nothing (mixed 2bpp/4bpp atlas preserved)' if mixed else
+                        f'art/{key}/atlas.png' if atlas
                         else f'art/{key}/NNN.png for every non-empty frame, same size as reference'),
         })
         if not shared:
             (work / 'art' / key).mkdir(parents=True, exist_ok=True)
+    from . import komas
+    koma_art = komas.scaffold(root, slot, work)
     eff = _rj(pkg / 'effects.json') if (pkg / 'effects.json').is_file() else {}
     brief = {'version': WORK_VERSION, 'template': template, 'slot': slot,
-             'slot_report': slots.slot_report(root, slot), 'sprites': sprites,
+             'slot_report': slots.slot_report(root, slot), 'sprites': sprites, 'komas': koma_art,
              'effects': eff.get('effects', []), 'spawns': eff.get('spawns', []),
              'compatibility': 'template == slot' if template == slot else 'forms/windows/tables match'}
     _wj(work / 'brief.json', brief)
@@ -323,7 +361,12 @@ def scaffold(root: DataRoot, template: str, slot: str, work: Path, *, name: str 
         'display_name': name or '', 'concept': concept_text or '',
         'palette': {'mode': 'from_art', 'alt_banks': 'copy',
                     'note': 'from_art: 15 colours per DSIG computed from your frames; alt_banks copy|keep'},
-        'require_all_frames': True,
+        'require_all_frames': True, 'require_all_komas': True,
+        'generator': {'ink': '#18151f', 'hair': '#393750', 'skin': '#e5ac82',
+                      'clothing': '#bb3e44', 'pants': '#343f67', 'accent': '#f5dd68',
+                      'highlight': '#f2eee1', 'effect': '#ef7e3c',
+                      'effect_highlight': '#fff1aa', 'paper': '#f2dc9b',
+                      'screen_tone': '#a98a72'},
         'moves': {u['move']: '' for s in sprites if not s['shared'] for u in s['used_by_moves']},
         'notes': 'Fill "moves" with what each move shows for the new character (pose / attack / effect).',
     }
@@ -346,7 +389,10 @@ def _write_brief_md(work: Path, b: dict) -> None:
         L.append(f'### `{s["key"]}` — {s["role"]}')
         L.append(f'- source `{s["archive"]}` | `{s["dstx"]}` (id {s["resource_id"]}), {s["mode"]}, '
                  f'{len(s["frames"])} frames, sizes {sizes[:6]}{" …" if len(sizes) > 6 else ""}')
-        L.append(f'- deliver: {s["deliver"]}; palette: ≤15 colours + transparent (colour 0)')
+        atlas = s['atlas'] or {}
+        limit = (1 << atlas.get('bpp', 4)) - 1
+        size = f' at {atlas["size"][0]}×{atlas["size"][1]}' if atlas and not atlas.get('mixed') else ''
+        L.append(f'- deliver: {s["deliver"]}{size}; palette: ≤{limit} colours + transparent (colour 0)')
         L.append(f'- reference: `reference/{s["key"]}/sheet.png`; used by {len(s["used_by_moves"])} move(s)')
         for u in s['used_by_moves'][:40]:
             cells = ' '.join(f'{c}@{t}' for t, c in u['cells'])
@@ -357,8 +403,13 @@ def _write_brief_md(work: Path, b: dict) -> None:
         L += ['## Shared effects (efc) — kept', '',
               'These textures are drawn for many characters; Character Forge never edits them.', '']
         L += [f'- `{s["key"]}` ({s["archive"]}, id {s["resource_id"]})' for s in shared]
+    L += ['', '## Koma artwork — each native 48×48 DSTX/DSIG panel', '']
+    for k in b.get('komas', []):
+        L.append(f'- {k["key"]}: {k["panels"]} panels, card(s) {k["card_ids"]}; '
+                 f'reference/koma/{k["key"]}/NNN.png -> art/koma/{k["key"]}/NNN.png')
     L += ['', f'## Spawned effects: {len(b["effects"])} effect moves, {len(b["spawns"])} spawn keys', '',
-          'Timing, hit boxes and spawn links stay the template\'s; only the art changes.']
+          'Timing, hit boxes and spawn links stay the template\'s unless native ALMT JSON is edited.',
+          'The built package includes ALMT_LINKS.json and the editable native ALMT JSON in each unit.']
     (work / 'BRIEF.md').write_text('\n'.join(L) + '\n', encoding='utf-8')
 
 
@@ -387,7 +438,7 @@ def draft(work: Path, colours: list[str] | None = None, *, overwrite: bool = Fal
     target = sorted((_hex_rgb(c) for c in colours), key=_lum)
     written = 0
     for s in brief['sprites']:
-        if s['shared']:
+        if s['shared'] or (s['atlas'] or {}).get('mixed'):
             continue
         ref, art = work / 'reference' / s['key'], work / 'art' / s['key']
         art.mkdir(parents=True, exist_ok=True)
@@ -409,7 +460,9 @@ def draft(work: Path, colours: list[str] | None = None, *, overwrite: bool = Fal
                             for px in _pixels(im)])
             im.save(dst)
             written += 1
-    return {'written': written, 'colours': colours}
+    from . import komas
+    koma_panels = komas.draft(work, overwrite=overwrite)
+    return {'written': written + koma_panels, 'koma_panels': koma_panels, 'colours': colours}
 
 
 # ===================================================================== build
@@ -418,21 +471,22 @@ def _palette_from(images: list[Image.Image], colours: int = 15) -> list[tuple[in
     for im in images:
         for r, g, b, a in _pixels(im):
             if a >= 128:
-                px.append((r & 0xF8, g & 0xF8, b & 0xF8))       # DS 15-bit colour
+                px.append((r, g, b))
     if not px:
         return [(0, 0, 0)] * colours
     strip = Image.new('RGB', (len(px), 1))
     strip.putdata(px)
     q = strip.quantize(colors=colours, method=Image.Quantize.MEDIANCUT, dither=Image.Dither.NONE)
     pal = q.getpalette()[:3 * colours]
-    out = [tuple(pal[i:i + 3]) for i in range(0, len(pal), 3)]
+    out = [dsigmod.rgb555_to_rgb(dsigmod.rgb_to_rgb555(*pal[i:i + 3]))
+           for i in range(0, len(pal), 3)]
     while len(out) < colours:
         out.append(out[-1] if out else (0, 0, 0))
     return out
 
 
 def _index(im: Image.Image, pal: list[tuple[int, int, int]]) -> Image.Image:
-    """RGBA → P image with index 0 transparent and 1..15 = pal (nearest colour, no dither)."""
+    """RGBA → P image with index zero transparent and opaque indices from pal."""
     pimg = Image.new('P', (1, 1))
     flat = [0, 0, 0] + [c for rgb in pal for c in rgb]
     flat += flat[-3:] * (256 - len(flat) // 3)
@@ -445,7 +499,7 @@ def _index(im: Image.Image, pal: list[tuple[int, int, int]]) -> Image.Image:
     for i, a in enumerate(alpha):
         if a < 128:
             data[i] = 0
-        elif data[i] == 0:
+        elif not 1 <= data[i] <= len(pal):
             data[i] = 1 + min(range(len(pal)), key=lambda k: sum((x - y) ** 2 for x, y in
                                                                  zip(pal[k], im.getpixel((i % im.width, i // im.width))[:3])))
     out = Image.frombytes('P', im.size, bytes(data))
@@ -494,13 +548,24 @@ def build(root: DataRoot, work: Path, out: Path) -> dict:
         jobs = []
         if s['atlas']:
             a = art / 'atlas.png'
+            atlas_info = info_['atlas']
+            if 'bpp' not in s['atlas'] and 2 in _texture_depths(info_):
+                report['errors'].append(f'{s["key"]}: legacy 2bpp atlas brief; scaffold again')
+                continue
+            if s['atlas'].get('mixed'):
+                if files:
+                    report['errors'].append(f'{s["key"]}: mixed 2bpp/4bpp atlas is preserved; remove atlas art')
+                continue
             if a.is_file():
                 im = _rgba(a)
                 if [im.width, im.height] != s['atlas']['size']:
                     report['errors'].append(f'{s["key"]}: atlas.png is {im.width}×{im.height}, '
                                             f'needs {s["atlas"]["size"][0]}×{s["atlas"]["size"][1]}')
                 else:
-                    jobs.append((a, out / s['sprite_dir'] / info_['atlas']['png'], {'atlas': True}))
+                    bpp = s['atlas'].get('bpp', 4)
+                    preview = atlas_info['two_bpp_preview'] if bpp == 2 else atlas_info['png']
+                    if im.tobytes() != _rgba(out / s['sprite_dir'] / preview).tobytes():
+                        jobs.append((a, out / s['sprite_dir'] / atlas_info['png'], {'bpp': bpp}))
             elif concept.get('require_all_frames', True):
                 report['errors'].append(f'{s["key"]}: missing art/{s["key"]}/atlas.png')
         else:
@@ -528,13 +593,17 @@ def build(root: DataRoot, work: Path, out: Path) -> dict:
         if not jobs:
             continue
         images = [_rgba(src) for src, _, _ in jobs]
-        pal = _palette_from(images)
+        if 'bpp' in jobs[0][2] and any(im.tobytes() != images[0].tobytes() for im in images[1:]):
+            report['errors'].append(f'{items[0][0]["key"]}: conflicting artwork for one shared atlas')
+            return report
+        bpp = jobs[0][2].get('bpp', 4)
+        pal = _palette_from(images, (1 << bpp) - 1)
         s0 = items[0][0]
         jp = _dsig_json_path(out, man, s0['dsig'], next(x['dstx']['unit'] for x in man['sprites']
                                                          if x['dir'] == s0['sprite_dir']), s0['dstx'])
         d = _rj(jp)
-        bank0 = [d['palettes'][0][0]] + [f'{0x8000 | (b >> 3) << 10 | (g >> 3) << 5 | (r >> 3):04X}'
-                                         for r, g, b in pal]
+        bank0 = list(d['palettes'][0])
+        bank0[1:1 + len(pal)] = [f'{0x8000 | dsigmod.rgb_to_rgb555(*rgb):04X}' for rgb in pal]
         if concept.get('palette', {}).get('alt_banks', 'copy') == 'copy':
             d['palettes'] = [list(bank0) for _ in d['palettes']]
         else:
@@ -542,10 +611,20 @@ def build(root: DataRoot, work: Path, out: Path) -> dict:
         _wj(jp, d)
         for (src, dst, opts), im in zip(jobs, images):
             p = _index(im, pal)
-            if opts.get('atlas'):
-                p.save(dst, transparency=0)
-            else:
-                p.save(dst, transparency=0)
+            if opts.get('bpp') == 2:
+                texels = p.tobytes()
+                packed = bytes(lo | (hi << 2) for lo, hi in zip(texels[::2], texels[1::2]))
+                # Package import consumes the native buffer as 4-bit indices.
+                p = Image.frombytes('P', (im.width // 2, im.height), packed)
+                p.putpalette([c for word in bank0 for c in dsigmod.rgb555_to_rgb(int(word, 16))])
+            p.save(dst, transparency=0)
+        if 'bpp' in jobs[0][2]:
+            source = jobs[0][1]
+            for s, _ in items:
+                folder = out / s['sprite_dir']
+                target = folder / _rj(folder / 'sprite.json')['atlas']['png']
+                if target != source:
+                    shutil.copyfile(source, target)
         for s, js in items:
             report['sprites'].append({'key': s['key'], 'frames_replaced': len(js), 'palette': bank0})
     if template != slot:
@@ -555,6 +634,10 @@ def build(root: DataRoot, work: Path, out: Path) -> dict:
     m['charforge'] = {'template': template, 'slot': slot, 'display_name': concept.get('display_name', ''),
                       'concept': concept.get('concept', '')}
     _wj(out / 'package.json', m)
+    from . import komas, links
+    komas.build(root, work, out, report)
+    if not report['errors']:
+        report['almt_moves_indexed'] = len(links.package_index(out, brief)['moves'])
     _wj(out / 'charforge_build.json', report)
     return report
 
@@ -576,6 +659,10 @@ def validate(root: DataRoot, pkg: Path, slot: str) -> dict:
     B = after.base
     names = slots.loader_names(slot, after.forms)
     man = _rj(pkg / 'package.json')
+    from . import komas
+    ke, ko = komas.validate(root, pkg, man)
+    errors.extend(ke)
+    ok.extend(ko)
     for u in man['units']:
         p = u['path']
         if p.startswith('efc/') or p.startswith('battle/ChrWin.aar|'):

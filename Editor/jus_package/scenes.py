@@ -34,9 +34,9 @@ STATUS = {
     '.aod': ('ALOD object list', 'Direct'),
     '.aar': ('nested archive', 'Direct'),
     '.bin': ('binary table (typed views in the Archive inspector)', 'Inferred'),
-    '.cam': ('stage camera', 'Unknown'),
+    '.cam': ('stage camera: 16-byte header + 4/5 signed point pairs (runtime consumer unknown)', 'Direct'),
     '.mob': ('stage physics & spawns', 'Direct'),
-    '.ncl': ('Nitro palette?', 'Unknown'),
+    '.ncl': ('NCCL / PALT RGB555 palette', 'Direct'),
 }
 
 
@@ -127,15 +127,38 @@ def find_layers(root: DataRoot, archive: str) -> list[Layer]:
     return out
 
 
-def render_layer(root: DataRoot, layer: Layer, image_path: str | None = None):
-    """(PIL image or None, problems) for a layer."""
+def render_layer(root: DataRoot, layer: Layer, image_path: str | None = None,
+                 palette_override_paths: tuple[str, ...] | list[str] = ()):
+    """Render ALTM/DSIG pixels with optional source-backed NCCL palette banks.
+
+    NCCL palettes are shared at DS graphics-engine level. The preview applies
+    only populated NCCL banks to all matching DSIG banks of that engine; no
+    pixel or palette source is modified. Hardware load timing remains unknown.
+    """
     path = image_path or layer.image_path
     if not path:
         return None, ['no tile image']
     try:
-        dsig = tilemap.embedded_dsig(root.read(path))
+        from jus_formats.binary import is_dscp, dscp_unwrap
+        source = root.read(path)
+        if is_dscp(source):
+            source = dscp_unwrap(source)
+        dsig = tilemap.embedded_dsig(source)
         if dsig is None:
             return None, [f'{split(path)[-1]}: no embedded DSIG']
+        if palette_override_paths:
+            import copy
+            from jus_formats import ncl
+            colors = [list(bank) for bank in dsig.palettes]
+            for palette_path in palette_override_paths:
+                pal = ncl.parse(root.read(palette_path))
+                if pal.bank_size != 16:
+                    raise ValueError(f'{palette_path}: not a 16-color BG palette')
+                for bank_index, bank in enumerate(pal.banks):
+                    if bank_index < len(colors) and any(bank):
+                        colors[bank_index] = list(bank)
+            dsig = copy.copy(dsig)
+            dsig.palettes = colors
         return tilemap.render(layer.map, dsig)
     except (ValueError, KeyError) as exc:
         return None, [str(exc)]

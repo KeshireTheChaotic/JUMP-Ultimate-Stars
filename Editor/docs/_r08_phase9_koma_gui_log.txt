@@ -1,0 +1,1 @@
+OK: 5×4 shape variant dialog → Apply → Save → reload

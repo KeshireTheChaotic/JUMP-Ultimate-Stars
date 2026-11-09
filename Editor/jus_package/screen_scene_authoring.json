@@ -1,0 +1,700 @@
+{
+  "version": 1,
+  "source_authority": "original ARM9 code and source-backed scene evidence, never emulator placement",
+  "manifest_header": {
+    "version": 1,
+    "provenance": "SCREEN_WORKSPACE_TRACE_20261107.md (ROM/overlay backed), supplementary archive mappings marked inferred",
+    "scene_table": "0x0209E32C",
+    "notes": [
+      "Layout table coordinates are immutable metadata, never write to ROM/overlay.",
+      "Unresolved widget placement is intentionally omitted.",
+      "Bottom screen routing for these widgets is inferred and configurable as a preview, not persisted.",
+      "ALMT move ID must resolve to a real BoundsIndex frame at runtime; do not guess an atlas cell."
+    ]
+  },
+  "scene_overrides": {
+    "1": {
+      "archive": "opening/opening.aar",
+      "archive_evidence": "inferred (scene family to original asset archive)",
+      "widgets": []
+    },
+    "2": {
+      "archive": "title/title.aar",
+      "archive_evidence": "inferred (scene family to original asset archive)",
+      "widgets": []
+    },
+    "3": {
+      "archive": "topmenu/topmenu.aar",
+      "archive_evidence": "direct (constructor trace)",
+      "widgets": [
+        {
+          "id": 0,
+          "name": "J-Galaxy",
+          "origin": [
+            36,
+            50
+          ],
+          "resource_archive": "topmenu/topmenu.aar|topmenu/top_button00.aar",
+          "sprite": "top_button00.dtx",
+          "animation": "top_button00.amt",
+          "move_id": "0x0050000C",
+          "destination": 16,
+          "screen": "Bottom",
+          "screen_evidence": "Direct: main graphics engine context + scene LCD swap bit15=0; hardware main on bottom",
+          "layout_evidence": "Direct overlay0 0x0216003C, RAW y for icon. +20 y belongs to separate label.",
+          "source": "functions_layout/arm9_ov00/arm9_ov00_02153cfc.c#L245-L270",
+          "record": "0x0216003C",
+          "allow_layout_edit": false,
+          "engine": "main",
+          "engine_evidence": "Direct: UI constructor passes FUN_0203b404() 3D/main-engine renderer to ALWidgetImp::Create"
+        },
+        {
+          "id": 1,
+          "name": "J-Arena",
+          "origin": [
+            92,
+            50
+          ],
+          "resource_archive": "topmenu/topmenu.aar|topmenu/top_button00.aar",
+          "sprite": "top_button00.dtx",
+          "animation": "top_button00.amt",
+          "move_id": "0x0050000D",
+          "destination": 21,
+          "screen": "Bottom",
+          "screen_evidence": "Direct: main graphics engine context + scene LCD swap bit15=0; hardware main on bottom",
+          "layout_evidence": "Direct overlay0 0x0216003C, RAW y for icon. +20 y belongs to separate label.",
+          "source": "functions_layout/arm9_ov00/arm9_ov00_02153cfc.c#L245-L270",
+          "record": "0x02160054",
+          "allow_layout_edit": false,
+          "engine": "main",
+          "engine_evidence": "Direct: UI constructor passes FUN_0203b404() 3D/main-engine renderer to ALWidgetImp::Create"
+        },
+        {
+          "id": 2,
+          "name": "Communication",
+          "origin": [
+            148,
+            50
+          ],
+          "resource_archive": "topmenu/topmenu.aar|topmenu/top_button00.aar",
+          "sprite": "top_button00.dtx",
+          "animation": "top_button00.amt",
+          "move_id": "0x0050000E",
+          "destination": 35,
+          "screen": "Bottom",
+          "screen_evidence": "Direct: main graphics engine context + scene LCD swap bit15=0; hardware main on bottom",
+          "layout_evidence": "Direct overlay0 0x0216003C, RAW y for icon. +20 y belongs to separate label.",
+          "source": "functions_layout/arm9_ov00/arm9_ov00_02153cfc.c#L245-L270",
+          "record": "0x0216006C",
+          "allow_layout_edit": false,
+          "engine": "main",
+          "engine_evidence": "Direct: UI constructor passes FUN_0203b404() 3D/main-engine renderer to ALWidgetImp::Create"
+        },
+        {
+          "id": 3,
+          "name": "J-Quiz",
+          "origin": [
+            204,
+            50
+          ],
+          "resource_archive": "topmenu/topmenu.aar|topmenu/top_button00.aar",
+          "sprite": "top_button00.dtx",
+          "animation": "top_button00.amt",
+          "move_id": "0x0050000F",
+          "destination": 31,
+          "screen": "Bottom",
+          "screen_evidence": "Direct: main graphics engine context + scene LCD swap bit15=0; hardware main on bottom",
+          "layout_evidence": "Direct overlay0 0x0216003C, RAW y for icon. +20 y belongs to separate label.",
+          "source": "functions_layout/arm9_ov00/arm9_ov00_02153cfc.c#L245-L270",
+          "record": "0x02160084",
+          "allow_layout_edit": false,
+          "engine": "main",
+          "engine_evidence": "Direct: UI constructor passes FUN_0203b404() 3D/main-engine renderer to ALWidgetImp::Create"
+        },
+        {
+          "id": 4,
+          "name": "Deck Select",
+          "origin": [
+            36,
+            102
+          ],
+          "resource_archive": "topmenu/topmenu.aar|topmenu/top_button00.aar",
+          "sprite": "top_button00.dtx",
+          "animation": "top_button00.amt",
+          "move_id": "0x00500010",
+          "destination": 4,
+          "screen": "Bottom",
+          "screen_evidence": "Direct: main graphics engine context + scene LCD swap bit15=0; hardware main on bottom",
+          "layout_evidence": "Direct overlay0 0x0216003C, RAW y for icon. +20 y belongs to separate label.",
+          "source": "functions_layout/arm9_ov00/arm9_ov00_02153cfc.c#L245-L270",
+          "record": "0x0216009C",
+          "allow_layout_edit": false,
+          "engine": "main",
+          "engine_evidence": "Direct: UI constructor passes FUN_0203b404() 3D/main-engine renderer to ALWidgetImp::Create"
+        },
+        {
+          "id": 5,
+          "name": "J-Power Koma",
+          "origin": [
+            92,
+            102
+          ],
+          "resource_archive": "topmenu/topmenu.aar|topmenu/top_button00.aar",
+          "sprite": "top_button00.dtx",
+          "animation": "top_button00.amt",
+          "move_id": "0x00500011",
+          "destination": 29,
+          "screen": "Bottom",
+          "screen_evidence": "Direct: main graphics engine context + scene LCD swap bit15=0; hardware main on bottom",
+          "layout_evidence": "Direct overlay0 0x0216003C, RAW y for icon. +20 y belongs to separate label.",
+          "source": "functions_layout/arm9_ov00/arm9_ov00_02153cfc.c#L245-L270",
+          "record": "0x021600B4",
+          "allow_layout_edit": false,
+          "engine": "main",
+          "engine_evidence": "Direct: UI constructor passes FUN_0203b404() 3D/main-engine renderer to ALWidgetImp::Create"
+        },
+        {
+          "id": 6,
+          "name": "Database",
+          "origin": [
+            148,
+            102
+          ],
+          "resource_archive": "topmenu/topmenu.aar|topmenu/top_button00.aar",
+          "sprite": "top_button00.dtx",
+          "animation": "top_button00.amt",
+          "move_id": "0x00500012",
+          "destination": 32,
+          "screen": "Bottom",
+          "screen_evidence": "Direct: main graphics engine context + scene LCD swap bit15=0; hardware main on bottom",
+          "layout_evidence": "Direct overlay0 0x0216003C, RAW y for icon. +20 y belongs to separate label.",
+          "source": "functions_layout/arm9_ov00/arm9_ov00_02153cfc.c#L245-L270",
+          "record": "0x021600CC",
+          "allow_layout_edit": false,
+          "engine": "main",
+          "engine_evidence": "Direct: UI constructor passes FUN_0203b404() 3D/main-engine renderer to ALWidgetImp::Create"
+        },
+        {
+          "id": 7,
+          "name": "Options",
+          "origin": [
+            204,
+            102
+          ],
+          "resource_archive": "topmenu/topmenu.aar|topmenu/top_button00.aar",
+          "sprite": "top_button00.dtx",
+          "animation": "top_button00.amt",
+          "move_id": "0x00500013",
+          "destination": 34,
+          "screen": "Bottom",
+          "screen_evidence": "Direct: main graphics engine context + scene LCD swap bit15=0; hardware main on bottom",
+          "layout_evidence": "Direct overlay0 0x0216003C, RAW y for icon. +20 y belongs to separate label.",
+          "source": "functions_layout/arm9_ov00/arm9_ov00_02153cfc.c#L245-L270",
+          "record": "0x021600E4",
+          "allow_layout_edit": false,
+          "engine": "main",
+          "engine_evidence": "Direct: UI constructor passes FUN_0203b404() 3D/main-engine renderer to ALWidgetImp::Create"
+        }
+      ],
+      "display_routing": {
+        "swap_bit15_at_entry": 0,
+        "main_lcd": "Bottom",
+        "sub_lcd": "Top",
+        "evidence": "Direct",
+        "source": "functions_layout/arm9_ov00/arm9_ov00_02153cfc.c#L93",
+        "constructor": "TopMenu::TopMenu_Add",
+        "notes": [
+          "Scene entry setting, not an immutable property."
+        ]
+      }
+    },
+    "4": {
+      "archive": "deckselect/deckselect.aar",
+      "archive_evidence": "inferred (scene family to original asset archive)",
+      "widgets": []
+    },
+    "5": {
+      "archive": "deckcheck/deckcheck.aar",
+      "archive_evidence": "inferred (scene family to original asset archive)",
+      "widgets": [],
+      "display_routing": {
+        "swap_bit15_at_entry": 0,
+        "main_lcd": "Bottom",
+        "sub_lcd": "Top",
+        "evidence": "Direct",
+        "source": "functions_layout/arm9_ov02/arm9_ov02_0215a038.c#L53",
+        "constructor": "DeckCheck::DeckCheck_Add",
+        "notes": [
+          "Scene entry setting, not an immutable property."
+        ]
+      }
+    },
+    "6": {
+      "archive": "stageselect/stageselect.aar",
+      "archive_evidence": "inferred (scene family to original asset archive)",
+      "widgets": []
+    },
+    "7": {
+      "archive": "ruleselect/ruleselect.aar",
+      "archive_evidence": "inferred (scene family to original asset archive)",
+      "widgets": [],
+      "display_routing": {
+        "swap_bit15_at_entry": 0,
+        "main_lcd": "Bottom",
+        "sub_lcd": "Top",
+        "evidence": "Direct",
+        "source": "functions_layout/arm9_ov01/arm9_ov01_02161f3c.c#L102",
+        "constructor": "RuleSelect::RuleSelect_Add",
+        "notes": [
+          "Scene entry setting, not an immutable property.",
+          "RuleSelect callback FUN_021617f0 can write both swap states based on internal state bit; see SCREEN_DISPLAY_ROUTING_TRACE_20261108.md."
+        ],
+        "dynamic_swap": "callback"
+      }
+    },
+    "8": {
+      "archive": "input/input.aar",
+      "archive_evidence": "inferred (scene family to original asset archive)",
+      "widgets": [],
+      "display_routing": {
+        "swap_bit15_at_entry": 1,
+        "main_lcd": "Top",
+        "sub_lcd": "Bottom",
+        "evidence": "Direct",
+        "source": "functions_layout/arm9_ov05/arm9_ov05_0215f41c.c#L66",
+        "constructor": "Input::Input_Add",
+        "notes": [
+          "Scene entry setting, not an immutable property."
+        ]
+      }
+    },
+    "9": {
+      "archive": "deckmake/deckmake.aar",
+      "archive_evidence": "inferred (scene family to original asset archive)",
+      "widgets": []
+    },
+    "10": {
+      "archive": "deckmake/deckmake.aar",
+      "archive_evidence": "inferred (scene family to original asset archive)",
+      "widgets": []
+    },
+    "13": {
+      "archive": "result/result.aar",
+      "archive_evidence": "inferred (scene family to original asset archive)",
+      "widgets": []
+    },
+    "15": {
+      "archive": "vscall/vscall.aar",
+      "archive_evidence": "inferred (scene family to original asset archive)",
+      "widgets": []
+    },
+    "16": {
+      "archive": "jgalaxy/jgalaxy.aar",
+      "archive_evidence": "inferred (scene family to original asset archive)",
+      "widgets": []
+    },
+    "17": {
+      "archive": "jgalaxy/jgalaxy.aar",
+      "archive_evidence": "inferred (scene family to original asset archive)",
+      "widgets": [],
+      "display_routing": {
+        "swap_bit15_at_entry": 1,
+        "main_lcd": "Top",
+        "sub_lcd": "Bottom",
+        "evidence": "Direct",
+        "source": "functions_layout/arm9_ov01/arm9_ov01_0214cd20.c#L28",
+        "constructor": "JGalaxyStageInfo::JGalaxyStageInfo_Add",
+        "notes": [
+          "Scene entry setting, not an immutable property.",
+          "Three ALWidgetImp widgets are passed FUN_0203b3f4() sub-engine renderer (Bottom); another is passed FUN_0203b3e4() main-engine renderer (Top)."
+        ]
+      }
+    },
+    "18": {
+      "archive": "jquiz/jquiz_pack.aar",
+      "archive_evidence": "inferred (scene family to original asset archive)",
+      "widgets": []
+    },
+    "19": {
+      "archive": "result/result.aar",
+      "archive_evidence": "inferred (scene family to original asset archive)",
+      "widgets": []
+    },
+    "20": {
+      "archive": "ending/ending.aar",
+      "archive_evidence": "inferred (scene family to original asset archive)",
+      "widgets": []
+    },
+    "21": {
+      "archive": "JArena/JArena.aar",
+      "archive_evidence": "direct (constructor trace)",
+      "widgets": [
+        {
+          "id": 0,
+          "name": "J-Arena widget 0",
+          "origin": [
+            48,
+            184
+          ],
+          "resource_archive": "JArena/JArena.aar|JArena/arena_top_obj.aar",
+          "sprite": "arena_top_obj.dtx",
+          "animation": "arena_top_obj.amt",
+          "move_id": "0x00810005",
+          "destination": null,
+          "screen": "Bottom",
+          "screen_evidence": "Direct: main graphics engine context + scene LCD swap bit15=0; hardware main on bottom",
+          "layout_evidence": "direct original overlay-3 constructor/selector",
+          "source": "functions_layout/arm9_ov03/arm9_ov03_0214d958.c#L226-L273",
+          "record": null,
+          "allow_layout_edit": false,
+          "note": "not resolved; scripted Y motion not projected",
+          "engine": "main",
+          "engine_evidence": "Direct: UI constructor passes FUN_0203b404() 3D/main-engine renderer to ALWidgetImp::Create"
+        },
+        {
+          "id": 1,
+          "name": "J-Arena widget 1",
+          "origin": [
+            80,
+            184
+          ],
+          "resource_archive": "JArena/JArena.aar|JArena/arena_top_obj.aar",
+          "sprite": "arena_top_obj.dtx",
+          "animation": "arena_top_obj.amt",
+          "move_id": "0x00810006",
+          "destination": 22,
+          "screen": "Bottom",
+          "screen_evidence": "Direct: main graphics engine context + scene LCD swap bit15=0; hardware main on bottom",
+          "layout_evidence": "direct original overlay-3 constructor/selector",
+          "source": "functions_layout/arm9_ov03/arm9_ov03_0214d958.c#L226-L273",
+          "record": null,
+          "allow_layout_edit": false,
+          "note": "scene 22 via high16 action 2; scripted Y motion not projected",
+          "engine": "main",
+          "engine_evidence": "Direct: UI constructor passes FUN_0203b404() 3D/main-engine renderer to ALWidgetImp::Create"
+        },
+        {
+          "id": 2,
+          "name": "J-Arena widget 2",
+          "origin": [
+            112,
+            184
+          ],
+          "resource_archive": "JArena/JArena.aar|JArena/arena_top_obj.aar",
+          "sprite": "arena_top_obj.dtx",
+          "animation": "arena_top_obj.amt",
+          "move_id": "0x00810007",
+          "destination": 4,
+          "screen": "Bottom",
+          "screen_evidence": "Direct: main graphics engine context + scene LCD swap bit15=0; hardware main on bottom",
+          "layout_evidence": "direct original overlay-3 constructor/selector",
+          "source": "functions_layout/arm9_ov03/arm9_ov03_0214d958.c#L226-L273",
+          "record": null,
+          "allow_layout_edit": false,
+          "note": "scene 4 with queued 6/7/12/13/26 path; scripted Y motion not projected",
+          "engine": "main",
+          "engine_evidence": "Direct: UI constructor passes FUN_0203b404() 3D/main-engine renderer to ALWidgetImp::Create"
+        },
+        {
+          "id": 3,
+          "name": "J-Arena widget 3",
+          "origin": [
+            144,
+            184
+          ],
+          "resource_archive": "JArena/JArena.aar|JArena/arena_top_obj.aar",
+          "sprite": "arena_top_obj.dtx",
+          "animation": "arena_top_obj.amt",
+          "move_id": "0x00810008",
+          "destination": 4,
+          "screen": "Bottom",
+          "screen_evidence": "Direct: main graphics engine context + scene LCD swap bit15=0; hardware main on bottom",
+          "layout_evidence": "direct original overlay-3 constructor/selector",
+          "source": "functions_layout/arm9_ov03/arm9_ov03_0214d958.c#L226-L273",
+          "record": null,
+          "allow_layout_edit": false,
+          "note": "scene 4 with queued 6/7/12 path; scripted Y motion not projected",
+          "engine": "main",
+          "engine_evidence": "Direct: UI constructor passes FUN_0203b404() 3D/main-engine renderer to ALWidgetImp::Create"
+        }
+      ],
+      "display_routing": {
+        "swap_bit15_at_entry": 0,
+        "main_lcd": "Bottom",
+        "sub_lcd": "Top",
+        "evidence": "Direct",
+        "source": "functions_layout/arm9_ov03/arm9_ov03_0214d958.c#L62",
+        "constructor": "JArenaTopMenu::JATopMenu_Add",
+        "notes": [
+          "Scene entry setting, not an immutable property."
+        ]
+      }
+    },
+    "22": {
+      "archive": "JArena/JArena.aar",
+      "archive_evidence": "inferred (scene family to original asset archive)",
+      "widgets": []
+    },
+    "23": {
+      "archive": "JArena/JArena.aar",
+      "archive_evidence": "inferred (scene family to original asset archive)",
+      "widgets": []
+    },
+    "24": {
+      "archive": "JArena/JArena.aar",
+      "archive_evidence": "inferred (scene family to original asset archive)",
+      "widgets": []
+    },
+    "25": {
+      "archive": "result/result.aar",
+      "archive_evidence": "inferred (scene family to original asset archive)",
+      "widgets": []
+    },
+    "26": {
+      "archive": "JArena/JArena.aar",
+      "archive_evidence": "inferred (scene family to original asset archive)",
+      "widgets": []
+    },
+    "27": {
+      "archive": "JArena/JArena.aar",
+      "archive_evidence": "inferred (scene family to original asset archive)",
+      "widgets": []
+    },
+    "28": {
+      "archive": "JArena/JArena.aar",
+      "archive_evidence": "inferred (scene family to original asset archive)",
+      "widgets": []
+    },
+    "29": {
+      "archive": "jpower/jpower.aar",
+      "archive_evidence": "inferred (scene family to original asset archive)",
+      "widgets": []
+    },
+    "30": {
+      "archive": "jpower/jpower.aar",
+      "archive_evidence": "inferred (scene family to original asset archive)",
+      "widgets": [],
+      "display_routing": {
+        "swap_bit15_at_entry": 0,
+        "main_lcd": "Bottom",
+        "sub_lcd": "Top",
+        "evidence": "Direct",
+        "source": "functions_layout/arm9_ov05/arm9_ov05_02162410.c#L68",
+        "constructor": "JPower::JPower_Add",
+        "notes": [
+          "Scene entry setting, not an immutable property."
+        ]
+      }
+    },
+    "31": {
+      "archive": "jquiz/jquiz_pack.aar",
+      "archive_evidence": "inferred (scene family to original asset archive)",
+      "widgets": []
+    },
+    "32": {
+      "archive": "database/database.aar",
+      "archive_evidence": "inferred (scene family to original asset archive)",
+      "widgets": [],
+      "display_routing": {
+        "swap_bit15_at_entry": 0,
+        "main_lcd": "Bottom",
+        "sub_lcd": "Top",
+        "evidence": "Direct",
+        "source": "functions_layout/arm9_ov05/arm9_ov05_02166cf0.c#L53",
+        "constructor": "Database::Database_Add",
+        "notes": [
+          "Scene entry setting, not an immutable property."
+        ]
+      }
+    },
+    "33": {
+      "archive": "database/database.aar",
+      "archive_evidence": "inferred (scene family to original asset archive)",
+      "widgets": []
+    },
+    "34": {
+      "archive": "option/option.aar",
+      "archive_evidence": "inferred (scene family to original asset archive)",
+      "widgets": [],
+      "display_routing": {
+        "swap_bit15_at_entry": 0,
+        "main_lcd": "Bottom",
+        "sub_lcd": "Top",
+        "evidence": "Direct",
+        "source": "functions_layout/arm9_ov00/arm9_ov00_02157138.c#L45",
+        "constructor": "Option::Option_Add",
+        "notes": [
+          "Scene entry setting, not an immutable property."
+        ]
+      }
+    },
+    "35": {
+      "archive": "Commu/commu_pack.aar",
+      "archive_evidence": "inferred (scene family to original asset archive)",
+      "widgets": []
+    },
+    "36": {
+      "archive": "Commu/commu_pack.aar",
+      "archive_evidence": "inferred (scene family to original asset archive)",
+      "widgets": [],
+      "display_routing": {
+        "swap_bit15_at_entry": 0,
+        "main_lcd": "Bottom",
+        "sub_lcd": "Top",
+        "evidence": "Direct",
+        "source": "functions_layout/arm9_ov07/arm9_ov07_02164344.c#L67",
+        "constructor": "CommuMenuWrlsWatchWait::CommuMenuWrlsWatchWait_Add",
+        "notes": [
+          "Scene entry setting, not an immutable property."
+        ]
+      }
+    },
+    "37": {
+      "archive": "Commu/commu_pack.aar",
+      "archive_evidence": "inferred (scene family to original asset archive)",
+      "widgets": []
+    },
+    "38": {
+      "archive": "Commu/commu_pack.aar",
+      "archive_evidence": "inferred (scene family to original asset archive)",
+      "widgets": []
+    },
+    "39": {
+      "archive": "Commu/commu_pack.aar",
+      "archive_evidence": "inferred (scene family to original asset archive)",
+      "widgets": []
+    },
+    "40": {
+      "archive": "jquiz/jquiz_pack.aar",
+      "archive_evidence": "inferred (scene family to original asset archive)",
+      "widgets": []
+    },
+    "41": {
+      "archive": "Commu/commu_pack.aar",
+      "archive_evidence": "inferred (scene family to original asset archive)",
+      "widgets": []
+    },
+    "42": {
+      "archive": "Commu/commu_pack.aar",
+      "archive_evidence": "inferred (scene family to original asset archive)",
+      "widgets": []
+    },
+    "43": {
+      "archive": "Commu/commu_pack.aar",
+      "archive_evidence": "inferred (scene family to original asset archive)",
+      "widgets": []
+    },
+    "45": {
+      "archive": "result/result.aar",
+      "archive_evidence": "inferred (scene family to original asset archive)",
+      "widgets": []
+    }
+  },
+  "native_fallback": {
+    "1": {
+      "family": "Cinematic/Movie texture",
+      "explanation": "Opening_Add -> Movie_Create; original opening.aar and .vx, not a static ALTM/DSIG BG map",
+      "source": "functions_layout/arm9_ov00/arm9_ov00_0214d3c8.c#L98-L116"
+    },
+    "11": {
+      "family": "Battle stage/gameplay",
+      "explanation": "Battle_Add; battle level, effects and fighter state determine backgrounds",
+      "source": "functions_layout/arm9_ov06/arm9_ov06_0214cd20.c#L64-L95"
+    },
+    "12": {
+      "family": "Battle stage/gameplay",
+      "explanation": "Battle_Add, mode supplied by scene wrapper; stage/gameplay-driven",
+      "source": "functions_layout/arm9_ov06/arm9_ov06_0214cd20.c#L64-L95"
+    },
+    "13": {
+      "family": "Runtime result widgets",
+      "explanation": "Result_Add builds ResultRank and dynamic results; no static ALTM binding verified",
+      "source": "functions_layout/arm9_ov01/arm9_ov01_02165ea4.c#L40-L62"
+    },
+    "14": {
+      "family": "Scripted demo/movie",
+      "explanation": "Demo_Add configures 2D engines and dynamic scripted objects; no static ALTM pairing verified",
+      "source": "functions_layout/arm9_ov02/arm9_ov02_02157220.c#L51-L90"
+    },
+    "16": {
+      "family": "J-Galaxy multi-renderer",
+      "explanation": "JGalaxy_Add invokes three ROM-indexed constructor families plus JGalaxyBackground/planet model",
+      "source": "functions_layout/arm9_ov02/arm9_ov02_0214cd20.c#L72-L88"
+    },
+    "23": {
+      "family": "J-Arena runtime job",
+      "explanation": "Scene23 wrapper computes job ID from live state; ROM job table 0x0215D2AC",
+      "source": "functions_layout/arm9_main/arm9_main_0206f90c.c#L3-L8"
+    },
+    "24": {
+      "family": "J-Arena runtime job",
+      "explanation": "Scene24 wrapper computes job ID from live state; ROM job table 0x0215D2AC",
+      "source": "functions_layout/arm9_main/arm9_main_0206f930.c#L3-L8"
+    },
+    "25": {
+      "family": "J-Arena result widgets",
+      "explanation": "JAMisnResult_Add creates mission results and 2D widgets; native static BG binding unresolved",
+      "source": "functions_layout/arm9_ov01/arm9_ov01_0215277c.c#L109-L135"
+    },
+    "26": {
+      "family": "J-Arena runtime job",
+      "explanation": "Scene26 wrapper reads job bitfield from live state; ROM job table 0x0215D2AC",
+      "source": "functions_layout/arm9_main/arm9_main_0206f9b8.c#L3-L8"
+    },
+    "27": {
+      "family": "J-Arena runtime job",
+      "explanation": "Scene27 wrapper reads job ID from live state; ROM job table 0x0215D2AC",
+      "source": "functions_layout/arm9_main/arm9_main_0206faa8.c#L3-L8"
+    },
+    "31": {
+      "family": "J-Quiz object callback",
+      "explanation": "JQuiz mode1 ROM target 0x0214CD20: ARM trampoline reads live scene object+0x18",
+      "source": "functions_layout/arm9_ov04/arm9_ov04_0214ce1c.c#L1-L15"
+    },
+    "35": {
+      "family": "Communication selector",
+      "explanation": "14 original conditional scene-wrapper calls select CommuMenu ROM callback modes",
+      "source": "functions_layout/arm9_main/arm9_main_0206fd54.c#L3-L130"
+    },
+    "39": {
+      "family": "Communication leader selection",
+      "explanation": "DataLeaderSel_Add -> CmnLeaderSel_Add; LCD swap argument at shared helper call unproven",
+      "source": "functions_layout/arm9_ov07/arm9_ov07_021624e8.c#L40-L53"
+    },
+    "41": {
+      "family": "WiFi connection controller",
+      "explanation": "WiFi_ConnectionAdd: original connection state and widget controller; no static tile BG binding verified",
+      "source": "functions_layout/arm9_ov08/arm9_ov08_02167960.c#L15-L40"
+    },
+    "43": {
+      "family": "Communication wait + text",
+      "explanation": "Main_CommunicationAdd: original DSFont text layout and network wait callbacks",
+      "source": "functions_layout/arm9_ov07/arm9_ov07_02167fcc.c#L46-L88"
+    },
+    "44": {
+      "family": "Battle stage/gameplay",
+      "explanation": "Battle_Add, alternate scene wrapper/mode; stage/gameplay-driven",
+      "source": "functions_layout/arm9_ov06/arm9_ov06_0214cd20.c#L64-L95"
+    },
+    "45": {
+      "family": "Runtime result widgets",
+      "explanation": "Result_Add, alternate mode; source-backed result sprite widgets, no fixed ALTM BG",
+      "source": "functions_layout/arm9_ov01/arm9_ov01_02165ea4.c#L40-L62"
+    }
+  },
+  "conditional_scene_ids": [
+    17,
+    19,
+    20,
+    22,
+    36,
+    38,
+    42
+  ],
+  "guidance": [
+    "Original navigation identities and transition edges are derived from SCREEN_NAV_GRAPH.json; not duplicated here.",
+    "Scene overrides are code-confirmed widgets, original archive candidate mappings or initial LCD routing, preserving evidence levels.",
+    "Native fallback is an explicit no-static-BG classification; never interpret as a missing scene or renderer failure.",
+    "This file does not store source asset pixels or generated character poses."
+  ]
+}

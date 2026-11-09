@@ -224,6 +224,20 @@ class DefinitionTable:
         self._data[start + 0x79] = opponents - 1
         struct.pack_into('<H', self._data, start + 0x7A, time_value)
 
+    def set_tutorial_slot(self, index: int, slot: int):
+        """Battle definition +0x70, only for native tutorial rule 3.
+
+        The original battle rule3 maps to type0x0C on the normal launch
+        path (overlay6 lookup 0x02170D9C), and fixed ROM pointer array
+        0x02171C20 has exactly six script paths. This does not add new
+        slots or change mission graph references.
+        """
+        if self.get(index).rule != 3:
+            raise ValueError("Tutorial slot only applies to battle rule 3")
+        if not isinstance(slot, int) or not 0 <= slot < 6:
+            raise ValueError("Original game supports tutorial script selectors 0–5 only")
+        struct.pack_into("<I", self._data, self._start(index) + 0x70, slot)
+
     def set_environment(self, index: int, enabled: bool):
         """Toggle only the confirmed stage floor/gimmick initialization gate."""
         pos = self._start(index) + 0x7C

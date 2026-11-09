@@ -1,0 +1,1940 @@
+{
+  "version": 1,
+  "provenance": "SCREEN_WORKSPACE_TRACE_20261107.md (ROM/overlay backed), supplementary archive mappings marked inferred",
+  "scene_table": "0x0209E32C",
+  "scenes": [
+    {
+      "id": 0,
+      "name": "Copyright",
+      "overlay": 0,
+      "archive": null,
+      "archive_evidence": "unresolved",
+      "widgets": [],
+      "create": {
+        "program": "arm9_ov00",
+        "address": "0214cd20",
+        "thumb": false,
+        "name": "Copyright_Add"
+      }
+    },
+    {
+      "id": 1,
+      "name": "Opening",
+      "overlay": 0,
+      "archive": "opening/opening.aar",
+      "archive_evidence": "inferred (scene family to original asset archive)",
+      "widgets": [],
+      "create": {
+        "program": "arm9_ov00",
+        "address": "0214d3c8",
+        "thumb": false,
+        "name": "Opening_Add"
+      }
+    },
+    {
+      "id": 2,
+      "name": "Title",
+      "overlay": 0,
+      "archive": "title/title.aar",
+      "archive_evidence": "inferred (scene family to original asset archive)",
+      "widgets": [],
+      "create": {
+        "program": "arm9_ov00",
+        "address": "0214fb6c",
+        "thumb": false,
+        "name": "Title_Add"
+      }
+    },
+    {
+      "id": 3,
+      "name": "TopMenu",
+      "overlay": 0,
+      "archive": "topmenu/topmenu.aar",
+      "archive_evidence": "direct (constructor trace)",
+      "widgets": [
+        {
+          "id": 0,
+          "name": "J-Galaxy",
+          "origin": [
+            36,
+            50
+          ],
+          "resource_archive": "topmenu/topmenu.aar|topmenu/top_button00.aar",
+          "sprite": "top_button00.dtx",
+          "animation": "top_button00.amt",
+          "move_id": "0x0050000C",
+          "destination": 16,
+          "screen": "Bottom",
+          "screen_evidence": "Direct: main graphics engine context + scene LCD swap bit15=0; hardware main on bottom",
+          "layout_evidence": "Direct overlay0 0x0216003C, RAW y for icon. +20 y belongs to separate label.",
+          "source": "functions_layout/arm9_ov00/arm9_ov00_02153cfc.c#L245-L270",
+          "record": "0x0216003C",
+          "allow_layout_edit": false,
+          "engine": "main",
+          "engine_evidence": "Direct: UI constructor passes FUN_0203b404() 3D/main-engine renderer to ALWidgetImp::Create"
+        },
+        {
+          "id": 1,
+          "name": "J-Arena",
+          "origin": [
+            92,
+            50
+          ],
+          "resource_archive": "topmenu/topmenu.aar|topmenu/top_button00.aar",
+          "sprite": "top_button00.dtx",
+          "animation": "top_button00.amt",
+          "move_id": "0x0050000D",
+          "destination": 21,
+          "screen": "Bottom",
+          "screen_evidence": "Direct: main graphics engine context + scene LCD swap bit15=0; hardware main on bottom",
+          "layout_evidence": "Direct overlay0 0x0216003C, RAW y for icon. +20 y belongs to separate label.",
+          "source": "functions_layout/arm9_ov00/arm9_ov00_02153cfc.c#L245-L270",
+          "record": "0x02160054",
+          "allow_layout_edit": false,
+          "engine": "main",
+          "engine_evidence": "Direct: UI constructor passes FUN_0203b404() 3D/main-engine renderer to ALWidgetImp::Create"
+        },
+        {
+          "id": 2,
+          "name": "Communication",
+          "origin": [
+            148,
+            50
+          ],
+          "resource_archive": "topmenu/topmenu.aar|topmenu/top_button00.aar",
+          "sprite": "top_button00.dtx",
+          "animation": "top_button00.amt",
+          "move_id": "0x0050000E",
+          "destination": 35,
+          "screen": "Bottom",
+          "screen_evidence": "Direct: main graphics engine context + scene LCD swap bit15=0; hardware main on bottom",
+          "layout_evidence": "Direct overlay0 0x0216003C, RAW y for icon. +20 y belongs to separate label.",
+          "source": "functions_layout/arm9_ov00/arm9_ov00_02153cfc.c#L245-L270",
+          "record": "0x0216006C",
+          "allow_layout_edit": false,
+          "engine": "main",
+          "engine_evidence": "Direct: UI constructor passes FUN_0203b404() 3D/main-engine renderer to ALWidgetImp::Create"
+        },
+        {
+          "id": 3,
+          "name": "J-Quiz",
+          "origin": [
+            204,
+            50
+          ],
+          "resource_archive": "topmenu/topmenu.aar|topmenu/top_button00.aar",
+          "sprite": "top_button00.dtx",
+          "animation": "top_button00.amt",
+          "move_id": "0x0050000F",
+          "destination": 31,
+          "screen": "Bottom",
+          "screen_evidence": "Direct: main graphics engine context + scene LCD swap bit15=0; hardware main on bottom",
+          "layout_evidence": "Direct overlay0 0x0216003C, RAW y for icon. +20 y belongs to separate label.",
+          "source": "functions_layout/arm9_ov00/arm9_ov00_02153cfc.c#L245-L270",
+          "record": "0x02160084",
+          "allow_layout_edit": false,
+          "engine": "main",
+          "engine_evidence": "Direct: UI constructor passes FUN_0203b404() 3D/main-engine renderer to ALWidgetImp::Create"
+        },
+        {
+          "id": 4,
+          "name": "Deck Select",
+          "origin": [
+            36,
+            102
+          ],
+          "resource_archive": "topmenu/topmenu.aar|topmenu/top_button00.aar",
+          "sprite": "top_button00.dtx",
+          "animation": "top_button00.amt",
+          "move_id": "0x00500010",
+          "destination": 4,
+          "screen": "Bottom",
+          "screen_evidence": "Direct: main graphics engine context + scene LCD swap bit15=0; hardware main on bottom",
+          "layout_evidence": "Direct overlay0 0x0216003C, RAW y for icon. +20 y belongs to separate label.",
+          "source": "functions_layout/arm9_ov00/arm9_ov00_02153cfc.c#L245-L270",
+          "record": "0x0216009C",
+          "allow_layout_edit": false,
+          "engine": "main",
+          "engine_evidence": "Direct: UI constructor passes FUN_0203b404() 3D/main-engine renderer to ALWidgetImp::Create"
+        },
+        {
+          "id": 5,
+          "name": "J-Power Koma",
+          "origin": [
+            92,
+            102
+          ],
+          "resource_archive": "topmenu/topmenu.aar|topmenu/top_button00.aar",
+          "sprite": "top_button00.dtx",
+          "animation": "top_button00.amt",
+          "move_id": "0x00500011",
+          "destination": 29,
+          "screen": "Bottom",
+          "screen_evidence": "Direct: main graphics engine context + scene LCD swap bit15=0; hardware main on bottom",
+          "layout_evidence": "Direct overlay0 0x0216003C, RAW y for icon. +20 y belongs to separate label.",
+          "source": "functions_layout/arm9_ov00/arm9_ov00_02153cfc.c#L245-L270",
+          "record": "0x021600B4",
+          "allow_layout_edit": false,
+          "engine": "main",
+          "engine_evidence": "Direct: UI constructor passes FUN_0203b404() 3D/main-engine renderer to ALWidgetImp::Create"
+        },
+        {
+          "id": 6,
+          "name": "Database",
+          "origin": [
+            148,
+            102
+          ],
+          "resource_archive": "topmenu/topmenu.aar|topmenu/top_button00.aar",
+          "sprite": "top_button00.dtx",
+          "animation": "top_button00.amt",
+          "move_id": "0x00500012",
+          "destination": 32,
+          "screen": "Bottom",
+          "screen_evidence": "Direct: main graphics engine context + scene LCD swap bit15=0; hardware main on bottom",
+          "layout_evidence": "Direct overlay0 0x0216003C, RAW y for icon. +20 y belongs to separate label.",
+          "source": "functions_layout/arm9_ov00/arm9_ov00_02153cfc.c#L245-L270",
+          "record": "0x021600CC",
+          "allow_layout_edit": false,
+          "engine": "main",
+          "engine_evidence": "Direct: UI constructor passes FUN_0203b404() 3D/main-engine renderer to ALWidgetImp::Create"
+        },
+        {
+          "id": 7,
+          "name": "Options",
+          "origin": [
+            204,
+            102
+          ],
+          "resource_archive": "topmenu/topmenu.aar|topmenu/top_button00.aar",
+          "sprite": "top_button00.dtx",
+          "animation": "top_button00.amt",
+          "move_id": "0x00500013",
+          "destination": 34,
+          "screen": "Bottom",
+          "screen_evidence": "Direct: main graphics engine context + scene LCD swap bit15=0; hardware main on bottom",
+          "layout_evidence": "Direct overlay0 0x0216003C, RAW y for icon. +20 y belongs to separate label.",
+          "source": "functions_layout/arm9_ov00/arm9_ov00_02153cfc.c#L245-L270",
+          "record": "0x021600E4",
+          "allow_layout_edit": false,
+          "engine": "main",
+          "engine_evidence": "Direct: UI constructor passes FUN_0203b404() 3D/main-engine renderer to ALWidgetImp::Create"
+        }
+      ],
+      "create": {
+        "program": "arm9_main",
+        "address": "0206e6ec",
+        "thumb": false,
+        "name": null,
+        "calls": [
+          "02153cfc TopMenu_Add"
+        ],
+        "thumb_calls": []
+      },
+      "display_routing": {
+        "swap_bit15_at_entry": 0,
+        "main_lcd": "Bottom",
+        "sub_lcd": "Top",
+        "evidence": "Direct",
+        "source": "functions_layout/arm9_ov00/arm9_ov00_02153cfc.c#L93",
+        "constructor": "TopMenu::TopMenu_Add",
+        "notes": [
+          "Scene entry setting, not an immutable property."
+        ]
+      }
+    },
+    {
+      "id": 4,
+      "name": "DeckSelect",
+      "overlay": 1,
+      "archive": "deckselect/deckselect.aar",
+      "archive_evidence": "inferred (scene family to original asset archive)",
+      "widgets": [],
+      "create": {
+        "program": "arm9_main",
+        "address": "0206e884",
+        "thumb": false,
+        "name": null,
+        "calls": [
+          "021572b8 DeckSelect_Add",
+          "021572b8 DeckSelect_Add"
+        ],
+        "thumb_calls": [
+          "021572b8"
+        ]
+      }
+    },
+    {
+      "id": 5,
+      "name": "DeckCheck",
+      "overlay": 2,
+      "archive": "deckcheck/deckcheck.aar",
+      "archive_evidence": "inferred (scene family to original asset archive)",
+      "widgets": [],
+      "create": {
+        "program": "arm9_main",
+        "address": "0206ea6c",
+        "thumb": false,
+        "name": null,
+        "calls": [
+          "0215a038 DeckCheck_Add"
+        ],
+        "thumb_calls": []
+      },
+      "display_routing": {
+        "swap_bit15_at_entry": 0,
+        "main_lcd": "Bottom",
+        "sub_lcd": "Top",
+        "evidence": "Direct",
+        "source": "functions_layout/arm9_ov02/arm9_ov02_0215a038.c#L53",
+        "constructor": "DeckCheck::DeckCheck_Add",
+        "notes": [
+          "Scene entry setting, not an immutable property."
+        ]
+      }
+    },
+    {
+      "id": 6,
+      "name": "StageSelect",
+      "overlay": 1,
+      "archive": "stageselect/stageselect.aar",
+      "archive_evidence": "inferred (scene family to original asset archive)",
+      "widgets": [],
+      "create": {
+        "program": "arm9_main",
+        "address": "0206eaa4",
+        "thumb": false,
+        "name": null,
+        "calls": [
+          "0215f740 StageSelect_Add"
+        ],
+        "thumb_calls": []
+      }
+    },
+    {
+      "id": 7,
+      "name": "RuleSelect",
+      "overlay": 1,
+      "archive": "ruleselect/ruleselect.aar",
+      "archive_evidence": "inferred (scene family to original asset archive)",
+      "widgets": [],
+      "create": {
+        "program": "arm9_main",
+        "address": "0206eb10",
+        "thumb": false,
+        "name": null,
+        "calls": [
+          "02161f3c RuleSelect_Add",
+          "02161f3c RuleSelect_Add"
+        ],
+        "thumb_calls": [
+          "02161f3c"
+        ]
+      },
+      "display_routing": {
+        "swap_bit15_at_entry": 0,
+        "main_lcd": "Bottom",
+        "sub_lcd": "Top",
+        "evidence": "Direct",
+        "source": "functions_layout/arm9_ov01/arm9_ov01_02161f3c.c#L102",
+        "constructor": "RuleSelect::RuleSelect_Add",
+        "notes": [
+          "Scene entry setting, not an immutable property.",
+          "RuleSelect callback FUN_021617f0 can write both swap states based on internal state bit; see SCREEN_DISPLAY_ROUTING_TRACE_20261108.md."
+        ],
+        "dynamic_swap": "callback"
+      }
+    },
+    {
+      "id": 8,
+      "name": "Input",
+      "overlay": 5,
+      "archive": "input/input.aar",
+      "archive_evidence": "inferred (scene family to original asset archive)",
+      "widgets": [],
+      "create": {
+        "program": "arm9_main",
+        "address": "0206ebd8",
+        "thumb": false,
+        "name": null,
+        "calls": [
+          "0215f41c Input_Add"
+        ],
+        "thumb_calls": [
+          "0215f41c"
+        ]
+      },
+      "display_routing": {
+        "swap_bit15_at_entry": 1,
+        "main_lcd": "Top",
+        "sub_lcd": "Bottom",
+        "evidence": "Direct",
+        "source": "functions_layout/arm9_ov05/arm9_ov05_0215f41c.c#L66",
+        "constructor": "Input::Input_Add",
+        "notes": [
+          "Scene entry setting, not an immutable property."
+        ]
+      }
+    },
+    {
+      "id": 9,
+      "name": "DeckMake",
+      "overlay": 5,
+      "archive": "deckmake/deckmake.aar",
+      "archive_evidence": "inferred (scene family to original asset archive)",
+      "widgets": [],
+      "create": {
+        "program": "arm9_main",
+        "address": "0206ec18",
+        "thumb": false,
+        "name": null,
+        "calls": [
+          "0214e6dc DeckMake_Add"
+        ],
+        "thumb_calls": []
+      }
+    },
+    {
+      "id": 10,
+      "name": "DeckMakeTutorial",
+      "overlay": 5,
+      "archive": "deckmake/deckmake.aar",
+      "archive_evidence": "inferred (scene family to original asset archive)",
+      "widgets": [],
+      "create": {
+        "program": "arm9_ov05",
+        "address": "02161184",
+        "thumb": false,
+        "name": "DeckMakeTutorial_Add"
+      }
+    },
+    {
+      "id": 11,
+      "name": "Battle",
+      "overlay": 6,
+      "archive": null,
+      "archive_evidence": "unresolved",
+      "widgets": [],
+      "create": {
+        "program": "arm9_main",
+        "address": "0206eca8",
+        "thumb": false,
+        "name": null,
+        "calls": [
+          "0214cd20 Battle_Add"
+        ],
+        "thumb_calls": [
+          "0214cd20"
+        ]
+      }
+    },
+    {
+      "id": 12,
+      "name": "Battle",
+      "overlay": 6,
+      "archive": null,
+      "archive_evidence": "unresolved",
+      "widgets": [],
+      "create": {
+        "program": "arm9_main",
+        "address": "0206ece0",
+        "thumb": false,
+        "name": null,
+        "calls": [
+          "0214cd20 Battle_Add",
+          "0214cd20 Battle_Add",
+          "0214cd20 Battle_Add",
+          "0214cd20 Battle_Add"
+        ],
+        "thumb_calls": [
+          "0214cd20"
+        ]
+      }
+    },
+    {
+      "id": 13,
+      "name": "Result",
+      "overlay": 1,
+      "archive": "result/result.aar",
+      "archive_evidence": "inferred (scene family to original asset archive)",
+      "widgets": [],
+      "create": {
+        "program": "arm9_main",
+        "address": "0206eff0",
+        "thumb": false,
+        "name": null,
+        "calls": [
+          "02165ea4 Result_Add"
+        ],
+        "thumb_calls": [
+          "02165ea4"
+        ]
+      }
+    },
+    {
+      "id": 14,
+      "name": "Demo",
+      "overlay": 2,
+      "archive": null,
+      "archive_evidence": "unresolved",
+      "widgets": [],
+      "create": {
+        "program": "arm9_main",
+        "address": "0206f038",
+        "thumb": false,
+        "name": null,
+        "calls": [
+          "02157220 Demo_Add"
+        ],
+        "thumb_calls": []
+      }
+    },
+    {
+      "id": 15,
+      "name": "VsCall",
+      "overlay": 3,
+      "archive": "vscall/vscall.aar",
+      "archive_evidence": "inferred (scene family to original asset archive)",
+      "widgets": [],
+      "create": {
+        "program": "arm9_main",
+        "address": "0206f050",
+        "thumb": false,
+        "name": null,
+        "calls": [
+          "0215b7d4 VsCall_Add"
+        ],
+        "thumb_calls": []
+      }
+    },
+    {
+      "id": 16,
+      "name": "JGalaxy",
+      "overlay": 2,
+      "archive": "jgalaxy/jgalaxy.aar",
+      "archive_evidence": "inferred (scene family to original asset archive)",
+      "widgets": [],
+      "create": {
+        "program": "arm9_main",
+        "address": "0206f068",
+        "thumb": false,
+        "name": null,
+        "calls": [
+          "0214cd20 JGalaxy_Add"
+        ],
+        "thumb_calls": []
+      }
+    },
+    {
+      "id": 17,
+      "name": "JGalaxyStageInfo",
+      "overlay": 1,
+      "archive": "jgalaxy/jgalaxy.aar",
+      "archive_evidence": "inferred (scene family to original asset archive)",
+      "widgets": [],
+      "create": {
+        "program": "arm9_ov01",
+        "address": "0214cd20",
+        "thumb": false,
+        "name": "JGalaxyStageInfo_Add"
+      },
+      "display_routing": {
+        "swap_bit15_at_entry": 1,
+        "main_lcd": "Top",
+        "sub_lcd": "Bottom",
+        "evidence": "Direct",
+        "source": "functions_layout/arm9_ov01/arm9_ov01_0214cd20.c#L28",
+        "constructor": "JGalaxyStageInfo::JGalaxyStageInfo_Add",
+        "notes": [
+          "Scene entry setting, not an immutable property.",
+          "Three ALWidgetImp widgets are passed FUN_0203b3f4() sub-engine renderer (Bottom); another is passed FUN_0203b3e4() main-engine renderer (Top)."
+        ]
+      }
+    },
+    {
+      "id": 18,
+      "name": "JQuiz",
+      "overlay": 4,
+      "archive": "jquiz/jquiz_pack.aar",
+      "archive_evidence": "inferred (scene family to original asset archive)",
+      "widgets": [],
+      "create": {
+        "program": "arm9_ov04",
+        "address": "0214ce4c",
+        "thumb": false,
+        "name": null
+      }
+    },
+    {
+      "id": 19,
+      "name": "JGalaxyResult",
+      "overlay": 1,
+      "archive": "result/result.aar",
+      "archive_evidence": "inferred (scene family to original asset archive)",
+      "widgets": [],
+      "create": {
+        "program": "arm9_ov01",
+        "address": "0214dcb0",
+        "thumb": false,
+        "name": "JGalaxyResult_Add"
+      }
+    },
+    {
+      "id": 20,
+      "name": "Ending",
+      "overlay": 0,
+      "archive": "ending/ending.aar",
+      "archive_evidence": "inferred (scene family to original asset archive)",
+      "widgets": [],
+      "create": {
+        "program": "arm9_ov00",
+        "address": "0214e860",
+        "thumb": false,
+        "name": "Ending_Add"
+      }
+    },
+    {
+      "id": 21,
+      "name": "JArena",
+      "overlay": 3,
+      "archive": "JArena/JArena.aar",
+      "archive_evidence": "direct (constructor trace)",
+      "widgets": [
+        {
+          "id": 0,
+          "name": "J-Arena widget 0",
+          "origin": [
+            48,
+            184
+          ],
+          "resource_archive": "JArena/JArena.aar|JArena/arena_top_obj.aar",
+          "sprite": "arena_top_obj.dtx",
+          "animation": "arena_top_obj.amt",
+          "move_id": "0x00810005",
+          "destination": null,
+          "screen": "Bottom",
+          "screen_evidence": "Direct: main graphics engine context + scene LCD swap bit15=0; hardware main on bottom",
+          "layout_evidence": "direct original overlay-3 constructor/selector",
+          "source": "functions_layout/arm9_ov03/arm9_ov03_0214d958.c#L226-L273",
+          "record": null,
+          "allow_layout_edit": false,
+          "note": "not resolved; scripted Y motion not projected",
+          "engine": "main",
+          "engine_evidence": "Direct: UI constructor passes FUN_0203b404() 3D/main-engine renderer to ALWidgetImp::Create"
+        },
+        {
+          "id": 1,
+          "name": "J-Arena widget 1",
+          "origin": [
+            80,
+            184
+          ],
+          "resource_archive": "JArena/JArena.aar|JArena/arena_top_obj.aar",
+          "sprite": "arena_top_obj.dtx",
+          "animation": "arena_top_obj.amt",
+          "move_id": "0x00810006",
+          "destination": 22,
+          "screen": "Bottom",
+          "screen_evidence": "Direct: main graphics engine context + scene LCD swap bit15=0; hardware main on bottom",
+          "layout_evidence": "direct original overlay-3 constructor/selector",
+          "source": "functions_layout/arm9_ov03/arm9_ov03_0214d958.c#L226-L273",
+          "record": null,
+          "allow_layout_edit": false,
+          "note": "scene 22 via high16 action 2; scripted Y motion not projected",
+          "engine": "main",
+          "engine_evidence": "Direct: UI constructor passes FUN_0203b404() 3D/main-engine renderer to ALWidgetImp::Create"
+        },
+        {
+          "id": 2,
+          "name": "J-Arena widget 2",
+          "origin": [
+            112,
+            184
+          ],
+          "resource_archive": "JArena/JArena.aar|JArena/arena_top_obj.aar",
+          "sprite": "arena_top_obj.dtx",
+          "animation": "arena_top_obj.amt",
+          "move_id": "0x00810007",
+          "destination": 4,
+          "screen": "Bottom",
+          "screen_evidence": "Direct: main graphics engine context + scene LCD swap bit15=0; hardware main on bottom",
+          "layout_evidence": "direct original overlay-3 constructor/selector",
+          "source": "functions_layout/arm9_ov03/arm9_ov03_0214d958.c#L226-L273",
+          "record": null,
+          "allow_layout_edit": false,
+          "note": "scene 4 with queued 6/7/12/13/26 path; scripted Y motion not projected",
+          "engine": "main",
+          "engine_evidence": "Direct: UI constructor passes FUN_0203b404() 3D/main-engine renderer to ALWidgetImp::Create"
+        },
+        {
+          "id": 3,
+          "name": "J-Arena widget 3",
+          "origin": [
+            144,
+            184
+          ],
+          "resource_archive": "JArena/JArena.aar|JArena/arena_top_obj.aar",
+          "sprite": "arena_top_obj.dtx",
+          "animation": "arena_top_obj.amt",
+          "move_id": "0x00810008",
+          "destination": 4,
+          "screen": "Bottom",
+          "screen_evidence": "Direct: main graphics engine context + scene LCD swap bit15=0; hardware main on bottom",
+          "layout_evidence": "direct original overlay-3 constructor/selector",
+          "source": "functions_layout/arm9_ov03/arm9_ov03_0214d958.c#L226-L273",
+          "record": null,
+          "allow_layout_edit": false,
+          "note": "scene 4 with queued 6/7/12 path; scripted Y motion not projected",
+          "engine": "main",
+          "engine_evidence": "Direct: UI constructor passes FUN_0203b404() 3D/main-engine renderer to ALWidgetImp::Create"
+        }
+      ],
+      "create": {
+        "program": "arm9_main",
+        "address": "0206f3cc",
+        "thumb": false,
+        "name": null,
+        "calls": [
+          "0214cd20 JArena_AddJob"
+        ],
+        "thumb_calls": []
+      },
+      "display_routing": {
+        "swap_bit15_at_entry": 0,
+        "main_lcd": "Bottom",
+        "sub_lcd": "Top",
+        "evidence": "Direct",
+        "source": "functions_layout/arm9_ov03/arm9_ov03_0214d958.c#L62",
+        "constructor": "JArenaTopMenu::JATopMenu_Add",
+        "notes": [
+          "Scene entry setting, not an immutable property."
+        ]
+      }
+    },
+    {
+      "id": 22,
+      "name": "JAMissionTry",
+      "overlay": 1,
+      "archive": "JArena/JArena.aar",
+      "archive_evidence": "inferred (scene family to original asset archive)",
+      "widgets": [],
+      "create": {
+        "program": "arm9_main",
+        "address": "0206f654",
+        "thumb": false,
+        "name": null,
+        "calls": [
+          "0214fe1c JAMissionTry_Add"
+        ],
+        "thumb_calls": [
+          "0214fe1c"
+        ]
+      }
+    },
+    {
+      "id": 23,
+      "name": "JArena",
+      "overlay": 3,
+      "archive": "JArena/JArena.aar",
+      "archive_evidence": "inferred (scene family to original asset archive)",
+      "widgets": [],
+      "create": {
+        "program": "arm9_main",
+        "address": "0206f90c",
+        "thumb": false,
+        "name": null,
+        "calls": [
+          "0214cd2c JArena_AddJob"
+        ],
+        "thumb_calls": []
+      }
+    },
+    {
+      "id": 24,
+      "name": "JArena",
+      "overlay": 3,
+      "archive": "JArena/JArena.aar",
+      "archive_evidence": "inferred (scene family to original asset archive)",
+      "widgets": [],
+      "create": {
+        "program": "arm9_main",
+        "address": "0206f930",
+        "thumb": false,
+        "name": null,
+        "calls": [
+          "0214cd38 JArena_AddJob"
+        ],
+        "thumb_calls": []
+      }
+    },
+    {
+      "id": 25,
+      "name": "JAMisnResult",
+      "overlay": 1,
+      "archive": "result/result.aar",
+      "archive_evidence": "inferred (scene family to original asset archive)",
+      "widgets": [],
+      "create": {
+        "program": "arm9_main",
+        "address": "0206f734",
+        "thumb": false,
+        "name": null,
+        "calls": [
+          "0215277c JAMisnResult_Add"
+        ],
+        "thumb_calls": [
+          "02071874",
+          "02071bb8",
+          "02071bf4"
+        ]
+      }
+    },
+    {
+      "id": 26,
+      "name": "JArena",
+      "overlay": 3,
+      "archive": "JArena/JArena.aar",
+      "archive_evidence": "inferred (scene family to original asset archive)",
+      "widgets": [],
+      "create": {
+        "program": "arm9_main",
+        "address": "0206f9b8",
+        "thumb": false,
+        "name": null,
+        "calls": [
+          "0214cd44 JArena_AddJob"
+        ],
+        "thumb_calls": []
+      }
+    },
+    {
+      "id": 27,
+      "name": "JArena",
+      "overlay": 3,
+      "archive": "JArena/JArena.aar",
+      "archive_evidence": "inferred (scene family to original asset archive)",
+      "widgets": [],
+      "create": {
+        "program": "arm9_main",
+        "address": "0206faa8",
+        "thumb": false,
+        "name": null,
+        "calls": [
+          "0214cd50 jus_Scene27_CreateImpl"
+        ],
+        "thumb_calls": []
+      }
+    },
+    {
+      "id": 28,
+      "name": "JARankLst",
+      "overlay": 1,
+      "archive": "JArena/JArena.aar",
+      "archive_evidence": "inferred (scene family to original asset archive)",
+      "widgets": [],
+      "create": {
+        "program": "arm9_main",
+        "address": "0206fb1c",
+        "thumb": false,
+        "name": null,
+        "calls": [
+          "02154154 JARankLst_Add"
+        ],
+        "thumb_calls": [
+          "02154154"
+        ]
+      }
+    },
+    {
+      "id": 29,
+      "name": "JPowerKomaList",
+      "overlay": 5,
+      "archive": "jpower/jpower.aar",
+      "archive_evidence": "inferred (scene family to original asset archive)",
+      "widgets": [],
+      "create": {
+        "program": "arm9_main",
+        "address": "0206fb4c",
+        "thumb": false,
+        "name": null,
+        "calls": [
+          "02166994 JPowerKomaList_Add"
+        ],
+        "thumb_calls": []
+      }
+    },
+    {
+      "id": 30,
+      "name": "JPower",
+      "overlay": 5,
+      "archive": "jpower/jpower.aar",
+      "archive_evidence": "inferred (scene family to original asset archive)",
+      "widgets": [],
+      "create": {
+        "program": "arm9_main",
+        "address": "0206fbc8",
+        "thumb": false,
+        "name": null,
+        "calls": [
+          "02162410 JPower_Add"
+        ],
+        "thumb_calls": []
+      },
+      "display_routing": {
+        "swap_bit15_at_entry": 0,
+        "main_lcd": "Bottom",
+        "sub_lcd": "Top",
+        "evidence": "Direct",
+        "source": "functions_layout/arm9_ov05/arm9_ov05_02162410.c#L68",
+        "constructor": "JPower::JPower_Add",
+        "notes": [
+          "Scene entry setting, not an immutable property."
+        ]
+      }
+    },
+    {
+      "id": 31,
+      "name": "JQuiz",
+      "overlay": 4,
+      "archive": "jquiz/jquiz_pack.aar",
+      "archive_evidence": "inferred (scene family to original asset archive)",
+      "widgets": [],
+      "create": {
+        "program": "arm9_ov04",
+        "address": "0214ce1c",
+        "thumb": false,
+        "name": null
+      }
+    },
+    {
+      "id": 32,
+      "name": "Database",
+      "overlay": 5,
+      "archive": "database/database.aar",
+      "archive_evidence": "inferred (scene family to original asset archive)",
+      "widgets": [],
+      "create": {
+        "program": "arm9_main",
+        "address": "0206fbe8",
+        "thumb": false,
+        "name": null,
+        "calls": [
+          "02166cf0 Database_Add"
+        ],
+        "thumb_calls": []
+      },
+      "display_routing": {
+        "swap_bit15_at_entry": 0,
+        "main_lcd": "Bottom",
+        "sub_lcd": "Top",
+        "evidence": "Direct",
+        "source": "functions_layout/arm9_ov05/arm9_ov05_02166cf0.c#L53",
+        "constructor": "Database::Database_Add",
+        "notes": [
+          "Scene entry setting, not an immutable property."
+        ]
+      }
+    },
+    {
+      "id": 33,
+      "name": "KomaBook",
+      "overlay": 5,
+      "archive": "database/database.aar",
+      "archive_evidence": "inferred (scene family to original asset archive)",
+      "widgets": [],
+      "create": {
+        "program": "arm9_main",
+        "address": "0206fca8",
+        "thumb": false,
+        "name": null,
+        "calls": [
+          "0215efa0 KomaBook_Add"
+        ],
+        "thumb_calls": []
+      }
+    },
+    {
+      "id": 34,
+      "name": "Option",
+      "overlay": 0,
+      "archive": "option/option.aar",
+      "archive_evidence": "inferred (scene family to original asset archive)",
+      "widgets": [],
+      "create": {
+        "program": "arm9_ov00",
+        "address": "02157138",
+        "thumb": false,
+        "name": "Option_Add"
+      },
+      "display_routing": {
+        "swap_bit15_at_entry": 0,
+        "main_lcd": "Bottom",
+        "sub_lcd": "Top",
+        "evidence": "Direct",
+        "source": "functions_layout/arm9_ov00/arm9_ov00_02157138.c#L45",
+        "constructor": "Option::Option_Add",
+        "notes": [
+          "Scene entry setting, not an immutable property."
+        ]
+      }
+    },
+    {
+      "id": 35,
+      "name": "CommuMenu",
+      "overlay": 7,
+      "archive": "Commu/commu_pack.aar",
+      "archive_evidence": "inferred (scene family to original asset archive)",
+      "widgets": [],
+      "create": {
+        "program": "arm9_main",
+        "address": "0206fd54",
+        "thumb": false,
+        "name": null,
+        "calls": [
+          "0214db7c jus_Scene35_CreateImpl",
+          "0214dbac jus_Scene35_CreateImpl",
+          "0214dc38 jus_Scene35_CreateImpl",
+          "0214dbc8 jus_Scene35_CreateImpl",
+          "0214dd18 jus_Scene35_CreateImpl",
+          "0214dbe4 jus_Scene35_CreateImpl",
+          "0214dc00 jus_Scene35_CreateImpl",
+          "0214dc1c jus_Scene35_CreateImpl",
+          "0214dd34 jus_Scene35_CreateImpl",
+          "0214dc54 jus_Scene35_CreateImpl",
+          "0214dc70 jus_Scene35_CreateImpl",
+          "0214dce0 jus_Scene35_CreateImpl",
+          "0214dcfc jus_Scene35_CreateImpl",
+          "0214dc8c jus_Scene35_CreateImpl"
+        ],
+        "thumb_calls": []
+      }
+    },
+    {
+      "id": 36,
+      "name": "CommuMenuWrlsWatchWait",
+      "overlay": 7,
+      "archive": "Commu/commu_pack.aar",
+      "archive_evidence": "inferred (scene family to original asset archive)",
+      "widgets": [],
+      "create": {
+        "program": "arm9_ov07",
+        "address": "02164344",
+        "thumb": true,
+        "name": "CommuMenuWrlsWatchWait_Add"
+      },
+      "display_routing": {
+        "swap_bit15_at_entry": 0,
+        "main_lcd": "Bottom",
+        "sub_lcd": "Top",
+        "evidence": "Direct",
+        "source": "functions_layout/arm9_ov07/arm9_ov07_02164344.c#L67",
+        "constructor": "CommuMenuWrlsWatchWait::CommuMenuWrlsWatchWait_Add",
+        "notes": [
+          "Scene entry setting, not an immutable property."
+        ]
+      }
+    },
+    {
+      "id": 37,
+      "name": "CommuMenuEntryDataEnt",
+      "overlay": 7,
+      "archive": "Commu/commu_pack.aar",
+      "archive_evidence": "inferred (scene family to original asset archive)",
+      "widgets": [],
+      "create": {
+        "program": "arm9_main",
+        "address": "020701f0",
+        "thumb": false,
+        "name": null,
+        "calls": [
+          "021653cc jus_Scene37_CreateImpl"
+        ],
+        "thumb_calls": []
+      }
+    },
+    {
+      "id": 38,
+      "name": "CommuMenu",
+      "overlay": 7,
+      "archive": "Commu/commu_pack.aar",
+      "archive_evidence": "inferred (scene family to original asset archive)",
+      "widgets": [],
+      "create": {
+        "program": "arm9_ov07",
+        "address": "0214dca8",
+        "thumb": false,
+        "name": null
+      }
+    },
+    {
+      "id": 39,
+      "name": "CommuMenu",
+      "overlay": 7,
+      "archive": "Commu/commu_pack.aar",
+      "archive_evidence": "inferred (scene family to original asset archive)",
+      "widgets": [],
+      "create": {
+        "program": "arm9_ov07",
+        "address": "0214dcc4",
+        "thumb": false,
+        "name": null
+      }
+    },
+    {
+      "id": 40,
+      "name": "JQuiz",
+      "overlay": 4,
+      "archive": "jquiz/jquiz_pack.aar",
+      "archive_evidence": "inferred (scene family to original asset archive)",
+      "widgets": [],
+      "create": {
+        "program": "arm9_ov04",
+        "address": "0214ce34",
+        "thumb": false,
+        "name": null
+      }
+    },
+    {
+      "id": 41,
+      "name": "WiFi_Connection",
+      "overlay": 8,
+      "archive": "Commu/commu_pack.aar",
+      "archive_evidence": "inferred (scene family to original asset archive)",
+      "widgets": [],
+      "create": {
+        "program": "arm9_ov08",
+        "address": "02167960",
+        "thumb": false,
+        "name": "WiFi_ConnectionAdd"
+      }
+    },
+    {
+      "id": 42,
+      "name": "CommuMenuWiFiError",
+      "overlay": 7,
+      "archive": "Commu/commu_pack.aar",
+      "archive_evidence": "inferred (scene family to original asset archive)",
+      "widgets": [],
+      "create": {
+        "program": "arm9_ov07",
+        "address": "02165158",
+        "thumb": false,
+        "name": null
+      }
+    },
+    {
+      "id": 43,
+      "name": "Main_Communication",
+      "overlay": 7,
+      "archive": "Commu/commu_pack.aar",
+      "archive_evidence": "inferred (scene family to original asset archive)",
+      "widgets": [],
+      "create": {
+        "program": "arm9_ov07",
+        "address": "02167fcc",
+        "thumb": false,
+        "name": "Main_CommunicationAdd"
+      }
+    },
+    {
+      "id": 44,
+      "name": "Battle",
+      "overlay": 6,
+      "archive": null,
+      "archive_evidence": "unresolved",
+      "widgets": [],
+      "create": {
+        "program": "arm9_main",
+        "address": "02070340",
+        "thumb": false,
+        "name": null,
+        "calls": [
+          "0214cd20 Battle_Add"
+        ],
+        "thumb_calls": [
+          "0214cd20"
+        ]
+      }
+    },
+    {
+      "id": 45,
+      "name": "Result",
+      "overlay": 1,
+      "archive": "result/result.aar",
+      "archive_evidence": "inferred (scene family to original asset archive)",
+      "widgets": [],
+      "create": {
+        "program": "arm9_main",
+        "address": "0207037c",
+        "thumb": false,
+        "name": null,
+        "calls": [
+          "02165ea4 Result_Add"
+        ],
+        "thumb_calls": [
+          "02165ea4"
+        ]
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": 0,
+      "to": 1,
+      "method": "assignment",
+      "selector": "entry",
+      "action": "branch (see C source)",
+      "code": "functions_layout/arm9_main/arm9_main_0206e618.c#L7"
+    },
+    {
+      "from": 1,
+      "to": 2,
+      "method": "assignment",
+      "selector": "entry",
+      "action": "branch (see C source)",
+      "code": "functions_layout/arm9_main/arm9_main_0206e62c.c#L8"
+    },
+    {
+      "from": 1,
+      "to": 2,
+      "method": "save-gated",
+      "selector": "entry",
+      "action": "branch (see C source)",
+      "code": "functions_layout/arm9_main/arm9_main_0206e62c.c#L11"
+    },
+    {
+      "from": 2,
+      "to": 1,
+      "method": "assignment",
+      "selector": "entry",
+      "action": "branch (see C source)",
+      "code": "functions_layout/arm9_main/arm9_main_0206e674.c#L12"
+    },
+    {
+      "from": 2,
+      "to": 3,
+      "method": "assignment",
+      "selector": "entry",
+      "action": "branch (see C source)",
+      "code": "functions_layout/arm9_main/arm9_main_0206e674.c#L20"
+    },
+    {
+      "from": 2,
+      "to": 14,
+      "method": "change",
+      "selector": "entry",
+      "action": "branch (see C source)",
+      "code": "functions_layout/arm9_main/arm9_main_0206e674.c#L23"
+    },
+    {
+      "from": 3,
+      "to": 16,
+      "method": "change",
+      "selector": "0",
+      "action": "button 0: J-Galaxy",
+      "code": "functions_layout/arm9_main/arm9_main_0206e70c.c#L9"
+    },
+    {
+      "from": 3,
+      "to": 21,
+      "method": "change",
+      "selector": "1",
+      "action": "button 1: J-Arena",
+      "code": "functions_layout/arm9_main/arm9_main_0206e70c.c#L12"
+    },
+    {
+      "from": 3,
+      "to": 35,
+      "method": "change",
+      "selector": "2",
+      "action": "button 2: Communication",
+      "code": "functions_layout/arm9_main/arm9_main_0206e70c.c#L15"
+    },
+    {
+      "from": 3,
+      "to": 31,
+      "method": "change",
+      "selector": "3",
+      "action": "button 3: J-Quiz",
+      "code": "functions_layout/arm9_main/arm9_main_0206e70c.c#L18"
+    },
+    {
+      "from": 3,
+      "to": 4,
+      "method": "change",
+      "selector": "4",
+      "action": "button 4: Deck Select",
+      "code": "functions_layout/arm9_main/arm9_main_0206e70c.c#L21"
+    },
+    {
+      "from": 3,
+      "to": 29,
+      "method": "change",
+      "selector": "5",
+      "action": "button 5: J-Power Koma",
+      "code": "functions_layout/arm9_main/arm9_main_0206e70c.c#L24"
+    },
+    {
+      "from": 3,
+      "to": 32,
+      "method": "change",
+      "selector": "6",
+      "action": "button 6: Database",
+      "code": "functions_layout/arm9_main/arm9_main_0206e70c.c#L27"
+    },
+    {
+      "from": 3,
+      "to": 34,
+      "method": "change",
+      "selector": "7",
+      "action": "button 7: Options",
+      "code": "functions_layout/arm9_main/arm9_main_0206e70c.c#L30"
+    },
+    {
+      "from": 3,
+      "to": 2,
+      "method": "change",
+      "selector": "8",
+      "action": "back",
+      "code": "functions_layout/arm9_main/arm9_main_0206e70c.c#L33"
+    },
+    {
+      "from": 4,
+      "to": 7,
+      "method": "assignment",
+      "selector": "entry",
+      "action": "branch (see C source)",
+      "code": "functions_layout/arm9_main/arm9_main_0206e8b8.c#L11"
+    },
+    {
+      "from": 4,
+      "to": 8,
+      "method": "change",
+      "selector": "2",
+      "action": "deck edit input",
+      "code": "functions_layout/arm9_main/arm9_main_0206e8b8.c#L33"
+    },
+    {
+      "from": 4,
+      "to": 9,
+      "method": "queue",
+      "selector": "2",
+      "action": "deck edit (queued)",
+      "code": "functions_layout/arm9_main/arm9_main_0206e8b8.c#L34"
+    },
+    {
+      "from": 4,
+      "to": 8,
+      "method": "change",
+      "selector": "3",
+      "action": "input",
+      "code": "functions_layout/arm9_main/arm9_main_0206e8b8.c#L40"
+    },
+    {
+      "from": 4,
+      "to": 9,
+      "method": "change",
+      "selector": "4",
+      "action": "deck editor",
+      "code": "functions_layout/arm9_main/arm9_main_0206e8b8.c#L46"
+    },
+    {
+      "from": 6,
+      "to": 37,
+      "method": "assignment",
+      "selector": "entry",
+      "action": "branch (see C source)",
+      "code": "functions_layout/arm9_main/arm9_main_0206eac0.c#L20"
+    },
+    {
+      "from": 7,
+      "to": 4,
+      "method": "assignment",
+      "selector": "2",
+      "action": "exit selector 2",
+      "code": "functions_layout/arm9_main/arm9_main_0206eb68.c#L19"
+    },
+    {
+      "from": 7,
+      "to": 37,
+      "method": "assignment",
+      "selector": "3",
+      "action": "exit selector 3",
+      "code": "functions_layout/arm9_main/arm9_main_0206eb68.c#L23"
+    },
+    {
+      "from": 9,
+      "to": 11,
+      "method": "assignment",
+      "selector": "entry",
+      "action": "branch (see C source)",
+      "code": "functions_layout/arm9_main/arm9_main_0206ec44.c#L17"
+    },
+    {
+      "from": 12,
+      "to": 4,
+      "method": "assignment",
+      "selector": "2",
+      "action": "exit selector 2",
+      "code": "functions_layout/arm9_main/arm9_main_0206ed80.c#L20"
+    },
+    {
+      "from": 12,
+      "to": 12,
+      "method": "assignment",
+      "selector": "3",
+      "action": "exit selector 3",
+      "code": "functions_layout/arm9_main/arm9_main_0206ed80.c#L23"
+    },
+    {
+      "from": 12,
+      "to": 12,
+      "method": "assignment",
+      "selector": "4",
+      "action": "exit selector 4",
+      "code": "functions_layout/arm9_main/arm9_main_0206ed80.c#L27"
+    },
+    {
+      "from": 16,
+      "to": 3,
+      "method": "save-gated",
+      "selector": "0",
+      "action": "back / save-gated",
+      "code": "functions_layout/arm9_main/arm9_main_0206f088.c#L9"
+    },
+    {
+      "from": 16,
+      "to": 29,
+      "method": "change",
+      "selector": "1",
+      "action": "J-Power",
+      "code": "functions_layout/arm9_main/arm9_main_0206f088.c#L12"
+    },
+    {
+      "from": 16,
+      "to": 4,
+      "method": "change",
+      "selector": "2",
+      "action": "deck selection",
+      "code": "functions_layout/arm9_main/arm9_main_0206f088.c#L15"
+    },
+    {
+      "from": 16,
+      "to": 17,
+      "method": "change",
+      "selector": "3",
+      "action": "mission info",
+      "code": "functions_layout/arm9_main/arm9_main_0206f088.c#L18"
+    },
+    {
+      "from": 17,
+      "to": 4,
+      "method": "change",
+      "selector": "entry",
+      "action": "branch (see C source)",
+      "code": "functions_layout/arm9_main/arm9_main_0206f148.c#L25"
+    },
+    {
+      "from": 17,
+      "to": 5,
+      "method": "change",
+      "selector": "entry",
+      "action": "branch (see C source)",
+      "code": "functions_layout/arm9_main/arm9_main_0206f148.c#L28"
+    },
+    {
+      "from": 17,
+      "to": 14,
+      "method": "queue",
+      "selector": "entry",
+      "action": "branch (see C source)",
+      "code": "functions_layout/arm9_main/arm9_main_0206f148.c#L32"
+    },
+    {
+      "from": 17,
+      "to": 14,
+      "method": "queue",
+      "selector": "entry",
+      "action": "branch (see C source)",
+      "code": "functions_layout/arm9_main/arm9_main_0206f148.c#L36"
+    },
+    {
+      "from": 17,
+      "to": 18,
+      "method": "queue",
+      "selector": "entry",
+      "action": "branch (see C source)",
+      "code": "functions_layout/arm9_main/arm9_main_0206f148.c#L37"
+    },
+    {
+      "from": 17,
+      "to": 12,
+      "method": "queue",
+      "selector": "entry",
+      "action": "branch (see C source)",
+      "code": "functions_layout/arm9_main/arm9_main_0206f148.c#L39"
+    },
+    {
+      "from": 17,
+      "to": 19,
+      "method": "queue",
+      "selector": "entry",
+      "action": "branch (see C source)",
+      "code": "functions_layout/arm9_main/arm9_main_0206f148.c#L40"
+    },
+    {
+      "from": 17,
+      "to": 10,
+      "method": "change",
+      "selector": "entry",
+      "action": "tutorial mode (param2=1)",
+      "code": "functions_layout/arm9_main/arm9_main_0206f148.c#L44"
+    },
+    {
+      "from": 18,
+      "to": 14,
+      "method": "change",
+      "selector": "entry",
+      "action": "branch (see C source)",
+      "code": "functions_layout/arm9_main/arm9_main_0206f2a4.c#L12"
+    },
+    {
+      "from": 19,
+      "to": 14,
+      "method": "change",
+      "selector": "entry",
+      "action": "branch (see C source)",
+      "code": "functions_layout/arm9_main/arm9_main_0206f300.c#L16"
+    },
+    {
+      "from": 19,
+      "to": 14,
+      "method": "change",
+      "selector": "entry",
+      "action": "branch (see C source)",
+      "code": "functions_layout/arm9_main/arm9_main_0206f300.c#L19"
+    },
+    {
+      "from": 19,
+      "to": 20,
+      "method": "queue",
+      "selector": "entry",
+      "action": "branch (see C source)",
+      "code": "functions_layout/arm9_main/arm9_main_0206f300.c#L20"
+    },
+    {
+      "from": 19,
+      "to": 20,
+      "method": "change",
+      "selector": "entry",
+      "action": "branch (see C source)",
+      "code": "functions_layout/arm9_main/arm9_main_0206f300.c#L24"
+    },
+    {
+      "from": 19,
+      "to": 16,
+      "method": "save-gated",
+      "selector": "entry",
+      "action": "branch (see C source)",
+      "code": "functions_layout/arm9_main/arm9_main_0206f300.c#L28"
+    },
+    {
+      "from": 21,
+      "to": 22,
+      "method": "change",
+      "selector": "entry",
+      "action": "branch (see C source)",
+      "code": "functions_layout/arm9_main/arm9_main_0206f3e4.c#L16"
+    },
+    {
+      "from": 21,
+      "to": 4,
+      "method": "change",
+      "selector": "entry",
+      "action": "branch (see C source)",
+      "code": "functions_layout/arm9_main/arm9_main_0206f3e4.c#L19"
+    },
+    {
+      "from": 21,
+      "to": 6,
+      "method": "queue",
+      "selector": "entry",
+      "action": "branch (see C source)",
+      "code": "functions_layout/arm9_main/arm9_main_0206f3e4.c#L20"
+    },
+    {
+      "from": 21,
+      "to": 7,
+      "method": "queue",
+      "selector": "entry",
+      "action": "branch (see C source)",
+      "code": "functions_layout/arm9_main/arm9_main_0206f3e4.c#L21"
+    },
+    {
+      "from": 21,
+      "to": 12,
+      "method": "queue",
+      "selector": "entry",
+      "action": "branch (see C source)",
+      "code": "functions_layout/arm9_main/arm9_main_0206f3e4.c#L22"
+    },
+    {
+      "from": 21,
+      "to": 13,
+      "method": "queue",
+      "selector": "entry",
+      "action": "branch (see C source)",
+      "code": "functions_layout/arm9_main/arm9_main_0206f3e4.c#L23"
+    },
+    {
+      "from": 21,
+      "to": 26,
+      "method": "queue",
+      "selector": "entry",
+      "action": "branch (see C source)",
+      "code": "functions_layout/arm9_main/arm9_main_0206f3e4.c#L24"
+    },
+    {
+      "from": 21,
+      "to": 4,
+      "method": "change",
+      "selector": "entry",
+      "action": "branch (see C source)",
+      "code": "functions_layout/arm9_main/arm9_main_0206f3e4.c#L27"
+    },
+    {
+      "from": 21,
+      "to": 6,
+      "method": "queue",
+      "selector": "entry",
+      "action": "branch (see C source)",
+      "code": "functions_layout/arm9_main/arm9_main_0206f3e4.c#L28"
+    },
+    {
+      "from": 21,
+      "to": 7,
+      "method": "queue",
+      "selector": "entry",
+      "action": "branch (see C source)",
+      "code": "functions_layout/arm9_main/arm9_main_0206f3e4.c#L29"
+    },
+    {
+      "from": 21,
+      "to": 12,
+      "method": "queue",
+      "selector": "entry",
+      "action": "branch (see C source)",
+      "code": "functions_layout/arm9_main/arm9_main_0206f3e4.c#L30"
+    },
+    {
+      "from": 21,
+      "to": 28,
+      "method": "change",
+      "selector": "0x18",
+      "action": "exit selector 0x18",
+      "code": "functions_layout/arm9_main/arm9_main_0206f3e4.c#L60"
+    },
+    {
+      "from": 21,
+      "to": 3,
+      "method": "save-gated",
+      "selector": "0x20",
+      "action": "exit selector 0x20",
+      "code": "functions_layout/arm9_main/arm9_main_0206f3e4.c#L77"
+    },
+    {
+      "from": 22,
+      "to": 4,
+      "method": "change",
+      "selector": "entry",
+      "action": "branch (see C source)",
+      "code": "functions_layout/arm9_main/arm9_main_0206f680.c#L15"
+    },
+    {
+      "from": 22,
+      "to": 5,
+      "method": "change",
+      "selector": "entry",
+      "action": "branch (see C source)",
+      "code": "functions_layout/arm9_main/arm9_main_0206f680.c#L18"
+    },
+    {
+      "from": 22,
+      "to": 12,
+      "method": "queue",
+      "selector": "entry",
+      "action": "branch (see C source)",
+      "code": "functions_layout/arm9_main/arm9_main_0206f680.c#L20"
+    },
+    {
+      "from": 22,
+      "to": 25,
+      "method": "queue",
+      "selector": "entry",
+      "action": "branch (see C source)",
+      "code": "functions_layout/arm9_main/arm9_main_0206f680.c#L21"
+    },
+    {
+      "from": 22,
+      "to": 26,
+      "method": "queue",
+      "selector": "entry",
+      "action": "branch (see C source)",
+      "code": "functions_layout/arm9_main/arm9_main_0206f680.c#L22"
+    },
+    {
+      "from": 24,
+      "to": 21,
+      "method": "save-gated",
+      "selector": "entry",
+      "action": "branch (see C source)",
+      "code": "functions_layout/arm9_main/arm9_main_0206f954.c#L11"
+    },
+    {
+      "from": 24,
+      "to": 27,
+      "method": "change",
+      "selector": "entry",
+      "action": "branch (see C source)",
+      "code": "functions_layout/arm9_main/arm9_main_0206f954.c#L15"
+    },
+    {
+      "from": 26,
+      "to": 12,
+      "method": "assignment",
+      "selector": "1",
+      "action": "exit selector 1",
+      "code": "functions_layout/arm9_main/arm9_main_0206f9d4.c#L20"
+    },
+    {
+      "from": 27,
+      "to": 15,
+      "method": "change",
+      "selector": "entry",
+      "action": "branch (see C source)",
+      "code": "functions_layout/arm9_main/arm9_main_0206facc.c#L11"
+    },
+    {
+      "from": 27,
+      "to": 12,
+      "method": "queue",
+      "selector": "entry",
+      "action": "branch (see C source)",
+      "code": "functions_layout/arm9_main/arm9_main_0206facc.c#L12"
+    },
+    {
+      "from": 28,
+      "to": 21,
+      "method": "assignment",
+      "selector": "entry",
+      "action": "branch (see C source)",
+      "code": "functions_layout/arm9_main/arm9_main_0206fb34.c#L11"
+    },
+    {
+      "from": 29,
+      "to": 30,
+      "method": "change",
+      "selector": "entry",
+      "action": "selected J-Power item",
+      "code": "functions_layout/arm9_main/arm9_main_0206fb78.c#L11"
+    },
+    {
+      "from": 32,
+      "to": 33,
+      "method": "change",
+      "selector": "1",
+      "action": "Koma Book",
+      "code": "functions_layout/arm9_main/arm9_main_0206fc00.c#L15"
+    },
+    {
+      "from": 32,
+      "to": 14,
+      "method": "change",
+      "selector": "2",
+      "action": "demo playback",
+      "code": "functions_layout/arm9_main/arm9_main_0206fc00.c#L19"
+    },
+    {
+      "from": 32,
+      "to": 8,
+      "method": "change",
+      "selector": "3",
+      "action": "text input",
+      "code": "functions_layout/arm9_main/arm9_main_0206fc00.c#L22"
+    },
+    {
+      "from": 34,
+      "to": 3,
+      "method": "save-gated",
+      "selector": "default",
+      "action": "exit selector default",
+      "code": "functions_layout/arm9_main/arm9_main_0206fcb8.c#L10"
+    },
+    {
+      "from": 34,
+      "to": 0,
+      "method": "save-gated",
+      "selector": "5",
+      "action": "exit selector 5",
+      "code": "functions_layout/arm9_main/arm9_main_0206fcb8.c#L28"
+    },
+    {
+      "from": 34,
+      "to": 3,
+      "method": "save-gated",
+      "selector": "5",
+      "action": "exit selector 5",
+      "code": "functions_layout/arm9_main/arm9_main_0206fcb8.c#L32"
+    },
+    {
+      "from": 35,
+      "to": 3,
+      "method": "save-gated",
+      "selector": "0",
+      "action": "back / save-gated",
+      "code": "functions_layout/arm9_main/arm9_main_0206fe50.c#L11"
+    },
+    {
+      "from": 35,
+      "to": 4,
+      "method": "change",
+      "selector": "1",
+      "action": "deck selection",
+      "code": "functions_layout/arm9_main/arm9_main_0206fe50.c#L14"
+    },
+    {
+      "from": 35,
+      "to": 8,
+      "method": "queue",
+      "selector": "1",
+      "action": "exit selector 1",
+      "code": "functions_layout/arm9_main/arm9_main_0206fe50.c#L15"
+    },
+    {
+      "from": 35,
+      "to": 43,
+      "method": "assignment",
+      "selector": "5",
+      "action": "communication session",
+      "code": "functions_layout/arm9_main/arm9_main_0206fe50.c#L24"
+    },
+    {
+      "from": 35,
+      "to": 4,
+      "method": "change",
+      "selector": "6",
+      "action": "deck selection",
+      "code": "functions_layout/arm9_main/arm9_main_0206fe50.c#L27"
+    },
+    {
+      "from": 35,
+      "to": 38,
+      "method": "queue",
+      "selector": "6",
+      "action": "exit selector 6",
+      "code": "functions_layout/arm9_main/arm9_main_0206fe50.c#L28"
+    },
+    {
+      "from": 35,
+      "to": 4,
+      "method": "change",
+      "selector": "7",
+      "action": "deck selection",
+      "code": "functions_layout/arm9_main/arm9_main_0206fe50.c#L31"
+    },
+    {
+      "from": 35,
+      "to": 39,
+      "method": "queue",
+      "selector": "7",
+      "action": "exit selector 7",
+      "code": "functions_layout/arm9_main/arm9_main_0206fe50.c#L32"
+    },
+    {
+      "from": 35,
+      "to": 40,
+      "method": "change",
+      "selector": "8",
+      "action": "quiz",
+      "code": "functions_layout/arm9_main/arm9_main_0206fe50.c#L35"
+    },
+    {
+      "from": 35,
+      "to": 4,
+      "method": "change",
+      "selector": "10",
+      "action": "deck selection",
+      "code": "functions_layout/arm9_main/arm9_main_0206fe50.c#L40"
+    },
+    {
+      "from": 35,
+      "to": 8,
+      "method": "change",
+      "selector": "0xb",
+      "action": "input",
+      "code": "functions_layout/arm9_main/arm9_main_0206fe50.c#L43"
+    },
+    {
+      "from": 35,
+      "to": 41,
+      "method": "change",
+      "selector": "0xd",
+      "action": "Wi-Fi connect",
+      "code": "functions_layout/arm9_main/arm9_main_0206fe50.c#L48"
+    },
+    {
+      "from": 42,
+      "to": 35,
+      "method": "save-gated",
+      "selector": "5",
+      "action": "exit selector 5",
+      "code": "functions_layout/arm9_main/arm9_main_02070264.c#L28"
+    },
+    {
+      "from": 43,
+      "to": 44,
+      "method": "assignment",
+      "selector": "entry",
+      "action": "branch (see C source)",
+      "code": "functions_layout/arm9_main/arm9_main_020702e0.c#L8"
+    },
+    {
+      "from": 43,
+      "to": 35,
+      "method": "save-gated",
+      "selector": "entry",
+      "action": "branch (see C source)",
+      "code": "functions_layout/arm9_main/arm9_main_020702e0.c#L13"
+    },
+    {
+      "from": 43,
+      "to": 35,
+      "method": "assignment",
+      "selector": "entry",
+      "action": "branch (see C source)",
+      "code": "functions_layout/arm9_main/arm9_main_020702e0.c#L16"
+    },
+    {
+      "from": 44,
+      "to": 45,
+      "method": "assignment",
+      "selector": "entry",
+      "action": "branch (see C source)",
+      "code": "functions_layout/arm9_main/arm9_main_02070354.c#L7"
+    },
+    {
+      "from": 45,
+      "to": 43,
+      "method": "assignment",
+      "selector": "entry",
+      "action": "branch (see C source)",
+      "code": "functions_layout/arm9_main/arm9_main_02070368.c#L7"
+    }
+  ],
+  "notes": [
+    "Layout table coordinates are immutable metadata, never write to ROM/overlay.",
+    "Unresolved widget placement is intentionally omitted.",
+    "Bottom screen routing for these widgets is inferred and configurable as a preview, not persisted.",
+    "ALMT move ID must resolve to a real BoundsIndex frame at runtime; do not guess an atlas cell."
+  ]
+}

@@ -1,0 +1,1218 @@
+{
+  "version": 1,
+  "authority": "original decompiled ARM9 C register writes; no emulator input",
+  "scope": "function-body statements with explicit register writes, plus callsites of known engine helpers",
+  "scene_count": 46,
+  "references": {
+    "priority_at_start": "functions_layout/arm9_main/arm9_main_02042d14.c#L49-L57",
+    "scene_reset": "functions_layout/arm9_main/arm9_main_0206e064.c#L1-L25",
+    "main_2d_blend": "functions_layout/arm9_main/arm9_main_0203b56c.c#L16-L43",
+    "sub_2d_blend": "functions_layout/arm9_main/arm9_main_0203b8d0.c#L16-L43",
+    "scroll_context": "functions_layout/arm9_main/arm9_main_0203d658.c#L4-L19",
+    "scroll_code_not_final_registers": true,
+    "initial_BG_priority_is_not_dynamic": true
+  },
+  "scenes": [
+    {
+      "id": 0,
+      "name": "Copyright",
+      "source_reachable_register_sites": [],
+      "register_site_count": 0,
+      "confidence": "source reachable; callback execution and register state at tick unresolved",
+      "runtime_initial_bg_priority": {
+        "source": "functions_layout/arm9_main/arm9_main_02042d14.c#L49-L57",
+        "main": [
+          1,
+          0,
+          2,
+          3
+        ],
+        "sub": [
+          3,
+          2,
+          1,
+          0
+        ]
+      },
+      "possible_callback_overrides": true
+    },
+    {
+      "id": 1,
+      "name": "Opening",
+      "source_reachable_register_sites": [],
+      "register_site_count": 0,
+      "confidence": "source reachable; callback execution and register state at tick unresolved",
+      "runtime_initial_bg_priority": {
+        "source": "functions_layout/arm9_main/arm9_main_02042d14.c#L49-L57",
+        "main": [
+          1,
+          0,
+          2,
+          3
+        ],
+        "sub": [
+          3,
+          2,
+          1,
+          0
+        ]
+      },
+      "possible_callback_overrides": true
+    },
+    {
+      "id": 2,
+      "name": "Title",
+      "source_reachable_register_sites": [],
+      "register_site_count": 0,
+      "confidence": "source reachable; callback execution and register state at tick unresolved",
+      "runtime_initial_bg_priority": {
+        "source": "functions_layout/arm9_main/arm9_main_02042d14.c#L49-L57",
+        "main": [
+          1,
+          0,
+          2,
+          3
+        ],
+        "sub": [
+          3,
+          2,
+          1,
+          0
+        ]
+      },
+      "possible_callback_overrides": true
+    },
+    {
+      "id": 3,
+      "name": "TopMenu",
+      "source_reachable_register_sites": [
+        {
+          "source": "functions_layout/arm9_ov00/arm9_ov00_02153cfc.c",
+          "line": 93,
+          "register": null,
+          "register_class": "engine_lcd_swap",
+          "function": "FUN_02043264",
+          "statement": "FUN_02043264(1);"
+        }
+      ],
+      "register_site_count": 1,
+      "confidence": "source reachable; callback execution and register state at tick unresolved",
+      "runtime_initial_bg_priority": {
+        "source": "functions_layout/arm9_main/arm9_main_02042d14.c#L49-L57",
+        "main": [
+          1,
+          0,
+          2,
+          3
+        ],
+        "sub": [
+          3,
+          2,
+          1,
+          0
+        ]
+      },
+      "possible_callback_overrides": true
+    },
+    {
+      "id": 4,
+      "name": "DeckSelect",
+      "source_reachable_register_sites": [],
+      "register_site_count": 0,
+      "confidence": "source reachable; callback execution and register state at tick unresolved",
+      "runtime_initial_bg_priority": {
+        "source": "functions_layout/arm9_main/arm9_main_02042d14.c#L49-L57",
+        "main": [
+          1,
+          0,
+          2,
+          3
+        ],
+        "sub": [
+          3,
+          2,
+          1,
+          0
+        ]
+      },
+      "possible_callback_overrides": true
+    },
+    {
+      "id": 5,
+      "name": "DeckCheck",
+      "source_reachable_register_sites": [
+        {
+          "source": "functions_layout/arm9_ov02/arm9_ov02_0215a038.c",
+          "line": 53,
+          "register": null,
+          "register_class": "engine_lcd_swap",
+          "function": "FUN_02043264",
+          "statement": "FUN_02043264(1);"
+        }
+      ],
+      "register_site_count": 1,
+      "confidence": "source reachable; callback execution and register state at tick unresolved",
+      "runtime_initial_bg_priority": {
+        "source": "functions_layout/arm9_main/arm9_main_02042d14.c#L49-L57",
+        "main": [
+          1,
+          0,
+          2,
+          3
+        ],
+        "sub": [
+          3,
+          2,
+          1,
+          0
+        ]
+      },
+      "possible_callback_overrides": true
+    },
+    {
+      "id": 6,
+      "name": "StageSelect",
+      "source_reachable_register_sites": [],
+      "register_site_count": 0,
+      "confidence": "source reachable; callback execution and register state at tick unresolved",
+      "runtime_initial_bg_priority": {
+        "source": "functions_layout/arm9_main/arm9_main_02042d14.c#L49-L57",
+        "main": [
+          1,
+          0,
+          2,
+          3
+        ],
+        "sub": [
+          3,
+          2,
+          1,
+          0
+        ]
+      },
+      "possible_callback_overrides": true
+    },
+    {
+      "id": 7,
+      "name": "RuleSelect",
+      "source_reachable_register_sites": [
+        {
+          "source": "functions_layout/arm9_ov01/arm9_ov01_02161f3c.c",
+          "line": 102,
+          "register": null,
+          "register_class": "engine_lcd_swap",
+          "function": "FUN_02043264",
+          "statement": "FUN_02043264(1);"
+        }
+      ],
+      "register_site_count": 1,
+      "confidence": "source reachable; callback execution and register state at tick unresolved",
+      "runtime_initial_bg_priority": {
+        "source": "functions_layout/arm9_main/arm9_main_02042d14.c#L49-L57",
+        "main": [
+          1,
+          0,
+          2,
+          3
+        ],
+        "sub": [
+          3,
+          2,
+          1,
+          0
+        ]
+      },
+      "possible_callback_overrides": true
+    },
+    {
+      "id": 8,
+      "name": "Input",
+      "source_reachable_register_sites": [
+        {
+          "source": "functions_layout/arm9_ov05/arm9_ov05_0215f41c.c",
+          "line": 66,
+          "register": null,
+          "register_class": "engine_lcd_swap",
+          "function": "FUN_02043264",
+          "statement": "FUN_02043264(0);"
+        }
+      ],
+      "register_site_count": 1,
+      "confidence": "source reachable; callback execution and register state at tick unresolved",
+      "runtime_initial_bg_priority": {
+        "source": "functions_layout/arm9_main/arm9_main_02042d14.c#L49-L57",
+        "main": [
+          1,
+          0,
+          2,
+          3
+        ],
+        "sub": [
+          3,
+          2,
+          1,
+          0
+        ]
+      },
+      "possible_callback_overrides": true
+    },
+    {
+      "id": 9,
+      "name": "DeckMake",
+      "source_reachable_register_sites": [],
+      "register_site_count": 0,
+      "confidence": "source reachable; callback execution and register state at tick unresolved",
+      "runtime_initial_bg_priority": {
+        "source": "functions_layout/arm9_main/arm9_main_02042d14.c#L49-L57",
+        "main": [
+          1,
+          0,
+          2,
+          3
+        ],
+        "sub": [
+          3,
+          2,
+          1,
+          0
+        ]
+      },
+      "possible_callback_overrides": true
+    },
+    {
+      "id": 10,
+      "name": "DeckMakeTutorial",
+      "source_reachable_register_sites": [],
+      "register_site_count": 0,
+      "confidence": "source reachable; callback execution and register state at tick unresolved",
+      "runtime_initial_bg_priority": {
+        "source": "functions_layout/arm9_main/arm9_main_02042d14.c#L49-L57",
+        "main": [
+          1,
+          0,
+          2,
+          3
+        ],
+        "sub": [
+          3,
+          2,
+          1,
+          0
+        ]
+      },
+      "possible_callback_overrides": true
+    },
+    {
+      "id": 11,
+      "name": "Battle",
+      "source_reachable_register_sites": [],
+      "register_site_count": 0,
+      "confidence": "source reachable; callback execution and register state at tick unresolved",
+      "runtime_initial_bg_priority": {
+        "source": "functions_layout/arm9_main/arm9_main_02042d14.c#L49-L57",
+        "main": [
+          1,
+          0,
+          2,
+          3
+        ],
+        "sub": [
+          3,
+          2,
+          1,
+          0
+        ]
+      },
+      "possible_callback_overrides": true
+    },
+    {
+      "id": 12,
+      "name": "Battle",
+      "source_reachable_register_sites": [],
+      "register_site_count": 0,
+      "confidence": "source reachable; callback execution and register state at tick unresolved",
+      "runtime_initial_bg_priority": {
+        "source": "functions_layout/arm9_main/arm9_main_02042d14.c#L49-L57",
+        "main": [
+          1,
+          0,
+          2,
+          3
+        ],
+        "sub": [
+          3,
+          2,
+          1,
+          0
+        ]
+      },
+      "possible_callback_overrides": true
+    },
+    {
+      "id": 13,
+      "name": "Result",
+      "source_reachable_register_sites": [],
+      "register_site_count": 0,
+      "confidence": "source reachable; callback execution and register state at tick unresolved",
+      "runtime_initial_bg_priority": {
+        "source": "functions_layout/arm9_main/arm9_main_02042d14.c#L49-L57",
+        "main": [
+          1,
+          0,
+          2,
+          3
+        ],
+        "sub": [
+          3,
+          2,
+          1,
+          0
+        ]
+      },
+      "possible_callback_overrides": true
+    },
+    {
+      "id": 14,
+      "name": "Demo",
+      "source_reachable_register_sites": [],
+      "register_site_count": 0,
+      "confidence": "source reachable; callback execution and register state at tick unresolved",
+      "runtime_initial_bg_priority": {
+        "source": "functions_layout/arm9_main/arm9_main_02042d14.c#L49-L57",
+        "main": [
+          1,
+          0,
+          2,
+          3
+        ],
+        "sub": [
+          3,
+          2,
+          1,
+          0
+        ]
+      },
+      "possible_callback_overrides": true
+    },
+    {
+      "id": 15,
+      "name": "VsCall",
+      "source_reachable_register_sites": [],
+      "register_site_count": 0,
+      "confidence": "source reachable; callback execution and register state at tick unresolved",
+      "runtime_initial_bg_priority": {
+        "source": "functions_layout/arm9_main/arm9_main_02042d14.c#L49-L57",
+        "main": [
+          1,
+          0,
+          2,
+          3
+        ],
+        "sub": [
+          3,
+          2,
+          1,
+          0
+        ]
+      },
+      "possible_callback_overrides": true
+    },
+    {
+      "id": 16,
+      "name": "JGalaxy",
+      "source_reachable_register_sites": [],
+      "register_site_count": 0,
+      "confidence": "source reachable; callback execution and register state at tick unresolved",
+      "runtime_initial_bg_priority": {
+        "source": "functions_layout/arm9_main/arm9_main_02042d14.c#L49-L57",
+        "main": [
+          1,
+          0,
+          2,
+          3
+        ],
+        "sub": [
+          3,
+          2,
+          1,
+          0
+        ]
+      },
+      "possible_callback_overrides": true
+    },
+    {
+      "id": 17,
+      "name": "JGalaxyStageInfo",
+      "source_reachable_register_sites": [
+        {
+          "source": "functions_layout/arm9_ov01/arm9_ov01_0214cd20.c",
+          "line": 28,
+          "register": null,
+          "register_class": "engine_lcd_swap",
+          "function": "FUN_02043264",
+          "statement": "FUN_02043264(0);"
+        }
+      ],
+      "register_site_count": 1,
+      "confidence": "source reachable; callback execution and register state at tick unresolved",
+      "runtime_initial_bg_priority": {
+        "source": "functions_layout/arm9_main/arm9_main_02042d14.c#L49-L57",
+        "main": [
+          1,
+          0,
+          2,
+          3
+        ],
+        "sub": [
+          3,
+          2,
+          1,
+          0
+        ]
+      },
+      "possible_callback_overrides": true
+    },
+    {
+      "id": 18,
+      "name": "JQuiz",
+      "source_reachable_register_sites": [],
+      "register_site_count": 0,
+      "confidence": "source reachable; callback execution and register state at tick unresolved",
+      "runtime_initial_bg_priority": {
+        "source": "functions_layout/arm9_main/arm9_main_02042d14.c#L49-L57",
+        "main": [
+          1,
+          0,
+          2,
+          3
+        ],
+        "sub": [
+          3,
+          2,
+          1,
+          0
+        ]
+      },
+      "possible_callback_overrides": true
+    },
+    {
+      "id": 19,
+      "name": "JGalaxyResult",
+      "source_reachable_register_sites": [],
+      "register_site_count": 0,
+      "confidence": "source reachable; callback execution and register state at tick unresolved",
+      "runtime_initial_bg_priority": {
+        "source": "functions_layout/arm9_main/arm9_main_02042d14.c#L49-L57",
+        "main": [
+          1,
+          0,
+          2,
+          3
+        ],
+        "sub": [
+          3,
+          2,
+          1,
+          0
+        ]
+      },
+      "possible_callback_overrides": true
+    },
+    {
+      "id": 20,
+      "name": "Ending",
+      "source_reachable_register_sites": [
+        {
+          "source": "functions_layout/arm9_ov00/arm9_ov00_0215beb4.c",
+          "line": 24,
+          "register": null,
+          "register_class": "engine_lcd_swap",
+          "function": "FUN_02043264",
+          "statement": "FUN_02043264(0);"
+        }
+      ],
+      "register_site_count": 1,
+      "confidence": "source reachable; callback execution and register state at tick unresolved",
+      "runtime_initial_bg_priority": {
+        "source": "functions_layout/arm9_main/arm9_main_02042d14.c#L49-L57",
+        "main": [
+          1,
+          0,
+          2,
+          3
+        ],
+        "sub": [
+          3,
+          2,
+          1,
+          0
+        ]
+      },
+      "possible_callback_overrides": true
+    },
+    {
+      "id": 21,
+      "name": "JArena",
+      "source_reachable_register_sites": [
+        {
+          "source": "functions_layout/arm9_ov03/arm9_ov03_0214d958.c",
+          "line": 62,
+          "register": null,
+          "register_class": "engine_lcd_swap",
+          "function": "FUN_02043264",
+          "statement": "FUN_02043264(1);"
+        }
+      ],
+      "register_site_count": 1,
+      "confidence": "source reachable; callback execution and register state at tick unresolved",
+      "runtime_initial_bg_priority": {
+        "source": "functions_layout/arm9_main/arm9_main_02042d14.c#L49-L57",
+        "main": [
+          1,
+          0,
+          2,
+          3
+        ],
+        "sub": [
+          3,
+          2,
+          1,
+          0
+        ]
+      },
+      "possible_callback_overrides": true
+    },
+    {
+      "id": 22,
+      "name": "JAMissionTry",
+      "source_reachable_register_sites": [
+        {
+          "source": "functions_layout/arm9_ov01/arm9_ov01_021504f0.c",
+          "line": 19,
+          "register": null,
+          "register_class": "engine_lcd_swap",
+          "function": "FUN_02043264",
+          "statement": "FUN_02043264(1);"
+        }
+      ],
+      "register_site_count": 1,
+      "confidence": "source reachable; callback execution and register state at tick unresolved",
+      "runtime_initial_bg_priority": {
+        "source": "functions_layout/arm9_main/arm9_main_02042d14.c#L49-L57",
+        "main": [
+          1,
+          0,
+          2,
+          3
+        ],
+        "sub": [
+          3,
+          2,
+          1,
+          0
+        ]
+      },
+      "possible_callback_overrides": true
+    },
+    {
+      "id": 23,
+      "name": "JArena",
+      "source_reachable_register_sites": [],
+      "register_site_count": 0,
+      "confidence": "source reachable; callback execution and register state at tick unresolved",
+      "runtime_initial_bg_priority": {
+        "source": "functions_layout/arm9_main/arm9_main_02042d14.c#L49-L57",
+        "main": [
+          1,
+          0,
+          2,
+          3
+        ],
+        "sub": [
+          3,
+          2,
+          1,
+          0
+        ]
+      },
+      "possible_callback_overrides": true
+    },
+    {
+      "id": 24,
+      "name": "JArena",
+      "source_reachable_register_sites": [],
+      "register_site_count": 0,
+      "confidence": "source reachable; callback execution and register state at tick unresolved",
+      "runtime_initial_bg_priority": {
+        "source": "functions_layout/arm9_main/arm9_main_02042d14.c#L49-L57",
+        "main": [
+          1,
+          0,
+          2,
+          3
+        ],
+        "sub": [
+          3,
+          2,
+          1,
+          0
+        ]
+      },
+      "possible_callback_overrides": true
+    },
+    {
+      "id": 25,
+      "name": "JAMisnResult",
+      "source_reachable_register_sites": [],
+      "register_site_count": 0,
+      "confidence": "source reachable; callback execution and register state at tick unresolved",
+      "runtime_initial_bg_priority": {
+        "source": "functions_layout/arm9_main/arm9_main_02042d14.c#L49-L57",
+        "main": [
+          1,
+          0,
+          2,
+          3
+        ],
+        "sub": [
+          3,
+          2,
+          1,
+          0
+        ]
+      },
+      "possible_callback_overrides": true
+    },
+    {
+      "id": 26,
+      "name": "JArena",
+      "source_reachable_register_sites": [],
+      "register_site_count": 0,
+      "confidence": "source reachable; callback execution and register state at tick unresolved",
+      "runtime_initial_bg_priority": {
+        "source": "functions_layout/arm9_main/arm9_main_02042d14.c#L49-L57",
+        "main": [
+          1,
+          0,
+          2,
+          3
+        ],
+        "sub": [
+          3,
+          2,
+          1,
+          0
+        ]
+      },
+      "possible_callback_overrides": true
+    },
+    {
+      "id": 27,
+      "name": "JArena",
+      "source_reachable_register_sites": [],
+      "register_site_count": 0,
+      "confidence": "source reachable; callback execution and register state at tick unresolved",
+      "runtime_initial_bg_priority": {
+        "source": "functions_layout/arm9_main/arm9_main_02042d14.c#L49-L57",
+        "main": [
+          1,
+          0,
+          2,
+          3
+        ],
+        "sub": [
+          3,
+          2,
+          1,
+          0
+        ]
+      },
+      "possible_callback_overrides": true
+    },
+    {
+      "id": 28,
+      "name": "JARankLst",
+      "source_reachable_register_sites": [
+        {
+          "source": "functions_layout/arm9_ov01/arm9_ov01_0215447c.c",
+          "line": 12,
+          "register": null,
+          "register_class": "engine_lcd_swap",
+          "function": "FUN_02043264",
+          "statement": "FUN_02043264(1);"
+        }
+      ],
+      "register_site_count": 1,
+      "confidence": "source reachable; callback execution and register state at tick unresolved",
+      "runtime_initial_bg_priority": {
+        "source": "functions_layout/arm9_main/arm9_main_02042d14.c#L49-L57",
+        "main": [
+          1,
+          0,
+          2,
+          3
+        ],
+        "sub": [
+          3,
+          2,
+          1,
+          0
+        ]
+      },
+      "possible_callback_overrides": true
+    },
+    {
+      "id": 29,
+      "name": "JPowerKomaList",
+      "source_reachable_register_sites": [],
+      "register_site_count": 0,
+      "confidence": "source reachable; callback execution and register state at tick unresolved",
+      "runtime_initial_bg_priority": {
+        "source": "functions_layout/arm9_main/arm9_main_02042d14.c#L49-L57",
+        "main": [
+          1,
+          0,
+          2,
+          3
+        ],
+        "sub": [
+          3,
+          2,
+          1,
+          0
+        ]
+      },
+      "possible_callback_overrides": true
+    },
+    {
+      "id": 30,
+      "name": "JPower",
+      "source_reachable_register_sites": [
+        {
+          "source": "functions_layout/arm9_ov05/arm9_ov05_02162410.c",
+          "line": 68,
+          "register": null,
+          "register_class": "engine_lcd_swap",
+          "function": "FUN_02043264",
+          "statement": "FUN_02043264(1);"
+        }
+      ],
+      "register_site_count": 1,
+      "confidence": "source reachable; callback execution and register state at tick unresolved",
+      "runtime_initial_bg_priority": {
+        "source": "functions_layout/arm9_main/arm9_main_02042d14.c#L49-L57",
+        "main": [
+          1,
+          0,
+          2,
+          3
+        ],
+        "sub": [
+          3,
+          2,
+          1,
+          0
+        ]
+      },
+      "possible_callback_overrides": true
+    },
+    {
+      "id": 31,
+      "name": "JQuiz",
+      "source_reachable_register_sites": [],
+      "register_site_count": 0,
+      "confidence": "source reachable; callback execution and register state at tick unresolved",
+      "runtime_initial_bg_priority": {
+        "source": "functions_layout/arm9_main/arm9_main_02042d14.c#L49-L57",
+        "main": [
+          1,
+          0,
+          2,
+          3
+        ],
+        "sub": [
+          3,
+          2,
+          1,
+          0
+        ]
+      },
+      "possible_callback_overrides": true
+    },
+    {
+      "id": 32,
+      "name": "Database",
+      "source_reachable_register_sites": [
+        {
+          "source": "functions_layout/arm9_ov05/arm9_ov05_02166cf0.c",
+          "line": 53,
+          "register": null,
+          "register_class": "engine_lcd_swap",
+          "function": "FUN_02043264",
+          "statement": "FUN_02043264(1);"
+        }
+      ],
+      "register_site_count": 1,
+      "confidence": "source reachable; callback execution and register state at tick unresolved",
+      "runtime_initial_bg_priority": {
+        "source": "functions_layout/arm9_main/arm9_main_02042d14.c#L49-L57",
+        "main": [
+          1,
+          0,
+          2,
+          3
+        ],
+        "sub": [
+          3,
+          2,
+          1,
+          0
+        ]
+      },
+      "possible_callback_overrides": true
+    },
+    {
+      "id": 33,
+      "name": "KomaBook",
+      "source_reachable_register_sites": [],
+      "register_site_count": 0,
+      "confidence": "source reachable; callback execution and register state at tick unresolved",
+      "runtime_initial_bg_priority": {
+        "source": "functions_layout/arm9_main/arm9_main_02042d14.c#L49-L57",
+        "main": [
+          1,
+          0,
+          2,
+          3
+        ],
+        "sub": [
+          3,
+          2,
+          1,
+          0
+        ]
+      },
+      "possible_callback_overrides": true
+    },
+    {
+      "id": 34,
+      "name": "Option",
+      "source_reachable_register_sites": [
+        {
+          "source": "functions_layout/arm9_ov00/arm9_ov00_02157138.c",
+          "line": 45,
+          "register": null,
+          "register_class": "engine_lcd_swap",
+          "function": "FUN_02043264",
+          "statement": "FUN_02043264(1);"
+        },
+        {
+          "source": "functions_layout/arm9_ov00/arm9_ov00_0215beb4.c",
+          "line": 24,
+          "register": null,
+          "register_class": "engine_lcd_swap",
+          "function": "FUN_02043264",
+          "statement": "FUN_02043264(0);"
+        }
+      ],
+      "register_site_count": 2,
+      "confidence": "source reachable; callback execution and register state at tick unresolved",
+      "runtime_initial_bg_priority": {
+        "source": "functions_layout/arm9_main/arm9_main_02042d14.c#L49-L57",
+        "main": [
+          1,
+          0,
+          2,
+          3
+        ],
+        "sub": [
+          3,
+          2,
+          1,
+          0
+        ]
+      },
+      "possible_callback_overrides": true
+    },
+    {
+      "id": 35,
+      "name": "CommuMenu",
+      "source_reachable_register_sites": [],
+      "register_site_count": 0,
+      "confidence": "source reachable; callback execution and register state at tick unresolved",
+      "runtime_initial_bg_priority": {
+        "source": "functions_layout/arm9_main/arm9_main_02042d14.c#L49-L57",
+        "main": [
+          1,
+          0,
+          2,
+          3
+        ],
+        "sub": [
+          3,
+          2,
+          1,
+          0
+        ]
+      },
+      "possible_callback_overrides": true
+    },
+    {
+      "id": 36,
+      "name": "CommuMenuWrlsWatchWait",
+      "source_reachable_register_sites": [
+        {
+          "source": "functions_layout/arm9_ov07/arm9_ov07_02164344.c",
+          "line": 67,
+          "register": null,
+          "register_class": "engine_lcd_swap",
+          "function": "FUN_02043264",
+          "statement": "FUN_02043264(1);"
+        }
+      ],
+      "register_site_count": 1,
+      "confidence": "source reachable; callback execution and register state at tick unresolved",
+      "runtime_initial_bg_priority": {
+        "source": "functions_layout/arm9_main/arm9_main_02042d14.c#L49-L57",
+        "main": [
+          1,
+          0,
+          2,
+          3
+        ],
+        "sub": [
+          3,
+          2,
+          1,
+          0
+        ]
+      },
+      "possible_callback_overrides": true
+    },
+    {
+      "id": 37,
+      "name": "CommuMenuEntryDataEnt",
+      "source_reachable_register_sites": [
+        {
+          "source": "functions_layout/arm9_ov07/arm9_ov07_021653fc.c",
+          "line": 51,
+          "register": null,
+          "register_class": "engine_lcd_swap",
+          "function": "FUN_02043264",
+          "statement": "FUN_02043264(1);"
+        }
+      ],
+      "register_site_count": 1,
+      "confidence": "source reachable; callback execution and register state at tick unresolved",
+      "runtime_initial_bg_priority": {
+        "source": "functions_layout/arm9_main/arm9_main_02042d14.c#L49-L57",
+        "main": [
+          1,
+          0,
+          2,
+          3
+        ],
+        "sub": [
+          3,
+          2,
+          1,
+          0
+        ]
+      },
+      "possible_callback_overrides": true
+    },
+    {
+      "id": 38,
+      "name": "CommuMenu",
+      "source_reachable_register_sites": [],
+      "register_site_count": 0,
+      "confidence": "source reachable; callback execution and register state at tick unresolved",
+      "runtime_initial_bg_priority": {
+        "source": "functions_layout/arm9_main/arm9_main_02042d14.c#L49-L57",
+        "main": [
+          1,
+          0,
+          2,
+          3
+        ],
+        "sub": [
+          3,
+          2,
+          1,
+          0
+        ]
+      },
+      "possible_callback_overrides": true
+    },
+    {
+      "id": 39,
+      "name": "CommuMenu",
+      "source_reachable_register_sites": [],
+      "register_site_count": 0,
+      "confidence": "source reachable; callback execution and register state at tick unresolved",
+      "runtime_initial_bg_priority": {
+        "source": "functions_layout/arm9_main/arm9_main_02042d14.c#L49-L57",
+        "main": [
+          1,
+          0,
+          2,
+          3
+        ],
+        "sub": [
+          3,
+          2,
+          1,
+          0
+        ]
+      },
+      "possible_callback_overrides": true
+    },
+    {
+      "id": 40,
+      "name": "JQuiz",
+      "source_reachable_register_sites": [],
+      "register_site_count": 0,
+      "confidence": "source reachable; callback execution and register state at tick unresolved",
+      "runtime_initial_bg_priority": {
+        "source": "functions_layout/arm9_main/arm9_main_02042d14.c#L49-L57",
+        "main": [
+          1,
+          0,
+          2,
+          3
+        ],
+        "sub": [
+          3,
+          2,
+          1,
+          0
+        ]
+      },
+      "possible_callback_overrides": true
+    },
+    {
+      "id": 41,
+      "name": "WiFi_Connection",
+      "source_reachable_register_sites": [],
+      "register_site_count": 0,
+      "confidence": "source reachable; callback execution and register state at tick unresolved",
+      "runtime_initial_bg_priority": {
+        "source": "functions_layout/arm9_main/arm9_main_02042d14.c#L49-L57",
+        "main": [
+          1,
+          0,
+          2,
+          3
+        ],
+        "sub": [
+          3,
+          2,
+          1,
+          0
+        ]
+      },
+      "possible_callback_overrides": true
+    },
+    {
+      "id": 42,
+      "name": "CommuMenuWiFiError",
+      "source_reachable_register_sites": [
+        {
+          "source": "functions_layout/arm9_ov07/arm9_ov07_02150678.c",
+          "line": 13,
+          "register": null,
+          "register_class": "engine_lcd_swap",
+          "function": "FUN_02043264",
+          "statement": "FUN_02043264(param_4);"
+        }
+      ],
+      "register_site_count": 1,
+      "confidence": "source reachable; callback execution and register state at tick unresolved",
+      "runtime_initial_bg_priority": {
+        "source": "functions_layout/arm9_main/arm9_main_02042d14.c#L49-L57",
+        "main": [
+          1,
+          0,
+          2,
+          3
+        ],
+        "sub": [
+          3,
+          2,
+          1,
+          0
+        ]
+      },
+      "possible_callback_overrides": true
+    },
+    {
+      "id": 43,
+      "name": "Main_Communication",
+      "source_reachable_register_sites": [],
+      "register_site_count": 0,
+      "confidence": "source reachable; callback execution and register state at tick unresolved",
+      "runtime_initial_bg_priority": {
+        "source": "functions_layout/arm9_main/arm9_main_02042d14.c#L49-L57",
+        "main": [
+          1,
+          0,
+          2,
+          3
+        ],
+        "sub": [
+          3,
+          2,
+          1,
+          0
+        ]
+      },
+      "possible_callback_overrides": true
+    },
+    {
+      "id": 44,
+      "name": "Battle",
+      "source_reachable_register_sites": [],
+      "register_site_count": 0,
+      "confidence": "source reachable; callback execution and register state at tick unresolved",
+      "runtime_initial_bg_priority": {
+        "source": "functions_layout/arm9_main/arm9_main_02042d14.c#L49-L57",
+        "main": [
+          1,
+          0,
+          2,
+          3
+        ],
+        "sub": [
+          3,
+          2,
+          1,
+          0
+        ]
+      },
+      "possible_callback_overrides": true
+    },
+    {
+      "id": 45,
+      "name": "Result",
+      "source_reachable_register_sites": [],
+      "register_site_count": 0,
+      "confidence": "source reachable; callback execution and register state at tick unresolved",
+      "runtime_initial_bg_priority": {
+        "source": "functions_layout/arm9_main/arm9_main_02042d14.c#L49-L57",
+        "main": [
+          1,
+          0,
+          2,
+          3
+        ],
+        "sub": [
+          3,
+          2,
+          1,
+          0
+        ]
+      },
+      "possible_callback_overrides": true
+    }
+  ]
+}

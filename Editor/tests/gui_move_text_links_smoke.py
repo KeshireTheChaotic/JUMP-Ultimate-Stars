@@ -54,7 +54,9 @@ def main():
         assert app.open_move_resource(a.form, a.resource_id, a.almt_member)
         tick(app)
         assert app.move.id == a.resource_id and app.workspace == 'animation'
-        assert 'Clenched Fists Shot' in app._move_control_and_title(app.move)
+        # The legacy Moves Tree is hidden under Roster mode to avoid repeated
+        # archive decompression. Original BIN titles remain visible in Inspector.
+        assert any('Clenched Fists Shot' in item for item in labels(app.inspector)), labels(app.inspector)
         assert any('bin/chr_b_t.bin' in item for item in labels(app.inspector)), labels(app.inspector)
         assert any('Open Koma card' in item for item in labels(app.inspector))
         assert app.open_koma_card(59)
@@ -67,7 +69,7 @@ def main():
         assert app.open_move_resource(s.form, s.resource_id, s.almt_member)
         tick(app)
         assert app.move.id == s.resource_id and app.workspace == 'animation'
-        assert 'Devil Bat Ghost' in app._move_control_and_title(app.move)
+        assert any('Devil Bat Ghost' in item for item in labels(app.inspector)), labels(app.inspector)
         assert any('bin/chr_s_t.bin' in item for item in labels(app.inspector))
         assert not app.root_data.dirty_files(), app.root_data.dirty_files()
         assert not app.almt_dirty and not ws.dirty

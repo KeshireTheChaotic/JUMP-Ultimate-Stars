@@ -1,0 +1,2641 @@
+{
+  "version": 1,
+  "authority": "Original overlay binary words + decompiled ARM9 only",
+  "families": [
+    {
+      "id": "JQuiz",
+      "overlay": 4,
+      "callback_source": "functions_layout/arm9_ov04/arm9_ov04_0214cf9c.c",
+      "callback_index_expr": "piVar2[5] (set from scene wrapper param2)",
+      "callback_table": 34997132,
+      "count": 10,
+      "core_path": "functions_layout/arm9_ov04/arm9_ov04_0214cd3c.c",
+      "scene_ids": [
+        18,
+        31,
+        40
+      ],
+      "mode_arg_index": 1,
+      "table_entries": [
+        {
+          "index": 0,
+          "table_word_address": "0x0216038C",
+          "raw_target": "0x00000000",
+          "target_path": null,
+          "thumb": false,
+          "status": "zero"
+        },
+        {
+          "index": 1,
+          "table_word_address": "0x02160390",
+          "raw_target": "0x0214CD20",
+          "target_path": null,
+          "thumb": false,
+          "status": "binary-resolved ARM scene-object thunk",
+          "assembly_dispatch": {
+            "machine_code": "E59F000C E59FC00C E5900000 E5900018 E12FFF1C 02161DE0",
+            "status": "original ARM indirect dispatch using live object at +0x18",
+            "onward_target": "runtime-dependent; not statically assigned"
+          }
+        },
+        {
+          "index": 2,
+          "table_word_address": "0x02160394",
+          "raw_target": "0x02153120",
+          "target_path": "functions_layout/arm9_ov04/arm9_ov04_02153120.c",
+          "thumb": false,
+          "status": "decompiled"
+        },
+        {
+          "index": 3,
+          "table_word_address": "0x02160398",
+          "raw_target": "0x021592B0",
+          "target_path": "functions_layout/arm9_ov04/arm9_ov04_021592b0.c",
+          "thumb": false,
+          "status": "decompiled"
+        },
+        {
+          "index": 4,
+          "table_word_address": "0x0216039C",
+          "raw_target": "0x0215AB94",
+          "target_path": null,
+          "thumb": false,
+          "status": "original-pointer-target-not-decompiled"
+        },
+        {
+          "index": 5,
+          "table_word_address": "0x021603A0",
+          "raw_target": "0x0215DA38",
+          "target_path": "functions_layout/arm9_ov04/arm9_ov04_0215da38.c",
+          "thumb": false,
+          "status": "decompiled"
+        },
+        {
+          "index": 6,
+          "table_word_address": "0x021603A4",
+          "raw_target": "0x02153188",
+          "target_path": "functions_layout/arm9_ov04/arm9_ov04_02153188.c",
+          "thumb": false,
+          "status": "decompiled"
+        },
+        {
+          "index": 7,
+          "table_word_address": "0x021603A8",
+          "raw_target": "0x0215F194",
+          "target_path": "functions_layout/arm9_ov04/arm9_ov04_0215f194.c",
+          "thumb": false,
+          "status": "decompiled"
+        },
+        {
+          "index": 8,
+          "table_word_address": "0x021603AC",
+          "raw_target": "0x0215CF24",
+          "target_path": "functions_layout/arm9_ov04/arm9_ov04_0215cf24.c",
+          "thumb": false,
+          "status": "decompiled"
+        },
+        {
+          "index": 9,
+          "table_word_address": "0x021603B0",
+          "raw_target": "0x0215A128",
+          "target_path": "functions_layout/arm9_ov04/arm9_ov04_0215a128.c",
+          "thumb": false,
+          "status": "decompiled"
+        }
+      ]
+    },
+    {
+      "id": "CommuMenu",
+      "overlay": 7,
+      "callback_source": "functions_layout/arm9_ov07/arm9_ov07_0214deac.c",
+      "callback_index_expr": "piVar2[4] (set from scene wrapper param1; can be forced to 24 on WiFi error)",
+      "callback_table": 35031476,
+      "count": 25,
+      "core_path": "functions_layout/arm9_ov07/arm9_ov07_0214da98.c",
+      "scene_ids": [
+        35,
+        38,
+        39
+      ],
+      "mode_arg_index": 0,
+      "table_entries": [
+        {
+          "index": 0,
+          "table_word_address": "0x021689B4",
+          "raw_target": "0x00000000",
+          "target_path": null,
+          "thumb": false,
+          "status": "zero"
+        },
+        {
+          "index": 1,
+          "table_word_address": "0x021689B8",
+          "raw_target": "0x0214DA44",
+          "target_path": null,
+          "thumb": false,
+          "status": "binary-resolved ARM scene-object thunk",
+          "assembly_dispatch": {
+            "machine_code": "E59F000C E59FC00C E5900000 E5900014 E12FFF1C 0216AD68",
+            "status": "original ARM indirect dispatch using live object at +0x14",
+            "onward_target": "runtime-dependent; not statically assigned"
+          }
+        },
+        {
+          "index": 2,
+          "table_word_address": "0x021689BC",
+          "raw_target": "0x0215A2BC",
+          "target_path": "functions_layout/arm9_ov07/arm9_ov07_0215a2bc.c",
+          "thumb": false,
+          "status": "decompiled"
+        },
+        {
+          "index": 3,
+          "table_word_address": "0x021689C0",
+          "raw_target": "0x0215C1A4",
+          "target_path": "functions_layout/arm9_ov07/arm9_ov07_0215c1a4.c",
+          "thumb": false,
+          "status": "decompiled"
+        },
+        {
+          "index": 4,
+          "table_word_address": "0x021689C4",
+          "raw_target": "0x0215C1F8",
+          "target_path": "functions_layout/arm9_ov07/arm9_ov07_0215c1f8.c",
+          "thumb": false,
+          "status": "decompiled"
+        },
+        {
+          "index": 5,
+          "table_word_address": "0x021689C8",
+          "raw_target": "0x02164345",
+          "target_path": "functions_layout/arm9_ov07/arm9_ov07_02164344.c",
+          "thumb": true,
+          "status": "decompiled"
+        },
+        {
+          "index": 6,
+          "table_word_address": "0x021689CC",
+          "raw_target": "0x02161EEC",
+          "target_path": "functions_layout/arm9_ov07/arm9_ov07_02161eec.c",
+          "thumb": false,
+          "status": "decompiled"
+        },
+        {
+          "index": 7,
+          "table_word_address": "0x021689D0",
+          "raw_target": "0x021624E8",
+          "target_path": "functions_layout/arm9_ov07/arm9_ov07_021624e8.c",
+          "thumb": false,
+          "status": "decompiled"
+        },
+        {
+          "index": 8,
+          "table_word_address": "0x021689D4",
+          "raw_target": "0x021629BC",
+          "target_path": null,
+          "thumb": false,
+          "status": "original-pointer-target-not-decompiled"
+        },
+        {
+          "index": 9,
+          "table_word_address": "0x021689D8",
+          "raw_target": "0x021629CC",
+          "target_path": null,
+          "thumb": false,
+          "status": "original-pointer-target-not-decompiled"
+        },
+        {
+          "index": 10,
+          "table_word_address": "0x021689DC",
+          "raw_target": "0x0215D1C1",
+          "target_path": "functions_layout/arm9_ov07/arm9_ov07_0215d1c0.c",
+          "thumb": true,
+          "status": "decompiled"
+        },
+        {
+          "index": 11,
+          "table_word_address": "0x021689E0",
+          "raw_target": "0x0216321C",
+          "target_path": "functions_layout/arm9_ov07/arm9_ov07_0216321c.c",
+          "thumb": false,
+          "status": "decompiled"
+        },
+        {
+          "index": 12,
+          "table_word_address": "0x021689E4",
+          "raw_target": "0x02163514",
+          "target_path": "functions_layout/arm9_ov07/arm9_ov07_02163514.c",
+          "thumb": false,
+          "status": "decompiled"
+        },
+        {
+          "index": 13,
+          "table_word_address": "0x021689E8",
+          "raw_target": "0x02163568",
+          "target_path": "functions_layout/arm9_ov07/arm9_ov07_02163568.c",
+          "thumb": false,
+          "status": "decompiled"
+        },
+        {
+          "index": 14,
+          "table_word_address": "0x021689EC",
+          "raw_target": "0x0214DA60",
+          "target_path": null,
+          "thumb": false,
+          "status": "original-pointer-target-not-decompiled"
+        },
+        {
+          "index": 15,
+          "table_word_address": "0x021689F0",
+          "raw_target": "0x02154645",
+          "target_path": null,
+          "thumb": true,
+          "status": "original-pointer-target-not-decompiled"
+        },
+        {
+          "index": 16,
+          "table_word_address": "0x021689F4",
+          "raw_target": "0x0215579C",
+          "target_path": "functions_layout/arm9_ov07/arm9_ov07_0215579c.c",
+          "thumb": false,
+          "status": "decompiled"
+        },
+        {
+          "index": 17,
+          "table_word_address": "0x021689F8",
+          "raw_target": "0x02155EFD",
+          "target_path": null,
+          "thumb": true,
+          "status": "original-pointer-target-not-decompiled"
+        },
+        {
+          "index": 18,
+          "table_word_address": "0x021689FC",
+          "raw_target": "0x02155F09",
+          "target_path": null,
+          "thumb": true,
+          "status": "original-pointer-target-not-decompiled"
+        },
+        {
+          "index": 19,
+          "table_word_address": "0x02168A00",
+          "raw_target": "0x0214DA7C",
+          "target_path": null,
+          "thumb": false,
+          "status": "original-pointer-target-not-decompiled"
+        },
+        {
+          "index": 20,
+          "table_word_address": "0x02168A04",
+          "raw_target": "0x0215197D",
+          "target_path": null,
+          "thumb": true,
+          "status": "original-pointer-target-not-decompiled"
+        },
+        {
+          "index": 21,
+          "table_word_address": "0x02168A08",
+          "raw_target": "0x00000000",
+          "target_path": null,
+          "thumb": false,
+          "status": "zero"
+        },
+        {
+          "index": 22,
+          "table_word_address": "0x02168A0C",
+          "raw_target": "0x02152F5D",
+          "target_path": "functions_layout/arm9_ov07/arm9_ov07_02152f5c.c",
+          "thumb": true,
+          "status": "decompiled"
+        },
+        {
+          "index": 23,
+          "table_word_address": "0x02168A10",
+          "raw_target": "0x00000000",
+          "target_path": null,
+          "thumb": false,
+          "status": "zero"
+        },
+        {
+          "index": 24,
+          "table_word_address": "0x02168A14",
+          "raw_target": "0x02164EE8",
+          "target_path": "functions_layout/arm9_ov07/arm9_ov07_02164ee8.c",
+          "thumb": false,
+          "status": "decompiled"
+        }
+      ]
+    },
+    {
+      "id": "JGalaxyPreConstructor",
+      "overlay": 2,
+      "callback_source": "functions_layout/arm9_ov02/arm9_ov02_0214cd20.c#L81",
+      "callback_table": 34979060,
+      "count": 7,
+      "table_entries": [
+        {
+          "index": 0,
+          "table_word_address": "0x0215BCF4",
+          "raw_target": "0x0214E058",
+          "thumb": false,
+          "target_path": "functions_layout/arm9_ov02/arm9_ov02_0214e058.c",
+          "status": "decompiled"
+        },
+        {
+          "index": 1,
+          "table_word_address": "0x0215BCF8",
+          "raw_target": "0x0214E058",
+          "thumb": false,
+          "target_path": "functions_layout/arm9_ov02/arm9_ov02_0214e058.c",
+          "status": "decompiled"
+        },
+        {
+          "index": 2,
+          "table_word_address": "0x0215BCFC",
+          "raw_target": "0x0214E0C4",
+          "thumb": false,
+          "target_path": "functions_layout/arm9_ov02/arm9_ov02_0214e0c4.c",
+          "status": "decompiled"
+        },
+        {
+          "index": 3,
+          "table_word_address": "0x0215BD00",
+          "raw_target": "0x0214E104",
+          "thumb": false,
+          "target_path": "functions_layout/arm9_ov02/arm9_ov02_0214e104.c",
+          "status": "decompiled"
+        },
+        {
+          "index": 4,
+          "table_word_address": "0x0215BD04",
+          "raw_target": "0x0214E104",
+          "thumb": false,
+          "target_path": "functions_layout/arm9_ov02/arm9_ov02_0214e104.c",
+          "status": "decompiled"
+        },
+        {
+          "index": 5,
+          "table_word_address": "0x0215BD08",
+          "raw_target": "0x0214E12C",
+          "thumb": false,
+          "target_path": "functions_layout/arm9_ov02/arm9_ov02_0214e12c.c",
+          "status": "decompiled"
+        },
+        {
+          "index": 6,
+          "table_word_address": "0x0215BD0C",
+          "raw_target": "0x0214D11C",
+          "thumb": false,
+          "target_path": "functions_layout/arm9_ov02/arm9_ov02_0214d11c.c",
+          "status": "decompiled"
+        }
+      ],
+      "selection": "runtime value in original constructor; no inferred index"
+    },
+    {
+      "id": "JGalaxyCreator",
+      "overlay": 2,
+      "callback_source": "functions_layout/arm9_ov02/arm9_ov02_0214cd20.c#L82",
+      "callback_table": 34979088,
+      "count": 7,
+      "table_entries": [
+        {
+          "index": 0,
+          "table_word_address": "0x0215BD10",
+          "raw_target": "0x02151544",
+          "thumb": false,
+          "target_path": "functions_layout/arm9_ov02/arm9_ov02_02151544.c",
+          "status": "decompiled"
+        },
+        {
+          "index": 1,
+          "table_word_address": "0x0215BD14",
+          "raw_target": "0x02151544",
+          "thumb": false,
+          "target_path": "functions_layout/arm9_ov02/arm9_ov02_02151544.c",
+          "status": "decompiled"
+        },
+        {
+          "index": 2,
+          "table_word_address": "0x0215BD18",
+          "raw_target": "0x0214E3BC",
+          "thumb": false,
+          "target_path": "functions_layout/arm9_ov02/arm9_ov02_0214e3bc.c",
+          "status": "decompiled"
+        },
+        {
+          "index": 3,
+          "table_word_address": "0x0215BD1C",
+          "raw_target": "0x0215528C",
+          "thumb": false,
+          "target_path": "functions_layout/arm9_ov02/arm9_ov02_0215528c.c",
+          "status": "decompiled"
+        },
+        {
+          "index": 4,
+          "table_word_address": "0x0215BD20",
+          "raw_target": "0x02155408",
+          "thumb": false,
+          "target_path": "functions_layout/arm9_ov02/arm9_ov02_02155408.c",
+          "status": "decompiled"
+        },
+        {
+          "index": 5,
+          "table_word_address": "0x0215BD24",
+          "raw_target": "0x021565C8",
+          "thumb": false,
+          "target_path": "functions_layout/arm9_ov02/arm9_ov02_021565c8.c",
+          "status": "decompiled"
+        },
+        {
+          "index": 6,
+          "table_word_address": "0x0215BD28",
+          "raw_target": "0x0214E048",
+          "thumb": false,
+          "target_path": "functions_layout/arm9_ov02/arm9_ov02_0214e048.c",
+          "status": "decompiled"
+        }
+      ],
+      "selection": "runtime value in original constructor; no inferred index"
+    },
+    {
+      "id": "JGalaxyPostConstructor",
+      "overlay": 2,
+      "callback_source": "functions_layout/arm9_ov02/arm9_ov02_0214cd20.c#L84",
+      "callback_table": 34979200,
+      "count": 7,
+      "table_entries": [
+        {
+          "index": 0,
+          "table_word_address": "0x0215BD80",
+          "raw_target": "0x0214E248",
+          "thumb": false,
+          "target_path": "functions_layout/arm9_ov02/arm9_ov02_0214e248.c",
+          "status": "decompiled"
+        },
+        {
+          "index": 1,
+          "table_word_address": "0x0215BD84",
+          "raw_target": "0x0214E248",
+          "thumb": false,
+          "target_path": "functions_layout/arm9_ov02/arm9_ov02_0214e248.c",
+          "status": "decompiled"
+        },
+        {
+          "index": 2,
+          "table_word_address": "0x0215BD88",
+          "raw_target": "0x0214ED0C",
+          "thumb": false,
+          "target_path": "functions_layout/arm9_ov02/arm9_ov02_0214ed0c.c",
+          "status": "decompiled"
+        },
+        {
+          "index": 3,
+          "table_word_address": "0x0215BD8C",
+          "raw_target": "0x02155578",
+          "thumb": false,
+          "target_path": "functions_layout/arm9_ov02/arm9_ov02_02155578.c",
+          "status": "decompiled"
+        },
+        {
+          "index": 4,
+          "table_word_address": "0x0215BD90",
+          "raw_target": "0x02155578",
+          "thumb": false,
+          "target_path": "functions_layout/arm9_ov02/arm9_ov02_02155578.c",
+          "status": "decompiled"
+        },
+        {
+          "index": 5,
+          "table_word_address": "0x0215BD94",
+          "raw_target": "0x02156690",
+          "thumb": false,
+          "target_path": "functions_layout/arm9_ov02/arm9_ov02_02156690.c",
+          "status": "decompiled"
+        },
+        {
+          "index": 6,
+          "table_word_address": "0x0215BD98",
+          "raw_target": "0x0214E050",
+          "thumb": false,
+          "target_path": "functions_layout/arm9_ov02/arm9_ov02_0214e050.c",
+          "status": "decompiled"
+        }
+      ],
+      "selection": "runtime value in original constructor; no inferred index"
+    },
+    {
+      "id": "JArenaJobs",
+      "overlay": 3,
+      "callback_source": "functions_layout/arm9_ov03/arm9_ov03_0214cff8.c#L11-L17",
+      "callback_table": 34984620,
+      "count": 12,
+      "table_entries": [
+        {
+          "index": 0,
+          "table_word_address": "0x0215D2AC",
+          "raw_target": "0x0214D958",
+          "thumb": false,
+          "target_path": "functions_layout/arm9_ov03/arm9_ov03_0214d958.c",
+          "status": "decompiled"
+        },
+        {
+          "index": 1,
+          "table_word_address": "0x0215D2B0",
+          "raw_target": "0x0214EE54",
+          "thumb": false,
+          "target_path": "functions_layout/arm9_ov03/arm9_ov03_0214ee54.c",
+          "status": "decompiled"
+        },
+        {
+          "index": 2,
+          "table_word_address": "0x0215D2B4",
+          "raw_target": "0x00000000",
+          "thumb": false,
+          "target_path": null,
+          "status": "zero"
+        },
+        {
+          "index": 3,
+          "table_word_address": "0x0215D2B8",
+          "raw_target": "0x00000000",
+          "thumb": false,
+          "target_path": null,
+          "status": "zero"
+        },
+        {
+          "index": 4,
+          "table_word_address": "0x0215D2BC",
+          "raw_target": "0x00000000",
+          "thumb": false,
+          "target_path": null,
+          "status": "zero"
+        },
+        {
+          "index": 5,
+          "table_word_address": "0x0215D2C0",
+          "raw_target": "0x021503A0",
+          "thumb": false,
+          "target_path": null,
+          "status": "binary-resolved ARM wrapper",
+          "assembly_dispatch": {
+            "machine_code": "04c09fe50010a0e31cff2fe1e0031502",
+            "trampoline_instructions": "ldr ip, [pc, #4]; mov r1, #0; bx ip",
+            "onward_target": "0x021503E0",
+            "onward_source": null,
+            "status": "original ARM branch trampoline; scene state remains dynamic"
+          }
+        },
+        {
+          "index": 6,
+          "table_word_address": "0x0215D2C4",
+          "raw_target": "0x021503B0",
+          "thumb": false,
+          "target_path": null,
+          "status": "binary-resolved ARM wrapper",
+          "assembly_dispatch": {
+            "machine_code": "04c09fe50110a0e31cff2fe1e0031502",
+            "trampoline_instructions": "ldr ip, [pc, #4]; mov r1, #1; bx ip",
+            "onward_target": "0x021503E0",
+            "onward_source": null,
+            "status": "original ARM branch trampoline; scene state remains dynamic"
+          }
+        },
+        {
+          "index": 7,
+          "table_word_address": "0x0215D2C8",
+          "raw_target": "0x021503C0",
+          "thumb": false,
+          "target_path": null,
+          "status": "binary-resolved ARM wrapper",
+          "assembly_dispatch": {
+            "machine_code": "04c09fe50210a0e31cff2fe1e0031502",
+            "trampoline_instructions": "ldr ip, [pc, #4]; mov r1, #2; bx ip",
+            "onward_target": "0x021503E0",
+            "onward_source": null,
+            "status": "original ARM branch trampoline; scene state remains dynamic"
+          }
+        },
+        {
+          "index": 8,
+          "table_word_address": "0x0215D2CC",
+          "raw_target": "0x021503D0",
+          "thumb": false,
+          "target_path": null,
+          "status": "binary-resolved ARM wrapper",
+          "assembly_dispatch": {
+            "machine_code": "04c09fe50310a0e31cff2fe1e0031502",
+            "trampoline_instructions": "ldr ip, [pc, #4]; mov r1, #3; bx ip",
+            "onward_target": "0x021503E0",
+            "onward_source": null,
+            "status": "original ARM branch trampoline; scene state remains dynamic"
+          }
+        },
+        {
+          "index": 9,
+          "table_word_address": "0x0215D2D0",
+          "raw_target": "0x0215178C",
+          "thumb": false,
+          "target_path": null,
+          "status": "binary-resolved ARM wrapper",
+          "assembly_dispatch": {
+            "machine_code": "04c09fe50010a0e31cff2fe1cc171502",
+            "trampoline_instructions": "ldr ip, [pc, #4]; mov r1, #0; bx ip",
+            "onward_target": "0x021517CC",
+            "onward_source": null,
+            "status": "original ARM branch trampoline; scene state remains dynamic"
+          }
+        },
+        {
+          "index": 10,
+          "table_word_address": "0x0215D2D4",
+          "raw_target": "0x0215179C",
+          "thumb": false,
+          "target_path": null,
+          "status": "binary-resolved ARM wrapper",
+          "assembly_dispatch": {
+            "machine_code": "04c09fe50110a0e31cff2fe1cc171502",
+            "trampoline_instructions": "ldr ip, [pc, #4]; mov r1, #1; bx ip",
+            "onward_target": "0x021517CC",
+            "onward_source": null,
+            "status": "original ARM branch trampoline; scene state remains dynamic"
+          }
+        },
+        {
+          "index": 11,
+          "table_word_address": "0x0215D2D8",
+          "raw_target": "0x021517AC",
+          "thumb": false,
+          "target_path": null,
+          "status": "binary-resolved ARM wrapper",
+          "assembly_dispatch": {
+            "machine_code": "04c09fe50210a0e31cff2fe1cc171502",
+            "trampoline_instructions": "ldr ip, [pc, #4]; mov r1, #2; bx ip",
+            "onward_target": "0x021517CC",
+            "onward_source": null,
+            "status": "original ARM branch trampoline; scene state remains dynamic"
+          }
+        }
+      ],
+      "selection": "runtime value in original constructor; no inferred index"
+    }
+  ],
+  "scene_dispatch": [
+    {
+      "scene_id": 18,
+      "family": "JQuiz",
+      "branches": [
+        {
+          "wrapper_path": "functions_layout/arm9_ov04/arm9_ov04_0214ce4c.c",
+          "line": 7,
+          "arguments": [
+            "2",
+            "9",
+            "0"
+          ],
+          "selected_state_index": 9,
+          "table_entry": {
+            "index": 9,
+            "table_word_address": "0x021603B0",
+            "raw_target": "0x0215A128",
+            "target_path": "functions_layout/arm9_ov04/arm9_ov04_0215a128.c",
+            "thumb": false,
+            "status": "decompiled"
+          }
+        }
+      ],
+      "selection": "literal in scene-specific overlay wrapper"
+    },
+    {
+      "scene_id": 31,
+      "family": "JQuiz",
+      "branches": [
+        {
+          "wrapper_path": "functions_layout/arm9_ov04/arm9_ov04_0214ce1c.c",
+          "line": 7,
+          "arguments": [
+            "0",
+            "1",
+            "0"
+          ],
+          "selected_state_index": 1,
+          "table_entry": {
+            "index": 1,
+            "table_word_address": "0x02160390",
+            "raw_target": "0x0214CD20",
+            "target_path": null,
+            "thumb": false,
+            "status": "binary-resolved ARM scene-object thunk",
+            "assembly_dispatch": {
+              "machine_code": "E59F000C E59FC00C E5900000 E5900018 E12FFF1C 02161DE0",
+              "status": "original ARM indirect dispatch using live object at +0x18",
+              "onward_target": "runtime-dependent; not statically assigned"
+            }
+          }
+        }
+      ],
+      "selection": "literal in scene-specific overlay wrapper"
+    },
+    {
+      "scene_id": 40,
+      "family": "JQuiz",
+      "branches": [
+        {
+          "wrapper_path": "functions_layout/arm9_ov04/arm9_ov04_0214ce34.c",
+          "line": 7,
+          "arguments": [
+            "1",
+            "5",
+            "0"
+          ],
+          "selected_state_index": 5,
+          "table_entry": {
+            "index": 5,
+            "table_word_address": "0x021603A0",
+            "raw_target": "0x0215DA38",
+            "target_path": "functions_layout/arm9_ov04/arm9_ov04_0215da38.c",
+            "thumb": false,
+            "status": "decompiled"
+          }
+        }
+      ],
+      "selection": "literal in scene-specific overlay wrapper"
+    },
+    {
+      "scene_id": 35,
+      "family": "CommuMenu",
+      "branches": [
+        {
+          "wrapper_path": "functions_layout/arm9_ov07/arm9_ov07_0214db7c.c",
+          "line": 8,
+          "arguments": [
+            "1",
+            "0",
+            "0",
+            "0"
+          ],
+          "selected_state_index": 1,
+          "table_entry": {
+            "index": 1,
+            "table_word_address": "0x021689B8",
+            "raw_target": "0x0214DA44",
+            "target_path": null,
+            "thumb": false,
+            "status": "binary-resolved ARM scene-object thunk",
+            "assembly_dispatch": {
+              "machine_code": "E59F000C E59FC00C E5900000 E5900014 E12FFF1C 0216AD68",
+              "status": "original ARM indirect dispatch using live object at +0x14",
+              "onward_target": "runtime-dependent; not statically assigned"
+            }
+          }
+        },
+        {
+          "wrapper_path": "functions_layout/arm9_ov07/arm9_ov07_0214dbac.c",
+          "line": 8,
+          "arguments": [
+            "1",
+            "9",
+            "0",
+            "0"
+          ],
+          "selected_state_index": 1,
+          "table_entry": {
+            "index": 1,
+            "table_word_address": "0x021689B8",
+            "raw_target": "0x0214DA44",
+            "target_path": null,
+            "thumb": false,
+            "status": "binary-resolved ARM scene-object thunk",
+            "assembly_dispatch": {
+              "machine_code": "E59F000C E59FC00C E5900000 E5900014 E12FFF1C 0216AD68",
+              "status": "original ARM indirect dispatch using live object at +0x14",
+              "onward_target": "runtime-dependent; not statically assigned"
+            }
+          }
+        },
+        {
+          "wrapper_path": "functions_layout/arm9_ov07/arm9_ov07_0214dc38.c",
+          "line": 8,
+          "arguments": [
+            "1",
+            "5",
+            "0",
+            "0"
+          ],
+          "selected_state_index": 1,
+          "table_entry": {
+            "index": 1,
+            "table_word_address": "0x021689B8",
+            "raw_target": "0x0214DA44",
+            "target_path": null,
+            "thumb": false,
+            "status": "binary-resolved ARM scene-object thunk",
+            "assembly_dispatch": {
+              "machine_code": "E59F000C E59FC00C E5900000 E5900014 E12FFF1C 0216AD68",
+              "status": "original ARM indirect dispatch using live object at +0x14",
+              "onward_target": "runtime-dependent; not statically assigned"
+            }
+          }
+        },
+        {
+          "wrapper_path": "functions_layout/arm9_ov07/arm9_ov07_0214dbc8.c",
+          "line": 8,
+          "arguments": [
+            "1",
+            "1",
+            "0",
+            "0"
+          ],
+          "selected_state_index": 1,
+          "table_entry": {
+            "index": 1,
+            "table_word_address": "0x021689B8",
+            "raw_target": "0x0214DA44",
+            "target_path": null,
+            "thumb": false,
+            "status": "binary-resolved ARM scene-object thunk",
+            "assembly_dispatch": {
+              "machine_code": "E59F000C E59FC00C E5900000 E5900014 E12FFF1C 0216AD68",
+              "status": "original ARM indirect dispatch using live object at +0x14",
+              "onward_target": "runtime-dependent; not statically assigned"
+            }
+          }
+        },
+        {
+          "wrapper_path": "functions_layout/arm9_ov07/arm9_ov07_0214dd18.c",
+          "line": 8,
+          "arguments": [
+            "0x13",
+            "7",
+            "2",
+            "0"
+          ],
+          "selected_state_index": 19,
+          "table_entry": {
+            "index": 19,
+            "table_word_address": "0x02168A00",
+            "raw_target": "0x0214DA7C",
+            "target_path": null,
+            "thumb": false,
+            "status": "original-pointer-target-not-decompiled"
+          }
+        },
+        {
+          "wrapper_path": "functions_layout/arm9_ov07/arm9_ov07_0214dbe4.c",
+          "line": 8,
+          "arguments": [
+            "1",
+            "3",
+            "0",
+            "0"
+          ],
+          "selected_state_index": 1,
+          "table_entry": {
+            "index": 1,
+            "table_word_address": "0x021689B8",
+            "raw_target": "0x0214DA44",
+            "target_path": null,
+            "thumb": false,
+            "status": "binary-resolved ARM scene-object thunk",
+            "assembly_dispatch": {
+              "machine_code": "E59F000C E59FC00C E5900000 E5900014 E12FFF1C 0216AD68",
+              "status": "original ARM indirect dispatch using live object at +0x14",
+              "onward_target": "runtime-dependent; not statically assigned"
+            }
+          }
+        },
+        {
+          "wrapper_path": "functions_layout/arm9_ov07/arm9_ov07_0214dc00.c",
+          "line": 8,
+          "arguments": [
+            "1",
+            "2",
+            "0",
+            "0"
+          ],
+          "selected_state_index": 1,
+          "table_entry": {
+            "index": 1,
+            "table_word_address": "0x021689B8",
+            "raw_target": "0x0214DA44",
+            "target_path": null,
+            "thumb": false,
+            "status": "binary-resolved ARM scene-object thunk",
+            "assembly_dispatch": {
+              "machine_code": "E59F000C E59FC00C E5900000 E5900014 E12FFF1C 0216AD68",
+              "status": "original ARM indirect dispatch using live object at +0x14",
+              "onward_target": "runtime-dependent; not statically assigned"
+            }
+          }
+        },
+        {
+          "wrapper_path": "functions_layout/arm9_ov07/arm9_ov07_0214dc1c.c",
+          "line": 8,
+          "arguments": [
+            "1",
+            "4",
+            "0",
+            "0"
+          ],
+          "selected_state_index": 1,
+          "table_entry": {
+            "index": 1,
+            "table_word_address": "0x021689B8",
+            "raw_target": "0x0214DA44",
+            "target_path": null,
+            "thumb": false,
+            "status": "binary-resolved ARM scene-object thunk",
+            "assembly_dispatch": {
+              "machine_code": "E59F000C E59FC00C E5900000 E5900014 E12FFF1C 0216AD68",
+              "status": "original ARM indirect dispatch using live object at +0x14",
+              "onward_target": "runtime-dependent; not statically assigned"
+            }
+          }
+        },
+        {
+          "wrapper_path": "functions_layout/arm9_ov07/arm9_ov07_0214dd34.c",
+          "line": 8,
+          "arguments": [
+            "0x13",
+            "7",
+            "4",
+            "0"
+          ],
+          "selected_state_index": 19,
+          "table_entry": {
+            "index": 19,
+            "table_word_address": "0x02168A00",
+            "raw_target": "0x0214DA7C",
+            "target_path": null,
+            "thumb": false,
+            "status": "original-pointer-target-not-decompiled"
+          }
+        },
+        {
+          "wrapper_path": "functions_layout/arm9_ov07/arm9_ov07_0214dc54.c",
+          "line": 8,
+          "arguments": [
+            "1",
+            "6",
+            "0",
+            "0"
+          ],
+          "selected_state_index": 1,
+          "table_entry": {
+            "index": 1,
+            "table_word_address": "0x021689B8",
+            "raw_target": "0x0214DA44",
+            "target_path": null,
+            "thumb": false,
+            "status": "binary-resolved ARM scene-object thunk",
+            "assembly_dispatch": {
+              "machine_code": "E59F000C E59FC00C E5900000 E5900014 E12FFF1C 0216AD68",
+              "status": "original ARM indirect dispatch using live object at +0x14",
+              "onward_target": "runtime-dependent; not statically assigned"
+            }
+          }
+        },
+        {
+          "wrapper_path": "functions_layout/arm9_ov07/arm9_ov07_0214dc70.c",
+          "line": 8,
+          "arguments": [
+            "1",
+            "8",
+            "0",
+            "0"
+          ],
+          "selected_state_index": 1,
+          "table_entry": {
+            "index": 1,
+            "table_word_address": "0x021689B8",
+            "raw_target": "0x0214DA44",
+            "target_path": null,
+            "thumb": false,
+            "status": "binary-resolved ARM scene-object thunk",
+            "assembly_dispatch": {
+              "machine_code": "E59F000C E59FC00C E5900000 E5900014 E12FFF1C 0216AD68",
+              "status": "original ARM indirect dispatch using live object at +0x14",
+              "onward_target": "runtime-dependent; not statically assigned"
+            }
+          }
+        },
+        {
+          "wrapper_path": "functions_layout/arm9_ov07/arm9_ov07_0214dce0.c",
+          "line": 8,
+          "arguments": [
+            "0xe",
+            "6",
+            "0",
+            "1"
+          ],
+          "selected_state_index": 14,
+          "table_entry": {
+            "index": 14,
+            "table_word_address": "0x021689EC",
+            "raw_target": "0x0214DA60",
+            "target_path": null,
+            "thumb": false,
+            "status": "original-pointer-target-not-decompiled"
+          }
+        },
+        {
+          "wrapper_path": "functions_layout/arm9_ov07/arm9_ov07_0214dcfc.c",
+          "line": 8,
+          "arguments": [
+            "0xe",
+            "6",
+            "0",
+            "2"
+          ],
+          "selected_state_index": 14,
+          "table_entry": {
+            "index": 14,
+            "table_word_address": "0x021689EC",
+            "raw_target": "0x0214DA60",
+            "target_path": null,
+            "thumb": false,
+            "status": "original-pointer-target-not-decompiled"
+          }
+        },
+        {
+          "wrapper_path": "functions_layout/arm9_ov07/arm9_ov07_0214dc8c.c",
+          "line": 8,
+          "arguments": [
+            "2",
+            "1",
+            "0",
+            "0"
+          ],
+          "selected_state_index": 2,
+          "table_entry": {
+            "index": 2,
+            "table_word_address": "0x021689BC",
+            "raw_target": "0x0215A2BC",
+            "target_path": "functions_layout/arm9_ov07/arm9_ov07_0215a2bc.c",
+            "thumb": false,
+            "status": "decompiled"
+          }
+        }
+      ],
+      "selection": "runtime condition-dependent"
+    },
+    {
+      "scene_id": 38,
+      "family": "CommuMenu",
+      "branches": [
+        {
+          "wrapper_path": "functions_layout/arm9_ov07/arm9_ov07_0214dca8.c",
+          "line": 7,
+          "arguments": [
+            "10",
+            "2",
+            "0",
+            "0"
+          ],
+          "selected_state_index": 10,
+          "table_entry": {
+            "index": 10,
+            "table_word_address": "0x021689DC",
+            "raw_target": "0x0215D1C1",
+            "target_path": "functions_layout/arm9_ov07/arm9_ov07_0215d1c0.c",
+            "thumb": true,
+            "status": "decompiled"
+          }
+        }
+      ],
+      "selection": "literal in scene-specific overlay wrapper"
+    },
+    {
+      "scene_id": 39,
+      "family": "CommuMenu",
+      "branches": [
+        {
+          "wrapper_path": "functions_layout/arm9_ov07/arm9_ov07_0214dcc4.c",
+          "line": 7,
+          "arguments": [
+            "7",
+            "4",
+            "0",
+            "0"
+          ],
+          "selected_state_index": 7,
+          "table_entry": {
+            "index": 7,
+            "table_word_address": "0x021689D0",
+            "raw_target": "0x021624E8",
+            "target_path": "functions_layout/arm9_ov07/arm9_ov07_021624e8.c",
+            "thumb": false,
+            "status": "decompiled"
+          }
+        }
+      ],
+      "selection": "literal in scene-specific overlay wrapper"
+    },
+    {
+      "scene_id": 16,
+      "family": "JGalaxyPreConstructor",
+      "selection": "runtime galaxy mode byte; no fixed mode asserted",
+      "branches": [
+        {
+          "wrapper_path": "functions_layout/arm9_ov02/arm9_ov02_0214cd20.c",
+          "line": 81,
+          "selected_state_index": 0,
+          "table_entry": {
+            "index": 0,
+            "table_word_address": "0x0215BCF4",
+            "raw_target": "0x0214E058",
+            "thumb": false,
+            "target_path": "functions_layout/arm9_ov02/arm9_ov02_0214e058.c",
+            "status": "decompiled"
+          },
+          "possible": true
+        },
+        {
+          "wrapper_path": "functions_layout/arm9_ov02/arm9_ov02_0214cd20.c",
+          "line": 81,
+          "selected_state_index": 1,
+          "table_entry": {
+            "index": 1,
+            "table_word_address": "0x0215BCF8",
+            "raw_target": "0x0214E058",
+            "thumb": false,
+            "target_path": "functions_layout/arm9_ov02/arm9_ov02_0214e058.c",
+            "status": "decompiled"
+          },
+          "possible": true
+        },
+        {
+          "wrapper_path": "functions_layout/arm9_ov02/arm9_ov02_0214cd20.c",
+          "line": 81,
+          "selected_state_index": 2,
+          "table_entry": {
+            "index": 2,
+            "table_word_address": "0x0215BCFC",
+            "raw_target": "0x0214E0C4",
+            "thumb": false,
+            "target_path": "functions_layout/arm9_ov02/arm9_ov02_0214e0c4.c",
+            "status": "decompiled"
+          },
+          "possible": true
+        },
+        {
+          "wrapper_path": "functions_layout/arm9_ov02/arm9_ov02_0214cd20.c",
+          "line": 81,
+          "selected_state_index": 3,
+          "table_entry": {
+            "index": 3,
+            "table_word_address": "0x0215BD00",
+            "raw_target": "0x0214E104",
+            "thumb": false,
+            "target_path": "functions_layout/arm9_ov02/arm9_ov02_0214e104.c",
+            "status": "decompiled"
+          },
+          "possible": true
+        },
+        {
+          "wrapper_path": "functions_layout/arm9_ov02/arm9_ov02_0214cd20.c",
+          "line": 81,
+          "selected_state_index": 4,
+          "table_entry": {
+            "index": 4,
+            "table_word_address": "0x0215BD04",
+            "raw_target": "0x0214E104",
+            "thumb": false,
+            "target_path": "functions_layout/arm9_ov02/arm9_ov02_0214e104.c",
+            "status": "decompiled"
+          },
+          "possible": true
+        },
+        {
+          "wrapper_path": "functions_layout/arm9_ov02/arm9_ov02_0214cd20.c",
+          "line": 81,
+          "selected_state_index": 5,
+          "table_entry": {
+            "index": 5,
+            "table_word_address": "0x0215BD08",
+            "raw_target": "0x0214E12C",
+            "thumb": false,
+            "target_path": "functions_layout/arm9_ov02/arm9_ov02_0214e12c.c",
+            "status": "decompiled"
+          },
+          "possible": true
+        },
+        {
+          "wrapper_path": "functions_layout/arm9_ov02/arm9_ov02_0214cd20.c",
+          "line": 81,
+          "selected_state_index": 6,
+          "table_entry": {
+            "index": 6,
+            "table_word_address": "0x0215BD0C",
+            "raw_target": "0x0214D11C",
+            "thumb": false,
+            "target_path": "functions_layout/arm9_ov02/arm9_ov02_0214d11c.c",
+            "status": "decompiled"
+          },
+          "possible": true
+        }
+      ]
+    },
+    {
+      "scene_id": 16,
+      "family": "JGalaxyCreator",
+      "selection": "runtime galaxy mode byte; no fixed mode asserted",
+      "branches": [
+        {
+          "wrapper_path": "functions_layout/arm9_ov02/arm9_ov02_0214cd20.c",
+          "line": 81,
+          "selected_state_index": 0,
+          "table_entry": {
+            "index": 0,
+            "table_word_address": "0x0215BD10",
+            "raw_target": "0x02151544",
+            "thumb": false,
+            "target_path": "functions_layout/arm9_ov02/arm9_ov02_02151544.c",
+            "status": "decompiled"
+          },
+          "possible": true
+        },
+        {
+          "wrapper_path": "functions_layout/arm9_ov02/arm9_ov02_0214cd20.c",
+          "line": 81,
+          "selected_state_index": 1,
+          "table_entry": {
+            "index": 1,
+            "table_word_address": "0x0215BD14",
+            "raw_target": "0x02151544",
+            "thumb": false,
+            "target_path": "functions_layout/arm9_ov02/arm9_ov02_02151544.c",
+            "status": "decompiled"
+          },
+          "possible": true
+        },
+        {
+          "wrapper_path": "functions_layout/arm9_ov02/arm9_ov02_0214cd20.c",
+          "line": 81,
+          "selected_state_index": 2,
+          "table_entry": {
+            "index": 2,
+            "table_word_address": "0x0215BD18",
+            "raw_target": "0x0214E3BC",
+            "thumb": false,
+            "target_path": "functions_layout/arm9_ov02/arm9_ov02_0214e3bc.c",
+            "status": "decompiled"
+          },
+          "possible": true
+        },
+        {
+          "wrapper_path": "functions_layout/arm9_ov02/arm9_ov02_0214cd20.c",
+          "line": 81,
+          "selected_state_index": 3,
+          "table_entry": {
+            "index": 3,
+            "table_word_address": "0x0215BD1C",
+            "raw_target": "0x0215528C",
+            "thumb": false,
+            "target_path": "functions_layout/arm9_ov02/arm9_ov02_0215528c.c",
+            "status": "decompiled"
+          },
+          "possible": true
+        },
+        {
+          "wrapper_path": "functions_layout/arm9_ov02/arm9_ov02_0214cd20.c",
+          "line": 81,
+          "selected_state_index": 4,
+          "table_entry": {
+            "index": 4,
+            "table_word_address": "0x0215BD20",
+            "raw_target": "0x02155408",
+            "thumb": false,
+            "target_path": "functions_layout/arm9_ov02/arm9_ov02_02155408.c",
+            "status": "decompiled"
+          },
+          "possible": true
+        },
+        {
+          "wrapper_path": "functions_layout/arm9_ov02/arm9_ov02_0214cd20.c",
+          "line": 81,
+          "selected_state_index": 5,
+          "table_entry": {
+            "index": 5,
+            "table_word_address": "0x0215BD24",
+            "raw_target": "0x021565C8",
+            "thumb": false,
+            "target_path": "functions_layout/arm9_ov02/arm9_ov02_021565c8.c",
+            "status": "decompiled"
+          },
+          "possible": true
+        },
+        {
+          "wrapper_path": "functions_layout/arm9_ov02/arm9_ov02_0214cd20.c",
+          "line": 81,
+          "selected_state_index": 6,
+          "table_entry": {
+            "index": 6,
+            "table_word_address": "0x0215BD28",
+            "raw_target": "0x0214E048",
+            "thumb": false,
+            "target_path": "functions_layout/arm9_ov02/arm9_ov02_0214e048.c",
+            "status": "decompiled"
+          },
+          "possible": true
+        }
+      ]
+    },
+    {
+      "scene_id": 16,
+      "family": "JGalaxyPostConstructor",
+      "selection": "runtime galaxy mode byte; no fixed mode asserted",
+      "branches": [
+        {
+          "wrapper_path": "functions_layout/arm9_ov02/arm9_ov02_0214cd20.c",
+          "line": 81,
+          "selected_state_index": 0,
+          "table_entry": {
+            "index": 0,
+            "table_word_address": "0x0215BD80",
+            "raw_target": "0x0214E248",
+            "thumb": false,
+            "target_path": "functions_layout/arm9_ov02/arm9_ov02_0214e248.c",
+            "status": "decompiled"
+          },
+          "possible": true
+        },
+        {
+          "wrapper_path": "functions_layout/arm9_ov02/arm9_ov02_0214cd20.c",
+          "line": 81,
+          "selected_state_index": 1,
+          "table_entry": {
+            "index": 1,
+            "table_word_address": "0x0215BD84",
+            "raw_target": "0x0214E248",
+            "thumb": false,
+            "target_path": "functions_layout/arm9_ov02/arm9_ov02_0214e248.c",
+            "status": "decompiled"
+          },
+          "possible": true
+        },
+        {
+          "wrapper_path": "functions_layout/arm9_ov02/arm9_ov02_0214cd20.c",
+          "line": 81,
+          "selected_state_index": 2,
+          "table_entry": {
+            "index": 2,
+            "table_word_address": "0x0215BD88",
+            "raw_target": "0x0214ED0C",
+            "thumb": false,
+            "target_path": "functions_layout/arm9_ov02/arm9_ov02_0214ed0c.c",
+            "status": "decompiled"
+          },
+          "possible": true
+        },
+        {
+          "wrapper_path": "functions_layout/arm9_ov02/arm9_ov02_0214cd20.c",
+          "line": 81,
+          "selected_state_index": 3,
+          "table_entry": {
+            "index": 3,
+            "table_word_address": "0x0215BD8C",
+            "raw_target": "0x02155578",
+            "thumb": false,
+            "target_path": "functions_layout/arm9_ov02/arm9_ov02_02155578.c",
+            "status": "decompiled"
+          },
+          "possible": true
+        },
+        {
+          "wrapper_path": "functions_layout/arm9_ov02/arm9_ov02_0214cd20.c",
+          "line": 81,
+          "selected_state_index": 4,
+          "table_entry": {
+            "index": 4,
+            "table_word_address": "0x0215BD90",
+            "raw_target": "0x02155578",
+            "thumb": false,
+            "target_path": "functions_layout/arm9_ov02/arm9_ov02_02155578.c",
+            "status": "decompiled"
+          },
+          "possible": true
+        },
+        {
+          "wrapper_path": "functions_layout/arm9_ov02/arm9_ov02_0214cd20.c",
+          "line": 81,
+          "selected_state_index": 5,
+          "table_entry": {
+            "index": 5,
+            "table_word_address": "0x0215BD94",
+            "raw_target": "0x02156690",
+            "thumb": false,
+            "target_path": "functions_layout/arm9_ov02/arm9_ov02_02156690.c",
+            "status": "decompiled"
+          },
+          "possible": true
+        },
+        {
+          "wrapper_path": "functions_layout/arm9_ov02/arm9_ov02_0214cd20.c",
+          "line": 81,
+          "selected_state_index": 6,
+          "table_entry": {
+            "index": 6,
+            "table_word_address": "0x0215BD98",
+            "raw_target": "0x0214E050",
+            "thumb": false,
+            "target_path": "functions_layout/arm9_ov02/arm9_ov02_0214e050.c",
+            "status": "decompiled"
+          },
+          "possible": true
+        }
+      ]
+    },
+    {
+      "scene_id": 21,
+      "family": "JArenaJobs",
+      "selection": "runtime JArena job ID supplied by scene-specific ARM9 wrapper; no fixed mode asserted",
+      "branches": [
+        {
+          "wrapper_path": "functions_layout/arm9_ov03/arm9_ov03_0214cff8.c",
+          "line": 11,
+          "selected_state_index": 0,
+          "table_entry": {
+            "index": 0,
+            "table_word_address": "0x0215D2AC",
+            "raw_target": "0x0214D958",
+            "thumb": false,
+            "target_path": "functions_layout/arm9_ov03/arm9_ov03_0214d958.c",
+            "status": "decompiled"
+          },
+          "possible": true
+        },
+        {
+          "wrapper_path": "functions_layout/arm9_ov03/arm9_ov03_0214cff8.c",
+          "line": 11,
+          "selected_state_index": 1,
+          "table_entry": {
+            "index": 1,
+            "table_word_address": "0x0215D2B0",
+            "raw_target": "0x0214EE54",
+            "thumb": false,
+            "target_path": "functions_layout/arm9_ov03/arm9_ov03_0214ee54.c",
+            "status": "decompiled"
+          },
+          "possible": true
+        },
+        {
+          "wrapper_path": "functions_layout/arm9_ov03/arm9_ov03_0214cff8.c",
+          "line": 11,
+          "selected_state_index": 2,
+          "table_entry": {
+            "index": 2,
+            "table_word_address": "0x0215D2B4",
+            "raw_target": "0x00000000",
+            "thumb": false,
+            "target_path": null,
+            "status": "zero"
+          },
+          "possible": true
+        },
+        {
+          "wrapper_path": "functions_layout/arm9_ov03/arm9_ov03_0214cff8.c",
+          "line": 11,
+          "selected_state_index": 3,
+          "table_entry": {
+            "index": 3,
+            "table_word_address": "0x0215D2B8",
+            "raw_target": "0x00000000",
+            "thumb": false,
+            "target_path": null,
+            "status": "zero"
+          },
+          "possible": true
+        },
+        {
+          "wrapper_path": "functions_layout/arm9_ov03/arm9_ov03_0214cff8.c",
+          "line": 11,
+          "selected_state_index": 4,
+          "table_entry": {
+            "index": 4,
+            "table_word_address": "0x0215D2BC",
+            "raw_target": "0x00000000",
+            "thumb": false,
+            "target_path": null,
+            "status": "zero"
+          },
+          "possible": true
+        },
+        {
+          "wrapper_path": "functions_layout/arm9_ov03/arm9_ov03_0214cff8.c",
+          "line": 11,
+          "selected_state_index": 5,
+          "table_entry": {
+            "index": 5,
+            "table_word_address": "0x0215D2C0",
+            "raw_target": "0x021503A0",
+            "thumb": false,
+            "target_path": null,
+            "status": "binary-resolved ARM wrapper",
+            "assembly_dispatch": {
+              "machine_code": "04c09fe50010a0e31cff2fe1e0031502",
+              "trampoline_instructions": "ldr ip, [pc, #4]; mov r1, #0; bx ip",
+              "onward_target": "0x021503E0",
+              "onward_source": null,
+              "status": "original ARM branch trampoline; scene state remains dynamic"
+            }
+          },
+          "possible": true
+        },
+        {
+          "wrapper_path": "functions_layout/arm9_ov03/arm9_ov03_0214cff8.c",
+          "line": 11,
+          "selected_state_index": 6,
+          "table_entry": {
+            "index": 6,
+            "table_word_address": "0x0215D2C4",
+            "raw_target": "0x021503B0",
+            "thumb": false,
+            "target_path": null,
+            "status": "binary-resolved ARM wrapper",
+            "assembly_dispatch": {
+              "machine_code": "04c09fe50110a0e31cff2fe1e0031502",
+              "trampoline_instructions": "ldr ip, [pc, #4]; mov r1, #1; bx ip",
+              "onward_target": "0x021503E0",
+              "onward_source": null,
+              "status": "original ARM branch trampoline; scene state remains dynamic"
+            }
+          },
+          "possible": true
+        },
+        {
+          "wrapper_path": "functions_layout/arm9_ov03/arm9_ov03_0214cff8.c",
+          "line": 11,
+          "selected_state_index": 7,
+          "table_entry": {
+            "index": 7,
+            "table_word_address": "0x0215D2C8",
+            "raw_target": "0x021503C0",
+            "thumb": false,
+            "target_path": null,
+            "status": "binary-resolved ARM wrapper",
+            "assembly_dispatch": {
+              "machine_code": "04c09fe50210a0e31cff2fe1e0031502",
+              "trampoline_instructions": "ldr ip, [pc, #4]; mov r1, #2; bx ip",
+              "onward_target": "0x021503E0",
+              "onward_source": null,
+              "status": "original ARM branch trampoline; scene state remains dynamic"
+            }
+          },
+          "possible": true
+        },
+        {
+          "wrapper_path": "functions_layout/arm9_ov03/arm9_ov03_0214cff8.c",
+          "line": 11,
+          "selected_state_index": 8,
+          "table_entry": {
+            "index": 8,
+            "table_word_address": "0x0215D2CC",
+            "raw_target": "0x021503D0",
+            "thumb": false,
+            "target_path": null,
+            "status": "binary-resolved ARM wrapper",
+            "assembly_dispatch": {
+              "machine_code": "04c09fe50310a0e31cff2fe1e0031502",
+              "trampoline_instructions": "ldr ip, [pc, #4]; mov r1, #3; bx ip",
+              "onward_target": "0x021503E0",
+              "onward_source": null,
+              "status": "original ARM branch trampoline; scene state remains dynamic"
+            }
+          },
+          "possible": true
+        },
+        {
+          "wrapper_path": "functions_layout/arm9_ov03/arm9_ov03_0214cff8.c",
+          "line": 11,
+          "selected_state_index": 9,
+          "table_entry": {
+            "index": 9,
+            "table_word_address": "0x0215D2D0",
+            "raw_target": "0x0215178C",
+            "thumb": false,
+            "target_path": null,
+            "status": "binary-resolved ARM wrapper",
+            "assembly_dispatch": {
+              "machine_code": "04c09fe50010a0e31cff2fe1cc171502",
+              "trampoline_instructions": "ldr ip, [pc, #4]; mov r1, #0; bx ip",
+              "onward_target": "0x021517CC",
+              "onward_source": null,
+              "status": "original ARM branch trampoline; scene state remains dynamic"
+            }
+          },
+          "possible": true
+        },
+        {
+          "wrapper_path": "functions_layout/arm9_ov03/arm9_ov03_0214cff8.c",
+          "line": 11,
+          "selected_state_index": 10,
+          "table_entry": {
+            "index": 10,
+            "table_word_address": "0x0215D2D4",
+            "raw_target": "0x0215179C",
+            "thumb": false,
+            "target_path": null,
+            "status": "binary-resolved ARM wrapper",
+            "assembly_dispatch": {
+              "machine_code": "04c09fe50110a0e31cff2fe1cc171502",
+              "trampoline_instructions": "ldr ip, [pc, #4]; mov r1, #1; bx ip",
+              "onward_target": "0x021517CC",
+              "onward_source": null,
+              "status": "original ARM branch trampoline; scene state remains dynamic"
+            }
+          },
+          "possible": true
+        },
+        {
+          "wrapper_path": "functions_layout/arm9_ov03/arm9_ov03_0214cff8.c",
+          "line": 11,
+          "selected_state_index": 11,
+          "table_entry": {
+            "index": 11,
+            "table_word_address": "0x0215D2D8",
+            "raw_target": "0x021517AC",
+            "thumb": false,
+            "target_path": null,
+            "status": "binary-resolved ARM wrapper",
+            "assembly_dispatch": {
+              "machine_code": "04c09fe50210a0e31cff2fe1cc171502",
+              "trampoline_instructions": "ldr ip, [pc, #4]; mov r1, #2; bx ip",
+              "onward_target": "0x021517CC",
+              "onward_source": null,
+              "status": "original ARM branch trampoline; scene state remains dynamic"
+            }
+          },
+          "possible": true
+        }
+      ]
+    },
+    {
+      "scene_id": 23,
+      "family": "JArenaJobs",
+      "selection": "runtime JArena job ID supplied by scene-specific ARM9 wrapper; no fixed mode asserted",
+      "branches": [
+        {
+          "wrapper_path": "functions_layout/arm9_ov03/arm9_ov03_0214cff8.c",
+          "line": 11,
+          "selected_state_index": 0,
+          "table_entry": {
+            "index": 0,
+            "table_word_address": "0x0215D2AC",
+            "raw_target": "0x0214D958",
+            "thumb": false,
+            "target_path": "functions_layout/arm9_ov03/arm9_ov03_0214d958.c",
+            "status": "decompiled"
+          },
+          "possible": true
+        },
+        {
+          "wrapper_path": "functions_layout/arm9_ov03/arm9_ov03_0214cff8.c",
+          "line": 11,
+          "selected_state_index": 1,
+          "table_entry": {
+            "index": 1,
+            "table_word_address": "0x0215D2B0",
+            "raw_target": "0x0214EE54",
+            "thumb": false,
+            "target_path": "functions_layout/arm9_ov03/arm9_ov03_0214ee54.c",
+            "status": "decompiled"
+          },
+          "possible": true
+        },
+        {
+          "wrapper_path": "functions_layout/arm9_ov03/arm9_ov03_0214cff8.c",
+          "line": 11,
+          "selected_state_index": 2,
+          "table_entry": {
+            "index": 2,
+            "table_word_address": "0x0215D2B4",
+            "raw_target": "0x00000000",
+            "thumb": false,
+            "target_path": null,
+            "status": "zero"
+          },
+          "possible": true
+        },
+        {
+          "wrapper_path": "functions_layout/arm9_ov03/arm9_ov03_0214cff8.c",
+          "line": 11,
+          "selected_state_index": 3,
+          "table_entry": {
+            "index": 3,
+            "table_word_address": "0x0215D2B8",
+            "raw_target": "0x00000000",
+            "thumb": false,
+            "target_path": null,
+            "status": "zero"
+          },
+          "possible": true
+        },
+        {
+          "wrapper_path": "functions_layout/arm9_ov03/arm9_ov03_0214cff8.c",
+          "line": 11,
+          "selected_state_index": 4,
+          "table_entry": {
+            "index": 4,
+            "table_word_address": "0x0215D2BC",
+            "raw_target": "0x00000000",
+            "thumb": false,
+            "target_path": null,
+            "status": "zero"
+          },
+          "possible": true
+        },
+        {
+          "wrapper_path": "functions_layout/arm9_ov03/arm9_ov03_0214cff8.c",
+          "line": 11,
+          "selected_state_index": 5,
+          "table_entry": {
+            "index": 5,
+            "table_word_address": "0x0215D2C0",
+            "raw_target": "0x021503A0",
+            "thumb": false,
+            "target_path": null,
+            "status": "binary-resolved ARM wrapper",
+            "assembly_dispatch": {
+              "machine_code": "04c09fe50010a0e31cff2fe1e0031502",
+              "trampoline_instructions": "ldr ip, [pc, #4]; mov r1, #0; bx ip",
+              "onward_target": "0x021503E0",
+              "onward_source": null,
+              "status": "original ARM branch trampoline; scene state remains dynamic"
+            }
+          },
+          "possible": true
+        },
+        {
+          "wrapper_path": "functions_layout/arm9_ov03/arm9_ov03_0214cff8.c",
+          "line": 11,
+          "selected_state_index": 6,
+          "table_entry": {
+            "index": 6,
+            "table_word_address": "0x0215D2C4",
+            "raw_target": "0x021503B0",
+            "thumb": false,
+            "target_path": null,
+            "status": "binary-resolved ARM wrapper",
+            "assembly_dispatch": {
+              "machine_code": "04c09fe50110a0e31cff2fe1e0031502",
+              "trampoline_instructions": "ldr ip, [pc, #4]; mov r1, #1; bx ip",
+              "onward_target": "0x021503E0",
+              "onward_source": null,
+              "status": "original ARM branch trampoline; scene state remains dynamic"
+            }
+          },
+          "possible": true
+        },
+        {
+          "wrapper_path": "functions_layout/arm9_ov03/arm9_ov03_0214cff8.c",
+          "line": 11,
+          "selected_state_index": 7,
+          "table_entry": {
+            "index": 7,
+            "table_word_address": "0x0215D2C8",
+            "raw_target": "0x021503C0",
+            "thumb": false,
+            "target_path": null,
+            "status": "binary-resolved ARM wrapper",
+            "assembly_dispatch": {
+              "machine_code": "04c09fe50210a0e31cff2fe1e0031502",
+              "trampoline_instructions": "ldr ip, [pc, #4]; mov r1, #2; bx ip",
+              "onward_target": "0x021503E0",
+              "onward_source": null,
+              "status": "original ARM branch trampoline; scene state remains dynamic"
+            }
+          },
+          "possible": true
+        },
+        {
+          "wrapper_path": "functions_layout/arm9_ov03/arm9_ov03_0214cff8.c",
+          "line": 11,
+          "selected_state_index": 8,
+          "table_entry": {
+            "index": 8,
+            "table_word_address": "0x0215D2CC",
+            "raw_target": "0x021503D0",
+            "thumb": false,
+            "target_path": null,
+            "status": "binary-resolved ARM wrapper",
+            "assembly_dispatch": {
+              "machine_code": "04c09fe50310a0e31cff2fe1e0031502",
+              "trampoline_instructions": "ldr ip, [pc, #4]; mov r1, #3; bx ip",
+              "onward_target": "0x021503E0",
+              "onward_source": null,
+              "status": "original ARM branch trampoline; scene state remains dynamic"
+            }
+          },
+          "possible": true
+        },
+        {
+          "wrapper_path": "functions_layout/arm9_ov03/arm9_ov03_0214cff8.c",
+          "line": 11,
+          "selected_state_index": 9,
+          "table_entry": {
+            "index": 9,
+            "table_word_address": "0x0215D2D0",
+            "raw_target": "0x0215178C",
+            "thumb": false,
+            "target_path": null,
+            "status": "binary-resolved ARM wrapper",
+            "assembly_dispatch": {
+              "machine_code": "04c09fe50010a0e31cff2fe1cc171502",
+              "trampoline_instructions": "ldr ip, [pc, #4]; mov r1, #0; bx ip",
+              "onward_target": "0x021517CC",
+              "onward_source": null,
+              "status": "original ARM branch trampoline; scene state remains dynamic"
+            }
+          },
+          "possible": true
+        },
+        {
+          "wrapper_path": "functions_layout/arm9_ov03/arm9_ov03_0214cff8.c",
+          "line": 11,
+          "selected_state_index": 10,
+          "table_entry": {
+            "index": 10,
+            "table_word_address": "0x0215D2D4",
+            "raw_target": "0x0215179C",
+            "thumb": false,
+            "target_path": null,
+            "status": "binary-resolved ARM wrapper",
+            "assembly_dispatch": {
+              "machine_code": "04c09fe50110a0e31cff2fe1cc171502",
+              "trampoline_instructions": "ldr ip, [pc, #4]; mov r1, #1; bx ip",
+              "onward_target": "0x021517CC",
+              "onward_source": null,
+              "status": "original ARM branch trampoline; scene state remains dynamic"
+            }
+          },
+          "possible": true
+        },
+        {
+          "wrapper_path": "functions_layout/arm9_ov03/arm9_ov03_0214cff8.c",
+          "line": 11,
+          "selected_state_index": 11,
+          "table_entry": {
+            "index": 11,
+            "table_word_address": "0x0215D2D8",
+            "raw_target": "0x021517AC",
+            "thumb": false,
+            "target_path": null,
+            "status": "binary-resolved ARM wrapper",
+            "assembly_dispatch": {
+              "machine_code": "04c09fe50210a0e31cff2fe1cc171502",
+              "trampoline_instructions": "ldr ip, [pc, #4]; mov r1, #2; bx ip",
+              "onward_target": "0x021517CC",
+              "onward_source": null,
+              "status": "original ARM branch trampoline; scene state remains dynamic"
+            }
+          },
+          "possible": true
+        }
+      ]
+    },
+    {
+      "scene_id": 24,
+      "family": "JArenaJobs",
+      "selection": "runtime JArena job ID supplied by scene-specific ARM9 wrapper; no fixed mode asserted",
+      "branches": [
+        {
+          "wrapper_path": "functions_layout/arm9_ov03/arm9_ov03_0214cff8.c",
+          "line": 11,
+          "selected_state_index": 0,
+          "table_entry": {
+            "index": 0,
+            "table_word_address": "0x0215D2AC",
+            "raw_target": "0x0214D958",
+            "thumb": false,
+            "target_path": "functions_layout/arm9_ov03/arm9_ov03_0214d958.c",
+            "status": "decompiled"
+          },
+          "possible": true
+        },
+        {
+          "wrapper_path": "functions_layout/arm9_ov03/arm9_ov03_0214cff8.c",
+          "line": 11,
+          "selected_state_index": 1,
+          "table_entry": {
+            "index": 1,
+            "table_word_address": "0x0215D2B0",
+            "raw_target": "0x0214EE54",
+            "thumb": false,
+            "target_path": "functions_layout/arm9_ov03/arm9_ov03_0214ee54.c",
+            "status": "decompiled"
+          },
+          "possible": true
+        },
+        {
+          "wrapper_path": "functions_layout/arm9_ov03/arm9_ov03_0214cff8.c",
+          "line": 11,
+          "selected_state_index": 2,
+          "table_entry": {
+            "index": 2,
+            "table_word_address": "0x0215D2B4",
+            "raw_target": "0x00000000",
+            "thumb": false,
+            "target_path": null,
+            "status": "zero"
+          },
+          "possible": true
+        },
+        {
+          "wrapper_path": "functions_layout/arm9_ov03/arm9_ov03_0214cff8.c",
+          "line": 11,
+          "selected_state_index": 3,
+          "table_entry": {
+            "index": 3,
+            "table_word_address": "0x0215D2B8",
+            "raw_target": "0x00000000",
+            "thumb": false,
+            "target_path": null,
+            "status": "zero"
+          },
+          "possible": true
+        },
+        {
+          "wrapper_path": "functions_layout/arm9_ov03/arm9_ov03_0214cff8.c",
+          "line": 11,
+          "selected_state_index": 4,
+          "table_entry": {
+            "index": 4,
+            "table_word_address": "0x0215D2BC",
+            "raw_target": "0x00000000",
+            "thumb": false,
+            "target_path": null,
+            "status": "zero"
+          },
+          "possible": true
+        },
+        {
+          "wrapper_path": "functions_layout/arm9_ov03/arm9_ov03_0214cff8.c",
+          "line": 11,
+          "selected_state_index": 5,
+          "table_entry": {
+            "index": 5,
+            "table_word_address": "0x0215D2C0",
+            "raw_target": "0x021503A0",
+            "thumb": false,
+            "target_path": null,
+            "status": "binary-resolved ARM wrapper",
+            "assembly_dispatch": {
+              "machine_code": "04c09fe50010a0e31cff2fe1e0031502",
+              "trampoline_instructions": "ldr ip, [pc, #4]; mov r1, #0; bx ip",
+              "onward_target": "0x021503E0",
+              "onward_source": null,
+              "status": "original ARM branch trampoline; scene state remains dynamic"
+            }
+          },
+          "possible": true
+        },
+        {
+          "wrapper_path": "functions_layout/arm9_ov03/arm9_ov03_0214cff8.c",
+          "line": 11,
+          "selected_state_index": 6,
+          "table_entry": {
+            "index": 6,
+            "table_word_address": "0x0215D2C4",
+            "raw_target": "0x021503B0",
+            "thumb": false,
+            "target_path": null,
+            "status": "binary-resolved ARM wrapper",
+            "assembly_dispatch": {
+              "machine_code": "04c09fe50110a0e31cff2fe1e0031502",
+              "trampoline_instructions": "ldr ip, [pc, #4]; mov r1, #1; bx ip",
+              "onward_target": "0x021503E0",
+              "onward_source": null,
+              "status": "original ARM branch trampoline; scene state remains dynamic"
+            }
+          },
+          "possible": true
+        },
+        {
+          "wrapper_path": "functions_layout/arm9_ov03/arm9_ov03_0214cff8.c",
+          "line": 11,
+          "selected_state_index": 7,
+          "table_entry": {
+            "index": 7,
+            "table_word_address": "0x0215D2C8",
+            "raw_target": "0x021503C0",
+            "thumb": false,
+            "target_path": null,
+            "status": "binary-resolved ARM wrapper",
+            "assembly_dispatch": {
+              "machine_code": "04c09fe50210a0e31cff2fe1e0031502",
+              "trampoline_instructions": "ldr ip, [pc, #4]; mov r1, #2; bx ip",
+              "onward_target": "0x021503E0",
+              "onward_source": null,
+              "status": "original ARM branch trampoline; scene state remains dynamic"
+            }
+          },
+          "possible": true
+        },
+        {
+          "wrapper_path": "functions_layout/arm9_ov03/arm9_ov03_0214cff8.c",
+          "line": 11,
+          "selected_state_index": 8,
+          "table_entry": {
+            "index": 8,
+            "table_word_address": "0x0215D2CC",
+            "raw_target": "0x021503D0",
+            "thumb": false,
+            "target_path": null,
+            "status": "binary-resolved ARM wrapper",
+            "assembly_dispatch": {
+              "machine_code": "04c09fe50310a0e31cff2fe1e0031502",
+              "trampoline_instructions": "ldr ip, [pc, #4]; mov r1, #3; bx ip",
+              "onward_target": "0x021503E0",
+              "onward_source": null,
+              "status": "original ARM branch trampoline; scene state remains dynamic"
+            }
+          },
+          "possible": true
+        },
+        {
+          "wrapper_path": "functions_layout/arm9_ov03/arm9_ov03_0214cff8.c",
+          "line": 11,
+          "selected_state_index": 9,
+          "table_entry": {
+            "index": 9,
+            "table_word_address": "0x0215D2D0",
+            "raw_target": "0x0215178C",
+            "thumb": false,
+            "target_path": null,
+            "status": "binary-resolved ARM wrapper",
+            "assembly_dispatch": {
+              "machine_code": "04c09fe50010a0e31cff2fe1cc171502",
+              "trampoline_instructions": "ldr ip, [pc, #4]; mov r1, #0; bx ip",
+              "onward_target": "0x021517CC",
+              "onward_source": null,
+              "status": "original ARM branch trampoline; scene state remains dynamic"
+            }
+          },
+          "possible": true
+        },
+        {
+          "wrapper_path": "functions_layout/arm9_ov03/arm9_ov03_0214cff8.c",
+          "line": 11,
+          "selected_state_index": 10,
+          "table_entry": {
+            "index": 10,
+            "table_word_address": "0x0215D2D4",
+            "raw_target": "0x0215179C",
+            "thumb": false,
+            "target_path": null,
+            "status": "binary-resolved ARM wrapper",
+            "assembly_dispatch": {
+              "machine_code": "04c09fe50110a0e31cff2fe1cc171502",
+              "trampoline_instructions": "ldr ip, [pc, #4]; mov r1, #1; bx ip",
+              "onward_target": "0x021517CC",
+              "onward_source": null,
+              "status": "original ARM branch trampoline; scene state remains dynamic"
+            }
+          },
+          "possible": true
+        },
+        {
+          "wrapper_path": "functions_layout/arm9_ov03/arm9_ov03_0214cff8.c",
+          "line": 11,
+          "selected_state_index": 11,
+          "table_entry": {
+            "index": 11,
+            "table_word_address": "0x0215D2D8",
+            "raw_target": "0x021517AC",
+            "thumb": false,
+            "target_path": null,
+            "status": "binary-resolved ARM wrapper",
+            "assembly_dispatch": {
+              "machine_code": "04c09fe50210a0e31cff2fe1cc171502",
+              "trampoline_instructions": "ldr ip, [pc, #4]; mov r1, #2; bx ip",
+              "onward_target": "0x021517CC",
+              "onward_source": null,
+              "status": "original ARM branch trampoline; scene state remains dynamic"
+            }
+          },
+          "possible": true
+        }
+      ]
+    },
+    {
+      "scene_id": 26,
+      "family": "JArenaJobs",
+      "selection": "runtime JArena job ID supplied by scene-specific ARM9 wrapper; no fixed mode asserted",
+      "branches": [
+        {
+          "wrapper_path": "functions_layout/arm9_ov03/arm9_ov03_0214cff8.c",
+          "line": 11,
+          "selected_state_index": 0,
+          "table_entry": {
+            "index": 0,
+            "table_word_address": "0x0215D2AC",
+            "raw_target": "0x0214D958",
+            "thumb": false,
+            "target_path": "functions_layout/arm9_ov03/arm9_ov03_0214d958.c",
+            "status": "decompiled"
+          },
+          "possible": true
+        },
+        {
+          "wrapper_path": "functions_layout/arm9_ov03/arm9_ov03_0214cff8.c",
+          "line": 11,
+          "selected_state_index": 1,
+          "table_entry": {
+            "index": 1,
+            "table_word_address": "0x0215D2B0",
+            "raw_target": "0x0214EE54",
+            "thumb": false,
+            "target_path": "functions_layout/arm9_ov03/arm9_ov03_0214ee54.c",
+            "status": "decompiled"
+          },
+          "possible": true
+        },
+        {
+          "wrapper_path": "functions_layout/arm9_ov03/arm9_ov03_0214cff8.c",
+          "line": 11,
+          "selected_state_index": 2,
+          "table_entry": {
+            "index": 2,
+            "table_word_address": "0x0215D2B4",
+            "raw_target": "0x00000000",
+            "thumb": false,
+            "target_path": null,
+            "status": "zero"
+          },
+          "possible": true
+        },
+        {
+          "wrapper_path": "functions_layout/arm9_ov03/arm9_ov03_0214cff8.c",
+          "line": 11,
+          "selected_state_index": 3,
+          "table_entry": {
+            "index": 3,
+            "table_word_address": "0x0215D2B8",
+            "raw_target": "0x00000000",
+            "thumb": false,
+            "target_path": null,
+            "status": "zero"
+          },
+          "possible": true
+        },
+        {
+          "wrapper_path": "functions_layout/arm9_ov03/arm9_ov03_0214cff8.c",
+          "line": 11,
+          "selected_state_index": 4,
+          "table_entry": {
+            "index": 4,
+            "table_word_address": "0x0215D2BC",
+            "raw_target": "0x00000000",
+            "thumb": false,
+            "target_path": null,
+            "status": "zero"
+          },
+          "possible": true
+        },
+        {
+          "wrapper_path": "functions_layout/arm9_ov03/arm9_ov03_0214cff8.c",
+          "line": 11,
+          "selected_state_index": 5,
+          "table_entry": {
+            "index": 5,
+            "table_word_address": "0x0215D2C0",
+            "raw_target": "0x021503A0",
+            "thumb": false,
+            "target_path": null,
+            "status": "binary-resolved ARM wrapper",
+            "assembly_dispatch": {
+              "machine_code": "04c09fe50010a0e31cff2fe1e0031502",
+              "trampoline_instructions": "ldr ip, [pc, #4]; mov r1, #0; bx ip",
+              "onward_target": "0x021503E0",
+              "onward_source": null,
+              "status": "original ARM branch trampoline; scene state remains dynamic"
+            }
+          },
+          "possible": true
+        },
+        {
+          "wrapper_path": "functions_layout/arm9_ov03/arm9_ov03_0214cff8.c",
+          "line": 11,
+          "selected_state_index": 6,
+          "table_entry": {
+            "index": 6,
+            "table_word_address": "0x0215D2C4",
+            "raw_target": "0x021503B0",
+            "thumb": false,
+            "target_path": null,
+            "status": "binary-resolved ARM wrapper",
+            "assembly_dispatch": {
+              "machine_code": "04c09fe50110a0e31cff2fe1e0031502",
+              "trampoline_instructions": "ldr ip, [pc, #4]; mov r1, #1; bx ip",
+              "onward_target": "0x021503E0",
+              "onward_source": null,
+              "status": "original ARM branch trampoline; scene state remains dynamic"
+            }
+          },
+          "possible": true
+        },
+        {
+          "wrapper_path": "functions_layout/arm9_ov03/arm9_ov03_0214cff8.c",
+          "line": 11,
+          "selected_state_index": 7,
+          "table_entry": {
+            "index": 7,
+            "table_word_address": "0x0215D2C8",
+            "raw_target": "0x021503C0",
+            "thumb": false,
+            "target_path": null,
+            "status": "binary-resolved ARM wrapper",
+            "assembly_dispatch": {
+              "machine_code": "04c09fe50210a0e31cff2fe1e0031502",
+              "trampoline_instructions": "ldr ip, [pc, #4]; mov r1, #2; bx ip",
+              "onward_target": "0x021503E0",
+              "onward_source": null,
+              "status": "original ARM branch trampoline; scene state remains dynamic"
+            }
+          },
+          "possible": true
+        },
+        {
+          "wrapper_path": "functions_layout/arm9_ov03/arm9_ov03_0214cff8.c",
+          "line": 11,
+          "selected_state_index": 8,
+          "table_entry": {
+            "index": 8,
+            "table_word_address": "0x0215D2CC",
+            "raw_target": "0x021503D0",
+            "thumb": false,
+            "target_path": null,
+            "status": "binary-resolved ARM wrapper",
+            "assembly_dispatch": {
+              "machine_code": "04c09fe50310a0e31cff2fe1e0031502",
+              "trampoline_instructions": "ldr ip, [pc, #4]; mov r1, #3; bx ip",
+              "onward_target": "0x021503E0",
+              "onward_source": null,
+              "status": "original ARM branch trampoline; scene state remains dynamic"
+            }
+          },
+          "possible": true
+        },
+        {
+          "wrapper_path": "functions_layout/arm9_ov03/arm9_ov03_0214cff8.c",
+          "line": 11,
+          "selected_state_index": 9,
+          "table_entry": {
+            "index": 9,
+            "table_word_address": "0x0215D2D0",
+            "raw_target": "0x0215178C",
+            "thumb": false,
+            "target_path": null,
+            "status": "binary-resolved ARM wrapper",
+            "assembly_dispatch": {
+              "machine_code": "04c09fe50010a0e31cff2fe1cc171502",
+              "trampoline_instructions": "ldr ip, [pc, #4]; mov r1, #0; bx ip",
+              "onward_target": "0x021517CC",
+              "onward_source": null,
+              "status": "original ARM branch trampoline; scene state remains dynamic"
+            }
+          },
+          "possible": true
+        },
+        {
+          "wrapper_path": "functions_layout/arm9_ov03/arm9_ov03_0214cff8.c",
+          "line": 11,
+          "selected_state_index": 10,
+          "table_entry": {
+            "index": 10,
+            "table_word_address": "0x0215D2D4",
+            "raw_target": "0x0215179C",
+            "thumb": false,
+            "target_path": null,
+            "status": "binary-resolved ARM wrapper",
+            "assembly_dispatch": {
+              "machine_code": "04c09fe50110a0e31cff2fe1cc171502",
+              "trampoline_instructions": "ldr ip, [pc, #4]; mov r1, #1; bx ip",
+              "onward_target": "0x021517CC",
+              "onward_source": null,
+              "status": "original ARM branch trampoline; scene state remains dynamic"
+            }
+          },
+          "possible": true
+        },
+        {
+          "wrapper_path": "functions_layout/arm9_ov03/arm9_ov03_0214cff8.c",
+          "line": 11,
+          "selected_state_index": 11,
+          "table_entry": {
+            "index": 11,
+            "table_word_address": "0x0215D2D8",
+            "raw_target": "0x021517AC",
+            "thumb": false,
+            "target_path": null,
+            "status": "binary-resolved ARM wrapper",
+            "assembly_dispatch": {
+              "machine_code": "04c09fe50210a0e31cff2fe1cc171502",
+              "trampoline_instructions": "ldr ip, [pc, #4]; mov r1, #2; bx ip",
+              "onward_target": "0x021517CC",
+              "onward_source": null,
+              "status": "original ARM branch trampoline; scene state remains dynamic"
+            }
+          },
+          "possible": true
+        }
+      ]
+    },
+    {
+      "scene_id": 27,
+      "family": "JArenaJobs",
+      "selection": "runtime JArena job ID supplied by scene-specific ARM9 wrapper; no fixed mode asserted",
+      "branches": [
+        {
+          "wrapper_path": "functions_layout/arm9_ov03/arm9_ov03_0214cff8.c",
+          "line": 11,
+          "selected_state_index": 0,
+          "table_entry": {
+            "index": 0,
+            "table_word_address": "0x0215D2AC",
+            "raw_target": "0x0214D958",
+            "thumb": false,
+            "target_path": "functions_layout/arm9_ov03/arm9_ov03_0214d958.c",
+            "status": "decompiled"
+          },
+          "possible": true
+        },
+        {
+          "wrapper_path": "functions_layout/arm9_ov03/arm9_ov03_0214cff8.c",
+          "line": 11,
+          "selected_state_index": 1,
+          "table_entry": {
+            "index": 1,
+            "table_word_address": "0x0215D2B0",
+            "raw_target": "0x0214EE54",
+            "thumb": false,
+            "target_path": "functions_layout/arm9_ov03/arm9_ov03_0214ee54.c",
+            "status": "decompiled"
+          },
+          "possible": true
+        },
+        {
+          "wrapper_path": "functions_layout/arm9_ov03/arm9_ov03_0214cff8.c",
+          "line": 11,
+          "selected_state_index": 2,
+          "table_entry": {
+            "index": 2,
+            "table_word_address": "0x0215D2B4",
+            "raw_target": "0x00000000",
+            "thumb": false,
+            "target_path": null,
+            "status": "zero"
+          },
+          "possible": true
+        },
+        {
+          "wrapper_path": "functions_layout/arm9_ov03/arm9_ov03_0214cff8.c",
+          "line": 11,
+          "selected_state_index": 3,
+          "table_entry": {
+            "index": 3,
+            "table_word_address": "0x0215D2B8",
+            "raw_target": "0x00000000",
+            "thumb": false,
+            "target_path": null,
+            "status": "zero"
+          },
+          "possible": true
+        },
+        {
+          "wrapper_path": "functions_layout/arm9_ov03/arm9_ov03_0214cff8.c",
+          "line": 11,
+          "selected_state_index": 4,
+          "table_entry": {
+            "index": 4,
+            "table_word_address": "0x0215D2BC",
+            "raw_target": "0x00000000",
+            "thumb": false,
+            "target_path": null,
+            "status": "zero"
+          },
+          "possible": true
+        },
+        {
+          "wrapper_path": "functions_layout/arm9_ov03/arm9_ov03_0214cff8.c",
+          "line": 11,
+          "selected_state_index": 5,
+          "table_entry": {
+            "index": 5,
+            "table_word_address": "0x0215D2C0",
+            "raw_target": "0x021503A0",
+            "thumb": false,
+            "target_path": null,
+            "status": "binary-resolved ARM wrapper",
+            "assembly_dispatch": {
+              "machine_code": "04c09fe50010a0e31cff2fe1e0031502",
+              "trampoline_instructions": "ldr ip, [pc, #4]; mov r1, #0; bx ip",
+              "onward_target": "0x021503E0",
+              "onward_source": null,
+              "status": "original ARM branch trampoline; scene state remains dynamic"
+            }
+          },
+          "possible": true
+        },
+        {
+          "wrapper_path": "functions_layout/arm9_ov03/arm9_ov03_0214cff8.c",
+          "line": 11,
+          "selected_state_index": 6,
+          "table_entry": {
+            "index": 6,
+            "table_word_address": "0x0215D2C4",
+            "raw_target": "0x021503B0",
+            "thumb": false,
+            "target_path": null,
+            "status": "binary-resolved ARM wrapper",
+            "assembly_dispatch": {
+              "machine_code": "04c09fe50110a0e31cff2fe1e0031502",
+              "trampoline_instructions": "ldr ip, [pc, #4]; mov r1, #1; bx ip",
+              "onward_target": "0x021503E0",
+              "onward_source": null,
+              "status": "original ARM branch trampoline; scene state remains dynamic"
+            }
+          },
+          "possible": true
+        },
+        {
+          "wrapper_path": "functions_layout/arm9_ov03/arm9_ov03_0214cff8.c",
+          "line": 11,
+          "selected_state_index": 7,
+          "table_entry": {
+            "index": 7,
+            "table_word_address": "0x0215D2C8",
+            "raw_target": "0x021503C0",
+            "thumb": false,
+            "target_path": null,
+            "status": "binary-resolved ARM wrapper",
+            "assembly_dispatch": {
+              "machine_code": "04c09fe50210a0e31cff2fe1e0031502",
+              "trampoline_instructions": "ldr ip, [pc, #4]; mov r1, #2; bx ip",
+              "onward_target": "0x021503E0",
+              "onward_source": null,
+              "status": "original ARM branch trampoline; scene state remains dynamic"
+            }
+          },
+          "possible": true
+        },
+        {
+          "wrapper_path": "functions_layout/arm9_ov03/arm9_ov03_0214cff8.c",
+          "line": 11,
+          "selected_state_index": 8,
+          "table_entry": {
+            "index": 8,
+            "table_word_address": "0x0215D2CC",
+            "raw_target": "0x021503D0",
+            "thumb": false,
+            "target_path": null,
+            "status": "binary-resolved ARM wrapper",
+            "assembly_dispatch": {
+              "machine_code": "04c09fe50310a0e31cff2fe1e0031502",
+              "trampoline_instructions": "ldr ip, [pc, #4]; mov r1, #3; bx ip",
+              "onward_target": "0x021503E0",
+              "onward_source": null,
+              "status": "original ARM branch trampoline; scene state remains dynamic"
+            }
+          },
+          "possible": true
+        },
+        {
+          "wrapper_path": "functions_layout/arm9_ov03/arm9_ov03_0214cff8.c",
+          "line": 11,
+          "selected_state_index": 9,
+          "table_entry": {
+            "index": 9,
+            "table_word_address": "0x0215D2D0",
+            "raw_target": "0x0215178C",
+            "thumb": false,
+            "target_path": null,
+            "status": "binary-resolved ARM wrapper",
+            "assembly_dispatch": {
+              "machine_code": "04c09fe50010a0e31cff2fe1cc171502",
+              "trampoline_instructions": "ldr ip, [pc, #4]; mov r1, #0; bx ip",
+              "onward_target": "0x021517CC",
+              "onward_source": null,
+              "status": "original ARM branch trampoline; scene state remains dynamic"
+            }
+          },
+          "possible": true
+        },
+        {
+          "wrapper_path": "functions_layout/arm9_ov03/arm9_ov03_0214cff8.c",
+          "line": 11,
+          "selected_state_index": 10,
+          "table_entry": {
+            "index": 10,
+            "table_word_address": "0x0215D2D4",
+            "raw_target": "0x0215179C",
+            "thumb": false,
+            "target_path": null,
+            "status": "binary-resolved ARM wrapper",
+            "assembly_dispatch": {
+              "machine_code": "04c09fe50110a0e31cff2fe1cc171502",
+              "trampoline_instructions": "ldr ip, [pc, #4]; mov r1, #1; bx ip",
+              "onward_target": "0x021517CC",
+              "onward_source": null,
+              "status": "original ARM branch trampoline; scene state remains dynamic"
+            }
+          },
+          "possible": true
+        },
+        {
+          "wrapper_path": "functions_layout/arm9_ov03/arm9_ov03_0214cff8.c",
+          "line": 11,
+          "selected_state_index": 11,
+          "table_entry": {
+            "index": 11,
+            "table_word_address": "0x0215D2D8",
+            "raw_target": "0x021517AC",
+            "thumb": false,
+            "target_path": null,
+            "status": "binary-resolved ARM wrapper",
+            "assembly_dispatch": {
+              "machine_code": "04c09fe50210a0e31cff2fe1cc171502",
+              "trampoline_instructions": "ldr ip, [pc, #4]; mov r1, #2; bx ip",
+              "onward_target": "0x021517CC",
+              "onward_source": null,
+              "status": "original ARM branch trampoline; scene state remains dynamic"
+            }
+          },
+          "possible": true
+        }
+      ]
+    }
+  ],
+  "topmenu_dynamic_actions": {
+    "selection_helper": "functions_layout/arm9_ov00/arm9_ov00_021568dc.c",
+    "spawn": "functions_layout/arm9_ov00/arm9_ov00_02156378.c",
+    "tick": "functions_layout/arm9_ov00/arm9_ov00_021561d0.c",
+    "runtime_input": "Deck roster, CharaData, physics and tick/state flags",
+    "source_only": true,
+    "offset_sites": [
+      {
+        "source": "functions_layout/arm9_ov00/arm9_ov00_02156378.c",
+        "line": 64,
+        "offset": 0,
+        "original_code": "FUN_021568dc(uVar2,0);",
+        "semantics": "Select CharaData base action ID + offset, NOT active pose proof"
+      },
+      {
+        "source": "functions_layout/arm9_ov00/arm9_ov00_02156984.c",
+        "line": 9,
+        "offset": 0,
+        "original_code": "FUN_021568dc(param_2[1],0);",
+        "semantics": "Select CharaData base action ID + offset, NOT active pose proof"
+      },
+      {
+        "source": "functions_layout/arm9_ov00/arm9_ov00_02156a24.c",
+        "line": 9,
+        "offset": 3,
+        "original_code": "FUN_021568dc(param_2[1],3);",
+        "semantics": "Select CharaData base action ID + offset, NOT active pose proof"
+      },
+      {
+        "source": "functions_layout/arm9_ov00/arm9_ov00_02156a84.c",
+        "line": 10,
+        "offset": 1,
+        "original_code": "FUN_021568dc(param_2[1],1);",
+        "semantics": "Select CharaData base action ID + offset, NOT active pose proof"
+      },
+      {
+        "source": "functions_layout/arm9_ov00/arm9_ov00_02156b74.c",
+        "line": 9,
+        "offset": 4,
+        "original_code": "FUN_021568dc(param_2[1],4);",
+        "semantics": "Select CharaData base action ID + offset, NOT active pose proof"
+      },
+      {
+        "source": "functions_layout/arm9_ov00/arm9_ov00_02156c48.c",
+        "line": 10,
+        "offset": 7,
+        "original_code": "FUN_021568dc(param_2[1],7);",
+        "semantics": "Select CharaData base action ID + offset, NOT active pose proof"
+      },
+      {
+        "source": "functions_layout/arm9_ov00/arm9_ov00_02156cd4.c",
+        "line": 9,
+        "offset": 6,
+        "original_code": "FUN_021568dc(param_2[1],6);",
+        "semantics": "Select CharaData base action ID + offset, NOT active pose proof"
+      },
+      {
+        "source": "functions_layout/arm9_ov00/arm9_ov00_02156d48.c",
+        "line": 9,
+        "offset": 1,
+        "original_code": "FUN_021568dc(param_2[1],1);",
+        "semantics": "Select CharaData base action ID + offset, NOT active pose proof"
+      }
+    ]
+  },
+  "native_mode_tables": {
+    "jgalaxy": 3,
+    "jarena": 1,
+    "source": "verified original overlay bytes",
+    "mode_indices_are_possible_not_executed": true
+  }
+}

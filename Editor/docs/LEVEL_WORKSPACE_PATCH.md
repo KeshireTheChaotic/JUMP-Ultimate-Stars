@@ -67,3 +67,36 @@ strict `shift_jis` comparison, and flags any exceptions. Inspect exceptions
 rather than rewriting malformed original strings. Then identify sprite/atlas
 member IDs for each node/galaxy/world and implement the corresponding previews.
 Always validate saved changes and structural edits in melonDS using a fresh save.
+
+
+## Tutorial script editing and normal-path mission links (2026-11-07)
+
+Before other Level P0 tasks, the Level workspace now has a **Tutorial scripts**
+bottom ribbon with direct source-backed editing of all seven original script
+files: battle/tutorial0..5.bin and deckmake/tutorial.bin. The user can edit raw
+opcode/arg1/arg2, insert or remove commands, and edit original CP932 text.
+No automatic skip/bypass buttons exist. The native opcode 13 terminal cleanup
+is retained, and original files remain unchanged until Level Apply / Save.
+
+A J-Galaxy **battle** definition with rule 3 selects tutorial battle mode
+0x0C on the normal scene path. Definition +0x70 chooses an existing script
+slot 0–5. The right Mission Inspector shows this selector and lets it be
+changed for rule-3 battle definitions (including clones); shared definition
+warnings still apply. Original seven tutorial definitions: battle IDs
+0,1,2,3,72,73,74, selecting slots 0,1,2,0,3,4,5. J-Galaxy contains 18
+node references, including travel/warp nodes sharing definition 0: reference
+alone does not prove the tutorial fight actually runs. None of the 56 original
+mission.bin definitions use tutorial rule3. Other scene launch modes may
+override normal battle type.
+
+Additional *new* tutorial script slots are **not supported by mission data
+alone**: original overlay6 uses six hardcoded pointer entries at 0x02171C20.
+An extra .bin file or a new mission definition does not extend that table.
+Deckmaking's one tutorial script is loaded via a separate overlay5 path.
+
+Exact source and runtime limitations are documented at:
+D:\Library\Development\JUS\docs\Research\TUTORIAL_LEVEL_EDITOR_VM_LINKS_AND_EXTENSION_LIMIT_20261107.md
+Validation:
+D:\Library\Development\JUS\docs\Research\TUTORIAL_LEVEL_NATIVE_BINDING_AND_EXTENSION_VALIDATION_20261107.json
+New Editor tests/test_tutorial_workspace.py; full regression suite passed
+327 tests, 1 skipped. No original Data, ROM, or Ghidra source was modified.

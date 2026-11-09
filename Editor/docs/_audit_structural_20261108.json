@@ -1,0 +1,1773 @@
+{
+  "duplicate_definitions": [],
+  "duplicate_import_bindings": [],
+  "normalized_structure_groups": [],
+  "same_function_names": [
+    {
+      "name": "main",
+      "refs": [
+        {
+          "file": "jus_editor_cli.py",
+          "line": 24,
+          "end": 84,
+          "name": "main",
+          "length": 61,
+          "signature": "3bc91a110edf3baa7f33e2fe2dc9162e2ef1b250"
+        },
+        {
+          "file": "tests/gui_all_46_native_scene_ids_smoke.py",
+          "line": 7,
+          "end": 37,
+          "name": "main",
+          "length": 31,
+          "signature": "d866884802e0a09eacc4c562ab03768aab6d8d0e"
+        },
+        {
+          "file": "tests/gui_battleinput_source_trace_smoke.py",
+          "line": 34,
+          "end": 67,
+          "name": "main",
+          "length": 34,
+          "signature": "32a09ba75caef9c32b1d9bbb3e83dcf8d73c8d01"
+        },
+        {
+          "file": "tests/gui_draw_traversal_smoke.py",
+          "line": 31,
+          "end": 57,
+          "name": "main",
+          "length": 27,
+          "signature": "2678339b0a0de3599c4f913e2c28017b424fb997"
+        },
+        {
+          "file": "tests/gui_effect_reference_actions_smoke.py",
+          "line": 14,
+          "end": 35,
+          "name": "main",
+          "length": 22,
+          "signature": "d07d8e56bbc694426b812d148b4def919f952e97"
+        },
+        {
+          "file": "tests/gui_hiei_steering_source_smoke.py",
+          "line": 15,
+          "end": 74,
+          "name": "main",
+          "length": 60,
+          "signature": "93f9239170fdf69f1f85f9bd5409936a6103e88d"
+        },
+        {
+          "file": "tests/gui_koma_shape_smoke.py",
+          "line": 27,
+          "end": 74,
+          "name": "main",
+          "length": 48,
+          "signature": "c8c3ba05c25f422c90662c8aa55b5a84c762389a"
+        },
+        {
+          "file": "tests/gui_level_smoke.py",
+          "line": 34,
+          "end": 67,
+          "name": "main",
+          "length": 34,
+          "signature": "fd95e20d79ffaa30960651ab23896cb03c1ce142"
+        },
+        {
+          "file": "tests/gui_level_workspace_patch_smoke.py",
+          "line": 21,
+          "end": 77,
+          "name": "main",
+          "length": 57,
+          "signature": "fa5ab8235ece4f8a89a108124a8f4cca56300ee7"
+        },
+        {
+          "file": "tests/gui_missions_smoke.py",
+          "line": 32,
+          "end": 87,
+          "name": "main",
+          "length": 56,
+          "signature": "2681e4772ff9039e6e77ccf09a2c18c86b91391b"
+        },
+        {
+          "file": "tests/gui_move_text_links_smoke.py",
+          "line": 38,
+          "end": 77,
+          "name": "main",
+          "length": 40,
+          "signature": "070df39db4c98d2412430a4fb6f734296c13ade9"
+        },
+        {
+          "file": "tests/gui_parentlink_smoke.py",
+          "line": 10,
+          "end": 43,
+          "name": "main",
+          "length": 34,
+          "signature": "1a9c4e0e3c58199d0aeda2aafeaa94cd594166ea"
+        },
+        {
+          "file": "tests/gui_pursuer_follow_smoke.py",
+          "line": 12,
+          "end": 50,
+          "name": "main",
+          "length": 39,
+          "signature": "84f9b62019240bd457c3294e72964ba38695cf9f"
+        },
+        {
+          "file": "tests/gui_scene_indirect_smoke.py",
+          "line": 9,
+          "end": 68,
+          "name": "main",
+          "length": 60,
+          "signature": "04dc5a37a1b340dfa14275c1724e3db2c9be8ed5"
+        },
+        {
+          "file": "tests/gui_screen_layout_smoke.py",
+          "line": 12,
+          "end": 70,
+          "name": "main",
+          "length": 59,
+          "signature": "c5b38b1e27d9e01e641a48edf5320a14ce7fdcd7"
+        },
+        {
+          "file": "tests/gui_screen_nested_smoke.py",
+          "line": 7,
+          "end": 38,
+          "name": "main",
+          "length": 32,
+          "signature": "f6d1cfa80037cab9e0bfca62e6732daa63c4b0f3"
+        },
+        {
+          "file": "tests/gui_screen_scene_composition_smoke.py",
+          "line": 10,
+          "end": 63,
+          "name": "main",
+          "length": 54,
+          "signature": "9f983e4945a4b10f729b4de0a23c0ce25509be65"
+        },
+        {
+          "file": "tests/gui_screen_source_edit_smoke.py",
+          "line": 16,
+          "end": 114,
+          "name": "main",
+          "length": 99,
+          "signature": "574d1f4c96edca3b3ba45a7bef71fd36155fbdfe"
+        },
+        {
+          "file": "tests/gui_screen_variants_text_smoke.py",
+          "line": 8,
+          "end": 80,
+          "name": "main",
+          "length": 73,
+          "signature": "68fd1d9cf12591b817266b1add8747c876b0c877"
+        },
+        {
+          "file": "tests/gui_shot_inspector_smoke.py",
+          "line": 17,
+          "end": 44,
+          "name": "main",
+          "length": 28,
+          "signature": "b5a9848489b632dafd635bcdacd764d8c6d2d50e"
+        },
+        {
+          "file": "tests/gui_shot_source_visual_smoke.py",
+          "line": 19,
+          "end": 111,
+          "name": "main",
+          "length": 93,
+          "signature": "085c6245ebe40b600e8cdd3b10e63be3fdaf4fa2"
+        },
+        {
+          "file": "tests/gui_smoke.py",
+          "line": 26,
+          "end": 193,
+          "name": "main",
+          "length": 168,
+          "signature": "e3ffb5204d039c9762960d343f74abe445f36c6a"
+        },
+        {
+          "file": "tests/gui_spawn_lifecycle_smoke.py",
+          "line": 16,
+          "end": 40,
+          "name": "main",
+          "length": 25,
+          "signature": "240a421fa3e94daa3106bb524bc9f3074cbf0c6f"
+        },
+        {
+          "file": "tests/gui_stage_overlay_smoke.py",
+          "line": 20,
+          "end": 87,
+          "name": "main",
+          "length": 68,
+          "signature": "b6a73f91db0853aea20701f2d562443d80740d2c"
+        },
+        {
+          "file": "tests/gui_stage_preview_smoke.py",
+          "line": 7,
+          "end": 34,
+          "name": "main",
+          "length": 28,
+          "signature": "37ba0c5dd5d14bd69860d541971f709f30f51671"
+        },
+        {
+          "file": "tests/gui_topmenu_extras_smoke.py",
+          "line": 10,
+          "end": 89,
+          "name": "main",
+          "length": 80,
+          "signature": "db8f24fd352ddc55977145a835753d0350293bb2"
+        },
+        {
+          "file": "tests/roundtrip_scan.py",
+          "line": 101,
+          "end": 118,
+          "name": "main",
+          "length": 18,
+          "signature": "8ad2b48e8d5e899d8fd386d9b2ad9f3407b4880f"
+        },
+        {
+          "file": "tests/sprite_scan.py",
+          "line": 31,
+          "end": 72,
+          "name": "main",
+          "length": 42,
+          "signature": "773d46a61a030ab82e5e69670dc834de36c71bf1"
+        },
+        {
+          "file": "tests/validate_chr_textures.py",
+          "line": 89,
+          "end": 100,
+          "name": "main",
+          "length": 12,
+          "signature": "add73522e0f873982694522147e2d8e185f8f39a"
+        },
+        {
+          "file": "tools/apply_translations.py",
+          "line": 206,
+          "end": 252,
+          "name": "main",
+          "length": 47,
+          "signature": "c56f7b58fedf6ea7b1d309b103b86d1ce08de24a"
+        },
+        {
+          "file": "tools/audit_open_effects.py",
+          "line": 133,
+          "end": 149,
+          "name": "main",
+          "length": 17,
+          "signature": "91def05ea9b933c844ef1bae3c7608c961ecd0b9"
+        },
+        {
+          "file": "tools/audit_spawn_lifecycle.py",
+          "line": 87,
+          "end": 100,
+          "name": "main",
+          "length": 14,
+          "signature": "0503200a8094addad74ae08b0493f363628a4495"
+        },
+        {
+          "file": "tools/trace_jgalaxy.py",
+          "line": 61,
+          "end": 69,
+          "name": "main",
+          "length": 9,
+          "signature": "ebfc78bd0a3132525d7e0c48e141e5f19fcd9382"
+        },
+        {
+          "file": "tools/trace_progression.py",
+          "line": 109,
+          "end": 122,
+          "name": "main",
+          "length": 14,
+          "signature": "fb49ef2b51365b074d6830e2a5519e53dd1cf7d3"
+        },
+        {
+          "file": "tools/trace_unknowns.py",
+          "line": 115,
+          "end": 138,
+          "name": "main",
+          "length": 24,
+          "signature": "131d342945a742d2770a072671fd02ab3ba49616"
+        },
+        {
+          "file": "tools/verify_cp932_names.py",
+          "line": 62,
+          "end": 76,
+          "name": "main",
+          "length": 15,
+          "signature": "98bda23611468d219bcaa761a55770b5937e04e8"
+        },
+        {
+          "file": "tools/verify_draw_traversal.py",
+          "line": 47,
+          "end": 64,
+          "name": "main",
+          "length": 18,
+          "signature": "6e74b118bb202cc8d0cfdf7a4839676b3acdf78d"
+        },
+        {
+          "file": "tools/verify_lifetime_dispatch.py",
+          "line": 115,
+          "end": 127,
+          "name": "main",
+          "length": 13,
+          "signature": "6eda1ebbc53776a699eb2d52e68eff566adc6d83"
+        },
+        {
+          "file": "tools/charforge/__main__.py",
+          "line": 18,
+          "end": 83,
+          "name": "main",
+          "length": 66,
+          "signature": "98f5aadb1a6d2a10d2db8eebbe3d2fb39d10550e"
+        }
+      ]
+    },
+    {
+      "name": "__init__",
+      "refs": [
+        {
+          "file": "app/dialogs.py",
+          "line": 14,
+          "end": 29,
+          "name": "__init__",
+          "length": 16,
+          "signature": "ef67ff271ffeb648c6cc50710cfd0515bb234a7a"
+        },
+        {
+          "file": "app/dialogs.py",
+          "line": 39,
+          "end": 90,
+          "name": "__init__",
+          "length": 52,
+          "signature": "bf79789120d3d3fc4a8849aa05a52ab1fa15f366"
+        },
+        {
+          "file": "app/editor.py",
+          "line": 79,
+          "end": 167,
+          "name": "__init__",
+          "length": 89,
+          "signature": "0c2cea32185ff607c5d20b67285dfc3d3b8cec65"
+        },
+        {
+          "file": "app/note_event_editor.py",
+          "line": 16,
+          "end": 43,
+          "name": "__init__",
+          "length": 28,
+          "signature": "2d5c6a97e8f68448bfe3b54992ec6005b75963d7"
+        },
+        {
+          "file": "jus_formats/aft.py",
+          "line": 43,
+          "end": 97,
+          "name": "__init__",
+          "length": 55,
+          "signature": "523496e662fe3d125880d7804c5e8df398eac3f0"
+        },
+        {
+          "file": "jus_formats/audio.py",
+          "line": 292,
+          "end": 306,
+          "name": "__init__",
+          "length": 15,
+          "signature": "a97719a193cfb202ad755c750b325c83398f5144"
+        },
+        {
+          "file": "jus_formats/clearlist.py",
+          "line": 72,
+          "end": 89,
+          "name": "__init__",
+          "length": 18,
+          "signature": "6a83c1a7458c80ec6c837bb09344b7ab28685694"
+        },
+        {
+          "file": "jus_formats/progression.py",
+          "line": 285,
+          "end": 309,
+          "name": "__init__",
+          "length": 25,
+          "signature": "3dd717bdd3a67e80868f51080bd331bc38053bea"
+        },
+        {
+          "file": "jus_package/audio_preview.py",
+          "line": 24,
+          "end": 52,
+          "name": "__init__",
+          "length": 29,
+          "signature": "8b99c419160dd7037b9da52d45050d14aa1dea5d"
+        },
+        {
+          "file": "jus_package/audio_preview.py",
+          "line": 104,
+          "end": 112,
+          "name": "__init__",
+          "length": 9,
+          "signature": "dbafeb804e67222c56b31395b91ebdbf75861567"
+        },
+        {
+          "file": "jus_package/passivekoma.py",
+          "line": 61,
+          "end": 71,
+          "name": "__init__",
+          "length": 11,
+          "signature": "67ebcd273bbb3b6e2a6c50dd1dd170a0d69a1bd9"
+        },
+        {
+          "file": "jus_package/sounds.py",
+          "line": 86,
+          "end": 123,
+          "name": "__init__",
+          "length": 38,
+          "signature": "ca2c0a227d0a962e6bc85d048bf881baed6fb8e9"
+        },
+        {
+          "file": "jus_package/stagesprites.py",
+          "line": 71,
+          "end": 92,
+          "name": "__init__",
+          "length": 22,
+          "signature": "4dab6226391407c403e8494c718055df62b53c60"
+        },
+        {
+          "file": "app/widgets/dopesheet.py",
+          "line": 37,
+          "end": 79,
+          "name": "__init__",
+          "length": 43,
+          "signature": "f1a382792f12ae86b673dc6899592e4a904732d3"
+        },
+        {
+          "file": "app/widgets/filmstrip.py",
+          "line": 13,
+          "end": 33,
+          "name": "__init__",
+          "length": 21,
+          "signature": "616f196735dcbd4e42eab76b0ed0ccd01abf41b3"
+        },
+        {
+          "file": "app/widgets/inspector.py",
+          "line": 16,
+          "end": 30,
+          "name": "__init__",
+          "length": 15,
+          "signature": "85025f2a6e841772de5c851f60aaf0619a5cd99f"
+        },
+        {
+          "file": "app/widgets/layers.py",
+          "line": 15,
+          "end": 40,
+          "name": "__init__",
+          "length": 26,
+          "signature": "4693deb0599464380c01f308abb0c19e2f0a03e7"
+        },
+        {
+          "file": "app/widgets/source_asset_editor.py",
+          "line": 18,
+          "end": 60,
+          "name": "__init__",
+          "length": 43,
+          "signature": "68add9e35613393c3a4307e8921295f89c477023"
+        },
+        {
+          "file": "app/widgets/source_asset_editor.py",
+          "line": 156,
+          "end": 191,
+          "name": "__init__",
+          "length": 36,
+          "signature": "e199ca84b66bea5ebbf29919e2b5ee9a07b5e34a"
+        },
+        {
+          "file": "app/widgets/tabs.py",
+          "line": 13,
+          "end": 26,
+          "name": "__init__",
+          "length": 14,
+          "signature": "dc4fb74165caed83cf02160803a062b6072a2607"
+        },
+        {
+          "file": "app/widgets/viewport.py",
+          "line": 28,
+          "end": 61,
+          "name": "__init__",
+          "length": 34,
+          "signature": "0570a0e7467c7663f6def25da69485ff8270cddc"
+        },
+        {
+          "file": "app/workspaces/koma.py",
+          "line": 46,
+          "end": 69,
+          "name": "__init__",
+          "length": 24,
+          "signature": "4fd035bf0a0f48bb66b17ad18ae562594e7ff19b"
+        },
+        {
+          "file": "app/workspaces/level.py",
+          "line": 40,
+          "end": 84,
+          "name": "__init__",
+          "length": 45,
+          "signature": "f3e65258bf60ce68156a49550ff78932e4036482"
+        },
+        {
+          "file": "app/workspaces/mapobjects.py",
+          "line": 23,
+          "end": 63,
+          "name": "__init__",
+          "length": 41,
+          "signature": "ba74e12e72267f0bff24d0eb4dc178f08d86b621"
+        },
+        {
+          "file": "app/workspaces/missions.py",
+          "line": 39,
+          "end": 62,
+          "name": "__init__",
+          "length": 24,
+          "signature": "cdef181111ff46aa226bdeaba6290b64e931a37f"
+        },
+        {
+          "file": "app/workspaces/roster.py",
+          "line": 24,
+          "end": 43,
+          "name": "__init__",
+          "length": 20,
+          "signature": "592dcd963b570031a39a33f78e301061be417f65"
+        },
+        {
+          "file": "app/workspaces/roster.py",
+          "line": 116,
+          "end": 145,
+          "name": "__init__",
+          "length": 30,
+          "signature": "8a1d553c8257fcbe564d2245838912feffd247b1"
+        },
+        {
+          "file": "app/workspaces/screen.py",
+          "line": 37,
+          "end": 77,
+          "name": "__init__",
+          "length": 41,
+          "signature": "08da82be54de1bb1f44f7b87cf9c5d8705b992dd"
+        },
+        {
+          "file": "app/workspaces/tutorials.py",
+          "line": 24,
+          "end": 39,
+          "name": "__init__",
+          "length": 16,
+          "signature": "0cd3f7ba902179660b3f80e9db8a5a2081ea3b33"
+        }
+      ]
+    },
+    {
+      "name": "parse",
+      "refs": [
+        {
+          "file": "jus_formats/alar.py",
+          "line": 141,
+          "end": 151,
+          "name": "parse",
+          "length": 11,
+          "signature": "4bdac279620c1c54fca71600c514ee4e8df83c92"
+        },
+        {
+          "file": "jus_formats/almt.py",
+          "line": 208,
+          "end": 236,
+          "name": "parse",
+          "length": 29,
+          "signature": "c2e46dbcdd915df80a4880daa99221c3da8af149"
+        },
+        {
+          "file": "jus_formats/alod.py",
+          "line": 51,
+          "end": 74,
+          "name": "parse",
+          "length": 24,
+          "signature": "94194c1f07ffb7a463fbdad90fc6985f25b2d5a2"
+        },
+        {
+          "file": "jus_formats/altm.py",
+          "line": 117,
+          "end": 150,
+          "name": "parse",
+          "length": 34,
+          "signature": "a8e747548a92c442ac4c39aece2cedb8ac0c9a1a"
+        },
+        {
+          "file": "jus_formats/dsig.py",
+          "line": 121,
+          "end": 154,
+          "name": "parse",
+          "length": 34,
+          "signature": "ca0ab3c3add22521227faa2c34fc0859d84b3194"
+        },
+        {
+          "file": "jus_formats/dstx.py",
+          "line": 121,
+          "end": 148,
+          "name": "parse",
+          "length": 28,
+          "signature": "083792b885ecf004d13b346d75da1e6343f072b9"
+        },
+        {
+          "file": "jus_formats/koma.py",
+          "line": 65,
+          "end": 77,
+          "name": "parse",
+          "length": 13,
+          "signature": "2abdd40fbd20f426f4f2b95465fb61505fc7a4de"
+        },
+        {
+          "file": "jus_formats/kshape.py",
+          "line": 184,
+          "end": 206,
+          "name": "parse",
+          "length": 23,
+          "signature": "2ad1bc6e612f1d04a58f893ac0b34f9cd10f996a"
+        },
+        {
+          "file": "jus_formats/kshape.py",
+          "line": 226,
+          "end": 238,
+          "name": "parse",
+          "length": 13,
+          "signature": "822f0ef6bb4f626f70da2e096fbca20e1630c099"
+        },
+        {
+          "file": "jus_formats/ncl.py",
+          "line": 42,
+          "end": 79,
+          "name": "parse",
+          "length": 38,
+          "signature": "3c46a4afcb39c5ff3e0bf228730b2469aa7410da"
+        },
+        {
+          "file": "jus_formats/notetrack.py",
+          "line": 154,
+          "end": 191,
+          "name": "parse",
+          "length": 38,
+          "signature": "3e30fbd7ab165d89b920009500b43f17f048dfc5"
+        },
+        {
+          "file": "jus_formats/tutorial.py",
+          "line": 56,
+          "end": 66,
+          "name": "parse",
+          "length": 11,
+          "signature": "2e1dc19e50b8447303e37bae0c2dbebc1c9d01fd"
+        }
+      ]
+    },
+    {
+      "name": "build",
+      "refs": [
+        {
+          "file": "jus_formats/almt.py",
+          "line": 305,
+          "end": 336,
+          "name": "build",
+          "length": 32,
+          "signature": "abebf9e9af1dae575660ab316e3965c7c97abb64"
+        },
+        {
+          "file": "jus_formats/altm.py",
+          "line": 152,
+          "end": 170,
+          "name": "build",
+          "length": 19,
+          "signature": "9d091c9f8707f6e0443266f0b094265c5b7ab8b4"
+        },
+        {
+          "file": "jus_formats/dsig.py",
+          "line": 156,
+          "end": 186,
+          "name": "build",
+          "length": 31,
+          "signature": "32a10892f86bc2c72739307e8bcbddede7fa7d49"
+        },
+        {
+          "file": "jus_formats/dstx.py",
+          "line": 175,
+          "end": 197,
+          "name": "build",
+          "length": 23,
+          "signature": "370e17fbab6189dd6edcbca2773f28051d3a1dac"
+        },
+        {
+          "file": "jus_formats/koma.py",
+          "line": 79,
+          "end": 89,
+          "name": "build",
+          "length": 11,
+          "signature": "0ad5b9570f750981013901b7cc5f7326ecde4425"
+        },
+        {
+          "file": "jus_formats/kshape.py",
+          "line": 208,
+          "end": 218,
+          "name": "build",
+          "length": 11,
+          "signature": "657609a47694a0c069abc88e664a05c58945913d"
+        },
+        {
+          "file": "jus_formats/notetrack.py",
+          "line": 193,
+          "end": 209,
+          "name": "build",
+          "length": 17,
+          "signature": "e402806700ba11cd02d6e1646cada0b1d8491298"
+        },
+        {
+          "file": "jus_package/registry.py",
+          "line": 189,
+          "end": 264,
+          "name": "build",
+          "length": 76,
+          "signature": "6bab3210b800025dc621d46886e2f2bf97844a94"
+        },
+        {
+          "file": "tools/charforge/forge.py",
+          "line": 469,
+          "end": 559,
+          "name": "build",
+          "length": 91,
+          "signature": "690f272107d4cc9256a9434f043190c925f7411b"
+        },
+        {
+          "file": "app/workspaces/koma.py",
+          "line": 72,
+          "end": 114,
+          "name": "build",
+          "length": 43,
+          "signature": "f64fa4d6fe9bd1546d0844f2a3ee3abd206eccec"
+        },
+        {
+          "file": "app/workspaces/level.py",
+          "line": 87,
+          "end": 175,
+          "name": "build",
+          "length": 89,
+          "signature": "a390a7823a76d0084845724dcd0b9e08918287e4"
+        },
+        {
+          "file": "app/workspaces/screen.py",
+          "line": 80,
+          "end": 157,
+          "name": "build",
+          "length": 78,
+          "signature": "766a93ce1b83f3ed8913c499ac8de1c04c63830d"
+        }
+      ]
+    },
+    {
+      "name": "on_root",
+      "refs": [
+        {
+          "file": "app/workspaces/koma.py",
+          "line": 122,
+          "end": 144,
+          "name": "on_root",
+          "length": 23,
+          "signature": "1d9cb930d7058d054a0728f98b5c45d9885cc4ad"
+        },
+        {
+          "file": "app/workspaces/level.py",
+          "line": 187,
+          "end": 206,
+          "name": "on_root",
+          "length": 20,
+          "signature": "03daf89a3748b0103f816b9655f6cfba2c5cb5ee"
+        },
+        {
+          "file": "app/workspaces/missions.py",
+          "line": 203,
+          "end": 218,
+          "name": "on_root",
+          "length": 16,
+          "signature": "ea4ea234c151403218a6512b31483a9adc406b66"
+        },
+        {
+          "file": "app/workspaces/roster.py",
+          "line": 147,
+          "end": 157,
+          "name": "on_root",
+          "length": 11,
+          "signature": "92ea27066499ce09bdfe7df2126527668bea2237"
+        },
+        {
+          "file": "app/workspaces/screen.py",
+          "line": 166,
+          "end": 184,
+          "name": "on_root",
+          "length": 19,
+          "signature": "a0a9c28c950c6d65d1d56b2d229e271439f9232d"
+        },
+        {
+          "file": "app/workspaces/tutorials.py",
+          "line": 108,
+          "end": 127,
+          "name": "on_root",
+          "length": 20,
+          "signature": "b3002c601e5cea8188c1318f7a0e28be269b2eb3"
+        }
+      ]
+    },
+    {
+      "name": "refresh",
+      "refs": [
+        {
+          "file": "app/workspaces/koma.py",
+          "line": 239,
+          "end": 268,
+          "name": "refresh",
+          "length": 30,
+          "signature": "7b8df74029e23b6ae444e70bf7c68ab39ed65dac"
+        },
+        {
+          "file": "app/workspaces/level.py",
+          "line": 469,
+          "end": 480,
+          "name": "refresh",
+          "length": 12,
+          "signature": "5b7114437f6856644887e8a82393181c41a82a87"
+        },
+        {
+          "file": "app/workspaces/mapobjects.py",
+          "line": 70,
+          "end": 86,
+          "name": "refresh",
+          "length": 17,
+          "signature": "0df9e365810606ecffa1849e8c2755b1979a1281"
+        },
+        {
+          "file": "app/workspaces/missions.py",
+          "line": 250,
+          "end": 326,
+          "name": "refresh",
+          "length": 77,
+          "signature": "09212d3d7a21e6622707436632e2069ea88893f8"
+        },
+        {
+          "file": "app/workspaces/screen.py",
+          "line": 992,
+          "end": 1002,
+          "name": "refresh",
+          "length": 11,
+          "signature": "ae65192cfcf9d69366ac24abedd27920b148b99a"
+        },
+        {
+          "file": "app/workspaces/tutorials.py",
+          "line": 174,
+          "end": 194,
+          "name": "refresh",
+          "length": 21,
+          "signature": "3fcd479acfc744d58c9e31c248562ef57f1ffd72"
+        }
+      ]
+    },
+    {
+      "name": "load",
+      "refs": [
+        {
+          "file": "jus_package/komacards.py",
+          "line": 96,
+          "end": 120,
+          "name": "load",
+          "length": 25,
+          "signature": "7208cbb0c37365402eaebc83f69abdef8a716daf"
+        },
+        {
+          "file": "jus_package/progression.py",
+          "line": 26,
+          "end": 41,
+          "name": "load",
+          "length": 16,
+          "signature": "840fafa2f3db5fc682f2e318c80b47f4ace1eecc"
+        },
+        {
+          "file": "app/workspaces/koma.py",
+          "line": 168,
+          "end": 201,
+          "name": "load",
+          "length": 34,
+          "signature": "7bd7370f2f90aae467d567fd41ce28af16524353"
+        },
+        {
+          "file": "app/workspaces/level.py",
+          "line": 357,
+          "end": 427,
+          "name": "load",
+          "length": 71,
+          "signature": "6aacb431b732e931e1db29c8144bc4924b78f4b6"
+        },
+        {
+          "file": "app/workspaces/screen.py",
+          "line": 644,
+          "end": 735,
+          "name": "load",
+          "length": 92,
+          "signature": "c990cf69dec908f2e38c3bbe1b02ea2b98c41444"
+        }
+      ]
+    },
+    {
+      "name": "apply",
+      "refs": [
+        {
+          "file": "app/widgets/source_asset_editor.py",
+          "line": 207,
+          "end": 217,
+          "name": "apply",
+          "length": 11,
+          "signature": "16cb227b4009a083ea856d4ff084d513bd058299"
+        },
+        {
+          "file": "app/workspaces/koma.py",
+          "line": 1029,
+          "end": 1062,
+          "name": "apply",
+          "length": 34,
+          "signature": "6f2055f98623a5a4e707d860fa9515bfe389c755"
+        },
+        {
+          "file": "app/workspaces/level.py",
+          "line": 1289,
+          "end": 1315,
+          "name": "apply",
+          "length": 27,
+          "signature": "af104eedc029b951f1957d556097af4811568a19"
+        },
+        {
+          "file": "app/workspaces/missions.py",
+          "line": 712,
+          "end": 740,
+          "name": "apply",
+          "length": 29,
+          "signature": "fc575149a1c3da6459ed61a2cec9f25e40af73c8"
+        },
+        {
+          "file": "app/workspaces/tutorials.py",
+          "line": 280,
+          "end": 298,
+          "name": "apply",
+          "length": 19,
+          "signature": "b96b6251bb9492866eab2beb3a848e1aae56480c"
+        }
+      ]
+    },
+    {
+      "name": "refresh_inspector",
+      "refs": [
+        {
+          "file": "app/editor.py",
+          "line": 3377,
+          "end": 3558,
+          "name": "refresh_inspector",
+          "length": 182,
+          "signature": "16853e107b3d9f2940be8a7f15b1389f9311cf3f"
+        },
+        {
+          "file": "app/workspaces/koma.py",
+          "line": 650,
+          "end": 708,
+          "name": "refresh_inspector",
+          "length": 59,
+          "signature": "54764b042aaff5e92279f53ab0bfac4695fe1971"
+        },
+        {
+          "file": "app/workspaces/level.py",
+          "line": 1125,
+          "end": 1195,
+          "name": "refresh_inspector",
+          "length": 71,
+          "signature": "a6e5ad6512ec7290df3a824866369446cf589a76"
+        },
+        {
+          "file": "app/workspaces/screen.py",
+          "line": 1181,
+          "end": 1602,
+          "name": "refresh_inspector",
+          "length": 422,
+          "signature": "5e562085738d848213df266e72819eed03e7cdd6"
+        }
+      ]
+    },
+    {
+      "name": "walk",
+      "refs": [
+        {
+          "file": "jus_package/registry.py",
+          "line": 197,
+          "end": 225,
+          "name": "walk",
+          "length": 29,
+          "signature": "0960eeb0772a29b29284f97f7d103c8b7a6c265a"
+        },
+        {
+          "file": "tests/roundtrip_scan.py",
+          "line": 29,
+          "end": 98,
+          "name": "walk",
+          "length": 70,
+          "signature": "a817fe54f960c2b09ff97175895fa5595f0ae0c0"
+        },
+        {
+          "file": "tests/test_dstx_panel_render.py",
+          "line": 95,
+          "end": 111,
+          "name": "walk",
+          "length": 17,
+          "signature": "f8c4b8613d8b45f30e437b9cdd06b5a8a856c909"
+        },
+        {
+          "file": "tests/test_panel_mesh_fallback.py",
+          "line": 61,
+          "end": 79,
+          "name": "walk",
+          "length": 19,
+          "signature": "1375cf73ca201b5930bab6118c007cd6066a0dc6"
+        }
+      ]
+    },
+    {
+      "name": "verify",
+      "refs": [
+        {
+          "file": "tools/verify_draw_traversal.py",
+          "line": 32,
+          "end": 44,
+          "name": "verify",
+          "length": 13,
+          "signature": "b08baf838884bb2b379a6e2f5c0d0bb106518d81"
+        },
+        {
+          "file": "tools/verify_effect_reference_path.py",
+          "line": 31,
+          "end": 41,
+          "name": "verify",
+          "length": 11,
+          "signature": "534b31d447237a5016f1eccce151473c772029f5"
+        },
+        {
+          "file": "tools/verify_lifetime_dispatch.py",
+          "line": 93,
+          "end": 112,
+          "name": "verify",
+          "length": 20,
+          "signature": "921e9340325511557b9f645637dfc0fa682d2b45"
+        },
+        {
+          "file": "tools/verify_spawn_dispatch.py",
+          "line": 15,
+          "end": 26,
+          "name": "verify",
+          "length": 12,
+          "signature": "60742ae6cdc38e07686aecc6cdf29d9efabeb1e8"
+        }
+      ]
+    },
+    {
+      "name": "populate",
+      "refs": [
+        {
+          "file": "app/workspaces/koma.py",
+          "line": 146,
+          "end": 161,
+          "name": "populate",
+          "length": 16,
+          "signature": "09bbd2de68b63c7a575cb88d7e843163ee1d95a6"
+        },
+        {
+          "file": "app/workspaces/level.py",
+          "line": 208,
+          "end": 305,
+          "name": "populate",
+          "length": 98,
+          "signature": "b9247d8317a554a8f4acaa131da895eb40ca5a52"
+        },
+        {
+          "file": "app/workspaces/roster.py",
+          "line": 173,
+          "end": 202,
+          "name": "populate",
+          "length": 30,
+          "signature": "2d5e5e2f225a6d45699d14097b2f5297e266484e"
+        },
+        {
+          "file": "app/workspaces/screen.py",
+          "line": 222,
+          "end": 251,
+          "name": "populate",
+          "length": 30,
+          "signature": "e55832372431021168929e503cdde963a0b4b6e0"
+        }
+      ]
+    },
+    {
+      "name": "_build",
+      "refs": [
+        {
+          "file": "app/note_event_editor.py",
+          "line": 45,
+          "end": 97,
+          "name": "_build",
+          "length": 53,
+          "signature": "2b1b21390939029b8f97a7e14619680111c00d86"
+        },
+        {
+          "file": "app/workspaces/missions.py",
+          "line": 65,
+          "end": 200,
+          "name": "_build",
+          "length": 136,
+          "signature": "a33189cb9a0e7511e808794749a412c4525c73d3"
+        },
+        {
+          "file": "app/workspaces/tutorials.py",
+          "line": 41,
+          "end": 106,
+          "name": "_build",
+          "length": 66,
+          "signature": "14a6fd0bd06910f69a586bb18351ab75b651ad4c"
+        }
+      ]
+    },
+    {
+      "name": "commit",
+      "refs": [
+        {
+          "file": "app/note_event_editor.py",
+          "line": 247,
+          "end": 263,
+          "name": "commit",
+          "length": 17,
+          "signature": "c002f31f1d8ac0dc73a877bd63ae54f0173ae0f4"
+        },
+        {
+          "file": "app/workspaces/koma.py",
+          "line": 428,
+          "end": 456,
+          "name": "commit",
+          "length": 29,
+          "signature": "fef42f2e6379b209680b211d731359a2a27bd618"
+        },
+        {
+          "file": "app/workspaces/mapobjects.py",
+          "line": 144,
+          "end": 160,
+          "name": "commit",
+          "length": 17,
+          "signature": "f937f6e833cc677b35fbc2d1bb498cb09d1d6c7d"
+        }
+      ]
+    },
+    {
+      "name": "_render",
+      "refs": [
+        {
+          "file": "jus_formats/audio.py",
+          "line": 323,
+          "end": 380,
+          "name": "_render",
+          "length": 58,
+          "signature": "34a441444deeb839ffe26df5390a36bedb38d791"
+        },
+        {
+          "file": "jus_package/audio_preview.py",
+          "line": 114,
+          "end": 126,
+          "name": "_render",
+          "length": 13,
+          "signature": "10edaccd76e76bbaad74b3871c060e3fdc1a6341"
+        },
+        {
+          "file": "app/workspaces/mapobjects.py",
+          "line": 101,
+          "end": 142,
+          "name": "_render",
+          "length": 42,
+          "signature": "5a0d408e17cdc734083c1a4e109addbb6a828ce0"
+        }
+      ]
+    },
+    {
+      "name": "validate",
+      "refs": [
+        {
+          "file": "jus_formats/clearlist.py",
+          "line": 110,
+          "end": 118,
+          "name": "validate",
+          "length": 9,
+          "signature": "dc09febb8aea15256486a2aa59063b50a28d4a4d"
+        },
+        {
+          "file": "jus_formats/tutorial.py",
+          "line": 68,
+          "end": 78,
+          "name": "validate",
+          "length": 11,
+          "signature": "4133637681078a5fb762c5777f2360929077326b"
+        },
+        {
+          "file": "tools/charforge/forge.py",
+          "line": 568,
+          "end": 696,
+          "name": "validate",
+          "length": 129,
+          "signature": "9772435b88319cc7ad9aee549c203583d359eb5a"
+        }
+      ]
+    },
+    {
+      "name": "collect",
+      "refs": [
+        {
+          "file": "tools/audit_spawn_lifecycle.py",
+          "line": 22,
+          "end": 84,
+          "name": "collect",
+          "length": 63,
+          "signature": "3881a0aed2238d52b673c3ec72721af09e5dff3d"
+        },
+        {
+          "file": "tools/trace_jgalaxy.py",
+          "line": 23,
+          "end": 58,
+          "name": "collect",
+          "length": 36,
+          "signature": "ec4f58629fbdd045ce805a704196e180b061547c"
+        },
+        {
+          "file": "tools/trace_progression.py",
+          "line": 96,
+          "end": 106,
+          "name": "collect",
+          "length": 11,
+          "signature": "28952b6bd5f2ab9cf4ee1e567cba5a302959c8a0"
+        }
+      ]
+    },
+    {
+      "name": "_press",
+      "refs": [
+        {
+          "file": "app/widgets/dopesheet.py",
+          "line": 371,
+          "end": 402,
+          "name": "_press",
+          "length": 32,
+          "signature": "9b87261cda7d46b734a91d44aecbad16c5c25efa"
+        },
+        {
+          "file": "app/workspaces/koma.py",
+          "line": 518,
+          "end": 537,
+          "name": "_press",
+          "length": 20,
+          "signature": "f4680643900e17c660948448f1845d929e4e7645"
+        },
+        {
+          "file": "app/workspaces/level.py",
+          "line": 947,
+          "end": 962,
+          "name": "_press",
+          "length": 16,
+          "signature": "935d2df8c7562d8b964b7b739d7d6253f2928496"
+        }
+      ]
+    },
+    {
+      "name": "_draw",
+      "refs": [
+        {
+          "file": "app/workspaces/koma.py",
+          "line": 304,
+          "end": 344,
+          "name": "_draw",
+          "length": 41,
+          "signature": "c3ae41907359427770e8bb761cb7688a2966bebf"
+        },
+        {
+          "file": "app/workspaces/level.py",
+          "line": 697,
+          "end": 810,
+          "name": "_draw",
+          "length": 114,
+          "signature": "aff6fe6e24b48b99e651f3883fb937affc528c8a"
+        },
+        {
+          "file": "app/workspaces/screen.py",
+          "line": 1036,
+          "end": 1139,
+          "name": "_draw",
+          "length": 104,
+          "signature": "6b2ce1ef4e73e460f8dc5d9cd9963c9cdd48f664"
+        }
+      ]
+    },
+    {
+      "name": "save",
+      "refs": [
+        {
+          "file": "app/editor.py",
+          "line": 967,
+          "end": 1004,
+          "name": "save",
+          "length": 38,
+          "signature": "126900694f33c8699e84d737dc875b325a1058c1"
+        },
+        {
+          "file": "jus_package/project.py",
+          "line": 181,
+          "end": 274,
+          "name": "save",
+          "length": 94,
+          "signature": "d2e2911d6da279bc97dadc3012c3d3fbfaea5839"
+        }
+      ]
+    },
+    {
+      "name": "export_package",
+      "refs": [
+        {
+          "file": "app/editor.py",
+          "line": 1017,
+          "end": 1052,
+          "name": "export_package",
+          "length": 36,
+          "signature": "40b5bce626483a1459d5d29f6cc11ccbe29d04a7"
+        },
+        {
+          "file": "jus_package/package.py",
+          "line": 92,
+          "end": 136,
+          "name": "export_package",
+          "length": 45,
+          "signature": "4b8ce0df2b16a4136d9bf930725d49c9cd9ed09b"
+        }
+      ]
+    },
+    {
+      "name": "import_package",
+      "refs": [
+        {
+          "file": "app/editor.py",
+          "line": 1054,
+          "end": 1078,
+          "name": "import_package",
+          "length": 25,
+          "signature": "c4910dd6ad68ed132539e8a5e18e30103e737340"
+        },
+        {
+          "file": "jus_package/package.py",
+          "line": 335,
+          "end": 365,
+          "name": "import_package",
+          "length": 31,
+          "signature": "388ad87e5be23fecaa8f8bae0db676f020d08ec3"
+        }
+      ]
+    },
+    {
+      "name": "_amt_tables",
+      "refs": [
+        {
+          "file": "app/editor.py",
+          "line": 1790,
+          "end": 1803,
+          "name": "_amt_tables",
+          "length": 14,
+          "signature": "d58fe594589416515354e2940d41d1abafc14556"
+        },
+        {
+          "file": "jus_package/package.py",
+          "line": 668,
+          "end": 683,
+          "name": "_amt_tables",
+          "length": 16,
+          "signature": "d246f162defae6ab85b8c98c86ddad9d5e3a3330"
+        }
+      ]
+    },
+    {
+      "name": "frame_view",
+      "refs": [
+        {
+          "file": "app/editor.py",
+          "line": 2481,
+          "end": 2490,
+          "name": "frame_view",
+          "length": 10,
+          "signature": "01e5e82c6125fdbea2e60ff19f354b81eee75c28"
+        },
+        {
+          "file": "app/workspaces/koma.py",
+          "line": 270,
+          "end": 280,
+          "name": "frame_view",
+          "length": 11,
+          "signature": "660c05e70731882f7e47ad4d521a6df5b022ce0e"
+        }
+      ]
+    },
+    {
+      "name": "add_event",
+      "refs": [
+        {
+          "file": "app/note_event_editor.py",
+          "line": 219,
+          "end": 229,
+          "name": "add_event",
+          "length": 11,
+          "signature": "9e3a3cd94bd0da53c9a116e955fef2cf58b2811f"
+        },
+        {
+          "file": "jus_formats/eventops.py",
+          "line": 145,
+          "end": 156,
+          "name": "add_event",
+          "length": 12,
+          "signature": "8216ff379d0fa9e9e80b621c4838bafc364c7e4f"
+        }
+      ]
+    },
+    {
+      "name": "add",
+      "refs": [
+        {
+          "file": "jus_formats/alar.py",
+          "line": 117,
+          "end": 125,
+          "name": "add",
+          "length": 9,
+          "signature": "6ebdf26f1b37fbbda4aab6d1055c2975c29efde2"
+        },
+        {
+          "file": "app/widgets/tabs.py",
+          "line": 28,
+          "end": 37,
+          "name": "add",
+          "length": 10,
+          "signature": "0130604ad05b729b9b42edfa3bed61b7572d0687"
+        }
+      ]
+    },
+    {
+      "name": "fields",
+      "refs": [
+        {
+          "file": "jus_formats/stageauthoring.py",
+          "line": 123,
+          "end": 153,
+          "name": "fields",
+          "length": 31,
+          "signature": "4cee805730136a4d2801602f0e0fd4c38c3c94dd"
+        },
+        {
+          "file": "jus_formats/stagephysics.py",
+          "line": 349,
+          "end": 369,
+          "name": "fields",
+          "length": 21,
+          "signature": "88d13b5c30aa5a875f8607a856c47d607ed7c5e8"
+        }
+      ]
+    },
+    {
+      "name": "clone",
+      "refs": [
+        {
+          "file": "jus_formats/stageauthoring.py",
+          "line": 223,
+          "end": 274,
+          "name": "clone",
+          "length": 52,
+          "signature": "0efce118fc7e9e9bb6c0d7ef652c4bf65fb35ef8"
+        },
+        {
+          "file": "app/workspaces/mapobjects.py",
+          "line": 162,
+          "end": 183,
+          "name": "clone",
+          "length": 22,
+          "signature": "dfa18e61cd01e0e7709608bb9358f69b9f78b2e2"
+        }
+      ]
+    },
+    {
+      "name": "summary",
+      "refs": [
+        {
+          "file": "jus_formats/stagephysics.py",
+          "line": 371,
+          "end": 391,
+          "name": "summary",
+          "length": 21,
+          "signature": "f35c13aa02c1d570edc928f104d56f164268bba6"
+        },
+        {
+          "file": "jus_package/package.py",
+          "line": 301,
+          "end": 309,
+          "name": "summary",
+          "length": 9,
+          "signature": "5b75f25f597944c6ad0e06d13b9d1b1f4c8f785b"
+        }
+      ]
+    },
+    {
+      "name": "character_sources",
+      "refs": [
+        {
+          "file": "jus_package/package.py",
+          "line": 656,
+          "end": 665,
+          "name": "character_sources",
+          "length": 10,
+          "signature": "76beb7659f65bd97f41a9f4f93fb0e305f80d6c5"
+        },
+        {
+          "file": "jus_package/project.py",
+          "line": 287,
+          "end": 309,
+          "name": "character_sources",
+          "length": 23,
+          "signature": "6429fff05ec254df8cbce02856cc647b36cdd884"
+        }
+      ]
+    },
+    {
+      "name": "project",
+      "refs": [
+        {
+          "file": "jus_package/spawns.py",
+          "line": 323,
+          "end": 424,
+          "name": "project",
+          "length": 102,
+          "signature": "8e1548011257c4634e30e503f23967910a4ce9d6"
+        },
+        {
+          "file": "jus_package/stagepreview.py",
+          "line": 288,
+          "end": 467,
+          "name": "project",
+          "length": 180,
+          "signature": "3bce00e8e51d670bfb6b16c5e5580f803df0a3e6"
+        }
+      ]
+    },
+    {
+      "name": "make_data",
+      "refs": [
+        {
+          "file": "tests/gui_level_smoke.py",
+          "line": 18,
+          "end": 31,
+          "name": "make_data",
+          "length": 14,
+          "signature": "60ab2ae015933925bab3e8ac23e3537df1f7d7ea"
+        },
+        {
+          "file": "tests/gui_missions_smoke.py",
+          "line": 17,
+          "end": 29,
+          "name": "make_data",
+          "length": 13,
+          "signature": "2ae6cd78bc6ef98f6f9066ce7dfaf7ff6fd0a9e8"
+        }
+      ]
+    },
+    {
+      "name": "_run",
+      "refs": [
+        {
+          "file": "tests/test_charforge.py",
+          "line": 54,
+          "end": 67,
+          "name": "_run",
+          "length": 14,
+          "signature": "03f2f48cfeef0bdc0ca361182c5e289f6b339ad5"
+        },
+        {
+          "file": "app/workspaces/tutorials.py",
+          "line": 227,
+          "end": 236,
+          "name": "_run",
+          "length": 10,
+          "signature": "5b69d4554065a0e70180089aab7fe9a4c1c84301"
+        }
+      ]
+    },
+    {
+      "name": "make",
+      "refs": [
+        {
+          "file": "tests/test_dstx_layout_0506.py",
+          "line": 16,
+          "end": 28,
+          "name": "make",
+          "length": 13,
+          "signature": "7c6670307fcada7c2e1e80f72805cf87b464a5a3"
+        },
+        {
+          "file": "tests/test_shot_runtime_fields.py",
+          "line": 18,
+          "end": 28,
+          "name": "make",
+          "length": 11,
+          "signature": "f6f48495070e4ac2f0929b2d292b934adcfc2e45"
+        }
+      ]
+    },
+    {
+      "name": "geometry",
+      "refs": [
+        {
+          "file": "tests/test_stageoverlay.py",
+          "line": 14,
+          "end": 22,
+          "name": "geometry",
+          "length": 9,
+          "signature": "6aa06021cb2dac398ba41938d7a78cac44d0e31d"
+        },
+        {
+          "file": "tests/test_stage_collision_projection.py",
+          "line": 11,
+          "end": 19,
+          "name": "geometry",
+          "length": 9,
+          "signature": "df8bf4465e1374030a4c9bd814bb698b88674d8f"
+        }
+      ]
+    },
+    {
+      "name": "audit",
+      "refs": [
+        {
+          "file": "tools/audit_open_effects.py",
+          "line": 41,
+          "end": 120,
+          "name": "audit",
+          "length": 80,
+          "signature": "7a9b75d933bc05a4bc6d2fa7291cfccae08bad25"
+        },
+        {
+          "file": "tools/verify_cp932_names.py",
+          "line": 37,
+          "end": 59,
+          "name": "audit",
+          "length": 23,
+          "signature": "a3648647c1054687c6ffe65fae11e6313bc35b02"
+        }
+      ]
+    },
+    {
+      "name": "redraw",
+      "refs": [
+        {
+          "file": "app/widgets/dopesheet.py",
+          "line": 164,
+          "end": 234,
+          "name": "redraw",
+          "length": 71,
+          "signature": "9e3586f6df3d409e5e706a95187aa7d369c49571"
+        },
+        {
+          "file": "app/widgets/viewport.py",
+          "line": 142,
+          "end": 166,
+          "name": "redraw",
+          "length": 25,
+          "signature": "5fd762b395da94245176234a6ddc00a1fe83d8ae"
+        }
+      ]
+    },
+    {
+      "name": "_paint",
+      "refs": [
+        {
+          "file": "app/workspaces/koma.py",
+          "line": 601,
+          "end": 610,
+          "name": "_paint",
+          "length": 10,
+          "signature": "c7dea1fbd9e1ec446cf9720516616b077518cdb7"
+        },
+        {
+          "file": "app/workspaces/level.py",
+          "line": 1012,
+          "end": 1035,
+          "name": "_paint",
+          "length": 24,
+          "signature": "942bd985a2945b233de0384f98e618b92ce9049e"
+        }
+      ]
+    },
+    {
+      "name": "restore",
+      "refs": [
+        {
+          "file": "app/workspaces/koma.py",
+          "line": 999,
+          "end": 1016,
+          "name": "restore",
+          "length": 18,
+          "signature": "8d5443d27f24112639b8da171943b85204f13552"
+        },
+        {
+          "file": "app/workspaces/level.py",
+          "line": 1242,
+          "end": 1263,
+          "name": "restore",
+          "length": 22,
+          "signature": "5f4b58d6108f29e29001c7456a58a6adf562d9fb"
+        }
+      ]
+    },
+    {
+      "name": "_browse",
+      "refs": [
+        {
+          "file": "app/workspaces/level.py",
+          "line": 307,
+          "end": 336,
+          "name": "_browse",
+          "length": 30,
+          "signature": "28f78a54067d607a1387cc1a0867823925ac9d0c"
+        },
+        {
+          "file": "app/workspaces/screen.py",
+          "line": 268,
+          "end": 287,
+          "name": "_browse",
+          "length": 20,
+          "signature": "c2bec859a1d334213b0ab351ae00488addb9d33b"
+        }
+      ]
+    },
+    {
+      "name": "_select_layer",
+      "refs": [
+        {
+          "file": "app/workspaces/level.py",
+          "line": 1037,
+          "end": 1050,
+          "name": "_select_layer",
+          "length": 14,
+          "signature": "bb7563a08c93c3fd085b8a47689b30e174f7601e"
+        },
+        {
+          "file": "app/workspaces/screen.py",
+          "line": 1141,
+          "end": 1170,
+          "name": "_select_layer",
+          "length": 30,
+          "signature": "798e40f6a4eb5b4ab1312577364ed23795157ca1"
+        }
+      ]
+    }
+  ],
+  "structure_groups_total": 0
+}

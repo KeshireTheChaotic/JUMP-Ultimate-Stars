@@ -1,0 +1,392 @@
+[
+  {
+    "file_a": "jus_package/screenvariants.py",
+    "line_a": 63,
+    "end_a": 72,
+    "file_b": "jus_package/screenvariants.py",
+    "line_b": 70,
+    "end_b": 79,
+    "matching_tokens": 126,
+    "same_file": true
+  },
+  {
+    "file_a": "jus_package/motion.py",
+    "line_a": 123,
+    "end_a": 138,
+    "file_b": "jus_package/sounds.py",
+    "line_b": 332,
+    "end_b": 347,
+    "matching_tokens": 117,
+    "same_file": false
+  },
+  {
+    "file_a": "app/workspaces/missions.py",
+    "line_a": 472,
+    "end_a": 482,
+    "file_b": "app/workspaces/missions.py",
+    "line_b": 507,
+    "end_b": 517,
+    "matching_tokens": 105,
+    "same_file": true
+  },
+  {
+    "file_a": "jus_formats/chrbin.py",
+    "line_a": 165,
+    "end_a": 181,
+    "file_b": "jus_formats/chrbin.py",
+    "line_b": 233,
+    "end_b": 248,
+    "matching_tokens": 100,
+    "same_file": true
+  },
+  {
+    "file_a": "jus_formats/chrbin.py",
+    "line_a": 165,
+    "end_a": 181,
+    "file_b": "jus_formats/chrbin.py",
+    "line_b": 237,
+    "end_b": 252,
+    "matching_tokens": 100,
+    "same_file": true
+  },
+  {
+    "file_a": "jus_formats/chrbin.py",
+    "line_a": 165,
+    "end_a": 181,
+    "file_b": "jus_formats/chrbin.py",
+    "line_b": 241,
+    "end_b": 257,
+    "matching_tokens": 100,
+    "same_file": true
+  },
+  {
+    "file_a": "app/editor.py",
+    "line_a": 2563,
+    "end_a": 2572,
+    "file_b": "app/editor.py",
+    "line_b": 2586,
+    "end_b": 2595,
+    "matching_tokens": 91,
+    "same_file": true
+  },
+  {
+    "file_a": "jus_formats/chrbin.py",
+    "line_a": 196,
+    "end_a": 211,
+    "file_b": "jus_formats/chrbin.py",
+    "line_b": 229,
+    "end_b": 244,
+    "matching_tokens": 89,
+    "same_file": true
+  },
+  {
+    "file_a": "jus_formats/battleai.py",
+    "line_a": 78,
+    "end_a": 94,
+    "file_b": "jus_formats/chrbin.py",
+    "line_b": 225,
+    "end_b": 241,
+    "matching_tokens": 85,
+    "same_file": false
+  },
+  {
+    "file_a": "app/editor.py",
+    "line_a": 2564,
+    "end_a": 2572,
+    "file_b": "app/editor.py",
+    "line_b": 2618,
+    "end_b": 2626,
+    "matching_tokens": 84,
+    "same_file": true
+  },
+  {
+    "file_a": "app/workspaces/missions.py",
+    "line_a": 456,
+    "end_a": 467,
+    "file_b": "app/workspaces/missions.py",
+    "line_b": 489,
+    "end_b": 500,
+    "matching_tokens": 83,
+    "same_file": true
+  },
+  {
+    "file_a": "app/editor.py",
+    "line_a": 2587,
+    "end_a": 2595,
+    "file_b": "app/editor.py",
+    "line_b": 2618,
+    "end_b": 2626,
+    "matching_tokens": 80,
+    "same_file": true
+  },
+  {
+    "file_a": "app/workspaces/roster.py",
+    "line_a": 376,
+    "end_a": 390,
+    "file_b": "app/workspaces/roster.py",
+    "line_b": 396,
+    "end_b": 410,
+    "matching_tokens": 80,
+    "same_file": true
+  },
+  {
+    "file_a": "jus_formats/chrbin.py",
+    "line_a": 87,
+    "end_a": 105,
+    "file_b": "jus_formats/chrbin.py",
+    "line_b": 215,
+    "end_b": 233,
+    "matching_tokens": 77,
+    "same_file": true
+  },
+  {
+    "file_a": "app/workspaces/koma.py",
+    "line_a": 114,
+    "end_a": 123,
+    "file_b": "app/workspaces/level.py",
+    "line_b": 179,
+    "end_b": 188,
+    "matching_tokens": 77,
+    "same_file": false
+  },
+  {
+    "file_a": "jus_formats/battleai.py",
+    "line_a": 70,
+    "end_a": 82,
+    "file_b": "jus_formats/chrbin.py",
+    "line_b": 122,
+    "end_b": 134,
+    "matching_tokens": 75,
+    "same_file": false
+  },
+  {
+    "file_a": "jus_formats/chrbin.py",
+    "line_a": 233,
+    "end_a": 245,
+    "file_b": "jus_formats/chrbin.py",
+    "line_b": 245,
+    "end_b": 260,
+    "matching_tokens": 75,
+    "same_file": true
+  },
+  {
+    "file_a": "jus_formats/battleai.py",
+    "line_a": 70,
+    "end_a": 82,
+    "file_b": "jus_formats/chrbin.py",
+    "line_b": 165,
+    "end_b": 178,
+    "matching_tokens": 74,
+    "same_file": false
+  },
+  {
+    "file_a": "jus_formats/battleai.py",
+    "line_a": 70,
+    "end_a": 82,
+    "file_b": "jus_formats/chrbin.py",
+    "line_b": 233,
+    "end_b": 245,
+    "matching_tokens": 74,
+    "same_file": false
+  },
+  {
+    "file_a": "jus_formats/battleai.py",
+    "line_a": 70,
+    "end_a": 82,
+    "file_b": "jus_formats/chrbin.py",
+    "line_b": 237,
+    "end_b": 249,
+    "matching_tokens": 74,
+    "same_file": false
+  },
+  {
+    "file_a": "jus_formats/battleai.py",
+    "line_a": 70,
+    "end_a": 82,
+    "file_b": "jus_formats/chrbin.py",
+    "line_b": 241,
+    "end_b": 254,
+    "matching_tokens": 74,
+    "same_file": false
+  },
+  {
+    "file_a": "jus_formats/chrbin.py",
+    "line_a": 122,
+    "end_a": 134,
+    "file_b": "jus_formats/chrbin.py",
+    "line_b": 165,
+    "end_b": 178,
+    "matching_tokens": 74,
+    "same_file": true
+  },
+  {
+    "file_a": "jus_formats/chrbin.py",
+    "line_a": 122,
+    "end_a": 134,
+    "file_b": "jus_formats/chrbin.py",
+    "line_b": 233,
+    "end_b": 245,
+    "matching_tokens": 74,
+    "same_file": true
+  },
+  {
+    "file_a": "jus_formats/chrbin.py",
+    "line_a": 122,
+    "end_a": 134,
+    "file_b": "jus_formats/chrbin.py",
+    "line_b": 237,
+    "end_b": 249,
+    "matching_tokens": 74,
+    "same_file": true
+  },
+  {
+    "file_a": "jus_formats/chrbin.py",
+    "line_a": 122,
+    "end_a": 134,
+    "file_b": "jus_formats/chrbin.py",
+    "line_b": 241,
+    "end_b": 254,
+    "matching_tokens": 74,
+    "same_file": true
+  },
+  {
+    "file_a": "jus_formats/chrbin.py",
+    "line_a": 170,
+    "end_a": 181,
+    "file_b": "jus_formats/chrbin.py",
+    "line_b": 233,
+    "end_b": 244,
+    "matching_tokens": 74,
+    "same_file": true
+  },
+  {
+    "file_a": "jus_formats/battleai.py",
+    "line_a": 70,
+    "end_a": 82,
+    "file_b": "jus_formats/chrbin.py",
+    "line_b": 245,
+    "end_b": 260,
+    "matching_tokens": 72,
+    "same_file": false
+  },
+  {
+    "file_a": "jus_formats/chrbin.py",
+    "line_a": 122,
+    "end_a": 134,
+    "file_b": "jus_formats/chrbin.py",
+    "line_b": 245,
+    "end_b": 260,
+    "matching_tokens": 72,
+    "same_file": true
+  },
+  {
+    "file_a": "jus_formats/chrbin.py",
+    "line_a": 165,
+    "end_a": 178,
+    "file_b": "jus_formats/chrbin.py",
+    "line_b": 245,
+    "end_b": 260,
+    "matching_tokens": 72,
+    "same_file": true
+  },
+  {
+    "file_a": "jus_formats/chrbin.py",
+    "line_a": 170,
+    "end_a": 181,
+    "file_b": "jus_formats/chrbin.py",
+    "line_b": 200,
+    "end_b": 211,
+    "matching_tokens": 72,
+    "same_file": true
+  },
+  {
+    "file_a": "jus_formats/chrbin.py",
+    "line_a": 200,
+    "end_a": 211,
+    "file_b": "jus_formats/chrbin.py",
+    "line_b": 237,
+    "end_b": 248,
+    "matching_tokens": 72,
+    "same_file": true
+  },
+  {
+    "file_a": "jus_formats/chrbin.py",
+    "line_a": 200,
+    "end_a": 211,
+    "file_b": "jus_formats/chrbin.py",
+    "line_b": 241,
+    "end_b": 252,
+    "matching_tokens": 72,
+    "same_file": true
+  },
+  {
+    "file_a": "jus_formats/chrbin.py",
+    "line_a": 200,
+    "end_a": 211,
+    "file_b": "jus_formats/chrbin.py",
+    "line_b": 245,
+    "end_b": 257,
+    "matching_tokens": 72,
+    "same_file": true
+  },
+  {
+    "file_a": "jus_package/effectlinks.py",
+    "line_a": 62,
+    "end_a": 72,
+    "file_b": "jus_package/motion.py",
+    "line_b": 124,
+    "end_b": 134,
+    "matching_tokens": 72,
+    "same_file": false
+  },
+  {
+    "file_a": "jus_package/effectlinks.py",
+    "line_a": 62,
+    "end_a": 72,
+    "file_b": "jus_package/sounds.py",
+    "line_b": 333,
+    "end_b": 343,
+    "matching_tokens": 72,
+    "same_file": false
+  },
+  {
+    "file_a": "app/workspaces/missions.py",
+    "line_a": 482,
+    "end_a": 494,
+    "file_b": "app/workspaces/missions.py",
+    "line_b": 517,
+    "end_b": 529,
+    "matching_tokens": 72,
+    "same_file": true
+  },
+  {
+    "file_a": "jus_formats/battleai.py",
+    "line_a": 70,
+    "end_a": 81,
+    "file_b": "jus_formats/chrbin.py",
+    "line_b": 170,
+    "end_b": 181,
+    "matching_tokens": 71,
+    "same_file": false
+  },
+  {
+    "file_a": "jus_formats/chrbin.py",
+    "line_a": 122,
+    "end_a": 133,
+    "file_b": "jus_formats/chrbin.py",
+    "line_b": 170,
+    "end_b": 181,
+    "matching_tokens": 71,
+    "same_file": true
+  },
+  {
+    "file_a": "app/workspaces/missions.py",
+    "line_a": 622,
+    "end_a": 630,
+    "file_b": "app/workspaces/missions.py",
+    "line_b": 678,
+    "end_b": 686,
+    "matching_tokens": 70,
+    "same_file": true
+  }
+]

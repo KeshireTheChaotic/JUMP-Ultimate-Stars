@@ -138,6 +138,16 @@ class MovingFloor:
     def speed(self) -> int | None:
         return FLOOR_SPEEDS[self.speed_index] if self.speed_index < len(FLOOR_SPEEDS) else None
 
+    @property
+    def sprite_source_almt(self) -> int:
+        """Native 02085704: +0x1F becomes stage floor ALMT resource 0x401100+n."""
+        return 0x401100 + self.sprite
+
+    @property
+    def source_signed_offsets(self) -> tuple[int, int]:
+        """Native 02085D74 copies s8 +2/+3 into runtime +0x1C/+0x1E as 8.8."""
+        return s8(self.raw, 2), s8(self.raw, 3)
+
 
 @dataclass(frozen=True)
 class PointRecord:
@@ -197,6 +207,16 @@ class GimmickRecord:
         return GIMMICK_TYPES.get(self.type_id, (f'type {self.type_id}',))[0]
 
     @property
+    def reserved_header(self) -> int:
+        """Original gimmick +0x0E u16: zero on all 29 original descriptors."""
+        return u16(self.raw, 0x0E)
+
+    @property
+    def source_almt_id(self) -> int:
+        """Native 02163188 gimmick variant +0x0D maps to 0x401200 + variant."""
+        return 0x401200 + self.sprite
+
+    @property
     def timers(self) -> tuple[int, int] | None:
         """Type 1 (off, on) and type 10 (interval, duration) u16 parameters."""
         if self.type_id in (1, 10) and len(self.params) >= 4:
@@ -234,6 +254,11 @@ class StageMob:
     gimmicks: tuple[GimmickRecord, ...]
     item_tail_bytes: int
     items: ItemConfig | None = None
+
+    @property
+    def gimmick_section_reserved(self) -> int:
+        """Section3 header +2 u16: zero for all 36 originals, not length."""
+        return u16(self.raw, self.sections[3].offset + 2)
 
 
 def _parse_items(blob: bytes, start: int, end: int, count: int) -> ItemConfig:
@@ -404,7 +429,7 @@ class BgLayer:
     y: int
     draw_priority: int       # +6 → FUN_02084EEC (draw-link priority, high draws first)
     bg_priority: int         # +7 → FUN_0203D0B4
-    f8: int                  # +8 → FUN_0203D478 (meaning not traced)
+    f8: int                  # +8 → FUN_0203D478 graphics renderer mode selector (4/8), exact GPU meaning unproven
     enabled: int             # +9: 0 = no layer; else <<10 to vfunc +0x90
     anims: tuple[BgAnim, ...]
 
@@ -539,6 +564,18 @@ class StageGeometry:
     conveyors: tuple[Conveyor, ...] = ()
 
     @property
+    def trailing_source_words(self) -> tuple[int, int, int]:
+        """Section5: source u16,u16,u32. 36/36 originals have first=0x200, last=0;
+        middle ranges 0x01C0..0x02F0. Native consumer/units unproven.
+        """
+        return struct.unpack_from('<HHI', self.raw, self.offsets[5])
+
+    @property
+    def bg_renderer_mode(self) -> tuple[int, ...]:
+        """The three exact +8 bytes handed to native FUN_0203D478."""
+        return tuple(layer.f8 for layer in self.layers)
+
+    @property
     def grid_cells(self) -> tuple[GridCell, ...]:
         """The 64×64 collision grid (16 px cells) the movement sweep reads."""
         return tuple(GridCell(i, *struct.unpack_from('<HBBHH', self.grid_data, 8 * i))
@@ -598,6 +635,8 @@ def parse_stage_bin(blob: bytes) -> StageGeometry:
         raise ValueError('stage .bin section offsets invalid')
     if offs[2] - offs[1] != 0x8034:
         raise ValueError('stage .bin grid section is not expected 0x34 + 0x8000 bytes')
+    if len(blob)-offs[5] != 8:
+        raise ValueError('stage .bin section 5 must have exactly 8 source bytes (u16,u16,u32)')
     hdr = blob[offs[1]:offs[1] + 0x34]
     ncoll = u16(hdr, 0x2E)
     nwall = hdr[0x2C]

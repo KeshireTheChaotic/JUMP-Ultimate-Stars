@@ -15,7 +15,6 @@ from PIL import Image, ImageDraw, ImageFont, ImageTk
 from jus_formats import almt, bintables, koma, kshape, roster
 from jus_package import komacards, movelinks
 from jus_package.project import join
-from .. import theme as T
 
 
 class RosterIndex:
@@ -368,43 +367,30 @@ class RosterBrowser:
         elif previous and previous[0] == 'move':
             self.select_move(previous[1], previous[2], previous[3])
 
-    def select_move(self, form, move_id, member):
-        """Keep the source-backed tree synchronized when Inspector navigates."""
-        self._expand_to_action(('move', form, move_id, member))
-        t = self.tree
-        for iid, act in self.actions.items():
-            if act == ('move', form, move_id, member) and t.exists(iid):
-                self._selecting = True
-                try:
-                    # Tk queues <<TreeviewSelect>> for selection_set even if this
-                    # is already the selected row. In Roster's selection callback
-                    # that used to reopen the same ALMT/Koma indefinitely.
-                    if t.selection() != (iid,):
-                        t.selection_set(iid)
-                    if t.focus() != iid:
-                        t.focus(iid)
-                    t.see(iid)
-                finally:
-                    self._selecting = False
-                return True
+    def _select_action(self, action):
+        """Synchronize source-backed selection without reentering Tk callbacks."""
+        self._expand_to_action(action)
+        tree = self.tree
+        for iid, candidate in self.actions.items():
+            if candidate != action or not tree.exists(iid):
+                continue
+            self._selecting = True
+            try:
+                # Tk queues <<TreeviewSelect>> even for redundant selection_set.
+                # Only select when changed to avoid reopening ALMT/Koma forever.
+                if tree.selection() != (iid,):
+                    tree.selection_set(iid)
+                if tree.focus() != iid:
+                    tree.focus(iid)
+                tree.see(iid)
+            finally:
+                self._selecting = False
+            return True
         return False
 
+    def select_move(self, form, move_id, member):
+        """Keep the source-backed tree synchronized when Inspector navigates."""
+        return self._select_action(('move', form, move_id, member))
+
     def select_card(self, card_index):
-        self._expand_to_action(('card', card_index))
-        t = self.tree
-        for iid, act in self.actions.items():
-            if act == ('card', card_index) and t.exists(iid):
-                self._selecting = True
-                try:
-                    # Tk queues <<TreeviewSelect>> for selection_set even if this
-                    # is already the selected row. In Roster's selection callback
-                    # that used to reopen the same ALMT/Koma indefinitely.
-                    if t.selection() != (iid,):
-                        t.selection_set(iid)
-                    if t.focus() != iid:
-                        t.focus(iid)
-                    t.see(iid)
-                finally:
-                    self._selecting = False
-                return True
-        return False
+        return self._select_action(('card', card_index))

@@ -12,7 +12,9 @@ def main(root):
         
         for _ in range(12): app.update(); time.sleep(.05)
         app.show_workspace('screen'); w=app.suite['screen']
-        assert w.mode.get()=='Screens'
+        assert w.mode.get()=='Scenes'
+        assert w.scene_id==3 and len(w._scene_widgets)==8
+        w.mode.set('Screens'); w._mode_changed(); app.update()
         w.load('title/title.aar')
         assert w.layers and w.sprite_image is None
         w.mode.set('Elements');w._mode_changed();app.update()

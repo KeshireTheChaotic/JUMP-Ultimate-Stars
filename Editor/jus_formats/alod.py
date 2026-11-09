@@ -34,7 +34,7 @@ class AlodNode:
     def parent(self) -> str | None:
         for desc, value in self.properties:
             text = value.decode('ascii', 'replace')
-            if desc & 0xFF == 0x10 and text.strip('\0'):
+            if desc == 0x10 and text.strip('\0'):
                 return text
         return None
 
@@ -75,6 +75,51 @@ class AlodFile:
 
     def build(self) -> bytes:
         return self.raw
+
+    def nonstandard_parent_links(self) -> list[tuple[str, str, str]]:
+        """Detect hierarchy edges absent from all 1,247 shipped ALOD files.
+
+        The shipped corpus contains 1,078 GN -> SP edges, no other parent
+        class pairs. A warning here is NOT proof the runtime rejects an edge.
+        """
+        kinds = {node.name: node.kind for node in self.nodes}
+        result = []
+        for node in self.nodes:
+            if node.parent and (node.kind, kinds.get(node.parent)) != ('GN  ', 'SP  '):
+                result.append((node.name, node.parent, kinds.get(node.parent, 'missing')))
+        return result
+
+    def replace_parent(self, node_name: str, parent_name: str) -> 'AlodFile':
+        """Patch only a proven ParentNodeID 4-byte value in its original location.
+
+        All 1,247 original ALOD files were surveyed: 1,078 properties have
+        descriptor 0x10 and ASCII four-character parent node names. The
+        runtime legality of arbitrary reparenting is NOT verified; this method
+        preserves all other record bytes and refuses missing nodes.
+        """
+        if 'ParentNodeID' not in self.field_names:
+            raise ValueError('ALOD has no declared ParentNodeID field')
+        names = [n.name for n in self.nodes]
+        if node_name not in names or parent_name not in names or node_name == parent_name:
+            raise ValueError('Both node and a distinct parent must exist in this ALOD')
+        index = names.index(node_name)
+        offset = u16(self.raw, 0x10 + 2 * index)
+        count = u32(self.raw, offset + 8)
+        if count > 64 or offset + 12 + 8 * count > len(self.raw):
+            raise ValueError('Invalid ALOD property table')
+        try:
+            encoded = parent_name.encode('ascii', 'strict')
+        except UnicodeError as exc:
+            raise ValueError('ALOD node names must be ASCII') from exc
+        if len(encoded) != 4:
+            raise ValueError('ALOD parent node names must be exactly four bytes')
+        for i in range(count):
+            p = offset + 12 + 8 * i
+            if u32(self.raw, p) == 0x10:
+                patched = bytearray(self.raw)
+                patched[p + 4:p + 8] = encoded
+                return type(self).parse(bytes(patched))
+        raise ValueError(f'Node {node_name} has no ParentNodeID property')
 
     def to_dict(self) -> dict:
         return {'format': 'ALOD', 'version': self.version, 'flags': self.flags,

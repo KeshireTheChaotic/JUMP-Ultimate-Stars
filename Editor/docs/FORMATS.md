@@ -136,11 +136,21 @@ u16 map_h, u32 0`.
 ## Stage data (`stage/stage.aar`)
 
 Per stage stem `bg_xx`: `bg_xx.aar` (ALTM layers + tiles), optional `bg_xx_floor.aar`
-and `bg_xx_gimmick.aar`, and `bg_xx.bin` / `.cam` (32 bytes) / `.mob`. `.bin`
+and `bg_xx_gimmick.aar`, and `bg_xx.bin` / `.cam` (32 or 36 bytes) / `.mob`. `.bin`
 (BG records, colliders, AI grid) and `.mob` (physics, spawns, gimmick objects) are
 decoded in `jus_formats.stagephysics`; collider types are in
 `docs/STAGE_COLLIDER_TYPES_TRACE.md` and the AI navigation in `docs/BATTLE_AI_TRACE.md`.
-The Level workspace draws and edits them. `.cam` is **not decoded**.
+The Level workspace draws and edits the verified `.bin` / `.mob` fields.
+
+**Camera `.cam` structural decode (2026-11-08):** `jus_formats.stagecamera` reads
+all 36 original files byte-for-byte. Header: three pairs of signed LE 16-bit
+words at +0x00/+0x04/+0x08; mode u8 +0x0C (1 in all originals), point count u8
++0x0D (4 in 35 files, 5 in bg_old_yo.cam), reserved u16 +0x0E (zero), then
+count × 4-byte signed coordinate pairs from +0x10. The first point equals the
+first header pair in every original. The Level inspector shows these raw values.
+**Unresolved:** the original runtime meaning of the header pairs and points,
+camera clamping, position and scroll origin; no guessed camera-space projection
+is applied. Research: `D:/Library/Development/JUS/docs/Research/STAGE_CAM_36_CORPUS_LAYOUT_20261108.md`.
 
 ## GenerateID effect spawns (`jus_package.spawns`)
 
@@ -493,3 +503,123 @@ The original constructor ROM array at ov06 0x02172864 maps shot handler01 to FUN
 ## Native shot source repeats and handler05 D-pad history
 
 The Animation View and viewport Show menu support Handler01 repeats (unobstructed model). This projects actual original +0x10 child ALMT art at native 0216BA2C spacing counter events. The model is **not** an emulator frame reconstruction: it assumes one update/tick, fixed owner and facing, no hit/stage collision, free child actor slots and constant initial raw q8 velocity; post-birth XY is estimated. No synthetic pixels or fake beam polygon. Hiei (yh_b_03) 5-Koma Special B 0x9832C uses handler05 (constructor 0216B910; updater 0216BE0C), reads D-Pad delta0x40, keeps 128 historical XY/rotation samples and selects source 0x98357 (+0x0C head), 0x98358 (+0x10 body), 0x98359 (+0x18 terminal). This does NOT auto-home toward the opponent; the curved trail cannot be reconstructed without live input/history. Original source NoteTrack status event tick112 chara_action(10,18) resolves to code status36/0x24 callback 021593E8. The self-contact conditional branch is not yet proved. Original scripts/exports are saved in D:\Library\Development\JUS\docs\Research\EFFECT_NATIVE_SHOT_REPEAT_AND_HIEI_TRACKING_TRACE_20261106.md. Tests: test_shotprojection_native.py, test_hiei_steered_ultimate.py, gui_shot_source_visual_smoke.py, gui_hiei_steering_source_smoke.py.
+
+
+## ChrBin col/shot/effect native field completion (2026-11-08)
+
+The preceding 2026-11-04/06 descriptions are preserved as historical research.
+**Correction:** the second 32-bit word in an 8-byte `chr/effect` row is NOT an
+unclassified monolithic metadata integer. Original overlay6 `FUN_02153CE8`
+splits it into **u16 sound-slot index (+0x04)** and **u16 sound argument
+(+0x06)**, guarded by the active per-character sound parameter slot value.
+The first u32 (+0x00) is the full source ALMT effect animation ID.
+Original BattlePrmData initializes sound slots to [FFFF,007A,FFFF,FFFF].
+Source: ov06 `021702BC.c` and `02153CE8.c`.
+
+Source-backed collider joins:
+- `chr/col` is 20-byte records. Source byte +0x02 chooses prioritized impact
+  flash; +0x03 is signed status selector; +0x05 is a signed native contact
+  magnitude distinct from the overlapping +0x04 s32 threat score;
+  +0x07 is an additional contact-accumulator byte;
+  +0x0C/+0x0D signed knockback coefficients;
+  +0x0E/+0x0F signed effect selectors;
+  +0x10/+0x11 effect modifier/table indices; +0x12/+0x13 zero in originals.
+- Native ov06 selector rule: **-1 disabled, 0..63 builtin, 64+ character
+  effect row selector-64**. All 101 such 64+ authored original references
+  resolve inside the matching `chr/effect` table; 0 bad references.
+- Source class byte0 and secondary selector byte1 remain numeric. Special
+  byte1==6 branch applies a state-dependent coefficient, but other human
+  names remain unproved.
+- `chr/shot` 32-byte records are dispatched via 26 original callbacks;
+  20 authored handler IDs occur in 1,258 original records. Handler01
+  +0x0C/+0x10/+0x14 child ALMT roles and handler05 terminal +0x18
+  remain source-backed; no claim of an emulator-perfect lifetime or path.
+
+The Archive inspector now shows **separate decoded contact fields, shot
+handler-specific source fields, and chr/effect ALMT/sound rows**, including
+cross-links from a collider into its effect row. The historical R08 shot/col
+diagnostic formatter string remains byte-for-byte compatible. Raw source record
+editing can be staged with `jus_formats.chrbin.RecordTable.replace_record`;
+`EffectRecord` provides bounded animation ID/sound-slot updates. The original
+data is never overwritten by the investigation.
+
+Research: `D:\Library\Development\JUS\docs\Research\CHR_COL_SHOT_EFFECT_NATIVE_FIELD_COMPLETION_20261108.md`,
+the 101-row CSV join, and `tests/test_chrbin_effect_contact_source.py`.
+Unknowns: canonical collision class names, remaining shot handler flag semantics,
+live impact/collision outcome geometry and final frame-perfect rendering.
+
+
+## Native collision-reaction and shot-runtime semantics (2026-11-08 follow-up)
+
+New source-backed report:
+`D:\Library\Development\JUS\docs\Research\CHR_COL_SHOT_NATIVE_RUNTIME_SEMANTICS_TRACE_20261108.md`.
+Original ARM9 0207FBD0 / 0207D440 prove collider+0x00 is a
+**comparison/precedence class code**, not an official list of attack types.
+Original overlay6 ROM at 0x021713E8 and 0x021721A0 provides all **16**
+defender reaction indices (+0x01), their primary/alternate ALMT resource
+offsets and original callbacks. Indices 9..12 select grabbed victim pose
+resources 0x33..0x36; other entries now show code-backed reaction action,
+with no invented move names. The Archive inspector reads these from
+`jus_formats/chrbin_semantics.py`.
+
+The original 26 shot constructor and update callback tables (overlay6
+0x02172864/0x0217278C) also establish additional **handler-scoped**
+control flags and dependent owner position, stage collision, bounce,
+stop/fade and removal branches. Shot handler0x16 is now verified as a
+**contact-dependent nested shot spawner**: +0x1E is a signed row index
+within its own 0x20-byte shot table, and native 0216F8D8 calls 0216AB58
+to create the nested shot on selected child contact bits. All six
+original authored records point to valid existing shot rows.
+`jus_formats.chrbin.ShotRecord.handler_16_nested_shot_index`
+exposes this source link; the Archive inspector displays the actual next
+handler and ALMT ID.
+
+Original read-only corpus/ROM audit:
+`tools/audit_native_chrbin_unresolved_semantics.py`.
+New tests: `tests/test_chrbin_native_semantics.py`.
+Exports: `CHR_COL_NATIVE_16_REACTION_ROUTES_20261108.csv`,
+`CHR_SHOT_NATIVE_FLAG_WITNESSES_20261108.csv`,
+`CHR_COL_SHOT_NATIVE_SEMANTICS_VALIDATION_20261108.json`.
+The new evidence covers 26 actually authored handler/flag combinations;
+41 more handler/bit combinations remain unclassified after excluding
+already-proved global fields. These are NOT 41 unique flags. Exact live
+projectile paths and player-facing names cannot be derived from these
+source records without the runtime input, stage, target, PRNG and
+collision-state history. No synthetic screenshots or effect geometry used.
+
+
+## Stage BIN/MOB and exhaustive archive audit — 2026-11-08
+
+The original 36 stage BIN/MOB pairs now have typed section coverage and byte-preserving
+staged editing of additional original source fields. Original native source proves BG
++0x08 invokes renderer mode setter FUN_0203D478 (source 02083FCC), moving-floor
++2/+3 signed offsets and +0x1F sprite ALMT (source 02085D74 / 02085704), and
+gimmick source +0x0C callback type / +0x0D ALMT variant (source 02163188).
+The BIN eight-byte trailer is exposed as three **raw fields** u16/u16/u32
+(first=0x0200, last=0 across all 36; second takes 13 values). Do not label the
+trailer as physical width/height until the native consumer is traced.
+
+Editor implementation: `jus_formats/stagephysics.py`, `jus_formats/stageauthoring.py`,
+`app/workspaces/mapobjects.py`, `app/workspaces/level.py`.
+Original validation: `tests/test_stage_bin_mob_completion.py`;
+research: `D:\Library\Development\JUS\docs\Research\STAGE_BIN_MOB_FINAL_NATIVE_COMPLETION_20261108.md`.
+
+Recursive active Data inventory: **391 physical files, 1549 ALARs, 11575
+leaf files, 1477/1477 BINs cataloged**. Exactly 53 active file instances have
+no full verified schema: **50 demo MDF, 1 opening VXDS file, opening/pattern.bin,
+and stage/SuddenDeath.bin**. Partial binary semantic fields in other formats
+are tracked separately, including ALOD/AI/deck. Four ALFT AFT fonts are already
+decoded; 12 inactive .aar.orig backups are not new runtime formats. The
+independent backup comparison found **0 additional filenames** in the 5016
+backup leaf members.
+
+Reproducible scans: `tools/audit_full_game_archive_decoding.py` and
+`tools/audit_alar_backups_vs_active.py`. Original full member catalogs and
+ranked remaining gaps:
+`D:\Library\Development\JUS\docs\Research\GAME_DATA_ALL_ARCHIVE_DECODE_GAPS_20261108.md`,
+`ALL_GAME_DATA_RECURSIVE_MEMBERS_20261108.csv`,
+`GAME_DATA_UNKNOWN_FILENAME_CANDIDATES_20261108.csv`,
+`GAME_DATA_UNFINISHED_DECODE_GROUPS_20261108.csv`.
+
+Decoded source-record structure is not evidence of gameplay-perfect runtime
+simulation. All original game archives, ROM and Ghidra exports remain unchanged.

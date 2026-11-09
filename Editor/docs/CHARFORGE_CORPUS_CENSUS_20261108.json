@@ -1,0 +1,2129 @@
+{
+ "authority": "Extracted JUS data + native parsers, hard-coded ARM9 74-entry battle slot table",
+ "scope": "Battle roster; support-only and passive Koma do not use the same replacement contract",
+ "total_slots": 74,
+ "slots_with_errors": 0,
+ "slots_with_warnings": 0,
+ "totals": {
+  "almt_move_records": 6945,
+  "dstx_sprite_members": 1274,
+  "dstx_frames": 25783,
+  "koma_card_count": 206,
+  "koma_art_members": 206,
+  "koma_panels": 1091
+ },
+ "records": [
+  {
+   "slot": "db_b_01",
+   "record": 0,
+   "resource_block": "0x05C100",
+   "forms": [
+    "",
+    "_4",
+    "_5"
+   ],
+   "animation_archives": 3,
+   "image_archives": 3,
+   "window_archives": 2,
+   "gameplay_tables": [
+    "ai",
+    "col",
+    "shot"
+   ],
+   "almt_move_records": 79,
+   "unique_almt_move_ids": 79,
+   "dstx_sprite_members": 10,
+   "dstx_frames": 302,
+   "effect_sprite_members_name_hint": 5,
+   "koma_card_count": 3,
+   "koma_art_members": 3,
+   "koma_panels": 13,
+   "errors": [],
+   "warnings": []
+  },
+  {
+   "slot": "db_b_02",
+   "record": 1,
+   "resource_block": "0x05C200",
+   "forms": [
+    "",
+    "_6",
+    "_7"
+   ],
+   "animation_archives": 3,
+   "image_archives": 3,
+   "window_archives": 1,
+   "gameplay_tables": [
+    "ai",
+    "col",
+    "shot"
+   ],
+   "almt_move_records": 96,
+   "unique_almt_move_ids": 96,
+   "dstx_sprite_members": 11,
+   "dstx_frames": 307,
+   "effect_sprite_members_name_hint": 7,
+   "koma_card_count": 2,
+   "koma_art_members": 2,
+   "koma_panels": 13,
+   "errors": [],
+   "warnings": []
+  },
+  {
+   "slot": "db_b_03",
+   "record": 2,
+   "resource_block": "0x05C300",
+   "forms": [
+    "",
+    "_4"
+   ],
+   "animation_archives": 2,
+   "image_archives": 2,
+   "window_archives": 1,
+   "gameplay_tables": [
+    "ai",
+    "col",
+    "shot"
+   ],
+   "almt_move_records": 64,
+   "unique_almt_move_ids": 64,
+   "dstx_sprite_members": 7,
+   "dstx_frames": 205,
+   "effect_sprite_members_name_hint": 4,
+   "koma_card_count": 1,
+   "koma_art_members": 1,
+   "koma_panels": 4,
+   "errors": [],
+   "warnings": []
+  },
+  {
+   "slot": "db_b_04",
+   "record": 3,
+   "resource_block": "0x05C400",
+   "forms": [
+    "",
+    "_5",
+    "_6"
+   ],
+   "animation_archives": 3,
+   "image_archives": 3,
+   "window_archives": 2,
+   "gameplay_tables": [
+    "ai",
+    "col",
+    "shot"
+   ],
+   "almt_move_records": 87,
+   "unique_almt_move_ids": 87,
+   "dstx_sprite_members": 13,
+   "dstx_frames": 288,
+   "effect_sprite_members_name_hint": 8,
+   "koma_card_count": 3,
+   "koma_art_members": 3,
+   "koma_panels": 16,
+   "errors": [],
+   "warnings": []
+  },
+  {
+   "slot": "db_b_05",
+   "record": 4,
+   "resource_block": "0x05C500",
+   "forms": [
+    "",
+    "_4"
+   ],
+   "animation_archives": 2,
+   "image_archives": 2,
+   "window_archives": 1,
+   "gameplay_tables": [
+    "ai",
+    "col",
+    "shot"
+   ],
+   "almt_move_records": 72,
+   "unique_almt_move_ids": 72,
+   "dstx_sprite_members": 8,
+   "dstx_frames": 213,
+   "effect_sprite_members_name_hint": 5,
+   "koma_card_count": 1,
+   "koma_art_members": 1,
+   "koma_panels": 4,
+   "errors": [],
+   "warnings": []
+  },
+  {
+   "slot": "db_b_06",
+   "record": 5,
+   "resource_block": "0x05C600",
+   "forms": [
+    "",
+    "_5"
+   ],
+   "animation_archives": 2,
+   "image_archives": 2,
+   "window_archives": 1,
+   "gameplay_tables": [
+    "ai",
+    "col",
+    "shot"
+   ],
+   "almt_move_records": 75,
+   "unique_almt_move_ids": 75,
+   "dstx_sprite_members": 13,
+   "dstx_frames": 238,
+   "effect_sprite_members_name_hint": 10,
+   "koma_card_count": 1,
+   "koma_art_members": 1,
+   "koma_panels": 5,
+   "errors": [],
+   "warnings": []
+  },
+  {
+   "slot": "db_b_07",
+   "record": 6,
+   "resource_block": "0x05C700",
+   "forms": [
+    "",
+    "_4"
+   ],
+   "animation_archives": 2,
+   "image_archives": 2,
+   "window_archives": 1,
+   "gameplay_tables": [
+    "ai",
+    "col",
+    "shot"
+   ],
+   "almt_move_records": 79,
+   "unique_almt_move_ids": 79,
+   "dstx_sprite_members": 11,
+   "dstx_frames": 288,
+   "effect_sprite_members_name_hint": 8,
+   "koma_card_count": 1,
+   "koma_art_members": 1,
+   "koma_panels": 4,
+   "errors": [],
+   "warnings": []
+  },
+  {
+   "slot": "db_b_08",
+   "record": 7,
+   "resource_block": "0x05C800",
+   "forms": [
+    "",
+    "_5"
+   ],
+   "animation_archives": 2,
+   "image_archives": 2,
+   "window_archives": 2,
+   "gameplay_tables": [
+    "ai",
+    "col",
+    "shot"
+   ],
+   "almt_move_records": 80,
+   "unique_almt_move_ids": 80,
+   "dstx_sprite_members": 13,
+   "dstx_frames": 261,
+   "effect_sprite_members_name_hint": 9,
+   "koma_card_count": 2,
+   "koma_art_members": 2,
+   "koma_panels": 10,
+   "errors": [],
+   "warnings": []
+  },
+  {
+   "slot": "db_b_09",
+   "record": 8,
+   "resource_block": "0x05C900",
+   "forms": [
+    "",
+    "_4",
+    "_5"
+   ],
+   "animation_archives": 3,
+   "image_archives": 3,
+   "window_archives": 1,
+   "gameplay_tables": [
+    "ai",
+    "col",
+    "shot"
+   ],
+   "almt_move_records": 91,
+   "unique_almt_move_ids": 91,
+   "dstx_sprite_members": 12,
+   "dstx_frames": 277,
+   "effect_sprite_members_name_hint": 8,
+   "koma_card_count": 2,
+   "koma_art_members": 2,
+   "koma_panels": 9,
+   "errors": [],
+   "warnings": []
+  },
+  {
+   "slot": "db_b_10",
+   "record": 9,
+   "resource_block": "0x05CA00",
+   "forms": [
+    "",
+    "_6"
+   ],
+   "animation_archives": 2,
+   "image_archives": 2,
+   "window_archives": 1,
+   "gameplay_tables": [
+    "ai",
+    "col",
+    "shot"
+   ],
+   "almt_move_records": 76,
+   "unique_almt_move_ids": 76,
+   "dstx_sprite_members": 14,
+   "dstx_frames": 265,
+   "effect_sprite_members_name_hint": 11,
+   "koma_card_count": 1,
+   "koma_art_members": 1,
+   "koma_panels": 6,
+   "errors": [],
+   "warnings": []
+  },
+  {
+   "slot": "db_b_11",
+   "record": 10,
+   "resource_block": "0x05CB00",
+   "forms": [
+    "",
+    "_6"
+   ],
+   "animation_archives": 2,
+   "image_archives": 2,
+   "window_archives": 2,
+   "gameplay_tables": [
+    "ai",
+    "col",
+    "shot"
+   ],
+   "almt_move_records": 74,
+   "unique_almt_move_ids": 74,
+   "dstx_sprite_members": 10,
+   "dstx_frames": 269,
+   "effect_sprite_members_name_hint": 6,
+   "koma_card_count": 2,
+   "koma_art_members": 2,
+   "koma_panels": 12,
+   "errors": [],
+   "warnings": []
+  },
+  {
+   "slot": "db_b_12",
+   "record": 11,
+   "resource_block": "0x05CC00",
+   "forms": [
+    "",
+    "_8"
+   ],
+   "animation_archives": 2,
+   "image_archives": 2,
+   "window_archives": 1,
+   "gameplay_tables": [
+    "ai",
+    "col",
+    "shot"
+   ],
+   "almt_move_records": 66,
+   "unique_almt_move_ids": 66,
+   "dstx_sprite_members": 6,
+   "dstx_frames": 244,
+   "effect_sprite_members_name_hint": 3,
+   "koma_card_count": 1,
+   "koma_art_members": 1,
+   "koma_panels": 8,
+   "errors": [],
+   "warnings": []
+  },
+  {
+   "slot": "op_b_01",
+   "record": 12,
+   "resource_block": "0x0A4100",
+   "forms": [
+    "",
+    "_4",
+    "_5",
+    "_6"
+   ],
+   "animation_archives": 4,
+   "image_archives": 4,
+   "window_archives": 2,
+   "gameplay_tables": [
+    "ai",
+    "col"
+   ],
+   "almt_move_records": 93,
+   "unique_almt_move_ids": 93,
+   "dstx_sprite_members": 10,
+   "dstx_frames": 344,
+   "effect_sprite_members_name_hint": 4,
+   "koma_card_count": 4,
+   "koma_art_members": 4,
+   "koma_panels": 21,
+   "errors": [],
+   "warnings": []
+  },
+  {
+   "slot": "op_b_02",
+   "record": 13,
+   "resource_block": "0x0A4200",
+   "forms": [
+    "",
+    "_4",
+    "_5",
+    "_6"
+   ],
+   "animation_archives": 4,
+   "image_archives": 4,
+   "window_archives": 2,
+   "gameplay_tables": [
+    "ai",
+    "col",
+    "shot"
+   ],
+   "almt_move_records": 81,
+   "unique_almt_move_ids": 81,
+   "dstx_sprite_members": 18,
+   "dstx_frames": 277,
+   "effect_sprite_members_name_hint": 12,
+   "koma_card_count": 4,
+   "koma_art_members": 4,
+   "koma_panels": 20,
+   "errors": [],
+   "warnings": []
+  },
+  {
+   "slot": "op_b_03",
+   "record": 14,
+   "resource_block": "0x0A4300",
+   "forms": [
+    "",
+    "_4",
+    "_5",
+    "_6"
+   ],
+   "animation_archives": 4,
+   "image_archives": 4,
+   "window_archives": 2,
+   "gameplay_tables": [
+    "ai",
+    "col",
+    "effect",
+    "shot"
+   ],
+   "almt_move_records": 96,
+   "unique_almt_move_ids": 96,
+   "dstx_sprite_members": 14,
+   "dstx_frames": 666,
+   "effect_sprite_members_name_hint": 8,
+   "koma_card_count": 4,
+   "koma_art_members": 4,
+   "koma_panels": 20,
+   "errors": [],
+   "warnings": []
+  },
+  {
+   "slot": "op_b_04",
+   "record": 15,
+   "resource_block": "0x0A4400",
+   "forms": [
+    "",
+    "_4",
+    "_5"
+   ],
+   "animation_archives": 3,
+   "image_archives": 3,
+   "window_archives": 2,
+   "gameplay_tables": [
+    "ai",
+    "col",
+    "shot"
+   ],
+   "almt_move_records": 91,
+   "unique_almt_move_ids": 91,
+   "dstx_sprite_members": 12,
+   "dstx_frames": 301,
+   "effect_sprite_members_name_hint": 7,
+   "koma_card_count": 3,
+   "koma_art_members": 3,
+   "koma_panels": 13,
+   "errors": [],
+   "warnings": []
+  },
+  {
+   "slot": "op_b_05",
+   "record": 16,
+   "resource_block": "0x0A4500",
+   "forms": [
+    "",
+    "_4",
+    "_5",
+    "_6"
+   ],
+   "animation_archives": 4,
+   "image_archives": 4,
+   "window_archives": 1,
+   "gameplay_tables": [
+    "ai",
+    "col",
+    "effect",
+    "shot"
+   ],
+   "almt_move_records": 96,
+   "unique_almt_move_ids": 96,
+   "dstx_sprite_members": 9,
+   "dstx_frames": 357,
+   "effect_sprite_members_name_hint": 4,
+   "koma_card_count": 3,
+   "koma_art_members": 3,
+   "koma_panels": 15,
+   "errors": [],
+   "warnings": []
+  },
+  {
+   "slot": "op_b_06",
+   "record": 17,
+   "resource_block": "0x0A4600",
+   "forms": [
+    "",
+    "_4",
+    "_5"
+   ],
+   "animation_archives": 3,
+   "image_archives": 3,
+   "window_archives": 2,
+   "gameplay_tables": [
+    "ai",
+    "col",
+    "shot"
+   ],
+   "almt_move_records": 111,
+   "unique_almt_move_ids": 111,
+   "dstx_sprite_members": 12,
+   "dstx_frames": 395,
+   "effect_sprite_members_name_hint": 7,
+   "koma_card_count": 3,
+   "koma_art_members": 3,
+   "koma_panels": 14,
+   "errors": [],
+   "warnings": []
+  },
+  {
+   "slot": "op_b_07",
+   "record": 18,
+   "resource_block": "0x0A4700",
+   "forms": [
+    "",
+    "_7",
+    "_8"
+   ],
+   "animation_archives": 3,
+   "image_archives": 3,
+   "window_archives": 1,
+   "gameplay_tables": [
+    "ai",
+    "col",
+    "shot"
+   ],
+   "almt_move_records": 96,
+   "unique_almt_move_ids": 96,
+   "dstx_sprite_members": 13,
+   "dstx_frames": 364,
+   "effect_sprite_members_name_hint": 9,
+   "koma_card_count": 2,
+   "koma_art_members": 2,
+   "koma_panels": 15,
+   "errors": [],
+   "warnings": []
+  },
+  {
+   "slot": "op_b_08",
+   "record": 19,
+   "resource_block": "0x0A4800",
+   "forms": [
+    "",
+    "_6"
+   ],
+   "animation_archives": 2,
+   "image_archives": 2,
+   "window_archives": 1,
+   "gameplay_tables": [
+    "ai",
+    "col",
+    "effect",
+    "shot"
+   ],
+   "almt_move_records": 93,
+   "unique_almt_move_ids": 93,
+   "dstx_sprite_members": 10,
+   "dstx_frames": 310,
+   "effect_sprite_members_name_hint": 7,
+   "koma_card_count": 1,
+   "koma_art_members": 1,
+   "koma_panels": 6,
+   "errors": [],
+   "warnings": []
+  },
+  {
+   "slot": "na_b_01",
+   "record": 20,
+   "resource_block": "0x060100",
+   "forms": [
+    "",
+    "_4",
+    "_5",
+    "_6"
+   ],
+   "animation_archives": 4,
+   "image_archives": 4,
+   "window_archives": 2,
+   "gameplay_tables": [
+    "ai",
+    "col",
+    "effect",
+    "shot"
+   ],
+   "almt_move_records": 118,
+   "unique_almt_move_ids": 118,
+   "dstx_sprite_members": 34,
+   "dstx_frames": 485,
+   "effect_sprite_members_name_hint": 28,
+   "koma_card_count": 4,
+   "koma_art_members": 4,
+   "koma_panels": 19,
+   "errors": [],
+   "warnings": []
+  },
+  {
+   "slot": "na_b_02",
+   "record": 21,
+   "resource_block": "0x060200",
+   "forms": [
+    "",
+    "_7",
+    "_8"
+   ],
+   "animation_archives": 3,
+   "image_archives": 3,
+   "window_archives": 2,
+   "gameplay_tables": [
+    "ai",
+    "col",
+    "effect",
+    "shot"
+   ],
+   "almt_move_records": 89,
+   "unique_almt_move_ids": 89,
+   "dstx_sprite_members": 21,
+   "dstx_frames": 316,
+   "effect_sprite_members_name_hint": 16,
+   "koma_card_count": 3,
+   "koma_art_members": 3,
+   "koma_panels": 23,
+   "errors": [],
+   "warnings": []
+  },
+  {
+   "slot": "na_b_03",
+   "record": 22,
+   "resource_block": "0x060300",
+   "forms": [
+    "",
+    "_4",
+    "_5",
+    "_6"
+   ],
+   "animation_archives": 4,
+   "image_archives": 4,
+   "window_archives": 2,
+   "gameplay_tables": [
+    "ai",
+    "col",
+    "effect",
+    "shot"
+   ],
+   "almt_move_records": 90,
+   "unique_almt_move_ids": 90,
+   "dstx_sprite_members": 16,
+   "dstx_frames": 344,
+   "effect_sprite_members_name_hint": 10,
+   "koma_card_count": 4,
+   "koma_art_members": 4,
+   "koma_panels": 21,
+   "errors": [],
+   "warnings": []
+  },
+  {
+   "slot": "na_b_04",
+   "record": 23,
+   "resource_block": "0x060400",
+   "forms": [
+    "",
+    "_4",
+    "_5",
+    "_6"
+   ],
+   "animation_archives": 4,
+   "image_archives": 4,
+   "window_archives": 2,
+   "gameplay_tables": [
+    "ai",
+    "col",
+    "effect",
+    "shot"
+   ],
+   "almt_move_records": 123,
+   "unique_almt_move_ids": 123,
+   "dstx_sprite_members": 20,
+   "dstx_frames": 648,
+   "effect_sprite_members_name_hint": 14,
+   "koma_card_count": 4,
+   "koma_art_members": 4,
+   "koma_panels": 21,
+   "errors": [],
+   "warnings": []
+  },
+  {
+   "slot": "na_b_05",
+   "record": 24,
+   "resource_block": "0x060500",
+   "forms": [
+    "",
+    "_7",
+    "_8"
+   ],
+   "animation_archives": 3,
+   "image_archives": 3,
+   "window_archives": 1,
+   "gameplay_tables": [
+    "ai",
+    "col",
+    "shot"
+   ],
+   "almt_move_records": 79,
+   "unique_almt_move_ids": 79,
+   "dstx_sprite_members": 26,
+   "dstx_frames": 330,
+   "effect_sprite_members_name_hint": 22,
+   "koma_card_count": 2,
+   "koma_art_members": 2,
+   "koma_panels": 15,
+   "errors": [],
+   "warnings": []
+  },
+  {
+   "slot": "sk_b_01",
+   "record": 25,
+   "resource_block": "0x030100",
+   "forms": [
+    "",
+    "_4",
+    "_5"
+   ],
+   "animation_archives": 3,
+   "image_archives": 3,
+   "window_archives": 2,
+   "gameplay_tables": [
+    "ai",
+    "col",
+    "shot"
+   ],
+   "almt_move_records": 85,
+   "unique_almt_move_ids": 85,
+   "dstx_sprite_members": 11,
+   "dstx_frames": 266,
+   "effect_sprite_members_name_hint": 6,
+   "koma_card_count": 3,
+   "koma_art_members": 3,
+   "koma_panels": 13,
+   "errors": [],
+   "warnings": []
+  },
+  {
+   "slot": "sk_b_02",
+   "record": 26,
+   "resource_block": "0x030200",
+   "forms": [
+    "",
+    "_6"
+   ],
+   "animation_archives": 2,
+   "image_archives": 2,
+   "window_archives": 1,
+   "gameplay_tables": [
+    "ai",
+    "col",
+    "shot"
+   ],
+   "almt_move_records": 78,
+   "unique_almt_move_ids": 78,
+   "dstx_sprite_members": 16,
+   "dstx_frames": 245,
+   "effect_sprite_members_name_hint": 13,
+   "koma_card_count": 1,
+   "koma_art_members": 1,
+   "koma_panels": 6,
+   "errors": [],
+   "warnings": []
+  },
+  {
+   "slot": "sk_b_03",
+   "record": 27,
+   "resource_block": "0x030300",
+   "forms": [
+    "",
+    "_4",
+    "_5"
+   ],
+   "animation_archives": 3,
+   "image_archives": 3,
+   "window_archives": 2,
+   "gameplay_tables": [
+    "ai",
+    "col",
+    "shot"
+   ],
+   "almt_move_records": 74,
+   "unique_almt_move_ids": 74,
+   "dstx_sprite_members": 15,
+   "dstx_frames": 260,
+   "effect_sprite_members_name_hint": 10,
+   "koma_card_count": 3,
+   "koma_art_members": 3,
+   "koma_panels": 14,
+   "errors": [],
+   "warnings": []
+  },
+  {
+   "slot": "jj_b_01",
+   "record": 28,
+   "resource_block": "0x038100",
+   "forms": [
+    "",
+    "_4",
+    "_5",
+    "_6"
+   ],
+   "animation_archives": 4,
+   "image_archives": 4,
+   "window_archives": 2,
+   "gameplay_tables": [
+    "ai",
+    "col",
+    "shot"
+   ],
+   "almt_move_records": 99,
+   "unique_almt_move_ids": 99,
+   "dstx_sprite_members": 24,
+   "dstx_frames": 358,
+   "effect_sprite_members_name_hint": 18,
+   "koma_card_count": 4,
+   "koma_art_members": 4,
+   "koma_panels": 20,
+   "errors": [],
+   "warnings": []
+  },
+  {
+   "slot": "jj_b_02",
+   "record": 29,
+   "resource_block": "0x038200",
+   "forms": [
+    "",
+    "_4",
+    "_5",
+    "_6"
+   ],
+   "animation_archives": 4,
+   "image_archives": 4,
+   "window_archives": 2,
+   "gameplay_tables": [
+    "ai",
+    "col",
+    "shot"
+   ],
+   "almt_move_records": 104,
+   "unique_almt_move_ids": 104,
+   "dstx_sprite_members": 17,
+   "dstx_frames": 360,
+   "effect_sprite_members_name_hint": 11,
+   "koma_card_count": 4,
+   "koma_art_members": 4,
+   "koma_panels": 20,
+   "errors": [],
+   "warnings": []
+  },
+  {
+   "slot": "hh_b_01",
+   "record": 30,
+   "resource_block": "0x068100",
+   "forms": [
+    "",
+    "_4",
+    "_5",
+    "_6"
+   ],
+   "animation_archives": 4,
+   "image_archives": 4,
+   "window_archives": 1,
+   "gameplay_tables": [
+    "ai",
+    "col",
+    "shot"
+   ],
+   "almt_move_records": 103,
+   "unique_almt_move_ids": 103,
+   "dstx_sprite_members": 19,
+   "dstx_frames": 366,
+   "effect_sprite_members_name_hint": 14,
+   "koma_card_count": 3,
+   "koma_art_members": 3,
+   "koma_panels": 15,
+   "errors": [],
+   "warnings": []
+  },
+  {
+   "slot": "hh_b_02",
+   "record": 31,
+   "resource_block": "0x068200",
+   "forms": [
+    "",
+    "_4",
+    "_5"
+   ],
+   "animation_archives": 3,
+   "image_archives": 3,
+   "window_archives": 1,
+   "gameplay_tables": [
+    "ai",
+    "col",
+    "shot"
+   ],
+   "almt_move_records": 102,
+   "unique_almt_move_ids": 102,
+   "dstx_sprite_members": 19,
+   "dstx_frames": 362,
+   "effect_sprite_members_name_hint": 15,
+   "koma_card_count": 2,
+   "koma_art_members": 2,
+   "koma_panels": 9,
+   "errors": [],
+   "warnings": []
+  },
+  {
+   "slot": "yh_b_01",
+   "record": 32,
+   "resource_block": "0x098100",
+   "forms": [
+    "",
+    "_4",
+    "_5",
+    "_6"
+   ],
+   "animation_archives": 4,
+   "image_archives": 4,
+   "window_archives": 1,
+   "gameplay_tables": [
+    "ai",
+    "col",
+    "shot"
+   ],
+   "almt_move_records": 105,
+   "unique_almt_move_ids": 105,
+   "dstx_sprite_members": 18,
+   "dstx_frames": 364,
+   "effect_sprite_members_name_hint": 13,
+   "koma_card_count": 3,
+   "koma_art_members": 3,
+   "koma_panels": 15,
+   "errors": [],
+   "warnings": []
+  },
+  {
+   "slot": "yh_b_02",
+   "record": 33,
+   "resource_block": "0x098200",
+   "forms": [
+    "",
+    "_4",
+    "_5"
+   ],
+   "animation_archives": 3,
+   "image_archives": 3,
+   "window_archives": 1,
+   "gameplay_tables": [
+    "ai",
+    "col",
+    "shot"
+   ],
+   "almt_move_records": 103,
+   "unique_almt_move_ids": 103,
+   "dstx_sprite_members": 15,
+   "dstx_frames": 383,
+   "effect_sprite_members_name_hint": 11,
+   "koma_card_count": 2,
+   "koma_art_members": 2,
+   "koma_panels": 9,
+   "errors": [],
+   "warnings": []
+  },
+  {
+   "slot": "yh_b_03",
+   "record": 34,
+   "resource_block": "0x098300",
+   "forms": [
+    "",
+    "_4",
+    "_5"
+   ],
+   "animation_archives": 3,
+   "image_archives": 3,
+   "window_archives": 1,
+   "gameplay_tables": [
+    "ai",
+    "col",
+    "shot"
+   ],
+   "almt_move_records": 96,
+   "unique_almt_move_ids": 96,
+   "dstx_sprite_members": 23,
+   "dstx_frames": 360,
+   "effect_sprite_members_name_hint": 19,
+   "koma_card_count": 2,
+   "koma_art_members": 2,
+   "koma_panels": 9,
+   "errors": [],
+   "warnings": []
+  },
+  {
+   "slot": "yo_b_01",
+   "record": 35,
+   "resource_block": "0x094100",
+   "forms": [
+    "",
+    "_4",
+    "_5",
+    "_6"
+   ],
+   "animation_archives": 4,
+   "image_archives": 4,
+   "window_archives": 1,
+   "gameplay_tables": [
+    "ai",
+    "col",
+    "shot"
+   ],
+   "almt_move_records": 134,
+   "unique_almt_move_ids": 134,
+   "dstx_sprite_members": 26,
+   "dstx_frames": 471,
+   "effect_sprite_members_name_hint": 21,
+   "koma_card_count": 3,
+   "koma_art_members": 3,
+   "koma_panels": 15,
+   "errors": [],
+   "warnings": []
+  },
+  {
+   "slot": "rk_b_01",
+   "record": 36,
+   "resource_block": "0x09C100",
+   "forms": [
+    "",
+    "_4",
+    "_5",
+    "_6"
+   ],
+   "animation_archives": 4,
+   "image_archives": 4,
+   "window_archives": 2,
+   "gameplay_tables": [
+    "ai",
+    "col",
+    "effect",
+    "shot"
+   ],
+   "almt_move_records": 96,
+   "unique_almt_move_ids": 96,
+   "dstx_sprite_members": 14,
+   "dstx_frames": 617,
+   "effect_sprite_members_name_hint": 8,
+   "koma_card_count": 4,
+   "koma_art_members": 4,
+   "koma_panels": 21,
+   "errors": [],
+   "warnings": []
+  },
+  {
+   "slot": "bc_b_01",
+   "record": 37,
+   "resource_block": "0x074100",
+   "forms": [
+    "",
+    "_4",
+    "_5"
+   ],
+   "animation_archives": 3,
+   "image_archives": 3,
+   "window_archives": 1,
+   "gameplay_tables": [
+    "ai",
+    "col",
+    "shot"
+   ],
+   "almt_move_records": 64,
+   "unique_almt_move_ids": 64,
+   "dstx_sprite_members": 6,
+   "dstx_frames": 288,
+   "effect_sprite_members_name_hint": 2,
+   "koma_card_count": 2,
+   "koma_art_members": 2,
+   "koma_panels": 9,
+   "errors": [],
+   "warnings": []
+  },
+  {
+   "slot": "bc_b_02",
+   "record": 38,
+   "resource_block": "0x074200",
+   "forms": [
+    "",
+    "_4",
+    "_5"
+   ],
+   "animation_archives": 3,
+   "image_archives": 3,
+   "window_archives": 2,
+   "gameplay_tables": [
+    "ai",
+    "col",
+    "effect",
+    "shot"
+   ],
+   "almt_move_records": 103,
+   "unique_almt_move_ids": 103,
+   "dstx_sprite_members": 13,
+   "dstx_frames": 337,
+   "effect_sprite_members_name_hint": 8,
+   "koma_card_count": 3,
+   "koma_art_members": 3,
+   "koma_panels": 14,
+   "errors": [],
+   "warnings": []
+  },
+  {
+   "slot": "bl_b_01",
+   "record": 39,
+   "resource_block": "0x078100",
+   "forms": [
+    "",
+    "_4",
+    "_5",
+    "_6"
+   ],
+   "animation_archives": 4,
+   "image_archives": 4,
+   "window_archives": 1,
+   "gameplay_tables": [
+    "ai",
+    "col",
+    "shot"
+   ],
+   "almt_move_records": 90,
+   "unique_almt_move_ids": 90,
+   "dstx_sprite_members": 12,
+   "dstx_frames": 329,
+   "effect_sprite_members_name_hint": 7,
+   "koma_card_count": 3,
+   "koma_art_members": 3,
+   "koma_panels": 15,
+   "errors": [],
+   "warnings": []
+  },
+  {
+   "slot": "bl_b_02",
+   "record": 40,
+   "resource_block": "0x078200",
+   "forms": [
+    "",
+    "_7",
+    "_8"
+   ],
+   "animation_archives": 3,
+   "image_archives": 3,
+   "window_archives": 1,
+   "gameplay_tables": [
+    "ai",
+    "col",
+    "shot"
+   ],
+   "almt_move_records": 88,
+   "unique_almt_move_ids": 88,
+   "dstx_sprite_members": 17,
+   "dstx_frames": 312,
+   "effect_sprite_members_name_hint": 13,
+   "koma_card_count": 2,
+   "koma_art_members": 2,
+   "koma_panels": 15,
+   "errors": [],
+   "warnings": []
+  },
+  {
+   "slot": "bl_b_03",
+   "record": 41,
+   "resource_block": "0x078300",
+   "forms": [
+    "",
+    "_4",
+    "_5",
+    "_6"
+   ],
+   "animation_archives": 4,
+   "image_archives": 4,
+   "window_archives": 1,
+   "gameplay_tables": [
+    "ai",
+    "col",
+    "shot"
+   ],
+   "almt_move_records": 93,
+   "unique_almt_move_ids": 93,
+   "dstx_sprite_members": 14,
+   "dstx_frames": 304,
+   "effect_sprite_members_name_hint": 9,
+   "koma_card_count": 3,
+   "koma_art_members": 3,
+   "koma_panels": 15,
+   "errors": [],
+   "warnings": []
+  },
+  {
+   "slot": "bl_b_04",
+   "record": 42,
+   "resource_block": "0x078400",
+   "forms": [
+    "",
+    "_4",
+    "_5",
+    "_6"
+   ],
+   "animation_archives": 4,
+   "image_archives": 4,
+   "window_archives": 1,
+   "gameplay_tables": [
+    "ai",
+    "col",
+    "shot"
+   ],
+   "almt_move_records": 104,
+   "unique_almt_move_ids": 104,
+   "dstx_sprite_members": 20,
+   "dstx_frames": 343,
+   "effect_sprite_members_name_hint": 15,
+   "koma_card_count": 3,
+   "koma_art_members": 3,
+   "koma_panels": 15,
+   "errors": [],
+   "warnings": []
+  },
+  {
+   "slot": "bl_b_05",
+   "record": 43,
+   "resource_block": "0x078500",
+   "forms": [
+    "",
+    "_4",
+    "_5",
+    "_6"
+   ],
+   "animation_archives": 4,
+   "image_archives": 4,
+   "window_archives": 1,
+   "gameplay_tables": [
+    "ai",
+    "col",
+    "effect",
+    "shot"
+   ],
+   "almt_move_records": 108,
+   "unique_almt_move_ids": 108,
+   "dstx_sprite_members": 17,
+   "dstx_frames": 403,
+   "effect_sprite_members_name_hint": 12,
+   "koma_card_count": 3,
+   "koma_art_members": 3,
+   "koma_panels": 15,
+   "errors": [],
+   "warnings": []
+  },
+  {
+   "slot": "bu_b_01",
+   "record": 44,
+   "resource_block": "0x070100",
+   "forms": [
+    "",
+    "_4",
+    "_5",
+    "_6"
+   ],
+   "animation_archives": 4,
+   "image_archives": 4,
+   "window_archives": 1,
+   "gameplay_tables": [
+    "ai",
+    "col",
+    "effect",
+    "shot"
+   ],
+   "almt_move_records": 112,
+   "unique_almt_move_ids": 112,
+   "dstx_sprite_members": 22,
+   "dstx_frames": 485,
+   "effect_sprite_members_name_hint": 17,
+   "koma_card_count": 3,
+   "koma_art_members": 3,
+   "koma_panels": 15,
+   "errors": [],
+   "warnings": []
+  },
+  {
+   "slot": "dg_b_01",
+   "record": 45,
+   "resource_block": "0x04C100",
+   "forms": [
+    "",
+    "_4",
+    "_5",
+    "_6"
+   ],
+   "animation_archives": 4,
+   "image_archives": 4,
+   "window_archives": 2,
+   "gameplay_tables": [
+    "ai",
+    "col",
+    "effect",
+    "shot"
+   ],
+   "almt_move_records": 108,
+   "unique_almt_move_ids": 108,
+   "dstx_sprite_members": 22,
+   "dstx_frames": 659,
+   "effect_sprite_members_name_hint": 16,
+   "koma_card_count": 4,
+   "koma_art_members": 4,
+   "koma_panels": 21,
+   "errors": [],
+   "warnings": []
+  },
+  {
+   "slot": "dg_b_02",
+   "record": 46,
+   "resource_block": "0x04C200",
+   "forms": [
+    "",
+    "_4",
+    "_5"
+   ],
+   "animation_archives": 3,
+   "image_archives": 3,
+   "window_archives": 1,
+   "gameplay_tables": [
+    "ai",
+    "col"
+   ],
+   "almt_move_records": 84,
+   "unique_almt_move_ids": 84,
+   "dstx_sprite_members": 13,
+   "dstx_frames": 374,
+   "effect_sprite_members_name_hint": 9,
+   "koma_card_count": 2,
+   "koma_art_members": 2,
+   "koma_panels": 9,
+   "errors": [],
+   "warnings": []
+  },
+  {
+   "slot": "bb_b_01",
+   "record": 47,
+   "resource_block": "0x084100",
+   "forms": [
+    "",
+    "_4",
+    "_5",
+    "_6"
+   ],
+   "animation_archives": 4,
+   "image_archives": 4,
+   "window_archives": 2,
+   "gameplay_tables": [
+    "ai",
+    "col",
+    "effect",
+    "shot"
+   ],
+   "almt_move_records": 111,
+   "unique_almt_move_ids": 111,
+   "dstx_sprite_members": 28,
+   "dstx_frames": 390,
+   "effect_sprite_members_name_hint": 22,
+   "koma_card_count": 4,
+   "koma_art_members": 4,
+   "koma_panels": 21,
+   "errors": [],
+   "warnings": []
+  },
+  {
+   "slot": "bb_b_02",
+   "record": 48,
+   "resource_block": "0x084200",
+   "forms": [
+    "",
+    "_4",
+    "_5",
+    "_6"
+   ],
+   "animation_archives": 4,
+   "image_archives": 4,
+   "window_archives": 1,
+   "gameplay_tables": [
+    "ai",
+    "col",
+    "effect",
+    "shot"
+   ],
+   "almt_move_records": 83,
+   "unique_almt_move_ids": 83,
+   "dstx_sprite_members": 22,
+   "dstx_frames": 288,
+   "effect_sprite_members_name_hint": 17,
+   "koma_card_count": 3,
+   "koma_art_members": 3,
+   "koma_panels": 15,
+   "errors": [],
+   "warnings": []
+  },
+  {
+   "slot": "bb_b_03",
+   "record": 49,
+   "resource_block": "0x084300",
+   "forms": [
+    "",
+    "_7"
+   ],
+   "animation_archives": 2,
+   "image_archives": 2,
+   "window_archives": 1,
+   "gameplay_tables": [
+    "ai",
+    "col",
+    "shot"
+   ],
+   "almt_move_records": 67,
+   "unique_almt_move_ids": 67,
+   "dstx_sprite_members": 14,
+   "dstx_frames": 278,
+   "effect_sprite_members_name_hint": 11,
+   "koma_card_count": 1,
+   "koma_art_members": 1,
+   "koma_panels": 7,
+   "errors": [],
+   "warnings": []
+  },
+  {
+   "slot": "bb_b_04",
+   "record": 50,
+   "resource_block": "0x084400",
+   "forms": [
+    "",
+    "_7"
+   ],
+   "animation_archives": 2,
+   "image_archives": 2,
+   "window_archives": 1,
+   "gameplay_tables": [
+    "ai",
+    "col"
+   ],
+   "almt_move_records": 64,
+   "unique_almt_move_ids": 64,
+   "dstx_sprite_members": 7,
+   "dstx_frames": 225,
+   "effect_sprite_members_name_hint": 4,
+   "koma_card_count": 1,
+   "koma_art_members": 1,
+   "koma_panels": 7,
+   "errors": [],
+   "warnings": []
+  },
+  {
+   "slot": "kk_b_01",
+   "record": 51,
+   "resource_block": "0x020100",
+   "forms": [
+    "",
+    "_4",
+    "_5",
+    "_6",
+    "_7"
+   ],
+   "animation_archives": 5,
+   "image_archives": 5,
+   "window_archives": 2,
+   "gameplay_tables": [
+    "ai",
+    "col",
+    "shot"
+   ],
+   "almt_move_records": 147,
+   "unique_almt_move_ids": 147,
+   "dstx_sprite_members": 27,
+   "dstx_frames": 468,
+   "effect_sprite_members_name_hint": 20,
+   "koma_card_count": 5,
+   "koma_art_members": 5,
+   "koma_panels": 28,
+   "errors": [],
+   "warnings": []
+  },
+  {
+   "slot": "gt_b_01",
+   "record": 52,
+   "resource_block": "0x018100",
+   "forms": [
+    "",
+    "_4",
+    "_5",
+    "_6",
+    "_7"
+   ],
+   "animation_archives": 5,
+   "image_archives": 5,
+   "window_archives": 2,
+   "gameplay_tables": [
+    "ai",
+    "col",
+    "shot"
+   ],
+   "almt_move_records": 130,
+   "unique_almt_move_ids": 130,
+   "dstx_sprite_members": 23,
+   "dstx_frames": 450,
+   "effect_sprite_members_name_hint": 16,
+   "koma_card_count": 5,
+   "koma_art_members": 5,
+   "koma_panels": 28,
+   "errors": [],
+   "warnings": []
+  },
+  {
+   "slot": "gt_b_02",
+   "record": 53,
+   "resource_block": "0x018200",
+   "forms": [
+    "",
+    "_4",
+    "_5",
+    "_6"
+   ],
+   "animation_archives": 4,
+   "image_archives": 4,
+   "window_archives": 2,
+   "gameplay_tables": [
+    "ai",
+    "col",
+    "effect",
+    "shot"
+   ],
+   "almt_move_records": 96,
+   "unique_almt_move_ids": 96,
+   "dstx_sprite_members": 28,
+   "dstx_frames": 352,
+   "effect_sprite_members_name_hint": 22,
+   "koma_card_count": 4,
+   "koma_art_members": 4,
+   "koma_panels": 21,
+   "errors": [],
+   "warnings": []
+  },
+  {
+   "slot": "tr_b_01",
+   "record": 54,
+   "resource_block": "0x010100",
+   "forms": [
+    "",
+    "_4",
+    "_5",
+    "_6"
+   ],
+   "animation_archives": 4,
+   "image_archives": 4,
+   "window_archives": 2,
+   "gameplay_tables": [
+    "ai",
+    "col",
+    "effect",
+    "shot"
+   ],
+   "almt_move_records": 92,
+   "unique_almt_move_ids": 92,
+   "dstx_sprite_members": 25,
+   "dstx_frames": 478,
+   "effect_sprite_members_name_hint": 19,
+   "koma_card_count": 4,
+   "koma_art_members": 4,
+   "koma_panels": 21,
+   "errors": [],
+   "warnings": []
+  },
+  {
+   "slot": "pj_b_01",
+   "record": 55,
+   "resource_block": "0x06C100",
+   "forms": [
+    "",
+    "_4",
+    "_5",
+    "_6"
+   ],
+   "animation_archives": 4,
+   "image_archives": 4,
+   "window_archives": 1,
+   "gameplay_tables": [
+    "ai",
+    "col",
+    "shot"
+   ],
+   "almt_move_records": 106,
+   "unique_almt_move_ids": 106,
+   "dstx_sprite_members": 17,
+   "dstx_frames": 363,
+   "effect_sprite_members_name_hint": 12,
+   "koma_card_count": 3,
+   "koma_art_members": 3,
+   "koma_panels": 15,
+   "errors": [],
+   "warnings": []
+  },
+  {
+   "slot": "ds_b_01",
+   "record": 56,
+   "resource_block": "0x054100",
+   "forms": [
+    "",
+    "_4",
+    "_5",
+    "_6",
+    "_7"
+   ],
+   "animation_archives": 5,
+   "image_archives": 5,
+   "window_archives": 2,
+   "gameplay_tables": [
+    "ai",
+    "col",
+    "effect",
+    "shot"
+   ],
+   "almt_move_records": 117,
+   "unique_almt_move_ids": 117,
+   "dstx_sprite_members": 32,
+   "dstx_frames": 376,
+   "effect_sprite_members_name_hint": 25,
+   "koma_card_count": 5,
+   "koma_art_members": 5,
+   "koma_panels": 28,
+   "errors": [],
+   "warnings": []
+  },
+  {
+   "slot": "ds_b_02",
+   "record": 57,
+   "resource_block": "0x054200",
+   "forms": [
+    "",
+    "_4",
+    "_5",
+    "_6",
+    "_7"
+   ],
+   "animation_archives": 5,
+   "image_archives": 5,
+   "window_archives": 2,
+   "gameplay_tables": [
+    "ai",
+    "col",
+    "effect",
+    "shot"
+   ],
+   "almt_move_records": 109,
+   "unique_almt_move_ids": 109,
+   "dstx_sprite_members": 24,
+   "dstx_frames": 460,
+   "effect_sprite_members_name_hint": 17,
+   "koma_card_count": 5,
+   "koma_art_members": 5,
+   "koma_panels": 26,
+   "errors": [],
+   "warnings": []
+  },
+  {
+   "slot": "ds_b_03",
+   "record": 58,
+   "resource_block": "0x054300",
+   "forms": [
+    "",
+    "_8"
+   ],
+   "animation_archives": 2,
+   "image_archives": 2,
+   "window_archives": 1,
+   "gameplay_tables": [
+    "ai",
+    "col",
+    "shot"
+   ],
+   "almt_move_records": 86,
+   "unique_almt_move_ids": 86,
+   "dstx_sprite_members": 19,
+   "dstx_frames": 318,
+   "effect_sprite_members_name_hint": 16,
+   "koma_card_count": 1,
+   "koma_art_members": 1,
+   "koma_panels": 8,
+   "errors": [],
+   "warnings": []
+  },
+  {
+   "slot": "mr_b_01",
+   "record": 59,
+   "resource_block": "0x090100",
+   "forms": [
+    "",
+    "_4",
+    "_5",
+    "_6",
+    "_7"
+   ],
+   "animation_archives": 5,
+   "image_archives": 5,
+   "window_archives": 1,
+   "gameplay_tables": [
+    "ai",
+    "col",
+    "shot"
+   ],
+   "almt_move_records": 159,
+   "unique_almt_move_ids": 159,
+   "dstx_sprite_members": 38,
+   "dstx_frames": 579,
+   "effect_sprite_members_name_hint": 32,
+   "koma_card_count": 4,
+   "koma_art_members": 4,
+   "koma_panels": 22,
+   "errors": [],
+   "warnings": []
+  },
+  {
+   "slot": "nn_b_01",
+   "record": 60,
+   "resource_block": "0x088100",
+   "forms": [
+    "",
+    "_4",
+    "_5"
+   ],
+   "animation_archives": 3,
+   "image_archives": 3,
+   "window_archives": 2,
+   "gameplay_tables": [
+    "ai",
+    "col",
+    "shot"
+   ],
+   "almt_move_records": 102,
+   "unique_almt_move_ids": 102,
+   "dstx_sprite_members": 17,
+   "dstx_frames": 420,
+   "effect_sprite_members_name_hint": 12,
+   "koma_card_count": 3,
+   "koma_art_members": 3,
+   "koma_panels": 13,
+   "errors": [],
+   "warnings": []
+  },
+  {
+   "slot": "hk_b_01",
+   "record": 61,
+   "resource_block": "0x080100",
+   "forms": [
+    "",
+    "_4",
+    "_5",
+    "_6",
+    "_7",
+    "_8"
+   ],
+   "animation_archives": 6,
+   "image_archives": 6,
+   "window_archives": 1,
+   "gameplay_tables": [
+    "ai",
+    "col",
+    "effect",
+    "shot"
+   ],
+   "almt_move_records": 135,
+   "unique_almt_move_ids": 135,
+   "dstx_sprite_members": 33,
+   "dstx_frames": 476,
+   "effect_sprite_members_name_hint": 26,
+   "koma_card_count": 5,
+   "koma_art_members": 5,
+   "koma_panels": 30,
+   "errors": [],
+   "warnings": []
+  },
+  {
+   "slot": "hk_b_02",
+   "record": 62,
+   "resource_block": "0x080200",
+   "forms": [
+    "",
+    "_6",
+    "_7",
+    "_8"
+   ],
+   "animation_archives": 4,
+   "image_archives": 4,
+   "window_archives": 1,
+   "gameplay_tables": [
+    "ai",
+    "col",
+    "effect",
+    "shot"
+   ],
+   "almt_move_records": 106,
+   "unique_almt_move_ids": 106,
+   "dstx_sprite_members": 31,
+   "dstx_frames": 360,
+   "effect_sprite_members_name_hint": 26,
+   "koma_card_count": 3,
+   "koma_art_members": 3,
+   "koma_panels": 21,
+   "errors": [],
+   "warnings": []
+  },
+  {
+   "slot": "ss_b_01",
+   "record": 63,
+   "resource_block": "0x040100",
+   "forms": [
+    "",
+    "_4",
+    "_5",
+    "_6",
+    "_7"
+   ],
+   "animation_archives": 5,
+   "image_archives": 5,
+   "window_archives": 1,
+   "gameplay_tables": [
+    "ai",
+    "col",
+    "shot"
+   ],
+   "almt_move_records": 94,
+   "unique_almt_move_ids": 94,
+   "dstx_sprite_members": 25,
+   "dstx_frames": 387,
+   "effect_sprite_members_name_hint": 19,
+   "koma_card_count": 4,
+   "koma_art_members": 4,
+   "koma_panels": 22,
+   "errors": [],
+   "warnings": []
+  },
+  {
+   "slot": "ss_b_02",
+   "record": 64,
+   "resource_block": "0x040200",
+   "forms": [
+    "",
+    "_8"
+   ],
+   "animation_archives": 2,
+   "image_archives": 2,
+   "window_archives": 1,
+   "gameplay_tables": [
+    "ai",
+    "col",
+    "shot"
+   ],
+   "almt_move_records": 73,
+   "unique_almt_move_ids": 73,
+   "dstx_sprite_members": 17,
+   "dstx_frames": 265,
+   "effect_sprite_members_name_hint": 14,
+   "koma_card_count": 1,
+   "koma_art_members": 1,
+   "koma_panels": 8,
+   "errors": [],
+   "warnings": []
+  },
+  {
+   "slot": "kn_b_01",
+   "record": 65,
+   "resource_block": "0x01C100",
+   "forms": [
+    "",
+    "_4",
+    "_5",
+    "_6",
+    "_7",
+    "_8"
+   ],
+   "animation_archives": 6,
+   "image_archives": 6,
+   "window_archives": 2,
+   "gameplay_tables": [
+    "ai",
+    "col",
+    "shot"
+   ],
+   "almt_move_records": 122,
+   "unique_almt_move_ids": 122,
+   "dstx_sprite_members": 38,
+   "dstx_frames": 444,
+   "effect_sprite_members_name_hint": 30,
+   "koma_card_count": 6,
+   "koma_art_members": 6,
+   "koma_panels": 34,
+   "errors": [],
+   "warnings": []
+  },
+  {
+   "slot": "oj_b_01",
+   "record": 66,
+   "resource_block": "0x028100",
+   "forms": [
+    "",
+    "_8"
+   ],
+   "animation_archives": 2,
+   "image_archives": 2,
+   "window_archives": 1,
+   "gameplay_tables": [
+    "ai",
+    "col",
+    "shot"
+   ],
+   "almt_move_records": 78,
+   "unique_almt_move_ids": 78,
+   "dstx_sprite_members": 13,
+   "dstx_frames": 289,
+   "effect_sprite_members_name_hint": 10,
+   "koma_card_count": 1,
+   "koma_art_members": 1,
+   "koma_panels": 8,
+   "errors": [],
+   "warnings": []
+  },
+  {
+   "slot": "oj_b_02",
+   "record": 67,
+   "resource_block": "0x028200",
+   "forms": [
+    "",
+    "_4",
+    "_5",
+    "_6"
+   ],
+   "animation_archives": 4,
+   "image_archives": 4,
+   "window_archives": 2,
+   "gameplay_tables": [
+    "ai",
+    "col",
+    "effect",
+    "shot"
+   ],
+   "almt_move_records": 110,
+   "unique_almt_move_ids": 110,
+   "dstx_sprite_members": 26,
+   "dstx_frames": 368,
+   "effect_sprite_members_name_hint": 20,
+   "koma_card_count": 4,
+   "koma_art_members": 4,
+   "koma_panels": 21,
+   "errors": [],
+   "warnings": []
+  },
+  {
+   "slot": "hs_b_01",
+   "record": 68,
+   "resource_block": "0x07C100",
+   "forms": [
+    "",
+    "_4",
+    "_5",
+    "_6"
+   ],
+   "animation_archives": 4,
+   "image_archives": 4,
+   "window_archives": 2,
+   "gameplay_tables": [
+    "ai",
+    "col",
+    "shot"
+   ],
+   "almt_move_records": 128,
+   "unique_almt_move_ids": 128,
+   "dstx_sprite_members": 22,
+   "dstx_frames": 411,
+   "effect_sprite_members_name_hint": 16,
+   "koma_card_count": 4,
+   "koma_art_members": 4,
+   "koma_panels": 21,
+   "errors": [],
+   "warnings": []
+  },
+  {
+   "slot": "nk_b_01",
+   "record": 69,
+   "resource_block": "0x064100",
+   "forms": [
+    "",
+    "_4",
+    "_5"
+   ],
+   "animation_archives": 3,
+   "image_archives": 3,
+   "window_archives": 2,
+   "gameplay_tables": [
+    "ai",
+    "col",
+    "shot"
+   ],
+   "almt_move_records": 83,
+   "unique_almt_move_ids": 83,
+   "dstx_sprite_members": 14,
+   "dstx_frames": 297,
+   "effect_sprite_members_name_hint": 9,
+   "koma_card_count": 3,
+   "koma_art_members": 3,
+   "koma_panels": 14,
+   "errors": [],
+   "warnings": []
+  },
+  {
+   "slot": "dt_b_01",
+   "record": 70,
+   "resource_block": "0x0A8100",
+   "forms": [
+    "",
+    "_4"
+   ],
+   "animation_archives": 2,
+   "image_archives": 2,
+   "window_archives": 1,
+   "gameplay_tables": [
+    "ai",
+    "col"
+   ],
+   "almt_move_records": 58,
+   "unique_almt_move_ids": 58,
+   "dstx_sprite_members": 5,
+   "dstx_frames": 158,
+   "effect_sprite_members_name_hint": 2,
+   "koma_card_count": 1,
+   "koma_art_members": 1,
+   "koma_panels": 4,
+   "errors": [],
+   "warnings": []
+  },
+  {
+   "slot": "dt_b_02",
+   "record": 71,
+   "resource_block": "0x0A8200",
+   "forms": [
+    "",
+    "_4"
+   ],
+   "animation_archives": 2,
+   "image_archives": 2,
+   "window_archives": 1,
+   "gameplay_tables": [
+    "ai",
+    "col"
+   ],
+   "almt_move_records": 58,
+   "unique_almt_move_ids": 58,
+   "dstx_sprite_members": 5,
+   "dstx_frames": 158,
+   "effect_sprite_members_name_hint": 2,
+   "koma_card_count": 1,
+   "koma_art_members": 1,
+   "koma_panels": 4,
+   "errors": [],
+   "warnings": []
+  },
+  {
+   "slot": "dt_b_03",
+   "record": 72,
+   "resource_block": "0x0A8300",
+   "forms": [
+    "",
+    "_4"
+   ],
+   "animation_archives": 2,
+   "image_archives": 2,
+   "window_archives": 1,
+   "gameplay_tables": [
+    "ai",
+    "col"
+   ],
+   "almt_move_records": 58,
+   "unique_almt_move_ids": 58,
+   "dstx_sprite_members": 5,
+   "dstx_frames": 158,
+   "effect_sprite_members_name_hint": 2,
+   "koma_card_count": 1,
+   "koma_art_members": 1,
+   "koma_panels": 4,
+   "errors": [],
+   "warnings": []
+  },
+  {
+   "slot": "dt_b_04",
+   "record": 73,
+   "resource_block": "0x0A8400",
+   "forms": [
+    "",
+    "_4"
+   ],
+   "animation_archives": 2,
+   "image_archives": 2,
+   "window_archives": 1,
+   "gameplay_tables": [
+    "ai",
+    "col"
+   ],
+   "almt_move_records": 45,
+   "unique_almt_move_ids": 45,
+   "dstx_sprite_members": 3,
+   "dstx_frames": 27,
+   "effect_sprite_members_name_hint": 0,
+   "koma_card_count": 1,
+   "koma_art_members": 1,
+   "koma_panels": 4,
+   "errors": [],
+   "warnings": []
+  }
+ ]
+}

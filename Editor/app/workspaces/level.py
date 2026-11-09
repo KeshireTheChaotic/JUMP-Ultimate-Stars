@@ -15,7 +15,7 @@ from tkinter import filedialog, messagebox, ttk
 from PIL import Image, ImageTk, ImageChops
 
 from jus_formats import altm as altmmod
-from jus_formats import battleai, roster, stagephysics, itemprob
+from jus_formats import battleai, roster, stagephysics, stagecamera, itemprob
 from jus_package import scenes, tilemap, stagepreview, stageoverlay, stagesprites
 from jus_package.project import split
 
@@ -25,8 +25,9 @@ from ..widgets.tabs import TextLog
 from .base import SuiteWorkspace
 from .missions import DOC as MISSION_DOC, MissionPanel
 from .mapobjects import MapObjectsPanel
+from .tutorials import TutorialPanel
 
-OVERLAYS = (('cam', 'Camera (unverified)', '.cam'), ('mob', 'Stage physics & spawns (.mob)', '.mob'),
+OVERLAYS = (('cam', 'Stage camera coordinates (.cam)', '.cam'), ('mob', 'Stage physics & spawns (.mob)', '.mob'),
             ('bin', 'Stage BG animation/collision (.bin)', '.bin'),
             ('gimmick', 'Gimmick assets', None))
 
@@ -121,6 +122,7 @@ class LevelWorkspace(SuiteWorkspace):
         self.layer_list.pack(fill='both', expand=True, padx=4, pady=4)
         self.missions = MissionPanel(self, self.right_mission_page)
         self.map_objects = MapObjectsPanel(self, self.bottom.add('objects', 'Map objects'))
+        self.tutorials = TutorialPanel(self, self.bottom.add('tutorial', 'Tutorial scripts'))
         tiles = self.bottom.add('tiles', 'Tile set')
         self.tile_canvas = tk.Canvas(tiles, bg=T.CANVAS_BG, highlightthickness=0, height=int(150 * self.k))
         tsb = ttk.Scrollbar(tiles, orient='horizontal', command=self.tile_canvas.xview)
@@ -173,7 +175,7 @@ class LevelWorkspace(SuiteWorkspace):
         return ws
 
     def _tab_changed(self, name):
-        self.focus = 'objects' if name == 'objects' else 'level'
+        self.focus = 'objects' if name == 'objects' else ('tutorial' if name == 'tutorial' else 'level')
         self.app._update_undo_label()
 
     def build_browser(self, parent):
@@ -191,6 +193,7 @@ class LevelWorkspace(SuiteWorkspace):
             except (OSError, ValueError, KeyError) as exc:
                 self.app.status.set(f'stage.aar: {exc}')
         self.missions.on_root()
+        self.tutorials.on_root()
         self._by_stage = self.missions.nodes_by_stage()
         self.stage = None
         self.map_objects.load(None, None)
@@ -310,6 +313,7 @@ class LevelWorkspace(SuiteWorkspace):
             self.select_mission(int(iid[2:]))
             return
         self.missions.select_node(None)
+        self.tutorials.select_node(None)
         self.right_tabs.select(1)
         self.refresh_inspector()
         if iid.startswith('g:'):
@@ -335,6 +339,7 @@ class LevelWorkspace(SuiteWorkspace):
         """Show a J-Galaxy node in the Mission tab and load the stage its battle uses."""
         self._stop_stage_play()
         self.missions.select_node(node_id)
+        self.tutorials.select_node(node_id)
         self.right_tabs.select(0)
         stem = self.missions.stage_of(node_id)
         if stem and (not self.stage or self.stage.stem != stem):
@@ -346,6 +351,7 @@ class LevelWorkspace(SuiteWorkspace):
     def mission_changed(self):
         """A mission edit or undo changed titles; keep the browser labels current."""
         self.populate()
+        self.tutorials.select_node(self.missions.node_id)
         self.refresh_inspector()
 
     def load(self, stem):
@@ -447,17 +453,19 @@ class LevelWorkspace(SuiteWorkspace):
             rows.append({'id': 'S:' + key, 'parent': 'so', 'name': name, 'kind': 'sprite',
                          'visible': self.show_sprites[key], 'available': sheet is not None,
                          'status': f'{count} object(s)' if sheet is not None else 'no archive'})
-        # Only the decoded stage data gets a row (it toggles the object preview and
-        # opens its inspector); camera / gimmick / collision rows did nothing.
+        # Stage camera coordinate records are now structurally decoded; their
+        # engine camera projection remains unknown and is never simulated here.
         rows.append({'id': 'ro', 'name': 'Stage object overlays', 'kind': 'group'})
         for key, name, _ in OVERLAYS:
-            if key not in ('mob', 'bin'):
+            if key not in ('mob', 'bin', 'cam'):
                 continue
             have = bool(self.stage and key in self.stage.members)
+            decoded = ((self._stage_mob if key == 'mob' else self._stage_geo) is not None
+                       if key != 'cam' else have)
             rows.append({'id': 'O:' + key, 'parent': 'ro', 'name': name, 'kind': 'overlay', 'readonly': True,
-                          'available': (self._stage_mob if key == 'mob' else self._stage_geo) is not None,
-                          'visible': self.preview_objects.get(),
-                          'status': 'runtime inspector' if have else 'no data'})
+                          'available': decoded, 'visible': self.preview_objects.get() if key != 'cam' else False,
+                          'status': ('structural coordinates; runtime unknown' if key == 'cam' and have
+                                     else 'runtime inspector' if have else 'no data')})
         return rows
 
     def refresh(self, frame=False):
@@ -1100,14 +1108,54 @@ class LevelWorkspace(SuiteWorkspace):
                 if key == 'gimmick':
                     try:
                         arc = self.app.root_data.archive(path)
-                        lines.append((f'{name}: {split(path)[-1]} — {len(arc.entries)} members (not decoded)', 'warn'))
+                        lines.append((f'{name}: {split(path)[-1]} — {len(arc.entries)} source members '
+                                      '(ALAR and ALMT decoded; some runtime triggers conditional)', 'good'))
                         for e in arc.entries:
                             lines.append(f'    {e.name.split("/")[-1]:28} type 0x{e.type_byte:02X} {len(e.data):7} bytes')
                     except (ValueError, KeyError) as exc:
                         lines.append((f'{name}: {exc}', 'bad'))
                     continue
                 blob = self.app.root_data.read(path)
-                lines.append((f'{name}: {split(path)[-1]} — {len(blob)} bytes, format not decoded (read-only)', 'warn'))
+                if key == 'cam':
+                    try:
+                        record = stagecamera.parse(blob)
+                        lines.append((f'{name}: {split(path)[-1]} — {len(blob)} bytes, '
+                                      f'{len(record.vertices)} signed point pairs (read-only; '
+                                      'camera semantics unknown)', 'good'))
+                    except ValueError as exc:
+                        lines.append((f'{name}: invalid structure: {exc}', 'bad'))
+                elif key == 'bin':
+                    try:
+                        g = stagephysics.parse_stage_bin(blob)
+                        tail = g.trailing_source_words
+                        lines.append((f'{name}: {split(path)[-1]} — 6 native sections; '
+                                      f'{len(g.collision_boxes)} colliders, {len(g.walls)} walls, '
+                                      f'{len(g.conveyors)} conveyors; {sum(len(l.anims) for l in g.layers)} '
+                                      'BG animations', 'good'))
+                        lines.append(('  BG renderer mode +8: ' + str(g.bg_renderer_mode)
+                                      + ' (native graphics setter, precise GPU mode unknown)', 'muted'))
+                        lines.append(('  section5 source u16/u16/u32: '
+                                      + ', '.join(f'0x{x:0{4 if j<2 else 8}X}' for j,x in enumerate(tail))
+                                      + ' (consumer not traced)', 'warn'))
+                    except ValueError as exc:
+                        lines.append((f'{name}: parser failed: {exc}', 'bad'))
+                elif key == 'mob':
+                    try:
+                        m = stagephysics.parse_mob(blob)
+                        lines.append((f'{name}: {split(path)[-1]} — 4 native sections; '
+                                      f'{len(m.floors)} floors, {len(m.item_candidates)} item candidates, '
+                                      f'{len(m.grips)} grips, {len(m.gimmicks)} gimmicks', 'good'))
+                        lines.append((f'  gimmick header +2 reserved=0x{m.gimmick_section_reserved:04X}; '
+                                      '0 in all 36 originals', 'muted'))
+                        for j, g in enumerate(m.gimmicks):
+                            lines.append((f'  gimmick #{j}: controller {g.type_id}, '
+                                          f'ALMT 0x{g.source_almt_id:08X}, '
+                                          f'unknown raw header +0x0E=0x{g.reserved_header:04X}', 'muted'))
+                    except ValueError as exc:
+                        lines.append((f'{name}: parser failed: {exc}', 'bad'))
+                else:
+                    lines.append((f'{name}: {split(path)[-1]} — {len(blob)} bytes, '
+                                  'unknown format (read-only)', 'warn'))
                 for off in range(0, min(len(blob), 256), 16):
                     chunk = blob[off:off + 16]
                     lines.append(f'  {off:04X}  {chunk.hex(" "):47}')
@@ -1132,6 +1180,32 @@ class LevelWorkspace(SuiteWorkspace):
             ins.section(name, note='Read-only overlay (Level v1 policy)')
             path = self.stage.members.get(ov)
             ins.value('Source', split(path)[-1] if path else '—')
+            if ov == 'cam' and path:
+                try:
+                    cam = stagecamera.parse(self.app.root_data.read(path))
+                except ValueError as exc:
+                    ins.evidence('Format', 'Unknown', f'Camera structure failed validation: {exc}')
+                    return
+                ins.evidence('Binary layout', 'Cross-checked',
+                             '36/36 shipped stage CAM records validate: 16-byte header, '
+                             'u8 point count +0x0D, s16 coordinate pairs from +0x10; '
+                             'original runtime camera consumers still need tracing')
+                ins.value('Byte length', str(len(cam.build())))
+                ins.value('Mode (+0x0C)', f'0x{cam.mode:02X} (unclassified)')
+                ins.value('Point count (+0x0D)', str(len(cam.vertices)))
+                ins.value('Reserved (+0x0E)', f'0x{cam.reserved:04X}')
+                for j, pair in enumerate(cam.header_pairs):
+                    ins.value(f'Header signed pair {j} (+0x{j*4:02X})', str(pair))
+                for j, pair in enumerate(cam.vertices):
+                    ins.value(f'Point {j} (+0x{0x10+j*4:02X})', str(pair))
+                if cam.vertices:
+                    ins.value('Raw point rectangle (unclassified)', str(cam.raw_point_bounds))
+                    ins.value('Original rectangular point order',
+                              'yes' if cam.has_rectangular_outline else 'non-original layout')
+                ins.text('Raw coordinate pairs only. Vertex meaning, camera clamp, scroll, '
+                         'world origin and relationship to the stage remain unproved; '
+                         'no geometry or screen placement is inferred from these values.')
+                return
             ins.evidence('Format', 'Direct' if ov in ('mob','bin') else 'Unknown',
                          'verified .mob/.bin structures and read-only simulation' if ov in ('mob','bin')
                          else 'not yet traced')
@@ -1209,6 +1283,8 @@ class LevelWorkspace(SuiteWorkspace):
 
     # ------------------------------------------------------------ undo / apply
     def doc(self):
+        if self.focus == 'tutorial':
+            return 'level-tutorial' if self.tutorials.scripts else None
         if self.focus == 'mission':
             return MISSION_DOC if self.missions.catalog is not None else None
         if self.focus == 'objects':
@@ -1216,6 +1292,8 @@ class LevelWorkspace(SuiteWorkspace):
         return 'level:' + self.stage.stem if self.stage else None
 
     def snapshot(self):
+        if self.focus == 'tutorial':
+            return self.tutorials.snapshot()
         if self.focus == 'mission':
             return self.missions.snapshot()
         if self.focus == 'objects':
@@ -1230,6 +1308,9 @@ class LevelWorkspace(SuiteWorkspace):
         super().checkpoint(label)
 
     def restore(self, snap):
+        if self.focus == 'tutorial':
+            self.tutorials.restore(snap)
+            return
         if self.focus == 'mission':
             self.missions.restore(snap)
             return
@@ -1270,13 +1351,19 @@ class LevelWorkspace(SuiteWorkspace):
 
     @property
     def dirty(self):
-        return self.maps_dirty or self.missions.dirty or self.map_objects.model.dirty
+        return (self.maps_dirty or self.missions.dirty or self.map_objects.model.dirty
+                or self.tutorials.dirty)
 
     def apply(self):
         if not self.dirty:
             self.app.status.set('Level: nothing to apply.')
             return
         done = []
+        if self.tutorials.dirty:
+            changed_tutorials = self.tutorials.apply()
+            if changed_tutorials is None:
+                return
+            done.append(', '.join(changed_tutorials) + ' tutorial script(s)')
         if self.missions.dirty:
             changed = self.missions.apply()
             if changed is None:

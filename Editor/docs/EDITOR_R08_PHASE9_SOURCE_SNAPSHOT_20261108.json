@@ -1,0 +1,169 @@
+{
+  "phase": "R08 Phase 9",
+  "original_controller_sha256": "1e0d81fdbf15b7b5ed3c3fa154cd127ba4adcb8bf78b5b2abca9bdde9affba08",
+  "original_controller_physical_lines": 1434,
+  "methods": {
+    "show_roster_sprite": {
+      "module": "app/lifecycle/roster_navigation.py",
+      "line_start": 136,
+      "line_end": 169,
+      "original_source": "def show_roster_sprite(self):\n    \"\"\"Open the sprite named by the current move's authored TextureID, if present.\"\"\"\n    if not self.root_data:\n        return\n    if self.move and self.index:\n        candidates = []\n        for node in self.move.nodes:\n            if node is None:\n                continue\n            for track in node.tracks:\n                if track.field != 'TextureID':\n                    continue\n                if track.keyed:\n                    entries = [k.value for k in track.keys if k.tick <= self.tick]\n                    if entries:\n                        candidates.append(entries[-1])\n                else:\n                    candidates.append(track.value)\n        for rid in candidates:\n            if not isinstance(rid, int):\n                continue\n            ref = self.index.sprite_ref(rid)\n            if ref is None:\n                continue\n            matching = next((label for label, path in self._sprite_paths.items()\n                             if path == ref.dstx_path), None)\n            if matching:\n                if self.sprite_path != ref.dstx_path:\n                    if (self.sprite_dirty or self.almt_dirty) and not self.confirm_discard():\n                        return\n                    self.sprite_combo.set(matching)\n                    self.load_sprite(matching, force=True)\n                break\n    self.show_workspace('sprite')\n",
+      "original_source_sha256": "46d7c1f830a439fac13764b025d881d7f837a335e4cc2de73884e5eaf9fa6323",
+      "transformed_source_sha256": "46bc23986b80bf7219dd15b627a72f0fbafc32b24510cb7d99eda4bd05f22a69",
+      "injected_formatter": false
+    },
+    "_switch_almt": {
+      "module": "app/lifecycle/roster_navigation.py",
+      "line_start": 359,
+      "line_end": 363,
+      "original_source": "def _switch_almt(self, name):\n    if self.almt_dirty and not self.confirm_discard():\n        self.almt_combo.set(split(self.almt_path)[-1] if self.almt_path else '')\n        return\n    self.load_almt(name)\n",
+      "original_source_sha256": "313f24e3d29bcadc793da600f7a79ea3bd886f4732719c9ecda3e6e673dddcaa",
+      "transformed_source_sha256": "1603a68b971c9aadb9515405d80effa5df5d3d94d07e652eb817f2d292fdd744",
+      "injected_formatter": false
+    },
+    "_ai_block": {
+      "module": "app/lifecycle/roster_navigation.py",
+      "line_start": 370,
+      "line_end": 386,
+      "original_source": "def _ai_block(self):\n    \"\"\"AIPM block (chr/ai/<id>.bin) for the selected move's input selector, or None.\"\"\"\n    if self.move is None or not self._battle_base_table() or not self.root_data:\n        return None\n    entry = battleinput.MOVE_CONTROLS.get(self.move.id & 0xFF)\n    if entry is None:\n        return None\n    cid = split(self.almt_path)[-1][:-4]\n    if cid not in self._ai_profiles:\n        path = battleai.AIPM_PATH.format(cid=cid)\n        try:\n            self._ai_profiles[cid] = battleai.parse_aipm(self.root_data.read(path)) \\\n                if self.root_data.exists(path) else None\n        except (ValueError, KeyError, OSError):\n            self._ai_profiles[cid] = None\n    prof = self._ai_profiles[cid]\n    return prof.for_selector(entry[1]) if prof else None\n",
+      "original_source_sha256": "afc3c5fd3126f58460a1b2351d3762b757789049bf4737f54a0acc3d7baf8225",
+      "transformed_source_sha256": "0c13c033f7bb3b40f3cb9a0a610cd7a66c2cedfa1525c43a01fcb00db4f2a409",
+      "injected_formatter": false
+    },
+    "_move_xref": {
+      "module": "app/lifecycle/roster_navigation.py",
+      "line_start": 388,
+      "line_end": 397,
+      "original_source": "def _move_xref(self):\n    \"\"\"Read-only, session-local BIN/Koma/ALMT references.\"\"\"\n    if self.root_data is None:\n        return None\n    if self._move_xrefs is None and not self._move_xrefs_error:\n        try:\n            self._move_xrefs = movelinks.MoveLinks(self.root_data)\n        except (OSError, ValueError, KeyError) as exc:\n            self._move_xrefs_error = str(exc)\n    return self._move_xrefs\n",
+      "original_source_sha256": "b5bfaeefb23e432a0b8c0f5bac80efc5956392165d2d0bc24e95aebf04d4889a",
+      "transformed_source_sha256": "9ef7b5138c60bed3422e576d9d84454d1171110930364d363208339882f8f0a8",
+      "injected_formatter": false
+    },
+    "_move_source_form": {
+      "module": "app/lifecycle/roster_navigation.py",
+      "line_start": 399,
+      "line_end": 410,
+      "original_source": "def _move_source_form(self):\n    if not self.almt_path:\n        return None, None\n    member = split(self.almt_path)[-1]\n    stem = member[:-4] if member.endswith('.amt') else ''\n    if stem in roster.BATTLE_IDS:\n        return stem, member\n    for size in (2, 3):\n        tail = f'_{size}'\n        if stem.endswith(tail) and stem[:-len(tail)] in roster.SUPPORT_IDS:\n            return stem[:-len(tail)], member\n    return None, None\n",
+      "original_source_sha256": "7f15677d937049b3ca824be2ddcd9c7526faf82ec1b55ee2661ab5bc7970a6af",
+      "transformed_source_sha256": "22d4c6f61fa4d50185724e55c2bd20ceeca3b3383c11a52dbf703be12c5303d5",
+      "injected_formatter": false
+    },
+    "_move_control_and_title": {
+      "module": "app/lifecycle/roster_navigation.py",
+      "line_start": 412,
+      "line_end": 430,
+      "original_source": "def _move_control_and_title(self, move):\n    form, member = self._move_source_form()\n    if not form:\n        return ''\n    label = (battleinput.control_for(move.id) or '') if form in roster.BATTLE_IDS else ''\n    # The Roster tree already shows the original BIN-backed move titles.\n    # This legacy Moves Treeview is deliberately hidden in Roster mode but\n    # remains the selection model for Timeline/Undo. Never decompress the\n    # same ChrArc ALMT once per row just to label a *hidden* list:\n    # MoveLinks.text_for_move -> _source_ids -> DataRoot.read decompresses\n    # the full nested DSCP payload for every row (an observable UI freeze).\n    if getattr(self, 'roster_browser', None) is not None:\n        return label or (f'Support ({member})' if form in roster.SUPPORT_IDS else '')\n    svc = self._move_xref()\n    if svc:\n        title = svc.text_for_move(form, move.id, almt_member=member)\n        if title and title.display_title:\n            return f'{label} - {title.display_title}' if label else title.display_title\n    return label or (f'Support ({member})' if form in roster.SUPPORT_IDS else '')\n",
+      "original_source_sha256": "cfcf22476d2e98375f7e7406ccc946523b5e6a75b96c1bd8ae5536b9a9b40033",
+      "transformed_source_sha256": "bf7250aec18eb4046cff0ffc819ae0d16b678a4b7246709fe35752a31f2d8aae",
+      "injected_formatter": false
+    },
+    "open_move_resource": {
+      "module": "app/lifecycle/roster_navigation.py",
+      "line_start": 432,
+      "line_end": 501,
+      "original_source": "def open_move_resource(self, form: str, resource_id: int, member: str, card_index: int | None = None):\n    \"\"\"Go to the original ALMT whose ID this Koma actually references.\"\"\"\n    if not self.root_data or not member or not member.endswith('.amt'):\n        return False\n    stem = member[:-4]\n    valid = (stem == form and form in roster.BATTLE_IDS) or (\n        form in roster.SUPPORT_IDS and stem in (f'{form}_2', f'{form}_3'))\n    if not valid:\n        self.status.set(f'Unverified move source: {form} / {member}')\n        return False\n    archive = join('chr/ChrArc.aar', f'chr/{stem}.aar')\n    target = join(archive, member)\n    if not self.root_data.exists(target):\n        self.status.set(f'Missing ALMT: {target}')\n        return False\n    if self.almt_path != target and not self.confirm_discard():\n        return False\n    if self.container != archive:\n        self.select_container(archive, form)\n    if self.almt_path != target:\n        self.almt_combo.set(member)\n        self.load_almt(member)\n    if not self.almt:\n        return False\n    found = next((i for i, m in enumerate(self.almt.moves) if m.id == resource_id), None)\n    if found is None:\n        self.status.set(f'Missing move {hx(resource_id)} in {target}')\n        return False\n    # The same battle ALMT move can be played from several deployed Koma.\n    # Resolve NoteTrack 0x0402 through the explicitly chosen Koma, or the\n    # size-specific Special A/B source link. Never guess a size for a\n    # common/unnamed action without an associated card.\n    idx = self.roster_browser.index\n    matched_card = None\n    if idx is not None:\n        source_cards = []\n        if card_index is not None:\n            source_cards.append(card_index)\n        elif self._sound_koma_card is not None:\n            source_cards.append(self._sound_koma_card)\n        for number in source_cards:\n            if not 0 <= number < len(idx.cards.cards):\n                continue\n            candidate = idx.cards.cards[number]\n            if any(v.resource_id == resource_id and v.almt_member == member\n                   for v in idx.moves.card_moves(candidate)):\n                matched_card = candidate\n                break\n        # Offset 0x29..0x32 encodes the 4..8 battle-Koma size in ROM.\n        # Even when several cards use the same size, their sound bank is\n        # identical (chr_b.bin +0x32 + 2*(size-4)).\n        off = resource_id & 0xff\n        if matched_card is None and form in roster.BATTLE_IDS and 0x29 <= off <= 0x32:\n            size = 4 + (off - 0x29) // 2\n            matched_card = next(\n                (c for c in idx.by_form.get(form, ())\n                 if c.size == size and\n                 any(v.resource_id == resource_id and v.almt_member == member\n                     for v in idx.moves.card_moves(c))),\n                None)\n    self._sound_koma_card = matched_card.index if matched_card is not None else None\n    self.sound_form.set(f'{matched_card.size}-cell' if\n                        matched_card is not None and form in roster.BATTLE_IDS else 'Auto')\n    self.show_workspace('animation')\n    self.roster_browser.select_move(form, resource_id, member)\n    if self.move_filter.get():\n        self.move_filter.set('')\n    self.populate_moves(select=found)\n    self.status.set(f'Koma source: {form} / {member} / {hx(resource_id)}')\n    return True\n",
+      "original_source_sha256": "b43cdf75b7c7aebfb431e6cb3906b1b31fc7943829f5c0052fc1e6be24767bf2",
+      "transformed_source_sha256": "85b258266c739a1e8f9e815480885a7a64ca266f0507b75e359ea6b2b70f8f50",
+      "injected_formatter": true
+    },
+    "open_koma_card": {
+      "module": "app/lifecycle/roster_navigation.py",
+      "line_start": 503,
+      "line_end": 512,
+      "original_source": "def open_koma_card(self, card_index: int):\n    ws = self.suite.get('koma')\n    if ws is None or self.root_data is None:\n        return False\n    self.show_workspace('koma')\n    ok = ws.open_card_by_id(card_index)\n    if ok:\n        self._sound_koma_card = card_index\n        self.roster_browser.select_card(card_index)\n    return ok\n",
+      "original_source_sha256": "6d0b24767640671e999f5fcaa8fdbfd7e2ac3b8e287cfb59235882962d26b51e",
+      "transformed_source_sha256": "2f0188578fa6e0ab419d28989655e6f0c16d3ac865a6acfada320f9ecd681f02",
+      "injected_formatter": false
+    },
+    "_battle_base_table": {
+      "module": "app/lifecycle/roster_navigation.py",
+      "line_start": 514,
+      "line_end": 520,
+      "original_source": "def _battle_base_table(self) -> bool:\n    \"\"\"True for a battle character's base move table (chr/<id>.aar|<id>.amt), the\n    only table the input selector 0x021712B8 indexes.\"\"\"\n    if not self.almt_path:\n        return False\n    name = split(self.almt_path)[-1]\n    return name.endswith('.amt') and name[:-4] in roster.BATTLE_IDS\n",
+      "original_source_sha256": "a3a77bf976878302254fdd7838a19782fb0aaf1b6c9cda983e1ef14d6442be03",
+      "transformed_source_sha256": "f13434bf9f990eb6570489ace8e2a06a802247d00a4dc4959a487ba245add17f",
+      "injected_formatter": false
+    },
+    "populate_moves": {
+      "module": "app/lifecycle/move_list.py",
+      "line_start": 522,
+      "line_end": 543,
+      "original_source": "def populate_moves(self, keep=False, select=None):\n    t = self.moves_tree\n    cur = self.almt.moves.index(self.move) if keep and self.move in (self.almt.moves if self.almt else []) else select\n    t.delete(*t.get_children())\n    if not self.almt:\n        self.move = None\n        self.refresh_animation()\n        return\n    flt = self.move_filter.get().strip().lower()\n    for i, m in enumerate(self.almt.moves):\n        control = self._move_control_and_title(m)\n        if flt and flt not in str(i) and flt not in hx(m.id).lower() and flt not in control.lower():\n            continue\n        t.insert('', 'end', str(i), values=(i, hx(m.id, 6), m.duration, '⟳' if m.flags & 1 else '', control))\n    target = str(cur if cur is not None else 0)\n    if t.exists(target):\n        t.selection_set(target)\n        t.focus(target)\n        t.see(target)\n    elif not keep:\n        self.move = None\n    self.on_move_select()\n",
+      "original_source_sha256": "745e3a91d50cc8c37a10fe4e0d3456b8410c39693fcd62a70a385b95f2d42b66",
+      "transformed_source_sha256": "8c373517d2f3be786667a59ed20a9690fc81d076c69eac3a716fb914fd347a5c",
+      "injected_formatter": true
+    },
+    "on_move_select": {
+      "module": "app/lifecycle/move_list.py",
+      "line_start": 545,
+      "line_end": 567,
+      "original_source": "def on_move_select(self, _e=None):\n    # Roster owns move selection. Its old Moves Treeview remains an internal\n    # model for Undo/Timeline but is hidden; queued Tk selection events from\n    # that hidden widget must not trigger another expensive redraw.\n    if (_e is not None and hasattr(self, '_animation_clips') and\n            not self._animation_clips.winfo_ismapped()):\n        return\n    sel = self.moves_tree.focus()\n    new = self.almt.moves[int(sel)] if self.almt and sel else None\n    changed = new is not self.move\n    if changed:\n        self._stop_play()\n        self._need_frame = True\n        self.sel_track = self.sel_key = self.sel_virtual = None\n    self.move = new\n    if changed:\n        self.after(5, self.fit_timeline)\n    self._refresh_pursuer_links()\n    self.tick = min(self.tick, self.move.duration) if self.move else 0\n    if _e is not None:\n        self.tick = 0\n    self.refresh_animation()\n    self.after(10, self.frame_view_if_needed)\n",
+      "original_source_sha256": "1c6b080eeece43bc9c6c50989bfafdaaa47ad88bcafb0bb0b9c667a3bff7562d",
+      "transformed_source_sha256": "ab80711c627aefc4ef2799f9c3f9f495b709facd6ae30def1539ad8e4fe38d8f",
+      "injected_formatter": false
+    },
+    "_move_row": {
+      "module": "app/lifecycle/move_list.py",
+      "line_start": 569,
+      "line_end": 572,
+      "original_source": "def _move_row(self, i):\n    m = self.almt.moves[i]\n    if self.moves_tree.exists(str(i)):\n        self.moves_tree.item(str(i), values=(i, hx(m.id, 6), m.duration, '⟳' if m.flags & 1 else '', self._move_control_and_title(m)))\n",
+      "original_source_sha256": "cbc574a3432fbf43a4bcab97fffadf36248ccb222cf17c5541e6103a5d01ab76",
+      "transformed_source_sha256": "25533b1d28f98504cbf337c4533769acaf8dfd24e6ca2458aa2dbfc2a31a8705",
+      "injected_formatter": true
+    },
+    "duplicate_move": {
+      "module": "app/lifecycle/move_list.py",
+      "line_start": 579,
+      "line_end": 590,
+      "original_source": "def duplicate_move(self):\n    if not self.move:\n        return\n    self.checkpoint('duplicate move')\n    d = almt.move_to_dict(self.move, self.almt.node_names)\n    new = almt.move_from_dict(d, self.almt.node_names)\n    new.id = max(m.id for m in self.almt.moves) + 1\n    self.almt.moves.append(new)\n    self.mark_almt()\n    self.move_filter.set('')\n    self.populate_moves(select=len(self.almt.moves) - 1)\n    self.status.set(f'Duplicated move as {hx(new.id)}')\n",
+      "original_source_sha256": "f97b3e7563b9c232c3d9262d36180d12c2905f7d49013299bb8c68168ad40bb7",
+      "transformed_source_sha256": "1efd1e27c54cbe1dcae7eb160fc0f44be5d916441254823dac6cb0183d2fcbb7",
+      "injected_formatter": true
+    },
+    "delete_move": {
+      "module": "app/lifecycle/move_list.py",
+      "line_start": 592,
+      "line_end": 600,
+      "original_source": "def delete_move(self):\n    if not self.move or len(self.almt.moves) <= 1:\n        return\n    if messagebox.askyesno('Delete move', f'Delete move {hx(self.move.id)}?'):\n        self.checkpoint('delete move')\n        i = self.almt.moves.index(self.move)\n        self.almt.moves.remove(self.move)\n        self.mark_almt()\n        self.populate_moves(select=max(0, i - 1))\n",
+      "original_source_sha256": "a3eee1b615d57c97824016e0dcbca216c53a5a655aa13a071f184b31b44db233",
+      "transformed_source_sha256": "47bb5e68f4e5e484d69786d429029b284484edd39ec7645e15e80ff402838c06",
+      "injected_formatter": true
+    },
+    "populate_archive": {
+      "module": "app/lifecycle/archive_navigation.py",
+      "line_start": 1346,
+      "line_end": 1362,
+      "original_source": "def populate_archive(self):\n    t = self.member_tree\n    t.delete(*t.get_children())\n    if not self.container:\n        return\n    arc = self.root_data.archive(self.container)\n    self.archive_info.configure(text=f'{split(self.container)[-1]}   ALAR v{arc.version} · flags '\n                                     f'{hx(arc.flags, 2)} · {len(arc.entries)} members')\n    kinds = {b'ALMT': 'ALMT', b'DSTX': 'DSTX', b'DSIG': 'DSIG', b'ALOD': 'ALOD', b'ALAR': 'ALAR',\n             b'ALTM': 'ALTM'}\n    for k, e in enumerate(arc.entries):\n        payload_kind = 'packed' if e.compressed else kinds.get(e.data[:4], 'data')\n        ok = '' if e.name_hash is None else ('✓' if arc.expected_hash(e) == e.name_hash else '✗')\n        t.insert('', 'end', str(k), values=(e.name, payload_kind, hx(e.id), hx(e.attributes),\n                                            f'{(e.name_hash or 0):04X} {ok}', len(e.data),\n                                            'yes' if e.compressed else ''))\n    self._member_details()\n",
+      "original_source_sha256": "0f9079567cf9179f0ea3174083c9412352c28f42c1258b9525629bb8660fbec6",
+      "transformed_source_sha256": "c37ec35daaaddc2d58d8bc8f4b6146cab1e4d685686cc0b81212ecc829219790",
+      "injected_formatter": true
+    },
+    "_selected_member": {
+      "module": "app/lifecycle/archive_navigation.py",
+      "line_start": 1364,
+      "line_end": 1368,
+      "original_source": "def _selected_member(self):\n    sel = self.member_tree.focus()\n    if not sel or not self.container or getattr(self, '_table', None):\n        return None\n    return self.root_data.archive(self.container).entries[int(sel)]\n",
+      "original_source_sha256": "fbc14df3c21802748f425c7e4de83bb913f4510920a3a5fb07ecd13dd98514b5",
+      "transformed_source_sha256": "64bcf527fdc11c50998fadce8ec70606ce850f7854316a24557c86c08822052e",
+      "injected_formatter": false
+    },
+    "_table_details": {
+      "module": "app/lifecycle/archive_navigation.py",
+      "line_start": 1370,
+      "line_end": 1381,
+      "original_source": "def _table_details(self, ins, path, tv):\n    ins.section(tv.title, note=path)\n    ins.value('Records', str(len(tv.records)))\n    ins.value('Read by', tv.source)\n    if tv.note:\n        ins.text(tv.note)\n    sel = self.member_tree.focus()\n    if sel.startswith('t') and sel[1:].isdigit():\n        r = tv.records[int(sel[1:])]\n        ins.section('Record', note=r.label)\n        for k, v in r.fields:\n            ins.value(k, v)\n",
+      "original_source_sha256": "a6d6aba7ebcca40d10425b9f1054ed69423af3a530f57230f4da0ccfaa5c728d",
+      "transformed_source_sha256": "ef354eb8ed406b183bb95c4520d5568e7312ecbad2b915f26ebf79d5cd2c196a",
+      "injected_formatter": false
+    },
+    "rebuild_check": {
+      "module": "app/lifecycle/archive_navigation.py",
+      "line_start": 1414,
+      "line_end": 1422,
+      "original_source": "def rebuild_check(self):\n    if not self.container:\n        return\n    arc = self.root_data.archive(self.container)\n    built = arc.build()\n    again = alar.Archive.parse(built)\n    same = [a.data == b.data for a, b in zip(arc.entries, again.entries)]\n    messagebox.showinfo('Rebuild check', f'Rebuilt {len(built):,} bytes; {sum(same)}/{len(same)} members '\n                                         're-read identically.')\n",
+      "original_source_sha256": "0d120f65dee70a0f4c8137c5fa07d93b9f97cc0df61aa9e66a67b37d716b9ffa",
+      "transformed_source_sha256": "9223919c94b2a901dc197ca54d1aad8bb9908c2368c5cb7aefe6ca81b2841ef8",
+      "injected_formatter": false
+    }
+  }
+}

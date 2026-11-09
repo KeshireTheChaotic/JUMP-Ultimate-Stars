@@ -1,0 +1,87 @@
+D:\Library\Development\JUS\publish\JUMP-Ultimate-Stars\Editor\tests\test_package.py:126: ResourceWarning: unclosed file <_io.BufferedReader name='C:\\Users\\Keshi\\AppData\\Local\\Temp\\jus_pkg_test_x25zd92o\\appended\\sprites\\chr~ChrArc.aar~chr~bb_b_01_4.aar~bb_b_01_4_.dtx\\frames\\000.png'>
+  im.save(sdir / 'frames' / 'new.png', transparency=Image.open(sdir / first['png']).info.get('transparency'))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+invalid command name "2974004707840redraw_view"
+    while executing
+"2974004707840redraw_view"
+    ("after" script)
+invalid command name "2974004715648<lambda>"
+    while executing
+"2974004715648<lambda>"
+    ("after" script)
+invalid command name "2974004708160_init_sashes"
+    while executing
+"2974004708160_init_sashes"
+    ("after" script)
+invalid command name "2974140480320fit_timeline"
+    while executing
+"2974140480320fit_timeline"
+    ("after" script)
+invalid command name "2974141242496frame_view_if_needed"
+    while executing
+"2974141242496frame_view_if_needed"
+    ("after" script)
+invalid command name "2974150448640redraw_view"
+    while executing
+"2974150448640redraw_view"
+    ("after" script)
+invalid command name "2974150705280fit_timeline"
+    while executing
+"2974150705280fit_timeline"
+    ("after" script)
+invalid command name "2974180303232frame_view_if_needed"
+    while executing
+"2974180303232frame_view_if_needed"
+    ("after" script)
+invalid command name "2974180328576<lambda>"
+    while executing
+"2974180328576<lambda>"
+    ("after" script)
+invalid command name "2974180308096init_sashes"
+    while executing
+"2974180308096init_sashes"
+    ("after" script)
+invalid command name "2974180505088<lambda>"
+    while executing
+"2974180505088<lambda>"
+    ("after" script)
+invalid command name "2974180720832fit_timeline"
+    while executing
+"2974180720832fit_timeline"
+    ("after" script)
+invalid command name "2974100911552redraw_view"
+    while executing
+"2974100911552redraw_view"
+    ("after" script)
+invalid command name "2974180296256frame_view_if_needed"
+    while executing
+"2974180296256frame_view_if_needed"
+    ("after" script)
+invalid command name "2974180675520fit_timeline"
+    while executing
+"2974180675520fit_timeline"
+    ("after" script)
+invalid command name "2974150319744redraw_view"
+    while executing
+"2974150319744redraw_view"
+    ("after" script)
+invalid command name "2974180302144frame_view_if_needed"
+    while executing
+"2974180302144frame_view_if_needed"
+    ("after" script)
+invalid command name "2973858183104redraw_view"
+    while executing
+"2973858183104redraw_view"
+    ("after" script)
+invalid command name "2973858290624<lambda>"
+    while executing
+"2973858290624<lambda>"
+    ("after" script)
+invalid command name "2973858182656_init_sashes"
+    while executing
+"2973858182656_init_sashes"
+    ("after" script)
+----------------------------------------------------------------------
+Ran 535 tests in 70.457s
+
+OK (skipped=1)

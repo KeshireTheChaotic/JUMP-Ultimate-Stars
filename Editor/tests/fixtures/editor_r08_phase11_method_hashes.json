@@ -1,0 +1,54 @@
+{
+  "phase": "R08 Phase 11",
+  "original_controller_sha256": "0200b45459093cb94ae11b84ae06c8f52f6db6eeea500191214dcf3afabdd1dc",
+  "original_method_body_contracts": {
+    "_set_roster_clips": {
+      "module": "app/lifecycle/ui_helpers.py",
+      "callable": "_set_roster_clips",
+      "original_source_sha256": "823817c72efbcea7c89378c9e66eb2791a254ebed6a9de26d98c260463a32954",
+      "transformed_body_sha256": "affb90802d757f490003dafdd9ca19a88ebf0501c60a101ac69ee43d81798a0a",
+      "original_decorator": null,
+      "original_lines": 10
+    },
+    "_arrow": {
+      "module": "app/lifecycle/ui_helpers.py",
+      "callable": "_arrow",
+      "original_source_sha256": "58d752f6874f0a27e867b2e13a09383b08cdbe50ec172a0849c523277d48f603",
+      "transformed_body_sha256": "af95dce9f8c3a5930ce62cb86db3d9d17ee62cd4017b38093d4169b0bdaf0ca7",
+      "original_decorator": null,
+      "original_lines": 13
+    },
+    "_open_doc": {
+      "module": "app/lifecycle/ui_helpers.py",
+      "callable": "_open_doc",
+      "original_source_sha256": "d044e235e6fc78bb18514ec1afe197cb89dc19aca27717dcc4447266d948ded4",
+      "transformed_body_sha256": "4563c78ec533d5d5897efc7ba6309f0c439ece29125716c32168b25b6becc42f",
+      "original_decorator": null,
+      "original_lines": 6
+    },
+    "_int": {
+      "module": "app/parsing.py",
+      "callable": "_int",
+      "original_source_sha256": "b4382a3cc5555297798abe1ea5dab99d226362b905137a35d1ce74e8d6fbbd53",
+      "transformed_body_sha256": "cec4477965ebeb2de5b8c6609ddba1699fd8a71633d69f8b6a3d819f1bf4a062",
+      "original_decorator": "staticmethod",
+      "original_lines": 5
+    },
+    "text_to_notes": {
+      "module": "app/timeline/note_text.py",
+      "callable": "text_to_notes",
+      "original_source_sha256": "9edd6536c8d4b9899b83a7032286d56ccd93b4a42a9fca4007e47c0edcbba6fb",
+      "transformed_body_sha256": "8098cb2b82f29410f4bd8f15de8e993c9ef3afd373e38069502402f33ce06be5",
+      "original_decorator": "staticmethod",
+      "original_lines": 23
+    },
+    "_value_hint": {
+      "module": "app/inspectors/value_hint.py",
+      "callable": "_value_hint",
+      "original_source_sha256": "8982230a18fee463c3b7e02af892a5463254510bcc6d3b8a725eeed01dffa567",
+      "transformed_body_sha256": "5abd8c8c919af3c683bc7bffd60d44d1a8f0c309ae55fa874547bec02fe2a69f",
+      "original_decorator": "staticmethod",
+      "original_lines": 9
+    }
+  }
+}

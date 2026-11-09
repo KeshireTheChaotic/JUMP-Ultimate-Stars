@@ -1,0 +1,62 @@
+{
+  "phase": "R08 Phase 8",
+  "original_controller_sha256": "0cc911f488a790a49162c8d79cf4360fd2436daef54ce006f89566daaaa3d113",
+  "original_method_body_contracts": {
+    "frame_view": {
+      "module": "app/renderers/projection.py",
+      "callable": "frame_view",
+      "original_lines": 10,
+      "original_source_sha256": "72f5c344e12ea09cbe4a68d2cf29d7723bf12bfa2c829991c986949739bed969",
+      "transformed_body_sha256": "0c41d35fafdac033903bc1b0ae0b870a67a449eee623bba731f457795b2345e0"
+    },
+    "_move_scope_extent": {
+      "module": "app/renderers/projection.py",
+      "callable": "_move_scope_extent",
+      "original_lines": 46,
+      "original_source_sha256": "43811a09c4477002d9667732d178d952dbd29e505484907a593ebfc65903ba14",
+      "transformed_body_sha256": "bb947faa6c26f1d221f591f75835ea5ea891ec82ee5e1b744eec48bad98b49a9"
+    },
+    "_handler00_launch_extents": {
+      "module": "app/renderers/projection.py",
+      "callable": "_handler00_launch_extents",
+      "original_lines": 45,
+      "original_source_sha256": "d0a1c793d59a7ab0b4445d0af28449802cacf23e7a2d58c57d1fb4c711b616a2",
+      "transformed_body_sha256": "27bb915d2f6f5eec1a8bc39d6e004f944b0499b0c51bee7da98d05d8470c2458"
+    },
+    "_move_extent": {
+      "module": "app/renderers/projection.py",
+      "callable": "_move_extent",
+      "original_lines": 25,
+      "original_source_sha256": "6af65e5a2dc05d4d264e2c0f9789a5927acf158eda99ea8a959a055c02200c6f",
+      "transformed_body_sha256": "b8ed34e8b8c262c0f4a845b21533a3fe515a77e43f0ffe692e08c680a1e28180"
+    },
+    "_animation_origin": {
+      "module": "app/renderers/projection.py",
+      "callable": "_animation_origin",
+      "original_lines": 6,
+      "original_source_sha256": "021bd8858ab64dc83e1ede5bef040bffe463792469b5bbdb6329dcd80036af22",
+      "transformed_body_sha256": "61883aaa71aeb838c4dae0833c85436d061d6b4a96bca084fdd599cc54e0def7"
+    },
+    "spawn_projection": {
+      "module": "app/renderers/projection.py",
+      "callable": "spawn_projection",
+      "original_lines": 7,
+      "original_source_sha256": "dc07512654beff766cbb17b1a7b0e1b78486f31c6b0655ea0becef60872238e6",
+      "transformed_body_sha256": "d5395ab28789cf4b45de4f126a4cfe40c16e93c56c80595ee48785ee31e39fbb"
+    },
+    "_shot_events_current": {
+      "module": "app/renderers/projection.py",
+      "callable": "_shot_events_current",
+      "original_lines": 16,
+      "original_source_sha256": "07df7253e2e271c36503f61b6ce14bdcba29249a65734de4ab851c1ed4c658f6",
+      "transformed_body_sha256": "a104a2e0ae04b67ab79db498f6e5c9666b06166a60bf82a96e08bf0ca1d26fd9"
+    },
+    "_visible_spawn_instances": {
+      "module": "app/renderers/projection.py",
+      "callable": "_visible_spawn_instances",
+      "original_lines": 5,
+      "original_source_sha256": "e1a39d77861feeba9cba1d464833611a6d11cb677836f4bd16de3e37ca4809a8",
+      "transformed_body_sha256": "719f66877d1ab0abeeb3de5a81f4bc1763a47d4cb41eb8135cd56fc258e96ea9"
+    }
+  }
+}

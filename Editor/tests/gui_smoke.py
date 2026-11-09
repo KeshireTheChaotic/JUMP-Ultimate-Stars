@@ -157,6 +157,10 @@ def main():
     app.show_workspace('screen')
     pump(0.4)
     sc = app.suite['screen']
+    # Archive-layer preview belongs to Screens mode; Scenes mode intentionally
+    # hides code-unverified native BG bindings rather than guessing placement.
+    sc.mode.set('Screens')
+    sc._mode_changed()
     sc.load('title/title.aar')
     pump(0.3)
     checks.append(('screen layers', [sc.cfg[n]['screen'] for n in sc.order] == ['Top', 'Top', 'Bottom', 'Bottom']))

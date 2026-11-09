@@ -1,0 +1,2973 @@
+{
+  "version": 1,
+  "scene_count": 46,
+  "source_authority": "Original ARM9 source table and original overlay bytes; no screenshot-derived state",
+  "composition_scene_count": 28,
+  "non_tile_static_unresolved_count": 18,
+  "all_ids": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45
+  ],
+  "scenes": [
+    {
+      "id": 0,
+      "name": "Copyright",
+      "overlay": 0,
+      "native_family": "Original ALTM/DIG background + runtime UI",
+      "code_source": "functions_layout/arm9_ov00/arm9_ov00_0214cd20.c#L57",
+      "native_explanation": "Original ARM9 loader identifies the engine and source tilemap; other scene elements may still require runtime state",
+      "composition_status": "source-backed native BG instance",
+      "background_variant_count": 1,
+      "background_variants": [
+        {
+          "id": "original",
+          "condition": "Copyright_Add; source literals 0x02160B60/78/90/A8",
+          "routing": "",
+          "source_layers": [
+            {
+              "engine": "sub",
+              "bg_slot": 0,
+              "atm": "copyright/ganbari.atm",
+              "dig": "copyright/ganbari.dig",
+              "source": "functions_layout/arm9_ov00/arm9_ov00_0214cd20.c#L57",
+              "initially_visible": true
+            },
+            {
+              "engine": "main",
+              "bg_slot": 1,
+              "atm": "copyright/nintendo.atm",
+              "dig": "copyright/nintendo.dig",
+              "source": "functions_layout/arm9_ov00/arm9_ov00_0214cd20.c#L78",
+              "initially_visible": true
+            }
+          ]
+        }
+      ],
+      "callback_families": [],
+      "scene_table_create": {
+        "program": "arm9_ov00",
+        "address": "0214cd20",
+        "thumb": false,
+        "name": "Copyright_Add"
+      },
+      "asset_reference_count": 4,
+      "unresolved_original_call_count": 0,
+      "render_mode": "Source-backed tile BG",
+      "evidence": "original ROM and ARM9 code; no emulator placement",
+      "deck_characters": "skip: render from player saved decks at game runtime; never generate fixed characters in editor",
+      "dynamic_state_unknown": "variant not confirmed at a particular tick"
+    },
+    {
+      "id": 1,
+      "name": "Opening",
+      "overlay": 0,
+      "native_family": "Cinematic/Movie texture",
+      "code_source": "functions_layout/arm9_ov00/arm9_ov00_0214d3c8.c#L98-L116",
+      "native_explanation": "Opening_Add -> Movie_Create; original opening.aar and .vx, not a static ALTM/DSIG BG map",
+      "composition_status": "native renderer path verified; no scene BG composition asserted",
+      "background_variant_count": 0,
+      "background_variants": [],
+      "callback_families": [],
+      "scene_table_create": {
+        "program": "arm9_ov00",
+        "address": "0214d3c8",
+        "thumb": false,
+        "name": "Opening_Add"
+      },
+      "asset_reference_count": 5,
+      "unresolved_original_call_count": 0,
+      "render_mode": "Cinematic/Movie texture",
+      "evidence": "original ROM and ARM9 code; no emulator placement",
+      "deck_characters": "skip: render from player saved decks at game runtime; never generate fixed characters in editor",
+      "dynamic_state_unknown": "no static ALTM/DIG placement proven; original runtime pathway indexed"
+    },
+    {
+      "id": 2,
+      "name": "Title",
+      "overlay": 0,
+      "native_family": "Original ALTM/DIG background + runtime UI",
+      "code_source": "functions_layout/arm9_ov00/arm9_ov00_0214fb6c.c#L197",
+      "native_explanation": "Original ARM9 loader identifies the engine and source tilemap; other scene elements may still require runtime state",
+      "composition_status": "source-backed native BG instance",
+      "background_variant_count": 2,
+      "background_variants": [
+        {
+          "id": "entry",
+          "condition": "constructor visibility enabled",
+          "routing": "",
+          "source_layers": [
+            {
+              "engine": "main",
+              "bg_slot": 2,
+              "atm": "title/title.aar|title/space_top00.atm",
+              "dig": "title/title.aar|title/space_top00.dig",
+              "source": "functions_layout/arm9_ov00/arm9_ov00_0214fb6c.c#L197",
+              "initially_visible": true
+            },
+            {
+              "engine": "main",
+              "bg_slot": 3,
+              "atm": "title/title.aar|title/space_top01.atm",
+              "dig": "title/title.aar|title/space_top01.dig",
+              "source": "functions_layout/arm9_ov00/arm9_ov00_0214fb6c.c#L201",
+              "initially_visible": true
+            },
+            {
+              "engine": "sub",
+              "bg_slot": 2,
+              "atm": "title/title.aar|title/space_under00.atm",
+              "dig": "title/title.aar|title/space_under00.dig",
+              "source": "functions_layout/arm9_ov00/arm9_ov00_0214fb6c.c#L213",
+              "initially_visible": true
+            },
+            {
+              "engine": "sub",
+              "bg_slot": 3,
+              "atm": "title/title.aar|title/space_under01.atm",
+              "dig": "title/title.aar|title/space_under01.dig",
+              "source": "functions_layout/arm9_ov00/arm9_ov00_0214fb6c.c#L217",
+              "initially_visible": true
+            }
+          ]
+        },
+        {
+          "id": "alternate",
+          "condition": "hidden until animation callback",
+          "routing": "",
+          "source_layers": [
+            {
+              "engine": "main",
+              "bg_slot": 2,
+              "atm": "title/title.aar|title/space_under00.atm",
+              "dig": "title/title.aar|title/space_under00.dig",
+              "source": "functions_layout/arm9_ov00/arm9_ov00_0214fb6c.c#L205",
+              "initially_visible": true
+            },
+            {
+              "engine": "main",
+              "bg_slot": 3,
+              "atm": "title/title.aar|title/space_under01.atm",
+              "dig": "title/title.aar|title/space_under01.dig",
+              "source": "functions_layout/arm9_ov00/arm9_ov00_0214fb6c.c#L209",
+              "initially_visible": true
+            },
+            {
+              "engine": "sub",
+              "bg_slot": 2,
+              "atm": "title/title.aar|title/space_top00.atm",
+              "dig": "title/title.aar|title/space_top00.dig",
+              "source": "functions_layout/arm9_ov00/arm9_ov00_0214fb6c.c#L221",
+              "initially_visible": true
+            },
+            {
+              "engine": "sub",
+              "bg_slot": 3,
+              "atm": "title/title.aar|title/space_top01.atm",
+              "dig": "title/title.aar|title/space_top01.dig",
+              "source": "functions_layout/arm9_ov00/arm9_ov00_0214fb6c.c#L225",
+              "initially_visible": true
+            }
+          ]
+        }
+      ],
+      "callback_families": [],
+      "scene_table_create": {
+        "program": "arm9_ov00",
+        "address": "0214fb6c",
+        "thumb": false,
+        "name": "Title_Add"
+      },
+      "asset_reference_count": 29,
+      "unresolved_original_call_count": 0,
+      "render_mode": "Source-backed tile BG",
+      "evidence": "original ROM and ARM9 code; no emulator placement",
+      "deck_characters": "skip: render from player saved decks at game runtime; never generate fixed characters in editor",
+      "dynamic_state_unknown": "variant not confirmed at a particular tick"
+    },
+    {
+      "id": 3,
+      "name": "TopMenu",
+      "overlay": 0,
+      "native_family": "Original ALTM/DIG background + runtime UI",
+      "code_source": "functions_layout/arm9_ov00/arm9_ov00_02153cfc.c#L196",
+      "native_explanation": "Original ARM9 loader identifies the engine and source tilemap; other scene elements may still require runtime state",
+      "composition_status": "source-backed native BG instance",
+      "background_variant_count": 2,
+      "background_variants": [
+        {
+          "id": "menu",
+          "condition": "TopMenu_Add creates CommonInfo(0,-1,1,-1)",
+          "routing": "",
+          "source_layers": [
+            {
+              "engine": "main",
+              "bg_slot": 2,
+              "atm": "topmenu/topmenu.aar|topmenu/top_bg01.atm",
+              "dig": "topmenu/topmenu.aar|topmenu/top_bg01.dig",
+              "source": "functions_layout/arm9_ov00/arm9_ov00_02153cfc.c#L196",
+              "initially_visible": true
+            },
+            {
+              "engine": "main",
+              "bg_slot": 3,
+              "atm": "topmenu/topmenu.aar|topmenu/top_bg00.atm",
+              "dig": "topmenu/topmenu.aar|topmenu/top_bg00.dig",
+              "source": "functions_layout/arm9_ov00/arm9_ov00_02153cfc.c#L196",
+              "initially_visible": true
+            },
+            {
+              "engine": "sub",
+              "bg_slot": 1,
+              "atm": "info/info.aar|info/win.atm",
+              "dig": "info/info.aar|info/win.dig",
+              "source": "functions_layout/arm9_ov12/arm9_ov12_021bcf1c.c#L144",
+              "initially_visible": true
+            },
+            {
+              "engine": "sub",
+              "bg_slot": 2,
+              "atm": "info/bg.atm",
+              "dig": "info/bg.dig",
+              "source": "functions_layout/arm9_ov12/arm9_ov12_021bcf1c.c#L96",
+              "initially_visible": true
+            }
+          ]
+        },
+        {
+          "id": "captured",
+          "condition": "Captured main-menu state: selected button0, J-Quiz disabled",
+          "routing": "",
+          "source_layers": [
+            {
+              "engine": "main",
+              "bg_slot": 2,
+              "atm": "topmenu/topmenu.aar|topmenu/top_bg01.atm",
+              "dig": "topmenu/topmenu.aar|topmenu/top_bg01.dig",
+              "source": "functions_layout/arm9_ov00/arm9_ov00_02153cfc.c#L196",
+              "initially_visible": true
+            },
+            {
+              "engine": "main",
+              "bg_slot": 3,
+              "atm": "topmenu/topmenu.aar|topmenu/top_bg00.atm",
+              "dig": "topmenu/topmenu.aar|topmenu/top_bg00.dig",
+              "source": "functions_layout/arm9_ov00/arm9_ov00_02153cfc.c#L196",
+              "initially_visible": true
+            },
+            {
+              "engine": "sub",
+              "bg_slot": 1,
+              "atm": "info/info.aar|info/win.atm",
+              "dig": "info/info.aar|info/win.dig",
+              "source": "functions_layout/arm9_ov12/arm9_ov12_021bcf1c.c#L144",
+              "initially_visible": true
+            },
+            {
+              "engine": "sub",
+              "bg_slot": 2,
+              "atm": "info/bg.atm",
+              "dig": "info/bg.dig",
+              "source": "functions_layout/arm9_ov12/arm9_ov12_021bcf1c.c#L96",
+              "initially_visible": true
+            }
+          ]
+        }
+      ],
+      "callback_families": [],
+      "scene_table_create": {
+        "program": "arm9_main",
+        "address": "0206e6ec",
+        "thumb": false,
+        "name": null,
+        "calls": [
+          "02153cfc TopMenu_Add"
+        ],
+        "thumb_calls": []
+      },
+      "asset_reference_count": 6,
+      "unresolved_original_call_count": 0,
+      "render_mode": "Source-backed tile BG",
+      "evidence": "original ROM and ARM9 code; no emulator placement",
+      "deck_characters": "skip: render from player saved decks at game runtime; never generate fixed characters in editor",
+      "dynamic_state_unknown": "variant not confirmed at a particular tick"
+    },
+    {
+      "id": 4,
+      "name": "DeckSelect",
+      "overlay": 1,
+      "native_family": "Original ALTM/DIG background + runtime UI",
+      "code_source": "functions_layout/arm9_ov01/arm9_ov01_0215754c.c#L88",
+      "native_explanation": "Original ARM9 loader identifies the engine and source tilemap; other scene elements may still require runtime state",
+      "composition_status": "source-backed native BG instance",
+      "background_variant_count": 4,
+      "background_variants": [
+        {
+          "id": "default",
+          "condition": "context selector default",
+          "routing": "",
+          "source_layers": [
+            {
+              "engine": "sub",
+              "bg_slot": 1,
+              "atm": "deckselect/deckselect.aar|deckselect/deck_sel00.atm",
+              "dig": "deckselect/deckselect.aar|deckselect/deck_sel00.dig",
+              "source": "functions_layout/arm9_ov01/arm9_ov01_0215754c.c#L88",
+              "initially_visible": true
+            },
+            {
+              "engine": "sub",
+              "bg_slot": 2,
+              "atm": "deckselect/deckselect.aar|deckselect/deck_sel01.atm",
+              "dig": "deckselect/deckselect.aar|deckselect/deck_sel01.dig",
+              "source": "functions_layout/arm9_ov01/arm9_ov01_0215754c.c#L92",
+              "initially_visible": true
+            },
+            {
+              "engine": "main",
+              "bg_slot": 2,
+              "atm": "deckselect/deck_base.atm",
+              "dig": "deckselect/deck_base.dig",
+              "source": "functions_layout/arm9_ov01/arm9_ov01_0215754c.c#L96",
+              "initially_visible": true
+            },
+            {
+              "engine": "sub",
+              "bg_slot": 3,
+              "atm": "info/bg.atm",
+              "dig": "info/bg.dig",
+              "source": "functions_layout/arm9_ov01/arm9_ov01_0215754c.c#L100",
+              "initially_visible": true
+            }
+          ]
+        },
+        {
+          "id": "arena",
+          "condition": "selector 1 or 4",
+          "routing": "",
+          "source_layers": [
+            {
+              "engine": "sub",
+              "bg_slot": 1,
+              "atm": "deckselect/deckselect.aar|deckselect/deck_sel00.atm",
+              "dig": "deckselect/deckselect.aar|deckselect/deck_sel00.dig",
+              "source": "functions_layout/arm9_ov01/arm9_ov01_0215754c.c#L88",
+              "initially_visible": true
+            },
+            {
+              "engine": "sub",
+              "bg_slot": 2,
+              "atm": "deckselect/deckselect.aar|deckselect/deck_sel01.atm",
+              "dig": "deckselect/deckselect.aar|deckselect/deck_sel01.dig",
+              "source": "functions_layout/arm9_ov01/arm9_ov01_0215754c.c#L92",
+              "initially_visible": true
+            },
+            {
+              "engine": "main",
+              "bg_slot": 2,
+              "atm": "deckselect/deck_base.atm",
+              "dig": "deckselect/deck_base.dig",
+              "source": "functions_layout/arm9_ov01/arm9_ov01_0215754c.c#L96",
+              "initially_visible": true
+            },
+            {
+              "engine": "sub",
+              "bg_slot": 3,
+              "atm": "info/bg.atm",
+              "dig": "info/bg.dig",
+              "source": "functions_layout/arm9_ov01/arm9_ov01_0215754c.c#L100",
+              "initially_visible": true
+            }
+          ]
+        },
+        {
+          "id": "comic",
+          "condition": "selector 6",
+          "routing": "",
+          "source_layers": [
+            {
+              "engine": "sub",
+              "bg_slot": 1,
+              "atm": "deckselect/deckselect.aar|deckselect/deck_sel00.atm",
+              "dig": "deckselect/deckselect.aar|deckselect/deck_sel00.dig",
+              "source": "functions_layout/arm9_ov01/arm9_ov01_0215754c.c#L88",
+              "initially_visible": true
+            },
+            {
+              "engine": "sub",
+              "bg_slot": 2,
+              "atm": "deckselect/deckselect.aar|deckselect/deck_sel01.atm",
+              "dig": "deckselect/deckselect.aar|deckselect/deck_sel01.dig",
+              "source": "functions_layout/arm9_ov01/arm9_ov01_0215754c.c#L92",
+              "initially_visible": true
+            },
+            {
+              "engine": "main",
+              "bg_slot": 2,
+              "atm": "deckselect/deck_base.atm",
+              "dig": "deckselect/deck_base.dig",
+              "source": "functions_layout/arm9_ov01/arm9_ov01_0215754c.c#L96",
+              "initially_visible": true
+            },
+            {
+              "engine": "sub",
+              "bg_slot": 3,
+              "atm": "info/bg.atm",
+              "dig": "info/bg.dig",
+              "source": "functions_layout/arm9_ov01/arm9_ov01_0215754c.c#L100",
+              "initially_visible": true
+            }
+          ]
+        },
+        {
+          "id": "no-palette",
+          "condition": "selector 5, no replacement palette applied",
+          "routing": "",
+          "source_layers": [
+            {
+              "engine": "sub",
+              "bg_slot": 1,
+              "atm": "deckselect/deckselect.aar|deckselect/deck_sel00.atm",
+              "dig": "deckselect/deckselect.aar|deckselect/deck_sel00.dig",
+              "source": "functions_layout/arm9_ov01/arm9_ov01_0215754c.c#L88",
+              "initially_visible": true
+            },
+            {
+              "engine": "sub",
+              "bg_slot": 2,
+              "atm": "deckselect/deckselect.aar|deckselect/deck_sel01.atm",
+              "dig": "deckselect/deckselect.aar|deckselect/deck_sel01.dig",
+              "source": "functions_layout/arm9_ov01/arm9_ov01_0215754c.c#L92",
+              "initially_visible": true
+            },
+            {
+              "engine": "main",
+              "bg_slot": 2,
+              "atm": "deckselect/deck_base.atm",
+              "dig": "deckselect/deck_base.dig",
+              "source": "functions_layout/arm9_ov01/arm9_ov01_0215754c.c#L96",
+              "initially_visible": true
+            },
+            {
+              "engine": "sub",
+              "bg_slot": 3,
+              "atm": "info/bg.atm",
+              "dig": "info/bg.dig",
+              "source": "functions_layout/arm9_ov01/arm9_ov01_0215754c.c#L100",
+              "initially_visible": true
+            }
+          ]
+        }
+      ],
+      "callback_families": [],
+      "scene_table_create": {
+        "program": "arm9_main",
+        "address": "0206e884",
+        "thumb": false,
+        "name": null,
+        "calls": [
+          "021572b8 DeckSelect_Add",
+          "021572b8 DeckSelect_Add"
+        ],
+        "thumb_calls": [
+          "021572b8"
+        ]
+      },
+      "asset_reference_count": 28,
+      "unresolved_original_call_count": 0,
+      "render_mode": "Source-backed tile BG",
+      "evidence": "original ROM and ARM9 code; no emulator placement",
+      "deck_characters": "skip: render from player saved decks at game runtime; never generate fixed characters in editor",
+      "dynamic_state_unknown": "variant not confirmed at a particular tick"
+    },
+    {
+      "id": 5,
+      "name": "DeckCheck",
+      "overlay": 2,
+      "native_family": "Original ALTM/DIG background + runtime UI",
+      "code_source": "functions_layout/arm9_ov02/arm9_ov02_0215a038.c#L108",
+      "native_explanation": "Original ARM9 loader identifies the engine and source tilemap; other scene elements may still require runtime state",
+      "composition_status": "source-backed native BG instance",
+      "background_variant_count": 2,
+      "background_variants": [
+        {
+          "id": "default",
+          "condition": "DeckCheck_Add(param1 != 1), main BG1/2; sub renderer used for deck display",
+          "routing": "",
+          "source_layers": [
+            {
+              "engine": "main",
+              "bg_slot": 2,
+              "atm": "info/bg.atm",
+              "dig": "info/bg.dig",
+              "source": "functions_layout/arm9_ov02/arm9_ov02_0215a038.c#L108",
+              "initially_visible": true
+            },
+            {
+              "engine": "main",
+              "bg_slot": 1,
+              "atm": "deckcheck/deckcheck.aar|deckcheck/win_g.atm",
+              "dig": "deckcheck/deckcheck.aar|deckcheck/win.dig",
+              "source": "functions_layout/arm9_ov02/arm9_ov02_0215a038.c#L134",
+              "initially_visible": true
+            }
+          ]
+        },
+        {
+          "id": "alternate",
+          "condition": "DeckCheck_Add(param1 == 1), original string mutation branch",
+          "routing": "",
+          "source_layers": [
+            {
+              "engine": "main",
+              "bg_slot": 2,
+              "atm": "info/bg.atm",
+              "dig": "info/bg.dig",
+              "source": "functions_layout/arm9_ov02/arm9_ov02_0215a038.c#L108",
+              "initially_visible": true
+            },
+            {
+              "engine": "main",
+              "bg_slot": 1,
+              "atm": "deckcheck/deckcheck.aar|deckcheck/win_a.atm",
+              "dig": "deckcheck/deckcheck.aar|deckcheck/win.dig",
+              "source": "functions_layout/arm9_ov02/arm9_ov02_0215a038.c#L134",
+              "initially_visible": true
+            }
+          ]
+        }
+      ],
+      "callback_families": [],
+      "scene_table_create": {
+        "program": "arm9_main",
+        "address": "0206ea6c",
+        "thumb": false,
+        "name": null,
+        "calls": [
+          "0215a038 DeckCheck_Add"
+        ],
+        "thumb_calls": []
+      },
+      "asset_reference_count": 5,
+      "unresolved_original_call_count": 0,
+      "render_mode": "Source-backed tile BG",
+      "evidence": "original ROM and ARM9 code; no emulator placement",
+      "deck_characters": "skip: render from player saved decks at game runtime; never generate fixed characters in editor",
+      "dynamic_state_unknown": "variant not confirmed at a particular tick"
+    },
+    {
+      "id": 6,
+      "name": "StageSelect",
+      "overlay": 1,
+      "native_family": "Original ALTM/DIG background + runtime UI",
+      "code_source": "functions_layout/arm9_ov01/arm9_ov01_0215fc68.c#L75",
+      "native_explanation": "Original ARM9 loader identifies the engine and source tilemap; other scene elements may still require runtime state",
+      "composition_status": "source-backed native BG instance",
+      "background_variant_count": 2,
+      "background_variants": [
+        {
+          "id": "solo",
+          "condition": "StageSelect_Add param1=0",
+          "routing": "",
+          "source_layers": [
+            {
+              "engine": "sub",
+              "bg_slot": 1,
+              "atm": "stageselect/stageselect.aar|stageselect/st_sel01.atm",
+              "dig": "stageselect/stageselect.aar|stageselect/st_sel01.dig",
+              "source": "functions_layout/arm9_ov01/arm9_ov01_0215fc68.c#L75",
+              "initially_visible": true
+            },
+            {
+              "engine": "sub",
+              "bg_slot": 2,
+              "atm": "stageselect/stageselect.aar|stageselect/st_sel00.atm",
+              "dig": "stageselect/stageselect.aar|stageselect/st_sel00.dig",
+              "source": "functions_layout/arm9_ov01/arm9_ov01_0215fc68.c#L75",
+              "initially_visible": true
+            },
+            {
+              "engine": "sub",
+              "bg_slot": 3,
+              "atm": "info/bg.atm",
+              "dig": "info/bg.dig",
+              "source": "functions_layout/arm9_ov01/arm9_ov01_0215fc68.c#L75",
+              "initially_visible": true
+            }
+          ]
+        },
+        {
+          "id": "multiplayer",
+          "condition": "StageSelect_Add param1!=0",
+          "routing": "",
+          "source_layers": [
+            {
+              "engine": "sub",
+              "bg_slot": 1,
+              "atm": "stageselect/stageselect.aar|stageselect/st_sel01.atm",
+              "dig": "stageselect/stageselect.aar|stageselect/st_sel01.dig",
+              "source": "functions_layout/arm9_ov01/arm9_ov01_0215fc68.c#L75",
+              "initially_visible": true
+            },
+            {
+              "engine": "sub",
+              "bg_slot": 2,
+              "atm": "stageselect/stageselect.aar|stageselect/st_sel00.atm",
+              "dig": "stageselect/stageselect.aar|stageselect/st_sel00.dig",
+              "source": "functions_layout/arm9_ov01/arm9_ov01_0215fc68.c#L75",
+              "initially_visible": true
+            },
+            {
+              "engine": "sub",
+              "bg_slot": 3,
+              "atm": "info/bg.atm",
+              "dig": "info/bg.dig",
+              "source": "functions_layout/arm9_ov01/arm9_ov01_0215fc68.c#L75",
+              "initially_visible": true
+            }
+          ]
+        }
+      ],
+      "callback_families": [],
+      "scene_table_create": {
+        "program": "arm9_main",
+        "address": "0206eaa4",
+        "thumb": false,
+        "name": null,
+        "calls": [
+          "0215f740 StageSelect_Add"
+        ],
+        "thumb_calls": []
+      },
+      "asset_reference_count": 11,
+      "unresolved_original_call_count": 0,
+      "render_mode": "Source-backed tile BG",
+      "evidence": "original ROM and ARM9 code; no emulator placement",
+      "deck_characters": "skip: render from player saved decks at game runtime; never generate fixed characters in editor",
+      "dynamic_state_unknown": "variant not confirmed at a particular tick"
+    },
+    {
+      "id": 7,
+      "name": "RuleSelect",
+      "overlay": 1,
+      "native_family": "Original ALTM/DIG background + runtime UI",
+      "code_source": "functions_layout/arm9_ov01/arm9_ov01_02161f3c.c#L156",
+      "native_explanation": "Original ARM9 loader identifies the engine and source tilemap; other scene elements may still require runtime state",
+      "composition_status": "source-backed native BG instance",
+      "background_variant_count": 4,
+      "background_variants": [
+        {
+          "id": "local-entry",
+          "condition": "FUN_02162D88 mode=0, POWCNT1 bit15=0",
+          "routing": "",
+          "source_layers": [
+            {
+              "engine": "main",
+              "bg_slot": 2,
+              "atm": "ruleselect/ruleselect.aar|ruleselect/rule_sel00.atm",
+              "dig": "ruleselect/ruleselect.aar|ruleselect/rule_sel00.dig",
+              "source": "functions_layout/arm9_ov01/arm9_ov01_02161f3c.c#L156",
+              "initially_visible": true
+            },
+            {
+              "engine": "main",
+              "bg_slot": 3,
+              "atm": "info/bg.atm",
+              "dig": "info/bg.dig",
+              "source": "functions_layout/arm9_ov01/arm9_ov01_02161f3c.c#L160",
+              "initially_visible": true
+            },
+            {
+              "engine": "sub",
+              "bg_slot": 1,
+              "atm": "info/info.aar|info/win.atm",
+              "dig": "info/info.aar|info/win.dig",
+              "source": "functions_layout/arm9_ov12/arm9_ov12_021bcf1c.c#L144",
+              "initially_visible": true
+            },
+            {
+              "engine": "sub",
+              "bg_slot": 2,
+              "atm": "info/bg.atm",
+              "dig": "info/bg.dig",
+              "source": "functions_layout/arm9_ov12/arm9_ov12_021bcf1c.c#L96",
+              "initially_visible": true
+            }
+          ]
+        },
+        {
+          "id": "comm-entry",
+          "condition": "FUN_02162D88 mode!=0, POWCNT1 bit15=0",
+          "routing": "",
+          "source_layers": [
+            {
+              "engine": "main",
+              "bg_slot": 2,
+              "atm": "ruleselect/ruleselect.aar|ruleselect/rule_sel00.atm",
+              "dig": "ruleselect/ruleselect.aar|ruleselect/rule_sel00.dig",
+              "source": "functions_layout/arm9_ov01/arm9_ov01_02161f3c.c#L156",
+              "initially_visible": true
+            },
+            {
+              "engine": "main",
+              "bg_slot": 3,
+              "atm": "info/bg.atm",
+              "dig": "info/bg.dig",
+              "source": "functions_layout/arm9_ov01/arm9_ov01_02161f3c.c#L160",
+              "initially_visible": true
+            },
+            {
+              "engine": "sub",
+              "bg_slot": 1,
+              "atm": "info/info.aar|info/win.atm",
+              "dig": "info/info.aar|info/win.dig",
+              "source": "functions_layout/arm9_ov12/arm9_ov12_021bcf1c.c#L144",
+              "initially_visible": true
+            },
+            {
+              "engine": "sub",
+              "bg_slot": 2,
+              "atm": "info/bg.atm",
+              "dig": "info/bg.dig",
+              "source": "functions_layout/arm9_ov12/arm9_ov12_021bcf1c.c#L96",
+              "initially_visible": true
+            }
+          ]
+        },
+        {
+          "id": "local-swapped",
+          "condition": "local mode; callback FUN_021617F0 sets bit15=1",
+          "routing": "",
+          "source_layers": [
+            {
+              "engine": "main",
+              "bg_slot": 2,
+              "atm": "ruleselect/ruleselect.aar|ruleselect/rule_sel00.atm",
+              "dig": "ruleselect/ruleselect.aar|ruleselect/rule_sel00.dig",
+              "source": "functions_layout/arm9_ov01/arm9_ov01_02161f3c.c#L156",
+              "initially_visible": true
+            },
+            {
+              "engine": "main",
+              "bg_slot": 3,
+              "atm": "info/bg.atm",
+              "dig": "info/bg.dig",
+              "source": "functions_layout/arm9_ov01/arm9_ov01_02161f3c.c#L160",
+              "initially_visible": true
+            },
+            {
+              "engine": "sub",
+              "bg_slot": 1,
+              "atm": "info/info.aar|info/win.atm",
+              "dig": "info/info.aar|info/win.dig",
+              "source": "functions_layout/arm9_ov12/arm9_ov12_021bcf1c.c#L144",
+              "initially_visible": true
+            },
+            {
+              "engine": "sub",
+              "bg_slot": 2,
+              "atm": "info/bg.atm",
+              "dig": "info/bg.dig",
+              "source": "functions_layout/arm9_ov12/arm9_ov12_021bcf1c.c#L96",
+              "initially_visible": true
+            }
+          ]
+        },
+        {
+          "id": "comm-swapped",
+          "condition": "communication mode; callback FUN_021617F0 sets bit15=1",
+          "routing": "",
+          "source_layers": [
+            {
+              "engine": "main",
+              "bg_slot": 2,
+              "atm": "ruleselect/ruleselect.aar|ruleselect/rule_sel00.atm",
+              "dig": "ruleselect/ruleselect.aar|ruleselect/rule_sel00.dig",
+              "source": "functions_layout/arm9_ov01/arm9_ov01_02161f3c.c#L156",
+              "initially_visible": true
+            },
+            {
+              "engine": "main",
+              "bg_slot": 3,
+              "atm": "info/bg.atm",
+              "dig": "info/bg.dig",
+              "source": "functions_layout/arm9_ov01/arm9_ov01_02161f3c.c#L160",
+              "initially_visible": true
+            },
+            {
+              "engine": "sub",
+              "bg_slot": 1,
+              "atm": "info/info.aar|info/win.atm",
+              "dig": "info/info.aar|info/win.dig",
+              "source": "functions_layout/arm9_ov12/arm9_ov12_021bcf1c.c#L144",
+              "initially_visible": true
+            },
+            {
+              "engine": "sub",
+              "bg_slot": 2,
+              "atm": "info/bg.atm",
+              "dig": "info/bg.dig",
+              "source": "functions_layout/arm9_ov12/arm9_ov12_021bcf1c.c#L96",
+              "initially_visible": true
+            }
+          ]
+        }
+      ],
+      "callback_families": [],
+      "scene_table_create": {
+        "program": "arm9_main",
+        "address": "0206eb10",
+        "thumb": false,
+        "name": null,
+        "calls": [
+          "02161f3c RuleSelect_Add",
+          "02161f3c RuleSelect_Add"
+        ],
+        "thumb_calls": [
+          "02161f3c"
+        ]
+      },
+      "asset_reference_count": 16,
+      "unresolved_original_call_count": 0,
+      "render_mode": "Source-backed tile BG",
+      "evidence": "original ROM and ARM9 code; no emulator placement",
+      "deck_characters": "skip: render from player saved decks at game runtime; never generate fixed characters in editor",
+      "dynamic_state_unknown": "variant not confirmed at a particular tick"
+    },
+    {
+      "id": 8,
+      "name": "Input",
+      "overlay": 5,
+      "native_family": "Original ALTM/DIG background + runtime UI",
+      "code_source": "functions_layout/arm9_ov05/arm9_ov05_0215f41c.c#L73",
+      "native_explanation": "Original ARM9 loader identifies the engine and source tilemap; other scene elements may still require runtime state",
+      "composition_status": "source-backed native BG instance",
+      "background_variant_count": 4,
+      "background_variants": [
+        {
+          "id": "mode-0",
+          "condition": "Input_Add mode selector 0; file suffix generated by mode byte",
+          "routing": "",
+          "source_layers": [
+            {
+              "engine": "main",
+              "bg_slot": 3,
+              "atm": "input/input.aar|input/mode_bg0.atm",
+              "dig": "input/input.aar|input/mode_bg0.dig",
+              "source": "functions_layout/arm9_ov05/arm9_ov05_0215f41c.c#L73",
+              "initially_visible": true
+            },
+            {
+              "engine": "main",
+              "bg_slot": 2,
+              "atm": "input/input.aar|input/txt_bg0.atm",
+              "dig": "input/input.aar|input/txt_bg0.dig",
+              "source": "functions_layout/arm9_ov05/arm9_ov05_0215f41c.c#L86",
+              "initially_visible": true
+            },
+            {
+              "engine": "sub",
+              "bg_slot": 2,
+              "atm": "input/input.aar|input/input_bg0.atm",
+              "dig": "input/input.aar|input/input_bg0.dig",
+              "source": "functions_layout/arm9_ov05/arm9_ov05_0215f41c.c#L190",
+              "initially_visible": true
+            },
+            {
+              "engine": "sub",
+              "bg_slot": 3,
+              "atm": "input/input.aar|input/input_bg1.atm",
+              "dig": "input/input.aar|input/input_bg1.dig",
+              "source": "functions_layout/arm9_ov05/arm9_ov05_0215f41c.c#L195",
+              "initially_visible": false
+            },
+            {
+              "engine": "sub",
+              "bg_slot": 1,
+              "atm": "input/input.aar|input/input_font.atm",
+              "dig": "input/input.aar|input/input_font.dig",
+              "source": "functions_layout/arm9_ov05/arm9_ov05_0215f41c.c#L200",
+              "initially_visible": true
+            }
+          ]
+        },
+        {
+          "id": "mode-1",
+          "condition": "Input_Add mode selector 1; file suffix generated by mode byte",
+          "routing": "",
+          "source_layers": [
+            {
+              "engine": "main",
+              "bg_slot": 3,
+              "atm": "input/input.aar|input/mode_bg1.atm",
+              "dig": "input/input.aar|input/mode_bg1.dig",
+              "source": "functions_layout/arm9_ov05/arm9_ov05_0215f41c.c#L73",
+              "initially_visible": true
+            },
+            {
+              "engine": "main",
+              "bg_slot": 2,
+              "atm": "input/input.aar|input/txt_bg1.atm",
+              "dig": "input/input.aar|input/txt_bg1.dig",
+              "source": "functions_layout/arm9_ov05/arm9_ov05_0215f41c.c#L86",
+              "initially_visible": true
+            },
+            {
+              "engine": "sub",
+              "bg_slot": 2,
+              "atm": "input/input.aar|input/input_bg0.atm",
+              "dig": "input/input.aar|input/input_bg0.dig",
+              "source": "functions_layout/arm9_ov05/arm9_ov05_0215f41c.c#L190",
+              "initially_visible": true
+            },
+            {
+              "engine": "sub",
+              "bg_slot": 3,
+              "atm": "input/input.aar|input/input_bg1.atm",
+              "dig": "input/input.aar|input/input_bg1.dig",
+              "source": "functions_layout/arm9_ov05/arm9_ov05_0215f41c.c#L195",
+              "initially_visible": false
+            },
+            {
+              "engine": "sub",
+              "bg_slot": 1,
+              "atm": "input/input.aar|input/input_font.atm",
+              "dig": "input/input.aar|input/input_font.dig",
+              "source": "functions_layout/arm9_ov05/arm9_ov05_0215f41c.c#L200",
+              "initially_visible": true
+            }
+          ]
+        },
+        {
+          "id": "mode-2",
+          "condition": "Input_Add mode selector 2; file suffix generated by mode byte",
+          "routing": "",
+          "source_layers": [
+            {
+              "engine": "main",
+              "bg_slot": 3,
+              "atm": "input/input.aar|input/mode_bg2.atm",
+              "dig": "input/input.aar|input/mode_bg2.dig",
+              "source": "functions_layout/arm9_ov05/arm9_ov05_0215f41c.c#L73",
+              "initially_visible": true
+            },
+            {
+              "engine": "main",
+              "bg_slot": 2,
+              "atm": "input/input.aar|input/txt_bg2.atm",
+              "dig": "input/input.aar|input/txt_bg2.dig",
+              "source": "functions_layout/arm9_ov05/arm9_ov05_0215f41c.c#L86",
+              "initially_visible": true
+            },
+            {
+              "engine": "sub",
+              "bg_slot": 2,
+              "atm": "input/input.aar|input/input_bg0.atm",
+              "dig": "input/input.aar|input/input_bg0.dig",
+              "source": "functions_layout/arm9_ov05/arm9_ov05_0215f41c.c#L190",
+              "initially_visible": true
+            },
+            {
+              "engine": "sub",
+              "bg_slot": 3,
+              "atm": "input/input.aar|input/input_bg1.atm",
+              "dig": "input/input.aar|input/input_bg1.dig",
+              "source": "functions_layout/arm9_ov05/arm9_ov05_0215f41c.c#L195",
+              "initially_visible": false
+            },
+            {
+              "engine": "sub",
+              "bg_slot": 1,
+              "atm": "input/input.aar|input/input_font.atm",
+              "dig": "input/input.aar|input/input_font.dig",
+              "source": "functions_layout/arm9_ov05/arm9_ov05_0215f41c.c#L200",
+              "initially_visible": true
+            }
+          ]
+        },
+        {
+          "id": "mode-3",
+          "condition": "Input_Add mode selector 3; file suffix generated by mode byte",
+          "routing": "",
+          "source_layers": [
+            {
+              "engine": "main",
+              "bg_slot": 3,
+              "atm": "input/input.aar|input/mode_bg3.atm",
+              "dig": "input/input.aar|input/mode_bg3.dig",
+              "source": "functions_layout/arm9_ov05/arm9_ov05_0215f41c.c#L73",
+              "initially_visible": true
+            },
+            {
+              "engine": "main",
+              "bg_slot": 2,
+              "atm": "input/input.aar|input/txt_bg3.atm",
+              "dig": "input/input.aar|input/txt_bg3.dig",
+              "source": "functions_layout/arm9_ov05/arm9_ov05_0215f41c.c#L86",
+              "initially_visible": true
+            },
+            {
+              "engine": "sub",
+              "bg_slot": 2,
+              "atm": "input/input.aar|input/input_bg0.atm",
+              "dig": "input/input.aar|input/input_bg0.dig",
+              "source": "functions_layout/arm9_ov05/arm9_ov05_0215f41c.c#L190",
+              "initially_visible": true
+            },
+            {
+              "engine": "sub",
+              "bg_slot": 3,
+              "atm": "input/input.aar|input/input_bg1.atm",
+              "dig": "input/input.aar|input/input_bg1.dig",
+              "source": "functions_layout/arm9_ov05/arm9_ov05_0215f41c.c#L195",
+              "initially_visible": false
+            },
+            {
+              "engine": "sub",
+              "bg_slot": 1,
+              "atm": "input/input.aar|input/input_font.atm",
+              "dig": "input/input.aar|input/input_font.dig",
+              "source": "functions_layout/arm9_ov05/arm9_ov05_0215f41c.c#L200",
+              "initially_visible": true
+            }
+          ]
+        }
+      ],
+      "callback_families": [],
+      "scene_table_create": {
+        "program": "arm9_main",
+        "address": "0206ebd8",
+        "thumb": false,
+        "name": null,
+        "calls": [
+          "0215f41c Input_Add"
+        ],
+        "thumb_calls": [
+          "0215f41c"
+        ]
+      },
+      "asset_reference_count": 15,
+      "unresolved_original_call_count": 0,
+      "render_mode": "Source-backed tile BG",
+      "evidence": "original ROM and ARM9 code; no emulator placement",
+      "deck_characters": "skip: render from player saved decks at game runtime; never generate fixed characters in editor",
+      "dynamic_state_unknown": "variant not confirmed at a particular tick"
+    },
+    {
+      "id": 9,
+      "name": "DeckMake",
+      "overlay": 5,
+      "native_family": "Original ALTM/DIG background + runtime UI",
+      "code_source": "functions_layout/arm9_ov05/arm9_ov05_021546c8.c#L42",
+      "native_explanation": "Original ARM9 loader identifies the engine and source tilemap; other scene elements may still require runtime state",
+      "composition_status": "source-backed native BG instance",
+      "background_variant_count": 1,
+      "background_variants": [
+        {
+          "id": "koma-edit",
+          "condition": "DeckMake_Add -> KomaState_Create + KomaList_Create",
+          "routing": "functions_layout/arm9_main/arm9_main_0206e064.c#L7",
+          "source_layers": [
+            {
+              "engine": "main",
+              "bg_slot": 2,
+              "atm": "deckmake/deckmake.aar|deckmake/edit_bg.atm",
+              "dig": "deckmake/deckmake.aar|deckmake/edit_bg.dig",
+              "source": "functions_layout/arm9_ov05/arm9_ov05_021546c8.c#L42",
+              "initially_visible": true
+            },
+            {
+              "engine": "main",
+              "bg_slot": 3,
+              "atm": "deckmake/deckmake.aar|deckmake/state.atm",
+              "dig": "deckmake/deckmake.aar|deckmake/state.dig",
+              "source": "functions_layout/arm9_ov05/arm9_ov05_021546c8.c#L51",
+              "initially_visible": true
+            },
+            {
+              "engine": "sub",
+              "bg_slot": 3,
+              "atm": "deckmake/deckmake.aar|deckmake/list00.atm",
+              "dig": "deckmake/deckmake.aar|deckmake/list00.dig",
+              "source": "functions_layout/arm9_ov05/arm9_ov05_0214f598.c#L57",
+              "initially_visible": true
+            }
+          ]
+        }
+      ],
+      "callback_families": [],
+      "scene_table_create": {
+        "program": "arm9_main",
+        "address": "0206ec18",
+        "thumb": false,
+        "name": null,
+        "calls": [
+          "0214e6dc DeckMake_Add"
+        ],
+        "thumb_calls": []
+      },
+      "asset_reference_count": 18,
+      "unresolved_original_call_count": 0,
+      "render_mode": "Source-backed tile BG",
+      "evidence": "original ROM and ARM9 code; no emulator placement",
+      "deck_characters": "skip: render from player saved decks at game runtime; never generate fixed characters in editor",
+      "dynamic_state_unknown": "variant not confirmed at a particular tick"
+    },
+    {
+      "id": 10,
+      "name": "DeckMakeTutorial",
+      "overlay": 5,
+      "native_family": "Original ALTM/DIG background + runtime UI",
+      "code_source": "functions_layout/arm9_ov12/arm9_ov12_021bcf1c.c#L123",
+      "native_explanation": "Original ARM9 loader identifies the engine and source tilemap; other scene elements may still require runtime state",
+      "composition_status": "source-backed native BG instance",
+      "background_variant_count": 1,
+      "background_variants": [
+        {
+          "id": "tutorial",
+          "condition": "DeckMakeTutorial_Add -> CommonInfo_Create(0x15,-1,0,0) and KomaList_Create(0,...); live tutorial script is separate.",
+          "routing": "functions_layout/arm9_main/arm9_main_0206e064.c#L7",
+          "source_layers": [
+            {
+              "engine": "main",
+              "bg_slot": 1,
+              "atm": "info/info.aar|info/win.atm",
+              "dig": "info/info.aar|info/win.dig",
+              "source": "functions_layout/arm9_ov12/arm9_ov12_021bcf1c.c#L123",
+              "initially_visible": true
+            },
+            {
+              "engine": "main",
+              "bg_slot": 2,
+              "atm": "info/bg.atm",
+              "dig": "info/bg.dig",
+              "source": "functions_layout/arm9_ov12/arm9_ov12_021bcf1c.c#L97",
+              "initially_visible": true
+            },
+            {
+              "engine": "sub",
+              "bg_slot": 3,
+              "atm": "deckmake/deckmake.aar|deckmake/list00.atm",
+              "dig": "deckmake/deckmake.aar|deckmake/list00.dig",
+              "source": "functions_layout/arm9_ov05/arm9_ov05_0214f598.c#L57",
+              "initially_visible": true
+            }
+          ]
+        }
+      ],
+      "callback_families": [],
+      "scene_table_create": {
+        "program": "arm9_ov05",
+        "address": "02161184",
+        "thumb": false,
+        "name": "DeckMakeTutorial_Add"
+      },
+      "asset_reference_count": 13,
+      "unresolved_original_call_count": 0,
+      "render_mode": "Source-backed tile BG",
+      "evidence": "original ROM and ARM9 code; no emulator placement",
+      "deck_characters": "skip: render from player saved decks at game runtime; never generate fixed characters in editor",
+      "dynamic_state_unknown": "variant not confirmed at a particular tick"
+    },
+    {
+      "id": 11,
+      "name": "Battle",
+      "overlay": 6,
+      "native_family": "Battle stage/gameplay",
+      "code_source": "functions_layout/arm9_ov06/arm9_ov06_0214cd20.c#L64-L95",
+      "native_explanation": "Battle_Add; battle level, effects and fighter state determine backgrounds",
+      "composition_status": "native renderer path verified; no scene BG composition asserted",
+      "background_variant_count": 0,
+      "background_variants": [],
+      "callback_families": [],
+      "scene_table_create": {
+        "program": "arm9_main",
+        "address": "0206eca8",
+        "thumb": false,
+        "name": null,
+        "calls": [
+          "0214cd20 Battle_Add"
+        ],
+        "thumb_calls": [
+          "0214cd20"
+        ]
+      },
+      "asset_reference_count": 10,
+      "unresolved_original_call_count": 2,
+      "render_mode": "Battle stage/gameplay",
+      "evidence": "original ROM and ARM9 code; no emulator placement",
+      "deck_characters": "skip: render from player saved decks at game runtime; never generate fixed characters in editor",
+      "dynamic_state_unknown": "no static ALTM/DIG placement proven; original runtime pathway indexed"
+    },
+    {
+      "id": 12,
+      "name": "Battle",
+      "overlay": 6,
+      "native_family": "Battle stage/gameplay",
+      "code_source": "functions_layout/arm9_ov06/arm9_ov06_0214cd20.c#L64-L95",
+      "native_explanation": "Battle_Add, mode supplied by scene wrapper; stage/gameplay-driven",
+      "composition_status": "native renderer path verified; no scene BG composition asserted",
+      "background_variant_count": 0,
+      "background_variants": [],
+      "callback_families": [],
+      "scene_table_create": {
+        "program": "arm9_main",
+        "address": "0206ece0",
+        "thumb": false,
+        "name": null,
+        "calls": [
+          "0214cd20 Battle_Add",
+          "0214cd20 Battle_Add",
+          "0214cd20 Battle_Add",
+          "0214cd20 Battle_Add"
+        ],
+        "thumb_calls": [
+          "0214cd20"
+        ]
+      },
+      "asset_reference_count": 10,
+      "unresolved_original_call_count": 2,
+      "render_mode": "Battle stage/gameplay",
+      "evidence": "original ROM and ARM9 code; no emulator placement",
+      "deck_characters": "skip: render from player saved decks at game runtime; never generate fixed characters in editor",
+      "dynamic_state_unknown": "no static ALTM/DIG placement proven; original runtime pathway indexed"
+    },
+    {
+      "id": 13,
+      "name": "Result",
+      "overlay": 1,
+      "native_family": "Runtime result widgets",
+      "code_source": "functions_layout/arm9_ov01/arm9_ov01_02165ea4.c#L40-L62",
+      "native_explanation": "Result_Add builds ResultRank and dynamic results; no static ALTM binding verified",
+      "composition_status": "native renderer path verified; no scene BG composition asserted",
+      "background_variant_count": 0,
+      "background_variants": [],
+      "callback_families": [],
+      "scene_table_create": {
+        "program": "arm9_main",
+        "address": "0206eff0",
+        "thumb": false,
+        "name": null,
+        "calls": [
+          "02165ea4 Result_Add"
+        ],
+        "thumb_calls": [
+          "02165ea4"
+        ]
+      },
+      "asset_reference_count": 18,
+      "unresolved_original_call_count": 0,
+      "render_mode": "Runtime result widgets",
+      "evidence": "original ROM and ARM9 code; no emulator placement",
+      "deck_characters": "skip: render from player saved decks at game runtime; never generate fixed characters in editor",
+      "dynamic_state_unknown": "no static ALTM/DIG placement proven; original runtime pathway indexed"
+    },
+    {
+      "id": 14,
+      "name": "Demo",
+      "overlay": 2,
+      "native_family": "Scripted demo/movie",
+      "code_source": "functions_layout/arm9_ov02/arm9_ov02_02157220.c#L51-L90",
+      "native_explanation": "Demo_Add configures 2D engines and dynamic scripted objects; no static ALTM pairing verified",
+      "composition_status": "native renderer path verified; no scene BG composition asserted",
+      "background_variant_count": 0,
+      "background_variants": [],
+      "callback_families": [],
+      "scene_table_create": {
+        "program": "arm9_main",
+        "address": "0206f038",
+        "thumb": false,
+        "name": null,
+        "calls": [
+          "02157220 Demo_Add"
+        ],
+        "thumb_calls": []
+      },
+      "asset_reference_count": 2,
+      "unresolved_original_call_count": 0,
+      "render_mode": "Scripted demo/movie",
+      "evidence": "original ROM and ARM9 code; no emulator placement",
+      "deck_characters": "skip: render from player saved decks at game runtime; never generate fixed characters in editor",
+      "dynamic_state_unknown": "no static ALTM/DIG placement proven; original runtime pathway indexed"
+    },
+    {
+      "id": 15,
+      "name": "VsCall",
+      "overlay": 3,
+      "native_family": "Original ALTM/DIG background + runtime UI",
+      "code_source": "functions_layout/arm9_ov03/arm9_ov03_0215b7d4.c#L83",
+      "native_explanation": "Original ARM9 loader identifies the engine and source tilemap; other scene elements may still require runtime state",
+      "composition_status": "source-backed native BG instance",
+      "background_variant_count": 1,
+      "background_variants": [
+        {
+          "id": "vs-call",
+          "condition": "VsCall_Add, two original BG1 maps",
+          "routing": "",
+          "source_layers": [
+            {
+              "engine": "main",
+              "bg_slot": 1,
+              "atm": "vscall/vscall.aar|vscall/vs00_a.atm",
+              "dig": "vscall/vscall.aar|vscall/vs00.dig",
+              "source": "functions_layout/arm9_ov03/arm9_ov03_0215b7d4.c#L83",
+              "initially_visible": true
+            },
+            {
+              "engine": "sub",
+              "bg_slot": 1,
+              "atm": "vscall/vscall.aar|vscall/vs00_b.atm",
+              "dig": "vscall/vscall.aar|vscall/vs00.dig",
+              "source": "functions_layout/arm9_ov03/arm9_ov03_0215b7d4.c#L87",
+              "initially_visible": true
+            }
+          ]
+        }
+      ],
+      "callback_families": [],
+      "scene_table_create": {
+        "program": "arm9_main",
+        "address": "0206f050",
+        "thumb": false,
+        "name": null,
+        "calls": [
+          "0215b7d4 VsCall_Add"
+        ],
+        "thumb_calls": []
+      },
+      "asset_reference_count": 14,
+      "unresolved_original_call_count": 0,
+      "render_mode": "Source-backed tile BG",
+      "evidence": "original ROM and ARM9 code; no emulator placement",
+      "deck_characters": "skip: render from player saved decks at game runtime; never generate fixed characters in editor",
+      "dynamic_state_unknown": "variant not confirmed at a particular tick"
+    },
+    {
+      "id": 16,
+      "name": "JGalaxy",
+      "overlay": 2,
+      "native_family": "J-Galaxy multi-renderer",
+      "code_source": "functions_layout/arm9_ov02/arm9_ov02_0214cd20.c#L72-L88",
+      "native_explanation": "JGalaxy_Add invokes three ROM-indexed constructor families plus JGalaxyBackground/planet model",
+      "composition_status": "native renderer path verified; no scene BG composition asserted",
+      "background_variant_count": 0,
+      "background_variants": [],
+      "callback_families": [
+        {
+          "family": "JGalaxyPreConstructor",
+          "selection": "runtime galaxy mode byte; no fixed mode asserted",
+          "branch_count": 7
+        },
+        {
+          "family": "JGalaxyCreator",
+          "selection": "runtime galaxy mode byte; no fixed mode asserted",
+          "branch_count": 7
+        },
+        {
+          "family": "JGalaxyPostConstructor",
+          "selection": "runtime galaxy mode byte; no fixed mode asserted",
+          "branch_count": 7
+        }
+      ],
+      "scene_table_create": {
+        "program": "arm9_main",
+        "address": "0206f068",
+        "thumb": false,
+        "name": null,
+        "calls": [
+          "0214cd20 JGalaxy_Add"
+        ],
+        "thumb_calls": []
+      },
+      "asset_reference_count": 1,
+      "unresolved_original_call_count": 0,
+      "render_mode": "J-Galaxy multi-renderer",
+      "evidence": "original ROM and ARM9 code; no emulator placement",
+      "deck_characters": "skip: render from player saved decks at game runtime; never generate fixed characters in editor",
+      "dynamic_state_unknown": "no static ALTM/DIG placement proven; original runtime pathway indexed"
+    },
+    {
+      "id": 17,
+      "name": "JGalaxyStageInfo",
+      "overlay": 1,
+      "native_family": "Original ALTM/DIG background + runtime UI",
+      "code_source": "functions_layout/arm9_ov01/arm9_ov01_0214e6e8.c#L228",
+      "native_explanation": "Original ARM9 loader identifies the engine and source tilemap; other scene elements may still require runtime state",
+      "composition_status": "conditional source-backed BG variant",
+      "background_variant_count": 1,
+      "background_variants": [
+        {
+          "id": "clear-list-victory01",
+          "condition": "JGalaxyStageInfo_Add -> JGalaxyClearList_Create(mode0); only if piVar2[0x1A] bit1 selects victory01 ALTM branch",
+          "routing": "functions_layout/arm9_ov01/arm9_ov01_0214cd20.c#L28",
+          "source_layers": [
+            {
+              "engine": "sub",
+              "bg_slot": 2,
+              "atm": "jgalaxy/jgalaxy.aar|jgalaxy/victory01.atm",
+              "dig": "jgalaxy/jgalaxy.aar|jgalaxy/victory00.dig",
+              "source": "functions_layout/arm9_ov01/arm9_ov01_0214e6e8.c#L228",
+              "initially_visible": true
+            }
+          ]
+        }
+      ],
+      "callback_families": [],
+      "scene_table_create": {
+        "program": "arm9_ov01",
+        "address": "0214cd20",
+        "thumb": false,
+        "name": "JGalaxyStageInfo_Add"
+      },
+      "asset_reference_count": 11,
+      "unresolved_original_call_count": 0,
+      "render_mode": "Source-backed tile BG",
+      "evidence": "original ROM and ARM9 code; no emulator placement",
+      "deck_characters": "skip: render from player saved decks at game runtime; never generate fixed characters in editor",
+      "dynamic_state_unknown": "variant not confirmed at a particular tick"
+    },
+    {
+      "id": 18,
+      "name": "JQuiz",
+      "overlay": 4,
+      "native_family": "Original ALTM/DIG background + runtime UI",
+      "code_source": "functions_layout/arm9_ov04/arm9_ov04_0214e204.c#L31",
+      "native_explanation": "Original ARM9 loader identifies the engine and source tilemap; other scene elements may still require runtime state",
+      "composition_status": "source-backed native BG instance",
+      "background_variant_count": 1,
+      "background_variants": [
+        {
+          "id": "jgalaxy-single",
+          "condition": "Scene18 -> JQuiz_Add_Core(2,9,0) -> table 0x0216038C[9] -> JQuizJGalaxyMode_Add -> JQuizMainSinglePlay_Add",
+          "routing": "functions_layout/arm9_ov04/arm9_ov04_0214dcd4.c#L19",
+          "source_layers": [
+            {
+              "engine": "main",
+              "bg_slot": 3,
+              "atm": "info/bg.atm",
+              "dig": "info/bg.dig",
+              "source": "functions_layout/arm9_ov04/arm9_ov04_0214e204.c#L31",
+              "initially_visible": true
+            },
+            {
+              "engine": "sub",
+              "bg_slot": 3,
+              "atm": "info/bg.atm",
+              "dig": "info/bg.dig",
+              "source": "functions_layout/arm9_ov04/arm9_ov04_0214e204.c#L31",
+              "initially_visible": true
+            },
+            {
+              "engine": "main",
+              "bg_slot": 2,
+              "atm": "jquiz/jquiz_pack.aar|jquiz/quiz00.atm",
+              "dig": "jquiz/jquiz_pack.aar|jquiz/quiz00.dig",
+              "source": "functions_layout/arm9_ov04/arm9_ov04_021592b0.c#L39",
+              "initially_visible": true
+            },
+            {
+              "engine": "sub",
+              "bg_slot": 2,
+              "atm": "jquiz/jquiz_pack.aar|jquiz/quiz00_b.atm",
+              "dig": "jquiz/jquiz_pack.aar|jquiz/quiz00_b.dig",
+              "source": "functions_layout/arm9_ov04/arm9_ov04_021592b0.c#L43",
+              "initially_visible": true
+            }
+          ]
+        }
+      ],
+      "callback_families": [
+        {
+          "family": "JQuiz",
+          "selection": "literal in scene-specific overlay wrapper",
+          "branch_count": 1
+        }
+      ],
+      "scene_table_create": {
+        "program": "arm9_ov04",
+        "address": "0214ce4c",
+        "thumb": false,
+        "name": null
+      },
+      "asset_reference_count": 3,
+      "unresolved_original_call_count": 0,
+      "render_mode": "Source-backed tile BG",
+      "evidence": "original ROM and ARM9 code; no emulator placement",
+      "deck_characters": "skip: render from player saved decks at game runtime; never generate fixed characters in editor",
+      "dynamic_state_unknown": "variant not confirmed at a particular tick"
+    },
+    {
+      "id": 19,
+      "name": "JGalaxyResult",
+      "overlay": 1,
+      "native_family": "Original ALTM/DIG background + runtime UI",
+      "code_source": "functions_layout/arm9_ov01/arm9_ov01_0214e6e8.c#L228",
+      "native_explanation": "Original ARM9 loader identifies the engine and source tilemap; other scene elements may still require runtime state",
+      "composition_status": "conditional source-backed BG variant",
+      "background_variant_count": 1,
+      "background_variants": [
+        {
+          "id": "clear-list-victory01",
+          "condition": "JGalaxyResult_Add -> JGalaxyClearList_Create(mode1); only if piVar2[0x1A] bit1 selects victory01 ALTM branch",
+          "routing": "functions_layout/arm9_main/arm9_main_0206e064.c#L7",
+          "source_layers": [
+            {
+              "engine": "sub",
+              "bg_slot": 2,
+              "atm": "jgalaxy/jgalaxy.aar|jgalaxy/victory01.atm",
+              "dig": "jgalaxy/jgalaxy.aar|jgalaxy/victory00.dig",
+              "source": "functions_layout/arm9_ov01/arm9_ov01_0214e6e8.c#L228",
+              "initially_visible": true
+            }
+          ]
+        }
+      ],
+      "callback_families": [],
+      "scene_table_create": {
+        "program": "arm9_ov01",
+        "address": "0214dcb0",
+        "thumb": false,
+        "name": "JGalaxyResult_Add"
+      },
+      "asset_reference_count": 16,
+      "unresolved_original_call_count": 0,
+      "render_mode": "Source-backed tile BG",
+      "evidence": "original ROM and ARM9 code; no emulator placement",
+      "deck_characters": "skip: render from player saved decks at game runtime; never generate fixed characters in editor",
+      "dynamic_state_unknown": "variant not confirmed at a particular tick"
+    },
+    {
+      "id": 20,
+      "name": "Ending",
+      "overlay": 0,
+      "native_family": "Original ALTM/DIG background + runtime UI",
+      "code_source": "functions_layout/arm9_ov00/arm9_ov00_0215b084.c#L77",
+      "native_explanation": "Original ARM9 loader identifies the engine and source tilemap; other scene elements may still require runtime state",
+      "composition_status": "conditional source-backed BG variant",
+      "background_variant_count": 2,
+      "background_variants": [
+        {
+          "id": "piece-00",
+          "condition": "Ending_Add -> EndingPiece_Create, first main/sub BG2 instances",
+          "routing": "functions_layout/arm9_main/arm9_main_0206e064.c#L7",
+          "source_layers": [
+            {
+              "engine": "main",
+              "bg_slot": 1,
+              "atm": "info/bg.atm",
+              "dig": "info/bg.dig",
+              "source": "functions_layout/arm9_ov00/arm9_ov00_0215b084.c#L77",
+              "initially_visible": true
+            },
+            {
+              "engine": "sub",
+              "bg_slot": 1,
+              "atm": "info/bg.atm",
+              "dig": "info/bg.dig",
+              "source": "functions_layout/arm9_ov00/arm9_ov00_0215b084.c#L87",
+              "initially_visible": true
+            },
+            {
+              "engine": "main",
+              "bg_slot": 2,
+              "atm": "ending/ending.aar|ending/bg_00.atm",
+              "dig": "ending/ending.aar|ending/bg.dig",
+              "source": "functions_layout/arm9_ov00/arm9_ov00_0215b084.c#L74",
+              "initially_visible": true
+            },
+            {
+              "engine": "sub",
+              "bg_slot": 2,
+              "atm": "ending/ending.aar|ending/bg_00.atm",
+              "dig": "ending/ending.aar|ending/bg.dig",
+              "source": "functions_layout/arm9_ov00/arm9_ov00_0215b084.c#L80",
+              "initially_visible": false
+            }
+          ]
+        },
+        {
+          "id": "piece-01",
+          "condition": "EndingPiece_Create, alternative BG2 map instances created in the same constructor",
+          "routing": "functions_layout/arm9_main/arm9_main_0206e064.c#L7",
+          "source_layers": [
+            {
+              "engine": "main",
+              "bg_slot": 1,
+              "atm": "info/bg.atm",
+              "dig": "info/bg.dig",
+              "source": "functions_layout/arm9_ov00/arm9_ov00_0215b084.c#L77",
+              "initially_visible": true
+            },
+            {
+              "engine": "sub",
+              "bg_slot": 1,
+              "atm": "info/bg.atm",
+              "dig": "info/bg.dig",
+              "source": "functions_layout/arm9_ov00/arm9_ov00_0215b084.c#L87",
+              "initially_visible": true
+            },
+            {
+              "engine": "main",
+              "bg_slot": 2,
+              "atm": "ending/ending.aar|ending/bg_01.atm",
+              "dig": "ending/ending.aar|ending/bg.dig",
+              "source": "functions_layout/arm9_ov00/arm9_ov00_0215b084.c#L92",
+              "initially_visible": true
+            },
+            {
+              "engine": "sub",
+              "bg_slot": 2,
+              "atm": "ending/ending.aar|ending/bg_01.atm",
+              "dig": "ending/ending.aar|ending/bg.dig",
+              "source": "functions_layout/arm9_ov00/arm9_ov00_0215b084.c#L83",
+              "initially_visible": true
+            }
+          ]
+        }
+      ],
+      "callback_families": [],
+      "scene_table_create": {
+        "program": "arm9_ov00",
+        "address": "0214e860",
+        "thumb": false,
+        "name": "Ending_Add"
+      },
+      "asset_reference_count": 46,
+      "unresolved_original_call_count": 0,
+      "render_mode": "Source-backed tile BG",
+      "evidence": "original ROM and ARM9 code; no emulator placement",
+      "deck_characters": "skip: render from player saved decks at game runtime; never generate fixed characters in editor",
+      "dynamic_state_unknown": "variant not confirmed at a particular tick"
+    },
+    {
+      "id": 21,
+      "name": "JArena",
+      "overlay": 3,
+      "native_family": "Original ALTM/DIG background + runtime UI",
+      "code_source": "functions_layout/arm9_ov03/arm9_ov03_0214d958.c#L132",
+      "native_explanation": "Original ARM9 loader identifies the engine and source tilemap; other scene elements may still require runtime state",
+      "composition_status": "source-backed native BG instance",
+      "background_variant_count": 1,
+      "background_variants": [
+        {
+          "id": "menu",
+          "condition": "",
+          "routing": "",
+          "source_layers": [
+            {
+              "engine": "main",
+              "bg_slot": 1,
+              "atm": "info/bg.atm",
+              "dig": "info/bg.dig",
+              "source": "functions_layout/arm9_ov03/arm9_ov03_0214d958.c#L132",
+              "initially_visible": true
+            },
+            {
+              "engine": "main",
+              "bg_slot": 2,
+              "atm": "JArena/JArena.aar|JArena/arena_top.atm",
+              "dig": "JArena/JArena.aar|JArena/arena_top.dig",
+              "source": "functions_layout/arm9_ov03/arm9_ov03_0214d958.c#L132",
+              "initially_visible": true
+            },
+            {
+              "engine": "sub",
+              "bg_slot": 1,
+              "atm": "info/info.aar|info/win.atm",
+              "dig": "info/info.aar|info/win.dig",
+              "source": "functions_layout/arm9_ov12/arm9_ov12_021bcf1c.c#L144",
+              "initially_visible": true
+            },
+            {
+              "engine": "sub",
+              "bg_slot": 2,
+              "atm": "info/bg.atm",
+              "dig": "info/bg.dig",
+              "source": "functions_layout/arm9_ov12/arm9_ov12_021bcf1c.c#L96",
+              "initially_visible": true
+            }
+          ]
+        }
+      ],
+      "callback_families": [
+        {
+          "family": "JArenaJobs",
+          "selection": "runtime JArena job ID supplied by scene-specific ARM9 wrapper; no fixed mode asserted",
+          "branch_count": 12
+        }
+      ],
+      "scene_table_create": {
+        "program": "arm9_main",
+        "address": "0206f3cc",
+        "thumb": false,
+        "name": null,
+        "calls": [
+          "0214cd20 JArena_AddJob"
+        ],
+        "thumb_calls": []
+      },
+      "asset_reference_count": 4,
+      "unresolved_original_call_count": 0,
+      "render_mode": "Source-backed tile BG",
+      "evidence": "original ROM and ARM9 code; no emulator placement",
+      "deck_characters": "skip: render from player saved decks at game runtime; never generate fixed characters in editor",
+      "dynamic_state_unknown": "variant not confirmed at a particular tick"
+    },
+    {
+      "id": 22,
+      "name": "JAMissionTry",
+      "overlay": 1,
+      "native_family": "Original ALTM/DIG background + runtime UI",
+      "code_source": "functions_layout/arm9_ov01/arm9_ov01_021507a0.c#L26",
+      "native_explanation": "Original ARM9 loader identifies the engine and source tilemap; other scene elements may still require runtime state",
+      "composition_status": "conditional source-backed BG variant",
+      "background_variant_count": 1,
+      "background_variants": [
+        {
+          "id": "mission-try",
+          "condition": "JAMissionTry_Add -> FUN_021507A0; index0 main BG1 and index1 main BG2, ROM address tables 0x0216BDD8/C4",
+          "routing": "functions_layout/arm9_ov01/arm9_ov01_021504f0.c#L19",
+          "source_layers": [
+            {
+              "engine": "main",
+              "bg_slot": 1,
+              "atm": "info/bg.atm",
+              "dig": "info/bg.dig",
+              "source": "functions_layout/arm9_ov01/arm9_ov01_021507a0.c#L26",
+              "initially_visible": true
+            },
+            {
+              "engine": "main",
+              "bg_slot": 2,
+              "atm": "JArena/JArena.aar|JArena/mis01.atm",
+              "dig": "JArena/JArena.aar|JArena/mis01.dig",
+              "source": "functions_layout/arm9_ov01/arm9_ov01_021507a0.c#L26",
+              "initially_visible": false
+            }
+          ]
+        }
+      ],
+      "callback_families": [],
+      "scene_table_create": {
+        "program": "arm9_main",
+        "address": "0206f654",
+        "thumb": false,
+        "name": null,
+        "calls": [
+          "0214fe1c JAMissionTry_Add"
+        ],
+        "thumb_calls": [
+          "0214fe1c"
+        ]
+      },
+      "asset_reference_count": 8,
+      "unresolved_original_call_count": 3,
+      "render_mode": "Source-backed tile BG",
+      "evidence": "original ROM and ARM9 code; no emulator placement",
+      "deck_characters": "skip: render from player saved decks at game runtime; never generate fixed characters in editor",
+      "dynamic_state_unknown": "variant not confirmed at a particular tick"
+    },
+    {
+      "id": 23,
+      "name": "JArena",
+      "overlay": 3,
+      "native_family": "J-Arena runtime job",
+      "code_source": "functions_layout/arm9_main/arm9_main_0206f90c.c#L3-L8",
+      "native_explanation": "Scene23 wrapper computes job ID from live state; ROM job table 0x0215D2AC",
+      "composition_status": "native renderer path verified; no scene BG composition asserted",
+      "background_variant_count": 0,
+      "background_variants": [],
+      "callback_families": [
+        {
+          "family": "JArenaJobs",
+          "selection": "runtime JArena job ID supplied by scene-specific ARM9 wrapper; no fixed mode asserted",
+          "branch_count": 12
+        }
+      ],
+      "scene_table_create": {
+        "program": "arm9_main",
+        "address": "0206f90c",
+        "thumb": false,
+        "name": null,
+        "calls": [
+          "0214cd2c JArena_AddJob"
+        ],
+        "thumb_calls": []
+      },
+      "asset_reference_count": 2,
+      "unresolved_original_call_count": 0,
+      "render_mode": "J-Arena runtime job",
+      "evidence": "original ROM and ARM9 code; no emulator placement",
+      "deck_characters": "skip: render from player saved decks at game runtime; never generate fixed characters in editor",
+      "dynamic_state_unknown": "no static ALTM/DIG placement proven; original runtime pathway indexed"
+    },
+    {
+      "id": 24,
+      "name": "JArena",
+      "overlay": 3,
+      "native_family": "J-Arena runtime job",
+      "code_source": "functions_layout/arm9_main/arm9_main_0206f930.c#L3-L8",
+      "native_explanation": "Scene24 wrapper computes job ID from live state; ROM job table 0x0215D2AC",
+      "composition_status": "native renderer path verified; no scene BG composition asserted",
+      "background_variant_count": 0,
+      "background_variants": [],
+      "callback_families": [
+        {
+          "family": "JArenaJobs",
+          "selection": "runtime JArena job ID supplied by scene-specific ARM9 wrapper; no fixed mode asserted",
+          "branch_count": 12
+        }
+      ],
+      "scene_table_create": {
+        "program": "arm9_main",
+        "address": "0206f930",
+        "thumb": false,
+        "name": null,
+        "calls": [
+          "0214cd38 JArena_AddJob"
+        ],
+        "thumb_calls": []
+      },
+      "asset_reference_count": 2,
+      "unresolved_original_call_count": 0,
+      "render_mode": "J-Arena runtime job",
+      "evidence": "original ROM and ARM9 code; no emulator placement",
+      "deck_characters": "skip: render from player saved decks at game runtime; never generate fixed characters in editor",
+      "dynamic_state_unknown": "no static ALTM/DIG placement proven; original runtime pathway indexed"
+    },
+    {
+      "id": 25,
+      "name": "JAMisnResult",
+      "overlay": 1,
+      "native_family": "J-Arena result widgets",
+      "code_source": "functions_layout/arm9_ov01/arm9_ov01_0215277c.c#L109-L135",
+      "native_explanation": "JAMisnResult_Add creates mission results and 2D widgets; native static BG binding unresolved",
+      "composition_status": "native renderer path verified; no scene BG composition asserted",
+      "background_variant_count": 0,
+      "background_variants": [],
+      "callback_families": [],
+      "scene_table_create": {
+        "program": "arm9_main",
+        "address": "0206f734",
+        "thumb": false,
+        "name": null,
+        "calls": [
+          "0215277c JAMisnResult_Add"
+        ],
+        "thumb_calls": [
+          "02071874",
+          "02071bb8",
+          "02071bf4"
+        ]
+      },
+      "asset_reference_count": 10,
+      "unresolved_original_call_count": 0,
+      "render_mode": "J-Arena result widgets",
+      "evidence": "original ROM and ARM9 code; no emulator placement",
+      "deck_characters": "skip: render from player saved decks at game runtime; never generate fixed characters in editor",
+      "dynamic_state_unknown": "no static ALTM/DIG placement proven; original runtime pathway indexed"
+    },
+    {
+      "id": 26,
+      "name": "JArena",
+      "overlay": 3,
+      "native_family": "J-Arena runtime job",
+      "code_source": "functions_layout/arm9_main/arm9_main_0206f9b8.c#L3-L8",
+      "native_explanation": "Scene26 wrapper reads job bitfield from live state; ROM job table 0x0215D2AC",
+      "composition_status": "native renderer path verified; no scene BG composition asserted",
+      "background_variant_count": 0,
+      "background_variants": [],
+      "callback_families": [
+        {
+          "family": "JArenaJobs",
+          "selection": "runtime JArena job ID supplied by scene-specific ARM9 wrapper; no fixed mode asserted",
+          "branch_count": 12
+        }
+      ],
+      "scene_table_create": {
+        "program": "arm9_main",
+        "address": "0206f9b8",
+        "thumb": false,
+        "name": null,
+        "calls": [
+          "0214cd44 JArena_AddJob"
+        ],
+        "thumb_calls": []
+      },
+      "asset_reference_count": 2,
+      "unresolved_original_call_count": 0,
+      "render_mode": "J-Arena runtime job",
+      "evidence": "original ROM and ARM9 code; no emulator placement",
+      "deck_characters": "skip: render from player saved decks at game runtime; never generate fixed characters in editor",
+      "dynamic_state_unknown": "no static ALTM/DIG placement proven; original runtime pathway indexed"
+    },
+    {
+      "id": 27,
+      "name": "JArena",
+      "overlay": 3,
+      "native_family": "J-Arena runtime job",
+      "code_source": "functions_layout/arm9_main/arm9_main_0206faa8.c#L3-L8",
+      "native_explanation": "Scene27 wrapper reads job ID from live state; ROM job table 0x0215D2AC",
+      "composition_status": "native renderer path verified; no scene BG composition asserted",
+      "background_variant_count": 0,
+      "background_variants": [],
+      "callback_families": [
+        {
+          "family": "JArenaJobs",
+          "selection": "runtime JArena job ID supplied by scene-specific ARM9 wrapper; no fixed mode asserted",
+          "branch_count": 12
+        }
+      ],
+      "scene_table_create": {
+        "program": "arm9_main",
+        "address": "0206faa8",
+        "thumb": false,
+        "name": null,
+        "calls": [
+          "0214cd50 jus_Scene27_CreateImpl"
+        ],
+        "thumb_calls": []
+      },
+      "asset_reference_count": 2,
+      "unresolved_original_call_count": 0,
+      "render_mode": "J-Arena runtime job",
+      "evidence": "original ROM and ARM9 code; no emulator placement",
+      "deck_characters": "skip: render from player saved decks at game runtime; never generate fixed characters in editor",
+      "dynamic_state_unknown": "no static ALTM/DIG placement proven; original runtime pathway indexed"
+    },
+    {
+      "id": 28,
+      "name": "JARankLst",
+      "overlay": 1,
+      "native_family": "Original ALTM/DIG background + runtime UI",
+      "code_source": "functions_layout/arm9_ov01/arm9_ov01_021546fc.c#L20",
+      "native_explanation": "Original ARM9 loader identifies the engine and source tilemap; other scene elements may still require runtime state",
+      "composition_status": "source-backed native BG instance",
+      "background_variant_count": 1,
+      "background_variants": [
+        {
+          "id": "rank-list",
+          "condition": "JARankLst_Add -> FUN_0215447C + FUN_021546FC + FUN_021560B4",
+          "routing": "functions_layout/arm9_ov01/arm9_ov01_0215447c.c#L12",
+          "source_layers": [
+            {
+              "engine": "main",
+              "bg_slot": 1,
+              "atm": "info/bg.atm",
+              "dig": "info/bg.dig",
+              "source": "functions_layout/arm9_ov01/arm9_ov01_021546fc.c#L20",
+              "initially_visible": true
+            },
+            {
+              "engine": "main",
+              "bg_slot": 2,
+              "atm": "JArena/JArena.aar|JArena/ranking_table00.atm",
+              "dig": "JArena/JArena.aar|JArena/ranking_table00.dig",
+              "source": "functions_layout/arm9_ov01/arm9_ov01_021546fc.c#L20",
+              "initially_visible": true
+            },
+            {
+              "engine": "sub",
+              "bg_slot": 3,
+              "atm": "deckselect/deck_base.atm",
+              "dig": "deckselect/deck_base.dig",
+              "source": "functions_layout/arm9_ov01/arm9_ov01_021560b4.c#L38",
+              "initially_visible": true
+            }
+          ]
+        }
+      ],
+      "callback_families": [],
+      "scene_table_create": {
+        "program": "arm9_main",
+        "address": "0206fb1c",
+        "thumb": false,
+        "name": null,
+        "calls": [
+          "02154154 JARankLst_Add"
+        ],
+        "thumb_calls": [
+          "02154154"
+        ]
+      },
+      "asset_reference_count": 7,
+      "unresolved_original_call_count": 3,
+      "render_mode": "Source-backed tile BG",
+      "evidence": "original ROM and ARM9 code; no emulator placement",
+      "deck_characters": "skip: render from player saved decks at game runtime; never generate fixed characters in editor",
+      "dynamic_state_unknown": "variant not confirmed at a particular tick"
+    },
+    {
+      "id": 29,
+      "name": "JPowerKomaList",
+      "overlay": 5,
+      "native_family": "Original ALTM/DIG background + runtime UI",
+      "code_source": "functions_layout/arm9_ov12/arm9_ov12_021bcf1c.c#L123",
+      "native_explanation": "Original ARM9 loader identifies the engine and source tilemap; other scene elements may still require runtime state",
+      "composition_status": "source-backed native BG instance",
+      "background_variant_count": 1,
+      "background_variants": [
+        {
+          "id": "common-info",
+          "condition": "JPowerKomaList_Add invokes CommonInfo_Create(0x17,-1,0,-1): param3=0 selects MAIN BG1 and MAIN BG2",
+          "routing": "functions_layout/arm9_main/arm9_main_0206e064.c#L7",
+          "source_layers": [
+            {
+              "engine": "main",
+              "bg_slot": 1,
+              "atm": "info/info.aar|info/win.atm",
+              "dig": "info/info.aar|info/win.dig",
+              "source": "functions_layout/arm9_ov12/arm9_ov12_021bcf1c.c#L123",
+              "initially_visible": true
+            },
+            {
+              "engine": "main",
+              "bg_slot": 2,
+              "atm": "info/bg.atm",
+              "dig": "info/bg.dig",
+              "source": "functions_layout/arm9_ov12/arm9_ov12_021bcf1c.c#L97",
+              "initially_visible": true
+            }
+          ]
+        }
+      ],
+      "callback_families": [],
+      "scene_table_create": {
+        "program": "arm9_main",
+        "address": "0206fb4c",
+        "thumb": false,
+        "name": null,
+        "calls": [
+          "02166994 JPowerKomaList_Add"
+        ],
+        "thumb_calls": []
+      },
+      "asset_reference_count": 10,
+      "unresolved_original_call_count": 0,
+      "render_mode": "Source-backed tile BG",
+      "evidence": "original ROM and ARM9 code; no emulator placement",
+      "deck_characters": "skip: render from player saved decks at game runtime; never generate fixed characters in editor",
+      "dynamic_state_unknown": "variant not confirmed at a particular tick"
+    },
+    {
+      "id": 30,
+      "name": "JPower",
+      "overlay": 5,
+      "native_family": "Original ALTM/DIG background + runtime UI",
+      "code_source": "functions_layout/arm9_ov05/arm9_ov05_02162410.c#L183",
+      "native_explanation": "Original ARM9 loader identifies the engine and source tilemap; other scene elements may still require runtime state",
+      "composition_status": "source-backed native BG instance",
+      "background_variant_count": 1,
+      "background_variants": [
+        {
+          "id": "jpower",
+          "condition": "JPower_Add main BG2/3; helper 021639D8 reads .atm/.dig",
+          "routing": "",
+          "source_layers": [
+            {
+              "engine": "main",
+              "bg_slot": 3,
+              "atm": "info/bg.atm",
+              "dig": "info/bg.dig",
+              "source": "functions_layout/arm9_ov05/arm9_ov05_02162410.c#L183",
+              "initially_visible": true
+            },
+            {
+              "engine": "main",
+              "bg_slot": 2,
+              "atm": "jpower/jpower.aar|jpower/jp.atm",
+              "dig": "jpower/jpower.aar|jpower/jp.dig",
+              "source": "functions_layout/arm9_ov05/arm9_ov05_02162410.c#L186",
+              "initially_visible": true
+            }
+          ]
+        }
+      ],
+      "callback_families": [],
+      "scene_table_create": {
+        "program": "arm9_main",
+        "address": "0206fbc8",
+        "thumb": false,
+        "name": null,
+        "calls": [
+          "02162410 JPower_Add"
+        ],
+        "thumb_calls": []
+      },
+      "asset_reference_count": 9,
+      "unresolved_original_call_count": 0,
+      "render_mode": "Source-backed tile BG",
+      "evidence": "original ROM and ARM9 code; no emulator placement",
+      "deck_characters": "skip: render from player saved decks at game runtime; never generate fixed characters in editor",
+      "dynamic_state_unknown": "variant not confirmed at a particular tick"
+    },
+    {
+      "id": 31,
+      "name": "JQuiz",
+      "overlay": 4,
+      "native_family": "J-Quiz object callback",
+      "code_source": "functions_layout/arm9_ov04/arm9_ov04_0214ce1c.c#L1-L15",
+      "native_explanation": "JQuiz mode1 ROM target 0x0214CD20: ARM trampoline reads live scene object+0x18",
+      "composition_status": "native renderer path verified; no scene BG composition asserted",
+      "background_variant_count": 0,
+      "background_variants": [],
+      "callback_families": [
+        {
+          "family": "JQuiz",
+          "selection": "literal in scene-specific overlay wrapper",
+          "branch_count": 1
+        }
+      ],
+      "scene_table_create": {
+        "program": "arm9_ov04",
+        "address": "0214ce1c",
+        "thumb": false,
+        "name": null
+      },
+      "asset_reference_count": 3,
+      "unresolved_original_call_count": 0,
+      "render_mode": "J-Quiz object callback",
+      "evidence": "original ROM and ARM9 code; no emulator placement",
+      "deck_characters": "skip: render from player saved decks at game runtime; never generate fixed characters in editor",
+      "dynamic_state_unknown": "no static ALTM/DIG placement proven; original runtime pathway indexed"
+    },
+    {
+      "id": 32,
+      "name": "Database",
+      "overlay": 5,
+      "native_family": "Original ALTM/DIG background + runtime UI",
+      "code_source": "functions_layout/arm9_ov05/arm9_ov05_0216774c.c#L49",
+      "native_explanation": "Original ARM9 loader identifies the engine and source tilemap; other scene elements may still require runtime state",
+      "composition_status": "source-backed native BG instance",
+      "background_variant_count": 7,
+      "background_variants": [
+        {
+          "id": "menu",
+          "condition": "Database::Database_MenuCreate",
+          "routing": "",
+          "source_layers": [
+            {
+              "engine": "main",
+              "bg_slot": 2,
+              "atm": "database/database.aar|database/top_bg.atm",
+              "dig": "database/database.aar|database/top_bg.dig",
+              "source": "functions_layout/arm9_ov05/arm9_ov05_0216774c.c#L49",
+              "initially_visible": true
+            },
+            {
+              "engine": "main",
+              "bg_slot": 1,
+              "atm": "info/bg.atm",
+              "dig": "info/bg.dig",
+              "source": "functions_layout/arm9_ov05/arm9_ov05_0216774c.c#L55",
+              "initially_visible": true
+            }
+          ]
+        },
+        {
+          "id": "locations",
+          "condition": "DatabaseLocation::Database_LocationCreate",
+          "routing": "",
+          "source_layers": [
+            {
+              "engine": "main",
+              "bg_slot": 1,
+              "atm": "database/database.aar|database/home_bg.atm",
+              "dig": "database/database.aar|database/home_bg.dig",
+              "source": "functions_layout/arm9_ov05/arm9_ov05_0216c038.c#L53",
+              "initially_visible": true
+            },
+            {
+              "engine": "main",
+              "bg_slot": 2,
+              "atm": "database/database.aar|database/home_list.atm",
+              "dig": "database/database.aar|database/home_bg.dig",
+              "source": "functions_layout/arm9_ov05/arm9_ov05_0216c038.c#L58",
+              "initially_visible": true
+            }
+          ]
+        },
+        {
+          "id": "list-0",
+          "condition": "DatabaseList::Database_ListCreate type 0",
+          "routing": "",
+          "source_layers": [
+            {
+              "engine": "main",
+              "bg_slot": 1,
+              "atm": "database/database.aar|database/list_bg0.atm",
+              "dig": "database/database.aar|database/list_bg0.dig",
+              "source": "functions_layout/arm9_ov05/arm9_ov05_021685f4.c#L76",
+              "initially_visible": true
+            },
+            {
+              "engine": "main",
+              "bg_slot": 2,
+              "atm": "database/database.aar|database/list.atm",
+              "dig": "database/database.aar|database/list.dig",
+              "source": "functions_layout/arm9_ov05/arm9_ov05_021685f4.c#L76",
+              "initially_visible": true
+            },
+            {
+              "engine": "main",
+              "bg_slot": 3,
+              "atm": "database/database.aar|database/playing.atm",
+              "dig": "database/database.aar|database/playing.dig",
+              "source": "functions_layout/arm9_ov05/arm9_ov05_021685f4.c#L85",
+              "initially_visible": true
+            }
+          ]
+        },
+        {
+          "id": "list-1",
+          "condition": "DatabaseList::Database_ListCreate type 1",
+          "routing": "",
+          "source_layers": [
+            {
+              "engine": "main",
+              "bg_slot": 1,
+              "atm": "database/database.aar|database/list_bg1.atm",
+              "dig": "database/database.aar|database/list_bg1.dig",
+              "source": "functions_layout/arm9_ov05/arm9_ov05_021685f4.c#L76",
+              "initially_visible": true
+            },
+            {
+              "engine": "main",
+              "bg_slot": 2,
+              "atm": "database/database.aar|database/list.atm",
+              "dig": "database/database.aar|database/list.dig",
+              "source": "functions_layout/arm9_ov05/arm9_ov05_021685f4.c#L76",
+              "initially_visible": true
+            },
+            {
+              "engine": "main",
+              "bg_slot": 3,
+              "atm": "database/database.aar|database/playing.atm",
+              "dig": "database/database.aar|database/playing.dig",
+              "source": "functions_layout/arm9_ov05/arm9_ov05_021685f4.c#L85",
+              "initially_visible": true
+            }
+          ]
+        },
+        {
+          "id": "list-2",
+          "condition": "DatabaseList::Database_ListCreate type 2",
+          "routing": "",
+          "source_layers": [
+            {
+              "engine": "main",
+              "bg_slot": 1,
+              "atm": "database/database.aar|database/list_bg2.atm",
+              "dig": "database/database.aar|database/list_bg2.dig",
+              "source": "functions_layout/arm9_ov05/arm9_ov05_021685f4.c#L76",
+              "initially_visible": true
+            },
+            {
+              "engine": "main",
+              "bg_slot": 2,
+              "atm": "database/database.aar|database/list.atm",
+              "dig": "database/database.aar|database/list.dig",
+              "source": "functions_layout/arm9_ov05/arm9_ov05_021685f4.c#L76",
+              "initially_visible": true
+            },
+            {
+              "engine": "main",
+              "bg_slot": 3,
+              "atm": "database/database.aar|database/playing.atm",
+              "dig": "database/database.aar|database/playing.dig",
+              "source": "functions_layout/arm9_ov05/arm9_ov05_021685f4.c#L85",
+              "initially_visible": true
+            }
+          ]
+        },
+        {
+          "id": "personal",
+          "condition": "DatabasePersonal::Database_PersonalCreate",
+          "routing": "",
+          "source_layers": [
+            {
+              "engine": "main",
+              "bg_slot": 1,
+              "atm": "database/database.aar|database/personal_bg.atm",
+              "dig": "database/database.aar|database/personal_bg.dig",
+              "source": "functions_layout/arm9_ov05/arm9_ov05_0216ae64.c#L58",
+              "initially_visible": true
+            }
+          ]
+        },
+        {
+          "id": "comics",
+          "condition": "DatabasePiece::Database_PieceCreate",
+          "routing": "",
+          "source_layers": [
+            {
+              "engine": "sub",
+              "bg_slot": 1,
+              "atm": "database/database.aar|database/story_bg0.atm",
+              "dig": "database/database.aar|database/story_bg0.dig",
+              "source": "functions_layout/arm9_ov05/arm9_ov05_0216a280.c#L66",
+              "initially_visible": true
+            },
+            {
+              "engine": "main",
+              "bg_slot": 1,
+              "atm": "database/database.aar|database/story_bg1.atm",
+              "dig": "database/database.aar|database/story_bg1.dig",
+              "source": "functions_layout/arm9_ov05/arm9_ov05_0216a280.c#L83",
+              "initially_visible": true
+            }
+          ]
+        }
+      ],
+      "callback_families": [],
+      "scene_table_create": {
+        "program": "arm9_main",
+        "address": "0206fbe8",
+        "thumb": false,
+        "name": null,
+        "calls": [
+          "02166cf0 Database_Add"
+        ],
+        "thumb_calls": []
+      },
+      "asset_reference_count": 21,
+      "unresolved_original_call_count": 0,
+      "render_mode": "Source-backed tile BG",
+      "evidence": "original ROM and ARM9 code; no emulator placement",
+      "deck_characters": "skip: render from player saved decks at game runtime; never generate fixed characters in editor",
+      "dynamic_state_unknown": "variant not confirmed at a particular tick"
+    },
+    {
+      "id": 33,
+      "name": "KomaBook",
+      "overlay": 5,
+      "native_family": "Original ALTM/DIG background + runtime UI",
+      "code_source": "functions_layout/arm9_ov05/arm9_ov05_021546c8.c#L42",
+      "native_explanation": "Original ARM9 loader identifies the engine and source tilemap; other scene elements may still require runtime state",
+      "composition_status": "source-backed native BG instance",
+      "background_variant_count": 1,
+      "background_variants": [
+        {
+          "id": "koma-book",
+          "condition": "KomaIBook_Add -> KomaState_Create(mode=2) and KomaList_Create(type=2)",
+          "routing": "functions_layout/arm9_main/arm9_main_0206e064.c#L7",
+          "source_layers": [
+            {
+              "engine": "main",
+              "bg_slot": 2,
+              "atm": "deckmake/deckmake.aar|deckmake/edit_bg.atm",
+              "dig": "deckmake/deckmake.aar|deckmake/edit_bg.dig",
+              "source": "functions_layout/arm9_ov05/arm9_ov05_021546c8.c#L42",
+              "initially_visible": true
+            },
+            {
+              "engine": "main",
+              "bg_slot": 3,
+              "atm": "deckmake/deckmake.aar|deckmake/state.atm",
+              "dig": "deckmake/deckmake.aar|deckmake/state.dig",
+              "source": "functions_layout/arm9_ov05/arm9_ov05_021546c8.c#L51",
+              "initially_visible": true
+            },
+            {
+              "engine": "sub",
+              "bg_slot": 3,
+              "atm": "deckmake/deckmake.aar|deckmake/list00.atm",
+              "dig": "deckmake/deckmake.aar|deckmake/list00.dig",
+              "source": "functions_layout/arm9_ov05/arm9_ov05_0214f598.c#L57",
+              "initially_visible": true
+            }
+          ]
+        }
+      ],
+      "callback_families": [],
+      "scene_table_create": {
+        "program": "arm9_main",
+        "address": "0206fca8",
+        "thumb": false,
+        "name": null,
+        "calls": [
+          "0215efa0 KomaBook_Add"
+        ],
+        "thumb_calls": []
+      },
+      "asset_reference_count": 18,
+      "unresolved_original_call_count": 0,
+      "render_mode": "Source-backed tile BG",
+      "evidence": "original ROM and ARM9 code; no emulator placement",
+      "deck_characters": "skip: render from player saved decks at game runtime; never generate fixed characters in editor",
+      "dynamic_state_unknown": "variant not confirmed at a particular tick"
+    },
+    {
+      "id": 34,
+      "name": "Option",
+      "overlay": 0,
+      "native_family": "Original ALTM/DIG background + runtime UI",
+      "code_source": "functions_layout/arm9_ov00/arm9_ov00_02157138.c#L171",
+      "native_explanation": "Original ARM9 loader identifies the engine and source tilemap; other scene elements may still require runtime state",
+      "composition_status": "source-backed native BG instance",
+      "background_variant_count": 1,
+      "background_variants": [
+        {
+          "id": "options",
+          "condition": "",
+          "routing": "",
+          "source_layers": [
+            {
+              "engine": "main",
+              "bg_slot": 1,
+              "atm": "option/option.aar|option/option.atm",
+              "dig": "option/option.aar|option/option.dig",
+              "source": "functions_layout/arm9_ov00/arm9_ov00_02157138.c#L171",
+              "initially_visible": true
+            },
+            {
+              "engine": "main",
+              "bg_slot": 2,
+              "atm": "info/bg.atm",
+              "dig": "info/bg.dig",
+              "source": "functions_layout/arm9_ov00/arm9_ov00_02157138.c#L174",
+              "initially_visible": true
+            },
+            {
+              "engine": "sub",
+              "bg_slot": 1,
+              "atm": "info/info.aar|info/win.atm",
+              "dig": "info/info.aar|info/win.dig",
+              "source": "functions_layout/arm9_ov12/arm9_ov12_021bcf1c.c#L144",
+              "initially_visible": true
+            },
+            {
+              "engine": "sub",
+              "bg_slot": 2,
+              "atm": "info/bg.atm",
+              "dig": "info/bg.dig",
+              "source": "functions_layout/arm9_ov12/arm9_ov12_021bcf1c.c#L96",
+              "initially_visible": true
+            }
+          ]
+        }
+      ],
+      "callback_families": [],
+      "scene_table_create": {
+        "program": "arm9_ov00",
+        "address": "02157138",
+        "thumb": false,
+        "name": "Option_Add"
+      },
+      "asset_reference_count": 35,
+      "unresolved_original_call_count": 0,
+      "render_mode": "Source-backed tile BG",
+      "evidence": "original ROM and ARM9 code; no emulator placement",
+      "deck_characters": "skip: render from player saved decks at game runtime; never generate fixed characters in editor",
+      "dynamic_state_unknown": "variant not confirmed at a particular tick"
+    },
+    {
+      "id": 35,
+      "name": "CommuMenu",
+      "overlay": 7,
+      "native_family": "Communication selector",
+      "code_source": "functions_layout/arm9_main/arm9_main_0206fd54.c#L3-L130",
+      "native_explanation": "14 original conditional scene-wrapper calls select CommuMenu ROM callback modes",
+      "composition_status": "native renderer path verified; no scene BG composition asserted",
+      "background_variant_count": 0,
+      "background_variants": [],
+      "callback_families": [
+        {
+          "family": "CommuMenu",
+          "selection": "runtime condition-dependent",
+          "branch_count": 14
+        }
+      ],
+      "scene_table_create": {
+        "program": "arm9_main",
+        "address": "0206fd54",
+        "thumb": false,
+        "name": null,
+        "calls": [
+          "0214db7c jus_Scene35_CreateImpl",
+          "0214dbac jus_Scene35_CreateImpl",
+          "0214dc38 jus_Scene35_CreateImpl",
+          "0214dbc8 jus_Scene35_CreateImpl",
+          "0214dd18 jus_Scene35_CreateImpl",
+          "0214dbe4 jus_Scene35_CreateImpl",
+          "0214dc00 jus_Scene35_CreateImpl",
+          "0214dc1c jus_Scene35_CreateImpl",
+          "0214dd34 jus_Scene35_CreateImpl",
+          "0214dc54 jus_Scene35_CreateImpl",
+          "0214dc70 jus_Scene35_CreateImpl",
+          "0214dce0 jus_Scene35_CreateImpl",
+          "0214dcfc jus_Scene35_CreateImpl",
+          "0214dc8c jus_Scene35_CreateImpl"
+        ],
+        "thumb_calls": []
+      },
+      "asset_reference_count": 0,
+      "unresolved_original_call_count": 0,
+      "render_mode": "Communication selector",
+      "evidence": "original ROM and ARM9 code; no emulator placement",
+      "deck_characters": "skip: render from player saved decks at game runtime; never generate fixed characters in editor",
+      "dynamic_state_unknown": "no static ALTM/DIG placement proven; original runtime pathway indexed"
+    },
+    {
+      "id": 36,
+      "name": "CommuMenuWrlsWatchWait",
+      "overlay": 7,
+      "native_family": "Original ALTM/DIG background + runtime UI",
+      "code_source": "functions_layout/arm9_ov07/arm9_ov07_02164344.c#L151",
+      "native_explanation": "Original ARM9 loader identifies the engine and source tilemap; other scene elements may still require runtime state",
+      "composition_status": "conditional source-backed BG variant",
+      "background_variant_count": 1,
+      "background_variants": [
+        {
+          "id": "wireless-watch",
+          "condition": "CommuMenuWrlsWatchWait_Add constructs main BG3, sub BG2, main BG2 watch_battle from ROM-string pairs at 0x0216A7E4",
+          "routing": "",
+          "source_layers": [
+            {
+              "engine": "main",
+              "bg_slot": 3,
+              "atm": "info/bg.atm",
+              "dig": "info/bg.dig",
+              "source": "functions_layout/arm9_ov07/arm9_ov07_02164344.c#L151",
+              "initially_visible": true
+            },
+            {
+              "engine": "sub",
+              "bg_slot": 2,
+              "atm": "info/bg.atm",
+              "dig": "info/bg.dig",
+              "source": "functions_layout/arm9_ov07/arm9_ov07_02164344.c#L154",
+              "initially_visible": true
+            },
+            {
+              "engine": "main",
+              "bg_slot": 2,
+              "atm": "Commu/commu_pack.aar|Commu/watch_battle.atm",
+              "dig": "Commu/commu_pack.aar|Commu/watch_battle.dig",
+              "source": "functions_layout/arm9_ov07/arm9_ov07_02164344.c#L157",
+              "initially_visible": false
+            }
+          ]
+        }
+      ],
+      "callback_families": [],
+      "scene_table_create": {
+        "program": "arm9_ov07",
+        "address": "02164344",
+        "thumb": true,
+        "name": "CommuMenuWrlsWatchWait_Add"
+      },
+      "asset_reference_count": 12,
+      "unresolved_original_call_count": 0,
+      "render_mode": "Source-backed tile BG",
+      "evidence": "original ROM and ARM9 code; no emulator placement",
+      "deck_characters": "skip: render from player saved decks at game runtime; never generate fixed characters in editor",
+      "dynamic_state_unknown": "variant not confirmed at a particular tick"
+    },
+    {
+      "id": 37,
+      "name": "CommuMenuEntryDataEnt",
+      "overlay": 7,
+      "native_family": "Original ALTM/DIG background + runtime UI",
+      "code_source": "functions_layout/arm9_ov07/arm9_ov07_021653fc.c#L97",
+      "native_explanation": "Original ARM9 loader identifies the engine and source tilemap; other scene elements may still require runtime state",
+      "composition_status": "source-backed native BG instance",
+      "background_variant_count": 1,
+      "background_variants": [
+        {
+          "id": "entry-data",
+          "condition": "CommuMenuEntryDataEnt_Add_Core -> main BG3 and sub BG3 original maps",
+          "routing": "functions_layout/arm9_ov07/arm9_ov07_021653fc.c#L51",
+          "source_layers": [
+            {
+              "engine": "main",
+              "bg_slot": 3,
+              "atm": "info/bg.atm",
+              "dig": "info/bg.dig",
+              "source": "functions_layout/arm9_ov07/arm9_ov07_021653fc.c#L97",
+              "initially_visible": true
+            },
+            {
+              "engine": "sub",
+              "bg_slot": 3,
+              "atm": "deckselect/deck_base.atm",
+              "dig": "deckselect/deck_base.dig",
+              "source": "functions_layout/arm9_ov07/arm9_ov07_021653fc.c#L100",
+              "initially_visible": true
+            }
+          ]
+        }
+      ],
+      "callback_families": [],
+      "scene_table_create": {
+        "program": "arm9_main",
+        "address": "020701f0",
+        "thumb": false,
+        "name": null,
+        "calls": [
+          "021653cc jus_Scene37_CreateImpl"
+        ],
+        "thumb_calls": []
+      },
+      "asset_reference_count": 8,
+      "unresolved_original_call_count": 0,
+      "render_mode": "Source-backed tile BG",
+      "evidence": "original ROM and ARM9 code; no emulator placement",
+      "deck_characters": "skip: render from player saved decks at game runtime; never generate fixed characters in editor",
+      "dynamic_state_unknown": "variant not confirmed at a particular tick"
+    },
+    {
+      "id": 38,
+      "name": "CommuMenu",
+      "overlay": 7,
+      "native_family": "Original ALTM/DIG background + runtime UI",
+      "code_source": "functions_layout/arm9_ov07/arm9_ov07_0215d1c0.c#L82",
+      "native_explanation": "Original ARM9 loader identifies the engine and source tilemap; other scene elements may still require runtime state",
+      "composition_status": "conditional source-backed BG variant",
+      "background_variant_count": 1,
+      "background_variants": [
+        {
+          "id": "surechigai",
+          "condition": "Scene38 CommuMenu_Add_Core(10,2,0,0) -> ROM table index10 (Thumb 0x0215D1C1) -> CommuMenuSuretigai_Add",
+          "routing": "functions_layout/arm9_ov07/arm9_ov07_0215d1c0.c#L69",
+          "source_layers": [
+            {
+              "engine": "main",
+              "bg_slot": 3,
+              "atm": "info/bg.atm",
+              "dig": "info/bg.dig",
+              "source": "functions_layout/arm9_ov07/arm9_ov07_0215d1c0.c#L82",
+              "initially_visible": true
+            },
+            {
+              "engine": "main",
+              "bg_slot": 2,
+              "atm": "Commu/commu_pack.aar|Commu/sure02.atm",
+              "dig": "Commu/commu_pack.aar|Commu/sure02.dig",
+              "source": "functions_layout/arm9_ov07/arm9_ov07_0215d1c0.c#L87",
+              "initially_visible": false
+            }
+          ]
+        }
+      ],
+      "callback_families": [
+        {
+          "family": "CommuMenu",
+          "selection": "literal in scene-specific overlay wrapper",
+          "branch_count": 1
+        }
+      ],
+      "scene_table_create": {
+        "program": "arm9_ov07",
+        "address": "0214dca8",
+        "thumb": false,
+        "name": null
+      },
+      "asset_reference_count": 0,
+      "unresolved_original_call_count": 0,
+      "render_mode": "Source-backed tile BG",
+      "evidence": "original ROM and ARM9 code; no emulator placement",
+      "deck_characters": "skip: render from player saved decks at game runtime; never generate fixed characters in editor",
+      "dynamic_state_unknown": "variant not confirmed at a particular tick"
+    },
+    {
+      "id": 39,
+      "name": "CommuMenu",
+      "overlay": 7,
+      "native_family": "Communication leader selection",
+      "code_source": "functions_layout/arm9_ov07/arm9_ov07_021624e8.c#L40-L53",
+      "native_explanation": "DataLeaderSel_Add -> CmnLeaderSel_Add; LCD swap argument at shared helper call unproven",
+      "composition_status": "native renderer path verified; no scene BG composition asserted",
+      "background_variant_count": 0,
+      "background_variants": [],
+      "callback_families": [
+        {
+          "family": "CommuMenu",
+          "selection": "literal in scene-specific overlay wrapper",
+          "branch_count": 1
+        }
+      ],
+      "scene_table_create": {
+        "program": "arm9_ov07",
+        "address": "0214dcc4",
+        "thumb": false,
+        "name": null
+      },
+      "asset_reference_count": 0,
+      "unresolved_original_call_count": 0,
+      "render_mode": "Communication leader selection",
+      "evidence": "original ROM and ARM9 code; no emulator placement",
+      "deck_characters": "skip: render from player saved decks at game runtime; never generate fixed characters in editor",
+      "dynamic_state_unknown": "no static ALTM/DIG placement proven; original runtime pathway indexed"
+    },
+    {
+      "id": 40,
+      "name": "JQuiz",
+      "overlay": 4,
+      "native_family": "Original ALTM/DIG background + runtime UI",
+      "code_source": "functions_layout/arm9_ov04/arm9_ov04_0214e204.c#L31",
+      "native_explanation": "Original ARM9 loader identifies the engine and source tilemap; other scene elements may still require runtime state",
+      "composition_status": "source-backed native BG instance",
+      "background_variant_count": 1,
+      "background_variants": [
+        {
+          "id": "battle-rule",
+          "condition": "Scene40 -> JQuiz_Add_Core(1,5,0) -> table 0x0216038C[5] -> JQuizBattleRuleDisp_Add",
+          "routing": "functions_layout/arm9_ov04/arm9_ov04_0214d208.c#L18",
+          "source_layers": [
+            {
+              "engine": "main",
+              "bg_slot": 3,
+              "atm": "info/bg.atm",
+              "dig": "info/bg.dig",
+              "source": "functions_layout/arm9_ov04/arm9_ov04_0214e204.c#L31",
+              "initially_visible": true
+            },
+            {
+              "engine": "main",
+              "bg_slot": 2,
+              "atm": "jquiz/jquiz_pack.aar|jquiz/com_rule00.atm",
+              "dig": "jquiz/jquiz_pack.aar|jquiz/com_rule00.dig",
+              "source": "functions_layout/arm9_ov04/arm9_ov04_0215da38.c#L78",
+              "initially_visible": true
+            },
+            {
+              "engine": "sub",
+              "bg_slot": 1,
+              "atm": "info/info.aar|info/win.atm",
+              "dig": "info/info.aar|info/win.dig",
+              "source": "functions_layout/arm9_ov12/arm9_ov12_021bcf1c.c#L144",
+              "initially_visible": true
+            },
+            {
+              "engine": "sub",
+              "bg_slot": 2,
+              "atm": "info/bg.atm",
+              "dig": "info/bg.dig",
+              "source": "functions_layout/arm9_ov12/arm9_ov12_021bcf1c.c#L96",
+              "initially_visible": true
+            }
+          ]
+        }
+      ],
+      "callback_families": [
+        {
+          "family": "JQuiz",
+          "selection": "literal in scene-specific overlay wrapper",
+          "branch_count": 1
+        }
+      ],
+      "scene_table_create": {
+        "program": "arm9_ov04",
+        "address": "0214ce34",
+        "thumb": false,
+        "name": null
+      },
+      "asset_reference_count": 3,
+      "unresolved_original_call_count": 0,
+      "render_mode": "Source-backed tile BG",
+      "evidence": "original ROM and ARM9 code; no emulator placement",
+      "deck_characters": "skip: render from player saved decks at game runtime; never generate fixed characters in editor",
+      "dynamic_state_unknown": "variant not confirmed at a particular tick"
+    },
+    {
+      "id": 41,
+      "name": "WiFi_Connection",
+      "overlay": 8,
+      "native_family": "WiFi connection controller",
+      "code_source": "functions_layout/arm9_ov08/arm9_ov08_02167960.c#L15-L40",
+      "native_explanation": "WiFi_ConnectionAdd: original connection state and widget controller; no static tile BG binding verified",
+      "composition_status": "native renderer path verified; no scene BG composition asserted",
+      "background_variant_count": 0,
+      "background_variants": [],
+      "callback_families": [],
+      "scene_table_create": {
+        "program": "arm9_ov08",
+        "address": "02167960",
+        "thumb": false,
+        "name": "WiFi_ConnectionAdd"
+      },
+      "asset_reference_count": 0,
+      "unresolved_original_call_count": 0,
+      "render_mode": "WiFi connection controller",
+      "evidence": "original ROM and ARM9 code; no emulator placement",
+      "deck_characters": "skip: render from player saved decks at game runtime; never generate fixed characters in editor",
+      "dynamic_state_unknown": "no static ALTM/DIG placement proven; original runtime pathway indexed"
+    },
+    {
+      "id": 42,
+      "name": "CommuMenuWiFiError",
+      "overlay": 7,
+      "native_family": "Original ALTM/DIG background + runtime UI",
+      "code_source": "functions_layout/arm9_ov07/arm9_ov07_02164ee8.c#L29",
+      "native_explanation": "Original ARM9 loader identifies the engine and source tilemap; other scene elements may still require runtime state",
+      "composition_status": "conditional source-backed BG variant",
+      "background_variant_count": 1,
+      "background_variants": [
+        {
+          "id": "wifi-error",
+          "condition": "Scene42_Create -> WiFiError_Add only on WiFi branch; error-status==7 can exit before BG loads",
+          "routing": "functions_layout/arm9_ov07/arm9_ov07_02164ee8.c#L18",
+          "source_layers": [
+            {
+              "engine": "main",
+              "bg_slot": 3,
+              "atm": "info/bg.atm",
+              "dig": "info/bg.dig",
+              "source": "functions_layout/arm9_ov07/arm9_ov07_02164ee8.c#L29",
+              "initially_visible": true
+            },
+            {
+              "engine": "sub",
+              "bg_slot": 3,
+              "atm": "info/bg.atm",
+              "dig": "info/bg.dig",
+              "source": "functions_layout/arm9_ov07/arm9_ov07_02164ee8.c#L32",
+              "initially_visible": true
+            }
+          ]
+        }
+      ],
+      "callback_families": [],
+      "scene_table_create": {
+        "program": "arm9_ov07",
+        "address": "02165158",
+        "thumb": false,
+        "name": null
+      },
+      "asset_reference_count": 5,
+      "unresolved_original_call_count": 0,
+      "render_mode": "Source-backed tile BG",
+      "evidence": "original ROM and ARM9 code; no emulator placement",
+      "deck_characters": "skip: render from player saved decks at game runtime; never generate fixed characters in editor",
+      "dynamic_state_unknown": "variant not confirmed at a particular tick"
+    },
+    {
+      "id": 43,
+      "name": "Main_Communication",
+      "overlay": 7,
+      "native_family": "Communication wait + text",
+      "code_source": "functions_layout/arm9_ov07/arm9_ov07_02167fcc.c#L46-L88",
+      "native_explanation": "Main_CommunicationAdd: original DSFont text layout and network wait callbacks",
+      "composition_status": "native renderer path verified; no scene BG composition asserted",
+      "background_variant_count": 0,
+      "background_variants": [],
+      "callback_families": [],
+      "scene_table_create": {
+        "program": "arm9_ov07",
+        "address": "02167fcc",
+        "thumb": false,
+        "name": "Main_CommunicationAdd"
+      },
+      "asset_reference_count": 1,
+      "unresolved_original_call_count": 0,
+      "render_mode": "Communication wait + text",
+      "evidence": "original ROM and ARM9 code; no emulator placement",
+      "deck_characters": "skip: render from player saved decks at game runtime; never generate fixed characters in editor",
+      "dynamic_state_unknown": "no static ALTM/DIG placement proven; original runtime pathway indexed"
+    },
+    {
+      "id": 44,
+      "name": "Battle",
+      "overlay": 6,
+      "native_family": "Battle stage/gameplay",
+      "code_source": "functions_layout/arm9_ov06/arm9_ov06_0214cd20.c#L64-L95",
+      "native_explanation": "Battle_Add, alternate scene wrapper/mode; stage/gameplay-driven",
+      "composition_status": "native renderer path verified; no scene BG composition asserted",
+      "background_variant_count": 0,
+      "background_variants": [],
+      "callback_families": [],
+      "scene_table_create": {
+        "program": "arm9_main",
+        "address": "02070340",
+        "thumb": false,
+        "name": null,
+        "calls": [
+          "0214cd20 Battle_Add"
+        ],
+        "thumb_calls": [
+          "0214cd20"
+        ]
+      },
+      "asset_reference_count": 10,
+      "unresolved_original_call_count": 2,
+      "render_mode": "Battle stage/gameplay",
+      "evidence": "original ROM and ARM9 code; no emulator placement",
+      "deck_characters": "skip: render from player saved decks at game runtime; never generate fixed characters in editor",
+      "dynamic_state_unknown": "no static ALTM/DIG placement proven; original runtime pathway indexed"
+    },
+    {
+      "id": 45,
+      "name": "Result",
+      "overlay": 1,
+      "native_family": "Runtime result widgets",
+      "code_source": "functions_layout/arm9_ov01/arm9_ov01_02165ea4.c#L40-L62",
+      "native_explanation": "Result_Add, alternate mode; source-backed result sprite widgets, no fixed ALTM BG",
+      "composition_status": "native renderer path verified; no scene BG composition asserted",
+      "background_variant_count": 0,
+      "background_variants": [],
+      "callback_families": [],
+      "scene_table_create": {
+        "program": "arm9_main",
+        "address": "0207037c",
+        "thumb": false,
+        "name": null,
+        "calls": [
+          "02165ea4 Result_Add"
+        ],
+        "thumb_calls": [
+          "02165ea4"
+        ]
+      },
+      "asset_reference_count": 18,
+      "unresolved_original_call_count": 0,
+      "render_mode": "Runtime result widgets",
+      "evidence": "original ROM and ARM9 code; no emulator placement",
+      "deck_characters": "skip: render from player saved decks at game runtime; never generate fixed characters in editor",
+      "dynamic_state_unknown": "no static ALTM/DIG placement proven; original runtime pathway indexed"
+    }
+  ]
+}

@@ -31,6 +31,7 @@ from typing import Callable, Mapping
 from jus_formats import almt, notetrack
 
 from .effectlinks import effect_frame_tick
+from .notecommands import iter_note_commands
 
 FLAG_KEEP_X_UNMIRRORED = 0x0001
 FLAG_NO_FACING_INHERIT = 0x0002
@@ -153,28 +154,18 @@ class ReferenceEvent:
 def reference_events(move: almt.Move, node_names: list[str]) -> tuple[ReferenceEvent, ...]:
     """Extract the traced child-reference actions without altering lifetimes."""
     events: list[ReferenceEvent] = []
-    for ni, node in enumerate(move.nodes):
-        if node is None:
+    for item in iter_note_commands(move, node_names):
+        command = item.command
+        if command.opcode != 0x0300:
             continue
-        tr = node.track('NoteTrack')
-        if tr is None:
+        args = command.values()
+        if not args or args[0] not in (4, 5):
             continue
-        try:
-            keys = notetrack.parse(tr.encoded()).keys
-        except (ValueError, IndexError, struct.error):
-            continue
-        for key in keys:
-            for cmd in key.commands:
-                if cmd.opcode != 0x0300:
-                    continue
-                args = cmd.values()
-                if not args or args[0] not in (4, 5):
-                    continue
-                action = args[0]
-                events.append(ReferenceEvent(key.tick,
-                            node_names[ni] if ni < len(node_names) else f'N{ni}',
-                            'tear down all GN effects' if action == 4 else 'tear down oldest live GN effect',
-                            action))
+        action = args[0]
+        events.append(ReferenceEvent(
+            item.tick, item.node,
+            'tear down all GN effects' if action == 4 else 'tear down oldest live GN effect',
+            action))
     return tuple(sorted(events, key=lambda ev: (ev.tick, ev.node)))
 
 

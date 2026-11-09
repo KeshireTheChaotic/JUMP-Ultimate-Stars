@@ -1,0 +1,63 @@
+{
+  "phase": "R08 Phase 8",
+  "source_file": "app/editor.py",
+  "original_editor_sha256": "0cc911f488a790a49162c8d79cf4360fd2436daef54ce006f89566daaaa3d113",
+  "methods": {
+    "frame_view": {
+      "original_source": "def frame_view(self):\n    # A Koma special can generate sprites well outside the base character\n    # pose. Frame the authored move *and* its source-resolved children\n    # across the key span rather than only tick 0 (Goku Cheap Joke,\n    # 0x5C12A, spawns two original 24-tick children at tick 7).\n    rect = self._move_scope_extent()\n    if rect:\n        self.view.frame_rect(rect)\n    else:\n        self.view.frame_origin()\n",
+      "original_source_sha256": "72f5c344e12ea09cbe4a68d2cf29d7723bf12bfa2c829991c986949739bed969",
+      "line_start": 1050,
+      "line_end": 1059,
+      "transformed_source_sha256": "68ce31171a63c40bf026603f74670de312c07cfbb9d07ddbdba306b5f30a2b85"
+    },
+    "_move_scope_extent": {
+      "original_source": "def _move_scope_extent(self):\n    if not self.move:\n        return None\n    if not self.show_spawns.get() or not self.index:\n        return self._move_extent()\n    candidates = {0, self.tick}\n    # Original character frame keys; include move extremes where available.\n    for node in self.move.nodes:\n        if node is None:\n            continue\n        for tr in node.tracks:\n            if tr.field in ('BoundsIndex', 'TextureID', '2DPos', 'CollisionRect0') and tr.keyed:\n                candidates.update(k.tick for k in tr.keys if 0 <= k.tick <= self.move.duration)\n    for sp in spawns.keyed_spawns(self.move, self.almt.node_names):\n        if sp.tick > self.move.duration:\n            continue\n        candidates.add(sp.tick)\n        child = self._effect_moves.get(sp.effect_id)\n        if child is not None:\n            last = min(child[0].duration - 1, self.move.duration - sp.tick)\n            if last > 0:\n                candidates.add(sp.tick + last)\n                candidates.add(sp.tick + last // 2)\n    ticks = sorted(candidates)\n    if len(ticks) > 48:\n        # Deterministic sampling bounded for long/many-effect attacks.\n        ticks = sorted({ticks[round(i * (len(ticks)-1)/47)] for i in range(48)}\n                       | {0, self.tick})\n    save_tick = self.tick\n    extents = []\n    try:\n        for t in ticks:\n            self.tick = t\n            bounds = self._move_extent()\n            if bounds:\n                extents.append(bounds)\n    finally:\n        self.tick = save_tick\n    # The original NoteTrack can also launch shot objects (action2).\n    # These are not GN GenerateID children of the parent and would be\n    # omitted from an otherwise complete effect-aware viewport frame.\n    extents.extend(self._handler00_launch_extents())\n    if not extents:\n        return None\n    return (min(v[0] for v in extents), min(v[1] for v in extents),\n            max(v[2] for v in extents), max(v[3] for v in extents))\n",
+      "original_source_sha256": "43811a09c4477002d9667732d178d952dbd29e505484907a593ebfc65903ba14",
+      "line_start": 1061,
+      "line_end": 1106,
+      "transformed_source_sha256": "73c1fcc3e3ac63a1df4ecced65c2214e27094ab1b5c4ad28ebf686e56d858a1b"
+    },
+    "_handler00_launch_extents": {
+      "original_source": "def _handler00_launch_extents(self):\n    \"\"\"Only original shot birth sprites and their authored 1-level GN keys.\n\n    Uses original shot launch XY and image pixels. Deliberately excludes\n    native projectile travel, contact termination and conditional exit.\n    \"\"\"\n    if not self.show_shot_sources.get() or not self.index:\n        return []\n    bounds = []\n    for ev in self._shot_events_current():\n        if ev.handler != 0:\n            continue\n        origin_x, origin_y = self._animation_origin(ev.tick)\n        base_x = origin_x + (-ev.launch_x if self.facing_left.get() else ev.launch_x)\n        base_y = origin_y + ev.launch_y\n        for rid in ev.directly_constructed_animations:\n            entry = self._effect_moves.get(rid)\n            if entry is None:\n                continue\n            child, child_names, _child_path = entry\n            ages = {0, max(0, child.duration // 2), max(0, child.duration - 1)}\n            for age in ages:\n                tick = effectlinks.effect_frame_tick(child, age)\n                if tick is None:\n                    continue\n                bounds.extend(spritegeometry.sprite_bounds(\n                    self._state(child, tick).values(),\n                    self._frame_image, (base_x, base_y)))\n            for nested in spawns.keyed_spawns(child, child_names):\n                nxt = self._effect_moves.get(nested.effect_id)\n                if nxt is None or nested.tick >= child.duration:\n                    continue\n                nm, _nnames, _path = nxt\n                at_tick = effectlinks.effect_frame_tick(nm, 0)\n                if at_tick is None:\n                    continue\n                try:\n                    ni = child_names.index(nested.node)\n                except ValueError:\n                    continue\n                pos = spawns.state_at(child, nested.tick).get(ni, {}).get('2DPos', [0, 0])\n                bounds.extend(spritegeometry.sprite_bounds(\n                    self._state(nm, at_tick).values(), self._frame_image,\n                    (base_x + pos[0], base_y + pos[1])))\n    return bounds\n",
+      "original_source_sha256": "d0a1c793d59a7ab0b4445d0af28449802cacf23e7a2d58c57d1fb4c711b616a2",
+      "line_start": 1108,
+      "line_end": 1152,
+      "transformed_source_sha256": "45ed36af0efe7371b0dafa7df9632fbf5bce32a6afab63e0160fc61bfdd4bab9"
+    },
+    "_move_extent": {
+      "original_source": "def _move_extent(self):\n    if not self.move:\n        return None\n    xs = []\n    st = self._state(self.move, self.tick)\n    for s in st.values():\n        xs.extend(spritegeometry.sprite_bounds((s,), self._frame_image))\n        pos = s.get('2DPos', [0, 0])\n        for field, value in s.items():\n            if field.startswith('CollisionRect') and isinstance(value, list):\n                xs.append((pos[0] + value[0], pos[1] + value[1],\n                           pos[0] + value[2], pos[1] + value[3]))\n    if self.show_spawns.get() and self.index:\n        for inst in self._visible_spawn_instances(self.spawn_projection()):\n            xs.extend(spritegeometry.sprite_bounds(\n                self._state(inst.move, inst.sub_tick).values(),\n                self._frame_image, inst.anchor))\n    dx, dy = self._animation_origin(self.tick)\n    xs = [(l + dx, t + dy, r + dx, b + dy) for l, t, r, b in xs]\n    if self.show_motion.get() and self._motion and self._motion.commands:\n        xs.extend((f.px[0], f.px[1], f.px[0], f.px[1]) for f in self._motion.frames)\n    if not xs:\n        return None\n    return (min(r[0] for r in xs) - 8, min(r[1] for r in xs) - 8, max(r[2] for r in xs) + 8,\n            max(r[3] for r in xs) + 8)\n",
+      "original_source_sha256": "6af65e5a2dc05d4d264e2c0f9789a5927acf158eda99ea8a959a055c02200c6f",
+      "line_start": 1154,
+      "line_end": 1178,
+      "transformed_source_sha256": "3ab9e20eb67c1bd4823fd15cd4780a3fec7bd5210d341c34be1bf56a962e6f2a"
+    },
+    "_animation_origin": {
+      "original_source": "def _animation_origin(self, tick):\n    if self.root_motion.get() and self._motion and self._motion.commands:\n        frame = self._motion.at(tick)\n        if frame:\n            return frame.px\n    return (0.0, 0.0)\n",
+      "original_source_sha256": "021bd8858ab64dc83e1ede5bef040bffe463792469b5bbdb6329dcd80036af22",
+      "line_start": 1190,
+      "line_end": 1195,
+      "transformed_source_sha256": "de2015ca1303f42f13a1426e616bda6dda787dc9816d434a070ec3c5d0c8d6d3"
+    },
+    "spawn_projection": {
+      "original_source": "def spawn_projection(self, tick=None):\n    if not self.move or not self.almt:\n        return spawns.Projection([], [], [])\n    return spawns.project(self.move, self.almt.node_names, self.tick if tick is None else tick,\n                          self._effect_moves, follow_parent=self.parent_link_preview.get(),\n                          origin_at=self._animation_origin,\n                          apply_teardown=self.effect_teardown.get())\n",
+      "original_source_sha256": "dc07512654beff766cbb17b1a7b0e1b78486f31c6b0655ea0becef60872238e6",
+      "line_start": 1222,
+      "line_end": 1228,
+      "transformed_source_sha256": "186f7efc8c5793bc5658df49ae620f86d129dc7a5fd1a93538fe2e2b5738ac51"
+    },
+    "_shot_events_current": {
+      "original_source": "def _shot_events_current(self):\n    \"\"\"All original 0x0300/action2 shot invocations for this base battle AMT.\"\"\"\n    if not self.move or not self.almt or not self.root_data or not self._battle_base_table():\n        return ()\n    form, _ = self._move_source_form()\n    if form is None:\n        return ()\n    member = join('chr/ChrBin.aar', f'chr/shot/{form}.bin')\n    if not self.root_data.exists(member):\n        return ()\n    try:\n        table = chrbin.parse(self.root_data.read(member), f'chr/shot/{form}.bin')\n        return shotvisuals.source_shots(self.move, self.almt.node_names, table)\n    except (ValueError, OSError, KeyError) as exc:\n        self._shot_source_error = str(exc)\n        return ()\n",
+      "original_source_sha256": "07df7253e2e271c36503f61b6ce14bdcba29249a65734de4ab851c1ed4c658f6",
+      "line_start": 1230,
+      "line_end": 1245,
+      "transformed_source_sha256": "6e177ee4bf1ef7e27dabbda3a0851d466addf599df659e64d858928f3d010981"
+    },
+    "_visible_spawn_instances": {
+      "original_source": "def _visible_spawn_instances(self, projection):\n    if not self.isolate_selected_spawn.get():\n        return projection.instances\n    hot = self.sel_virtual.get('spawn') if self.sel_virtual else None\n    return [i for i in projection.instances if hot is not None and i.spawn == hot]\n",
+      "original_source_sha256": "e1a39d77861feeba9cba1d464833611a6d11cb677836f4bd16de3e37ca4809a8",
+      "line_start": 1265,
+      "line_end": 1269,
+      "transformed_source_sha256": "d3ab104d9c0143254b8fa0afe1ada1366e4c97a2ea160d0dbf61f687ff20a19c"
+    }
+  }
+}

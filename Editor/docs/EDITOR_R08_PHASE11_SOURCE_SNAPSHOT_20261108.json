@@ -1,0 +1,61 @@
+{
+  "phase": "R08 Phase 11",
+  "original_controller_sha256": "0200b45459093cb94ae11b84ae06c8f52f6db6eeea500191214dcf3afabdd1dc",
+  "original_controller_physical_lines": 1070,
+  "methods": {
+    "_set_roster_clips": {
+      "module": "app/lifecycle/ui_helpers.py",
+      "original_line_start": 121,
+      "original_line_end": 130,
+      "original_decorator": null,
+      "original_source": "def _set_roster_clips(self, hidden=True):\n    \"\"\"Roster tree replaces the redundant internal move-list pane.\"\"\"\n    if not hasattr(self, '_animation_clips'):\n        return\n    panes = self._upper.panes()\n    child = str(self._animation_clips)\n    if hidden and child in panes:\n        self._upper.forget(self._animation_clips)\n    elif not hidden and child not in panes:\n        self._upper.insert(0, self._animation_clips, weight=0)\n",
+      "original_source_sha256": "823817c72efbcea7c89378c9e66eb2791a254ebed6a9de26d98c260463a32954",
+      "transformed_source_sha256": "f0ea2c1b93c0be2c6c5de5514ee4806399b2a45aa0c60b2035cf0e5a0aaa5f3e"
+    },
+    "_arrow": {
+      "module": "app/lifecycle/ui_helpers.py",
+      "original_line_start": 152,
+      "original_line_end": 164,
+      "original_decorator": null,
+      "original_source": "def _arrow(self, dx, dy, e, big=False):\n    if self.workspace == 'animation':\n        if dx:\n            if big:\n                self.jump_key(dx)\n            else:\n                self.set_tick(self.tick + dx)\n    elif self.workspace == 'sprite':\n        if self.piece_i is not None and self._piece() is not None:\n            step = 8 if big else 1\n            self.nudge_piece(dx * step, dy * step)\n        elif dx and self.sprite_d:\n            self.select_frame(max(0, min(len(self.sprite_d.frames) - 1, (self.frame_i or 0) + dx)))\n",
+      "original_source_sha256": "58d752f6874f0a27e867b2e13a09383b08cdbe50ec172a0849c523277d48f603",
+      "transformed_source_sha256": "f96f596bb7f60d5936a35e492db00f37c29efc7175dc27c94bd0446ffaa8d065"
+    },
+    "_open_doc": {
+      "module": "app/lifecycle/ui_helpers.py",
+      "original_line_start": 169,
+      "original_line_end": 174,
+      "original_decorator": null,
+      "original_source": "def _open_doc(self, name):\n    p = HERE / 'docs' / name\n    if p.is_file():\n        os.startfile(str(p)) if sys.platform == 'win32' else None\n    else:\n        messagebox.showinfo('Docs', f'{p} not found')\n",
+      "original_source_sha256": "d044e235e6fc78bb18514ec1afe197cb89dc19aca27717dcc4447266d948ded4",
+      "transformed_source_sha256": "9fcba23248c570e87912f43c62a24f47cde44f5f018d310493f868a1efccfe72"
+    },
+    "_int": {
+      "module": "app/parsing.py",
+      "original_line_start": 177,
+      "original_line_end": 181,
+      "original_decorator": "staticmethod",
+      "original_source": "def _int(text, default):\n    try:\n        return parse_int(text)\n    except ValueError:\n        return default\n",
+      "original_source_sha256": "b4382a3cc5555297798abe1ea5dab99d226362b905137a35d1ce74e8d6fbbd53",
+      "transformed_source_sha256": "b4382a3cc5555297798abe1ea5dab99d226362b905137a35d1ce74e8d6fbbd53"
+    },
+    "text_to_notes": {
+      "module": "app/timeline/note_text.py",
+      "original_line_start": 421,
+      "original_line_end": 443,
+      "original_decorator": "staticmethod",
+      "original_source": "def text_to_notes(text: str, old_raw: bytes) -> bytes:\n    old = notetrack.parse(old_raw)\n    keys: list[notetrack.NoteKey] = []\n    for line in text.splitlines():\n        line = line.split('#', 1)[0].strip()\n        if not line:\n            continue\n        parts = line.split()\n        tick = int(parts[0], 0)\n        if not keys or keys[-1].tick != tick:\n            keys.append(notetrack.NoteKey(tick))\n        if len(parts) == 1 or parts[1] == '-':\n            continue\n        op = int(parts[1], 0)\n        rest = parts[2:]\n        if rest and rest[0].startswith('hex:'):\n            cmd = notetrack.Command(op, bytes.fromhex(rest[0][4:]))\n        else:\n            cmd = notetrack.Command.from_values(op, [int(x, 0) for x in rest])\n        keys[-1].commands.append(cmd)\n    if notetrack.NoteTrack(keys, old.tail).build() == old_raw:\n        return old_raw\n    return notetrack.NoteTrack(keys).build()\n",
+      "original_source_sha256": "9edd6536c8d4b9899b83a7032286d56ccd93b4a42a9fca4007e47c0edcbba6fb",
+      "transformed_source_sha256": "9edd6536c8d4b9899b83a7032286d56ccd93b4a42a9fca4007e47c0edcbba6fb"
+    },
+    "_value_hint": {
+      "module": "app/inspectors/value_hint.py",
+      "original_line_start": 820,
+      "original_line_end": 828,
+      "original_decorator": "staticmethod",
+      "original_source": "def _value_hint(field):\n    kind = almt.value_kind(field)\n    if kind == 's16x2':\n        return 'JSON list [x, y]'\n    if kind == 's16x4':\n        return 'JSON list [x0, y0, x1, y1]'\n    if kind.startswith('u32x'):\n        return f'JSON list of {kind[4:]} u32 values'\n    return 'Integer (0x… hex allowed)'\n",
+      "original_source_sha256": "8982230a18fee463c3b7e02af892a5463254510bcc6d3b8a725eeed01dffa567",
+      "transformed_source_sha256": "8982230a18fee463c3b7e02af892a5463254510bcc6d3b8a725eeed01dffa567"
+    }
+  }
+}

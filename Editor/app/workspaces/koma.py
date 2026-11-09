@@ -29,7 +29,6 @@ from jus_package import images, komacards, passivekoma
 from jus_package.project import join
 
 from .. import theme as T
-from ..widgets import Filmstrip
 from .base import SuiteWorkspace
 
 ARCHIVE = 'koma/koma.aar'

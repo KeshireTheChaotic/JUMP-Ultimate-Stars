@@ -50,6 +50,7 @@ import struct
 from dataclasses import dataclass, field
 
 from jus_formats import almt, notetrack
+from .notecommands import iter_note_commands
 
 GRAVITY = 0x29
 FRICTION_X = 0x20
@@ -121,23 +122,10 @@ class Motion:
 
 
 def physics_commands(move: almt.Move, node_names: list[str]) -> list[tuple[int, str, notetrack.Command]]:
-    out = []
-    for ni, node in enumerate(move.nodes):
-        if node is None:
-            continue
-        tr = node.track('NoteTrack')
-        if tr is None:
-            continue
-        try:
-            nt = notetrack.parse(tr.encoded())
-        except (ValueError, IndexError, struct.error):
-            continue
-        name = node_names[ni] if ni < len(node_names) else f'N{ni}'
-        for key in nt.keys:
-            for cmd in key.commands:
-                if cmd.opcode >> 8 == 1:
-                    out.append((key.tick, name, cmd))
-    out.sort(key=lambda t: t[0])          # stable: node order, then stored order
+    out = [(item.tick, item.node, item.command)
+           for item in iter_note_commands(move, node_names)
+           if item.command.opcode >> 8 == 1]
+    out.sort(key=lambda t: t[0])  # Stable: original node/key/command order within a tick.
     return out
 
 

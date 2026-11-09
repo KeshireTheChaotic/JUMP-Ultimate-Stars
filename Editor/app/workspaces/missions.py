@@ -21,6 +21,7 @@ from jus_formats import roster
 from jus_formats.progression import DefinitionTable, GalaxyGraph
 from jus_formats.roster import KOMA_SERIES_PREFIXES
 from jus_package import progression as prog
+from jus_package import tutorials as tutlinks
 
 from .. import theme as T
 
@@ -52,6 +53,7 @@ class MissionPanel:
         self.definition_var = tk.StringVar()
         self.stage_var = tk.StringVar()
         self.rule_var = tk.StringVar()
+        self.tutorial_slot_var = tk.StringVar(value='0')
         self.opponents_var = tk.StringVar()
         self.time_var = tk.StringVar()
         self.environment_var = tk.BooleanVar(value=False)
@@ -113,6 +115,12 @@ class MissionPanel:
             ttk.Entry(node, textvariable=var, width=8).grid(row=i, column=1, sticky='ew', padx=4, pady=2)
         ttk.Button(node, text='Update shared battle settings', command=self.update_battle_parameters).grid(
             row=10, column=0, columnspan=2, sticky='ew', padx=6, pady=(3, 6))
+        ttk.Label(node, text='Tutorial slot (+0x70)').grid(row=11, column=0, sticky='w', padx=6)
+        self.tutorial_slot_entry = ttk.Entry(node, textvariable=self.tutorial_slot_var, width=8)
+        self.tutorial_slot_entry.grid(row=11, column=1, sticky='ew', padx=4, pady=2)
+        self.tutorial_link_label = ttk.Label(node, text='Native battle rule 3 selects a fixed script slot 0–5.',
+              wraplength=int(285 * self.ws.k), justify='left', style='Toolbar.TLabel')
+        self.tutorial_link_label.grid(row=12, column=0, columnspan=2, sticky='ew', padx=6, pady=3)
         node.columnconfigure(1, weight=1)
 
         objectives = ttk.LabelFrame(main, text='Mission objectives & rewards')
@@ -256,6 +264,7 @@ class MissionPanel:
             self.definition_var.set('')
             self.stage_var.set('')
             self.rule_var.set('')
+            self.tutorial_slot_var.set('')
             self.opponents_var.set('')
             self.time_var.set('')
             self.goal_code_var.set('')
@@ -279,6 +288,23 @@ class MissionPanel:
         self.definition_var.set(str(n.definition_id))
         self.stage_var.set(str(d.stage_index))
         self.rule_var.set(str(d.rule))
+        native_selector = int.from_bytes(d.data[0x70:0x74], 'little')
+        self.tutorial_slot_var.set(str(native_selector))
+        source = tutlinks.script_for_definition(d, is_battle=not n.mission)
+        self.tutorial_slot_entry.configure(state='normal' if not n.mission else 'disabled')
+        if source:
+            self.tutorial_link_label.configure(text=(
+                f'Native battle rule 3 → tutorial mode 0x0C on normal launch; '
+                f'loads {source}. Other scene launch modes can override type. '
+                'Changing the slot affects every node using this shared battle definition.'))
+        elif n.mission:
+            self.tutorial_link_label.configure(text=(
+                'Mission-type progression definition: no original tutorial VM '
+                'binding proven. Its +0x70 field may have other semantics.'))
+        else:
+            self.tutorial_link_label.configure(text=(
+                f'Battle rule {d.rule}; no tutorial script required on the normal '
+                'launch path. Original rule3 + slot 0–5 enables a fixed existing script.'))
         self.opponents_var.set(str(d.opponents))
         self.time_var.set(str(d.time_value))
         self.environment_var.set(bool(d.data[0x7C] & 0x02))
@@ -431,70 +457,78 @@ class MissionPanel:
         self._edited('J-Galaxy node reassigned (fixed node ID preserved). Apply, then Save.')
         self.ws.select_mission(self.node_id)
 
-    def update_stage(self):
+    def _edit_shared_definition(self, mutate, *, error_title, warning,
+                                checkpoint_label, status):
+        """Validate and stage an edit that retains the original definition ID.
+
+        The trial table is byte-identical until mutation is validated.
+        A shared-reference prompt occurs before the undo checkpoint/commit,
+        so cancellation, invalid data and unchanged serialization leave all
+        staged data, history and selections untouched.
+
+        Do NOT use for create/remove/compact operations: those have distinct
+        fresh-save compatibility and progression-reference requirements.
+        """
         if self.catalog is None or self.node_id is None:
-            return
-        c = self.catalog
-        node = c.graph.get(self.node_id)
-        table = c.missions if node.mission else c.battles
+            return False
+        catalog = self.catalog
+        node = catalog.graph.get(self.node_id)
+        table = catalog.missions if node.mission else catalog.battles
         try:
+            trial = DefinitionTable.parse(table.build())
+            mutate(trial, node)
+            if trial.build() == table.build():
+                return False
+        except (ValueError, IndexError) as exc:
+            messagebox.showerror(error_title, str(exc))
+            return False
+
+        linked = sum(1 for i in range(catalog.graph.node_count)
+                     if (other := catalog.graph.get(i)).mission == node.mission
+                     and other.definition_id == node.definition_id)
+        if linked > 1 and not messagebox.askyesno(
+                'Shared definition', warning.format(linked=linked)):
+            return False
+        self.checkpoint(checkpoint_label)
+        if node.mission:
+            catalog.missions = trial
+        else:
+            catalog.battles = trial
+        self._edited(status)
+        self.ws.select_mission(self.node_id)
+        return True
+
+    def update_stage(self):
+        def mutate(trial, node):
             index = _number(self.stage_var.get())
             if roster.stage_stem(index) is None:
                 raise ValueError(f'Stage ID {index} is absent from the verified stage table')
-            trial = DefinitionTable.parse(table.build())
             trial.set_stage(node.definition_id, index)
             trial.set_environment(node.definition_id, self.environment_var.get())
-            if trial.build() == table.build():
-                return
-        except (ValueError, IndexError) as exc:
-            messagebox.showerror('Stage definition', str(exc))
-            return
-        linked = sum(1 for i in range(c.graph.node_count)
-                     if (other := c.graph.get(i)).mission == node.mission
-                     and other.definition_id == node.definition_id)
-        if linked > 1 and not messagebox.askyesno('Shared definition',
-                f'This definition is referenced by {linked} J-Galaxy nodes. '
-                'Changing its stage/gate changes all of them. Continue?'):
-            return
-        self.checkpoint('edit shared battle stage')
-        if node.mission:
-            c.missions = trial
-        else:
-            c.battles = trial
-        self._edited('Shared battle definition stage/gate updated in memory. Apply, then Save.')
-        self.ws.select_mission(self.node_id)
+
+        self._edit_shared_definition(
+            mutate, error_title='Stage definition',
+            warning=('This definition is referenced by {linked} J-Galaxy nodes. '
+                     'Changing its stage/gate changes all of them. Continue?'),
+            checkpoint_label='edit shared battle stage',
+            status='Shared battle definition stage/gate updated in memory. Apply, then Save.')
 
     def update_battle_parameters(self):
-        if self.catalog is None or self.node_id is None:
-            return
-        c = self.catalog
-        node = c.graph.get(self.node_id)
-        table = c.missions if node.mission else c.battles
-        try:
-            trial = DefinitionTable.parse(table.build())
+        def mutate(trial, node):
             trial.set_battle_parameters(
                 node.definition_id, rule=_number(self.rule_var.get()),
                 opponents=_number(self.opponents_var.get()),
                 time_value=_number(self.time_var.get()))
-            if trial.build() == table.build():
-                return
-        except (ValueError, IndexError) as exc:
-            messagebox.showerror('Battle settings', str(exc))
-            return
-        linked = sum(1 for i in range(c.graph.node_count)
-                     if (other := c.graph.get(i)).mission == node.mission
-                     and other.definition_id == node.definition_id)
-        if linked > 1 and not messagebox.askyesno('Shared definition',
-                f'This definition is referenced by {linked} nodes. Changing battle '
-                'settings changes all of them. Continue?'):
-            return
-        self.checkpoint('edit battle rule/opponents/time')
-        if node.mission:
-            c.missions = trial
-        else:
-            c.battles = trial
-        self._edited('Battle rule/opponents/time updated in memory. Apply, then Save.')
-        self.ws.select_mission(self.node_id)
+            if not node.mission and trial.get(node.definition_id).rule == 3:
+                trial.set_tutorial_slot(node.definition_id,
+                                        _number(self.tutorial_slot_var.get()))
+
+        self._edit_shared_definition(
+            mutate, error_title='Battle settings',
+            warning=('This definition is referenced by {linked} nodes. Changing battle '
+                     'settings changes all of them. Continue?'),
+            checkpoint_label='edit battle rule/opponents/time',
+            status='Battle rule/opponents/time updated in memory. Apply, then Save.')
 
     def update_goal_code(self):
         if self.catalog is None or self.node_id is None or self.slot is None:

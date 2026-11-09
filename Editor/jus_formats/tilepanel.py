@@ -19,7 +19,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
-from .dsig import DsigFile, MODE_TILED4, MODE_TILED8, rgb555_to_rgb, parse as parse_dsig
+from .dsig import MODE_TILED4, MODE_TILED8, rgb555_to_rgb, parse as parse_dsig
 from .dstx import LayoutTable
 from .sprite import read_tiled4, read_tiled8
 

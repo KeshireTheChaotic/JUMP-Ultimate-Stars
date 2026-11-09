@@ -1,0 +1,133 @@
+{
+  "phase": "R08 Phase 10",
+  "original_controller_sha256": "8f67312d9949d7a5192b66cfb58273d58808cbb6603073fffb30dacfd2813feb",
+  "original_controller_physical_lines": 1190,
+  "methods": {
+    "_amt_tables": {
+      "module": "app/lifecycle/effect_sources.py",
+      "start_line": 513,
+      "end_line": 526,
+      "original_source": "def _amt_tables(self, paths):\n    out = []\n    for path in paths:\n        try:\n            arc = self.root_data.archive(path)\n            for e in arc.entries:\n                if e.ext != '.amt':\n                    continue\n                rp = join(path, e.name)\n                table = self.almt if (rp == self.almt_path and self.almt) else almt.parse(e.payload())\n                out.append((rp, table))\n        except (KeyError, ValueError, OSError):\n            continue\n    return out\n",
+      "original_source_sha256": "ac212f49a5ee3733684b76c34be1978f6c040ed672257eaaf8de42a831ebfd54",
+      "transformed_source_sha256": "4eae894514855fb9a0b13b4a54915c04169269cef05a7bac7d1bfe6c971713d1",
+      "injected_formatter": false
+    },
+    "_load_effect_catalog": {
+      "module": "app/lifecycle/effect_sources.py",
+      "start_line": 528,
+      "end_line": 537,
+      "original_source": "def _load_effect_catalog(self):\n    \"\"\"Move-id → (move, node names, path) over the character scope, then efc/*.aar.\"\"\"\n    self._effect_moves = {}\n    if not self.root_data:\n        return\n    if self._common_tables is None:\n        self._common_tables = self._amt_tables(self.root_data.effect_archives())\n    # The open table is always the live (possibly edited) object.\n    common = [(p, self.almt if (p == self.almt_path and self.almt) else t) for p, t in self._common_tables]\n    spawns.build_catalog(self._amt_tables(self.scope) + common, self._effect_moves)\n",
+      "original_source_sha256": "b5ccb75f53c50a0dca23d121be9685077ce9c2b54620db9f52bcd7d4535e69f3",
+      "transformed_source_sha256": "bd797168b5f33ef5e3fd56233c00d12204bc7bf320b6c6822013c605dd0133df",
+      "injected_formatter": false
+    },
+    "_refresh_pursuer_links": {
+      "module": "app/lifecycle/effect_sources.py",
+      "start_line": 539,
+      "end_line": 552,
+      "original_source": "def _refresh_pursuer_links(self):\n    self._pursuer_events = ()\n    self._effect_table_error = ''\n    if self.move is None or self.root_data is None or not self.container:\n        return\n    char = self._char_of(self.container)\n    if char:\n        path = join('chr/ChrBin.aar', f'chr/effect/{char}.bin')\n        try:\n            if self.root_data.exists(path):\n                recs = effectlinks.parse_effect_records(self.root_data.read(path))\n                self._pursuer_events = effectlinks.pursuer_events(self.move, self.almt.node_names, recs)\n        except (ValueError, OSError, KeyError) as exc:\n            self._effect_table_error = str(exc)\n",
+      "original_source_sha256": "676b463730fe467c91d9d8763d1ca15fd700596621483f6cb52e7b15fd127818",
+      "transformed_source_sha256": "60f447983fc7d41b0031be136af4d0a16862025c2eaf8ad217f57cf7436596b8",
+      "injected_formatter": false
+    },
+    "open_effect_move": {
+      "module": "app/lifecycle/effect_sources.py",
+      "start_line": 561,
+      "end_line": 578,
+      "original_source": "def open_effect_move(self, eid, path):\n    \"\"\"Jump to an effect's own move table (like opening a sub-timeline).\"\"\"\n    parts = split(path)\n    container, name = join(*parts[:-1]), parts[-1]\n    if not self.confirm_discard():\n        return\n    if container != self.container:\n        cid = self._char_of(container) if container.startswith('chr/') else None\n        self.select_container(container, cid)\n    if self.almt_path != path:\n        self.almt_combo.set(name)\n        self.load_almt(name)\n    if self.almt:\n        idx = next((i for i, m in enumerate(self.almt.moves) if m.id == eid), None)\n        if idx is not None:\n            self.move_filter.set('')\n            self.populate_moves(select=idx)\n    self.status.set(f'Opened effect {hx(eid)} in {path}')\n",
+      "original_source_sha256": "b75ced9dbb10254acb7bfea9ce8d0c1d4c758fc06eeb266882773a7e6b3080c8",
+      "transformed_source_sha256": "60c0a5dce4989bbbe5d2d51cd1c04c7dd2e614894186d96a84f2ea2a0f8947af",
+      "injected_formatter": true
+    },
+    "_refresh_notetrack_effects": {
+      "module": "app/timeline/presentation_ops.py",
+      "start_line": 584,
+      "end_line": 593,
+      "original_source": "def _refresh_notetrack_effects(self):\n    self._motion = motion.simulate(self.move, self.almt.node_names, self._motion_params()) if self.move else None\n    form = self.sound_form.get()\n    card_index = (self._sound_koma_card if form.endswith('-cell') else None)\n    self._cues = (self._sounds.cues(self.move, self.almt.node_names, self.container,\n                                    form=int(form.split('-')[0]) if form.endswith('-cell') else None,\n                                    card_index=card_index)\n                  if self.move and self._sounds else [])\n    if self._audio:\n        self._audio.prepare(self._cues)\n",
+      "original_source_sha256": "f974255a097854b7ebf8879817a2de126f8300f407f1d8206b622481b0abc6f8",
+      "transformed_source_sha256": "d62af7e51ed7422b86933813dc42340825eda86847b00157276940a23fa29707",
+      "injected_formatter": false
+    },
+    "_motion_changed": {
+      "module": "app/timeline/presentation_ops.py",
+      "start_line": 595,
+      "end_line": 599,
+      "original_source": "def _motion_changed(self):\n    if self.move:\n        self._refresh_notetrack_effects()\n        self.refresh_inspector()\n        self.redraw_view()\n",
+      "original_source_sha256": "194bb44d2a08eed2f52d84aa67086a0726f0b5d521865eaedef5e27c7a9bf3d0",
+      "transformed_source_sha256": "1e88dc6043f0378c710922799d5d22d98e303c22e2d3cb588795cd65cb22ca5b",
+      "injected_formatter": false
+    },
+    "_physics_tooltip": {
+      "module": "app/timeline/presentation_ops.py",
+      "start_line": 607,
+      "end_line": 617,
+      "original_source": "def _physics_tooltip(self, tick):\n    mo = self._motion\n    lines = [f'tick {tick}']\n    for t, node, c in mo.commands:\n        if t == tick:\n            lines.append(f'{node}: 0x{c.opcode:04X} {motion.LABELS.get(c.opcode, \"\")} {c.values()}  '\n                         f'(ov06 0x{motion.FUNCTIONS.get(c.opcode, 0):08X})')\n    f = mo.at(tick)\n    if f:\n        lines.append(f'offset ({f.px[0]:.1f}, {f.px[1]:.1f}) px · v ({f.vx / 256:.2f}, {f.vy / 256:.2f}) px/frame')\n    return '\\n'.join(lines)\n",
+      "original_source_sha256": "95df26f4e236290626619a97122754c2f7b53f2e4ca452fb90f7b135dee6242c",
+      "transformed_source_sha256": "f9801b47c08c54b761a6018973e2a8c4e513d3d1d572a8a7f7d16db8ba6a3a37",
+      "injected_formatter": false
+    },
+    "_sound_tooltip": {
+      "module": "app/timeline/presentation_ops.py",
+      "start_line": 619,
+      "end_line": 625,
+      "original_source": "def _sound_tooltip(self, tick):\n    lines = [f'tick {tick}']\n    for c, played in sounds.dedupe_same_frame(self._cues):\n        if c.tick == tick:\n            lines.append(f'0x{c.opcode:04X} seq {c.seq}: {c.label}' + ('' if played or c.ssar is None\n                                                                       else '  (same-frame duplicate: ignored)'))\n    return '\\n'.join(lines)\n",
+      "original_source_sha256": "fcffb4630f0e81c0aa5828ffebb1c1f4571ee3f3a8c9bf7d0260639223b51399",
+      "transformed_source_sha256": "dba6b1796f034f955361ffbfebd36bd3952410e5451987619920501503ba6150",
+      "injected_formatter": false
+    },
+    "_event_tooltip": {
+      "module": "app/timeline/presentation_ops.py",
+      "start_line": 638,
+      "end_line": 651,
+      "original_source": "def _event_tooltip(self, tick, payload):\n    if not payload:\n        return ''\n    row_events = []\n    _, _, cmd = payload\n    lines = [f'tick {tick}  {eventops.category(cmd.opcode)}', self.command_text(cmd)]\n    info = cmd.info\n    if info:\n        lines.append(info.meaning[:90])\n    fn = motion.FUNCTIONS.get(cmd.opcode) or sounds.FUNCTIONS.get(cmd.opcode)\n    if fn:\n        lines.append(f'handler: ov06 0x{fn:08X}' + (' → main FUN_0207342C' if cmd.opcode >> 8 == 4 else\n                                                    ' · physics step main FUN_02082E10'))\n    return '\\n'.join(lines + row_events)\n",
+      "original_source_sha256": "bbc7debc515fa4de868aee73d273bfce475d708de505771e5930634c4121e0bc",
+      "transformed_source_sha256": "59628d3d26322eac9142bdd63b955b60cd2bd35025a2a9ba3ad0366680033e0e",
+      "injected_formatter": false
+    },
+    "_fmt": {
+      "module": "app/timeline/presentation_ops.py",
+      "start_line": 653,
+      "end_line": 666,
+      "original_source": "def _fmt(self, field, v):\n    if isinstance(v, list):\n        return '(' + ', '.join(str(x) for x in v) + ')'\n    if v is None:\n        return '—'\n    if field in almt.FIXED_20_12:\n        return f'{hx(v)} ({v / 4096:g})'\n    if field == 'Marker':\n        return eventops.marker_label(v)\n    if field in ('TextureID', 'GenerateID'):\n        return hx(v)\n    if field == 'EffectFlags':\n        return hx(v, 4)\n    return str(v)\n",
+      "original_source_sha256": "dd5bb74f845e2ec82894ea322ad8004caad72bab9b211985b48af9895c57646d",
+      "transformed_source_sha256": "4db57b3079d2322b3c1b0de34ea6b199d77504d1980995a4d405114c3051f6ce",
+      "injected_formatter": true
+    },
+    "_fmt_short": {
+      "module": "app/timeline/presentation_ops.py",
+      "start_line": 668,
+      "end_line": 675,
+      "original_source": "def _fmt_short(self, field, v):\n    if isinstance(v, list):\n        return ','.join(str(x) for x in v)\n    if field in ('TextureID', 'GenerateID'):\n        return hx(v, 6)\n    if field in almt.FIXED_20_12:\n        return f'{v / 4096:g}'\n    return str(v)\n",
+      "original_source_sha256": "a3e84a0a8a01b4104a853f761dbd26a5656230539aeeda7ab6a389e94c332e9b",
+      "transformed_source_sha256": "8335570916e76497749849603b39cc068e623e4a720369582fe3301aff4d7e3a",
+      "injected_formatter": true
+    },
+    "refresh_animation": {
+      "module": "app/renderers/viewport_ops.py",
+      "start_line": 772,
+      "end_line": 783,
+      "original_source": "def refresh_animation(self):\n    \"\"\"Rebuild timeline rows, inspector, viewport and labels.\"\"\"\n    dur = self.move.duration if self.move else 0\n    self.dur_label.configure(text=f'/ {dur}')\n    self.tick = min(self.tick, dur)\n    self.tick_var.set(str(self.tick))\n    self.timeline.set_data(self._timeline_rows(), dur)\n    if self.sel_track is not None and self.sel_key is not None:\n        self.timeline.select(('trk',) + tuple(self.sel_track), self.sel_key)\n    self.timeline.set_tick(self.tick)\n    self.refresh_inspector()\n    self.redraw_view()\n",
+      "original_source_sha256": "4220f30e9b9b878929eceb401d1ca7d437c1140ede2946ad27f53f3b419d8099",
+      "transformed_source_sha256": "6fa851504a71659e0c85b93770eda902575c94c3bb2027e6ac49b093eb648b2b",
+      "injected_formatter": false
+    },
+    "_frame_image": {
+      "module": "app/renderers/viewport_ops.py",
+      "start_line": 789,
+      "end_line": 805,
+      "original_source": "def _frame_image(self, tid, frame):\n    key = (tid & 0xFFFFFF, frame)\n    if key not in self._frame_cache:\n        res = None\n        spr = self.index.sprite(tid) if self.index else None\n        if spr is not None:\n            d, src = spr\n            if 0 <= frame < len(d.frames) and d.frames[frame].pieces:\n                try:\n                    img = sprite.compose(d.frames[frame], src)\n                    res = (images.to_rgba(img, src.dsig.palettes), img.left, img.top)\n                except (ValueError, IndexError):\n                    res = None\n        if len(self._frame_cache) > 600:\n            self._frame_cache.clear()\n        self._frame_cache[key] = res\n    return self._frame_cache[key]\n",
+      "original_source_sha256": "431ffda229af49d4848bb1ba76e429635e4d647d6d4ca1df81ed8a09965e5f6b",
+      "transformed_source_sha256": "3cc151636ae9db56a9a06610fcb2ad803ee880e666c91d3dcf754615d25e1c92",
+      "injected_formatter": false
+    },
+    "fit_timeline": {
+      "module": "app/renderers/viewport_ops.py",
+      "start_line": 822,
+      "end_line": 829,
+      "original_source": "def fit_timeline(self):\n    \"\"\"Zoom the timeline so the whole move fits (like Unity's 'F' in the dope sheet).\"\"\"\n    if not self.move:\n        return\n    avail = self.timeline.canvas.winfo_width() - self.timeline.HEADER_W - 40\n    if avail > 50:\n        self.timeline.xoff = 0\n        self.timeline.set_zoom(max(3.0, min(40.0 * T.ui_scale(self), avail / max(8, self.move.duration + 2))))\n",
+      "original_source_sha256": "243e6f0e488f6d60cae943e7e5bbf93b3332cca46752e346c94dca438c7a1702",
+      "transformed_source_sha256": "994f4e01b2a95f9c5a0b47a798c654506904b913c44c93be0fe57032721cd064",
+      "injected_formatter": false
+    }
+  }
+}

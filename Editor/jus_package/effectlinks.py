@@ -17,6 +17,7 @@ from dataclasses import dataclass
 import struct
 
 from jus_formats import notetrack, almt
+from .notecommands import iter_note_commands
 
 
 @dataclass(frozen=True)
@@ -60,25 +61,14 @@ def pursuer_events(move: almt.Move, node_names: list[str],
     game, so slots are initially unknown instead of implicitly zero.
     """
     commands: list[tuple[int, int, int, str, int, list[int]]] = []
-    for ni, node in enumerate(move.nodes):
-        if node is None:
+    for item in iter_note_commands(move, node_names):
+        command = item.command
+        if command.opcode != 0x0300:
             continue
-        tr = node.track('NoteTrack')
-        if tr is None:
-            continue
-        try:
-            notes = notetrack.parse(tr.encoded())
-        except (ValueError, IndexError, struct.error):
-            continue
-        for key in notes.keys:
-            for order, cmd in enumerate(key.commands):
-                if cmd.opcode != 0x0300:
-                    continue
-                values = cmd.values()
-                if values and values[0] in (13, 14):
-                    commands.append((key.tick, ni, order,
-                                     node_names[ni] if ni < len(node_names) else f'N{ni}',
-                                     values[0], values))
+        values = command.values()
+        if values and values[0] in (13, 14):
+            commands.append((item.tick, item.node_index, item.ordinal,
+                             item.node, values[0], values))
     commands.sort(key=lambda c: (c[0], c[1], c[2]))
     slots: tuple[int | None, int | None] = (None, None)
     xy: tuple[int, int] | None = None

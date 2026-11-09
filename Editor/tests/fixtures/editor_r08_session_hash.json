@@ -1,0 +1,8 @@
+{
+  "version": 1,
+  "module": "app/lifecycle/session.py",
+  "callable": "initialize_editor_state",
+  "original_lines": 75,
+  "transformed_body_sha256": "e3dbb98aae8fab36f4efe57d556c6be7b3b27021d3790536d16557cd615ac53e",
+  "pre_extraction_sha256": "580cca273fa1f0b0267536403bcfbe8fbf3793824390026a72bdba77703e7c0e"
+}

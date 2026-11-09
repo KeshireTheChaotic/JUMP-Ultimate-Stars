@@ -1,0 +1,100 @@
+D:\Library\Development\JUS\publish\JUMP-Ultimate-Stars\Editor\tests\test_package.py:126: ResourceWarning: unclosed file <_io.BufferedReader name='C:\\Users\\Keshi\\AppData\\Local\\Temp\\jus_pkg_test_o5nd0kb6\\appended\\sprites\\chr~ChrArc.aar~chr~bb_b_01_4.aar~bb_b_01_4_.dtx\\frames\\000.png'>
+  im.save(sdir / 'frames' / 'new.png', transparency=Image.open(sdir / first['png']).info.get('transparency'))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+invalid command name "2238435793856redraw_view"
+    while executing
+"2238435793856redraw_view"
+    ("after" script)
+invalid command name "2238435801984<lambda>"
+    while executing
+"2238435801984<lambda>"
+    ("after" script)
+invalid command name "2238435794368_init_sashes"
+    while executing
+"2238435794368_init_sashes"
+    ("after" script)
+invalid command name "2238564308160fit_timeline"
+    while executing
+"2238564308160fit_timeline"
+    ("after" script)
+invalid command name "2238564922816frame_view_if_needed"
+    while executing
+"2238564922816frame_view_if_needed"
+    ("after" script)
+invalid command name "2238574243392redraw_view"
+    while executing
+"2238574243392redraw_view"
+    ("after" script)
+invalid command name "2238507160000fit_timeline"
+    while executing
+"2238507160000fit_timeline"
+    ("after" script)
+invalid command name "2238604097472frame_view_if_needed"
+    while executing
+"2238604097472frame_view_if_needed"
+    ("after" script)
+invalid command name "2238604122624<lambda>"
+    while executing
+"2238604122624<lambda>"
+    ("after" script)
+invalid command name "2238507142016init_sashes"
+    while executing
+"2238507142016init_sashes"
+    ("after" script)
+invalid command name "2238604293056<lambda>"
+    while executing
+"2238604293056<lambda>"
+    ("after" script)
+invalid command name "2238604241536fit_timeline"
+    while executing
+"2238604241536fit_timeline"
+    ("after" script)
+invalid command name "2238255089152redraw_view"
+    while executing
+"2238255089152redraw_view"
+    ("after" script)
+invalid command name "2238604091968frame_view_if_needed"
+    while executing
+"2238604091968frame_view_if_needed"
+    ("after" script)
+invalid command name "2238564734784fit_timeline"
+    while executing
+"2238564734784fit_timeline"
+    ("after" script)
+invalid command name "2238574130176redraw_view"
+    while executing
+"2238574130176redraw_view"
+    ("after" script)
+invalid command name "2238604095104frame_view_if_needed"
+    while executing
+"2238604095104frame_view_if_needed"
+    ("after" script)
+invalid command name "2238262044160redraw_view"
+    while executing
+"2238262044160redraw_view"
+    ("after" script)
+invalid command name "2238262077120<lambda>"
+    while executing
+"2238262077120<lambda>"
+    ("after" script)
+invalid command name "2238262044352_init_sashes"
+    while executing
+"2238262044352_init_sashes"
+    ("after" script)
+======================================================================
+FAIL: test_all_original_chrbin_formatting_matches_pre_r08 (test_chrdiagnostics_refactor.FormatterTest.test_all_original_chrbin_formatting_matches_pre_r08)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Library\Development\JUS\publish\JUMP-Ultimate-Stars\Editor\tests\test_chrdiagnostics_refactor.py", line 55, in test_all_original_chrbin_formatting_matches_pre_r08
+    self.assertEqual({k:v.hexdigest() for k,v in hashes.items()},GOLD['sha256'])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: {'shot': '241627391b8b82a22a5fcd7ba05ba164d98bce937[95 chars]bca'} != {'shot': 'fb534755cd56de7023a87e745acd15906c940aaf0[95 chars]f0f'}
+- {'col': '831b7ee842154a465045c6727e8184da395588676038c647a12058cec7f09bca',
+-  'shot': '241627391b8b82a22a5fcd7ba05ba164d98bce937c342a7c4d04547acbadcb26'}
++ {'col': 'd3e58af67f2644f946bfd0647e7c225b2030f568dc28151cb5977fa6d2205f0f',
++  'shot': 'fb534755cd56de7023a87e745acd15906c940aaf00bebb0d9aef9919e215e5c8'}
+
+----------------------------------------------------------------------
+Ran 521 tests in 69.701s
+
+FAILED (failures=1, skipped=1)

@@ -1,0 +1,7 @@
+TOTAL_AOD 1247 ERRORS 0
+FIELDS [('ParentNodeID', 529)]
+CLASSES [('SP  ', 1248), ('GN  ', 1078)]
+DESC [(16, 1078)]
+COUNTS [((40, 1, 0), 695), ((92, 3, 1), 246), ((112, 4, 1), 108), ((76, 2, 1), 81), ((68, 2, 1), 57), ((136, 5, 1), 15), ((36, 1, 0), 15), ((104, 3, 1), 12), ((44, 1, 0), 2), ((128, 4, 1), 2), ((180, 7, 1), 2), ((156, 6, 1), 2), ((224, 9, 1), 1), ((56, 2, 0), 1), ((596, 1, 0), 1), ((352, 1, 0), 1), ((548, 2, 1), 1), ((248, 1, 0), 1), ((116, 1, 0), 1), ((840, 2, 1), 1)]
+EXAMPLES_BY_DESCRIPTOR
+0x10 count 1078 examples [('chr/ChrArc.aar|chr/bb_b_01.aar|bb_b_01.aod', 'GN01', 'GN  ', '53503031', ['ParentNodeID']), ('chr/ChrArc.aar|chr/bb_b_01.aar|bb_b_01.aod', 'GN02', 'GN  ', '53503031', ['ParentNodeID']), ('chr/ChrArc.aar|chr/bb_b_01.aar|bb_b_01.aod', 'GN03', 'GN  ', '53503031', ['ParentNodeID']), ('chr/ChrArc.aar|chr/bb_b_01.aar|bb_b_01_e0.aod', 'GN01', 'GN  ', '53503031', ['ParentNodeID']), ('chr/ChrArc.aar|chr/bb_b_02.aar|bb_b_02.aod', 'GN01', 'GN  ', '53503031', ['ParentNodeID'])]

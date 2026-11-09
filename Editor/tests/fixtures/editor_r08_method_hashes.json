@@ -1,0 +1,173 @@
+{
+  "version": 1,
+  "original_method_body_contracts": {
+    "refresh_inspector": {
+      "module": "app/inspectors/move.py",
+      "callable": "render_move_inspector",
+      "original_lines": 182,
+      "transformed_body_sha256": "8e3706bef27b8ead1bb2dc4b35bee300bcb35cb80615ec83d0509fd5228e7096",
+      "pre_extraction_sha256": "2c767f2cfc32a44b25194d83ae995d35b9650fa859db80002377392d9af8e111"
+    },
+    "refresh_details": {
+      "module": "app/inspectors/sprite.py",
+      "callable": "render_sprite_inspector",
+      "original_lines": 54,
+      "transformed_body_sha256": "1ad0cd581e6cc272f491fa50f0ac873b63d904c0487e9567c6a4e411c54a12ad",
+      "pre_extraction_sha256": "9eddcdfb36a8e0cf9a3330adf7a18531ff5cf44deb64ba279cdc41b150fbcdb6"
+    },
+    "_draw_shot_source_sprites": {
+      "module": "app/renderers/shot_source.py",
+      "callable": "draw_original_shot_sources",
+      "original_lines": 95,
+      "transformed_body_sha256": "49053dc86a9620f6f12305c5a7f3e94ba43326ba1bcbf070046a78569d125721",
+      "pre_extraction_sha256": "0a9fce8e2dbe181d3c5b4f9204119a49466bd675ae1b791b34a04b9d97aba35d"
+    },
+    "_build_animation": {
+      "module": "app/layouts/animation.py",
+      "callable": "build_animation",
+      "original_lines": 132,
+      "transformed_body_sha256": "613428dfda1cbe8d23d1051f5605dd120ddc1f3dd92ca2cc01ead03a2838cdf3",
+      "pre_extraction_sha256": "21fced19e8c67f82051bdd653f5e2db2dee843e116b5a815f8dcb085dc599d4c"
+    },
+    "_build_sprite": {
+      "module": "app/layouts/sprite.py",
+      "callable": "build_sprite",
+      "original_lines": 56,
+      "transformed_body_sha256": "c7e4def5aac5bed8fc30592cc4b5b16ad3cfeb48ef8e84a5f7f63a0d50cd99b0",
+      "pre_extraction_sha256": "3ddabc2cede45f547fff3e586765269b95e47ae5a2a741685c5ce987942b677b"
+    },
+    "_build_archive": {
+      "module": "app/layouts/archive.py",
+      "callable": "build_archive",
+      "original_lines": 17,
+      "transformed_body_sha256": "b3f60f94d6a4f659d8a1bf1915795f5d9e9d1741ea4b8cba825a2dbe1a512a21",
+      "pre_extraction_sha256": "aa9f4cd24c59bb72f8d0c5d8c94b3750a7cdc5f47b212134e19a98dcfce9021a"
+    },
+    "_timeline_rows": {
+      "module": "app/timeline/rows.py",
+      "callable": "build_timeline_rows",
+      "original_lines": 71,
+      "transformed_body_sha256": "e86398f56c5ecafd046369d83574e4fa10760f70ecb10e4d153732dbf3b858d0",
+      "pre_extraction_sha256": "46ee0f4fb091f4377f942bb74c7ed19631329f11ec452c8758556e45fa04f5ca"
+    },
+    "_notetrack_effect_rows": {
+      "module": "app/timeline/rows.py",
+      "callable": "build_notetrack_effect_rows",
+      "original_lines": 44,
+      "transformed_body_sha256": "d8c94cb670b11a9a358fe3841c2cd12b0ba3d8e9218938481f7bd3652e2dbc4e",
+      "pre_extraction_sha256": "de1b93320c7d1ca613b89591bd447d317ef89582b99f66b74aab305207ddac50"
+    },
+    "_spawn_rows": {
+      "module": "app/timeline/rows.py",
+      "callable": "build_spawn_rows",
+      "original_lines": 68,
+      "transformed_body_sha256": "c8361109b3c08cf2c85e646c30a1aab583a26e87563da383b711db95d3a7774e",
+      "pre_extraction_sha256": "4022c628f9de44d751155d82c1c77d34a501dbeae1cad7bdca2996e6bf2b23f8"
+    },
+    "_shot_rows": {
+      "module": "app/timeline/rows.py",
+      "callable": "build_shot_rows",
+      "original_lines": 30,
+      "transformed_body_sha256": "8cfcdb32a69f9bc38baa28268920bd2e92a345feb8e967a06b5e0d4693b3e19f",
+      "pre_extraction_sha256": "d490acec41d8676afd1d849fa5ffdacfea684342cfddd51191219a905328ca1e"
+    },
+    "_draw_node_sprites": {
+      "module": "app/renderers/animation.py",
+      "callable": "draw_node_sprites",
+      "original_lines": 20,
+      "transformed_body_sha256": "c534fd964660355393c4602d4e4ac81c8e86cf588e50b72881a373ebb4aa956e",
+      "pre_extraction_sha256": "fc5eb90d8e981fcaf541d514b547b1eb571d372abdd40d36d4436c918000208d"
+    },
+    "_draw_animation": {
+      "module": "app/renderers/animation.py",
+      "callable": "draw_animation",
+      "original_lines": 17,
+      "transformed_body_sha256": "52a287fa992823dc35449b9c617ab94d0257790589b93ad23deae7f770149f18",
+      "pre_extraction_sha256": "4795a2d3ee1d04347dc74c33af7ce45c4863f7297a6d4d07f207d20451b67a66"
+    },
+    "_draw_animation_body": {
+      "module": "app/renderers/animation.py",
+      "callable": "draw_animation_body",
+      "original_lines": 57,
+      "transformed_body_sha256": "cf37dbe4443c9dc32c639f2d115473d27c3077d171da394f6dcaaaf16bed9c77",
+      "pre_extraction_sha256": "220d72343271f893b19668f9f686c7da4e5428184f3bbdd0ee1628f0219955b9"
+    },
+    "_draw_motion": {
+      "module": "app/renderers/animation.py",
+      "callable": "draw_motion",
+      "original_lines": 24,
+      "transformed_body_sha256": "92f9849ca73ab5ae7ae1d3b4854f715b1b3034a991049adda54a7a6b5c180000",
+      "pre_extraction_sha256": "98c60ab328c5e00568e87389c1ba44578dde3ae162d1eedcf33864da1ba529ff"
+    },
+    "_draw_spawns": {
+      "module": "app/renderers/animation.py",
+      "callable": "draw_spawns",
+      "original_lines": 30,
+      "transformed_body_sha256": "e38e4ea25c025a05deed31917ddcfe21f22303e9ababd5d25dc6b11964e601ad",
+      "pre_extraction_sha256": "76389cb75aeb85b701a7fcd4d83ba0620864a6fd2cecd45064e90685c6d6f65f"
+    },
+    "_draw_pursuer": {
+      "module": "app/renderers/animation.py",
+      "callable": "draw_pursuer",
+      "original_lines": 43,
+      "transformed_body_sha256": "4c7c4154aea7256d4d7d26940f3af65f7ac81c04ffd424849e54b0136feb7ada",
+      "pre_extraction_sha256": "f138b22c702078494183f927924e5d01cb21836321e129b6b7897bb5ce50462b"
+    },
+    "_draw_sprite": {
+      "module": "app/renderers/sprite.py",
+      "callable": "draw_sprite",
+      "original_lines": 41,
+      "transformed_body_sha256": "518263d8e6f3cf3a2e43d7d5310575315a2003fa6a767e64e89bfe4d75c3a4f2",
+      "pre_extraction_sha256": "921e2f36c02178beb296222995d45a8d3cb19a7d24601b0cc6f78b8a839c4ff3"
+    },
+    "_build_menu": {
+      "module": "app/lifecycle/shell.py",
+      "callable": "build_menu",
+      "original_lines": 72,
+      "transformed_body_sha256": "db16cf63fcdaf7ff985769d7a86233c4f0866b4f8dd7d5c169fbe270980e2767",
+      "pre_extraction_sha256": "d4e6f1b0ded7cef629d8c3de86a9be2b7205ddcb25ca400ba69a05d3ff41847f"
+    },
+    "_build_layout": {
+      "module": "app/lifecycle/shell.py",
+      "callable": "build_layout",
+      "original_lines": 70,
+      "transformed_body_sha256": "38040702f9887f769fca81389d94f9d6ea4931b446efef3a1914b244e331155e",
+      "pre_extraction_sha256": "9f24f3c749722ac2bacfddcbad7b3bad3e659aeccc7d9137485543c7fa5ac906"
+    },
+    "_build_project": {
+      "module": "app/lifecycle/shell.py",
+      "callable": "build_project",
+      "original_lines": 27,
+      "transformed_body_sha256": "48103a263e7d63d9005ccbc899252856082ade9a43cc779ea8b2ca271f7d1dec",
+      "pre_extraction_sha256": "b18937fd4a2d0c07cd2e30de044f665f1be369808a799bc600cfa00f9e44dca0"
+    },
+    "_init_sashes": {
+      "module": "app/lifecycle/shell.py",
+      "callable": "init_sashes",
+      "original_lines": 21,
+      "transformed_body_sha256": "204d3bd1e5f213b3b6025cd9df8077f4a7137c72029b5517a6cc9e24f4e4c61a",
+      "pre_extraction_sha256": "f7630de7f49e6d2076ce39a7b37aea9d222665dea93914bbe6ea7a251ed76206"
+    },
+    "_init_sprite_sashes": {
+      "module": "app/lifecycle/shell.py",
+      "callable": "init_sprite_sashes",
+      "original_lines": 8,
+      "transformed_body_sha256": "6d3dd4aafb5922ad115592dcc4a17b15c023f58d330d468217b7794757ffd32f",
+      "pre_extraction_sha256": "98e8c83f37b43c50b92410ebffedf9778dbe37880b52093d6b9880080198cc1e"
+    },
+    "show_workspace": {
+      "module": "app/lifecycle/navigation.py",
+      "callable": "activate_workspace",
+      "original_lines": 51,
+      "transformed_body_sha256": "770b00c22ee4793a103602da74920b8dcdc810dbe6bfa53c42ed629c9e96ed0e",
+      "pre_extraction_sha256": "b60a5b5fc4b6a8aaf6eb0e7f3b0239b4e777319f30c03a532e422f1198f11d4d"
+    },
+    "_bind_shortcuts": {
+      "module": "app/lifecycle/navigation.py",
+      "callable": "bind_shortcuts",
+      "original_lines": 47,
+      "transformed_body_sha256": "7e375b87660b03bbe92e98f6926076daa2ce0fbad78857b2b29e887f81a339a0",
+      "pre_extraction_sha256": "6069332d77919ec029bb094f5e7abffe12630f712e1e9aa85d0f181007a9fa36"
+    }
+  }
+}

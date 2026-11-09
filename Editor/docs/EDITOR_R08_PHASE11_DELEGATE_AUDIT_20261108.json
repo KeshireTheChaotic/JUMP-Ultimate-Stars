@@ -1,0 +1,1675 @@
+{
+  "phase": "R08 Phase 11",
+  "controller_physical_lines": 1021,
+  "total_EditorApp_functions": 189,
+  "verified_delegate_count": 178,
+  "failed_delegate_count": 0,
+  "non_delegates": [
+    {
+      "method": "__init__",
+      "line": 62
+    },
+    {
+      "method": "show_roster_animation",
+      "line": 124
+    },
+    {
+      "method": "show_shortcuts",
+      "line": 148
+    },
+    {
+      "method": "_short",
+      "line": 202
+    },
+    {
+      "method": "_char_of",
+      "line": 206
+    },
+    {
+      "method": "_motion_params",
+      "line": 494
+    },
+    {
+      "method": "_branch_targets",
+      "line": 526
+    },
+    {
+      "method": "destroy",
+      "line": 613
+    },
+    {
+      "method": "_state",
+      "line": 641
+    },
+    {
+      "method": "redraw_view",
+      "line": 649
+    },
+    {
+      "method": "frame_view_if_needed",
+      "line": 653
+    }
+  ],
+  "resolved_delegates": [
+    {
+      "method": "_build_menu",
+      "line": 81,
+      "module": "app.lifecycle.shell",
+      "symbol": "build_menu",
+      "args": 1,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "_build_layout",
+      "line": 87,
+      "module": "app.lifecycle.shell",
+      "symbol": "build_layout",
+      "args": 1,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "_build_project",
+      "line": 93,
+      "module": "app.lifecycle.shell",
+      "symbol": "build_project",
+      "args": 3,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "_build_animation",
+      "line": 100,
+      "module": "app.layouts.animation",
+      "symbol": "build_animation",
+      "args": 4,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "_build_sprite",
+      "line": 107,
+      "module": "app.layouts.sprite",
+      "symbol": "build_sprite",
+      "args": 3,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "_build_archive",
+      "line": 114,
+      "module": "app.layouts.archive",
+      "symbol": "build_archive",
+      "args": 3,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "_set_roster_clips",
+      "line": 120,
+      "module": "app.lifecycle.ui_helpers",
+      "symbol": "_set_roster_clips",
+      "args": 2,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "show_roster_sprite",
+      "line": 127,
+      "module": "app.lifecycle.roster_navigation",
+      "symbol": "show_roster_sprite",
+      "args": 1,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "show_workspace",
+      "line": 131,
+      "module": "app.lifecycle.navigation",
+      "symbol": "activate_workspace",
+      "args": 2,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "_bind_shortcuts",
+      "line": 138,
+      "module": "app.lifecycle.navigation",
+      "symbol": "bind_shortcuts",
+      "args": 1,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "_arrow",
+      "line": 144,
+      "module": "app.lifecycle.ui_helpers",
+      "symbol": "_arrow",
+      "args": 5,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "_open_doc",
+      "line": 151,
+      "module": "app.lifecycle.ui_helpers",
+      "symbol": "_open_doc",
+      "args": 2,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "_int",
+      "line": 156,
+      "module": "app.parsing",
+      "symbol": "_int",
+      "args": 2,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "choose_root",
+      "line": 161,
+      "module": "app.lifecycle.resource_ops",
+      "symbol": "choose_root",
+      "args": 1,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "open_root",
+      "line": 166,
+      "module": "app.lifecycle.resource_ops",
+      "symbol": "open_root",
+      "args": 3,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "populate_tree",
+      "line": 171,
+      "module": "app.lifecycle.resource_ops",
+      "symbol": "populate_tree",
+      "args": 1,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "on_resource_open",
+      "line": 176,
+      "module": "app.lifecycle.resource_ops",
+      "symbol": "on_resource_open",
+      "args": 2,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "on_resource_select",
+      "line": 181,
+      "module": "app.lifecycle.resource_ops",
+      "symbol": "on_resource_select",
+      "args": 2,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "_project_context",
+      "line": 186,
+      "module": "app.lifecycle.resource_ops",
+      "symbol": "_project_context",
+      "args": 2,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "open_table",
+      "line": 191,
+      "module": "app.lifecycle.resource_ops",
+      "symbol": "open_table",
+      "args": 2,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "select_container",
+      "line": 196,
+      "module": "app.lifecycle.resource_ops",
+      "symbol": "select_container",
+      "args": 3,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "update_dirty",
+      "line": 211,
+      "module": "app.lifecycle.document_ops",
+      "symbol": "update_dirty",
+      "args": 1,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "confirm_discard",
+      "line": 216,
+      "module": "app.lifecycle.document_ops",
+      "symbol": "confirm_discard",
+      "args": 1,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "apply_current",
+      "line": 221,
+      "module": "app.lifecycle.document_ops",
+      "symbol": "apply_current",
+      "args": 1,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "save",
+      "line": 226,
+      "module": "app.lifecycle.document_ops",
+      "symbol": "save",
+      "args": 2,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "revert",
+      "line": 231,
+      "module": "app.lifecycle.document_ops",
+      "symbol": "revert",
+      "args": 1,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "export_package",
+      "line": 237,
+      "module": "app.lifecycle.document_ops",
+      "symbol": "export_package",
+      "args": 1,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "import_package",
+      "line": 242,
+      "module": "app.lifecycle.document_ops",
+      "symbol": "import_package",
+      "args": 1,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "run_task",
+      "line": 247,
+      "module": "app.lifecycle.document_ops",
+      "symbol": "run_task",
+      "args": 4,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "_doc",
+      "line": 253,
+      "module": "app.lifecycle.history_ops",
+      "symbol": "_doc",
+      "args": 1,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "_almt_snapshot",
+      "line": 258,
+      "module": "app.lifecycle.history_ops",
+      "symbol": "_almt_snapshot",
+      "args": 1,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "_sprite_snapshot",
+      "line": 263,
+      "module": "app.lifecycle.history_ops",
+      "symbol": "_sprite_snapshot",
+      "args": 1,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "checkpoint",
+      "line": 268,
+      "module": "app.lifecycle.history_ops",
+      "symbol": "checkpoint",
+      "args": 4,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "_restore_almt",
+      "line": 273,
+      "module": "app.lifecycle.history_ops",
+      "symbol": "_restore_almt",
+      "args": 2,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "_restore_sprite",
+      "line": 278,
+      "module": "app.lifecycle.history_ops",
+      "symbol": "_restore_sprite",
+      "args": 2,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "undo",
+      "line": 283,
+      "module": "app.lifecycle.history_ops",
+      "symbol": "undo",
+      "args": 1,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "redo",
+      "line": 288,
+      "module": "app.lifecycle.history_ops",
+      "symbol": "redo",
+      "args": 1,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "_history_step",
+      "line": 293,
+      "module": "app.lifecycle.history_ops",
+      "symbol": "_history_step",
+      "args": 3,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "_update_undo_label",
+      "line": 298,
+      "module": "app.lifecycle.history_ops",
+      "symbol": "_update_undo_label",
+      "args": 1,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "_switch_almt",
+      "line": 304,
+      "module": "app.lifecycle.roster_navigation",
+      "symbol": "_switch_almt",
+      "args": 2,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "load_almt",
+      "line": 308,
+      "module": "app.lifecycle.resource_ops",
+      "symbol": "load_almt",
+      "args": 2,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "_ai_block",
+      "line": 313,
+      "module": "app.lifecycle.roster_navigation",
+      "symbol": "_ai_block",
+      "args": 1,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "_move_xref",
+      "line": 317,
+      "module": "app.lifecycle.roster_navigation",
+      "symbol": "_move_xref",
+      "args": 1,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "_move_source_form",
+      "line": 321,
+      "module": "app.lifecycle.roster_navigation",
+      "symbol": "_move_source_form",
+      "args": 1,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "_move_control_and_title",
+      "line": 325,
+      "module": "app.lifecycle.roster_navigation",
+      "symbol": "_move_control_and_title",
+      "args": 2,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "open_move_resource",
+      "line": 329,
+      "module": "app.lifecycle.roster_navigation",
+      "symbol": "open_move_resource",
+      "args": 5,
+      "keyword_args": [
+        "hx"
+      ],
+      "resolved": true
+    },
+    {
+      "method": "open_koma_card",
+      "line": 333,
+      "module": "app.lifecycle.roster_navigation",
+      "symbol": "open_koma_card",
+      "args": 2,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "_battle_base_table",
+      "line": 337,
+      "module": "app.lifecycle.roster_navigation",
+      "symbol": "_battle_base_table",
+      "args": 1,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "populate_moves",
+      "line": 341,
+      "module": "app.lifecycle.move_list",
+      "symbol": "populate_moves",
+      "args": 3,
+      "keyword_args": [
+        "hx"
+      ],
+      "resolved": true
+    },
+    {
+      "method": "on_move_select",
+      "line": 345,
+      "module": "app.lifecycle.move_list",
+      "symbol": "on_move_select",
+      "args": 2,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "_move_row",
+      "line": 349,
+      "module": "app.lifecycle.move_list",
+      "symbol": "_move_row",
+      "args": 2,
+      "keyword_args": [
+        "hx"
+      ],
+      "resolved": true
+    },
+    {
+      "method": "mark_almt",
+      "line": 353,
+      "module": "app.lifecycle.apply_ops",
+      "symbol": "mark_almt",
+      "args": 1,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "duplicate_move",
+      "line": 358,
+      "module": "app.lifecycle.move_list",
+      "symbol": "duplicate_move",
+      "args": 1,
+      "keyword_args": [
+        "hx"
+      ],
+      "resolved": true
+    },
+    {
+      "method": "delete_move",
+      "line": 362,
+      "module": "app.lifecycle.move_list",
+      "symbol": "delete_move",
+      "args": 1,
+      "keyword_args": [
+        "hx"
+      ],
+      "resolved": true
+    },
+    {
+      "method": "apply_almt",
+      "line": 366,
+      "module": "app.lifecycle.apply_ops",
+      "symbol": "apply_almt",
+      "args": 1,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "export_almt_json",
+      "line": 371,
+      "module": "app.lifecycle.apply_ops",
+      "symbol": "export_almt_json",
+      "args": 1,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "import_almt_json",
+      "line": 376,
+      "module": "app.lifecycle.apply_ops",
+      "symbol": "import_almt_json",
+      "args": 1,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "apply_move_props",
+      "line": 381,
+      "module": "app.lifecycle.apply_ops",
+      "symbol": "apply_move_props",
+      "args": 1,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "command_text",
+      "line": 387,
+      "module": "app.timeline.interactions",
+      "symbol": "command_text",
+      "args": 3,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "notes_to_text",
+      "line": 392,
+      "module": "app.timeline.interactions",
+      "symbol": "notes_to_text",
+      "args": 2,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "text_to_notes",
+      "line": 398,
+      "module": "app.timeline.note_text",
+      "symbol": "text_to_notes",
+      "args": 2,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "_track",
+      "line": 403,
+      "module": "app.timeline.interactions",
+      "symbol": "_track",
+      "args": 2,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "_track_done",
+      "line": 408,
+      "module": "app.timeline.interactions",
+      "symbol": "_track_done",
+      "args": 3,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "edit_track",
+      "line": 413,
+      "module": "app.timeline.interactions",
+      "symbol": "edit_track",
+      "args": 1,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "add_track",
+      "line": 418,
+      "module": "app.timeline.interactions",
+      "symbol": "add_track",
+      "args": 1,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "delete_track",
+      "line": 423,
+      "module": "app.timeline.interactions",
+      "symbol": "delete_track",
+      "args": 1,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "_active_value",
+      "line": 428,
+      "module": "app.timeline.interactions",
+      "symbol": "_active_value",
+      "args": 3,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "add_key_at_playhead",
+      "line": 433,
+      "module": "app.timeline.interactions",
+      "symbol": "add_key_at_playhead",
+      "args": 1,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "delete_selected_key",
+      "line": 438,
+      "module": "app.timeline.interactions",
+      "symbol": "delete_selected_key",
+      "args": 1,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "set_key",
+      "line": 443,
+      "module": "app.timeline.interactions",
+      "symbol": "set_key",
+      "args": 3,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "_note_track_for_selection",
+      "line": 449,
+      "module": "app.timeline.interactions",
+      "symbol": "_note_track_for_selection",
+      "args": 2,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "_note_dialog",
+      "line": 454,
+      "module": "app.timeline.interactions",
+      "symbol": "_note_dialog",
+      "args": 5,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "edit_note_events",
+      "line": 459,
+      "module": "app.timeline.interactions",
+      "symbol": "edit_note_events",
+      "args": 1,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "add_note_event",
+      "line": 464,
+      "module": "app.timeline.interactions",
+      "symbol": "add_note_event",
+      "args": 1,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "_amt_tables",
+      "line": 470,
+      "module": "app.lifecycle.effect_sources",
+      "symbol": "_amt_tables",
+      "args": 2,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "_load_effect_catalog",
+      "line": 474,
+      "module": "app.lifecycle.effect_sources",
+      "symbol": "_load_effect_catalog",
+      "args": 1,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "_refresh_pursuer_links",
+      "line": 478,
+      "module": "app.lifecycle.effect_sources",
+      "symbol": "_refresh_pursuer_links",
+      "args": 1,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "_timeline_rows",
+      "line": 483,
+      "module": "app.timeline.rows",
+      "symbol": "build_timeline_rows",
+      "args": 2,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "open_effect_move",
+      "line": 489,
+      "module": "app.lifecycle.effect_sources",
+      "symbol": "open_effect_move",
+      "args": 3,
+      "keyword_args": [
+        "hx"
+      ],
+      "resolved": true
+    },
+    {
+      "method": "_refresh_notetrack_effects",
+      "line": 497,
+      "module": "app.timeline.presentation_ops",
+      "symbol": "_refresh_notetrack_effects",
+      "args": 1,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "_motion_changed",
+      "line": 501,
+      "module": "app.timeline.presentation_ops",
+      "symbol": "_motion_changed",
+      "args": 1,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "_notetrack_effect_rows",
+      "line": 505,
+      "module": "app.timeline.rows",
+      "symbol": "build_notetrack_effect_rows",
+      "args": 2,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "_physics_tooltip",
+      "line": 511,
+      "module": "app.timeline.presentation_ops",
+      "symbol": "_physics_tooltip",
+      "args": 2,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "_sound_tooltip",
+      "line": 515,
+      "module": "app.timeline.presentation_ops",
+      "symbol": "_sound_tooltip",
+      "args": 2,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "_spawn_rows",
+      "line": 519,
+      "module": "app.timeline.rows",
+      "symbol": "build_spawn_rows",
+      "args": 1,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "_event_tooltip",
+      "line": 530,
+      "module": "app.timeline.presentation_ops",
+      "symbol": "_event_tooltip",
+      "args": 3,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "_fmt",
+      "line": 534,
+      "module": "app.timeline.presentation_ops",
+      "symbol": "_fmt",
+      "args": 3,
+      "keyword_args": [
+        "hx"
+      ],
+      "resolved": true
+    },
+    {
+      "method": "_fmt_short",
+      "line": 538,
+      "module": "app.timeline.presentation_ops",
+      "symbol": "_fmt_short",
+      "args": 3,
+      "keyword_args": [
+        "hx"
+      ],
+      "resolved": true
+    },
+    {
+      "method": "_timeline_select",
+      "line": 542,
+      "module": "app.timeline.interactions",
+      "symbol": "_timeline_select",
+      "args": 4,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "_timeline_move_key",
+      "line": 547,
+      "module": "app.timeline.interactions",
+      "symbol": "_timeline_move_key",
+      "args": 4,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "_timeline_context",
+      "line": 552,
+      "module": "app.timeline.interactions",
+      "symbol": "_timeline_context",
+      "args": 5,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "_timeline_activate",
+      "line": 557,
+      "module": "app.timeline.interactions",
+      "symbol": "_timeline_activate",
+      "args": 3,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "_toggle_group",
+      "line": 562,
+      "module": "app.timeline.interactions",
+      "symbol": "_toggle_group",
+      "args": 2,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "_set_collapsed",
+      "line": 567,
+      "module": "app.timeline.interactions",
+      "symbol": "_set_collapsed",
+      "args": 2,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "jump_key",
+      "line": 572,
+      "module": "app.timeline.interactions",
+      "symbol": "jump_key",
+      "args": 2,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "set_tick",
+      "line": 578,
+      "module": "app.timeline.interactions",
+      "symbol": "set_tick",
+      "args": 2,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "_poll_audio",
+      "line": 583,
+      "module": "app.lifecycle.playback",
+      "symbol": "_poll_audio",
+      "args": 1,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "_sound_changed",
+      "line": 588,
+      "module": "app.lifecycle.playback",
+      "symbol": "_sound_changed",
+      "args": 1,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "_play_sound_tick",
+      "line": 593,
+      "module": "app.lifecycle.playback",
+      "symbol": "_play_sound_tick",
+      "args": 2,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "_begin_play",
+      "line": 598,
+      "module": "app.lifecycle.playback",
+      "symbol": "_begin_play",
+      "args": 1,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "_schedule_frame",
+      "line": 603,
+      "module": "app.lifecycle.playback",
+      "symbol": "_schedule_frame",
+      "args": 1,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "_audition_tick",
+      "line": 608,
+      "module": "app.lifecycle.playback",
+      "symbol": "_audition_tick",
+      "args": 1,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "toggle_play",
+      "line": 621,
+      "module": "app.lifecycle.playback",
+      "symbol": "toggle_play",
+      "args": 1,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "_stop_play",
+      "line": 626,
+      "module": "app.lifecycle.playback",
+      "symbol": "_stop_play",
+      "args": 1,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "_animate",
+      "line": 631,
+      "module": "app.lifecycle.playback",
+      "symbol": "_animate",
+      "args": 1,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "refresh_animation",
+      "line": 637,
+      "module": "app.renderers.viewport_ops",
+      "symbol": "refresh_animation",
+      "args": 1,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "_frame_image",
+      "line": 645,
+      "module": "app.renderers.viewport_ops",
+      "symbol": "_frame_image",
+      "args": 3,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "_init_sashes",
+      "line": 658,
+      "module": "app.lifecycle.shell",
+      "symbol": "init_sashes",
+      "args": 1,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "fit_timeline",
+      "line": 664,
+      "module": "app.renderers.viewport_ops",
+      "symbol": "fit_timeline",
+      "args": 1,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "_init_sprite_sashes",
+      "line": 668,
+      "module": "app.lifecycle.shell",
+      "symbol": "init_sprite_sashes",
+      "args": 1,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "frame_view",
+      "line": 674,
+      "module": "app.renderers",
+      "symbol": "projection.frame_view",
+      "args": 1,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "_move_scope_extent",
+      "line": 678,
+      "module": "app.renderers",
+      "symbol": "projection._move_scope_extent",
+      "args": 1,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "_handler00_launch_extents",
+      "line": 682,
+      "module": "app.renderers",
+      "symbol": "projection._handler00_launch_extents",
+      "args": 1,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "_move_extent",
+      "line": 686,
+      "module": "app.renderers",
+      "symbol": "projection._move_extent",
+      "args": 1,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "_draw_node_sprites",
+      "line": 690,
+      "module": "app.renderers.animation",
+      "symbol": "draw_node_sprites",
+      "args": 9,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "_draw_animation",
+      "line": 695,
+      "module": "app.renderers.animation",
+      "symbol": "draw_animation",
+      "args": 3,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "_animation_origin",
+      "line": 700,
+      "module": "app.renderers",
+      "symbol": "projection._animation_origin",
+      "args": 2,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "_draw_animation_body",
+      "line": 704,
+      "module": "app.renderers.animation",
+      "symbol": "draw_animation_body",
+      "args": 6,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "_inspect_spawn",
+      "line": 709,
+      "module": "app.inspectors.events",
+      "symbol": "_inspect_spawn",
+      "args": 4,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "_draw_motion",
+      "line": 714,
+      "module": "app.renderers.animation",
+      "symbol": "draw_motion",
+      "args": 4,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "_inspect_physics",
+      "line": 719,
+      "module": "app.inspectors.events",
+      "symbol": "_inspect_physics",
+      "args": 2,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "_inspect_sound",
+      "line": 724,
+      "module": "app.inspectors.events",
+      "symbol": "_inspect_sound",
+      "args": 2,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "spawn_projection",
+      "line": 729,
+      "module": "app.renderers",
+      "symbol": "projection.spawn_projection",
+      "args": 2,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "_shot_events_current",
+      "line": 733,
+      "module": "app.renderers",
+      "symbol": "projection._shot_events_current",
+      "args": 1,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "_draw_shot_source_sprites",
+      "line": 737,
+      "module": "app.renderers.shot_source",
+      "symbol": "draw_original_shot_sources",
+      "args": 5,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "_shot_rows",
+      "line": 743,
+      "module": "app.timeline.rows",
+      "symbol": "build_shot_rows",
+      "args": 2,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "_inspect_shot_source",
+      "line": 749,
+      "module": "app.inspectors.shot_source",
+      "symbol": "render_shot_source_inspector",
+      "args": 3,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "_visible_spawn_instances",
+      "line": 755,
+      "module": "app.renderers",
+      "symbol": "projection._visible_spawn_instances",
+      "args": 2,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "_draw_spawns",
+      "line": 759,
+      "module": "app.renderers.animation",
+      "symbol": "draw_spawns",
+      "args": 7,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "_draw_pursuer",
+      "line": 764,
+      "module": "app.renderers.animation",
+      "symbol": "draw_pursuer",
+      "args": 5,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "refresh_inspector",
+      "line": 770,
+      "module": "app.inspectors.move",
+      "symbol": "render_move_inspector",
+      "args": 3,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "_value_hint",
+      "line": 777,
+      "module": "app.inspectors.value_hint",
+      "symbol": "_value_hint",
+      "args": 1,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "_inspect_notes",
+      "line": 781,
+      "module": "app.inspectors.events",
+      "symbol": "_inspect_notes",
+      "args": 3,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "load_sprite",
+      "line": 787,
+      "module": "app.lifecycle.resource_ops",
+      "symbol": "load_sprite",
+      "args": 3,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "_frame_sprite_if_needed",
+      "line": 792,
+      "module": "app.lifecycle.sprite_controls",
+      "symbol": "_frame_sprite_if_needed",
+      "args": 1,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "populate_frames",
+      "line": 797,
+      "module": "app.lifecycle.sprite_controls",
+      "symbol": "populate_frames",
+      "args": 2,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "_bank",
+      "line": 802,
+      "module": "app.lifecycle.sprite_controls",
+      "symbol": "_bank",
+      "args": 1,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "_compose",
+      "line": 807,
+      "module": "app.lifecycle.sprite_controls",
+      "symbol": "_compose",
+      "args": 3,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "_thumb_for",
+      "line": 812,
+      "module": "app.lifecycle.sprite_controls",
+      "symbol": "_thumb_for",
+      "args": 2,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "select_frame",
+      "line": 817,
+      "module": "app.lifecycle.sprite_controls",
+      "symbol": "select_frame",
+      "args": 2,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "_piece",
+      "line": 822,
+      "module": "app.lifecycle.sprite_controls",
+      "symbol": "_piece",
+      "args": 1,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "redraw_sprite",
+      "line": 827,
+      "module": "app.lifecycle.sprite_controls",
+      "symbol": "redraw_sprite",
+      "args": 2,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "frame_sprite",
+      "line": 832,
+      "module": "app.lifecycle.sprite_controls",
+      "symbol": "frame_sprite",
+      "args": 1,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "_draw_sprite",
+      "line": 837,
+      "module": "app.renderers.sprite",
+      "symbol": "draw_sprite",
+      "args": 2,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "_hit_piece",
+      "line": 842,
+      "module": "app.lifecycle.sprite_controls",
+      "symbol": "_hit_piece",
+      "args": 3,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "_sprite_press",
+      "line": 847,
+      "module": "app.lifecycle.sprite_controls",
+      "symbol": "_sprite_press",
+      "args": 4,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "_sprite_drag",
+      "line": 852,
+      "module": "app.lifecycle.sprite_controls",
+      "symbol": "_sprite_drag",
+      "args": 4,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "_sprite_release",
+      "line": 857,
+      "module": "app.lifecycle.sprite_controls",
+      "symbol": "_sprite_release",
+      "args": 4,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "nudge_piece",
+      "line": 862,
+      "module": "app.lifecycle.sprite_controls",
+      "symbol": "nudge_piece",
+      "args": 3,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "_after_piece_edit",
+      "line": 867,
+      "module": "app.lifecycle.apply_ops",
+      "symbol": "_after_piece_edit",
+      "args": 1,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "refresh_details",
+      "line": 872,
+      "module": "app.inspectors.sprite",
+      "symbol": "render_sprite_inspector",
+      "args": 3,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "_palette_widget",
+      "line": 878,
+      "module": "app.lifecycle.sprite_controls",
+      "symbol": "_palette_widget",
+      "args": 2,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "apply_piece",
+      "line": 883,
+      "module": "app.lifecycle.apply_ops",
+      "symbol": "apply_piece",
+      "args": 1,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "toggle_flipbook",
+      "line": 888,
+      "module": "app.lifecycle.sprite_controls",
+      "symbol": "toggle_flipbook",
+      "args": 1,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "_stop_flipbook",
+      "line": 893,
+      "module": "app.lifecycle.sprite_controls",
+      "symbol": "_stop_flipbook",
+      "args": 1,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "_flip_step",
+      "line": 898,
+      "module": "app.lifecycle.sprite_controls",
+      "symbol": "_flip_step",
+      "args": 1,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "_film_context",
+      "line": 903,
+      "module": "app.lifecycle.sprite_controls",
+      "symbol": "_film_context",
+      "args": 3,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "mark_sprite",
+      "line": 908,
+      "module": "app.lifecycle.apply_ops",
+      "symbol": "mark_sprite",
+      "args": 1,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "apply_sprite",
+      "line": 913,
+      "module": "app.lifecycle.apply_ops",
+      "symbol": "apply_sprite",
+      "args": 1,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "export_frames",
+      "line": 918,
+      "module": "app.lifecycle.apply_ops",
+      "symbol": "export_frames",
+      "args": 1,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "_ask_png_origin",
+      "line": 923,
+      "module": "app.lifecycle.apply_ops",
+      "symbol": "_ask_png_origin",
+      "args": 2,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "import_frame",
+      "line": 928,
+      "module": "app.lifecycle.apply_ops",
+      "symbol": "import_frame",
+      "args": 2,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "relayout_frame",
+      "line": 933,
+      "module": "app.lifecycle.apply_ops",
+      "symbol": "relayout_frame",
+      "args": 1,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "delete_frame",
+      "line": 938,
+      "module": "app.lifecycle.apply_ops",
+      "symbol": "delete_frame",
+      "args": 1,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "export_atlas",
+      "line": 943,
+      "module": "app.lifecycle.apply_ops",
+      "symbol": "export_atlas",
+      "args": 1,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "import_atlas",
+      "line": 948,
+      "module": "app.lifecycle.apply_ops",
+      "symbol": "import_atlas",
+      "args": 1,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "edit_palette",
+      "line": 953,
+      "module": "app.lifecycle.apply_ops",
+      "symbol": "edit_palette",
+      "args": 1,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "_palette_done",
+      "line": 958,
+      "module": "app.lifecycle.apply_ops",
+      "symbol": "_palette_done",
+      "args": 2,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "populate_archive",
+      "line": 964,
+      "module": "app.lifecycle.archive_navigation",
+      "symbol": "populate_archive",
+      "args": 1,
+      "keyword_args": [
+        "hx"
+      ],
+      "resolved": true
+    },
+    {
+      "method": "_selected_member",
+      "line": 968,
+      "module": "app.lifecycle.archive_navigation",
+      "symbol": "_selected_member",
+      "args": 1,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "_table_details",
+      "line": 972,
+      "module": "app.lifecycle.archive_navigation",
+      "symbol": "_table_details",
+      "args": 4,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "_member_details",
+      "line": 976,
+      "module": "app.inspectors.archive_member",
+      "symbol": "render_archive_member_details",
+      "args": 2,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "extract_member",
+      "line": 982,
+      "module": "app.lifecycle.apply_ops",
+      "symbol": "extract_member",
+      "args": 1,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "replace_member",
+      "line": 987,
+      "module": "app.lifecycle.apply_ops",
+      "symbol": "replace_member",
+      "args": 1,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "add_member",
+      "line": 992,
+      "module": "app.lifecycle.apply_ops",
+      "symbol": "add_member",
+      "args": 1,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "remove_member",
+      "line": 997,
+      "module": "app.lifecycle.apply_ops",
+      "symbol": "remove_member",
+      "args": 1,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "after_archive_edit",
+      "line": 1002,
+      "module": "app.lifecycle.apply_ops",
+      "symbol": "after_archive_edit",
+      "args": 1,
+      "keyword_args": [],
+      "resolved": true
+    },
+    {
+      "method": "rebuild_check",
+      "line": 1007,
+      "module": "app.lifecycle.archive_navigation",
+      "symbol": "rebuild_check",
+      "args": 1,
+      "keyword_args": [],
+      "resolved": true
+    }
+  ]
+}

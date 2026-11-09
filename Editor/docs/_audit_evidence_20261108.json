@@ -1,0 +1,1295 @@
+{
+  "root": "D:\\Library\\Development\\JUS\\publish\\JUMP-Ultimate-Stars\\Editor",
+  "files_total": 202,
+  "production_files": 106,
+  "test_and_support_files": 96,
+  "python_lines": 38200,
+  "production_lines": 29098,
+  "ast_functions": 2035,
+  "parse_errors": [],
+  "largest_files": [
+    {
+      "file": "app/editor.py",
+      "lines": 4376,
+      "bytes": 223890
+    },
+    {
+      "file": "app/workspaces/screen.py",
+      "lines": 1629,
+      "bytes": 89869
+    },
+    {
+      "file": "app/workspaces/level.py",
+      "lines": 1403,
+      "bytes": 71655
+    },
+    {
+      "file": "app/workspaces/koma.py",
+      "lines": 1066,
+      "bytes": 52239
+    },
+    {
+      "file": "jus_package/package.py",
+      "lines": 789,
+      "bytes": 34558
+    },
+    {
+      "file": "app/workspaces/missions.py",
+      "lines": 740,
+      "bytes": 38088
+    },
+    {
+      "file": "tools/charforge/forge.py",
+      "lines": 727,
+      "bytes": 34114
+    },
+    {
+      "file": "jus_package/screenvariants.py",
+      "lines": 625,
+      "bytes": 32896
+    },
+    {
+      "file": "jus_formats/stagephysics.py",
+      "lines": 615,
+      "bytes": 26150
+    },
+    {
+      "file": "jus_formats/progression.py",
+      "lines": 607,
+      "bytes": 27427
+    },
+    {
+      "file": "jus_formats/sprite.py",
+      "lines": 543,
+      "bytes": 21394
+    },
+    {
+      "file": "jus_formats/audio.py",
+      "lines": 499,
+      "bytes": 20166
+    },
+    {
+      "file": "app/widgets/dopesheet.py",
+      "lines": 491,
+      "bytes": 20956
+    },
+    {
+      "file": "jus_formats/almt.py",
+      "lines": 478,
+      "bytes": 18284
+    },
+    {
+      "file": "jus_package/stagepreview.py",
+      "lines": 467,
+      "bytes": 20180
+    },
+    {
+      "file": "jus_package/spawns.py",
+      "lines": 434,
+      "bytes": 18725
+    },
+    {
+      "file": "app/workspaces/roster.py",
+      "lines": 410,
+      "bytes": 18380
+    },
+    {
+      "file": "jus_package/dynamicgeometry.py",
+      "lines": 391,
+      "bytes": 18479
+    },
+    {
+      "file": "jus_package/registry.py",
+      "lines": 374,
+      "bytes": 16503
+    },
+    {
+      "file": "jus_package/sounds.py",
+      "lines": 372,
+      "bytes": 19041
+    },
+    {
+      "file": "jus_package/scenes.py",
+      "lines": 336,
+      "bytes": 14024
+    },
+    {
+      "file": "jus_formats/chrbin.py",
+      "lines": 331,
+      "bytes": 11926
+    },
+    {
+      "file": "jus_formats/dstx.py",
+      "lines": 317,
+      "bytes": 11723
+    },
+    {
+      "file": "jus_package/project.py",
+      "lines": 309,
+      "bytes": 13153
+    },
+    {
+      "file": "app/workspaces/tutorials.py",
+      "lines": 298,
+      "bytes": 13472
+    },
+    {
+      "file": "jus_package/movelinks.py",
+      "lines": 283,
+      "bytes": 12397
+    },
+    {
+      "file": "jus_formats/stageauthoring.py",
+      "lines": 274,
+      "bytes": 12718
+    },
+    {
+      "file": "app/note_event_editor.py",
+      "lines": 263,
+      "bytes": 12986
+    },
+    {
+      "file": "jus_formats/kshape.py",
+      "lines": 256,
+      "bytes": 10802
+    },
+    {
+      "file": "tools/apply_translations.py",
+      "lines": 256,
+      "bytes": 11313
+    },
+    {
+      "file": "jus_formats/alar.py",
+      "lines": 241,
+      "bytes": 9491
+    },
+    {
+      "file": "jus_formats/gametables.py",
+      "lines": 223,
+      "bytes": 10458
+    },
+    {
+      "file": "jus_formats/notetrack.py",
+      "lines": 221,
+      "bytes": 10472
+    },
+    {
+      "file": "jus_package/motion.py",
+      "lines": 219,
+      "bytes": 8667
+    },
+    {
+      "file": "app/widgets/source_asset_editor.py",
+      "lines": 217,
+      "bytes": 10510
+    }
+  ],
+  "exact_duplicate_functions": [],
+  "cross_file_duplicate_windows": [
+    {
+      "file_a": "jus_package/motion.py",
+      "line_a": 124,
+      "end_a": 136,
+      "file_b": "jus_package/sounds.py",
+      "line_b": 333,
+      "end_b": 345,
+      "matching_noncomment_lines": 13,
+      "sample": "out=[] / forni,nodeinenumerate(move.nodes): / ifnodeisNone:"
+    }
+  ],
+  "unused_private_candidates": [
+    {
+      "file": "app/editor.py",
+      "qual": "EditorApp._inspect_shot_source",
+      "line": 3102,
+      "end": 3293,
+      "length": 192,
+      "static_refs": 1
+    },
+    {
+      "file": "app/editor.py",
+      "qual": "EditorApp._build_animation",
+      "line": 343,
+      "end": 474,
+      "length": 132,
+      "static_refs": 1
+    },
+    {
+      "file": "jus_formats/audio.py",
+      "qual": "AudioRenderer._mix_note",
+      "line": 418,
+      "end": 499,
+      "length": 82,
+      "static_refs": 1
+    },
+    {
+      "file": "app/editor.py",
+      "qual": "EditorApp._build_menu",
+      "line": 170,
+      "end": 241,
+      "length": 72,
+      "static_refs": 1
+    },
+    {
+      "file": "app/editor.py",
+      "qual": "EditorApp._build_layout",
+      "line": 243,
+      "end": 312,
+      "length": 70,
+      "static_refs": 1
+    },
+    {
+      "file": "app/editor.py",
+      "qual": "EditorApp._spawn_rows",
+      "line": 2035,
+      "end": 2102,
+      "length": 68,
+      "static_refs": 1
+    },
+    {
+      "file": "app/workspaces/koma.py",
+      "qual": "KomaWorkspace._inspect_linked_moves",
+      "line": 791,
+      "end": 856,
+      "length": 66,
+      "static_refs": 1
+    },
+    {
+      "file": "app/editor.py",
+      "qual": "EditorApp._inspect_sound",
+      "line": 2887,
+      "end": 2948,
+      "length": 62,
+      "static_refs": 1
+    },
+    {
+      "file": "app/widgets/dopesheet.py",
+      "qual": "DopeSheet._draw_row_keys",
+      "line": 262,
+      "end": 323,
+      "length": 62,
+      "static_refs": 1
+    },
+    {
+      "file": "jus_formats/infotext.py",
+      "qual": "_repack_with_first_word",
+      "line": 54,
+      "end": 113,
+      "length": 60,
+      "static_refs": 1
+    },
+    {
+      "file": "app/editor.py",
+      "qual": "EditorApp._draw_animation_body",
+      "line": 2683,
+      "end": 2739,
+      "length": 57,
+      "static_refs": 1
+    },
+    {
+      "file": "app/editor.py",
+      "qual": "EditorApp._build_sprite",
+      "line": 477,
+      "end": 532,
+      "length": 56,
+      "static_refs": 1
+    },
+    {
+      "file": "jus_package/package.py",
+      "qual": "_export_unit",
+      "line": 145,
+      "end": 194,
+      "length": 50,
+      "static_refs": 1
+    },
+    {
+      "file": "jus_package/registry.py",
+      "qual": "_link_almt",
+      "line": 301,
+      "end": 350,
+      "length": 50,
+      "static_refs": 1
+    },
+    {
+      "file": "jus_package/package.py",
+      "qual": "_apply_unit",
+      "line": 555,
+      "end": 603,
+      "length": 49,
+      "static_refs": 1
+    },
+    {
+      "file": "app/editor.py",
+      "qual": "EditorApp._bind_shortcuts",
+      "line": 655,
+      "end": 701,
+      "length": 47,
+      "static_refs": 1
+    },
+    {
+      "file": "app/editor.py",
+      "qual": "EditorApp._notetrack_effect_rows",
+      "line": 1970,
+      "end": 2013,
+      "length": 44,
+      "static_refs": 1
+    },
+    {
+      "file": "app/editor.py",
+      "qual": "EditorApp._draw_pursuer",
+      "line": 3332,
+      "end": 3374,
+      "length": 43,
+      "static_refs": 1
+    },
+    {
+      "file": "app/editor.py",
+      "qual": "EditorApp._draw_sprite",
+      "line": 3702,
+      "end": 3742,
+      "length": 41,
+      "static_refs": 1
+    },
+    {
+      "file": "app/workspaces/level.py",
+      "qual": "LevelWorkspace._preview_bg_image",
+      "line": 655,
+      "end": 695,
+      "length": 41,
+      "static_refs": 1
+    },
+    {
+      "file": "app/workspaces/koma.py",
+      "qual": "KomaWorkspace._inspect_card",
+      "line": 710,
+      "end": 749,
+      "length": 40,
+      "static_refs": 1
+    },
+    {
+      "file": "app/workspaces/koma.py",
+      "qual": "KomaWorkspace._inspect_passive_ability",
+      "line": 751,
+      "end": 789,
+      "length": 39,
+      "static_refs": 1
+    },
+    {
+      "file": "app/editor.py",
+      "qual": "EditorApp._inspect_physics",
+      "line": 2848,
+      "end": 2885,
+      "length": 38,
+      "static_refs": 1
+    },
+    {
+      "file": "app/workspaces/level.py",
+      "qual": "LevelWorkspace._layer_rows",
+      "line": 430,
+      "end": 467,
+      "length": 38,
+      "static_refs": 1
+    },
+    {
+      "file": "app/workspaces/level.py",
+      "qual": "LevelWorkspace._fill_runtime",
+      "line": 616,
+      "end": 653,
+      "length": 38,
+      "static_refs": 1
+    },
+    {
+      "file": "app/workspaces/screen.py",
+      "qual": "ScreenWorkspace._load_source_only_scene_layers",
+      "line": 386,
+      "end": 420,
+      "length": 35,
+      "static_refs": 1
+    },
+    {
+      "file": "jus_package/package.py",
+      "qual": "_write_effects",
+      "line": 740,
+      "end": 773,
+      "length": 34,
+      "static_refs": 1
+    },
+    {
+      "file": "app/editor.py",
+      "qual": "EditorApp._timeline_context",
+      "line": 2204,
+      "end": 2236,
+      "length": 33,
+      "static_refs": 1
+    },
+    {
+      "file": "app/workspaces/level.py",
+      "qual": "LevelWorkspace._draw_stage_sprites",
+      "line": 850,
+      "end": 881,
+      "length": 32,
+      "static_refs": 1
+    },
+    {
+      "file": "jus_package/package.py",
+      "qual": "_export_sprites",
+      "line": 209,
+      "end": 240,
+      "length": 32,
+      "static_refs": 1
+    },
+    {
+      "file": "app/editor.py",
+      "qual": "EditorApp._shot_rows",
+      "line": 3071,
+      "end": 3100,
+      "length": 30,
+      "static_refs": 1
+    },
+    {
+      "file": "app/workspaces/level.py",
+      "qual": "LevelWorkspace._hit_map_object",
+      "line": 883,
+      "end": 911,
+      "length": 29,
+      "static_refs": 1
+    },
+    {
+      "file": "jus_package/package.py",
+      "qual": "_member_payload",
+      "line": 368,
+      "end": 396,
+      "length": 29,
+      "static_refs": 1
+    },
+    {
+      "file": "tools/charforge/forge.py",
+      "qual": "_write_brief_md",
+      "line": 335,
+      "end": 362,
+      "length": 28,
+      "static_refs": 1
+    },
+    {
+      "file": "app/editor.py",
+      "qual": "EditorApp._build_project",
+      "line": 314,
+      "end": 340,
+      "length": 27,
+      "static_refs": 1
+    },
+    {
+      "file": "app/workspaces/level.py",
+      "qual": "LevelWorkspace._draw_ai_nav",
+      "line": 823,
+      "end": 848,
+      "length": 26,
+      "static_refs": 1
+    },
+    {
+      "file": "jus_formats/almt.py",
+      "qual": "AlmtFile._decode_track",
+      "line": 277,
+      "end": 302,
+      "length": 26,
+      "static_refs": 1
+    },
+    {
+      "file": "jus_package/registry.py",
+      "qual": "_link_koma",
+      "line": 267,
+      "end": 292,
+      "length": 26,
+      "static_refs": 1
+    },
+    {
+      "file": "tools/charforge/forge.py",
+      "qual": "_texture_usage",
+      "line": 204,
+      "end": 229,
+      "length": 26,
+      "static_refs": 1
+    },
+    {
+      "file": "app/editor.py",
+      "qual": "EditorApp._palette_widget",
+      "line": 3864,
+      "end": 3888,
+      "length": 25,
+      "static_refs": 1
+    },
+    {
+      "file": "app/widgets/dopesheet.py",
+      "qual": "DopeSheet._draw_header",
+      "line": 236,
+      "end": 260,
+      "length": 25,
+      "static_refs": 1
+    },
+    {
+      "file": "app/workspaces/level.py",
+      "qual": "LevelWorkspace._fill_raw",
+      "line": 1098,
+      "end": 1122,
+      "length": 25,
+      "static_refs": 1
+    },
+    {
+      "file": "app/editor.py",
+      "qual": "EditorApp._draw_motion",
+      "line": 2823,
+      "end": 2846,
+      "length": 24,
+      "static_refs": 1
+    },
+    {
+      "file": "app/workspaces/screen.py",
+      "qual": "ScreenWorkspace._populate_scene_graph",
+      "line": 289,
+      "end": 312,
+      "length": 24,
+      "static_refs": 1
+    },
+    {
+      "file": "jus_formats/almt.py",
+      "qual": "AlmtFile._build_move",
+      "line": 343,
+      "end": 366,
+      "length": 24,
+      "static_refs": 1
+    },
+    {
+      "file": "app/workspaces/level.py",
+      "qual": "LevelWorkspace._apply_objects",
+      "line": 1317,
+      "end": 1339,
+      "length": 23,
+      "static_refs": 1
+    },
+    {
+      "file": "app/workspaces/screen.py",
+      "qual": "ScreenWorkspace._fill_resources",
+      "line": 737,
+      "end": 759,
+      "length": 23,
+      "static_refs": 1
+    },
+    {
+      "file": "app/workspaces/screen.py",
+      "qual": "ScreenWorkspace._draw_atlas",
+      "line": 897,
+      "end": 918,
+      "length": 22,
+      "static_refs": 1
+    },
+    {
+      "file": "jus_formats/alar.py",
+      "qual": "Archive._build3",
+      "line": 211,
+      "end": 232,
+      "length": 22,
+      "static_refs": 1
+    },
+    {
+      "file": "jus_package/registry.py",
+      "qual": "_link_chrbin",
+      "line": 353,
+      "end": 374,
+      "length": 22,
+      "static_refs": 1
+    },
+    {
+      "file": "app/workspaces/level.py",
+      "qual": "LevelWorkspace._apply_maps",
+      "line": 1341,
+      "end": 1361,
+      "length": 21,
+      "static_refs": 1
+    },
+    {
+      "file": "jus_formats/almt.py",
+      "qual": "AlmtFile._parse_move",
+      "line": 238,
+      "end": 258,
+      "length": 21,
+      "static_refs": 1
+    },
+    {
+      "file": "jus_formats/audio.py",
+      "qual": "AudioRenderer._wave",
+      "line": 396,
+      "end": 416,
+      "length": 21,
+      "static_refs": 1
+    },
+    {
+      "file": "jus_package/sounds.py",
+      "qual": "SoundResolver._resolve_by_symbol",
+      "line": 297,
+      "end": 317,
+      "length": 21,
+      "static_refs": 1
+    },
+    {
+      "file": "tools/charforge/forge.py",
+      "qual": "_index",
+      "line": 434,
+      "end": 454,
+      "length": 21,
+      "static_refs": 1
+    },
+    {
+      "file": "jus_formats/almt.py",
+      "qual": "AlmtFile._build_chunk",
+      "line": 368,
+      "end": 387,
+      "length": 20,
+      "static_refs": 1
+    },
+    {
+      "file": "app/editor.py",
+      "qual": "EditorApp._inspect_notes",
+      "line": 3571,
+      "end": 3589,
+      "length": 19,
+      "static_refs": 1
+    },
+    {
+      "file": "app/workspaces/roster.py",
+      "qual": "RosterBrowser._keycap_icon",
+      "line": 248,
+      "end": 266,
+      "length": 19,
+      "static_refs": 1
+    },
+    {
+      "file": "app/workspaces/screen.py",
+      "qual": "ScreenWorkspace._fill_code_references",
+      "line": 521,
+      "end": 539,
+      "length": 19,
+      "static_refs": 1
+    },
+    {
+      "file": "jus_formats/alar.py",
+      "qual": "Archive._build2",
+      "line": 191,
+      "end": 209,
+      "length": 19,
+      "static_refs": 1
+    },
+    {
+      "file": "jus_package/package.py",
+      "qual": "_apply_loose",
+      "line": 631,
+      "end": 649,
+      "length": 19,
+      "static_refs": 1
+    },
+    {
+      "file": "app/editor.py",
+      "qual": "EditorApp._timeline_activate",
+      "line": 2238,
+      "end": 2255,
+      "length": 18,
+      "static_refs": 1
+    },
+    {
+      "file": "app/workspaces/level.py",
+      "qual": "LevelWorkspace._mission_inspector",
+      "line": 1197,
+      "end": 1214,
+      "length": 18,
+      "static_refs": 1
+    },
+    {
+      "file": "jus_formats/gametables.py",
+      "qual": "_jquiz",
+      "line": 141,
+      "end": 158,
+      "length": 18,
+      "static_refs": 1
+    },
+    {
+      "file": "jus_package/package.py",
+      "qual": "_merge_almt",
+      "line": 399,
+      "end": 416,
+      "length": 18,
+      "static_refs": 1
+    },
+    {
+      "file": "app/editor.py",
+      "qual": "EditorApp._build_archive",
+      "line": 535,
+      "end": 551,
+      "length": 17,
+      "static_refs": 1
+    },
+    {
+      "file": "app/workspaces/screen.py",
+      "qual": "ScreenWorkspace._element_archives",
+      "line": 204,
+      "end": 220,
+      "length": 17,
+      "static_refs": 1
+    },
+    {
+      "file": "tools/apply_translations.py",
+      "qual": "_owners",
+      "line": 49,
+      "end": 65,
+      "length": 17,
+      "static_refs": 1
+    },
+    {
+      "file": "app/editor.py",
+      "qual": "EditorApp._hit_piece",
+      "line": 3744,
+      "end": 3759,
+      "length": 16,
+      "static_refs": 1
+    },
+    {
+      "file": "app/note_event_editor.py",
+      "qual": "NoteEventEditor._command_from_form",
+      "line": 190,
+      "end": 205,
+      "length": 16,
+      "static_refs": 1
+    },
+    {
+      "file": "tools/charforge/forge.py",
+      "qual": "_palette_from",
+      "line": 416,
+      "end": 431,
+      "length": 16,
+      "static_refs": 1
+    },
+    {
+      "file": "app/editor.py",
+      "qual": "EditorApp._audition_tick",
+      "line": 2322,
+      "end": 2336,
+      "length": 15,
+      "static_refs": 1
+    },
+    {
+      "file": "app/editor.py",
+      "qual": "EditorApp._ask_png_origin",
+      "line": 3985,
+      "end": 3999,
+      "length": 15,
+      "static_refs": 1
+    },
+    {
+      "file": "app/workspaces/koma.py",
+      "qual": "KomaWorkspace._picker",
+      "line": 865,
+      "end": 879,
+      "length": 15,
+      "static_refs": 1
+    },
+    {
+      "file": "app/workspaces/koma.py",
+      "qual": "KomaWorkspace._swatches",
+      "line": 881,
+      "end": 895,
+      "length": 15,
+      "static_refs": 1
+    },
+    {
+      "file": "jus_formats/almt.py",
+      "qual": "AlmtFile._parse_chunk",
+      "line": 260,
+      "end": 274,
+      "length": 15,
+      "static_refs": 1
+    },
+    {
+      "file": "jus_formats/gametables.py",
+      "qual": "_jpower",
+      "line": 113,
+      "end": 127,
+      "length": 15,
+      "static_refs": 1
+    },
+    {
+      "file": "tools/charforge/forge.py",
+      "qual": "_contact_sheet",
+      "line": 243,
+      "end": 257,
+      "length": 15,
+      "static_refs": 1
+    },
+    {
+      "file": "app/editor.py",
+      "qual": "EditorApp._event_tooltip",
+      "line": 2114,
+      "end": 2127,
+      "length": 14,
+      "static_refs": 1
+    },
+    {
+      "file": "app/workspaces/screen.py",
+      "qual": "ScreenWorkspace._expand",
+      "line": 253,
+      "end": 266,
+      "length": 14,
+      "static_refs": 1
+    },
+    {
+      "file": "app/workspaces/screen.py",
+      "qual": "ScreenWorkspace._open_resource",
+      "line": 772,
+      "end": 785,
+      "length": 14,
+      "static_refs": 1
+    },
+    {
+      "file": "jus_formats/gametables.py",
+      "qual": "_counted",
+      "line": 81,
+      "end": 94,
+      "length": 14,
+      "static_refs": 1
+    },
+    {
+      "file": "jus_formats/gametables.py",
+      "qual": "_commwin",
+      "line": 97,
+      "end": 110,
+      "length": 14,
+      "static_refs": 1
+    },
+    {
+      "file": "app/editor.py",
+      "qual": "EditorApp._animate",
+      "line": 2365,
+      "end": 2377,
+      "length": 13,
+      "static_refs": 1
+    },
+    {
+      "file": "app/editor.py",
+      "qual": "EditorApp._palette_done",
+      "line": 4097,
+      "end": 4109,
+      "length": 13,
+      "static_refs": 1
+    },
+    {
+      "file": "app/widgets/dopesheet.py",
+      "qual": "DopeSheet._draw_arc",
+      "line": 325,
+      "end": 337,
+      "length": 13,
+      "static_refs": 1
+    },
+    {
+      "file": "app/widgets/viewport.py",
+      "qual": "Viewport._draw_checker",
+      "line": 128,
+      "end": 140,
+      "length": 13,
+      "static_refs": 1
+    },
+    {
+      "file": "app/workspaces/level.py",
+      "qual": "LevelWorkspace._choose_tile",
+      "line": 988,
+      "end": 1000,
+      "length": 13,
+      "static_refs": 1
+    },
+    {
+      "file": "jus_formats/alar.py",
+      "qual": "Archive._parse2",
+      "line": 154,
+      "end": 166,
+      "length": 13,
+      "static_refs": 1
+    },
+    {
+      "file": "app/editor.py",
+      "qual": "EditorApp._table_details",
+      "line": 4136,
+      "end": 4147,
+      "length": 12,
+      "static_refs": 1
+    },
+    {
+      "file": "app/note_event_editor.py",
+      "qual": "NoteEventEditor._switch_opcode",
+      "line": 149,
+      "end": 160,
+      "length": 12,
+      "static_refs": 1
+    },
+    {
+      "file": "app/widgets/filmstrip.py",
+      "qual": "Filmstrip._thumb",
+      "line": 67,
+      "end": 78,
+      "length": 12,
+      "static_refs": 1
+    },
+    {
+      "file": "app/widgets/source_asset_editor.py",
+      "qual": "SourceAssetEditor._import",
+      "line": 128,
+      "end": 139,
+      "length": 12,
+      "static_refs": 1
+    },
+    {
+      "file": "app/workspaces/koma.py",
+      "qual": "KomaWorkspace._edit_colour",
+      "line": 904,
+      "end": 915,
+      "length": 12,
+      "static_refs": 1
+    },
+    {
+      "file": "app/workspaces/screen.py",
+      "qual": "ScreenWorkspace._crop",
+      "line": 1007,
+      "end": 1018,
+      "length": 12,
+      "static_refs": 1
+    },
+    {
+      "file": "jus_formats/audio.py",
+      "qual": "AudioRenderer._definition",
+      "line": 383,
+      "end": 394,
+      "length": 12,
+      "static_refs": 1
+    },
+    {
+      "file": "jus_formats/dstx.py",
+      "qual": "DstxFile._parse_frame",
+      "line": 151,
+      "end": 162,
+      "length": 12,
+      "static_refs": 1
+    },
+    {
+      "file": "jus_package/package.py",
+      "qual": "_open_package",
+      "line": 312,
+      "end": 323,
+      "length": 12,
+      "static_refs": 1
+    },
+    {
+      "file": "jus_package/stagepreview.py",
+      "qual": "_sprite_cell",
+      "line": 274,
+      "end": 285,
+      "length": 12,
+      "static_refs": 1
+    },
+    {
+      "file": "app/editor.py",
+      "qual": "EditorApp._physics_tooltip",
+      "line": 2015,
+      "end": 2025,
+      "length": 11,
+      "static_refs": 1
+    },
+    {
+      "file": "app/widgets/dopesheet.py",
+      "qual": "DopeSheet._context",
+      "line": 440,
+      "end": 450,
+      "length": 11,
+      "static_refs": 1
+    },
+    {
+      "file": "jus_formats/alar.py",
+      "qual": "Archive._parse3",
+      "line": 169,
+      "end": 179,
+      "length": 11,
+      "static_refs": 1
+    },
+    {
+      "file": "jus_formats/gametables.py",
+      "qual": "_titleorder",
+      "line": 170,
+      "end": 180,
+      "length": 11,
+      "static_refs": 1
+    },
+    {
+      "file": "jus_formats/stagephysics.py",
+      "qual": "_parse_items",
+      "line": 239,
+      "end": 249,
+      "length": 11,
+      "static_refs": 1
+    },
+    {
+      "file": "app/editor.py",
+      "qual": "EditorApp._set_roster_clips",
+      "line": 553,
+      "end": 562,
+      "length": 10,
+      "static_refs": 1
+    },
+    {
+      "file": "app/editor.py",
+      "qual": "EditorApp._project_context",
+      "line": 835,
+      "end": 844,
+      "length": 10,
+      "static_refs": 1
+    },
+    {
+      "file": "app/editor.py",
+      "qual": "EditorApp._restore_almt",
+      "line": 1151,
+      "end": 1160,
+      "length": 10,
+      "static_refs": 1
+    },
+    {
+      "file": "app/editor.py",
+      "qual": "EditorApp._sprite_drag",
+      "line": 3767,
+      "end": 3776,
+      "length": 10,
+      "static_refs": 1
+    },
+    {
+      "file": "app/theme.py",
+      "qual": "Tooltip._show",
+      "line": 181,
+      "end": 190,
+      "length": 10,
+      "static_refs": 1
+    },
+    {
+      "file": "app/workspaces/screen.py",
+      "qual": "ScreenWorkspace._atlas_click",
+      "line": 933,
+      "end": 942,
+      "length": 10,
+      "static_refs": 1
+    },
+    {
+      "file": "jus_formats/dstx.py",
+      "qual": "DstxFile._frame_bytes",
+      "line": 164,
+      "end": 173,
+      "length": 10,
+      "static_refs": 1
+    },
+    {
+      "file": "jus_formats/gametables.py",
+      "qual": "_palette",
+      "line": 194,
+      "end": 203,
+      "length": 10,
+      "static_refs": 1
+    },
+    {
+      "file": "jus_package/package.py",
+      "qual": "_dig_for",
+      "line": 197,
+      "end": 206,
+      "length": 10,
+      "static_refs": 1
+    },
+    {
+      "file": "jus_package/package.py",
+      "qual": "_texture_ids",
+      "line": 686,
+      "end": 695,
+      "length": 10,
+      "static_refs": 1
+    },
+    {
+      "file": "tools/charforge/forge.py",
+      "qual": "_sprite_key",
+      "line": 192,
+      "end": 201,
+      "length": 10,
+      "static_refs": 1
+    },
+    {
+      "file": "tools/charforge/forge.py",
+      "qual": "_dsig_json_path",
+      "line": 457,
+      "end": 466,
+      "length": 10,
+      "static_refs": 1
+    },
+    {
+      "file": "app/editor.py",
+      "qual": "EditorApp._restore_sprite",
+      "line": 1162,
+      "end": 1170,
+      "length": 9,
+      "static_refs": 1
+    },
+    {
+      "file": "jus_formats/gametables.py",
+      "qual": "_secret",
+      "line": 130,
+      "end": 138,
+      "length": 9,
+      "static_refs": 1
+    },
+    {
+      "file": "jus_package/movelinks.py",
+      "qual": "MoveLinks._source_ids",
+      "line": 212,
+      "end": 220,
+      "length": 9,
+      "static_refs": 1
+    },
+    {
+      "file": "jus_package/package.py",
+      "qual": "_write_readme",
+      "line": 278,
+      "end": 286,
+      "length": 9,
+      "static_refs": 1
+    },
+    {
+      "file": "app/editor.py",
+      "qual": "EditorApp._branch_targets",
+      "line": 2105,
+      "end": 2112,
+      "length": 8,
+      "static_refs": 1
+    },
+    {
+      "file": "app/editor.py",
+      "qual": "EditorApp._fmt_short",
+      "line": 2144,
+      "end": 2151,
+      "length": 8,
+      "static_refs": 1
+    },
+    {
+      "file": "app/editor.py",
+      "qual": "EditorApp._init_sprite_sashes",
+      "line": 2472,
+      "end": 2479,
+      "length": 8,
+      "static_refs": 1
+    },
+    {
+      "file": "app/editor.py",
+      "qual": "EditorApp._sprite_release",
+      "line": 3778,
+      "end": 3785,
+      "length": 8,
+      "static_refs": 1
+    },
+    {
+      "file": "app/widgets/dopesheet.py",
+      "qual": "DopeSheet._yview",
+      "line": 140,
+      "end": 147,
+      "length": 8,
+      "static_refs": 1
+    },
+    {
+      "file": "app/workspaces/koma.py",
+      "qual": "KomaWorkspace._panel_at",
+      "line": 295,
+      "end": 302,
+      "length": 8,
+      "static_refs": 1
+    },
+    {
+      "file": "app/workspaces/screen.py",
+      "qual": "ScreenWorkspace._select_code_reference",
+      "line": 541,
+      "end": 548,
+      "length": 8,
+      "static_refs": 1
+    },
+    {
+      "file": "app/workspaces/tutorials.py",
+      "qual": "TutorialPanel._change",
+      "line": 218,
+      "end": 225,
+      "length": 8,
+      "static_refs": 1
+    },
+    {
+      "file": "app/editor.py",
+      "qual": "EditorApp._sound_tooltip",
+      "line": 2027,
+      "end": 2033,
+      "length": 7,
+      "static_refs": 1
+    },
+    {
+      "file": "app/editor.py",
+      "qual": "EditorApp._film_context",
+      "line": 3934,
+      "end": 3940,
+      "length": 7,
+      "static_refs": 1
+    },
+    {
+      "file": "app/widgets/dopesheet.py",
+      "qual": "DopeSheet._ensure_visible",
+      "line": 149,
+      "end": 155,
+      "length": 7,
+      "static_refs": 1
+    },
+    {
+      "file": "app/widgets/source_asset_editor.py",
+      "qual": "SourceAssetEditor._current_bytes",
+      "line": 99,
+      "end": 105,
+      "length": 7,
+      "static_refs": 1
+    },
+    {
+      "file": "app/widgets/source_asset_editor.py",
+      "qual": "SourceAssetEditor._export",
+      "line": 141,
+      "end": 147,
+      "length": 7,
+      "static_refs": 1
+    },
+    {
+      "file": "jus_formats/gametables.py",
+      "qual": "_staffroll",
+      "line": 161,
+      "end": 167,
+      "length": 7,
+      "static_refs": 1
+    },
+    {
+      "file": "jus_package/registry.py",
+      "qual": "Registry.__post_init__",
+      "line": 114,
+      "end": 120,
+      "length": 7,
+      "static_refs": 0
+    },
+    {
+      "file": "tools/apply_translations.py",
+      "qual": "_write_linear2",
+      "line": 81,
+      "end": 87,
+      "length": 7,
+      "static_refs": 1
+    }
+  ],
+  "summary_counts": {
+    "exact_function_groups": 0,
+    "cross_file_windows": 1,
+    "static_private_no_ref_candidates": 136
+  }
+}

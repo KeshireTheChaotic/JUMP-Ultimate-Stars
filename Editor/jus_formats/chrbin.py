@@ -12,8 +12,7 @@ from dataclasses import dataclass
 import struct
 
 from .binary import u32
-from .collisionwork import (AUTHORED_WORK_BASE, col_flag_work_contributions,
-                            resolve_collision_work)
+from .collisionwork import col_flag_work_contributions, resolve_collision_work
 
 STRIDES = {'col': 20, 'shot': 32, 'effect': 8}
 
@@ -196,6 +195,27 @@ class ShotRecord:
         return bool(self.flags & 1)
 
     @property
+    def raw_byte1c(self) -> int:
+        """+0x1C per-handler parameter; no universal runtime meaning proved."""
+        return self.raw[0x1C]
+
+    @property
+    def primary_animation_id(self) -> int:
+        """+0x0C: original ALMT source passed to the handler, not a DSTX ID."""
+        return self.reference0
+
+    @property
+    def beam01_repeat_segment(self) -> int | None:
+        """Handler01 uses +0x10 as repeated ALMT child (ov06 0216BA2C)."""
+        return self.reference1 if self.handler_id == 1 else None
+
+    @property
+    def beam01_spawn_child(self) -> int | None:
+        """Handler01 begins with +0x14 and +0x0C (ov06 0216B514)."""
+        return (self.optional_reference if self.handler_id == 1 and self.optional_reference_active
+                and self.optional_reference else None)
+
+    @property
     def selector_byte(self) -> int:
         return self.raw[0x1D]
 
@@ -208,11 +228,96 @@ class ShotRecord:
         return struct.unpack_from('<H', self.raw, 0x1E)[0]
 
     @property
+    def handler_16_nested_shot_index(self) -> int | None:
+        """Handler 0x16 on-contact child shot index, original +0x1E s16.
+
+        ov06 FUN_0216F8D8 uses index*0x20 in BattlePrmData's own shot
+        table; FUN_0216AB58 then creates that nested shot. Shipped 6/6
+        handler-0x16 entries have valid same-table indexes.
+        """
+        return struct.unpack_from('<h', self.raw, 0x1E)[0] if self.handler_id == 0x16 else None
+
+    @property
     def handler_0b_update(self) -> str | None:
         if self.handler_id != 0x0B:
             return None
         return ('0x0216F398' if self.handler_parameter_1e == 0
                 else '0x0216F9D0')
+
+
+
+@dataclass(frozen=True)
+class EffectRecord:
+    """Original 8-byte chr/effect row, sourced from BattlePrmData +0x14.
+
+    The first u32 is passed to FUN_0206C7FC as an animation/effect asset ID.
+    The two u16 fields at +4,+6 select a sound-parameter slot and supply
+    FUN_0207342C's second argument (ov06 FUN_02153CE8).
+    """
+    raw: bytes
+
+    def __post_init__(self):
+        if len(self.raw) != 8:
+            raise ValueError('Effect records must be exactly eight bytes')
+
+    @property
+    def animation_id(self) -> int:
+        return struct.unpack_from('<I', self.raw, 0)[0]
+
+    @property
+    def sound_slot(self) -> int:
+        return struct.unpack_from('<H', self.raw, 4)[0]
+
+    @property
+    def sound_argument(self) -> int:
+        return struct.unpack_from('<H', self.raw, 6)[0]
+
+    @property
+    def original_default_sound_value(self) -> int | None:
+        """Battle_PrmDataInit initializes four slots: FFFF,007A,FFFF,FFFF.
+
+        This represents the initial state only, not possible runtime changes.
+        """
+        return (0xFFFF, 0x007A, 0xFFFF, 0xFFFF)[self.sound_slot] if self.sound_slot < 4 else None
+
+    def replace_animation_id(self, new_id: int) -> 'EffectRecord':
+        if not 0 <= new_id <= 0xFFFFFFFF:
+            raise ValueError('Expected u32 animation ID')
+        return type(self)(struct.pack('<I', new_id) + self.raw[4:])
+
+    def replace_sound(self, slot: int, argument: int) -> 'EffectRecord':
+        if not (0 <= slot <= 3 and 0 <= argument <= 0xFFFF):
+            raise ValueError('Original effect sound slot must be 0..3 and argument u16')
+        return type(self)(self.raw[:4] + struct.pack('<HH', slot, argument))
+
+
+@dataclass(frozen=True)
+class EffectSelectorResolution:
+    """Native ov06 FUN_02153CE8 routing; not a rendering projection."""
+    selector: int
+    category: str
+    character_record: int | None
+
+
+def resolve_effect_selector(raw_signed: int, available_records: int | None = None) -> EffectSelectorResolution:
+    """-1 disabled; 0..63 built-in; >=64 character effect table row (selector-64).
+
+    If the character table is provided, validate the lookup bounds. Original
+    corpus has 101 valid character table references with no invalid joins.
+    """
+    if not -128 <= raw_signed <= 127:
+        raise ValueError('Selector must be original signed byte')
+    if raw_signed == -1:
+        return EffectSelectorResolution(raw_signed, 'disabled', None)
+    if raw_signed < -1:
+        # Not found among the 2,837 original col records; preserve semantics unknown.
+        return EffectSelectorResolution(raw_signed, 'unclassified negative', None)
+    if raw_signed < 0x40:
+        return EffectSelectorResolution(raw_signed, 'built-in effect', None)
+    index = raw_signed - 0x40
+    if available_records is not None and not (0 <= index < available_records):
+        raise IndexError(f'Effect selector {raw_signed} -> row {index} out of {available_records}')
+    return EffectSelectorResolution(raw_signed, 'character effect', index)
 
 
 @dataclass(frozen=True)
@@ -231,6 +336,71 @@ class ColRecord:
     @property
     def selector_byte(self) -> int:
         return self.raw[1]
+
+    @property
+    def direct_contact_magnitude(self) -> int:
+        """+0x05 signed scalar read by main 02080F14's hit calculation.
+
+        This single-byte value is distinct from the overlapping +0x04 s32
+        used by ov11's AI threat scorer. It is not final HP loss.
+        """
+        return struct.unpack_from('<b',self.raw,5)[0]
+
+    @property
+    def contact_accumulator_delta(self) -> int:
+        """+0x07 s8: main 02080F14 adds to defender work+0x171."""
+        return struct.unpack_from('<b',self.raw,7)[0]
+
+    @property
+    def uses_selector6_special_scale(self) -> bool:
+        """+0x01==6: contact solver reads DAT_0209FB64 and state-dependent scale."""
+        return self.raw[1] == 6
+
+    @property
+    def impact_flash_priority(self) -> int:
+        """+0x02: original contact renderer compares this byte as priority.
+
+        Main FUN_02080F14 chooses the smaller nonzero priority and indexes
+        DAT_0209FEE4 for the impact flash asset (not a whole attack type).
+        """
+        return self.raw[2]
+
+    @property
+    def signed_status_selector(self) -> int:
+        """+0x03 signed status channel selector; zero disables status lane."""
+        return struct.unpack_from('<b', self.raw, 3)[0]
+
+    @property
+    def status_id(self) -> int | None:
+        value = self.signed_status_selector
+        return abs(value) if value else None
+
+    @property
+    def signed_knockback(self) -> tuple[int, int]:
+        """+0x0C,+0x0D signed coefficients, not final world-space movement.
+
+        Main FUN_02080F14 scales x with 0x80 and y with -0x9E, then
+        applies facing, hit outcome and target-state conditionals.
+        """
+        return struct.unpack_from('<bb', self.raw, 0x0C)
+
+    @property
+    def impact_effect_selectors(self) -> tuple[int, int]:
+        """+0x0E/+0x0F s8: first and second visual effect source selectors."""
+        return struct.unpack_from('<bb', self.raw, 0x0E)
+
+    @property
+    def impact_effect_modifier_bytes(self) -> tuple[int, int]:
+        """+0x10/+0x11: original visual-effect dispatcher arguments 7/8.
+
+        They select tables DAT_02171E1C/DAT_02171E0C in ov06 02153CE8.
+        Specific game-facing enum labels remain unavailable.
+        """
+        return self.raw[0x10], self.raw[0x11]
+
+    @property
+    def impact_effect_resolution(self) -> tuple[EffectSelectorResolution, EffectSelectorResolution]:
+        return tuple(resolve_effect_selector(x) for x in self.impact_effect_selectors)
 
     @property
     def word02(self) -> int:
@@ -293,6 +463,11 @@ class RecordTable:
             raise ValueError('Not a 0x20-byte chr/shot table')
         return ShotRecord(self.record(i))
 
+    def effect_record(self, i: int) -> EffectRecord:
+        if self.kind != 'effect' or self.stride != 8:
+            raise ValueError('Not an 8-byte chr/effect table')
+        return EffectRecord(self.record(i))
+
     def col_record(self, i: int) -> ColRecord:
         if self.kind != 'col' or self.stride != 20:
             raise ValueError('Not a 0x14-byte chr/col table')
@@ -313,6 +488,18 @@ class RecordTable:
     def words32(self, i: int) -> tuple[int, ...]:
         r = self.record(i)
         return tuple(u32(r, k) for k in range(0, len(r) - 3, 4))
+
+    def replace_record(self, i: int, raw_record: bytes) -> 'RecordTable':
+        """Replace a single record in a staged copy; original archive stays untouched."""
+        if not self.stride:
+            raise ValueError('Cannot edit an unknown-stride record table')
+        if not 0 <= i < self.count:
+            raise IndexError(i)
+        if len(raw_record) != self.stride:
+            raise ValueError(f'Expected exactly {self.stride} record bytes')
+        start = self.stride * i
+        return RecordTable(self.kind, self.stride,
+                           self.raw[:start] + raw_record + self.raw[start + self.stride:])
 
     def build(self) -> bytes:
         return self.raw

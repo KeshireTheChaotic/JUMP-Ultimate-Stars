@@ -1,0 +1,27 @@
+PASS retime+undo
+PASS marker jump arc
+PASS pursuer rows
+PASS spawn rows + live effect
+PASS nudge+undo
+PASS apply+save before switch
+PASS koma paint+undo
+PASS koma card shape+undo
+PASS koma card from prefix table
+PASS level layers
+PASS mission ↔ stage link + reward undo
+PASS screen layers
+PASS library shows one picture
+PASS screen list has no data archives
+PASS game table view
+PASS no unapplied work at end
+PASS no references workspace
+PASS no unexpected dialogs
+OK: Koma battle/support → original BIN title/ALMT; ALMT → Koma, all read-only
+OK: Bo-bobo native source +0x10 real ALMT fragments at ticks49/53 (3 and 7 updates), 24px spacing; XY explicitly no-contact modeled; original data unchanged
+OK: 46/46 original scene IDs loaded, 28 source-backed BG scenes, 18 runtime-only/indirect scenes with no fabricated BG, all ROM modes indexed and no character placeholders
+OK: source-backed scene editor, arbitrary original NCCL byte edit, safe DataRoot staging, untouched original files, all-42 InfoDeck message edit, DeckCheck/Input/VsCall/JPower code-backed variants
+OK: db_b_01 tick 30 - 7 nominal effects, 05C185 isolated with frame 5 and end 33
+OK: GUI Archive shot/col typed inspectors opened original records
+OK: original normal-action and special button bitmask predicates in Editor Inspector; unnamed action remains unnamed
+OK: 5×4 shape variant dialog → Apply → Save → reload
+GUI_STAGE_BIN_MOB_EXTENDED_FIELDS_PASS: six new compact record groups and staged commits

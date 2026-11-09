@@ -1,0 +1,118 @@
+{
+  "phase": "R08 Phase 10",
+  "original_controller_sha256": "8f67312d9949d7a5192b66cfb58273d58808cbb6603073fffb30dacfd2813feb",
+  "original_method_body_contracts": {
+    "_amt_tables": {
+      "module": "app/lifecycle/effect_sources.py",
+      "callable": "_amt_tables",
+      "original_source_sha256": "ac212f49a5ee3733684b76c34be1978f6c040ed672257eaaf8de42a831ebfd54",
+      "transformed_body_sha256": "d4ae44e72c3589f958469137f5b7a3f5bb5dff995137b0be70314b786856f28d",
+      "original_lines": 14,
+      "injected_formatter": false
+    },
+    "_load_effect_catalog": {
+      "module": "app/lifecycle/effect_sources.py",
+      "callable": "_load_effect_catalog",
+      "original_source_sha256": "b5ccb75f53c50a0dca23d121be9685077ce9c2b54620db9f52bcd7d4535e69f3",
+      "transformed_body_sha256": "a0bc662428a548b5ff62e21da89e2f60733752ecdbf4d57475253927c91542d0",
+      "original_lines": 10,
+      "injected_formatter": false
+    },
+    "_refresh_pursuer_links": {
+      "module": "app/lifecycle/effect_sources.py",
+      "callable": "_refresh_pursuer_links",
+      "original_source_sha256": "676b463730fe467c91d9d8763d1ca15fd700596621483f6cb52e7b15fd127818",
+      "transformed_body_sha256": "cea26c58234e614942eac3253c8813540b3b9f1a8837e60c3981d8dcd9bfe1d5",
+      "original_lines": 14,
+      "injected_formatter": false
+    },
+    "open_effect_move": {
+      "module": "app/lifecycle/effect_sources.py",
+      "callable": "open_effect_move",
+      "original_source_sha256": "b75ced9dbb10254acb7bfea9ce8d0c1d4c758fc06eeb266882773a7e6b3080c8",
+      "transformed_body_sha256": "616a458d06128a304e1cc25a1fb93a65ebd27921543e999c2ef1727818e77d9e",
+      "original_lines": 18,
+      "injected_formatter": true
+    },
+    "_refresh_notetrack_effects": {
+      "module": "app/timeline/presentation_ops.py",
+      "callable": "_refresh_notetrack_effects",
+      "original_source_sha256": "f974255a097854b7ebf8879817a2de126f8300f407f1d8206b622481b0abc6f8",
+      "transformed_body_sha256": "03acd827e1d4af1033666bd4464772663eb6547ddb8df5a83ae73d97e884f24b",
+      "original_lines": 10,
+      "injected_formatter": false
+    },
+    "_motion_changed": {
+      "module": "app/timeline/presentation_ops.py",
+      "callable": "_motion_changed",
+      "original_source_sha256": "194bb44d2a08eed2f52d84aa67086a0726f0b5d521865eaedef5e27c7a9bf3d0",
+      "transformed_body_sha256": "7a2a11dd5cfa899f8d4b1f56a2e0522df7c9bc4ffa0714e08ad0090ea5427c6d",
+      "original_lines": 5,
+      "injected_formatter": false
+    },
+    "_physics_tooltip": {
+      "module": "app/timeline/presentation_ops.py",
+      "callable": "_physics_tooltip",
+      "original_source_sha256": "95df26f4e236290626619a97122754c2f7b53f2e4ca452fb90f7b135dee6242c",
+      "transformed_body_sha256": "a9f08e59bcd8152df0b05d0e6017e6d3a1666f2b0c64d4eef4bd98b02837be1d",
+      "original_lines": 11,
+      "injected_formatter": false
+    },
+    "_sound_tooltip": {
+      "module": "app/timeline/presentation_ops.py",
+      "callable": "_sound_tooltip",
+      "original_source_sha256": "fcffb4630f0e81c0aa5828ffebb1c1f4571ee3f3a8c9bf7d0260639223b51399",
+      "transformed_body_sha256": "6df4958619aeb6f7bdae9219a25eb29cbe9d183767b76cf997b851d8b1cae589",
+      "original_lines": 7,
+      "injected_formatter": false
+    },
+    "_event_tooltip": {
+      "module": "app/timeline/presentation_ops.py",
+      "callable": "_event_tooltip",
+      "original_source_sha256": "bbc7debc515fa4de868aee73d273bfce475d708de505771e5930634c4121e0bc",
+      "transformed_body_sha256": "62b0a8a5eb9f458e362f85f97b58d730113237f664ad297d2a984b9a208e02e0",
+      "original_lines": 14,
+      "injected_formatter": false
+    },
+    "_fmt": {
+      "module": "app/timeline/presentation_ops.py",
+      "callable": "_fmt",
+      "original_source_sha256": "dd5bb74f845e2ec82894ea322ad8004caad72bab9b211985b48af9895c57646d",
+      "transformed_body_sha256": "98cfc72a5fa80be744f4132b47b8faf4773d74e3367036cc34e3e661fd7c0183",
+      "original_lines": 14,
+      "injected_formatter": true
+    },
+    "_fmt_short": {
+      "module": "app/timeline/presentation_ops.py",
+      "callable": "_fmt_short",
+      "original_source_sha256": "a3e84a0a8a01b4104a853f761dbd26a5656230539aeeda7ab6a389e94c332e9b",
+      "transformed_body_sha256": "50620a88d35c74f97960f15dd5e693289d6abc10c653b7e7c87f399976339400",
+      "original_lines": 8,
+      "injected_formatter": true
+    },
+    "refresh_animation": {
+      "module": "app/renderers/viewport_ops.py",
+      "callable": "refresh_animation",
+      "original_source_sha256": "4220f30e9b9b878929eceb401d1ca7d437c1140ede2946ad27f53f3b419d8099",
+      "transformed_body_sha256": "0b5f3d40e96cf124f8d6bfc2442f753456567fb888c67565f0c0066b9ba32faa",
+      "original_lines": 12,
+      "injected_formatter": false
+    },
+    "_frame_image": {
+      "module": "app/renderers/viewport_ops.py",
+      "callable": "_frame_image",
+      "original_source_sha256": "431ffda229af49d4848bb1ba76e429635e4d647d6d4ca1df81ed8a09965e5f6b",
+      "transformed_body_sha256": "bbfc300437a9789fb5c075bb887f4d15e7ae83e3afa5e917a99499921fa1959c",
+      "original_lines": 17,
+      "injected_formatter": false
+    },
+    "fit_timeline": {
+      "module": "app/renderers/viewport_ops.py",
+      "callable": "fit_timeline",
+      "original_source_sha256": "243e6f0e488f6d60cae943e7e5bbf93b3332cca46752e346c94dca438c7a1702",
+      "transformed_body_sha256": "0170b5b489b7dbdc92abc120fca71dd34d631a6fa418c2fc28640f2f2c9e8e39",
+      "original_lines": 8,
+      "injected_formatter": false
+    }
+  }
+}

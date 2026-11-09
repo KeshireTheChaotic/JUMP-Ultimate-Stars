@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "authority": "Original ARM9 navigation graph + source trace + authored evidence",
+  "generated_by": "tools/rebuild_scene_catalog.py",
+  "source_sha256": {
+    "SCREEN_NAV_GRAPH.json": "9cadc551e65f696519132fbf154e45e4641bc540a7cf800e95e9776921b7e8f4",
+    "screen_scene_authoring.json": "953513c4e06b0303b53359b3a7d06a67198f495c394c536898ac4d97b9a0bd1d",
+    "screen_code_sources_v2.json": "861256fb51e129230a0c2e3e9e097435d066933e4f556eea4a6687c3d747d0ca",
+    "screen_runtime_dispatch.json": "0948d5d7dcabae3ab44856e40ae7e3da611030803b75c653577856941e39d2d4"
+  },
+  "outputs_sha256": {
+    "screen_metadata.json": "b1572414abd33c0d1ed741cbff7c92dbe2d598b5c4b7845df3b843c60cbf1eb5",
+    "screen_native_registry.json": "89e046570b6e1a4a79f1ed8b3b1193dfc9b8bd0c6866e2a50bd19c6681fdf936"
+  }
+}

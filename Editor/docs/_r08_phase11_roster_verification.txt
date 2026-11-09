@@ -1,0 +1,18 @@
+test_all_original_card_kinds (test_unified_roster.RosterSourceIntegrity.test_all_original_card_kinds) ... ok
+test_each_battle_form_has_source_backed_moves (test_unified_roster.RosterSourceIntegrity.test_each_battle_form_has_source_backed_moves) ... ok
+test_passive_koma_have_no_battle_move_mapping (test_unified_roster.RosterSourceIntegrity.test_passive_koma_have_no_battle_move_mapping) ... ok
+test_roster_and_original_card_art_resolves (test_unified_roster.RosterSourceIntegrity.test_roster_and_original_card_art_resolves) ... ok
+test_support_actions_are_attached_to_koma_not_invented_moves (test_unified_roster.RosterSourceIntegrity.test_support_actions_are_attached_to_koma_not_invented_moves) ... ok
+test_koma_edits_stay_staged_when_switching_then_save (test_unified_roster.RosterWorkspaceSmoke.test_koma_edits_stay_staged_when_switching_then_save) ... ok
+test_koma_fullheight_and_original_grid_rearrangement (test_unified_roster.RosterWorkspaceSmoke.test_koma_fullheight_and_original_grid_rearrangement) ... ok
+test_moves_tree_navigation_and_sprite_mode (test_unified_roster.RosterWorkspaceSmoke.test_moves_tree_navigation_and_sprite_mode) ... ok
+test_real_treeview_clicks_do_not_loop_or_redecode (test_unified_roster.RosterWorkspaceSmoke.test_real_treeview_clicks_do_not_loop_or_redecode)
+Tk queues selection events asynchronously; direct GUI method tests ... ok
+test_support_and_passive_tree_selection (test_unified_roster.RosterWorkspaceSmoke.test_support_and_passive_tree_selection) ... ok
+test_unified_tab_and_original_koma_art_thumbnail (test_unified_roster.RosterWorkspaceSmoke.test_unified_tab_and_original_koma_art_thumbnail) ... ok
+test_workspace_switches_use_single_roster_tab (test_unified_roster.RosterWorkspaceSmoke.test_workspace_switches_use_single_roster_tab) ... ok
+
+----------------------------------------------------------------------
+Ran 12 tests in 10.703s
+
+OK

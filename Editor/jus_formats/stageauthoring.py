@@ -104,17 +104,24 @@ class StageObjects:
         result = []
         if self.m:
             result.append(StageObject('spawner', 0, 'Item spawning settings'))
+            result.append(StageObject('itemweights', 0, 'Item spawn weight table'))
+            result.append(StageObject('itemjpower', 0, 'J-Power weights & factor'))
+            result.append(StageObject('itemcategory', 0, 'Item categories & raw auxiliary bytes'))
             result += [StageObject('item', i, f'Item spawn #{i}') for i in range(len(self.m.item_candidates))]
             result += [StageObject('symbol', i, f'Item symbol #{i}') for i in range(len(self.m.items.symbols))]
             result += [StageObject('grip', i, f'Grip point #{i}') for i in range(len(self.m.grips))]
             for i, f in enumerate(self.m.floors):
                 result.append(StageObject('floor', i, f'Moving platform #{i} · {sp.FLOOR_MOTION.get(f.motion_kind, (f.motion_kind,))[0]}'))
+                result.append(StageObject('floor-shape', i, f'Platform #{i} source geometry & sprite'))
                 result += [StageObject('path', (i << 8) | j, f'Platform #{i} path step #{j}')
                            for j in range(len(f.path_commands))]
             for i, g in enumerate(self.m.gimmicks):
                 category = 'trigger' if g.type_id in (1, 2, 8, 9, 10) else 'gimmick'
                 result.append(StageObject(category, i, f'{g.label} #{i}'))
+                result.append(StageObject('gimmick-visual', i, f'Gimmick #{i} ALMT variant & raw header'))
         if self.g:
+            result.append(StageObject('stage-tail', 0, 'Stage .bin last 8 raw source bytes'))
+            result += [StageObject('wallhp', i, f'Breakable wall #{i} HP') for i in range(len(self.g.walls))]
             result += [StageObject('collider', i, f'Collider #{i} · {c.type_id} {c.label}')
                        for i, c in enumerate(self.g.collision_boxes)]
             result += [StageObject('conveyor', i, f'Conveyor #{i}') for i in range(len(self.g.conveyors))]
@@ -125,6 +132,18 @@ class StageObjects:
         if kind == 'spawner' and m and m.items:
             return {'interval': m.items.interval, 'item_set': m.items.item_set,
                     'stage_weight': m.items.stage_weight}
+        if kind == 'itemweights' and m and m.items:
+            return {f'weight_{j}':v for j,v in enumerate(m.items.weights)}
+        if kind == 'itemjpower' and m and m.items:
+            out={f'jpower_{j}':v for j,v in enumerate(m.items.jpower_weights)}
+            out['jpower_factor']=m.items.jpower_factor
+            return out
+        if kind == 'itemcategory' and m and m.items:
+            out={}
+            for j,(weight,raw_aux) in enumerate(m.items.categories):
+                out[f'category_{j}_weight']=weight
+                out[f'category_{j}_aux_raw']=raw_aux
+            return out
         if kind in ('item', 'grip') and m:
             v = (m.item_candidates if kind == 'item' else m.grips)[i]
             return {'x': v.x_fixed / 256, 'y': v.y_fixed / 256}
@@ -135,10 +154,24 @@ class StageObjects:
             f = m.floors[i]
             return {'x': f.x, 'y': f.y, 'speed_index': f.speed_index,
                     'motion_kind': f.motion_kind}
+        if kind == 'floor-shape' and m:
+            f=m.floors[i]
+            offx,offy=f.source_signed_offsets
+            return {'source_offset_x_s8':offx,'source_offset_y_s8':offy,
+                    'source_u16_08':f.half_width,'source_u16_0A':f.thickness,
+                    'sprite_variant':f.sprite}
         if kind == 'path' and m:
             f, step = i >> 8, i & 0xff
             command = m.floors[f].path_commands[step]
             return {'x': command.x, 'y': command.y} if command.kind == 0 else {'wait_count': command.count}
+        if kind == 'gimmick-visual' and m:
+            v=m.gimmicks[i]
+            return {'variant':v.sprite,'reserved_u16_0E':v.reserved_header}
+        if kind == 'stage-tail' and g:
+            a,b,c=g.trailing_source_words
+            return {'raw_u16_0':a,'raw_u16_2':b,'raw_u32_4':c}
+        if kind == 'wallhp' and g:
+            return {'health':g.walls[i].health}
         if kind in ('trigger', 'gimmick') and m:
             v = m.gimmicks[i]
             result = {'x': v.x_fixed / 256, 'y': v.y_fixed / 256}
@@ -156,7 +189,7 @@ class StageObjects:
         expected = self.fields(kind, i)
         if set(values) != set(expected):
             raise ValueError('Object fields have changed; reselect and retry')
-        if kind in ('collider', 'conveyor'):
+        if kind in ('collider', 'conveyor', 'stage-tail', 'wallhp'):
             blob = bytearray(self.geo)
             if kind == 'collider':
                 pos = self.g.offsets[2] + 24 * i
@@ -168,9 +201,17 @@ class StageObjects:
                 blob[pos + 0x14] = type_id
                 g = sp.parse_stage_bin(bytes(blob))
                 sync_collider_grid(blob, g, i, g.collision_boxes[i])
-            else:
+            elif kind == 'conveyor':
                 struct.pack_into('<h', blob, self.g.offsets[4] + 8 * i,
                                  _integer(values['speed'], -32768, 32767, 'speed'))
+            elif kind == 'stage-tail':
+                struct.pack_into('<HHI',blob,self.g.offsets[5],
+                    _integer(values['raw_u16_0'],0,65535,'raw_u16_0'),
+                    _integer(values['raw_u16_2'],0,65535,'raw_u16_2'),
+                    _integer(values['raw_u32_4'],0,0xFFFFFFFF,'raw_u32_4'))
+            elif kind == 'wallhp':
+                struct.pack_into('<h',blob,self.g.offsets[3]+20*i+2,
+                    _integer(values['health'],-32768,32767,'health'))
             sp.parse_stage_bin(bytes(blob))
             self.geo = bytes(blob)
         else:
@@ -180,6 +221,23 @@ class StageObjects:
                 struct.pack_into('<H', blob, pos + 6, _integer(values['interval'], 0, 65535, 'interval'))
                 blob[pos + 4] = _integer(values['item_set'], 0, 255, 'item_set')
                 struct.pack_into('<b', blob, pos + 5, _integer(values['stage_weight'], -128, 127, 'stage_weight'))
+            elif kind == 'itemweights':
+                pos=self.m.sections[1].offset
+                for j in range(6):
+                    struct.pack_into('<b',blob,pos+8+j,
+                        _integer(values[f'weight_{j}'],-128,127,f'weight_{j}'))
+            elif kind == 'itemjpower':
+                pos=self.m.sections[1].offset
+                for j in range(6):
+                    struct.pack_into('<b',blob,pos+0x0E+j,
+                        _integer(values[f'jpower_{j}'],-128,127,f'jpower_{j}'))
+                struct.pack_into('<b',blob,pos+0x15,
+                    _integer(values['jpower_factor'],-128,127,'jpower_factor'))
+            elif kind == 'itemcategory':
+                pos=self.m.sections[1].offset
+                for j in range(3):
+                    blob[pos+0x18+4*j]=_integer(values[f'category_{j}_weight'],0,255,f'category_{j}_weight')
+                    blob[pos+0x19+4*j]=_integer(values[f'category_{j}_aux_raw'],0,255,f'category_{j}_aux_raw')
             elif kind in ('item', 'grip'):
                 v = (self.m.item_candidates if kind == 'item' else self.m.grips)[i]
                 for j, key in enumerate(('x', 'y')):
@@ -206,6 +264,19 @@ class StageObjects:
                 else:
                     struct.pack_into('<h', blob, v.offset + 4,
                                      _integer(values['wait_count'], 0, 32767, 'wait_count'))
+            elif kind == 'floor-shape':
+                v=self.m.floors[i]
+                blob[v.offset+2]=_integer(values['source_offset_x_s8'],-128,127,'source_offset_x_s8') & 0xFF
+                blob[v.offset+3]=_integer(values['source_offset_y_s8'],-128,127,'source_offset_y_s8') & 0xFF
+                struct.pack_into('<HH',blob,v.offset+8,
+                    _integer(values['source_u16_08'],0,65535,'source_u16_08'),
+                    _integer(values['source_u16_0A'],0,65535,'source_u16_0A'))
+                blob[v.offset+0x1F]=_integer(values['sprite_variant'],0,255,'sprite_variant')
+            elif kind == 'gimmick-visual':
+                v=self.m.gimmicks[i]
+                blob[v.offset+0x0D]=_integer(values['variant'],0,255,'variant')
+                struct.pack_into('<H',blob,v.offset+0x0E,
+                    _integer(values['reserved_u16_0E'],0,65535,'reserved_u16_0E'))
             elif kind in ('trigger', 'gimmick'):
                 v = self.m.gimmicks[i]
                 for j, key in enumerate(('x', 'y')):

@@ -1,0 +1,34 @@
+{
+  "version": 1,
+  "phase": "R08-inspector-phase7",
+  "original_method_body_contracts": {
+    "_inspect_spawn": {
+      "module": "app/inspectors/events.py",
+      "callable": "_inspect_spawn",
+      "original_lines": 81,
+      "original_sha256": "b4698a89d3355e0356f1023620477e13c3aeb46e34472d1f4a88d04ad09b531a",
+      "transformed_body_sha256": "a41bfca311418eb18d4108fb38221533c291cbd1fa424d44e8949f38313e4cf3"
+    },
+    "_inspect_physics": {
+      "module": "app/inspectors/events.py",
+      "callable": "_inspect_physics",
+      "original_lines": 38,
+      "original_sha256": "9e1c07be3bec0bb991c6614ddcf0c752d8fbdc4ac41b25479750c0ae2374b760",
+      "transformed_body_sha256": "154213611b165d924442e0345491b6b21eb64e73f48ef99eeba42769375f7a47"
+    },
+    "_inspect_sound": {
+      "module": "app/inspectors/events.py",
+      "callable": "_inspect_sound",
+      "original_lines": 62,
+      "original_sha256": "337cf9f8111c21165f3cf5078e75e813789704dd67da8fe6bc6a4663d5a476d4",
+      "transformed_body_sha256": "ac60b2d8855c91e2f5625d910de49bc08f39524dd3b7a20f81cd42573df4bbfe"
+    },
+    "_inspect_notes": {
+      "module": "app/inspectors/events.py",
+      "callable": "_inspect_notes",
+      "original_lines": 19,
+      "original_sha256": "ba929abcc9226510a98f15bc883b3b626658ac82799bf1174b014a8e1bfc0758",
+      "transformed_body_sha256": "d26fca429d765a285d4c543d26cac7fa36426f6b5b30a208a95abaa04d0c39ae"
+    }
+  }
+}

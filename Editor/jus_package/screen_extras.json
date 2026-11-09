@@ -1,0 +1,346 @@
+{
+  "version": 1,
+  "scene": 3,
+  "description": "Source-backed UI extras for TopMenu; static code-linked placement plus explicitly labeled captured-state facts",
+  "provenance": {
+    "original_overlay": "arm9_overlay_0000.bin relocated at 0x0214CD20",
+    "source_code": "functions_layout/arm9_ov00/arm9_ov00_02153cfc.c",
+    "commoninfo_code": "functions_layout/arm9_ov12/arm9_ov12_021bcf1c.c",
+    "snapshot_name": "JUS.ml2",
+    "snapshot_sha256": "870279eb832011f18b3bbdd364f6963716848ecec687979d45848cb633303aba"
+  },
+  "elements": [
+    {
+      "id": "label:0",
+      "name": "0: bottom menu label",
+      "kind": "sprite-label",
+      "origin": [
+        36,
+        70
+      ],
+      "resource_archive": "topmenu/topmenu.aar|topmenu/top_button00.aar",
+      "sprite": "top_button00.dtx",
+      "animation": "top_button00.amt",
+      "move_id": "0x00500018",
+      "engine": "main",
+      "allow_layout_edit": false,
+      "source": "functions_layout/arm9_ov00/arm9_ov00_02153cfc.c#L311-L319",
+      "layout_evidence": "Original ARM9 constructor / original overlay table",
+      "screen_evidence": "Engine+POWCNT1 bit15=0 (main=>Bottom;sub=>Top)",
+      "button_id": 0,
+      "record_address": "0x0216003C",
+      "source_add_y": 20
+    },
+    {
+      "id": "label:1",
+      "name": "1: bottom menu label",
+      "kind": "sprite-label",
+      "origin": [
+        92,
+        70
+      ],
+      "resource_archive": "topmenu/topmenu.aar|topmenu/top_button00.aar",
+      "sprite": "top_button00.dtx",
+      "animation": "top_button00.amt",
+      "move_id": "0x00500019",
+      "engine": "main",
+      "allow_layout_edit": false,
+      "source": "functions_layout/arm9_ov00/arm9_ov00_02153cfc.c#L311-L319",
+      "layout_evidence": "Original ARM9 constructor / original overlay table",
+      "screen_evidence": "Engine+POWCNT1 bit15=0 (main=>Bottom;sub=>Top)",
+      "button_id": 1,
+      "record_address": "0x02160054",
+      "source_add_y": 20
+    },
+    {
+      "id": "label:2",
+      "name": "2: bottom menu label",
+      "kind": "sprite-label",
+      "origin": [
+        148,
+        70
+      ],
+      "resource_archive": "topmenu/topmenu.aar|topmenu/top_button00.aar",
+      "sprite": "top_button00.dtx",
+      "animation": "top_button00.amt",
+      "move_id": "0x0050001A",
+      "engine": "main",
+      "allow_layout_edit": false,
+      "source": "functions_layout/arm9_ov00/arm9_ov00_02153cfc.c#L311-L319",
+      "layout_evidence": "Original ARM9 constructor / original overlay table",
+      "screen_evidence": "Engine+POWCNT1 bit15=0 (main=>Bottom;sub=>Top)",
+      "button_id": 2,
+      "record_address": "0x0216006C",
+      "source_add_y": 20
+    },
+    {
+      "id": "label:3",
+      "name": "3: bottom menu label",
+      "kind": "sprite-label",
+      "origin": [
+        204,
+        70
+      ],
+      "resource_archive": "topmenu/topmenu.aar|topmenu/top_button00.aar",
+      "sprite": "top_button00.dtx",
+      "animation": "top_button00.amt",
+      "move_id": "0x0050001B",
+      "engine": "main",
+      "allow_layout_edit": false,
+      "source": "functions_layout/arm9_ov00/arm9_ov00_02153cfc.c#L311-L319",
+      "layout_evidence": "Original ARM9 constructor / original overlay table",
+      "screen_evidence": "Engine+POWCNT1 bit15=0 (main=>Bottom;sub=>Top)",
+      "button_id": 3,
+      "record_address": "0x02160084",
+      "source_add_y": 20
+    },
+    {
+      "id": "label:4",
+      "name": "4: bottom menu label",
+      "kind": "sprite-label",
+      "origin": [
+        36,
+        122
+      ],
+      "resource_archive": "topmenu/topmenu.aar|topmenu/top_button00.aar",
+      "sprite": "top_button00.dtx",
+      "animation": "top_button00.amt",
+      "move_id": "0x0050001C",
+      "engine": "main",
+      "allow_layout_edit": false,
+      "source": "functions_layout/arm9_ov00/arm9_ov00_02153cfc.c#L311-L319",
+      "layout_evidence": "Original ARM9 constructor / original overlay table",
+      "screen_evidence": "Engine+POWCNT1 bit15=0 (main=>Bottom;sub=>Top)",
+      "button_id": 4,
+      "record_address": "0x0216009C",
+      "source_add_y": 20
+    },
+    {
+      "id": "label:5",
+      "name": "5: bottom menu label",
+      "kind": "sprite-label",
+      "origin": [
+        92,
+        122
+      ],
+      "resource_archive": "topmenu/topmenu.aar|topmenu/top_button00.aar",
+      "sprite": "top_button00.dtx",
+      "animation": "top_button00.amt",
+      "move_id": "0x0050001D",
+      "engine": "main",
+      "allow_layout_edit": false,
+      "source": "functions_layout/arm9_ov00/arm9_ov00_02153cfc.c#L311-L319",
+      "layout_evidence": "Original ARM9 constructor / original overlay table",
+      "screen_evidence": "Engine+POWCNT1 bit15=0 (main=>Bottom;sub=>Top)",
+      "button_id": 5,
+      "record_address": "0x021600B4",
+      "source_add_y": 20
+    },
+    {
+      "id": "label:6",
+      "name": "6: bottom menu label",
+      "kind": "sprite-label",
+      "origin": [
+        148,
+        122
+      ],
+      "resource_archive": "topmenu/topmenu.aar|topmenu/top_button00.aar",
+      "sprite": "top_button00.dtx",
+      "animation": "top_button00.amt",
+      "move_id": "0x0050001E",
+      "engine": "main",
+      "allow_layout_edit": false,
+      "source": "functions_layout/arm9_ov00/arm9_ov00_02153cfc.c#L311-L319",
+      "layout_evidence": "Original ARM9 constructor / original overlay table",
+      "screen_evidence": "Engine+POWCNT1 bit15=0 (main=>Bottom;sub=>Top)",
+      "button_id": 6,
+      "record_address": "0x021600CC",
+      "source_add_y": 20
+    },
+    {
+      "id": "label:7",
+      "name": "7: bottom menu label",
+      "kind": "sprite-label",
+      "origin": [
+        204,
+        122
+      ],
+      "resource_archive": "topmenu/topmenu.aar|topmenu/top_button00.aar",
+      "sprite": "top_button00.dtx",
+      "animation": "top_button00.amt",
+      "move_id": "0x0050001F",
+      "engine": "main",
+      "allow_layout_edit": false,
+      "source": "functions_layout/arm9_ov00/arm9_ov00_02153cfc.c#L311-L319",
+      "layout_evidence": "Original ARM9 constructor / original overlay table",
+      "screen_evidence": "Engine+POWCNT1 bit15=0 (main=>Bottom;sub=>Top)",
+      "button_id": 7,
+      "record_address": "0x021600E4",
+      "source_add_y": 20
+    },
+    {
+      "id": "right-jp",
+      "name": "Right decorative/action glyph",
+      "kind": "decor-button",
+      "origin": [
+        240,
+        160
+      ],
+      "resource_archive": "topmenu/topmenu.aar|topmenu/top_jp.aar",
+      "sprite": "top_jp.dtx",
+      "animation": "top_jp.amt",
+      "move_id": "0x00530000",
+      "engine": "main",
+      "allow_layout_edit": false,
+      "source": "functions_layout/arm9_ov00/arm9_ov00_02153cfc.c#L339-L389",
+      "layout_evidence": "Original ARM9 constructor / original overlay table",
+      "screen_evidence": "Engine+POWCNT1 bit15=0 (main=>Bottom;sub=>Top)",
+      "record_address": "0x02160024"
+    },
+    {
+      "id": "right-back",
+      "name": "B / Back",
+      "kind": "decor-button",
+      "origin": [
+        255,
+        191
+      ],
+      "resource_archive": "Common/button.aar",
+      "sprite": "button.dtx",
+      "animation": "button.amt",
+      "move_id": "0x00510000",
+      "engine": "main",
+      "allow_layout_edit": false,
+      "source": "functions_layout/arm9_ov00/arm9_ov00_02153cfc.c#L339-L389",
+      "layout_evidence": "Original ARM9 constructor / original overlay table",
+      "screen_evidence": "Engine+POWCNT1 bit15=0 (main=>Bottom;sub=>Top)",
+      "record_address": "0x02160030"
+    },
+    {
+      "id": "info-icon",
+      "name": "Information icon/title (captured mode 0)",
+      "kind": "information-icon",
+      "origin": [
+        10,
+        24
+      ],
+      "resource_archive": "info/info.aar|info/icon.aar",
+      "sprite": "icon.dtx",
+      "animation": "icon.amt",
+      "move_id": "0x00700000",
+      "engine": "sub",
+      "allow_layout_edit": false,
+      "source": "functions_layout/arm9_ov12/arm9_ov12_021bd8b8.c#L12-L26; functions_layout/arm9_ov12/arm9_ov12_021bda2c.c#L5-L19",
+      "layout_evidence": "Original ARM9 constructor / original overlay table",
+      "screen_evidence": "Engine+POWCNT1 bit15=0 (main=>Bottom;sub=>Top)",
+      "state_condition": "Icon record 0 in supplied save; final entry animation position x=10,y=24",
+      "sprite_state_evidence": "Captured 2026-11-08 JUS.ml2 mode0; record index for other modes not yet mapped"
+    },
+    {
+      "id": "speech-box",
+      "name": "Explanation speech box",
+      "kind": "information-speech",
+      "origin": [
+        128,
+        96
+      ],
+      "resource_archive": "info/info.aar|info/mess.aar",
+      "sprite": "hukidasi.dtx",
+      "animation": "hukidasi.amt",
+      "move_id": "0x00701000",
+      "engine": "sub",
+      "allow_layout_edit": false,
+      "source": "functions_layout/arm9_ov12/arm9_ov12_021bcf1c.c#L219-L234; functions_layout/arm9_ov12/arm9_ov12_021bd800.c#L4-L30",
+      "layout_evidence": "Original ARM9 constructor / original overlay table",
+      "screen_evidence": "Engine+POWCNT1 bit15=0 (main=>Bottom;sub=>Top)",
+      "state_condition": "Fully entered callback: x=128, y=96; animates from y=192 at -12px/frame"
+    }
+  ],
+  "snapshot": {
+    "id": "captured",
+    "label": "Captured melonDS main menu (2026-11-08)",
+    "scene_id": 3,
+    "selected_button": 0,
+    "series_code": "jump",
+    "commoninfo_icon_index": 0,
+    "disabled_icon_moves": {
+      "3": "0x00500014"
+    },
+    "disabled_label_moves": {
+      "3": "0x00500020"
+    },
+    "chara_count": 2,
+    "character_x_pixels": [
+      16,
+      88
+    ],
+    "deck_caption": "スターターデッキ",
+    "deck_caption_source": "TopMenuChara 0x02155CB4 / callback 0x021566C8, ComicDeck+0x5FE; captured RAM",
+    "deck_caption_origin": [
+      0,
+      184
+    ],
+    "pending_dynamic_sprite": "Characters are created by CharaData::CharaData_Create and driven by runtime state; sprite frames/animation still need dynamic tracing",
+    "characters": [
+      {
+        "slot": 0,
+        "character_index": 12,
+        "koma_size": 3,
+        "roster_name": "op_b_01",
+        "base_resource_id": "0x0A4100",
+        "live_x": 16,
+        "live_y": null,
+        "engine": "main",
+        "lcd": "Bottom",
+        "resource_archive": "chr/ChrArc.aar|chr/op_b_01.aar",
+        "sprite_member": "op_b_01_.dtx",
+        "animation_member": "op_b_01.amt",
+        "source_texture_archive": "chr/op_b_01c.aar",
+        "source_texture_member": "op_b_01.dig",
+        "source": "functions_layout/arm9_main/arm9_main_02074580.c; functions_layout/arm9_main/arm9_main_02074728.c; functions_layout/arm9_ov00/arm9_ov00_02156378.c; functions_layout/arm9_ov00/arm9_ov00_021561d0.c",
+        "live_index_evidence": "JUS.ml2: CharaData +0x8C=3 (battle 3-koma), +0x8D=12 (roster index). X is slot +0x18/8; exact rendered Y/pose selected by live callbacks.",
+        "render_status": "Original source art and character identity traced; active ALMT pose, scaling and vertical placement require dynamic renderer state."
+      },
+      {
+        "slot": 1,
+        "character_index": 20,
+        "koma_size": 3,
+        "roster_name": "na_b_01",
+        "base_resource_id": "0x060100",
+        "live_x": 88,
+        "live_y": null,
+        "engine": "main",
+        "lcd": "Bottom",
+        "resource_archive": "chr/ChrArc.aar|chr/na_b_01.aar",
+        "sprite_member": "na_b_01_.dtx",
+        "animation_member": "na_b_01.amt",
+        "source_texture_archive": "chr/na_b_01c.aar",
+        "source_texture_member": "na_b_01.dig",
+        "source": "functions_layout/arm9_main/arm9_main_02074580.c; functions_layout/arm9_main/arm9_main_02074728.c; functions_layout/arm9_ov00/arm9_ov00_02156378.c; functions_layout/arm9_ov00/arm9_ov00_021561d0.c",
+        "live_index_evidence": "JUS.ml2: CharaData +0x8C=3 (battle 3-koma), +0x8D=20 (roster index). X is slot +0x18/8; exact rendered Y/pose selected by live callbacks.",
+        "render_status": "Original source art and character identity traced; active ALMT pose, scaling and vertical placement require dynamic renderer state."
+      }
+    ],
+    "series_bg_code": "jp",
+    "series_text_code": "jump"
+  },
+  "other_pending": [
+    {
+      "resource_archive": "topmenu/topmenu.aar|topmenu/galaxy_obj.aar",
+      "move_ids": [
+        "0x00520000",
+        "0x00520001",
+        "0x00520002",
+        "0x00520003"
+      ],
+      "source": "functions_layout/arm9_ov00/arm9_ov00_02153cfc.c#L399-L437",
+      "note": "Offscreen initial positions and animated transforms; not safe to project as static."
+    },
+    {
+      "archive": "chr/ChrArc.aar",
+      "render_font": "font/js8font.aft",
+      "source": "functions_layout/arm9_ov00/arm9_ov00_02155cb4.c; functions_layout/arm9_ov00/arm9_ov00_02156378.c",
+      "note": "Character slot count, deck selection and CharaData animations depend on runtime game state."
+    }
+  ]
+}

@@ -38,21 +38,27 @@ Requirements:
    what the new character does in that move, matched to the template
    move's timing and the cells it shows.
 4. Write an **art plan** (`art_plan.md` in the work folder) before making
-   any art. It has the palette (≤15 colours per sheet), the silhouette and
+   any art. Follow the [character art bible](../../docs/CHARFORGE_ART_BIBLE.md)
+   and use each sheet's palette budget from the brief. Record the silhouette and
    proportions against the reference frames, and per sprite key the pose of
    every frame. Effects are listed separately, with which effect move uses
-   which cells.
-5. Make the art: every required `art/<key>/NNN.png` / `atlas.png` at the
-   reference size, with the anchor where the reference has it, a transparent
-   background, hard pixel edges and ≤15 colours. Run `draft` first so every
-   file exists and the build is testable. Then replace the drafts with final
-   frames. Use an image tool if one is connected, otherwise produce pixel
-   art programmatically, and say which. Never edit shared `efc_*` keys.
+   which cells. Include the target's Koma members and 48×48 panel layouts.
+5. Make the art: run `generate` for a pose-complete, **procedural** source-guided
+   baseline (or `draft` to use original recoloured art). For the character's
+   final identity, replace those files with actual authored PNGs. Produce every
+   required `art/<key>/NNN.png` / `atlas.png`, plus each
+   `art/koma/<key>/NNN.png` at 48×48. The anchor remains where the source has
+   it. Use a transparent background, hard edges, and at most 15 opaque colours
+   for 4bpp or three for 2bpp. Use an image
+   tool if one is connected, otherwise produce pixel art programmatically, and
+   say which. Leave shared `efc_*` keys and mixed 2bpp/4bpp atlases as provided.
 6. `build`, then `validate`. Fix every error and rebuild until validate
    reports no errors. Explain every warning.
-7. Make a review sheet: for each sprite key, a contact sheet of the new
-   frames next to the reference frames, rendered from the built package.
-   Show it to me.
+7. Run `review <work>` to build `review/index.html`, an inspectable
+   original-vs-authored gallery for every frame, effect atlas and Koma panel.
+   Read the built package's `ALMT_LINKS.json` and verify the exact resource-ID,
+   texture, frame and GenerateID links. Show actual images, never fabricated
+   application screenshots.
 8. Tell me how to import: File → Import package → the package folder →
    Save. Give the display-name command (`names <slot> "<name>"`), but don't
    run it until I confirm. Remind me to test in melonDS with a fresh save.

@@ -1,0 +1,15 @@
+{
+  "authority": "pre-R08 git HEAD EditorApp formatting plus original ChrBin archive records",
+  "records": {
+    "shot": 1258,
+    "col": 2837
+  },
+  "files": {
+    "shot": 184,
+    "col": 281
+  },
+  "sha256": {
+    "shot": "fb534755cd56de7023a87e745acd15906c940aaf00bebb0d9aef9919e215e5c8",
+    "col": "d3e58af67f2644f946bfd0647e7c225b2030f568dc28151cb5977fa6d2205f0f"
+  }
+}
