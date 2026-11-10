@@ -17,7 +17,8 @@ Version 1 (single image)::
 Version 2, mode 0x40 (character frame stream)::
 
     +0x0C+32*banks  u32 max_frame_bytes   (largest decompressed frame)
-    table           u32 frame_count, {u16 offset_words, u16 packed_size}[frame_count]
+    table           u16 frame_count, u16 reserved, then
+                    {u16 offset_words, u16 packed_size}[frame_count]
                     offset_words is relative to the table start
     frames          LZ10 streams, 4-byte aligned
     w08 = frame_count + 1 (table words), w0A = words after the palettes,
@@ -66,6 +67,7 @@ class DsigFile:
     max_frame_bytes: int = 0
     frames: list[bytes] = field(default_factory=list)          # compressed LZ10 streams
     frame_tail: bytes = b''            # bytes after the last frame (exactness)
+    frame_table_reserved: int = 0      # native 16-bit word after v2 frame count
     _cache: dict = field(default_factory=dict, repr=False, compare=False)
 
     # ------------------------------------------------------------- palettes
@@ -138,7 +140,11 @@ class DsigFile:
             raise ValueError(f'Unsupported DSIG v2 mode {mode:#x}')
         obj.max_frame_bytes = u32(blob, pal_end)
         table = pal_end + 4
-        count = u32(blob, table)
+        # The native FFL4 reader (port/src/Jus.Game/Assets/AlFormats.cs)
+        # uses u16 here. The following halfword is preserved verbatim;
+        # all 248 original v2/0x40 files have zero in that slot.
+        count = u16(blob, table)
+        obj.frame_table_reserved = u16(blob, table + 2)
         if table + 4 + 4 * count > len(blob):
             raise ValueError('Truncated DSIG frame table')
         end = table + 4 + 4 * count
@@ -170,7 +176,11 @@ class DsigFile:
         out += p32(self.max_frame_bytes)
         table = len(out)
         count = len(self.frames)
-        out += p32(count) + bytes(4 * count)
+        if count >= 0xFFFF:
+            raise ValueError('DSIG character-stream frame count exceeds u16 header limit')
+        if not 0 <= self.frame_table_reserved <= 0xFFFF:
+            raise ValueError('DSIG frame table reserved word must fit u16')
+        out += p16(count) + p16(self.frame_table_reserved) + bytes(4 * count)
         for i, data in enumerate(self.frames):
             pad_to(out, 4)
             rel = (len(out) - table) // 4
@@ -192,6 +202,7 @@ class DsigFile:
              'palettes': [[f'{v:04X}' for v in bank] for bank in self.palettes]}
         if self.version == 2:
             d['frame_count'] = len(self.frames)
+            d['frame_table_reserved'] = f'0x{self.frame_table_reserved:04X}'
             d['max_frame_bytes'] = self.max_frame_bytes
         return d
 

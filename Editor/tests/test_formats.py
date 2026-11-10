@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import os
 import random
+import struct
 import sys
 import unittest
 from pathlib import Path
@@ -215,6 +216,166 @@ class Sprites(unittest.TestCase):
         fr = dstx.Frame([dstx.Piece(0, 0, 0, 0x0000), dstx.Piece(0, 8, 0, 0x0000)])
         self.assertEqual(sprite.charstream_slots(fr), [0, 64])
         self.assertEqual(dstx.SHAPES[0], (8, 8))
+
+
+class NativeRoundtripRouting(unittest.TestCase):
+    def test_dispatch_keeps_sprite_koma_and_panel_layouts_distinct(self):
+        from tests.roundtrip_scan import decode_dstx
+        from tests.test_suite_formats import make_koma
+        from tests.test_dstx_layout_0506 import LayoutTables
+
+        samples = [
+            (dstx.DstxFile(1, 0x03, [dstx.Frame()], embedded=b'DSIG' + bytes(12)).build(),
+             'sprite'),
+            (dstx.DstxFile(1, 0x83, [dstx.Frame()], tail=bytes(4)).build(),
+             'sprite'),
+            (make_koma(), 'koma'),
+            (LayoutTables().make(5), 'panel-layout'),
+            (LayoutTables().make(6), 'panel-layout'),
+        ]
+        for blob, expected in samples:
+            with self.subTest(flag=blob[5]):
+                parsed, family = decode_dstx(blob)
+                self.assertEqual(family, expected)
+                self.assertEqual(parsed.build(), blob)
+
+
+# Native ALMT binder and DSTX/DSIG port reconciliation (ARM9-backed).
+def interpolated_motion() -> almt.AlmtFile:
+    f = almt.AlmtFile(node_names=['SP01'])
+    for name in ('TextureID', 'Alpha', 'BoundsIndex'):
+        f.field_index(name)
+    f.moves.append(almt.Move(0x500000, 20, 60, 0, [
+        almt.NodeAnim([
+            almt.Track('TextureID', False, value=0x500000),
+            almt.Track('Alpha', True, keys=[
+                almt.Key(0, 0x1000), almt.Key(10, 0x0800)],
+                interpolator=0x494C, offset_low_bit=1),
+            almt.Track('BoundsIndex', True, keys=[
+                almt.Key(0, 0), almt.Key(4, 2)]),
+        ])
+    ]))
+    return f
+
+
+class NativeAlmtInterpolator(unittest.TestCase):
+    def test_on_disk_reference_and_selector_before_keys(self):
+        raw = interpolated_motion().build()
+        motion = struct.unpack_from('<I', raw, 0x10)[0]
+        chunk = motion - 0x20 + struct.unpack_from('<H', raw, motion + 8)[0]
+        self.assertEqual((raw[chunk], raw[chunk + 1]), (1, 2))
+        self.assertEqual(raw[chunk + 2:chunk + 5], bytes((0, 0x81, 2)))
+        offsets_at = chunk + 2 + 4
+        rel = struct.unpack_from('<H', raw, offsets_at + 2)[0]
+        self.assertEqual(rel & 1, 1)
+        key_ptr = chunk + (rel & ~1)
+        self.assertEqual(struct.unpack_from('<H', raw, key_ptr - 2)[0], 0x494C)
+        self.assertEqual(struct.unpack_from('<H', raw, key_ptr)[0], 0)
+
+    def test_parse_build_edit_and_json_preserve_explicit_selector(self):
+        original = interpolated_motion().build()
+        parsed = almt.parse(original)
+        self.assertEqual(parsed.build(), original)
+        tr = parsed.moves[0].nodes[0].track('Alpha')
+        self.assertEqual(tr.interpolator, 0x494C)
+        self.assertEqual(tr.offset_low_bit, 1)
+        self.assertFalse(tr.opaque)
+        self.assertEqual([(k.tick, k.value) for k in tr.keys],
+                         [(0, 0x1000), (10, 0x0800)])
+        self.assertEqual(almt.from_dict(almt.to_dict(parsed)).build(), original)
+        tr.keys[1].value = 0x0400
+        tr.touch()
+        modified = parsed.build()
+        parsed_again = almt.parse(modified)
+        changed = parsed_again.moves[0].nodes[0].track('Alpha')
+        self.assertEqual(changed.interpolator, 0x494C)
+        self.assertEqual(changed.offset_low_bit, 1)
+        self.assertEqual(changed.keys[1].value, 0x0400)
+        self.assertEqual(parsed_again.moves[0].nodes[0].track('BoundsIndex').keys[1].value, 2)
+        self.assertEqual(almt.from_dict(almt.to_dict(parsed_again)).build(), modified)
+
+    def test_static_field_index_128_does_not_imply_interpolator(self):
+        f = almt.AlmtFile(node_names=['SP01'])
+        for i in range(128):
+            f.field_index(f'Unused{i:03d}')
+        f.field_index('TextureID')
+        f.moves.append(almt.Move(0x500000, 3, 60, 0, [
+            almt.NodeAnim([almt.Track('TextureID', False, value=0x123456)])
+        ]))
+        raw = f.build()
+        parsed = almt.parse(raw)
+        self.assertEqual(parsed.moves[0].nodes[0].tracks[0].value, 0x123456)
+        self.assertIsNone(parsed.moves[0].nodes[0].tracks[0].interpolator)
+        self.assertEqual(almt.from_dict(almt.to_dict(parsed)).build(), raw)
+
+    def test_reject_invalid_explicit_interpolator_metadata(self):
+        f = interpolated_motion()
+        tr = f.moves[0].nodes[0].track('Alpha')
+        tr.interpolator = 0x10000
+        with self.assertRaisesRegex(ValueError, 'u16'):
+            f.build()
+        tr.interpolator = 0x494C
+        tr.offset_low_bit = 2
+        with self.assertRaisesRegex(ValueError, 'offset low bit'):
+            f.build()
+        f.moves[0].nodes[0].track('TextureID').interpolator = 0
+        with self.assertRaisesRegex(ValueError, 'requires a keyed'):
+            f.build()
+
+    def test_reject_keyed_property_index_above_native_limit(self):
+        f = almt.AlmtFile(node_names=['SP01'])
+        for i in range(128):
+            f.field_index(f'Unused{i:03d}')
+        f.field_index('Alpha')
+        f.moves.append(almt.Move(1, 4, 60, 0,
+                                 [almt.NodeAnim([almt.Track('Alpha', True,
+                                   keys=[almt.Key(0, 0x1000)])])]))
+        with self.assertRaisesRegex(ValueError, '7-bit'):
+            f.build()
+
+
+class NativeSpriteReferences(unittest.TestCase):
+    def test_dstx_83_external_texture_id_preserves_native_tail(self):
+        sprite = dstx.DstxFile(2, 0x83, [
+            dstx.Frame([dstx.Piece(0, -4, -8, 0x0000)])
+        ], tail=struct.pack('<I', 0x084100))
+        original = sprite.build()
+        parsed = dstx.parse(original)
+        self.assertEqual(parsed.external_texture_id, 0x084100)
+        self.assertEqual(parsed.to_dict()['external_texture_id'], '0x00084100')
+        self.assertEqual(parsed.to_dict()['tail'], '00410800')
+        self.assertEqual(parsed.build(), original)
+
+    def test_embedded_sprite_does_not_expose_external_reference(self):
+        sprite = dstx.DstxFile(1, 0x03, [dstx.Frame()], embedded=b'DSIG' + bytes(12))
+        parsed = dstx.parse(sprite.build())
+        self.assertIsNone(parsed.external_texture_id)
+        self.assertNotIn('external_texture_id', parsed.to_dict())
+
+    def test_dsig_native_character_stream_has_u16_count_and_reserved_word(self):
+        img = dsig.DsigFile(2, 0x40, 4, palettes=[[0] * 16])
+        img.frames.append(b'')
+        img.set_frame_data(0, bytes(64))
+        raw = img.build()
+        table = 12 + 32 + 4
+        self.assertEqual(struct.unpack_from('<HH', raw, table), (1, 0))
+        self.assertEqual(dsig.parse(raw).build(), raw)
+        self.assertEqual(dsig.parse(raw).frame_data(0), bytes(64))
+
+    def test_dsig_frame_table_reserved_halfword_does_not_change_count(self):
+        img = dsig.DsigFile(2, 0x40, 4, palettes=[[0] * 16])
+        img.frames.append(b'')
+        img.set_frame_data(0, bytes([1] * 64))
+        img.frame_table_reserved = 0xBEEF
+        raw = img.build()
+        self.assertEqual(struct.unpack_from('<HH', raw, 12 + 32 + 4),
+                         (1, 0xBEEF))
+        parsed = dsig.parse(raw)
+        self.assertEqual(len(parsed.frames), 1)
+        self.assertEqual(parsed.frame_table_reserved, 0xBEEF)
+        self.assertEqual(parsed.frame_data(0), bytes([1] * 64))
+        self.assertEqual(parsed.to_dict()['frame_table_reserved'], '0xBEEF')
+        self.assertEqual(parsed.build(), raw)
 
 
 if __name__ == '__main__':

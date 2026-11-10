@@ -611,3 +611,71 @@ Reproducible scans: `tools/audit_full_game_archive_decoding.py` and
 
 Decoded source-record structure is not evidence of gameplay-perfect runtime
 simulation. All original game archives, ROM and Ghidra exports remain unchanged.
+
+## Native codec reconciliation — 2026-11-10
+
+Compared the current Editor codecs with the native-port parsers
+(`port/src/Jus.Game/Assets/SpriteFormats.cs`, `AlFormats.cs`, and
+`AlodFile.cs`) and original ARM9 functions, rather than inferring
+layouts from screenshot appearance. The original `data/` tree was
+read-only throughout.
+
+| Family | Source corpus | Result |
+| --- | ---: | --- |
+| ALMT | 1,547 files; 13,238 motions; 63,718 tracks | All existing tracks retain native byte and JSON round-trip |
+| ALOD | 1,247 | Byte-exact original data; parent descriptor remains explicitly bounded |
+| DSIG 0x10 / 0x11 / 0x20 / 0x50 / 0x40 | 2,291 / 514 / 387 / 1,669 / 248 | All 5,109 DSIGs byte-exact, including 6 loose files |
+| DSTX sprite 0x03 / 0x83 | 2,658 / 456 | All byte-exact; 0x83 stores a 4-byte external texture resource ID |
+| DSTX Koma 0x04 | 898 | Byte-exact with the Koma-specific codec |
+| DSTX panel layout 0x05 / 0x06 | 3 / 47 | Byte-exact with the separate panel tilemap decoder |
+
+The Editor now supports the **optional ALMT interpolator encoding** read by
+ARM9 main `0x0201F11C` and `0x0201F6F4`: high bit of a **keyed**
+field reference selects a u16 interpolator identifier immediately before
+the first key; the native resolver masks bit 0 of the relative offset
+(`0x0201F6BC`/`0x0201F6F4`). The new `Track.interpolator` and
+`Track.offset_low_bit` metadata round-trip through ALMT JSON and
+survive edits. A static field reference may have index >=128; only keyed
+references use bit 7 as a flag. **None of the 63,718 original tracks**
+uses the interpolator flag or odd offset: original step/held-key behavior
+has not been changed. This is a native serialization feature, **not**
+an attempt to simulate runtime easing in the preview.
+
+For DSTX 0x83, `DstxFile.external_texture_id` exposes the resource
+word as read-only metadata without modifying `tail`, the original
+source bytes. All 456 original references are nonzero, 24-bit IDs in
+exactly four bytes. Existing source-backed texture resolution is
+unchanged. DSIG v2/0x40 frame streams now parse the native u16
+frame count plus a separately preserved u16 header word (rather than
+interpreting the two together as a u32 count). The second word is zero
+in all 248 original streams (16,849 frames); its runtime semantics
+remain unknown, and nonzero values are preserved without being treated
+as additional frames.
+
+The original `tests/roundtrip_scan.py` previously misreported 948
+valid Koma/panel-layout DSTX sources as decoder failures. It now
+dispatches subtype 0x04 to `koma.parse`, 0x05/0x06 to
+`dstx.parse_layout`, and 0x03/0x83 to `dstx.parse`. It follows each
+original embedded DSIG at the DSTX data-end pointer and offers a
+`--strict` failure exit on actual format errors or mismatches.
+The strict scan has **4,062/4,062 DSTX, 5,103/5,103 archived DSIG,
+1,547/1,547 ALMT and 1,247/1,247 ALOD** byte-exact outcomes;
+there are no exceptions or nonidentical files.
+
+Regression cases were added to the tracked `tests/test_formats.py`:
+explicit interpolator and odd-offset wire bytes, JSON and edited
+round-trip, static high field references, invalid selector rejection,
+external 0x83 resource ID preservation, stream table count/reserved
+word, and DSTX-family dispatch. Reproduce the original-data scan with
+`py -3 tests/roundtrip_scan.py --strict`.
+Full unit-suite verification: **617 tests, OK (2 skipped)** on Windows;
+pre-existing Pillow unclosed-file and Tk after-destroy warnings remain.
+
+**Remaining bounds:** native interpolator evaluation of new authored
+tracks is not implemented in the preview; DSTX 0x05/0x06 screen-space
+placement remains dependent on untraced scene code; and runtime-dependent
+sprite geometry is outside the Editor's native-data authoring scope.
+No gameplay behavior or invented rendering is claimed by these tests.
+
+Character Forge is excluded from the recommended next-work roadmap;
+its implementation was not modified or deleted in this reconciliation.

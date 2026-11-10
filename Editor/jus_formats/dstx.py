@@ -29,7 +29,7 @@ from __future__ import annotations
 import struct
 from dataclasses import dataclass, field
 
-from .binary import p16, pad_to, u16
+from .binary import p16, pad_to, u16, u32
 
 MAGIC = b'DSTX'
 EMPTY_BOUNDS = (0x7FFF, 0x7FFF, -0x7FFF, -0x7FFF)
@@ -117,6 +117,16 @@ class DstxFile:
     tail: bytes = b''                  # bytes after data_end when nothing embedded
     frame_refs: list[int] | None = None  # original offset-table sharing (exactness)
 
+    @property
+    def external_texture_id(self) -> int | None:
+        """Source resource ID for 0x83 banks, not an editable sprite-frame field.
+
+        FUN_020433EC / FUN_020165DC resolve this little-endian word at the
+        DSTX data-end pointer. All 456 original 0x83 banks have a 4-byte,
+        nonzero 24-bit reference. Keep the original tail bytes intact.
+        """
+        return u32(self.tail, 0) if self.flags == 0x83 and len(self.tail) >= 4 else None
+
     @classmethod
     def parse(cls, blob: bytes) -> 'DstxFile':
         if blob[:4] != MAGIC or len(blob) < 10:
@@ -199,6 +209,8 @@ class DstxFile:
     def to_dict(self) -> dict:
         return {'format': 'DSTX', 'version': self.version, 'flags': f'0x{self.flags:02X}',
                 'tail': self.tail.hex(),
+                **({'external_texture_id': f'0x{self.external_texture_id:08X}'}
+                   if self.external_texture_id is not None else {}),
                 'frames': [{'pieces': [p.to_list() for p in fr.pieces],
                             **({'bounds': list(fr.bounds)} if fr.bounds is not None else {})}
                            for fr in self.frames]}

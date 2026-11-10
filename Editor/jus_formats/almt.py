@@ -15,6 +15,10 @@ Layout::
           node chunk: u8 static_count, u8 keyed_count, u8 field_ref[n], pad to 2,
                       u16 body_offset[n] (relative to chunk), bodies
           static body: value (width bytes, padded to 2)
+          keyed ref:  field index (bits 0-6), bit 7 = explicit u16 interpolator
+                      stored immediately before the first key; the track offset
+                      points to the first key, not the interpolator.
+          body offset: low bit ignored by the native resolver (preserved on edit)
           keyed body:  {u16 tick, value (padded to 2)}* u16 0xFFFF
 
 Value widths come from the ARM9 field handlers (see ``FIELD_WIDTHS``).
@@ -60,8 +64,11 @@ FIELD_NOTES = {
     'Alpha': '20.12 fixed point (0x1000 = opaque)',
     'NoteTrack': 'timed battle commands (see jus_formats.notetrack)',
 }
-# Keyed values hold until the next key (step); a field reference with bit 0x80
-# would select an interpolator but none of the shipped files use it.
+# Original game-data census (2026-11-10): 1,547 ALMT files, 63,718 tracks;
+# no keyed field reference with bit 0x80 or odd track offset was observed.
+# The optional interpolator prefix is nevertheless confirmed by ARM9
+# 0x0201F11C, 0x0201F6F4 (ref high bit, halfword at key_ptr-2).
+# Default held-key previews remain appropriate for the shipped corpus.
 
 
 def field_width(name: str) -> int | None:
@@ -129,6 +136,8 @@ class Track:
     raw: bytes | None = None        # exact original body (incl. trailing pad)
     opaque: bool = False            # body cannot be decoded/re-encoded
     dirty: bool = False             # set when value/keys were edited
+    interpolator: int | None = None  # explicit u16 before keyed values; None = native default
+    offset_low_bit: int = 0         # native resolver masks bit 0 of the relative offset
 
     def canonical(self) -> bytes:
         if self.opaque:
@@ -137,9 +146,15 @@ class Track:
             return self.raw
         width = field_width(self.field)
         if not self.keyed:
+            if self.interpolator is not None:
+                raise ValueError('Explicit ALMT interpolator requires a keyed track')
             body = encode_value(self.field, self.value)
             return body + bytes(_even(width) - width)
         out = bytearray()
+        if self.interpolator is not None:
+            if not 0 <= self.interpolator <= 0xFFFF:
+                raise ValueError('ALMT interpolator id must fit in u16')
+            out += p16(self.interpolator)
         for k in self.keys:
             body = encode_value(self.field, k.value)
             out += p16(k.tick) + body + bytes(_even(width) - width)
@@ -264,18 +279,38 @@ class AlmtFile:
         offs_at = at + 2 + _even(n)
         offs = [u16(rec, offs_at + 2 * k) for k in range(n)]
         node = NodeAnim()
+        ranges = []
         for k, (ref, rel) in enumerate(zip(refs, offs)):
-            start = at + rel
-            later = [at + o for o in offs if o > rel]
+            keyed = k >= c1
+            has_interpolator = keyed and bool(ref & 0x80)
+            # FUN_0201F6BC/0201F6F4 mask the low offset bit. A flagged
+            # keyed track points *after* its two-byte interpolator selector.
+            key_start = at + (rel & ~1)
+            body_start = key_start - (2 if has_interpolator else 0)
+            if body_start < at or body_start >= limit:
+                raise ValueError('ALMT track offset outside node chunk')
+            field_index = (ref & 0x7F) if keyed else ref
+            if field_index >= len(self.field_names):
+                raise ValueError('ALMT field reference outside field table')
+            ranges.append((field_index, keyed, has_interpolator, rel & 1, body_start))
+        for field_index, keyed, has_interpolator, offset_bit, start in ranges:
+            later = [item[4] for item in ranges if item[4] > start]
             stop = min(later) if later else limit
             body = bytes(rec[start:stop])
-            name = self.field_names[ref]
-            node.tracks.append(self._decode_track(name, k >= c1, body))
+            track = self._decode_track(self.field_names[field_index], keyed, body,
+                                       has_interpolator)
+            track.offset_low_bit = offset_bit
+            node.tracks.append(track)
         return node
 
     @staticmethod
-    def _decode_track(name: str, keyed: bool, body: bytes) -> Track:
+    def _decode_track(name: str, keyed: bool, body: bytes,
+                      has_interpolator: bool = False) -> Track:
         tr = Track(name, keyed, raw=body)
+        if has_interpolator:
+            if len(body) < 2:
+                raise ValueError('ALMT interpolator selector truncated')
+            tr.interpolator = u16(body, 0)
         width = field_width(name)
         if width is None:
             tr.opaque = True
@@ -285,7 +320,7 @@ class AlmtFile:
             if not keyed:
                 tr.value = decode_value(name, body[:width])
             else:
-                p = 0
+                p = 2 if has_interpolator else 0
                 while True:
                     tick = u16(body, p)
                     if tick == END:
@@ -375,13 +410,28 @@ class AlmtFile:
         if len(statics) > 255 or len(keyed) > 255:
             raise ValueError('Too many tracks on one node')
         chunk = bytearray((len(statics), len(keyed)))
-        chunk += bytes(self.field_index(t.field) for t in ordered)
+        refs = bytearray()
+        for t in ordered:
+            index = self.field_index(t.field)
+            if t.interpolator is not None:
+                if not t.keyed or index >= 0x80:
+                    raise ValueError('ALMT interpolator requires a keyed field index below 128')
+                refs.append(index | 0x80)
+            else:
+                if t.keyed and index >= 0x80:
+                    raise ValueError('ALMT keyed field index exceeds native 7-bit limit')
+                refs.append(index)
+        chunk += refs
         pad_to(chunk, 2)
         offs_at = len(chunk)
         chunk += bytes(2 * n)
         for k, t in enumerate(ordered):
             body = t.encoded()
-            chunk[offs_at + 2 * k:offs_at + 2 * k + 2] = p16(len(chunk))
+            # Native runtime offset resolves to keys, not selector prefix.
+            key_at = len(chunk) + (2 if t.interpolator is not None else 0)
+            if t.offset_low_bit not in (0, 1):
+                raise ValueError('ALMT offset low bit must be 0 or 1')
+            chunk[offs_at + 2 * k:offs_at + 2 * k + 2] = p16(key_at | t.offset_low_bit)
             chunk += body
             pad_to(chunk, 2)
         return bytes(chunk)
@@ -397,6 +447,10 @@ def parse(blob: bytes) -> AlmtFile:
 
 def track_to_dict(t: Track) -> dict:
     d = {'field': t.field, 'keyed': t.keyed}
+    if t.interpolator is not None:
+        d['interpolator'] = f'0x{t.interpolator:04X}'
+    if t.offset_low_bit:
+        d['offset_low_bit'] = t.offset_low_bit
     if t.opaque and t.field == 'NoteTrack':
         from .notetrack import NoteTrack
         try:
@@ -423,6 +477,11 @@ def track_to_dict(t: Track) -> dict:
 
 def track_from_dict(d: dict) -> Track:
     t = Track(d['field'], bool(d['keyed']))
+    if 'interpolator' in d and d['interpolator'] is not None:
+        t.interpolator = int(str(d['interpolator']), 0)
+    t.offset_low_bit = int(d.get('offset_low_bit', 0))
+    if t.interpolator is not None and not t.keyed:
+        raise ValueError('Explicit ALMT interpolator requires a keyed track')
     if 'notes' in d:
         from .notetrack import NoteTrack
         t.opaque = True

@@ -19,11 +19,25 @@ from jus_formats.binary import is_dscp, dscp_unwrap, lz10_compress, lz10_decompr
 
 FORMATS = {}
 try:
-    from jus_formats import almt, alod, dstx, dsig  # noqa: E402
+    from jus_formats import almt, alod, dstx, dsig, koma  # noqa: E402
     FORMATS = {'almt': (b'ALMT', almt), 'alod': (b'ALOD', alod),
                'dstx': (b'DSTX', dstx), 'dsig': (b'DSIG', dsig)}
 except ImportError:
     pass
+
+
+def decode_dstx(blob):
+    """Route DSTX through its actual native family rather than assuming sprite.
+
+    0x03/0x83 are piece tables, 0x04 is Koma art, and 0x05/0x06 are
+    auxiliary panel tilemaps. All are DSTX resources with different codecs.
+    """
+    flags = blob[5] & 0x7F
+    if flags == 0x04:
+        return koma.parse(blob), 'koma'
+    if flags in (0x05, 0x06):
+        return dstx.parse_layout(blob), 'panel-layout'
+    return dstx.parse(blob), 'sprite'
 
 
 def walk(blob, src, stats, examples, wanted, depth=0):
@@ -56,7 +70,11 @@ def walk(blob, src, stats, examples, wanted, depth=0):
     for key, (m, mod) in FORMATS.items():
         if magic == m and key in wanted:
             try:
-                obj = mod.parse(blob)
+                if key == 'dstx':
+                    obj, family = decode_dstx(blob)
+                    stats[('dstx-family', family, f'0x{blob[5]:02X}')] += 1
+                else:
+                    obj = mod.parse(blob)
                 ok = obj.build() == blob
                 stats[(key, ok)] += 1
                 if not ok:
@@ -86,11 +104,17 @@ def walk(blob, src, stats, examples, wanted, depth=0):
                     stats[('almt-json-roundtrip-regen-strings', ok4)] += 1
                     if not ok4:
                         examples['almt-json-roundtrip-regen-strings'].append(src)
-                if key == 'dstx' and obj.embedded is not None:
-                    walk(obj.embedded, src + ':embedded', stats, examples, wanted, depth + 1)
-                    stats[('dstx-tail-empty', True)] += 1
-                elif key == 'dstx':
-                    stats[('dstx-tail', obj.tail.hex() if len(obj.tail) <= 4 else len(obj.tail))] += 1
+                if key == 'dstx':
+                    # The embedded DSIG begins at DSTX data_end in all three
+                    # families; Koma and panel-layout objects have distinct
+                    # Python APIs, so inspect the native pointer directly.
+                    end = int.from_bytes(blob[8:10], 'little')
+                    if blob[end:end + 4] == b'DSIG':
+                        walk(blob[end:], src + ':embedded', stats, examples, wanted, depth + 1)
+                        stats[('dstx-embedded', True)] += 1
+                    elif family == 'sprite':
+                        stats[('dstx-tail', obj.tail.hex() if len(obj.tail) <= 4
+                               else len(obj.tail))] += 1
             except Exception as exc:  # noqa: BLE001
                 stats[(key, 'error')] += 1
                 examples[key].append(f'{src}: {exc!r}')
@@ -103,6 +127,8 @@ def main():
     ap.add_argument('root', nargs='?', default=r'D:\Library\Development\JUS\data')
     ap.add_argument('--formats', default='alar,almt,alod,dstx,dsig')
     ap.add_argument('--glob', default='**/*.aar')
+    ap.add_argument('--strict', action='store_true',
+                    help='Exit nonzero for any parse, hash or round-trip mismatch')
     args = ap.parse_args()
     wanted = set(args.formats.split(','))
     stats = collections.Counter()
@@ -116,6 +142,8 @@ def main():
         print(f'--- {k}: {len(lst)} examples')
         for x in lst[:8]:
             print('   ', x)
+    if args.strict and any(examples.values()):
+        raise SystemExit(1)
 
 
 if __name__ == '__main__':
