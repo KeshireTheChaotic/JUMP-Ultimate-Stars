@@ -63,8 +63,9 @@ class OriginalFormatInspectorTests(unittest.TestCase):
         rows=LevelWorkspace._layer_rows(mock)
         row=next(r for r in rows if r["id"]=="O:cam")
         self.assertTrue(row["available"])
-        self.assertTrue(row["readonly"])
+        self.assertFalse(row["readonly"])  # Source coordinates editable; projection is not
         self.assertIn("structural",row["status"])
+        self.assertIn("runtime unknown",row["status"])
 
     def test_alod_archive_inspector_has_real_parents_not_raw_unknown(self):
         rows=render("chr/ChrArc.aar|chr/bb_b_01.aar","bb_b_01.aod")

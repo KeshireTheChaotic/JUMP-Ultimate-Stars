@@ -59,6 +59,25 @@ internal static partial class Win32
     [LibraryImport("user32.dll", EntryPoint = "DefWindowProcW")]
     public static partial nint DefWindowProc(nint hwnd, uint msg, nint wParam, nint lParam);
 
+    /// <summary>Resize the window so its client area is <paramref name="w"/> x <paramref name="h"/>
+    /// (0 x 0 = minimise; any other size restores it first).</summary>
+    public static void SetClientSize(nint hwnd, int w, int h)
+    {
+        if (w <= 0 || h <= 0) { ShowWindow(hwnd, 6 /* SW_MINIMIZE */); return; }
+        ShowWindow(hwnd, 9 /* SW_RESTORE */);
+        var r = new RECT { right = w, bottom = h };
+        AdjustWindowRect(ref r, WS_OVERLAPPEDWINDOW, false);
+        SetWindowPos(hwnd, 0, 0, 0, r.right - r.left, r.bottom - r.top, 0x0002 | 0x0004 | 0x0010 /* NOMOVE | NOZORDER | NOACTIVATE */);
+    }
+
+    [LibraryImport("user32.dll")]
+    [return: MarshalAs(UnmanagedType.Bool)]
+    private static partial bool SetWindowPos(nint hwnd, nint after, int x, int y, int cx, int cy, uint flags);
+
+    [LibraryImport("user32.dll")]
+    [return: MarshalAs(UnmanagedType.Bool)]
+    private static partial bool ShowWindow(nint hwnd, int cmd);
+
     [LibraryImport("user32.dll", EntryPoint = "PeekMessageW")]
     [return: MarshalAs(UnmanagedType.Bool)]
     public static partial bool PeekMessage(out MSG msg, nint hwnd, uint min, uint max, uint remove);

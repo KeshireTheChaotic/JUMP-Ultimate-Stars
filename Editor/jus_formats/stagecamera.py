@@ -75,6 +75,16 @@ class StageCamera:
         vertices[index] = (x, y)
         return type(self)(self.header_pairs, self.mode, tuple(vertices), self.reserved)
 
+    def replace_header_pair(self, index: int, x: int, y: int) -> 'StageCamera':
+        """Patch a header signed pair only. Runtime camera meaning stays unknown."""
+        if not 0 <= index < 3:
+            raise IndexError('Camera header-pair index must be 0..2')
+        pairs = list(self.header_pairs)
+        pairs[index] = (x, y)
+        updated = type(self)(tuple(pairs), self.mode, self.vertices, self.reserved)
+        updated.build()  # validate signed-16 bounds before returning
+        return updated
+
     def to_dict(self) -> dict:
         return {
             "format": "stage-camera",

@@ -13,7 +13,7 @@ from __future__ import annotations
 
 import re
 import tkinter as tk
-from tkinter import ttk
+from tkinter import ttk, simpledialog, messagebox
 
 from PIL import Image, ImageTk
 
@@ -50,6 +50,7 @@ class ScreenWorkspace(SuiteWorkspace):
         self.sprite_frame = tk.StringVar(value='0')
         self.layout_panel_index = tk.StringVar(value='0')
         self.selected_layout = None
+        self._pending_layouts: dict[str, bytes] = {}
         self.layout_image = None
         self.layout_render_info = None
         self.show_outside = tk.BooleanVar(value=False)
@@ -166,6 +167,7 @@ class ScreenWorkspace(SuiteWorkspace):
 
     # ------------------------------------------------------------ browser
     def on_root(self):
+        self._pending_layouts = {}
         root = self.app.root_data
         # Screens mode: archives with backgrounds; data-only and sprite-only archives are excluded
         self._archives = scenes.screen_archives(root) if root else []
@@ -798,7 +800,8 @@ class ScreenWorkspace(SuiteWorkspace):
         try:
             from jus_formats.dstx import parse_layout
             entry = self.app.root_data.archive(self.archive).entries[index]
-            blob = entry.payload()
+            path = join(self.archive, entry.name)
+            blob = self._pending_layouts.get(path, entry.payload())
             if entry.ext != '.dtx' or blob[:4] != b'DSTX' or blob[5] not in (5, 6):
                 return
             self.selected_layout = parse_layout(blob)
@@ -820,6 +823,103 @@ class ScreenWorkspace(SuiteWorkspace):
             self.sprite_error = None
         except (ValueError, IndexError, OSError) as exc:
             self.sprite_error = str(exc)
+
+    def _layout_source_path(self):
+        if self.selected_resource is None or not self.archive or self.selected_layout is None:
+            return None
+        entry = self.app.root_data.archive(self.archive).entries[self.selected_resource]
+        return join(self.archive, entry.name)
+
+    def _edit_layout_cell(self):
+        """Edit one source tile-panel cell, never engine-defined screen placement."""
+        layout = self.selected_layout
+        path = self._layout_source_path()
+        if layout is None or path is None:
+            return
+        try:
+            pi = int(self.layout_panel_index.get())
+            panel = layout.panel_maps[pi]
+        except (ValueError, IndexError):
+            return
+        message = (f'Panel {pi}: enter X, Y, tile-entry value\n'
+                   f'(0 <= X < {panel.tiles_w}, 0 <= Y < {panel.tiles_h}).\n'
+                   f'Value is a source u{panel.cell_bytes * 8} integer, decimal or 0xHEX. '
+                   'No screen position is implied.')
+        raw = simpledialog.askstring('Edit DSTX panel tile', message,
+                                     initialvalue=f'0, 0, 0x{panel.cells[0]:0{panel.cell_bytes * 2}X}',
+                                     parent=self.app)
+        if raw is None:
+            return
+        try:
+            bits = [v.strip() for v in raw.split(',')]
+            if len(bits) != 3:
+                raise ValueError('Enter X, Y, value separated by commas')
+            x, y = int(bits[0]), int(bits[1])
+            value = int(bits[2], 16) if bits[2].lower().startswith('0x') else int(bits[2])
+            result = layout.replace_cell(pi, x, y, value)
+        except (ValueError, IndexError) as exc:
+            messagebox.showerror('Edit DSTX panel tile', str(exc), parent=self.app)
+            return
+        if result.raw == layout.raw:
+            return
+        self.checkpoint('edit native tile-panel cell')
+        self._pending_layouts[path] = result.raw
+        self.selected_layout = result
+        self._render_layout_panel()
+        self.refresh_inspector()
+        self.view.redraw()
+        self.app.update_dirty()
+        self.app.status.set(f'Edited {path}, panel {pi} ({x},{y}); Apply Screen, then Save')
+
+    def doc(self):
+        path = self._layout_source_path()
+        return 'screen-layout:' + path if path else None
+
+    def snapshot(self):
+        return self.selected_layout.build() if self.doc() else None
+
+    def restore(self, snap):
+        from jus_formats.dstx import parse_layout
+        path = self._layout_source_path()
+        if path is None:
+            return
+        result = parse_layout(snap)
+        if snap == self.app.root_data.read(path):
+            self._pending_layouts.pop(path, None)
+        else:
+            self._pending_layouts[path] = result.build()
+        self.selected_layout = result
+        self._render_layout_panel()
+        self.refresh_inspector()
+        self.view.redraw()
+
+    @property
+    def dirty(self):
+        return bool(self._pending_layouts)
+
+    def apply(self):
+        from jus_formats.dstx import parse_layout
+        if not self._pending_layouts:
+            self.app.status.set('Screen: nothing to apply.')
+            return
+        updates = dict(self._pending_layouts)
+        try:
+            for path, blob in updates.items():
+                result = parse_layout(blob)
+                if result.build() != blob:
+                    raise ValueError(f'{path}: modified layout round-trip mismatch')
+        except (ValueError, IndexError) as exc:
+            messagebox.showerror('Screen tile panels', str(exc), parent=self.app)
+            return
+        for path, blob in updates.items():
+            self.app.root_data.write(path, blob)
+        self._pending_layouts.clear()
+        if self.selected_layout is not None:
+            self._load_layout(self.selected_resource)
+        self.refresh_inspector()
+        self.view.redraw()
+        self.app.update_dirty()
+        self.app.status.set(f'Applied {len(updates)} DSTX source tile-panel files; Save to persist')
 
     def _layout_panel_changed(self, _event=None):
         # Actual DSIG source pixels only. No guessed screen coordinates.
@@ -1495,8 +1595,9 @@ class ScreenWorkspace(SuiteWorkspace):
                     if 0 <= panel_index < len(layout.panel_maps):
                         grid = layout.panel_maps[panel_index]
                         panel = layout.panels[panel_index]
-                        ins.section(f'Panel {panel_index} - raw tile grid',
-                                    note='row-major; read-only; local coordinates')
+                        ins.section(f'Panel {panel_index} - source tile grid',
+                                    note='row-major, editable local map; runtime placement remains unknown')
+                        ins.buttons(('Edit panel tile cell…', self._edit_layout_cell))
                         ins.value('Descriptor', f'first tile {panel.first_tile}, '
                                   f'{grid.tiles_w} x {grid.tiles_h} tile cells')
                         base = 8 + 4 * (len(layout.panels) + 1)

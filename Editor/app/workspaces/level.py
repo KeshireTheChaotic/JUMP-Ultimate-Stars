@@ -10,7 +10,7 @@ from __future__ import annotations
 
 import tkinter as tk
 from pathlib import Path
-from tkinter import filedialog, messagebox, ttk
+from tkinter import filedialog, messagebox, simpledialog, ttk
 
 from PIL import Image, ImageTk, ImageChops
 
@@ -52,6 +52,8 @@ class LevelWorkspace(SuiteWorkspace):
         self.flip_v = tk.BooleanVar(value=False)
         self._stroke = False
         self._original_maps: dict[str, bytes] = {}
+        self._camera_bytes: bytes | None = None
+        self._camera_original: bytes | None = None
         self._dsig_cache = {}
         self._sets: list[scenes.StageSet] = []
         self._probs = []
@@ -346,13 +348,14 @@ class LevelWorkspace(SuiteWorkspace):
         self.refresh_inspector()
 
     def load(self, stem):
-        if self.stage and self.stage.stem != stem and (self.maps_dirty or self.map_objects.model.dirty):
-            if not messagebox.askyesno('Level', 'Discard unapplied tile-map or stage-object edits before switching stages?'):
+        if self.stage and self.stage.stem != stem and (self.maps_dirty or self.map_objects.model.dirty or self.camera_dirty):
+            if not messagebox.askyesno('Level', 'Discard unapplied tile-map, camera or stage-object edits before switching stages?'):
                 return
         self.stage = next((s for s in self._sets if s.stem == stem), None)
         self._stroke = False
         self.sel_overlay = None
         self._original_maps = {}
+        self._camera_bytes = self._camera_original = None
         self._dsig_cache = {}
         self._stage_mob, self._stage_geo, self._stage_frame = None, None, None
         self._item_prob = None
@@ -365,6 +368,13 @@ class LevelWorkspace(SuiteWorkspace):
                     self.layers += scenes.find_layers(self.app.root_data, self.stage.members[role])
                 except (ValueError, KeyError) as exc:
                     probs.append((f'{role}: {exc}', 'bad'))
+        if self.stage and self.stage.members.get('cam'):
+            try:
+                cam_raw = self.app.root_data.read(self.stage.members['cam'])
+                stagecamera.parse(cam_raw)
+                self._camera_bytes = self._camera_original = cam_raw
+            except (OSError, ValueError, IndexError, KeyError) as exc:
+                probs.append((f'cam parser: {exc}', 'warn'))
         if self.stage:
             for role, parse, dest in (('mob', stagephysics.parse_mob, '_stage_mob'),
                                       ('bin', stagephysics.parse_stage_bin, '_stage_geo')):
@@ -452,9 +462,9 @@ class LevelWorkspace(SuiteWorkspace):
             have = bool(self.stage and key in self.stage.members)
             decoded = ((self._stage_mob if key == 'mob' else self._stage_geo) is not None
                        if key != 'cam' else have)
-            rows.append({'id': 'O:' + key, 'parent': 'ro', 'name': name, 'kind': 'overlay', 'readonly': True,
+            rows.append({'id': 'O:' + key, 'parent': 'ro', 'name': name, 'kind': 'overlay', 'readonly': key != 'cam',
                           'available': decoded, 'visible': self.preview_objects.get() if key != 'cam' else False,
-                          'status': ('structural coordinates; runtime unknown' if key == 'cam' and have
+                          'status': ('structural source coordinates editable; runtime unknown' if key == 'cam' and have
                                      else 'runtime inspector' if have else 'no data')})
         return rows
 
@@ -1166,12 +1176,14 @@ class LevelWorkspace(SuiteWorkspace):
         ov = getattr(self, 'sel_overlay', None)
         if ov:
             name = next(n for k, n, _ in OVERLAYS if k == ov)
-            ins.section(name, note='Read-only overlay (Level v1 policy)')
+            ins.section(name, note='Original data; engine camera projection read-only')
             path = self.stage.members.get(ov)
             ins.value('Source', split(path)[-1] if path else '—')
             if ov == 'cam' and path:
                 try:
-                    cam = stagecamera.parse(self.app.root_data.read(path))
+                    pending = getattr(self, '_camera_bytes', None)
+                    cam = stagecamera.parse(pending if pending is not None
+                                            else self.app.root_data.read(path))
                 except ValueError as exc:
                     ins.evidence('Format', 'Unknown', f'Camera structure failed validation: {exc}')
                     return
@@ -1182,6 +1194,10 @@ class LevelWorkspace(SuiteWorkspace):
                 ins.value('Byte length', str(len(cam.build())))
                 ins.value('Mode (+0x0C)', f'0x{cam.mode:02X} (unclassified)')
                 ins.value('Point count (+0x0D)', str(len(cam.vertices)))
+                ins.value('Unapplied camera changes', 'yes' if getattr(self, 'camera_dirty', False) else 'no')
+                if hasattr(self, '_edit_camera_point') and hasattr(self, '_edit_camera_header_pair'):
+                    ins.buttons(('Edit raw camera point…', self._edit_camera_point),
+                                ('Edit header signed pair…', self._edit_camera_header_pair))
                 ins.value('Reserved (+0x0E)', f'0x{cam.reserved:04X}')
                 for j, pair in enumerate(cam.header_pairs):
                     ins.value(f'Header signed pair {j} (+0x{j*4:02X})', str(pair))
@@ -1271,6 +1287,56 @@ class LevelWorkspace(SuiteWorkspace):
                                                'rule/count/time editable in Mission / Rewards')
 
     # ------------------------------------------------------------ undo / apply
+    def _edit_camera_point(self):
+        self._edit_camera_pair(header=False)
+
+    def _edit_camera_header_pair(self):
+        self._edit_camera_pair(header=True)
+
+    def _edit_camera_pair(self, *, header=False):
+        """Edit only a confirmed s16 pair; no runtime camera model is implied."""
+        if self._camera_bytes is None or not self.stage:
+            return
+        cam = stagecamera.parse(self._camera_bytes)
+        pairs = cam.header_pairs if header else cam.vertices
+        if not pairs:
+            return
+        example = f'0, {pairs[0][0]}, {pairs[0][1]}'
+        data = simpledialog.askstring(
+            'Edit raw camera coordinates',
+            f'Enter index, signed X, signed Y (between -32768 and 32767).\n'
+            f'{"Header pairs" if header else "Point pairs"}: indices 0..{len(pairs)-1}.\n'
+            'These are original file coordinates, not a proven scroll/clamp boundary.',
+            initialvalue=example, parent=self.app)
+        if data is None:
+            return
+        try:
+            values = [int(x.strip()) for x in data.split(',')]
+            if len(values) != 3:
+                raise ValueError('Expected index, X, Y')
+            index, x, y = values
+            changed = (cam.replace_header_pair(index, x, y) if header
+                       else cam.replace_vertex(index, x, y))
+            blob = changed.build()
+            if stagecamera.parse(blob).build() != blob:
+                raise ValueError('Stage camera round-trip mismatch')
+        except (ValueError, IndexError) as exc:
+            messagebox.showerror('Stage camera', str(exc), parent=self.app)
+            return
+        if blob == self._camera_bytes:
+            return
+        self.focus = 'camera'
+        self.app.history.push(self.doc(), 'edit native camera signed pair', self._camera_bytes)
+        self.app._update_undo_label()
+        self._camera_bytes = blob
+        self.refresh_inspector()
+        self.app.update_dirty()
+        self.app.status.set('Raw stage camera point staged in Level workspace; Apply, then Save')
+
+    @property
+    def camera_dirty(self):
+        return self._camera_bytes is not None and self._camera_bytes != self._camera_original
+
     def doc(self):
         if self.focus == 'tutorial':
             return 'level-tutorial' if self.tutorials.scripts else None
@@ -1278,9 +1344,13 @@ class LevelWorkspace(SuiteWorkspace):
             return MISSION_DOC if self.missions.catalog is not None else None
         if self.focus == 'objects':
             return f'level-objects:{self.stage.stem}' if self.stage else None
+        if self.focus == 'camera':
+            return f'level-camera:{self.stage.stem}' if self.stage else None
         return 'level:' + self.stage.stem if self.stage else None
 
     def snapshot(self):
+        if self.focus == 'camera':
+            return self._camera_bytes
         if self.focus == 'tutorial':
             return self.tutorials.snapshot()
         if self.focus == 'mission':
@@ -1297,6 +1367,11 @@ class LevelWorkspace(SuiteWorkspace):
         super().checkpoint(label)
 
     def restore(self, snap):
+        if self.focus == 'camera':
+            stagecamera.parse(snap)
+            self._camera_bytes = snap
+            self.refresh_inspector()
+            return
         if self.focus == 'tutorial':
             self.tutorials.restore(snap)
             return
@@ -1340,7 +1415,7 @@ class LevelWorkspace(SuiteWorkspace):
 
     @property
     def dirty(self):
-        return (self.maps_dirty or self.missions.dirty or self.map_objects.model.dirty
+        return (self.maps_dirty or self.camera_dirty or self.missions.dirty or self.map_objects.model.dirty
                 or self.tutorials.dirty)
 
     def apply(self):
@@ -1358,6 +1433,19 @@ class LevelWorkspace(SuiteWorkspace):
             if changed is None:
                 return
             done.append(', '.join(changed) + ' into jgalaxy.aar')
+        if self.camera_dirty and self.stage and self._camera_bytes is not None:
+            path = self.stage.members.get('cam')
+            if path is None:
+                messagebox.showerror('Stage camera', 'Missing original CAM member', parent=self.app)
+                return
+            try:
+                stagecamera.parse(self._camera_bytes)
+            except ValueError as exc:
+                messagebox.showerror('Stage camera', str(exc), parent=self.app)
+                return
+            self.app.root_data.write(path, self._camera_bytes)
+            self._camera_original = self._camera_bytes
+            done.append('one CAM source coordinate file')
         if self.map_objects.model.dirty:
             changed_objects = self._apply_objects()
             if changed_objects is None:

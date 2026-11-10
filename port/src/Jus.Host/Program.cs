@@ -13,6 +13,7 @@ namespace Jus.Host;
 ///   --mute        no audio output (scripted --frames runs are always silent).
 ///   --renderer vulkan|d3d12|gdi  presentation backend (default vulkan; falls back to GDI);
 ///   --present-capture file       with --frames: write the last presented frame as it is in the swap chain.
+///   --resize "WxH@N,…"           set the client area to W x H at frame N (0x0 minimises), for testing.
 ///   --frames N     run N frames, then exit (for tests); --press injects buttons at given frames;
 ///   --snapshot     writes top.bmp/bottom.bmp of the last frame.</summary>
 internal static class Program
@@ -93,6 +94,7 @@ internal static class Program
                 var injected = opt.Injected(frames);
                 _platform.BeginFrame(injected & ~TouchBit, (injected & TouchBit) != 0);
                 game.Frame();
+                if (opt.Resizes.TryGetValue(frames, out var size)) Win32.SetClientSize(_hwnd, size.W, size.H);
                 if (opt.PresentCapture is { } cap && opt.Frames is { } last && frames == last - 1) _presenter.CaptureNext(cap);
                 Present();
                 frames++;
@@ -211,10 +213,14 @@ internal sealed record Options(long? Frames, string? Snapshot, Dictionary<long, 
     HashSet<long> SnapshotFrames, string? Rom, string? Data, string? SaveSeed, bool Mute = false,
     string? Renderer = null, string? PresentCapture = null)
 {
+    /// <summary>--resize "WxH@frame,…": client-area sizes to set at given frames (0x0 = minimise).</summary>
+    public Dictionary<long, (int W, int H)> Resizes { get; init; } = [];
+
     public static Options Parse(string[] args)
     {
         long? frames = null; string? snap = null, rom = null, data = null, saveSeed = null, renderer = null, capture = null;
         bool mute = false;
+        var resizes = new Dictionary<long, (int, int)>();
         var presses = new Dictionary<long, PadButtons>();
         var at = new HashSet<long>();
         for (int i = 0; i < args.Length; i++)
@@ -230,6 +236,14 @@ internal sealed record Options(long? Frames, string? Snapshot, Dictionary<long, 
                 case "--mute": mute = true; break;
                 case "--renderer": renderer = args[++i]; break;
                 case "--present-capture": capture = args[++i]; break;
+                case "--resize":
+                    foreach (var item in args[++i].Split(',', StringSplitOptions.RemoveEmptyEntries))
+                    {
+                        var parts = item.Split('@');
+                        var wh = parts[0].Split('x');
+                        resizes[long.Parse(parts[1])] = (int.Parse(wh[0]), int.Parse(wh[1]));
+                    }
+                    break;
                 case "--press":
                     foreach (var item in args[++i].Split(',', StringSplitOptions.RemoveEmptyEntries))
                     {
@@ -241,7 +255,7 @@ internal sealed record Options(long? Frames, string? Snapshot, Dictionary<long, 
                     break;
             }
         }
-        return new(frames, snap, presses, at, rom, data, saveSeed, mute, renderer, capture);
+        return new(frames, snap, presses, at, rom, data, saveSeed, mute, renderer, capture) { Resizes = resizes };
     }
 
     /// <summary>Frames an injected press is held: scenes such as the Opening sample the pad once per

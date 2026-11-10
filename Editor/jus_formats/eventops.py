@@ -112,6 +112,46 @@ def argument_labels(opcode: int) -> tuple[str, ...]:
     return labels if labels and len(labels) == len(kinds) else tuple(f'arg {i+1} ({k})' for i,k in enumerate(kinds))
 
 
+def branch_target_args(opcode: int) -> tuple[int, ...]:
+    """Argument indices that hold a branch target (or a stored label) for a 0x00xx op.
+
+    ov06 FUN_02155688 sign-extends the target byte and passes it to vtable
+    +0xEC → FUN_0201F93C, which seeks to the Marker key whose value equals it;
+    -1 means "no branch". So a target n jumps to Marker label n of the move.
+    Read from each op's argument description: 'target', 'target1/2',
+    'target per stick direction (8)', and 0x0013's stored label.
+    """
+    info = notetrack.op_info(opcode)
+    if info is None or opcode >> 8 != 0:
+        return ()
+    if opcode == 0x0013:
+        return (0,)
+    if opcode == 0x001D:          # 'like 0x000E': arg1, target1, arg2, target2
+        return (1, 3)
+    names = [n.strip() for n in re.split(r'[:(]', info.meaning, maxsplit=1)[0].split(',')]
+    out = []
+    for i, n in enumerate(names):
+        if n.startswith('target per'):
+            out.extend(range(i, i + 8))
+        elif re.fullmatch(r'target\d?', n):
+            out.append(i)
+    if not out and info.meaning.startswith('target'):
+        out = [0]
+    return tuple(out)
+
+
+def argument_choices(opcode: int, index: int, values) -> dict[str, int] | None:
+    """Dropdown entries for an argument with a traced enumeration, else None."""
+    if opcode == 0x0300 and index == 0:
+        return {f'0x{n:02X} — {name}': n for n, name in CHARA_ACTION_NAMES.items()}
+    if opcode == 0x0300 and index == 1 and values:
+        if values[0] == 0x0A:
+            return {f'{i} — status 0x{s:02X} (table 0x02171168)': i for i, s in enumerate(STATUS_SELECTOR)}
+        if values[0] == 0x0B:
+            return {f'{i} — item 0x{t:02X} (ALMT 0x{0x300000 + t:06X})': i for i, t in enumerate(ITEM_SELECTOR)}
+    return None
+
+
 def marker_event(value: int) -> int | None:
     """Return callback argument for change-triggered special markers only."""
     if 0xFF80 <= value <= 0xFF8F:

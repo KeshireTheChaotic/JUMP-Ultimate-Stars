@@ -85,12 +85,14 @@ class SuiteWorkspace:
         return log
 
     def init_sashes(self):
+        if getattr(self.app, '_closing', False):
+            return
         try:
             self.frame.update_idletasks()
             w = self._upper.winfo_width()
             h = self._ws.winfo_height()
             if w < 400 or h < 200:
-                self.frame.after(150, self.init_sashes)
+                self.app.after(150, self.init_sashes)
                 return
             self._upper.sashpos(0, max(int(420 * self.k), w - int(360 * self.k)))
             if self.bottom is not None:
@@ -134,7 +136,7 @@ class SuiteWorkspace:
     def on_show(self):
         if not self._sashed:
             self._sashed = True
-            self.frame.after(60, self.init_sashes)
+            self.app.after(60, self.init_sashes)
 
     def doc(self) -> str | None:
         """Undo document key for the current selection (None = nothing editable)."""

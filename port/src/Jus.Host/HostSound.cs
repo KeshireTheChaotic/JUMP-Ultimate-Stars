@@ -61,7 +61,14 @@ internal sealed partial class HostSound : ISound, IDisposable
         if (_musicPlayer >= 0) _engine.Stop(_musicPlayer, frames * 192 / 60);
     }
 
-    public void StopAll() => _engine.Stop();
+    public void StopAll()
+    {
+        _engine.Stop();
+        _engine.StopStream();
+    }
+
+    public void QueueStream(short[] samples, int rate) => _engine.QueueStream(samples, rate);
+    public void StopStream() => _engine.StopStream();
 
     private void Pump()
     {

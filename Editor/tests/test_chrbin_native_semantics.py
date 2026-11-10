@@ -120,4 +120,36 @@ class NativeSourceSemantics(unittest.TestCase):
         self.assertEqual(native_shot_flags(26,0xFFFFFFFF),())
 
 
+class NativeMoveContactSources(unittest.TestCase):
+    def test_signed_fields_patch_only_source_bytes(self):
+        rec = chrbin.ColRecord(bytes(range(20)))
+        altered = rec.replace_contact_values(-12, 7, 6, -2, 3)
+        self.assertEqual(altered.direct_contact_magnitude, -12)
+        self.assertEqual(altered.signed_status_selector, 7)
+        self.assertEqual(altered.contact_accumulator_delta, 6)
+        self.assertEqual(altered.signed_knockback, (-2, 3))
+        self.assertEqual([i for i,(a,b) in enumerate(zip(rec.raw,altered.raw)) if a!=b],
+                         [3,5,7,12,13])
+        with self.assertRaises(ValueError):
+            rec.replace_contact_values(128,0,0,0,0)
+        self.assertEqual(rec.raw, bytes(range(20)))
+
+    @unittest.skipUnless((ROOT/'Data/chr/ChrArc.aar').is_file(), 'Native ALMT data absent')
+    def test_battle_move_links_authored_source_col_records(self):
+        from jus_package.project import DataRoot
+        from jus_package.movecombat import collisions_for_move
+        from jus_formats import almt
+        r=DataRoot(ROOT/'Data')
+        a=almt.parse(r.read('chr/ChrArc.aar|chr/db_b_01.aar|db_b_01.amt'))
+        m=next(m for m in a.moves if m.id & 0xFF == 0x1E)
+        refs=collisions_for_move(r,'db_b_01',m)
+        self.assertEqual(len(refs),1)
+        self.assertEqual(refs[0].work_id,0x100)
+        self.assertEqual(refs[0].record_index,0)
+        self.assertIsNotNone(refs[0].record)
+        direct=chrbin.parse(r.read(refs[0].source_path),'chr/col/db_b_01.bin')
+        self.assertEqual(refs[0].record.raw, direct.col_record(0).raw)
+        self.assertEqual(len(collisions_for_move(r,'not-a-form',m)),0)
+
+
 if __name__=='__main__':unittest.main()

@@ -65,7 +65,28 @@ def main():
             assert w.sprite_image is None  # a tile panel is not an OAM sprite image
             assert w.layout_image is not None
             assert w.layout_image.size == (64, 40)
-            print('OK: 2 original-source panel images rendered in Screen inspector')
+            from unittest.mock import patch
+            w.layout_panel_index.set('1')
+            w._layout_panel_changed()
+            before = w.selected_layout.raw
+            with patch('app.workspaces.screen.simpledialog.askstring', return_value='2, 1, 0x1009'):
+                w._edit_layout_cell()
+            assert w.dirty and w.selected_layout.raw != before
+            assert w.selected_layout.panel_maps[1].row(1)[2] == 0x1009
+            app.undo()
+            assert w.selected_layout.raw == before and not w.dirty
+            app.redo()
+            assert w.dirty
+            w.apply()
+            assert not w.dirty
+            assert 'deckmake/deckmake.aar' in app.root_data.dirty_files()
+            saved = app.root_data.read('deckmake/deckmake.aar|deckmake/list02.dtx')
+            from jus_formats.dstx import parse_layout
+            assert parse_layout(saved).panel_maps[1].row(1)[2] == 0x1009
+            assert (root / 'deckmake/deckmake.aar').read_bytes() == Archive.parse(
+                (root / 'deckmake/deckmake.aar').read_bytes()).build()
+            assert saved != layout  # original archive on disk remains untouched until Save
+            print('OK: 2 native tile-panel renders; cell edit → undo/redo → Apply → staged Save')
         finally:
             app.destroy()
 

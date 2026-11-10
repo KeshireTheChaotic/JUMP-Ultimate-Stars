@@ -27,4 +27,6 @@ internal sealed class RecordingSound : ISound
     public int StopAlls;
     public void PlayEffect(int id, int arg) => Effects.Add((id, arg));
     public void StopAll() => StopAlls++;
+    public long StreamSamples;
+    public void QueueStream(short[] samples, int rate) => StreamSamples += samples.Length;
 }

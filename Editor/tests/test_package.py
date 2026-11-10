@@ -121,9 +121,11 @@ class PackageRoundTrip(unittest.TestCase):
         sdir = work / 'sprites' / 'chr~ChrArc.aar~chr~bb_b_01_4.aar~bb_b_01_4_.dtx'
         info = json.loads((sdir / 'sprite.json').read_text())
         first = next(f for f in info['frames'] if f.get('png'))
-        im = Image.open(sdir / first['png'])
-        im = im.transpose(Image.FLIP_LEFT_RIGHT)           # new artwork, new layout
-        im.save(sdir / 'frames' / 'new.png', transparency=Image.open(sdir / first['png']).info.get('transparency'))
+        with Image.open(sdir / first['png']) as source:
+            transparency = source.info.get('transparency')
+            im = source.transpose(Image.FLIP_LEFT_RIGHT)  # new artwork, new layout
+        im.save(sdir / 'frames' / 'new.png', transparency=transparency)
+        im.close()
         info['frames'].append({'png': 'frames/new.png', 'left': first['left'], 'top': first['top'], 'pieces': []})
         (sdir / 'sprite.json').write_text(json.dumps(info))
         out = self.tmp / 'out_append'

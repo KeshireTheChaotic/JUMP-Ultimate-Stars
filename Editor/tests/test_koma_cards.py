@@ -69,6 +69,48 @@ class Synthetic(unittest.TestCase):
             self.assertEqual((Path(td) / 'bin/koma.bin').read_bytes(), b'old')
 
 
+class JPowerNative(unittest.TestCase):
+    def test_source_family_and_surgical_cost_patch(self):
+        from jus_formats import jpower
+        row = bytearray(0x130)
+        struct.pack_into('<I', row, 0, 12)
+        row[4:24] = struct.pack('<BBHHH6H', 1, 0, 1, 13, 0, 30, 20, 0, 0, 0, 5)
+        table = jpower.parse(bytes(row))
+        self.assertIs(table.family(12), table.rows[0])
+        self.assertIs(table.family(13), table.rows[0])
+        self.assertEqual(table.rows[0].koma_targets[0].target_id, 13)
+        self.assertEqual(table.rows[0].koma_targets[0].prices, (30, 20, 0, 0, 0, 5))
+        edited = table.replace_costs(0, 0, 0, (1, 2, 3, 4, 5, 6))
+        self.assertEqual(edited.cell(0, 0, 0).prices, (1, 2, 3, 4, 5, 6))
+        self.assertEqual(edited.raw[:12], row[:12])
+        self.assertEqual(edited.raw[24:], row[24:])
+        self.assertEqual(edited.raw[12:24], struct.pack('<6H', 1,2,3,4,5,6))
+        with self.assertRaises(ValueError):
+            table.replace_costs(0, 0, 0, (1,2))
+        with self.assertRaises(ValueError):
+            table.replace_costs(0, 0, 0, (0,0,0,0,0,65536))
+        with self.assertRaises(ValueError):
+            table.replace_costs(0, 0, 1, (1,1,1,1,1,1))
+
+    @unittest.skipUnless((DATA / 'bin/jpower.bin').is_file(), 'JUS_DATA not available')
+    def test_original_jpower_link_integrity_and_prices(self):
+        from jus_formats import jpower
+        from jus_package import komacards
+        from jus_package.project import DataRoot
+        root = DataRoot(DATA)
+        table = jpower.parse(root.read(jpower.PATH))
+        cat = komacards.load(root)
+        self.assertEqual(table.build(), root.read(jpower.PATH))
+        self.assertEqual(len(table.rows), 311)
+        unlocks = [cell for row in table.rows for cell in row.koma_targets]
+        self.assertEqual(len(unlocks), 565)
+        self.assertEqual(len({row.root_card for row in table.rows}), 311)
+        self.assertEqual(len({cell.target_id for cell in unlocks}), 565)
+        self.assertEqual(table.validate_cards(cat.cards.cards), [])
+        self.assertEqual(table.family(0).index, 0)
+        self.assertEqual(table.family(1).index, 0)
+
+
 @unittest.skipUnless((DATA / 'bin/kshape.bin').is_file(), 'JUS_DATA not available')
 class RealCards(unittest.TestCase):
     @classmethod

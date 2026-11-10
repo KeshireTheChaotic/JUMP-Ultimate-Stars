@@ -20,11 +20,11 @@ from __future__ import annotations
 import re
 import tkinter as tk
 from pathlib import Path
-from tkinter import colorchooser, filedialog, messagebox, ttk
+from tkinter import colorchooser, filedialog, messagebox, simpledialog, ttk
 
 from PIL import Image
 
-from jus_formats import bintables, dsig as dsigmod, koma, kshape
+from jus_formats import bintables, dsig as dsigmod, jpower, koma, kshape
 from jus_package import images, komacards, passivekoma
 from jus_package.project import join
 
@@ -62,6 +62,9 @@ class KomaWorkspace(SuiteWorkspace):
         self.cat_error = ''
         self._passive_catalog = None
         self._passive_error = ''
+        self._jpower = None
+        self._jpower_error = ''
+        self._jpower_dirty = False
         self._source_art_unillustrated = False
         self.card_choices: list[tuple[kshape.Card, bool]] = []
         self.card: kshape.Card | None = None
@@ -123,7 +126,13 @@ class KomaWorkspace(SuiteWorkspace):
         self._koma_names = None          # bin/komatxt.bin, loaded on first use
         self.cat, self.cat_error = None, ''
         self._passive_catalog, self._passive_error = None, ''
+        self._jpower, self._jpower_error, self._jpower_dirty = None, '', False
         root = self.app.root_data
+        if root is not None:
+            try:
+                self._jpower = jpower.parse(root.read(jpower.PATH))
+            except (OSError, ValueError, KeyError) as exc:
+                self._jpower_error = str(exc)
         if root is not None:
             try:
                 self._passive_catalog = passivekoma.PassiveCatalog(root)
@@ -656,7 +665,10 @@ class KomaWorkspace(SuiteWorkspace):
             ins.section('Evidence')
             ins.evidence('Panel art', 'Direct', 'DSTX v1 flags 0x04 rebuilds byte-exactly on 898/898 files')
             ins.evidence('Card shapes', 'Direct', 'kshape.bin 66 shapes / koma.bin 890 cards rebuild byte-exactly')
-            ins.evidence('Mission / evolution unlocks', 'Unknown', 'acquisition tables not traced')
+            ins.evidence('Mission rewards', 'Direct', 'J-Galaxy mission reward grant IDs')
+            ins.evidence('Koma evolution / purchase', 'Direct',
+                         'J-Power type-1 cells, ov05 021653AC/021646F4; '
+                         'full prerequisites and physical UI positions remain unproven')
             return
         k = self.kf
         ins.section('Asset', note=self.path.split('|')[-1])
@@ -670,6 +682,8 @@ class KomaWorkspace(SuiteWorkspace):
             state.append('card shape selector edited')
         if self._shape_dirty:
             state.append('shape dictionary edited')
+        if self._jpower_dirty:
+            state.append('J-Power costs edited')
         ins.value('State', ('● ' + ', '.join(state) + ', not applied') if state else 'unchanged',
                   colour=T.WARN if state else T.MUTED)
         self._inspect_card(ins)
@@ -704,7 +718,9 @@ class KomaWorkspace(SuiteWorkspace):
         ins.evidence('Card shape', 'Direct', 'kshape.bin / koma.bin byte-exact; occupancy masks match all 66 shapes')
         ins.evidence('Card ↔ art', 'Direct', 'prefix table 0x0209E840 + art index (FUN_020790F0); '
                                               'art index = file number')
-        ins.evidence('Mission / evolution unlocks', 'Unknown', 'acquisition tables not traced')
+        ins.evidence('J-Power card unlocks', 'Direct',
+                     'bin/jpower.bin type-1 target at cell+4, ov05 021646F4; '
+                     'source family records read below')
 
     def _inspect_card(self, ins):
         if self.cat is None:
@@ -743,9 +759,87 @@ class KomaWorkspace(SuiteWorkspace):
             self._inspect_passive_ability(ins, c)
         else:
             self._inspect_linked_moves(ins, c)
+        self._inspect_jpower(ins, c)
         if s:
             ins.section(f'Shape picker ({s.size} cells)', note='Click a shape. The Shapes tab below lists all 66.')
             ins.widget(self._picker)
+
+    def _inspect_jpower(self, ins, card):
+        """Show the original J-Power family and type-1 Koma purchase links."""
+        if self._jpower is None:
+            ins.value('J-Power', self._jpower_error or 'No source table', colour=T.WARN)
+            return
+        family = self._jpower.family(card.index)
+        if family is None:
+            ins.section('J-Power evolution / purchase')
+            ins.value('Family', 'Not present in the original 311 J-Power rows')
+            return
+        root_id = family.root_card
+        unlocks = family.koma_targets
+        ins.section('J-Power evolution / purchase',
+                    note='Original bin/jpower.bin; five source groups × three slots')
+        ins.value('Family root', f'#{root_id}: {self.koma_name(root_id)}')
+        ins.value('Known Koma unlocks', str(len(unlocks)))
+        ins.value('Other unlock kinds', str(sum(c.active and c.kind != 1 for c in family.cells)))
+        if card.index != root_id:
+            ins.buttons(('Open root Koma', lambda idx=root_id: self.app.open_koma_card(idx)))
+        if not unlocks:
+            return
+        choices = [f'G{c.group} S{c.slot}: #{c.target_id} {self.koma_name(c.target_id)}'
+                   for c in unlocks]
+        lookup = dict(zip(choices, unlocks))
+        prior = getattr(self, '_jpower_selected', '')
+        initial = next((k for k, c in lookup.items() if c.target_id == card.index), None)
+        chosen = prior if prior in lookup and card.index == root_id else (initial or choices[0])
+        self._jpower_selected = chosen
+        self._jpower_choice_var = tk.StringVar(value=chosen)
+        def select():
+            self._jpower_selected = self._jpower_choice_var.get()
+            self.refresh_inspector()
+        ins.combo('Unlock link', self._jpower_choice_var, choices,
+                  'Original row group/slot, target Koma ID at +4', on_change=select, width=40)
+        cell = lookup[chosen]
+        ins.value('Selected target', f'#{cell.target_id} · {self.koma_name(cell.target_id)}')
+        ins.value('Six resource costs', ', '.join(map(str, cell.prices)),
+                  tip='Source u16 values at cell +8..+0x13; currency names not inferred')
+        ins.value('Gate/placement raw', f'0x{cell.gate_raw:02X} / 0x{cell.placement_raw:02X}')
+        ins.value('Cell offset', f'0x{cell.offset:05X} in bin/jpower.bin')
+        ins.buttons(('Open target Koma', lambda idx=cell.target_id: self.app.open_koma_card(idx)),
+                    ('Edit six resource costs…', lambda c=cell: self._edit_jpower_costs(c)))
+        ins.evidence('J-Power Koma link', 'Direct',
+                     'ov05 021653AC indexes 0x130 rows / 0x14 cells; '
+                     '02164234 tests kind, 021646F4 grants kind=1 target at +4 via 02075F98')
+        ins.evidence('Six resource costs', 'Direct',
+                     'ov05 02164458 reads six consecutive u16 costs from cell +8; '
+                     'resource name/meaning not inferred')
+        ins.evidence('Upgrade dependencies', 'Unknown',
+                     'ov05 0216458C traverses previous rows and placement modifiers; '
+                     'family grouping does not prove a linear prerequisites chain')
+
+    def _edit_jpower_costs(self, cell):
+        if self._jpower is None:
+            return
+        initial = ', '.join(map(str, cell.prices))
+        raw = simpledialog.askstring('J-Power resource costs',
+                                     'Six original u16 costs (0-65535), comma-separated.\n'
+                                     'Only this 12-byte cost vector changes.',
+                                     initialvalue=initial, parent=self.app)
+        if raw is None:
+            return
+        try:
+            values = [int(v.strip()) for v in raw.replace(',', ' ').split()]
+            updated = self._jpower.replace_costs(cell.row, cell.group, cell.slot, values)
+        except (ValueError, IndexError) as exc:
+            messagebox.showerror('J-Power costs', str(exc), parent=self.app)
+            return
+        if updated.raw == self._jpower.raw:
+            return
+        self.checkpoint('edit J-Power resource costs')
+        self._jpower = updated
+        self._jpower_dirty = updated.raw != self.app.root_data.read(jpower.PATH)
+        self.refresh_inspector()
+        self.app.update_dirty()
+        self.app.status.set('J-Power source costs edited; Apply Koma, then Save to write bin/jpower.bin')
 
     def _inspect_passive_ability(self, ins, card):
         """Decoded original ability text and numeric descriptor, never invented bonuses."""
@@ -993,10 +1087,15 @@ class KomaWorkspace(SuiteWorkspace):
             return None
         return (self.kf.build(), self.panel, self._dirty,
                 self.cat.cards.build() if self.cat else None,
-                self.cat.shapes.build() if self.cat else None)
+                self.cat.shapes.build() if self.cat else None,
+                self._jpower.build() if getattr(self, '_jpower', None) is not None else None)
 
     def restore(self, snap):
-        data, panel, _, cards, shapes = snap
+        data, panel, _, cards, shapes = snap[:5]
+        purchase_data = snap[5] if len(snap) >= 6 else None
+        if purchase_data is not None:
+            self._jpower = jpower.parse(purchase_data)
+            self._jpower_dirty = purchase_data != self.app.root_data.read(jpower.PATH)
         self.kf = koma.parse(data)
         self.kf.image_dirty = True
         self._dirty = data != getattr(self, '_orig', None)
@@ -1015,6 +1114,9 @@ class KomaWorkspace(SuiteWorkspace):
         self.refresh()
 
     def _revert_cards(self):
+        if getattr(self, '_jpower_dirty', False):
+            self._jpower = jpower.parse(self.app.root_data.read(jpower.PATH))
+            self._jpower_dirty = False
         if self.cat and (self._cards_dirty or self._shape_dirty):
             self.cat.shapes = kshape.ShapeTable.parse(self.app.root_data.read(komacards.SHAPES))
             self.cat.cards = kshape.CardTable.parse(self.app.root_data.read(komacards.CARDS), self.cat.shapes)
@@ -1023,7 +1125,8 @@ class KomaWorkspace(SuiteWorkspace):
 
     @property
     def dirty(self):
-        return self._dirty or self._cards_dirty or self._shape_dirty
+        return (self._dirty or self._cards_dirty or self._shape_dirty or
+                getattr(self, '_jpower_dirty', False))
 
     def apply(self):
         if not self.kf or not self.dirty:
@@ -1054,6 +1157,15 @@ class KomaWorkspace(SuiteWorkspace):
             if hasattr(self.app, '_move_xrefs'):
                 self.app._move_xrefs = None
                 self.app._move_xrefs_error = ''
+        if getattr(self, '_jpower_dirty', False) and self._jpower is not None:
+            if self.cat is not None:
+                problems = self._jpower.validate_cards(self.cat.cards.cards)
+                if problems:
+                    messagebox.showerror('J-Power', '; '.join(problems[:5]), parent=self.app)
+                    return
+            self.app.root_data.write_file(jpower.PATH, self._jpower.build())
+            self._jpower_dirty = False
+            done.append(jpower.PATH)
         self.refresh()
         if hasattr(self.app, 'roster_browser'):
             self.app.roster_browser.refresh_from_staged()

@@ -59,8 +59,16 @@ def shape_label(code: int) -> str:
 
 
 class EditorApp(tk.Tk):
+    """Tk root with lifecycle-owned delayed callbacks.
+
+    Tkinter's default after() registers a transient Tcl command but does not
+    cancel the timer when its Python callback is destroyed. Track all root-
+    owned jobs so the Tcl event queue is empty before root teardown.
+    """
     def __init__(self, data_root: str | None = None):
         T.dpi_aware()
+        self._scheduled_jobs = set()
+        self._closing = False
         super().__init__()
         self.title('JUS Editor')
         self.geometry('1680x1000')
@@ -610,10 +618,51 @@ class EditorApp(tk.Tk):
         return _operation(self)
 
 
+    def after(self, ms, func=None, *args):
+        if func is None:
+            return super().after(ms)
+        if self._closing:
+            return None
+        token = [None]
+        def run():
+            self._scheduled_jobs.discard(token[0])
+            if not self._closing:
+                func(*args)
+        token[0] = super().after(ms, run)
+        self._scheduled_jobs.add(token[0])
+        return token[0]
+
+    def after_idle(self, func, *args):
+        if self._closing:
+            return None
+        token = [None]
+        def run():
+            self._scheduled_jobs.discard(token[0])
+            if not self._closing:
+                func(*args)
+        token[0] = super().after_idle(run)
+        self._scheduled_jobs.add(token[0])
+        return token[0]
+
+    def after_cancel(self, job):
+        if job is None:
+            return
+        self._scheduled_jobs.discard(job)
+        super().after_cancel(job)
+
     def destroy(self):
+        if self._closing:
+            return
         self._stop_play()
-        if getattr(self, '_audio_poll_job', None):
-            self.after_cancel(self._audio_poll_job)
+        self._closing = True
+        # Invalidate all callbacks, including deferred viewport sizing,
+        # redraw, workspace switch and in-flight file-load polling jobs.
+        for job in tuple(self._scheduled_jobs):
+            try:
+                self.after_cancel(job)
+            except tk.TclError:
+                pass
+        self._scheduled_jobs.clear()
         if self._audio:
             self._audio.close()
         super().destroy()

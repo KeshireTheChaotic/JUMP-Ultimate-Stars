@@ -6,6 +6,7 @@ Linux CI: xvfb-run -a python tests/gui_level_smoke.py
 import sys
 import time
 import tempfile
+import struct
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
@@ -24,7 +25,10 @@ def make_data(root: Path):
                           write_tiled4([1] * 64, 8, 8) + write_tiled4([7] * 64, 8, 8))
     bg = alar.Archive(entries=[alar.Entry('bg_aa_00.atm', m.build(), 0x46000001),
                                   alar.Entry('bg_aa_00.dig', image.build(), 0x42000001)]).build()
-    stage = alar.Archive(entries=[alar.Entry('stage/bg_aa.aar', bg, 0x47000001)]).build()
+    camera = struct.pack('<6hBBH8h',-432,-400,255,288,768,799,1,4,0,
+                         -432,-400,-432,-656,-592,-656,-592,-400)
+    stage = alar.Archive(entries=[alar.Entry('stage/bg_aa.aar', bg, 0x47000001),
+                                  alar.Entry('stage/bg_aa.cam', camera, 0x4A000001)]).build()
     (root / 'stage/stage.aar').write_bytes(stage)
     dummy = alar.Archive(entries=[alar.Entry('dummy.bin', b'abcd')]).build()
     (root / 'chr/ChrArc.aar').write_bytes(alar.Archive(
@@ -58,11 +62,33 @@ def main():
             assert w.dirty
             w.apply()
             assert not w.dirty and app.root_data.dirty_files()
+            from unittest.mock import patch
+            from jus_formats.stagecamera import StageCamera
+            assert w.stage.members.get('cam')
+            path = w.stage.members['cam']
+            original = app.root_data.read(path)
+            w.sel_overlay = 'cam'
+            w.refresh_inspector()
+            with patch('app.workspaces.level.simpledialog.askstring',
+                       return_value='1, -200, -250'):
+                w._edit_camera_point()
+            assert w.camera_dirty
+            self_cam = StageCamera.parse(w._camera_bytes)
+            assert self_cam.vertices[1] == (-200, -250)
+            app.undo()
+            assert w._camera_bytes == original and not w.camera_dirty
+            app.redo()
+            assert w.camera_dirty
+            w.apply()
+            assert not w.camera_dirty
+            assert StageCamera.parse(app.root_data.read(path)).vertices[1] == (-200, -250)
+            assert app.root_data.dirty_files()
             with tempfile.TemporaryDirectory() as out_tmp:
                 app.root_data.save(out_tmp)
                 new = DataRoot(Path(out_tmp)).read(w.sel_layer.atm_path)
                 assert altm.parse(new).get(0, 0) == w.brush
-            print('OK: Level paint → undo/redo → Apply → Save → reload')
+            assert app.root_data.read(path) != original
+            print('OK: Level ALTM + camera source edit → undo/redo → Apply → Save → reload')
         finally:
             app.destroy()
 

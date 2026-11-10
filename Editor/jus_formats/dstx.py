@@ -278,8 +278,28 @@ class LayoutTable:
         return 2 if self.mode6 else 1
 
     def build(self) -> bytes:
-        """Byte-identical read-only round trip; no unverified edits."""
+        """The exact original record, with any explicitly patched map cells."""
         return self.raw
+
+    def replace_cell(self, panel_index: int, x: int, y: int, value: int) -> 'LayoutTable':
+        """Edit a panel-local u8/u16 source tilemap cell without touching metadata.
+
+        These coordinates are within an individual tile-panel, not the screen.
+        The engine's panel placements remain hard-coded/unknown.
+        """
+        if not 0 <= panel_index < len(self.panel_maps):
+            raise IndexError('DSTX tile-panel index out of range')
+        panel = self.panel_maps[panel_index]
+        if not (0 <= x < panel.tiles_w and 0 <= y < panel.tiles_h):
+            raise IndexError('DSTX panel tile coordinates out of range')
+        limit = (1 << (8 * panel.cell_bytes)) - 1
+        if not isinstance(value, int) or not 0 <= value <= limit:
+            raise ValueError(f'DSTX panel tile entry must be 0..0x{limit:X}')
+        auxiliary_start = 8 + 4 * (len(self.panels) + 1)
+        at = auxiliary_start + panel.offset + (y * panel.tiles_w + x) * panel.cell_bytes
+        patched = bytearray(self.raw)
+        patched[at:at + panel.cell_bytes] = value.to_bytes(panel.cell_bytes, 'little')
+        return parse_layout(bytes(patched))
 
 
 def parse_layout(blob: bytes) -> LayoutTable:

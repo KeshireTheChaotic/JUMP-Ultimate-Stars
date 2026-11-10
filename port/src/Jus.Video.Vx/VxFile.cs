@@ -58,4 +58,9 @@ public sealed class VxFile
         _data.AsSpan(_blocks[i] + 4, BinaryPrimitives.ReadUInt16LittleEndian(_data.AsSpan(_blocks[i])) - 2);
 
     public VxDecoder CreateDecoder() => new(Width, Height, Quantizer);
+
+    /// <summary>The audio codebook (3,124 = 0xC34 bytes at +0x24's offset).</summary>
+    public ReadOnlySpan<byte> AudioCodebook => _data.AsSpan(AudioCodebookOffset, VxAudioDecoder.CodebookSize);
+
+    public VxAudioDecoder CreateAudioDecoder() => new(AudioCodebook);
 }

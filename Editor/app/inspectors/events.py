@@ -1,6 +1,7 @@
 """Original-source spawned effect, physics, sound, and NoteTrack Inspector panels."""
 from __future__ import annotations
 import re
+import struct
 from app import theme as T
 from jus_formats import almt,eventops,notetrack
 from jus_package import motion,sounds,spawns
@@ -212,4 +213,138 @@ def _inspect_notes(editor, ins, tr):
     ins.buttons(('⚑ Add event here', editor.add_note_event, 'Accent.TButton'),
                 ('Edit events…', editor.edit_note_events))
     ins.buttons(('Edit as text…', editor.edit_track), ('Delete @ tick', editor.delete_selected_key))
+
+
+# ------------------------------------------------------------ inline event editing
+def render_note_event_editors(editor, ins, tr):
+    """Inline editors for every NoteTrack event at the selected tick (after _inspect_notes)."""
+    try:
+        nt = notetrack.parse(tr.encoded())
+    except ValueError:
+        return
+    t = editor.sel_key if editor.sel_key is not None else editor.tick
+    here = [loc for loc in eventops.list_events(nt) if loc.tick == t]
+    if not here:
+        return
+    ins.section(f'Edit events @ {t}', note='Branch targets list this move\'s Marker labels; '
+                'each Apply is one undo step.')
+    labels = _marker_labels(editor)
+    for n, loc in enumerate(here):
+        _event_editor(editor, ins, tr, loc, n, labels)
+_RANGES = {'b': (-128, 127), 'B': (0, 255), 'h': (-32768, 32767), 'H': (0, 65535),
+           'i': (-2**31, 2**31 - 1), 'I': (0, 2**32 - 1)}
+
+
+def _marker_labels(editor) -> list[int]:
+    """Marker values in the current move: the labels a branch target can seek to."""
+    out = set()
+    move = getattr(editor, 'move', None)
+    for node in (move.nodes if move else ()):
+        for track in (node.tracks if node else ()):
+            if track.field == 'Marker' and not track.opaque:
+                vals = [k.value for k in track.keys] if track.keyed else [track.value]
+                out.update(v for v in vals if isinstance(v, int))
+    return sorted(out)
+
+
+def target_choices(labels, signed=True) -> dict[str, int]:
+    """Branch-target dropdown: -1 (none) plus this move's Marker labels that fit the byte."""
+    lo, hi = (-128, 127) if signed else (0, 255)
+    out = {'-1 — no branch': -1} if signed else {}
+    for v in labels:
+        if lo <= v <= hi and v != -1:
+            out[f'{v} — Marker label {v}'] = v
+    return out
+
+
+def _commit(editor, track, data, label):
+    """Validate and store an edited NoteTrack as one undoable step."""
+    for ev in eventops.list_events(data):
+        eventops.validate_event(data, ev, editor.move.duration)
+    raw = data.build()
+    notetrack.parse(raw)
+    if raw == track.encoded():
+        return
+    snap = editor._almt_snapshot()
+    track.raw = raw
+    track.opaque = True
+    track.keyed = True
+    track.touch()
+    editor._track_done(label, snap)
+
+
+def _event_editor(editor, ins, track, loc, n, labels):
+    import tkinter as tk
+    from tkinter import messagebox
+    cmd = loc.command
+    col = T.EVENT_COLOURS.get(cmd.opcode >> 8, T.FG)
+    ins.value(f'#{n + 1} {eventops.category(cmd.opcode).split(" /")[0]}', editor.command_text(cmd), colour=col)
+    opcodes = {eventops.opcode_label(op): op for op in sorted(notetrack.OPCODES)}
+    op_var = tk.StringVar(master=ins, value=eventops.opcode_label(cmd.opcode))
+    values = cmd.values()
+
+    def change_opcode():
+        op = opcodes.get(op_var.get())
+        if op is None or op == cmd.opcode:
+            return
+        data = notetrack.parse(track.encoded())
+        new = notetrack.Command.from_values(op, [0] * len(eventops.argument_types(op)))
+        if op >> 8 == 0:              # branches start with "no branch" targets
+            vals = new.values()
+            for i in eventops.branch_target_args(op):
+                if eventops.argument_types(op)[i] == 'b':
+                    vals[i] = -1
+            new = notetrack.Command.from_values(op, vals)
+        eventops.change_event(data, loc.key_index, loc.command_index, loc.tick, new)
+        _commit(editor, track, data, f'Change event to {notetrack.OPCODES[op].name}')
+
+    ins.combo('Event', op_var, list(opcodes), 'Opcode (category: branch, physics/state, presentation, '
+              'character action, audio)', on_change=change_opcode, width=30)
+    if values is None:
+        ins.value('Arguments', cmd.args.hex(' ') or '(none)', colour=T.MUTED)
+        return
+    kinds = eventops.argument_types(cmd.opcode)
+    names = eventops.argument_labels(cmd.opcode)
+    targets = set(eventops.branch_target_args(cmd.opcode))
+    readers = []
+    for i, (kind, name, value) in enumerate(zip(kinds, names, values)):
+        choices = None
+        if i in targets:
+            choices = target_choices(labels, signed=kind == 'b')
+            name = 'Label' if cmd.opcode == 0x0013 else ('Branch target' if len(targets) == 1 else f'Target ({name})')
+        else:
+            choices = eventops.argument_choices(cmd.opcode, i, values)
+        if choices is not None:
+            current = next((k for k, v in choices.items() if v == value), None)
+            if current is None:
+                current = f'{value} — custom'
+                choices = {**choices, current: value}
+            var = tk.StringVar(master=ins, value=current)
+            ins.combo(name[:1].upper() + name[1:], var, list(choices), width=30,
+                      tip='Marker labels of this move (target n seeks to Marker value n)' if i in targets else None)
+            readers.append(lambda var=var, choices=choices: choices[var.get()])
+        else:
+            lo, hi = _RANGES.get(kind, (-2**31, 2**31 - 1))
+            var = tk.StringVar(master=ins, value=str(value))
+            ins.spin(name[:1].upper() + name[1:], var, lo, hi)
+            readers.append(lambda var=var: int(var.get(), 0))
+    if cmd.opcode == 0x0300 and values:
+        ins.value('Meaning', eventops.chara_action_text(values), colour=T.MUTED)
+
+    def apply():
+        try:
+            new_values = [read() for read in readers]
+            if new_values == values:
+                return
+            data = notetrack.parse(track.encoded())
+            typed = notetrack.Command.from_values(cmd.opcode, new_values)
+            need = struct.calcsize('<' + cmd.info.args)
+            # keep the original reserved/padding bytes after the typed arguments
+            new = notetrack.Command(cmd.opcode, typed.args[:need] + cmd.args[need:])
+            eventops.change_event(data, loc.key_index, loc.command_index, loc.tick, new)
+            _commit(editor, track, data, f'Edit {cmd.name}')
+        except (ValueError, OverflowError, KeyError) as exc:
+            messagebox.showerror('NoteTrack event', str(exc), parent=ins.winfo_toplevel())
+
+    ins.buttons((f'Apply #{n + 1}', apply, 'Accent.TButton'))
 

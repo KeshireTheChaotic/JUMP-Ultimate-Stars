@@ -62,6 +62,10 @@ public interface ISound
     void FadeOutMusic(int frames) { }
     /// <summary>FUN_02073410: stop all sound at once (soft reset).</summary>
     void StopAll() { }
+    /// <summary>Movie audio: append mono 16-bit samples at <paramref name="rate"/> Hz to the stream.</summary>
+    void QueueStream(short[] samples, int rate) { }
+    /// <summary>Drop the queued stream audio.</summary>
+    void StopStream() { }
 }
 
 /// <summary>Everything the game needs from the operating system.</summary>

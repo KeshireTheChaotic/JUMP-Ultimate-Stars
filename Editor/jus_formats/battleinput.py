@@ -9,11 +9,14 @@ Verified 2026-11-06 against overlay 6:
   first word is the move's offset inside the character's resource block
   (move id = res_base & 0xFFFF00 | offset); specials add 2 per koma size.
 
-Input bits as the code tests them: 0x01 Up, 0x02 Down, 0x04 Left, 0x08 Right,
-0x40 X, 0x80 B, 0x100 Y, 0x1000 (probably Select).  The code proves the
-combinations; the button names (B weak, Y strong, X special, Up+X second
-special, Select ultimate) come from the game's control guides, and 0x1000 =
-Select is provisional.
+Input bits in the *battle actor* at +0x6C: 0x01 Up, 0x02 Down,
+0x04/0x08 facing-dependent horizontal directions, 0x10/0x20 jump state,
+0x40 special, 0x80 weak, 0x100 strong, 0x1000 ultimate, and
+0x4000/0x8000 Koma hotkey slots 1/2. Physical labels come from original
+control guides, not from equating numeric masks with the hardware pad.
+ARM9 main 0203A610 proves a DISTINCT KEYINPUT/EXTKEYIN-to-HwPad mapping;
+the intervening HwPad-to-battle-actor+0x6C mapping has not been traced.
+See jus_formats/padtrace.py for both source-backed namespaces.
 """
 from __future__ import annotations
 
@@ -29,7 +32,8 @@ MOVE_CONTROLS = {
     0x25: ('Down + Y', 8, 'crouch mode, input 0x102'),
     0x26: ('Air B', 9, 'air mode, input 0x80'),
     0x27: ('Air Y', 10, 'air mode, input 0x100'),
-    0x18: ('Select (probable) — ultimate', 11, 'input 0x1000; physical key provisional'),
+    0x18: ('Select (guide-corroborated) — ultimate', 11,
+           'battle actor input 0x1000; original physical Select-to-actor conversion untraced'),
     0x28: ('Scripted follow-up', 12, 'actor +0xD1 set; not a button'),
 }
 for _size in range(4, 9):
@@ -50,7 +54,7 @@ def control_for(move_id: int) -> str | None:
 # Original actor+0x6C bitmask predicates, 0x0215A720 (ground), 0x0215A8C0
 # (air), 0x0215A8F8 (crouch). These are raw input masks, NOT invented
 # movement/move names. Physical labels are guide-derived; bit0x1000's
-# physical identity remains unverified.
+# physical identity at actor+0x6C remains unverified; consult padtrace.py.
 SOURCE_INPUT_CONDITIONS = {
     0x1E: ('ground', 'input & 0x80', 'facing-forward predicate false', '0215A720'),
     0x1F: ('ground', 'input & 0x100', 'facing-forward predicate false', '0215A720'),
@@ -85,3 +89,30 @@ def source_trace(move_id: int) -> tuple[str, str, str, str] | None:
     and a NoteTrack follow-up permission is distinct from accepting the input.
     """
     return SOURCE_INPUT_CONDITIONS.get(move_id & 0xff)
+
+
+# Exact ov06 literal dispatch call sites to FUN_02157450, original Ghidra
+# functions_layout/arm9_ov06/arm9_ov06_*.c. This is a source-call index,
+# NOT a button map. Dynamic args and indirect dispatch cannot be named here.
+ENGINE_LITERAL_MOVE_DISPATCH: dict[int, tuple[str, ...]] = {
+    0x00: ('0215D2E4',),
+    0x01: ('0215D760',),
+    0x02: ('0215D91C',),
+    0x03: ('0215EAEC',),
+    0x04: ('0215DBA4', '0215DF18', '0215E2DC', '0215E4AC'),
+    0x05: ('0215DF18',),
+    0x06: ('0215DD48', '0215DF18'),
+    0x07: ('0215BF70', '0215D2E4'),
+    0x08: ('0215BD50', '0215D2E4', '0215D3B4', '0215DBA4', '0215E2DC', '0215E94C'),
+    0x0A: ('0215C488',),
+    0x0B: ('0215AF34', '0215C2F8'),
+    0x0C: ('0215B72C', '0215B7CC', '0215C824'),
+    0x0E: ('0215BEA8',),
+    0x0F: ('0215B818', '0215BB34', '0215C090', '0215C488', '0215C824', '0215CD2C'),
+    0x10: ('0215C824',),
+    0x13: ('0215BA40',),
+    0x14: ('0215E5C0',),
+    0x15: ('0215E724',),
+    0x16: ('0215BD18', '0215E854'),
+    0x17: ('0215BB9C', '0215BC44', '0215CC54'),
+}

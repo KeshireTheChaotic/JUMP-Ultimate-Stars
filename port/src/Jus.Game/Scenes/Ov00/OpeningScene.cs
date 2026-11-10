@@ -22,7 +22,7 @@ namespace Jus.Game.Scenes.Ov00;
 ///
 /// Not translated: the PassMark password entry (0x02151570, callback 0x0214E6D0: a code from
 /// bin/koma.bin plays SE 0x78/9, sets +0x57 = 1 and shows an overlay-12 animation), Secret_Create,
-/// the overlay-12 object 0x021BA49C, movie audio, and closing the lid (sleep).</summary>
+/// the overlay-12 object 0x021BA49C, and closing the lid (sleep). The movie's audio plays (MoviePlayer).</summary>
 public sealed class OpeningScene : ISceneTask
 {
     /// <summary>Brightness ramp run every vblank by 0x0214E61C (fields +0x58..+0x5C).</summary>
@@ -88,7 +88,7 @@ public sealed class OpeningScene : ISceneTask
         _game = game;
         var p = game.Platform;
         p.Sound.FadeOutMusic(0);                                                   // FUN_02073410: stop sound
-        _movie = new MoviePlayer(p.Assets.Read("opening/opening.vx"));             // Movie_Create(0, "opening/opening.vx", 0)
+        _movie = new MoviePlayer(p.Assets.Read("opening/opening.vx"), p.Sound);    // Movie_Create(0, "opening/opening.vx", 0)
         _movie.FrameDecoded += OnMovieFrame;
         _movie.Ended += OnMovieEnded;
         var res = new ResourceManager(p.Assets);
@@ -98,7 +98,7 @@ public sealed class OpeningScene : ISceneTask
         var starImage = DsigImage.Load(res, "opening/star00.dig");
         _star = new TileBackground(starImage, AltmMap.Load(res, "opening/star00.atm")) { Visible = false };
         _starAnims = PaletteAnimation.Load(starImage, res.Read("opening/star.bin"));   // CommonPaletteAnime_Load(.., 0x80)
-        p.Log("Opening: PassMark/Secret input, movie audio and the overlay-12 effect are not translated yet");
+        p.Log("Opening: PassMark/Secret input and the overlay-12 effect are not translated yet");
         _ramp.Start(-16, 2, 8, bottomOnly: false);                                 // FUN_0214e5b8(this, -16, 2, 8, 0)
     }
 

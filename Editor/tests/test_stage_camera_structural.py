@@ -26,6 +26,18 @@ class StageCameraTests(unittest.TestCase):
         with self.assertRaises(IndexError):cam.replace_vertex(4,0,0)
         with self.assertRaises(ValueError):cam.replace_vertex(0,40000,0).build()
 
+    def test_edit_header_pair_preserves_every_other_byte(self):
+        from struct import pack
+        sample = pack('<6hBBH8h', -432, -400, 255, 288, 768, 799, 1, 4, 0,
+                      -432,-400,-432,-656,-592,-656,-592,-400)
+        cam = StageCamera.parse(sample)
+        changed = cam.replace_header_pair(1, -300, 350).build()
+        self.assertEqual(changed[:4], sample[:4])
+        self.assertEqual(changed[8:], sample[8:])
+        self.assertEqual(StageCamera.parse(changed).header_pairs[1],(-300,350))
+        with self.assertRaises(IndexError):cam.replace_header_pair(3,0,0)
+        with self.assertRaises(ValueError):cam.replace_header_pair(0,99999,0)
+
     @unittest.skipUnless((DATA/"stage/stage.aar").is_file(),"original stage data absent")
     def test_every_original_camera_rebuilds_identically(self):
         arc=open_nested((DATA/"stage/stage.aar").read_bytes())

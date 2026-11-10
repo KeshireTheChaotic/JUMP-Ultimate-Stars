@@ -38,6 +38,45 @@ public sealed partial class SoundEngine
         for (int i = 0; i < 16; i++) _globalVars[i] = -1;
     }
 
+    private readonly Queue<short[]> _stream = new();
+    private short[]? _streamBlock;
+    private double _streamPos, _streamStep;
+
+    /// <summary>Append mono samples at <paramref name="rate"/> Hz (movie audio). Mixed like one DS channel at
+    /// full volume, centred, sample-and-hold resampled to <see cref="OutputRate"/>.</summary>
+    public void QueueStream(short[] samples, int rate)
+    {
+        lock (_players)
+        {
+            _streamStep = (double)rate / OutputRate;
+            _stream.Enqueue(samples);
+        }
+    }
+
+    public void StopStream()
+    {
+        lock (_players)
+        {
+            _stream.Clear();
+            _streamBlock = null;
+        }
+    }
+
+    /// <summary>Samples of stream audio still queued (for tests and hosts).</summary>
+    public int QueuedStreamSamples { get { lock (_players) return _stream.Sum(b => b.Length) + (_streamBlock is null ? 0 : _streamBlock.Length - (int)_streamPos); } }
+
+    private int NextStreamSample()
+    {
+        while (_streamBlock is null || _streamPos >= _streamBlock.Length)
+        {
+            if (_streamBlock is not null) _streamPos -= _streamBlock.Length;
+            if (!_stream.TryDequeue(out _streamBlock)) { _streamBlock = null; _streamPos = 0; return 0; }
+        }
+        int s = _streamBlock[(int)_streamPos];
+        _streamPos += _streamStep;
+        return s;
+    }
+
     /// <summary>Number of sequences still playing (for tests and hosts).</summary>
     public int ActiveSequences { get { lock (_players) return _players.Count; } }
 
@@ -125,6 +164,11 @@ public sealed partial class SoundEngine
                     Frame();
                 }
                 int l = 0, r = 0;
+                if (_streamBlock is not null || _stream.Count > 0)
+                {
+                    int sv = (NextStreamSample() * 127 >> 7) * 63 >> 7;   // one channel, volume 127, pan 64
+                    l += sv; r += sv;
+                }
                 foreach (var c in _ch)
                 {
                     if (!c.Active) continue;

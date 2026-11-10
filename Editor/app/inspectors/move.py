@@ -1,7 +1,9 @@
 """Original source-backed editor refresh_inspector responsibility (R08)."""
 import tkinter as tk
 from app import theme as T
-from jus_formats import almt,battleinput,roster
+from jus_formats import almt,battleinput,padtrace,roster
+from jus_formats.chrbin_semantics import REACTION_RESOURCE_PAIRS, native_reaction_route
+from app.inspectors.combat import render_move_contacts
 from jus_package import effectlinks
 from jus_package.project import split
 
@@ -82,6 +84,22 @@ def render_move_inspector(editor, hex_id, focus_value=False):
                 ins.value('Condition', guard)
                 ins.value('Code source', 'ov06 ' + function)
                 ins.value('Selected ALMT offset', hex_id(m.id & 0xFF, 2))
+                ins.evidence('Actor input → ALMT', 'Direct',
+                             'ov06 0215A720/0215A8C0/0215A8F8 → 02159EF8; '
+                             'native actor+0x6C selector, not the raw DS key mask')
+                ins.evidence('Physical key → actor input', 'Inferred',
+                             'Control-guide-correlated physical name only: '
+                             'hardware input 04000130/04000136 → HwPad '
+                             'main 0203A610 uses a DIFFERENT mask namespace. '
+                             'Intermediate translation to actor+0x6C untraced.')
+                if (m.id & 0xFF) == 0x18:
+                    ins.value('Physical Select hardware path',
+                              'KEYINPUT 0x0004 → HwPad 0x4000 (main 0203A610)')
+                    ins.value('Battle ultimate selector',
+                              'actor+0x6C bit 0x1000 → selector 11 → ALMT 0x18')
+                    ins.value('Translation status',
+                              'No verified HwPad 0x4000 → actor 0x1000 bridge',
+                              colour=T.WARN)
                 ins.text('The actor+0xC0 and +0xC4 masks can block a transition; '
                          'ground/air NoteTrack permissions (+0xF3/+0xF4) and '
                          'follow-up fields (+0xCC/+0xF6/+0xF7) alter eligibility. '
@@ -98,6 +116,43 @@ def render_move_inspector(editor, hex_id, focus_value=False):
             ins.text('No individually verified source move title. Code-call '
                      'sites for this numeric resource are cataloged separately; '
                      'a human-facing move name is not inferred from its position.')
+    if editor._battle_base_table():
+        offset = m.id & 0xFF
+        routes = [(route, 'primary' if pair[0] == offset else 'alternate')
+                  for route, pair in enumerate(REACTION_RESOURCE_PAIRS)
+                  if offset in pair]
+        if routes:
+            ins.section('Engine-driven reaction assignments',
+                        note='Damage response, not an input-button assignment')
+            for row_id, role in routes:
+                route = native_reaction_route(row_id)
+                ins.value(f'Reaction {row_id} ({role})',
+                          f'{route.interpretation}\n'
+                          f'callback 0x{route.callback_address:08X}')
+            ins.evidence('Reaction selector', 'Direct',
+                         'ov06 0215AF34, original 16-row ALMT reaction table '
+                         '0x021713E8 and callback table 0x021721A0')
+        movement = padtrace.ENGINE_MOVEMENT_ACTIONS.get(offset)
+        if movement:
+            label, function_path = movement
+            ins.section('Engine-driven movement state',
+                        note='Actor input/state transition, not a direct button assignment')
+            ins.value('Source role', label)
+            ins.value('Native transition path', function_path)
+            ins.evidence('Movement action', 'Direct',
+                         'Original ov06 state callbacks, distinct from physical-button selector table')
+        sites = battleinput.ENGINE_LITERAL_MOVE_DISPATCH.get(offset, ())
+        if sites:
+            ins.section('Native internal move dispatch',
+                        note='Code references only; these do not establish a button')
+            ins.value('Direct call sites', ', '.join('ov06 ' + addr for addr in sites))
+            ins.evidence('Literal resource offset', 'Direct',
+                         'Original ov06 callers of FUN_02157450; dynamic and indirect '
+                         'call sites are not represented')
+        if offset not in battleinput.MOVE_CONTROLS and not routes:
+            ins.value('Physical button', 'No native input-selector mapping established',
+                      colour=T.MUTED)
+        render_move_contacts(editor, ins, form, m)
     if editor.sel_virtual is not None and editor.sel_virtual.get('spawn') is not None:
         editor._inspect_spawn(ins, editor.sel_virtual)
         return
@@ -138,6 +193,8 @@ def render_move_inspector(editor, hex_id, focus_value=False):
     ins.section(f'{editor.almt.node_names[ni]} / {tr.field}', note=note)
     if tr.field == 'NoteTrack' and tr.opaque:
         editor._inspect_notes(ins, tr)
+        from app.inspectors.events import render_note_event_editors
+        render_note_event_editors(editor, ins, tr)
         return
     if tr.opaque:
         ins.value('Body', f'{len(tr.encoded())} raw bytes')

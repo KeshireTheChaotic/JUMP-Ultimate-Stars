@@ -320,6 +320,29 @@ def resolve_effect_selector(raw_signed: int, available_records: int | None = Non
     return EffectSelectorResolution(raw_signed, 'character effect', index)
 
 
+#: Single-byte chr/col fields with a traced reader: name -> (offset, signed, lo, hi).
+#: +0x00 main 0207D440 (zero vs nonzero branch; 0207FBD0 precedence compare),
+#: +0x01 ov06 0215AF34 (16-entry reaction table), +0x02/+0x03/+0x05/+0x07/+0x0C/+0x0D
+#: main 02080F14 (flash priority, signed status lane, contact magnitude,
+#: accumulator, knockback x/y).
+COL_EDIT_FIELDS = {
+    'class': (0x00, False, 0, 255),
+    'reaction': (0x01, False, 0, 15),
+    'flash_priority': (0x02, False, 0, 255),
+    'status': (0x03, True, -128, 127),
+    'contact': (0x05, True, -128, 127),
+    'accumulator': (0x07, True, -128, 127),
+    'knockback_x': (0x0C, True, -128, 127),
+    'knockback_y': (0x0D, True, -128, 127),
+}
+COL_FIELD_LABELS = {
+    'class': 'Class code (+0x00)', 'reaction': 'Reaction (+0x01)',
+    'flash_priority': 'Flash priority (+0x02)', 'status': 'Status (+0x03)',
+    'contact': 'Contact magnitude (+0x05)', 'accumulator': 'Accumulator (+0x07)',
+    'knockback_x': 'Knockback X (+0x0C)', 'knockback_y': 'Knockback Y (+0x0D)',
+}
+
+
 @dataclass(frozen=True)
 class ColRecord:
     """Raw 20-byte col metadata, separate from ALMT CollisionType IDs."""
@@ -345,6 +368,46 @@ class ColRecord:
         used by ov11's AI threat scorer. It is not final HP loss.
         """
         return struct.unpack_from('<b',self.raw,5)[0]
+
+    def replace_contact_values(self, magnitude: int, status: int, accumulator: int,
+                               knockback_x: int, knockback_y: int) -> 'ColRecord':
+        """Patch exactly five native signed source bytes, not final damage.
+
+        main 02080F14 reads byte +5 as magnitude, +3 as status channel,
+        +7 as accumulated contact term and +0x0C/+0x0D as knockback.
+        Other bytes are retained; note the +4 s32 scoring word overlaps
+        the edited +5/+7 bytes and will necessarily change too.
+        """
+        values = (magnitude, status, accumulator, knockback_x, knockback_y)
+        if any(not isinstance(v, int) or not -128 <= v <= 127 for v in values):
+            raise ValueError('Contact source fields must be signed 8-bit numbers')
+        updated = bytearray(self.raw)
+        for pos, value in zip((5, 3, 7, 12, 13), values):
+            updated[pos] = value & 0xFF
+        return type(self)(bytes(updated))
+
+    def field_values(self) -> dict[str, int]:
+        """Current value of every field in :data:`COL_EDIT_FIELDS`."""
+        out = {}
+        for name, (offset, signed, _lo, _hi) in COL_EDIT_FIELDS.items():
+            out[name] = struct.unpack_from('<b' if signed else '<B', self.raw, offset)[0]
+        return out
+
+    def replace_fields(self, **values: int) -> 'ColRecord':
+        """Patch named single-byte fields (see :data:`COL_EDIT_FIELDS`); other bytes are kept.
+
+        The +0x04 s32 word read by ov11's scorer overlaps +0x05/+0x07, so it
+        changes when contact or accumulator change.
+        """
+        updated = bytearray(self.raw)
+        for name, value in values.items():
+            if name not in COL_EDIT_FIELDS:
+                raise ValueError(f'Unknown col field {name!r}')
+            offset, signed, lo, hi = COL_EDIT_FIELDS[name]
+            if not isinstance(value, int) or not lo <= value <= hi:
+                raise ValueError(f'{COL_FIELD_LABELS[name]} must be {lo}..{hi}')
+            updated[offset] = value & 0xFF
+        return type(self)(bytes(updated))
 
     @property
     def contact_accumulator_delta(self) -> int:

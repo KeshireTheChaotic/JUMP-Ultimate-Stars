@@ -191,26 +191,34 @@ class ValueControls:
             elif f == 'LifeType':
                 choices = {'0 (policy 0)': 0, '−1 (0xFFFF)': 65535}
             elif f.startswith('CollisionType'):
-                namespace = tk.StringVar(master=ins, value='Global' if value < 256 else 'Character')
-                descriptor = tk.StringVar(master=ins, value=str(value if value < 256 else value-256))
-                self.variables.extend((namespace, descriptor))
-                def select_descriptor():
-                    index = int(descriptor.get(), 0)
-                    limit = 255 if namespace.get() == 'Global' else 65279
-                    if not 0 <= index <= limit:
-                        messagebox.showerror('Collision descriptor', f'Index must be 0–{limit}', parent=ins.winfo_toplevel())
-                        return
-                    var.set(str(index + (256 if namespace.get() == 'Character' else 0)))
-                    self.apply()
-                ins.combo('Descriptor table', namespace, ['Global', 'Character'], on_change=select_descriptor)
-                ins.spin('Descriptor index', descriptor, 0, 65279, on_change=select_descriptor)
+                # main 0207D440: 0 none, 1..0xFF builtin ROM records, 0x100+i chr/col row i.
+                from jus_package import movecombat
+                form = None
+                if getattr(self.editor, 'root_data', None) is not None:
+                    try:
+                        form = self.editor._move_source_form()[0]
+                    except (AttributeError, TypeError, ValueError):
+                        form = None
+                try:
+                    pairs = movecombat.collision_choices(self.editor.root_data, form) if form else []
+                except (OSError, KeyError, ValueError):
+                    pairs = []
+                if pairs:
+                    choices = {label: wid for wid, label in pairs}
+                else:
+                    choices = {'0 — none (no collision record)': 0}
+                    choices.update({f'0x{w:04X} — builtin record': w for w in range(1, 0x100)})
+                if value not in choices.values():
+                    choices[f'0x{value:04X} — no such row for this character'] = value
             if choices:
                 choice = tk.StringVar(master=ins, value=next((k for k, v in choices.items() if v == value), 'Custom'))
                 self.variables.append(choice)
                 def select():
                     var.set(str(choices[choice.get()]))
                     self.apply()
-                ins.combo('Preset', choice, list(choices), on_change=select)
+                ins.combo('Collision record' if f.startswith('CollisionType') else 'Preset',
+                          choice, list(choices), on_change=select,
+                          width=34 if f.startswith('CollisionType') else 22)
             if f in ('TextureID', 'BoundsIndex', 'PatternNo', 'GenerateID'):
                 from app.widgets.resource_picker import ResourcePicker, preview_widget
                 ins.widget(lambda parent: preview_widget(parent, self.editor, f, value))

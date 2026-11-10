@@ -171,15 +171,19 @@ class Tooltip:
         self.widget, self.text, self.delay = widget, text, delay
         self.tip = None
         self._after = None
+        self._timer_owner = widget.winfo_toplevel()
         widget.bind('<Enter>', self._schedule, add='+')
         widget.bind('<Leave>', self._hide, add='+')
         widget.bind('<ButtonPress>', self._hide, add='+')
+        widget.bind('<Destroy>', self._hide, add='+')
 
     def _schedule(self, _e=None):
-        self._after = self.widget.after(self.delay, self._show)
+        self._hide()
+        self._after = self._timer_owner.after(self.delay, self._show)
 
     def _show(self):
-        if self.tip or not self.text:
+        self._after = None
+        if self.tip or not self.text or not self.widget.winfo_exists():
             return
         x = self.widget.winfo_rootx() + 12
         y = self.widget.winfo_rooty() + self.widget.winfo_height() + 4
@@ -191,7 +195,10 @@ class Tooltip:
 
     def _hide(self, _e=None):
         if self._after:
-            self.widget.after_cancel(self._after)
+            try:
+                self._timer_owner.after_cancel(self._after)
+            except tk.TclError:
+                pass
             self._after = None
         if self.tip:
             self.tip.destroy()

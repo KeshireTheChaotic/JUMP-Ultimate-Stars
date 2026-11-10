@@ -53,6 +53,26 @@ class LayoutTables(unittest.TestCase):
                 with self.assertRaises(ValueError):
                     DstxFile.parse(blob)
 
+    def test_edit_local_tilemap_cell_changes_only_native_width(self):
+        for flag in (5, 6):
+            with self.subTest(flag=flag):
+                raw = self.make(flag)
+                src = parse_layout(raw)
+                changed = src.replace_cell(1, 2, 3, 0xAB if flag == 5 else 0xBEEF)
+                self.assertEqual(changed.build(), changed.raw)
+                self.assertEqual(changed.panels, src.panels)
+                self.assertEqual(changed.embedded, src.embedded)
+                self.assertEqual(changed.panel_maps[1].row(3)[2],
+                                 0xAB if flag == 5 else 0xBEEF)
+                differing = [i for i, (a, b) in enumerate(zip(raw, changed.raw)) if a != b]
+                self.assertGreaterEqual(len(differing), 1)
+                self.assertLessEqual(len(differing), 2 if flag == 6 else 1)
+                self.assertEqual(len(changed.raw), len(raw))
+                with self.assertRaises(IndexError):
+                    src.replace_cell(1, 3, 0, 0)
+                with self.assertRaises(ValueError):
+                    src.replace_cell(1, 2, 3, 0x100 if flag == 5 else 0x10000)
+
     def test_invalid_section_offset_and_nonzero_tail_rejected(self):
         for flag in (5, 6):
             with self.subTest(flag=flag):

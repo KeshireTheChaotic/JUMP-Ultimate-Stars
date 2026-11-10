@@ -126,13 +126,20 @@ Three modes: **Scenes** (default), **Screens** (archive background previews), an
 * The References workspace was dropped (2026-11-05): where-used browsing is not an edit.
   `jus_package/registry.py` stays as a library (tests, save checks) for future
   dependency-driven invalidation.
-* Level `.cam` and unclassified `.mob`/`.bin` fields remain read-only; known spawner, physics, collider and gimmick fields have bounded editing. Screen
-  native BG instances are now source-backed for 12 scenes; remaining untraced scenes stay preview-only/hidden.
+* Level `.cam` structural s16 header/point coordinates are editable with undo/redo and Apply;
+  their runtime camera/clamp semantics remain untraced. Unclassified `.mob`/`.bin` fields
+  remain read-only; known spawner, physics, collider and gimmick fields have bounded editing.
+  Screen native BG instances are source-backed where the ARM9 trace proves routing;
+  untraced scenes stay hidden rather than acquiring fabricated layer placements.
 * Emulator verification of ALTM rendering, effect draw order and pursuer motion.
 
 ### DSTX 0x05/0x06 diagnostic (2026-11-05)
 
-The Screen workspace now reads and inspects the four-byte tile-panel descriptors of these layouts, and displays their count/base tile/dimensions. See `docs/EFFECT_AND_FORMATS_TRACE_20261105.md`. Their auxiliary placement section remains opaque and read-only; this is not sprite/background drawing support.
+The Screen workspace reads original four-byte tile-panel descriptors and complete u8/u16
+panel-local maps, with bounded editing of individual source tilemap cells, undo/redo,
+and Apply staging. See `docs/EFFECT_AND_FORMATS_TRACE_20261105.md` and the 2026-11-10
+reconciliation below. Engine-defined screen placement remains untraced/read-only;
+local tilemap editing does not claim to position widgets on either physical LCD.
 
 
 ## Tutorial script editing and normal-path mission links (2026-11-07)
@@ -162,3 +169,137 @@ Deckmaking's one tutorial script is loaded via a separate overlay5 path.
 
 New Editor tests/test_tutorial_workspace.py; full regression suite passed
 327 tests, 1 skipped. No original Data, ROM, or Ghidra source was modified.
+
+## 2026-11-10 — Physical-key to battle-action trace continuation
+
+The original ARM7 037FEC3C and ARM9 main 0203A610 prove the 12-key
+KEYINPUT/EXTKEYIN-to-HwPad mapping; ov06 proves actor+0x6C action
+predicates, jump/guard state transitions and two Koma hotkey slots.
+The two input masks **are not identical** (hardware Select → HwPad
+0x4000, but actor 0x1000 selects Ultimate; actor 0x4000 is hotkey 1).
+The intervening conversion remains untraced. Editor move inspection
+now marks original-code evidence separately from guide-derived physical
+button labels and displays five source-backed internal movement states.
+See [BATTLE_INPUT_PHYSICAL_KEYS_TRACE_20261110.md](BATTLE_INPUT_PHYSICAL_KEYS_TRACE_20261110.md).
+
+## 2026-11-10 — Level/Screen authoring and battle data cross-references
+
+**Scope:** P1 GUI callback teardown and P2 native-data Level/Screen authoring.
+Battle AI and Character Forge are excluded. Original game data and Ghidra
+exports are read-only: edits stage through DataRoot and require Apply/Save.
+
+### P1 — GUI callback lifecycle
+
+`EditorApp.after` and `after_idle` now track Tk root-owned pending jobs,
+unregister jobs on execution and cancel the remaining jobs before root
+destruction. Deferred `SuiteWorkspace.init_sashes` timers and tooltips use
+the root-owned callback lifecycle; Tooltip also cancels on widget destruction.
+A four-cycle real GUI smoke test opened/switches through six workspaces
+and closes without pending Tcl jobs or orphaned callback errors. No
+alteration to the game's runtime. Test script:
+`D:\Library\Development\JUS\.test_tmp\gui_teardown_regression.py`.
+
+### P2 — Editing original Level and Screen source assets
+
+Level's stage-camera inspector now edits original signed-16 header pairs
+(+0x00/+0x04/+0x08) and source vertices (+0x10 onwards) using
+`StageCamera.replace_vertex` and `replace_header_pair`. Bounds and
+original file shape are validated before staging; Level history supports
+undo/redo and Apply stages the existing .cam member. All 36 original .cam
+records are byte-exact in the unedited parser. Camera mode, scroll, clamp,
+and runtime projection are still code-owned or untraced. The preview is
+NOT presented as a hardware-verifiable camera simulation.
+
+Screen Elements' DSTX type 0x05/0x06 now edits individual source
+panel-local tilemap cells with validated (panel,x,y,u8/u16 entry),
+undo/redo and Screen Apply. The correct original auxiliary map offset is
+`8+4*(panel_count+1)+panel_map.offset`, followed by row-major entries
+of native entry width. `LayoutTable.replace_cell` patches only the
+selected 1- or 2-byte cell. This is not engine widget placement: the
+native screen X/Y, runtime affine transforms and active display branch
+remain untraced. All 50 original map layouts continue byte-exact
+unmodified; dedicated GUI smokes exercise edit/undo/redo/Apply.
+
+### Move input, internal action IDs and combat record provenance
+
+Original ov06 `0215A720` (ground), `0215A8C0` (air), `0215A8F8`
+(crouch) and `02159EF8` prove the active button selector table at
+`021712B8`. Previously verified B/Y, direction+B/Y and X special
+actions remain mapped as before. No additional *physical-button*
+assignments were proven among unlabelled offsets in this pass: do not
+promote automatic movement/reaction states into input combinations.
+Select/bit 0x1000's physical identity remains provisional.
+
+New `battleinput.ENGINE_LITERAL_MOVE_DISPATCH` records exactly
+**20 original ALMT offsets**, referenced from **41 direct literal
+caller/function pairs** of ov06 `FUN_02157450`. It deliberately does not
+assign button names to those runtime internal calls or pretend to include
+indirect dispatch. The Move inspector displays native call-site addresses,
+alongside existing 16-row defender reaction selectors
+(ov06 `021713E8`/`021721A0`), differentiating engine-driven animations
+from interactive attacks. The inspector also distinguishes grabbed-victim
+poses from attack combos.
+
+For selected battle ALMT moves, `movecombat.collisions_for_move`
+resolves original `CollisionTypeN` track values through main
+`0207D440`: 1..255 are ROM built-ins at the native table, 0x100+
+indexes the character's `chr/ChrBin.aar|chr/col/<form>.bin` row at
+(work-0x100). The inspector displays the **native source numbers**:
+
+- signed byte +0x05 = contact magnitude; main `02080F14` scales this
+  by 0x100 and performs further conditional runtime calculations
+- signed byte +0x03 = status-channel selector (sign retained; 0 disables)
+- signed byte +0x07 = contact accumulator delta
+- signed bytes +0x0C/+0x0D = knockback coefficients
+- +0x01 = native defender reaction route; +0x02 impact flash priority
+- signed bytes +0x0E/+0x0F = effect routing (ov06 `02153CE8`)
+
+These fields are **not final HP damage**, and numeric statuses are not
+silently renamed poison/burn/etc. The Move inspector can stage a bounded
+5-byte signed-value source edit with full-row validation. The original
+`ColRecord.replace_contact_values` preserves all other bytes (note
++0x05/+0x07 overlap the independently interpreted +0x04 signed32
+AI scoring lane). The edits are staged in the existing ChrBin archive
+and require Save to persist.
+
+### Koma evolution / unlock families
+
+Original `bin/jpower.bin` is 311 records of size 0x130; each root record
+contains five groups of three 0x14-byte purchase cells (ov05
+`02165398` and `021653AC`). Native `021646F4` proves cell kind=1
+unlocks Koma id u16 at +0x04. Kind 2..10 cells affect distinct saved
+data sources, **not Koma evolution**. Source kind-1 links form
+**311 unique roots and 565 distinct Koma targets** (876 referenced
+cards of the 890 original Koma entries). All 565 source-target pairs
+remain within their source series; roots and targets do not overlap.
+Each cell includes **six u16 J-Power resource costs at +0x08**,
+tested by ov05 `02164458`.
+
+The Koma inspector now shows a source family root, exact group/slot
+and target Koma, per-cost values, unknown raw gate/placement bytes,
+and navigation to root/target cards. Edit six costs stages only their
+12 source bytes through the Koma history; Apply stages
+`bin/jpower.bin`. Original IDs and family link structure are
+validated prior to writing. Excluded from inferred semantics:
+a linear upgrade ordering and all eligibility prerequisites. Native
+`0216458C` checks a previous group and placement modifier table
+`DAT_0216D738`; this is not proof that every neighboring Koma is a
+direct prerequisite. Further tracing of its source consumer is required
+before drawing a dependency DAG.
+
+**Validation:** 36/36 CAM source files, 50/50 DSTX tile-panel layouts,
+311/311 J-Power root records and 565/565 Koma target references
+valid. Synthetic GUI Level/Screen authoring tests and native-source
+Koma edit/undo/redo/Apply smokes pass. See:
+`tests/gui_level_smoke.py`,
+`tests/gui_screen_layout_smoke.py`,
+`tests/test_stage_camera_structural.py`,
+`tests/test_dstx_layout_0506.py`,
+`tests/test_koma_cards.py`, and
+`tests/test_chrbin_native_semantics.py`.
+
+**Open:** final HP damage formula and status durations, full button
+labels for movement/automatic states, ROM builtin collision record
+editing, native eligibility/gating graph for J-Power, hardware scene
+placements and original camera transform callback tracing. These are
+explicitly not labelled complete.

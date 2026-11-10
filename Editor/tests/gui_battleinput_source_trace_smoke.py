@@ -52,6 +52,23 @@ def main():
             assert expected in text,(offset,expected,text[:4500])
             assert 'Original input to ALMT' in text or 'ORIGINAL INPUT TO ALMT' in text,text[:500]
             assert app.move.id&255==offset
+        idx=next(i for i,m in enumerate(app.almt.moves) if m.id&255==0x18)
+        app.populate_moves(select=idx)
+        for _ in range(2):app.update()
+        text=all_inspector_text(app.inspector)
+        assert 'KEYINPUT 0x0004' in text,text[:4500]
+        assert 'HwPad 0x4000' in text,text[:4500]
+        assert 'actor+0x6C bit 0x1000' in text,text[:4500]
+        assert 'No verified HwPad 0x4000' in text,text[:4500]
+
+        idx=next(i for i,m in enumerate(app.almt.moves) if m.id&255==0x03)
+        app.populate_moves(select=idx)
+        for _ in range(2):app.update()
+        text=all_inspector_text(app.inspector)
+        assert 'ENGINE-DRIVEN MOVEMENT STATE' in text,text[:4500]
+        assert '0215E9A0' in text and '0215EAEC' in text,text[:4500]
+        assert 'No native input-selector mapping established' in text,text[:4500]
+
         idx=next(i for i,m in enumerate(app.almt.moves) if m.id&255==0)
         app.populate_moves(select=idx)
         for _ in range(3):app.update()
