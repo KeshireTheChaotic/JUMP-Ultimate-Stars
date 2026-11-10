@@ -1,8 +1,8 @@
 
-/* JUS-CLASS jus_Class_020948a4::vfunc_04 [class-virtual] slot 4 of vtable 020948a4 (own slot, not
+/* JUS-CLASS jus_HwSwapBuffers::vfunc_04 [class-virtual] slot 4 of vtable 020948a4 (own slot, not
    inherited) */
 
-undefined4 * jus_Class_020948a4::vfunc_04(undefined4 *param_1)
+undefined4 * jus_HwSwapBuffers::vfunc_04(undefined4 *param_1)
 
 {
   int iVar1;

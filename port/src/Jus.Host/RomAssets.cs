@@ -20,21 +20,11 @@ internal sealed class RomAssets : IAssetSource
 
     public byte[] Read(string path) => _rom.ReadFile(path);
 
-    public static string? Find()
-    {
-        var env = Environment.GetEnvironmentVariable("JUS_ROM");
-        if (env is not null && File.Exists(env)) return env;
-        for (var d = new DirectoryInfo(AppContext.BaseDirectory); d is not null; d = d.Parent)
-        {
-            var p = Path.Combine(d.FullName, "JUS.nds");
-            if (File.Exists(p)) return p;
-        }
-        return null;
-    }
 }
 
-/// <summary>Sound requests are logged until the sound archive (SDAT) is ported.</summary>
+/// <summary>Sound requests are only logged (no sound archive available, scripted runs, or --mute).</summary>
 internal sealed class LoggingSound(Action<string> log) : ISound
 {
-    public void PlayEffect(int id, int arg) => log($"sound: effect 0x{id:X} ({arg}) [not ported yet]");
+    public void PlayEffect(int id, int arg) => log($"sound: effect 0x{id:X} ({arg})");
+    public void PlayMusic(int id, int arg) => log($"sound: music {id} ({arg})");
 }

@@ -1,9 +1,8 @@
 
-/* JUS-CLASS jus_Class_02098858::vfunc_09 [class-virtual] slot 9 of vtable 02098858 (own slot, not
+/* JUS-CLASS jus_Prop_Color::vfunc_09 [class-virtual] slot 9 of vtable 02098858 (own slot, not
    inherited) */
 
-void jus_Class_02098858::vfunc_09
-               (undefined4 param_1,int *param_2,undefined4 param_3,undefined4 param_4)
+void jus_Prop_Color::vfunc_09(undefined4 param_1,int *param_2,undefined4 param_3,undefined4 param_4)
 
 {
   undefined4 local_2c;

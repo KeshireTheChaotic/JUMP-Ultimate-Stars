@@ -1,8 +1,8 @@
 
-/* JUS-CLASS jus_Class_021d21e4::vfunc_09 [class-virtual] slot 9 of vtable 021d21e4 (own slot, not
-   inherited) */
+/* JUS-CLASS ALCollision_Part_021d21e4::vfunc_09 [class-virtual] slot 9 of vtable 021d21e4 (own
+   slot, not inherited) */
 
-void jus_Class_021d21e4::vfunc_09(undefined4 param_1,undefined4 param_2,int param_3)
+void ALCollision_Part_021d21e4::vfunc_09(undefined4 param_1,undefined4 param_2,int param_3)
 
 {
   undefined4 uVar1;

@@ -18,7 +18,7 @@ int jus_TagAGEC::vfunc_24(int param_1)
   puVar3 = (undefined4 *)FUN_0201a228(8);
   if (puVar3 != (undefined4 *)0x0) {
     jus_Class_02094ecc::jus_Class_02094ecc(puVar3,iVar2);
-    *puVar3 = &jus_Class_02094e24::vftable;
+    *puVar3 = &jus_TagAGEC_Part_02094e24::vftable;
   }
   return iVar2;
 }

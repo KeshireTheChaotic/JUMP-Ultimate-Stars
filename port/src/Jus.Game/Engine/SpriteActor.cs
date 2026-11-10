@@ -20,7 +20,9 @@ public sealed class SpriteActor(DstxBank bank, AlmtMotionSet motions, int motion
     /// <summary>Opacity 0..1 (widget vfunc 0xF8); below 1 the sprite is blended over what is drawn.</summary>
     public double Alpha { get; set; } = 1.0;
     public int MotionId => _motion.Id;
-    public int Cell => _motion.ValueAt(_frame);
+    /// <summary>When set, this cell is drawn instead of the motion's (engine code that picks cells directly).</summary>
+    public int? FixedCell { get; set; }
+    public int Cell => FixedCell ?? _motion.ValueAt(_frame);
     public bool AtEnd => _frame >= _motion.Length;
 
     /// <summary>FUN_02023894(widget, id, 0) + play.</summary>
@@ -30,12 +32,13 @@ public sealed class SpriteActor(DstxBank bank, AlmtMotionSet motions, int motion
         _frame = 0;
     }
 
-    /// <summary>Advance one frame; a motion holds its last frame when it reaches its length
-    /// (Title's 0x710001 is a 4-frame white flash, cell 5 in the all-white palette 4, that settles on
-    /// the normal logo, cell 6 - looping it would strobe).</summary>
+    /// <summary>Advance one frame. A motion without the ALMT loop flag (record +7 bit 0) holds its last
+    /// frame when it reaches its length (Title's 0x710001 is a 4-frame white flash that settles on the
+    /// normal logo); one with the flag starts again from frame 0 (wrap point inferred).</summary>
     public void Update()
     {
         if (_frame < _motion.Length) _frame++;
+        else if (_motion.Loop && _motion.Length > 0) _frame = 1;
     }
 
     /// <summary>Draw the current cell, scaled around the actor's origin. Earlier parts have higher OBJ
@@ -50,11 +53,29 @@ public sealed class SpriteActor(DstxBank bank, AlmtMotionSet motions, int motion
         var px = screen.Pixels;
         double s = Scale;
         int a = (int)Math.Round(Math.Clamp(Alpha, 0, 1) * 256);
+        // FFL4 (format 0x40): the first part's u16 is the frame; the parts' 4bpp tiles follow each other
+        // in that frame (FUN_0203F5C8 / FUN_0203F440)
+        byte[]? frame = tex.IsFrames && parts.Length > 0 ? tex.Frame(parts[0].Tile) : null;
+        var frameBase = new int[parts.Length];
+        if (frame is not null)
+            for (int k = 1; k < parts.Length; k++)
+            {
+                var (pw, ph) = DstxBank.Sizes[Math.Min(parts[k - 1].Size & 0xF, DstxBank.Sizes.Length - 1)];
+                frameBase[k] = frameBase[k - 1] + pw * ph / 64;
+            }
         for (int k = parts.Length - 1; k >= 0; k--)
         {
             var part = parts[k];
-            var (w, h) = DstxBank.Sizes[part.Size];
+            // linear (3D, jus_TagSPD3) textures: size byte = size code | 0x10 h-flip | 0x20 v-flip |
+            // 0x40 4-colour (2bpp) at double width; the tile is (column = bits 0–4, row = bits 5+) in 8 px
+            bool linear = tex.IsLinear;
+            int code = part.Size & 0xF;
+            if (code >= DstxBank.Sizes.Length) continue;
+            bool hflip = (part.Size & 0x10) != 0, vflip = (part.Size & 0x20) != 0;
+            bool twoBpp = linear && (part.Size & 0x40) != 0;
+            var (w, h) = DstxBank.Sizes[code];
             int tilesPerRow = w / 8;
+            int u0 = (part.Tile & 31) * 8, v0 = (part.Tile >> 5) * 8;
             // destination rectangle of this part
             int x0 = (int)Math.Floor(X + part.X * s), y0 = (int)Math.Floor(Y + part.Y * s);
             int x1 = (int)Math.Ceiling(X + (part.X + w) * s), y1 = (int)Math.Ceiling(Y + (part.Y + h) * s);
@@ -66,11 +87,13 @@ public sealed class SpriteActor(DstxBank bank, AlmtMotionSet motions, int motion
                 {
                     int x = (int)Math.Floor((dx + 0.5 - X) / s) - part.X;
                     if (x < 0 || x >= w) continue;
-                    // OBJ textures use 1D tile mapping; linear (format 0x20) textures are addressed as a
-                    // 2D region starting at the part's tile position
-                    int c = tex.IsLinear
-                        ? tex.Pixel(part.Tile, x, y)
-                        : tex.Pixel(part.Tile + (y >> 3) * tilesPerRow + (x >> 3), x & 7, y & 7);
+                    // OBJ textures use 1D tile mapping; linear textures are a 2D region at (u0, v0)
+                    int sx = hflip ? w - 1 - x : x, sy = vflip ? h - 1 - y : y;
+                    int c = frame is not null
+                        ? FramePixel(frame, frameBase[k] + (sy >> 3) * tilesPerRow + (sx >> 3), sx & 7, sy & 7)
+                        : linear
+                        ? (twoBpp ? tex.PixelAt2Bpp(u0 + sx, v0 + sy) : tex.PixelAt(u0 + sx, v0 + sy))
+                        : tex.Pixel(part.Tile + (sy >> 3) * tilesPerRow + (sx >> 3), sx & 7, sy & 7);
                     if (c == 0) continue;
                     int index = tex.Is8Bpp ? c : part.Palette * 16 + c;
                     if (index >= tex.Palette.Length) continue;
@@ -79,6 +102,12 @@ public sealed class SpriteActor(DstxBank bank, AlmtMotionSet motions, int motion
                 }
             }
         }
+    }
+
+    private static int FramePixel(byte[] frame, int tile, int x, int y)
+    {
+        int o = tile * 32 + y * 4 + (x >> 1);
+        return o < frame.Length ? (frame[o] >> ((x & 1) * 4)) & 0xF : 0;
     }
 
     private static uint Blend(uint src, uint dst, int a)

@@ -1,8 +1,8 @@
 
-/* JUS-CLASS jus_Class_02181740::vfunc_22 [class-virtual] slot 22 of vtable 02181740 (own slot, not
-   inherited) */
+/* JUS-CLASS BattleAI_Part_02181740::vfunc_22 [class-virtual] slot 22 of vtable 02181740 (own slot,
+   not inherited) */
 
-void jus_Class_02181740::vfunc_22(int param_1)
+void BattleAI_Part_02181740::vfunc_22(int param_1)
 
 {
   char cVar1;

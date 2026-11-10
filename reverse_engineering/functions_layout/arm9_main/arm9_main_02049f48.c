@@ -1,9 +1,9 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
-/* JUS-CLASS jus_Class_02097244::vfunc_34 [class-virtual] slot 34 of vtable 02097244 (own slot, not
+/* JUS-CLASS jus_HwDisplaySub::vfunc_34 [class-virtual] slot 34 of vtable 02097244 (own slot, not
    inherited) */
 
-void jus_Class_02097244::vfunc_34(void)
+void jus_HwDisplaySub::vfunc_34(void)
 
 {
                     /* JUS-TAG hw={"POWCNT":1} io=["04000304"] */

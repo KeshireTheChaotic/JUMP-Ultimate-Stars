@@ -1,9 +1,9 @@
 
-/* JUS-CLASS jus_Class_02098af8::vfunc_49 [class-virtual] slot 49 of vtable 02098af8 (own slot, not
+/* JUS-CLASS jus_Prop_Texture::vfunc_49 [class-virtual] slot 49 of vtable 02098af8 (own slot, not
    inherited) */
 
 undefined *
-jus_Class_02098af8::vfunc_49(int *param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+jus_Prop_Texture::vfunc_49(int *param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
 
 {
   DAT_020a1068 = DAT_020a1068 + 1 & 7;

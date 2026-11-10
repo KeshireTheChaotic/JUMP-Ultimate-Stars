@@ -11,7 +11,7 @@ void jus_Class_02094088::vfunc_12(undefined4 param_1,undefined4 param_2)
   if (iVar1 == 0) {
     return;
   }
-  jus_Class_020947a8::jus_Class_020947a8(iVar1,param_2);
+  jus_HwTexPltt::jus_HwTexPltt(iVar1,param_2);
   return;
 }
 

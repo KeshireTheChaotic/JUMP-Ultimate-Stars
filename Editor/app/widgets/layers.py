@@ -12,7 +12,7 @@ from .. import theme as T
 
 
 class LayerList(ttk.Frame):
-    def __init__(self, parent, *, on_select=None, on_toggle=None, height=8, **kw):
+    def __init__(self, parent, *, on_select=None, on_toggle=None, on_context=None, height=8, **kw):
         super().__init__(parent, **kw)
         k = T.ui_scale(self)
         self.tree = ttk.Treeview(self, columns=('eye', 'kind', 'status'), show='tree headings',
@@ -35,9 +35,11 @@ class LayerList(ttk.Frame):
         sb.pack(side='right', fill='y')
         self.on_select = on_select
         self.on_toggle = on_toggle
+        self.on_context = on_context
         self.layers: dict[str, dict] = {}
         self.tree.bind('<<TreeviewSelect>>', self._select)
         self.tree.bind('<Button-1>', self._click, add='+')
+        self.tree.bind('<Button-3>', self._right, add='+')
 
     def set_layers(self, layers: list[dict], keep_selection=True):
         """Each layer: id, name, kind, visible, status, available(=True), readonly(=False), parent."""
@@ -70,6 +72,18 @@ class LayerList(ttk.Frame):
         iid = self.selected()
         if iid and self.on_select:
             self.on_select(self.layers.get(iid))
+
+    def _right(self, event):
+        if self.on_context is None:
+            return
+        iid = self.tree.identify_row(event.y)
+        layer = self.layers.get(iid)
+        if not layer or layer.get('kind') == 'group':
+            return
+        self.tree.selection_set(iid)
+        self.tree.focus(iid)
+        self.on_context(layer, event)
+        return 'break'
 
     def _click(self, e):
         if self.tree.identify_column(e.x) != '#1':

@@ -1,8 +1,8 @@
 
-/* JUS-CLASS jus_Class_02097244::jus_Class_02097244 [class-default] stores vtable 02097244 into
+/* JUS-CLASS jus_HwDisplaySub::jus_HwDisplaySub [class-hardware-role] stores vtable 02097244 into
    *this (constructor) */
 
-undefined4 * jus_Class_02097244::jus_Class_02097244(undefined4 *param_1)
+undefined4 * jus_HwDisplaySub::jus_HwDisplaySub(undefined4 *param_1)
 
 {
   int iVar1;

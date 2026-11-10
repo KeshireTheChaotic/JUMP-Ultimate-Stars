@@ -34,7 +34,7 @@ public sealed class JusGame
 
     public IPlatform Platform { get; }
     /// <summary>The global screen fade (0x0214BD50).</summary>
-    public Engine.ScreenFade Fade { get; }
+    public Engine.ScreenFade Fade { get; private set; }
     public GameGlobals Globals { get; } = new();
     public SceneDirector Director { get; }
     public long FrameCount { get; private set; }
@@ -51,11 +51,48 @@ public sealed class JusGame
         Director.Init();
     }
 
+    private Engine.BgmData? _bgm;
+    private int _music = -1;                 // DAT_0214bc1c: the music id last requested
+
+    /// <summary>FUN_020734e0(id) + FUN_0207361c(id, arg): start background music. A new id is looked up in
+    /// the BGM table and marked as heard in the save (FUN_02071514); the sequence then starts.</summary>
+    public void PlayMusic(int id, int arg)
+    {
+        if (_music != id)
+        {
+            _music = id;
+            try
+            {
+                _bgm ??= new Engine.BgmData(Assets.Dscp.Unpack(Platform.Assets.Read("bin/bgm.bin")));
+                int index = _bgm.IndexOf(id);
+                if (index >= 0) Globals.Save.MarkBgmHeard(index);
+            }
+            catch (IOException) { }          // no table: only the heard flag is skipped
+        }
+        Platform.Sound.PlayMusic(id, arg);
+    }
+
     private bool _resetRequested;
 
-    /// <summary>L+R+Select+Start while soft reset is allowed (original FUN_0206dcec(0), not translated:
-    /// the port restarts the scene flow at Copyright and keeps the save state).</summary>
+    /// <summary>L+R+Select+Start while soft reset is allowed: FUN_0206dcec(0), run at the start of the
+    /// next frame.</summary>
     public void RequestSoftReset() => _resetRequested = true;
+
+    /// <summary>FUN_0206dcec(param): shut down communication (FUN_0208b784(1); not ported), stop all sound
+    /// (FUN_02073410), switch off every BG layer on both engines (DISPCNT &amp;= ~0x1F00), then
+    /// OS_ResetSystem(param) (FUN_020552d0: stops DMA, masks IRQs, reboots). The reboot clears .bss and
+    /// runs the boot path again, which reloads the save from backup memory and starts at scene 0.</summary>
+    private void SoftReset()
+    {
+        Platform.Log("soft reset (OS_ResetSystem)");
+        Platform.Sound.StopAll();
+        foreach (var s in new[] { Platform.TopScreen, Platform.BottomScreen }) s.Clear(0xFF000000);
+        Globals.Reboot();
+        _music = -1;
+        Fade = new Engine.ScreenFade(Platform);
+        Director.Restart();
+        Start();
+    }
 
     /// <summary>One frame: the director runs first (it is the first task the original registers),
     /// then the current scene.</summary>
@@ -64,8 +101,7 @@ public sealed class JusGame
         if (_resetRequested)
         {
             _resetRequested = false;
-            Platform.Log("soft reset");
-            Director.Restart();
+            SoftReset();
         }
         Director.Update();
         Director.Current?.Update();

@@ -60,14 +60,14 @@ public sealed class AlarArchive
     public AlarEntry? Find(int id, byte kind) => Entries.FirstOrDefault(e => e.Id == id && e.Kind == kind);
 }
 
-/// <summary>Name/id lookup over mounted archives, falling back to NitroFS — the native stand-in
+/// <summary>Name/id lookup over mounted archives, falling back to the asset source — the native stand-in
 /// for the engine's resource registry (archives are mounted by FUN_020101f4, files found by
 /// FUN_02035c90(name)).</summary>
 public sealed class ResourceManager(IAssetSource files)
 {
     private readonly List<AlarArchive> _mounted = [];
 
-    /// <summary>Mount an archive from NitroFS or from an already mounted archive (nested .aar).</summary>
+    /// <summary>Mount an archive from the asset source or an already mounted archive (nested .aar).</summary>
     public AlarArchive Mount(string path)
     {
         var a = new AlarArchive(Dscp.Unpack(ReadRaw(path)));

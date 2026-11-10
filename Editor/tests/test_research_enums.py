@@ -1,4 +1,4 @@
-"""Research-backed labels (docs/Research 2026-11-06) checked against binaries and data."""
+"""Research-backed labels (2026-11-06) checked against binaries and data."""
 import os
 import struct
 import sys

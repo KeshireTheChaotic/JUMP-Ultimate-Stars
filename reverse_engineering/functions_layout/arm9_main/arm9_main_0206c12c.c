@@ -1,8 +1,8 @@
 
-/* JUS-CLASS jus_Class_0209df4c::vfunc_22 [class-virtual] slot 22 of vtable 0209df4c (own slot, not
-   inherited) */
+/* JUS-CLASS CommonTutorial_Part_0209df4c::vfunc_22 [class-virtual] slot 22 of vtable 0209df4c (own
+   slot, not inherited) */
 
-void jus_Class_0209df4c::vfunc_22
+void CommonTutorial_Part_0209df4c::vfunc_22
                (int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
 
 {

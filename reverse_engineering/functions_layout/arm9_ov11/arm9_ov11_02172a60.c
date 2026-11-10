@@ -90,7 +90,7 @@ undefined4 * BattleAI::BattleAI_Create(void)
                  thunk_FUN_0201a228(0x134,s_BattleAI_cpp_021817c0,s_BattleAI_Create_0218179c,0xf9);
         if (puVar3 != (undefined4 *)0x0) {
           jus_Class_02094864::jus_Class_02094864();
-          *puVar3 = &jus_Class_02181700::vftable;
+          *puVar3 = &BattleAI_Part_02181700::vftable;
           puVar3[0x38] = uVar10;
           puVar3[0x4b] = 0;
           puVar3[0x3a] = 0;
@@ -111,7 +111,7 @@ undefined4 * BattleAI::BattleAI_Create(void)
                thunk_FUN_0201a228(0x14,s_BattleAI_cpp_021817c0,s_BattleAI_Create_0218179c,0xfd);
       if (puVar3 != (undefined4 *)0x0) {
         jus_Class_02095814::jus_Class_02095814();
-        *puVar3 = &jus_Class_02181740::vftable;
+        *puVar3 = &BattleAI_Part_02181740::vftable;
         puVar3[2] = uVar10;
         *(undefined1 *)(puVar3 + 4) = 0;
         *(undefined2 *)((int)puVar3 + 0xe) = 0;

@@ -1,8 +1,9 @@
 
-/* JUS-CLASS jus_Class_02099640::vfunc_51 [class-virtual] slot 51 of vtable 02099640 (own slot, not
-   inherited) */
+/* JUS-CLASS jus_Prop_EffectFlags_Derived_02099640::vfunc_51 [class-virtual] slot 51 of vtable
+   02099640 (own slot, not inherited) */
 
-void jus_Class_02099640::vfunc_51(int *param_1,undefined4 param_2,undefined4 *param_3)
+void jus_Prop_EffectFlags_Derived_02099640::vfunc_51
+               (int *param_1,undefined4 param_2,undefined4 *param_3)
 
 {
   undefined4 *puVar1;

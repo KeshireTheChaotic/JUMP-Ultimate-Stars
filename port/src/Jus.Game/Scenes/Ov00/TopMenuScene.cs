@@ -17,9 +17,11 @@ namespace Jus.Game.Scenes.Ov00;
 /// stopped on 0x02155B28); d-pad moves along the links (up/down: +0xC, left: +0xD, right: +0xE);
 /// A / touch selects (0x02155B94: SE 0x78/0); B → result 8 (0x02155C00: SE 0x78/1); fades; exit code
 /// = cursor (+0x7C, cleanup 0x0215512C).
-/// Not yet: the top-screen character display (TopMenu_CharaCreate), galaxy objects 0x520000 and
-/// galaxy_obj.bin, the top_jp button 0x530000, the on-screen back button art 0x510000, the
-/// JGalaxy-unlock check with Secret, music 2.</summary>
+/// Back button: widget 0x510000 (Common/button.aar) at (255, 191), touch box (−48, −16)–(0, 0), same as B.
+/// Not yet: the top-screen character display (TopMenu_CharaCreate) and its top_jp button 0x530000
+/// (record 0x02160024 at (240, 160); handler 0x02155C30 = SE 0x78/0 + FUN_02156180 on the character),
+/// galaxy objects 0x520000–0x520003 (FUN_02155334, display 0x0203B404) with galaxy_obj.bin, the
+/// JGalaxy-unlock check with Secret.</summary>
 public sealed class TopMenuScene : ISceneTask
 {
     /// <summary>Menu table 0x0216003C: x, y, unlock check, alt, links.</summary>
@@ -35,6 +37,18 @@ public sealed class TopMenuScene : ISceneTask
     private readonly TileBackground _bg2, _bg3;
     private readonly List<PaletteAnimation> _bgAnims;
     private readonly SpriteActor[] _buttons = new SpriteActor[8], _labels = new SpriteActor[8];
+    /// <summary>The on-screen back button: widget 0x510000 from Common/button.aar, record 0x02160030
+    /// {x 255, y 191, resource 0x510000}, touch box (−48, −16)–(0, 0) around that anchor, B bound to it
+    /// (key 0x20); its handler 0x02155C00 is the B path (SE 0x78/1, result 8).</summary>
+    private readonly SpriteActor _back;
+    public const int BackX = 255, BackY = 191;
+
+    /// <summary>Galaxy objects 0x520000–0x520003 (FUN_02155334, bank 0x520000, draw priority 0xE0) as
+    /// children of a parent node on the top_bg00 map; their offsets (20.12) from TopMenu_Add.</summary>
+    private static readonly (int X, int Y)[] GalaxyOffsets = [(0x104000, 0xB8000), (0x9F000, 0xEB000), (0x100000, 0x60000), (0xC0000, 0x48000)];
+    private readonly SpriteActor[] _galaxy = new SpriteActor[4];
+    private readonly List<PaletteAnimation> _galaxyGlow;
+    private int _orbit = 0x2000;                // work +0x80 (TopMenu_Add: piVar6[0x20] = 0x2000)
     private readonly bool[] _unlocked = new bool[8];
     private Phase _phase = Phase.FadeIn;
     private int _cursor;                    // +0x7C
@@ -65,9 +79,19 @@ public sealed class TopMenuScene : ISceneTask
             _buttons[i] = new SpriteActor(bank, motions, id) { X = it.X, Y = it.Y };
             _labels[i] = new SpriteActor(bank, motions, id + 0xC) { X = it.X, Y = it.Y + 20 };
         }
+        res.Mount("topmenu/galaxy_obj.aar");                                       // nested in topmenu.aar
+        var gBank = new DstxBank(res.Read(0x520000, (byte)'@'));
+        var gMotions = new AlmtMotionSet(res.Read(0x520000, (byte)'A'));
+        for (int i = 0; i < 4; i++)
+            _galaxy[i] = new SpriteActor(gBank, gMotions, 0x520000 + i) { Alpha = i < 2 ? 0xB33 / 4096.0 : 1.0 };   // FUN_02151054(0xB33) on the first two
+        _galaxyGlow = PaletteAnimation.Load(gBank.Texture, res.Read("topmenu/galaxy_obj.bin"));
+        PlaceGalaxy();
+        res.Mount("Common/button.aar");
+        _back = new SpriteActor(new DstxBank(res.Read(0x510000, (byte)'@')), new AlmtMotionSet(res.Read(0x510000, (byte)'A')), 0x510000)
+            { X = BackX, Y = BackY };
         _cursor = Math.Clamp(cursor, 0, 7);
-        p.Log("TopMenu: character display, galaxy objects, top_jp and the back-button art are not translated yet");
-        p.Sound.PlayMusic(2, 0);                                                  // FUN_020734e0(2), FUN_0207361c(2, 0)
+        p.Log("TopMenu: character display (and its top_jp button), galaxy objects and the Secret/JGalaxy check are not translated yet");
+        game.PlayMusic(2, 0);                                                     // FUN_020734e0(2), FUN_0207361c(2, 0)
         game.Fade.Start(FadeKind.FromBlack, 1);                                   // FUN_02073ebc(2, 1)
     }
 
@@ -99,6 +123,12 @@ public sealed class TopMenuScene : ISceneTask
         Pulse();
         foreach (var s in _buttons) s.Update();
         foreach (var s in _labels) s.Update();
+        _back.Update();
+        _orbit += 0x1B;                                  // the galaxy parent's update callback 0x02155890
+        if (_orbit > 0x10000) _orbit -= 0x10000;
+        PlaceGalaxy();
+        foreach (var g in _galaxy) g.Update();
+        foreach (var a in _galaxyGlow) a.Update();
         Draw();
     }
 
@@ -113,6 +143,11 @@ public sealed class TopMenuScene : ISceneTask
         else if ((trg & 0x4) != 0) next = it.Right;
         if (next != _cursor) Focus(next);
 
+        if (input.TouchTrigger && input.TouchX >= BackX - 48 && input.TouchX <= BackX && input.TouchY >= BackY - 16 && input.TouchY <= BackY)
+        {
+            Back();
+            return;
+        }
         if (input.TouchTrigger)
         {
             for (int i = 0; i < 8; i++)
@@ -127,12 +162,16 @@ public sealed class TopMenuScene : ISceneTask
             }
         }
         if ((trg & 0x10) != 0) Select();                  // A
-        else if ((trg & 0x20) != 0)                       // B (widget 0x510000, key 0x20)
-        {
-            _game.Platform.Sound.PlayEffect(0x78, 1);
-            _cursor = 8;
-            Leave();
-        }
+        else if ((trg & 0x20) != 0) Back();               // B (widget 0x510000, key 0x20)
+    }
+
+    /// <summary>0x02155C00: the back widget (touch or B): press motion, SE 0x78/1, result 8, leave.</summary>
+    private void Back()
+    {
+        _back.SetMotion(0x510001);                        // the widget's second motion (func_0x021b3fc4), inferred as "pressed"
+        _game.Platform.Sound.PlayEffect(0x78, 1);
+        _cursor = 8;
+        Leave();
     }
 
     /// <summary>Focus in (0x02155A24) on the new item, focus out (0x02155B28) on the old one.</summary>
@@ -165,9 +204,33 @@ public sealed class TopMenuScene : ISceneTask
     {
         if (_cursor > 7) return;
         _pulse++;
+        // jus_TagIPCT::vfunc_22 with flags 0: ping-pong over the halved duration; time runs 1..15,
+        // then 14..0, evaluated after each step with the linear 'LI' curve.
         int t = _pulse % (2 * PulseHalf);
-        double f = t <= PulseHalf ? t / (double)PulseHalf : (2 * PulseHalf - t) / (double)PulseHalf;
-        _buttons[_cursor].Scale = 1.0 + (0x111E / 4096.0 - 1.0) * f;
+        int frame = t <= PulseHalf ? t : 2 * PulseHalf - t;
+        _buttons[_cursor].Scale = LinearInterpolator.Vector(0x1000, 0x111E, frame, 0, PulseHalf) / 4096.0;
+    }
+
+    /// <summary>The galaxy parent's position, 0x02155890 (single-precision soft-float, CodeWarrior
+    /// float→int truncates): θ = trunc(float(2·counter)·π / 65536 · 4096) (20.12 radians),
+    /// y = FX_Mul(100, cos θ) − 96 (FUN_02009838 = cos), x = trunc(float(FX_Mul(−100, sin θ))·0.6) − 64
+    /// (FUN_02009C54 = sin). (Corrected 2026-11-10: the two were swapped at first.)</summary>
+    public static (int X, int Y) GalaxyParent(int counter)
+    {
+        int theta = LinearInterpolator.AngleToRadians(counter);
+        int y = LinearInterpolator.FxMul(100 << 12, LinearInterpolator.CosFx(theta)) - 0x60000;
+        int x = (int)((float)LinearInterpolator.FxMul(-100 << 12, LinearInterpolator.SinFx(theta)) * 0.6f) - 0x40000;
+        return (x, y);
+    }
+
+    private void PlaceGalaxy()
+    {
+        var (px, py) = GalaxyParent(_orbit);
+        for (int i = 0; i < 4; i++)
+        {
+            _galaxy[i].X = (px + GalaxyOffsets[i].X) >> 12;
+            _galaxy[i].Y = (py + GalaxyOffsets[i].Y) >> 12;
+        }
     }
 
     private void Draw()
@@ -177,12 +240,14 @@ public sealed class TopMenuScene : ISceneTask
         var menu = p.BottomScreen;
         menu.Clear(0xFF000000);
         _bg3.DrawAt(menu, 0, 0);
+        foreach (var g in _galaxy) g.Draw(menu);          // on the top_bg00 map, under the top_bg01 frame
         _bg2.DrawAt(menu, 0, 0);
         for (int i = 0; i < 8; i++)
         {
             _buttons[i].Draw(menu);
             _labels[i].Draw(menu);
         }
+        _back.Draw(menu);
         p.TopScreen.Clear(0xFF000000);
     }
 }

@@ -6,12 +6,12 @@ void FUN_0203aea8(void)
   
   FUN_02031988(0);
   if ((DAT_020a0d64 & 1) == 0) {
-    jus_Class_020972e0::jus_Class_020972e0(&DAT_020a374c);
+    jus_HwDisplayMain::jus_HwDisplayMain(&DAT_020a374c);
     FUN_0200f2b0(&DAT_020a374c,FUN_0203b368,&DAT_020a1338);
     DAT_020a0d64 = DAT_020a0d64 | 1;
   }
   if ((DAT_020a0d68 & 1) == 0) {
-    jus_Class_02097244::jus_Class_02097244(&DAT_020a4054);
+    jus_HwDisplaySub::jus_HwDisplaySub(&DAT_020a4054);
     FUN_0200f2b0(&DAT_020a4054,FUN_0203b37c,&DAT_020a1344);
     DAT_020a0d68 = DAT_020a0d68 | 1;
   }
@@ -21,24 +21,24 @@ void FUN_0203aea8(void)
     DAT_020a0d54 = DAT_020a0d54 | 1;
   }
   if ((DAT_020a1040 & 1) == 0) {
-    jus_Class_0209ab18::jus_Class_0209ab18(&DAT_020a495c,0);
+    jus_HwBgLayerMain::jus_HwBgLayerMain(&DAT_020a495c,0);
     FUN_0200f2b0(&DAT_020a495c,FUN_0203b3bc,&DAT_020a135c);
-    jus_Class_0209ab18::jus_Class_0209ab18(&DAT_020a5380,1);
+    jus_HwBgLayerMain::jus_HwBgLayerMain(&DAT_020a5380,1);
     FUN_0200f2b0(&DAT_020a5380,FUN_0203b3bc,&DAT_020a1368);
-    jus_Class_0209ab18::jus_Class_0209ab18(&DAT_020a5da4,2);
+    jus_HwBgLayerMain::jus_HwBgLayerMain(&DAT_020a5da4,2);
     FUN_0200f2b0(&DAT_020a5da4,FUN_0203b3bc,&DAT_020a1374);
-    jus_Class_0209ab18::jus_Class_0209ab18(&DAT_020a67c8,3);
+    jus_HwBgLayerMain::jus_HwBgLayerMain(&DAT_020a67c8,3);
     FUN_0200f2b0(&DAT_020a67c8,FUN_0203b3bc,&DAT_020a1380);
     DAT_020a1040 = DAT_020a1040 | 1;
   }
   if ((DAT_020a109c & 1) == 0) {
-    jus_Class_0209aa68::jus_Class_0209aa68(&DAT_020a71ec,0);
+    jus_HwBgLayerSub::jus_HwBgLayerSub(&DAT_020a71ec,0);
     FUN_0200f2b0(&DAT_020a71ec,FUN_0203b3d0,&DAT_020a138c);
-    jus_Class_0209aa68::jus_Class_0209aa68(&DAT_020a7c10,1);
+    jus_HwBgLayerSub::jus_HwBgLayerSub(&DAT_020a7c10,1);
     FUN_0200f2b0(&DAT_020a7c10,FUN_0203b3d0,&DAT_020a1398);
-    jus_Class_0209aa68::jus_Class_0209aa68(&DAT_020a8634,2);
+    jus_HwBgLayerSub::jus_HwBgLayerSub(&DAT_020a8634,2);
     FUN_0200f2b0(&DAT_020a8634,FUN_0203b3d0,&DAT_020a13a4);
-    jus_Class_0209aa68::jus_Class_0209aa68(&DAT_020a9058,3);
+    jus_HwBgLayerSub::jus_HwBgLayerSub(&DAT_020a9058,3);
     FUN_0200f2b0(&DAT_020a9058,FUN_0203b3d0,&DAT_020a13b0);
     DAT_020a109c = DAT_020a109c | 1;
   }

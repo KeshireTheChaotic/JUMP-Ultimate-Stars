@@ -28,7 +28,7 @@ internal sealed class FakePlatform : IPlatform
     public IScreen BottomScreen { get; } = new FakeScreen();
     public InputState Input { get; set; }
     public FakeSave SaveFile { get; } = new();
-    public IAssetSource Assets { get; } = RomAssetsForTests.Instance;
+    public IAssetSource Assets { get; init; } = RomAssetsForTests.Instance;
     public RecordingSound SoundLog { get; } = new();
     public ISound Sound => SoundLog;
     public TimeSpan Clock { get; set; }

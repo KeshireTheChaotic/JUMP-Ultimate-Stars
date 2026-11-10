@@ -1,10 +1,9 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
-/* JUS-CLASS jus_Class_020947a8::vfunc_06 [class-virtual] slot 6 of vtable 020947a8 (own slot, not
+/* JUS-CLASS jus_HwTexPltt::vfunc_06 [class-virtual] slot 6 of vtable 020947a8 (own slot, not
    inherited) */
 
-int jus_Class_020947a8::vfunc_06
-              (int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+int jus_HwTexPltt::vfunc_06(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
 
 {
   uint uVar1;

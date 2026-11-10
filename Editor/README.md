@@ -6,6 +6,11 @@ full character and effect **sprite packages** (PNG frames + JSON) with ALAR
 archive rebuilding. Based on JUS Move Lab v23; the format layer was rewritten as
 read/write libraries and re-audited against the data (see `docs/FORMATS.md`).
 
+**Scope:** the Editor edits and previews game data. Re-creating the engine is out of
+scope: no physics or collision response, no live projectile travel, no
+frame-perfect runtime composition (scroll phase, blending, draw order) and no AI or
+battle-state simulation. Previews show the authored source data only.
+
 ## Run
 
 ```powershell
@@ -55,8 +60,6 @@ editable, explains the limitation, and links to the **different**
 illustrated Dr. Mashirito 2-Koma #428 (ds_09.dtx), without substituting
 its art for #889. Any authentic replacement or modded dt_19.dtx is
 preserved and no longer classified as the exact original placeholder.
-See docs/Research/MASHIRITO_889_DT19_ORIGINAL_ROM_ART_VALIDATION_20261107.json
-in the JUS project research directory.
 
 Save now offers to Apply dirty suite workspaces including Koma even while
 another Roster mode is visible. Original game data is not written until Save.
@@ -81,9 +84,6 @@ It also launches handler00 shot record1 at tick 33: the original ALMT
 0x0005C16B. Both are source-backed, and the viewport frames their extents.
 The separate 0x0005C16D exit animation is conditional on native shot
 retirement and is deliberately not rendered as a guaranteed launch effect.
-Source/ROM proof, known conditional-runtime limits, and 312 passive-card
-records are documented in
-D:\Library\Development\JUS\docs\Research\ROSTER_GOKU_CHEAP_JOKE_SOUND_PASSIVE_IMPLEMENTATION_20261107.md.
 
 * **Level workspace (Ctrl+5)** — left J-Galaxy hierarchy follows the in-game menu:
   **space node → galaxy cluster → world/planet → mission**, using verified child
@@ -288,7 +288,7 @@ In Animation, select a battle attack with NoteTrack chara_action(2), select the 
 
 ### Handler01 constructor and repeating shot-body roles
 
-The original constructor ROM array at ov06 0x02172864 maps shot handler01 to FUN_0216B4F4; a second 26-entry per-frame update array at 0x0217278C maps it to FUN_0216BA2C. Constructor 0216B514 creates record+0x14 initial anchored ALMT (when nonzero) then record+0x0C moving ALMT without a hit test. Updater 0216BA2C creates additional record+0x10 ALMT instances when native spacing/slot conditions pass. These source field roles are shared across the 68 original handler01 records; source+0x0C is not contact-only by construction. Handler01 sets work+0x26 bit2, bypassing ordinary record-lifetime countdown, so the current source-only preview cap is not native expiry. The Animation Shot Inspector shows all three source roles, original per-frame update callback and code provenance; it still does not extrapolate a fabricated full beam. Research: D:\Library\Development\JUS\docs\Research\HANDLER01_BEAM_FIELD_LIFECYCLE_PROOF_20261106.md. Regression: tests/test_shot_handler01_lifecycle.py.
+The original constructor ROM array at ov06 0x02172864 maps shot handler01 to FUN_0216B4F4; a second 26-entry per-frame update array at 0x0217278C maps it to FUN_0216BA2C. Constructor 0216B514 creates record+0x14 initial anchored ALMT (when nonzero) then record+0x0C moving ALMT without a hit test. Updater 0216BA2C creates additional record+0x10 ALMT instances when native spacing/slot conditions pass. These source field roles are shared across the 68 original handler01 records; source+0x0C is not contact-only by construction. Handler01 sets work+0x26 bit2, bypassing ordinary record-lifetime countdown, so the current source-only preview cap is not native expiry. The Animation Shot Inspector shows all three source roles, original per-frame update callback and code provenance; it still does not extrapolate a fabricated full beam. Regression: tests/test_shot_handler01_lifecycle.py.
 
 ### Source-derived projectile repeat preview and Hiei steering trace
 

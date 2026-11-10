@@ -1,8 +1,8 @@
 
-/* JUS-CLASS jus_Class_0209ab18::vfunc_34 [class-virtual] slot 34 of vtable 0209ab18 (own slot, not
+/* JUS-CLASS jus_HwBgLayerMain::vfunc_34 [class-virtual] slot 34 of vtable 0209ab18 (own slot, not
    inherited) */
 
-void jus_Class_0209ab18::vfunc_34(int param_1)
+void jus_HwBgLayerMain::vfunc_34(int param_1)
 
 {
   *(uint *)(param_1 + 0x960) =

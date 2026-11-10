@@ -1,8 +1,8 @@
 
-/* JUS-CLASS jus_Class_021d1b18::~jus_Class_021d1b18 [class-default] slot 0/1 of vtable 021d1b18;
-   resets vtables (destructor) */
+/* JUS-CLASS ALCollision_Part_021d1b18::~ALCollision_Part_021d1b18 [class-owned] slot 0/1 of vtable
+   021d1b18; resets vtables (destructor) */
 
-undefined4 * jus_Class_021d1b18::~jus_Class_021d1b18(undefined4 *param_1)
+undefined4 * ALCollision_Part_021d1b18::~ALCollision_Part_021d1b18(undefined4 *param_1)
 
 {
   *param_1 = &vftable;

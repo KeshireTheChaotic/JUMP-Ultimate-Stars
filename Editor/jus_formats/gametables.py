@@ -1,6 +1,6 @@
 """Read-only views of the global game tables (``bin/*.bin`` and a few archive members).
 
-Layouts are from docs/Research (2026-11-06) and were re-checked on the shipped
+Layouts are from the 2026-11-06 research (ARM9 readers below) and were re-checked on the shipped
 data by ``tests/test_gametables.py``.  Text slots are self-relative u32
 offsets (string at slot offset + value, 0 = no string) to NUL-terminated CP932.
 Numeric fields keep their raw values; a name is given only where the reading

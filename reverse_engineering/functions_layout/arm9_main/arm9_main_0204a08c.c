@@ -12,7 +12,7 @@ void jus_Class_02094088::vfunc_13
   if (iVar1 == 0) {
     return;
   }
-  jus_Class_020947a8::jus_Class_020947a8(iVar1,param_2,param_3,param_4);
+  jus_HwTexPltt::jus_HwTexPltt(iVar1,param_2,param_3,param_4);
   return;
 }
 

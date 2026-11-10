@@ -1,8 +1,8 @@
 
-/* JUS-CLASS jus_Class_020972e0::vfunc_31 [class-virtual] slot 31 of vtable 020972e0 (own slot, not
+/* JUS-CLASS jus_HwDisplayMain::vfunc_31 [class-virtual] slot 31 of vtable 020972e0 (own slot, not
    inherited) */
 
-undefined4 jus_Class_020972e0::vfunc_31(void)
+undefined4 jus_HwDisplayMain::vfunc_31(void)
 
 {
   return 1;

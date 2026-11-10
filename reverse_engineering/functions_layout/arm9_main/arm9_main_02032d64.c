@@ -1,8 +1,8 @@
 
-/* JUS-CLASS jus_Class_02099af4::vfunc_03 [class-virtual] slot 3 of vtable 02099af4 (own slot, not
+/* JUS-CLASS jus_Prop_BoundsIndex::vfunc_03 [class-virtual] slot 3 of vtable 02099af4 (own slot, not
    inherited) */
 
-void jus_Class_02099af4::vfunc_03(int *param_1,undefined4 param_2,int param_3)
+void jus_Prop_BoundsIndex::vfunc_03(int *param_1,undefined4 param_2,int param_3)
 
 {
   int iVar1;

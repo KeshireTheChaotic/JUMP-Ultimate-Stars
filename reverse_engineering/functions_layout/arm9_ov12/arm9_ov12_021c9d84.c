@@ -1,8 +1,8 @@
 
-/* JUS-CLASS jus_Class_021d4b9c::vfunc_07 [class-virtual] slot 7 of vtable 021d4b9c (own slot, not
-   inherited) */
+/* JUS-CLASS ALTextDS_Part_021d4b9c::vfunc_07 [class-virtual] slot 7 of vtable 021d4b9c (own slot,
+   not inherited) */
 
-void jus_Class_021d4b9c::vfunc_07(int param_1)
+void ALTextDS_Part_021d4b9c::vfunc_07(int param_1)
 
 {
   ushort uVar1;

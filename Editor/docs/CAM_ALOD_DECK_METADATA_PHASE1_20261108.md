@@ -21,13 +21,13 @@ Header contains three `s16,s16` pairs at `+0x00/+0x04/+0x08`, `u8` values `+0x0C
 
 Native source: `reverse_engineering/functions_layout/arm9_ov06/arm9_ov06_0214cd20.c` invokes `BattleCamera::Battle_CameraCreate` (`02151be8.c`) before `BattleMap::BattleMapInit` (`02161cb4.c`). The relevant stage loader decompilation is partially truncated, and a direct ".cam" string is absent from verified main ARM9/ov06, so a native CAM resource consumer is **not verified**.
 
-Detailed audit: `D:\Library\Development\JUS\docs\Research\STAGE_CAM_36_CORPUS_LAYOUT_20261108.md`.
+
 
 ## ALOD source
 
 Scanned original 317 top-level archives plus nested ALAR content, resulting in 1,247 ALOD files, 2,326 original nodes (1,248 SP and 1,078 GN), all 1,078 observed properties using descriptor `0x00000010` with four-character existing parent-node IDs. The 529 files declaring `ParentNodeID` were identified; no additional shipped property descriptor exists in the corpus. Source property registration: `reverse_engineering/functions_layout/arm9_main/arm9_main_02020f7c.c`. Safe patching changes only the exact source four-byte property value; no claim is made about game-safe arbitrary reparenting.
 
-Detailed audit: `D:\Library\Development\JUS\docs\Research\ALOD_PARENT_FIELD_CORPUS_20261108.md`.
+
 
 ## Deck source
 
@@ -42,7 +42,7 @@ Original code consumers for companion metadata:
 
 No fabricated "cost", "power", "rarity" or "reward" labels were assigned. The Archive inspector exposes numeric hex values and original-byte source slices; the codecs permit independently edited UTF-16LE, CP932 and byte metadata with strict bounds.
 
-Detailed audit: `D:\Library\Development\JUS\docs\Research\DECK_COMPANION_METADATA_SOURCE_20261108.md`.
+
 
 ## Validation
 

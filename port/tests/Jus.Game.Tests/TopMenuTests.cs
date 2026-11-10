@@ -61,6 +61,32 @@ public sealed class TopMenuTests
     }
 
     [Fact]
+    public void TouchingTheBackButtonGoesBackToTheTitle()
+    {
+        var s = new TopMenuScene(_game, 0);
+        Run(s, limit: 10);
+        // the button art is drawn in the bottom-right corner of the touch screen
+        var px = _p.BottomScreen.Pixels.ToArray();
+        Assert.Contains(Enumerable.Range(176, 15).SelectMany(y => Enumerable.Range(208, 47).Select(x => px[y * 256 + x])),
+            c => c != px[0]);
+        Assert.True(Run(s, touchAt: (240, 184), touchFrame: 2) > 0);
+        Assert.Equal(8, _game.Globals.Director.ExitCode);
+        Assert.Contains((0x78, 1), _p.SoundLog.Effects);
+    }
+
+    [Fact]
+    public void GalaxyParentFollowsTheOrbitArithmetic()
+    {
+        // counter 0x2000: θ = trunc(16384·π/65536·4096) = 3216; sin → 2895, cos → 2897 (20.12, truncated)
+        // y = (409600·2897 >> 12) − 0x60000 = −103516 (cos); x = trunc(−289500·0.6) − 0x40000 = −435844 (sin)
+        Assert.Equal((-435844, -103516), TopMenuScene.GalaxyParent(0x2000));
+        // a quarter turn later (45° → 135°): sin is the same, cos flips sign: about 141 px up, no sideways move
+        var (x1, y1) = TopMenuScene.GalaxyParent(0x6000);
+        Assert.InRange((x1 - -435844) >> 12, -1, 1);
+        Assert.InRange((y1 - -103516) >> 12, -145, -138);
+    }
+
+    [Fact]
     public void FocusPulses()
     {
         var s = new TopMenuScene(_game, 2);

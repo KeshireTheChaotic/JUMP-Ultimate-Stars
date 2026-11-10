@@ -8,6 +8,11 @@ namespace Jus.Host;
 /// keyboard/mouse input, the save file, and the frame loop at the original refresh rate.
 ///
 /// Usage: JUS.exe [--frames N] [--press "A@30,Right@40,..."] [--snapshot dir]
+///   --data dir    extracted game data (otherwise Data beside the executable, else JUS_DATA_ROOT); no ROM needed;
+///   --rom path    explicitly use a ROM instead; --save-seed path seeds the first local save.
+///   --mute        no audio output (scripted --frames runs are always silent).
+///   --renderer vulkan|d3d12|gdi  presentation backend (default vulkan; falls back to GDI);
+///   --present-capture file       with --frames: write the last presented frame as it is in the swap chain.
 ///   --frames N     run N frames, then exit (for tests); --press injects buttons at given frames;
 ///   --snapshot     writes top.bmp/bottom.bmp of the last frame.</summary>
 internal static class Program
@@ -16,6 +21,7 @@ internal static class Program
     private const double FrameSeconds = 1.0 / 59.8261;
 
     private static HostPlatform? _platform;
+    private static IPresenter? _presenter;
     private static Win32.WndProc? _wndProc;       // kept alive for the native callback
     private static nint _hwnd;
     private static bool _quit;
@@ -28,21 +34,33 @@ internal static class Program
         Directory.CreateDirectory(data);
         using var log = new StreamWriter(Path.Combine(data, "jus.log"), append: false) { AutoFlush = true };
 
+        Action<string> logLine = msg => { log.WriteLine(msg); Debug.WriteLine(msg); };
+        IAssetSource assets;
+        try
+        {
+            assets = AssetSelection.Open(opt.Data, opt.Rom, Environment.GetEnvironmentVariable("JUS_DATA_ROOT"),
+                AppContext.BaseDirectory, logLine);
+        }
+        catch (Exception ex) when (ex is IOException or ArgumentException or UnauthorizedAccessException)
+        {
+            logLine($"{ex.Message} Use --data <extracted directory>, JUS_DATA_ROOT, or Data beside JUS.exe. --rom <path> selects ROM mode.");
+            return 2;
+        }
+
         _hwnd = CreateWindow();
         nint dc = Win32.GetDC(_hwnd);
         using var top = new GdiScreen(dc);
         using var bottom = new GdiScreen(dc);
         Win32.ReleaseDC(_hwnd, dc);
 
-        Action<string> logLine = msg => { log.WriteLine(msg); Debug.WriteLine(msg); };
-        string? romPath = opt.Rom ?? RomAssets.Find();
-        if (romPath is null)
-        {
-            logLine("JUS.nds not found: pass --rom <path>, set JUS_ROM, or place it above the executable.");
-            return 2;
-        }
-        var save = new FileSave(Path.Combine(data, "JUS.sav"), Path.Combine(Path.GetDirectoryName(romPath)!, "JUS.sav"));
-        _platform = new HostPlatform(top, bottom, save, new RomAssets(romPath, logLine), new LoggingSound(logLine), logLine);
+        string? seed = opt.SaveSeed ?? (opt.Rom is { } rom
+            ? Path.Combine(Path.GetDirectoryName(Path.GetFullPath(rom))!, "JUS.sav") : null);
+        var save = new FileSave(Path.Combine(data, "JUS.sav"), seed);
+        // native SDAT player on the default output device; scripted runs (--frames) and --mute stay silent
+        using var sound = opt.Frames is null && !opt.Mute ? HostSound.TryCreate(assets, output: true, logLine) : null;
+        _platform = new HostPlatform(top, bottom, save, assets, sound ?? (ISound)new LoggingSound(logLine), logLine);
+        using var presenter = PresenterFactory.Create(opt.Renderer, _hwnd, logLine);
+        _presenter = presenter;
         var game = new JusGame(_platform);
         game.Director.SceneCreated += id => Win32.SetWindowText(_hwnd,
             id is { } s ? $"JUS — scene {(int)s:D2} {s}" : "JUS — saving");
@@ -75,6 +93,7 @@ internal static class Program
                 var injected = opt.Injected(frames);
                 _platform.BeginFrame(injected & ~TouchBit, (injected & TouchBit) != 0);
                 game.Frame();
+                if (opt.PresentCapture is { } cap && opt.Frames is { } last && frames == last - 1) _presenter.CaptureNext(cap);
                 Present();
                 frames++;
                 if (opt.Snapshot is { } sdir && opt.SnapshotFrames.Contains(frames)) Snapshot(sdir, $"f{frames:D5}_");
@@ -136,15 +155,11 @@ internal static class Program
         return ((cw - w) / 2, (ch - 2 * h) / 2, w, h);
     }
 
+    /// <summary>Hand both screens (brightness applied) to the selected presenter.</summary>
     private static void Present()
     {
-        if (_platform is null) return;
-        var (x, y, w, h) = Layout();
-        nint dc = Win32.GetDC(_hwnd);
-        Win32.SetStretchBltMode(dc, Win32.COLORONCOLOR);
-        Win32.StretchBlt(dc, x, y, w, h, _platform.Top.PresentDc(), 0, 0, IScreen.Width, IScreen.Height, Win32.SRCCOPY);
-        Win32.StretchBlt(dc, x, y + h, w, h, _platform.Bottom.PresentDc(), 0, 0, IScreen.Width, IScreen.Height, Win32.SRCCOPY);
-        Win32.ReleaseDC(_hwnd, dc);
+        if (_platform is null || _presenter is null) return;
+        _presenter.Present(_platform.Top.Presented, _platform.Bottom.Presented);
     }
 
     private static nint WndProc(nint hwnd, uint msg, nint wParam, nint lParam)
@@ -193,11 +208,13 @@ internal static class Program
 
 /// <summary>Command-line options for scripted runs.</summary>
 internal sealed record Options(long? Frames, string? Snapshot, Dictionary<long, PadButtons> Presses,
-    HashSet<long> SnapshotFrames, string? Rom)
+    HashSet<long> SnapshotFrames, string? Rom, string? Data, string? SaveSeed, bool Mute = false,
+    string? Renderer = null, string? PresentCapture = null)
 {
     public static Options Parse(string[] args)
     {
-        long? frames = null; string? snap = null, rom = null;
+        long? frames = null; string? snap = null, rom = null, data = null, saveSeed = null, renderer = null, capture = null;
+        bool mute = false;
         var presses = new Dictionary<long, PadButtons>();
         var at = new HashSet<long>();
         for (int i = 0; i < args.Length; i++)
@@ -208,6 +225,11 @@ internal sealed record Options(long? Frames, string? Snapshot, Dictionary<long, 
                 case "--snapshot": snap = args[++i]; break;
                 case "--snapshot-at": foreach (var f in args[++i].Split(',')) at.Add(long.Parse(f)); break;
                 case "--rom": rom = args[++i]; break;
+                case "--data": data = args[++i]; break;
+                case "--save-seed": saveSeed = args[++i]; break;
+                case "--mute": mute = true; break;
+                case "--renderer": renderer = args[++i]; break;
+                case "--present-capture": capture = args[++i]; break;
                 case "--press":
                     foreach (var item in args[++i].Split(',', StringSplitOptions.RemoveEmptyEntries))
                     {
@@ -219,7 +241,7 @@ internal sealed record Options(long? Frames, string? Snapshot, Dictionary<long, 
                     break;
             }
         }
-        return new(frames, snap, presses, at, rom);
+        return new(frames, snap, presses, at, rom, data, saveSeed, mute, renderer, capture);
     }
 
     /// <summary>Frames an injected press is held: scenes such as the Opening sample the pad once per
@@ -237,9 +259,12 @@ internal sealed record Options(long? Frames, string? Snapshot, Dictionary<long, 
 /// <summary>Minimal 32-bit BMP writer for snapshots.</summary>
 internal static class Bmp
 {
-    public static void Write(string path, ReadOnlySpan<uint> pixels)
+    public static void Write(string path, ReadOnlySpan<uint> pixels) => Write(path, pixels, IScreen.Width, IScreen.Height);
+
+    public static void Write(string path, ReadOnlySpan<uint> pixels, int w, int h)
     {
-        int w = IScreen.Width, h = IScreen.Height, size = 54 + w * h * 4;
+        int size = 54 + w * h * 4;
+        pixels = pixels[..(w * h)];
         using var bw = new BinaryWriter(File.Create(path));
         bw.Write((ushort)0x4D42); bw.Write(size); bw.Write(0); bw.Write(54);
         bw.Write(40); bw.Write(w); bw.Write(-h); bw.Write((ushort)1); bw.Write((ushort)32);

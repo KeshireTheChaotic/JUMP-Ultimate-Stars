@@ -871,7 +871,7 @@ class EditorApp(tk.Tk):
 
     def refresh_details(self):
         """Present original DSTX/DSIG sprite details."""
-        from app.inspectors.sprite import render_sprite_inspector
+        from app.inspectors.atlas_sprite import render_sprite_inspector
         return render_sprite_inspector(self, hx, shape_label)
 
 
@@ -926,7 +926,7 @@ class EditorApp(tk.Tk):
 
 
     def import_frame(self, append):
-        from app.lifecycle.apply_ops import import_frame as _controller
+        from app.lifecycle.atlas_frame_ops import import_frame as _controller
         return _controller(self, append)
 
 

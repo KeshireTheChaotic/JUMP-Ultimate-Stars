@@ -1,8 +1,8 @@
 
-/* JUS-CLASS jus_Class_020944cc::vfunc_21 [class-virtual] slot 21 of vtable 020944cc (own slot, not
-   inherited) */
+/* JUS-CLASS jus_HwTexPltt_Part_020944cc::vfunc_21 [class-virtual] slot 21 of vtable 020944cc (own
+   slot, not inherited) */
 
-int * jus_Class_020944cc::vfunc_21
+int * jus_HwTexPltt_Part_020944cc::vfunc_21
                 (int *param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
 
 {

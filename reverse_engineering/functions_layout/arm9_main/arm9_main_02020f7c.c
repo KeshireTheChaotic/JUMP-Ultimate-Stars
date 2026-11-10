@@ -42,13 +42,13 @@ void FUN_02020f7c(void)
     puVar4 = (undefined4 *)FUN_0201a228(0x14);
     if (puVar4 != (undefined4 *)0x0) {
       jus_Class_020977f0::jus_Class_020977f0(puVar4,s_Caption_0209d5cc,&DAT_0209d49c);
-      *puVar4 = &jus_Class_020987b0::vftable;
+      *puVar4 = &jus_Prop_Caption::vftable;
     }
     (**(code **)(*DAT_020a0ed4 + 0x3c))(DAT_020a0ed4,puVar4);
     puVar4 = (undefined4 *)FUN_0201a228(0x68);
     if (puVar4 != (undefined4 *)0x0) {
       jus_Class_02098078::jus_Class_02098078(puVar4,s_Position_0209d648,&DAT_0209d4bc);
-      *puVar4 = &jus_Class_02098d98::vftable;
+      *puVar4 = &jus_Prop_Position::vftable;
     }
     (**(code **)(*DAT_020a0ed4 + 0x3c))(DAT_020a0ed4,puVar4);
     puVar4 = (undefined4 *)FUN_0201a228(0x14);
@@ -60,13 +60,13 @@ void FUN_02020f7c(void)
     puVar4 = (undefined4 *)FUN_0201a228(0x68);
     if (puVar4 != (undefined4 *)0x0) {
       jus_Class_02098078::jus_Class_02098078(puVar4,s_Scale_0209d54c,&DAT_0209d63c);
-      *puVar4 = &jus_Class_02098cf0::vftable;
+      *puVar4 = &jus_Prop_Scale::vftable;
     }
     (**(code **)(*DAT_020a0ed4 + 0x3c))(DAT_020a0ed4,puVar4);
     puVar4 = (undefined4 *)FUN_0201a228(0x14);
     if (puVar4 != (undefined4 *)0x0) {
       jus_Class_02097a90::jus_Class_02097a90(puVar4,s_Texture_0209d5c4,&DAT_0209d6c0);
-      *puVar4 = &jus_Class_02098af8::vftable;
+      *puVar4 = &jus_Prop_Texture::vftable;
     }
     (**(code **)(*DAT_020a0ed4 + 0x3c))(DAT_020a0ed4,puVar4);
     puVar4 = (undefined4 *)FUN_0201a228(0x14);
@@ -78,74 +78,74 @@ void FUN_02020f7c(void)
     puVar4 = (undefined4 *)FUN_0201a228(0x14);
     if (puVar4 != (undefined4 *)0x0) {
       jus_Class_02099a48::jus_Class_02099a48(puVar4,s_Marker_0209d58c,&DAT_0209d584);
-      *puVar4 = &jus_Class_0209a508::vftable;
+      *puVar4 = &jus_Prop_Marker::vftable;
     }
     (**(code **)(*DAT_020a0ed4 + 0x3c))(DAT_020a0ed4,puVar4);
     puVar4 = (undefined4 *)FUN_0201a228(0x14);
     if (puVar4 != (undefined4 *)0x0) {
       jus_Class_02099a48::jus_Class_02099a48(puVar4,s_LifeType_0209d618,&DAT_0209d5e8);
-      *puVar4 = &jus_Class_0209a3b0::vftable;
+      *puVar4 = &jus_Prop_LifeType::vftable;
     }
     (**(code **)(*DAT_020a0ed4 + 0x3c))(DAT_020a0ed4,puVar4);
     puVar4 = (undefined4 *)FUN_0201a228(0x14);
     if (puVar4 != (undefined4 *)0x0) {
       ALCollision_02099c4c::ALCollision_02099c4c(puVar4,s_TextureID_0209d690,&DAT_0209d744);
-      *puVar4 = &jus_Class_0209a660::vftable;
+      *puVar4 = &jus_Prop_TextureID::vftable;
     }
     (**(code **)(*DAT_020a0ed4 + 0x3c))(DAT_020a0ed4,puVar4);
     puVar4 = (undefined4 *)FUN_0201a228(0x14);
     if (puVar4 != (undefined4 *)0x0) {
       jus_Class_020977f0::jus_Class_020977f0(puVar4,s_TextureName_0209d6fc,&DAT_0209d734);
-      *puVar4 = &jus_Class_02098a50::vftable;
+      *puVar4 = &jus_Prop_TextureName::vftable;
     }
     (**(code **)(*DAT_020a0ed4 + 0x3c))(DAT_020a0ed4,puVar4);
     puVar4 = (undefined4 *)FUN_0201a228(0x14);
     if (puVar4 != (undefined4 *)0x0) {
       jus_Class_02099238::jus_Class_02099238(puVar4,s_ParentNodeID_0209d724,&DAT_0209d6a8);
-      *puVar4 = &jus_Class_0209a5b4::vftable;
+      *puVar4 = &jus_Prop_ParentNodeID::vftable;
     }
     DAT_02093c1c = puVar4;
     (**(code **)(*DAT_020a0ed4 + 0x3c))(DAT_020a0ed4,puVar4);
     puVar4 = (undefined4 *)FUN_0201a228(0x14);
     if (puVar4 != (undefined4 *)0x0) {
       ALCollision_020985b8::ALCollision_020985b8(puVar4,s_DrawPrio_0209d5dc,&DAT_0209d830);
-      *puVar4 = &jus_Class_020989a8::vftable;
+      *puVar4 = &jus_Prop_DrawPrio::vftable;
     }
     (**(code **)(*DAT_020a0ed4 + 0x3c))(DAT_020a0ed4,puVar4);
     puVar4 = (undefined4 *)FUN_0201a228(0x14);
     if (puVar4 != (undefined4 *)0x0) {
       ALCollision_020985b8::ALCollision_020985b8(puVar4,s_Alpha_0209d574,&DAT_0209d678);
-      *puVar4 = &jus_Class_02098900::vftable;
+      *puVar4 = &jus_Prop_Alpha::vftable;
     }
     (**(code **)(*DAT_020a0ed4 + 0x3c))(DAT_020a0ed4,puVar4);
     puVar4 = (undefined4 *)FUN_0201a228(0x14);
     if (puVar4 != (undefined4 *)0x0) {
       jus_Class_020992e4::jus_Class_020992e4(puVar4,&DAT_0209d514,&DAT_0209d4a4);
-      *puVar4 = &jus_Class_0209a304::vftable;
+      *puVar4 = &jus_Prop_Disp::vftable;
     }
     (**(code **)(*DAT_020a0ed4 + 0x3c))(DAT_020a0ed4,puVar4);
     puVar4 = (undefined4 *)FUN_0201a228(0x14);
     if (puVar4 != (undefined4 *)0x0) {
       jus_Class_020992e4::jus_Class_020992e4(puVar4,s_ZWriteEnable_0209d764,&DAT_0209d7e4);
-      *puVar4 = &jus_Class_0209a258::vftable;
+      *puVar4 = &jus_Prop_ZWriteEnable::vftable;
     }
     (**(code **)(*DAT_020a0ed4 + 0x3c))(DAT_020a0ed4,puVar4);
     puVar4 = (undefined4 *)FUN_0201a228(0x14);
     if (puVar4 != (undefined4 *)0x0) {
       jus_Class_020992e4::jus_Class_020992e4(puVar4,s_ZTestEnable_0209d708,&DAT_0209d754);
-      *puVar4 = &jus_Class_0209a1ac::vftable;
+      *puVar4 = &jus_Prop_ZTestEnable::vftable;
     }
     (**(code **)(*DAT_020a0ed4 + 0x3c))(DAT_020a0ed4,puVar4);
     puVar4 = (undefined4 *)FUN_0201a228(0x14);
     if (puVar4 != (undefined4 *)0x0) {
       jus_Class_02099844::jus_Class_02099844(puVar4,s_BlendMode_0209d69c,&DAT_0209d7d4);
-      *puVar4 = &jus_Class_0209a100::vftable;
+      *puVar4 = &jus_Prop_BlendMode::vftable;
     }
     (**(code **)(*DAT_020a0ed4 + 0x3c))(DAT_020a0ed4,puVar4);
     puVar4 = (undefined4 *)FUN_0201a228(0x14);
     if (puVar4 != (undefined4 *)0x0) {
       jus_Class_02098708::jus_Class_02098708(puVar4,s_Color_0209d564,&DAT_0209d47c);
-      *puVar4 = &jus_Class_02098858::vftable;
+      *puVar4 = &jus_Prop_Color::vftable;
     }
     (**(code **)(*DAT_020a0ed4 + 0x3c))(DAT_020a0ed4,puVar4);
     puVar4 = (undefined4 *)FUN_0201a228(0x14);
@@ -157,7 +157,7 @@ void FUN_02020f7c(void)
     puVar4 = (undefined4 *)FUN_0201a228(0x14);
     if (puVar4 != (undefined4 *)0x0) {
       jus_Class_02099a48::jus_Class_02099a48(puVar4,s_ParentCalcType_0209d7c4,&DAT_0209d6e4);
-      *puVar4 = &jus_Class_02099efc::vftable;
+      *puVar4 = &jus_Prop_ParentCalcType::vftable;
     }
     (**(code **)(*DAT_020a0ed4 + 0x3c))(DAT_020a0ed4,puVar4);
     FUN_02023cd0(0x2020444e,FUN_02021820);

@@ -34,8 +34,15 @@ public static class Dscp
             : file;
 }
 
-/// <summary>"DSIG" image (.dig): +5 format (0x10 = 4bpp, 0x11 = 8bpp), +6 palette count (in
-/// 16-colour units), +8 width, +0xA height (pixels), +0xC palettes (BGR555), then 8x8 tiles.</summary>
+/// <summary>"DSIG" image (.dig): +5 format, +6 palette count (in 16-colour units), +8 width, +0xA
+/// height (pixels), +0xC palettes (BGR555), then the pixels. Formats, by the engine's switch in
+/// jus_Class_02094130::vfunc_07 (0x020394D0):
+/// 0x10 jus_TagNCG1 4bpp 8x8 tiles; 0x11 jus_TagNG18 8bpp tiles with extended palettes;
+/// 0x20 jus_TagPL4R linear 4bpp; 0x50 jus_TagLCP4 = LZ77-compressed linear 4bpp (decompressed with
+/// FUN_020519C8, then uploaded like PL4R, FUN_02044774);
+/// 0x30 jus_TagNFC4 (not in the ROM); 0x40 jus_TagFFL4 = 4bpp frames streamed from another file
+/// through a u32 frame table (+8 = entry count; version 2 has one more u32 before it), used by the
+/// battle characters (chr/*_4c.aar) — not ported.</summary>
 public sealed class DsigImage
 {
     public int Format { get; }
@@ -54,8 +61,8 @@ public sealed class DsigImage
         if (data.Length < 12 || BinaryPrimitives.ReadUInt32LittleEndian(data) != 0x47495344) throw new InvalidDataException("not DSIG");
         Format = data[5];
         // 0x20: 4bpp as well (0.5 bytes per pixel; used for the translucent Title effect sprites)
-        if (Format is not (0x10 or 0x11 or 0x20)) throw new NotSupportedException($"DSIG format 0x{Format:X2}");
-        int pals = BinaryPrimitives.ReadUInt16LittleEndian(data.AsSpan(6));
+        if (Format is not (0x10 or 0x11 or 0x20 or 0x40 or 0x50)) throw new NotSupportedException($"DSIG format 0x{Format:X2}");
+        int pals = data[6];                 // a byte: FFL4 files use +7 for something else (the engine reads +6 only)
         Width = BinaryPrimitives.ReadUInt16LittleEndian(data.AsSpan(8));
         Height = BinaryPrimitives.ReadUInt16LittleEndian(data.AsSpan(10));
         Palette555 = new ushort[pals * 16];
@@ -63,7 +70,38 @@ public sealed class DsigImage
             Palette555[i] = BinaryPrimitives.ReadUInt16LittleEndian(data.AsSpan(12 + 2 * i));
         Palette = new uint[Palette555.Length];
         Refresh();
-        Tiles = data.AsSpan(12 + pals * 32).ToArray();
+        if (Format == 0x40)
+        {
+            // jus_TagFFL4: [version 2: u32] then a frame table {u16 count, u16} + count × {u16 offset/4,
+            // u16 size} (offsets from the table start); each frame is LZ77 OBJ tile data (FUN_0203F440)
+            _raw = data;
+            _frameTable = 12 + pals * 32 + (data[4] == 1 ? 0 : 4);
+            FrameCount = BinaryPrimitives.ReadUInt16LittleEndian(data.AsSpan(_frameTable));
+            Tiles = [];
+            return;
+        }
+        Tiles = Format == 0x50
+            ? Lz10.Decompress(data.AsSpan(12 + pals * 32))
+            : data.AsSpan(12 + pals * 32).ToArray();
+    }
+
+    private readonly byte[]? _raw;
+    private readonly int _frameTable;
+    private readonly Dictionary<int, byte[]> _frames = [];
+
+    /// <summary>Format 0x40: frames of 4bpp OBJ tiles, chosen per cell by its first part's u16.</summary>
+    public bool IsFrames => Format == 0x40;
+    public int FrameCount { get; }
+
+    /// <summary>Frame <paramref name="index"/> of a format-0x40 image (table entry index + 1), decompressed.</summary>
+    public byte[] Frame(int index)
+    {
+        if (_raw is null || index < 0 || index >= FrameCount) return [];
+        if (_frames.TryGetValue(index, out var f)) return f;
+        int e = _frameTable + (index + 1) * 4;
+        int off = _frameTable + BinaryPrimitives.ReadUInt16LittleEndian(_raw.AsSpan(e)) * 4;
+        int size = BinaryPrimitives.ReadUInt16LittleEndian(_raw.AsSpan(e + 2));
+        return _frames[index] = Lz10.Decompress(_raw.AsSpan(off, size));
     }
 
     public static DsigImage Load(IAssetSource assets, string path) => new(Dscp.Unpack(assets.Read(path)));
@@ -82,8 +120,9 @@ public sealed class DsigImage
         return 0xFF000000 | r << 16 | g << 8 | b;
     }
 
-    /// <summary>Format 0x20 is a linear (texture-style) 4bpp bitmap, row-major, not 8x8 tiles.</summary>
-    public bool IsLinear => Format == 0x20;
+    /// <summary>Formats 0x20 and 0x50 (after decompression) are linear (texture-style) 4bpp bitmaps,
+    /// row-major, not 8x8 tiles.</summary>
+    public bool IsLinear => Format is 0x20 or 0x50;
 
     /// <summary>Colour index at bitmap position (x, y) of a linear 4bpp image (low nibble = even x).</summary>
     public int PixelAt(int x, int y)
@@ -91,6 +130,16 @@ public sealed class DsigImage
         if (x < 0 || y < 0 || x >= Width || y >= Height) return 0;
         int o = (y * Width + x) >> 1;
         return o < Tiles.Length ? (Tiles[o] >> ((x & 1) * 4)) & 0xF : 0;
+    }
+
+    /// <summary>Colour index at (x, y) when a linear texture is read as 4-colour (2bpp, GX format 2) at
+    /// twice its 4bpp width, as 3D sprite parts with flag 0x40 do (low bits = leftmost pixel).</summary>
+    public int PixelAt2Bpp(int x, int y)
+    {
+        int w2 = Width * 2;
+        if (x < 0 || y < 0 || x >= w2 || y >= Height) return 0;
+        int i = y * w2 + x;
+        return (i >> 2) < Tiles.Length ? (Tiles[i >> 2] >> ((i & 3) * 2)) & 3 : 0;
     }
 
     /// <summary>Colour index of pixel (x, y) of tile <paramref name="tile"/>.</summary>

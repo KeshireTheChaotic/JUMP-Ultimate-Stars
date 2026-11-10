@@ -1,10 +1,10 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 /* WARNING: Restarted to delay deadcode elimination for space: ram */
-/* JUS-CLASS jus_Class_020972e0::vfunc_23 [class-virtual] slot 23 of vtable 020972e0 (own slot, not
+/* JUS-CLASS jus_HwDisplayMain::vfunc_23 [class-virtual] slot 23 of vtable 020972e0 (own slot, not
    inherited) */
 
-void jus_Class_020972e0::vfunc_23
+void jus_HwDisplayMain::vfunc_23
                (int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
 
 {

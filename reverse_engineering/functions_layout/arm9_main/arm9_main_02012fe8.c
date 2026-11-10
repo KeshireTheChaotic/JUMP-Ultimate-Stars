@@ -1,10 +1,8 @@
 
-/* JUS-CLASS jus_TagDLSE_Part_0209af58_Part_02098ee8::jus_TagDLSE_Part_0209af58_Part_02098ee8
-   [class-owned] stores vtable 02098ee8 into *this (constructor) */
+/* JUS-CLASS jus_Prop_TargetPropName::jus_Prop_TargetPropName [class-property-name] stores vtable
+   02098ee8 into *this (constructor) */
 
-undefined4 *
-jus_TagDLSE_Part_0209af58_Part_02098ee8::jus_TagDLSE_Part_0209af58_Part_02098ee8
-          (undefined4 *param_1)
+undefined4 * jus_Prop_TargetPropName::jus_Prop_TargetPropName(undefined4 *param_1)
 
 {
                     /* JUS-TAG strings=["TargetPropName"] */

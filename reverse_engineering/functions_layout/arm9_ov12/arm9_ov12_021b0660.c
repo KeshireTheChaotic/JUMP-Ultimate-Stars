@@ -14,7 +14,7 @@ void ALCollision::Init(void)
     piVar1 = (int *)thunk_FUN_0201a228(0x24,s_ALCollision_cpp_021d25e0,&DAT_021d1828,0x99,in_r3);
     if (piVar1 != (int *)0x0) {
       PropBindInstance_02095200::PropBindInstance_02095200(piVar1,0);
-      *piVar1 = (int)&jus_Class_021d1b18::vftable;
+      *piVar1 = (int)&ALCollision_Part_021d1b18::vftable;
       puVar2 = (undefined4 *)
                thunk_FUN_0201a228(0x14,s_ALPropSetImp_h_021d190c,&DAT_021d1868,0x1f9,in_r3);
       if (puVar2 != (undefined4 *)0x0) {
@@ -28,19 +28,19 @@ void ALCollision::Init(void)
              thunk_FUN_0201a228(0x14,s_ALCollision_cpp_021d25e0,&DAT_021d1828,0x9a,in_r3);
     if (puVar2 != (undefined4 *)0x0) {
       ALCollision_02099c4c::ALCollision_02099c4c(puVar2,s_ShapeID_021d1890,&DAT_021d1888);
-      *puVar2 = &jus_Class_021d2490::vftable;
+      *puVar2 = &jus_Prop_ShapeID::vftable;
     }
     (**(code **)(*DAT_021d5130 + 0x3c))(DAT_021d5130,puVar2);
     puVar2 = (undefined4 *)thunk_FUN_0201a228(0x14,s_ALCollision_cpp_021d25e0,&DAT_021d1828,0x9b);
     if (puVar2 != (undefined4 *)0x0) {
       ALCollision_02099c4c::ALCollision_02099c4c(puVar2,s_Attribute_021d18bc,&DAT_021d1850);
-      *puVar2 = &jus_Class_021d23e4::vftable;
+      *puVar2 = &jus_Prop_Attribute::vftable;
     }
     (**(code **)(*DAT_021d5130 + 0x3c))(DAT_021d5130,puVar2);
     puVar2 = (undefined4 *)thunk_FUN_0201a228(0x14,s_ALCollision_cpp_021d25e0,&DAT_021d1828,0x9c);
     if (puVar2 != (undefined4 *)0x0) {
       ALCollision_02099c4c::ALCollision_02099c4c(puVar2,&DAT_021d1858,&DAT_021d1840);
-      *puVar2 = &jus_Class_021d2338::vftable;
+      *puVar2 = &jus_Prop_Kind::vftable;
     }
     (**(code **)(*DAT_021d5130 + 0x3c))(DAT_021d5130,puVar2);
     puVar2 = (undefined4 *)thunk_FUN_0201a228(0x68,s_ALCollision_cpp_021d25e0,&DAT_021d1828,0x9d);
@@ -56,19 +56,19 @@ void ALCollision::Init(void)
       puVar2[0xb] = puVar2;
       puVar2[0x12] = puVar2;
       puVar2[0x19] = puVar2;
-      *puVar2 = &jus_Class_021d21e4::vftable;
+      *puVar2 = &ALCollision_Part_021d21e4::vftable;
     }
     (**(code **)(*DAT_021d5130 + 0x3c))(DAT_021d5130,puVar2);
     puVar2 = (undefined4 *)thunk_FUN_0201a228(0x14,s_ALCollision_cpp_021d25e0,&DAT_021d1828,0x9e);
     if (puVar2 != (undefined4 *)0x0) {
       ALCollision_02099c4c::ALCollision_02099c4c(puVar2,s_Enable_021d1880,&DAT_021d1870);
-      *puVar2 = &jus_Class_021d228c::vftable;
+      *puVar2 = &jus_Prop_Enable::vftable;
     }
     (**(code **)(*DAT_021d5130 + 0x3c))(DAT_021d5130,puVar2);
     puVar2 = (undefined4 *)thunk_FUN_0201a228(0x1c,s_ALCollision_cpp_021d25e0,&DAT_021d1828,0xa0);
     if (puVar2 != (undefined4 *)0x0) {
       ALCollision_02094f78::ALCollision_02094f78(puVar2,0);
-      *puVar2 = &jus_Class_021d1ac0::vftable;
+      *puVar2 = &ALCollision_Part_021d1ac0::vftable;
     }
     DAT_021d512c = 0;
     DAT_021d5134 = puVar2;

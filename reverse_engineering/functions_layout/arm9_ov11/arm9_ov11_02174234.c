@@ -1,8 +1,8 @@
 
-/* JUS-CLASS jus_Class_02181700::vfunc_05 [class-virtual] slot 5 of vtable 02181700 (own slot, not
-   inherited) */
+/* JUS-CLASS BattleAI_Part_02181700::vfunc_05 [class-virtual] slot 5 of vtable 02181700 (own slot,
+   not inherited) */
 
-void jus_Class_02181700::vfunc_05(int param_1)
+void BattleAI_Part_02181700::vfunc_05(int param_1)
 
 {
   int iVar1;

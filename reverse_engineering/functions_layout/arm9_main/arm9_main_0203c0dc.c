@@ -1,8 +1,8 @@
 
-/* JUS-CLASS jus_Class_0209abc8::jus_Class_0209abc8 [class-default] stores vtable 0209abc8 into
-   *this (constructor) */
+/* JUS-CLASS jus_HwBgLayer::jus_HwBgLayer [class-hardware-role] stores vtable 0209abc8 into *this
+   (constructor) */
 
-undefined4 * jus_Class_0209abc8::jus_Class_0209abc8(undefined4 *param_1,undefined4 param_2)
+undefined4 * jus_HwBgLayer::jus_HwBgLayer(undefined4 *param_1,undefined4 param_2)
 
 {
   int iVar1;
@@ -52,7 +52,7 @@ undefined4 * jus_Class_0209abc8::jus_Class_0209abc8(undefined4 *param_1,undefine
   *(undefined1 *)(param_1 + 0x25d) = 0;
   *(undefined1 *)(param_1 + 0x263) = 1;
   jus_Class_02094220::jus_Class_02094220(param_1 + 0x264);
-  jus_Class_020957b0::jus_Class_020957b0(param_1 + 0x267);
+  jus_HwBgLayer_Part_020957b0::jus_HwBgLayer_Part_020957b0(param_1 + 0x267);
   jus_Class_020942e4::jus_Class_020942e4(param_1 + 0x277);
   param_1[0x235] = 1 << (param_1[0x233] & 0xff);
   param_1[0x236] = 1 << (param_1[0x234] & 0xff);
@@ -69,7 +69,7 @@ undefined4 * jus_Class_0209abc8::jus_Class_0209abc8(undefined4 *param_1,undefine
   iVar1 = FUN_0201a228(8);
   uVar2 = 0;
   if (iVar1 != 0) {
-    uVar2 = jus_Class_02093d04::jus_Class_02093d04(iVar1,param_1);
+    uVar2 = jus_HwBgLayer_Part_02093d04::jus_HwBgLayer_Part_02093d04(iVar1,param_1);
   }
   param_1[0x22] = uVar2;
   param_1[0x287] = 0;

@@ -24,5 +24,7 @@ internal sealed class RomAssetsForTests : IAssetSource
 internal sealed class RecordingSound : ISound
 {
     public List<(int Id, int Arg)> Effects { get; } = [];
+    public int StopAlls;
     public void PlayEffect(int id, int arg) => Effects.Add((id, arg));
+    public void StopAll() => StopAlls++;
 }

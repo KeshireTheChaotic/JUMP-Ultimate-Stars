@@ -94,9 +94,5 @@ alone**: original overlay6 uses six hardcoded pointer entries at 0x02171C20.
 An extra .bin file or a new mission definition does not extend that table.
 Deckmaking's one tutorial script is loaded via a separate overlay5 path.
 
-Exact source and runtime limitations are documented at:
-D:\Library\Development\JUS\docs\Research\TUTORIAL_LEVEL_EDITOR_VM_LINKS_AND_EXTENSION_LIMIT_20261107.md
-Validation:
-D:\Library\Development\JUS\docs\Research\TUTORIAL_LEVEL_NATIVE_BINDING_AND_EXTENSION_VALIDATION_20261107.json
 New Editor tests/test_tutorial_workspace.py; full regression suite passed
 327 tests, 1 skipped. No original Data, ROM, or Ghidra source was modified.

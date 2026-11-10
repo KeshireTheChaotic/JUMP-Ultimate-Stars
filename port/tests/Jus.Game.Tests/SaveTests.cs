@@ -12,7 +12,15 @@ internal sealed class BytesSave(byte[] data) : ISaveStorage
 
 public sealed class SaveTests
 {
-    private static byte[] RealSave() => File.ReadAllBytes(Path.Combine(RomAssetsForTests.FindRoot(), "JUS.sav"));
+    /// <summary>The player's save, read-only: next to the ROM, or in <c>unpacked\</c> (where the melonDS
+    /// setup keeps it).</summary>
+    private static byte[] RealSave()
+    {
+        string root = RomAssetsForTests.FindRoot();
+        string path = Path.Combine(root, "JUS.sav");
+        if (!File.Exists(path)) path = Path.Combine(root, "unpacked", "JUS.sav");
+        return File.ReadAllBytes(path);
+    }
 
     [Fact]
     public void LoadsTheRealSave()

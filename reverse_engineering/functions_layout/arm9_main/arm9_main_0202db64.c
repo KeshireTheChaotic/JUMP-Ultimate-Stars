@@ -1,8 +1,8 @@
 
-/* JUS-CLASS jus_Class_02098858::vfunc_34 [class-virtual] slot 34 of vtable 02098858 (own slot, not
+/* JUS-CLASS jus_Prop_Color::vfunc_34 [class-virtual] slot 34 of vtable 02098858 (own slot, not
    inherited) */
 
-undefined4 jus_Class_02098858::vfunc_34(undefined4 param_1,undefined4 *param_2,char *param_3)
+undefined4 jus_Prop_Color::vfunc_34(undefined4 param_1,undefined4 *param_2,char *param_3)
 
 {
   undefined4 uVar1;

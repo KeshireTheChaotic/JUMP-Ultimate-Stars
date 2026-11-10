@@ -124,6 +124,6 @@ public sealed class OpeningTests
             _p.Input = prev;
             _game.Frame();
         }
-        Assert.Contains("soft reset", logs);
+        Assert.Contains(logs, l => l.StartsWith("soft reset"));
     }
 }

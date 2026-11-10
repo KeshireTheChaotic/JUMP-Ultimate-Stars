@@ -4,6 +4,7 @@ from __future__ import annotations
 from jus_formats import dsig as dsigmod, sprite
 from jus_formats.dsig import DsigFile, MODE_CHARSTREAM, MODE_TILED4
 from jus_formats.dstx import DstxFile, Frame
+from .atlasframes import AtlasFramePatch, plan_atlas_frame_image, set_atlas_frame_image
 
 
 def set_frame_image(d: DstxFile, g: DsigFile, i: int, img: sprite.IndexedImage,

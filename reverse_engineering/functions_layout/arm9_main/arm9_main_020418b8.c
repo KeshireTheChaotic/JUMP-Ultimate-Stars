@@ -63,7 +63,7 @@ void FUN_020418b8(void)
   FUN_02023cd0(0x20205250);
   if ((DAT_020a0ee8 & 1) == 0) {
     DAT_020a0ef0 = &PTR_vfunc_09_020944f0;
-    FUN_0200f2b0(&DAT_020a0ef0,jus_Class_020944cc::vfunc_14);
+    FUN_0200f2b0(&DAT_020a0ef0,jus_HwTexPltt_Part_020944cc::vfunc_14);
     DAT_020a0ee8 = DAT_020a0ee8 | 1;
   }
   FUN_020289f0(&DAT_020a0ef0);

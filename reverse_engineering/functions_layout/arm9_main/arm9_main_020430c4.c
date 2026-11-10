@@ -25,8 +25,8 @@ void FUN_020430c4(void)
   FUN_02056298();
   FUN_02061428();
   if ((DAT_020a0da4 & 1) == 0) {
-    jus_Class_020948a4::jus_Class_020948a4(&DAT_020a2e54);
-    FUN_0200f2b0(&DAT_020a2e54,jus_Class_020948a4::vfunc_03);
+    jus_HwSwapBuffers::jus_HwSwapBuffers(&DAT_020a2e54);
+    FUN_0200f2b0(&DAT_020a2e54,jus_HwSwapBuffers::vfunc_03);
     DAT_020a0da4 = DAT_020a0da4 | 1;
   }
   DAT_020a0f64 = &DAT_020a2e54;

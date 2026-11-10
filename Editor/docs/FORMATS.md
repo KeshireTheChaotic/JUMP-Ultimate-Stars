@@ -150,7 +150,7 @@ count × 4-byte signed coordinate pairs from +0x10. The first point equals the
 first header pair in every original. The Level inspector shows these raw values.
 **Unresolved:** the original runtime meaning of the header pairs and points,
 camera clamping, position and scroll origin; no guessed camera-space projection
-is applied. Research: `D:/Library/Development/JUS/docs/Research/STAGE_CAM_36_CORPUS_LAYOUT_20261108.md`.
+is applied.
 
 ## GenerateID effect spawns (`jus_package.spawns`)
 
@@ -430,10 +430,7 @@ members / 2,837 records, all roundtrip exactly. No AI editing features.
 
 Verification: python -m unittest tests.test_dstx_layout_0506
 tests.test_shot_runtime_fields; complete test discovery 227 tests, one
-skipped, all passed; gui_screen_layout_smoke.py passed. The independent
-scene hierarchy / physical LCD trace is in
-D:/Library/Development/JUS/docs/Research/
-JGALAXY_PARENT_TRANSFORMS_LCD_ROUTING_TRACE_20261106.md.
+skipped, all passed; gui_screen_layout_smoke.py passed.
 
 
 ## P3 and P6 updates (2026-11-06)
@@ -445,8 +442,7 @@ tile index/H,V-flip/palette-bank convention. 8bpp uses flat palette indexing,
 including opaque colour16. A distinct pure read-only renderer
 jus_formats/tilepanel.py returns RGBA source pixels; the GUI displays the
 panel as an explicitly isolated resource (not an original hardware screenshot).
-All 50 originals/1094 panels are rendered with no missing tiles/banks and
-the exact decoded pixel hashes are cataloged under docs/Research/P3_*.
+All 50 originals/1094 panels are rendered with no missing tiles/banks.
 
 Shot/collision inspection now recognizes conditional u16 spawn cap at shot+2,
 the +0x1D three-way audio route under shot flags bit0x10000, and
@@ -454,7 +450,7 @@ the +0x1D three-way audio route under shot flags bit0x10000, and
 0x0D(0x200,0x400), and shared 0x0C/0x14(0x100).
 It displays mechanical callback descriptions, raw unknown flags, and
 chr/col's +2,+8,+0x0C,+0x10 original words; no invented gameplay collision
-names. See docs/Research/P6_SHOT_COL_RUNTIME_HANDLERS_TRACE_20261106.md.
+names.
 
 No AI editing added. Actual scene-wide screen composition, physical LCD
 presentation, user-visible col class names and untraced shot flags remain
@@ -470,15 +466,14 @@ jus_formats/collisionwork.py holds 3 exact 32-entry ARM9 bit-mask tables
 for chr/col+0x08 contributions to work+0x14/+0x18/+0x1C, and a local
 CollisionRect-to-center/half-extents transform from ARM9 02079E40.
 Archive inspector exposes class-zero vs nonzero runtime branches and raw
-unknowns. See docs/Research/COLLISION_WORK_ID_DIRECT_JOIN_TRACE_20261106.md.
+unknowns.
 
 The new read-only jus_formats/panelmesh.py reconstructs the *conditional*
 ARM9 02043C7C fallback CLDS six-byte pieces, with 4/2/1 horizontal spans,
 original 17-entry width lookup (0..16), and signed-byte local coordinates.
 The real source census is 1,035 supported panels and 59 panels that exceed
 the lookup. Screen inspector labels this alternate mesh as conditional,
-never as confirmed final scene composition. See
-docs/Research/DSTX_0506_CONDITIONAL_MESH_AND_SCENE_TRACE_20261106.md.
+never as confirmed final scene composition.
 
 All original game assets/ROM/Ghidra exports are untouched. No AI editing
 functions have been added. Final emulator screen placement, LCD routing and
@@ -486,23 +481,23 @@ contact-result damage/guard/status are still unverified.
 
 ## Koma / move / BIN text source cross-reference
 
-The Animation workspace shows original BIN-authored names, types and descriptions for the exact resource ID of sized Special A/B or support actions. Koma inspector shows all 14 shared+special actions for a type0 battle card, one 2-/3-Koma action for a type1 support card, and none for help/other cards. Navigation is bidirectional: Koma Inspector -> Open ALMT move; Animation Move Inspector -> choose source Koma card -> Open Koma card. The read-only mapper in jus_package/movelinks.py derives original text fields from bin/chr_b_t.bin (74 x 53 words, 51 text pointers) and bin/chr_s_t.bin (193 x 9 text pointers, ov05 0214E370/0214E3D4); the original Koma type, roster and size are from bin/koma.bin. Matching enforces the full 32-bit move ID and actual primary ALMT source member, rather than a guessed name or array index. Ordinary fighter inputs have only code-backed control labels, not invented source names. The Editor only normalizes | to spaces for display. Research: ../../../../docs/Research/ALMT_KOMA_TEXT_MOVE_LINK_TRACE_20261106.md. Tests: tests/test_move_text_links.py, tests/gui_move_text_links_smoke.py.
+The Animation workspace shows original BIN-authored names, types and descriptions for the exact resource ID of sized Special A/B or support actions. Koma inspector shows all 14 shared+special actions for a type0 battle card, one 2-/3-Koma action for a type1 support card, and none for help/other cards. Navigation is bidirectional: Koma Inspector -> Open ALMT move; Animation Move Inspector -> choose source Koma card -> Open Koma card. The read-only mapper in jus_package/movelinks.py derives original text fields from bin/chr_b_t.bin (74 x 53 words, 51 text pointers) and bin/chr_s_t.bin (193 x 9 text pointers, ov05 0214E370/0214E3D4); the original Koma type, roster and size are from bin/koma.bin. Matching enforces the full 32-bit move ID and actual primary ALMT source member, rather than a guessed name or array index. Ordinary fighter inputs have only code-backed control labels, not invented source names. The Editor only normalizes | to spaces for display. Tests: tests/test_move_text_links.py, tests/gui_move_text_links_smoke.py.
 
 ## NoteTrack shot objects and source-frame inspection
 
-The original battle 0x0300 NoteTrack chara_action subcode2 references a 0x20-byte chr/shot record, not a parent GenerateID child. In overlay6 FUN_0216B514, handler1 constructs a source ALMT animation from shot offset+0x14 if nonzero, and another from +0x0C; offset+0x10 is retained in separate work. Those are full animation IDs, NOT direct DSTX IDs. The Editor animation viewport Show > Shot animation sources displays original ALMT TextureID+BoundsIndex frames at their authored launch anchor, and the Shot objects timeline/inspector shows record/handler/animation IDs and nominal authored lifetime. This is a SOURCE DIAGNOSTIC ONLY, not frame-accurate DS projectile stretch, travel, hit or on-screen beam geometry. Other shot handlers are kept as numeric source events and are not assigned fictional art. For original ground/air/crouch input masks in Animation Inspector, see jus_formats/battleinput.py SOURCE_INPUT_CONDITIONS and ../../../../docs/Research/ALMT_SHOT_SOURCE_AND_NORMAL_BUTTON_CONTROL_TRACE_20261106.md. Tests: tests/test_shot_visual_source.py, tests/gui_shot_source_visual_smoke.py, tests/test_battleinput_source_trace.py, tests/gui_battleinput_source_trace_smoke.py.
+The original battle 0x0300 NoteTrack chara_action subcode2 references a 0x20-byte chr/shot record, not a parent GenerateID child. In overlay6 FUN_0216B514, handler1 constructs a source ALMT animation from shot offset+0x14 if nonzero, and another from +0x0C; offset+0x10 is retained in separate work. Those are full animation IDs, NOT direct DSTX IDs. The Editor animation viewport Show > Shot animation sources displays original ALMT TextureID+BoundsIndex frames at their authored launch anchor, and the Shot objects timeline/inspector shows record/handler/animation IDs and nominal authored lifetime. This is a SOURCE DIAGNOSTIC ONLY, not frame-accurate DS projectile stretch, travel, hit or on-screen beam geometry. Other shot handlers are kept as numeric source events and are not assigned fictional art. For original ground/air/crouch input masks in Animation Inspector, see jus_formats/battleinput.py SOURCE_INPUT_CONDITIONS. Tests: tests/test_shot_visual_source.py, tests/gui_shot_source_visual_smoke.py, tests/test_battleinput_source_trace.py, tests/gui_battleinput_source_trace_smoke.py.
 
 ## Native dynamic effect geometry and shot work (read-only)
 
-The original 26 callback table entries at overlay6 0x02172864 are exposed by jus_package/dynamicgeometry.py. Their runtime constructors, child translation, fixed-point velocity, stage collision and target/arc dependencies are kept distinct from ALMT GenerateID spawns and ChrBin persistent pursuer actions. The Animation Shot Inspector identifies native handler, raw shot fields, original ALMT source, source TextureID/frame, DSIG 0x50 or 0x20 GX atlas and DSTX pieces. For handler01 with a proven cardinal direction, launch child positions reproduce the native 0x1800 24.8 child spacing (24px); non-cardinal native float trig remains source-only. The editor still does NOT simulate full beam extension, dynamic shot travel, hits or frame-accurate DS GX matrices. GenerateID Inspector now reports child keyed geometry fields separately. Run tests/test_dynamic_geometry_code.py, tests/test_all_effect_geometry_source.py and tests/gui_shot_source_visual_smoke.py. Full source research: D:\Library\Development\JUS\docs\Research\EFFECT_DYNAMIC_GEOMETRY_PROJECTILE_RUNTIME_TRACE_20261106.md.
+The original 26 callback table entries at overlay6 0x02172864 are exposed by jus_package/dynamicgeometry.py. Their runtime constructors, child translation, fixed-point velocity, stage collision and target/arc dependencies are kept distinct from ALMT GenerateID spawns and ChrBin persistent pursuer actions. The Animation Shot Inspector identifies native handler, raw shot fields, original ALMT source, source TextureID/frame, DSIG 0x50 or 0x20 GX atlas and DSTX pieces. For handler01 with a proven cardinal direction, launch child positions reproduce the native 0x1800 24.8 child spacing (24px); non-cardinal native float trig remains source-only. The editor still does NOT simulate full beam extension, dynamic shot travel, hits or frame-accurate DS GX matrices. GenerateID Inspector now reports child keyed geometry fields separately. Run tests/test_dynamic_geometry_code.py, tests/test_all_effect_geometry_source.py and tests/gui_shot_source_visual_smoke.py.
 
 ## Source-proven handler01 beam role lifecycle
 
-The original constructor ROM array at ov06 0x02172864 maps shot handler01 to FUN_0216B4F4; a second 26-entry per-frame update array at 0x0217278C maps it to FUN_0216BA2C. Constructor 0216B514 creates record+0x14 initial anchored ALMT (when nonzero) then record+0x0C moving ALMT without a hit test. Updater 0216BA2C creates additional record+0x10 ALMT instances when native spacing/slot conditions pass. These source field roles are shared across the 68 original handler01 records; source+0x0C is not contact-only by construction. Handler01 sets work+0x26 bit2, bypassing ordinary record-lifetime countdown, so the current source-only preview cap is not native expiry. The Animation Shot Inspector shows all three source roles, original per-frame update callback and code provenance; it still does not extrapolate a fabricated full beam. Research: D:\Library\Development\JUS\docs\Research\HANDLER01_BEAM_FIELD_LIFECYCLE_PROOF_20261106.md. Regression: tests/test_shot_handler01_lifecycle.py.
+The original constructor ROM array at ov06 0x02172864 maps shot handler01 to FUN_0216B4F4; a second 26-entry per-frame update array at 0x0217278C maps it to FUN_0216BA2C. Constructor 0216B514 creates record+0x14 initial anchored ALMT (when nonzero) then record+0x0C moving ALMT without a hit test. Updater 0216BA2C creates additional record+0x10 ALMT instances when native spacing/slot conditions pass. These source field roles are shared across the 68 original handler01 records; source+0x0C is not contact-only by construction. Handler01 sets work+0x26 bit2, bypassing ordinary record-lifetime countdown, so the current source-only preview cap is not native expiry. The Animation Shot Inspector shows all three source roles, original per-frame update callback and code provenance; it still does not extrapolate a fabricated full beam. Regression: tests/test_shot_handler01_lifecycle.py.
 
 ## Native shot source repeats and handler05 D-pad history
 
-The Animation View and viewport Show menu support Handler01 repeats (unobstructed model). This projects actual original +0x10 child ALMT art at native 0216BA2C spacing counter events. The model is **not** an emulator frame reconstruction: it assumes one update/tick, fixed owner and facing, no hit/stage collision, free child actor slots and constant initial raw q8 velocity; post-birth XY is estimated. No synthetic pixels or fake beam polygon. Hiei (yh_b_03) 5-Koma Special B 0x9832C uses handler05 (constructor 0216B910; updater 0216BE0C), reads D-Pad delta0x40, keeps 128 historical XY/rotation samples and selects source 0x98357 (+0x0C head), 0x98358 (+0x10 body), 0x98359 (+0x18 terminal). This does NOT auto-home toward the opponent; the curved trail cannot be reconstructed without live input/history. Original source NoteTrack status event tick112 chara_action(10,18) resolves to code status36/0x24 callback 021593E8. The self-contact conditional branch is not yet proved. Original scripts/exports are saved in D:\Library\Development\JUS\docs\Research\EFFECT_NATIVE_SHOT_REPEAT_AND_HIEI_TRACKING_TRACE_20261106.md. Tests: test_shotprojection_native.py, test_hiei_steered_ultimate.py, gui_shot_source_visual_smoke.py, gui_hiei_steering_source_smoke.py.
+The Animation View and viewport Show menu support Handler01 repeats (unobstructed model). This projects actual original +0x10 child ALMT art at native 0216BA2C spacing counter events. The model is **not** an emulator frame reconstruction: it assumes one update/tick, fixed owner and facing, no hit/stage collision, free child actor slots and constant initial raw q8 velocity; post-birth XY is estimated. No synthetic pixels or fake beam polygon. Hiei (yh_b_03) 5-Koma Special B 0x9832C uses handler05 (constructor 0216B910; updater 0216BE0C), reads D-Pad delta0x40, keeps 128 historical XY/rotation samples and selects source 0x98357 (+0x0C head), 0x98358 (+0x10 body), 0x98359 (+0x18 terminal). This does NOT auto-home toward the opponent; the curved trail cannot be reconstructed without live input/history. Original source NoteTrack status event tick112 chara_action(10,18) resolves to code status36/0x24 callback 021593E8. The self-contact conditional branch is not yet proved. Tests: test_shotprojection_native.py, test_hiei_steered_ultimate.py, gui_shot_source_visual_smoke.py, gui_hiei_steering_source_smoke.py.
 
 
 ## ChrBin col/shot/effect native field completion (2026-11-08)
@@ -543,16 +538,13 @@ editing can be staged with `jus_formats.chrbin.RecordTable.replace_record`;
 `EffectRecord` provides bounded animation ID/sound-slot updates. The original
 data is never overwritten by the investigation.
 
-Research: `D:\Library\Development\JUS\docs\Research\CHR_COL_SHOT_EFFECT_NATIVE_FIELD_COMPLETION_20261108.md`,
-the 101-row CSV join, and `tests/test_chrbin_effect_contact_source.py`.
+Tests: `tests/test_chrbin_effect_contact_source.py`.
 Unknowns: canonical collision class names, remaining shot handler flag semantics,
 live impact/collision outcome geometry and final frame-perfect rendering.
 
 
 ## Native collision-reaction and shot-runtime semantics (2026-11-08 follow-up)
 
-New source-backed report:
-`D:\Library\Development\JUS\docs\Research\CHR_COL_SHOT_NATIVE_RUNTIME_SEMANTICS_TRACE_20261108.md`.
 Original ARM9 0207FBD0 / 0207D440 prove collider+0x00 is a
 **comparison/precedence class code**, not an official list of attack types.
 Original overlay6 ROM at 0x021713E8 and 0x021721A0 provides all **16**
@@ -601,8 +593,8 @@ trailer as physical width/height until the native consumer is traced.
 
 Editor implementation: `jus_formats/stagephysics.py`, `jus_formats/stageauthoring.py`,
 `app/workspaces/mapobjects.py`, `app/workspaces/level.py`.
-Original validation: `tests/test_stage_bin_mob_completion.py`;
-research: `D:\Library\Development\JUS\docs\Research\STAGE_BIN_MOB_FINAL_NATIVE_COMPLETION_20261108.md`.
+Original validation: `tests/test_stage_bin_mob_completion.py`.
+
 
 Recursive active Data inventory: **391 physical files, 1549 ALARs, 11575
 leaf files, 1477/1477 BINs cataloged**. Exactly 53 active file instances have
@@ -614,12 +606,8 @@ independent backup comparison found **0 additional filenames** in the 5016
 backup leaf members.
 
 Reproducible scans: `tools/audit_full_game_archive_decoding.py` and
-`tools/audit_alar_backups_vs_active.py`. Original full member catalogs and
-ranked remaining gaps:
-`D:\Library\Development\JUS\docs\Research\GAME_DATA_ALL_ARCHIVE_DECODE_GAPS_20261108.md`,
-`ALL_GAME_DATA_RECURSIVE_MEMBERS_20261108.csv`,
-`GAME_DATA_UNKNOWN_FILENAME_CANDIDATES_20261108.csv`,
-`GAME_DATA_UNFINISHED_DECODE_GROUPS_20261108.csv`.
+`tools/audit_alar_backups_vs_active.py` (they write their catalogs to
+`D:\Library\Development\JUS\docs\Research`).
 
 Decoded source-record structure is not evidence of gameplay-perfect runtime
 simulation. All original game archives, ROM and Ghidra exports remain unchanged.

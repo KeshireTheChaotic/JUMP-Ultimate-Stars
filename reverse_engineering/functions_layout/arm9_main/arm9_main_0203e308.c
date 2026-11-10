@@ -1,8 +1,8 @@
 
-/* JUS-CLASS jus_Class_0209aa68::vfunc_35 [class-virtual] slot 35 of vtable 0209aa68 (own slot, not
+/* JUS-CLASS jus_HwBgLayerSub::vfunc_35 [class-virtual] slot 35 of vtable 0209aa68 (own slot, not
    inherited) */
 
-void jus_Class_0209aa68::vfunc_35(int param_1)
+void jus_HwBgLayerSub::vfunc_35(int param_1)
 
 {
   undefined1 *puVar1;

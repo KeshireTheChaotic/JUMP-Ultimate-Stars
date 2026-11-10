@@ -45,21 +45,23 @@ public interface ISaveStorage
     void Flush();
 }
 
-/// <summary>Game data files by their NitroFS path (read from the player's own ROM).</summary>
+/// <summary>Game data files by relative game path, from external data or an explicit ROM source.</summary>
 public interface IAssetSource
 {
     byte[] Read(string path);
 }
 
-/// <summary>Sound output. Until the sound archive is ported, hosts may only log requests.</summary>
+/// <summary>Sound output (the host plays the SDAT with Jus.Sound, or only logs).</summary>
 public interface ISound
 {
-    /// <summary>FUN_0207342c(id, arg): start sound effect <paramref name="id"/>.</summary>
+    /// <summary>FUN_0207342c(id, arg): sequence archive <paramref name="id"/>, sequence <paramref name="arg"/>.</summary>
     void PlayEffect(int id, int arg);
-    /// <summary>FUN_020734e0 + FUN_0207361c(id, arg): start background music.</summary>
+    /// <summary>FUN_020734e0 + FUN_0207361c(id, arg): start background music (sequence <paramref name="id"/>).</summary>
     void PlayMusic(int id, int arg) { }
     /// <summary>FUN_0207367c(frames): fade the music out.</summary>
     void FadeOutMusic(int frames) { }
+    /// <summary>FUN_02073410: stop all sound at once (soft reset).</summary>
+    void StopAll() { }
 }
 
 /// <summary>Everything the game needs from the operating system.</summary>

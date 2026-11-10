@@ -11,7 +11,7 @@ cartridge. The supported image has SHA256
 
 | Folder | What it is |
 |---|---|
-| `port/` | C# (.NET 10) native port in progress: ROM/NitroFS reader, ARM9 boot and overlay loader, xUnit tests. Run `dotnet test` in `port/`; the tests look for `JUS.nds` in a parent directory or in `JUS_ROOT`. |
+| `port/` | C# (.NET 10) native port in progress. The Windows host defaults to external extracted data; see [port setup](port/README.md). Includes ROM/NitroFS tools, ARM9 verification and xUnit tests. Tests look for `JUS.nds` in a parent directory or in `JUS_ROOT`. |
 | `Editor/` | Python editor for the game's resource formats (sprites, animations, note-track events, packages). See `Editor/README.md` and `Editor/docs/`. |
 | `reverse_engineering/functions_layout/` | Ghidra export per program (ARM9 main, ARM7 main, overlays 0–13): one `.asm`, `.c` and `.json` per function, plus a `functions.tsv` index. Addresses are runtime addresses (autoload blocks and overlays at their load address). |
 

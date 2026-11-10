@@ -12,7 +12,7 @@ void ALCollisionImp::vfunc_05(int param_1,undefined4 param_2,undefined4 param_3,
            thunk_FUN_0201a228(0x10,s_ALCollision_cpp_021d25e0,s_CreateIntf_021d18d4,0x587,param_4);
   if (puVar1 != (undefined4 *)0x0) {
     ALCollision_021d1a4c::ALCollision_021d1a4c(puVar1,param_1);
-    *puVar1 = &jus_Class_021d1948::vftable;
+    *puVar1 = &ALCollisionImp_Part_021d1948::vftable;
   }
   *(undefined4 **)(param_1 + 0x18) = puVar1;
   return;

@@ -6,14 +6,17 @@
 *.ml1
 *.dsv
 *.zip
+# Extracted game data for the native port (copied next to JUS.exe at build time)
+port/Data/
 
 #Tests
-port\tests\
-Editor\tests\
+port/tests/
+Editor/tests/
 
 #Temp Tools
-Editor\tools\
-Editor\.claude\
+Editor/docs/
+Editor/tools/
+Editor/.claude/
 
 # .NET
 bin/

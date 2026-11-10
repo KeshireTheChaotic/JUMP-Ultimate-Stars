@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
@@ -16,11 +16,14 @@
 
   <ItemGroup>
     <Using Include="Xunit" />
+    <Compile Include="..\..\src\Jus.Host\AssetSelection.cs" Link="Host\AssetSelection.cs" />
+    <Compile Include="..\..\src\Jus.Host\RomAssets.cs" Link="Host\RomAssets.cs" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Jus.Game\Jus.Game.csproj" />
     <ProjectReference Include="..\..\src\Jus.Nds\Jus.Nds.csproj" />
+    <ProjectReference Include="..\..\src\Jus.Sound\Jus.Sound.csproj" />
   </ItemGroup>
 
 </Project>

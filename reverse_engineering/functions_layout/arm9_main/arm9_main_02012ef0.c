@@ -38,7 +38,7 @@ jus_TagDLSE_Part_0209af58::jus_TagDLSE_Part_0209af58
     iVar2 = FUN_0201a228(0x14);
     uVar3 = 0;
     if (iVar2 != 0) {
-      uVar3 = jus_TagDLSE_Part_0209af58_Part_02098ee8::jus_TagDLSE_Part_0209af58_Part_02098ee8();
+      uVar3 = jus_Prop_TargetPropName::jus_Prop_TargetPropName();
     }
     (**(code **)(*DAT_020a1074 + 0x3c))(DAT_020a1074,uVar3);
     if (param_2 == 0) {

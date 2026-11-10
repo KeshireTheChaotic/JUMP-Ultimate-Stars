@@ -58,8 +58,8 @@ public sealed class TitleScene : ISceneTask
 
     /// <summary>The effects' "Scale" controller (jus_TagIPMV via ALControllerImp::Create(.., 0x494C,
     /// target, 4, 0, 1)): from the current scale 1.2 to the target vector (1, 1, 1) built in the
-    /// static initializer 0x0208C5E4, over 4 frames, once (flags 0xB). Interpolator 0x494C is taken
-    /// as linear (its curve function is not read yet).</summary>
+    /// static initializer 0x0208C5E4, over 4 frames, once (flags 0xB: no halving, stop and destroy at
+    /// the end). Interpolator 0x494C is the engine's linear 'LI' curve (<see cref="LinearInterpolator"/>).</summary>
     public const int FxTweenFrames = 4;
     private readonly TimeSpan _start;        // work +0x78 (OS tick at creation)
     private Phase _phase = Phase.WaitFadeIn;
@@ -111,7 +111,7 @@ public sealed class TitleScene : ISceneTask
         _fx1 = new SpriteActor(fxBank, fxMotions, 0x720000) { X = 128, Y = 72, Alpha = 0xE66 / 4096.0, Scale = 0x1333 / 4096.0, Visible = false };
         _fx2 = new SpriteActor(fxBank, fxMotions, 0x720001) { X = 128, Y = 72, Alpha = 0xCCC / 4096.0, Scale = 0x1333 / 4096.0, Visible = false };
         _fxGlow = PaletteAnimation.Load(fxBank.Texture, res.Read("title/title_effect.bin"));
-        game.Platform.Sound.PlayMusic(0, 0);                                    // FUN_020734e0, FUN_0207361c(0, 0)
+        game.PlayMusic(0, 0);                                                   // FUN_020734e0, FUN_0207361c(0, 0)
         _start = game.Platform.Clock;                                           // FUN_02054b44 → +0x78
         game.Fade.Start(FadeKind.FromBlack, 1);                                 // FUN_02073ebc(2, 1)
     }
@@ -169,8 +169,8 @@ public sealed class TitleScene : ISceneTask
         if (_fxTween >= 0 && _fxTween < FxTweenFrames)
         {
             _fxTween++;
-            double s = 0x1333 / 4096.0 + (1.0 - 0x1333 / 4096.0) * _fxTween / FxTweenFrames;
-            _fx1.Scale = _fx2.Scale = s;
+            int s = LinearInterpolator.Vector(0x1333, 0x1000, _fxTween, 0, FxTweenFrames);
+            _fx1.Scale = _fx2.Scale = s / 4096.0;
         }
         Draw();
     }

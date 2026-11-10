@@ -13,9 +13,14 @@ from jus_formats import alar
 R=Path(r'D:\Library\Development\JUS')
 DATA=R/'Data'
 DEST=R/'docs/Research'
+DEST.mkdir(parents=True,exist_ok=True)
+# Optional earlier research (removed 2026-11-10). Without it, .bin files get no
+# family label and the catalog cross-check is skipped.
 HIST=DEST/'ALL_BIN_ASSET_INVENTORY_20261106.csv'
-old={r['virtual_path']:r for r in csv.DictReader(HIST.open(encoding='utf-8-sig',newline=''))}
-assert len(old)==1477,(len(old),'historical bin catalog is unexpectedly different')
+old={}
+if HIST.is_file():
+    old={r['virtual_path']:r for r in csv.DictReader(HIST.open(encoding='utf-8-sig',newline=''))}
+    assert len(old)==1477,(len(old),'historical bin catalog is unexpectedly different')
 partial_bin={
  'chr/ai','chr/ai_param','chr/col','chr/shot',
  'bin/ability','bin/bgm','bin/chr_b','bin/chr_s','bin/chr_b_t',
@@ -38,6 +43,8 @@ def classify(ext,virt,blob):
     if ext=='.bin':
         rec=old.get(virt)
         if not rec:
+            if not old:
+                return ('binary (no family catalog)','Family catalog not present; see jus_formats for typed readers','bin')
             return ('uncataloged binary','No source-backed .bin family mapping', 'unknown')
         fam=rec['family']
         if fam in opaque_bin:
@@ -68,7 +75,7 @@ def classify(ext,virt,blob):
               'AIPM/AIMV attack/movement table fields partly understood; candidate ranking, variant selection incomplete',fam)
         if fam in researched_bin:
             return ('typed/research-decoded; some semantic fields open',
-              'See Research and jus_formats/gametables.py; local numeric fields or UI integration may be incomplete',fam)
+              'See jus_formats/gametables.py; local numeric fields or UI integration may be incomplete',fam)
         if fam in partial_bin:
             return ('typed/research-decoded; semantic fields open',
               'Runtime record meanings, numeric flag bits and/or authoring route not exhaustively established',fam)
@@ -167,7 +174,8 @@ for f in sorted(DATA.rglob('*'),key=lambda x:x.as_posix().lower()):
         meta(physical,physical,f.name,ext,0,blob,len(blob),False,'','')
 assert not errors,('Errors parsing original corpus',errors[:10])
 assert len(archives)>=1500,('Expected nested archives missing',len(archives))
-assert bin_seen==set(old),(len(bin_seen),len(old),list(sorted(bin_seen-set(old)))[:10],list(sorted(set(old)-bin_seen))[:10])
+if old:
+    assert bin_seen==set(old),(len(bin_seen),len(old),list(sorted(bin_seen-set(old)))[:10],list(sorted(set(old)-bin_seen))[:10])
 assert sum(1 for x in rows if x['extension']=='.bin')==1477
 def write_csv(name,data):
     with (DEST/name).open('w',encoding='utf8',newline='') as fh:
@@ -189,20 +197,22 @@ groups.sort(key=lambda r:(r['decode_status']!='format unresolved' and r['decode_
 write_csv('GAME_DATA_UNFINISHED_DECODE_GROUPS_20261108.csv',groups)
 unknown=[r for r in rows if r['decode_status'] in ('format unresolved','unclassified file type','uncataloged binary','unclassified binary family')]
 write_csv('GAME_DATA_UNKNOWN_FILENAME_CANDIDATES_20261108.csv',unknown if unknown else [dict(virtual_path='',physical_file='',member_name='',extension='',depth_in_aar='',bytes='',stored_bytes='',compressed_in_aar='',archive_version='',resource_id='',magic_first8='',sha256='',family='',decode_status='',remaining_gap='')])
-nitro=list(csv.DictReader((DEST/'DWC_UTILITY_NITROFS_342_MEMBERS_20261106.csv').open(encoding='utf-8-sig')))
-assert len(nitro)==342
+NITRO=DEST/'DWC_UTILITY_NITROFS_342_MEMBERS_20261106.csv'
+nitro=list(csv.DictReader(NITRO.open(encoding='utf-8-sig'))) if NITRO.is_file() else []
+assert not nitro or len(nitro)==342
 all_ext=Counter(x['extension'] for x in rows)
 result=dict(total_physical_files=sum(physical_counter.values()),
  physical_extensions=dict(physical_counter),total_nested_alar_archives=len(archives),
  nested_alar_members=sum(x['entries'] for x in archives),all_leaf_files=len(rows),
- leaves_by_extension=dict(all_ext),bins=len(bin_seen),original_bin_catalog_match=True,
+ leaves_by_extension=dict(all_ext),bins=len(bin_seen),original_bin_catalog_match=bool(old) or None,
  unknown_format_file_instances=len(unknown),open_issue_groups=len(groups),
  wifi_nitrofs_embedded_files=len(nitro),
  wifi_nested_file_types=dict(Counter(x['extension'] for x in nitro)),
  notes=['Recursive ALAR v2/v3 traversal; DSCP payloads unwrapped',
         'Statuses distinguish layout-decoded, runtime-partial, unknown format and editor integration.',
         'DWC embedded NitroFS is a separate 342-member resource layer, not ALAR.',
-        'Cross-check original ALL_BIN_ASSET_INVENTORY_20261106.csv: every one of 1477 BINs accounted for.'],
+        ('Cross-check original ALL_BIN_ASSET_INVENTORY_20261106.csv: every one of 1477 BINs accounted for.'
+         if old else 'No earlier BIN catalog present: .bin families not labelled, cross-check skipped.')],
  errors=errors)
 with (DEST/'GAME_DATA_RECURSIVE_DECODE_AUDIT_20261108.json').open('w',encoding='utf8') as fh:
     json.dump(result,fh,indent=2,ensure_ascii=False);fh.write('\n')

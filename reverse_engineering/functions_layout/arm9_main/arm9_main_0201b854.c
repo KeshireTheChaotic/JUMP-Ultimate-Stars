@@ -19,7 +19,7 @@ void FUN_0201b854(void)
   puVar1 = (undefined4 *)FUN_0201a228(0x14);
   if (puVar1 != (undefined4 *)0x0) {
     ALCollision_020985b8::ALCollision_020985b8(puVar1,s_Speed_0209d524,&DAT_0209d600);
-    *puVar1 = &jus_Class_02098e40::vftable;
+    *puVar1 = &jus_Prop_Speed::vftable;
   }
   (**(code **)(*DAT_020a0c8c + 0x3c))(DAT_020a0c8c,puVar1);
   DAT_020a1064 = 1;

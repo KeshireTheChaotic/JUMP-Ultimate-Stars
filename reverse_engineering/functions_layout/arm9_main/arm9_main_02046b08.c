@@ -1,8 +1,8 @@
 
-/* JUS-CLASS jus_Class_020944cc::vfunc_22 [class-virtual] slot 22 of vtable 020944cc (own slot, not
-   inherited) */
+/* JUS-CLASS jus_HwTexPltt_Part_020944cc::vfunc_22 [class-virtual] slot 22 of vtable 020944cc (own
+   slot, not inherited) */
 
-void jus_Class_020944cc::vfunc_22(undefined4 param_1,undefined4 param_2,int param_3)
+void jus_HwTexPltt_Part_020944cc::vfunc_22(undefined4 param_1,undefined4 param_2,int param_3)
 
 {
   uint extraout_r1;

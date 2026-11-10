@@ -1,10 +1,10 @@
 
 /* WARNING: Removing unreachable block (ram,0x0203e8a4) */
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
-/* JUS-CLASS jus_Class_0209aa68::vfunc_40 [class-virtual] slot 40 of vtable 0209aa68 (own slot, not
+/* JUS-CLASS jus_HwBgLayerSub::vfunc_40 [class-virtual] slot 40 of vtable 0209aa68 (own slot, not
    inherited) */
 
-void jus_Class_0209aa68::vfunc_40(void)
+void jus_HwBgLayerSub::vfunc_40(void)
 
 {
   short sVar1;

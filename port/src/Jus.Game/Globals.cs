@@ -134,6 +134,22 @@ public sealed class SaveWork
     /// <summary>FUN_02070f44: count one frame of play time, saturating at <see cref="PlayFramesMax"/>.</summary>
     public void TickPlayTime() => PlayFrames = PlayFrames < PlayFramesMax ? PlayFrames + 1 : PlayFramesMax;
 
+    /// <summary>FUN_02071514(index): mark BGM table entry <paramref name="index"/> as heard (bit array at
+    /// save +0xA34, 0x020B0CEC); a new bit sets 0x020B02AC and marks the word dirty (FUN_02073114).</summary>
+    public void MarkBgmHeard(int index)
+    {
+        int word = 0xA34 + (index >> 5) * 4;
+        uint bit = 1u << (index & 31);
+        uint cur = BitConverter.ToUInt32(Image.Data, word);
+        if ((cur & bit) != 0) return;
+        BitConverter.TryWriteBytes(Image.Data.AsSpan(word), cur | bit);
+        AutoSaveRequested = true;
+        Dirty.Add((word, 4));
+    }
+
+    /// <summary>Whether BGM table entry <paramref name="index"/> has been heard.</summary>
+    public bool BgmHeard(int index) => (BitConverter.ToUInt32(Image.Data, 0xA34 + (index >> 5) * 4) & (1u << (index & 31))) != 0;
+
     /// <summary>FUN_0207120c(flags, requestSave): set progress flags; optionally request an autosave.</summary>
     public void SetProgressFlags(uint flags, bool requestSave)
     {
@@ -150,9 +166,21 @@ public sealed class GameGlobals
     /// <summary>0x020AFC9C (FUN_0206dcdc): L+R+Select+Start soft reset allowed (scenes switch it
     /// off while they run, e.g. Copyright).</summary>
     public bool SoftResetEnabled = true;
-    public DirectorWork Director { get; } = new();
-    public SessionWork Session { get; } = new();
-    public BattleSetupWork Battle { get; } = new();
-    public StageWork Stage { get; } = new();
-    public SaveWork Save { get; } = new();
+    public DirectorWork Director { get; private set; } = new();
+    public SessionWork Session { get; private set; } = new();
+    public BattleSetupWork Battle { get; private set; } = new();
+    public StageWork Stage { get; private set; } = new();
+    public SaveWork Save { get; private set; } = new();
+
+    /// <summary>OS_ResetSystem reboots the game: crt0 clears .bss, so every work block starts fresh (the
+    /// save is read again from backup memory by the boot path).</summary>
+    public void Reboot()
+    {
+        SoftResetEnabled = true;
+        Director = new();
+        Session = new();
+        Battle = new();
+        Stage = new();
+        Save = new();
+    }
 }

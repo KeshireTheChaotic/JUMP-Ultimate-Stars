@@ -1,8 +1,8 @@
 
-/* JUS-CLASS jus_Class_0209ab18::vfunc_04 [class-virtual] slot 4 of vtable 0209ab18 (own slot, not
+/* JUS-CLASS jus_HwBgLayerMain::vfunc_04 [class-virtual] slot 4 of vtable 0209ab18 (own slot, not
    inherited) */
 
-void jus_Class_0209ab18::vfunc_04(int param_1,uint *param_2)
+void jus_HwBgLayerMain::vfunc_04(int param_1,uint *param_2)
 
 {
   *(uint *)(param_1 + 0x96c) = *param_2 >> 0xc;

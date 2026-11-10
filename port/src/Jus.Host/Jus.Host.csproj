@@ -11,9 +11,16 @@
     <ApplicationHighDpiMode>PerMonitorV2</ApplicationHighDpiMode>
   </PropertyGroup>
 
+  <!-- Extracted game data (`jus extract Data <rom>` in port/; never committed) lives next to JUS.exe,
+       so the game runs from Data\ without the ROM. -->
+  <ItemGroup>
+    <None Include="..\..\Data\**\*" Link="Data\%(RecursiveDir)%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" Visible="false" />
+  </ItemGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\Jus.Game\Jus.Game.csproj" />
     <ProjectReference Include="..\Jus.Nds\Jus.Nds.csproj" />
+    <ProjectReference Include="..\Jus.Sound\Jus.Sound.csproj" />
   </ItemGroup>
 
 </Project>

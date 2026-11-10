@@ -3,7 +3,7 @@
 Text tables are self-relative u32 offsets (entry i at 4*i + value) to
 NUL-terminated CP932 strings; the first offset gives the table size.  Some
 tables interleave numeric words with the text pointers, so they are read as
-fixed groups and only the text slots are decoded (docs/Research, 2026-11-06,
+fixed groups and only the text slots are decoded (2026-11-06 research,
 re-checked on the shipped data):
 
 * ``bin/komatxt.bin``  890 × 3 words: word 0 = Koma name (one per bin/koma.bin card)

@@ -69,13 +69,13 @@ void CommonEffect::CommonEffect_Init
            thunk_FUN_0201a228(0x28,s_CommonEffect_cpp_0209e258,s_CommonEffect_Init_0209e244,0x67);
   if (puVar3 != (undefined4 *)0x0) {
     jus_Class_02098708::jus_Class_02098708(puVar3,s_EffectFlags_0209e280,&DAT_0209e26c);
-    *puVar3 = &jus_Class_0209e068::vftable;
+    *puVar3 = &jus_Prop_EffectFlags::vftable;
     puVar3[5] = 0;
     puVar3[6] = 0;
     puVar3[7] = 0;
     puVar3[8] = 0;
     puVar3[9] = 0x80;
-    *puVar3 = &jus_Class_02099640::vftable;
+    *puVar3 = &jus_Prop_EffectFlags_Derived_02099640::vftable;
   }
   (**(code **)(*DAT_020afc48 + 0x3c))(DAT_020afc48,puVar3);
   return;

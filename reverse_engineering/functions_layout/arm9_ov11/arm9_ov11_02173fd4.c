@@ -1,8 +1,8 @@
 
-/* JUS-CLASS jus_Class_02181740::vfunc_07 [class-virtual] slot 7 of vtable 02181740 (own slot, not
-   inherited) */
+/* JUS-CLASS BattleAI_Part_02181740::vfunc_07 [class-virtual] slot 7 of vtable 02181740 (own slot,
+   not inherited) */
 
-void jus_Class_02181740::vfunc_07(int param_1,undefined4 *param_2)
+void BattleAI_Part_02181740::vfunc_07(int param_1,undefined4 *param_2)
 
 {
   int *piVar1;

@@ -1,8 +1,8 @@
 
-/* JUS-CLASS jus_Class_02098af8::vfunc_56 [class-virtual] slot 56 of vtable 02098af8 (own slot, not
+/* JUS-CLASS jus_Prop_Texture::vfunc_56 [class-virtual] slot 56 of vtable 02098af8 (own slot, not
    inherited) */
 
-undefined4 * jus_Class_02098af8::vfunc_56(int *param_1,undefined4 param_2)
+undefined4 * jus_Prop_Texture::vfunc_56(int *param_1,undefined4 param_2)
 
 {
   undefined4 *puVar1;

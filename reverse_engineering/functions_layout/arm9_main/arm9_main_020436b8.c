@@ -7,7 +7,7 @@ jus_TagCLDS::jus_TagCLDS
           (undefined4 *param_1,uint param_2,undefined4 param_3,undefined4 param_4,char param_5)
 
 {
-  *param_1 = &jus_TagCNTR_Part_02094b9c::vftable;
+  *param_1 = &jus_Class_02094b9c::vftable;
   param_1[1] = param_2;
   *param_1 = &vftable;
   *(undefined1 *)(param_1 + 3) = 0;

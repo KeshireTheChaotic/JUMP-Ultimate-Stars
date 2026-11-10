@@ -1,8 +1,8 @@
 
-/* JUS-CLASS jus_Class_0209a258::vfunc_09 [class-virtual] slot 9 of vtable 0209a258 (own slot, not
-   inherited) */
+/* JUS-CLASS jus_Prop_ZWriteEnable::vfunc_09 [class-virtual] slot 9 of vtable 0209a258 (own slot,
+   not inherited) */
 
-void jus_Class_0209a258::vfunc_09
+void jus_Prop_ZWriteEnable::vfunc_09
                (undefined4 param_1,int *param_2,undefined1 *param_3,undefined4 param_4)
 
 {

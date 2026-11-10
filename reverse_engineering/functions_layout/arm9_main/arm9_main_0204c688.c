@@ -1,8 +1,8 @@
 
-/* JUS-CLASS jus_Class_020994e8::vfunc_44 [class-virtual] slot 44 of vtable 020994e8 (own slot, not
+/* JUS-CLASS jus_Prop_MapID::vfunc_44 [class-virtual] slot 44 of vtable 020994e8 (own slot, not
    inherited) */
 
-undefined4 jus_Class_020994e8::vfunc_44(undefined4 param_1)
+undefined4 jus_Prop_MapID::vfunc_44(undefined4 param_1)
 
 {
   int iVar1;

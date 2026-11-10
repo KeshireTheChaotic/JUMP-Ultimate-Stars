@@ -120,8 +120,10 @@ class ScreenWorkspace(SuiteWorkspace):
         self.view = self.make_viewport(on_draw=self._draw, on_press=self._scene_press,
                                        origin_frac=(0.3, 0.06), zoom=2)
         self.view.canvas.bind('<Double-Button-1>', self._scene_double_click)
+        self.view.canvas.bind('<Button-3>', self._background_view_context, add='+')
         self.view.show_grid.set(False)
-        self.layer_list = LayerList(self.layers_panel.body, on_select=self._select_layer, on_toggle=self._toggle)
+        self.layer_list = LayerList(self.layers_panel.body, on_select=self._select_layer,
+                                    on_toggle=self._toggle, on_context=self._background_context)
         self.layer_list.pack(fill='both', expand=True, padx=4, pady=4)
         page = self.bottom.add('resources', 'Resources')
         from ..theme import tree as mktree
@@ -1168,6 +1170,14 @@ class ScreenWorkspace(SuiteWorkspace):
                 return
             self.refresh_inspector()
             self.view.redraw()
+
+    def _background_context(self, row, event):
+        from .screen_bg_actions import show_background_menu
+        return show_background_menu(self, row, event)
+
+    def _background_view_context(self, event):
+        from .screen_bg_actions import show_view_background_menu
+        return show_view_background_menu(self, event)
 
     def _toggle(self, row):
         n = str(row['id'])

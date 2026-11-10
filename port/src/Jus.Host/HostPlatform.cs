@@ -2,7 +2,7 @@ using Jus.Game;
 
 namespace Jus.Host;
 
-/// <summary>Keyboard/mouse → game input, screens, save, ROM assets and sound for the game.
+/// <summary>Keyboard/mouse → game input, screens, save, assets and sound for the game.
 /// Keys: arrows = D-pad, X = A, Z = B, S = X, A = Y, Q = L, W = R, Enter = Start, Backspace = Select,
 /// left mouse on the bottom screen = touch, Esc = quit.</summary>
 internal sealed class HostPlatform(GdiScreen top, GdiScreen bottom, ISaveStorage save, IAssetSource assets,

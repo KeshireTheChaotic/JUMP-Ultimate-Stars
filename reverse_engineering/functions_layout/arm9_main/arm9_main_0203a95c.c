@@ -1,8 +1,8 @@
 
-/* JUS-CLASS jus_Class_020947a8::~jus_Class_020947a8 [class-default] slot 0/1 of vtable 020947a8;
-   resets vtables (destructor) */
+/* JUS-CLASS jus_HwTexPltt::~jus_HwTexPltt [class-hardware-role] slot 0/1 of vtable 020947a8; resets
+   vtables (destructor) */
 
-undefined4 * jus_Class_020947a8::~jus_Class_020947a8(undefined4 *param_1)
+undefined4 * jus_HwTexPltt::~jus_HwTexPltt(undefined4 *param_1)
 
 {
   int iVar1;

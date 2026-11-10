@@ -1,9 +1,9 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
-/* JUS-CLASS jus_Class_02097244::vfunc_23 [class-virtual] slot 23 of vtable 02097244 (own slot, not
+/* JUS-CLASS jus_HwDisplaySub::vfunc_23 [class-virtual] slot 23 of vtable 02097244 (own slot, not
    inherited) */
 
-void jus_Class_02097244::vfunc_23
+void jus_HwDisplaySub::vfunc_23
                (int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
 
 {

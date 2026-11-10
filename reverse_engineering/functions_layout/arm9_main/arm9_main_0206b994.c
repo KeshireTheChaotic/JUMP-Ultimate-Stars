@@ -42,7 +42,7 @@ int * CommonTutorial::CommonTutorial_Create
                                   s_CommonTutorial_Create_0209deb4,0x81);
       if (puVar4 != (undefined4 *)0x0) {
         jus_Class_02094864::jus_Class_02094864();
-        *puVar4 = &jus_Class_0209df0c::vftable;
+        *puVar4 = &CommonTutorial_Part_0209df0c::vftable;
         puVar4[0x38] = 0;
         puVar4[0x39] = 0;
       }
@@ -57,7 +57,7 @@ int * CommonTutorial::CommonTutorial_Create
                               0x86);
   if (puVar4 != (undefined4 *)0x0) {
     jus_Class_02095814::jus_Class_02095814();
-    *puVar4 = &jus_Class_0209df4c::vftable;
+    *puVar4 = &CommonTutorial_Part_0209df4c::vftable;
     *(undefined2 *)(puVar4 + 2) = 0;
     *(undefined2 *)((int)puVar4 + 10) = 0;
     *(undefined2 *)(puVar4 + 3) = 0;

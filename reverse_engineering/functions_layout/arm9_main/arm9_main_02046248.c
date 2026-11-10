@@ -1,8 +1,8 @@
 
-/* JUS-CLASS jus_Class_020944cc::vfunc_20 [class-virtual] slot 20 of vtable 020944cc (own slot, not
-   inherited) */
+/* JUS-CLASS jus_HwTexPltt_Part_020944cc::vfunc_20 [class-virtual] slot 20 of vtable 020944cc (own
+   slot, not inherited) */
 
-undefined4 * jus_Class_020944cc::vfunc_20(void)
+undefined4 * jus_HwTexPltt_Part_020944cc::vfunc_20(void)
 
 {
   int *piVar1;

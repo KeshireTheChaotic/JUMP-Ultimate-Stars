@@ -1,9 +1,9 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
-/* JUS-CLASS jus_Class_020948a4::vfunc_05 [class-virtual] slot 5 of vtable 020948a4 (own slot, not
+/* JUS-CLASS jus_HwSwapBuffers::vfunc_05 [class-virtual] slot 5 of vtable 020948a4 (own slot, not
    inherited) */
 
-void jus_Class_020948a4::vfunc_05(void)
+void jus_HwSwapBuffers::vfunc_05(void)
 
 {
   uint uVar1;

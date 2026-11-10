@@ -1,8 +1,8 @@
 
-/* JUS-CLASS jus_Class_02098d98::vfunc_09 [class-virtual] slot 9 of vtable 02098d98 (own slot, not
+/* JUS-CLASS jus_Prop_Position::vfunc_09 [class-virtual] slot 9 of vtable 02098d98 (own slot, not
    inherited) */
 
-void jus_Class_02098d98::vfunc_09
+void jus_Prop_Position::vfunc_09
                (undefined4 param_1,int param_2,undefined4 param_3,undefined4 param_4)
 
 {

@@ -1,8 +1,8 @@
 
-/* JUS-CLASS jus_Class_020948a4::jus_Class_020948a4 [class-default] stores vtable 020948a4 into
+/* JUS-CLASS jus_HwSwapBuffers::jus_HwSwapBuffers [class-hardware-role] stores vtable 020948a4 into
    *this (constructor) */
 
-undefined4 * jus_Class_020948a4::jus_Class_020948a4(undefined4 *param_1)
+undefined4 * jus_HwSwapBuffers::jus_HwSwapBuffers(undefined4 *param_1)
 
 {
   undefined4 *puVar1;
