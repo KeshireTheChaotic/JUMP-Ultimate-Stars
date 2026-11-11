@@ -1169,14 +1169,14 @@ class LevelWorkspace(SuiteWorkspace):
         self._mission_inspector(ins)
         if not self.stage:
             ins.section('Level editor')
-            ins.text('Select a J-Galaxy mission to load its assigned stage. ALTM tiles and mission rewards '
-                     'are writable. Verified .mob/.bin geometry/parameters can be patched in Map objects; '
-                     'collision hitboxes and camera state are not yet reproduced.')
+            ins.text('Select a mission to edit its stage artwork, objects, '
+                     'tutorial steps, and rewards. Some camera and collision behavior '
+                     'can only be previewed approximately.')
             return
         ov = getattr(self, 'sel_overlay', None)
         if ov:
             name = next(n for k, n, _ in OVERLAYS if k == ov)
-            ins.section(name, note='Original data; engine camera projection read-only')
+            ins.section(name, note='You can edit stored camera points. Their exact in-game effect is not fully known.')
             path = self.stage.members.get(ov)
             ins.value('Source', split(path)[-1] if path else '—')
             if ov == 'cam' and path:
@@ -1187,18 +1187,18 @@ class LevelWorkspace(SuiteWorkspace):
                 except ValueError as exc:
                     ins.evidence('Format', 'Unknown', f'Camera structure failed validation: {exc}')
                     return
-                ins.evidence('Binary layout', 'Cross-checked',
+                ins.evidence('Camera file format', 'Cross-checked',
                              '36/36 shipped stage CAM records validate: 16-byte header, '
                              'u8 point count +0x0D, s16 coordinate pairs from +0x10; '
                              'original runtime camera consumers still need tracing')
                 ins.value('Byte length', str(len(cam.build())))
-                ins.value('Mode (+0x0C)', f'0x{cam.mode:02X} (unclassified)')
+                ins.evidence('Camera mode', 'Unknown', f'Original mode value: 0x{cam.mode:02X}')
                 ins.value('Point count (+0x0D)', str(len(cam.vertices)))
                 ins.value('Unapplied camera changes', 'yes' if getattr(self, 'camera_dirty', False) else 'no')
                 if hasattr(self, '_edit_camera_point') and hasattr(self, '_edit_camera_header_pair'):
-                    ins.buttons(('Edit raw camera point…', self._edit_camera_point),
-                                ('Edit header signed pair…', self._edit_camera_header_pair))
-                ins.value('Reserved (+0x0E)', f'0x{cam.reserved:04X}')
+                    ins.buttons(('Edit camera point…', self._edit_camera_point),
+                                ('Edit camera setting…', self._edit_camera_header_pair))
+                ins.evidence('Other camera data', 'Limited', f'Original reserved value: 0x{cam.reserved:04X}')
                 for j, pair in enumerate(cam.header_pairs):
                     ins.value(f'Header signed pair {j} (+0x{j*4:02X})', str(pair))
                 for j, pair in enumerate(cam.vertices):
@@ -1207,15 +1207,14 @@ class LevelWorkspace(SuiteWorkspace):
                     ins.value('Raw point rectangle (unclassified)', str(cam.raw_point_bounds))
                     ins.value('Original rectangular point order',
                               'yes' if cam.has_rectangular_outline else 'non-original layout')
-                ins.text('Raw coordinate pairs only. Vertex meaning, camera clamp, scroll, '
-                         'world origin and relationship to the stage remain unproved; '
-                         'no geometry or screen placement is inferred from these values.')
+                ins.text('These numbers come from the original game. Their exact effect '
+                         'on scrolling and camera limits is not yet confirmed.')
                 return
             ins.evidence('Format', 'Direct' if ov in ('mob','bin') else 'Unknown',
                          'verified .mob/.bin structures and read-only simulation' if ov in ('mob','bin')
                          else 'not yet traced')
-            ins.text('Decoded stage physics and spawner markers are projected when their mission enables them. '
-                     'Use the Map objects ribbon below to edit verified .mob/.bin fields.')
+            ins.text('Stage objects and collision areas appear when the mission uses them. '
+                     'Use Map Objects below to change their supported settings.')
             return
         l = self.sel_layer
         ins.section('Stage', note=self.stage.stem)
@@ -1224,8 +1223,8 @@ class LevelWorkspace(SuiteWorkspace):
             ins.value('Battle stage index', '— (not in stage table)')
         else:
             _, a, b = roster.STAGES[idx]
-            ins.value('Battle stage index', f'{idx} (0x{idx:02X})')
-            ins.value('Table words', f'0x{a:02X}, 0x{b:02X}')
+            ins.value('Battle stage index', str(idx))
+            ins.evidence('Other stage settings', 'Limited', f'Original stage table values: 0x{a:02X}, 0x{b:02X}')
             ins.evidence('Stage table', 'Direct','ARM9 0x02092D08 {name, s16, s16}; index = definition +0x75')
             ins.evidence('Table words', 'Inferred', 'ov06 passes them to FUN_020734E0 / FUN_0207361C (music?)')
         used = self._by_stage.get(self.stage.stem, [])
@@ -1240,8 +1239,8 @@ class LevelWorkspace(SuiteWorkspace):
             return
         m = l.map
         ins.section(f'Layer {l.name}')
-        ins.value('Map', f'{m.width}×{m.height} tiles = {m.pixel_size[0]}×{m.pixel_size[1]} px')
-        ins.value('Storage', 'packed rows (flags 0x07)' if m.packed else 'raw (flags 0x03)')
+        ins.value('Map', f'{m.width} × {m.height} tiles ({m.pixel_size[0]} × {m.pixel_size[1]} pixels)')
+        ins.value('Storage', 'Compact map data' if m.packed else 'Standard map data')
         ins.value('Tiles used', str(len(m.used_tiles())))
         ins.value('Banks used', ', '.join(map(str, sorted(m.used_banks()))))
         ins.value('Tile image', (split(l.image_path)[-1] if l.image_path else '— (no pair)') +
@@ -1264,8 +1263,8 @@ class LevelWorkspace(SuiteWorkspace):
                   (' H' if self.flip_h.get() else '') + (' V' if self.flip_v.get() else ''))
         ins.value('Unapplied edits', 'yes' if l.map.build() != self._original_maps.get(l.atm_path) else 'no',
                   colour=T.WARN if l.map.build() != self._original_maps.get(l.atm_path) else None)
-        ins.text('Tile brush edits ALTM only; verified .mob/.bin properties are edited in Map objects. '
-                 'Use Apply, then Save; the stage archive is not modified before Save.')
+        ins.text('Paint the map here, or use Map Objects to edit stage objects. '
+                 'Select Apply, then Save to keep your changes.')
 
     def _mission_inspector(self, ins):
         m = self.missions
@@ -1303,10 +1302,10 @@ class LevelWorkspace(SuiteWorkspace):
             return
         example = f'0, {pairs[0][0]}, {pairs[0][1]}'
         data = simpledialog.askstring(
-            'Edit raw camera coordinates',
-            f'Enter index, signed X, signed Y (between -32768 and 32767).\n'
+            'Edit camera coordinates',
+            f'Enter point number, X and Y (from -32768 to 32767).\n'
             f'{"Header pairs" if header else "Point pairs"}: indices 0..{len(pairs)-1}.\n'
-            'These are original file coordinates, not a proven scroll/clamp boundary.',
+            'These are values stored by the game; the exact camera effect is not fully known.',
             initialvalue=example, parent=self.app)
         if data is None:
             return
@@ -1331,7 +1330,7 @@ class LevelWorkspace(SuiteWorkspace):
         self._camera_bytes = blob
         self.refresh_inspector()
         self.app.update_dirty()
-        self.app.status.set('Raw stage camera point staged in Level workspace; Apply, then Save')
+        self.app.status.set('Camera value changed. Select Apply, then Save to keep it.')
 
     @property
     def camera_dirty(self):
@@ -1436,7 +1435,7 @@ class LevelWorkspace(SuiteWorkspace):
         if self.camera_dirty and self.stage and self._camera_bytes is not None:
             path = self.stage.members.get('cam')
             if path is None:
-                messagebox.showerror('Stage camera', 'Missing original CAM member', parent=self.app)
+                messagebox.showerror('Stage camera', 'Camera data is missing from this stage', parent=self.app)
                 return
             try:
                 stagecamera.parse(self._camera_bytes)

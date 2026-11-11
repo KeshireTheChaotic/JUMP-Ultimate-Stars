@@ -1294,112 +1294,73 @@ class ScreenWorkspace(SuiteWorkspace):
         if self.mode.get() == 'Scenes' and self.scene_id is not None:
             scene = self._scene_by_id.get(self.scene_id, {})
             ins.section(f'Scene {self.scene_id:02d} — {scene.get("name", "Unknown")}')
-            ins.value('Overlay', str(scene.get('overlay', 'unknown')))
-            ins.value('Engine geometry / routing', 'HARD-CODED (read-only)')
-            ins.text('Original asset pixels, animation records, color data and CP932 text '
-                     'are editable. Overlay-defined positions, BG slots, callback rules, '
-                     'hit regions and scene transitions cannot be changed here.')
+            ins.evidence('Scene setup details', 'Direct',
+                         f'Original game overlay: {scene.get("overlay", "unknown")}')
+            ins.value('Screen layout', 'Controlled by the game (not editable here)')
+            ins.text('You can edit artwork, animation, colors, and text. '
+                     'The game controls where menu items appear and what opens next.')
             native=nativescenes.scene_info(self.scene_id)
             ins.section('Native renderer — original game',note=native['native_family'])
             ins.value('Renderer status',native['composition_status'])
             ins.value('Original BG variants',str(native['background_variant_count']))
             ins.evidence('Renderer entry','Direct',native['code_source'])
-            ins.text(native['native_explanation'])
-            ins.text('Roster and character graphics are loaded from the player saved '
-                     'decks at runtime. Static character rendering is intentionally omitted.')
+            ins.evidence('Preview behavior', 'Cross-checked', native['native_explanation'])
+            ins.text('Characters shown here depend on the player’s saved deck, '
+                     'so this preview does not show a fixed character.')
             if native['dynamic_state_unknown']:
                 ins.evidence('Active runtime state','Unknown',native['dynamic_state_unknown'])
-            trace=sourceauthority.scene_sources(self.scene_id)
-            ins.value('ARM9-traced functions',str(len(trace['constructor_files'])))
-            ins.value('Code-referenced asset paths',str(len(trace['confirmed_resource_paths'])))
-            ins.value('Verified indirect pointers',
-                      str(sum(bool(p.get('verified')) for p in trace.get('indirect_pointers',()))))
-            ins.value('Original code call edges',str(len(trace.get('call_edges',()))))
-            if trace.get('unresolved'):
-                ins.evidence('Remaining callgraph edges','Unknown',
-                             str(len(trace['unresolved']))+
-                             ' unresolved or out-of-budget sites; no inferred assets')
-            for callback in sourceauthority.runtime_scene_modes(self.scene_id):
-                ins.section('Original ROM callback dispatch',note=callback['family'])
-                ins.value('Selection mechanism',callback['selection'])
-                # Avoid overwhelming the inspector with 100+ branch rows.
-                seen=set()
-                entries=[]
-                for branch in callback['branches']:
-                    entry=branch.get('table_entry') or {}
-                    key=(branch['selected_state_index'],entry.get('raw_target'))
-                    if key not in seen:
-                        entries.append(branch)
-                        seen.add(key)
-                for branch in entries[:15]:
-                    entry=branch.get('table_entry') or {}
-                    fn=entry.get('target_path')
-                    selector=branch['selected_state_index']
-                    origin=entry.get('assembly_dispatch') or {}
-                    source=(f"{branch['wrapper_path']}#L{branch['line']}; "
-                            f"ROM table [{selector}] at {entry.get('table_word_address','unknown')}, "
-                            f"target {entry.get('raw_target','unknown')}")
-                    if origin:
-                        source+=(f"; {origin.get('status','ARM binary stub')}; "
-                                 f"onward {origin.get('onward_target','runtime')}")
-                        if origin.get('onward_source'):
-                            source+=f"; {origin['onward_source']}"
-                    label=('Possible' if branch.get('possible') else 'Selected')+f' state {selector}'
-                    evidence='Cross-checked' if fn or origin else 'Unknown'
-                    ins.evidence(label,evidence,source+' -> '+(fn or 'no exported C target'))
-                if len(entries)>15:
-                    ins.value('Other ROM callback slots',str(len(entries)-15))
-                ins.text('Original callback table values prove possible renderer '
-                         'methods, not a static execution state or guaranteed '
-                         'sprite pose, coordinates, priority or visibility.')
-            if self.scene_id==3:
-                ins.section('TopMenu CharaData action selectors — engine rules')
-                offsets={}
-                for site in sourceauthority.topmenu_action_sites():
-                    offsets.setdefault(site['offset'],[]).append(
-                        f"{site['source']}#L{site['line']}")
-                for offset,evidence in sorted(offsets.items()):
-                    ins.evidence(f'CharaData base move +{offset}', 'Direct',
-                                 '; '.join(evidence))
-                ins.text('These ROM-derived action offsets are not DSTX frames. '
-                         'Current animation tick/pose and positions depend on '
-                         'CharaData/ComicDeck and gameplay callback state. '
-                         'No active frame is fabricated.')
-            register=sourceauthority.hardware_scene(self.scene_id)
-            ins.value('Hardware-related reachable sites',
-                      str(register['register_site_count'])+' (static callgraph)')
-            categories={}
-            for statement in register['source_reachable_register_sites']:
-                categories.setdefault(statement['register_class'],[]).append(statement)
-            for kind,sites in sorted(categories.items()):
-                first=sites[0]
-                ins.evidence('Potential '+kind,'Inferred',
-                             f"{first['source']}#L{first['line']} "
-                             f"({len(sites)} statically reachable sites; "
-                             'actual callback execution not established)')
-            for fn in trace['constructor_files']:
-                if fn['depth'] != 0:continue
-                ins.evidence('Scene constructor','Direct',fn['path']+' (0x'+
-                             fn['path'].rsplit('_',1)[-1].split('.')[0]+')')
-            if not trace['constructor_files']:
-                ins.evidence('Scene constructor','Unknown',
-                             'Scene dispatch wrapper requires a downstream function trace')
-            if trace['confirmed_resource_paths']:
-                ins.text('Code-referenced resources are available through Edit source data. '
-                         'A reference is NOT proof the resource is visible in this scene.')
-            ins.value('Archive', scene.get('archive') or 'not resolved')
-            ins.evidence('Archive link', 'Direct' if scene.get('archive_evidence', '').startswith('direct')
+            trace = sourceauthority.scene_sources(self.scene_id)
+            callbacks = sourceauthority.runtime_scene_modes(self.scene_id)
+            ins.section('Screen setup')
+            ins.value('Available artwork and data', str(len(trace['confirmed_resource_paths'])))
+            ins.value('Game-controlled variations',
+                      str(sum(len(item['branches']) for item in callbacks)))
+            ins.text('You can edit the artwork and text used here. The game itself '
+                     'chooses positions, animations, and menu transitions.')
+            ins.evidence(
+                'How this scene is assembled',
+                'Direct' if trace['constructor_files'] else 'Unknown',
+                'Scene entry points: ' +
+                ', '.join(fn['path'] for fn in trace['constructor_files'] if fn['depth']==0) +
+                '; resource paths: ' + ', '.join(trace['confirmed_resource_paths'][:20]) +
+                f'; {len(trace.get("call_edges", ())) } original function links, ' +
+                f'{len(trace.get("unresolved", ())) } links still unverified.')
+            for callback in callbacks:
+                branches = callback.get('branches', ())
+                if not branches:
+                    continue
+                sample = '; '.join(
+                    f'state {br["selected_state_index"]}: ' +
+                    str((br.get('table_entry') or {}).get('target_path') or 'unknown target')
+                    for br in branches[:15])
+                ins.evidence('Screen variations', 'Cross-checked',
+                             str(callback.get('family', '')) + ': ' + sample)
+            if self.scene_id == 3:
+                sites = sourceauthority.topmenu_action_sites()
+                ins.evidence('Menu character animations', 'Direct',
+                             '; '.join(f'move +{item["offset"]}: {item["source"]} '
+                                       f'line {item["line"]}' for item in sites))
+                ins.text('Character poses change with the active menu. '
+                         'The editor does not guess which frame is currently playing.')
+            register = sourceauthority.hardware_scene(self.scene_id)
+            if register['register_site_count']:
+                ins.evidence('Display hardware setup', 'Inferred',
+                             f'{register["register_site_count"]} reachable hardware '
+                             'settings in original game code; active path may differ.')
+            ins.value('Artwork collection', scene.get('archive') or 'No collection linked')
+            ins.evidence('Artwork collection match',
+                         'Direct' if scene.get('archive_evidence', '').startswith('direct')
                          else 'Inferred' if scene.get('archive') else 'Unknown',
-                         scene.get('archive_evidence', 'not traced'))
+                         scene.get('archive_evidence', 'No matching artwork collection found'))
             routing = scene.get('display_routing') or {}
             if routing.get('swap_bit15_at_entry') in (0, 1):
                 ins.value('Main engine (A)', routing['main_lcd'])
                 ins.value('Sub engine (B)', routing['sub_lcd'])
-                ins.value('POWCNT1 bit 15', str(routing['swap_bit15_at_entry']))
+                ins.evidence('Screen routing setting', 'Direct',
+                             'Original screen-switch bit: ' + str(routing['swap_bit15_at_entry']))
                 ins.evidence('LCD routing at scene entry', 'Direct', routing['source'])
                 if routing.get('dynamic_swap'):
-                    ins.text('The scene changes LCD routing later via a callback; '
-                             'the entry mapping is not valid for every state.')
+                    ins.text('The game may switch which screen shows this content.')
             else:
                 v_id=self._variant_options.get(self.scene_variant.get())
                 mode=next((v for v in screenvariants.variants_for_scene(self.scene_id)
@@ -1414,11 +1375,8 @@ class ScreenWorkspace(SuiteWorkspace):
                     ins.evidence('Scene-reset LCD routing' if inherited else 'Variant LCD routing',
                                  'Cross-checked' if inherited else 'Direct',
                                  mode.get('routing_source',''))
-                    ins.text(('Reset initializes POWCNT1, but no constructor-specific '
-                              'LCD swap has been proven for this scene.')
-                             if inherited else
-                             ('ROM callback table chooses the state-specific constructor; '
-                              'the entry wrapper may have a different initial LCD arrangement.'))
+                    ins.text('The game can choose a different screen arrangement '
+                             'when you change menu options.')
                 else:
                     ins.evidence('LCD routing','Unknown','No verified constructor swap for this scene')
             ins.value('Mapped widgets', str(len(self._scene_widgets)))
@@ -1461,10 +1419,10 @@ class ScreenWorkspace(SuiteWorkspace):
             if selected:
                 w = selected.spec
                 ins.section(f'Widget {w["id"]} — {w["name"]}')
-                ins.value('Native origin', f'{selected.origin_x}, {selected.origin_y} (hard-coded ARM9)')
-                ins.value('Render state / collision', 'HARD-CODED engine / callbacks')
+                ins.value('Position', f'{selected.origin_x}, {selected.origin_y} (set by the game)')
+                ins.value('Visibility and hit area', 'Controlled by the game')
                 native_route = w.get('engine') in ('main', 'sub') and routing.get('swap_bit15_at_entry') in (0, 1)
-                ins.value('Display screen', selected.screen + (' (source-backed)' if native_route else ' (preview only)'))
+                ins.value('Shown on', selected.screen + (' screen' if native_route else ' (preview only)'))
                 if w.get('engine'):
                     ins.value('Renderer', w['engine'] + ' engine')
                 ins.value('Move ID', str(w['move_id']))
@@ -1480,8 +1438,8 @@ class ScreenWorkspace(SuiteWorkspace):
                     ins.evidence('Captured sprite state','Direct',w['snapshot_evidence'])
                 if w.get('state_condition'):
                     ins.evidence('Conditional display','Direct',w['state_condition'])
-                ins.buttons(('Edit actual sprite…', self._edit_selected_widget),
-                            ('Edit source bytes / ALMT…',self._edit_source_assets))
+                ins.buttons(('Edit sprite artwork…', self._edit_selected_widget),
+                            ('Edit artwork or animation…',self._edit_source_assets))
             if self.scene_id in (7, 34):
                 ins.section('Mode-selection explanations')
                 self._explanation_options = {}
@@ -1498,8 +1456,8 @@ class ScreenWorkspace(SuiteWorkspace):
                 self._explanation_display.set(chosen_label or next(iter(self._explanation_options),''))
                 ins.combo('Active explanation', self._explanation_display,
                           tuple(self._explanation_options), on_change=self._scene_text_selected)
-                ins.text('The original game chooses these records from its rule selector '
-                         'and current rule type; choose the associated element or message.')
+                ins.text('Choose which help message to view or edit. '
+                         'The game displays different messages for different menu choices.')
             message_id = self._scene_text_id()
             if message_id is not None and self.app.root_data:
                 ins.section(f'Explanation text — record {message_id}')
@@ -1535,18 +1493,18 @@ class ScreenWorkspace(SuiteWorkspace):
         if not self.archive and not (self.mode.get() == 'Scenes' and self.scene_id is not None and self.layers):
             if self.mode.get() != 'Scenes':
                 ins.section('Screen editor')
-                ins.text('Pick a menu/scene archive to preview source tilemaps.')
+                ins.text('Select a menu or screen to preview and edit its artwork.')
             return
         if self.archive:
             ins.section('Archive', note=self.archive)
         else:
             ins.section('Source-backed loose backgrounds',note='No scene archive exists; original asset files only')
-        ins.buttons(('Edit selected original source asset…', self._edit_source_assets))
+        ins.buttons(('Edit selected artwork or data…', self._edit_source_assets))
         ins.value('Layers', str(len(self.layers)))
         if self.sprite_info is not None:
             ins.section('Sprite frame preview — read-only', note=self.sprite_info.dtx_path)
             ins.value('Frame', f'{self.sprite_frame.get()} / {self.sprite_info.frame_count - 1}')
-            ins.value('Texture', 'embedded DSIG' if self.sprite_info.embedded else
+            ins.value('Image source', 'Included in this artwork file' if self.sprite_info.embedded else
                       self.sprite_info.image_path)
             ins.value('DSIG mode', f'0x{self.sprite_info.dsig_mode:02X}')
             if self.sprite_image is not None:
@@ -1555,7 +1513,7 @@ class ScreenWorkspace(SuiteWorkspace):
             ins.evidence('Sprite image', 'Direct', 'DSTX frame + DSIG pixel decoder')
             ins.evidence('Runtime position', 'Unknown', 'centered for inspection only')
         if self.sprite_error:
-            ins.section('Sprite preview error')
+            ins.section('Cannot preview artwork')
             ins.value('Detail', self.sprite_error)
         if self.selected_resource is not None:
             try:
@@ -1573,21 +1531,21 @@ class ScreenWorkspace(SuiteWorkspace):
                     ins.evidence('Palette layout','Direct','NCCL → PALT + CMNT; source-byte exact round-trip')
                     ins.evidence('Screen X/Y','Unknown','Palette entries carry no layout coordinates')
                 if item.ext == '.amt':
-                    ins.section('ALMT — animation timing not projected', note=item.name)
-                    ins.text('The associated sprite frames are previewable above. The frame number '
-                             'is a DSTX index, not an ALMT playback tick.')
+                    ins.section('Animation preview', note=item.name)
+                    ins.text('You can view the artwork frames here. Open the Animation editor '
+                             'to see how they play over time.')
                 if item.ext == '.dtx' and data[:4] == b'DSTX' and data[5] in (5, 6):
                     from jus_formats.dstx import parse_layout
                     layout = (self.selected_layout if self.selected_layout is not None
                               else parse_layout(data))
-                    ins.section('DSTX 0x05/0x06 - tilemap inspection', note=item.name)
-                    ins.value('Mode', f'0x{layout.flags:02X}; unsigned {layout.cell_bytes * 8}-bit cells')
+                    ins.section('Editable tile layout', note=item.name)
+                    ins.value('Tile format', f'{layout.cell_bytes * 8}-bit tile numbers')
                     ins.value('Panels', str(len(layout.panel_maps)))
-                    ins.value('Offset table', f'{len(layout.map_offsets)} relative u16 offsets')
-                    ins.value('Auxiliary', f'{len(layout.auxiliary)} bytes, '
-                              f'{len(layout.padding)} final zero padding bytes')
-                    ins.value('DSIG', f'{len(layout.embedded)} embedded bytes'
-                              if layout.embedded[:4] == b'DSIG' else 'not found')
+                    ins.evidence('Tile file structure', 'Direct',
+                                 f'{len(layout.map_offsets)} tile offsets; '
+                                 f'{len(layout.auxiliary)} data bytes; '
+                                 f'{len(layout.padding)} padding bytes; '
+                                 f'{len(layout.embedded)} embedded image bytes')
                     try:
                         panel_index = int(self.layout_panel_index.get())
                     except ValueError:
@@ -1595,39 +1553,39 @@ class ScreenWorkspace(SuiteWorkspace):
                     if 0 <= panel_index < len(layout.panel_maps):
                         grid = layout.panel_maps[panel_index]
                         panel = layout.panels[panel_index]
-                        ins.section(f'Panel {panel_index} - source tile grid',
-                                    note='row-major, editable local map; runtime placement remains unknown')
-                        ins.buttons(('Edit panel tile cell…', self._edit_layout_cell))
-                        ins.value('Descriptor', f'first tile {panel.first_tile}, '
-                                  f'{grid.tiles_w} x {grid.tiles_h} tile cells')
+                        ins.section(f'Panel {panel_index} - tile layout',
+                                    note='Edit the tiles in this panel. The game controls its screen position.')
+                        ins.buttons(('Change a tile…', self._edit_layout_cell))
+                        ins.value('Tile layout', f'{grid.tiles_w} × {grid.tiles_h} tiles')
                         base = 8 + 4 * (len(layout.panels) + 1)
-                        ins.value('Data offset', f'aux +0x{grid.offset:04X}, '
-                                  f'DSTX +0x{base + grid.offset:04X}')
-                        ins.value('Stored cells', f'{len(grid.cells)} x u{grid.cell_bytes * 8}')
+                        ins.evidence('Tile storage', 'Direct',
+                                     f'First tile {panel.first_tile}; data offset '
+                                     f'aux +0x{grid.offset:04X}; file +0x{base + grid.offset:04X}; '
+                                     f'{len(grid.cells)} cells of {grid.cell_bytes * 8} bits')
                         # Conditional ARM9 02043C7C CLDS-conversion geometry.
                         # This path does not necessarily run for a given resource.
                         from jus_formats.panelmesh import expand_conditional_fallback
                         try:
                             fallback = expand_conditional_fallback(layout, panel_index)
-                            ins.value('Conditional CLDS pieces', str(len(fallback.pieces)))
-                            ins.value('CLDS tile sequence',
-                                      f'{fallback.first_tile} .. {fallback.next_tile - 1}')
+                            ins.evidence('Additional image layout', 'Inferred',
+                                         f'{len(fallback.pieces)} possible pieces; '
+                                         f'tiles {fallback.first_tile}–{fallback.next_tile - 1}')
                             ins.evidence('Conditional CLDS mesh', 'Direct',
                                          'ARM9 02043C7C when branch selected; '
                                          'not proven as active display path')
                         except ValueError as exc:
-                            ins.value('Conditional CLDS mesh', str(exc))
+                            ins.evidence('Additional image layout', 'Unknown', str(exc))
                             ins.evidence('Conditional CLDS mesh', 'Unknown',
                                          'ROM width lookup ends at 16; wider panels '
                                          'need another runtime branch')
                         digits = grid.cell_bytes * 2
                         lines = [' '.join(f'{v:0{digits}X}' for v in grid.row(y)[:16])
                                  for y in range(min(grid.tiles_h, 16))]
-                        ins.value('Tile grid (hex)', '\n'.join(lines) if lines else '(empty)')
+                        ins.evidence('Exact tile values', 'Direct', '\n'.join(lines) if lines else '(empty)')
                         if self.layout_render_info is not None:
                             info = self.layout_render_info
-                            ins.value('Rendered pixels', f'{info.width} x {info.height} RGBA')
-                            ins.value('DSIG pixel mode', f'0x{info.dsig_mode:02X}')
+                            ins.value('Preview size', f'{info.width} × {info.height} pixels')
+                            ins.evidence('Image color format', 'Direct', f'Original image mode 0x{info.dsig_mode:02X}')
                             ins.value('Distinct source tiles', str(len(info.referenced_tiles)))
                             ins.value('4bpp palette bank IDs', ', '.join(map(str, info.palette_banks)))
                             ins.value('Flipped cells (H,V)',
@@ -1638,8 +1596,8 @@ class ScreenWorkspace(SuiteWorkspace):
                         elif self.sprite_error:
                             ins.value('Render problem', self.sprite_error)
                         if grid.tiles_w > 16 or grid.tiles_h > 16:
-                            ins.text('Only the first 16 columns and 16 rows are shown here. '
-                                     'The parser retains the complete original panel map.')
+                            ins.text('Only part of this larger tile layout is shown. '
+                                     'All tiles are preserved when editing.')
                     else:
                         ins.value('Selected panel', 'Choose a valid tile-panel index above.')
                     ins.evidence('Map offsets and cells', 'Direct',
@@ -1661,8 +1619,8 @@ class ScreenWorkspace(SuiteWorkspace):
         self._v = {'screen': tk.StringVar(value=c['screen']), 'sx': tk.StringVar(value=str(c['sx'])),
                    'sy': tk.StringVar(value=str(c['sy']))}
         if c.get('native_bg'):
-            ins.value('Engine BG slot / physical LCD','HARD-CODED ARM9 (read-only)')
-            ins.value('Physical LCD',c['screen']+' (code-derived)')
+            ins.value('Background position', 'Set by the game (view only)')
+            ins.value('Screen', c['screen'])
             ins.value('Graphics engine',f'{c["engine"].upper()} BG{c["bg_slot"]}')
             ins.evidence('Hardware engine / slot','Direct',c['source'])
             ins.evidence('Physical LCD',c.get('native_evidence','Inferred'),
@@ -1672,9 +1630,9 @@ class ScreenWorkspace(SuiteWorkspace):
                           if c.get('routing_source') else
                           'POWCNT1 swap at entry; later callbacks may change the mapping'))
             if c.get('animated'):
-                ins.value('Runtime scroll/animation','Yes — static snapshot in editor')
-                ins.text('The original game animates this background. No scene-layout '
-                         'or scroll-speed editing is exposed.')
+                ins.value('Animated in the game', 'Yes (preview shows a still frame)')
+                ins.text('This background moves during gameplay. Its speed and position '
+                         'cannot yet be edited here.')
             else:
                 ins.value('Runtime animation','Not confirmed for this layer')
             ins.value('Initial hardware BG priority',str(c['baseline_bg_priority'])+' (0 = frontmost)')
@@ -1685,8 +1643,8 @@ class ScreenWorkspace(SuiteWorkspace):
                 ins.value('Variant palette',path)
             if c.get('note'):
                 ins.text(c['note'])
-            ins.buttons(('Edit original ALTM map data…',self._edit_source_assets),
-                        ('Edit tile image / palette source…',self._edit_source_assets))
+            ins.buttons(('Edit background tiles…',self._edit_source_assets),
+                        ('Edit background colors…',self._edit_source_assets))
         else:
             ins.combo('Screen', self._v['screen'], ('Top', 'Bottom', 'Hidden'),
                       'Preview only: the real BG assignment is set in code (not traced)',
@@ -1698,7 +1656,7 @@ class ScreenWorkspace(SuiteWorkspace):
             ins.buttons(('▲ Forward',lambda: self._move(1)),
                         ('▼ Back',lambda: self._move(-1)))
         ins.value('Map', f'{m.width}×{m.height} tiles = {m.pixel_size[0]}×{m.pixel_size[1]} px')
-        ins.value('Storage', 'packed rows' if m.packed else 'raw')
+        ins.value('Storage', 'Compact map data' if m.packed else 'Standard map data')
         ins.value('Tile image', split(l.image_path)[-1] if l.image_path else '— (no pair)')
         ins.value('Banks used', ', '.join(map(str, sorted(m.used_banks()))))
         ins.section('Evidence')

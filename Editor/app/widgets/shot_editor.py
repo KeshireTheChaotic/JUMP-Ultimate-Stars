@@ -9,12 +9,16 @@ from app.widgets.resource_picker import ResourcePicker, preview_widget
 
 
 FIELDS = (
-    ('Handler', 0, 'B'), ('Handler parameter +01', 1, 'B'),
-    ('Spawn limit', 2, 'H'), ('Work parameter', 4, 'H'), ('Lifetime (0 = 30)', 6, 'h'),
-    ('Flags', 8, 'I'), ('Source animation +0C', 12, 'I'),
-    ('Reference +10', 16, 'I'), ('Optional reference +14', 20, 'I'),
-    ('Handler reference +18', 24, 'I'), ('Parameter +1C', 28, 'B'),
-    ('Selector +1D', 29, 'B'), ('Tail +1E', 30, 'B'), ('Tail +1F', 31, 'B'))
+    ('Behavior type (advanced)', 0, 'B'), ('Behavior option (advanced)', 1, 'B'),
+    ('Maximum projectiles', 2, 'H'), ('Movement setting (advanced)', 4, 'H'),
+    ('Lifetime (0 = 30 frames)', 6, 'h'),
+    ('Effect options (advanced)', 8, 'I'), ('Starting animation', 12, 'I'),
+    ('Repeated animation', 16, 'I'), ('Ending animation', 20, 'I'),
+    ('Additional animation (advanced)', 24, 'I'),
+    ('Other setting 1 (advanced)', 28, 'B'),
+    ('Other setting 2 (advanced)', 29, 'B'),
+    ('Other setting 3 (advanced)', 30, 'B'),
+    ('Other setting 4 (advanced)', 31, 'B'))
 
 
 def update_record(raw, values):
@@ -34,18 +38,18 @@ class ShotEditor(tk.Toplevel):
     def __init__(self, editor, path, record=0):
         super().__init__(editor)
         self.editor, self.path = editor, path
-        self.title('Edit shot source records')
+        self.title('Edit projectile effects')
         self.geometry('570x760')
         self.original = editor.root_data.read(path)
         self.table = chrbin.parse(self.original, path)
         if self.table.stride != 32 or not self.table.count:
             self.destroy()
-            raise ValueError('No decoded shot records in this resource')
+            raise ValueError('No editable projectile effects were found in this file')
         self.undo_stack = []
         self.record = tk.IntVar(master=self, value=record)
         bar = ttk.Frame(self, padding=8)
         bar.pack(fill='x')
-        ttk.Label(bar, text='Record').pack(side='left')
+        ttk.Label(bar, text='Projectile').pack(side='left')
         selector = ttk.Combobox(bar, textvariable=self.record, values=list(range(self.table.count)), state='readonly', width=8)
         selector.pack(side='left', padx=8)
         selector.bind('<<ComboboxSelected>>', self.select_record)
@@ -53,7 +57,7 @@ class ShotEditor(tk.Toplevel):
         self.ins.pack(fill='both', expand=True)
         foot = ttk.Frame(self, padding=8)
         foot.pack(fill='x')
-        ttk.Button(foot, text='Apply record', command=self.apply_record).pack(side='left')
+        ttk.Button(foot, text='Apply changes', command=self.apply_record).pack(side='left')
         ttk.Button(foot, text='Undo record edit', command=self.undo).pack(side='left', padx=5)
         ttk.Button(foot, text='Stage and close', command=self.stage).pack(side='left')
         ttk.Button(foot, text='Cancel', command=self.destroy).pack(side='right')

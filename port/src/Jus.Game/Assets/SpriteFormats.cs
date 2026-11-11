@@ -181,10 +181,26 @@ public sealed class AlmtMotionSet
     /// <summary>The target classes (e.g. "SP01"); motions here are read for target 0.</summary>
     public IReadOnlyList<string> TargetClasses { get; }
 
+    /// <summary>The raw file, for readers of other tracks (e.g. the battle NoteTrack).</summary>
+    public byte[] Data { get; }
+    public int Version { get; }
+    /// <summary>Property names (+8 count; u16 offsets at 0xC + 4·targets + 4·motions; FUN_02020514), e.g.
+    /// "BoundsIndex", "TextureID", "CollisionRect0", "NoteTrack". Track property indices index this list.</summary>
+    public IReadOnlyList<string> PropertyNames { get; }
+
     public AlmtMotionSet(byte[] data)
     {
         if (BinaryPrimitives.ReadUInt32LittleEndian(data) != 0x544D4C41) throw new InvalidDataException("not ALMT");
+        Data = data;
+        Version = data[4];
         int targets = Math.Max(1, (int)data[6]), count = data[7];
+        int names = 0xC + 4 * targets + 4 * count;
+        PropertyNames = Enumerable.Range(0, data[8]).Select(i =>
+        {
+            int o = BinaryPrimitives.ReadUInt16LittleEndian(data.AsSpan(names + 2 * i));
+            int e = Array.IndexOf(data, (byte)0, o);
+            return o < data.Length && e > o ? System.Text.Encoding.ASCII.GetString(data, o, e - o) : "";
+        }).ToArray();
         TargetClasses = Enumerable.Range(0, targets).Select(t => System.Text.Encoding.ASCII.GetString(data, 0xC + 4 * t, 4)).ToArray();
         int table = 0xC + 4 * targets;               // one 4-character target class per target, then the offsets
         var list = new List<SpriteMotion>(count);
@@ -234,6 +250,30 @@ public sealed class AlmtMotionSet
             bool keyed = j >= c;
             int interp = keyed && (prop & 0x80) != 0 ? BinaryPrimitives.ReadUInt16LittleEndian(data.AsSpan(at - 2)) : 0;
             list.Add(new Track(keyed ? prop & 0x7F : prop, keyed, at, interp));
+        }
+        return list;
+    }
+
+    /// <summary>Index of a property name, or −1.</summary>
+    public int PropertyIndex(string name) => PropertyNames.ToList().IndexOf(name);
+
+    /// <summary>Every track of a motion with its target index; track blocks are one u16 per target at
+    /// record +8, relative to o − 0x20, cumulative from version 2 on (a 0 entry = no block).</summary>
+    public List<(int Target, Track Track)> MotionTracks(int id)
+    {
+        int targets = TargetClasses.Count, table = 0xC + 4 * targets;
+        int index = Motions.ToList().FindIndex(m => m.Id == id);
+        if (index < 0) throw new KeyNotFoundException($"motion 0x{id:X6}");
+        int o = BinaryPrimitives.ReadInt32LittleEndian(Data.AsSpan(table + 4 * index));
+        var list = new List<(int, Track)>();
+        int cum = 0;
+        for (int t = 0; t < targets; t++)
+        {
+            int rel = BinaryPrimitives.ReadUInt16LittleEndian(Data.AsSpan(o + 8 + 2 * t));
+            cum += rel;
+            if (rel == 0) continue;
+            int b = o - 0x20 + (Version >= 2 ? cum : rel);
+            foreach (var tr in Tracks(Data, b)) list.Add((t, tr));
         }
         return list;
     }

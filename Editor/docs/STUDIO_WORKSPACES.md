@@ -170,6 +170,64 @@ Deckmaking's one tutorial script is loaded via a separate overlay5 path.
 New Editor tests/test_tutorial_workspace.py; full regression suite passed
 327 tests, 1 skipped. No original Data, ROM, or Ghidra source was modified.
 
+## 2026-11-10 — D-pad movement and defender reactions (Roster categories)
+
+**Scope:** Separate native D-pad-only movement/stance ALMTs and defender
+reactions from the old `Other / scripted animations` Roster branch.
+Battle AI, Koma activation hotkeys, original game data, ROM and
+reverse-engineered exports are **out of scope and unmodified**.
+
+**D-pad/stance (four resources per original battle form):**
+
+| ALMT offset | Editor label | Native source path |
+| --- | --- | --- |
+| `0x00` | Neutral / idle | ov06 `0215D2E4 → 02157450(0)` |
+| `0x01` | Horizontal movement | ov06 `0215D6F8 → 0215D760 → 02157450(1)`; actor +0x6C &0x0C |
+| `0x02` | Directional dash / faster movement | ov06 `0215DA84 → 0215D860 → 0215D91C → 02157450(2)`; facing-direction input + state thresholds |
+| `0x03` | Down / guard | ov06 `0215E9A0 → 0215EAEC → 02157450(3)`; actor +0x6C &0x02 |
+
+Neutral is default/no-input. Horizontal and faster movement can be
+engine-driven in addition to D-pad controls. Faster movement is
+conditional on existing runtime state; no unverified double-tap timing
+or precise physical-key adapter is asserted. The jump/airborne ALMTs
+`0x04–0x06` require jump-state predicates (including actor bit0x10
+in `0215DB50`) and intentionally remain in Other/Scripted. This does
+not falsely promote A-button actions to D-pad-only moves.
+
+**Reaction branch:**
+
+- The 16 original defender state pairs at ov06 ROM `0x021713E8` and
+  handlers at `0x021721A0`, dispatched by `0215AF34`, define
+  the main reaction-resource set. Code-backed meanings are presented
+  with generic roles, not unverified human-readable hit-type names.
+- Reaction-state 6 has an explicit callback override:
+  `0215BA40 → 02157450(0x13)`; the ordinary table's 0x10/0x12 pair
+  does not capture this alternate target.
+- Impact/recovery offsets `0x07` and `0x08` come from
+  `0215D2E4` via actor+0x1E6, as well as `0215BF70` and
+  `0215BD50`. **0x08 has additional movement/landing paths** and is
+  therefore marked dual-purpose, not exclusively a hit reaction.
+- Terminal grabbed-victim poses `0x33–0x36` belong to the Reaction
+  branch (reaction table states 9–12), preserving original IDs.
+
+**Original corpus validation:** 74 battle forms, 2,220 original
+unmapped resource entries, partitioned into 296 Movement, 1,110
+Reaction, and 814 Other/Scripted. A source-corpus regression compares
+all original ALMT move IDs minus the Koma-mapped normal/special moves
+against the three groups and checks for duplicates; no resources are
+discarded or generated.
+
+**Implementation:** `jus_formats/animroles.py` contains source-backed
+roles and exact ROM-pair-derived reaction offsets.
+`app/workspaces/roster.py` displays three separately lazy-loaded
+branches, retains original ALMT member navigation and expands the
+correct nested group during selection. `app/inspectors/move.py`
+surfaces the native movement/reaction paths, dual-purpose notes and
+non-button reaction handling. The original ALMT binary and serialization
+logic are unchanged. `tests/test_unified_roster.py` and
+`tests/gui_battleinput_source_trace_smoke.py` cover source completeness,
+group navigation and real inspector rendering. No speculative thumbnails.
+
 ## 2026-11-10 — Physical-key to battle-action trace continuation
 
 The original ARM7 037FEC3C and ARM9 main 0203A610 prove the 12-key

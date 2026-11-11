@@ -320,16 +320,26 @@ def resolve_effect_selector(raw_signed: int, available_records: int | None = Non
     return EffectSelectorResolution(raw_signed, 'character effect', index)
 
 
+# ARM9 static at 0x02092E68: signed chr/col byte +0x0E indexes this table
+# inside damage routine main 020823E4, independently of the byte's separate
+# presentation/effect-selector usage in main 02080F14. Values 0/1/2 select
+# no class gate, category-one gate, and category-two gate respectively.
+# Test pinned to the original SHA-verified arm9.bin in
+# tests/test_native_combat_damage_verification.py.
+DAMAGE_CLASS_CATEGORIES = (1, 1) + (2,) * 10 + (0,) * 4
+
+
 #: Single-byte chr/col fields with a traced reader: name -> (offset, signed, lo, hi).
 #: +0x00 main 0207D440 (zero vs nonzero branch; 0207FBD0 precedence compare),
-#: +0x01 ov06 0215AF34 (16-entry reaction table), +0x02/+0x03/+0x05/+0x07/+0x0C/+0x0D
-#: main 02080F14 (flash priority, signed status lane, contact magnitude,
-#: accumulator, knockback x/y).
+#: +0x01 ov06 0215AF34 (16-entry reaction table), +0x02/+0x03/+0x04/+0x05/+0x07/+0x0C/+0x0D
+#: main 02080F14 / 020823E4 (flash priority, signed status lane, base HP damage, SP pressure,
+#: reaction-duration contribution, knockback x/y).
 COL_EDIT_FIELDS = {
     'class': (0x00, False, 0, 255),
     'reaction': (0x01, False, 0, 15),
     'flash_priority': (0x02, False, 0, 255),
     'status': (0x03, True, -128, 127),
+    'base_damage': (0x04, True, -128, 127),
     'contact': (0x05, True, -128, 127),
     'accumulator': (0x07, True, -128, 127),
     'knockback_x': (0x0C, True, -128, 127),
@@ -338,7 +348,8 @@ COL_EDIT_FIELDS = {
 COL_FIELD_LABELS = {
     'class': 'Class code (+0x00)', 'reaction': 'Reaction (+0x01)',
     'flash_priority': 'Flash priority (+0x02)', 'status': 'Status (+0x03)',
-    'contact': 'Contact magnitude (+0x05)', 'accumulator': 'Accumulator (+0x07)',
+    'base_damage': 'Base HP damage (+0x04)',
+    'contact': 'SP pressure (+0x05)', 'accumulator': 'Hit-stun contribution (+0x07)',
     'knockback_x': 'Knockback X (+0x0C)', 'knockback_y': 'Knockback Y (+0x0D)',
 }
 
@@ -361,20 +372,52 @@ class ColRecord:
         return self.raw[1]
 
     @property
-    def direct_contact_magnitude(self) -> int:
-        """+0x05 signed scalar read by main 02080F14's hit calculation.
+    def base_damage(self) -> int:
+        """+0x04 s8: HP damage input read by main 020823E4 through element+0x10.
 
-        This single-byte value is distinct from the overlapping +0x04 s32
-        used by ov11's AI threat scorer. It is not final HP loss.
+        Native fixed-point arithmetic, nature gates, ability multipliers,
+        hit flags and later guard changes determine actual HP loss.
         """
-        return struct.unpack_from('<b',self.raw,5)[0]
+        return struct.unpack_from('<b', self.raw, 4)[0]
+
+    @property
+    def sp_pressure(self) -> int:
+        """+0x05 s8: source byte accumulated as <<8 into the SP pending array.
+
+        Main 02080F14 writes to collision work +0xEC + 4*class; ov06
+        0215A978 later drains the folded SP total through main 020781E4.
+        This value is NOT base HP damage.
+        """
+        return struct.unpack_from('<b', self.raw, 5)[0]
+
+    @property
+    def direct_contact_magnitude(self) -> int:
+        """Legacy compatibility alias for +0x05; actually SP pressure, not HP damage."""
+        return self.sp_pressure
+
+    @property
+    def hitstun_contribution(self) -> int:
+        """+0x07 s8: added to work+0x171; ov06 0215A978 uses it for stun duration."""
+        return struct.unpack_from('<b', self.raw, 7)[0]
+
+    @property
+    def damage_gate_category(self) -> int | None:
+        """+0x0E s8 indexes ARM9 0x02092E68 for damage gates (main 020823E4).
+
+        None means the class index is outside 0..15, so all class-dependent
+        quarter-step gates are skipped. This byte also has separate effect
+        presentation uses: do not conflate damage classes and visual IDs.
+        """
+        index = struct.unpack_from('<b', self.raw, 0x0E)[0]
+        return DAMAGE_CLASS_CATEGORIES[index] if 0 <= index < 16 else None
 
     def replace_contact_values(self, magnitude: int, status: int, accumulator: int,
                                knockback_x: int, knockback_y: int) -> 'ColRecord':
         """Patch exactly five native signed source bytes, not final damage.
 
-        main 02080F14 reads byte +5 as magnitude, +3 as status channel,
-        +7 as accumulated contact term and +0x0C/+0x0D as knockback.
+        Legacy parameter ``magnitude`` addresses the SP pressure byte +5,
+        NOT HP damage byte +4 (main 020823E4). Byte +3 is the status channel,
+        +7 is the hit-stun contribution, and +0x0C/+0x0D are knockback.
         Other bytes are retained; note the +4 s32 scoring word overlaps
         the edited +5/+7 bytes and will necessarily change too.
         """
@@ -397,7 +440,7 @@ class ColRecord:
         """Patch named single-byte fields (see :data:`COL_EDIT_FIELDS`); other bytes are kept.
 
         The +0x04 s32 word read by ov11's scorer overlaps +0x05/+0x07, so it
-        changes when contact or accumulator change.
+        changes when SP pressure or hit-stun contribution changes.
         """
         updated = bytearray(self.raw)
         for name, value in values.items():
@@ -411,8 +454,8 @@ class ColRecord:
 
     @property
     def contact_accumulator_delta(self) -> int:
-        """+0x07 s8: main 02080F14 adds to defender work+0x171."""
-        return struct.unpack_from('<b',self.raw,7)[0]
+        """Legacy alias for +0x07 hit-stun contribution, work+0x171."""
+        return self.hitstun_contribution
 
     @property
     def uses_selector6_special_scale(self) -> bool:

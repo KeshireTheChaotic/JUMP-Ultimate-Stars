@@ -15,8 +15,8 @@ DATA = Path(r'D:\Library\Development\JUS\Data')
 if not DATA.is_dir():
     DATA = (ROOT / '..' / '..' / '..' / 'Data').resolve()
 
-from jus_formats import roster
-from jus_package.project import DataRoot
+from jus_formats import almt, animroles, roster
+from jus_package.project import DataRoot, join
 from app.workspaces.roster import RosterIndex
 
 
@@ -52,6 +52,76 @@ class RosterSourceIntegrity(unittest.TestCase):
             self.assertTrue(all(m.form == form for m, _ in moves))
         self.assertEqual(sum(len(self.idx.moves.card_moves(card)) == 14 for card in
                              self.idx.cards.cards if card.raw[6] == 0), 206)
+
+    def test_all_battle_almt_resources_partition_without_duplicates(self):
+        """Original 74-form corpus: no source animation disappears after grouping."""
+        for form in roster.BATTLE_IDS:
+            grouped = self.idx.battle_animation_groups(form)
+            self.assertEqual(set(grouped), {'movement', 'reaction', 'other'})
+            source = join('chr/ChrArc.aar', f'chr/{form}.aar', f'{form}.amt')
+            all_moves = almt.parse(self.idx.root.read(source)).moves
+            mapped = {link.resource_id for link, _ in self.idx.battle_moves(form)}
+            assigned = [mid for rows in grouped.values() for mid, _, _ in rows]
+            self.assertEqual(len(assigned), len(set(assigned)), form)
+            self.assertEqual(set(assigned),
+                             {m.id for m in all_moves} - mapped, form)
+            self.assertEqual({mid & 0xFF for mid, _, _ in grouped['movement']},
+                             {0, 1, 2, 3}, form)
+            self.assertTrue(all(animroles.battle_animation_role(mid).category == kind
+                                for kind, rows in grouped.items()
+                                for mid, _, _ in rows), form)
+            self.assertEqual(
+                tuple((mid, ticks) for mid, ticks, _ in grouped['other']),
+                self.idx.other_battle_animations(form))
+
+    def test_original_74_form_partition_totals(self):
+        totals = {k: sum(len(self.idx.battle_animation_groups(form)[k])
+                         for form in roster.BATTLE_IDS)
+                  for k in ('movement', 'reaction', 'other')}
+        self.assertEqual(totals, {'movement': 296, 'reaction': 1110, 'other': 814})
+        self.assertEqual(sum(totals.values()), 2220)
+
+    @unittest.skipUnless(
+        (Path(r'D:\Library\Development\JUS\reverse_engineering\functions_layout')
+         / 'arm9_ov06/arm9_ov06_0215d2e4.c').is_file(),
+        'Native overlay 6 decompiled traces are unavailable')
+    def test_original_movement_reaction_callback_witnesses(self):
+        src = (Path(r'D:\Library\Development\JUS\reverse_engineering\functions_layout')
+               / 'arm9_ov06')
+        witnesses = {
+            '0215d2e4': ['FUN_02157450(param_1,0);',
+                         'FUN_02157450(param_1,7);',
+                         'FUN_02157450(param_1,8);'],
+            '0215d6f8': ['param_1 + 0x6c) & 0xc', 'FUN_0215d760'],
+            '0215d760': ['FUN_02157450(param_1,1);'],
+            '0215da84': ['FUN_0215a824'],
+            '0215d860': ['FUN_0215d91c'],
+            '0215d91c': ['FUN_02157450(param_1,2);'],
+            '0215e9a0': ['param_1 + 0x6c) & 2', 'FUN_0215eaec'],
+            '0215eaec': ['FUN_02157450(param_1,3);'],
+            '0215af34': ['PTR_FUN_021721a0'],
+            '0215ba40': ['FUN_02157450(param_1,0x13);'],
+            '0215bf70': ['FUN_02157450(param_1,7);'],
+            '0215bd50': ['FUN_02157450(param_1,8);'],
+        }
+        for address, needles in witnesses.items():
+            with self.subTest(address=address):
+                original = (src / f'arm9_ov06_{address}.c').read_text(encoding='utf-8')
+                for needle in needles:
+                    self.assertIn(needle, original)
+
+    def test_native_reaction_table_and_dpad_only_boundaries(self):
+        self.assertEqual(set(animroles.D_PAD_MOVEMENT), {0, 1, 2, 3})
+        self.assertTrue(all(animroles.battle_animation_role(i).category == 'reaction'
+                            for i in animroles.REACTION_OFFSETS))
+        self.assertEqual(animroles.battle_animation_role(4).category, 'other')
+        self.assertEqual(animroles.battle_animation_role(5).category, 'other')
+        self.assertEqual(animroles.battle_animation_role(6).category, 'other')
+        self.assertEqual(animroles.battle_animation_role(0x33).title,
+                         'Grabbed-victim reaction pose')
+        self.assertIn('0215D860', animroles.D_PAD_MOVEMENT[2].source)
+        self.assertIn('0215E9A0', animroles.D_PAD_MOVEMENT[3].source)
+        self.assertIn('0215AF34', animroles.battle_animation_role(0x0B).source)
 
     def test_support_actions_are_attached_to_koma_not_invented_moves(self):
         for form in roster.SUPPORT_IDS:
@@ -113,6 +183,46 @@ class RosterWorkspaceSmoke(unittest.TestCase):
         self.assertEqual(a.workspace, 'sprite')
         a.show_roster_animation()
         self.assertEqual(a.workspace, 'animation')
+
+    def test_separate_dpad_reaction_and_other_tree_categories(self):
+        a = self.app
+        a.open_root(str(DATA))
+        browser = a.roster_browser
+        form = 'db_b_01'
+        battle_root = browser.tree.get_children('')[0]
+        character = next(n for n in browser.tree.get_children(battle_root)
+                         if browser.actions.get(n) == ('battle', form))
+        browser._open_node(character)
+        moves = next(n for n in browser.tree.get_children(character)
+                     if browser.actions.get(n) == ('moves', form))
+        browser._open_node(moves)
+        branches = {browser.actions[n][2]: n
+                    for n in browser.tree.get_children(moves)
+                    if browser.actions.get(n, ('',))[0] == 'animation-group'}
+        self.assertEqual(set(branches), {'movement', 'reaction', 'other'})
+        for kind in ('movement', 'reaction', 'other'):
+            browser._open_node(branches[kind])
+            rows = browser.tree.get_children(branches[kind])
+            expected = browser.index.battle_animation_groups(form)[kind]
+            self.assertEqual(len(rows), len(expected))
+            self.assertEqual([browser.actions[r][2] for r in rows],
+                             [mid for mid, _, _ in expected])
+        self.assertEqual({browser.actions[r][2] & 0xff
+                          for r in browser.tree.get_children(branches['movement'])},
+                         {0, 1, 2, 3})
+        self.assertTrue(any((browser.actions[r][2] & 0xff) == 0x33
+                            for r in browser.tree.get_children(branches['reaction'])))
+        self.assertFalse(any((browser.actions[r][2] & 0xff) in {0x33, 0x34, 0x35, 0x36}
+                             for r in browser.tree.get_children(branches['other'])))
+
+        # Regression: changing editors must reopen the correct nested branch
+        # rather than searching only the directly linked normal/special rows.
+        react = browser.actions[browser.tree.get_children(branches['reaction'])[0]]
+        browser.populate()  # discard all lazily opened branches
+        self.assertTrue(browser.select_move(react[1], react[2], react[3]))
+        selected = browser.tree.selection()
+        self.assertEqual(browser.actions[selected[0]], react)
+        self.assertEqual(a.root_data.dirty_files(), [])
 
     def test_koma_fullheight_and_original_grid_rearrangement(self):
         a = self.app

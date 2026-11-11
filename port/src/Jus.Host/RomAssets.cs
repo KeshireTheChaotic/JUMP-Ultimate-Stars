@@ -18,7 +18,7 @@ internal sealed class RomAssets : IAssetSource
         _rom = new NdsRom(bytes);
     }
 
-    public byte[] Read(string path) => _rom.ReadFile(path);
+    public byte[] Read(string path) => path == Jus.Nds.JusTablesExport.FileName ? Jus.Nds.JusTablesExport.Build(_rom) : _rom.ReadFile(path);
 
 }
 

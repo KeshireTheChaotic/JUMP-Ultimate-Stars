@@ -50,7 +50,8 @@ def record_summary(rec: chrbin.ColRecord) -> str:
     v = rec.field_values()
     status = v['status']
     lane = 'off' if not status else f'{"+" if status > 0 else "−"}{abs(status)}'
-    return (f'reaction {v["reaction"]}, contact {v["contact"]}, status {lane}, '
+    return (f'reaction {v["reaction"]}, base HP damage {v["base_damage"]}, '
+            f'SP pressure {v["contact"]}, hit-stun {v["accumulator"]:+d}, status {lane}, '
             f'knockback {v["knockback_x"]},{v["knockback_y"]}')
 
 

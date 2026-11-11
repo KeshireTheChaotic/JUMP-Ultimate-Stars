@@ -19,12 +19,12 @@ def build_animation(editor, host, k, speeds):
     editor.almt_combo = ttk.Combobox(tb, state='readonly')
     editor.almt_combo.pack(fill='x')
     editor.almt_combo.bind('<<ComboboxSelected>>', lambda e: editor._switch_almt(editor.almt_combo.get()))
-    T.Tooltip(editor.almt_combo, 'Move table (ALMT) in the selected archive')
+    T.Tooltip(editor.almt_combo, 'Choose the animation set to edit.')
     editor.move_filter = tk.StringVar()
     editor.move_filter.trace_add('write', lambda *_: editor.populate_moves(keep=True))
     fe = ttk.Entry(clips.body, textvariable=editor.move_filter)
     fe.pack(fill='x', padx=6, pady=2)
-    T.Tooltip(fe, 'Filter by index, resource id, input control or original BIN move title')
+    T.Tooltip(fe, 'Search by animation number, button, or move name.')
     mf, editor.moves_tree = T.tree(clips.body, ('#', 'id', 'len', 'loop', 'control'), (34, 86, 40, 34, 255),
                                  height=20, style='Mono.Treeview')
     mf.pack(fill='both', expand=True, padx=(6, 0), pady=2)
@@ -33,68 +33,71 @@ def build_animation(editor, host, k, speeds):
     mb.pack(fill='x', padx=6, pady=(2, 6))
     T.tool_button(mb, '＋ Dup', editor.duplicate_move, 'Duplicate the selected move (Ctrl+D)')
     T.tool_button(mb, '✕ Del', editor.delete_move, 'Delete the selected move')
-    T.tool_button(mb, 'Apply', editor.apply_almt, 'Write this move table into its archive')
+    T.tool_button(mb, 'Apply', editor.apply_almt, 'Apply animation changes before saving.')
     # viewport
     vp = T.Panel(upper, 'Viewport')
     upper.add(vp, weight=1)
     # Unity-style "Gizmos" dropdown keeps the header uncluttered at any width.
     giz = ttk.Menubutton(vp.header, text='Show ▾', style='Tool.TButton')
     gm = tk.Menu(giz, tearoff=False)
-    for text, var in (('Spawned effects (GenerateID)', editor.show_spawns),
-                      ('Shot animation sources (chara_action 2)', editor.show_shot_sources),
-                      ('Handler01 repeats: no contact/terrain model', editor.show_shot_repeat_model),
+    for text, var in (('Created effects', editor.show_spawns),
+                      ('Projectile animations', editor.show_shot_sources),
+                      ('Repeated projectiles (estimated)', editor.show_shot_repeat_model),
                       ('Effect origin markers', editor.show_effect_marks),
-                      ('Pursuer effect (chara_action 13/14)', editor.show_effects),
+                      ('Following effects', editor.show_effects),
                       ('Collision boxes', editor.show_collision),
                       ('Onion skin', editor.show_onion)):
         gm.add_checkbutton(label=text, variable=var, command=editor.redraw_view)
     gm.add_separator()
-    gm.add_checkbutton(label='Physics trajectory (NoteTrack 0x01xx)', variable=editor.show_motion,
+    gm.add_checkbutton(label='Movement path preview', variable=editor.show_motion,
                        command=editor.redraw_view)
-    gm.add_checkbutton(label='Root motion: move the character along it', variable=editor.root_motion,
+    gm.add_checkbutton(label='Move character along the preview path', variable=editor.root_motion,
                        command=editor.redraw_view)
-    gm.add_checkbutton(label='Facing left (mirrors x impulses)', variable=editor.facing_left,
+    gm.add_checkbutton(label='Face left', variable=editor.facing_left,
                        command=editor._motion_changed)
     gm.add_checkbutton(label='Assume floor at start height', variable=editor.motion_floor,
                        command=editor._motion_changed)
     gm.add_separator()
-    gm.add_checkbutton(label='Isolate selected spawned effect (diagnostic only)',
+    gm.add_checkbutton(label='Show only the selected effect',
                        variable=editor.isolate_selected_spawn, command=editor.redraw_view)
-    gm.add_checkbutton(label='Effect teardown by chara_action 4/5', variable=editor.effect_teardown,
+    gm.add_checkbutton(label='Show when effects are removed', variable=editor.effect_teardown,
                        command=editor.refresh_animation)
-    gm.add_checkbutton(label='ParentLink translation follow (no scale/facing)',
+    gm.add_checkbutton(label='Follow parent position only',
                        variable=editor.parent_link_preview, command=editor.redraw_view)
-    gm.add_command(label='Effect layer (high-first callbacks; final occlusion unverified):', state='disabled')
+    gm.add_command(label='Draw effects:', state='disabled')
     for v in ('Front', 'Behind'):
         gm.add_radiobutton(label=f'   Effects {v.lower()} character', value=v, variable=editor.effect_layer,
                            command=editor.redraw_view)
     gm.add_separator()
-    gm.add_command(label='Pursuer position preview:', state='disabled')
+    gm.add_command(label='Following-effect preview:', state='disabled')
     for mode in ('Follow (traced)', 'Target only'):
-        gm.add_radiobutton(label='   ' + mode, value=mode, variable=editor.pursuer_motion_preview,
+        gm.add_radiobutton(label='   ' + {'Follow (traced)': 'Follow target (estimated)',
+                                           'Target only': 'Show target position'}.get(mode, mode),
+                           value=mode, variable=editor.pursuer_motion_preview,
                            command=editor.redraw_view)
-    gm.add_command(label='Pursuer initial position (unknown across moves):', state='disabled')
+    gm.add_command(label='Assume the effect starts at:', state='disabled')
     for seed in ('First target', 'Origin (0,0)'):
-        gm.add_radiobutton(label='   Assume ' + seed.lower(), value=seed,
+        gm.add_radiobutton(label='   ' + {'First target': 'First target position',
+                                         'Origin (0,0)': 'Center (0,0)'}.get(seed, seed), value=seed,
                            variable=editor.pursuer_start_seed, command=editor.redraw_view)
-    gm.add_command(label='Pursuer state (picked at run time):', state='disabled')
+    gm.add_command(label='Effect version (chosen during play):', state='disabled')
     for v in ('A', 'B'):
         gm.add_radiobutton(label=f'   State {v}', value=v, variable=editor.pursuer_choice, command=editor.redraw_view)
     giz['menu'] = gm
     giz.pack(side='right', padx=4)
-    T.Tooltip(giz, 'Viewport overlays: effects, pursuer, collision, onion skin, effect layer')
+    T.Tooltip(giz, 'Show or hide effect previews, hitboxes, and animation guides.')
     cb = ttk.Checkbutton(vp.header, text='Effects', variable=editor.show_spawns, style='Toolbar.TCheckbutton',
                          command=editor.redraw_view)
     cb.pack(side='right', padx=4)
-    T.Tooltip(cb, 'Effects spawned by GenerateID keys, incl. nested spawns')
+    T.Tooltip(cb, 'Show effects created during the animation.')
     ttk.Button(vp.header, text='Frame', style='Tool.TButton', command=editor.frame_view).pack(side='right', padx=6)
     editor.view = Viewport(vp.body, on_draw=editor._draw_animation, zoom=3,
                            on_press=lambda x, y, e: node_drag.press(editor, x, y, e),
                            on_drag=lambda x, y, e: node_drag.drag(editor, x, y, e),
                            on_release=lambda x, y, e: node_drag.release(editor, x, y, e))
-    T.Tooltip(editor.view.canvas, 'Drag collider corners to resize; drag inside a box to move it. '
-              'Drag a node handle or sprite to move 2DPos. Edits key the current frame. '
-              'Middle-drag or Space+drag pans.')
+    T.Tooltip(editor.view.canvas, 'Drag a hitbox corner to resize it, or drag inside to move it. '
+              'Drag the character or an effect handle to change its position on this frame. '
+              'Middle-drag or Space+drag to move the view.')
     editor.view.pack(fill='both', expand=True)
     # inspector
     ins = T.Panel(upper, 'Inspector')
@@ -131,8 +134,8 @@ def build_animation(editor, host, k, speeds):
     T.separator(bar)
     T.tool_button(bar, '◆ Key', editor.add_key_at_playhead, 'Add a key at the playhead on the selected track (K)')
     T.tool_button(bar, '− Key', editor.delete_selected_key, 'Remove the selected key (Delete)')
-    T.tool_button(bar, '⚑ Event', editor.add_note_event, 'Add a NoteTrack event at the playhead (E)')
-    T.tool_button(bar, '＋ Track', editor.add_track, 'Add a track to a node')
+    T.tool_button(bar, '⚑ Event', editor.add_note_event, 'Add an event at the current frame (E)')
+    T.tool_button(bar, '＋ Track', editor.add_track, 'Add a property to animate')
     T.tool_button(bar, '✎ Text', editor.edit_track, 'Edit the selected track as text')
     fit = ttk.Button(bar, text='Fit', style='Tool.TButton', command=editor.fit_timeline)
     fit.pack(side='right', padx=(2, 8))

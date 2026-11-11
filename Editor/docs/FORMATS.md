@@ -4,6 +4,26 @@ All values little-endian. "Verified" means checked against every relevant file i
 `D:\Library\Development\JUS\data` by `tests/roundtrip_scan.py` / `tests/sprite_scan.py`
 (2026-11-04) unless stated otherwise.
 
+**2026-11-10 external research reconciliation:** See
+[`JUS_RESEARCH_RECONCILIATION_20261110.md`](JUS_RESEARCH_RECONCILIATION_20261110.md)
+before importing field names or derived tables from `jus-research-main.zip`.
+In particular, its `docs/formats/Combat-Formats.md` misidentifies the
+Koma purchase/evolution table `bin/jpower.bin` as combat damage data and
+assigns incorrect labels to several `chr/col` bytes. Native source-backed
+`jus_formats/jpower.py` and `jus_formats/chrbin.py` take precedence.
+Battle-Koma nature resolution from `koma.bin +0x0B` is available as
+read-only `jus_formats.kshape.native_card_nature`.
+
+**2026-11-10 native combat follow-up:** The source and ROM verification in
+[`NATIVE_COMBAT_VERIFICATION_20261110.md`](NATIVE_COMBAT_VERIFICATION_20261110.md)
+establishes `chr/col +0x04` as the **signed base HP-damage byte**,
+`+0x05` as a separate SP-pressure contribution, and `+0x07` as a
+hit-stun contribution. `+0x0E` also indexes the engine's damage-gate
+class table, independently of its impact-effect use. Original `jpower.bin`
+remains the Koma purchase/evolution table. In `jus_formats.chrbin`,
+the old keys `contact` and `accumulator` are retained as compatibility
+aliases with corrected labels; `base_damage` is an editable native field.
+
 ## Corpus results
 
 | Check | Result |

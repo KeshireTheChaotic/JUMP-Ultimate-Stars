@@ -3,6 +3,7 @@ import tkinter as tk
 from tkinter import ttk
 from PIL import Image, ImageTk
 from jus_package.spawns import state_at
+from app import ui_copy
 
 
 def selected_texture(editor):
@@ -75,7 +76,7 @@ def preview_widget(parent, editor, field, value):
     except (ValueError, IndexError, KeyError, OSError):
         source = None
     if source is None:
-        return ttk.Label(parent, text='No image for this resource' if value else 'No preview')
+        return ttk.Label(parent, text='No artwork found for this selection' if value else 'No preview')
     photo = ImageTk.PhotoImage(thumbnail(source, (160, 100)), master=parent)
     label = ttk.Label(parent, image=photo)
     label.image = photo
@@ -99,7 +100,7 @@ class ResourcePicker(tk.Toplevel):
 
     def __init__(self, parent, editor, field, on_pick):
         super().__init__(parent)
-        self.title(f'Choose {field}')
+        self.title(f'Choose {ui_copy.field_label(field)}')
         self.geometry('800x660')
         self.minsize(700, 620)
         self.editor, self.field, self.on_pick = editor, field, on_pick
@@ -112,7 +113,7 @@ class ResourcePicker(tk.Toplevel):
         self.query = tk.StringVar(master=self)
         bar = ttk.Frame(self, padding=8)
         bar.pack(fill='x')
-        ttk.Label(bar, text='Filter ID, frame or resource path').pack(side='left')
+        ttk.Label(bar, text='Search frames, images, or numbers').pack(side='left')
         ttk.Entry(bar, textvariable=self.query).pack(side='left', fill='x', expand=True, padx=8)
         self.query.trace_add('write', lambda *_: self.refresh(reset=True))
         self.grid_frame = ttk.Frame(self, padding=8)

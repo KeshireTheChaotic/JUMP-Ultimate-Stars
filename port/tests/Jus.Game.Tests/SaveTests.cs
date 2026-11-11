@@ -14,7 +14,7 @@ public sealed class SaveTests
 {
     /// <summary>The player's save, read-only: next to the ROM, or in <c>unpacked\</c> (where the melonDS
     /// setup keeps it).</summary>
-    private static byte[] RealSave()
+    internal static byte[] RealSave()
     {
         string root = RomAssetsForTests.FindRoot();
         string path = Path.Combine(root, "JUS.sav");

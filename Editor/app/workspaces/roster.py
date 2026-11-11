@@ -12,7 +12,7 @@ from tkinter import ttk
 
 from PIL import Image, ImageDraw, ImageFont, ImageTk
 
-from jus_formats import almt, bintables, koma, kshape, roster
+from jus_formats import almt, animroles, bintables, koma, kshape, roster
 from jus_package import komacards, movelinks
 from jus_package.project import join
 
@@ -26,6 +26,7 @@ class RosterIndex:
         self.moves = movelinks.MoveLinks(root)
         self.catalog = komacards.load(root)
         self._unillustrated_cache = {}
+        self._animation_group_cache = {}
         self.by_form = defaultdict(list)
         self.passive_by_series = defaultdict(list)
         for card in self.cards.cards:
@@ -63,14 +64,31 @@ class RosterIndex:
             v[0].category == 'battle-special', v[0].koma_size if v[1] else 0,
             v[0].offset, v[0].resource_id))
 
+    def battle_animation_groups(self, form):
+        """Source-backed only; preserve every unmapped original ALMT move.
+
+        Results are cached for the lifetime of this RosterIndex; staging
+        or switching data roots builds a fresh index.
+        """
+        if form not in self._animation_group_cache:
+            groups = {'movement': [], 'reaction': [], 'other': []}
+            path = join('chr/ChrArc.aar', f'chr/{form}.aar', f'{form}.amt')
+            if self.root.exists(path):
+                mapped = {link.resource_id for link, _ in self.battle_moves(form)}
+                for move in almt.parse(self.root.read(path)).moves:
+                    if move.id in mapped:
+                        continue
+                    role = animroles.battle_animation_role(move.id)
+                    groups[role.category].append((move.id, move.duration, role.title))
+            self._animation_group_cache[form] = {
+                name: tuple(rows) for name, rows in groups.items()
+            }
+        return self._animation_group_cache[form]
+
     def other_battle_animations(self, form):
-        """Do not silently hide unnamed/scripted original ALMT moves."""
-        path = join('chr/ChrArc.aar', f'chr/{form}.aar', f'{form}.amt')
-        if not self.root.exists(path):
-            return ()
-        mapped = {link.resource_id for link, _ in self.battle_moves(form)}
-        return tuple((m.id, m.duration) for m in almt.parse(self.root.read(path)).moves
-                     if m.id not in mapped)
+        """Unassigned original ALMT records, excluding traced roles."""
+        return tuple((mid, duration) for mid, duration, _ in
+                     self.battle_animation_groups(form)['other'])
 
     def art_for_card(self, card):
         candidates = self.catalog.art_for_card(card)
@@ -212,24 +230,28 @@ class RosterBrowser:
             self._add(iid, 'Koma', ('koma-group', form), lazy=True)
         elif kind == 'moves':
             form = action[1]
-            mapped = set()
             for link, card in self.index.battle_moves(form):
-                mapped.add(link.resource_id)
                 icon = self._icon(card) if card else self._keycap_icon(link.offset)
                 label = (f'{link.koma_size}-Koma · {link.display_name}' if card
                          else f'{link.control} · {link.display_name}' if link.display_name != link.control
                          else link.control)
                 label += f'  [0x{link.resource_id:08X}]'
                 self._add(iid, label, ('move', form, link.resource_id, link.almt_member), image=icon)
-            # Unmapped ALMT entries are source animations, not invented combat input actions.
-            others = self.index.other_battle_animations(form)
-            if others:
-                extra = self._add(iid, f'Other / scripted animations ({len(others)})',
-                                  ('extra-group', form), lazy=True)
-        elif kind == 'extra-group':
-            form = action[1]
-            for mid, duration in self.index.other_battle_animations(form):
-                self._add(iid, f'Animation 0x{mid:08X} · {duration} ticks',
+            # Source animations are grouped by verified native state routes.
+            # Each unmapped ALMT entry appears in exactly one category.
+            categories = self.index.battle_animation_groups(form)
+            for category, title in (
+                ('movement', 'Movement / D-pad and idle'),
+                ('reaction', 'Reaction animations'),
+                ('other', 'Other / scripted animations'),
+            ):
+                if categories[category]:
+                    self._add(iid, f'{title} ({len(categories[category])})',
+                              ('animation-group', form, category), lazy=True)
+        elif kind == 'animation-group':
+            _, form, category = action
+            for mid, duration, title in self.index.battle_animation_groups(form)[category]:
+                self._add(iid, f'{title} · 0x{mid:08X} · {duration} ticks',
                           ('move', form, mid, f'{form}.amt'))
         elif kind == 'koma-group':
             for card in self.index.by_form.get(action[1], ()):
@@ -292,7 +314,7 @@ class RosterBrowser:
         if not action:
             return
         kind = action[0]
-        if kind in ('battle', 'support', 'moves', 'koma-group', 'extra-group', 'passive-series'):
+        if kind in ('battle', 'support', 'moves', 'koma-group', 'animation-group', 'passive-series'):
             self._open_node(iid)
             self.tree.item(iid, open=True)
             return
@@ -355,6 +377,19 @@ class RosterBrowser:
                     if self.actions.get(child) == (group_kind, form):
                         self._open_node(child)
                         self.tree.item(child, open=True)
+                        if kind == 'move' and not any(
+                                self.actions.get(row) == action
+                                for row in self.tree.get_children(child)):
+                            # The selected ALMT source lives in one lazy
+                            # Movement/Reaction/Other child, not the direct
+                            # Koma-linked normal/special moves.
+                            role = animroles.battle_animation_role(action[2])
+                            subgroup = ('animation-group', form, role.category)
+                            for branch in self.tree.get_children(child):
+                                if self.actions.get(branch) == subgroup:
+                                    self._open_node(branch)
+                                    self.tree.item(branch, open=True)
+                                    break
                         return
 
     def refresh_from_staged(self):

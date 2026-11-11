@@ -54,16 +54,24 @@ def main():
         app.refresh_inspector()
         app.update()
         texts=[]
+        technical=[]
         def walk(w):
             for child in w.winfo_children():
                 try:texts.append(str(child.cget('text')))
                 except Exception:pass
+                detail=getattr(child, '_technical_note', None)
+                if detail:
+                    technical.append(detail)
                 walk(child)
         walk(app.inspector.inner)
         combined='\n'.join(texts)
-        for term in ('FUN_0216BE0C','128 positions','0x098357','0x098358',
-                     '0x098359','D-pad','FUN_021593E8','0x24','no live input'):
+        notes='\n'.join(technical)
+        for term in ('128 saved positions','0x098357','0x098358',
+                     '0x098359','D-pad'):
             assert term.lower() in combined.lower(),(term,combined[:9000])
+        for term in ('FUN_0216BE0C','FUN_021593E8','0x24'):
+            assert term.lower() in notes.lower(),(term,notes[:9000])
+            assert term.lower() not in combined.lower(),(term,combined[:9000])
         assert not app.root_data.dirty_files()
         assert not app.almt_dirty
         assert not errors,'\n'.join(errors)

@@ -85,6 +85,47 @@ class Card:
     def variant(self) -> int:
         return self.raw[9]
 
+    @property
+    def panel_type(self) -> int:
+        """Native koma.bin +0x06: battle 0, support 1, helper 2."""
+        return self.raw[6]
+
+    @property
+    def nature_override(self) -> int | None:
+        """Battle-only +0x0B upper nibble; 3 means use chr_b base nature."""
+        if self.panel_type != 0:
+            return None
+        value = self.raw[0x0B] >> 4
+        return None if value == 3 else value
+
+
+def native_card_nature(card: Card, chr_b: bytes, chr_s: bytes) -> int:
+    """Resolve a panel's nature as native ov05 FUN_0214E480 does.
+
+    Battle: +0x0B high-nibble override or chr_b record +0.
+    Support: chr_s size-specific eight-byte variant +0.
+    Helper: neutral (3). Low-nibble flags are intentionally not interpreted.
+    """
+    kind = card.panel_type
+    if kind == 2:
+        return 3
+    idx = card.raw[7]
+    if kind == 0:
+        if card.nature_override is not None:
+            return card.nature_override
+        offset = idx * 0x3C
+        source = chr_b
+    elif kind == 1:
+        offset = idx * 0x14 + (card.size - 2) * 8
+        if card.size not in (2, 3):
+            raise ValueError('Support nature requires a 2- or 3-panel card')
+        source = chr_s
+    else:
+        raise ValueError(f'Unknown native Koma panel type {kind}')
+    if offset < 0 or offset >= len(source):
+        raise ValueError(f'Koma {card.index}: nature source offset {offset} outside table')
+    return source[offset]
+
 
 class ShapeTable:
     def __init__(self, groups: list[list[Shape]], raw: bytes | None = None):

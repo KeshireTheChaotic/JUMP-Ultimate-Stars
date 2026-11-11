@@ -7,9 +7,10 @@ the caller so it can read edits back on Apply.
 from __future__ import annotations
 
 import tkinter as tk
-from tkinter import ttk
+from tkinter import ttk, messagebox
 
 from .. import theme as T
+from .. import ui_copy
 
 
 class Inspector(ttk.Frame):
@@ -39,9 +40,12 @@ class Inspector(ttk.Frame):
         self._row = 0
 
     def section(self, title, note=None):
-        ttk.Label(self.inner, text=title.upper(), style='Section.TLabel').pack(fill='x', padx=10, pady=(8, 0))
+        header = ttk.Label(self.inner, text=ui_copy.label(title).upper(), style='Section.TLabel')
+        header.pack(fill='x', padx=10, pady=(8, 0))
         tk.Frame(self.inner, height=1, bg=T.LINE).pack(fill='x', padx=10)
-        if note:
+        if note and ui_copy.is_technical_note(note):
+            T.Tooltip(header, 'Technical details: ' + note)
+        elif note:
             ttk.Label(self.inner, text=note, style='Muted.TLabel', wraplength=int(280 * T.ui_scale(self)),
                       justify='left').pack(fill='x', padx=10, pady=(3, 0))
         self._grid = ttk.Frame(self.inner)
@@ -51,7 +55,7 @@ class Inspector(ttk.Frame):
         return self._grid
 
     def _label(self, text, tip=None):
-        lab = ttk.Label(self._grid, text=text, style='Muted.TLabel')
+        lab = ttk.Label(self._grid, text=ui_copy.label(text), style='Muted.TLabel')
         lab.grid(row=self._row, column=0, sticky='w', padx=(0, 8), pady=2)
         if tip:
             T.Tooltip(lab, tip)
@@ -67,9 +71,22 @@ class Inspector(ttk.Frame):
         return v
 
     def evidence(self, label, grade, note=None):
-        """Evidence badge row: Direct / Cross-checked / Inferred / Unknown (tooltip = note)."""
-        return self.value(label, f'● {grade}' + (f' — {note}' if note else ''),
-                          tip=note, colour=T.EVIDENCE.get(grade, T.MUTED))
+        """Show confidence in plain language; retain original sources on click."""
+        status = ui_copy.evidence_status(grade)
+        widget = self.value(label, status + (' · Details' if note else ''),
+                            colour=T.EVIDENCE.get(grade, T.MUTED))
+        if note:
+            widget._technical_note = note
+            widget.configure(cursor='hand2', takefocus=1)
+            def reveal(_event=None):
+                messagebox.showinfo(
+                    'About this setting',
+                    f'{ui_copy.label(label)} — {status}\n\n{note}',
+                    parent=self.winfo_toplevel())
+            widget.bind('<Button-1>', reveal)
+            widget.bind('<Return>', reveal)
+            T.Tooltip(widget, 'Click for technical details and sources')
+        return widget
 
     def entry(self, label, var, tip=None, width=14, on_return=None):
         self._label(label, tip)

@@ -26,13 +26,80 @@ public sealed class JusGame
             }
         };
         Fade = new Engine.ScreenFade(platform);
+        // the JUS game tables exported from the player's ROM (jus extract → Data/jus/arm9tables.json)
+        Tables = Assets.JusTables.TryLoad(platform.Assets);
+        if (Tables is null) platform.Log("JUS tables (jus/arm9tables.json) not found: re-run `jus extract`; scenes that need them use stand-ins");
+        else
+        {
+            Scenes.Ov00.CommonInfo.SeriesCode = c => (uint)c < (uint)Tables.SeriesCodes.Length ? Tables.SeriesCodes[c] : null;
+            Scenes.Ov00.CommonInfo.RandomName = Tables.CommonInfoRandom;
+            Scenes.Ov00.CommonInfo.CloseName = Tables.OptionClose;
+        }
         Register(SceneId.Copyright, d => new Scenes.Ov00.CopyrightScene(this));
         Register(SceneId.Title, d => new Scenes.Ov00.TitleScene(this));
         Register(SceneId.Opening, d => new Scenes.Ov00.OpeningScene(this));
         Register(SceneId.TopMenu, d => new Scenes.Ov00.TopMenuScene(this, d.D.MenuCursor));     // jus_Scene03_Create
+        Register(SceneId.JGalaxy, d =>
+        {
+            Globals.Stage.Reset();                                                              // jus_Scene16_Create: FUN_020704a8
+            return new Scenes.Ov02.JGalaxyScene(this, d.D.Params[16].Arg);
+        });
+        // overlay 1 (subagent translation, merged 2026-11-10; artwork still stand-in text panels)
+        Register(SceneId.JGalaxyStageInfo, d => new Scenes.Ov01.JGalaxyStageInfoScene(this));                // 0x0214CD20
+        Register(SceneId.DeckSelect, d => new Scenes.Ov01.DeckSelectScene(this, d.D.Params[4].Arg & 0xFF));   // jus_Scene04_Create 0x0206E884
+        Register(SceneId.Result13, d => new Scenes.Ov01.ResultScene(this, d.D.Params[13].Arg & 0xFF));        // jus_Scene13_Create 0x0206EFF0
+        Register(SceneId.JGalaxyResult, d => new Scenes.Ov01.JGalaxyResultScene(this));                      // 0x0214DCB0
+        Register(SceneId.Result45, d => new Scenes.Ov01.ResultScene(this, 4));                               // jus_Scene45_Create 0x0207037C
+        // overlay 5 (subagent translation, merged 2026-11-10; deck rules translated, editing UI a stand-in)
+        Register(SceneId.DeckMake, d =>                                                                      // jus_Scene09_Create 0x0206EC18
+        {
+            if (d.D.Unk17 == 0) d.G.Session.ResetSlots();                                                    // FUN_0207062c
+            return new Scenes.Ov05.DeckMakeScene(this, d.D.Params[9].Arg);
+        });
+        Register(SceneId.KomaBook, d => { d.G.Session.ResetSlots(); return new Scenes.Ov05.KomaBookScene(this); });   // jus_Scene33_Create 0x0206FCA8
+        // overlay 3, J Arena (subagent translation, merged 2026-11-10; the menu, job 0, is translated, other jobs are stand-ins).
+        Register(SceneId.JArena21, d => new Scenes.Ov03.JArenaScene(this, d.D.Params[21].Arg));            // jus_Scene21_Create 0x0206F3CC
+        Register(SceneId.JArena26, d => new Scenes.Ov03.JArenaScene(this, d.D.Params[26].Arg & 0xFF));     // jus_Scene26_Create 0x0206F9B8
+        if (Tables is { } jt)
+        {
+            // jus_Scene23/24/27_Create: job = byte table 0x02092424/28/2C [Arg] (exported JUS tables)
+            Register(SceneId.JArena23, d => new Scenes.Ov03.JArenaScene(this, jt.JArenaJob(0, d.D.Params[23].Arg)));
+            Register(SceneId.JArena24, d => new Scenes.Ov03.JArenaScene(this, jt.JArenaJob(1, d.D.Params[24].Arg)));
+            Register(SceneId.JArena27, d => new Scenes.Ov03.JArenaScene(this, jt.JArenaJob(2, d.D.Params[27].Arg)));
+        }
+        // overlay 7, communication menus (subagent translation, merged 2026-11-10; the top menu is translated, the
+        // communication pages are stand-ins behind ICommLink/NoCommLink, which finds no partner)
+        var comm = new Scenes.Ov07.NoCommLink();
+        Register(SceneId.CommuMenu35, d =>                                                                  // jus_Scene35_Create 0x0206FD54
+        {
+            if (Globals.Director.SceneChangeRequested)                                                     // FUN_0206E5F4
+            {
+                Globals.Director.SceneChangeRequested = false;
+                d.X.ReseedRandom();                                                                        // OS_GetTick + FUN_02030F24
+                Globals.Battle.Reset();                                                                    // FUN_020703D8
+            }
+            return Scenes.Ov07.CommuMenuScene.Create35(this, comm);
+        });
+        Register(SceneId.CommuMenu38, d => Scenes.Ov07.CommuMenuScene.Create38(this, comm));              // 0x0214DCA8
+        Register(SceneId.CommuMenu39, d => Scenes.Ov07.CommuMenuScene.Create39(this, comm));              // 0x0214DCC4
+        // overlay 0, Option and Ending (subagent translation, merged 2026-11-10; Option nearly complete, Ending's first two parts stand-ins)
+        Register(SceneId.Option, d => new Scenes.Ov00.OptionScene(this));                                  // Option_Add 0x02157138 (direct)
+        Register(SceneId.Ending, d => new Scenes.Ov00.EndingScene(this));                                  // Ending_Add 0x0214E860 (direct)
+        // overlay 6, battle (subagent translation, merged 2026-11-10; a shell: stage, characters idle, camera, exit codes on
+        // stand-in keys). Stage table 0x02092D08 from the exported JUS tables.
+        Register(SceneId.Battle11, d => new Scenes.Ov06.BattleScene(this, Scenes.Ov06.BattleSetup.FromGlobals(this, 5), StageTable));
+        Register(SceneId.Battle12, d => new Scenes.Ov06.BattleScene(this, Scenes.Ov06.BattleSetup.FromGlobals(this, Scenes.Ov06.BattleSetup.KindForScene12(d.D)), StageTable));
+        Register(SceneId.Battle44, d => new Scenes.Ov06.BattleScene(this, Scenes.Ov06.BattleSetup.FromGlobals(this, 6), StageTable));
+        // overlay 4, J Quiz (subagent translation, merged 2026-11-10; partial, see TODO.md)
+        Register(SceneId.JQuiz31, d => new Scenes.Ov04.JQuizScene(this, SceneId.JQuiz31));
+        Register(SceneId.JQuiz40, d => new Scenes.Ov04.JQuizScene(this, SceneId.JQuiz40));
+        Register(SceneId.JQuiz18, d => new Scenes.Ov04.JQuizScene(this, SceneId.JQuiz18));
     }
 
     public IPlatform Platform { get; }
+    /// <summary>The JUS game tables (null when the data predates them).</summary>
+    public Assets.JusTables? Tables { get; }
+    private Assets.IOv06StageTable? StageTable => Tables is null ? null : new Assets.Ov06JusTablesStageTable(Tables);
     /// <summary>The global screen fade (0x0214BD50).</summary>
     public Engine.ScreenFade Fade { get; private set; }
     public GameGlobals Globals { get; } = new();

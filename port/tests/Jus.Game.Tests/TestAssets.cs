@@ -9,7 +9,10 @@ internal sealed class RomAssetsForTests : IAssetSource
     public static RomAssetsForTests Instance { get; } = new();
     private readonly Lazy<NdsRom> _rom = new(() => NdsRom.Load(Path.Combine(FindRoot(), "JUS.nds")));
 
-    public byte[] Read(string path) => _rom.Value.ReadFile(path);
+    public byte[] Read(string path) => path == Jus.Nds.JusTablesExport.FileName
+        ? (_tables ??= Jus.Nds.JusTablesExport.Build(_rom.Value))                  // what `jus extract` writes into Data
+        : _rom.Value.ReadFile(path);
+    private byte[]? _tables;
 
     public static string FindRoot()
     {

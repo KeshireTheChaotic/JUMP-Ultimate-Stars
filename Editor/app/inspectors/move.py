@@ -1,7 +1,7 @@
 """Original source-backed editor refresh_inspector responsibility (R08)."""
 import tkinter as tk
 from app import theme as T
-from jus_formats import almt,battleinput,padtrace,roster
+from jus_formats import almt,animroles,battleinput,padtrace,roster
 from jus_formats.chrbin_semantics import REACTION_RESOURCE_PAIRS, native_reaction_route
 from app.inspectors.combat import render_move_contacts
 from jus_package import effectlinks
@@ -12,21 +12,22 @@ def render_move_inspector(editor, hex_id, focus_value=False):
     ins.clear()
     if not editor.move:
         ins.section('Move')
-        ins.text('Select a move in the Moves list.' if editor.almt else
-                 'This archive has no move table. Use the Sprite workspace (Ctrl+2).')
+        ins.text('Choose an animation from the Moves list.' if editor.almt else
+                 'This file contains artwork, but no character animations. Open the Sprite editor instead.')
         return
     m = editor.move
     i = editor.almt.moves.index(m) if m in editor.almt.moves else -1
-    ins.section(f'Move {i}', note=split(editor.almt_path)[-1] if editor.almt_path else None)
+    ins.section(f'Animation {i}', note=split(editor.almt_path)[-1] if editor.almt_path else None)
     editor._mv = {'id': tk.StringVar(value=hex_id(m.id)), 'duration': tk.StringVar(value=str(m.duration)),
                 'loop': tk.BooleanVar(value=bool(m.flags & almt.MOVE_FLAG_LOOP))}
-    ins.entry('ID', editor._mv['id'], 'Move id (high word: character/effect table)', on_return=editor.apply_move_props)
-    ins.spin('Length', editor._mv['duration'], 0, 65535, 'Duration in ticks (60 per second)',
+    ins.entry('ID', editor._mv['id'], 'Keep this number when replacing an existing animation.', on_return=editor.apply_move_props)
+    ins.spin('Length', editor._mv['duration'], 0, 65535, 'Number of game frames (60 frames per second).',
              on_change=editor.apply_move_props)
-    ins.check('Loop', editor._mv['loop'], 'Flags bit 0: wrap at the end instead of ending',
+    ins.check('Loop', editor._mv['loop'], 'Play the animation again when it reaches the end.',
               on_change=editor.apply_move_props)
-    ins.value('fps', f'{m.fps}  (not read by the game)', colour=T.MUTED)
-    ins.value('Flags', hex_id(m.flags, 2), colour=T.MUTED)
+    ins.evidence('Other animation settings', 'Limited',
+                 f'Playback rate field: {m.fps} (not used by the game); '
+                 f'original option bits: {hex_id(m.flags, 2)}')
     # Dynamic read-only source correlation; BIN titles are never written to ALMT.
     form, member = editor._move_source_form()
     if form:
@@ -41,117 +42,128 @@ def render_move_inspector(editor, hex_id, focus_value=False):
             source_cards = svc.cards_for_move(form, m.id, almt_member=member,
                                                source_ids=source_ids)
             if source:
-                ins.section('Original move text', note=f'{source.source} | record {source.record}')
-                ins.value('Title', source.display_title or '(blank in supplied BIN)')
-                ins.value('BIN title slot', str(source.title_slot),
-                          tip=f'{source.source}, word {source.record}*'
-                              f'{53 if form in roster.BATTLE_IDS else 9}+{source.title_slot}')
-                ins.value('Type', source.type_label or '(blank in supplied BIN)')
-                ins.value('Description', source.display_description or '(none in supplied BIN)')
-                ins.value('Description slots', ', '.join(map(str, source.description_slots)),
-                          colour=T.MUTED)
-                ins.evidence('Text', 'Direct', 'original self-relative BIN pointers; '
+                ins.section('Move details')
+                ins.value('Title', source.display_title or '(No title in game data)')
+                ins.value('Type', source.type_label or '(No type specified)')
+                ins.value('Description', source.display_description or '(No description in game data)')
+                ins.evidence('Text', 'Direct', f'text source {source.source}, entry {source.record}, title slot '
+                             f'{source.title_slot}, description slots {source.description_slots}; '
                              'battle special overlay5 0214E0A4/0214E11C; '
                              'support original overlay5 0214E370/0214E3D4')
             elif form in roster.BATTLE_IDS and m.id & 0xFF in battleinput.MOVE_CONTROLS:
                 ins.section('Original move text')
-                ins.text('No individual move title is defined by the verified '
-                         'bin/chr_b_t.bin special-name accessor for this action. '
-                         'The input/control label is code-derived.')
+                ins.text('This action has no separate title in the game text. Its button label is shown instead.')
             if source_cards:
-                ins.section('Koma references', note='bin/koma.bin +7 roster, +8 size; read-only')
+                ins.section('Available on these Koma')
                 labels = [f'#{c.index} ({c.size} koma)' for c in source_cards]
                 editor._source_card_choice = tk.StringVar(value=labels[0])
                 editor._source_card_lookup = dict(zip(labels, (c.index for c in source_cards)))
                 ins.combo('Card', editor._source_card_choice, labels,
-                          'This ALMT action is available to these original Koma records',
+                          'Choose a Koma that can use this move.',
                           width=22)
-                ins.buttons(('Open Koma card',
+                ins.buttons(('View Koma',
                              lambda: editor.open_koma_card(
                                  editor._source_card_lookup[editor._source_card_choice.get()])))
         elif editor._move_xrefs_error:
-            ins.value('Move text lookup', editor._move_xrefs_error, colour=T.WARN)
+            ins.value('Move description', 'Unavailable; check that the game data is complete.',
+                          tip=editor._move_xrefs_error, colour=T.WARN)
     if editor._battle_base_table():
         control = battleinput.MOVE_CONTROLS.get(m.id & 0xFF)
         if control:
-            ins.value('Control', f'{control[0]} (selector {control[1]})', tip=control[2])
+            ins.value('Buttons', control[0],
+                      tip='The game may prevent this move while recovering, stunned, or without enough energy.')
             trace = battleinput.source_trace(m.id)
             if trace:
                 mode, predicate, guard, function = trace
-                ins.section('Original input to ALMT', note='Code predicate; input acceptance is conditional')
-                ins.value('State mode', mode)
-                ins.value('Input predicate', predicate)
-                ins.value('Condition', guard)
-                ins.value('Code source', 'ov06 ' + function)
-                ins.value('Selected ALMT offset', hex_id(m.id & 0xFF, 2))
-                ins.evidence('Actor input → ALMT', 'Direct',
-                             'ov06 0215A720/0215A8C0/0215A8F8 → 02159EF8; '
-                             'native actor+0x6C selector, not the raw DS key mask')
-                ins.evidence('Physical key → actor input', 'Inferred',
-                             'Control-guide-correlated physical name only: '
-                             'hardware input 04000130/04000136 → HwPad '
-                             'main 0203A610 uses a DIFFERENT mask namespace. '
-                             'Intermediate translation to actor+0x6C untraced.')
+                ins.section('How to use this move')
+                state = {'ground': 'Standing', 'air': 'In the air',
+                         'crouch': 'Crouching'}.get(mode, mode.replace('ground', 'Standing'))
+                ins.value('When', state)
+                ins.value('Input', control[0])
+                if 'meter' in guard or 'size' in guard:
+                    ins.text('This move requires the correct Koma size and enough special energy.')
+                elif 'scripted' in guard.lower():
+                    ins.text('This action starts automatically in certain situations.')
+                else:
+                    ins.text('The move may be unavailable while another action is finishing.')
+                ins.evidence('In-game action mapping', 'Direct',
+                             f'Actor+0x6C: {predicate}; {guard}; '
+                             f'ov06 {function}; input selector {control[1]}, '
+                             f'ALMT offset 0x{m.id & 0xFF:02X}')
+                ins.evidence('Physical button names', 'Inferred',
+                             'Names follow the original game controls. '
+                             'Hardware inputs and actor inputs use different bit fields; '
+                             'the final conversion has not been traced.')
                 if (m.id & 0xFF) == 0x18:
-                    ins.value('Physical Select hardware path',
-                              'KEYINPUT 0x0004 → HwPad 0x4000 (main 0203A610)')
-                    ins.value('Battle ultimate selector',
-                              'actor+0x6C bit 0x1000 → selector 11 → ALMT 0x18')
-                    ins.value('Translation status',
-                              'No verified HwPad 0x4000 → actor 0x1000 bridge',
-                              colour=T.WARN)
-                ins.text('The actor+0xC0 and +0xC4 masks can block a transition; '
-                         'ground/air NoteTrack permissions (+0xF3/+0xF4) and '
-                         'follow-up fields (+0xCC/+0xF6/+0xF7) alter eligibility. '
-                         'Matching an input mask does NOT prove a successful cancel.')
+                    ins.text('Select activates the Ultimate Action. '
+                             'The final hardware-to-action mapping is still being verified.')
+                    ins.evidence('Select button mapping', 'Inferred',
+                                 'KEYINPUT 0x0004 -> HwPad 0x4000 (main 0203A610); '
+                                 'actor+0x6C bit 0x1000 -> selector 11 -> ALMT 0x18. '
+                                 'No directly verified conversion between these steps.')
     if editor._battle_base_table() and (m.id & 0xFF) not in battleinput.MOVE_CONTROLS:
         offset = m.id & 0xFF
-        if offset in (0x33, 0x34, 0x35, 0x36):
-            ins.section('Grabbed-victim pose')
-            ins.text('One of the four source victim reaction poses (user-confirmed). '
-                     'Not an independently named attacking move.')
+        role = animroles.battle_animation_role(m.id)
+        if role.category == 'movement':
+            ins.section('D-pad movement / stance')
+            ins.value('Original ALMT offset', hex_id(offset, 2))
+            ins.value('Source-derived action', role.title)
+            if role.note:
+                ins.text(role.note)
+            ins.evidence('How this movement starts', 'Direct', role.source)
+        elif role.category == 'reaction':
+            ins.section('Reaction animation')
+            ins.value('Original ALMT offset', hex_id(offset, 2))
+            ins.value('Source-derived role', role.title)
+            if role.note:
+                ins.text(role.note)
+            ins.evidence('Why this animation plays', 'Direct', role.source)
         else:
             ins.section('Unnamed base action')
             ins.value('Original ALMT offset', hex_id(offset, 2))
-            ins.text('No individually verified source move title. Code-call '
-                     'sites for this numeric resource are cataloged separately; '
-                     'a human-facing move name is not inferred from its position.')
+            ins.text('This animation has no confirmed name or button assignment. '
+                     'You can still view and edit its frames.')
     if editor._battle_base_table():
         offset = m.id & 0xFF
         routes = [(route, 'primary' if pair[0] == offset else 'alternate')
                   for route, pair in enumerate(REACTION_RESOURCE_PAIRS)
                   if offset in pair]
         if routes:
-            ins.section('Engine-driven reaction assignments',
-                        note='Damage response, not an input-button assignment')
-            for row_id, role in routes:
+            ins.section('When this reaction plays',
+                        note='The game chooses a reaction when a character is hit or grabbed.')
+            for row_id, choice in routes:
                 route = native_reaction_route(row_id)
-                ins.value(f'Reaction {row_id} ({role})',
-                          f'{route.interpretation}\n'
-                          f'callback 0x{route.callback_address:08X}')
-            ins.evidence('Reaction selector', 'Direct',
+                ins.value(f'Reaction situation {row_id + 1}',
+                          'Main version' if choice == 'primary' else 'Alternate version')
+                ins.evidence(f'Reaction {row_id + 1} details', 'Direct',
+                             f'{route.interpretation}; callback 0x{route.callback_address:08X}')
+            ins.evidence('Reaction selection', 'Direct',
                          'ov06 0215AF34, original 16-row ALMT reaction table '
                          '0x021713E8 and callback table 0x021721A0')
         movement = padtrace.ENGINE_MOVEMENT_ACTIONS.get(offset)
-        if movement:
+        if movement and offset not in animroles.D_PAD_MOVEMENT:
             label, function_path = movement
-            ins.section('Engine-driven movement state',
-                        note='Actor input/state transition, not a direct button assignment')
+            ins.section('Other state transition',
+                        note='Not D-pad-only; state callbacks can reuse reaction animations')
             ins.value('Source role', label)
-            ins.value('Native transition path', function_path)
-            ins.evidence('Movement action', 'Direct',
-                         'Original ov06 state callbacks, distinct from physical-button selector table')
+            ins.evidence('Other movement behavior', 'Direct',
+                         function_path + '; original ov06 state callbacks')
         sites = battleinput.ENGINE_LITERAL_MOVE_DISPATCH.get(offset, ())
         if sites:
-            ins.section('Native internal move dispatch',
-                        note='Code references only; these do not establish a button')
-            ins.value('Direct call sites', ', '.join('ov06 ' + addr for addr in sites))
-            ins.evidence('Literal resource offset', 'Direct',
-                         'Original ov06 callers of FUN_02157450; dynamic and indirect '
-                         'call sites are not represented')
-        if offset not in battleinput.MOVE_CONTROLS and not routes:
-            ins.value('Physical button', 'No native input-selector mapping established',
-                      colour=T.MUTED)
+            ins.evidence('Used by game events', 'Direct',
+                         'Automatic animation calls: ' +
+                         ', '.join('ov06 ' + addr for addr in sites) +
+                         '; this does not establish a button assignment')
+        if offset not in battleinput.MOVE_CONTROLS:
+            role = animroles.battle_animation_role(m.id)
+            if role.category == 'movement':
+                ins.value('Triggered by', 'Direction buttons or standing still',
+                          colour=T.MUTED)
+            elif role.category == 'reaction':
+                ins.value('Triggered by', 'Getting hit, grabbed, or recovering',
+                          colour=T.MUTED)
+            else:
+                ins.value('Triggered by', 'Not yet identified', colour=T.MUTED)
         render_move_contacts(editor, ins, form, m)
     if editor.sel_virtual is not None and editor.sel_virtual.get('spawn') is not None:
         editor._inspect_spawn(ins, editor.sel_virtual)
@@ -177,10 +189,11 @@ def render_move_inspector(editor, hex_id, focus_value=False):
             ins.value('Active', '; '.join(ev.operations) or '—')
             ins.value('Slots', f'A={ev.slot_a} → {hex_id(ev.move_a, 6) if ev.move_a is not None else "?"}\n'
                                f'B={ev.slot_b} → {hex_id(ev.move_b, 6) if ev.move_b is not None else "?"}')
-        ins.text('Driven by NoteTrack chara_action 13 (slots from ChrBin chr/effect) and 14 (target). '
-                 'The position follow rule is traced to overlay 6 FUN_021618E4 (quarter-distance, '
-                 'up to four pixels per axis per update, snap near target). Starting position, '
-                 'active A/B state and runtime facing remain scenario assumptions.')
+        ins.text('This effect can follow a target. The preview estimates its '
+                 'starting position and direction; results can differ during gameplay.')
+        ins.evidence('Effect following behavior', 'Direct',
+                     'NoteTrack chara_action 13/14; overlay 6 FUN_021618E4; '
+                     'quarter-distance with up to four pixels per axis per update.')
         return
     tr = editor._track()
     if tr is None:
@@ -190,7 +203,9 @@ def render_move_inspector(editor, hex_id, focus_value=False):
         return
     ni, ti = editor.sel_track
     note = almt.FIELD_NOTES.get(tr.field)
-    ins.section(f'{editor.almt.node_names[ni]} / {tr.field}', note=note)
+    from app import ui_copy
+    ins.section(f'{editor.almt.node_names[ni]} / {ui_copy.field_label(tr.field)}',
+                note=note)
     if tr.field == 'NoteTrack' and tr.opaque:
         editor._inspect_notes(ins, tr)
         from app.inspectors.events import render_note_event_editors

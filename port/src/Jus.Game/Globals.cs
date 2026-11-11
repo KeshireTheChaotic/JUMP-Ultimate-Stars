@@ -77,6 +77,32 @@ public sealed class BattleSetupWork
 {
     public readonly byte[] Raw = new byte[0x4C];
     public int I32(int o) => BitConverter.ToInt32(Raw, o);
+
+    /// <summary>FUN_020703D8: clear the block, +0 = 1, then FUN_02070414's defaults, then +0xC = 0.</summary>
+    public void Reset()
+    {
+        Array.Clear(Raw);
+        Raw[0] = 1;
+        SetDefaults();
+        BitConverter.TryWriteBytes(Raw.AsSpan(0xC), 0);
+    }
+
+    /// <summary>FUN_02070414.</summary>
+    public void SetDefaults()
+    {
+        BitConverter.TryWriteBytes(Raw.AsSpan(0xC), 0xD);           // 0x020AFE9C
+        BitConverter.TryWriteBytes(Raw.AsSpan(0x10), 0);            // 0x020AFEA0
+        BitConverter.TryWriteBytes(Raw.AsSpan(0x1C), 0x116F);       // 0x020AFEAC
+        Raw[0x2B] = 1; Raw[0x2C] = 1; Raw[0x2A] = 0; Raw[0x2D] = 0; Raw[0x32] = 0; Raw[0x33] = 0;
+        for (int i = 0; i < 4; i++)
+        {
+            Raw[0x20 + i] = (byte)(i != 0 ? 1 : 0);
+            Raw[0x24 + i] = 0;
+            Raw[0x34 + i] = 0;
+            Raw[0x2E + i] = 1;
+        }
+        Raw[0x2E] = 0;
+    }
 }
 
 /// <summary>Stage/progress work block 0x020AFEDC (0x70 bytes), reset by FUN_020704a8.</summary>
@@ -149,6 +175,35 @@ public sealed class SaveWork
 
     /// <summary>Whether BGM table entry <paramref name="index"/> has been heard.</summary>
     public bool BgmHeard(int index) => (BitConverter.ToUInt32(Image.Data, 0xA34 + (index >> 5) * 4) & (1u << (index & 31))) != 0;
+
+    /// <summary>Save +0x3E5C (0x020B4114): the J Galaxy mission the cursor was last on.</summary>
+    public int CurrentMission
+    {
+        get => BitConverter.ToInt32(Image.Data, 0x3E5C);
+        private set => BitConverter.TryWriteBytes(Image.Data.AsSpan(0x3E5C), value);
+    }
+
+    /// <summary>FUN_02071AFC(mission, requestSave): remember the J Galaxy mission; a change marks the
+    /// field dirty and, with <paramref name="requestSave"/>, requests an autosave.</summary>
+    public void SetCurrentMission(int mission, bool requestSave)
+    {
+        if (CurrentMission == mission) return;
+        if (requestSave) AutoSaveRequested = true;
+        CurrentMission = mission;
+        Dirty.Add((0x3E5C, 4));
+    }
+
+    /// <summary>Save +0x3DCC (0x020B4084): one byte per J Galaxy mission, bit 0 = cleared.</summary>
+    public bool MissionCleared(int mission) => (Image.Data[0x3DCC + mission] & 1) != 0;
+
+    /// <summary>Save +0xA7C (0x020B0D34): bit array read by the planet unlock kind 2.</summary>
+    public bool UnlockBit(int n) => (BitConverter.ToUInt32(Image.Data, 0xA7C + ((n & 0xFF) >> 5) * 4) & (1u << (n & 31))) != 0;
+
+    /// <summary>FUN_02070FB4: koma <paramref name="id"/> owned (bit array at save +0x8F4, 0x020B0BAC).</summary>
+    public bool KomaOwned(int id) => (BitConverter.ToUInt32(Image.Data, 0x8F4 + (id >> 5) * 4) & (1u << (id & 31))) != 0;
+
+    /// <summary>FUN_02070F94: the number of owned koma among ids 0..0x39F.</summary>
+    public int KomaOwnedCount() => Enumerable.Range(0, 0x3A0).Count(KomaOwned);
 
     /// <summary>FUN_0207120c(flags, requestSave): set progress flags; optionally request an autosave.</summary>
     public void SetProgressFlags(uint flags, bool requestSave)

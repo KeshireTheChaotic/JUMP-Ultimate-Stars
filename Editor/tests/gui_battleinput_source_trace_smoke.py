@@ -31,6 +31,11 @@ def all_inspector_text(ins):
     return '\n'.join(bits)
 
 
+def all_technical_notes(ins):
+    return '\n'.join(getattr(child, '_technical_note', '')
+                     for child in descendants(ins.inner))
+
+
 def main():
     app=EditorApp(str(DATA));errors=[]
     app.report_callback_exception=lambda *args:errors.append(
@@ -49,37 +54,48 @@ def main():
             app.populate_moves(select=idx)
             for _ in range(2):app.update()
             text=all_inspector_text(app.inspector)
-            assert expected in text,(offset,expected,text[:4500])
-            assert 'Original input to ALMT' in text or 'ORIGINAL INPUT TO ALMT' in text,text[:500]
+            notes=all_technical_notes(app.inspector)
+            assert expected in notes,(offset,expected,notes[:4500])
+            assert 'HOW TO USE THIS MOVE' in text,text[:500]
+            assert expected not in text  # source bytes are behind Details, not on the main panel
             assert app.move.id&255==offset
         idx=next(i for i,m in enumerate(app.almt.moves) if m.id&255==0x18)
         app.populate_moves(select=idx)
         for _ in range(2):app.update()
         text=all_inspector_text(app.inspector)
-        assert 'KEYINPUT 0x0004' in text,text[:4500]
-        assert 'HwPad 0x4000' in text,text[:4500]
-        assert 'actor+0x6C bit 0x1000' in text,text[:4500]
-        assert 'No verified HwPad 0x4000' in text,text[:4500]
+        notes=all_technical_notes(app.inspector)
+        assert 'Select activates the Ultimate Action.' in text,text[:4500]
+        assert 'KEYINPUT 0x0004' in notes,notes[:4500]
+        assert 'HwPad 0x4000' in notes,notes[:4500]
+        assert 'actor+0x6C bit 0x1000' in notes,notes[:4500]
+        assert 'KEYINPUT 0x0004' not in text
 
-        idx=next(i for i,m in enumerate(app.almt.moves) if m.id&255==0x03)
-        app.populate_moves(select=idx)
-        for _ in range(2):app.update()
-        text=all_inspector_text(app.inspector)
-        assert 'ENGINE-DRIVEN MOVEMENT STATE' in text,text[:4500]
-        assert '0215E9A0' in text and '0215EAEC' in text,text[:4500]
-        assert 'No native input-selector mapping established' in text,text[:4500]
-
-        idx=next(i for i,m in enumerate(app.almt.moves) if m.id&255==0)
+        for offset,witness in ((0x00,'0215D2E4'),(0x01,'0215D6F8'),
+                               (0x02,'0215D860'),(0x03,'0215E9A0')):
+            idx=next(i for i,m in enumerate(app.almt.moves) if m.id&255==offset)
+            app.populate_moves(select=idx)
+            for _ in range(2):app.update()
+            text=all_inspector_text(app.inspector)
+            assert 'MOVEMENT AND STANCE' in text,text[:2500]
+            assert witness in all_technical_notes(app.inspector),(offset,witness)
+        for offset,witness in ((0x0B,'0215AF34'),(0x33,'Grabbed-victim reaction pose')):
+            idx=next(i for i,m in enumerate(app.almt.moves) if m.id&255==offset)
+            app.populate_moves(select=idx)
+            for _ in range(2):app.update()
+            text=all_inspector_text(app.inspector)
+            assert 'REACTION ANIMATION' in text,text[:2500]
+            assert witness in text or witness in all_technical_notes(app.inspector),(offset,witness,text[:3500])
+        idx=next(i for i,m in enumerate(app.almt.moves) if m.id&255==0x09)
         app.populate_moves(select=idx)
         for _ in range(3):app.update()
         text=all_inspector_text(app.inspector)
-        assert 'UNNAMED BASE ACTION' in text,text[:1000]
-        assert '0x00' in text,text[:1300]
+        assert 'OTHER ANIMATION' in text,text[:1600]
+        assert '0x09' in text,text[:1900]
         assert not errors,'\n'.join(errors)
         assert app.root_data.dirty_files()==[]
         assert not app.almt_dirty
-        print('OK: original normal-action and special button bitmask predicates in Editor Inspector; '
-              'unnamed action remains unnamed')
+        print('OK: physical attack predicates, 4 D-pad/stance actions, reactions '
+              'and unnamed script entries render in the original Editor Inspector')
     finally:
         app.destroy()
 

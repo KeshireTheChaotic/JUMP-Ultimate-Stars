@@ -7,109 +7,96 @@ def render_shot_source_inspector(editor, ins, hex_id):
     events = editor._shot_events_current()
     ins.section('Shot source', note='Original chr/shot table; runtime != static preview')
     if not events:
-        ins.text('No source shot commands in this ALMT.')
+        ins.text('This animation does not create a projectile.')
         return
     for ev in timelineprojection.shot_events_for_inspector(events, editor.tick):
-        ins.section(f'Shot #{ev.record_index} @ tick {ev.tick}')
+        ins.section(f'Projectile {ev.record_index + 1} — frame {ev.tick}')
         from app.widgets.shot_editor import ShotEditor
         from jus_package.project import join
         form, _ = editor._move_source_form()
         if form:
             path = join('chr/ChrBin.aar', f'chr/shot/{form}.bin')
-            ins.buttons(('Edit shot record…', lambda path=path, i=ev.record_index: ShotEditor(editor, path, i)))
-        ins.value('Handler', f'0x{ev.handler:02X}, {ev.record.handler_address}')
+            ins.buttons(('Edit projectile settings…', lambda path=path, i=ev.record_index: ShotEditor(editor, path, i)))
         ins.value('Behavior', ev.record.handler_behavior)
-        ins.value('Source event', f'chara_action(2) record {ev.record_index} '
-                  f'offset ({ev.launch_x}, {ev.launch_y})')
-        ins.value('Source preview window', f'{ev.record.effective_lifetime} ticks; '
-                  f'preview cap tick {ev.nominal_end} (NOT runtime expiry)')
+        ins.evidence('Projectile behavior type', 'Direct',
+                     f'Handler 0x{ev.handler:02X} at {ev.record.handler_address}')
+        ins.value('Starting position', f'X {ev.launch_x}, Y {ev.launch_y}')
+        ins.value('Preview length', f'Up to {ev.record.effective_lifetime} frames '
+                  f'(the game may end it earlier)')
         if ev.handler == 0:
-            ins.section('Handler00 — native launch and exit phases',
-                        note='Original actor constructor, not a collision simulation')
-            ins.value('Launch ALMT (+0x0C)',
-                      hex_id(ev.record.reference0, 6) + ' via 0216EEF4 → 0216E3D0 → 0216F100')
-            ins.value('End ALMT (+0x14)',
+            ins.section('Projectile start and finish')
+            ins.value('Starting animation', hex_id(ev.record.reference0, 6))
+            ins.value('Ending animation',
                       (hex_id(ev.record.optional_reference, 6)
                        if ev.record.optional_reference else '(none)') +
                       (' · conditional on shot retirement, flags bit0'
                        if ev.record.flags & 1 else ' · flag0 not set'))
-            ins.value('Native launch visual', 'FUN_0216EB8C selects source+0x0C')
-            ins.value('Native terminal visual', 'FUN_0216E5A0 uses work+0x1C on teardown')
-            ins.text('The viewport shows real +0x0C birth ALMT sprite frames '
-                     'and one level of authored GenerateID children at the '
-                     'original launch anchor. Dynamic projectile travel, '
-                     'collisions, and the conditional +0x14 exit are '
-                     'not reconstructed or presented as guaranteed.')
+            ins.evidence('How the start and end effects play', 'Direct',
+                         'FUN_0216EB8C selects source+0x0C; '
+                         'FUN_0216E5A0 uses work+0x1C on teardown')
+            ins.text('The preview uses the original starting artwork. '
+                     'The projectile path and collision behavior may differ during gameplay.')
         if ev.handler05_timer_exemption_is_code_proven:
-            ins.section('Handler05 - D-pad controlled history trail',
-                        note='Native 0216B910/0216BE0C/0216C028; no live input playback')
+            ins.section('D-pad controlled projectile')
             for field,resource,role in ev.handler05_source_roles:
-                ins.value(f'{field} {hex_id(resource,6)}',role)
-            ins.value('D-pad raw steering',
-                      'Up: Y-0x40; Down: Y+0x40; Left: X-0x40; Right: X+0x40')
-            ins.value('History region', '128 positions + rotations, stride 12 bytes')
-            ins.value('Trail instance cap', '12 total (head + 10 body + terminal)')
-            ins.value('Native update', 'FUN_0216BE0C with FUN_0216C028')
-            ins.value('Native timer', 'exempt via work+0x26 bit1 from FUN_0216B910')
+                ins.value('Trail animation', f'{field} {hex_id(resource,6)}')
+                ins.evidence('Trail part details', 'Direct', role)
+            ins.value('Controls', 'Use the D-pad to steer the projectile.')
+            ins.evidence('Direction values', 'Direct',
+                         'Up: Y-0x40; Down: Y+0x40; Left: X-0x40; Right: X+0x40')
+            ins.value('Trail history', '128 saved positions and directions')
+            ins.value('Trail pieces', 'Up to 12 (head, body, and end)')
+            ins.evidence('Steering behavior', 'Direct',
+                         'FUN_0216BE0C and FUN_0216C028; '
+                         'timer exemption via work+0x26 bit1 from FUN_0216B910')
             if ev.move_id == 0x0009832C:
-                ins.section('Authored status/teardown cues',
-                            note='Original NoteTrack events, not guaranteed runtime branch')
+                ins.section('Status changes and ending')
                 ins.value('Move name', 'True Dragon of the Darkness Flame (original BIN)')
-                ins.value('Shot source', 'tick 34: record2 handler05; '
-                          'tick 82/112: chara_action(3) shot cleanup')
-                ins.value('Original status event', 'tick 112: chara_action(10,18)')
-                ins.value('Original ROM byte mapping',
-                          'DAT_0217215C[18] = 0x24')
-                ins.value('Original status callback',
-                          'FUN_021593E8 (writes fighter+0xBC = 0x140 on start)')
-                ins.text('Original move text describes a self-hit power effect, '
-                         'but whether that status event is conditional on '
-                         'self-contact, Marker branch selection or another '
-                         'live runtime flag is not proven by static sources.')
+                ins.value('Projectile timing', 'Starts at frame 34; end commands at frames 82 and 112')
+                ins.value('Possible self-effect', 'Triggered by a command at frame 112')
+                ins.evidence('Exact status behavior', 'Limited',
+                             'frame 112 chara_action(10,18); DAT_0217215C[18]=0x24; '
+                             'FUN_021593E8 writes fighter+0xBC=0x140 on start')
+                ins.text('The game describes a power effect that can affect the user. '
+                         'Its exact conditions are not yet confirmed.')
             if editor.tick >= ev.tick:
                 trail = steeredtrail.hiei_handler05_source_plan(
                     ev.record, editor.tick-ev.tick)
-                ins.value('No-contact source child count',str(len(trail.sources)))
-                ins.value('Native history write index',str(trail.history_write_index))
-                ins.value('Terminal source instanced',
-                          'yes (conditional)' if trail.terminal_bodies else
-                          'not yet (in uninterrupted model)')
-            ins.text('The original text says Use D-Pad to control. This is '
-                     'direct steering, NOT automatic enemy homing. No '
-                     'D-pad sequence, target hit, self-hit, native DS '
-                     'float normalization, historical path or physical '
-                     'contact is reproduced by a static ALMT preview.')
+                ins.value('Visible trail pieces (estimated)',str(len(trail.sources)))
+                ins.evidence('Trail history position', 'Direct',
+                             str(trail.history_write_index))
+                ins.value('Ending animation',
+                          'May be shown' if trail.terminal_bodies else 'Not shown in this preview')
+            ins.text('The D-pad steers this projectile; it does not automatically follow '
+                     'an enemy. The preview cannot show your actual button inputs '
+                     'or predict collisions.')
         if ev.handler01_timer_exemption_is_code_proven:
-            ins.value('Repeat projection', 'Unobstructed cardinal source model '
-                      if editor.show_shot_repeat_model.get() else 'Disabled')
+            ins.value('Repeated effects preview', 'On (estimated straight-line movement) '
+                      if editor.show_shot_repeat_model.get() else 'Off')
             model = (shotprojection.project_handler01_unobstructed(
                 ev.record, max(0, editor.tick-ev.tick), editor.facing_left.get())
                 if editor.tick >= ev.tick else None)
             if model:
-                ins.value('Total +0x10 launches',str(model.body_emissions)
-                          + ' (source 0216BA2C counter path)')
-                ins.value('Modeled child objects',str(len(model.sprites)))
-                ins.value('Native spacing counter (q8)',str(model.next_spacing_q8))
-                ins.value('Constant-velocity seed (q8)',str(model.velocity_q8))
-                ins.text('Child XY after birth assumes linear unobstructed '
-                         'actor movement, NOT an observed game trajectory. '
-                         'Live collision, owner movement, GX transform '
-                         'and interrupted slot allocation remain unknown.')
-            ins.text('Native handler01 sets work+0x26 flag2 in 0216B4F4. '
-                     'Scheduler 0216AF04 skips its usual countdown for '
-                     'this flag. True retirement is hit/work-state dependent.')
-            ins.section('Handler01 field roles (verified native code)')
+                ins.value('Pieces created', str(model.body_emissions))
+                ins.value('Visible pieces',str(len(model.sprites)))
+                ins.evidence('Trail spacing and speed', 'Direct',
+                             f'Counter: {model.next_spacing_q8}; speed: {model.velocity_q8} (q8 units)')
+                ins.text('Trail positions are estimates. They do not include collisions, '
+                         'moving targets, or changes in direction.')
+            ins.evidence('How repeated effects end', 'Direct',
+                         'Handler01 sets work+0x26 flag2 in 0216B4F4; '
+                         '0216AF04 skips countdown. Retirement depends on contact state.')
+            ins.section('Repeated projectile parts')
             for field, resource, behavior in ev.handler1_source_roles:
                 ins.value(f'{field}  {hex_id(resource,6)}',behavior)
-            ins.text('Original 0216B514 unconditionally calls the +0x0C '
-                     'child constructor on launch. Thus +0x0C is NOT '
-                     'constructed exclusively on impact. '
-                     'ROM update callback 0216BA2C reads +0x10 '
-                     'to construct repeated body segments when the '
-                     'source 0x1800 spacing counter crosses its threshold.')
+            ins.evidence('How repeat parts appear', 'Direct',
+                         'Original 0216B514 constructs +0x0C at launch; '
+                         '0216BA2C reads +0x10 and creates repeated body pieces '
+                         'when spacing counter 0x1800 crosses threshold.')
 
-        ins.value('References', ', '.join(hex_id(v, 6) for v in ev.references))
-        ins.value('Flags', hex_id(ev.record.flags))
+        ins.value('Related animations', ', '.join(hex_id(v, 6) for v in ev.references))
+        ins.evidence('Other effect options', 'Limited',
+                     f'Original option bits: {hex_id(ev.record.flags)}')
         primary = editor._effect_moves.get(ev.record.reference0)
         if primary:
             source_move, source_names, source_path = primary
@@ -120,46 +107,49 @@ def render_shot_source_inspector(editor, ins, hex_id):
                     continue
                 tid, bound = st['TextureID'], st.get('BoundsIndex')
                 original = editor.index.sprite(tid) if editor.index else None
-                ins.value('Original texture', f'{hex_id(tid, 6)}, BoundsIndex {bound}')
+                ins.value('Image', f'{hex_id(tid, 6)}, frame {bound}')
                 if original:
                     dstx, spr_source = original
-                    ins.value('Original renderer',
-                              f'DSIG 0x{spr_source.mode:02X} - '
-                              + ('GX textured atlas' if spr_source.is_atlas else
-                                 'DS OBJ/tile source' if spr_source.is_obj else 'other source'))
+                    ins.evidence('Graphics format', 'Direct',
+                                 f'DSIG 0x{spr_source.mode:02X} - '
+                                 + ('GX textured atlas' if spr_source.is_atlas else
+                                    'DS OBJ/tile source' if spr_source.is_obj else 'other source'))
                     if isinstance(bound, int) and 0 <= bound < len(dstx.frames):
                         ins.value('DSTX pieces',str(len(dstx.frames[bound].pieces)))
-                    ins.text('Original sprite pixels are source data; native rotation, '
-                             'stretch, transform inheritance and occlusion are '
-                             'runtime GPU state, NOT collision rectangle geometry.')
+                    ins.text('The preview uses the original artwork. Rotation, stretching, '
+                             'and overlap can differ during gameplay.')
                 break
         else:
             ins.value('Primary ALMT', f'{hex_id(ev.record.reference0, 6)} '
                       '(not in current character/common catalog)',colour=T.WARN)
-        ins.value('Raw source byte +0x01', f'0x{ev.record.byte1:02X}')
-        ins.value('Speed work +0x04', f'{ev.record.work_param} (raw u16)')
+        ins.evidence('Other projectile values', 'Limited',
+                     f'Original direction byte 0x{ev.record.byte1:02X}; '
+                     f'work parameter +0x04 = {ev.record.work_param}')
         profile = dynamicgeometry.shot_dynamic_path(ev.handler)
         ins.section('Original dynamic geometry', note='Code-backed mechanism, not a simulated hit')
         ins.value('Movement family', profile.geometry_family)
-        ins.value('Native per-frame callback', profile.per_frame_update)
-        ins.value('ROM dispatch tables', 'ov06 0x02172864 constructor / 0x0217278C updater')
-        ins.value('Renderer', profile.visual_model)
-        ins.value('Position logic', profile.position_model)
-        ins.value('Required runtime state', ', '.join(profile.runtime_dependencies))
-        ins.value('Native functions', ', '.join(profile.native_functions))
+        ins.evidence('Projectile movement calculation', 'Direct',
+                     str(profile.per_frame_update) + '; ov06 0x02172864 constructor / '
+                     '0x0217278C updater')
+        ins.evidence('Drawing the effect', 'Limited', profile.visual_model)
+        ins.evidence('Movement path details', 'Limited', profile.position_model)
+        ins.text('The preview uses the original images. Movement may depend '
+                 'on your inputs, timing, and collisions.')
+        ins.evidence('Movement conditions', 'Limited', ', '.join(profile.runtime_dependencies))
+        ins.evidence('Movement references', 'Direct', ', '.join(profile.native_functions))
         if profile.uses_trig_direction_byte:
             unit = dynamicgeometry.cardinal_direction_q8(
                 ev.record.byte1, editor.facing_left.get())
-            ins.value('Native direction argument',
-                      f'0x{ev.record.byte1:02X} via FUN_0216E898 (256-angle cycle)')
+            ins.evidence('Direction formula', 'Direct',
+                         f'0x{ev.record.byte1:02X} via FUN_0216E898 (256-angle cycle)')
             if unit and profile.uses_speed_param_u16:
-                ins.value('Cardinal source velocity',
-                          f'{dynamicgeometry.native_velocity_q8(ev.record.work_param, unit)}'
-                          ' raw 24.8, BEFORE stage/hit adjustments')
+                ins.evidence('Calculated speed', 'Inferred',
+                             f'{dynamicgeometry.native_velocity_q8(ev.record.work_param, unit)} '
+                             'in 24.8 units before stage/hit adjustments')
             elif profile.uses_speed_param_u16:
-                ins.value('Native velocity formula',
-                          '(u16 shot+4 * signed_q8_trig(shot+1, facing)) >> 8'
-                          ' (live DS FP rounding and collision required)')
+                ins.evidence('Calculated speed', 'Inferred',
+                             '(u16 shot+4 * signed_q8_trig(shot+1, facing)) >> 8; '
+                             'runtime rounding and collisions not shown')
         arrangement = dynamicgeometry.handler1_child_placement_q8(
             ev.record, editor.facing_left.get()) if ev.handler == 1 else None
         if arrangement:
@@ -182,16 +172,13 @@ def render_shot_source_inspector(editor, ins, hex_id):
                                       f'{hex_id(st["TextureID"], 6)} '
                                       + (ref.dstx_path if ref else 'DSTX missing'))
                             break
-            ins.text('Direct original handler 1 FUN_0216B514 calls FUN_0216C5F0 '
-                     'for +0x14 (if nonzero), then +0x0C. Those IDs are ALMT '
-                     'animations whose own TextureID/BoundsIndex choose the '
-                     'original sprite frames. This viewport holds their '
-                     'authored shot launch anchor fixed: NOT a reconstructed '
-                     'full-length beam, moving projectile, or repeated/rotated '
-                     'DS geometry. Stored +0x10 has a separate consumer.')
+            ins.text('The preview shows the projectile’s starting artwork, not its '
+                     'full travel path, rotation, or collision behavior.')
+            ins.evidence('Projectile creation details', 'Direct',
+                         'FUN_0216B514 calls FUN_0216C5F0 for +0x14 then +0x0C; '
+                         'TextureID/BoundsIndex choose frames; +0x10 is used separately.')
         else:
-            ins.text('Handler has no individually traced static source-sprite '
-                     'constructor in this diagnostic; no visual guess rendered.')
+            ins.text('There is not enough information to preview this projectile reliably.')
     ins.evidence('Projectile source', 'Direct',
                  'ov06 FUN_02157A44(2) ? FUN_02158470 ? FUN_0216A944 ? '
                  'FUN_0216ACC8; handler1 FUN_0216B514 ? FUN_0216C5F0')

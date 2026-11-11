@@ -11,21 +11,22 @@ def _inspect_spawn(editor, ins, row, hex_id):
     sp = row['spawn']
     ins.section('Spawned effect', note='GenerateID — read-only here; edit the key on the node track')
     ins.value('Effect id', hex_id(sp.effect_id, 6), colour=T.EFFECT)
-    ins.value('Spawned by', f'{sp.node}, GenerateID key {sp.key_index}')
-    ins.value('Spawn tick', f'{sp.tick}  (exact key time)')
-    ins.value('Occurrence', f'#{sp.occurrence} of this id in the move')
+    ins.value('Created by', f'{sp.node}, keyframe {sp.key_index}')
+    ins.value('Appears at frame', str(sp.tick))
+    ins.value('Instance', f'{sp.occurrence} of this effect in the move')
     entry = editor._effect_moves.get(sp.effect_id)
     if entry is None:
-        ins.value('Move', 'not found in character or efc/ archives', colour=T.BAD)
+        ins.value('Animation', 'The linked animation could not be found.', colour=T.BAD)
         return
     child, names, path = entry
     ins.value('Table', path)
     ins.value('Length', f'{child.duration}{"  ⟳ loops" if child.flags & almt.MOVE_FLAG_LOOP else ""}')
-    ins.value('Spawn lifetime control', '-1 (FUN_0206CA8C → +0xDC / 0x02025278)')
+    ins.evidence('Effect lifetime rules', 'Direct',
+                 'Owner-controlled lifetime: -1 (FUN_0206CA8C -> +0xDC / 0x02025278)')
     lifetime = spawns.nominal_lifetime(sp, child, editor.tick)
-    ins.value('Nominal state', lifetime.phase)
-    ins.value('Authored end tick', str(lifetime.scheduled_end) if lifetime.scheduled_end is not None
-              else 'not defined: loop / owner-controlled')
+    ins.value('Preview status', lifetime.phase)
+    ins.value('Scheduled end', f'Frame {lifetime.scheduled_end}' if lifetime.scheduled_end is not None
+              else 'Controlled by another game event')
     kill = getattr(editor, '_teardowns', {}).get(sp.key)
     if kill is not None:
         ins.value('Torn down', f'tick {kill.tick} by chara_action({kill.action})'
@@ -33,12 +34,12 @@ def _inspect_spawn(editor, ins, row, hex_id):
     elif child.flags & almt.MOVE_FLAG_LOOP:
         ins.value('Torn down', 'not in this move: the loop outlives the move until a later '
                   'chara_action(4/5) or the owner\'s teardown', colour=T.MUTED)
-    ins.text('Lifecycle (ARM9): a loop wrap only fires event 6 (0x02027B14) and keeps playing; a '
-             'one-shot ends after its length (0x0201BDEC → 0x02028868). Effects spawned by GN01..GN09 '
-             'are torn down by NoteTrack chara_action(4) (all) and (5) (oldest live): '
-             '0x0206C650 / 0x0206C760 → handle +0x08 = 0x02049460 → 0x02027560. '
-             'Same-tick order (action before spawn) is inferred from the data.')
-    ins.text('Not simulated: branches, combat hits, and effects carried over from a previous move.')
+    ins.text('Repeating effects can continue until another action removes them. '
+             'A normal effect finishes after its animation, unless the game changes it.')
+    ins.evidence('Effect start and end rules', 'Direct',
+                 'Loop wrap event 6 at 02027B14; one-shot 0201BDEC -> 02028868; '
+                 'chara_action(4/5) via 0206C650/0206C760 -> 02049460 -> 02027560')
+    ins.text('This preview does not include hits or effects carried over from earlier moves.')
     live = [i for i in editor.spawn_projection().instances if i.spawn == sp]
     if live:
         inst = live[0]
@@ -54,10 +55,8 @@ def _inspect_spawn(editor, ins, row, hex_id):
                     _dstx, sprite_source = sprite_entry
                     if sprite_source.is_atlas:
                         ins.value('Image path', f'DSIG 0x{sprite_source.mode:02X} — GX textured atlas')
-                        ins.text('Preview uses indexed-pixel RGBA on a Tk canvas. '
-                                 'The DS submits atlas pieces through GX, with polygon alpha, '
-                                 'depth and material state. Overlap in this preview is NOT a '
-                                 'pixel-accurate hardware composite.')
+                        ins.text('The preview uses the original image, but transparency '
+                                 'and overlap may look different during gameplay.')
                     elif sprite_source.is_obj:
                         ins.value('Image path', f'DSIG 0x{sprite_source.mode:02X} — OBJ/tile source')
                 break
@@ -75,19 +74,16 @@ def _inspect_spawn(editor, ins, row, hex_id):
         ins.value('Keyed child fields',
                   ', '.join(dynamic_tracks) if dynamic_tracks else
                   'None: static authored child ALMT')
-        ins.text('FUN_0206CA8C / 02022060 create linked effects; '
-                 'FUN_0202AA28 evaluates inherited transforms. '
-                 'Animated 2DPos, BoundsIndex, Alpha, DrawPrio and '
-                 'runtime camera/GX transforms are distinct from shots.')
-        ins.text('Verified: DrawPrio setter → sorted list → high-first draw callbacks. '
-                 'DS depth, alpha and BG/OBJ rules still determine visible front/back.')
+        ins.evidence('Effect positioning rules', 'Direct',
+                 'FUN_0206CA8C/02022060 create linked effects; '
+                 'FUN_0202AA28 evaluates inherited transformations.')
+        ins.text('The game may layer these effects differently from the preview.')
         for n in inst.notes:
             ins.text('• ' + n)
     else:
-        ins.text('Outside the nominal authored span. This does not identify an observed runtime death.')
+        ins.text('This effect is outside its usual preview time. Its actual end is not confirmed.')
     ins.buttons(('Open effect move', lambda: editor.open_effect_move(sp.effect_id, path), 'Accent.TButton'))
-    ins.text('Projection follows the authored timeline straight through. Marker loops, branches, facing '
-             'and LifeType are not simulated.')
+    ins.text('The preview follows the saved frames. Gameplay choices can change what happens.')
 
 
 def _inspect_physics(editor, ins):

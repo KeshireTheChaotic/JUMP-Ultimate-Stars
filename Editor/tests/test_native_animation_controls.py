@@ -3,10 +3,11 @@ import struct
 import tkinter as tk
 import unittest
 from types import SimpleNamespace
-from unittest.mock import Mock
+from unittest.mock import Mock, patch
 from PIL import Image
 
 from app.inspectors.track_controls import ValueControls, commit_value, default_value, validate_value
+from app import ui_copy
 from app.widgets.inspector import Inspector
 from app.widgets.resource_picker import resource_choices, resource_image, thumbnail, ResourcePicker
 from app.widgets.shot_editor import update_record
@@ -73,6 +74,27 @@ class NativeControlsTkTests(unittest.TestCase):
 
     def tearDown(self):
         self.ins.destroy()
+
+    def test_plain_english_inspector_and_clickable_original_evidence(self):
+        self.assertEqual(ui_copy.field_label('BoundsIndex'), 'Sprite frame')
+        self.assertEqual(ui_copy.field_label('CollisionRect2'), 'Hitbox area 3')
+        self.assertEqual(ui_copy.field_label('GenerateID'), 'Spawn effect')
+        self.assertEqual(ui_copy.evidence_status('Direct'), 'Verified')
+        self.assertEqual(ui_copy.evidence_status('Unknown'), 'Not confirmed')
+        self.ins.section('Original move text', note='FUN_02012345 uses ROM data')
+        evidence = self.ins.evidence('Original input to ALMT', 'Direct',
+                                     'FUN_02012345 actor+0x6C')
+        self.assertEqual(evidence.cget('text'), 'Verified · Details')
+        self.assertEqual(evidence._technical_note, 'FUN_02012345 actor+0x6C')
+        self.assertIn('Details', evidence.cget('text'))
+        labels = [w.cget('text') for w in self.ins.inner.winfo_children()
+                  if isinstance(w, __import__('tkinter').ttk.Label)]
+        self.assertIn('MOVE DETAILS', labels)
+        self.assertNotIn('FUN_02012345 uses ROM data', '\n'.join(labels))
+        with patch('app.widgets.inspector.messagebox.showinfo') as popup:
+            evidence.event_generate('<Button-1>')
+            popup.assert_called_once()
+            self.assertIn('FUN_02012345', str(popup.call_args))
 
     def test_all_fields_have_native_controls_and_preserve_values(self):
         for field in list(almt.FIELD_WIDTHS) + ['CollisionEnable0','CollisionType0','CollisionRect0']:
@@ -168,7 +190,9 @@ class NativeEditorIntegrationTests(unittest.TestCase):
         dialog.destroy()
         self.assertEqual(self.app.almt.build(),before)
         dialog=AddTrackDialog(self.app)
-        dialog.field.set('CollisionRect2'); dialog.rebuild()
+        self.assertEqual(dialog._field_by_label['Sprite frame'], 'BoundsIndex')
+        self.assertEqual(dialog._field_by_label['Hitbox area 3'], 'CollisionRect2')
+        dialog.field.set('Hitbox area 3'); dialog.rebuild()
         for var,value in zip(dialog.controls.variables,[-10,-20,30,40]): var.set(str(value))
         dialog.controls.apply()
         tr=self.app.move.nodes[0].track('CollisionRect2')

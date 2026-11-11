@@ -40,7 +40,11 @@ switch (cmd)
             Directory.CreateDirectory(Path.GetDirectoryName(dst)!);
             File.WriteAllBytes(dst, rom.ReadFile(id));
         }
-        Console.WriteLine($"extracted {rom.FileSystem.Files.Count} files to {outDir}");
+        // the JUS game tables from the ARM9 image/overlays (not the Nintendo SDK), as data
+        string tables = Path.Combine(outDir, Jus.Nds.JusTablesExport.FileName.Replace('/', Path.DirectorySeparatorChar));
+        Directory.CreateDirectory(Path.GetDirectoryName(tables)!);
+        File.WriteAllBytes(tables, Jus.Nds.JusTablesExport.Build(rom));
+        Console.WriteLine($"extracted {rom.FileSystem.Files.Count} files and {Jus.Nds.JusTablesExport.FileName} to {outDir}");
         return 0;
     case "verify":
         var image = new Jus.Nds.Verification.Arm9Image();

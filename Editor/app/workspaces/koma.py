@@ -660,8 +660,8 @@ class KomaWorkspace(SuiteWorkspace):
         ins.clear()
         if not self.kf:
             ins.section('Koma')
-            ins.text('Choose an asset in the browser. Each koma file holds 1–8 square panels of 48×48 pixels '
-                     '(6×6 tiles, 16 colours); its card in bin/koma.bin places them on a 5×4 shape grid.')
+            ins.text('Choose a Koma from the list to edit its artwork, shape, '
+                     'upgrades, and available moves.')
             ins.section('Evidence')
             ins.evidence('Panel art', 'Direct', 'DSTX v1 flags 0x04 rebuilds byte-exactly on 898/898 files')
             ins.evidence('Card shapes', 'Direct', 'kshape.bin 66 shapes / koma.bin 890 cards rebuild byte-exactly')
@@ -673,29 +673,28 @@ class KomaWorkspace(SuiteWorkspace):
         k = self.kf
         ins.section('Asset', note=self.path.split('|')[-1])
         ins.value('Panels', str(len(k.panels)))
-        ins.value('Tiles', f'{k.tile_count} (tile 0 unused)')
-        ins.value('Palette', f'{k.image.banks} bank, 4bpp')
+        ins.value('Tiles', str(k.tile_count), tip='The first tile is reserved.')
+        ins.value('Palette', f'{k.image.banks} color group(s), 16 colors each')
         state = []
         if self._dirty:
             state.append('art edited')
         if self._cards_dirty:
-            state.append('card shape selector edited')
+            state.append('Koma shape changed')
         if self._shape_dirty:
-            state.append('shape dictionary edited')
+            state.append('shared shape changed')
         if self._jpower_dirty:
-            state.append('J-Power costs edited')
-        ins.value('State', ('● ' + ', '.join(state) + ', not applied') if state else 'unchanged',
+            state.append('upgrade costs changed')
+        ins.value('Changes', ('● ' + ', '.join(state) + ', ready to apply') if state else 'No changes',
                   colour=T.WARN if state else T.MUTED)
         self._inspect_card(ins)
         if self._source_art_unillustrated:
-            ins.section('Unillustrated original ROM asset',
-                        note='This is a valid DSTX file, not a broken decoder or missing archive.')
+            ins.section('Artwork not provided',
+                        note='This Koma uses a blank placeholder in the original game.')
             ins.value('Original source', self.path.split('|')[-1], colour=T.WARN)
             ins.value('Visible artwork', 'Flat-fill placeholder; neither panel contains an illustration',
                       colour=T.WARN)
-            ins.text('The original ROM contains this flat placeholder. '
-                     'Rendering it differently cannot restore missing pixels. '
-                     'Its original shape and raw graphics are preserved for editing.')
+            ins.text('The game does not include finished artwork for this Koma. '
+                     'You can import new artwork or edit the existing placeholder.')
             if self.card is not None and self.card.index == 889:
                 ins.value('Other source', 'Dr. Mashirito card #428: ds_09.dtx (different support Koma)')
                 ins.buttons(('View different Mashirito 2-Koma (#428)',
@@ -729,8 +728,7 @@ class KomaWorkspace(SuiteWorkspace):
             return
         ins.section('Card (bin/koma.bin)', note='Selecting a variant changes this card; editing a shared variant affects its users.')
         if not self.card_choices:
-            ins.text('No card record uses this art. dt_20..dt_27 are extra art (1..8 panels) with no card; '
-                     'their purpose is not traced.')
+            ins.text('This artwork is not assigned to a Koma. You can still edit or export it.')
             return
         if len({c.index for c, _ in self.card_choices}) > 1:
             labels = [f'{c.index}  (series {c.series_id})' for c, _ in self.card_choices]
@@ -748,13 +746,15 @@ class KomaWorkspace(SuiteWorkspace):
         ins.value('Series id', f'{c.series_id}  → ' + (' / '.join(cands) if cands else '?'),
                   colour=T.WARN if len(cands) != 1 else None,
                   tip='byte +4; prefix inferred from panel-count sequences')
-        ins.value('Art index', f'{c.art_index}  (byte +5)')
+        ins.value('Art index', str(c.art_index))
         s = self._shape()
         if s:
             ins.value('Shape', f'#{s.index}: size {s.size}, variant {s.variant}  ({s.bounds[0]}×{s.bounds[1]} cells)')
             for p in s.problems():
                 ins.value('Anomaly', p, colour=T.BAD)
-        ins.value('Raw', bytes(c.raw).hex(' '), tip='12-byte record; unknown bytes are preserved')
+        ins.evidence('Additional Koma data', 'Limited',
+                     'Original 12-byte Koma entry: ' + bytes(c.raw).hex(' ') +
+                     '. Unidentified fields are preserved unchanged.')
         if c.raw[6] == passivekoma.PASSIVE_KIND:
             self._inspect_passive_ability(ins, c)
         else:
@@ -772,20 +772,20 @@ class KomaWorkspace(SuiteWorkspace):
         family = self._jpower.family(card.index)
         if family is None:
             ins.section('J-Power evolution / purchase')
-            ins.value('Family', 'Not present in the original 311 J-Power rows')
+            ins.value('Upgrades', 'No known upgrade path for this Koma')
             return
         root_id = family.root_card
         unlocks = family.koma_targets
-        ins.section('J-Power evolution / purchase',
-                    note='Original bin/jpower.bin; five source groups × three slots')
+        ins.section('Koma upgrades and costs',
+                    note='Choose an upgrade to see what it unlocks and costs.')
         ins.value('Family root', f'#{root_id}: {self.koma_name(root_id)}')
         ins.value('Known Koma unlocks', str(len(unlocks)))
         ins.value('Other unlock kinds', str(sum(c.active and c.kind != 1 for c in family.cells)))
         if card.index != root_id:
-            ins.buttons(('Open root Koma', lambda idx=root_id: self.app.open_koma_card(idx)))
+            ins.buttons(('View base Koma', lambda idx=root_id: self.app.open_koma_card(idx)))
         if not unlocks:
             return
-        choices = [f'G{c.group} S{c.slot}: #{c.target_id} {self.koma_name(c.target_id)}'
+        choices = [f'{self.koma_name(c.target_id) or "Koma"} (#{c.target_id})'
                    for c in unlocks]
         lookup = dict(zip(choices, unlocks))
         prior = getattr(self, '_jpower_selected', '')
@@ -797,15 +797,17 @@ class KomaWorkspace(SuiteWorkspace):
             self._jpower_selected = self._jpower_choice_var.get()
             self.refresh_inspector()
         ins.combo('Unlock link', self._jpower_choice_var, choices,
-                  'Original row group/slot, target Koma ID at +4', on_change=select, width=40)
+                  'Choose the Koma that becomes available after this upgrade.', on_change=select, width=40)
         cell = lookup[chosen]
         ins.value('Selected target', f'#{cell.target_id} · {self.koma_name(cell.target_id)}')
-        ins.value('Six resource costs', ', '.join(map(str, cell.prices)),
-                  tip='Source u16 values at cell +8..+0x13; currency names not inferred')
-        ins.value('Gate/placement raw', f'0x{cell.gate_raw:02X} / 0x{cell.placement_raw:02X}')
-        ins.value('Cell offset', f'0x{cell.offset:05X} in bin/jpower.bin')
-        ins.buttons(('Open target Koma', lambda idx=cell.target_id: self.app.open_koma_card(idx)),
-                    ('Edit six resource costs…', lambda c=cell: self._edit_jpower_costs(c)))
+        ins.value('Upgrade costs', ', '.join(map(str, cell.prices)),
+                  tip='Six resource amounts. The game data does not identify their names yet.')
+        ins.evidence('Other unlock requirements', 'Unknown',
+                     f'Original group {cell.group}, slot {cell.slot}; '
+                     f'gate 0x{cell.gate_raw:02X}; placement 0x{cell.placement_raw:02X}; '
+                     f'file position 0x{cell.offset:05X} in bin/jpower.bin')
+        ins.buttons(('View upgraded Koma', lambda idx=cell.target_id: self.app.open_koma_card(idx)),
+                    ('Change upgrade costs…', lambda c=cell: self._edit_jpower_costs(c)))
         ins.evidence('J-Power Koma link', 'Direct',
                      'ov05 021653AC indexes 0x130 rows / 0x14 cells; '
                      '02164234 tests kind, 021646F4 grants kind=1 target at +4 via 02075F98')
@@ -820,9 +822,9 @@ class KomaWorkspace(SuiteWorkspace):
         if self._jpower is None:
             return
         initial = ', '.join(map(str, cell.prices))
-        raw = simpledialog.askstring('J-Power resource costs',
-                                     'Six original u16 costs (0-65535), comma-separated.\n'
-                                     'Only this 12-byte cost vector changes.',
+        raw = simpledialog.askstring('Upgrade costs',
+                                     'Enter six costs (0–65535), separated by commas.\n'
+                                     'Resource names are not confirmed. Only these costs will change.',
                                      initialvalue=initial, parent=self.app)
         if raw is None:
             return
@@ -839,12 +841,11 @@ class KomaWorkspace(SuiteWorkspace):
         self._jpower_dirty = updated.raw != self.app.root_data.read(jpower.PATH)
         self.refresh_inspector()
         self.app.update_dirty()
-        self.app.status.set('J-Power source costs edited; Apply Koma, then Save to write bin/jpower.bin')
+        self.app.status.set('Upgrade costs changed. Select Apply, then Save to keep your changes.')
 
     def _inspect_passive_ability(self, ins, card):
         """Decoded original ability text and numeric descriptor, never invented bonuses."""
-        ins.section('Passive Koma — Ability',
-                    note='Type-2 Koma byte +7 → ability.bin[ID*4] and ability_t.bin[ID*3].')
+        ins.section('Passive Koma ability')
         if self._passive_catalog is None:
             ins.value('Source', self._passive_error or 'ability tables unavailable',
                       colour=T.BAD)
@@ -856,15 +857,15 @@ class KomaWorkspace(SuiteWorkspace):
             return
         if ability is None:
             return
-        ins.value('Ability ID', f'{ability.id}  (koma.bin card #{card.index} byte +7)')
+        ins.value('Ability ID', str(ability.id))
         ins.value('Name', ability.display_name or '(blank source text)',
                   tip=f'bin/ability_t.bin record {ability.id}, string 0; raw: {ability.name!r}')
         for index, line in enumerate(ability.description_lines, 1):
             if line:
                 ins.value(f'Description {index}', line.replace('|', ' '),
                           tip=f'bin/ability_t.bin record {ability.id}, string {index}; raw: {line!r}')
-        ins.section('Passive Stats / Native Descriptor',
-                    note='These are actual ability.bin fields, not computed gameplay damage or buffs.')
+        ins.section('Ability strength',
+                    note='The exact gameplay effect of these values is not yet fully known.')
         ins.value('Category +0', str(ability.category),
                   tip='Original dispatch family: FUN_02077768, byte[0]. Numeric identity retained.')
         ins.value('Subtype +1', str(ability.subtype),
@@ -872,8 +873,9 @@ class KomaWorkspace(SuiteWorkspace):
         ins.value('Parameter +2', f'{ability.parameter_raw} (signed {ability.parameter_signed})',
                   tip='Native raw byte. The effect unit/scale is not uniformly established.')
         ins.value('Reserved +3', str(ability.raw[3]))
-        ins.value('Raw descriptor', ability.raw.hex(' '),
-                  tip=f'bin/ability.bin, bytes [{ability.id*4}:{ability.id*4+4}]')
+        ins.evidence('Additional ability data', 'Limited',
+                     f'Original ability bytes: {ability.raw.hex(" ")}; '
+                     f'bin/ability.bin, bytes [{ability.id*4}:{ability.id*4+4}]')
         ins.evidence('Ability ID', 'Direct',
                      'bin/koma.bin type2 +0x07; main FUN_02077768 indexes ability.bin by card+0x41')
         ins.evidence('Descriptions', 'Direct',
@@ -885,8 +887,7 @@ class KomaWorkspace(SuiteWorkspace):
         """Read-only, original game source links; no inferred attack names."""
         ins.section('Moves (BIN / ALMT)', note='Card size determines Special A/B or support action')
         if card.raw[6] == 2:
-            ins.text('Help/other Koma. No battle or support ALMT move is assigned to '
-                     'this type by the verified roster/resource linkage.')
+            ins.text('Passive Koma provide abilities rather than battle or support moves.')
             return
         svc = self.app._move_xref() if hasattr(self.app, '_move_xref') else None
         if svc is None:
@@ -900,7 +901,7 @@ class KomaWorkspace(SuiteWorkspace):
             return
         self._move_link_choices = {}
         ins.value('Character', f'{svc.character_name(linked[0].form)} ({linked[0].form})')
-        ins.value('Source ALMT', linked[0].almt_member)
+        ins.value('Animation file', linked[0].almt_member)
         if card.raw[6] == 0:
             specs = {x.variant: x for x in linked if x.category == 'battle-special'}
             for variant in ('A', 'B'):
@@ -920,8 +921,7 @@ class KomaWorkspace(SuiteWorkspace):
                              self.app.open_move_resource(x.form, x.resource_id, x.almt_member, card_index=card.index)),
                             ('Open Special B', lambda x=specs['B']:
                              self.app.open_move_resource(x.form, x.resource_id, x.almt_member, card_index=card.index)))
-            ins.value('Common actions', f'{len(linked)-len(specs)} input/actor actions shared '
-                      'by this battle form', colour=T.MUTED)
+            ins.value('Shared moves', f'{len(linked)-len(specs)} moves available to this character', colour=T.MUTED)
         else:
             x = linked[0]
             title = x.text.display_title if x.text else ''
